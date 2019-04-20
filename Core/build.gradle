@@ -1,13 +1,11 @@
 apply plugin: 'com.android.library'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        //  versionCode 1
-        versionName "1.1"
-
+        versionName "1.0"
+        versionCode 1
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
