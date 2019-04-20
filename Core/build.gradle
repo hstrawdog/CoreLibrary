@@ -1,0 +1,134 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        //  versionCode 1
+        versionName "1.1"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+
+
+        def versionPropsFile = file('version.properties')
+        if (versionPropsFile.canRead()) {
+            //载入version.properties
+            Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+            //从version.properties根据关键字"VERSION_CODE"取Integer
+            def verCode = versionProps['VERSION_CODE'].toInteger()
+            //判断build模式，如果是发布模式（':app:assembleRelease'）则自增版本号，并且写回version.properties文件中
+            def runTasks = gradle.startParameter.taskNames
+            if ('assemble' in runTasks) {
+                versionProps['VERSION_CODE'] = (++verCode).toString()
+                versionProps.store(versionPropsFile.newWriter(), null)
+            }
+            versionCode verCode
+        } else {
+            throw new GradleException("Could not read version.properties!")
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //主要是下面这一段
+    android.libraryVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "Core_${variant.buildType.name}_${defaultConfig.versionName}_${defaultConfig.versionCode}" + '.aar'
+        }
+    }
+
+//    //主要是下面这一段
+//    android.libraryVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (outputFile != null && outputFile.name.endsWith('.aar')) {
+//                def fileName = "自定义.aar"
+//                output.outputFile = new File(outputFile.parent, fileName)
+//            }
+//        }
+//    }
+
+}
+
+// 指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+
+}
+// 打包源码jar
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+//编译groovy代码时采用 UTF-8
+tasks.withType(GroovyCompile) {
+    groovyOptions.encoding = "MacRoman"
+}
+
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// 打包文档jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+
+dependencies {
+    api(rootProject.ext.dependencies.arouterApi) {
+        exclude group: 'com.android.support'
+    }
+
+    api rootProject.ext.dependencies.constraintlayout
+    api rootProject.ext.dependencies.IDimensCompat
+    api rootProject.ext.dependencies.appcompatV7
+    api rootProject.ext.dependencies.recyclerview
+    api rootProject.ext.dependencies.cardview
+
+
+
+    api rootProject.ext.dependencies.eventBus
+
+    api rootProject.ext.dependencies.gson
+    api rootProject.ext.dependencies.retrofit
+    //  api rootProject.ext.dependencies.converterGson
+    api rootProject.ext.dependencies.loggingInterceptor
+
+    api rootProject.ext.dependencies.Luban
+
+    api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
+    api rootProject.ext.dependencies.ultraPtr
+
+    api rootProject.ext.dependencies.glide
+    annotationProcessor rootProject.ext.dependencies.glideCompiler
+
+    api rootProject.ext.dependencies.butterknife
+    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+
+
+}
+
+

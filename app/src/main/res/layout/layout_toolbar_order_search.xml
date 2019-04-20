@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tb_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x88"
+    android:background="@color/white"
+    app:contentInsetStart="0dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x88">
+
+        <com.hqq.core.widget.FilterImageView
+            android:id="@+id/iv_bar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/x15"
+            android:paddingRight="@dimen/x26"
+            android:src="@mipmap/ic_back_gray" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x52"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/sp_ed_50"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tv_bar_right"
+            app:layout_constraintLeft_toRightOf="@+id/iv_bar_back"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:src="@mipmap/ic_search" />
+
+            <EditText
+                android:id="@+id/edt_search"
+                style="@style/def_text.24.868585"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:hint="请输入关键字"
+                android:imeOptions="actionSearch"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_bar_right"
+            style="@style/def_text.32.191919"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingRight="@dimen/x37"
+            android:text="搜索"
+            android:textColor="@color/colorBackground"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.Toolbar>

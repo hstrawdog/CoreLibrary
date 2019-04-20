@@ -1,0 +1,32 @@
+package com.hqq.core.recycler;
+
+/**
+ * @Author : huangqiqiang
+ * @Package : com.core.library.banner
+ * @FileName :   IBannerBean
+ * @Date : 2018/6/19 0019  下午 5:37
+ * @Descrive : TODO
+ * @Email :
+ */
+public interface IBannerBean {
+    /**
+     * 图片url
+     *
+     * @return
+     */
+    String getBannerUrl();
+
+    /**
+     * 标题
+     *
+     * @return
+     */
+    String getBannerTitle();
+
+    /**
+     * tag  其他 这边应该是要一个Object
+     * 保存一些需要通过banner 传递的数据
+     * @return
+     */
+    Object getBannerTag();
+}

@@ -1,0 +1,58 @@
+ext {
+    support = "27.1.1"
+    android = [
+            compileSdkVersion: 27,
+            minSdkVersion    : 19,
+            targetSdkVersion : 27,
+            versionCode      : 1,
+            versionName      : "1.4.8"
+    ]
+
+    dependencies = [
+            // ------------- Android -------------
+            supportV4                    : "com.android.support:support-v4:$support",
+            appcompatV7                  : "com.android.support:appcompat-v7:$support",
+            design                       : "com.android.support:design:$support",
+            recyclerview                 : "com.android.support:recyclerview-v7:$support",
+            cardview                     : "com.android.support:cardview-v7:$support",
+            constraintlayout             : 'com.android.support.constraint:constraint-layout:1.1.3',
+            // ------------- 网络请求 -------------
+            okhttp                       : 'com.squareup.okhttp3:okhttp:3.12.1',
+            loggingInterceptor           : 'com.squareup.okhttp3:logging-interceptor:3.12.1',
+            retrofit                     : 'com.squareup.retrofit2:retrofit:2.5.0',
+            converterGson                : 'com.squareup.retrofit2:converter-gson:2.5.0',
+            ioClient                     : 'io.socket:socket.io-client:1.0.0',
+            // ------------- 图片请求 -------------
+            glide                        : 'com.github.bumptech.glide:glide:4.8.0',
+            glideCompiler                : 'com.github.bumptech.glide:compiler:4.8.0',
+            // ------------- json解析 -------------
+            gson                         : 'com.google.code.gson:gson:2.8.2',
+            // ------------- eventBus -------------
+            eventBus                     : 'org.greenrobot:eventbus:3.1.1',
+            // ------------- butterKnife -------------
+            butterknife                  : 'com.jakewharton:butterknife:8.8.1',
+            butterknifeCompiler          : 'com.jakewharton:butterknife-compiler:8.8.1',
+            // ------------- recycleView  适配器 上拉刷新  -------------
+            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42',
+            // ------------- 下拉刷新  已经停止维护多年  正在寻找合适的替换框架 -------------
+            ultraPtr                     : 'in.srain.cube:ultra-ptr:1.0.11',
+            // ------------- Luban 图片压缩  -------------
+            Luban                        : 'top.zibin:Luban:1.1.8',
+            // -------------  图片预览效果  缩放等 -------------
+            photoview                    : 'com.bm.photoview:library:1.4.1',
+            // -------------  ZXing 二维码 -------------
+            zxing                        : 'com.google.zxing:core:3.3.0',
+            // -------------  微信sdk -------------
+            wechatSdk                    : 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+',
+            // -------------   bugly -------------
+            //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+            bugly                        : 'com.tencent.bugly:crashreport:latest.release',
+            // -------------   屏幕适配 -------------
+            IDimensCompat                : 'com.github.huangqiqiang:IDimensCompat:1.0.0',
+            // -------------   相册 -------------
+            IHAlbum                      : 'com.github.huangqiqiang:AlbumApp:1.0.10',
+            // -------------   路由 -------------
+            "arouterApi"                 : 'com.alibaba:arouter-api:1.4.1',//ARouter api
+            "arouterCompiler"            : 'com.alibaba:arouter-compiler:1.2.2'//ARouter
+    ]
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tb_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x88"
+    app:contentInsetStart="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x88">
+
+        <ImageView
+            android:id="@+id/iv_toolBar_Bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x90"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_pictures"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/x26"
+                android:paddingRight="@dimen/x26"
+                android:src="@mipmap/icon_back"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/ll_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/x12"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_marginTop="@dimen/x12"
+                android:layout_weight="1"
+                android:background="@drawable/sp_f0f2f5_50">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/x17"
+                    android:layout_marginLeft="@dimen/x18"
+                    android:layout_marginTop="@dimen/x17"
+                    android:src="@mipmap/ic_main_search_magnifier" />
+
+                <EditText
+                    android:id="@+id/edt_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/x18"
+                    android:background="@color/transparent"
+                    android:hint="金刚菩提手串"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"
+                    android:textColor="@color/color_333"
+                    android:textColorHint="@color/color_999"
+                    android:textSize="@dimen/x30" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <View style="@style/line_vertical" android:layout_gravity="bottom" />
+    </FrameLayout>
+
+</android.support.v7.widget.Toolbar>
