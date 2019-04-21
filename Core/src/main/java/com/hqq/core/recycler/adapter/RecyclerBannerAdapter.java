@@ -8,9 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hqq.core.R;
+import com.hqq.core.glide.ImageLoadUtils;
 import com.hqq.core.recycler.IBannerBean;
 import com.hqq.core.recycler.OnRvBannerClickListener;
-import com.hqq.core.glide.ImageLoadUtils;
+import com.hqq.core.utils.RegexUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +51,16 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder,  int position) {
-       final int finalPosition=position;
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final int finalPosition = position;
         ImageView img = holder.itemView.findViewById(R.id.iv_banner);
         TextView tv = holder.itemView.findViewById(R.id.tv_code_banner);
-        ImageLoadUtils.with(mData.get(position % mData.size()).getBannerUrl(), img);
+        if (RegexUtils.isNumeric(mData.get(position % mData.size()).getBannerUrl())) {
+            ImageLoadUtils.with(Integer.parseInt(mData.get(position % mData.size()).getBannerUrl()), img);
+        } else {
+            ImageLoadUtils.with(mData.get(position % mData.size()).getBannerUrl(), img);
+
+        }
 
         if (mIsShowTip) {
             tv.setText(mData.get(position % mData.size()).getBannerTitle());

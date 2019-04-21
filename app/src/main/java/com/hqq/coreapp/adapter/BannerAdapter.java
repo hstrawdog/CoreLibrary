@@ -19,7 +19,6 @@ public class BannerAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     public BannerAdapter() {
         super(R.layout.item_banner_adapter);
     }
-
     @Override
     protected void convert(BaseViewHolder helper, String item) {
 

@@ -5,6 +5,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
+import com.hqq.coreapp.ui.activity.BannerActivity;
 import com.hqq.coreapp.ui.activity.DefImgActivity;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
 import com.hqq.coreapp.ui.activity.LoadMoreActivity;
@@ -38,6 +39,7 @@ public class MainActivity extends BaseRcActivity<MainAdapter> {
         mAdapter.addData(new MainBean("fragment 加载", IFragmentActivity.class));
         mAdapter.addData(new MainBean("RcActivity 加载", RcActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
+        mAdapter.addData(new MainBean("banner", BannerActivity.class));
 
 
         LogUtils.e("  ");

@@ -99,6 +99,7 @@ public class RegexUtils {
         // TODO: 2018/8/15 0015  手机号码
         return false;
     }
+
     public static boolean isPhone(String phone) {
         String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
         if (RegexUtils.checkNull(phone)) {
@@ -254,6 +255,15 @@ public class RegexUtils {
         return dest;
     }
 
+    public static boolean isNumeric(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.indexOf(str.charAt(i)) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * 格式化 html  替换字符串中图片大小
      *
@@ -300,6 +310,7 @@ public class RegexUtils {
     public static String htmlFormat4em(String name) {
         return name.replaceAll("<em>", "<font color=\"#cd3b3b\">").replaceAll("</em>", "</font>");
     }
+
     public static void main(String[] args) {
         String url = "http://172.12.1.123/test.txt";
         String regex = "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})";
@@ -314,7 +325,6 @@ public class RegexUtils {
         System.out.println(getMatcher(REGEX_PRICE, str));
 
     }
-
 
 
 }

@@ -1,9 +1,14 @@
 package com.hqq.coreapp.ui.activity;
 
+import com.hqq.core.recycler.BannerLayout;
+import com.hqq.core.recycler.RecyclerViewBanner;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.BannerAdapter;
-import com.hqq.core.recycler.BannerLayout;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.coreapp.bean.BannerBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -19,6 +24,8 @@ public class BannerActivity extends BaseActivity {
 
     @BindView(R.id.bl_recycler)
     BannerLayout mBlRecycler;
+    @BindView(R.id.rc_banner)
+    RecyclerViewBanner mRcBanner;
 
     @Override
     public int getViewId() {
@@ -37,5 +44,15 @@ public class BannerActivity extends BaseActivity {
         mBannerAdapter.addData("");
         mBannerAdapter.addData("");
         mBlRecycler.setAdapter(mBannerAdapter);
+
+
+        List<BannerBean> list =new ArrayList<>();
+        list.add(new BannerBean(R.mipmap.ic_banner2));
+        list.add(new BannerBean(R.mipmap.ic_banner2));
+        list.add(new BannerBean(R.mipmap.ic_banner2));
+        list.add(new BannerBean(R.mipmap.ic_banner2));
+        list.add(new BannerBean(R.mipmap.ic_banner2));
+        mRcBanner.setRvBannerData(list);
     }
+
 }
