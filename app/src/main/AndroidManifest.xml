@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hqq.coreapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".APP"
         android:allowBackup="true"
@@ -15,7 +17,6 @@
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

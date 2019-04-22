@@ -182,10 +182,9 @@ public class BaseWebFragment extends BaseFragment {
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 if (TextUtils.isEmpty(mTitle) && RegexUtils.checkNotNull(title)) {
-
-                    //    mActivity.setTitle(title);
-
-                    mRootViewBuild.getDefToolBar().setToolbarTitle(title);
+                    if (mRootViewBuild.getDefToolBar() != null) {
+                        mRootViewBuild.getDefToolBar().setToolbarTitle(title);
+                    }
                 }
             }
 
