@@ -63,6 +63,12 @@ public class PermissionsFragment extends Fragment {
     }
 
 
+    /**
+     *
+     * @param context
+     * @param permissions
+     * @return
+     */
     public static boolean hasPermission(Context context, String... permissions) {
         boolean has = permissions != null && permissions.length > 0;
         if (has) {
@@ -70,7 +76,6 @@ public class PermissionsFragment extends Fragment {
                 has = has && ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
             }
         }
-
         return has;
     }
 

@@ -21,6 +21,7 @@ import com.hqq.core.R;
 import com.hqq.core.listenner.WebLoadListener;
 import com.hqq.core.ui.BaseFragment;
 import com.hqq.core.utils.RegexUtils;
+import com.hqq.core.utils.ResourcesUtils;
 
 /**
  * @Author : huangqiqiang
@@ -38,6 +39,7 @@ public class BaseWebFragment extends BaseFragment {
     private String mUrl;
     private CharSequence mTitle = "";
     WebLoadListener mWebLoadListener;
+    private int mProgressBarColor;
 
 
     public static BaseWebFragment instantiate(Context context, String title, String url) {
@@ -81,6 +83,10 @@ public class BaseWebFragment extends BaseFragment {
     public void initBasic(Bundle savedInstanceState) {
         mWebView = (WebView) findViewById(R.id.web_view);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_progressbar);
+        if (RegexUtils.checkNotNull(mProgressBarColor)) {
+            mProgressBar.setDrawingCacheBackgroundColor(mProgressBarColor);
+
+        }
 
         mProgressBar.setMax(100);
         //先加载5%，以使用户觉得界面没有卡死
@@ -230,5 +236,13 @@ public class BaseWebFragment extends BaseFragment {
 
     public final WebView getWebView() {
         return mWebView;
+    }
+
+    public void setProgressBar(ProgressBar progressBar) {
+        mProgressBar = progressBar;
+    }
+
+    public int getProgressBarColor() {
+        return mProgressBarColor;
     }
 }
