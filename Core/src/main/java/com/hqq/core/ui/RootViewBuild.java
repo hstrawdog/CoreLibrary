@@ -171,7 +171,7 @@ public class RootViewBuild {
 
 
     public IToolBar initIToolBar(ViewGroup layout) {
-        StatusBarManager.statusBarLightMode(mActivity, true);
+        StatusBarManager.statusBarLightMode(mActivity, CoreBuildConfig.getInstance().isStatusMode());
         if (mIsShowToolBar != false || mIsShowStatus != false) {
             mIToolBar = new IToolBarBuild(mActivity)
                     .setViewGroup(layout)

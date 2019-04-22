@@ -50,7 +50,11 @@ public class CoreBuildConfig {
      */
     private boolean debug = false;
 
-    private  int defImg=R.drawable.ic_def_img;
+    private int defImg = R.drawable.ic_def_img;
+    /**
+     * 状态栏 模式
+     */
+    private boolean statusMode = true;
 
     /**
      * {@link #init(Application, boolean)}
@@ -109,5 +113,14 @@ public class CoreBuildConfig {
 
     public void setDefImg(int defImg) {
         this.defImg = defImg;
+    }
+
+    public boolean isStatusMode() {
+        return statusMode;
+    }
+
+    public CoreBuildConfig setStatusMode(boolean statusMode) {
+        this.statusMode = statusMode;
+        return this;
     }
 }
