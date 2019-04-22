@@ -245,4 +245,8 @@ public class BaseWebFragment extends BaseFragment {
     public int getProgressBarColor() {
         return mProgressBarColor;
     }
+
+    public void setProgressBarColor(int progressBarColor) {
+        mProgressBarColor = progressBarColor;
+    }
 }
