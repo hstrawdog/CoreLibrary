@@ -1,6 +1,6 @@
 package com.hqq.coreapp.bean;
 
-import com.hqq.core.recycler.IBannerBean;
+import com.hqq.core.recycler.BaseBannerBean;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -10,7 +10,7 @@ import com.hqq.core.recycler.IBannerBean;
  * @emain: 593979591@qq.com
  * @date: 2019-04-21 18:45
  */
-public class BannerBean implements IBannerBean {
+public class BannerBean implements BaseBannerBean {
     int id;
 
     public BannerBean(int id) {

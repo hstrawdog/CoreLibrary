@@ -3,12 +3,12 @@ package com.hqq.core.recycler;
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.banner
- * @FileName :   IBannerBean
+ * @FileName :   BaseBannerBean
  * @Date : 2018/6/19 0019  下午 5:37
  * @Descrive : TODO
  * @Email :
  */
-public interface IBannerBean {
+public interface BaseBannerBean {
     /**
      * 图片url
      *

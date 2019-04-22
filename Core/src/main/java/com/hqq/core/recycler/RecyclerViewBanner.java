@@ -46,7 +46,7 @@ public class RecyclerViewBanner extends FrameLayout {
     private CircleIndicatorImpl mLinearLayout;
 
 
-    private List<IBannerBean> mData = new ArrayList<>();
+    private List<BaseBannerBean> mData = new ArrayList<>();
     private int startX, startY, currentIndex;
     private boolean isPlaying;
     private Handler handler = new Handler();
@@ -79,7 +79,7 @@ public class RecyclerViewBanner extends FrameLayout {
         }
     };
 
-    public List<IBannerBean> getData() {
+    public List<BaseBannerBean> getData() {
         return mData;
     }
 
@@ -269,7 +269,7 @@ public class RecyclerViewBanner extends FrameLayout {
      *
      * @param data Banner对象列表
      */
-    public <T extends IBannerBean> void setRvBannerData(List<T> data) {
+    public <T extends BaseBannerBean> void setRvBannerData(List<T> data) {
         setPlaying(false);
         // 避免空指针
         if (mData == null) {
@@ -295,7 +295,7 @@ public class RecyclerViewBanner extends FrameLayout {
         }
     }
 
-    public <T extends IBannerBean> void setRvBannerData(List<T> data, int position) {
+    public <T extends BaseBannerBean> void setRvBannerData(List<T> data, int position) {
         setPlaying(false);
         // 避免空指针
         if (mData == null) {

@@ -43,7 +43,6 @@ public class ToolBarActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_bar_right:
-
                 break;
             case R.id.button5:
                 mRootViewBuild.getDefToolBar().setStatusColor(ContextCompat.getColor(mActivity, R.color.main_color));

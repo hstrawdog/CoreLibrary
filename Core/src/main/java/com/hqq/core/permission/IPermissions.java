@@ -75,7 +75,6 @@ public interface IPermissions {
 
 
 
-
     boolean hasPermission(Context  context, String... permissions);
 
     boolean hasCalendar(Context context);

@@ -3,26 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activity.BannerActivity">
-
-    <com.hqq.core.recycler.BannerLayout
-        android:id="@+id/bl_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x330"
-        app:autoPlaying="true"
-        app:centerScale="1.3"
-        app:interval="2000"
-        app:itemSpace="20"
-        app:moveSpeed="1.8"
-        app:showIndicator="false" />
 
     <com.hqq.core.recycler.RecyclerViewBanner
         android:id="@+id/rc_banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x330"
- />
+        android:layout_height="@dimen/x330" />
 
 
 </LinearLayout>

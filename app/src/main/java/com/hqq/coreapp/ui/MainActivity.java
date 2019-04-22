@@ -9,6 +9,7 @@ import com.hqq.coreapp.ui.activity.BannerActivity;
 import com.hqq.coreapp.ui.activity.DefImgActivity;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
 import com.hqq.coreapp.ui.activity.LoadMoreActivity;
+import com.hqq.coreapp.ui.activity.PermissionActivity;
 import com.hqq.coreapp.ui.activity.RcActivity;
 import com.hqq.coreapp.ui.activity.SearchBarActivity;
 import com.hqq.coreapp.ui.activity.ToolBarActivity;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseRcActivity<MainAdapter> {
         mAdapter.addData(new MainBean("RcActivity 加载", RcActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("banner", BannerActivity.class));
+        mAdapter.addData(new MainBean("PermissionActivity", PermissionActivity.class));
 
 
         LogUtils.e("  ");

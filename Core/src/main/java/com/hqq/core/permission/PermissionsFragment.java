@@ -3,15 +3,17 @@ package com.hqq.core.permission;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.hqq.core.utils.ToastUtils;
-import com.hqq.core.R;
+import com.hqq.core.utils.VersionUtils;
+import com.hqq.core.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +28,19 @@ import java.util.List;
  */
 public class PermissionsFragment extends Fragment {
     public static int CODE = 0x5186;
-    IPermissionsResult mIPermissionsResult;
+    PermissionsResult mPermissionsResult;
 
-    public void setIPermissionsResult(IPermissionsResult IPermissionsResult) {
-        mIPermissionsResult = IPermissionsResult;
+    public void setPermissionsResult(PermissionsResult permissionsResult) {
+        mPermissionsResult = permissionsResult;
     }
 
-    public PermissionsFragment() {
-
+    public static PermissionsFragment newInstance() {
+        Bundle args = new Bundle();
+        PermissionsFragment fragment = new PermissionsFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,20 +50,20 @@ public class PermissionsFragment extends Fragment {
 
     /**
      * 发现 系统选择 与 厂商权限不一致   取消判断是否拥有权限 直接去申请
+     *
      * @param strings
      */
     public void requestPermissions(String[] strings) {
         mPermissions = strings;
-
         if (hasPermission(getContext(), strings)) {
+            mPermissionsResult.PermissionsResult(true);
         } else {
             requestPermissions(strings, CODE);
         }
-        requestPermissions(strings, CODE);
     }
 
 
-    public   static boolean hasPermission(Context context, String... permissions) {
+    public static boolean hasPermission(Context context, String... permissions) {
         boolean has = permissions != null && permissions.length > 0;
         if (has) {
             for (String permission : permissions) {
@@ -69,9 +75,10 @@ public class PermissionsFragment extends Fragment {
     }
 
     /**
-     *  申请的权限组
+     * 申请的权限组
      */
     String[] mPermissions;
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -82,8 +89,6 @@ public class PermissionsFragment extends Fragment {
                 if (hasPermission(getContext(), perm)) {
                     granted.add(perm);
                 } else {
-                    boolean isTip = ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), perm);
-
                     denied.add(perm);
                 }
             }
@@ -97,15 +102,30 @@ public class PermissionsFragment extends Fragment {
                 }
             }
         }
-
         if (denied.isEmpty() && !granted.isEmpty()) {
-            if (mIPermissionsResult != null) {
-                ToastUtils.showToast(getContext(), "同意了所有权限");
-                mIPermissionsResult.PermissionsResult(permissions, grantResults);
+            ToastUtils.showToast(getContext(), "同意了所有权限");
+            if (mPermissionsResult != null) {
+                mPermissionsResult.PermissionsResult(true);
             }
         } else {
-            ToastUtils.showToast(getContext(), "拒绝权限");
-            new AppSettingsDialog.Builder(this).build().show();
+            ToastUtils.showToast(getContext(), "权限拒绝");
+            // 打开设置界面
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", VersionUtils.getPackageName(getContext()), null);
+            intent.setData(uri);
+            startActivityForResult(intent, 0x55);
+
+
+            //勾选了对话框中”Don’t ask again”的选项, 返回false
+            for (String deniedPermission : permissions) {
+                boolean flag = shouldShowRequestPermissionRationale(deniedPermission);
+                if (!flag) {
+                    //拒绝授权
+                    return;
+                }
+            }
+
 
         }
     }
@@ -113,12 +133,11 @@ public class PermissionsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-            if (hasPermission(getContext(), mPermissions)) {
-                ToastUtils.showToast(getContext(), R.string.open_all_permission);
-            } else {
-                ToastUtils.showToast(getContext(), R.string.un_open_all_permission);
-            }
+        if (requestCode == 0x55) {
+            // 从设置界面过来 重新再去检测权限
+            requestPermissions(mPermissions);
+
         }
+
     }
 }

@@ -1,6 +1,5 @@
 package com.hqq.coreapp.ui.activity;
 
-import com.hqq.core.recycler.BannerLayout;
 import com.hqq.core.recycler.RecyclerViewBanner;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.coreapp.R;
@@ -22,8 +21,6 @@ import butterknife.BindView;
  */
 public class BannerActivity extends BaseActivity {
 
-    @BindView(R.id.bl_recycler)
-    BannerLayout mBlRecycler;
     @BindView(R.id.rc_banner)
     RecyclerViewBanner mRcBanner;
 
@@ -36,17 +33,8 @@ public class BannerActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        mBannerAdapter = new BannerAdapter();
-        mBannerAdapter.addData("");
-        mBannerAdapter.addData("");
-        mBannerAdapter.addData("");
-        mBannerAdapter.addData("");
-        mBannerAdapter.addData("");
-        mBannerAdapter.addData("");
-        mBlRecycler.setAdapter(mBannerAdapter);
 
-
-        List<BannerBean> list =new ArrayList<>();
+        List<BannerBean> list = new ArrayList<>();
         list.add(new BannerBean(R.mipmap.ic_banner2));
         list.add(new BannerBean(R.mipmap.ic_banner2));
         list.add(new BannerBean(R.mipmap.ic_banner2));

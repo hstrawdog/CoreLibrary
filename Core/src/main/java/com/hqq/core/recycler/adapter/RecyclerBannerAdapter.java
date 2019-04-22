@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.hqq.core.R;
 import com.hqq.core.glide.ImageLoadUtils;
-import com.hqq.core.recycler.IBannerBean;
+import com.hqq.core.recycler.BaseBannerBean;
 import com.hqq.core.recycler.OnRvBannerClickListener;
 import com.hqq.core.utils.RegexUtils;
 
@@ -25,7 +25,7 @@ import java.util.List;
  * @Email :
  */
 public class RecyclerBannerAdapter extends RecyclerView.Adapter {
-    private List<IBannerBean> mData = new ArrayList<>();
+    private List<BaseBannerBean> mData = new ArrayList<>();
     private OnRvBannerClickListener onRvBannerClickListener;
     private boolean mIsShowTip;
     private boolean mIsUnlimited = true;
@@ -34,7 +34,7 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter {
         mIsUnlimited = unlimited;
     }
 
-    public void setData(List<IBannerBean> data) {
+    public void setData(List<BaseBannerBean> data) {
         mData = data;
     }
 
