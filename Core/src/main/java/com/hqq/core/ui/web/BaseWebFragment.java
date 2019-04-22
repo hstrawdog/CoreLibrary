@@ -2,6 +2,7 @@ package com.hqq.core.ui.web;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class BaseWebFragment extends BaseFragment {
     private String mUrl;
     private CharSequence mTitle = "";
     WebLoadListener mWebLoadListener;
-    private int mProgressBarColor;
+    private ColorStateList mProgressBarColor;
 
 
     public static BaseWebFragment instantiate(Context context, String title, String url) {
@@ -84,7 +85,9 @@ public class BaseWebFragment extends BaseFragment {
         mWebView = (WebView) findViewById(R.id.web_view);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_progressbar);
         if (RegexUtils.checkNotNull(mProgressBarColor)) {
-            mProgressBar.setDrawingCacheBackgroundColor(mProgressBarColor);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mProgressBar.setIndeterminateTintList(mProgressBarColor);
+            }
 
         }
 
@@ -242,11 +245,11 @@ public class BaseWebFragment extends BaseFragment {
         mProgressBar = progressBar;
     }
 
-    public int getProgressBarColor() {
+    public ColorStateList getProgressBarColor() {
         return mProgressBarColor;
     }
 
-    public void setProgressBarColor(int progressBarColor) {
+    public void setProgressBarColor(ColorStateList progressBarColor) {
         mProgressBarColor = progressBarColor;
     }
 }
