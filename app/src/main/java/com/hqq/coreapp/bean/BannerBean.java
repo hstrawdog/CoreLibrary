@@ -11,9 +11,9 @@ import com.hqq.core.recycler.BaseBannerBean;
  * @date: 2019-04-21 18:45
  */
 public class BannerBean implements BaseBannerBean {
-    int id;
+    String id;
 
-    public BannerBean(int id) {
+    public BannerBean(String id) {
         this.id = id;
     }
 

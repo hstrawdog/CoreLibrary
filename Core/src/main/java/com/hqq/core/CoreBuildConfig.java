@@ -35,10 +35,7 @@ public class CoreBuildConfig {
      * 默认 标题栏 内容
      */
     private Class<?> mDefIToolbar = IDefToolBarImpl.class;
-    /**
-     * 布局默认背景颜色
-     */
-    private int bgColor = R.color.bg_color;
+
     /**
      * Application   主要获取 context
      * 理论奔溃后 会再次执行 Application 中的 onCreate()
@@ -50,11 +47,16 @@ public class CoreBuildConfig {
      */
     private boolean debug = false;
 
+    /**
+     * 默认图
+     */
     private int defImg = R.drawable.ic_def_img;
     /**
      * 状态栏 模式
      */
     private boolean statusMode = true;
+
+
 
     /**
      * {@link #init(Application, boolean)}
@@ -83,13 +85,6 @@ public class CoreBuildConfig {
         mDefIToolbar = defIToolbar;
     }
 
-    public int getBgColor() {
-        return bgColor;
-    }
-
-    public void setBgColor(int bgColor) {
-        this.bgColor = bgColor;
-    }
 
     public Class<?> getDefItoobar() {
         return mDefIToolbar;

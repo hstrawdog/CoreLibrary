@@ -45,13 +45,13 @@ public class ToolBarActivity extends BaseActivity {
             case R.id.tv_bar_right:
                 break;
             case R.id.button5:
-                mRootViewBuild.getDefToolBar().setStatusColor(ContextCompat.getColor(mActivity, R.color.main_color));
+                mRootViewBuild.getDefToolBar().setStatusColor(ContextCompat.getColor(mActivity, R.color.color_77400a));
                 break;
             case R.id.button4:
                 mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.white);
                 break;
             case R.id.button3:
-                mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.main_color);
+                mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.color_77400a);
                 break;
             case R.id.button:
                 StatusBarManager.statusBarLightMode(mActivity, true);

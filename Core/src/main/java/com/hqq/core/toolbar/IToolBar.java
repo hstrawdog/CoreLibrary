@@ -35,7 +35,7 @@ public abstract class IToolBar {
     /**
      * 状态栏背景颜色
      */
-    protected int mStatusColor = R.color.white;
+    protected int mStatusColor = R.color.toolbar_status_color;
 
     /**
      * 状态栏背景
@@ -74,7 +74,7 @@ public abstract class IToolBar {
 
         if (mIsShowStatusBar ) {
             initStatusBar(mActivity);
-            int mStatusBarHeight = StatusBarManager.getInternalDimensionSize(activity);
+            int mStatusBarHeight = ScreenUtils.getStatusBarHeight(activity);
             linearLayout.addView(mStatusBar, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight));
         }
 

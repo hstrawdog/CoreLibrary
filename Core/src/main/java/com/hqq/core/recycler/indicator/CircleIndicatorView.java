@@ -18,64 +18,23 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
  * @Descrive :
  * @Email :
  */
-public class CircleIndicatorImpl extends View implements Indicator {
+public class CircleIndicatorView extends View implements Indicator {
 
-    public CircleIndicatorImpl(Context context) {
+
+    public CircleIndicatorView(Context context) {
         this(context, null);
     }
 
-    public CircleIndicatorImpl(Context context, @Nullable AttributeSet attrs) {
+    public CircleIndicatorView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CircleIndicatorImpl(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CircleIndicatorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setWillNotDraw(false);
         init();
     }
 
-
-    @Override
-    public void setCurrentItem(int item) {
-        mCurrItem = item;
-        invalidate();
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-
-    }
-
-
-    @Override
-    public void setPageColumn(int column) {
-        mColumn = column;
-    }
-
-    public void setDefPointPadding(int defPointPadding) {
-        mDefPointPadding = defPointPadding;
-    }
-
-    public void setDefRadius(int defRadius) {
-        mDefRadius = defRadius;
-    }
-
-
-    public void setDefColor(int defColor) {
-        mDefColor = defColor;
-        mPaintPageFill.setColor(mDefColor);
-    }
-
-    public void setSelectColor(int selectColor) {
-        mSelectColor = selectColor;
-        mPaintFill.setColor(mSelectColor);
-
-    }
-
-
-    public void setModel(int model) {
-        mModel = model;
-    }
 
     /**
      * 小圆点的 总数
@@ -84,7 +43,7 @@ public class CircleIndicatorImpl extends View implements Indicator {
     /**
      * 默认的画笔
      */
-    private final Paint mPaintPageFill = new Paint(ANTI_ALIAS_FLAG);
+    protected final Paint mPaintPageFill = new Paint(ANTI_ALIAS_FLAG);
     /**
      * 选中的画笔
      */
@@ -98,18 +57,15 @@ public class CircleIndicatorImpl extends View implements Indicator {
      * 默认点的半径
      */
     int mDefRadius = 10;
-
     /**
      * 点与点的间隔
      */
     int mDefPointPadding = 10;
-
     /**
      * 默认颜色
      */
     @ColorInt
     int mDefColor = 0xffffffff;
-
     /**
      * 选中颜色
      */
@@ -121,13 +77,20 @@ public class CircleIndicatorImpl extends View implements Indicator {
      */
     int mModel = 2;
 
-    private void init() {
-        mPaintPageFill.setStyle(Paint.Style.FILL);
-        mPaintPageFill.setColor(mDefColor);
-        mPaintFill.setStyle(Paint.Style.FILL);
-        mPaintFill.setColor(mSelectColor);
+    @Override
+    public void setCurrentItem(int item) {
+        mCurrItem = item;
+        invalidate();
+    }
 
+    @Override
+    public void notifyDataSetChanged() {
+        postInvalidate();
+    }
 
+    @Override
+    public void setPageColumn(int column) {
+        mColumn = column;
     }
 
     @Override
@@ -177,6 +140,36 @@ public class CircleIndicatorImpl extends View implements Indicator {
             canvas.drawCircle(getWidth() - (getPointSize() * (mColumn - mCurrItem)) - mDefRadius, getHeight() / 2, mDefRadius, mPaintFill);
         }
 
+    }
+
+    public void setDefPointPadding(int defPointPadding) {
+        mDefPointPadding = defPointPadding;
+    }
+
+    public void setDefRadius(int defRadius) {
+        mDefRadius = defRadius;
+    }
+
+    public void setDefColor(int defColor) {
+        mDefColor = defColor;
+        mPaintPageFill.setColor(mDefColor);
+    }
+
+    public void setSelectColor(int selectColor) {
+        mSelectColor = selectColor;
+        mPaintFill.setColor(mSelectColor);
+
+    }
+
+    public void setModel(int model) {
+        mModel = model;
+    }
+
+    public void init() {
+        mPaintPageFill.setStyle(Paint.Style.FILL);
+        mPaintPageFill.setColor(mDefColor);
+        mPaintFill.setStyle(Paint.Style.FILL);
+        mPaintFill.setColor(mSelectColor);
     }
 
 

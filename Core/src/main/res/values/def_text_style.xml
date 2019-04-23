@@ -123,8 +123,8 @@
         <item name="android:textColor">@color/color_999</item>
     </style>
 
-    <style name="def_text.20.main_color">
-        <item name="android:textColor">@color/main_color</item>
+    <style name="def_text.20.87582">
+        <item name="android:textColor">@color/color_87582e</item>
     </style>
 
     <style name="def_text.20.bf920f">
@@ -155,8 +155,8 @@
         <item name="android:textColor">@color/color_87582e</item>
     </style>
 
-    <style name="def_text.22.main_color">
-        <item name="android:textColor">@color/main_color</item>
+    <style name="def_text.22.87582">
+        <item name="android:textColor">@color/color_87582e</item>
     </style>
 
     <style name="def_text.20.red">
@@ -234,8 +234,8 @@
         <item name="android:textColor">@color/color_424749</item>
     </style>
 
-    <style name="def_text.24.main_color">
-        <item name="android:textColor">@color/main_color</item>
+    <style name="def_text.24.87582">
+        <item name="android:textColor">@color/color_87582e</item>
     </style>
 
     <style name="def_text.24.main_87582e">
@@ -251,7 +251,7 @@
     </style>
 
 
-    <style name="def_text.26.main_color">
+    <style name="def_text.26.87582">
         <item name="android:textColor">@color/color_87582e</item>
     </style>
 
@@ -295,7 +295,7 @@
         <item name="android:textColor">@color/color_cd3b3b</item>
     </style>
 
-    <style name="def_text.28.main_color">
+    <style name="def_text.28.87582">
         <item name="android:textColor">@color/color_87582e</item>
     </style>
 
@@ -327,7 +327,7 @@
         <item name="android:textColor">@color/color_cd3b3b</item>
     </style>
 
-    <style name="def_text.30.main_color">
+    <style name="def_text.30.87582">
         <item name="android:textColor">@color/color_87582e</item>
     </style>
 
@@ -395,8 +395,8 @@
     </style>
 
 
-    <style name="def_text.34.main_color">
-        <item name="android:textColor">@color/main_color</item>
+    <style name="def_text.34.87582">
+        <item name="android:textColor">@color/color_87582e</item>
     </style>
 
 

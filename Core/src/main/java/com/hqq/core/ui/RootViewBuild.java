@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.hqq.core.CoreBuildConfig;
+import com.hqq.core.R;
 import com.hqq.core.annotation.LayoutModel;
 import com.hqq.core.toolbar.IDefToolBarImpl;
 import com.hqq.core.toolbar.IToolBar;
@@ -102,7 +103,7 @@ public class RootViewBuild {
         } else {
             view = rootView;
         }
-        frameLayout.setBackgroundResource(CoreBuildConfig.getInstance().getBgColor());
+        frameLayout.setBackgroundResource(R.color.bg_color);
         frameLayout.addView(view);
         addToolBar(frameLayout);
         return frameLayout;
@@ -127,7 +128,7 @@ public class RootViewBuild {
         } else {
             view = rootView;
         }
-        layout.setBackgroundResource(CoreBuildConfig.getInstance().getBgColor());
+        layout.setBackgroundResource(R.color.bg_color);
         layout.addView(view);
         return layout;
     }

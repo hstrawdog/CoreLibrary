@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="RecyclerViewBanner">
+    <declare-styleable name="BannerLayout">
         <attr name="rvb_interval" format="integer" />
         <attr name="rvb_showIndicator" format="boolean" />
-
         <attr name="rvb_indicatorSelectedColor" format="color" />
         <attr name="rvb_indicatorUnselectedColor" format="color" />
-
         <attr name="rvb_indicatorRadius" format="integer" />
         <attr name="rvb_indicatorSpace" format="dimension|reference" />
         <attr name="rvb_indicatorMargin" format="dimension|reference" />
@@ -19,17 +17,5 @@
         </attr>
         <attr name="rvb_autoPlaying" format="boolean" />
     </declare-styleable>
-
-
-    <declare-styleable name="BannerLayout">
-        <attr name="interval" />
-        <attr name="showIndicator" />
-        <attr name="orientation" />
-        <attr name="autoPlaying" />
-        <attr name="itemSpace" format="integer" />
-        <attr name="centerScale" format="float" />
-        <attr name="moveSpeed" format="float" />
-    </declare-styleable>
-
 
 </resources>

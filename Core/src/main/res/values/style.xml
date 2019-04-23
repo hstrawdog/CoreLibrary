@@ -13,33 +13,15 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="EasyPermissions" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-    <style name="EasyPermissions.Transparent">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-
-
     <style name="ToolbarStyle" parent="Base.Widget.AppCompat.ActionBar">
         <item name="android:minHeight">@dimen/x88</item>
         <item name="titleMargin">0dp</item>
     </style>
 
-
     <!--分割线-->
     <style name="base_line">
         <item name="android:background">@color/color_line_gray</item>
     </style>
-
 
     <style name="line_vertical" parent="base_line">
         <item name="android:layout_width">match_parent</item>

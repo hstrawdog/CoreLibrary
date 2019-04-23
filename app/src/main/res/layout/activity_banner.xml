@@ -7,8 +7,13 @@
     android:orientation="vertical"
     tools:context=".ui.activity.BannerActivity">
 
-    <com.hqq.core.recycler.RecyclerViewBanner
+    <com.hqq.core.recycler.BannerLayout
         android:id="@+id/rc_banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x330" />
+
+    <com.hqq.core.recycler.BannerLayout
+        android:id="@+id/rc_banner2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x330" />
 

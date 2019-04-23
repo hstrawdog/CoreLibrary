@@ -48,7 +48,7 @@ public class SoftHideKeyBoardUtil {
     private int mStatusBarHeight;
 
     private SoftHideKeyBoardUtil(Activity activity) {
-        mStatusBarHeight = StatusBarManager.getStatusBarHeight(activity);
+        mStatusBarHeight = ScreenUtils.getStatusBarHeight(activity);
         //1､找到Activity的最外层布局控件，它其实是一个DecorView,它所用的控件就是FrameLayout
         FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
         //2､获取到setContentView放进去的View
@@ -108,7 +108,7 @@ public class SoftHideKeyBoardUtil {
 
 
     private SoftHideKeyBoardUtil(Activity activity, FrameLayout content) {
-        mStatusBarHeight = StatusBarManager.getStatusBarHeight(activity);
+        mStatusBarHeight = ScreenUtils.getStatusBarHeight(activity);
         //1､找到Activity的最外层布局控件，它其实是一个DecorView,它所用的控件就是FrameLayout
         //2､获取到setContentView放进去的View
         mChildOfContent = content.getChildAt(0);

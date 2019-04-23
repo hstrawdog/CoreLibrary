@@ -3,6 +3,4 @@
     <item name="rvb_banner_image_view_id" type="id" />
     <item name="rc_list" type="id" />
     <item name="ptr_pull_down" type="id" />
-
-
 </resources>

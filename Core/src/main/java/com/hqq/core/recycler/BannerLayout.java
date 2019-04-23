@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.hqq.core.R;
-import com.hqq.core.recycler.adapter.RecyclerBannerAdapter;
-import com.hqq.core.recycler.indicator.CircleIndicatorImpl;
+import com.hqq.core.recycler.adapter.BaseBannerAdapter;
+import com.hqq.core.recycler.indicator.CircleIndicatorView;
 import com.hqq.core.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.List;
  * @Email :  593979591@qq.com
  */
 
-public class RecyclerViewBanner extends FrameLayout {
+public class BannerLayout extends FrameLayout {
 
 
     private int mInterval;
@@ -43,10 +43,8 @@ public class RecyclerViewBanner extends FrameLayout {
     private boolean isShowTip;
 
     private RecyclerView mRecyclerView;
-    private CircleIndicatorImpl mLinearLayout;
-
-
-    private List<BaseBannerBean> mData = new ArrayList<>();
+    private CircleIndicatorView mLinearLayout;
+    private List mData = new ArrayList<>();
     private int startX, startY, currentIndex;
     private boolean isPlaying;
     private Handler handler = new Handler();
@@ -64,9 +62,8 @@ public class RecyclerViewBanner extends FrameLayout {
      * 轮播图改变
      */
     OnRvBannerChangeListener mOnRvBannerChangeListener;
-
     LinearLayoutManager mLinearLayoutManager;
-    private RecyclerBannerAdapter mAdapter;
+    private BaseBannerAdapter mAdapter;
 
     private Runnable playTask = new Runnable() {
 
@@ -83,32 +80,32 @@ public class RecyclerViewBanner extends FrameLayout {
         return mData;
     }
 
-    public RecyclerViewBanner(Context context) {
+    public BannerLayout(Context context) {
         this(context, null);
     }
 
-    public RecyclerViewBanner(Context context, AttributeSet attrs) {
+    public BannerLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RecyclerViewBanner(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BannerLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RecyclerViewBanner);
-        mInterval = a.getInt(R.styleable.RecyclerViewBanner_rvb_interval, 3000);
-        isShowIndicator = a.getBoolean(R.styleable.RecyclerViewBanner_rvb_showIndicator, true);
-        isShowTip = a.getBoolean(R.styleable.RecyclerViewBanner_rvb_isShowTip, true);
-        isAutoPlaying = a.getBoolean(R.styleable.RecyclerViewBanner_rvb_autoPlaying, true);
-        int margin = a.getDimensionPixelSize(R.styleable.RecyclerViewBanner_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8));
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BannerLayout);
+        mInterval = a.getInt(R.styleable.BannerLayout_rvb_interval, 3000);
+        isShowIndicator = a.getBoolean(R.styleable.BannerLayout_rvb_showIndicator, true);
+        isShowTip = a.getBoolean(R.styleable.BannerLayout_rvb_isShowTip, true);
+        isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_rvb_autoPlaying, true);
+        int margin = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8));
 
 
         if (mRecyclerView == null) {
             mRecyclerView = new RecyclerView(context);
-            mLinearLayout = new CircleIndicatorImpl(context);
-            mAdapter = new RecyclerBannerAdapter();
+            mLinearLayout = new CircleIndicatorView(context);
+            mAdapter = new BaseBannerAdapter();
             mLinearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         }
 
@@ -117,7 +114,7 @@ public class RecyclerViewBanner extends FrameLayout {
 
         // 直接使用卡片布局 貌似 也是可以的
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-       // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
+        // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
         new PagerSnapHelper().attachToRecyclerView(mRecyclerView);
 
         mAdapter.setData(mData);
@@ -148,7 +145,7 @@ public class RecyclerViewBanner extends FrameLayout {
 
         LayoutParams linearLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        linearLayoutParams.gravity = Gravity.BOTTOM ;
+        linearLayoutParams.gravity = Gravity.BOTTOM;
         linearLayoutParams.setMargins(margin, margin, margin, margin);
         addView(mLinearLayout, linearLayoutParams);
 
@@ -161,49 +158,6 @@ public class RecyclerViewBanner extends FrameLayout {
 //        }
 
 
-    }
-
-    /**
-     * 配置 指示器 内容
-     *
-     * @param a TypedArray
-     */
-    private void initIndicator(TypedArray a) {
-
-        int sd = a.getColor(R.styleable.RecyclerViewBanner_rvb_indicatorSelectedColor, 0xff87582e);
-        mLinearLayout.setSelectColor(sd);
-
-        int usd = a.getColor(R.styleable.RecyclerViewBanner_rvb_indicatorUnselectedColor, 0xffffffff);
-        mLinearLayout.setDefColor(usd);
-
-        int radius = a.getDimensionPixelSize(R.styleable.RecyclerViewBanner_rvb_indicatorRadius, 0);
-
-        if (radius > 0) {
-            mLinearLayout.setDefRadius(radius);
-        }
-
-        int g = a.getInt(R.styleable.RecyclerViewBanner_rvb_indicatorGravity, 3);
-        mLinearLayout.setModel(g);
-
-
-    }
-
-
-    /**
-     * 设置是否自动播放（上锁）
-     *
-     * @param playing 开始播放
-     */
-    private synchronized void setPlaying(boolean playing) {
-        if (isAutoPlaying) {
-            if (!isPlaying && playing && mAdapter != null && mAdapter.getItemCount() > 2) {
-                handler.postDelayed(playTask, mInterval);
-                isPlaying = true;
-            } else if (isPlaying && !playing) {
-                handler.removeCallbacksAndMessages(null);
-                isPlaying = false;
-            }
-        }
     }
 
 
@@ -265,11 +219,53 @@ public class RecyclerViewBanner extends FrameLayout {
     }
 
     /**
+     * 配置 指示器 内容
+     *
+     * @param a TypedArray
+     */
+    private void initIndicator(TypedArray a) {
+
+        int sd = a.getColor(R.styleable.BannerLayout_rvb_indicatorSelectedColor, 0xff87582e);
+        mLinearLayout.setSelectColor(sd);
+
+        int usd = a.getColor(R.styleable.BannerLayout_rvb_indicatorUnselectedColor, 0xffffffff);
+        mLinearLayout.setDefColor(usd);
+
+        int radius = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorRadius, 0);
+
+        if (radius > 0) {
+            mLinearLayout.setDefRadius(radius);
+        }
+
+        int g = a.getInt(R.styleable.BannerLayout_rvb_indicatorGravity, 3);
+        mLinearLayout.setModel(g);
+
+
+    }
+
+    /**
+     * 设置是否自动播放（上锁）
+     *
+     * @param playing 开始播放
+     */
+    private synchronized void setPlaying(boolean playing) {
+        if (isAutoPlaying) {
+            if (!isPlaying && playing && mAdapter != null && mAdapter.getItemCount() > 2) {
+                handler.postDelayed(playTask, mInterval);
+                isPlaying = true;
+            } else if (isPlaying && !playing) {
+                handler.removeCallbacksAndMessages(null);
+                isPlaying = false;
+            }
+        }
+    }
+
+    /**
      * 设置轮播数据集
      *
      * @param data Banner对象列表
      */
-    public <T extends BaseBannerBean> void setRvBannerData(List<T> data) {
+    public <T> void setRvBannerData(List<T> data) {
         setPlaying(false);
         // 避免空指针
         if (mData == null) {
@@ -316,6 +312,11 @@ public class RecyclerViewBanner extends FrameLayout {
             mAdapter.notifyDataSetChanged();
         }
     }
+
+    public <T extends BaseBannerAdapter> void setAdapter(T adapter) {
+        mAdapter = adapter;
+    }
+
 
     /**
      * 指示器整体由数据列表容量数量的AppCompatImageView均匀分布在一个横向的LinearLayout中构成
@@ -423,4 +424,6 @@ public class RecyclerViewBanner extends FrameLayout {
     public void setCurrentIndex(int currentIndex) {
         this.currentIndex = currentIndex;
     }
+
+
 }

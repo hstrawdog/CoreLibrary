@@ -23,7 +23,7 @@ import com.hqq.core.R;
  */
 public class IDefToolBarImpl extends IToolBar {
     protected ImageView mImageViewBg;
-    protected int mDefColor = R.color.white;
+    protected int mDefColor = R.color.toolbar_bg_color;
     protected int mDefTitleColor = R.color.color_333;
 
     @Override

@@ -19,13 +19,13 @@ import java.util.List;
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.banner
- * @FileName :   RecyclerBannerAdapter
+ * @FileName :   BaseBannerAdapter
  * @Date : 2018/6/15 0015  下午 5:26
  * @Descrive : TODO
  * @Email :
  */
-public class RecyclerBannerAdapter extends RecyclerView.Adapter {
-    private List<BaseBannerBean> mData = new ArrayList<>();
+public class BaseBannerAdapter<T> extends RecyclerView.Adapter {
+    private List<T> mData = new ArrayList<>();
     private OnRvBannerClickListener onRvBannerClickListener;
     private boolean mIsShowTip;
     private boolean mIsUnlimited = true;
@@ -34,7 +34,7 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter {
         mIsUnlimited = unlimited;
     }
 
-    public void setData(List<BaseBannerBean> data) {
+    public void setData(List<T> data) {
         mData = data;
     }
 
@@ -42,42 +42,20 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter {
         this.onRvBannerClickListener = onRvBannerClickListener;
     }
 
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_banner, parent, false);
+        View view = onCreateView(parent);
         return new RecyclerView.ViewHolder(view) {
         };
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final int finalPosition = position;
-        ImageView img = holder.itemView.findViewById(R.id.iv_banner);
-        TextView tv = holder.itemView.findViewById(R.id.tv_code_banner);
-        if (RegexUtils.isNumeric(mData.get(position % mData.size()).getBannerUrl())) {
-            ImageLoadUtils.with(Integer.parseInt(mData.get(position % mData.size()).getBannerUrl()), img);
-        } else {
-            ImageLoadUtils.with(mData.get(position % mData.size()).getBannerUrl(), img);
 
-        }
-
-        if (mIsShowTip) {
-            tv.setText(mData.get(position % mData.size()).getBannerTitle());
-            tv.setVisibility(View.VISIBLE);
-        } else {
-            tv.setVisibility(View.GONE);
-        }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onRvBannerClickListener != null) {
-                    onRvBannerClickListener.onClick(finalPosition % mData.size());
-                }
-            }
-        });
+        onBindView(holder, position);
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -99,4 +77,42 @@ public class RecyclerBannerAdapter extends RecyclerView.Adapter {
     public void setShowTip(boolean isShowTip) {
         mIsShowTip = isShowTip;
     }
+
+
+    private View onCreateView(ViewGroup parent) {
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_banner, parent, false);
+    }
+
+    private void onBindView(RecyclerView.ViewHolder holder, int position) {
+        final int finalPosition = position;
+        ImageView img = holder.itemView.findViewById(R.id.iv_banner);
+        TextView tv = holder.itemView.findViewById(R.id.tv_code_banner);
+        T data = mData.get(position % mData.size());
+        if (data instanceof BaseBannerBean) {
+            BaseBannerBean baseBannerBean = (BaseBannerBean) data;
+            ImageLoadUtils.with(baseBannerBean.getBannerUrl(), img);
+            if (mIsShowTip) {
+                tv.setText(baseBannerBean.getBannerTitle());
+                tv.setVisibility(View.VISIBLE);
+            } else {
+                tv.setVisibility(View.GONE);
+            }
+        } else if (data instanceof String) {
+            tv.setVisibility(View.GONE);
+            ImageLoadUtils.with((String) data, img);
+        } else if (data instanceof Integer) {
+            tv.setVisibility(View.GONE);
+            ImageLoadUtils.with((Integer) data, img);
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onRvBannerClickListener != null) {
+                    onRvBannerClickListener.onClick(finalPosition % mData.size());
+                }
+            }
+        });
+    }
+
 }

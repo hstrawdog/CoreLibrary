@@ -1,6 +1,8 @@
 package com.hqq.coreapp.ui.activity;
 
-import com.hqq.core.recycler.RecyclerViewBanner;
+import android.os.Bundle;
+
+import com.hqq.core.recycler.BannerLayout;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.BannerAdapter;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @Author : huangqiqiang
@@ -22,7 +25,9 @@ import butterknife.BindView;
 public class BannerActivity extends BaseActivity {
 
     @BindView(R.id.rc_banner)
-    RecyclerViewBanner mRcBanner;
+    BannerLayout mRcBanner;
+    @BindView(R.id.rc_banner2)
+    BannerLayout mRcBanner2;
 
     @Override
     public int getViewId() {
@@ -35,12 +40,19 @@ public class BannerActivity extends BaseActivity {
     protected void initView() {
 
         List<BannerBean> list = new ArrayList<>();
-        list.add(new BannerBean(R.mipmap.ic_banner2));
-        list.add(new BannerBean(R.mipmap.ic_banner2));
-        list.add(new BannerBean(R.mipmap.ic_banner2));
-        list.add(new BannerBean(R.mipmap.ic_banner2));
-        list.add(new BannerBean(R.mipmap.ic_banner2));
+        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
         mRcBanner.setRvBannerData(list);
+
+
+        List<Integer> list2 = new ArrayList<>();
+        list2.add(R.mipmap.ic_banner2);
+        list2.add(R.mipmap.ic_banner2);
+        mRcBanner2.setRvBannerData(list2);
     }
+
 
 }
