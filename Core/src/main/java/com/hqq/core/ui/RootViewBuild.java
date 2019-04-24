@@ -1,7 +1,6 @@
 package com.hqq.core.ui;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,7 +119,6 @@ public class RootViewBuild {
         LinearLayout layout = new LinearLayout(mActivity);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setOverScrollMode(View.OVER_SCROLL_NEVER);
-
         addToolBar(layout);
         View view;
         if (vid > 0) {
@@ -139,11 +137,9 @@ public class RootViewBuild {
     public void recoverToolbar() {
         if (getIToolBar() != null) {
             View view = getIToolBar().getRootView();
-            if (view != null) {
-                if (view instanceof ViewGroup) {
-                    if ((((ViewGroup) view).getParent() != null)) {
-                        ((ViewGroup) view).removeView(view);
-                    }
+            if (view != null && view instanceof ViewGroup) {
+                if ((view.getParent() != null)) {
+                    ((ViewGroup) view).removeView(view);
                 }
             }
         }
@@ -176,7 +172,6 @@ public class RootViewBuild {
         if (mIsShowToolBar != false || mIsShowStatus != false) {
             mIToolBar = new IToolBarBuild(mActivity)
                     .setViewGroup(layout)
-                    .setStatusBarColor(Color.WHITE)
                     .setShowStatusBar(mIsShowStatus)
                     .setShowToolBar(mIsShowToolBar)
                     .create(mClass);
@@ -190,6 +185,7 @@ public class RootViewBuild {
         if (mIToolBar == null) {
             // 避免空指针
             new Exception("RootViewBuild no fount IDefToolBarImpl ");
+            return null;
         }
         return mIToolBar;
     }
