@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-    <!--        def        textView                                     -->
     <style name="def_text">
         <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <style name="def_text.14">
-        <item name="android:textSize">@dimen/x14</item>
     </style>
 
     <style name="def_text.16">
@@ -23,20 +16,12 @@
         <item name="android:textSize">@dimen/x20</item>
     </style>
 
-    <style name="def_text.21">
-        <item name="android:textSize">@dimen/x21</item>
-    </style>
-
     <style name="def_text.22">
         <item name="android:textSize">@dimen/x22</item>
     </style>
 
     <style name="def_text.24">
         <item name="android:textSize">@dimen/x24</item>
-    </style>
-
-    <style name="def_text.25">
-        <item name="android:textSize">@dimen/x25</item>
     </style>
 
     <style name="def_text.26">
@@ -47,19 +32,11 @@
         <item name="android:textSize">@dimen/x28</item>
     </style>
 
-    <style name="def_text.29">
-        <item name="android:textSize">@dimen/x29</item>
-    </style>
-
     <style name="def_text.30">
         <item name="android:textSize">@dimen/x30</item>
     </style>
 
     <style name="def_text.32">
-        <item name="android:textSize">@dimen/x32</item>
-    </style>
-
-    <style name="def_text.33">
         <item name="android:textSize">@dimen/x32</item>
     </style>
 
@@ -83,6 +60,14 @@
         <item name="android:textSize">@dimen/x42</item>
     </style>
 
+    <style name="def_text.44">
+        <item name="android:textSize">@dimen/x44</item>
+    </style>
+
+    <style name="def_text.46">
+        <item name="android:textSize">@dimen/x46</item>
+    </style>
+
     <style name="def_text.48">
         <item name="android:textSize">@dimen/x48</item>
     </style>
@@ -91,369 +76,717 @@
         <item name="android:textSize">@dimen/x50</item>
     </style>
 
-    <style name="def_text.72">
-        <item name="android:textSize">@dimen/x72</item>
+    <style name="def_text.52">
+        <item name="android:textSize">@dimen/x52</item>
     </style>
 
-    <style name="def_text.14.white">
-        <item name="android:textColor">@color/white</item>
+    <style name="def_text.54">
+        <item name="android:textSize">@dimen/x54</item>
     </style>
 
-    <style name="def_text.16.white">
-        <item name="android:textColor">@color/white</item>
+    <style name="def_text.56">
+        <item name="android:textSize">@dimen/x56</item>
     </style>
 
-    <style name="def_text.18.333">
-        <item name="android:textColor">@color/color_333</item>
+    <style name="def_text.58">
+        <item name="android:textSize">@dimen/x58</item>
+    </style>
+
+    <style name="def_text.60">
+        <item name="android:textSize">@dimen/x60</item>
+    </style>
+
+    <style name="def_text.62">
+        <item name="android:textSize">@dimen/x62</item>
+    </style>
+
+    <style name="def_text.64">
+        <item name="android:textSize">@dimen/x64</item>
+    </style>
+
+    <style name="def_text.66">
+        <item name="android:textSize">@dimen/x66</item>
+    </style>
+
+    <style name="def_text.68">
+        <item name="android:textSize">@dimen/x68</item>
+    </style>
+
+    <style name="def_text.70">
+        <item name="android:textSize">@dimen/x70</item>
+    </style>
+
+    <style name="def_text.16.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.16.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.16.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.16.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.16.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.16.191919">
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
     <style name="def_text.18.cd3b3b">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.18.333">
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
     <style name="def_text.18.666">
-        <item name="android:textColor">@color/color_666</item>
+        <item name ="android:textColor">@color/color_666</item>
     </style>
 
     <style name="def_text.18.999">
-        <item name="android:textColor">@color/color_999</item>
+        <item name ="android:textColor">@color/color_999</item>
     </style>
 
-    <style name="def_text.20.999">
-        <item name="android:textColor">@color/color_999</item>
+    <style name="def_text.18.868585">
+        <item name ="android:textColor">@color/color_868585</item>
     </style>
 
-    <style name="def_text.20.87582">
-        <item name="android:textColor">@color/color_87582e</item>
-    </style>
-
-    <style name="def_text.20.bf920f">
-        <item name="android:textColor">@color/color_bf920f</item>
+    <style name="def_text.18.191919">
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
     <style name="def_text.20.cd3b3b">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
 
-    <style name="def_text.20.b3b4b5">
-        <item name="android:textColor">@color/color_b3b4b5</item>
+    <style name="def_text.20.333">
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
-    <style name="def_text.22.white">
-        <item name="android:textColor">@color/white</item>
+    <style name="def_text.20.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.20.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.20.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.20.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.22.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.22.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.22.666">
+        <item name ="android:textColor">@color/color_666</item>
     </style>
 
     <style name="def_text.22.999">
-        <item name="android:textColor">@color/color_999</item>
+        <item name ="android:textColor">@color/color_999</item>
     </style>
 
-    <style name="def_text.22.888">
-        <item name="android:textColor">@color/color_888</item>
+    <style name="def_text.22.868585">
+        <item name ="android:textColor">@color/color_868585</item>
     </style>
 
-    <style name="def_text.22.87582e">
-        <item name="android:textColor">@color/color_87582e</item>
-    </style>
-
-    <style name="def_text.22.87582">
-        <item name="android:textColor">@color/color_87582e</item>
-    </style>
-
-    <style name="def_text.20.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
-    </style>
-
-    <style name="def_text.22.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
-    </style>
-
-    <style name="def_text.20.c1">
-        <item name="android:textColor">@color/color_c1</item>
-    </style>
-
-    <style name="def_text.18.fff">
-        <item name="android:textColor">@color/color_fff</item>
-    </style><style name="def_text.20.fff">
-        <item name="android:textColor">@color/color_fff</item>
+    <style name="def_text.22.191919">
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
     <style name="def_text.24.cd3b3b">
-        <item name="android:textColor">@color/color_cd3b3b</item>
-    </style>
-
-    <style name="def_text.24.fff">
-        <item name="android:textColor">@color/color_fff</item>
-    </style>
-
-    <style name="def_text.24.c6c4c4">
-        <item name="android:textColor">@color/color_c6c4c4</item>
-    </style>
-
-    <style name="def_text.24.999">
-        <item name="android:textColor">@color/color_999</item>
-    </style>
-
-    <style name="def_text.24.87582E">
-        <item name="android:textColor">@color/color_87582E</item>
-    </style>
-
-    <style name="def_text.24.888">
-        <item name="android:textColor">@color/color_888</item>
-    </style>
-
-    <style name="def_text.24.FF5050">
-        <item name="android:textColor">@color/color_FF5050</item>
-    </style>
-
-
-    <style name="def_text.24.white">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="def_text.24.868585">
-        <item name="android:textColor">@color/color_868585</item>
-    </style>
-
-    <style name="def_text.24.666">
-        <item name="android:textColor">@color/color_666</item>
-    </style>
-
-    <style name="def_text.24.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
 
     <style name="def_text.24.333">
-        <item name="android:textColor">@color/color_333</item>
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
-    <style name="def_text.24.424749">
-        <item name="android:textColor">@color/color_424749</item>
+    <style name="def_text.24.666">
+        <item name ="android:textColor">@color/color_666</item>
     </style>
 
-    <style name="def_text.28.424749">
-        <item name="android:textColor">@color/color_424749</item>
+    <style name="def_text.24.999">
+        <item name ="android:textColor">@color/color_999</item>
     </style>
 
-    <style name="def_text.24.87582">
-        <item name="android:textColor">@color/color_87582e</item>
+    <style name="def_text.24.868585">
+        <item name ="android:textColor">@color/color_868585</item>
     </style>
 
-    <style name="def_text.24.main_87582e">
-        <item name="android:textColor">@color/color_87582e</item>
+    <style name="def_text.24.191919">
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
-    <style name="def_text.24.2b">
-        <item name="android:textColor">@color/color_2b</item>
-    </style>
-
-    <style name="def_text.24.444">
-        <item name="android:textColor">@color/color_444</item>
-    </style>
-
-
-    <style name="def_text.26.87582">
-        <item name="android:textColor">@color/color_87582e</item>
-    </style>
-
-    <style name="def_text.26.999">
-        <item name="android:textColor">@color/color_999</item>
-    </style>
-
-    <style name="def_text.26.c6c4c4">
-        <item name="android:textColor">@color/color_c6c4c4</item>
-    </style>
-
-    <style name="def_text.26.fff">
-        <item name="android:textColor">@color/color_fff</item>
+    <style name="def_text.26.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
 
     <style name="def_text.26.333">
-        <item name="android:textColor">@color/color_333</item>
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
     <style name="def_text.26.666">
-        <item name="android:textColor">@color/color_666</item>
+        <item name ="android:textColor">@color/color_666</item>
     </style>
 
-    <style name="def_text.28.aa5a02">
-        <item name="android:textColor">@color/color_aa5a02</item>
+    <style name="def_text.26.999">
+        <item name ="android:textColor">@color/color_999</item>
     </style>
 
-    <style name="def_text.28.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+    <style name="def_text.26.868585">
+        <item name ="android:textColor">@color/color_868585</item>
     </style>
 
-    <style name="def_text.28.999">
-        <item name="android:textColor">@color/color_999</item>
-    </style>
-
-    <style name="def_text.28.b3b4b5">
-        <item name="android:textColor">@color/color_b3b4b5</item>
+    <style name="def_text.26.191919">
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
     <style name="def_text.28.cd3b3b">
-        <item name="android:textColor">@color/color_cd3b3b</item>
-    </style>
-
-    <style name="def_text.28.87582">
-        <item name="android:textColor">@color/color_87582e</item>
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
 
     <style name="def_text.28.333">
-        <item name="android:textColor">@color/color_333</item>
-    </style>
-
-    <style name="def_text.28.FF5050">
-        <item name="android:textColor">@color/color_FF5050</item>
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
     <style name="def_text.28.666">
-        <item name="android:textColor">@color/color_666</item>
+        <item name ="android:textColor">@color/color_666</item>
     </style>
 
-    <style name="def_text.28.fff">
-        <item name="android:textColor">@color/color_fff</item>
+    <style name="def_text.28.999">
+        <item name ="android:textColor">@color/color_999</item>
     </style>
 
-    <style name="def_text.28.b36d61">
-        <item name="android:textColor">@color/color_b36d61</item>
+    <style name="def_text.28.868585">
+        <item name ="android:textColor">@color/color_868585</item>
     </style>
 
-    <style name="def_text.29.f44c28">
-        <item name="android:textColor">@color/color_f44c28</item>
-    </style>
-
-    <style name="def_text.30.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
-    </style>
-
-    <style name="def_text.30.87582">
-        <item name="android:textColor">@color/color_87582e</item>
-    </style>
-
-    <style name="def_text.30.fff">
-        <item name="android:textColor">@color/white</item>
+    <style name="def_text.28.191919">
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
     <style name="def_text.30.cd3b3b">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
-
-    <style name="def_text.30.999">
-        <item name="android:textColor">@color/color_999</item>
-    </style>
-
-    <style name="def_text.30.e88209">
-        <item name="android:textColor">@color/color_e88209</item>
-    </style>
-
-    <style name="def_text.30.77400a">
-        <item name="android:textColor">@color/color_77400a</item>
-
-    </style>
-
 
     <style name="def_text.30.333">
-        <item name="android:textColor">@color/color_333</item>
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
     <style name="def_text.30.666">
-        <item name="android:textColor">@color/color_666</item>
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.30.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.30.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.30.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.32.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
 
     <style name="def_text.32.333">
-        <item name="android:textColor">@color/color_333</item>
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
-    <style name="def_text.32.fff">
-        <item name="android:textColor">@color/color_fff</item>
+    <style name="def_text.32.666">
+        <item name ="android:textColor">@color/color_666</item>
     </style>
 
-    <style name="def_text.32.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+    <style name="def_text.32.999">
+        <item name ="android:textColor">@color/color_999</item>
     </style>
 
-    <style name="def_text.32.F44C28">
-        <item name="android:textColor">@color/color_f44c28</item>
+    <style name="def_text.32.868585">
+        <item name ="android:textColor">@color/color_868585</item>
     </style>
 
     <style name="def_text.32.191919">
-        <item name="android:textColor">@color/color_191919</item>
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
-    <style name="def_text.33.333">
-        <item name="android:textColor">@color/color_333</item>
+    <style name="def_text.34.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
 
     <style name="def_text.34.333">
-        <item name="android:textColor">@color/color_333</item>
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
+    <style name="def_text.34.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
 
     <style name="def_text.34.999">
-        <item name="android:textColor">@color/color_999</item>
+        <item name ="android:textColor">@color/color_999</item>
     </style>
 
-
-    <style name="def_text.34.87582">
-        <item name="android:textColor">@color/color_87582e</item>
+    <style name="def_text.34.868585">
+        <item name ="android:textColor">@color/color_868585</item>
     </style>
 
-
-    <style name="def_text.33.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
-    </style>
-
-    <style name="def_text.36.fff">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="def_text.36.999">
-        <item name="android:textColor">@color/color_999</item>
-    </style>
-
-    <style name="def_text.36.87582e">
-        <item name="android:textColor">@color/color_87582e</item>
-    </style>
-
-    <style name="def_text.36.white">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="def_text.36.666">
-        <item name="android:textColor">@color/color_666</item>
-    </style>
-
-    <style name="def_text.36.333">
-        <item name="android:textColor">@color/color_333</item>
-    </style>
-
-    <style name="def_text.36.444">
-        <item name="android:textColor">@color/color_444</item>
-    </style>
-
-    <style name="def_text.36.77400a">
-        <item name="android:textColor">@color/color_77400a</item>
-    </style>
-
-    <style name="def_text.36.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+    <style name="def_text.34.191919">
+        <item name ="android:textColor">@color/color_191919</item>
     </style>
 
     <style name="def_text.36.cd3b3b">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+        <item name ="android:textColor">@color/color_cd3b3b</item>
     </style>
 
-    <style name="def_text.40.red">
-        <item name="android:textColor">@color/color_cd3b3b</item>
+    <style name="def_text.36.333">
+        <item name ="android:textColor">@color/color_333</item>
     </style>
 
-    <style name="def_text.40.ff5050">
-        <item name="android:textColor">@color/color_FF5050</item>
+    <style name="def_text.36.666">
+        <item name ="android:textColor">@color/color_666</item>
     </style>
 
-    <style name="def_text.40.33ae75">
-        <item name="android:textColor">@color/color_33ae75</item>
+    <style name="def_text.36.999">
+        <item name ="android:textColor">@color/color_999</item>
     </style>
+
+    <style name="def_text.36.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.36.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.38.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.38.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.38.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.38.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.38.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.38.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.40.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.40.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.40.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.40.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.40.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.40.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.42.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.42.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.42.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.42.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.42.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.42.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.44.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.44.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.44.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.44.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.44.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.44.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.46.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.46.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.46.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.46.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.46.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.46.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.48.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.48.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.48.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.48.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.48.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.48.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.50.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.50.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.50.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.50.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.50.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.50.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.52.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.52.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.52.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.52.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.52.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.52.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.54.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.54.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.54.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.54.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.54.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.54.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.56.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.56.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.56.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.56.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.56.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.56.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.58.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.58.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.58.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.58.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.58.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.58.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.60.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.60.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.60.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.60.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.60.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.60.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.62.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.62.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.62.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.62.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.62.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.62.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.64.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.64.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.64.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.64.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.64.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.64.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.66.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.66.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.66.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.66.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.66.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.66.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.68.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.68.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.68.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.68.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.68.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.68.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
+    <style name="def_text.70.cd3b3b">
+        <item name ="android:textColor">@color/color_cd3b3b</item>
+    </style>
+
+    <style name="def_text.70.333">
+        <item name ="android:textColor">@color/color_333</item>
+    </style>
+
+    <style name="def_text.70.666">
+        <item name ="android:textColor">@color/color_666</item>
+    </style>
+
+    <style name="def_text.70.999">
+        <item name ="android:textColor">@color/color_999</item>
+    </style>
+
+    <style name="def_text.70.868585">
+        <item name ="android:textColor">@color/color_868585</item>
+    </style>
+
+    <style name="def_text.70.191919">
+        <item name ="android:textColor">@color/color_191919</item>
+    </style>
+
 
 </resources>
