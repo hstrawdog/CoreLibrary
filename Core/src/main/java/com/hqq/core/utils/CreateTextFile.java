@@ -25,16 +25,18 @@ public class CreateTextFile {
 
 
         List<String> list = new ArrayList<>();
-        list.add("cd3b3b");
         list.add("333");
         list.add("666");
         list.add("999");
-        list.add("868585");
-        list.add("191919");
+        list.add("main");
+        list.add("title");
+        list.add("subtitle");
+        list.add("content");
+        list.add("red");
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                "<resources>\n");
+                "<resources>\n\n");
         stringBuilder.append("    <style name=\"def_text\">\n" +
                 "        <item name=\"android:includeFontPadding\">false</item>\n" +
                 "    </style>\n\n");
