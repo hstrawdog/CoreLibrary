@@ -15,11 +15,11 @@ import java.util.List;
  * @version V1.0 <描述当前版本功能>
  * @author: huangqiqiang
  * 在此写用途
- * @FileName: com.hqq.core.utils.CreateTextFile.java
+ * @FileName: com.hqq.core.utils.CreateDefColorFile.java
  * @emain: 593979591@qq.com
  * @date: 2019-04-24 20:32
  */
-public class CreateTextFile {
+public class CreateDefColorFile {
 
     public static void main(String[] args) {
 
@@ -46,7 +46,7 @@ public class CreateTextFile {
             stringBuilder.append("        <item name=\"android:textSize\">@dimen/x" + i + "</item>\n");
             stringBuilder.append("    </style>\n\n");
         }
-        for (int i = 16; i < 72; i = i + 2) {
+        for (int i = 16; i < 47; i = i + 2) {
             for (String color : list) {
                 stringBuilder.append("    <style name=\"def_text." + i + "." + color + "\">\n");
                 stringBuilder.append("        <item name =\"android:textColor\">@color/color_" + color + "</item>\n");
@@ -82,7 +82,7 @@ public class CreateTextFile {
                 //创建文件成功后，写入内容到文件里
                 writeFileContent(filenameTemp, filecontent);
             } else {
-                FileWriter fileWriter =new FileWriter(file);
+                FileWriter fileWriter = new FileWriter(file);
                 fileWriter.write("");
                 fileWriter.flush();
                 fileWriter.close();

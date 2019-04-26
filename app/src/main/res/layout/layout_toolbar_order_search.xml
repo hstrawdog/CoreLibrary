@@ -45,10 +45,11 @@
 
             <EditText
                 android:id="@+id/edt_search"
-                style="@style/def_text.24.868585"
+                style="@style/def_text.24"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/color_868585"
                 android:background="@color/transparent"
                 android:gravity="center_vertical"
                 android:hint="请输入关键字"
@@ -59,13 +60,13 @@
 
         <TextView
             android:id="@+id/tv_bar_right"
-            style="@style/def_text.32.191919"
+            style="@style/def_text.32"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingRight="@dimen/x37"
             android:text="搜索"
-            android:textColor="@color/colorBackground"
+            android:textColor="@color/color_191919"
             app:layout_constraintRight_toRightOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
