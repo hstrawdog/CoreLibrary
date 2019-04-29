@@ -3,6 +3,7 @@ package com.hqq.coreapp;
 import android.app.Application;
 
 import com.hqq.core.CoreBuildConfig;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * @Author : huangqiqiang
@@ -17,7 +18,14 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         //配置 默认加载的 toolBar
-        CoreBuildConfig.getInstance().init(this,true);
+        CoreBuildConfig.getInstance().init(this, true);
         //.setDefItoobar(IDefToolBarImpl.class);
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
+
+
     }
 }

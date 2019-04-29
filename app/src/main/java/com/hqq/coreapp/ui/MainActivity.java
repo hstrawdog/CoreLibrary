@@ -1,14 +1,17 @@
 package com.hqq.coreapp.ui;
 
 import android.content.Intent;
+import android.support.design.widget.BottomSheetDialog;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.utils.ToastUtils;
+import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
 import com.hqq.coreapp.ui.activity.BannerActivity;
+import com.hqq.coreapp.ui.activity.BottomSheetActivity;
 import com.hqq.coreapp.ui.activity.DefImgActivity;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
 import com.hqq.coreapp.ui.activity.LoadMoreActivity;
@@ -45,9 +48,8 @@ public class MainActivity extends BaseRcActivity<MainAdapter> {
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("Banner", BannerActivity.class));
         mAdapter.addData(new MainBean("PermissionActivity", PermissionActivity.class));
+        mAdapter.addData(new MainBean("BottomSheetActivity", BottomSheetActivity.class));
 
-
-        LogUtils.e("  ");
     }
 
     @Override

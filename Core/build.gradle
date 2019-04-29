@@ -109,6 +109,7 @@ dependencies {
     api rootProject.ext.dependencies.recyclerview
     api rootProject.ext.dependencies.cardview
 
+    api rootProject.ext.dependencies.design
 
 
     api rootProject.ext.dependencies.eventBus

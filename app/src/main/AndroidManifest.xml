@@ -4,7 +4,6 @@
     package="com.hqq.coreapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -36,7 +35,8 @@
         <activity android:name=".ui.activity.SearchBarActivity" />
         <activity android:name=".ui.activity.BannerActivity" />
         <activity android:name=".ui.activity.DefImgActivity" />
-        <activity android:name=".ui.activity.PermissionActivity"></activity>
+        <activity android:name=".ui.activity.PermissionActivity" />
+        <activity android:name=".ui.activity.BottomSheetActivity"></activity>
     </application>
 
 </manifest>

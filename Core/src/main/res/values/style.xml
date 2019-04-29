@@ -61,4 +61,21 @@
         <item name="android:windowExitAnimation">@anim/dialog_left_right</item>
     </style>
 
+
+    <style name="TransparentBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/SheetStyle</item>
+    </style>
+
+    <style name="SheetStyle" parent="android:Widget">
+        <item name="android:background">@android:color/transparent</item>
+
+        <!--折叠的高度-->
+        <item name="behavior_peekHeight">auto</item>
+        <!-- 是否可以隐藏-->
+        <item name="behavior_hideable">true</item>
+        <!--折叠效果 false   开启-->
+        <item name="behavior_skipCollapsed">false</item>
+    </style>
+
+
 </resources>
