@@ -39,13 +39,11 @@ public class ToastUtils {
         if (TextUtils.isEmpty(text)) {
             return;
         }
-        if (mToast == null) {
+        if (mToast != null) {
+            mToast.cancel();
+        } else {
             mToast = Toast.makeText(context.getApplicationContext(), text, duration);
             mToast.setGravity(Gravity.CENTER, 0, 0);
-            mToast.setText(text);
-        } else {
-            //加上时间的设置才能保证时间不叠加
-            mToast.setDuration(duration);
             mToast.setText(text);
         }
         mToast.show();
