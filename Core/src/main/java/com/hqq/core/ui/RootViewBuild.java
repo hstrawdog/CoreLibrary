@@ -27,16 +27,7 @@ import com.hqq.core.utils.statusbar.StatusBarManager;
  * 　根据条件　判断添加　状态栏　标题栏
  */
 public class RootViewBuild {
-    /**
-     * 布局
-     * LinearLayout
-     */
-    public static final int LAYOUT_MODE_LINEAR_LAYOUT = 1;
-    /**
-     * 布局
-     * frameLayout
-     */
-    public static final int LAYOUT_MODE_FRAME_LAYOUT = 2;
+
     /**
      * 当前activitry
      */
@@ -66,7 +57,7 @@ public class RootViewBuild {
      * 布局类型
      */
     @LayoutModel
-    protected int mLayoutMode = LAYOUT_MODE_LINEAR_LAYOUT;
+    protected int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
 
 
     public RootViewBuild(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
@@ -83,9 +74,9 @@ public class RootViewBuild {
      * @return
      */
     protected View createRootView(View rootView, int vid) {
-        if (mLayoutMode == LAYOUT_MODE_LINEAR_LAYOUT) {
+        if (mLayoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
             return mRootView = createLayoutView(rootView, vid);
-        } else if (mLayoutMode == LAYOUT_MODE_FRAME_LAYOUT) {
+        } else if (mLayoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
             return mRootView = createFrameLayoutView(rootView, vid);
         } else {
             return null;

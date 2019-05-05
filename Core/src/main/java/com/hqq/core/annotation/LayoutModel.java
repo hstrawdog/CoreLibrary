@@ -13,7 +13,16 @@ import com.hqq.core.ui.RootViewBuild;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-@IntDef({RootViewBuild.LAYOUT_MODE_LINEAR_LAYOUT, RootViewBuild.LAYOUT_MODE_FRAME_LAYOUT})
+@IntDef({LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT, LayoutModel.LAYOUT_MODE_FRAME_LAYOUT})
 public @interface LayoutModel {
-    int value() default RootViewBuild.LAYOUT_MODE_LINEAR_LAYOUT;
+    /**
+     * 布局
+     * LinearLayout
+     */
+    int LAYOUT_MODE_LINEAR_LAYOUT = 1;
+    /**
+     * 布局
+     * frameLayout
+     */
+    int LAYOUT_MODE_FRAME_LAYOUT = 2;
 }
