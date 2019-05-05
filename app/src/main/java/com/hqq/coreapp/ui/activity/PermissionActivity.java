@@ -35,7 +35,7 @@ public class PermissionActivity extends BaseActivity {
             @Override
             public void PermissionsResult(boolean status) {
 
-                ToastUtils.showToast("摄像头权限");
+                ToastUtils.showToast("拥有摄像头权限");
             }
         });
 
@@ -47,7 +47,7 @@ public class PermissionActivity extends BaseActivity {
             @Override
             public void PermissionsResult(boolean status) {
 
-                ToastUtils.showToast("摄像头权限");
+                ToastUtils.showToast("拥有文件读写权限");
             }
         });
     }

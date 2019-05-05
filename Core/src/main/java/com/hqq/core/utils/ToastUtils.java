@@ -39,13 +39,13 @@ public class ToastUtils {
         if (TextUtils.isEmpty(text)) {
             return;
         }
-        if (mToast != null) {
+        if (mToast != null ) {
             mToast.cancel();
-        } else {
+        }
             mToast = Toast.makeText(context.getApplicationContext(), text, duration);
             mToast.setGravity(Gravity.CENTER, 0, 0);
             mToast.setText(text);
-        }
+
         mToast.show();
     }
 

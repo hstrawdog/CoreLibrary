@@ -25,18 +25,28 @@
         </activity>
         <activity
             android:name=".ui.activity.ToolBarActivity"
-            android:label="设置标题栏" />
+            android:label="标题/状态栏设置" />
         <activity android:name=".ui.activity.IFragmentActivity" />
-        <activity android:name=".ui.activity.LoadMoreActivity" />
+        <activity
+            android:name=".ui.activity.LoadMoreActivity"
+            android:label="加载数据" />
         <activity
             android:name=".ui.activity.DefActivity"
             android:label="默认Activity" />
-        <activity android:name=".ui.activity.ListActivity" />
+        <activity
+            android:name=".ui.activity.ListActivity"
+            android:label="列表数据" />
         <activity android:name=".ui.activity.SearchBarActivity" />
-        <activity android:name=".ui.activity.BannerActivity" />
+        <activity
+            android:name=".ui.activity.BannerActivity"
+            android:label="轮播图测试" />
         <activity android:name=".ui.activity.DefImgActivity" />
-        <activity android:name=".ui.activity.PermissionActivity" />
-        <activity android:name=".ui.activity.BottomSheetActivity"></activity>
+        <activity
+            android:name=".ui.activity.PermissionActivity"
+            android:label="权限测试" />
+        <activity
+            android:name=".ui.activity.BottomSheetActivity"
+            android:label="仿支付评论列表"></activity>
     </application>
 
 </manifest>

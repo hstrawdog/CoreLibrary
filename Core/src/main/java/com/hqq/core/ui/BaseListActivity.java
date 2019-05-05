@@ -40,8 +40,8 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
 
     protected int mPageSize = BaseCommonsKey.PAGE_SIZE;
     protected int mPageCount = 1;
-    protected  RecyclerView.LayoutManager mLayoutManager;
-    protected  BaseListModel mBaseListModel;
+    protected RecyclerView.LayoutManager mLayoutManager;
+    protected BaseListModel mBaseListModel;
 
 
     @Override
@@ -72,6 +72,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     protected void initView() {
         mLayoutManager = getRcLayoutManager();
         mAdapter = getRcAdapter();
+        mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
         mBaseListModel.initRecycleView(mRootViewBuild.getRootView(), mRcList, mAdapter, mLayoutManager,
                 this, this, this);
         mBaseListModel.initPtrPullDown(mRootViewBuild.getRootView());

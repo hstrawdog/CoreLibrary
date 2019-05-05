@@ -6,6 +6,7 @@ import com.hqq.coreapp.bean.MainBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 /**
  * @Author : huangqiqiang
@@ -35,7 +36,14 @@ public class LoadMoreActivity extends BaseListActivity<MainAdapter> {
 
     @Override
     protected void onLoadMore() {
-        getData();
+
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mBaseListModel.fillingData(getData());
+                mAdapter.loadMoreComplete();
+            }
+        }, 2000);
     }
 
     public List<MainBean> getData() {
@@ -44,7 +52,6 @@ public class LoadMoreActivity extends BaseListActivity<MainAdapter> {
             list.add(new MainBean("标题 " + ((int) (1 + Math.random() * 10)), null));
         }
         return list;
-
     }
 
 }

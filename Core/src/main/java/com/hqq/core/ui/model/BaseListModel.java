@@ -163,9 +163,7 @@ public class BaseListModel {
                                 BaseQuickAdapter.OnItemClickListener onItemClickListener,
                                 BaseQuickAdapter.OnItemChildClickListener onItemChildClickListener
     ) {
-        if (rcList == null) {
-            rcList = view.findViewById(R.id.rc_list);
-        }
+
         rcList.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
         rcList.setLayoutManager(layoutManager);
@@ -201,6 +199,13 @@ public class BaseListModel {
     public void onDestroy() {
         mContext = null;
         mPtrPullDown = null;
+    }
+
+    public RecyclerView checkRecycleView(RecyclerView rcList,View view) {
+        if (rcList == null) {
+            rcList = view.findViewById(R.id.rc_list);
+        }
+        return rcList;
     }
 
     /**

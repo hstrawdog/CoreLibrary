@@ -25,7 +25,6 @@ public class BottomSheetActivity extends BaseActivity {
     protected void initView() {
     }
 
-
     @OnClick(R.id.button9)
     public void onViewClicked() {
         FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();

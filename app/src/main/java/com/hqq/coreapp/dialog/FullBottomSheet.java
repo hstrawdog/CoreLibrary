@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.hqq.core.ui.BaseBottomDialog;
+import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.StringAdapter;
 
@@ -33,5 +34,9 @@ public class FullBottomSheet extends BaseBottomDialog {
         recyclerView.setAdapter(mStringAdapter);
     }
 
+    @Override
+    protected int getHeight() {
+        return (int) ResourcesUtils.getDimen(getContext(), R.dimen.x750);
+    }
 
 }
