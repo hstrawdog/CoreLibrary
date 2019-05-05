@@ -29,7 +29,7 @@ import butterknife.Unbinder;
  */
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
-    private View mRootView = null;
+    protected View mRootView = null;
     protected Activity mActivity;
     public LoadingView mLoadingView;
     /**
@@ -75,10 +75,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (mRootView == null) {
             mActivity = getActivity();
             mLoadingView = new LoadingView(mActivity);
-            mRootViewBuild = new RootViewBuild(getActivity());
+            mRootViewBuild = new RootViewBuild(getActivity(),false,false);
             initDefBuild();
-
-
             int vid = getViewId();
             if (vid != 0) {
                 mRootView = mRootViewBuild.createRootView(null, vid);

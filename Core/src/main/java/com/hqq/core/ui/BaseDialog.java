@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.hqq.core.R;
+import com.hqq.core.listenner.DialogClickListener;
 import com.hqq.core.widget.LoadingView;
 
 import butterknife.ButterKnife;

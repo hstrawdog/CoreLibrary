@@ -69,6 +69,12 @@ public class RootViewBuild {
     protected int mLayoutMode = LAYOUT_MODE_LINEAR_LAYOUT;
 
 
+    public RootViewBuild(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
+        mActivity = activity;
+        mIsShowStatus = isShowStatus;
+        mIsShowToolBar = isShowToolBar;
+    }
+
     /**
      * 构建跟布局
      *
@@ -145,7 +151,6 @@ public class RootViewBuild {
         }
     }
 
-
     /**
      * 设置状态栏颜色   所以需要init
      * 但是可以不添加到布局中
@@ -165,8 +170,6 @@ public class RootViewBuild {
      * @param layout
      * @return
      */
-
-
     public IToolBar initIToolBar(ViewGroup layout) {
         StatusBarManager.statusBarLightMode(mActivity, CoreBuildConfig.getInstance().isStatusMode());
         if (mIsShowToolBar != false || mIsShowStatus != false) {
@@ -176,8 +179,6 @@ public class RootViewBuild {
                     .setShowToolBar(mIsShowToolBar)
                     .create(mClass);
         }
-
-
         return mIToolBar;
     }
 
@@ -200,27 +201,12 @@ public class RootViewBuild {
         }
     }
 
-
     public void setIToolBarClass(Class<? extends IToolBar> clss) {
         mClass = clss;
     }
 
     public View getRootView() {
         return mRootView;
-    }
-
-
-    public RootViewBuild(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
-        mActivity = activity;
-        mIsShowStatus = isShowStatus;
-        mIsShowToolBar = isShowToolBar;
-    }
-
-    public RootViewBuild() {
-    }
-
-    public RootViewBuild(Activity activity) {
-        mActivity = activity;
     }
 
     public void setShowStatus(boolean showStatus) {

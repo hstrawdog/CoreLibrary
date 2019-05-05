@@ -1,26 +1,23 @@
 package com.hqq.coreapp.ui;
 
 import android.content.Intent;
-import android.support.design.widget.BottomSheetDialog;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
-import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
 import com.hqq.coreapp.ui.activity.BannerActivity;
 import com.hqq.coreapp.ui.activity.BottomSheetActivity;
 import com.hqq.coreapp.ui.activity.DefImgActivity;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
+import com.hqq.coreapp.ui.activity.ListActivity;
 import com.hqq.coreapp.ui.activity.LoadMoreActivity;
 import com.hqq.coreapp.ui.activity.PermissionActivity;
-import com.hqq.coreapp.ui.activity.RcActivity;
 import com.hqq.coreapp.ui.activity.SearchBarActivity;
 import com.hqq.coreapp.ui.activity.ToolBarActivity;
-import com.hqq.core.ui.BaseRcActivity;
-import com.hqq.core.utils.log.LogUtils;
 
 /**
  * @Author : huangqiqiang
@@ -30,7 +27,7 @@ import com.hqq.core.utils.log.LogUtils;
  * @Descrive : TODO
  * @Email :
  */
-public class MainActivity extends BaseRcActivity<MainAdapter> {
+public class MainActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
@@ -44,7 +41,7 @@ public class MainActivity extends BaseRcActivity<MainAdapter> {
         mAdapter.addData(new MainBean("默认标题栏", ToolBarActivity.class));
         mAdapter.addData(new MainBean("搜索/自定义标题栏", SearchBarActivity.class));
         mAdapter.addData(new MainBean("fragment 加载", IFragmentActivity.class));
-        mAdapter.addData(new MainBean("RcActivity 加载", RcActivity.class));
+        mAdapter.addData(new MainBean("ListActivity 加载", ListActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("Banner", BannerActivity.class));
         mAdapter.addData(new MainBean("PermissionActivity", PermissionActivity.class));

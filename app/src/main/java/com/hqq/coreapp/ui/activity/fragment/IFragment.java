@@ -5,12 +5,12 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 
+import com.hqq.core.ui.BaseListFragment;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
 import com.hqq.coreapp.ui.activity.ToolBarActivity;
-import com.hqq.core.ui.BaseRcFragment;
 import com.hqq.core.widget.CusPtrClassicFrameLayout;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.List;
  * @Descrive :
  * @Email :
  */
-public class IFragment extends BaseRcFragment<MainAdapter> {
+public class IFragment extends BaseListFragment<MainAdapter> {
 
     @Override
     public int getViewId() {
@@ -52,23 +52,16 @@ public class IFragment extends BaseRcFragment<MainAdapter> {
     }
 
     @Override
-    protected boolean isShowLoadMore() {
+    public boolean isShowLoadMore() {
         return true;
     }
+
 
     @Override
     protected MainAdapter getRcAdapter() {
         return new MainAdapter();
     }
 
-    @Override
-    public void initBasic(Bundle savedInstanceState) {
-        mPtrPullDown = (CusPtrClassicFrameLayout) findViewById(R.id.ptr_pull_down);
-        mRcList = (RecyclerView) findViewById(R.id.rc_list);
-        super.initBasic(savedInstanceState);
-        initPull();
-
-    }
 
     @Override
     protected void initData() {
@@ -113,7 +106,7 @@ public class IFragment extends BaseRcFragment<MainAdapter> {
                 list.add(new MainBean("fragment 加载", IFragmentActivity.class));
                 list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
                 list.add(new MainBean("fragment 加载", IFragmentActivity.class));
-                fillingData(list);
+                mBaseListModel.fillingData(list);
             }
         }, 3 * 1000);
 

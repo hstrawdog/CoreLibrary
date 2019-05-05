@@ -4,7 +4,7 @@ import android.os.Handler;
 
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
-import com.hqq.core.ui.BaseRcActivity;
+import com.hqq.core.ui.BaseListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.iblibrary.ui.activity
- * @FileName :   RcActivity
+ * @FileName :   ListActivity
  * @Date : 2018/12/14 0014
  * @Descrive : TODO
  * @Email :
  */
-public class RcActivity extends BaseRcActivity<MainAdapter> {
+public class ListActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
@@ -63,7 +63,7 @@ public class RcActivity extends BaseRcActivity<MainAdapter> {
                 list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
                 list.add(new MainBean("fragment 加载", IFragmentActivity.class));
                 mLoadingView.dismiss();
-                fillingData(list);
+                mBaseListModel.fillingData(list);
 
             }
         }, 3 * 1000);

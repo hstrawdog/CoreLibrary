@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
     protected Activity mActivity;
     public LoadingView mLoadingView;
-    protected RootViewBuild mRootViewBuild = new RootViewBuild();
+    protected RootViewBuild mRootViewBuild ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
         super.onCreate(savedInstanceState);
         mActivity = this;
+        mRootViewBuild=new RootViewBuild(this,true,true);
         initDefConfig();
 
         //  构建  ContentView 默认 LineLayout 构建   支持  xml /view

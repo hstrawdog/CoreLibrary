@@ -1,8 +1,8 @@
 package com.hqq.coreapp.ui.activity;
 
+import com.hqq.core.ui.BaseListActivity;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
-import com.hqq.core.ui.BaseRcActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * @Descrive : TODO
  * @Email :
  */
-public class LoadMoreActivity extends BaseRcActivity<MainAdapter> {
+public class LoadMoreActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
@@ -25,11 +25,11 @@ public class LoadMoreActivity extends BaseRcActivity<MainAdapter> {
 
     @Override
     protected void initData() {
-        fillingData(getData());
+        mBaseListModel.fillingData(getData());
     }
 
     @Override
-    protected boolean isShowLoadMore() {
+    public boolean isShowLoadMore() {
         return true;
     }
 

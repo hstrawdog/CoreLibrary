@@ -31,7 +31,7 @@
         <activity
             android:name=".ui.activity.DefActivity"
             android:label="默认Activity" />
-        <activity android:name=".ui.activity.RcActivity" />
+        <activity android:name=".ui.activity.ListActivity" />
         <activity android:name=".ui.activity.SearchBarActivity" />
         <activity android:name=".ui.activity.BannerActivity" />
         <activity android:name=".ui.activity.DefImgActivity" />
