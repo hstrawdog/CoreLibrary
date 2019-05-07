@@ -59,7 +59,6 @@ public class RootViewBuild {
     @LayoutModel
     protected int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
 
-
     public RootViewBuild(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
         mActivity = activity;
         mIsShowStatus = isShowStatus;
@@ -173,45 +172,96 @@ public class RootViewBuild {
         return mIToolBar;
     }
 
-    public IToolBar getIToolBar() {
+    /**
+     * 获取 父类态栏
+     *
+     * @return
+     */
+    public <T extends IToolBar> T getIToolBar() {
         if (mIToolBar == null) {
             // 避免空指针
             new Exception("RootViewBuild no fount IDefToolBarImpl ");
             return null;
         }
-        return mIToolBar;
+        return (T) mIToolBar;
     }
 
+    /**
+     * 获取默认状态栏
+     *
+     * @return
+     */
     public IDefToolBarImpl getDefToolBar() {
         if (getIToolBar() != null && getIToolBar() instanceof IDefToolBarImpl) {
             return (IDefToolBarImpl) getIToolBar();
         } else {
-            // 开发中的异常 目前先抛出
+            // 自定义的异常 目前先抛出
             new Exception("RootViewBuild no fount IDefToolBarImpl ");
             return null;
         }
     }
 
-    public void setIToolBarClass(Class<? extends IToolBar> clss) {
-        mClass = clss;
-    }
-
+    /**
+     * 获取跟布局
+     *
+     * @return
+     */
     public View getRootView() {
         return mRootView;
     }
 
-    public void setShowStatus(boolean showStatus) {
-        mIsShowStatus = showStatus;
-    }
-
-    public void setShowToolBar(boolean showToolBar) {
-        mIsShowToolBar = showToolBar;
-    }
-
+    /**
+     * 设置根部的样式  目前只支持两种  布局
+     *
+     * @param layoutMode
+     */
     public void setLayoutMode(@LayoutModel int layoutMode) {
         mLayoutMode = layoutMode;
     }
 
+    /**
+     * toolBar 的类名
+     *
+     * @param clss
+     */
+    public void setIToolBarClass(Class<? extends IToolBar> clss) {
+        mClass = clss;
+    }
+
+    /**
+     * 是否显示  状态栏  与标题栏
+     *
+     * @param showStatus  状态栏
+     * @param showToolBar 标题栏
+     */
+    public void setToolbatVisibility(boolean showStatus, boolean showToolBar) {
+        mIsShowStatus = showStatus;
+        mIsShowToolBar = showToolBar;
+    }
+
+    /**
+     * 是否显示标题栏
+     *
+     * @param showStatus
+     */
+    public void setShowStatus(boolean showStatus) {
+        mIsShowStatus = showStatus;
+    }
+
+    /**
+     * 是否显示标题栏
+     *
+     * @param showToolBar
+     */
+    public void setShowToolBar(boolean showToolBar) {
+        mIsShowToolBar = showToolBar;
+    }
+
+    /**
+     * 设置当前 act 目测没有用 暂时保留
+     *
+     * @param activity
+     */
     public void setActivity(AppCompatActivity activity) {
         mActivity = activity;
     }

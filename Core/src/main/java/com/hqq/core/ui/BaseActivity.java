@@ -106,10 +106,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
          * RootViewBuild　
          * 默认布局类型
          */
-        mRootViewBuild.setActivity(this);
         mRootViewBuild.setShowStatus(visibilityStatusBar());
         mRootViewBuild.setShowToolBar(visibilityToolBar());
-
     }
 
     /**
