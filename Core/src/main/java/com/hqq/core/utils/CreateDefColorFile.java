@@ -29,10 +29,8 @@ public class CreateDefColorFile {
         list.add("666");
         list.add("999");
         list.add("main");
-        list.add("title");
-        list.add("subtitle");
-        list.add("content");
         list.add("red");
+        list.add("white");
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +

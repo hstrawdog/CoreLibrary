@@ -133,20 +133,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.16.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.16.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.16.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.16.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.16.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.18.333">
@@ -165,20 +157,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.18.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.18.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.18.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.18.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.18.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.20.333">
@@ -197,20 +181,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.20.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.20.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.20.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.20.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.20.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.22.333">
@@ -229,20 +205,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.22.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.22.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.22.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.22.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.22.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.24.333">
@@ -261,20 +229,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.24.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.24.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.24.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.24.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.24.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.26.333">
@@ -293,20 +253,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.26.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.26.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.26.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.26.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.26.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.28.333">
@@ -325,20 +277,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.28.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.28.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.28.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.28.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.28.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.30.333">
@@ -357,20 +301,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.30.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.30.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.30.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.30.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.30.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.32.333">
@@ -389,20 +325,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.32.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.32.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.32.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.32.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.32.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.34.333">
@@ -421,20 +349,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.34.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.34.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.34.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.34.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.34.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.36.333">
@@ -453,20 +373,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.36.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.36.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.36.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.36.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.36.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.38.333">
@@ -485,20 +397,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.38.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.38.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.38.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.38.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.38.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.40.333">
@@ -517,20 +421,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.40.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.40.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.40.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.40.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.40.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.42.333">
@@ -549,20 +445,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.42.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.42.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.42.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.42.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.42.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.44.333">
@@ -581,20 +469,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.44.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.44.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.44.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.44.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.44.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
     <style name="def_text.46.333">
@@ -613,20 +493,12 @@
         <item name ="android:textColor">@color/color_main</item>
     </style>
 
-    <style name="def_text.46.title">
-        <item name ="android:textColor">@color/color_title</item>
-    </style>
-
-    <style name="def_text.46.subtitle">
-        <item name ="android:textColor">@color/color_subtitle</item>
-    </style>
-
-    <style name="def_text.46.content">
-        <item name ="android:textColor">@color/color_content</item>
-    </style>
-
     <style name="def_text.46.red">
         <item name ="android:textColor">@color/color_red</item>
+    </style>
+
+    <style name="def_text.46.white">
+        <item name ="android:textColor">@color/color_white</item>
     </style>
 
 
