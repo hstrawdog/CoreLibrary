@@ -30,5 +30,10 @@ public class BottomSheetActivity extends BaseActivity {
         FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
         mFullBottomSheetFragment.show(getSupportFragmentManager(), "123");
     }
+    @OnClick(R.id.button10)
+    public void onViewClicked1() {
+        FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
+        mFullBottomSheetFragment.show(getSupportFragmentManager(), "123");
+    }
 
 }

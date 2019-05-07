@@ -17,9 +17,6 @@ public abstract class BaseFragmentAdapter extends FragmentPagerAdapter {
     protected SparseArray<Fragment> mFragmentSparseArray = new SparseArray<>();
     protected SparseArray<String> mStringSparseArray = new SparseArray<>();
 
-    public SparseArray<String> getStringSparseArray() {
-        return mStringSparseArray;
-    }
 
     public BaseFragmentAdapter(FragmentManager fm) {
         super(fm);
@@ -35,7 +32,6 @@ public abstract class BaseFragmentAdapter extends FragmentPagerAdapter {
         return mStringSparseArray.get(position);
     }
 
-
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = mFragmentSparseArray.get(position);
@@ -46,6 +42,9 @@ public abstract class BaseFragmentAdapter extends FragmentPagerAdapter {
         return fragment;
     }
 
+    public SparseArray<String> getStringSparseArray() {
+        return mStringSparseArray;
+    }
 
     /**
      * 只会执行一次
