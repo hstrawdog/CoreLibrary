@@ -39,7 +39,8 @@ public class ToolBarActivity extends BaseActivity {
 
 
     @Override
-    @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6})
+    @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
+            R.id.button7, R.id.button8})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_bar_right:
@@ -50,19 +51,23 @@ public class ToolBarActivity extends BaseActivity {
             case R.id.button4:
                 mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.white);
                 break;
+            case R.id.button7:
+                mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.color_000);
+                break;
             case R.id.button3:
                 mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.color_77400a);
                 break;
             case R.id.button:
                 StatusBarManager.statusBarLightMode(mActivity, true);
-
                 break;
             case R.id.button2:
                 StatusBarManager.statusBarLightMode(mActivity, false);
-
                 break;
             case R.id.button6:
                 mRootViewBuild.getDefToolBar().setToolbarTitle("new标题");
+                break;
+            case R.id.button8:
+                mRootViewBuild.getDefToolBar().setToolBarColor(R.color.color_main);
                 break;
             default:
         }

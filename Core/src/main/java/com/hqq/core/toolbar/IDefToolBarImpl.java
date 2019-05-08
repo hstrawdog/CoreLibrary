@@ -1,6 +1,7 @@
 package com.hqq.core.toolbar;
 
 import android.app.Activity;
+import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -74,6 +75,7 @@ public class IDefToolBarImpl extends IToolBar {
         }
 
     }
+
     public void initScrollNoImage(float ahpla) {
         if (ahpla > 1) {
             ahpla = 1;
@@ -114,6 +116,15 @@ public class IDefToolBarImpl extends IToolBar {
         return mImageViewBg;
     }
 
+    /**
+     * 设置 bar 的颜色
+     *
+     * @param color
+     */
+    public void setToolBarColor(@DrawableRes int color) {
+        getToolBarBg().setImageResource(color);
+        getStatusBar().setBackgroundResource(color);
+    }
 
     /**
      * 设置标题
@@ -237,7 +248,7 @@ public class IDefToolBarImpl extends IToolBar {
     public IDefToolBarImpl setToolBarBg(@DrawableRes int resid) {
         mDefColor = resid;
         if (mImageViewBg != null) {
-            mImageViewBg.setBackgroundResource(resid);
+            mImageViewBg.setImageResource(resid);
         }
         return this;
     }
