@@ -57,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             if (view != null) {
                 setContentView(mRootViewBuild.createRootView(view, 0));
             } else {
-                new Exception("no fount layout and rootView  , must init View");
+                new Exception("no fount layout and rootView  , must createToolBar View");
                 return;
             }
         }

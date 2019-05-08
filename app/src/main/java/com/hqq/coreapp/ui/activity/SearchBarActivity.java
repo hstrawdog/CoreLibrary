@@ -1,7 +1,7 @@
 package com.hqq.coreapp.ui.activity;
 
 import com.hqq.coreapp.R;
-import com.hqq.coreapp.weight.IToolBarOrderSearch;
+import com.hqq.coreapp.weight.BaseToolBarOrderSearch;
 import com.hqq.core.ui.BaseActivity;
 
 /**
@@ -22,7 +22,7 @@ public class SearchBarActivity extends BaseActivity {
     @Override
     protected void initDefConfig() {
         super.initDefConfig();
-        mRootViewBuild.setIToolBarClass(IToolBarOrderSearch.class);
+        mRootViewBuild.setIToolBarClass(BaseToolBarOrderSearch.class);
     }
 
 

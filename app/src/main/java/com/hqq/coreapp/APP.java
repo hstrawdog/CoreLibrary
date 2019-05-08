@@ -19,7 +19,7 @@ public class APP extends Application {
         super.onCreate();
         //配置 默认加载的 toolBar
         CoreBuildConfig.getInstance().init(this, true);
-        //.setDefItoobar(IDefToolBarImpl.class);
+        //.setDefItoobar(BaseDefToolBarImpl.class);
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;

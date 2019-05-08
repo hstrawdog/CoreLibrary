@@ -10,17 +10,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hqq.coreapp.R;
-import com.hqq.core.toolbar.IToolBar;
+import com.hqq.core.toolbar.BaseToolBar;
 
 /**
  * @Author : huangqiqiang
  * @Package : com.shangwenwan.sellercenter.toolsbar
- * @FileName :   IToolBarOrderSearch
+ * @FileName :   BaseToolBarOrderSearch
  * @Date : 2018/11/27 0027  下午 1:14
  * @Descrive :
  * @Email :
  */
-public class IToolBarOrderSearch extends IToolBar {
+public class BaseToolBarOrderSearch extends BaseToolBar {
 
     @Override
     public View iniToolBar(final Activity activity, ViewGroup viewGroup) {

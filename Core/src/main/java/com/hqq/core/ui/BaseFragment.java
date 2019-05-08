@@ -85,7 +85,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                 if (view != null) {
                     mRootView = mRootViewBuild.createRootView(view, 0);
                 } else {
-                    new Exception("no fount layout and rootView  , must init View");
+                    new Exception("no fount layout and rootView  , must createToolBar View");
                 }
             }
             mUnkinder = ButterKnife.bind(this, mRootView);

@@ -2,7 +2,7 @@ package com.hqq.core;
 
 import android.app.Application;
 
-import com.hqq.core.toolbar.IDefToolBarImpl;
+import com.hqq.core.toolbar.BaseDefToolBarImpl;
 
 
 /**
@@ -34,7 +34,7 @@ public class CoreBuildConfig {
     /**
      * 默认 标题栏 内容
      */
-    private Class<?> mDefIToolbar = IDefToolBarImpl.class;
+    private Class<?> mDefIToolbar = BaseDefToolBarImpl.class;
 
     /**
      * Application   主要获取 context

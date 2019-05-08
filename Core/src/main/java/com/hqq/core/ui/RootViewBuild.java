@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
 import com.hqq.core.annotation.LayoutModel;
-import com.hqq.core.toolbar.IDefToolBarImpl;
-import com.hqq.core.toolbar.IToolBar;
+import com.hqq.core.toolbar.BaseToolBar;
+import com.hqq.core.toolbar.BaseDefToolBarImpl;
 import com.hqq.core.toolbar.IToolBarBuild;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
@@ -47,7 +47,7 @@ public class RootViewBuild {
     /**
      * 标题栏
      */
-    IToolBar mIToolBar;
+    BaseToolBar mIToolBar;
 
     /**
      * 标题栏类型
@@ -160,7 +160,7 @@ public class RootViewBuild {
      * @param layout
      * @return
      */
-    public IToolBar initIToolBar(ViewGroup layout) {
+    public BaseToolBar initIToolBar(ViewGroup layout) {
         StatusBarManager.statusBarLightMode(mActivity, CoreBuildConfig.getInstance().isStatusMode());
         if (mIsShowToolBar != false || mIsShowStatus != false) {
             mIToolBar = new IToolBarBuild(mActivity)
@@ -177,10 +177,10 @@ public class RootViewBuild {
      *
      * @return
      */
-    public <T extends IToolBar> T getIToolBar() {
+    public <T extends BaseToolBar> T getIToolBar() {
         if (mIToolBar == null) {
             // 避免空指针
-            new Exception("RootViewBuild no fount IDefToolBarImpl ");
+            new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
             return null;
         }
         return (T) mIToolBar;
@@ -191,12 +191,12 @@ public class RootViewBuild {
      *
      * @return
      */
-    public IDefToolBarImpl getDefToolBar() {
-        if (getIToolBar() != null && getIToolBar() instanceof IDefToolBarImpl) {
-            return (IDefToolBarImpl) getIToolBar();
+    public BaseDefToolBarImpl getDefToolBar() {
+        if (getIToolBar() != null && getIToolBar() instanceof BaseDefToolBarImpl) {
+            return (BaseDefToolBarImpl) getIToolBar();
         } else {
             // 自定义的异常 目前先抛出
-            new Exception("RootViewBuild no fount IDefToolBarImpl ");
+            new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
             return null;
         }
     }
@@ -224,7 +224,7 @@ public class RootViewBuild {
      *
      * @param clss
      */
-    public void setIToolBarClass(Class<? extends IToolBar> clss) {
+    public void setIToolBarClass(Class<? extends BaseToolBar> clss) {
         mClass = clss;
     }
 

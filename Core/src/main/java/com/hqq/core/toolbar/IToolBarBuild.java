@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * @Descrive :
  * @Email :
  */
-public class IToolBarBuild<T extends IToolBar> {
+public class IToolBarBuild<T extends BaseToolBar> {
     T mIToolBar;
     Activity mActivity;
     ViewGroup mViewGroup;
@@ -56,7 +56,7 @@ public class IToolBarBuild<T extends IToolBar> {
             mIToolBar.setShowStatusBar(mIsShowStatusBar)
                     .setShowBar(mIsShowToolBar)
                     .setStatusColor(mStatusBarColor)
-                    .init(mActivity);
+                    .createToolBar(mActivity);
 
         } catch (Exception e) {
             e.printStackTrace();

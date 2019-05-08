@@ -1,7 +1,6 @@
 package com.hqq.core.toolbar;
 
 import android.app.Activity;
-import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +16,12 @@ import com.hqq.core.R;
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.toolbar
- * @FileName :   IDefToolBarImpl
+ * @FileName :   BaseDefToolBarImpl
  * @Date : 2018/11/15 0015  下午 7:27
  * @Descrive :
  * @Email :
  */
-public class IDefToolBarImpl extends IToolBar {
+public class BaseDefToolBarImpl extends BaseToolBar {
     protected ImageView mImageViewBg;
     protected int mDefColor = R.color.toolbar_bg_color;
     protected int mDefTitleColor = R.color.color_333;
@@ -131,7 +130,7 @@ public class IDefToolBarImpl extends IToolBar {
      *
      * @param title
      */
-    public IDefToolBarImpl setToolbarTitle(String title) {
+    public BaseDefToolBarImpl setToolbarTitle(String title) {
         if (mRootView == null) {
             return null;
         }
@@ -245,7 +244,7 @@ public class IDefToolBarImpl extends IToolBar {
      *
      * @param resid
      */
-    public IDefToolBarImpl setToolBarBg(@DrawableRes int resid) {
+    public BaseDefToolBarImpl setToolBarBg(@DrawableRes int resid) {
         mDefColor = resid;
         if (mImageViewBg != null) {
             mImageViewBg.setImageResource(resid);
@@ -259,12 +258,12 @@ public class IDefToolBarImpl extends IToolBar {
      * @param defColor
      * @return
      */
-    public IDefToolBarImpl setDefColor(int defColor) {
+    public BaseDefToolBarImpl setDefColor(int defColor) {
         mDefColor = defColor;
         return this;
     }
 
-    public IDefToolBarImpl setDefTitleColor(int defTitleColor) {
+    public BaseDefToolBarImpl setDefTitleColor(int defTitleColor) {
         getToolbarTitle().setTextColor(ContextCompat.getColor(getToolbarTitle().getContext(), defTitleColor));
         return this;
     }
@@ -275,7 +274,7 @@ public class IDefToolBarImpl extends IToolBar {
      * @param ic              ic
      * @param onClickListener onClickListener
      */
-    public IDefToolBarImpl setRightBackgroundResource(int ic, View.OnClickListener onClickListener) {
+    public BaseDefToolBarImpl setRightBackgroundResource(int ic, View.OnClickListener onClickListener) {
         ImageView imageView = getRightImageView();
         imageView.setVisibility(View.VISIBLE);
         imageView.setImageResource(ic);
@@ -289,7 +288,7 @@ public class IDefToolBarImpl extends IToolBar {
      * @param id
      * @return
      */
-    public IDefToolBarImpl setLetImageView(int id) {
+    public BaseDefToolBarImpl setLetImageView(int id) {
         getLeftView().setImageResource(id);
         return this;
     }
