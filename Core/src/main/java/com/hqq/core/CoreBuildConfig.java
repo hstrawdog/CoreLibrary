@@ -16,21 +16,6 @@ import com.hqq.core.toolbar.BaseDefToolBarImpl;
 public class CoreBuildConfig {
     private static volatile CoreBuildConfig singleton;
 
-    public static CoreBuildConfig getInstance() {
-        if (singleton == null) {
-            synchronized (CoreBuildConfig.class) {
-                if (singleton == null) {
-                    singleton = new CoreBuildConfig();
-                }
-            }
-        }
-        return singleton;
-    }
-
-    private CoreBuildConfig() {
-    }
-
-
     /**
      * 默认 标题栏 内容
      */
@@ -45,17 +30,31 @@ public class CoreBuildConfig {
     /**
      * 是否开启 log日志  BuildConfig.Debug
      */
-    private boolean debug = false;
+    private boolean mDebug = false;
 
     /**
      * 默认图
      */
-    private int defImg = R.drawable.ic_def_img;
+    private int mDefImg = R.drawable.ic_def_img;
     /**
      * 状态栏 模式
      */
-    private boolean statusMode = true;
+    private boolean mStatusMode = true;
 
+
+    public static CoreBuildConfig getInstance() {
+        if (singleton == null) {
+            synchronized (CoreBuildConfig.class) {
+                if (singleton == null) {
+                    singleton = new CoreBuildConfig();
+                }
+            }
+        }
+        return singleton;
+    }
+
+    private CoreBuildConfig() {
+    }
 
 
     /**
@@ -74,7 +73,7 @@ public class CoreBuildConfig {
      */
     public void init(Application application, boolean isDebug) {
         mApplication = application;
-        debug = isDebug;
+        mDebug = isDebug;
     }
 
     public Class<?> getDefIToolbar() {
@@ -84,7 +83,6 @@ public class CoreBuildConfig {
     public void setDefIToolbar(Class<?> defIToolbar) {
         mDefIToolbar = defIToolbar;
     }
-
 
     public Class<?> getDefItoobar() {
         return mDefIToolbar;
@@ -99,23 +97,23 @@ public class CoreBuildConfig {
     }
 
     public boolean isDebug() {
-        return debug;
+        return mDebug;
     }
 
     public int getDefImg() {
-        return defImg;
+        return mDefImg;
     }
 
     public void setDefImg(int defImg) {
-        this.defImg = defImg;
+        this.mDefImg = defImg;
     }
 
     public boolean isStatusMode() {
-        return statusMode;
+        return mStatusMode;
     }
 
     public CoreBuildConfig setStatusMode(boolean statusMode) {
-        this.statusMode = statusMode;
+        this.mStatusMode = statusMode;
         return this;
     }
 }
