@@ -100,7 +100,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment {
         return CoordinatorLayout.LayoutParams.MATCH_PARENT;
     }
 
-    private int getTransparentBottomSheetStyle() {
+    protected int getTransparentBottomSheetStyle() {
         return R.style.TransparentBottomSheetStyle;
     }
 

@@ -2,6 +2,7 @@ package com.hqq.coreapp.ui.activity;
 
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.coreapp.R;
+import com.hqq.coreapp.dialog.FoldFullBottomSheet;
 import com.hqq.coreapp.dialog.FullBottomSheet;
 
 import butterknife.OnClick;
@@ -30,9 +31,10 @@ public class BottomSheetActivity extends BaseActivity {
         FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
         mFullBottomSheetFragment.show(getSupportFragmentManager(), "123");
     }
+
     @OnClick(R.id.button10)
     public void onViewClicked1() {
-        FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
+        FoldFullBottomSheet mFullBottomSheetFragment = new FoldFullBottomSheet();
         mFullBottomSheetFragment.show(getSupportFragmentManager(), "123");
     }
 

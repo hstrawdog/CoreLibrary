@@ -39,4 +39,8 @@ public class FoldFullBottomSheet extends BaseBottomDialog {
         return (int) ResourcesUtils.getDimen(getContext(), R.dimen.x750);
     }
 
+    @Override
+    protected int getTransparentBottomSheetStyle() {
+        return R.style.TransparentBottomSheetStyle_behavior;
+    }
 }

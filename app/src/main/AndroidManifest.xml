@@ -40,7 +40,9 @@
         <activity
             android:name=".ui.activity.BannerActivity"
             android:label="轮播图测试" />
-        <activity android:name=".ui.activity.DefImgActivity" />
+        <activity
+            android:name=".ui.activity.DefImgActivity"
+            android:label="默认图显示" />
         <activity
             android:name=".ui.activity.PermissionActivity"
             android:label="权限测试" />
