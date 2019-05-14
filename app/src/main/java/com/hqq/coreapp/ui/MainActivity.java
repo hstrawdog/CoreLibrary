@@ -17,6 +17,7 @@ import com.hqq.coreapp.ui.activity.ListActivity;
 import com.hqq.coreapp.ui.activity.LoadMoreActivity;
 import com.hqq.coreapp.ui.activity.PermissionActivity;
 import com.hqq.coreapp.ui.activity.SearchBarActivity;
+import com.hqq.coreapp.ui.activity.TextViewSizeActivity;
 import com.hqq.coreapp.ui.activity.ToolBarActivity;
 
 /**
@@ -46,6 +47,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("Banner", BannerActivity.class));
         mAdapter.addData(new MainBean("PermissionActivity", PermissionActivity.class));
         mAdapter.addData(new MainBean("BottomSheetActivity", BottomSheetActivity.class));
+        mAdapter.addData(new MainBean("TextViewSizeActivity", TextViewSizeActivity.class));
 
     }
 

@@ -48,7 +48,8 @@
             android:label="权限测试" />
         <activity
             android:name=".ui.activity.BottomSheetActivity"
-            android:label="知乎评论列表"></activity>
+            android:label="知乎评论列表" />
+        <activity android:name=".ui.activity.TextViewSizeActivity"></activity>
     </application>
 
 </manifest>

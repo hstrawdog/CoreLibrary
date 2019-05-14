@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hqq.coreapp.ui.activity.TextViewSizeActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_red"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="bottom"
+            style="@style/def_text.30.333"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:background="#0099ff"
+            android:gravity="center"
+            android:text="AajJÂâ" />
+
+        <TextView
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:background="#333333"
+            android:gravity="center"
+            android:text="x100"
+            android:textSize="@dimen/x30" />
+
+    </LinearLayout>
+
+    <View style="@style/line_vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_red"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="bottom"
+            style="@style/def_text.30.333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0099ff"
+            android:gravity="center"
+            android:text="AajJÂâ" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#333333"
+            android:gravity="center"
+            android:text="AajJÂâ"
+            android:textSize="@dimen/x30" />
+
+    </LinearLayout>
+
+    <View style="@style/line_vertical" />
+
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_red"
+        android:orientation="horizontal">
+
+        <View
+            style="@style/def_text.30.333"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:background="#0099ff"
+            android:gravity="center"
+            android:text="x100" />
+
+        <TextView
+            style="@style/def_text.30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#333333"
+            android:gravity="center"
+            android:paddingBottom="@dimen/x70"
+            android:text="AajJÂâ" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
