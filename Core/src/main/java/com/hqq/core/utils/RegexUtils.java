@@ -307,8 +307,22 @@ public class RegexUtils {
         return componentName != null;
     }
 
-    public static String htmlFormat4em(String name) {
-        return name.replaceAll("<em>", "<font color=\"#cd3b3b\">").replaceAll("</em>", "</font>");
+
+    /**
+     *  格式化数据  ***
+     * @param userName
+     * @return
+     */
+    public static String format2xxx(String userName) {
+        if (checkNotNull(userName)) {
+            StringBuilder stringBuilder = new StringBuilder(userName.substring(0, 1));
+            stringBuilder.append("***");
+            stringBuilder.append(userName.substring(userName.length() - 1, userName.length()));
+
+            return stringBuilder.toString();
+        }
+
+        return "***";
     }
 
     public static void main(String[] args) {
