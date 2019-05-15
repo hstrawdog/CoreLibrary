@@ -2,6 +2,7 @@ package com.hqq.core;
 
 import android.app.Application;
 
+import com.hqq.core.annotation.StatusBarMode;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
 
 
@@ -39,7 +40,7 @@ public class CoreBuildConfig {
     /**
      * 状态栏 模式
      */
-    private boolean mStatusMode = true;
+    private int mStatusMode = StatusBarMode.DARK_MODE;
 
 
     public static CoreBuildConfig getInstance() {
@@ -108,11 +109,11 @@ public class CoreBuildConfig {
         this.mDefImg = defImg;
     }
 
-    public boolean isStatusMode() {
+    public int isStatusMode() {
         return mStatusMode;
     }
 
-    public CoreBuildConfig setStatusMode(boolean statusMode) {
+    public CoreBuildConfig setStatusMode(@StatusBarMode int statusMode) {
         this.mStatusMode = statusMode;
         return this;
     }

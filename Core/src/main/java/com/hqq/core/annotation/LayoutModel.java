@@ -2,7 +2,6 @@ package com.hqq.core.annotation;
 
 import android.support.annotation.IntDef;
 
-import com.hqq.core.ui.RootViewBuild;
 
 
 /**

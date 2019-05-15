@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
 import com.hqq.core.annotation.LayoutModel;
+import com.hqq.core.annotation.StatusBarMode;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
 import com.hqq.core.toolbar.IToolBarBuild;
@@ -59,6 +60,9 @@ public class RootViewBuild {
     @LayoutModel
     protected int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
 
+    @StatusBarMode
+    protected int mStatusBarMode = CoreBuildConfig.getInstance().isStatusMode();
+
     public RootViewBuild(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
         mActivity = activity;
         mIsShowStatus = isShowStatus;
@@ -100,7 +104,7 @@ public class RootViewBuild {
         }
         frameLayout.setBackgroundResource(R.color.bg_color);
         frameLayout.addView(view);
-        addToolBar(frameLayout);
+        createToolBar(frameLayout);
         return frameLayout;
     }
 
@@ -115,7 +119,7 @@ public class RootViewBuild {
         LinearLayout layout = new LinearLayout(mActivity);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        addToolBar(layout);
+        createToolBar(layout);
         View view;
         if (vid > 0) {
             view = mActivity.getLayoutInflater().inflate(vid, layout, false);
@@ -147,9 +151,15 @@ public class RootViewBuild {
      *
      * @param layout
      */
-    protected void addToolBar(ViewGroup layout) {
-        initIToolBar(layout);
+    protected void createToolBar(ViewGroup layout) {
+        if (mStatusBarMode == StatusBarMode.LIGHT_MODE) {
+            StatusBarManager.statusBarLightMode(mActivity, true);
+        } else {
+            StatusBarManager.statusBarLightMode(mActivity, false);
+
+        }
         if (mIsShowToolBar != false || mIsShowStatus != false) {
+            initIToolBar(layout);
             layout.addView(mIToolBar.getRootView());
         }
     }
@@ -161,7 +171,6 @@ public class RootViewBuild {
      * @return
      */
     public BaseToolBar initIToolBar(ViewGroup layout) {
-        StatusBarManager.statusBarLightMode(mActivity, CoreBuildConfig.getInstance().isStatusMode());
         if (mIsShowToolBar != false || mIsShowStatus != false) {
             mIToolBar = new IToolBarBuild(mActivity)
                     .setViewGroup(layout)
@@ -179,7 +188,7 @@ public class RootViewBuild {
      */
     public <T extends BaseToolBar> T getIToolBar() {
         if (mIToolBar == null) {
-            // 避免空指针
+            //  自定义异常
             new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
             return null;
         }
@@ -195,7 +204,7 @@ public class RootViewBuild {
         if (getIToolBar() != null && getIToolBar() instanceof BaseDefToolBarImpl) {
             return (BaseDefToolBarImpl) getIToolBar();
         } else {
-            // 自定义的异常 目前先抛出
+            // 自定义的异常 目前先抛出 类型不正确
             new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
             return null;
         }
@@ -262,8 +271,19 @@ public class RootViewBuild {
      *
      * @param activity
      */
+
+
     public void setActivity(AppCompatActivity activity) {
         mActivity = activity;
     }
 
+    public void setStatusBarMode(int statusBarMode) {
+        mStatusBarMode = statusBarMode;
+    }
+
+    public int getStatusBarMode() {
+        return mStatusBarMode;
+    }
 }
+
+
