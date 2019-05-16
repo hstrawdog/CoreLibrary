@@ -48,7 +48,7 @@ ext {
             //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
             bugly                        : 'com.tencent.bugly:crashreport:latest.release',
             // -------------   屏幕适配 -------------
-            IDimensCompat                : 'com.github.huangqiqiang:IDimensCompat:1.0.0',
+            IDimensCompat                : 'com.github.huangqiqiang:IDimensCompat:1.0.1',
             // -------------   相册 -------------
             IHAlbum                      : 'com.github.huangqiqiang:AlbumApp:1.0.10',
             // -------------   路由 -------------

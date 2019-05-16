@@ -12,6 +12,7 @@ import com.hqq.coreapp.bean.MainBean;
 import com.hqq.coreapp.ui.activity.BannerActivity;
 import com.hqq.coreapp.ui.activity.BottomSheetActivity;
 import com.hqq.coreapp.ui.activity.DefImgActivity;
+import com.hqq.coreapp.ui.activity.DimenActivity;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
 import com.hqq.coreapp.ui.activity.ListActivity;
 import com.hqq.coreapp.ui.activity.LoadMoreActivity;
@@ -38,6 +39,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 
     @Override
     protected void initData() {
+        mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("加载数据", LoadMoreActivity.class));
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
         mAdapter.addData(new MainBean("搜索/自定义标题栏", SearchBarActivity.class));
