@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
-import com.hqq.coreapp.ui.activity.fragment.IFragment;
+import com.hqq.coreapp.ui.activity.fragment.MainFragment;
 
 /**
  * @Author : huangqiqiang
@@ -22,14 +22,14 @@ public class IFragmentAdapter extends FragmentPagerAdapter {
 
 
 
-    SparseArray<IFragment> mSparseArray =new SparseArray();
+    SparseArray<MainFragment> mSparseArray =new SparseArray();
 
     @Override
     public Fragment getItem(int position) {
 
         Fragment fragment  =mSparseArray .get(position);
         if (fragment == null){
-            fragment= IFragment.getIFragment(position);
+            fragment= MainFragment.getIFragment(position);
         }
 
         return   fragment;

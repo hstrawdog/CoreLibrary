@@ -49,7 +49,7 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     }
 
     @Override
-    protected View getRootView() {
+    public View getRootView() {
         return mBaseListModel.createRecycleView(getContext());
     }
 

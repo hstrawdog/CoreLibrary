@@ -27,7 +27,7 @@ public class IFragmentActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
         mVpPage.setAdapter(new IFragmentAdapter(getSupportFragmentManager()));
     }
 //    @Override

@@ -25,7 +25,7 @@ public class FullBottomSheet extends BaseBottomDialog {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
         RecyclerView recyclerView = mRootView.findViewById(R.id.rc_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         for (int i = 0; i < 20; i++) {

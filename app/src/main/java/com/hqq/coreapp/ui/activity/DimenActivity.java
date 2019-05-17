@@ -19,7 +19,7 @@ public class DimenActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
 
     }
 }

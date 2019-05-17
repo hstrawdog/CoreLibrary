@@ -26,7 +26,7 @@ public class ToolBarActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
 
         mRootViewBuild.getDefToolBar().setRightTextView("分享", new View.OnClickListener() {
             @Override

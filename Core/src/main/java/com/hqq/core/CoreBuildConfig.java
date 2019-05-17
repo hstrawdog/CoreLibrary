@@ -15,7 +15,6 @@ import com.hqq.core.toolbar.BaseDefToolBarImpl;
  * @Email :
  */
 public class CoreBuildConfig {
-    private static volatile CoreBuildConfig singleton;
 
     /**
      * 默认 标题栏 内容
@@ -40,8 +39,11 @@ public class CoreBuildConfig {
     /**
      * 状态栏 模式
      */
-    private int mStatusMode = StatusBarMode.DARK_MODE;
-
+    private int mStatusMode = StatusBarMode.LIGHT_MODE;
+    /**
+     * 单利维持对象
+     */
+    private static volatile CoreBuildConfig singleton;
 
     public static CoreBuildConfig getInstance() {
         if (singleton == null) {

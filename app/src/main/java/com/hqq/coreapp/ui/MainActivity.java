@@ -39,7 +39,6 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 
     @Override
     protected void initData() {
-        mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("加载数据", LoadMoreActivity.class));
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
         mAdapter.addData(new MainBean("搜索/自定义标题栏", SearchBarActivity.class));
@@ -49,14 +48,15 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("Banner", BannerActivity.class));
         mAdapter.addData(new MainBean("PermissionActivity", PermissionActivity.class));
         mAdapter.addData(new MainBean("BottomSheetActivity", BottomSheetActivity.class));
-        mAdapter.addData(new MainBean("TextViewSizeActivity", TextViewSizeActivity.class));
+        mAdapter.addData(new MainBean("文字适配测试", TextViewSizeActivity.class));
+        mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
 
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
-        goActivity(mAdapter.getItem(position).getClassName());
+        startActivity(new Intent(this, mAdapter.getItem(position).getClassName()));
     }
 
 

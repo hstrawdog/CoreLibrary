@@ -23,7 +23,7 @@ public class BottomSheetActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
     }
 
     @OnClick(R.id.button9)

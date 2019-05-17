@@ -61,7 +61,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
      * @return
      */
     @Override
-    protected View getRootView() {
+    public View getRootView() {
         return mBaseListModel.createRecycleView(this);
     }
 
@@ -69,7 +69,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
      * 初始化  基础数据
      */
     @Override
-    protected void initView() {
+    public void initView() {
         mLayoutManager = getRcLayoutManager();
         mAdapter = getRcAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());

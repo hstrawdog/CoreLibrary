@@ -72,8 +72,8 @@ public class BaseWebFragment extends BaseFragment {
     }
 
     @Override
-    protected void initDefBuild() {
-        super.initDefBuild();
+    public void initDefConfig() {
+        super.initDefConfig();
         mRootViewBuild.setShowStatus(true);
         mRootViewBuild.setShowToolBar(true);
     }

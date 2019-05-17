@@ -24,7 +24,7 @@ public class PermissionActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
 
     }
 

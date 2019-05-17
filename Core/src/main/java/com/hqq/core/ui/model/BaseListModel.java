@@ -161,11 +161,9 @@ public class BaseListModel {
     public void initRecycleView(View view, RecyclerView rcList, BaseQuickAdapter mAdapter, RecyclerView.LayoutManager layoutManager,
                                 BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener,
                                 BaseQuickAdapter.OnItemClickListener onItemClickListener,
-                                BaseQuickAdapter.OnItemChildClickListener onItemChildClickListener
-    ) {
+                                BaseQuickAdapter.OnItemChildClickListener onItemChildClickListener) {
 
         rcList.setOverScrollMode(View.OVER_SCROLL_NEVER);
-
         rcList.setLayoutManager(layoutManager);
         // 添加焦点
         rcList.setAdapter(mAdapter);

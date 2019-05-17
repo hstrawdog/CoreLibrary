@@ -20,7 +20,7 @@ public class SearchBarActivity extends BaseActivity {
     }
 
     @Override
-    protected void initDefConfig() {
+    public void initDefConfig() {
         super.initDefConfig();
         mRootViewBuild.setIToolBarClass(BaseToolBarOrderSearch.class);
     }
@@ -28,7 +28,7 @@ public class SearchBarActivity extends BaseActivity {
 
 
      @Override
-    protected void initView() {
+     public void initView() {
 
     }
 }

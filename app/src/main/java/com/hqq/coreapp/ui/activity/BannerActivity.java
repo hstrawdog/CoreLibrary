@@ -37,8 +37,7 @@ public class BannerActivity extends BaseActivity {
     BannerAdapter mBannerAdapter;
 
     @Override
-    protected void initView() {
-
+    public void initView() {
         List<BannerBean> list = new ArrayList<>();
         list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
         list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));

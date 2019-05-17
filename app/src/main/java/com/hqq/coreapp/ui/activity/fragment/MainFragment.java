@@ -19,12 +19,12 @@ import java.util.List;
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.iblibrary.ui.activity.fragment
- * @FileName :   IFragment
+ * @FileName :   MainFragment
  * @Date : 2018/11/23 0023  上午 9:41
  * @Descrive :
  * @Email :
  */
-public class IFragment extends BaseListFragment<MainAdapter> {
+public class MainFragment extends BaseListFragment<MainAdapter> {
 
     @Override
     public int getViewId() {
@@ -33,7 +33,7 @@ public class IFragment extends BaseListFragment<MainAdapter> {
     }
 
     public static Fragment getIFragment(int position) {
-        IFragment fragment = new IFragment();
+        MainFragment fragment = new MainFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("postition", position);
         fragment.setArguments(bundle);
@@ -47,7 +47,7 @@ public class IFragment extends BaseListFragment<MainAdapter> {
      * @return
      */
     @Override
-    protected boolean isLazyLoad() {
+    public boolean isLazyLoad() {
         return true;
     }
 

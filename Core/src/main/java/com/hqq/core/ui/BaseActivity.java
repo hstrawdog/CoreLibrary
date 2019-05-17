@@ -6,13 +6,10 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 
-import com.hqq.core.utils.KeyboardUtils;
 import com.hqq.core.widget.LoadingView;
 
 import butterknife.ButterKnife;
@@ -25,10 +22,10 @@ import butterknife.ButterKnife;
  * @Descrive : TODO
  * @Email :
  */
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements CreateRootView.IActivity, View.OnClickListener {
     protected Activity mActivity;
     public LoadingView mLoadingView;
-    protected RootViewBuild mRootViewBuild ;
+    protected RootViewBuild mRootViewBuild;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
         super.onCreate(savedInstanceState);
         mActivity = this;
-        mRootViewBuild=new RootViewBuild(this,true,true);
+        mRootViewBuild = new RootViewBuild(this, true, true);
         initDefConfig();
 
         //  构建  ContentView 默认 LineLayout 构建   支持  xml /view
@@ -101,13 +98,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 默认配置
      */
-    protected void initDefConfig() {
+    @Override
+    public void initDefConfig() {
         /**
          * RootViewBuild　
          * 默认布局类型
          */
-        mRootViewBuild.setShowStatus(visibilityStatusBar());
-        mRootViewBuild.setShowToolBar(visibilityToolBar());
+        mRootViewBuild.setShowStatus(true);
+        mRootViewBuild.setShowToolBar(true);
     }
 
     /**
@@ -116,8 +114,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @return
      */
-    protected View getRootView() {
-
+    @Override
+    public View getRootView() {
         return null;
     }
 
@@ -126,7 +124,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @return true 则强制竖屏
      */
-    protected boolean alwaysPortrait() {
+    @Override
+    public boolean alwaysPortrait() {
         return true;
     }
 
@@ -135,79 +134,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @return true则全屏
      */
-    protected boolean fullScreen() {
+    @Override
+    public boolean fullScreen() {
         return false;
     }
 
-    /**
-     * 获取id
-     *
-     * @return
-     */
-    public abstract int getViewId();
-
-    /**
-     * 初始化
-     */
-    protected abstract void initView();
-
-    /**
-     * 是否显示状态栏
-     *
-     * @return
-     */
-    protected boolean visibilityStatusBar() {
-        return true;
-    }
-
-    /**
-     * 11.22  修改方法 是否显示标题栏
-     *
-     * @return
-     */
-    protected Boolean visibilityToolBar() {
-        return true;
-    }
-
-    /**
-     * 隐藏键盘方法
-     * @param event
-     * @param view
-     */
-    protected void hideKeyboard(MotionEvent event, View view) {
-        if (view != null && view instanceof EditText) {
-            int[] location = {0, 0};
-            view.getLocationInWindow(location);
-            int left = location[0], top = location[1], right = left + view.getWidth(), bootom = top + view.getHeight();
-            // 判断焦点位置坐标是否在控件内，如果位置在控件外则隐藏键盘
-            if (event.getRawX() < left || event.getRawX() > right || event.getY() < top || event.getRawY() > bootom) {
-                // 隐藏键盘
-                KeyboardUtils.hideSoftInput(view);
-            }
-        }
-    }
-
-
-    /*********************************** Activity 跳转*******************************************************************************/
-    protected void goActivity(Class<?> cls) {
-        goActivity(cls, null);
-    }
-
-    protected void goActivity(Class<?> cls, Bundle bundle) {
-        goActivity(cls, bundle, -1);
-    }
-
-    protected void goActivity(Class<?> cls, int requestCode) {
-        goActivity(cls, null, requestCode);
-    }
-
-    protected void goActivity(Class<?> cls, Bundle bundle, int requestCode) {
-        Intent intent = new Intent(this, cls);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-        startActivityForResult(intent, requestCode);
-
-    }
 
 }

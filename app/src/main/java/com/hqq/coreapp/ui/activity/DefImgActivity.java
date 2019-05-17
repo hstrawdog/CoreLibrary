@@ -12,7 +12,7 @@ public class DefImgActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
 
     }
 }

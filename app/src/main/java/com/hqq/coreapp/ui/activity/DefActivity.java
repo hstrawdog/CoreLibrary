@@ -19,7 +19,7 @@ public class DefActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
 
     }
 }
