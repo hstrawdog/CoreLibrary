@@ -45,9 +45,9 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("fragment 加载", IFragmentActivity.class));
         mAdapter.addData(new MainBean("ListActivity 加载", ListActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
-        mAdapter.addData(new MainBean("Banner", BannerActivity.class));
-        mAdapter.addData(new MainBean("PermissionActivity", PermissionActivity.class));
-        mAdapter.addData(new MainBean("BottomSheetActivity", BottomSheetActivity.class));
+        mAdapter.addData(new MainBean("轮播图", BannerActivity.class));
+        mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
+        mAdapter.addData(new MainBean("仿知乎评论列表", BottomSheetActivity.class));
         mAdapter.addData(new MainBean("文字适配测试", TextViewSizeActivity.class));
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
 
