@@ -11,7 +11,6 @@ import android.app.Activity;
  * @Descrive :
  */
 public interface IToolBar {
-
     /**
      * 构建  标题栏
      *
