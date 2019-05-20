@@ -13,17 +13,13 @@ import java.util.regex.Pattern;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.shangwenwang.common.utils
+ * @Package : com..common.utils
  * @FileName :   RegexUtils
  * @Date : 2018/12/24 0024  下午 4:53
  * @Descrive :  验证工具类 包含空判断 正则判断
  * @Email :
  */
 public class RegexUtils {
-    public static String REGEX_ID = "id=\"(.*?)\"";
-    public static String REGEX_IMG = "img src=\"(.*?)\"";
-    public static String REGEX_TITLE = "class=\"title\">(.*?)</div>";
-    public static String REGEX_PRICE = "class=\"price\">(.*?)</div>";
 
     /**
      * 检查 null
@@ -330,13 +326,6 @@ public class RegexUtils {
         String regex = "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})";
         System.out.println(getMatcher(regex, url));
 
-        String str = "<div id=\"2105\" class=\"chat-good-d\"><div class=\"detail-top clearfix\"><div class=\"img-box\"> <img src=\"http://images.shangwenwan.com/mall/goodsfd47f4e1-30bc-4682-8d8b-d066c4c5831d?imageMogr2/size-limit/96.3k!/thumbnail/840.0x840.0\" /></div><div class=\"con\"><div class=\"title\">刺猬紫檀雅致台灯一对景德镇陶瓷按钮开关</div><div class=\"price\">1180.0</div></div></div></div>";
-
-        System.out.println(getMatcher(REGEX_ID, str));
-        System.out.println(getMatcher(REGEX_IMG, str));
-        System.out.println(getMatcher(REGEX_IMG, str));
-        System.out.println(getMatcher(REGEX_TITLE, str));
-        System.out.println(getMatcher(REGEX_PRICE, str));
 
     }
 

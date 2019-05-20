@@ -6,7 +6,7 @@ import android.support.annotation.IntDef;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.shangwenwan.sww.annotation
+ * @Package : com...annotation
  * @FileName :   LayoutModel
  * @Date : 2019/1/17 0017  下午 1:43
  * @Email : qiqiang213@gmail.com

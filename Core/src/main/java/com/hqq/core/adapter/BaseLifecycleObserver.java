@@ -6,7 +6,7 @@ import android.arch.lifecycle.OnLifecycleEvent;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.shangwenwang.common.net
+ * @Package : com..common.net
  * @FileName :   BaseLifecycleObserver
  * @Date : 2019/1/5 0005  下午 6:00
  * @Email : qiqiang213@gmail.com

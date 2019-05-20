@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.shangwenwan.sww.utils
+ * @Package : com...utils
  * @FileName :   MathUtils
  * @Date : 2019/4/1 0001  下午 2:37
  * @Email : qiqiang213@gmail.com
@@ -78,10 +78,6 @@ public class MathUtils {
 
 
     public static void main(String[] args) {
-//        System.out.println(getDoubleString(9999970.00));
-//        System.out.println(getDoubleString(0.001));
-//        System.out.println(getDoubleString(0.01));
-//        System.out.println(getDoubleString(12.00));
         System.out.println(Double.parseDouble("100495") / 1000.00);
         System.out.println(MathUtils.getDoubleString(Double.parseDouble("100495") / 1000.00));
 

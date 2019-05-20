@@ -14,13 +14,13 @@ import com.hqq.core.toolbar.BaseToolBar;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.shangwenwan.sellercenter.toolsbar
- * @FileName :   BaseToolBarOrderSearch
+ * @Package : com..sellercenter.toolsbar
+ * @FileName :   BaseToolBarSearch
  * @Date : 2018/11/27 0027  下午 1:14
  * @Descrive :
  * @Email :
  */
-public class BaseToolBarOrderSearch extends BaseToolBar {
+public class BaseToolBarSearch extends BaseToolBar {
 
     @Override
     public View iniToolBar(final Activity activity, ViewGroup viewGroup) {
