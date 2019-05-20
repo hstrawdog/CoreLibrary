@@ -50,7 +50,6 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("仿知乎评论列表", BottomSheetActivity.class));
         mAdapter.addData(new MainBean("文字适配测试", TextViewSizeActivity.class));
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
-
     }
 
     @Override
