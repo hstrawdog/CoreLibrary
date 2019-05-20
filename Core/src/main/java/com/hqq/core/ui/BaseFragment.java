@@ -1,7 +1,6 @@
 package com.hqq.core.ui;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -27,7 +26,7 @@ import butterknife.Unbinder;
  * @Descrive :
  * @Email :
  */
-public abstract class BaseFragment extends Fragment implements CreateRootView.IFragment, View.OnClickListener {
+public abstract class BaseFragment extends Fragment implements ICreateRootView.IFragment, View.OnClickListener {
 
     protected View mRootView = null;
     protected Activity mActivity;

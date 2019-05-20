@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * @Descrive : TODO
  * @Email :
  */
-public abstract class BaseActivity extends AppCompatActivity implements CreateRootView.IActivity, View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements ICreateRootView.IActivity, View.OnClickListener {
     protected Activity mActivity;
     public LoadingView mLoadingView;
     protected RootViewBuild mRootViewBuild;
