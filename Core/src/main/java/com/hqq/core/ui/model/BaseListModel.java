@@ -148,36 +148,37 @@ public class BaseListModel {
     /**
      * 初始化 RecycleView 等一切操作
      *
-     * @param view
      * @param rcList
-     * @param mAdapter
+     * @param adapter
      * @param layoutManager
      * @param requestLoadMoreListener
      * @param onItemClickListener
      * @param onItemChildClickListener
      */
-    public void initRecycleView(View view, RecyclerView rcList, BaseQuickAdapter mAdapter, RecyclerView.LayoutManager layoutManager,
+    public void initRecycleView( RecyclerView rcList, BaseQuickAdapter adapter, RecyclerView.LayoutManager layoutManager,
                                 BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener,
                                 BaseQuickAdapter.OnItemClickListener onItemClickListener,
                                 BaseQuickAdapter.OnItemChildClickListener onItemChildClickListener) {
-
-        if (null == rcList) {
-            try {
+        try {
+            if (null == rcList) {
                 throw new Exception("  listView is null ");
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            if (adapter == null) {
+                throw new Exception("adapter is null ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         rcList.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcList.setLayoutManager(layoutManager);
         // 添加焦点
-        rcList.setAdapter(mAdapter);
+        rcList.setAdapter(adapter);
         if (mBaseListModelView.isShowLoadMore()) {
-            mAdapter.setOnLoadMoreListener(requestLoadMoreListener, rcList);
+            adapter.setOnLoadMoreListener(requestLoadMoreListener, rcList);
         }
-        mAdapter.setOnItemClickListener(onItemClickListener);
-        mAdapter.setOnItemChildClickListener(onItemChildClickListener);
+        adapter.setOnItemClickListener(onItemClickListener);
+        adapter.setOnItemChildClickListener(onItemChildClickListener);
 
 
     }

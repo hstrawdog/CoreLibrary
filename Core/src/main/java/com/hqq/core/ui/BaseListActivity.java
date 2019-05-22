@@ -73,7 +73,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
         mLayoutManager = getRcLayoutManager();
         mAdapter = getAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
-        mBaseListModel.initRecycleView(mRootViewBuild.getRootView(), mRcList, mAdapter, mLayoutManager,
+        mBaseListModel.initRecycleView(mRcList, mAdapter, mLayoutManager,
                 this, this, this);
         mBaseListModel.initPtrPullDown(mRootViewBuild.getRootView());
 
