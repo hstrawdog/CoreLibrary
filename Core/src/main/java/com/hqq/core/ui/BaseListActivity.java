@@ -71,7 +71,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     @Override
     public void initView() {
         mLayoutManager = getRcLayoutManager();
-        mAdapter = getRcAdapter();
+        mAdapter = getAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
         mBaseListModel.initRecycleView(mRootViewBuild.getRootView(), mRcList, mAdapter, mLayoutManager,
                 this, this, this);
@@ -128,7 +128,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     }
 
     @Override
-    public BaseQuickAdapter getAdapter() {
+    public T getAdapter() {
         return mAdapter;
     }
 
@@ -155,18 +155,6 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     protected void onLoadMore() {
 
     }
-
-    /**
-     * 初始化  adapter
-     *
-     * @return
-     */
-    protected abstract T getRcAdapter();
-
-    /**
-     * 初始化  data
-     */
-    protected abstract void initData();
 
 
 }

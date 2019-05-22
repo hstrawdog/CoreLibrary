@@ -216,7 +216,7 @@ public class BaseListModel {
     /**
      * m->v 的接口
      */
-    public interface BaseListModelView {
+    public interface BaseListModelView<T extends BaseQuickAdapter> {
 
         /**
          * 分页下标
@@ -256,7 +256,7 @@ public class BaseListModel {
          *
          * @return
          */
-        BaseQuickAdapter getAdapter();
+        T getAdapter();
 
         /**
          * 获取 recycleView
@@ -265,7 +265,10 @@ public class BaseListModel {
          */
         ViewGroup getListView();
 
-
+        /**
+         * 初始化数据
+         */
+        void initData();
     }
 
 }

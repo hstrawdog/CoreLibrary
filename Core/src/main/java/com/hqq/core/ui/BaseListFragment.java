@@ -66,7 +66,7 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     public void initBasic(Bundle savedInstanceState) {
 
         mLayoutManager = getRcLayoutManager();
-        mAdapter = getRcAdapter();
+        mAdapter = getAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
         mBaseListModel.initRecycleView(mRootViewBuild.getRootView(), mRcList, mAdapter, mLayoutManager,
                 this, this, this);
@@ -113,10 +113,6 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
         onLoadMore();
     }
 
-    @Override
-    public BaseQuickAdapter getAdapter() {
-        return mAdapter;
-    }
 
     @Override
     public ViewGroup getListView() {
@@ -126,6 +122,11 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     @Override
     public boolean isShowLoadMore() {
         return false;
+    }
+
+    @Override
+    public T getAdapter() {
+        return mAdapter;
     }
 
     private RecyclerView.LayoutManager getRcLayoutManager() {
@@ -143,17 +144,6 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
 
     }
 
-    /**
-     * 初始化  adapter
-     *
-     * @return
-     */
-    protected abstract T getRcAdapter();
-
-    /**
-     * 初始化 数据
-     */
-    protected abstract void initData();
 
 
 }
