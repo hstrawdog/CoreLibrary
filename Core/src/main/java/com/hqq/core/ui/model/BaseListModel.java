@@ -49,7 +49,6 @@ public class BaseListModel {
         if (mPtrPullDown != null) {
             initPull();
         }
-
     }
 
     /**
@@ -141,7 +140,6 @@ public class BaseListModel {
 
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-
                 mBaseListModelView.onRefreshBegin();
             }
         });
@@ -199,10 +197,11 @@ public class BaseListModel {
         mPtrPullDown = null;
     }
 
-    public RecyclerView checkRecycleView(RecyclerView rcList,View view) {
+    public RecyclerView checkRecycleView(RecyclerView rcList, View view) {
         if (rcList == null) {
             rcList = view.findViewById(R.id.rc_list);
         }
+
         return rcList;
     }
 
@@ -211,19 +210,53 @@ public class BaseListModel {
      */
     public interface BaseListModelView {
 
+        /**
+         * 分页下标
+         *
+         * @return
+         */
         int getPageCount();
 
+        /**
+         * 分页大小
+         *
+         * @return
+         */
         int getPageSize();
 
+        /**
+         * 进入下一页
+         *
+         * @return
+         */
         int addPageCount();
 
+        /**
+         * 是否加载更多
+         *
+         * @return
+         */
         boolean isShowLoadMore();
 
+        /**
+         * 开始下拉刷新
+         */
         void onRefreshBegin();
 
+        /**
+         * 获取adapter
+         *
+         * @return
+         */
         BaseQuickAdapter getAdapter();
 
+        /**
+         * 获取 recycleView
+         *
+         * @return
+         */
         ViewGroup getListView();
+
 
     }
 

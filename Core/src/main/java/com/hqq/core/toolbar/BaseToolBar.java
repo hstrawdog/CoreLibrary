@@ -201,14 +201,4 @@ public abstract class BaseToolBar implements IToolBar {
         getViewLine().setBackgroundResource(color);
     }
 
-
-    /**
-     * 构建toolBar
-     *
-     * @param activity  activity
-     * @param viewGroup viewGroup
-     */
-    public abstract View iniToolBar(final Activity activity, ViewGroup viewGroup);
-
-
 }

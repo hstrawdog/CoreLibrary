@@ -1,6 +1,8 @@
 package com.hqq.core.toolbar;
 
 import android.app.Activity;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * @Author : huangqiqiang
@@ -18,4 +20,13 @@ public interface IToolBar {
      * @return
      */
     IToolBar createToolBar(Activity activity);
+
+    /**
+     * 构建toolBar
+     *
+     * @param activity  activity
+     * @param viewGroup viewGroup
+     */
+    View iniToolBar(final Activity activity, ViewGroup viewGroup);
+
 }
