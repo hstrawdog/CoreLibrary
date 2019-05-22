@@ -190,7 +190,7 @@ public class RootViewBuild {
         if (mIToolBar == null) {
             //  自定义异常
             try {
-                throw   new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+                throw new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -210,7 +210,7 @@ public class RootViewBuild {
         } else {
             // 自定义的异常 目前先抛出 类型不正确
             try {
-                throw    new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+                throw new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -279,8 +279,6 @@ public class RootViewBuild {
      *
      * @param activity
      */
-
-
     public void setActivity(AppCompatActivity activity) {
         mActivity = activity;
     }

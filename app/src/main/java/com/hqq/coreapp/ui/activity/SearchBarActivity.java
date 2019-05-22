@@ -1,5 +1,8 @@
 package com.hqq.coreapp.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.weight.BaseToolBarSearch;
 import com.hqq.core.ui.BaseActivity;
@@ -13,6 +16,10 @@ import com.hqq.core.ui.BaseActivity;
   * @Email :
   */
 public class SearchBarActivity extends BaseActivity {
+    public static void open(Activity context) {
+        Intent starter = new Intent(context, SearchBarActivity.class);
+        context.startActivityForResult(starter,-1);
+    }
 
     @Override
     public int getViewId() {

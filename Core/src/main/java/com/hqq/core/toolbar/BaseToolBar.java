@@ -34,7 +34,7 @@ public abstract class BaseToolBar implements IToolBar {
     /**
      * 状态栏背景颜色
      */
-    protected int mStatusColor = R.color.toolbar_status_color;
+    protected int mDefStatusColor = R.color.toolbar_status_color;
 
     /**
      * 状态栏背景
@@ -110,7 +110,7 @@ public abstract class BaseToolBar implements IToolBar {
      *
      * @param colorId
      */
-    public BaseToolBar setStatusColor(@ColorInt int colorId) {
+    public BaseToolBar setDefStatusColor(@ColorInt int colorId) {
         if (getStatusBar() != null) {
             getStatusBar().setBackgroundColor(colorId);
         }
@@ -143,7 +143,7 @@ public abstract class BaseToolBar implements IToolBar {
      */
     public void initStatusBar(Activity activity) {
         mStatusBar = new View(activity);
-        mStatusBar.setBackgroundResource(mStatusColor);
+        mStatusBar.setBackgroundResource(mDefStatusColor);
     }
     /***************** Toolbar  *************************/
 

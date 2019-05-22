@@ -42,7 +42,6 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
     public void initData() {
         mAdapter.addData(new MainBean("加载数据", LoadMoreActivity.class));
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
-        mAdapter.addData(new MainBean("搜索/自定义标题栏", SearchBarActivity.class));
         mAdapter.addData(new MainBean("fragment 加载", IFragmentActivity.class));
         mAdapter.addData(new MainBean("ListActivity 加载", ListActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));

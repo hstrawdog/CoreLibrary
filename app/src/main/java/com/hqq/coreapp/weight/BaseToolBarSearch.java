@@ -38,6 +38,11 @@ public class BaseToolBarSearch extends BaseToolBar {
         return mToolbar;
     }
 
+    @Override
+    public void setToolBarColor(int colorId) {
+        
+    }
+
     public EditText getSearchView() {
         return mRootView.findViewById(R.id.edt_search);
     }

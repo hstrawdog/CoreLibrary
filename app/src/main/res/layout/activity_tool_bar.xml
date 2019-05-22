@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="标题栏白色 " />
+
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
@@ -47,10 +48,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="设置标题名称 " />
+
     <Button
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="bar的颜色 " />
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="def 中设置颜色" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义标题栏" />
 
 </LinearLayout>

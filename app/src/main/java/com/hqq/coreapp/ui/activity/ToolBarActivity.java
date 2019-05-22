@@ -1,13 +1,16 @@
 package com.hqq.coreapp.ui.activity;
 
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
-import com.hqq.coreapp.R;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
+import com.hqq.coreapp.R;
+import com.hqq.coreapp.ui.activity.bar.SettingToolBarActivity;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,13 +43,13 @@ public class ToolBarActivity extends BaseActivity {
 
     @Override
     @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
-            R.id.button7, R.id.button8})
+            R.id.button7, R.id.button8, R.id.button12, R.id.button13})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_bar_right:
                 break;
             case R.id.button5:
-                mRootViewBuild.getDefToolBar().setStatusColor(ContextCompat.getColor(mActivity, R.color.color_77400a));
+                mRootViewBuild.getDefToolBar().setDefStatusColor(ContextCompat.getColor(mActivity, R.color.color_77400a));
                 break;
             case R.id.button4:
                 mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.white);
@@ -69,7 +72,17 @@ public class ToolBarActivity extends BaseActivity {
             case R.id.button8:
                 mRootViewBuild.getDefToolBar().setToolBarColor(R.color.color_main);
                 break;
+            case R.id.button12:
+                SettingToolBarActivity.open(this);
+                break;
+            case R.id.button13:
+                SearchBarActivity.open(this);
+                break;
             default:
         }
     }
+
+
+
+
 }

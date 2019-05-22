@@ -23,7 +23,7 @@ import com.hqq.core.R;
  */
 public class BaseDefToolBarImpl extends BaseToolBar {
     protected ImageView mImageViewBg;
-    protected int mDefColor = R.color.toolbar_bg_color;
+    protected int mDefToolBarColor = R.color.toolbar_bg_color;
     protected int mDefTitleColor = R.color.color_333;
 
     @Override
@@ -40,7 +40,7 @@ public class BaseDefToolBarImpl extends BaseToolBar {
             }
         });
         mImageViewBg = toolbar.findViewById(R.id.iv_toolBar_Bg);
-        mImageViewBg.setBackgroundResource(mDefColor);
+        mImageViewBg.setBackgroundResource(mDefToolBarColor);
         ((TextView) toolbar.findViewById(R.id.tv_bar_title)).setText(activity.getTitle());
         ((TextView) toolbar.findViewById(R.id.tv_bar_title)).setTextColor(ContextCompat.getColor(toolbar.getContext(), mDefTitleColor));
         return toolbar;
@@ -120,9 +120,18 @@ public class BaseDefToolBarImpl extends BaseToolBar {
      *
      * @param color
      */
+    @Override
     public void setToolBarColor(@DrawableRes int color) {
-        getToolBarBg().setImageResource(color);
-        getStatusBar().setBackgroundResource(color);
+        if (null != getToolBarBg()) {
+            getToolBarBg().setImageResource(color);
+        } else {
+            mDefToolBarColor = color;
+        }
+        if (null != getStatusBar()) {
+            getStatusBar().setBackgroundResource(color);
+        } else {
+            mDefStatusColor = color;
+        }
     }
 
     /**
@@ -245,7 +254,7 @@ public class BaseDefToolBarImpl extends BaseToolBar {
      * @param resid
      */
     public BaseDefToolBarImpl setToolBarBg(@DrawableRes int resid) {
-        mDefColor = resid;
+        mDefToolBarColor = resid;
         if (mImageViewBg != null) {
             mImageViewBg.setImageResource(resid);
         }
@@ -255,11 +264,11 @@ public class BaseDefToolBarImpl extends BaseToolBar {
     /**
      * 配置默认颜色
      *
-     * @param defColor
+     * @param defToolBarColor
      * @return
      */
-    public BaseDefToolBarImpl setDefColor(int defColor) {
-        mDefColor = defColor;
+    public BaseDefToolBarImpl setDefToolBarColor(int defToolBarColor) {
+        mDefToolBarColor = defToolBarColor;
         return this;
     }
 

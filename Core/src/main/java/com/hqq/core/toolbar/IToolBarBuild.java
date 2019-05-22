@@ -55,7 +55,7 @@ public class IToolBarBuild<T extends BaseToolBar> {
             mIToolBar = clas.newInstance();
             mIToolBar.setShowStatusBar(mIsShowStatusBar)
                     .setShowBar(mIsShowToolBar)
-                    .setStatusColor(mStatusBarColor)
+                    .setDefStatusColor(mStatusBarColor)
                     .createToolBar(mActivity);
 
         } catch (Exception e) {
