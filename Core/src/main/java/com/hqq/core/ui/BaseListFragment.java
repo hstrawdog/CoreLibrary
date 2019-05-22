@@ -29,7 +29,9 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @Descrive :
  * @Email :
  */
-public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView {
+public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment implements
+        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
+        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView<T> {
     protected RecyclerView mRcList;
     protected T mAdapter;
     /**
@@ -66,12 +68,11 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     public void initBasic(Bundle savedInstanceState) {
 
         mLayoutManager = getRcLayoutManager();
-        mAdapter = getAdapter();
+        mAdapter =  getAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
         mBaseListModel.initRecycleView( mRcList, mAdapter, mLayoutManager,
                 this, this, this);
         mBaseListModel.initPtrPullDown(mRootViewBuild.getRootView());
-
         initData();
     }
 
@@ -122,11 +123,6 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     @Override
     public boolean isShowLoadMore() {
         return false;
-    }
-
-    @Override
-    public T getAdapter() {
-        return mAdapter;
     }
 
     private RecyclerView.LayoutManager getRcLayoutManager() {

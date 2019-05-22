@@ -56,15 +56,14 @@ public class MainFragment extends BaseListFragment<MainAdapter> {
         return true;
     }
 
-
     @Override
-    protected MainAdapter getRcAdapter() {
+    public MainAdapter getAdapter() {
         return new MainAdapter();
+
     }
 
-
     @Override
-    protected void initData() {
+    public void initData() {
         initlistData();
     }
 

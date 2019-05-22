@@ -2,6 +2,7 @@ package com.hqq.coreapp.ui.activity;
 
 import android.os.Handler;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
 import com.hqq.core.ui.BaseListActivity;
@@ -18,15 +19,13 @@ import java.util.List;
  * @Email :
  */
 public class ListActivity extends BaseListActivity<MainAdapter> {
-
-
     @Override
-    protected MainAdapter getRcAdapter() {
+    public MainAdapter getAdapter() {
         return new MainAdapter();
     }
 
     @Override
-    protected void initData() {
+    public void initData() {
         getData();
     }
 

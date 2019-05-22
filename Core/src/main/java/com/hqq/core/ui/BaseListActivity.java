@@ -29,7 +29,9 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @Descrive :
  * @Email :
  */
-public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseActivity implements BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView {
+public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseActivity implements
+        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
+        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView<T> {
     protected RecyclerView mRcList;
     protected T mAdapter;
     /**
@@ -125,11 +127,6 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
         mPageCount = 1;
         mAdapter.loadMoreComplete();
         onLoadMore();
-    }
-
-    @Override
-    public T getAdapter() {
-        return mAdapter;
     }
 
     @Override

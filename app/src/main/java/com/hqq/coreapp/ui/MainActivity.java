@@ -34,12 +34,12 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
-    protected MainAdapter getRcAdapter() {
+    public MainAdapter getAdapter() {
         return new MainAdapter();
     }
 
     @Override
-    protected void initData() {
+    public void initData() {
         mAdapter.addData(new MainBean("加载数据", LoadMoreActivity.class));
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
         mAdapter.addData(new MainBean("搜索/自定义标题栏", SearchBarActivity.class));

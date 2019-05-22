@@ -20,12 +20,12 @@ public class LoadMoreActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
-    protected MainAdapter getRcAdapter() {
+    public MainAdapter getAdapter() {
         return new MainAdapter();
     }
 
     @Override
-    protected void initData() {
+    public void initData() {
         mBaseListModel.fillingData(getData());
     }
 

@@ -21,8 +21,6 @@ public class BannerAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     }
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-
         ImageLoadUtils.with("http://img0.imgtn.bdimg.com/it/u=1352823040,1166166164&fm=27&gp=0.jpg", (ImageView) helper.getView(R.id.iv_banner));
-
     }
 }

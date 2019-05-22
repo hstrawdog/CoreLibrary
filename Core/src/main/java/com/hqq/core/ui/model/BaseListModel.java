@@ -155,7 +155,7 @@ public class BaseListModel {
      * @param onItemClickListener
      * @param onItemChildClickListener
      */
-    public void initRecycleView( RecyclerView rcList, BaseQuickAdapter adapter, RecyclerView.LayoutManager layoutManager,
+    public void initRecycleView(RecyclerView rcList, BaseQuickAdapter adapter, RecyclerView.LayoutManager layoutManager,
                                 BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener,
                                 BaseQuickAdapter.OnItemClickListener onItemClickListener,
                                 BaseQuickAdapter.OnItemChildClickListener onItemChildClickListener) {
@@ -166,21 +166,20 @@ public class BaseListModel {
             if (adapter == null) {
                 throw new Exception("adapter is null ");
             }
+
+            rcList.setOverScrollMode(View.OVER_SCROLL_NEVER);
+            rcList.setLayoutManager(layoutManager);
+            // 添加焦点
+            rcList.setAdapter(adapter);
+            if (mBaseListModelView.isShowLoadMore()) {
+                adapter.setOnLoadMoreListener(requestLoadMoreListener, rcList);
+            }
+            adapter.setOnItemClickListener(onItemClickListener);
+            adapter.setOnItemChildClickListener(onItemChildClickListener);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        rcList.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        rcList.setLayoutManager(layoutManager);
-        // 添加焦点
-        rcList.setAdapter(adapter);
-        if (mBaseListModelView.isShowLoadMore()) {
-            adapter.setOnLoadMoreListener(requestLoadMoreListener, rcList);
-        }
-        adapter.setOnItemClickListener(onItemClickListener);
-        adapter.setOnItemChildClickListener(onItemChildClickListener);
-
-
     }
 
     /**
@@ -217,7 +216,7 @@ public class BaseListModel {
     /**
      * m->v 的接口
      */
-    public interface BaseListModelView<T extends BaseQuickAdapter> {
+    public interface BaseListModelView<K extends BaseQuickAdapter> {
 
         /**
          * 分页下标
@@ -257,7 +256,7 @@ public class BaseListModel {
          *
          * @return
          */
-        T getAdapter();
+        K getAdapter();
 
         /**
          * 获取 recycleView
