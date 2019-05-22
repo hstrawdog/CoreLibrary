@@ -49,8 +49,13 @@
         <activity
             android:name=".ui.activity.BottomSheetActivity"
             android:label="知乎评论列表" />
-        <activity android:name=".ui.activity.TextViewSizeActivity" android:label="文字大小"/>
-        <activity android:name=".ui.activity.DimenActivity" android:label="1像素大小测试"></activity>
+        <activity
+            android:name=".ui.activity.TextViewSizeActivity"
+            android:label="文字大小" />
+        <activity
+            android:name=".ui.activity.DimenActivity"
+            android:label="1像素大小测试" />
+        <activity android:name=".ui.activity.ThrowActivity" android:label="Throw异常测试"></activity>
     </application>
 
 </manifest>

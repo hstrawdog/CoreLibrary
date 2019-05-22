@@ -68,7 +68,11 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
                 if (view != null) {
                     mRootView = mRootViewBuild.createRootView(view, 0);
                 } else {
-                    new Exception("no fount layout and rootView  , must createToolBar View");
+                    try {
+                        throw  new Exception("no fount layout and rootView  , must createToolBar View");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             mUnkinder = ButterKnife.bind(this, mRootView);

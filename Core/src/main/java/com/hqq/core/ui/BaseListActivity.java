@@ -72,10 +72,6 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     public void initView() {
         mLayoutManager = getRcLayoutManager();
         mAdapter = getRcAdapter();
-        if ( null ==mRcList){
-            new Throwable(" RecyclerView  is null ");
-        }
-
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
         mBaseListModel.initRecycleView(mRootViewBuild.getRootView(), mRcList, mAdapter, mLayoutManager,
                 this, this, this);

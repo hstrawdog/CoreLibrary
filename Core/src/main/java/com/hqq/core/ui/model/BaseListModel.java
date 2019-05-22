@@ -161,6 +161,14 @@ public class BaseListModel {
                                 BaseQuickAdapter.OnItemClickListener onItemClickListener,
                                 BaseQuickAdapter.OnItemChildClickListener onItemChildClickListener) {
 
+        if (null == rcList) {
+            try {
+                throw new Exception("  listView is null ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         rcList.setOverScrollMode(View.OVER_SCROLL_NEVER);
         rcList.setLayoutManager(layoutManager);
         // 添加焦点

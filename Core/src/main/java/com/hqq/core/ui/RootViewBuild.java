@@ -189,7 +189,11 @@ public class RootViewBuild {
     public <T extends BaseToolBar> T getIToolBar() {
         if (mIToolBar == null) {
             //  自定义异常
-            new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+            try {
+                throw   new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return null;
         }
         return (T) mIToolBar;
@@ -205,7 +209,11 @@ public class RootViewBuild {
             return (BaseDefToolBarImpl) getIToolBar();
         } else {
             // 自定义的异常 目前先抛出 类型不正确
-            new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+            try {
+                throw    new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return null;
         }
     }

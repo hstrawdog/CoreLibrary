@@ -54,7 +54,11 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
             if (view != null) {
                 setContentView(mRootViewBuild.createRootView(view, 0));
             } else {
-                new Exception("no fount layout and rootView  , must createToolBar View");
+                try {
+                    throw new Exception("no fount layout and rootView  , must createToolBar View");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return;
             }
         }
