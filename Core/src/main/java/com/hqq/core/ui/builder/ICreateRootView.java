@@ -1,4 +1,4 @@
-package com.hqq.core.ui.build;
+package com.hqq.core.ui.builder;
 
 import android.os.Bundle;
 import android.view.View;

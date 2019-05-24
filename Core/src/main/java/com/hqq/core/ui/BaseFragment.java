@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hqq.core.ui.build.ICreateRootView;
-import com.hqq.core.ui.build.RootViewBuild;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.LoadingView;
 
@@ -44,7 +44,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
     /**
      * 布局创建 容器
      */
-    protected RootViewBuild mRootViewBuild;
+    protected RootViewBuilder mRootViewBuild;
     Unbinder mUnkinder;
 
     /**
@@ -60,7 +60,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
         if (mRootView == null) {
             mActivity = getActivity();
             mLoadingView = new LoadingView(mActivity);
-            mRootViewBuild = new RootViewBuild(getActivity(), false, false);
+            mRootViewBuild = new RootViewBuilder(getActivity(), false, false);
             initDefConfig();
 
             mRootView = mRootViewBuild.initContentView(getViewId(), getRootView());

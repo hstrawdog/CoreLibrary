@@ -1,16 +1,14 @@
-package com.hqq.core.ui.build;
+package com.hqq.core.ui.builder;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
@@ -18,13 +16,13 @@ import com.hqq.core.annotation.LayoutModel;
 import com.hqq.core.annotation.StatusBarMode;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
-import com.hqq.core.toolbar.IToolBarBuild;
+import com.hqq.core.toolbar.IToolBarBuilder;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.ui
- * @FileName :   RootViewBuild
+ * @FileName :   RootViewBuilder
  * @Date : 2018/12/4 0004  下午 7:03
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
@@ -32,7 +30,7 @@ import com.hqq.core.utils.statusbar.StatusBarManager;
  * 　动态添加　布局
  * 　根据条件　判断添加　状态栏　标题栏
  */
-public class RootViewBuild implements IRootViewBuild {
+public class RootViewBuilder implements IRootViewBuilder {
 
     /**
      * 当前activitry
@@ -77,7 +75,7 @@ public class RootViewBuild implements IRootViewBuild {
      */
     boolean fullScreen = false;
 
-    public RootViewBuild(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
+    public RootViewBuilder(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
         mActivity = activity;
         mIsShowStatus = isShowStatus;
         mIsShowToolBar = isShowToolBar;
@@ -223,7 +221,7 @@ public class RootViewBuild implements IRootViewBuild {
      */
     public BaseToolBar initIToolBar(ViewGroup layout) {
         if (mIsShowToolBar != false || mIsShowStatus != false) {
-            mIToolBar = new IToolBarBuild(mActivity)
+            mIToolBar = new IToolBarBuilder(mActivity)
                     .setViewGroup(layout)
                     .setShowStatusBar(mIsShowStatus)
                     .setShowToolBar(mIsShowToolBar)
@@ -241,7 +239,7 @@ public class RootViewBuild implements IRootViewBuild {
         if (mIToolBar == null) {
             //  自定义异常
             try {
-                throw new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+                throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -261,7 +259,7 @@ public class RootViewBuild implements IRootViewBuild {
         } else {
             // 自定义的异常 目前先抛出 类型不正确
             try {
-                throw new Exception("RootViewBuild no fount BaseDefToolBarImpl ");
+                throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -285,7 +283,7 @@ public class RootViewBuild implements IRootViewBuild {
      *
      * @param layoutMode
      */
-    public RootViewBuild setLayoutMode(@LayoutModel int layoutMode) {
+    public RootViewBuilder setLayoutMode(@LayoutModel int layoutMode) {
         mLayoutMode = layoutMode;
         return this;
     }
@@ -295,7 +293,7 @@ public class RootViewBuild implements IRootViewBuild {
      *
      * @param clss
      */
-    public RootViewBuild setIToolBarClass(Class<? extends BaseToolBar> clss) {
+    public RootViewBuilder setIToolBarClass(Class<? extends BaseToolBar> clss) {
         mClass = clss;
         return this;
 
@@ -307,7 +305,7 @@ public class RootViewBuild implements IRootViewBuild {
      * @param showStatus  状态栏
      * @param showToolBar 标题栏
      */
-    public RootViewBuild setToolbatVisibility(boolean showStatus, boolean showToolBar) {
+    public RootViewBuilder setToolbatVisibility(boolean showStatus, boolean showToolBar) {
         mIsShowStatus = showStatus;
         mIsShowToolBar = showToolBar;
         return this;
@@ -319,7 +317,7 @@ public class RootViewBuild implements IRootViewBuild {
      *
      * @param showStatus
      */
-    public RootViewBuild setShowStatus(boolean showStatus) {
+    public RootViewBuilder setShowStatus(boolean showStatus) {
         mIsShowStatus = showStatus;
         return this;
 
@@ -330,7 +328,7 @@ public class RootViewBuild implements IRootViewBuild {
      *
      * @param showToolBar
      */
-    public RootViewBuild setShowToolBar(boolean showToolBar) {
+    public RootViewBuilder setShowToolBar(boolean showToolBar) {
         mIsShowToolBar = showToolBar;
         return this;
 
@@ -341,13 +339,13 @@ public class RootViewBuild implements IRootViewBuild {
      *
      * @param activity
      */
-    public RootViewBuild setActivity(AppCompatActivity activity) {
+    public RootViewBuilder setActivity(AppCompatActivity activity) {
         mActivity = activity;
         return this;
 
     }
 
-    public RootViewBuild setStatusBarMode(int statusBarMode) {
+    public RootViewBuilder setStatusBarMode(int statusBarMode) {
         mStatusBarMode = statusBarMode;
         return this;
 
@@ -361,7 +359,7 @@ public class RootViewBuild implements IRootViewBuild {
         return alwaysPortrait;
     }
 
-    public RootViewBuild setAlwaysPortrait(boolean alwaysPortrait) {
+    public RootViewBuilder setAlwaysPortrait(boolean alwaysPortrait) {
         this.alwaysPortrait = alwaysPortrait;
         return this;
     }
@@ -370,7 +368,7 @@ public class RootViewBuild implements IRootViewBuild {
         return fullScreen;
     }
 
-    public RootViewBuild setFullScreen(boolean fullScreen) {
+    public RootViewBuilder setFullScreen(boolean fullScreen) {
         this.fullScreen = fullScreen;
         return this;
 

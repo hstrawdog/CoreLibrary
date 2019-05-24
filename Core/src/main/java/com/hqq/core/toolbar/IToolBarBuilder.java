@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.toolbar
- * @FileName :   IToolBarBuild
+ * @FileName :   IToolBarBuilder
  * @Date : 2018/11/23 0023  下午 1:34
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public class IToolBarBuild<T extends BaseToolBar> {
+public class IToolBarBuilder<T extends BaseToolBar> {
     T mIToolBar;
     Activity mActivity;
     ViewGroup mViewGroup;
@@ -26,26 +26,26 @@ public class IToolBarBuild<T extends BaseToolBar> {
     boolean mIsShowToolBar = true;
     int mStatusBarColor = Color.WHITE;
 
-    public IToolBarBuild setStatusBarColor(int statusBarColor) {
+    public IToolBarBuilder setStatusBarColor(int statusBarColor) {
         mStatusBarColor = statusBarColor;
         return this;
     }
 
-    public IToolBarBuild(Activity activity) {
+    public IToolBarBuilder(Activity activity) {
         mActivity = activity;
     }
 
-    public IToolBarBuild setViewGroup(ViewGroup viewGroup) {
+    public IToolBarBuilder setViewGroup(ViewGroup viewGroup) {
         mViewGroup = viewGroup;
         return this;
     }
 
-    public IToolBarBuild setShowStatusBar(boolean isShowStatusBar) {
+    public IToolBarBuilder setShowStatusBar(boolean isShowStatusBar) {
         mIsShowStatusBar = isShowStatusBar;
         return this;
     }
 
-    public IToolBarBuild setShowToolBar(boolean showToolBar) {
+    public IToolBarBuilder setShowToolBar(boolean showToolBar) {
         mIsShowToolBar = showToolBar;
         return this;
     }

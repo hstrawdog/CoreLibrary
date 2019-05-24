@@ -7,8 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.hqq.core.ui.build.ICreateRootView;
-import com.hqq.core.ui.build.RootViewBuild;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.widget.LoadingView;
 
 import butterknife.ButterKnife;
@@ -24,13 +24,13 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity implements ICreateRootView.IActivity, View.OnClickListener {
     protected Activity mActivity;
     public LoadingView mLoadingView;
-    protected RootViewBuild mRootViewBuild;
+    protected RootViewBuilder mRootViewBuild;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = this;
-        mRootViewBuild = new RootViewBuild(this, true, true);
+        mRootViewBuild = new RootViewBuilder(this, true, true);
         initDefConfig();
         setContentView(mRootViewBuild.initContentView(getViewId(), getRootView()));
 
