@@ -16,7 +16,7 @@ import java.util.Locale;
  * @FileName :   DateUtils
  * @Date : 2018/7/5 0005  上午 11:03
  * @Descrive : https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/lib/src/main/java/com/blankj/utilcode/util/TimeUtils.java
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class DateUtils {
     private static final ThreadLocal<SimpleDateFormat> SDF_THREAD_LOCAL = new ThreadLocal<>();

@@ -17,7 +17,7 @@ import android.support.v4.content.ContextCompat;
  * @FileName :   ResourcesUtils
  * @Date : 2018/12/14 0014  上午 11:18
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  * 资源辅助类
  */
 public class ResourcesUtils {

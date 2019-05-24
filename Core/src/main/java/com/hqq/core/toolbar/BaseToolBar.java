@@ -17,7 +17,7 @@ import com.hqq.core.utils.ScreenUtils;
  * @FileName :   BaseToolBar
  * @Date : 2018/11/15 0015  下午 7:26
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public abstract class BaseToolBar implements IToolBar {
     /**

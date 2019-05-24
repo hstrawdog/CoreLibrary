@@ -10,7 +10,7 @@ import android.view.ViewGroup;
  * @FileName :   IToolBarBuild
  * @Date : 2018/11/23 0023  下午 1:34
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class IToolBarBuild<T extends BaseToolBar> {
     T mIToolBar;

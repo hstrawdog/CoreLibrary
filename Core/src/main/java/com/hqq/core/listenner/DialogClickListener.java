@@ -6,7 +6,7 @@ package com.hqq.core.listenner;
  * @FileName :   DialogClickListener
  * @Date : 2018/7/5 0005  下午 1:58
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public interface DialogClickListener<T>  {
     /**

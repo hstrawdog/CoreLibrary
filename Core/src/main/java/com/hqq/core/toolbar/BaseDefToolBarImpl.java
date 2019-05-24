@@ -19,7 +19,7 @@ import com.hqq.core.R;
  * @FileName :   BaseDefToolBarImpl
  * @Date : 2018/11/15 0015  下午 7:27
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class BaseDefToolBarImpl extends BaseToolBar {
     protected ImageView mImageViewBg;

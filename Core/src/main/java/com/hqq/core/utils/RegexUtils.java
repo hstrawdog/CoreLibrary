@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * @FileName :   RegexUtils
  * @Date : 2018/12/24 0024  下午 4:53
  * @Descrive :  验证工具类 包含空判断 正则判断
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class RegexUtils {
 

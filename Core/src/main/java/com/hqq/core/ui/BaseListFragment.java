@@ -27,7 +27,7 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @FileName :   BaseListFragment
  * @Date : 2018/11/23 0023  上午 11:47
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment implements
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
@@ -39,7 +39,6 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
      *
      * @param data
      */
-
     protected int mPageSize = BaseCommonsKey.PAGE_SIZE;
     protected int mPageCount = 1;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -66,11 +65,11 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
 
     @Override
     public void initBasic(Bundle savedInstanceState) {
-
         mLayoutManager = getRcLayoutManager();
-        mAdapter =  getAdapter();
+        mAdapter = initAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
-        mBaseListModel.initRecycleView( mRcList, mAdapter, mLayoutManager,
+
+        mBaseListModel.initRecycleView(mRcList, mAdapter, mLayoutManager,
                 this, this, this);
         mBaseListModel.initPtrPullDown(mRootViewBuild.getRootView());
         initData();
@@ -114,6 +113,10 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
         onLoadMore();
     }
 
+    @Override
+    public T getAdapter() {
+        return mAdapter;
+    }
 
     @Override
     public ViewGroup getListView() {
@@ -125,12 +128,9 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
         return false;
     }
 
-    private RecyclerView.LayoutManager getRcLayoutManager() {
-        return initDefLayoutManager();
-    }
-
-    protected RecyclerView.LayoutManager initDefLayoutManager() {
-        return new LinearLayoutManager(getContext());
+    @Override
+    public RecyclerView.LayoutManager getRcLayoutManager() {
+        return new LinearLayoutManager(mActivity);
     }
 
     /**
@@ -139,7 +139,6 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     protected void onLoadMore() {
 
     }
-
 
 
 }

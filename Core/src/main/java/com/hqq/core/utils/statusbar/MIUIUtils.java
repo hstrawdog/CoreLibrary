@@ -8,7 +8,7 @@ import java.io.IOException;
  * @FileName :   MIUIUtils
  * @Date : 2018/9/12 0012  下午 2:01
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class MIUIUtils {
     private static final String KEY_MIUI_VERSION_CODE = "ro.miui.ui.version.code";

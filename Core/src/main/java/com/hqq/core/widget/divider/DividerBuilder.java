@@ -12,7 +12,7 @@ import com.hqq.core.R;
  * @FileName :   DividerBuilder
  * @Date : 2018/7/5 0005  下午 5:16
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class DividerBuilder {
     private SideLine leftSideLine;

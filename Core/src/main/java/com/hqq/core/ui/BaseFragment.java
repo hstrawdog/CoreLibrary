@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hqq.core.ui.build.ICreateRootView;
+import com.hqq.core.ui.build.RootViewBuild;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.LoadingView;
 
@@ -24,7 +26,7 @@ import butterknife.Unbinder;
  * @FileName :   BaseFragment
  * @Date : 2018/5/28 0028  下午 2:14
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public abstract class BaseFragment extends Fragment implements ICreateRootView.IFragment, View.OnClickListener {
 
@@ -60,21 +62,9 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
             mLoadingView = new LoadingView(mActivity);
             mRootViewBuild = new RootViewBuild(getActivity(), false, false);
             initDefConfig();
-            int vid = getViewId();
-            if (vid != 0) {
-                mRootView = mRootViewBuild.createRootView(null, vid);
-            } else {
-                View view = getRootView();
-                if (view != null) {
-                    mRootView = mRootViewBuild.createRootView(view, 0);
-                } else {
-                    try {
-                        throw  new Exception("no fount layout and rootView  , must createToolBar View");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+
+            mRootView = mRootViewBuild.initContentView(getViewId(), getRootView());
+
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());

@@ -16,7 +16,7 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
  * @FileName :   CircleIndicatorImpl
  * @Date : 2019/1/3 0003  下午 7:40
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class CircleIndicatorView extends View implements Indicator {
 

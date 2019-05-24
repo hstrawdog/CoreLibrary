@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  * @FileName :   StatusBarManager
  * @Date : 2018/5/24 0024  下午 3:09
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  * https://www.jianshu.com/p/7d8df51347ff
  * https://blog.csdn.net/qq_36230279/article/details/80664863
  */
@@ -61,6 +61,25 @@ public class StatusBarManager {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //4.4到5.0
             WindowManager.LayoutParams localLayoutParams = activity.getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+    }
+
+    @TargetApi(19)
+    public static void transparencyBar(Window window) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //5.0及以上
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            View decorView = window.getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //4.4到5.0
+            WindowManager.LayoutParams localLayoutParams = window.getAttributes();
             localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
         }
     }
@@ -275,7 +294,6 @@ public class StatusBarManager {
         }
 
     }
-
 
 
 }

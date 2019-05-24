@@ -6,7 +6,7 @@ package com.hqq.core.widget.divider;
  * @FileName :   Divider
  * @Date : 2018/7/5 0005  下午 5:14
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class Divider {
 

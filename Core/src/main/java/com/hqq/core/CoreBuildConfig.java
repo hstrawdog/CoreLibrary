@@ -12,7 +12,7 @@ import com.hqq.core.toolbar.BaseDefToolBarImpl;
  * @FileName :   CoreBuildConfig
  * @Date : 2018/11/23 0023  下午 2:16
  * @Descrive :  配置文件
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class CoreBuildConfig {
 

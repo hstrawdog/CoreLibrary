@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
  * @FileName :   GsonUtil
  * @Date : 2019/1/3 0003  上午 10:30
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class GsonUtil {
     private static final Gson GSON = new GsonBuilder()

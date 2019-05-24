@@ -13,7 +13,7 @@ import com.hqq.coreapp.ui.activity.fragment.MainFragment;
  * @FileName :   IFragmentAdapter
  * @Date : 2018/11/23 0023  上午 9:40
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class IFragmentAdapter extends FragmentPagerAdapter {
     public IFragmentAdapter(FragmentManager fm) {

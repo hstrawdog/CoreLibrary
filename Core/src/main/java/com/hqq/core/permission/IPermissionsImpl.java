@@ -9,7 +9,7 @@ import android.content.Context;
  * @FileName :   IPermissionsImpl
  * @Date : 2018/11/22 0022  上午 9:57
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class IPermissionsImpl implements IPermissions {
 

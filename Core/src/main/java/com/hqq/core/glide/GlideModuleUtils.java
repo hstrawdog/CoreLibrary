@@ -15,7 +15,7 @@ import com.bumptech.glide.module.AppGlideModule;
  * @FileName :   GlideModuleUtils
  * @Date : 2018/10/19 0019  下午 4:45
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 @GlideModule
 public class GlideModuleUtils extends AppGlideModule {

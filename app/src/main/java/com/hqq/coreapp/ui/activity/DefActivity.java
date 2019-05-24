@@ -9,7 +9,7 @@ import com.hqq.core.ui.BaseActivity;
   * @FileName :   DefActivity
   * @Date  : 2018/12/14 0014
   * @Descrive : TODO
-  * @Email :
+  * @Email :  qiqiang213@gmail.com
   */
 public class DefActivity extends BaseActivity {
 

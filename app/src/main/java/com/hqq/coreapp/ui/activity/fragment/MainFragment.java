@@ -22,7 +22,7 @@ import java.util.List;
  * @FileName :   MainFragment
  * @Date : 2018/11/23 0023  上午 9:41
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class MainFragment extends BaseListFragment<MainAdapter> {
 
@@ -37,7 +37,6 @@ public class MainFragment extends BaseListFragment<MainAdapter> {
         Bundle bundle = new Bundle();
         bundle.putInt("postition", position);
         fragment.setArguments(bundle);
-
         return fragment;
     }
 
@@ -57,7 +56,7 @@ public class MainFragment extends BaseListFragment<MainAdapter> {
     }
 
     @Override
-    public MainAdapter getAdapter() {
+    public MainAdapter initAdapter() {
         return new MainAdapter();
 
     }

@@ -11,7 +11,7 @@ import com.squareup.leakcanary.LeakCanary;
  * @FileName :   APP
  * @Date : 2018/11/23 0023  下午 2:21
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class APP extends Application {
     @Override

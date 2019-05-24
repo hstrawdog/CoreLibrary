@@ -11,7 +11,7 @@ import com.hqq.coreapp.bean.MainBean;
  * @FileName :   MainAdapter
  * @Date : 2018/11/22 0022  下午 7:45
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> {
     public MainAdapter() {

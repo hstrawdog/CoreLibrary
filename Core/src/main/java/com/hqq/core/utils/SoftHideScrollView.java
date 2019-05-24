@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  * @FileName :   SoftHideScrollView
  * @Date : 2018/7/9 0009  下午 2:52
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  *
  * SoftHideKeyBoardUtil   重绘 view
  * SoftHideScrollView  保留一部分view 被键盘遮挡效果是类似的

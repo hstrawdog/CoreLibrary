@@ -6,7 +6,7 @@ package com.hqq.core.recycler;
  * @FileName :   OnRvBannerClickListener
  * @Date : 2018/6/15 0015  下午 5:25
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public interface OnRvBannerClickListener {
     /**

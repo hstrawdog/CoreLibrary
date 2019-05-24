@@ -29,7 +29,7 @@ import com.hqq.core.utils.ResourcesUtils;
  * @FileName :   ImageLoadUtils
  * @Date : 2018/2/9  9:23
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 
 public class ImageLoadUtils {

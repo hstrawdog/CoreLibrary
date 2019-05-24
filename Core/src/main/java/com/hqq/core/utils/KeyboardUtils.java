@@ -14,7 +14,7 @@ import android.view.inputmethod.InputMethodManager;
  * @FileName :   KeyboardUtils
  * @Date : 2018/9/26 0026  下午 6:20
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  * https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/src/main/java/com/blankj/utilcode/util/KeyboardUtils.java
  */
 public class KeyboardUtils {

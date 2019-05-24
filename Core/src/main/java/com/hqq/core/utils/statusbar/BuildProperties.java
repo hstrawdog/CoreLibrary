@@ -17,7 +17,7 @@ import java.util.Set;
  * @FileName :   BuildProperties
  * @Date : 2018/9/12 0012  下午 1:50
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class BuildProperties {
     private final Properties properties;

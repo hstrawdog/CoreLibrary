@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
  * @FileName :   BaseFrameLayoutActivity
  * @Date : 2018/9/18 0018  下午 2:08
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public abstract class BaseFrameLayoutActivity extends BaseActivity {
     public Fragment mCurrentFragment;

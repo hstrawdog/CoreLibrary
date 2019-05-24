@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
  * @FileName :   PermissionsResult
  * @Date : 2018/11/22 0022  上午 11:53
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public interface PermissionsResult {
     void PermissionsResult(boolean status);

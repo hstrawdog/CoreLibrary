@@ -18,7 +18,7 @@ import java.security.MessageDigest;
  * @FileName :   GlideRoundTransform
  * @Date : 2018/11/26 0026  下午 3:14
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class GlideRoundTransform extends BitmapTransformation {
 

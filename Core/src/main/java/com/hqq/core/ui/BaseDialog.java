@@ -28,7 +28,7 @@ import butterknife.Unbinder;
  * @FileName :   BaseDialog
  * @Date : 2018/6/19 0019  上午 11:33
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public abstract class BaseDialog extends DialogFragment {
 

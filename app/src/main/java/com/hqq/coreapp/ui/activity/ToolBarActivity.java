@@ -19,7 +19,7 @@ import butterknife.OnClick;
  * @FileName :   ToolBarActivity
  * @Date : 2018/11/22 0022
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class ToolBarActivity extends BaseActivity {
 

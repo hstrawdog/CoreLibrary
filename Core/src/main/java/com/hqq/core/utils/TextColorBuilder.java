@@ -21,7 +21,7 @@ import android.view.View;
  * @FileName :   TextColorBuilder
  * @Date : 2018/12/19 0019  下午 4:55
  * @Descrive : String 工具类 点击事件等待完善
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class TextColorBuilder {
 

@@ -14,13 +14,13 @@ import java.util.logging.Handler;
  * @FileName :   LoadMoreActivity
  * @Date : 2018/11/23 0023
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class LoadMoreActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
-    public MainAdapter getAdapter() {
+    public MainAdapter initAdapter() {
         return new MainAdapter();
     }
 

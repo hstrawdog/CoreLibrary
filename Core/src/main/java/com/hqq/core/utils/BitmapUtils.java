@@ -25,7 +25,7 @@ import java.util.Map;
  * @FileName :   BitmapUtils
  * @Date : 2018/6/25 0025  上午 11:35
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class BitmapUtils {
 

@@ -14,7 +14,7 @@ import butterknife.BindView;
  * @FileName :   IFragmentActivity
  * @Date : 2018/11/23 0023
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class IFragmentActivity extends BaseActivity {
 

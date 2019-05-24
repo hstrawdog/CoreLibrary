@@ -6,7 +6,7 @@ package com.hqq.core.recycler;
  * @FileName :   BaseBannerBean
  * @Date : 2018/6/19 0019  下午 5:37
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public interface BaseBannerBean {
     /**

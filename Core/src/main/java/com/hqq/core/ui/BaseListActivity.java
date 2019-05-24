@@ -27,7 +27,7 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @FileName :   BaseListActivity
  * @Date : 2018/11/5 0005  下午 4:23
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseActivity implements
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
@@ -73,7 +73,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     @Override
     public void initView() {
         mLayoutManager = getRcLayoutManager();
-        mAdapter = getAdapter();
+        mAdapter = initAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
         mBaseListModel.initRecycleView(mRcList, mAdapter, mLayoutManager,
                 this, this, this);
@@ -100,6 +100,11 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+    }
+
+    @Override
+    public T getAdapter() {
+        return mAdapter;
     }
 
     @Override
@@ -141,13 +146,12 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
         mBaseListModel = null;
     }
 
-    private RecyclerView.LayoutManager getRcLayoutManager() {
-        return initDefLayoutManager();
-    }
-
-    protected RecyclerView.LayoutManager initDefLayoutManager() {
+    @Override
+    public RecyclerView.LayoutManager getRcLayoutManager() {
         return new LinearLayoutManager(this);
     }
+
+
 
     protected void onLoadMore() {
 

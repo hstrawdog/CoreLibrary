@@ -8,7 +8,7 @@ import android.content.Context;
  * @FileName :   IPermissions
  * @Date : 2018/11/22 0022  上午 9:53
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public interface IPermissions {
     /**

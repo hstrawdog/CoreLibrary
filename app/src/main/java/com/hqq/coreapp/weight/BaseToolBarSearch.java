@@ -18,7 +18,7 @@ import com.hqq.core.toolbar.BaseToolBar;
  * @FileName :   BaseToolBarSearch
  * @Date : 2018/11/27 0027  下午 1:14
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class BaseToolBarSearch extends BaseToolBar {
 

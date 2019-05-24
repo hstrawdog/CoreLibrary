@@ -36,7 +36,6 @@ public class BaseListModel {
         mContext = context;
     }
 
-
     /**
      * 初始化 下拉刷新
      *
@@ -163,6 +162,7 @@ public class BaseListModel {
             if (null == rcList) {
                 throw new Exception("  listView is null ");
             }
+
             if (adapter == null) {
                 throw new Exception("adapter is null ");
             }
@@ -218,6 +218,7 @@ public class BaseListModel {
      */
     public interface BaseListModelView<K extends BaseQuickAdapter> {
 
+
         /**
          * 分页下标
          *
@@ -258,6 +259,9 @@ public class BaseListModel {
          */
         K getAdapter();
 
+        K initAdapter();
+
+
         /**
          * 获取 recycleView
          *
@@ -269,6 +273,9 @@ public class BaseListModel {
          * 初始化数据
          */
         void initData();
+
+        RecyclerView.LayoutManager getRcLayoutManager();
+
     }
 
 }

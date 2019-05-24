@@ -10,7 +10,7 @@ import android.content.pm.PackageManager;
  * @FileName :   VersionUtils
  * @Date : 2018/7/3 0003  下午 1:44
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class VersionUtils {
     /**

@@ -27,7 +27,7 @@ import android.widget.TextView;
  * @FileName :   ViewHolderUtils
  * @Date : 2018/6/13 0013  上午 9:44
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  * 与BRVAH是一样的  方便 HeadView 的一些操作
  */
 public class ViewHolderUtils {

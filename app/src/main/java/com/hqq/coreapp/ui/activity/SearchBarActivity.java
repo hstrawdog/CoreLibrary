@@ -13,7 +13,7 @@ import com.hqq.core.ui.BaseActivity;
   * @FileName :   SearchBarActivity
   * @Date  : 2018/12/14 0014
   * @Descrive : TODO
-  * @Email :
+  * @Email :  qiqiang213@gmail.com
   */
 public class SearchBarActivity extends BaseActivity {
     public static void open(Activity context) {

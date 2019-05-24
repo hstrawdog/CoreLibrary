@@ -24,7 +24,7 @@ import java.util.List;
  * @FileName :   PermissionsFragment
  * @Date : 2018/11/22 0022  上午 10:41
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class PermissionsFragment extends Fragment {
     public static int CODE = 0x5186;

@@ -58,7 +58,8 @@
         <activity
             android:name=".ui.activity.ThrowActivity"
             android:label="Throw异常测试" />
-        <activity android:name=".ui.activity.bar.SettingToolBarActivity"></activity>
+        <activity android:name=".ui.activity.bar.SettingToolBarActivity" />
+        <activity android:name=".ui.activity.TestDialogActivity"></activity>
     </application>
 
 </manifest>

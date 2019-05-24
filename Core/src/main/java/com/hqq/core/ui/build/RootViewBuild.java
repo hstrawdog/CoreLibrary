@@ -1,11 +1,16 @@
-package com.hqq.core.ui;
+package com.hqq.core.ui.build;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
@@ -22,12 +27,12 @@ import com.hqq.core.utils.statusbar.StatusBarManager;
  * @FileName :   RootViewBuild
  * @Date : 2018/12/4 0004  下午 7:03
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  * 　主要功能
  * 　动态添加　布局
  * 　根据条件　判断添加　状态栏　标题栏
  */
-public class RootViewBuild {
+public class RootViewBuild implements IRootViewBuild {
 
     /**
      * 当前activitry
@@ -63,6 +68,15 @@ public class RootViewBuild {
     @StatusBarMode
     protected int mStatusBarMode = CoreBuildConfig.getInstance().isStatusMode();
 
+    /**
+     * 是否强制竖屏
+     */
+    boolean alwaysPortrait = true;
+    /**
+     * 是否全屏显示
+     */
+    boolean fullScreen = false;
+
     public RootViewBuild(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
         mActivity = activity;
         mIsShowStatus = isShowStatus;
@@ -76,13 +90,50 @@ public class RootViewBuild {
      * @param vid
      * @return
      */
-    protected View createRootView(View rootView, int vid) {
+    @Override
+    public View createRootView(View rootView, int vid) {
+
         if (mLayoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
             return mRootView = createLayoutView(rootView, vid);
         } else if (mLayoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
             return mRootView = createFrameLayoutView(rootView, vid);
         } else {
             return null;
+        }
+    }
+
+    @Override
+    public void initActivity() {
+        if (fullScreen) {
+            //隐藏状态 上的字体还颜色
+            mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
+                    , WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        //竖屏
+        if (alwaysPortrait) {
+            mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
+
+
+    @Override
+    public View initContentView(int layoutId, View rootView) {
+        //  构建  ContentView 默认 LineLayout 构建   支持  xml /view
+        // 优先构建xml
+        if (layoutId != 0) {
+            return createRootView(null, layoutId);
+        } else {
+            if (rootView != null) {
+                return createRootView(rootView, 0);
+            } else {
+                try {
+                    throw new Exception("no fount layoutId and rootView  , must init RootView");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
         }
     }
 
@@ -218,6 +269,8 @@ public class RootViewBuild {
         }
     }
 
+    /*********************************Build 方法*********************************************/
+
     /**
      * 获取跟布局
      *
@@ -232,8 +285,9 @@ public class RootViewBuild {
      *
      * @param layoutMode
      */
-    public void setLayoutMode(@LayoutModel int layoutMode) {
+    public RootViewBuild setLayoutMode(@LayoutModel int layoutMode) {
         mLayoutMode = layoutMode;
+        return this;
     }
 
     /**
@@ -241,8 +295,10 @@ public class RootViewBuild {
      *
      * @param clss
      */
-    public void setIToolBarClass(Class<? extends BaseToolBar> clss) {
+    public RootViewBuild setIToolBarClass(Class<? extends BaseToolBar> clss) {
         mClass = clss;
+        return this;
+
     }
 
     /**
@@ -251,9 +307,11 @@ public class RootViewBuild {
      * @param showStatus  状态栏
      * @param showToolBar 标题栏
      */
-    public void setToolbatVisibility(boolean showStatus, boolean showToolBar) {
+    public RootViewBuild setToolbatVisibility(boolean showStatus, boolean showToolBar) {
         mIsShowStatus = showStatus;
         mIsShowToolBar = showToolBar;
+        return this;
+
     }
 
     /**
@@ -261,8 +319,10 @@ public class RootViewBuild {
      *
      * @param showStatus
      */
-    public void setShowStatus(boolean showStatus) {
+    public RootViewBuild setShowStatus(boolean showStatus) {
         mIsShowStatus = showStatus;
+        return this;
+
     }
 
     /**
@@ -270,8 +330,10 @@ public class RootViewBuild {
      *
      * @param showToolBar
      */
-    public void setShowToolBar(boolean showToolBar) {
+    public RootViewBuild setShowToolBar(boolean showToolBar) {
         mIsShowToolBar = showToolBar;
+        return this;
+
     }
 
     /**
@@ -279,16 +341,39 @@ public class RootViewBuild {
      *
      * @param activity
      */
-    public void setActivity(AppCompatActivity activity) {
+    public RootViewBuild setActivity(AppCompatActivity activity) {
         mActivity = activity;
+        return this;
+
     }
 
-    public void setStatusBarMode(int statusBarMode) {
+    public RootViewBuild setStatusBarMode(int statusBarMode) {
         mStatusBarMode = statusBarMode;
+        return this;
+
     }
 
     public int getStatusBarMode() {
         return mStatusBarMode;
+    }
+
+    public boolean isAlwaysPortrait() {
+        return alwaysPortrait;
+    }
+
+    public RootViewBuild setAlwaysPortrait(boolean alwaysPortrait) {
+        this.alwaysPortrait = alwaysPortrait;
+        return this;
+    }
+
+    public boolean isFullScreen() {
+        return fullScreen;
+    }
+
+    public RootViewBuild setFullScreen(boolean fullScreen) {
+        this.fullScreen = fullScreen;
+        return this;
+
     }
 }
 

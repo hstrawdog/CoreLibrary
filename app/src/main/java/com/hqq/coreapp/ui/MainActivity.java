@@ -18,6 +18,7 @@ import com.hqq.coreapp.ui.activity.ListActivity;
 import com.hqq.coreapp.ui.activity.LoadMoreActivity;
 import com.hqq.coreapp.ui.activity.PermissionActivity;
 import com.hqq.coreapp.ui.activity.SearchBarActivity;
+import com.hqq.coreapp.ui.activity.TestDialogActivity;
 import com.hqq.coreapp.ui.activity.TextViewSizeActivity;
 import com.hqq.coreapp.ui.activity.ThrowActivity;
 import com.hqq.coreapp.ui.activity.ToolBarActivity;
@@ -28,13 +29,13 @@ import com.hqq.coreapp.ui.activity.ToolBarActivity;
  * @FileName :   MainActivity
  * @Date : 2018/11/22 0022
  * @Descrive : TODO
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class MainActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
-    public MainAdapter getAdapter() {
+    public MainAdapter initAdapter() {
         return new MainAdapter();
     }
 
@@ -48,6 +49,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("轮播图", BannerActivity.class));
         mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
         mAdapter.addData(new MainBean("仿知乎评论列表", BottomSheetActivity.class));
+        mAdapter.addData(new MainBean("dialog样式测试", TestDialogActivity.class));
         mAdapter.addData(new MainBean("文字适配测试", TextViewSizeActivity.class));
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));

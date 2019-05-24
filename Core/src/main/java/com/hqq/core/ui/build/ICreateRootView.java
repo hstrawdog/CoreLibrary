@@ -1,4 +1,4 @@
-package com.hqq.core.ui;
+package com.hqq.core.ui.build;
 
 import android.os.Bundle;
 import android.view.View;
@@ -34,18 +34,6 @@ public interface ICreateRootView {
          * 初始化
          */
         void initView();
-
-
-        /**
-         * @return
-         */
-        boolean fullScreen();
-
-
-        /**
-         * @return
-         */
-        boolean alwaysPortrait();
 
     }
 

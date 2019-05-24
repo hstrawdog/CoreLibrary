@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
  * @FileName :   PermissionsUtils
  * @Date : 2018/11/22 0022  上午 10:47
  * @Descrive :
- * @Email :
+ * @Email :  qiqiang213@gmail.com
  */
 public class PermissionsUtils {
     /**
