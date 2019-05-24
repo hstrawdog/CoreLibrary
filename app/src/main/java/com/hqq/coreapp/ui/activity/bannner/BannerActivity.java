@@ -1,4 +1,4 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.bannner;
 
 import android.os.Bundle;
 

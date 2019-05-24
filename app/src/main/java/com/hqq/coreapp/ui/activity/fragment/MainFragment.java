@@ -3,15 +3,13 @@ package com.hqq.coreapp.ui.activity.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 
 import com.hqq.core.ui.BaseListFragment;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
-import com.hqq.coreapp.ui.activity.ToolBarActivity;
-import com.hqq.core.widget.CusPtrClassicFrameLayout;
+import com.hqq.coreapp.ui.activity.bar.ToolBarActivity;
 
 import java.util.ArrayList;
 import java.util.List;

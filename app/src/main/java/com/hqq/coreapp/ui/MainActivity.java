@@ -9,19 +9,18 @@ import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
-import com.hqq.coreapp.ui.activity.BannerActivity;
-import com.hqq.coreapp.ui.activity.BottomSheetActivity;
+import com.hqq.coreapp.ui.activity.bannner.BannerActivity;
+import com.hqq.coreapp.ui.activity.dialog.BottomSheetActivity;
 import com.hqq.coreapp.ui.activity.DefImgActivity;
-import com.hqq.coreapp.ui.activity.DimenActivity;
+import com.hqq.coreapp.ui.activity.screen.DimenActivity;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
-import com.hqq.coreapp.ui.activity.ListActivity;
-import com.hqq.coreapp.ui.activity.LoadMoreActivity;
+import com.hqq.coreapp.ui.activity.list.ListActivity;
+import com.hqq.coreapp.ui.activity.list.LoadMoreActivity;
 import com.hqq.coreapp.ui.activity.PermissionActivity;
-import com.hqq.coreapp.ui.activity.SearchBarActivity;
-import com.hqq.coreapp.ui.activity.TestDialogActivity;
-import com.hqq.coreapp.ui.activity.TextViewSizeActivity;
+import com.hqq.coreapp.ui.activity.dialog.TestDialogActivity;
+import com.hqq.coreapp.ui.activity.screen.TextViewSizeActivity;
 import com.hqq.coreapp.ui.activity.ThrowActivity;
-import com.hqq.coreapp.ui.activity.ToolBarActivity;
+import com.hqq.coreapp.ui.activity.bar.ToolBarActivity;
 
 /**
  * @Author : huangqiqiang

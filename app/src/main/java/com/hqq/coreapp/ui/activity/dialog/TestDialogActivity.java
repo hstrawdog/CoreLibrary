@@ -1,16 +1,15 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.dialog;
 
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.dialog.FullDialog;
+import com.hqq.coreapp.ui.activity.dialog.BottomSheetActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

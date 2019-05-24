@@ -1,4 +1,4 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.screen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

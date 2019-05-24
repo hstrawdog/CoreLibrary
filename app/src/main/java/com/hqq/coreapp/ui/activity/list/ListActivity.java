@@ -1,11 +1,12 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.list;
 
 import android.os.Handler;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
 import com.hqq.core.ui.BaseListActivity;
+import com.hqq.coreapp.ui.activity.IFragmentActivity;
+import com.hqq.coreapp.ui.activity.bar.ToolBarActivity;
 
 import java.util.ArrayList;
 import java.util.List;

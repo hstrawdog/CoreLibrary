@@ -1,4 +1,4 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.screen;
 
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.coreapp.R;

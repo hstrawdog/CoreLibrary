@@ -1,4 +1,4 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.dialog;
 
 import android.app.Activity;
 import android.content.Intent;

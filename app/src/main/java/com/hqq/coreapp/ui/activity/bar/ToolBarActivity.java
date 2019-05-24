@@ -1,6 +1,5 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.bar;
 
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
@@ -8,9 +7,7 @@ import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.coreapp.R;
-import com.hqq.coreapp.ui.activity.bar.SettingToolBarActivity;
 
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

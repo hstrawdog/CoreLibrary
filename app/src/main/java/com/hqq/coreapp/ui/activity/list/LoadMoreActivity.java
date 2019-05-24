@@ -1,4 +1,4 @@
-package com.hqq.coreapp.ui.activity;
+package com.hqq.coreapp.ui.activity.list;
 
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.coreapp.adapter.MainAdapter;

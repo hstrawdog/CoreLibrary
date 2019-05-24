@@ -17,28 +17,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.ToolBarActivity"
+            android:name=".ui.activity.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
         <activity android:name=".ui.activity.IFragmentActivity" />
         <activity
-            android:name=".ui.activity.LoadMoreActivity"
+            android:name=".ui.activity.list.LoadMoreActivity"
             android:label="加载数据" />
         <activity
             android:name=".ui.activity.DefActivity"
             android:label="默认Activity" />
         <activity
-            android:name=".ui.activity.ListActivity"
+            android:name=".ui.activity.list.ListActivity"
             android:label="列表数据" />
-        <activity android:name=".ui.activity.SearchBarActivity" />
+        <activity android:name=".ui.activity.bar.SearchBarActivity" />
         <activity
-            android:name=".ui.activity.BannerActivity"
+            android:name=".ui.activity.bannner.BannerActivity"
             android:label="轮播图测试" />
         <activity
             android:name=".ui.activity.DefImgActivity"
@@ -47,19 +43,27 @@
             android:name=".ui.activity.PermissionActivity"
             android:label="权限测试" />
         <activity
-            android:name=".ui.activity.BottomSheetActivity"
+            android:name=".ui.activity.dialog.BottomSheetActivity"
             android:label="知乎评论列表" />
         <activity
-            android:name=".ui.activity.TextViewSizeActivity"
+            android:name=".ui.activity.screen.TextViewSizeActivity"
             android:label="文字大小" />
         <activity
-            android:name=".ui.activity.DimenActivity"
+            android:name=".ui.activity.screen.DimenActivity"
             android:label="1像素大小测试" />
         <activity
             android:name=".ui.activity.ThrowActivity"
             android:label="Throw异常测试" />
         <activity android:name=".ui.activity.bar.SettingToolBarActivity" />
-        <activity android:name=".ui.activity.TestDialogActivity"></activity>
+        <activity android:name=".ui.activity.dialog.TestDialogActivity" />
+        <activity android:name=".ui.activity.animation.BezierActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
