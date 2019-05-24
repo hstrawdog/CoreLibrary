@@ -146,8 +146,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
 
     @Override
     public void initDefConfig() {
-        mRootViewBuild.setShowStatus(false);
-        mRootViewBuild.setShowToolBar(false);
+
     }
 
     /**
