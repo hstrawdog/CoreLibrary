@@ -1,6 +1,7 @@
 package com.hqq.coreapp.ui.activity;
 
 
+import android.view.View;
 import android.widget.Button;
 
 import com.hqq.core.ui.BaseActivity;
@@ -33,12 +34,28 @@ public class ThrowActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.button11)
-    public void onViewClicked() {
-        try {
-            throw new Exception("一个异常 ");
-        } catch (Exception e) {
-            e.printStackTrace();
+    @OnClick({R.id.button11, R.id.button12})
+    public void onViewClicked(View view) {
+
+        switch (view.getId()) {
+            case R.id.button11:
+                try {
+                    throw new Exception("一个异常 ");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.button12:
+                try {
+                    throw new RuntimeException("一个运行异常 ");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            default:
         }
+
+
     }
 }

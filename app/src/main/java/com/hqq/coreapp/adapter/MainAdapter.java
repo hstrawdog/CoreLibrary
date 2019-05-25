@@ -1,5 +1,8 @@
 package com.hqq.coreapp.adapter;
 
+import android.content.Intent;
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hqq.coreapp.R;
@@ -13,7 +16,7 @@ import com.hqq.coreapp.bean.MainBean;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> {
+public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> implements BaseQuickAdapter.OnItemClickListener {
     public MainAdapter() {
         super(R.layout.item_main);
     }
@@ -26,5 +29,18 @@ public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, MainBean item) {
         helper.setText(R.id.tv_title, item.getTitle());
+        setOnItemClickListener(this);
+
     }
+
+    @Override
+    public void setOnItemClick(View v, int position) {
+        super.setOnItemClick(v, position);
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        mContext.startActivity(new Intent(mContext, getItem(position).getClassName()));
+    }
+
 }

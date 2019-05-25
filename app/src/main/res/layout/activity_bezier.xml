@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hqq.coreapp.ui.activity.animation.BezierActivity">
+    tools:context="com.hqq.coreapp.ui.activity.customize.BezierActivity">
 
 
-    <com.hqq.coreapp.ui.activity.animation.weight.BezierView
+    <com.hqq.coreapp.ui.activity.customize.weight.BezierView
         android:id="@+id/view_bezier"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

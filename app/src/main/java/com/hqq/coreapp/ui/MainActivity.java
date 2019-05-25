@@ -10,8 +10,11 @@ import com.hqq.core.utils.ToastUtils;
 import com.hqq.coreapp.adapter.MainAdapter;
 import com.hqq.coreapp.bean.MainBean;
 import com.hqq.coreapp.ui.activity.bannner.BannerActivity;
+import com.hqq.coreapp.ui.activity.customize.CustomizeIndexActivity;
 import com.hqq.coreapp.ui.activity.dialog.BottomSheetActivity;
 import com.hqq.coreapp.ui.activity.DefImgActivity;
+import com.hqq.coreapp.ui.activity.dialog.DialogIndexActivity;
+import com.hqq.coreapp.ui.activity.list.ListIndexActivity;
 import com.hqq.coreapp.ui.activity.screen.DimenActivity;
 import com.hqq.coreapp.ui.activity.IFragmentActivity;
 import com.hqq.coreapp.ui.activity.list.ListActivity;
@@ -40,24 +43,16 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 
     @Override
     public void initData() {
-        mAdapter.addData(new MainBean("加载数据", LoadMoreActivity.class));
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
-        mAdapter.addData(new MainBean("fragment 加载", IFragmentActivity.class));
-        mAdapter.addData(new MainBean("ListActivity 加载", ListActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("轮播图", BannerActivity.class));
         mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
-        mAdapter.addData(new MainBean("仿知乎评论列表", BottomSheetActivity.class));
-        mAdapter.addData(new MainBean("dialog样式测试", TestDialogActivity.class));
         mAdapter.addData(new MainBean("文字适配测试", TextViewSizeActivity.class));
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
-    }
-
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        super.onItemClick(adapter, view, position);
-        startActivity(new Intent(this, mAdapter.getItem(position).getClassName()));
+        mAdapter.addData(new MainBean("列表系列", ListIndexActivity.class));
+        mAdapter.addData(new MainBean("Dialog系列", DialogIndexActivity.class));
+        mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
     }
 
 

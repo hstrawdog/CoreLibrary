@@ -18,6 +18,12 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.MainActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.activity.bar.ToolBarActivity"
@@ -56,14 +62,12 @@
             android:label="Throw异常测试" />
         <activity android:name=".ui.activity.bar.SettingToolBarActivity" />
         <activity android:name=".ui.activity.dialog.TestDialogActivity" />
-        <activity android:name=".ui.activity.animation.BezierActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".ui.activity.customize.BezierActivity">
 
         </activity>
+        <activity android:name=".ui.activity.customize.CustomizeIndexActivity"></activity>
+        <activity android:name=".ui.activity.dialog.DialogIndexActivity"></activity>
+        <activity android:name=".ui.activity.list.ListIndexActivity"></activity>
     </application>
 
 </manifest>
