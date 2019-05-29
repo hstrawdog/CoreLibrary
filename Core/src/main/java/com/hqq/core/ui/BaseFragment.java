@@ -29,8 +29,11 @@ import butterknife.Unbinder;
  * @Email :  qiqiang213@gmail.com
  */
 public abstract class BaseFragment extends Fragment implements ICreateRootView.IFragment, View.OnClickListener {
-
+    /**
+     * 缓存根布局对象
+     */
     protected View mRootView = null;
+
     protected Activity mActivity;
     public LoadingView mLoadingView;
     /**
@@ -60,11 +63,10 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
         if (mRootView == null) {
             mActivity = getActivity();
             mLoadingView = new LoadingView(mActivity);
-            mRootViewBuild = new RootViewBuilder(getActivity(), false, false);
+            mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
 
-            mRootView = mRootViewBuild.initContentView(getViewId(), getRootView());
-
+            mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
@@ -81,7 +83,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isLazyLoad() && mIsCreate && !mLazyInitEnd && isVisibleToUser) {
-            initBasic(null);
+            initView();
             mLazyInitEnd = true;
             LogUtils.d("setUserVisibleHint  initBasic " + getClass().getSimpleName() + this.toString());
         } else if (isLazyLoad() && mIsCreate && mLazyInitEnd && !isVisibleToUser) {
@@ -101,13 +103,14 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
         if (!mIsCreate && mRootView != null) {
             mIsCreate = true;
             if (!isLazyLoad()) {
-                initBasic(savedInstanceState);
+                initView();
+
                 LogUtils.d("onViewCreated initBasic   false  " + getClass().getSimpleName() + this.toString());
 
             } else if (isLazyLoad() && getUserVisibleHint()) {
                 mLazyInitEnd = true;
                 LogUtils.d("onViewCreated initBasic   True " + getClass().getSimpleName() + this.toString());
-                initBasic(savedInstanceState);
+                initView();
             }
         }
     }
@@ -163,7 +166,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
      * 关联主界面 <b>只有在使用自定义View时使用</b>
      */
     @Override
-    public View getRootView() {
+    public View setRootView() {
         return null;
     }
 
@@ -190,46 +193,5 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
         return mRootView.findViewById(id);
     }
 
-    /******************************** Activity跳转  ****************************************/
-    /******************************** getArguments  空判断  ****************************************/
-    protected int getArguments2Int(String key, int defaultValue) {
-        if (getArguments() != null) {
-            return getArguments().getInt(key, defaultValue);
-        }
-        return defaultValue;
-    }
-
-    protected <T extends Parcelable> T getArguments2Parcelable(String key) {
-        if (getArguments() != null) {
-            return getArguments().getParcelable(key);
-        }
-        return null;
-    }
-
-    protected <T extends Parcelable> ArrayList<T> getArguments2ParcelableArrayList(String key) {
-        if (getArguments() != null) {
-            return getArguments().getParcelableArrayList(key);
-        }
-        return null;
-    }
-
-    protected String getArguments2getString(String key, String defaultValue) {
-        if (getArguments() != null) {
-            return getArguments().getString(key, defaultValue);
-        }
-        return defaultValue;
-    }
-
-    protected Object getArgumentsValue(String key, Object defaultValue) {
-        if (getArguments() != null) {
-
-            if (defaultValue instanceof Integer) {
-                return getArguments().getInt(key, (Integer) defaultValue);
-            } else if (defaultValue instanceof String) {
-                return getArguments().getString(key, (String) defaultValue);
-            }
-        }
-        return defaultValue;
-    }
 
 }

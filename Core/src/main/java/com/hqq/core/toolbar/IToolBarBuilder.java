@@ -12,27 +12,27 @@ import android.view.ViewGroup;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public class IToolBarBuilder<T extends BaseToolBar> {
-    T mIToolBar;
-    Activity mActivity;
-    ViewGroup mViewGroup;
+public class IToolBarBuilder {
+    private Activity mActivity;
+    private ViewGroup mViewGroup;
     /**
      * 是否显示 状态栏 背景
      */
-    boolean mIsShowStatusBar = true;
+    private boolean mIsShowStatusBar = true;
     /**
      * 是否显示 ToolBar
      */
-    boolean mIsShowToolBar = true;
-    int mStatusBarColor = Color.WHITE;
+    private boolean mIsShowToolBar = true;
+    private int mStatusBarColor = Color.WHITE;
 
     public IToolBarBuilder setStatusBarColor(int statusBarColor) {
         mStatusBarColor = statusBarColor;
         return this;
     }
 
-    public IToolBarBuilder(Activity activity) {
+    public IToolBarBuilder setActivity(Activity activity) {
         mActivity = activity;
+        return this;
     }
 
     public IToolBarBuilder setViewGroup(ViewGroup viewGroup) {
@@ -50,10 +50,15 @@ public class IToolBarBuilder<T extends BaseToolBar> {
         return this;
     }
 
-    public T create(Class<T> clas) {
+    /**
+     * @param clss 类型
+     * @return
+     */
+    public <T extends IToolBar> T create(Class<T> clss) {
+        T toolBar = null;
         try {
-            mIToolBar = clas.newInstance();
-            mIToolBar.setShowStatusBar(mIsShowStatusBar)
+            toolBar = clss.newInstance();
+            toolBar.setShowStatusBar(mIsShowStatusBar)
                     .setShowBar(mIsShowToolBar)
                     .setDefStatusColor(mStatusBarColor)
                     .createToolBar(mActivity);
@@ -61,8 +66,7 @@ public class IToolBarBuilder<T extends BaseToolBar> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return mIToolBar;
+        return toolBar;
     }
-
 
 }

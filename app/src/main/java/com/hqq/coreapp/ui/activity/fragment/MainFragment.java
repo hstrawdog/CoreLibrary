@@ -25,7 +25,7 @@ import java.util.List;
 public class MainFragment extends BaseListFragment<MainAdapter> {
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.fragment_i;
 
     }

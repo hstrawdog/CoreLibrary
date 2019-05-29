@@ -18,6 +18,10 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.MainActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -58,11 +62,6 @@
         <activity android:name=".ui.activity.bar.SettingToolBarActivity" />
         <activity android:name=".ui.activity.dialog.TestDialogActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.customize.BezierActivity">
 

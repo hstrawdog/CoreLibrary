@@ -1,8 +1,9 @@
 package com.hqq.core.ui.builder;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -13,9 +14,10 @@ import android.widget.LinearLayout;
 import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
 import com.hqq.core.annotation.LayoutModel;
-import com.hqq.core.annotation.StatusBarMode;
+import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
+import com.hqq.core.toolbar.IToolBar;
 import com.hqq.core.toolbar.IToolBarBuilder;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
@@ -33,60 +35,88 @@ import com.hqq.core.utils.statusbar.StatusBarManager;
 public class RootViewBuilder implements IRootViewBuilder {
 
     /**
-     * 当前activitry
+     * 当前activity
      */
-    Activity mActivity;
+    private Activity mActivity;
     /**
      * 是否显示状态栏
      */
-    boolean mIsShowStatus;
+    private boolean mIsShowStatus;
     /**
      * 是否显示 标题栏
      */
-    boolean mIsShowToolBar;
+    private boolean mIsShowToolBar;
     /**
      * 根布局
      */
-    View mRootView;
+    private View mRootView;
     /**
      * 标题栏
      */
-    BaseToolBar mIToolBar;
+    private IToolBar mIToolBar;
 
     /**
      * 标题栏类型
      */
-    Class<?> mClass = CoreBuildConfig.getInstance().getDefItoobar();
+    private Class<? extends IToolBar> mClass = CoreBuildConfig.getInstance().getDefItoobar();
     /**
      * 布局类型
      */
     @LayoutModel
-    protected int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
+    private int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
 
-    @StatusBarMode
-    protected int mStatusBarMode = CoreBuildConfig.getInstance().isStatusMode();
+    /**
+     *
+     */
+    @ToolBarMode
+    private int mStatusBarMode = CoreBuildConfig.getInstance().isStatusMode();
 
     /**
      * 是否强制竖屏
      */
-    boolean alwaysPortrait = true;
+    private boolean alwaysPortrait = true;
     /**
      * 是否全屏显示
      */
-    boolean fullScreen = false;
+    private boolean fullScreen = false;
 
-    public RootViewBuilder(Activity activity, boolean isShowStatus, boolean isShowToolBar) {
-        mActivity = activity;
+    /**
+     * 是否执行 状态栏 透明化
+     */
+    private boolean immersiveStatusBar = false;
+
+
+    public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
+        if (activity instanceof Activity) {
+            mActivity = (Activity) activity;
+            immersiveStatusBar = true;
+        } else if (activity instanceof Fragment) {
+            mActivity = ((Fragment) activity).getActivity();
+        } else if (activity instanceof DialogFragment) {
+            mActivity = ((DialogFragment) activity).getActivity();
+        } else {
+            try {
+                throw new Exception("不支持的布局");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
         mIsShowStatus = isShowStatus;
         mIsShowToolBar = isShowToolBar;
+    }
+
+    public <T> RootViewBuilder(T activity) {
+        this(activity, false, false);
     }
 
     /**
      * 构建跟布局
      *
-     * @param rootView
-     * @param vid
-     * @return
+     * @param rootView 布局View
+     * @param vid      布局id
+     * @return 构建后的View
      */
     @Override
     public View createRootView(View rootView, int vid) {
@@ -200,14 +230,17 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @param layout
      */
-    protected void createToolBar(ViewGroup layout) {
-        if (mStatusBarMode == StatusBarMode.LIGHT_MODE) {
-            StatusBarManager.statusBarLightMode(mActivity, true);
-        } else {
-            StatusBarManager.statusBarLightMode(mActivity, false);
-
+    private void createToolBar(ViewGroup layout) {
+        // 默认只有Activity 会去执行设置状态栏的颜色
+        if (immersiveStatusBar) {
+            if (mStatusBarMode == ToolBarMode.LIGHT_MODE) {
+                StatusBarManager.statusBarLightMode(mActivity, true);
+            } else {
+                StatusBarManager.statusBarLightMode(mActivity, false);
+            }
         }
-        if (mIsShowToolBar != false || mIsShowStatus != false) {
+
+        if (mIsShowToolBar || mIsShowStatus) {
             initIToolBar(layout);
             layout.addView(mIToolBar.getRootView());
         }
@@ -219,15 +252,13 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param layout
      * @return
      */
-    public BaseToolBar initIToolBar(ViewGroup layout) {
-        if (mIsShowToolBar != false || mIsShowStatus != false) {
-            mIToolBar = new IToolBarBuilder(mActivity)
-                    .setViewGroup(layout)
-                    .setShowStatusBar(mIsShowStatus)
-                    .setShowToolBar(mIsShowToolBar)
-                    .create(mClass);
-        }
-        return mIToolBar;
+    public void initIToolBar(ViewGroup layout) {
+        IToolBarBuilder iToolBarBuilder = new IToolBarBuilder();
+        iToolBarBuilder.setActivity(mActivity);
+        iToolBarBuilder.setViewGroup(layout);
+        iToolBarBuilder.setShowStatusBar(mIsShowStatus);
+        iToolBarBuilder.setShowToolBar(mIsShowToolBar);
+        mIToolBar = iToolBarBuilder.create(mClass);
     }
 
     /**
@@ -334,18 +365,8 @@ public class RootViewBuilder implements IRootViewBuilder {
 
     }
 
-    /**
-     * 设置当前 act 目测没有用 暂时保留
-     *
-     * @param activity
-     */
-    public RootViewBuilder setActivity(AppCompatActivity activity) {
-        mActivity = activity;
-        return this;
 
-    }
-
-    public RootViewBuilder setStatusBarMode(int statusBarMode) {
+    public RootViewBuilder setStatusBarMode(@ToolBarMode int statusBarMode) {
         mStatusBarMode = statusBarMode;
         return this;
 

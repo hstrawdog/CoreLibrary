@@ -26,7 +26,7 @@ public class BottomSheetActivity extends BaseActivity {
     }
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_bottom_sheet;
     }
 

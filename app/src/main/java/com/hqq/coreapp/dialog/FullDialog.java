@@ -41,20 +41,22 @@ public class FullDialog extends BaseDialog {
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
 
+
     @Override
-    public int setView() {
+    public int setViewId() {
         return R.layout.dialog_full;
-    }
-
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        StatusBarManager.transparencyBar(getDialog().getWindow());
 
     }
 
     @Override
-    protected void initView() {
+    public void initDefConfig() {
+
     }
+
+    @Override
+    public void initView() {
+
+    }
+
+
 }

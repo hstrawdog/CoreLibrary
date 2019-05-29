@@ -22,7 +22,7 @@ public class SearchBarActivity extends BaseActivity {
     }
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_search_bar;
     }
 

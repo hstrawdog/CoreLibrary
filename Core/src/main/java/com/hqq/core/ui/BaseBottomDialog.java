@@ -15,6 +15,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.hqq.core.R;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.RootViewBuilder;
+import com.hqq.core.utils.log.LogUtils;
+import com.hqq.core.widget.LoadingView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -27,35 +31,37 @@ import butterknife.Unbinder;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public abstract class BaseBottomDialog extends BottomSheetDialogFragment {
+public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootView.IDialogFragment {
 
     protected View mRootView = null;
-    Unbinder unbinder;
+    Unbinder mUnkinder;
     boolean mLoaded = false;
     protected BottomSheetBehavior<FrameLayout> behavior;
+    /**
+     * 布局创建 容器
+     */
+    protected RootViewBuilder mRootViewBuild;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE , getTransparentBottomSheetStyle());
+        setStyle(DialogFragment.STYLE_NO_TITLE, getTransparentBottomSheetStyle());
 
     }
+    @Override
+    public void initDefConfig() {
 
+    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (mRootView != null) {
-            ViewGroup parent = (ViewGroup) mRootView.getParent();
-            if (null != parent) {
-                parent.removeView(mRootView);
-            }
-        }
         if (mRootView == null) {
-            FrameLayout layout = new FrameLayout(getActivity());
-            layout.addView(inflater.inflate(setView(), layout, false));
-            mRootView = layout;
+            mRootViewBuild = new RootViewBuilder(this);
+            initDefConfig();
+            mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
+            mUnkinder = ButterKnife.bind(this, mRootView);
         }
-        unbinder = ButterKnife.bind(this, mRootView);
+        LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         return mRootView;
     }
 
@@ -92,7 +98,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
+        mUnkinder.unbind();
         mRootView = null;
     }
 
@@ -108,15 +114,8 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment {
         return behavior;
     }
 
-    /**
-     * 关联主界面
-     *
-     * @return int
-     */
-    public abstract int setView();
-
-    /**
-     * 初始化
-     */
-    protected abstract void initView();
+    @Override
+    public View setRootView() {
+        return null;
+    }
 }

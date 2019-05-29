@@ -19,7 +19,7 @@ import butterknife.OnClick;
 public class PermissionActivity extends BaseActivity {
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_permission;
     }
 

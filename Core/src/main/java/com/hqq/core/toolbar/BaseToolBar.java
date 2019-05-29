@@ -18,13 +18,15 @@ import com.hqq.core.utils.ScreenUtils;
  * @Date : 2018/11/15 0015  下午 7:26
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * -  第一层 背景    toolBar
+ * -  第二层 状态栏  statusBar
+ * -  第三层 标题栏  TitleBar
  */
 public abstract class BaseToolBar implements IToolBar {
     /**
      * mLinearLayout  包含
      * 1. 顶部状态栏背景颜色
      * 2. 中间 toolbar 与 toolbar  背景颜色  与 底部的分割线
-     * id 暂时不做 改动
      */
 
     /**
@@ -54,8 +56,10 @@ public abstract class BaseToolBar implements IToolBar {
     protected boolean mIsShowLine = true;
 
     protected boolean mIsShowBar = true;
+
     protected boolean mIsShowStatusBar = true;
 
+    @Override
     public BaseToolBar setShowStatusBar(boolean showStatusBar) {
         mIsShowStatusBar = showStatusBar;
         return this;
@@ -110,6 +114,7 @@ public abstract class BaseToolBar implements IToolBar {
      *
      * @param colorId
      */
+    @Override
     public BaseToolBar setDefStatusColor(@ColorInt int colorId) {
         if (getStatusBar() != null) {
             getStatusBar().setBackgroundColor(colorId);
@@ -117,6 +122,7 @@ public abstract class BaseToolBar implements IToolBar {
         return this;
     }
 
+    @Override
     public BaseToolBar setShowBar(boolean showBar) {
         mIsShowBar = showBar;
         return this;
@@ -152,6 +158,7 @@ public abstract class BaseToolBar implements IToolBar {
      *
      * @return mRootView
      */
+    @Override
     public View getRootView() {
         return mRootView;
     }
@@ -197,7 +204,7 @@ public abstract class BaseToolBar implements IToolBar {
      *
      * @param color color id
      */
-    public void setLineColor(@ColorRes int color) {
+    public void setLineColor(int color) {
         getViewLine().setBackgroundResource(color);
     }
 

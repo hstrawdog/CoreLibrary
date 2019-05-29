@@ -47,7 +47,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
 
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return 0;
     }
 
@@ -58,12 +58,12 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     }
 
     /**
-     * 重写了 getViewId    执行 getRootView
+     * 重写了 setViewId    执行 setRootView
      *
      * @return
      */
     @Override
-    public View getRootView() {
+    public View setRootView() {
         return mBaseListModel.createRecycleView(this);
     }
 

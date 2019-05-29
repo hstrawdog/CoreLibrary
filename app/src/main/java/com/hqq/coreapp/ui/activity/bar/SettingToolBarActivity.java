@@ -28,7 +28,7 @@ public class SettingToolBarActivity extends BaseActivity {
     }
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_setting_tool_bar;
     }
 

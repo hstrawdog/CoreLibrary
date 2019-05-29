@@ -121,7 +121,7 @@ public class BaseDefToolBarImpl extends BaseToolBar {
      * @param color
      */
     @Override
-    public void setToolBarColor(@DrawableRes int color) {
+    public void setToolBarColor( int color) {
         if (null != getToolBarBg()) {
             getToolBarBg().setImageResource(color);
         } else {

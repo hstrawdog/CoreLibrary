@@ -54,7 +54,7 @@ public class BaseWebFragment extends BaseFragment {
 
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.fragment_web;
     }
 
@@ -81,7 +81,7 @@ public class BaseWebFragment extends BaseFragment {
 
     @SuppressLint("JavascriptInterface")
     @Override
-    public void initBasic(Bundle savedInstanceState) {
+    public void initView() {
         mWebView = (WebView) findViewById(R.id.web_view);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_progressbar);
         if (RegexUtils.checkNotNull(mProgressBarColor)) {

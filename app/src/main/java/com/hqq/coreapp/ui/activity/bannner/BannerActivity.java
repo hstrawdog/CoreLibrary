@@ -30,7 +30,7 @@ public class BannerActivity extends BaseActivity {
     BannerLayout mRcBanner2;
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_banner;
     }
 

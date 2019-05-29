@@ -45,12 +45,12 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     protected BaseListModel mBaseListModel;
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return 0;
     }
 
     @Override
-    public View getRootView() {
+    public View setRootView() {
         return mBaseListModel.createRecycleView(getContext());
     }
 
@@ -64,7 +64,7 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     }
 
     @Override
-    public void initBasic(Bundle savedInstanceState) {
+    public void initView() {
         mLayoutManager = getRcLayoutManager();
         mAdapter = initAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());

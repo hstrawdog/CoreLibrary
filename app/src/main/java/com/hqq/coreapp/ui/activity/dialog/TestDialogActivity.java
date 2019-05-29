@@ -27,7 +27,7 @@ public class TestDialogActivity extends BaseActivity {
     Button mButton15;
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_test_dialog;
     }
 

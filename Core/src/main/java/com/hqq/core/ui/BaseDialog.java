@@ -17,6 +17,9 @@ import android.widget.FrameLayout;
 
 import com.hqq.core.R;
 import com.hqq.core.listenner.DialogClickListener;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.RootViewBuilder;
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.core.widget.LoadingView;
 
@@ -31,20 +34,18 @@ import butterknife.Unbinder;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseDialog extends DialogFragment {
+public abstract class BaseDialog extends DialogFragment implements ICreateRootView.IDialogFragment {
 
-    Unbinder unbinder;
+    Unbinder mUnkinder;
     protected LoadingView mLoadingView;
     boolean mLoaded = false;
     protected DialogClickListener mDialogClickListener;
-
-    public BaseDialog setDialogClickListener(DialogClickListener dialogClickListener) {
-        mDialogClickListener = dialogClickListener;
-        return this;
-    }
-
-
     protected View mRootView = null;
+    /**
+     * 布局创建 容器
+     */
+    protected RootViewBuilder mRootViewBuild;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,19 +57,15 @@ public abstract class BaseDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().setWindowAnimations(setAnimation());
-        if (mRootView != null) {
-            ViewGroup parent = (ViewGroup) mRootView.getParent();
-            if (null != parent) {
-                parent.removeView(mRootView);
-            }
-        }
         if (mRootView == null) {
-            FrameLayout layout = new FrameLayout(getActivity());
-            layout.addView(inflater.inflate(setView(), layout, false));
-            mRootView = layout;
+            mLoadingView = new LoadingView(getActivity());
+            mRootViewBuild = new RootViewBuilder(this);
+            initDefConfig();
+
+            mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
+            mUnkinder = ButterKnife.bind(this, mRootView);
         }
-        mLoadingView = new LoadingView(getActivity());
-        unbinder = ButterKnife.bind(this, mRootView);
+        LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         return mRootView;
     }
 
@@ -76,26 +73,29 @@ public abstract class BaseDialog extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (!mLoaded && mRootView != null) {
+            StatusBarManager.transparencyBar(getDialog().getWindow());
             mLoaded = true;
             initView();
         }
     }
 
     @Override
+    public View setRootView() {
+        return null;
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-//        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         super.onActivityCreated(savedInstanceState);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getBackground()));
         getDialog().getWindow().setLayout(setWeight(), setHeight());
         getDialog().getWindow().setGravity(setGravity());
-//        //透明状态栏
-//        getDialog().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
+        mUnkinder.unbind();
         mLoadingView = null;
         mRootView = null;
     }
@@ -112,17 +112,11 @@ public abstract class BaseDialog extends DialogFragment {
         // super.show(manager, getClass().getSimpleName());
     }
 
-    /**
-     * 关联主界面
-     *
-     * @return int
-     */
-    public abstract int setView();
 
-    /**
-     * 初始化
-     */
-    protected abstract void initView();
+    public BaseDialog setDialogClickListener(DialogClickListener dialogClickListener) {
+        mDialogClickListener = dialogClickListener;
+        return this;
+    }
 
     /**
      * @return 背景颜色

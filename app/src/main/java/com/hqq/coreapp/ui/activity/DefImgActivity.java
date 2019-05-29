@@ -7,7 +7,7 @@ import com.hqq.coreapp.R;
 public class DefImgActivity extends BaseActivity {
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_def_img;
     }
 

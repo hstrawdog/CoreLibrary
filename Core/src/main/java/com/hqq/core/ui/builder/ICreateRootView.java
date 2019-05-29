@@ -17,35 +17,45 @@ public interface ICreateRootView {
      *
      * @return
      */
-    int getViewId();
+    int setViewId();
 
     /**
+     * 设置跟布局
+     *
      * @return
      */
-    View getRootView();
+    View setRootView();
 
     /**
-     *
+     * 初始化默认配置 RootView
      */
     void initDefConfig();
 
+    /**
+     * 初始化 view 等
+     */
+    void initView();
+
     interface IActivity extends ICreateRootView {
-        /**
-         * 初始化
-         */
-        void initView();
+
 
     }
 
     interface IFragment extends ICreateRootView {
-        /**
-         * 基础 初始化
-         *
-         * @param savedInstanceState 对象  在延迟加载的时候可能会出现null
-         */
-        void initBasic(Bundle savedInstanceState);
 
+        /**
+         * 是否延迟加载
+         * 延迟加载 需要当Fragment加载到View中并显示出来才会去执行 initBasic
+         *
+         * @return
+         */
         boolean isLazyLoad();
     }
+
+    interface IDialogFragment extends ICreateRootView {
+
+
+    }
+
 
 }

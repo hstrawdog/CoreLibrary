@@ -1,7 +1,7 @@
 package com.hqq.core.toolbar;
 
 import android.app.Activity;
-import android.support.annotation.ColorRes;
+import android.support.annotation.ColorInt;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,20 +25,56 @@ public interface IToolBar {
     /**
      * 构建  标题栏
      *
-     * @param activity
-     * @return
+     * @param activity activity
+     * @return  this
      */
     IToolBar createToolBar(Activity activity);
+
 
     /**
      * 构建toolBar
      *
      * @param activity  activity
      * @param viewGroup viewGroup
+     * @return rootView
      */
     View iniToolBar(final Activity activity, ViewGroup viewGroup);
 
+    /**
+     * bar 的颜色
+     *
+     * @param colorId 颜色id
+     */
+    void setToolBarColor(int colorId);
 
-    void setToolBarColor(@ColorRes int colorId);
+    /**
+     * 状态栏
+     *
+     * @param isShowStatusBar 是否显示
+     * @return this
+     */
+    IToolBar setShowStatusBar(boolean isShowStatusBar);
 
+    /**
+     * 是否显示 toolBar
+     *
+     * @param isShowToolBar 是否显示
+     * @return this
+     */
+    IToolBar setShowBar(boolean isShowToolBar);
+
+    /**
+     * 默认的 状态栏颜色
+     *
+     * @param statusBarColor 颜色值
+     * @return this
+     */
+    IToolBar setDefStatusColor(@ColorInt int statusBarColor);
+
+    /**
+     * 构建后生成的View
+     *
+     * @return view
+     */
+    View getRootView();
 }

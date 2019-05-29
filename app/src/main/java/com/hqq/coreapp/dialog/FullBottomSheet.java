@@ -20,8 +20,9 @@ public class FullBottomSheet extends BaseBottomDialog {
     StringAdapter mStringAdapter = new StringAdapter();
 
     @Override
-    public int setView() {
+    public int setViewId() {
         return R.layout.dialog_bottom_sheet;
+
     }
 
     @Override

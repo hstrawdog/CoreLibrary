@@ -2,8 +2,9 @@ package com.hqq.core;
 
 import android.app.Application;
 
-import com.hqq.core.annotation.StatusBarMode;
+import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
+import com.hqq.core.toolbar.IToolBar;
 
 
 /**
@@ -19,7 +20,7 @@ public class CoreBuildConfig {
     /**
      * 默认 标题栏 内容
      */
-    private Class<?> mDefIToolbar = BaseDefToolBarImpl.class;
+    private Class<? extends IToolBar > mDefIToolbar = BaseDefToolBarImpl.class;
 
     /**
      * Application   主要获取 context
@@ -39,7 +40,7 @@ public class CoreBuildConfig {
     /**
      * 状态栏 模式
      */
-    private int mStatusMode = StatusBarMode.LIGHT_MODE;
+    private int mStatusMode = ToolBarMode.LIGHT_MODE;
     /**
      * 单利维持对象
      */
@@ -79,21 +80,18 @@ public class CoreBuildConfig {
         mDebug = isDebug;
     }
 
-    public Class<?> getDefIToolbar() {
+    public Class<? > getDefIToolbar() {
         return mDefIToolbar;
     }
 
-    public void setDefIToolbar(Class<?> defIToolbar) {
+    public void setDefIToolbar(Class<? extends  IToolBar> defIToolbar) {
         mDefIToolbar = defIToolbar;
     }
 
-    public Class<?> getDefItoobar() {
-        return mDefIToolbar;
+    public Class<? extends IToolBar> getDefItoobar() {
+        return (Class<? extends IToolBar>) mDefIToolbar;
     }
 
-    public void setDefItoobar(Class<?> defItoobar) {
-        mDefIToolbar = defItoobar;
-    }
 
     public Application getApplication() {
         return mApplication;
@@ -115,7 +113,7 @@ public class CoreBuildConfig {
         return mStatusMode;
     }
 
-    public CoreBuildConfig setStatusMode(@StatusBarMode int statusMode) {
+    public CoreBuildConfig setStatusMode(@ToolBarMode int statusMode) {
         this.mStatusMode = statusMode;
         return this;
     }

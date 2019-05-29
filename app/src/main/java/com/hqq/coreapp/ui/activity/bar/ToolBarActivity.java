@@ -21,7 +21,7 @@ import butterknife.OnClick;
 public class ToolBarActivity extends BaseActivity {
 
     @Override
-    public int getViewId() {
+    public int setViewId() {
         return R.layout.activity_tool_bar;
     }
 
