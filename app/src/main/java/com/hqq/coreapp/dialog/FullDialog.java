@@ -1,9 +1,16 @@
 package com.hqq.coreapp.dialog;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.hqq.core.ui.BaseDialog;
+import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.coreapp.R;
 
 /**
@@ -16,15 +23,18 @@ import com.hqq.coreapp.R;
  */
 public class FullDialog extends BaseDialog {
 
- public static void showDialog(FragmentManager fragmentManager){
-     FullDialog fragment = new FullDialog();
-     fragment.show(fragmentManager);
- }
+    public static void showDialog(FragmentManager fragmentManager) {
+        FullDialog fragment = new FullDialog();
+        fragment.show(fragmentManager);
+    }
+
     @Override
     protected int setHeight() {
+//        return getWidthAndHeight(getDialog().getWindow())[1];
         return WindowManager.LayoutParams.MATCH_PARENT;
 
     }
+
 
     @Override
     protected int setWeight() {
@@ -36,9 +46,15 @@ public class FullDialog extends BaseDialog {
         return R.layout.dialog_full;
     }
 
+
     @Override
-    protected void initView() {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        StatusBarManager.transparencyBar(getDialog().getWindow());
 
     }
 
+    @Override
+    protected void initView() {
+    }
 }

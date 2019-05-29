@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 
 import com.hqq.core.R;
 import com.hqq.core.listenner.DialogClickListener;
+import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.core.widget.LoadingView;
 
 import butterknife.ButterKnife;
@@ -48,11 +49,8 @@ public abstract class BaseDialog extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 可以全屏 但是 背景消失
-        //setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         //代码设置 无标题 无边框
-        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DefDialogStyle);
     }
 
     @Override

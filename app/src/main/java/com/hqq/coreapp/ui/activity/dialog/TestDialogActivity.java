@@ -7,7 +7,6 @@ import android.widget.Button;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.dialog.FullDialog;
-import com.hqq.coreapp.ui.activity.dialog.BottomSheetActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

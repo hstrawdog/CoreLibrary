@@ -18,6 +18,7 @@
         <item name="titleMargin">0dp</item>
     </style>
 
+
     <!--分割线-->
     <style name="base_line">
         <item name="android:background">@color/color_line_gray</item>
@@ -40,6 +41,13 @@
     <style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="DefDialogStyle" parent="AlertDialog.AppCompat">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
     </style>
 
@@ -83,7 +91,6 @@
     <style name="SheetStyle.behavior">
         <!--最好是要设置的一个高度  auto 有的坑-->
         <item name="behavior_peekHeight">@dimen/x100</item>
-
         <!--折叠效果 false   开启-->
         <item name="behavior_skipCollapsed">false</item>
     </style>
