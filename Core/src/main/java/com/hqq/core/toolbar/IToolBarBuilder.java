@@ -14,7 +14,6 @@ import android.view.ViewGroup;
  */
 public class IToolBarBuilder {
     private Activity mActivity;
-    private ViewGroup mViewGroup;
     /**
      * 是否显示 状态栏 背景
      */
@@ -35,11 +34,6 @@ public class IToolBarBuilder {
         return this;
     }
 
-    public IToolBarBuilder setViewGroup(ViewGroup viewGroup) {
-        mViewGroup = viewGroup;
-        return this;
-    }
-
     public IToolBarBuilder setShowStatusBar(boolean isShowStatusBar) {
         mIsShowStatusBar = isShowStatusBar;
         return this;
@@ -55,18 +49,17 @@ public class IToolBarBuilder {
      * @return
      */
     public <T extends IToolBar> T create(Class<T> clss) {
-        T toolBar = null;
         try {
-            toolBar = clss.newInstance();
+            T toolBar = clss.newInstance();
             toolBar.setShowStatusBar(mIsShowStatusBar)
                     .setShowBar(mIsShowToolBar)
                     .setDefStatusColor(mStatusBarColor)
                     .createToolBar(mActivity);
-
+            return toolBar;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return toolBar;
+        return null;
     }
 
 }

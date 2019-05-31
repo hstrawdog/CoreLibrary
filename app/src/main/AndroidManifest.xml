@@ -18,10 +18,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.MainActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -67,7 +63,16 @@
 
         </activity>
         <activity android:name=".ui.activity.customize.CustomizeIndexActivity"></activity>
-        <activity android:name=".ui.activity.dialog.DialogIndexActivity"></activity>
+        <activity
+            android:name=".ui.activity.dialog.DialogIndexActivity"
+            android:label="dialog 系列">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".ui.activity.list.ListIndexActivity"></activity>
     </application>
 

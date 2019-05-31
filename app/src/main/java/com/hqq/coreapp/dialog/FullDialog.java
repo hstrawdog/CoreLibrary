@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.ui.BaseDialog;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.coreapp.R;
@@ -29,28 +30,23 @@ public class FullDialog extends BaseDialog {
     }
 
     @Override
-    protected int setHeight() {
-//        return getWidthAndHeight(getDialog().getWindow())[1];
+    public int setHeight() {
         return WindowManager.LayoutParams.MATCH_PARENT;
-
     }
-
 
     @Override
-    protected int setWeight() {
+    public int setWeight() {
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
-
 
     @Override
     public int setViewId() {
         return R.layout.dialog_full;
-
     }
 
     @Override
     public void initDefConfig() {
-
+        mStatusBarMode = ToolBarMode.LIGHT_MODE;
     }
 
     @Override

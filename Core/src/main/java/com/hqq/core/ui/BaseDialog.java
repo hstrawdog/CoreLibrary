@@ -13,9 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import com.hqq.core.R;
+import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.listenner.DialogClickListener;
 import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.ui.builder.RootViewBuilder;
@@ -31,8 +31,10 @@ import butterknife.Unbinder;
  * @Package : com.core.library
  * @FileName :   BaseDialog
  * @Date : 2018/6/19 0019  上午 11:33
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
+ * - 默认 背景是透明的 状态栏亮色模式
+ * - 在高度全屏的情况下 进行状态栏模式设置
  */
 public abstract class BaseDialog extends DialogFragment implements ICreateRootView.IDialogFragment {
 
@@ -46,6 +48,11 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
      */
     protected RootViewBuilder mRootViewBuild;
 
+    /**
+     * 状态栏模式
+     */
+    @ToolBarMode
+    protected int mStatusBarMode;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,11 +68,10 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             mLoadingView = new LoadingView(getActivity());
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-
             mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
+            LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         }
-        LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         return mRootView;
     }
 
@@ -73,24 +79,29 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (!mLoaded && mRootView != null) {
-            StatusBarManager.transparencyBar(getDialog().getWindow());
+            if (mStatusBarMode == ToolBarMode.LIGHT_MODE) {
+                StatusBarManager.setStatusBarModel(getDialog().getWindow(), true);
+
+            } else if (mStatusBarMode == ToolBarMode.DARK_MODE) {
+                StatusBarManager.setStatusBarModel(getDialog().getWindow(), false);
+
+            } else {
+                // 默认进行全屏显示
+                StatusBarManager.transparencyBar(getDialog().getWindow());
+            }
             mLoaded = true;
             initView();
         }
     }
 
     @Override
-    public View setRootView() {
-        return null;
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getBackground()));
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(setBackground()));
         getDialog().getWindow().setLayout(setWeight(), setHeight());
         getDialog().getWindow().setGravity(setGravity());
     }
+
 
     @Override
     public void onDestroy() {
@@ -100,7 +111,13 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         mRootView = null;
     }
 
+    @Override
+    public View setRootView() {
+        return null;
+    }
 
+
+    @Override
     public void show(FragmentManager manager) {
         FragmentTransaction ft = manager.beginTransaction();
         Fragment prev = manager.findFragmentByTag(getClass().getSimpleName());
@@ -109,7 +126,39 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         }
         ft.add(this, getClass().getSimpleName());
         ft.commitAllowingStateLoss();
-        // super.show(manager, getClass().getSimpleName());
+    }
+
+    @Override
+    public void initDefConfig() {
+
+    }
+
+    /**
+     * @return 背景颜色
+     */
+    @Override
+    public int setBackground() {
+        return 0x00000000;
+    }
+
+    @Override
+    public int setGravity() {
+        return Gravity.CENTER;
+    }
+
+    @Override
+    public int setWeight() {
+        return WindowManager.LayoutParams.WRAP_CONTENT;
+    }
+
+    @Override
+    public int setHeight() {
+        return WindowManager.LayoutParams.WRAP_CONTENT;
+    }
+
+    @Override
+    public int setAnimation() {
+        return R.style.DialogAnimation_bottom2top;
     }
 
 
@@ -117,29 +166,5 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         mDialogClickListener = dialogClickListener;
         return this;
     }
-
-    /**
-     * @return 背景颜色
-     */
-    public int getBackground() {
-        return 0x00000000;
-    }
-
-    public int setGravity() {
-        return Gravity.CENTER;
-    }
-
-    protected int setWeight() {
-        return WindowManager.LayoutParams.WRAP_CONTENT;
-    }
-
-    protected int setHeight() {
-        return WindowManager.LayoutParams.WRAP_CONTENT;
-    }
-
-    protected int setAnimation() {
-        return R.style.DialogAnimation_bottom2top;
-    }
-
 
 }

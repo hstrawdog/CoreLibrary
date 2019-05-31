@@ -21,9 +21,6 @@ public class GsonUtil {
             .serializeNulls()//排除transient标记的字段
             .create();
 
-    private GsonUtil() {
-    }
-
     public static String toJsonString(Object o) {
         return GSON.toJson(o);
     }
@@ -72,7 +69,6 @@ public class GsonUtil {
     public static JsonElement toJsonTree(Object o, Type type) {
         return GSON.toJsonTree(o, type);
     }
-
 
     public static JsonElement getValue(String json, String key) {
         return new JsonParser().parse(json).getAsJsonObject().get(key);

@@ -22,7 +22,6 @@ public class DialogIndexActivity extends BaseListActivity<MainAdapter> {
     public void initData() {
         mAdapter.addData(new MainBean("仿知乎评论列表", BottomSheetActivity.class));
         mAdapter.addData(new MainBean("dialog样式测试", TestDialogActivity.class));
-
     }
 
 

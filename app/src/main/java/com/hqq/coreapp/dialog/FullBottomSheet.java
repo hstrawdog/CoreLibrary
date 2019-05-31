@@ -36,7 +36,7 @@ public class FullBottomSheet extends BaseBottomDialog {
     }
 
     @Override
-    protected int getHeight() {
+    public int setHeight() {
         return (int) ResourcesUtils.getDimen(getContext(), R.dimen.x750);
     }
 

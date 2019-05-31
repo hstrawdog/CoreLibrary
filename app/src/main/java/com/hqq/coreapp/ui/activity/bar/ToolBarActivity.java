@@ -58,10 +58,10 @@ public class ToolBarActivity extends BaseActivity {
                 mRootViewBuild.getDefToolBar().getToolBarBg().setImageResource(R.color.color_77400a);
                 break;
             case R.id.button:
-                StatusBarManager.statusBarLightMode(mActivity, true);
+                StatusBarManager.setStatusBarModel(mActivity.getWindow(), true);
                 break;
             case R.id.button2:
-                StatusBarManager.statusBarLightMode(mActivity, false);
+                StatusBarManager.setStatusBarModel(mActivity.getWindow(), false);
                 break;
             case R.id.button6:
                 mRootViewBuild.getDefToolBar().setToolbarTitle("new标题");
@@ -78,8 +78,6 @@ public class ToolBarActivity extends BaseActivity {
             default:
         }
     }
-
-
 
 
 }

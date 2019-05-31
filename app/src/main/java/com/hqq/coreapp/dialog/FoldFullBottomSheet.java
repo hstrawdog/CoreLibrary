@@ -8,6 +8,8 @@ import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.coreapp.R;
 import com.hqq.coreapp.adapter.StringAdapter;
 
+import static java.security.AccessController.getContext;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.coreapp.dialog
@@ -19,14 +21,11 @@ import com.hqq.coreapp.adapter.StringAdapter;
 public class FoldFullBottomSheet extends BaseBottomDialog {
     StringAdapter mStringAdapter = new StringAdapter();
 
-
     @Override
     public int setViewId() {
         return R.layout.dialog_bottom_sheet;
 
     }
-
-
 
     @Override
     public void initView() {
@@ -39,7 +38,7 @@ public class FoldFullBottomSheet extends BaseBottomDialog {
     }
 
     @Override
-    protected int getHeight() {
+    public int setHeight() {
         return (int) ResourcesUtils.getDimen(getContext(), R.dimen.x750);
     }
 

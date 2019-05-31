@@ -9,6 +9,9 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +33,10 @@ import butterknife.Unbinder;
  * @Date : 2019/4/29 0029  下午 2:58
  * @Email : qiqiang213@gmail.com
  * @Descrive :
+ * 宽度是全屏
+ * 高度自定义
  */
-public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootView.IDialogFragment {
+public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootView.IBottomDialogFragment {
 
     protected View mRootView = null;
     Unbinder mUnkinder;
@@ -49,10 +54,8 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         setStyle(DialogFragment.STYLE_NO_TITLE, getTransparentBottomSheetStyle());
 
     }
-    @Override
-    public void initDefConfig() {
 
-    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mRootView == null) {
@@ -88,7 +91,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         FrameLayout bottomSheet = dialog.getDelegate().findViewById(android.support.design.R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomSheet.getLayoutParams();
-            layoutParams.height = getHeight();
+            layoutParams.height = setHeight();
             behavior = BottomSheetBehavior.from(bottomSheet);
             // 初始为展开状态
             behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -102,8 +105,26 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         mRootView = null;
     }
 
-    protected int getHeight() {
+    @Override
+    public int setHeight() {
         return CoordinatorLayout.LayoutParams.MATCH_PARENT;
+    }
+
+    @Override
+    public void initDefConfig() {
+
+    }
+
+
+    @Override
+    public void show(FragmentManager manager) {
+        FragmentTransaction ft = manager.beginTransaction();
+        Fragment prev = manager.findFragmentByTag(getClass().getSimpleName());
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.add(this, getClass().getSimpleName());
+        ft.commitAllowingStateLoss();
     }
 
     protected int getTransparentBottomSheetStyle() {
@@ -114,8 +135,11 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         return behavior;
     }
 
+
     @Override
     public View setRootView() {
         return null;
     }
+
+
 }

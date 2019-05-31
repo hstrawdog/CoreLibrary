@@ -28,9 +28,8 @@ import com.hqq.core.utils.statusbar.StatusBarManager;
  * @Date : 2018/12/4 0004  下午 7:03
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
- * 　主要功能
  * 　动态添加　布局
- * 　根据条件　判断添加　状态栏　标题栏
+ * 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
 public class RootViewBuilder implements IRootViewBuilder {
 
@@ -66,7 +65,7 @@ public class RootViewBuilder implements IRootViewBuilder {
     private int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
 
     /**
-     *
+     * 状态栏模式
      */
     @ToolBarMode
     private int mStatusBarMode = CoreBuildConfig.getInstance().isStatusMode();
@@ -234,14 +233,14 @@ public class RootViewBuilder implements IRootViewBuilder {
         // 默认只有Activity 会去执行设置状态栏的颜色
         if (immersiveStatusBar) {
             if (mStatusBarMode == ToolBarMode.LIGHT_MODE) {
-                StatusBarManager.statusBarLightMode(mActivity, true);
+                StatusBarManager.setStatusBarModel(mActivity.getWindow(), true);
             } else {
-                StatusBarManager.statusBarLightMode(mActivity, false);
+                StatusBarManager.setStatusBarModel(mActivity.getWindow(), false);
             }
         }
 
         if (mIsShowToolBar || mIsShowStatus) {
-            initIToolBar(layout);
+            initIToolBar();
             layout.addView(mIToolBar.getRootView());
         }
     }
@@ -249,13 +248,11 @@ public class RootViewBuilder implements IRootViewBuilder {
     /**
      * 可以重写 这个方法 去自定义  头部
      *
-     * @param layout
      * @return
      */
-    public void initIToolBar(ViewGroup layout) {
+    public void initIToolBar() {
         IToolBarBuilder iToolBarBuilder = new IToolBarBuilder();
         iToolBarBuilder.setActivity(mActivity);
-        iToolBarBuilder.setViewGroup(layout);
         iToolBarBuilder.setShowStatusBar(mIsShowStatus);
         iToolBarBuilder.setShowToolBar(mIsShowToolBar);
         mIToolBar = iToolBarBuilder.create(mClass);
@@ -298,7 +295,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         }
     }
 
-    /*********************************Build 方法*********************************************/
+    /*********************************Builder 方法*********************************************/
 
     /**
      * 获取跟布局
