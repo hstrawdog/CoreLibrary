@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.ui.builder.RootViewBuilder;
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.LoadingView;
 
 import butterknife.ButterKnife;
@@ -38,6 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         initView();
+        LogUtils.e(this.toString());
         //  ARouter.getInstance().inject(this);
     }
 

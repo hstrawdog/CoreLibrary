@@ -34,17 +34,10 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
         BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView<T> {
     protected RecyclerView mRcList;
     protected T mAdapter;
-    /**
-     * 默认的填充数据
-     *
-     * @param data
-     */
-
     protected int mPageSize = BaseCommonsKey.PAGE_SIZE;
     protected int mPageCount = 1;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected BaseListModel mBaseListModel;
-
 
     @Override
     public int setViewId() {
@@ -78,7 +71,6 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
         mBaseListModel.initRecycleView(mRcList, mAdapter, mLayoutManager,
                 this, this, this);
         mBaseListModel.initPtrPullDown(mRootViewBuild.getRootView());
-
         initData();
     }
 
@@ -87,24 +79,19 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
         onLoadMore();
     }
 
-    /**
-     * 是需要加载更多
-     *
-     * @return
-     */
     @Override
     public boolean isShowLoadMore() {
         return false;
     }
 
     @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+    public T getAdapter() {
+        return mAdapter;
     }
 
     @Override
-    public T getAdapter() {
-        return mAdapter;
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
     }
 
     @Override
@@ -152,9 +139,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     }
 
 
-
     protected void onLoadMore() {
-
     }
 
 
