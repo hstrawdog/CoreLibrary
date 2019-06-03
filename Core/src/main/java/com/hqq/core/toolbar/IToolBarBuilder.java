@@ -2,7 +2,6 @@ package com.hqq.core.toolbar;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.view.ViewGroup;
 
 /**
  * @Author : huangqiqiang
@@ -22,6 +21,9 @@ public class IToolBarBuilder {
      * 是否显示 ToolBar
      */
     private boolean mIsShowToolBar = true;
+    /**
+     * 默认白色
+     */
     private int mStatusBarColor = Color.WHITE;
 
     public IToolBarBuilder setStatusBarColor(int statusBarColor) {

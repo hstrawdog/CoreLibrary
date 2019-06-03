@@ -34,12 +34,10 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         mRootViewBuild = new RootViewBuilder(this, true, true);
         initDefConfig();
         setContentView(mRootViewBuild.initContentView(setViewId(), setRootView()));
-
         mLoadingView = new LoadingView(this);
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         initView();
-        LogUtils.e(this.toString());
         //  ARouter.getInstance().inject(this);
     }
 

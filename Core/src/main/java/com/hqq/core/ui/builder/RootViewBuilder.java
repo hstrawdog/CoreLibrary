@@ -15,8 +15,8 @@ import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
 import com.hqq.core.annotation.LayoutModel;
 import com.hqq.core.annotation.ToolBarMode;
-import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
+import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.IToolBar;
 import com.hqq.core.toolbar.IToolBarBuilder;
 import com.hqq.core.utils.statusbar.StatusBarManager;
@@ -119,7 +119,6 @@ public class RootViewBuilder implements IRootViewBuilder {
      */
     @Override
     public View createRootView(View rootView, int vid) {
-
         if (mLayoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
             return mRootView = createLayoutView(rootView, vid);
         } else if (mLayoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
@@ -210,7 +209,7 @@ public class RootViewBuilder implements IRootViewBuilder {
     }
 
     /**
-     * 回收ToolBar
+     * 回收ToolBar 解除与父布局关联
      */
     public void recoverToolbar() {
         if (getIToolBar() != null) {
