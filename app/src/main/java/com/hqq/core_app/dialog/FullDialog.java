@@ -39,7 +39,7 @@ public class FullDialog extends BaseDialog {
 
     @Override
     public void initDefConfig() {
-        mStatusBarMode = ToolBarMode.LIGHT_MODE;
+        mStatusBarMode = ToolBarMode.DARK_MODE;
     }
 
     @Override

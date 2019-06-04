@@ -17,13 +17,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardScrollActivity"></activity>
-        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHidKeyboardIndexActivity" >
+        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHidKeyboardIndexActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardActivity">
 
@@ -70,7 +66,14 @@
         <activity android:name=".ui.activity.customize.CustomizeIndexActivity" />
         <activity
             android:name=".ui.activity.dialog.DialogIndexActivity"
-            android:label="dialog 系列" />
+            android:label="dialog 系列">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".ui.activity.list.ListIndexActivity" />
     </application>
 

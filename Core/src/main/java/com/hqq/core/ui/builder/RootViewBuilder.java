@@ -100,8 +100,6 @@ public class RootViewBuilder implements IRootViewBuilder {
                 e.printStackTrace();
             }
         }
-
-
         mIsShowStatus = isShowStatus;
         mIsShowToolBar = isShowToolBar;
     }

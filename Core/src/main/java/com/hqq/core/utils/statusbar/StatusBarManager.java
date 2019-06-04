@@ -1,8 +1,6 @@
 package com.hqq.core.utils.statusbar;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
@@ -23,7 +21,10 @@ import java.lang.reflect.Method;
  * https://blog.csdn.net/qq_36230279/article/details/80664863
  */
 public class StatusBarManager {
-
+    /**
+     * MIUI状态栏字体黑色与白色标识位
+     */
+    static final String IMMERSION_MIUI_STATUS_BAR_DARK = "EXTRA_FLAG_STATUS_BAR_DARK_MODE";
 
     /**
      * 在Android4.1及以上版本中，你可以把应用的内容显示在状态栏后面，所以当status bar隐藏和显示的时候，内容区域不会改变大小。想要到达这个效果，可以使用SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN。你同样也需要使用 SYSTEM_UI_FLAG_LAYOUT_STABLE 来帮助你的app来维持一个稳定的布局。
@@ -65,22 +66,15 @@ public class StatusBarManager {
     public static void setStatusBarModel(Window window, boolean lightStatusBar) {
         transparencyBar(window);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (MIUIUtils.isMIUI()) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    setStatusBarTextColor(window, lightStatusBar);
-                } else {
-                    MIUISetStatusBarLightMode(window, lightStatusBar);
-                }
-            } else if (FlymeUtils.isFlyme()) {
-                //参数 false 白色 true 黑色
-                StatusbarColorUtils.setStatusBarDarkIcon(window, lightStatusBar);
-            } else if (FlymeUtils.isMeizuFlymeOS()) {
-                processFlyMe(lightStatusBar, window);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                setStatusBarTextColor(window, lightStatusBar);
-            } else {
-
-            }
+            setStatusBarTextColor(window, lightStatusBar);
+        }
+        if (OSUtils.isMIUI6Later()) {
+            MIUISetStatusBarLightMode(window, lightStatusBar);
+        } else if (OSUtils.isFlymeOS4Later()) {
+            //参数 false 白色 true 黑色
+            FlymeOSStatusBarFontUtils.setStatusBarDarkIcon(window, lightStatusBar);
+        } else if (!OSUtils.isFlymeOS4Later()) {
+            processFlyMe(lightStatusBar, window);
         }
     }
 
@@ -117,14 +111,14 @@ public class StatusBarManager {
      * @param dark   是否把状态栏文字及图标颜色设置为深色
      * @return boolean 成功执行返回true
      */
-    public static boolean MIUISetStatusBarLightMode(Window window, boolean dark) {
-        boolean result = false;
+    public static void MIUISetStatusBarLightMode(Window window, boolean dark) {
         if (window != null) {
-            Class clazz = window.getClass();
+            Class<? extends Window> clazz = window.getClass();
             try {
-                int darkModeFlag = 0;
-                Class layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
-                Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
+                int darkModeFlag;
+                Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
+                String key = IMMERSION_MIUI_STATUS_BAR_DARK;
+                Field field = layoutParams.getField(key);
                 darkModeFlag = field.getInt(layoutParams);
                 Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
                 if (dark) {
@@ -134,21 +128,10 @@ public class StatusBarManager {
                     //清除黑色字体
                     extraFlagField.invoke(window, 0, darkModeFlag);
                 }
-                result = true;
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    //开发版 7.7.13 及以后版本采用了系统API，旧方法无效但不会报错，所以两个方式都要加上
-                    if (dark) {
-                        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                    } else {
-                        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-                    }
-                }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }
-        return result;
     }
 
     /**
