@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.coreapp.ui.activity.ThrowActivity">
+    tools:context="com.hqq.core_app.ui.activity.ThrowActivity">
 
     <Button
         android:id="@+id/button11"

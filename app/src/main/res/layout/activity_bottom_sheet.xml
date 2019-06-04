@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.hqq.coreapp.ui.activity.dialog.BottomSheetActivity">
+    tools:context="com.hqq.core_app.ui.activity.dialog.BottomSheetActivity">
 
     <Button
         android:id="@+id/button9"

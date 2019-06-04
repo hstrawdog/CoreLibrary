@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hqq.core_app.ui.activity.customize.CustomizeIndexActivity">
+    tools:context="com.hqq.core_app.ui.activity.soft_hide_keyboard.SoftHidKeyboardIndexActivity">
 
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hqq.coreapp">
+    package="com.hqq.core_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,10 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardScrollActivity"></activity>
+        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHidKeyboardIndexActivity" >
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardActivity">
 
         </activity>
+        <activity android:name=".ui.MainActivity" />
         <activity
             android:name=".ui.activity.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
@@ -56,24 +65,13 @@
             android:name=".ui.activity.ThrowActivity"
             android:label="Throw异常测试" />
         <activity android:name=".ui.activity.bar.SettingToolBarActivity" />
-        <activity android:name=".ui.activity.dialog.TestDialogActivity">
-
-        </activity>
-        <activity android:name=".ui.activity.customize.BezierActivity">
-
-        </activity>
-        <activity android:name=".ui.activity.customize.CustomizeIndexActivity"></activity>
+        <activity android:name=".ui.activity.dialog.TestDialogActivity" />
+        <activity android:name=".ui.activity.customize.BezierActivity" />
+        <activity android:name=".ui.activity.customize.CustomizeIndexActivity" />
         <activity
             android:name=".ui.activity.dialog.DialogIndexActivity"
-            android:label="dialog 系列">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-        <activity android:name=".ui.activity.list.ListIndexActivity"></activity>
+            android:label="dialog 系列" />
+        <activity android:name=".ui.activity.list.ListIndexActivity" />
     </application>
 
 </manifest>
