@@ -16,14 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardScrollActivity"></activity>
-        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHidKeyboardIndexActivity">
-
+        <activity
+            android:name=".ui.activity.tab_layout.TabLayoutActivity"
+            android:label="tabLayout  测试">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
-        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardActivity">
-
-        </activity>
+        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardScrollActivity" />
+        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHidKeyboardIndexActivity"></activity>
+        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardActivity"></activity>
         <activity android:name=".ui.MainActivity" />
         <activity
             android:name=".ui.activity.bar.ToolBarActivity"
@@ -47,11 +51,8 @@
             android:label="默认图显示" />
         <activity
             android:name=".ui.activity.PermissionActivity"
-            android:label="权限测试" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="权限测试">
+
         </activity>
         <activity
             android:name=".ui.activity.dialog.BottomSheetActivity"
@@ -71,10 +72,7 @@
         <activity android:name=".ui.activity.customize.CustomizeIndexActivity" />
         <activity
             android:name=".ui.activity.dialog.DialogIndexActivity"
-            android:label="dialog 系列">
-
-
-        </activity>
+            android:label="dialog 系列"></activity>
         <activity android:name=".ui.activity.list.ListIndexActivity" />
     </application>
 
