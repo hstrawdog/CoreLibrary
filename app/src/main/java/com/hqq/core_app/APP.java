@@ -17,8 +17,8 @@ public class APP extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //配置 默认加载的 toolBar
-        CoreBuildConfig.getInstance().init(this, true);
+        //配置 默认加载的 toolBar    InitProvider   会比 Application  更加优先
+        //  CoreBuildConfig.getInstance().init(this, true);
         //.setDefItoobar(BaseDefToolBarImpl.class);
 
         if (LeakCanary.isInAnalyzerProcess(this)) {

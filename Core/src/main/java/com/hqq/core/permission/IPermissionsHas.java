@@ -5,12 +5,12 @@ import android.content.Context;
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.permission
- * @FileName :   IPermissions
+ * @FileName :   IPermissionsHas
  * @Date : 2018/11/22 0022  上午 9:53
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public interface IPermissions {
+public interface IPermissionsHas {
     /**
      * <!-- 危险权限 start -->
      * <!--PHONE-->

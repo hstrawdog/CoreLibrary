@@ -83,6 +83,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
                 StatusBarManager.setStatusBarModel(getDialog().getWindow(), true);
             } else if (mStatusBarMode == ToolBarMode.DARK_MODE) {
                 StatusBarManager.setStatusBarModel(getDialog().getWindow(), false);
+
             } else {
                 // 默认进行全屏显示
                 StatusBarManager.transparencyBar(getDialog().getWindow());

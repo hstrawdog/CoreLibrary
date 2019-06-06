@@ -6,12 +6,12 @@ import android.content.Context;
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.permission
- * @FileName :   IPermissionsImpl
+ * @FileName :   PermissionsHasImpl
  * @Date : 2018/11/22 0022  上午 9:57
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public class IPermissionsImpl implements IPermissions {
+public class PermissionsHasImpl implements IPermissionsHas {
 
 
     @Override

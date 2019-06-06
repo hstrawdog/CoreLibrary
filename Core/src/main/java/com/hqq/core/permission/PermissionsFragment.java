@@ -64,7 +64,6 @@ public class PermissionsFragment extends Fragment {
 
 
     /**
-     *
      * @param context
      * @param permissions
      * @return
@@ -108,12 +107,12 @@ public class PermissionsFragment extends Fragment {
             }
         }
         if (denied.isEmpty() && !granted.isEmpty()) {
-            ToastUtils.showToast(getContext(), "同意了所有权限");
+            //   ToastUtils.showToast(getContext(), "同意了所有权限");
             if (mPermissionsResult != null) {
                 mPermissionsResult.PermissionsResult(true);
             }
         } else {
-            ToastUtils.showToast(getContext(), "权限拒绝");
+            ToastUtils.showToast(getContext(), "拒绝权限,会导致功能无法执行");
             // 打开设置界面
             Intent intent = new Intent();
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);

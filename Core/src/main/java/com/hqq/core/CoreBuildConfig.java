@@ -1,10 +1,12 @@
 package com.hqq.core;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
 import com.hqq.core.toolbar.IToolBar;
+import com.hqq.core.utils.RegexUtils;
 
 
 /**
@@ -12,15 +14,15 @@ import com.hqq.core.toolbar.IToolBar;
  * @Package : com.core.library
  * @FileName :   CoreBuildConfig
  * @Date : 2018/11/23 0023  下午 2:16
- * @Descrive :  配置文件
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :  配置文件
  */
 public class CoreBuildConfig {
 
     /**
      * 默认 标题栏 内容
      */
-    private Class<? extends IToolBar > mDefIToolbar = BaseDefToolBarImpl.class;
+    private Class<? extends IToolBar> mDefIToolbar = BaseDefToolBarImpl.class;
 
     /**
      * Application   主要获取 context
@@ -31,7 +33,7 @@ public class CoreBuildConfig {
     /**
      * 是否开启 log日志  BuildConfig.Debug
      */
-    private boolean mDebug = false;
+    private boolean mDebug = true;
 
     /**
      * 默认图
@@ -41,6 +43,9 @@ public class CoreBuildConfig {
      * 状态栏 模式
      */
     private int mStatusMode = ToolBarMode.LIGHT_MODE;
+
+    private ActivityLifecycle mActivityLifecycle;
+
     /**
      * 单利维持对象
      */
@@ -58,6 +63,7 @@ public class CoreBuildConfig {
     }
 
     private CoreBuildConfig() {
+
     }
 
 
@@ -68,7 +74,7 @@ public class CoreBuildConfig {
      */
     @Deprecated
     public void init(Application application) {
-        mApplication = application;
+        init(application, true);
     }
 
     /**
@@ -78,18 +84,24 @@ public class CoreBuildConfig {
     public void init(Application application, boolean isDebug) {
         mApplication = application;
         mDebug = isDebug;
+        // 监听Activity 的生命周期
+        if (RegexUtils.checkNull(mActivityLifecycle)) {
+            mActivityLifecycle = new ActivityLifecycle();
+            application.registerActivityLifecycleCallbacks(mActivityLifecycle);
+        }
+
     }
 
-    public Class<? > getDefIToolbar() {
+    public Class<?> getDefIToolbar() {
         return mDefIToolbar;
     }
 
-    public void setDefIToolbar(Class<? extends  IToolBar> defIToolbar) {
+    public void setDefIToolbar(Class<? extends IToolBar> defIToolbar) {
         mDefIToolbar = defIToolbar;
     }
 
     public Class<? extends IToolBar> getDefItoobar() {
-        return (Class<? extends IToolBar>) mDefIToolbar;
+        return mDefIToolbar;
     }
 
 
@@ -116,5 +128,14 @@ public class CoreBuildConfig {
     public CoreBuildConfig setStatusMode(@ToolBarMode int statusMode) {
         this.mStatusMode = statusMode;
         return this;
+    }
+
+    /**
+     * 获取当前的 Activity
+     *
+     * @return
+     */
+    public Activity getCurrActivity() {
+        return mActivityLifecycle.getActivity();
     }
 }

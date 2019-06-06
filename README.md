@@ -1,9 +1,10 @@
 [![](https://jitpack.io/v/huangqiqiang/CoreApp.svg)](https://jitpack.io/#huangqiqiang/CoreApp)
-##### 类名
-1. 所有接口统一使用IXxx开头
-2. 所有基础类统一使用BaseXxxx开通
 ##### 规范
-1. 尽量使用单个单词 如果无法表用小写单词_小写单词 core_app
+1. 接口可以使用IXxx开头
+2. 接口实现可以参考 XxxImpl
+2. 基类统一参考使用BaseXxx
+
+1. 尽量使用单个单词 如果无法表用小写单词_小写单词 如core_app
  所有封装的最上层都是接口 提高封装的可拓展性
 
 1. 遵循设计模式七大原则
@@ -14,10 +15,12 @@
     - 迪米特法则
     - 里氏代换
 1. 设计模式
-    - builder 模式
-    - 门面模式
     - 单利模式
-    - 工厂m模式
+    - builder 模式
+    - 工厂模式
+    - 外观模式 门面模式
+    - 代理模式
+    - 命令模式
 1. 类的结构
     - 常量
     - 变量
@@ -28,8 +31,10 @@
     - 实现方法
     - 自定义方法
 
-#### 更加优秀的开源库
+#### 参考的开源库
+  [权限适配](https://github.com/soulqw/SoulPermission)
 
   [状态栏适配]( https://github.com/gyf-dev/ImmersionBar)
 
 
+application 可与通过 ContentProvider 来获取  这样可以避免需要在application 中执行init 方法

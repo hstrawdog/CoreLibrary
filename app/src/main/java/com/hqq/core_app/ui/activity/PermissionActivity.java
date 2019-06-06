@@ -28,13 +28,11 @@ public class PermissionActivity extends BaseActivity {
 
     }
 
-
     @OnClick(R.id.button7)
     public void onMButton7Clicked() {
-        PermissionsUtils.showCameraFragment(this, new PermissionsResult() {
+        PermissionsUtils.showCameraFragment(new PermissionsResult() {
             @Override
             public void PermissionsResult(boolean status) {
-
                 ToastUtils.showToast("拥有摄像头权限");
             }
         });
@@ -43,10 +41,9 @@ public class PermissionActivity extends BaseActivity {
 
     @OnClick(R.id.button8)
     public void onMButton8Clicked() {
-        PermissionsUtils.showStorageFragment(this, new PermissionsResult() {
+        PermissionsUtils.requestStorage(new PermissionsResult() {
             @Override
             public void PermissionsResult(boolean status) {
-
                 ToastUtils.showToast("拥有文件读写权限");
             }
         });
