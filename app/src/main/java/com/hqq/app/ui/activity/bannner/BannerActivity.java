@@ -31,7 +31,6 @@ public class BannerActivity extends BaseActivity {
         return R.layout.activity_banner;
     }
 
-    BannerAdapter mBannerAdapter;
 
     @Override
     public void initView() {

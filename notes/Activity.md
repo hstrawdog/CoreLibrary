@@ -1,3 +1,6 @@
+
+ [TOC]
+
 1. Activity的工作流程
 2. Window 和WindowManager 之间的关系
 3. Activity的启动模式
