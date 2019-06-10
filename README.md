@@ -16,9 +16,9 @@
     - 里氏代换
 1. 设计模式
     - 单利模式
-    - builder 模式
+    - builder模式/构建者模式
     - 工厂模式
-    - 外观模式 门面模式
+    - 外观模式/门面模式
     - 代理模式
     - 命令模式
 1. 类的结构
@@ -27,7 +27,7 @@
     - 静态方法
     - 构造方法
     - 父类方法生命周期
-    - 重载/重新
+    - 重载/重写
     - 实现方法
     - 自定义方法
 
@@ -37,4 +37,5 @@
   [状态栏适配]( https://github.com/gyf-dev/ImmersionBar)
 
 
-application 可与通过 ContentProvider 来获取  这样可以避免需要在application 中执行init 方法
+application 可与通过 ContentProvider来获取(不知道算不算是ipc 的机制)
+这样可以避免需要在application中执行init方法

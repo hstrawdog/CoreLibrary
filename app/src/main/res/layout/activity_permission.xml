@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.core_app.ui.activity.PermissionActivity">
+    tools:context="com.hqq.app.ui.activity.PermissionActivity">
 
     <Button
         android:id="@+id/button7"
