@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.hqq.core_app.ui.activity.tab_layout.TabLayoutActivity">
 
 
     <android.support.design.widget.TabLayout
-        app:tabIndicatorFullWidth="false"
         android:id="@+id/tb_tablayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="fixed"
         tools:ignore="MissingConstraints">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="咖啡" />
+    </android.support.design.widget.TabLayout>
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="奶茶" />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tb_tablayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        tools:ignore="MissingConstraints">
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="菊花茶" />
     </android.support.design.widget.TabLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tb_tablayout3"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x2"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/x30"
+        app:tabMode="fixed"
+        tools:ignore="MissingConstraints">
+
+    </android.support.design.widget.TabLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x90"
+        android:layout_marginBottom="@dimen/x2"
+        android:background="@color/color_main">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tb_tablayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x40"
+            android:background="@color/white"
+            app:tabMode="fixed"
+            tools:ignore="MissingConstraints">
+
+        </android.support.design.widget.TabLayout>
+
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

@@ -1,9 +1,9 @@
 ext {
-    support = "27.1.1"
+    support = "28.0.0"
     android = [
-            compileSdkVersion: 27,
+            compileSdkVersion: 28,
             minSdkVersion    : 19,
-            targetSdkVersion : 27,
+            targetSdkVersion : 28,
             versionCode      : 1,
             versionName      : "1.4.8"
     ]

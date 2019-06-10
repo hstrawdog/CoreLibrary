@@ -99,12 +99,12 @@ public class BitmapUtils {
         canvas.drawRect(new Rect(0, 0, newW, newH), p);
 
         // 绘边框
-        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW, (newH
-                - bigH - 2 * smallH)
+        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW, (newH - bigH - 2 * smallH)
                 / 2 + smallH, null);
 
 
-        canvas.save(Canvas.ALL_SAVE_FLAG);
+//        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.save();
         canvas.restore();
         bm.recycle();
         return newBitmap;
