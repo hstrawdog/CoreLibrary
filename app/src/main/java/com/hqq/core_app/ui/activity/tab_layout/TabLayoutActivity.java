@@ -12,15 +12,15 @@ import com.hqq.core_app.R;
  * @Descrive :
  */
 public class TabLayoutActivity extends BaseActivity {
-
     @Override
     public int setViewId() {
         return R.layout.activity_tab_layout;
     }
-
-
     @Override
     public void initView() {
 
     }
+
+
+
 }
