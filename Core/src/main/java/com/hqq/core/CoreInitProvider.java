@@ -13,12 +13,12 @@ import com.hqq.core.utils.RegexUtils;
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.core
- * @FileName :   InitProvider
+ * @FileName :   CoreInitProvider
  * @Date : 2019/6/6 0006  上午 9:54
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class InitProvider extends ContentProvider {
+public class CoreInitProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         /**

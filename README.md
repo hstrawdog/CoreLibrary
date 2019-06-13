@@ -1,8 +1,5 @@
 [![](https://jitpack.io/v/huangqiqiang/CoreApp.svg)](https://jitpack.io/#huangqiqiang/CoreApp)
-
-[toc]
-
-# 规范
+##### 规范
 1. 接口可以使用IXxx开头
 2. 接口实现可以参考 XxxImpl
 2. 基类统一参考使用BaseXxx
@@ -34,7 +31,7 @@
     - 实现方法
     - 自定义方法
 
-# 参考的开源库
+#### 参考的开源库
   [权限适配](https://github.com/soulqw/SoulPermission)
 
   [状态栏适配]( https://github.com/gyf-dev/ImmersionBar)
