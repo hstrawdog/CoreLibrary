@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hqq.app">
+    package="com.hqq.core.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -17,66 +17,66 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.hqq.core.app.ui.activity.tab_layout.TabLayoutActivity"
+            android:name=".ui.activity.tab.layout.TabLayoutActivity"
             android:label="tabLayout  测试">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hqq.core.app.ui.activity.soft_hide_keyboard.SoftHideKeyBoardScrollActivity" />
-        <activity android:name="com.hqq.core.app.ui.activity.soft_hide_keyboard.SoftHidKeyboardIndexActivity">
+        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
+        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHidKeyboardIndexActivity">
 
         </activity>
-        <activity android:name=".ui.activity.soft_hide_keyboard.SoftHideKeyBoardActivity">
+        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardActivity">
 
         </activity>
-        <activity android:name="com.hqq.core.app.ui.MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.bar.ToolBarActivity"
+            android:name=".ui.activity.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
-        <activity android:name="com.hqq.core.app.ui.activity.IFragmentActivity" />
+        <activity android:name=".ui.activity.IFragmentActivity" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.list.LoadMoreActivity"
+            android:name=".ui.activity.list.LoadMoreActivity"
             android:label="加载数据" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.DefActivity"
+            android:name=".ui.activity.DefActivity"
             android:label="默认Activity" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.list.ListActivity"
+            android:name=".ui.activity.list.ListActivity"
             android:label="列表数据" />
-        <activity android:name="com.hqq.core.app.ui.activity.bar.SearchBarActivity" />
+        <activity android:name=".ui.activity.bar.SearchBarActivity" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.bannner.BannerActivity"
+            android:name=".ui.activity.bannner.BannerActivity"
             android:label="轮播图测试" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.DefImgActivity"
+            android:name=".ui.activity.DefImgActivity"
             android:label="默认图显示" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.PermissionActivity"
-            android:label="权限测试"/>
+            android:name=".ui.activity.PermissionActivity"
+            android:label="权限测试" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.dialog.BottomSheetActivity"
+            android:name=".ui.activity.dialog.BottomSheetActivity"
             android:label="知乎评论列表" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.screen.TextViewSizeActivity"
+            android:name=".ui.activity.screen.TextViewSizeActivity"
             android:label="文字大小" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.screen.DimenActivity"
+            android:name=".ui.activity.screen.DimenActivity"
             android:label="1像素大小测试" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.ThrowActivity"
+            android:name=".ui.activity.ThrowActivity"
             android:label="Throw异常测试" />
-        <activity android:name="com.hqq.core.app.ui.activity.bar.SettingToolBarActivity" />
-        <activity android:name="com.hqq.core.app.ui.activity.dialog.TestDialogActivity" />
-        <activity android:name="com.hqq.core.app.ui.activity.customize.BezierActivity" />
-        <activity android:name="com.hqq.core.app.ui.activity.customize.CustomizeIndexActivity" />
+        <activity android:name=".ui.activity.bar.SettingToolBarActivity" />
+        <activity android:name=".ui.activity.dialog.TestDialogActivity" />
+        <activity android:name=".ui.activity.customize.BezierActivity" />
+        <activity android:name=".ui.activity.customize.CustomizeIndexActivity" />
         <activity
-            android:name="com.hqq.core.app.ui.activity.dialog.DialogIndexActivity"
+            android:name=".ui.activity.dialog.DialogIndexActivity"
             android:label="dialog 系列">
 
         </activity>
-        <activity android:name="com.hqq.core.app.ui.activity.list.ListIndexActivity" />
+        <activity android:name=".ui.activity.list.ListIndexActivity" />
     </application>
 
 </manifest>

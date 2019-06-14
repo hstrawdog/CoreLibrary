@@ -7,7 +7,7 @@
     tools:context="com.hqq.app.ui.activity.customize.BezierActivity">
 
 
-    <com.hqq.app.ui.activity.customize.weight.BezierView
+    <com.hqq.core.app.ui.activity.customize.weight.BezierView
         android:id="@+id/view_bezier"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
