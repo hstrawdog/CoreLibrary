@@ -20,7 +20,6 @@ import java.util.List;
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
     private List<Activity> activities = new ArrayList<>();
 
-
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         activities.add(activity);
@@ -55,7 +54,6 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityDestroyed(Activity activity) {
         activities.remove(activity);
-
     }
 
     Activity getActivity() {
@@ -64,13 +62,12 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         }
         // 获取最上面的 Activity
         for (int i = activities.size() - 1; i >= 0; i--) {
-
             Activity activity = activities.get(i);
             if (!activity.isFinishing()) {
                 return activity;
             }
         }
-        throw new IllegalStateException("当前Activity 异常");
+        throw new IllegalStateException("未获取到站内对象 当前Activity 异常");
     }
 
 

@@ -12,7 +12,6 @@ import com.hqq.core.CoreBuildConfig;
  */
 public class FragmentProxy implements IPermissionActions {
 
-
     @Override
     public void requestPermissions(String[] permissions, PermissionsResult listener) {
         PermissionsFragment mPermissionsFragment = PermissionsFragmentFactory.getPermissionsFragment(CoreBuildConfig.getInstance().getCurrActivity());

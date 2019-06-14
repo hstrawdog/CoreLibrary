@@ -360,6 +360,12 @@ public class RootViewBuilder implements IRootViewBuilder {
     }
 
 
+    /**
+     * 设置状态栏模式
+     *
+     * @param statusBarMode
+     * @return
+     */
     public RootViewBuilder setStatusBarMode(@ToolBarMode int statusBarMode) {
         mStatusBarMode = statusBarMode;
         return this;

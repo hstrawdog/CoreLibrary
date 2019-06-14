@@ -42,8 +42,11 @@ public class CoreBuildConfig {
     /**
      * 状态栏 模式
      */
-    private int mStatusMode = ToolBarMode.LIGHT_MODE;
+    private int mStatusModeLight = ToolBarMode.LIGHT_MODE;
 
+    /**
+     * Activity生命周期管理
+     */
     private ActivityLifecycle mActivityLifecycle;
 
     /**
@@ -122,11 +125,11 @@ public class CoreBuildConfig {
     }
 
     public int isStatusMode() {
-        return mStatusMode;
+        return mStatusModeLight;
     }
 
-    public CoreBuildConfig setStatusMode(@ToolBarMode int statusMode) {
-        this.mStatusMode = statusMode;
+    public CoreBuildConfig setStatusModeLight(@ToolBarMode int statusModeLight) {
+        this.mStatusModeLight = statusModeLight;
         return this;
     }
 

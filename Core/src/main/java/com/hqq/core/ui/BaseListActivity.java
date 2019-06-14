@@ -1,6 +1,7 @@
 package com.hqq.core.ui;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,6 +65,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
      * 初始化  基础数据
      */
     @Override
+    @CallSuper
     public void initView() {
         mLayoutManager = getRcLayoutManager();
         mAdapter = initAdapter();
