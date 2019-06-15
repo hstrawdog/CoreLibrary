@@ -3,6 +3,8 @@ package com.hqq.core.ui.builder;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,6 @@ import com.hqq.core.utils.statusbar.StatusBarManager;
  * 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
 public class RootViewBuilder implements IRootViewBuilder {
-
     /**
      * 当前activity
      */
@@ -83,6 +84,10 @@ public class RootViewBuilder implements IRootViewBuilder {
      * 是否执行 状态栏 透明化
      */
     private boolean immersiveStatusBar = false;
+    /**
+     * 状态栏默认白色
+     */
+    int mStatusColor = Color.WHITE;
 
 
     public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
@@ -242,6 +247,16 @@ public class RootViewBuilder implements IRootViewBuilder {
         }
     }
 
+
+    /**
+     * 状态栏颜色
+     *
+     * @param statusColor
+     */
+    public void setStatusColor(@ColorInt int statusColor) {
+        mStatusColor = statusColor;
+    }
+
     /**
      * 可以重写 这个方法 去自定义  头部
      *
@@ -252,6 +267,8 @@ public class RootViewBuilder implements IRootViewBuilder {
         iToolBarBuilder.setActivity(mActivity);
         iToolBarBuilder.setShowStatusBar(mIsShowStatus);
         iToolBarBuilder.setShowToolBar(mIsShowToolBar);
+        iToolBarBuilder.setStatusBarColor(mStatusColor);
+
         mIToolBar = iToolBarBuilder.create(mClass);
     }
 

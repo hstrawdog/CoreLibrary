@@ -2,6 +2,7 @@ package com.hqq.core.toolbar;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
 
 /**
  * @Author : huangqiqiang
@@ -26,7 +27,7 @@ public class IToolBarBuilder {
      */
     private int mStatusBarColor = Color.WHITE;
 
-    public IToolBarBuilder setStatusBarColor(int statusBarColor) {
+    public IToolBarBuilder setStatusBarColor(@ColorInt int statusBarColor) {
         mStatusBarColor = statusBarColor;
         return this;
     }
