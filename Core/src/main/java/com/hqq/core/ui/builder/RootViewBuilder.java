@@ -249,15 +249,6 @@ public class RootViewBuilder implements IRootViewBuilder {
 
 
     /**
-     * 状态栏颜色
-     *
-     * @param statusColor
-     */
-    public void setStatusColor(@ColorInt int statusColor) {
-        mStatusColor = statusColor;
-    }
-
-    /**
      * 可以重写 这个方法 去自定义  头部
      *
      * @return
@@ -268,7 +259,6 @@ public class RootViewBuilder implements IRootViewBuilder {
         iToolBarBuilder.setShowStatusBar(mIsShowStatus);
         iToolBarBuilder.setShowToolBar(mIsShowToolBar);
         iToolBarBuilder.setStatusBarColor(mStatusColor);
-
         mIToolBar = iToolBarBuilder.create(mClass);
     }
 
@@ -389,23 +379,59 @@ public class RootViewBuilder implements IRootViewBuilder {
 
     }
 
+    /**
+     * 状态栏颜色
+     *
+     * @param statusColor
+     */
+    public void setStatusColor(@ColorInt int statusColor) {
+        mStatusColor = statusColor;
+    }
+
+    /**
+     * 获取状态栏模式
+     *
+     * @return
+     */
     public int getStatusBarMode() {
         return mStatusBarMode;
     }
 
+    /**
+     * 是否强制竖屏
+     *
+     * @return
+     */
     public boolean isAlwaysPortrait() {
         return alwaysPortrait;
     }
 
+    /**
+     * 设置是否竖屏
+     *
+     * @param alwaysPortrait
+     * @return
+     */
     public RootViewBuilder setAlwaysPortrait(boolean alwaysPortrait) {
         this.alwaysPortrait = alwaysPortrait;
         return this;
     }
 
+    /**
+     * 是否全屏
+     *
+     * @return
+     */
     public boolean isFullScreen() {
         return fullScreen;
     }
 
+    /**
+     * 设置是否全屏
+     *
+     * @param fullScreen
+     * @return
+     */
     public RootViewBuilder setFullScreen(boolean fullScreen) {
         this.fullScreen = fullScreen;
         return this;

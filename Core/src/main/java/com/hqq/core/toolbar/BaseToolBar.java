@@ -112,12 +112,14 @@ public abstract class BaseToolBar implements IToolBar {
     /**
      * 设置 状态栏底部的颜色
      *
-     * @param colorId
+     * @param colorInt
      */
     @Override
-    public BaseToolBar setDefStatusColor(@ColorInt int colorId) {
+    public BaseToolBar setDefStatusColor(@ColorInt int colorInt) {
         if (getStatusBar() != null) {
-            getStatusBar().setBackgroundColor(colorId);
+            getStatusBar().setBackgroundColor(colorInt);
+        }else {
+            mDefStatusColor=colorInt;
         }
         return this;
     }
