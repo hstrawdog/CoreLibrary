@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +88,8 @@ public class RootViewBuilder implements IRootViewBuilder {
     /**
      * 状态栏默认白色
      */
-    int mStatusColor = Color.WHITE;
+    @ColorRes
+    int mStatusColor = R.color.white;
 
 
     public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
@@ -242,7 +244,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         }
 
         if (mIsShowToolBar || mIsShowStatus) {
-            initIToolBar();
+            mIToolBar = initIToolBar();
             layout.addView(mIToolBar.getRootView());
         }
     }
@@ -253,13 +255,13 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @return
      */
-    public void initIToolBar() {
+    public IToolBar initIToolBar() {
         IToolBarBuilder iToolBarBuilder = new IToolBarBuilder();
         iToolBarBuilder.setActivity(mActivity);
         iToolBarBuilder.setShowStatusBar(mIsShowStatus);
         iToolBarBuilder.setShowToolBar(mIsShowToolBar);
         iToolBarBuilder.setStatusBarColor(mStatusColor);
-        mIToolBar = iToolBarBuilder.create(mClass);
+        return iToolBarBuilder.create(mClass);
     }
 
     /**
@@ -384,7 +386,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @param statusColor
      */
-    public void setStatusColor(@ColorInt int statusColor) {
+    public void setStatusColor(@ColorRes int statusColor) {
         mStatusColor = statusColor;
     }
 

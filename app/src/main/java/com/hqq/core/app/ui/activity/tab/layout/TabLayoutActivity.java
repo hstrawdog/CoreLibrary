@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.hqq.core.adapter.BaseFragmentAdapter;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.app.R;
+import com.hqq.core.utils.ResourcesUtils;
 
 import butterknife.BindView;
 
@@ -34,6 +35,14 @@ public class TabLayoutActivity extends BaseActivity {
     @Override
     public int setViewId() {
         return R.layout.activity_tab_layout;
+    }
+
+    @Override
+    public void initDefConfig() {
+        super.initDefConfig();
+
+        mRootViewBuild.setStatusColor(R.color.color_main);
+
     }
 
     @Override

@@ -3,6 +3,9 @@ package com.hqq.core.toolbar;
 import android.app.Activity;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+
+import com.hqq.core.R;
 
 /**
  * @Author : huangqiqiang
@@ -25,9 +28,10 @@ public class IToolBarBuilder {
     /**
      * 默认白色
      */
-    private int mStatusBarColor = Color.WHITE;
+    @ColorRes
+    private int mStatusBarColor = R.color.white;
 
-    public IToolBarBuilder setStatusBarColor(@ColorInt int statusBarColor) {
+    public IToolBarBuilder setStatusBarColor(@ColorRes int statusBarColor) {
         mStatusBarColor = statusBarColor;
         return this;
     }

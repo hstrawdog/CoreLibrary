@@ -1,4 +1,6 @@
 [![](https://jitpack.io/v/huangqiqiang/CoreApp.svg)](https://jitpack.io/#huangqiqiang/CoreApp)
+
+[javac](https://javadoc.jitpack.io/com/github/huangqiqiang/CoreApp/1.0.52/javadoc/)
 ##### 规范
 1. 接口可以使用IXxx开头
 2. 接口实现可以参考 XxxImpl

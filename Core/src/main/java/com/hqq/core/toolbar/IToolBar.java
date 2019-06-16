@@ -2,6 +2,7 @@ package com.hqq.core.toolbar;
 
 import android.app.Activity;
 import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -69,7 +70,7 @@ public interface IToolBar {
      * @param statusBarColor 颜色值
      * @return this
      */
-    IToolBar setDefStatusColor(@ColorInt int statusBarColor);
+    IToolBar setDefStatusColor(@ColorRes int statusBarColor);
 
     /**
      * 构建后生成的View

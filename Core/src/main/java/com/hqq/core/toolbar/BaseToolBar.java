@@ -36,6 +36,7 @@ public abstract class BaseToolBar implements IToolBar {
     /**
      * 状态栏背景颜色
      */
+    @ColorRes
     protected int mDefStatusColor = R.color.toolbar_status_color;
 
     /**
@@ -55,8 +56,13 @@ public abstract class BaseToolBar implements IToolBar {
      */
     protected boolean mIsShowLine = true;
 
+    /**
+     *  是否显示 标题栏
+     */
     protected boolean mIsShowBar = true;
-
+    /**
+     * 是否显示状态栏
+     */
     protected boolean mIsShowStatusBar = true;
 
     @Override
@@ -115,14 +121,15 @@ public abstract class BaseToolBar implements IToolBar {
      * @param colorInt
      */
     @Override
-    public BaseToolBar setDefStatusColor(@ColorInt int colorInt) {
+    public BaseToolBar setDefStatusColor(@ColorRes int colorInt) {
         if (getStatusBar() != null) {
             getStatusBar().setBackgroundColor(colorInt);
         }else {
-            mDefStatusColor=colorInt;
+             mDefStatusColor=colorInt;
         }
         return this;
     }
+
 
     @Override
     public BaseToolBar setShowBar(boolean showBar) {
