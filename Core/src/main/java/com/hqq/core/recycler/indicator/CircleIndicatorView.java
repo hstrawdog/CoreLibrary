@@ -20,7 +20,6 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
  */
 public class CircleIndicatorView extends View implements Indicator {
 
-
     public CircleIndicatorView(Context context) {
         this(context, null);
     }
@@ -95,11 +94,9 @@ public class CircleIndicatorView extends View implements Indicator {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
         // view 的高度  点的高度 +  padding
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(mDefRadius * 2 + mDefPointPadding + 2,
                 MeasureSpec.EXACTLY);
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 

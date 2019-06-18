@@ -29,4 +29,5 @@ public interface Indicator {
      * @param column size
      */
     void setPageColumn(int column);
+
 }

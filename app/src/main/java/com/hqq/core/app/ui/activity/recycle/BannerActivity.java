@@ -1,4 +1,4 @@
-package com.hqq.core.app.ui.activity.bannner;
+package com.hqq.core.app.ui.activity.recycle;
 
 import com.hqq.core.recycler.BannerLayout;
 import com.hqq.core.ui.BaseActivity;

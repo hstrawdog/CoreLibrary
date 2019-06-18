@@ -3,11 +3,12 @@ package com.hqq.core.app.ui;
 import android.content.Intent;
 import android.view.KeyEvent;
 
+import com.hqq.core.app.ui.activity.recycle.RecycleIndexActivity;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.app.adapter.MainAdapter;
 import com.hqq.core.app.bean.MainBean;
-import com.hqq.core.app.ui.activity.bannner.BannerActivity;
+import com.hqq.core.app.ui.activity.recycle.BannerActivity;
 import com.hqq.core.app.ui.activity.customize.CustomizeIndexActivity;
 import com.hqq.core.app.ui.activity.DefImgActivity;
 import com.hqq.core.app.ui.activity.dialog.DialogIndexActivity;
@@ -38,7 +39,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
     public void initData() {
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
-        mAdapter.addData(new MainBean("轮播图", BannerActivity.class));
+        mAdapter.addData(new MainBean("Recycle 相关", RecycleIndexActivity.class));
         mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
         mAdapter.addData(new MainBean("文字适配测试", TextViewSizeActivity.class));
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));

@@ -28,10 +28,12 @@ import java.util.List;
  * @Package : com.core.library.banner
  * @FileName :   RecyclerViewBanner
  * @Date : 2018/8/6 0006  下午 4:09
- * @Descrive : TODO
  * @Email :  593979591@qq.com
+ * @Descrive :
+ * 待完成
+ * 1.多种指示器配置
+ * 2. 考虑再次封装 adapter  不应该绑定在这边 需要解耦
  */
-
 public class BannerLayout extends FrameLayout {
 
 
