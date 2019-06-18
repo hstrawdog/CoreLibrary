@@ -16,16 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.recycle.RecycleIndexActivity"></activity>
+        <activity android:name=".ui.activity.recycle.GallerySnapActivity"></activity>
+        <activity android:name=".ui.activity.recycle.RecycleIndexActivity" />
         <activity
             android:name=".ui.activity.recycle.FullPagerSnapActivity"
-            android:label="Recycle多个item 分页"></activity>
+            android:label="Recycle多个item 分页" />
         <activity
             android:name=".ui.activity.tab.layout.TabLayoutActivity"
-            android:label="tabLayout  测试"></activity>
+            android:label="tabLayout  测试" />
         <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
-        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHidKeyboardIndexActivity"></activity>
-        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardActivity"></activity>
+        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHidKeyboardIndexActivity" />
+        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

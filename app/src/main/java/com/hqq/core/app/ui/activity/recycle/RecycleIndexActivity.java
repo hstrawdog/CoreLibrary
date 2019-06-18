@@ -1,13 +1,7 @@
 package com.hqq.core.app.ui.activity.recycle;
 
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-
-import com.hqq.core.adapter.BaseRcViewHolder;
-import com.hqq.core.app.R;
 import com.hqq.core.app.adapter.MainAdapter;
 import com.hqq.core.app.bean.MainBean;
-import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.ui.BaseListActivity;
 
 /**
@@ -30,6 +24,7 @@ public class RecycleIndexActivity extends BaseListActivity<MainAdapter> {
     public void initData() {
         mAdapter.addData(new MainBean("轮播图", BannerActivity.class));
         mAdapter.addData(new MainBean("多Item 分页滑动", FullPagerSnapActivity.class));
+        mAdapter.addData(new MainBean("画廊 分页滑动", GallerySnapActivity.class));
 
     }
 }
