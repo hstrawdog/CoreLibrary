@@ -12,9 +12,13 @@ import android.util.DisplayMetrics;
 import android.view.View;
 
 /**
- * Created by chenzhimao on 17-7-7.
+ * @Author : huangqiqiang
+ * @Package : com.hqq.core.recycler
+ * @FileName :   GallerySnapHelper
+ * @Date : 2019/6/22 0022  下午 3:53
+ * @Email :  qiqiang213@gmail.com
+ * @Descrive :  类似谷歌商店的效果
  */
-
 public class GallerySnapHelper extends SnapHelper {
     private static final float INVALID_DISTANCE = 1f;
     private static final float MILLISECONDS_PER_INCH = 40f;

@@ -17,7 +17,7 @@ import com.hqq.core.utils.log.LogUtils;
  * @FileName :   PagerSnapHelper
  * @Date : 2019/6/18 0018  上午 10:16
  * @Email : qiqiang213@gmail.com
- * @Descrive : 多个item分页 目前只支持横向的滑动
+ * @Descrive : 多个item组合分页 只支持横向分页滑动
  */
 public class PagerSnapHelper extends SnapHelper {
 

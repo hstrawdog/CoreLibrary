@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.hqq.core.app.R;
 import com.hqq.core.app.adapter.SnapHelperAdapter;
 import com.hqq.core.recycler.GallerySnapHelper;
+import com.hqq.core.recycler.gallery.RecyclerCoverFlow;
 import com.hqq.core.ui.BaseActivity;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class GallerySnapActivity extends BaseActivity {
     ArrayList<String> mData;
     LinearLayoutManager mLayoutManager;
     GallerySnapHelper mGallerySnapHelper;
+    @BindView(R.id.rcf_view)
+    RecyclerCoverFlow mRcfView;
+
     @Override
     public int setViewId() {
         return R.layout.activity_gallery_snap;
@@ -42,12 +46,18 @@ public class GallerySnapActivity extends BaseActivity {
         mRecyclerview.setAdapter(new SnapHelperAdapter(this, mData));
         mGallerySnapHelper = new GallerySnapHelper();
         mGallerySnapHelper.attachToRecyclerView(mRecyclerview);
+
+
+        mRcfView.setAdapter((new SnapHelperAdapter(this, mData)));
+
     }
+
     private void initData() {
         mData = new ArrayList<>();
-        for (int i= 0;i<60;i++){
-            mData.add("i="+i);
+        for (int i = 0; i < 60; i++) {
+            mData.add("i=" + i);
         }
     }
+
 
 }
