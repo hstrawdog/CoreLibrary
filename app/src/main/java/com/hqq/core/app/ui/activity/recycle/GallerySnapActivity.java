@@ -1,19 +1,17 @@
 package com.hqq.core.app.ui.activity.recycle;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.hqq.core.app.R;
 import com.hqq.core.app.adapter.SnapHelperAdapter;
-import com.hqq.core.recycler.GallerySnapHelper;
+import com.hqq.core.recycler.gallery.GallerySnapHelper;
 import com.hqq.core.recycler.gallery.RecyclerCoverFlow;
 import com.hqq.core.ui.BaseActivity;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @Author : huangqiqiang
@@ -49,7 +47,8 @@ public class GallerySnapActivity extends BaseActivity {
 
 
         mRcfView.setAdapter((new SnapHelperAdapter(this, mData)));
-
+//        mRcfView.setAlphaItem(true);
+        mRcfView.setFlatFlow(false);
     }
 
     private void initData() {
