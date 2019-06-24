@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -35,7 +36,17 @@ public class ProgressBarView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    int defProgress = 10;
+    float mProgress = 0;
+    @ColorInt
+    int mUnselectedColor = Color.RED;
+    @ColorInt
+    int mSelectedColor = Color.GREEN;
+    /**
+     * 圆角大小
+     */
+    int mFilletSize = 10;
+
+    boolean mSlide = false;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -43,41 +54,42 @@ public class ProgressBarView extends View {
         super.onDraw(canvas);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.RED);
-        canvas.drawRoundRect(0, 0, getWidth(), getHeight(), 20, 20, paint);
-        paint.setColor(Color.BLUE);
-        LogUtils.e(defProgress);
+        paint.setColor(mUnselectedColor);
+        canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mFilletSize, mFilletSize, paint);
+        paint.setColor(mSelectedColor);
 
-
-        LogUtils.e(((getWidth() / 100 )+ "-----" +((float) (getWidth() / 1000f)) * (defProgress >= 100 ? 100 : defProgress) + "----" + getWidth()));
-        canvas.drawRoundRect(0, 0, ((float) (getWidth() / 100.0f)) * (defProgress >= 100 ? 100 : defProgress), getHeight(), 20, 20, paint);
+        canvas.drawRoundRect(0, 0, ((getWidth() / 100.0f)) * (mProgress >= 100 ? 100 : mProgress), getHeight(), mFilletSize, mFilletSize, paint);
     }
-
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                break;
             case MotionEvent.ACTION_MOVE:
-                defProgress = (int) ((((float) event.getX() ) / getWidth()) * 100);
-                LogUtils.e("ACTION_MOVE " + defProgress);
-                invalidate();
+                if (mSlide) {
+                    mProgress = (((event.getX()) / getWidth()) * 100);
+                    invalidate();
+                }
                 break;
-            case MotionEvent.ACTION_UP:
-                defProgress = (int) ((((float) event.getX()) / getWidth()) * 100);
-                LogUtils.e("ACTION_UP  " + defProgress);
-                invalidate();
-                break;
-
+            default:
         }
-
-        return true;
-
+        return super.onTouchEvent(event);
 
     }
 
+    public void setProgress(float progress) {
+        this.mProgress = progress;
+    }
 
+
+    public void setUnselectedColor(int unselectedColor) {
+        mUnselectedColor = unselectedColor;
+    }
+
+    public void setSelectedColor(int selectedColor) {
+        mSelectedColor = selectedColor;
+    }
+
+    public void setFilletSize(int filletSize) {
+        mFilletSize = filletSize;
+    }
 }
