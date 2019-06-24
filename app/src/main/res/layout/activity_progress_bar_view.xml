@@ -9,8 +9,14 @@
 
     <com.hqq.core.app.ui.activity.customize.weight.ProgressBarView
         android:layout_width="@dimen/x400"
-        android:layout_marginTop="@dimen/x40"
+        android:layout_height="@dimen/x20"
         android:layout_marginLeft="@dimen/x40"
-        android:layout_height="@dimen/x20" />
+        android:layout_marginTop="@dimen/x40" />
+
+
+    <com.hqq.core.app.ui.activity.customize.weight.RatingBarView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
 
 </LinearLayout>
