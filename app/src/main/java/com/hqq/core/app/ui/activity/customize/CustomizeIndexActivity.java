@@ -8,6 +8,15 @@ import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.app.adapter.MainAdapter;
 import com.hqq.core.app.bean.MainBean;
 
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.hqq.core.app.ui.activity.customize
+  * @FileName :   CustomizeIndexActivity
+  * @Date  : 2019/6/25 0025  下午 8:37
+  * @Email :  qiqiang213@gmail.com
+  * @Descrive :
+  */
+
 public class CustomizeIndexActivity extends BaseListActivity<MainAdapter> {
 
 
@@ -20,6 +29,7 @@ public class CustomizeIndexActivity extends BaseListActivity<MainAdapter> {
     public void initData() {
 
         mAdapter.addData(new MainBean("贝塞尔曲线鉴定绘制", BezierActivity.class));
+        mAdapter.addData(new MainBean("进度条/星星", ProgressBarViewActivity.class));
     }
 
     @Override

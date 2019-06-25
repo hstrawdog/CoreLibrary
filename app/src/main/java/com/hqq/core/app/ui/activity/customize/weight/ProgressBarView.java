@@ -36,7 +36,7 @@ public class ProgressBarView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    float mProgress = 0;
+    float mProgress = 10;
     @ColorInt
     int mUnselectedColor = Color.RED;
     @ColorInt
@@ -46,7 +46,7 @@ public class ProgressBarView extends View {
      */
     int mFilletSize = 10;
 
-    boolean mSlide = false;
+    boolean mSlide = true;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -62,7 +62,8 @@ public class ProgressBarView extends View {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        LogUtils.e(event.getAction());
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
                 if (mSlide) {
@@ -72,9 +73,10 @@ public class ProgressBarView extends View {
                 break;
             default:
         }
-        return super.onTouchEvent(event);
+        return event.getAction() != MotionEvent.ACTION_UP || super.dispatchTouchEvent(event);
 
     }
+
 
     public void setProgress(float progress) {
         this.mProgress = progress;
