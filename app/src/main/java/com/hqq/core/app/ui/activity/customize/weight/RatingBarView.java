@@ -40,8 +40,14 @@ public class RatingBarView extends LinearLayout {
         BitmapFactory.Options options = new BitmapFactory.Options();
         BitmapFactory.decodeResource(getResources(), mDefPic, options);
         //获取图片的宽高
-        mHeight = options.outHeight;
-        mWidth = options.outWidth;
+        mHeight = options.outHeight < mHeight ? options.outHeight : mHeight;
+        mWidth = options.outWidth < mWidth ? options.outWidth : mWidth;
+        if (getMeasuredHeight() != 0 && getMeasuredHeight() < mHeight) {
+            mWidth = (int) ((float) getMeasuredHeight() / mHeight * mWidth);
+            mHeight = getMeasuredHeight();
+            initView();
+        }
+        mMarginRight=getPaddingRight();
     }
 
     int mDefSelectPic = R.mipmap.ic_star_red;
@@ -51,6 +57,7 @@ public class RatingBarView extends LinearLayout {
     int mMarginRight = 10;
 
     private void initView() {
+
         setBackgroundColor(ResourcesUtils.getColor(getContext(), R.color.white));
         removeAllViews();
         LayoutParams params = new LayoutParams(mWidth, mHeight);
