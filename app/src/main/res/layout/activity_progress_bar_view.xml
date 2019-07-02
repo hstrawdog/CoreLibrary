@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,9 +18,11 @@
     <com.hqq.core.app.ui.activity.customize.weight.RatingBarView
         android:layout_width="wrap_content"
         android:layout_height="@dimen/x65"
-        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginLeft="@dimen/x270"
         android:layout_marginTop="@dimen/x30"
         android:gravity="center"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        app:is_slide="true"
+        app:padding_child="@dimen/x30" />
 
 </LinearLayout>

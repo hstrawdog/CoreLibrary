@@ -16,15 +16,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.activity.LayoutTestActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.customize.ProgressBarViewActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
+        </activity>
+        <activity android:name=".ui.MainActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
-
-
         </activity>
+
+
+
         <activity android:name=".ui.activity.recycle.GallerySnapActivity" />
         <activity android:name=".ui.activity.recycle.RecycleIndexActivity" />
         <activity
@@ -36,13 +55,7 @@
         <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
         <activity android:name=".ui.activity.soft.hide.keyboard.SoftHidKeyboardIndexActivity" />
         <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardActivity" />
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ui.activity.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />

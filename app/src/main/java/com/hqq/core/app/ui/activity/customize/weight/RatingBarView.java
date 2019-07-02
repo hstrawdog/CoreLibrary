@@ -1,6 +1,7 @@
 package com.hqq.core.app.ui.activity.customize.weight;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.hqq.core.app.R;
 import com.hqq.core.utils.ResourcesUtils;
+import com.hqq.core.utils.log.LogUtils;
 
 /**
  * @Author : huangqiqiang
@@ -30,6 +32,12 @@ public class RatingBarView extends LinearLayout {
 
     public RatingBarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RatingBar);
+        mIsSlide = array.getBoolean(R.styleable.RatingBar_is_slide, false);
+        mMarginRight = (int) array.getDimension(R.styleable.RatingBar_padding_child, 10);
+
+        array.recycle();
         initView();
 
     }
@@ -47,7 +55,6 @@ public class RatingBarView extends LinearLayout {
             mHeight = getMeasuredHeight();
             initView();
         }
-        mMarginRight=getPaddingRight();
     }
 
     int mDefSelectPic = R.mipmap.ic_star_red;
@@ -55,6 +62,7 @@ public class RatingBarView extends LinearLayout {
     int mCurrent = 0;
     private int mWidth = 50, mHeight = 50;
     int mMarginRight = 10;
+    boolean mIsSlide = false;
 
     private void initView() {
 
@@ -68,7 +76,9 @@ public class RatingBarView extends LinearLayout {
             } else {
                 imageView.setImageResource(mDefPic);
             }
-            params.setMargins(0, 0, mMarginRight, 0);
+            if (i < 5) {
+                params.setMargins(0, 0, mMarginRight, 0);
+            }
             addView(imageView, params);
         }
     }
@@ -84,8 +94,12 @@ public class RatingBarView extends LinearLayout {
             index = ev.getY();
             length = getHeight();
         }
-        mCurrent = (int) (5 * index / length);
-        redraw();
+        if (mIsSlide) {
+
+            mCurrent = (int) (5 * index / length);
+            LogUtils.e(" index " + mCurrent +"------"+ index);
+            redraw();
+        }
         return ev.getAction() != MotionEvent.ACTION_UP || super.dispatchTouchEvent(ev);
     }
 
@@ -107,6 +121,14 @@ public class RatingBarView extends LinearLayout {
 
     public void setSelect(int select) {
         mCurrent = select;
+    }
+
+    public int getCurrent() {
+        return mCurrent;
+    }
+
+    public void setSlide(boolean slide) {
+        mIsSlide = slide;
     }
 
     public void setWidth(int width) {
