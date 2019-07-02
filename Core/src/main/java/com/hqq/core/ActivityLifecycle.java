@@ -67,7 +67,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
                 return activity;
             }
         }
-        throw new IllegalStateException("未获取到站内对象 当前Activity 异常");
+        throw new IllegalStateException("未获取到栈内对象 当前Activity 异常");
     }
 
 

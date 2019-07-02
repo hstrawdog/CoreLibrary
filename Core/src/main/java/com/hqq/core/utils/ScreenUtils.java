@@ -1,5 +1,6 @@
 package com.hqq.core.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -56,12 +57,48 @@ public class ScreenUtils {
      * 屏幕高度
      *
      * @param context context
-     * @return int
+     * @return int 屏幕高度减去 状态栏高度
      */
     public static int getScreenHeight(Context context) {
         DisplayMetrics localDisplayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(localDisplayMetrics);
         return localDisplayMetrics.heightPixels - getStatusBarHeight(context);
+    }
+
+    /**
+     * 获取物理宽度
+     *
+     * @param context
+     * @return
+     */
+    public static float getScreenXDPI(Context context) {
+        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(localDisplayMetrics);
+        return localDisplayMetrics.xdpi;
+    }
+
+    /**
+     * 获取物理高度
+     *
+     * @param context
+     * @return
+     */
+    public static float getScreenYDPI(Context context) {
+        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(localDisplayMetrics);
+        return localDisplayMetrics.ydpi;
+    }
+
+    /**
+     * 获取像素密度
+     *
+     * @param context
+     * @return
+     */
+    public static float getScreenDensityDpi(Context context) {
+        DisplayMetrics localDisplayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(localDisplayMetrics);
+        return localDisplayMetrics.densityDpi;
     }
 
     /**

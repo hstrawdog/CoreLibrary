@@ -25,17 +25,27 @@ public class CacheUtil {
      *
      * @param context
      * @return
-     * @throws Exception
      */
-    public static String getTotalCacheSize(Context context) throws Exception {
-        long cacheSize = getFolderSize(context.getCacheDir());
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            cacheSize += getFolderSize(context.getExternalCacheDir());
+    public static String getTotalCacheSize(Context context) {
+        long cacheSize = 0;
+        try {
+            cacheSize = getFolderSize(context.getCacheDir());
+
+            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                cacheSize += getFolderSize(context.getExternalCacheDir());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return getFormatSize(cacheSize);
     }
 
 
+    /**
+     * 清除缓存
+     *
+     * @param context
+     */
     public static void clearAllCache(Context context) {
         deleteDir(context.getCacheDir());
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -43,6 +53,11 @@ public class CacheUtil {
         }
     }
 
+    /**
+     * 删除文件夹
+     * @param dir
+     * @return
+     */
     private static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();

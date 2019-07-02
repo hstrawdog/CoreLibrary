@@ -18,12 +18,12 @@ import android.view.View;
 /**
  * @Author : huangqiqiang
  * @Package : com.qi.core.utils
- * @FileName :   TextColorBuilder
+ * @FileName :   TextSpannableBuilder
  * @Date : 2018/12/19 0019  下午 4:55
  * @Descrive : String 工具类 点击事件等待完善
  * @Email :  qiqiang213@gmail.com
  */
-public class TextColorBuilder {
+public class TextSpannableBuilder {
 
     public interface OnClickListener {
         void onClick(View widget, CharSequence clickedText);
@@ -71,17 +71,17 @@ public class TextColorBuilder {
     }
 
 
-    public TextColorBuilder addTextPart(CharSequence text) {
+    public TextSpannableBuilder addTextPart(CharSequence text) {
         mStringBuilder.append(text);
         return this;
     }
 
-    public TextColorBuilder addTextPart(Context context, @ColorRes int colorId, CharSequence text) {
+    public TextSpannableBuilder addTextPart(Context context, @ColorRes int colorId, CharSequence text) {
         return addTextPart(ContextCompat.getColor(context, colorId), text);
     }
 
 
-    public TextColorBuilder addTextPart(@ColorInt int color, CharSequence text) {
+    public TextSpannableBuilder addTextPart(@ColorInt int color, CharSequence text) {
         if (!TextUtils.isEmpty(text)) {
             final int start = mStringBuilder.length();
             final int end = start + text.length();
@@ -91,12 +91,12 @@ public class TextColorBuilder {
         return this;
     }
 
-    public TextColorBuilder addTextPart(CharSequence text, Context context, int colorId, OnClickListener listener) {
+    public TextSpannableBuilder addTextPart(CharSequence text, Context context, int colorId, OnClickListener listener) {
         return addTextPart(text, ContextCompat.getColor(context, colorId), listener);
     }
 
 
-    public TextColorBuilder addTextPartColorAndSize(Context context, @ColorRes int colorId,float proportion, CharSequence text) {
+    public TextSpannableBuilder addTextPartColorAndSize(Context context, @ColorRes int colorId, float proportion, CharSequence text) {
         if (!TextUtils.isEmpty(text)) {
             final int start = mStringBuilder.length();
             final int end = start + text.length();
@@ -110,7 +110,7 @@ public class TextColorBuilder {
 
 
 
-    public TextColorBuilder addTextSizeSpan(float proportion
+    public TextSpannableBuilder addTextSizeSpan(float proportion
             , CharSequence text) {
         if (!TextUtils.isEmpty(text)) {
             final int start = mStringBuilder.length();
@@ -121,7 +121,7 @@ public class TextColorBuilder {
         return this;
     }
 
-    public TextColorBuilder addTextPart(CharSequence text, CharacterStyle characterStyle) {
+    public TextSpannableBuilder addTextPart(CharSequence text, CharacterStyle characterStyle) {
         if (!TextUtils.isEmpty(text)) {
             final int start = mStringBuilder.length();
             final int end = start + text.length();
@@ -133,7 +133,7 @@ public class TextColorBuilder {
 
 
 
-    public TextColorBuilder addTextPart(CharSequence text, int color, OnClickListener listener) {
+    public TextSpannableBuilder addTextPart(CharSequence text, int color, OnClickListener listener) {
         if (!TextUtils.isEmpty(text)) {
             final int start = mStringBuilder.length();
             final int end = start + text.length();
