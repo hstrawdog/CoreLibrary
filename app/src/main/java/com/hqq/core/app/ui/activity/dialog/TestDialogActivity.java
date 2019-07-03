@@ -4,9 +4,10 @@ package com.hqq.core.app.ui.activity.dialog;
 import android.view.View;
 import android.widget.Button;
 
-import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.app.R;
 import com.hqq.core.app.dialog.FullDialog;
+import com.hqq.core.app.dialog.RightDialog;
+import com.hqq.core.ui.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,7 +37,7 @@ public class TestDialogActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.button14, R.id.button15})
+    @OnClick({R.id.button14, R.id.button15, R.id.button16})
     public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.button14:
@@ -45,6 +46,10 @@ public class TestDialogActivity extends BaseActivity {
             case R.id.button15:
                 FullDialog.showDialog(getSupportFragmentManager());
                 break;
+            case R.id.button16:
+                RightDialog.showDialog(getSupportFragmentManager());
+                break;
+
             default:
         }
     }

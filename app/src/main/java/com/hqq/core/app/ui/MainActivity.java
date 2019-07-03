@@ -3,6 +3,7 @@ package com.hqq.core.app.ui;
 import android.content.Intent;
 import android.view.KeyEvent;
 
+import com.hqq.core.app.ui.activity.BaseInfoActivity;
 import com.hqq.core.app.ui.activity.recycle.RecycleIndexActivity;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
@@ -47,6 +48,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("列表系列", ListIndexActivity.class));
         mAdapter.addData(new MainBean("Dialog系列", DialogIndexActivity.class));
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
+        mAdapter.addData(new MainBean("基础信息", BaseInfoActivity.class));
     }
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.app.ui.activity.dialog.TestDialogActivity">
+    tools:context=".ui.activity.dialog.TestDialogActivity">
 
     <Button
         android:id="@+id/button14"
@@ -18,6 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="全屏的dialog" />
+
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="右边的dialog" />
 
 
 </LinearLayout>
