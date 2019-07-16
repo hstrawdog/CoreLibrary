@@ -6,12 +6,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.activity.dialog.TestDialogActivity">
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="无折叠效果"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="38dp" />
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="带叠效果"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="38dp" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择dialog" />
 
     <Button
         android:id="@+id/button14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="仿知乎评论的dialog" />
+        android:text="底部dialog" />
 
     <Button
         android:id="@+id/button15"
@@ -24,6 +44,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="右边的dialog" />
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="左边边的dialog" />
 
 
 </LinearLayout>
