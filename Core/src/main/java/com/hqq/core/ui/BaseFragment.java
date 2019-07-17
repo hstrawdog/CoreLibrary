@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.ui.builder.RootViewBuilder;

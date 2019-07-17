@@ -57,7 +57,11 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //代码设置 无标题 无边框
+//        //代码设置 无标题 无边框
+//        if (setWeight() == WindowManager.LayoutParams.WRAP_CONTENT) {
+//            setStyle(DialogFragment.STYLE_NORMAL, R.style.MyDialog);
+//        } else {
+//        }
         setStyle(DialogFragment.STYLE_NORMAL, R.style.DefDialogStyle);
     }
 
@@ -72,6 +76,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             mUnkinder = ButterKnife.bind(this, mRootView);
             LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         }
+
         return mRootView;
     }
 
@@ -89,17 +94,26 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             }
             mLoaded = true;
             initView();
+            LogUtils.e(mRootView.getWidth());
+
+
         }
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        LogUtils.e(mRootView.getMeasuredWidth());
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(setBackground()));
         getDialog().getWindow().setLayout(setWeight(), setHeight());
         getDialog().getWindow().setGravity(setGravity());
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getDialog().setCanceledOnTouchOutside(true);
+    }
 
     @Override
     public void onDestroy() {

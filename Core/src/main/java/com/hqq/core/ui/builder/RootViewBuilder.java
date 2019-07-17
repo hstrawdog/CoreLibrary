@@ -1,11 +1,9 @@
 package com.hqq.core.ui.builder;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,16 +88,18 @@ public class RootViewBuilder implements IRootViewBuilder {
      */
     @ColorRes
     int mStatusColor = R.color.white;
-
+    @ColorRes
+    int mBgColor = R.color.bg_color;
 
     public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
         if (activity instanceof Activity) {
             mActivity = (Activity) activity;
             immersiveStatusBar = true;
+        } else if (activity instanceof DialogFragment) {
+            mBgColor = R.color.transparent;
+            mActivity = ((DialogFragment) activity).getActivity();
         } else if (activity instanceof Fragment) {
             mActivity = ((Fragment) activity).getActivity();
-        } else if (activity instanceof DialogFragment) {
-            mActivity = ((DialogFragment) activity).getActivity();
         } else {
             try {
                 throw new Exception("不支持的布局");
@@ -184,7 +184,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         } else {
             view = rootView;
         }
-        frameLayout.setBackgroundResource(R.color.bg_color);
+        frameLayout.setBackgroundResource(mBgColor);
         frameLayout.addView(view);
         createToolBar(frameLayout);
         return frameLayout;
@@ -208,7 +208,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         } else {
             view = rootView;
         }
-        layout.setBackgroundResource(R.color.bg_color);
+        layout.setBackgroundResource(mBgColor);
         layout.addView(view);
         return layout;
     }

@@ -6,6 +6,7 @@ import android.view.WindowManager;
 
 import com.hqq.core.app.R;
 import com.hqq.core.ui.BaseDialog;
+import com.hqq.core.utils.ResourcesUtils;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -33,12 +34,12 @@ public class RightDialog extends BaseDialog {
 
     @Override
     public int setWeight() {
-        return WindowManager.LayoutParams.WRAP_CONTENT;
+        return (int) ResourcesUtils.getDimen(getActivity(), R.dimen.x200);
     }
 
     @Override
     public int setHeight() {
-        return  WindowManager.LayoutParams.MATCH_PARENT;
+        return WindowManager.LayoutParams.MATCH_PARENT;
     }
 
     @Override

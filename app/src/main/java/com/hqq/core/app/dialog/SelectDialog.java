@@ -6,6 +6,7 @@ import android.view.WindowManager;
 
 import com.hqq.core.app.R;
 import com.hqq.core.ui.BaseDialog;
+import com.hqq.core.utils.ResourcesUtils;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -33,12 +34,13 @@ public class SelectDialog extends BaseDialog {
 
     @Override
     public int setWeight() {
-        return WindowManager.LayoutParams.WRAP_CONTENT;
+        return (int) ResourcesUtils.getDimen(getActivity(), R.dimen.x560);
     }
+
 
     @Override
     public int setHeight() {
-        return  WindowManager.LayoutParams.WRAP_CONTENT;
+        return WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
     @Override
