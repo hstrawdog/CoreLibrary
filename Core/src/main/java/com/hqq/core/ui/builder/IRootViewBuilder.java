@@ -11,14 +11,6 @@ import android.view.View;
  * @Descrive :
  */
 public interface IRootViewBuilder {
-    /**
-     * 构建rootView的类型
-     *
-     * @param rootView
-     * @param vid
-     * @return
-     */
-    View createRootView(View rootView, int vid);
 
     /**
      * 初始化activity的配置

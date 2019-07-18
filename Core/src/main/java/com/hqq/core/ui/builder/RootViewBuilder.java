@@ -20,6 +20,7 @@ import com.hqq.core.toolbar.BaseDefToolBarImpl;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.IToolBar;
 import com.hqq.core.toolbar.IToolBarBuilder;
+import com.hqq.core.ui.model.CreateRootViewModel;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
 /**
@@ -38,14 +39,6 @@ public class RootViewBuilder implements IRootViewBuilder {
      */
     private Activity mActivity;
     /**
-     * 是否显示状态栏
-     */
-    private boolean mIsShowStatus;
-    /**
-     * 是否显示 标题栏
-     */
-    private boolean mIsShowToolBar;
-    /**
      * 根布局
      */
     private View mRootView;
@@ -53,22 +46,6 @@ public class RootViewBuilder implements IRootViewBuilder {
      * 标题栏
      */
     private IToolBar mIToolBar;
-
-    /**
-     * 标题栏类型
-     */
-    private Class<? extends IToolBar> mClass = CoreBuildConfig.getInstance().getDefItoobar();
-    /**
-     * 布局类型
-     */
-    @LayoutModel
-    private int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
-
-    /**
-     * 状态栏模式
-     */
-    @ToolBarMode
-    private int mStatusBarMode = CoreBuildConfig.getInstance().isStatusMode();
 
     /**
      * 是否强制竖屏
@@ -80,57 +57,34 @@ public class RootViewBuilder implements IRootViewBuilder {
     private boolean fullScreen = false;
 
     /**
-     * 是否执行 状态栏 透明化
+     * 布局构建器
      */
-    private boolean immersiveStatusBar = false;
-    /**
-     * 状态栏默认白色
-     */
-    @ColorRes
-    int mStatusColor = R.color.white;
-    @ColorRes
-    int mBgColor = R.color.bg_color;
+    CreateRootViewModel mCreateRootViewModel;
 
     public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
+
+        mCreateRootViewModel = new CreateRootViewModel(isShowStatus, isShowToolBar);
+
         if (activity instanceof Activity) {
             mActivity = (Activity) activity;
-            immersiveStatusBar = true;
+            mCreateRootViewModel.setImmersiveStatusBar(true);
         } else if (activity instanceof DialogFragment) {
-            mBgColor = R.color.transparent;
             mActivity = ((DialogFragment) activity).getActivity();
+            mCreateRootViewModel.setBgColor(R.color.transparent);
         } else if (activity instanceof Fragment) {
             mActivity = ((Fragment) activity).getActivity();
         } else {
             try {
-                throw new Exception("不支持的布局");
+                throw new Exception("不支持的类" + activity.getClass().getName());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        mIsShowStatus = isShowStatus;
-        mIsShowToolBar = isShowToolBar;
+        mCreateRootViewModel.setActivity(mActivity);
     }
 
     public <T> RootViewBuilder(T activity) {
         this(activity, false, false);
-    }
-
-    /**
-     * 构建跟布局
-     *
-     * @param rootView 布局View
-     * @param vid      布局id
-     * @return 构建后的View
-     */
-    @Override
-    public View createRootView(View rootView, int vid) {
-        if (mLayoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
-            return mRootView = createLayoutView(rootView, vid);
-        } else if (mLayoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
-            return mRootView = createFrameLayoutView(rootView, vid);
-        } else {
-            return null;
-        }
     }
 
     @Override
@@ -150,68 +104,10 @@ public class RootViewBuilder implements IRootViewBuilder {
 
     @Override
     public View initContentView(int layoutId, View rootView) {
-        //  构建  ContentView 默认 LineLayout 构建   支持  xml /view
-        // 优先构建xml
-        if (layoutId != 0) {
-            return createRootView(null, layoutId);
-        } else {
-            if (rootView != null) {
-                return createRootView(rootView, 0);
-            } else {
-                try {
-                    throw new Exception("no fount layoutId and rootView  , must init RootView");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        }
+        mRootView = mCreateRootViewModel.initContentView(layoutId, rootView);
+        return mRootView;
     }
 
-    /**
-     * 正常 情况下只有 帧布局 才需要 有渐变
-     *
-     * @param rootView
-     * @param vid
-     * @return
-     */
-    protected View createFrameLayoutView(View rootView, int vid) {
-        FrameLayout frameLayout = new FrameLayout(mActivity);
-        frameLayout.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        View view;
-        if (vid > 0) {
-            view = mActivity.getLayoutInflater().inflate(vid, frameLayout, false);
-        } else {
-            view = rootView;
-        }
-        frameLayout.setBackgroundResource(mBgColor);
-        frameLayout.addView(view);
-        createToolBar(frameLayout);
-        return frameLayout;
-    }
-
-    /**
-     * 线性 布局
-     *
-     * @param rootView
-     * @param vid
-     * @return
-     */
-    protected View createLayoutView(View rootView, int vid) {
-        LinearLayout layout = new LinearLayout(mActivity);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        createToolBar(layout);
-        View view;
-        if (vid > 0) {
-            view = mActivity.getLayoutInflater().inflate(vid, layout, false);
-        } else {
-            view = rootView;
-        }
-        layout.setBackgroundResource(mBgColor);
-        layout.addView(view);
-        return layout;
-    }
 
     /**
      * 回收ToolBar 解除与父布局关联
@@ -227,42 +123,6 @@ public class RootViewBuilder implements IRootViewBuilder {
         }
     }
 
-    /**
-     * 设置状态栏颜色   所以需要init
-     * 但是可以不添加到布局中
-     *
-     * @param layout
-     */
-    private void createToolBar(ViewGroup layout) {
-        // 默认只有Activity 会去执行设置状态栏的颜色
-        if (immersiveStatusBar) {
-            if (mStatusBarMode == ToolBarMode.LIGHT_MODE) {
-                StatusBarManager.setStatusBarModel(mActivity.getWindow(), true);
-            } else {
-                StatusBarManager.setStatusBarModel(mActivity.getWindow(), false);
-            }
-        }
-
-        if (mIsShowToolBar || mIsShowStatus) {
-            mIToolBar = initIToolBar();
-            layout.addView(mIToolBar.getRootView());
-        }
-    }
-
-
-    /**
-     * 可以重写 这个方法 去自定义  头部
-     *
-     * @return
-     */
-    public IToolBar initIToolBar() {
-        IToolBarBuilder iToolBarBuilder = new IToolBarBuilder();
-        iToolBarBuilder.setActivity(mActivity);
-        iToolBarBuilder.setShowStatusBar(mIsShowStatus);
-        iToolBarBuilder.setShowToolBar(mIsShowToolBar);
-        iToolBarBuilder.setStatusBarColor(mStatusColor);
-        return iToolBarBuilder.create(mClass);
-    }
 
     /**
      * 获取 父类态栏
@@ -271,13 +131,16 @@ public class RootViewBuilder implements IRootViewBuilder {
      */
     public <T extends BaseToolBar> T getIToolBar() {
         if (mIToolBar == null) {
-            //  自定义异常
-            try {
-                throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
-            } catch (Exception e) {
-                e.printStackTrace();
+            mIToolBar = mCreateRootViewModel.getIToolBar();
+            if (mIToolBar == null) {
+                //  自定义异常
+                try {
+                    throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
-            return null;
         }
         return (T) mIToolBar;
     }
@@ -318,7 +181,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param layoutMode
      */
     public RootViewBuilder setLayoutMode(@LayoutModel int layoutMode) {
-        mLayoutMode = layoutMode;
+        mCreateRootViewModel.setLayoutMode(layoutMode);
         return this;
     }
 
@@ -328,7 +191,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param clss
      */
     public RootViewBuilder setIToolBarClass(Class<? extends BaseToolBar> clss) {
-        mClass = clss;
+        mCreateRootViewModel.setIToolBarClass(clss);
         return this;
 
     }
@@ -340,8 +203,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showToolBar 标题栏
      */
     public RootViewBuilder setToolbatVisibility(boolean showStatus, boolean showToolBar) {
-        mIsShowStatus = showStatus;
-        mIsShowToolBar = showToolBar;
+        mCreateRootViewModel.setToolbatVisibility(showStatus, showToolBar);
         return this;
 
     }
@@ -352,7 +214,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showStatus
      */
     public RootViewBuilder setShowStatus(boolean showStatus) {
-        mIsShowStatus = showStatus;
+        mCreateRootViewModel.setShowStatus(showStatus);
         return this;
 
     }
@@ -363,7 +225,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showToolBar
      */
     public RootViewBuilder setShowToolBar(boolean showToolBar) {
-        mIsShowToolBar = showToolBar;
+        mCreateRootViewModel.setShowStatus(showToolBar);
         return this;
 
     }
@@ -376,7 +238,8 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @return
      */
     public RootViewBuilder setStatusBarMode(@ToolBarMode int statusBarMode) {
-        mStatusBarMode = statusBarMode;
+
+        mCreateRootViewModel.setStatusBarMode(statusBarMode);
         return this;
 
     }
@@ -387,7 +250,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param statusColor
      */
     public void setStatusColor(@ColorRes int statusColor) {
-        mStatusColor = statusColor;
+        mCreateRootViewModel.setStatusColor(statusColor);
     }
 
     /**
@@ -396,7 +259,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @return
      */
     public int getStatusBarMode() {
-        return mStatusBarMode;
+        return mCreateRootViewModel.getStatusBarMode();
     }
 
     /**

@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.BaseInfoActivity">
+        <activity
+            android:name=".ui.activity.BaseInfoActivity"
+            android:label="设备信息">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -37,10 +39,10 @@
         </activity>
         <activity android:name=".ui.MainActivity">
 
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.recycle.GallerySnapActivity" />
         <activity android:name=".ui.activity.recycle.RecycleIndexActivity" />
@@ -92,10 +94,10 @@
         <activity
             android:name=".ui.activity.dialog.TestDialogActivity"
             android:label="dialog 测试">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".ui.activity.customize.BezierActivity" />
         <activity android:name=".ui.activity.customize.CustomizeIndexActivity" />

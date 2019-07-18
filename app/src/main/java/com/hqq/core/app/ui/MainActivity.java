@@ -48,7 +48,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("列表系列", ListIndexActivity.class));
         mAdapter.addData(new MainBean("Dialog系列", DialogIndexActivity.class));
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
-        mAdapter.addData(new MainBean("基础信息", BaseInfoActivity.class));
+        mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
     }
 
 
