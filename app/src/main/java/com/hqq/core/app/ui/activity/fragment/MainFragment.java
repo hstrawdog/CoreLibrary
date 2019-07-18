@@ -61,7 +61,7 @@ public class MainFragment extends BaseListFragment<MainAdapter> {
 
     @Override
     public void initData() {
-        initlistData();
+        initListData();
     }
 
     @Override
@@ -74,13 +74,13 @@ public class MainFragment extends BaseListFragment<MainAdapter> {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                initlistData();
+                initListData();
             }
         }, 3 * 1000);
 
     }
 
-    private void initlistData() {
+    private void initListData() {
         List<MainBean> list = new ArrayList<>();
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
         list.add(new MainBean("fragment 加载", IFragmentActivity.class));

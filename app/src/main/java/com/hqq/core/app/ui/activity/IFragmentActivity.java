@@ -30,6 +30,8 @@ public class IFragmentActivity extends BaseActivity {
     public void initView() {
         mVpPage.setAdapter(new IFragmentAdapter(getSupportFragmentManager()));
     }
+
+
 //    @Override
 //    public BaseToolBar initIToolBar(ViewGroup layout) {
 //        return new IToolBarBuilder(ISearchToolBarImpl.class,this, layout, true, true)

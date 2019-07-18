@@ -51,7 +51,12 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
 
     @Override
     public View setRootView() {
-        return mBaseListModel.createRecycleView(getContext());
+        if (setViewId() <= 0) {
+            return mBaseListModel.createRecycleView(getContext());
+        } else {
+            return null;
+        }
+
     }
 
     @Override

@@ -70,7 +70,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
             mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
-        LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
+        LogUtils.d(this,"onCreateView " + getClass().getSimpleName() + this.toString());
         return mRootView;
     }
 
@@ -86,7 +86,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
         if (isLazyLoad() && mIsCreate && !mLazyInitEnd && isVisibleToUser) {
             initView();
             mLazyInitEnd = true;
-            LogUtils.d("setUserVisibleHint  initBasic " + getClass().getSimpleName() + this.toString());
+            LogUtils.d(this,"setUserVisibleHint  initBasic " + getClass().getSimpleName() + this.toString());
         } else if (isLazyLoad() && mIsCreate && mLazyInitEnd && !isVisibleToUser) {
             onFragmentHit();
         }
@@ -106,11 +106,11 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
             if (!isLazyLoad()) {
                 initView();
 
-                LogUtils.d("onViewCreated initBasic   false  " + getClass().getSimpleName() + this.toString());
+                LogUtils.d(this,"onViewCreated initBasic   false  " + getClass().getSimpleName() + this.toString());
 
             } else if (isLazyLoad() && getUserVisibleHint()) {
                 mLazyInitEnd = true;
-                LogUtils.d("onViewCreated initBasic   True " + getClass().getSimpleName() + this.toString());
+                LogUtils.d(this,"onViewCreated initBasic   True " + getClass().getSimpleName() + this.toString());
                 initView();
             }
         }
@@ -123,7 +123,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.d("onDestroy " + getClass().getSimpleName() + this.toString());
+        LogUtils.d(this,"onDestroy " + getClass().getSimpleName() + this.toString());
         //    mLoadingView = null;
         if (mUnkinder != null) {
             mUnkinder.unbind();
@@ -139,7 +139,6 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
             }
         }
         if (mRootViewBuild != null) {
-            mRootViewBuild.recoverToolbar();
             mRootViewBuild = null;
         }
         if (mLoadingView != null) {

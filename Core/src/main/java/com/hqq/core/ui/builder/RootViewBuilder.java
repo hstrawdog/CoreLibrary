@@ -43,11 +43,6 @@ public class RootViewBuilder implements IRootViewBuilder {
      */
     private View mRootView;
     /**
-     * 标题栏
-     */
-    private IToolBar mIToolBar;
-
-    /**
      * 是否强制竖屏
      */
     private boolean alwaysPortrait = true;
@@ -62,9 +57,7 @@ public class RootViewBuilder implements IRootViewBuilder {
     CreateRootViewModel mCreateRootViewModel;
 
     public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
-
         mCreateRootViewModel = new CreateRootViewModel(isShowStatus, isShowToolBar);
-
         if (activity instanceof Activity) {
             mActivity = (Activity) activity;
             mCreateRootViewModel.setImmersiveStatusBar(true);
@@ -110,52 +103,16 @@ public class RootViewBuilder implements IRootViewBuilder {
 
 
     /**
-     * 回收ToolBar 解除与父布局关联
-     */
-    public void recoverToolbar() {
-        if (getIToolBar() != null) {
-            View view = getIToolBar().getRootView();
-            if (view != null && view instanceof ViewGroup) {
-                if ((view.getParent() != null)) {
-                    ((ViewGroup) view).removeView(view);
-                }
-            }
-        }
-    }
-
-
-    /**
-     * 获取 父类态栏
-     *
-     * @return
-     */
-    public <T extends BaseToolBar> T getIToolBar() {
-        if (mIToolBar == null) {
-            mIToolBar = mCreateRootViewModel.getIToolBar();
-            if (mIToolBar == null) {
-                //  自定义异常
-                try {
-                    throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        }
-        return (T) mIToolBar;
-    }
-
-    /**
      * 获取默认状态栏
      *
      * @return
      */
-    public BaseDefToolBarImpl getDefToolBar() {
-        if (getIToolBar() != null && getIToolBar() instanceof BaseDefToolBarImpl) {
-            return (BaseDefToolBarImpl) getIToolBar();
+    public <T> BaseDefToolBarImpl getDefToolBar() {
+        if (mCreateRootViewModel.getIToolBar() != null && mCreateRootViewModel.getIToolBar() instanceof BaseDefToolBarImpl) {
+            return (BaseDefToolBarImpl) mCreateRootViewModel.getIToolBar();
         } else {
-            // 自定义的异常 目前先抛出 类型不正确
             try {
+                // 自定义的异常 目前先抛出 类型不正确
                 throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -225,7 +182,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showToolBar
      */
     public RootViewBuilder setShowToolBar(boolean showToolBar) {
-        mCreateRootViewModel.setShowStatus(showToolBar);
+        mCreateRootViewModel.setShowToolBar(showToolBar);
         return this;
 
     }

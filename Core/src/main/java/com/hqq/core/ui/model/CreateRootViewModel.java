@@ -1,7 +1,6 @@
 package com.hqq.core.ui.model;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.ColorRes;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.IToolBar;
 import com.hqq.core.toolbar.IToolBarBuilder;
-import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
 import java.lang.ref.WeakReference;
@@ -67,18 +65,18 @@ public class CreateRootViewModel {
      */
     private boolean mIsShowToolBar;
 
-    public CreateRootViewModel(Activity activity, boolean isShowStatus, boolean isShowToolBar, boolean immersiveStatusBar) {
-        mActivity = new WeakReference<>(activity);
-        mIsShowStatus = isShowStatus;
-        mIsShowToolBar = isShowToolBar;
-        this.immersiveStatusBar = immersiveStatusBar;
-    }
-
     public CreateRootViewModel(boolean isShowStatus, boolean isShowToolBar) {
         mIsShowStatus = isShowStatus;
         mIsShowToolBar = isShowToolBar;
     }
 
+    /**
+     * 构建布局
+     *
+     * @param layoutId xml id
+     * @param rootView 布局View
+     * @return
+     */
     public View initContentView(int layoutId, View rootView) {
         //  构建  ContentView 默认 LineLayout 构建   支持  xml /view
         // 优先构建xml
@@ -134,11 +132,6 @@ public class CreateRootViewModel {
         frameLayout.setBackgroundResource(mBgColor);
         frameLayout.addView(view);
         createToolBar(frameLayout);
-
-        if (mIToolBar.getRootView() == null) {
-            return view;
-        }
-        frameLayout.addView(mIToolBar.getRootView());
         return frameLayout;
     }
 
@@ -160,11 +153,7 @@ public class CreateRootViewModel {
         } else {
             view = rootView;
         }
-        if (mIToolBar.getRootView() == null) {
-            view.setBackgroundResource(mBgColor);
-            return view;
-        }
-        layout.addView(mIToolBar.getRootView());
+
         layout.setBackgroundResource(mBgColor);
         layout.addView(view);
         return layout;
@@ -187,6 +176,7 @@ public class CreateRootViewModel {
         }
         if (mIsShowToolBar || mIsShowStatus) {
             mIToolBar = initIToolBar();
+            layout.addView(mIToolBar.getRootView());
         }
     }
 
@@ -243,6 +233,15 @@ public class CreateRootViewModel {
     public void setShowStatus(boolean showStatus) {
         mIsShowStatus = showStatus;
 
+    }
+
+    /**
+     * 是否显示标题栏
+     *
+     * @param showToolBar
+     */
+    public void setShowToolBar(boolean showToolBar) {
+        mIsShowToolBar = showToolBar;
     }
 
     /**
@@ -321,4 +320,6 @@ public class CreateRootViewModel {
         mBgColor = bgColor;
 
     }
+
+
 }

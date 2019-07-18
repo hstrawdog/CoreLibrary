@@ -218,7 +218,6 @@ public class BaseListModel {
      */
     public interface BaseListModelView<K extends BaseQuickAdapter> {
 
-
         /**
          * 分页下标
          *

@@ -33,7 +33,7 @@ ext {
             butterknife                  : 'com.jakewharton:butterknife:8.8.1',
             butterknifeCompiler          : 'com.jakewharton:butterknife-compiler:8.8.1',
             // ------------- recycleView  适配器 上拉刷新  -------------
-            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42',
+            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46',
             // ------------- 下拉刷新  已经停止维护多年  正在寻找合适的替换框架 -------------
             ultraPtr                     : 'in.srain.cube:ultra-ptr:1.0.11',
             // ------------- Luban 图片压缩  -------------

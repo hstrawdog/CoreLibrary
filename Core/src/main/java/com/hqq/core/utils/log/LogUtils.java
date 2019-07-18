@@ -7,13 +7,13 @@ import com.hqq.core.BuildConfig;
 import com.hqq.core.CoreBuildConfig;
 
 /**
-  * @Author : huangqiqiang
-  * @Package : com.qi.core.utils.log
-  * @FileName :   LogUtils
-  * @Date  : 2019/3/13 0013  
-  * @Email :  qiqiang213@gmail.com
-  * @Descrive : TODO
-  */
+ * @Author : huangqiqiang
+ * @Package : com.qi.core.utils.log
+ * @FileName :   LogUtils
+ * @Date : 2019/3/13 0013
+ * @Email :  qiqiang213@gmail.com
+ * @Descrive : TODO
+ */
 
 public class LogUtils {
     /**
@@ -35,66 +35,74 @@ public class LogUtils {
         }
     }
 
-     /**
-      * DEBUG 类型日志
-      * @param object
-      */
+    /**
+     * DEBUG 类型日志
+     *
+     * @param object
+     */
     public static void d(Object object) {
         d(TAG, object);
     }
 
-     /**
-      * DEBUG 类型日志
-      * @param tag 日志标识
-      * @param object
-      */
-     public static void d(String tag, Object object) {
-         if (CoreBuildConfig.getInstance().isDebug()) {
-             if (object == null) {
-                 d("标签" + tag + "的打印内容为空！");
-             }
-             Log.d(tag, object.toString());
-         }
-     }
+    public static <T> void d(T t, Object object) {
+        d(t.getClass().getName(), object);
+    }
 
-     public  static   void debugW(Object object){
-         if (CoreBuildConfig.getInstance().isDebug()){
-             e(object);
-         }
-     }
+    /**
+     * DEBUG 类型日志
+     *
+     * @param tag    日志标识
+     * @param object
+     */
+    public static void d(String tag, Object object) {
+        if (CoreBuildConfig.getInstance().isDebug()) {
+            if (object == null) {
+                d("标签" + tag + "的打印内容为空！");
+            }
+            Log.d(tag, object.toString());
+        }
+    }
 
-     /**
-      * ERROR 类型日志
-      * @param object
-      */
+    public static void debugW(Object object) {
+        if (CoreBuildConfig.getInstance().isDebug()) {
+            e(object);
+        }
+    }
+
+    /**
+     * ERROR 类型日志
+     *
+     * @param object
+     */
     public static void e(Object object) {
         e(TAG, object);
     }
 
-     /**
-      * ERROR 类型日志
-      * @param tag 日志标识
-      * @param object
-      */
-     public static void e(String tag, Object object) {
-         if (CoreBuildConfig.getInstance().isDebug()) {
-             if (object == null) {
-                 e("标签" + tag + "的打印内容为空！");
-             }
-             String sobject = object.toString().trim();
-             if (sobject.length() > 4000) {
-                 for (int i = 0; i < sobject.length(); i += 4000) {
-                     if (i + 4000 < sobject.length()) {
-                         Log.e(tag + i, sobject.substring(i, i + 4000));
-                     } else {
-                         Log.e(tag + i, sobject.substring(i, sobject.length()));
-                     }
-                 }
-             } else {
-                 Log.e(tag, sobject);
-             }
-         }
-     }
+    /**
+     * ERROR 类型日志
+     *
+     * @param tag    日志标识
+     * @param object
+     */
+    public static void e(String tag, Object object) {
+        if (CoreBuildConfig.getInstance().isDebug()) {
+            if (object == null) {
+                e("标签" + tag + "的打印内容为空！");
+            }
+            String sobject = object.toString().trim();
+            if (sobject.length() > 4000) {
+                for (int i = 0; i < sobject.length(); i += 4000) {
+                    if (i + 4000 < sobject.length()) {
+                        Log.e(tag + i, sobject.substring(i, i + 4000));
+                    } else {
+                        Log.e(tag + i, sobject.substring(i, sobject.length()));
+                    }
+                }
+            } else {
+                Log.e(tag, sobject);
+            }
+        }
+    }
 
     public static void e(String object) {
         if (CoreBuildConfig.getInstance().isDebug()) {

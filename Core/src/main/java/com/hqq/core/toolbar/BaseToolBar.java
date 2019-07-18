@@ -1,6 +1,7 @@
 package com.hqq.core.toolbar;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 
 import com.hqq.core.R;
 import com.hqq.core.utils.ScreenUtils;
+
+import java.lang.ref.WeakReference;
 
 /**
  * @Author : huangqiqiang
@@ -46,7 +49,7 @@ public abstract class BaseToolBar implements IToolBar {
     /**
      * 当前activity
      */
-    protected Activity mActivity;
+    protected WeakReference<Activity> mActivity;
     /**
      * 底部分割线
      */
@@ -76,14 +79,14 @@ public abstract class BaseToolBar implements IToolBar {
      */
     @Override
     public BaseToolBar createToolBar(final Activity activity) {
-        mActivity = activity;
+        mActivity = new WeakReference<>(activity);
         LinearLayout linearLayout = new LinearLayout(activity);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
 
         if (mIsShowStatusBar) {
-            initStatusBar(mActivity);
+            initStatusBar(mActivity.get());
             int mStatusBarHeight = ScreenUtils.getStatusBarHeight(activity);
             linearLayout.addView(mStatusBar, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight));
         }
@@ -95,8 +98,8 @@ public abstract class BaseToolBar implements IToolBar {
         }
 
         if (mIsShowLine) {
-            mViewLine = new View(mActivity);
-            mViewLine.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(mActivity, 1)));
+            mViewLine = new View(mActivity.get());
+            mViewLine.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(mActivity.get(), 1)));
             mViewLine.setBackgroundResource(R.color.toolbar_line_bg);
             linearLayout.addView(mViewLine);
         }
@@ -121,7 +124,7 @@ public abstract class BaseToolBar implements IToolBar {
      * @param colorInt
      */
     @Override
-    public BaseToolBar setDefStatusColor(@ColorRes int colorInt) {
+    public BaseToolBar setDefStatusColor(@ColorInt int colorInt) {
         if (getStatusBar() != null) {
             getStatusBar().setBackgroundColor(colorInt);
         }else {

@@ -121,7 +121,7 @@ public class BaseDefToolBarImpl extends BaseToolBar {
      * @param color
      */
     @Override
-    public void setToolBarColor( int color) {
+    public void setToolBarColor(int color) {
         if (null != getToolBarBg()) {
             getToolBarBg().setImageResource(color);
         } else {
@@ -221,7 +221,7 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         if (mRootView != null) {
             return mRootView.findViewById(R.id.iv_bar_right);
         } else {
-            return new ImageView(mActivity);
+            return new ImageView(mActivity.get());
         }
     }
 

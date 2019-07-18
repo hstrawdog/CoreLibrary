@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.KeyEvent;
 
 import com.hqq.core.app.ui.activity.BaseInfoActivity;
+import com.hqq.core.app.ui.activity.dialog.TestDialogActivity;
 import com.hqq.core.app.ui.activity.recycle.RecycleIndexActivity;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
@@ -37,6 +38,12 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
     }
 
     @Override
+    public void initDefConfig() {
+        super.initDefConfig();
+        mRootViewBuild.setShowToolBar(false);
+    }
+
+    @Override
     public void initData() {
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
@@ -46,7 +53,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
         mAdapter.addData(new MainBean("列表系列", ListIndexActivity.class));
-        mAdapter.addData(new MainBean("Dialog系列", DialogIndexActivity.class));
+        mAdapter.addData(new MainBean("Dialog系列", TestDialogActivity.class));
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
         mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
     }

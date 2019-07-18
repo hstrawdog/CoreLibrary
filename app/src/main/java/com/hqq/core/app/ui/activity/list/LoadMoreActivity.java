@@ -39,8 +39,10 @@ public class LoadMoreActivity extends BaseListActivity<MainAdapter> {
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mBaseListModel.fillingData(getData());
-                mAdapter.loadMoreComplete();
+                if (mBaseListModel != null) {
+                    mBaseListModel.fillingData(getData());
+                    mAdapter.loadMoreComplete();
+                }
             }
         }, 2000);
     }

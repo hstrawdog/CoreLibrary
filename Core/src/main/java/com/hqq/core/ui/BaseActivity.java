@@ -45,7 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
     protected void onDestroy() {
         super.onDestroy();
         // 手动回收
-        mRootViewBuild.recoverToolbar();
         mRootViewBuild = null;
     }
 
