@@ -39,6 +39,8 @@ public class BaseInfoActivity extends BaseActivity {
                 .addTextPart(VersionUtils.getVerName(this))
                 .addTextPart("\n版本号    ")
                 .addTextPart(VersionUtils.getVersionCode(this) + "")
+                .addTextPart("\n系统分配大小    ")
+                .addTextPart(CacheUtil.getAppCacheSize(this) + "M")
                 .addTextPart("\nGlide缓存大小    ")
                 .addTextPart(CacheUtil.getCacheSize(this) + "")
                 .addTextPart("\n缓存总大小    ")
@@ -55,6 +57,7 @@ public class BaseInfoActivity extends BaseActivity {
                 .addTextPart(ScreenUtils.getScreenYDPI(this) + "dpi")
                 .addTextPart("\n屏幕密度    ")
                 .addTextPart(ScreenUtils.getScreenDensityDpi(this) + "dpi")
+
                 .build());
     }
 

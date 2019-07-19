@@ -32,8 +32,8 @@
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/tv_bar_right"
             app:layout_constraintLeft_toRightOf="@+id/iv_bar_back"
+            app:layout_constraintRight_toLeftOf="@+id/tv_bar_right"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -49,12 +49,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/color_868585"
                 android:background="@color/transparent"
                 android:gravity="center_vertical"
                 android:hint="请输入关键字"
                 android:imeOptions="actionSearch"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/color_868585" />
+
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:src="@mipmap/ic_delete_x"
+                android:visibility="gone" />
 
         </LinearLayout>
 

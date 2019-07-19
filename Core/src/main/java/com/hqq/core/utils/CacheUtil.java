@@ -1,5 +1,6 @@
 package com.hqq.core.utils;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Environment;
 
@@ -55,6 +56,7 @@ public class CacheUtil {
 
     /**
      * 删除文件夹
+     *
      * @param dir
      * @return
      */
@@ -150,4 +152,18 @@ public class CacheUtil {
         }
         return "";
     }
+
+    /**
+     * 获取系统分配内存大小
+     *
+     * @param context
+     * @return
+     */
+    public static int getAppCacheSize(Context context) {
+
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        int memClass = activityManager.getMemoryClass();
+        return memClass;
+    }
+
 }

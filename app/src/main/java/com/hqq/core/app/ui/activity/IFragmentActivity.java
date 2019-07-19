@@ -32,10 +32,4 @@ public class IFragmentActivity extends BaseActivity {
     }
 
 
-//    @Override
-//    public BaseToolBar initIToolBar(ViewGroup layout) {
-//        return new IToolBarBuilder(ISearchToolBarImpl.class,this, layout, true, true)
-//                .create();
-//    }
-
 }

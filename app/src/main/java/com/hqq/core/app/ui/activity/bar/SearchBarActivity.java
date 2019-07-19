@@ -8,17 +8,17 @@ import com.hqq.core.app.weight.BaseToolBarSearch;
 import com.hqq.core.ui.BaseActivity;
 
 /**
-  * @Author : huangqiqiang
-  * @Package : com.hqq.iblibrary.ui.activity
-  * @FileName :   SearchBarActivity
-  * @Date  : 2018/12/14 0014
-  * @Descrive : TODO
-  * @Email :  qiqiang213@gmail.com
-  */
+ * @Author : huangqiqiang
+ * @Package : com.hqq.iblibrary.ui.activity
+ * @FileName :   SearchBarActivity
+ * @Date : 2018/12/14 0014
+ * @Descrive : TODO
+ * @Email :  qiqiang213@gmail.com
+ */
 public class SearchBarActivity extends BaseActivity {
     public static void open(Activity context) {
         Intent starter = new Intent(context, SearchBarActivity.class);
-        context.startActivityForResult(starter,-1);
+        context.startActivityForResult(starter, -1);
     }
 
     @Override
@@ -32,8 +32,9 @@ public class SearchBarActivity extends BaseActivity {
         mRootViewBuild.setIToolBarClass(BaseToolBarSearch.class);
     }
 
-     @Override
-     public void initView() {
+    @Override
+    public void initView() {
 
     }
+
 }
