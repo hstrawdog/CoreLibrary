@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
-import com.hqq.core.app.ui.activity.fragment.MainFragment;
+import com.hqq.core.app.ui.fragment.MainFragment;
 
 /**
  * @Author : huangqiqiang

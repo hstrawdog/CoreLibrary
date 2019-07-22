@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.customize.FishActivity">
+        <activity android:name=".ui.customize.FishActivity">
 
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
@@ -25,7 +25,7 @@
 
         </activity>
         <activity
-            android:name=".ui.activity.BaseInfoActivity"
+            android:name=".ui.BaseInfoActivity"
             android:label="设备信息">
 
             <!-- <intent-filter> -->
@@ -34,10 +34,10 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <activity android:name=".ui.activity.LayoutTestActivity">
+        <activity android:name=".ui.LayoutTestActivity">
 
         </activity>
-        <activity android:name=".ui.activity.customize.ProgressBarViewActivity">
+        <activity android:name=".ui.customize.ProgressBarViewActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -51,55 +51,55 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.recycle.GallerySnapActivity" />
-        <activity android:name=".ui.activity.recycle.RecycleIndexActivity" />
+        <activity android:name=".ui.recycle.GallerySnapActivity" />
+        <activity android:name=".ui.recycle.RecycleIndexActivity" />
         <activity
-            android:name=".ui.activity.recycle.FullPagerSnapActivity"
+            android:name=".ui.recycle.FullPagerSnapActivity"
             android:label="Recycle多个item 分页" />
         <activity
-            android:name=".ui.activity.tab.layout.TabLayoutActivity"
+            android:name=".ui.tab.layout.TabLayoutActivity"
             android:label="tabLayout  测试" />
-        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
-        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHidKeyboardIndexActivity" />
-        <activity android:name=".ui.activity.soft.hide.keyboard.SoftHideKeyBoardActivity" />
+        <activity android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
+        <activity android:name=".ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity" />
+        <activity android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardActivity" />
         <activity
-            android:name=".ui.activity.bar.ToolBarActivity"
+            android:name=".ui.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
-        <activity android:name=".ui.activity.IFragmentActivity" />
+        <activity android:name=".ui.IFragmentActivity" />
         <activity
-            android:name=".ui.activity.list.LoadMoreActivity"
+            android:name=".ui.list.LoadMoreActivity"
             android:label="加载数据" />
         <activity
-            android:name=".ui.activity.DefActivity"
+            android:name=".ui.DefActivity"
             android:label="默认Activity" />
         <activity
-            android:name=".ui.activity.list.ListActivity"
+            android:name=".ui.list.ListActivity"
             android:label="列表数据" />
-        <activity android:name=".ui.activity.bar.SearchBarActivity" />
+        <activity android:name=".ui.bar.SearchBarActivity" />
         <activity
-            android:name=".ui.activity.recycle.BannerActivity"
+            android:name=".ui.recycle.BannerActivity"
             android:label="轮播图测试" />
         <activity
-            android:name=".ui.activity.DefImgActivity"
+            android:name=".ui.DefImgActivity"
             android:label="默认图显示" />
         <activity
-            android:name=".ui.activity.PermissionActivity"
+            android:name=".ui.PermissionActivity"
             android:label="权限测试" />
         <activity
-            android:name=".ui.activity.dialog.BottomSheetActivity"
+            android:name=".ui.dialog.BottomSheetActivity"
             android:label="知乎评论列表" />
         <activity
-            android:name=".ui.activity.screen.TextViewSizeActivity"
+            android:name=".ui.screen.TextViewSizeActivity"
             android:label="文字大小" />
         <activity
-            android:name=".ui.activity.screen.DimenActivity"
+            android:name=".ui.screen.DimenActivity"
             android:label="1像素大小测试" />
         <activity
-            android:name=".ui.activity.ThrowActivity"
+            android:name=".ui.ThrowActivity"
             android:label="Throw异常测试" />
-        <activity android:name=".ui.activity.bar.SettingToolBarActivity" />
+        <activity android:name=".ui.bar.SettingToolBarActivity" />
         <activity
-            android:name=".ui.activity.dialog.TestDialogActivity"
+            android:name=".ui.dialog.TestDialogActivity"
             android:label="dialog 测试">
 
             <!-- <intent-filter> -->
@@ -107,12 +107,12 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.activity.customize.BezierActivity" />
-        <activity android:name=".ui.activity.customize.CustomizeIndexActivity" />
+        <activity android:name=".ui.customize.BezierActivity" />
+        <activity android:name=".ui.customize.CustomizeIndexActivity" />
         <activity
-            android:name=".ui.activity.dialog.DialogIndexActivity"
+            android:name=".ui.dialog.DialogIndexActivity"
             android:label="dialog 系列" />
-        <activity android:name=".ui.activity.list.ListIndexActivity" />
+        <activity android:name=".ui.list.ListIndexActivity" />
     </application>
 
 </manifest>

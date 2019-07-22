@@ -3,23 +3,17 @@ package com.hqq.core.app.ui;
 import android.content.Intent;
 import android.view.KeyEvent;
 
-import com.hqq.core.app.ui.activity.BaseInfoActivity;
-import com.hqq.core.app.ui.activity.dialog.TestDialogActivity;
-import com.hqq.core.app.ui.activity.recycle.RecycleIndexActivity;
-import com.hqq.core.ui.BaseListActivity;
-import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.app.adapter.MainAdapter;
 import com.hqq.core.app.bean.MainBean;
-import com.hqq.core.app.ui.activity.recycle.BannerActivity;
-import com.hqq.core.app.ui.activity.customize.CustomizeIndexActivity;
-import com.hqq.core.app.ui.activity.DefImgActivity;
-import com.hqq.core.app.ui.activity.dialog.DialogIndexActivity;
-import com.hqq.core.app.ui.activity.list.ListIndexActivity;
-import com.hqq.core.app.ui.activity.screen.DimenActivity;
-import com.hqq.core.app.ui.activity.PermissionActivity;
-import com.hqq.core.app.ui.activity.screen.TextViewSizeActivity;
-import com.hqq.core.app.ui.activity.ThrowActivity;
-import com.hqq.core.app.ui.activity.bar.ToolBarActivity;
+import com.hqq.core.app.ui.bar.ToolBarActivity;
+import com.hqq.core.app.ui.customize.CustomizeIndexActivity;
+import com.hqq.core.app.ui.dialog.TestDialogActivity;
+import com.hqq.core.app.ui.list.ListIndexActivity;
+import com.hqq.core.app.ui.recycle.RecycleIndexActivity;
+import com.hqq.core.app.ui.screen.DimenActivity;
+import com.hqq.core.app.ui.screen.TextViewSizeActivity;
+import com.hqq.core.ui.BaseListActivity;
+import com.hqq.core.utils.ToastUtils;
 
 /**
  * @Author : huangqiqiang
