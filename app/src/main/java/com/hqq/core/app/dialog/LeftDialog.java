@@ -45,4 +45,9 @@ public class LeftDialog extends BaseDialog {
     public int setGravity() {
         return Gravity.LEFT;
     }
+
+    @Override
+    public int setAnimation() {
+        return R.anim.dialog_left_right;
+    }
 }

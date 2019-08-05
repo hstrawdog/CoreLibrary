@@ -53,8 +53,8 @@ public class PermissionsHasImpl implements IPermissionsHas {
 
     @Override
     public boolean hasCalendar(Context context) {
-        return PermissionsFragment.hasPermission(context,
                 //(允许程序读取用户的日程信息)
+        return PermissionsFragment.hasPermission(context,
                 Manifest.permission.READ_CALENDAR,
                 Manifest.permission.WRITE_CALENDAR
         );
@@ -63,8 +63,8 @@ public class PermissionsHasImpl implements IPermissionsHas {
 
     @Override
     public boolean hasCamera(Context context) {
-        return PermissionsFragment.hasPermission(context,
                 //(允许访问摄像头进行拍照)
+        return PermissionsFragment.hasPermission(context,
                 Manifest.permission.CAMERA);
     }
 

@@ -36,7 +36,6 @@ public class ThrowActivity extends BaseActivity {
 
     @OnClick({R.id.button11, R.id.button12})
     public void onViewClicked(View view) {
-
         switch (view.getId()) {
             case R.id.button11:
                 try {

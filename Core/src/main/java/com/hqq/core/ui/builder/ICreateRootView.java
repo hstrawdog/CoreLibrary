@@ -72,7 +72,6 @@ public interface ICreateRootView {
         int setHeight();
     }
 
-
     interface IBottomDialogFragment extends IBaseDialogFragment {
 
     }

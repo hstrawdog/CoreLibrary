@@ -43,6 +43,11 @@ public class FullDialog extends BaseDialog {
     }
 
     @Override
+    public int setAnimation() {
+        return R.anim.fade_in;
+    }
+
+    @Override
     public void initView() {
 
     }

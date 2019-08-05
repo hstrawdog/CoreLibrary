@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import com.hqq.core.R;
 import com.hqq.core.listenner.WebLoadListener;
 import com.hqq.core.ui.BaseFragment;
+import com.hqq.core.utils.BundleUtils;
 import com.hqq.core.utils.RegexUtils;
 import com.hqq.core.utils.ResourcesUtils;
 
@@ -103,8 +104,8 @@ public class BaseWebFragment extends BaseFragment {
         // 标识 为Android的 js 支持 对象是activity
         mWebView.addJavascriptInterface(getActivity(), "android");
 
-        mUrl = getArguments().getString(getString(R.string.key_url));
-        mTitle = getArguments().getString(getString(R.string.key_title));
+        mUrl = BundleUtils.getString(this,getString(R.string.key_url));
+        mTitle =   BundleUtils.getString(this,getString(R.string.key_title)) ;
         getActivity().setTitle(mTitle);
         mWebView.loadUrl(mUrl);
 
@@ -190,8 +191,8 @@ public class BaseWebFragment extends BaseFragment {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                if (TextUtils.isEmpty(mTitle) && RegexUtils.checkNotNull(title)) {
-                    if (mRootViewBuild.getDefToolBar() != null) {
+                if (TextUtils.isEmpty(mTitle) && RegexUtils.checkNotNull(title) && mRootViewBuild != null && mRootViewBuild.getDefToolBar() != null) {
+                    if (null != mRootViewBuild && null != mRootViewBuild.getDefToolBar()) {
                         mRootViewBuild.getDefToolBar().setToolbarTitle(title);
                     }
                 }

@@ -12,8 +12,18 @@ import android.graphics.Bitmap;
  */
 public interface WebLoadListener {
 
-     void onPageStarted(String url, Bitmap favicon);
+    /**
+     * 开始加载网页
+     *
+     * @param url     String
+     * @param favicon
+     */
+    void onPageStarted(String url, Bitmap favicon);
 
 
+    /**
+     * 结束加载网页
+     * @param url String
+     */
     void onPageFinished(String url);
 }

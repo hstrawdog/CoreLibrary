@@ -316,7 +316,7 @@ public class CreateRootViewModel {
      *
      * @param bgColor
      */
-    public void setBgColor(int bgColor) {
+    public void setBgColor(@ColorRes int bgColor) {
         mBgColor = bgColor;
 
     }

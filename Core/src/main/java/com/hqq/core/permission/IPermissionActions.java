@@ -9,6 +9,12 @@ package com.hqq.core.permission;
  * @Descrive :
  */
 public interface IPermissionActions {
+    /**
+     * 请求权限
+     *
+     * @param permissions 权限组
+     * @param listener    回调
+     */
     void requestPermissions(String[] permissions, PermissionsResult listener);
 
 }

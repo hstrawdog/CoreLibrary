@@ -69,8 +69,6 @@ public interface IPermissionsHas {
      * * •	WRITE_EXTERNAL_STORAGE
      * <!-- 危险权限 Permissions end -->
      * 链接：https://juejin.im/post/5beaf27fe51d45332a4568e9
-     * 来源：掘金
-     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
 
 

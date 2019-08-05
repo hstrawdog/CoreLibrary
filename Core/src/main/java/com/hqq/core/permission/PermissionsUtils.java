@@ -14,56 +14,26 @@ import com.hqq.core.CoreBuildConfig;
  * @Descrive :   PermissionsFragment   需要用 工厂或者代理来生成
  */
 public class PermissionsUtils {
-    /**
-     * @param context
-     * @param permissionsResult
-     */
-    @Deprecated
-    public static void showCameraFragment(AppCompatActivity context, PermissionsResult permissionsResult) {
-        PermissionsFragment mPermissionsFragment = PermissionsFragment.newInstance();
-        if (!new PermissionsHasImpl().hasCamera(context)) {
-            mPermissionsFragment.setPermissionsResult(permissionsResult);
-            context.getSupportFragmentManager().beginTransaction().add(mPermissionsFragment, "PermissionsFragment").commitNow();
-            mPermissionsFragment.requestPermissions(new String[]{Manifest.permission.CAMERA});
-        } else {
-            permissionsResult.PermissionsResult(true);
-        }
-    }
-
-    /**
-     * @param context
-     * @param permissionsResult
-     */
-    @Deprecated
-    public static void showStorageFragment(AppCompatActivity context, PermissionsResult permissionsResult) {
-        PermissionsFragment mPermissionsFragment = PermissionsFragment.newInstance();
-        if (!new PermissionsHasImpl().hasStorage(context)) {
-            mPermissionsFragment.setPermissionsResult(permissionsResult);
-            context.getSupportFragmentManager().beginTransaction().add(mPermissionsFragment, "PermissionsFragment").commitNow();
-            mPermissionsFragment.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
-        } else {
-            permissionsResult.PermissionsResult(true);
-        }
-    }
 
     /**
      * @param permissionsResult
      */
     public static void requestStorage(PermissionsResult permissionsResult) {
         if (!new PermissionsHasImpl().hasStorage(CoreBuildConfig.getInstance().getApplication())) {
-            String[] premissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE};
-            new FragmentProxy().requestPermissions(premissions, permissionsResult);
+            new FragmentProxy().requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, permissionsResult);
         } else {
-            permissionsResult.PermissionsResult(true);
+            permissionsResult.onPermissionsResult(true);
         }
     }
 
+    /**
+     * @param permissionsResult
+     */
     public static void showCameraFragment(PermissionsResult permissionsResult) {
         if (!new PermissionsHasImpl().hasCamera(CoreBuildConfig.getInstance().getApplication())) {
-            String[] premissions = new String[]{Manifest.permission.CAMERA};
-            new FragmentProxy().requestPermissions(premissions, permissionsResult);
+            new FragmentProxy().requestPermissions(new String[]{Manifest.permission.CAMERA}, permissionsResult);
         } else {
-            permissionsResult.PermissionsResult(true);
+            permissionsResult.onPermissionsResult(true);
         }
     }
 }

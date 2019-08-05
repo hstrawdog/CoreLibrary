@@ -13,7 +13,6 @@ import android.support.v4.content.ContextCompat;
 
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.VersionUtils;
-import com.hqq.core.utils.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class PermissionsFragment extends Fragment {
     public void requestPermissions(String[] strings) {
         mPermissions = strings;
         if (hasPermission(getContext(), strings)) {
-            mPermissionsResult.PermissionsResult(true);
+            mPermissionsResult.onPermissionsResult(true);
         } else {
             requestPermissions(strings, CODE);
         }
@@ -109,7 +108,7 @@ public class PermissionsFragment extends Fragment {
         if (denied.isEmpty() && !granted.isEmpty()) {
             //   ToastUtils.showToast(getContext(), "同意了所有权限");
             if (mPermissionsResult != null) {
-                mPermissionsResult.PermissionsResult(true);
+                mPermissionsResult.onPermissionsResult(true);
             }
         } else {
             ToastUtils.showToast(getContext(), "拒绝权限,会导致功能无法执行");

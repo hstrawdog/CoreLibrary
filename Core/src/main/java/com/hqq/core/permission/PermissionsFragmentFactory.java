@@ -28,7 +28,7 @@ public class PermissionsFragmentFactory {
                 fragmentManager.beginTransaction().add(permissionsFragment, PERMISSIONS_FRAGMENT_TAG).commitNow();
             }
         } else {
-            throw new IllegalStateException("不支持 Activity 需要继承 AppCompatActivity ");
+            throw new IllegalStateException("不支持的Activity 需要继承 AppCompatActivity ");
         }
 
         return permissionsFragment;
