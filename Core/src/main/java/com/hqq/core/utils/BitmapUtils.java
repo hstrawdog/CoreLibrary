@@ -1,5 +1,7 @@
 package com.hqq.core.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,11 +11,18 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
+import android.view.View;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -29,6 +38,59 @@ import java.util.Map;
  */
 public class BitmapUtils {
 
+    public static Bitmap generatBitmap(View v) {
+        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        v.draw(canvas);
+        return bitmap;
+    }
+
+    public static void saveImageToGallery(Context context, Bitmap bitmaps) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "dearxy");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File file = new File(appDir, fileName);
+        Log.e("test_sign", "图片全路径localFile = " + appDir.getAbsolutePath() + fileName);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            bitmaps.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            ToastUtils.showToast(context, "保存到相册失败！");
+            e.printStackTrace();
+        } catch (IOException e) {
+            ToastUtils.showToast(context, "保存到相册失败！");
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                    //回收
+                    bitmaps.recycle();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            ToastUtils.showToast(context, "保存到相册失败！");
+            e.printStackTrace();
+        }
+        ToastUtils.showToast(context, "已保存到手机相册！");
+        // 最后通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                Uri.fromFile(new File(appDir.getPath()))));
+    }
     /**
      * 等比缩放图片
      * @param bm

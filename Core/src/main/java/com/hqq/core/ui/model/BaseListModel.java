@@ -30,6 +30,7 @@ public class BaseListModel {
     View mLoadMoreFoodView;
     protected CusPtrClassicFrameLayout mPtrPullDown;
     Context mContext;
+    private int mDefLayoutEmptyViewById = R.layout.layout_load_more_empty;
 
     public BaseListModel(BaseListModelView baseListModelView, Context context) {
         mBaseListModelView = baseListModelView;
@@ -65,7 +66,7 @@ public class BaseListModel {
         removeLoadMoreFood();
         if (mBaseListModelView.getAdapter().getItemCount() == 0) {
             // 没有头部的时候才可以加这个
-            mBaseListModelView.getAdapter().setEmptyView(R.layout.layout_load_more_empty, mBaseListModelView.getListView());
+            mBaseListModelView.getAdapter().setEmptyView(getLayoutEmptyView(), mBaseListModelView.getListView());
         } else if (mBaseListModelView.getAdapter().getData().size() == 0) {
             //这个是空数据的显示
             addLoadMoreFoodView();
@@ -80,6 +81,10 @@ public class BaseListModel {
             mPtrPullDown.refreshComplete();
         }
 
+    }
+
+    private int getLayoutEmptyView() {
+        return mDefLayoutEmptyViewById;
     }
 
     /**
