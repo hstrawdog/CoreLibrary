@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class SharedPreferencesUtil {
     public static synchronized void  putObject(Context context, String key, Object object) {
         //PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences sp = context.getSharedPreferences("preferences", Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
+        SharedPreferences sp = context.getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
         SharedPreferences.Editor editor = sp.edit();
         if (object instanceof Boolean) {
             editor.putBoolean(key, (Boolean) object);
@@ -27,7 +27,7 @@ public class SharedPreferencesUtil {
     public static synchronized Object getObject(Context context, String key, Object defaultObject) {
         try {
             //  PreferenceManager.getDefaultSharedPreferences(context); // 会出现空指针=
-            SharedPreferences sp = context.getSharedPreferences("preferences", Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
+            SharedPreferences sp = context.getApplicationContext().getSharedPreferences("preferences", Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
             if (defaultObject instanceof Boolean) {
                 return sp.getBoolean(key, (Boolean) defaultObject);
             } else if (defaultObject instanceof Float) {

@@ -6,22 +6,15 @@ import android.support.annotation.ColorRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
-import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
 import com.hqq.core.annotation.LayoutModel;
 import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
 import com.hqq.core.toolbar.BaseToolBar;
-import com.hqq.core.toolbar.IToolBar;
-import com.hqq.core.toolbar.IToolBarBuilder;
 import com.hqq.core.ui.model.CreateRootViewModel;
-import com.hqq.core.utils.statusbar.StatusBarManager;
 
 /**
  * @Author : huangqiqiang
@@ -100,7 +93,6 @@ public class RootViewBuilder implements IRootViewBuilder {
         mRootView = mCreateRootViewModel.initContentView(layoutId, rootView);
         return mRootView;
     }
-
 
     /**
      * 获取默认状态栏

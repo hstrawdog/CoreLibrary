@@ -24,7 +24,7 @@ import java.lang.ref.WeakReference;
  * @FileName :   CreateRootViewModel
  * @Date : 2019/7/17 0017  下午 5:53
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : 根布局的创建
  */
 public class CreateRootViewModel {
     /**
@@ -33,8 +33,13 @@ public class CreateRootViewModel {
     private Class<? extends IToolBar> mClass = CoreBuildConfig.getInstance().getDefItoobar();
     @LayoutModel
     private int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
-
+    /**
+     * 当前上下文
+     */
     WeakReference<Activity> mActivity;
+    /**
+     * 状态栏颜色
+     */
     @ColorRes
     int mStatusColor = R.color.white;
 

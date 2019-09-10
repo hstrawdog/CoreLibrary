@@ -66,6 +66,7 @@ public class BaseListModel {
         removeLoadMoreFood();
         if (mBaseListModelView.getAdapter().getItemCount() == 0) {
             // 没有头部的时候才可以加这个
+            // 这边需要适配两种情况 空布局如果可以点击的话
             mBaseListModelView.getAdapter().setEmptyView(getLayoutEmptyView(), mBaseListModelView.getListView());
         } else if (mBaseListModelView.getAdapter().getData().size() == 0) {
             //这个是空数据的显示
@@ -83,6 +84,11 @@ public class BaseListModel {
 
     }
 
+    /**
+     * 空布局 layout Id
+     *
+     * @return
+     */
     private int getLayoutEmptyView() {
         return mDefLayoutEmptyViewById;
     }
@@ -188,16 +194,19 @@ public class BaseListModel {
     }
 
     /**
-     * 创建一个 rootview  recyleView
+     * 创建一个 rootView = recycleView
      *
      * @param context
      * @return
      */
     public View createRecycleView(Context context) {
+        //正常情况下父布局应该会是LinearLayout
+        return createRecycleView(context, ViewGroup.LayoutParams.MATCH_PARENT);
+    }
 
-        //父布局 LinearLayout
+    public View createRecycleView(Context context, int height) {
         View view = new RecyclerView(context);
-        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         view.setId(R.id.rc_list);
         return view;
     }
@@ -220,6 +229,7 @@ public class BaseListModel {
 
     /**
      * m->v 的接口
+     * k  adapter
      */
     public interface BaseListModelView<K extends BaseQuickAdapter> {
 
@@ -264,7 +274,6 @@ public class BaseListModel {
         K getAdapter();
 
         K initAdapter();
-
 
         /**
          * 获取 recycleView

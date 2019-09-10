@@ -90,6 +90,7 @@ public class CircleIndicatorView extends View implements Indicator {
     @Override
     public void setPageColumn(int column) {
         mColumn = column;
+        setCurrentItem(0);
     }
 
     @Override

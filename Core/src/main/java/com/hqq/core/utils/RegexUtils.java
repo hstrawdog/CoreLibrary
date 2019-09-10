@@ -325,8 +325,6 @@ public class RegexUtils {
         String url = "http://172.12.1.123/test.txt";
         String regex = "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})";
         System.out.println(getMatcher(regex, url));
-
-
     }
 
 
