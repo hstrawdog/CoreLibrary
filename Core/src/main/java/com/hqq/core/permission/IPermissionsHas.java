@@ -72,24 +72,79 @@ public interface IPermissionsHas {
      */
 
 
+    boolean hasPermission(Context context, String... permissions);
 
-    boolean hasPermission(Context  context, String... permissions);
-
+    /**
+     * 用户日志权限
+     *
+     * @param context
+     * @return
+     */
     boolean hasCalendar(Context context);
 
+    /**
+     * 摄像头权限
+     *
+     * @param context
+     * @return
+     */
     boolean hasCamera(Context context);
 
+    /**
+     * 联系人
+     * 通讯录
+     *
+     * @param context
+     * @return
+     */
     boolean hasContacts(Context context);
 
+    /**
+     * 位置权限
+     * 定位
+     *
+     * @param context
+     * @return
+     */
     boolean hasLocation(Context context);
 
+    /**
+     * 手机麦克风
+     *
+     * @param context
+     * @return
+     */
     boolean hasMicrophone(Context context);
 
+    /**
+     * 手机信息 拨打电话
+     *
+     * @param context
+     * @return
+     */
     boolean hasPhone(Context context);
 
+    /**
+     * 传感器
+     *
+     * @param context
+     * @return
+     */
     boolean hasSensors(Context context);
 
+    /**
+     * 短信 彩信
+     *
+     * @param context
+     * @return
+     */
     boolean hasSMS(Context context);
 
+    /**
+     * 读写权限
+     *
+     * @param context
+     * @return
+     */
     boolean hasStorage(Context context);
 }

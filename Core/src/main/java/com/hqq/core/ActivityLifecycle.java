@@ -56,7 +56,12 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         activities.remove(activity);
     }
 
-    Activity getActivity() {
+    /**
+     * 获取APP中activity栈中最上层一个activity
+     *
+     * @return
+     */
+    protected Activity getActivity() {
         if (null == activities || activities.size() == 0) {
             throw new InitException("Core 未初始化");
         }

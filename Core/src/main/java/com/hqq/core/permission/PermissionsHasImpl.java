@@ -8,12 +8,18 @@ import android.content.Context;
  * @Package : com.core.library.permission
  * @FileName :   PermissionsHasImpl
  * @Date : 2018/11/22 0022  上午 9:57
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive : 判断是否拥有权限
  */
 public class PermissionsHasImpl implements IPermissionsHas {
 
-
+    /**
+     * 全部权限
+     *
+     * @param context
+     * @param permissions
+     * @return
+     */
     @Override
     public boolean hasPermission(Context context, String... permissions) {
         boolean result = true;
@@ -37,7 +43,7 @@ public class PermissionsHasImpl implements IPermissionsHas {
                         || Manifest.permission.CALL_PHONE.equals(permission)) {
                     result = result && hasPhone(context);
                 } else if (Manifest.permission.BODY_SENSORS.equals(permission)
-                        ) {
+                ) {
                     result = result && hasSensors(context);
                 } else if (Manifest.permission.SEND_SMS.equals(permission)
                         || Manifest.permission.RECEIVE_SMS.equals(permission)) {
@@ -53,7 +59,7 @@ public class PermissionsHasImpl implements IPermissionsHas {
 
     @Override
     public boolean hasCalendar(Context context) {
-                //(允许程序读取用户的日程信息)
+        //(允许程序读取用户的日程信息)
         return PermissionsFragment.hasPermission(context,
                 Manifest.permission.READ_CALENDAR,
                 Manifest.permission.WRITE_CALENDAR
@@ -63,7 +69,7 @@ public class PermissionsHasImpl implements IPermissionsHas {
 
     @Override
     public boolean hasCamera(Context context) {
-                //(允许访问摄像头进行拍照)
+        //(允许访问摄像头进行拍照)
         return PermissionsFragment.hasPermission(context,
                 Manifest.permission.CAMERA);
     }
@@ -116,7 +122,6 @@ public class PermissionsHasImpl implements IPermissionsHas {
                 Manifest.permission.USE_SIP,
                 //(允许程序监视，修改或放弃播出电话)
                 Manifest.permission.PROCESS_OUTGOING_CALLS);
-
     }
 
     @Override

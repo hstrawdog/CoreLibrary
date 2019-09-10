@@ -16,9 +16,11 @@ import com.hqq.core.CoreBuildConfig;
 public class PermissionsUtils {
 
     /**
+     * 读写文件的权限
+     *
      * @param permissionsResult
      */
-    public static void requestStorage(PermissionsResult permissionsResult) {
+    public static void requestStoragePermission(PermissionsResult permissionsResult) {
         if (!new PermissionsHasImpl().hasStorage(CoreBuildConfig.getInstance().getApplication())) {
             new FragmentProxy().requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, permissionsResult);
         } else {
@@ -27,9 +29,11 @@ public class PermissionsUtils {
     }
 
     /**
+     * 获取摄像头权限
+     *
      * @param permissionsResult
      */
-    public static void showCameraFragment(PermissionsResult permissionsResult) {
+    public static void requestCameraPermission(PermissionsResult permissionsResult) {
         if (!new PermissionsHasImpl().hasCamera(CoreBuildConfig.getInstance().getApplication())) {
             new FragmentProxy().requestPermissions(new String[]{Manifest.permission.CAMERA}, permissionsResult);
         } else {
@@ -37,3 +41,5 @@ public class PermissionsUtils {
         }
     }
 }
+
+
