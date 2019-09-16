@@ -9,14 +9,35 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library
  * @FileName :   DateUtils
  * @Date : 2018/7/5 0005  上午 11:03
- * @Descrive : https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/lib/src/main/java/com/blankj/utilcode/util/TimeUtils.java
  * @Email :  qiqiang213@gmail.com
+ * @Descrive : https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/lib/src/main/java/com/blankj/utilcode/util/TimeUtils.java
+ * 字母	日期或时间元素	表示	示例
+ * G	Era 标志符	Text	AD
+ * y	年	Year	1996; 96
+ * M	年中的月份	Month	July; Jul; 07
+ * w	年中的周数	Number	27
+ * W	月份中的周数	Number	2
+ * D	年中的天数	Number	189
+ * d	月份中的天数	Number	10
+ * F	月份中的星期	Number	2
+ * E	星期中的天数	Text	Tuesday; Tue
+ * a	Am/pm 标记	Text	PM
+ * H	一天中的小时数（0-23）	Number	0
+ * k	一天中的小时数（1-24）	Number	24
+ * K	am/pm 中的小时数（0-11）	Number	0
+ * h	am/pm 中的小时数（1-12）	Number	12
+ * m	小时中的分钟数	Number	30
+ * s	分钟中的秒数	Number	55
+ * S	毫秒数	Number	978
+ * z	时区	General time zone	Pacific Standard Time; PST; GMT-08:00
+ * Z	时区	RFC 822 time zone	-0800
  */
 public class DateUtils {
     private static final ThreadLocal<SimpleDateFormat> SDF_THREAD_LOCAL = new ThreadLocal<>();
@@ -29,6 +50,21 @@ public class DateUtils {
         }
         return simpleDateFormat;
     }
+
+
+    /**
+     * 获取当前东八区的时间
+     *
+     * @return
+     */
+    public static String getNowDate() {
+        SimpleDateFormat dff = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dff.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        String ee = dff.format(new Date());
+
+        return ee;
+    }
+
 
     /**
      * 月日时分秒，0-9前补0
@@ -294,18 +330,8 @@ public class DateUtils {
 
 
     public static void main(String[] args) {
-//        System.out.println(string2Millisecond("2019-01-07 17:36:22"));
-//        System.out.println(
-//                millis2String(string2Millisecond("2019-01-07 17:36:22") - 30 * 60 * 1000
-//                        , new SimpleDateFormat("MM月dd日HH时mm分ss秒")));
-//
-//        for (int i = 0; i < 10; i++) {
-//            if (i == 6) {
-//                break;
-//            }
-//            System.out.println(i);
-//        }
-//        System.out.println(string2Millisecond(""));
+
+        System.out.println("args = [" + getNowDate() + "]");
 
 
 
