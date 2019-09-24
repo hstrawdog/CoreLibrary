@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 
 import com.hqq.core.R;
 import com.hqq.core.recycler.adapter.BaseBannerAdapter;
+import com.hqq.core.recycler.adapter.RecycleBannerAdapter;
 import com.hqq.core.recycler.indicator.CircleIndicatorView;
 import com.hqq.core.utils.ScreenUtils;
 
@@ -34,8 +35,7 @@ import java.util.List;
  * 1.多种指示器配置
  * 2. 考虑再次封装 adapter  不应该绑定在这边 需要解耦
  */
-@Deprecated
-public class BannerLayout extends FrameLayout {
+public class RecycleViewBanner extends FrameLayout {
 
 
     private int mInterval;
@@ -66,7 +66,7 @@ public class BannerLayout extends FrameLayout {
      */
     OnRvBannerChangeListener mOnRvBannerChangeListener;
     LinearLayoutManager mLinearLayoutManager;
-    private BaseBannerAdapter mAdapter;
+    private RecycleBannerAdapter mAdapter;
 
     private Runnable playTask = new Runnable() {
 
@@ -83,15 +83,15 @@ public class BannerLayout extends FrameLayout {
         return mData;
     }
 
-    public BannerLayout(Context context) {
+    public RecycleViewBanner(Context context) {
         this(context, null);
     }
 
-    public BannerLayout(Context context, AttributeSet attrs) {
+    public RecycleViewBanner(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BannerLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RecycleViewBanner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -108,7 +108,7 @@ public class BannerLayout extends FrameLayout {
         if (mRecyclerView == null) {
             mRecyclerView = new RecyclerView(context);
             mLinearLayout = new CircleIndicatorView(context);
-            mAdapter = new BaseBannerAdapter();
+            mAdapter = new RecycleBannerAdapter();
             mLinearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         }
 
@@ -294,29 +294,8 @@ public class BannerLayout extends FrameLayout {
         }
     }
 
-    public <T extends BaseBannerBean> void setRvBannerData(List<T> data, int position) {
-        setPlaying(false);
-        // 避免空指针
-        if (mData == null) {
-            mData = new ArrayList<>();
-        }
-        mData.clear();
-        mData.addAll(data);
-        if (mData.size() > 1) {
-            currentIndex = position;
-            mAdapter.notifyDataSetChanged();
-            mRecyclerView.scrollToPosition(currentIndex);
-            if (isShowIndicator) {
-                createIndicators();
-            }
-            setPlaying(true);
-        } else {
-            currentIndex = 0;
-            mAdapter.notifyDataSetChanged();
-        }
-    }
 
-    public <T extends BaseBannerAdapter> void setAdapter(T adapter) {
+    public <T extends RecycleBannerAdapter> void setAdapter(T adapter) {
         mAdapter = adapter;
     }
 
@@ -383,15 +362,6 @@ public class BannerLayout extends FrameLayout {
 
 
     /**
-     * 点击事件
-     *
-     * @param onRvBannerClickListener 　OnRvBannerClickListener
-     */
-    public void setOnRvBannerClickListener(OnRvBannerClickListener onRvBannerClickListener) {
-        mAdapter.setOnRvBannerClickListener(onRvBannerClickListener);
-    }
-
-    /**
      * 是否 无限轮播
      *
      * @param unlimited boolean
@@ -428,5 +398,35 @@ public class BannerLayout extends FrameLayout {
         this.currentIndex = currentIndex;
     }
 
+    public void setOnRvBannerClickListener(RecycleViewBanner.RecycleViewBannerClickListener onRvBannerClickListener) {
+        mAdapter.setOnRvBannerClickListener(onRvBannerClickListener);
+    }
+
+    public void setRecycleViewBannerChangeListener(RecycleViewBanner.RecycleViewBannerChangeListener recycleViewBannerChangeListener) {
+        mAdapter.setRecycleViewBannerChangeListener(recycleViewBannerChangeListener);
+    }
+
+    public interface RecycleViewBannerClickListener<T> {
+        /**
+         * @param t
+         */
+        void onBannerClick(T t);
+
+    }
+
+
+    public interface RecycleViewBannerChangeListener<T> {
+        /**
+         * @param t
+         * @return
+         */
+        String getUrl(T t);
+
+        /**
+         * @param t
+         * @return
+         */
+        String getTitle(T t);
+    }
 
 }

@@ -8,6 +8,7 @@ package com.hqq.core.recycler;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
+@Deprecated
 public interface BaseBannerBean {
     /**
      * 图片url

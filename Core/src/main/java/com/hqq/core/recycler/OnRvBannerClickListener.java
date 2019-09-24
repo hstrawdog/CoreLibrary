@@ -8,6 +8,7 @@ package com.hqq.core.recycler;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
+@Deprecated
 public interface OnRvBannerClickListener {
     /**
      *  点击事件
