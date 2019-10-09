@@ -12,9 +12,8 @@ import com.hqq.core.CoreBuildConfig;
  * @FileName :   LogUtils
  * @Date : 2019/3/13 0013
  * @Email :  qiqiang213@gmail.com
- * @Descrive : TODO
+ * @Descrive :    logcat 打印的长度  4*1024  这边用的 4*1000
  */
-
 public class LogUtils {
     /**
      * Log的开关<br>
@@ -44,10 +43,6 @@ public class LogUtils {
         d(TAG, object);
     }
 
-    public static <T> void d(T t, Object object) {
-        d(t.getClass().getName(), object);
-    }
-
     /**
      * DEBUG 类型日志
      *
@@ -60,12 +55,6 @@ public class LogUtils {
                 d("标签" + tag + "的打印内容为空！");
             }
             Log.d(tag, object.toString());
-        }
-    }
-
-    public static void debugW(Object object) {
-        if (CoreBuildConfig.getInstance().isDebug()) {
-            e(object);
         }
     }
 
@@ -90,10 +79,10 @@ public class LogUtils {
                 e("标签" + tag + "的打印内容为空！");
             }
             String sobject = object.toString().trim();
-            if (sobject.length() > 4000) {
-                for (int i = 0; i < sobject.length(); i += 4000) {
+            if (sobject.length() > 4 * 1000) {
+                for (int i = 0; i < sobject.length(); i += 4 * 1000) {
                     if (i + 4000 < sobject.length()) {
-                        Log.e(tag + i, sobject.substring(i, i + 4000));
+                        Log.e(tag + i, sobject.substring(i, i + 4 * 1000));
                     } else {
                         Log.e(tag + i, sobject.substring(i, sobject.length()));
                     }
@@ -103,28 +92,6 @@ public class LogUtils {
             }
         }
     }
-
-    public static void e(String object) {
-        if (CoreBuildConfig.getInstance().isDebug()) {
-            if (object == null) {
-                e("标签" + TAG + "的打印内容为空！");
-                return;
-            }
-            String sobject = object.toString().trim();
-            if (sobject.length() > 4000) {
-                for (int i = 0; i < sobject.length(); i += 4000) {
-                    if (i + 4000 < sobject.length()) {
-                        Log.e(TAG + i, sobject.substring(i, i + 4000));
-                    } else {
-                        Log.e(TAG + i, sobject.substring(i, sobject.length()));
-                    }
-                }
-            } else {
-                Log.e(TAG, sobject);
-            }
-        }
-    }
-
 
     public static void v(Object object) {
         if (CoreBuildConfig.getInstance().isDebug()) {

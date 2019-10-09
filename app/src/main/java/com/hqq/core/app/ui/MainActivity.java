@@ -15,6 +15,7 @@ import com.hqq.core.app.ui.screen.TextViewSizeActivity;
 import com.hqq.core.app.ui.web.WebActivity;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
+import com.hqq.core.utils.log.LogUtils;
 
 /**
  * @Author : huangqiqiang
@@ -52,6 +53,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
         mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
         mAdapter.addData(new MainBean("网页测试", WebActivity.class));
+
     }
 
 

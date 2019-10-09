@@ -16,6 +16,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Checkable;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -28,7 +29,7 @@ import android.widget.TextView;
  * @Date : 2018/6/13 0013  上午 9:44
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
- * 与BRVAH是一样的  方便 HeadView 的一些操作
+ * 与旧帮帮 BRVAH是一样的  方便 HeadView 的一些操作
  */
 public class ViewHolderUtils {
 
@@ -37,10 +38,13 @@ public class ViewHolderUtils {
      */
     private final SparseArray<View> views;
 
+
     /**
      * use itemView instead
      */
+
     public View convertView;
+
     View.OnClickListener mOnItemChildClick;
 
     public ViewHolderUtils(final View view, View.OnClickListener onItemChildClick) {
@@ -53,7 +57,7 @@ public class ViewHolderUtils {
     /**
      * use itemView instead
      *
-     * @return the ViewHolderUtils root view
+     * @return the ViewHolder root view
      */
     @Deprecated
     public View getConvertView() {
@@ -179,9 +183,22 @@ public class ViewHolderUtils {
      * @param visible True for VISIBLE, false for GONE.
      * @return The ViewHolderUtils for chaining.
      */
-    public ViewHolderUtils setVisible(@IdRes int viewId, boolean visible) {
+    public ViewHolderUtils setGone(@IdRes int viewId, boolean visible) {
         View view = getView(viewId);
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        return this;
+    }
+
+    /**
+     * Set a view visibility to VISIBLE (true) or INVISIBLE (false).
+     *
+     * @param viewId  The view id.
+     * @param visible True for VISIBLE, false for INVISIBLE.
+     * @return The ViewHolderUtils for chaining.
+     */
+    public ViewHolderUtils setVisible(@IdRes int viewId, boolean visible) {
+        View view = getView(viewId);
+        view.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
         return this;
     }
 
@@ -303,6 +320,90 @@ public class ViewHolderUtils {
     }
 
 
+
+    /**
+     * Sets the on touch listener of the view.
+     *
+     * @param viewId   The view id.
+     * @param listener The on touch listener;
+     * @return The ViewHolderUtils for chaining.
+     */
+    @Deprecated
+    public ViewHolderUtils setOnTouchListener(@IdRes int viewId, View.OnTouchListener listener) {
+        View view = getView(viewId);
+        view.setOnTouchListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the on long click listener of the view.
+     *
+     * @param viewId   The view id.
+     * @param listener The on long click listener;
+     * @return The ViewHolderUtils for chaining.
+     * Please use {@link #(int)} (adapter.setOnItemChildLongClickListener(listener))}
+     */
+    @Deprecated
+    public ViewHolderUtils setOnLongClickListener(@IdRes int viewId, View.OnLongClickListener listener) {
+        View view = getView(viewId);
+        view.setOnLongClickListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the listview or gridview's item click listener of the view
+     *
+     * @param viewId   The view id.
+     * @param listener The item on click listener;
+     * @return The ViewHolderUtils for chaining.
+     * Please use {@link #addOnClickListener(int)} (int)} (adapter.setOnItemChildClickListener(listener))}
+     */
+    @Deprecated
+    public ViewHolderUtils setOnItemClickListener(@IdRes int viewId, AdapterView.OnItemClickListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemClickListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the listview or gridview's item long click listener of the view
+     *
+     * @param viewId   The view id.
+     * @param listener The item long click listener;
+     * @return The ViewHolderUtils for chaining.
+     */
+    public ViewHolderUtils setOnItemLongClickListener(@IdRes int viewId, AdapterView.OnItemLongClickListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemLongClickListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the listview or gridview's item selected click listener of the view
+     *
+     * @param viewId   The view id.
+     * @param listener The item selected click listener;
+     * @return The ViewHolderUtils for chaining.
+     */
+    public ViewHolderUtils setOnItemSelectedClickListener(@IdRes int viewId, AdapterView.OnItemSelectedListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemSelectedListener(listener);
+        return this;
+    }
+
+    /**
+     * Sets the on checked change listener of the view.
+     *
+     * @param viewId   The view id.
+     * @param listener The checked change listener of compound button.
+     * @return The ViewHolderUtils for chaining.
+     */
+    public ViewHolderUtils setOnCheckedChangeListener(@IdRes int viewId, CompoundButton.OnCheckedChangeListener listener) {
+        CompoundButton view = getView(viewId);
+        view.setOnCheckedChangeListener(listener);
+        return this;
+    }
+
     /**
      * Sets the tag of the view.
      *
@@ -370,6 +471,7 @@ public class ViewHolderUtils {
         }
         return (T) view;
     }
+
 
     /**
      * add childView id
