@@ -16,5 +16,4 @@ import android.support.annotation.IntDef;
 public @interface ToolBarMode {
     int LIGHT_MODE = 1;
     int DARK_MODE = 2;
-
 }

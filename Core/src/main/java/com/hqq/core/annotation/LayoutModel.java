@@ -3,7 +3,6 @@ package com.hqq.core.annotation;
 import android.support.annotation.IntDef;
 
 
-
 /**
  * @Author : huangqiqiang
  * @Package : com...annotation

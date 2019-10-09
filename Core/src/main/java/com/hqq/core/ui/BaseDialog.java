@@ -35,6 +35,8 @@ import butterknife.Unbinder;
  * @Descrive :
  * - 默认 背景是透明的 状态栏亮色模式
  * - 在高度全屏的情况下 进行状态栏模式设置
+ * - 宽度需要在代码上写死
+ * - DialogFragment自带内存泄漏
  */
 public abstract class BaseDialog extends DialogFragment implements ICreateRootView.IDialogFragment {
 
