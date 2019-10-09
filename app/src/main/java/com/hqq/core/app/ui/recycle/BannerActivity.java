@@ -1,9 +1,8 @@
 package com.hqq.core.app.ui.recycle;
 
-import com.hqq.core.recycler.BannerLayout;
+import com.hqq.core.recycler.RecycleViewBanner;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.app.R;
-import com.hqq.core.app.bean.BannerBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +20,9 @@ import butterknife.BindView;
 public class BannerActivity extends BaseActivity {
 
     @BindView(R.id.rc_banner)
-    BannerLayout mRcBanner;
+    RecycleViewBanner mRcBanner;
     @BindView(R.id.rc_banner2)
-    BannerLayout mRcBanner2;
+    RecycleViewBanner mRcBanner2;
 
     @Override
     public int setViewId() {
@@ -33,12 +32,12 @@ public class BannerActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        List<BannerBean> list = new ArrayList<>();
-        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
-        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
-        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
-        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
-        list.add(new BannerBean("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        List<String> list = new ArrayList<>();
+        list.add(("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
+        list.add(("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
         mRcBanner.setRvBannerData(list);
         List<Integer> list2 = new ArrayList<>();
         list2.add(R.mipmap.ic_banner2);

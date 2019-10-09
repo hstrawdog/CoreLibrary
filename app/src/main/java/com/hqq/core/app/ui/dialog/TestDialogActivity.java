@@ -52,7 +52,6 @@ public class TestDialogActivity extends BaseActivity {
             case R.id.button9:
                 FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
                 mFullBottomSheetFragment.show(getSupportFragmentManager());
-
                 break;
             case R.id.button10:
                 FoldFullBottomSheet mFullBottomSheetFragments = new FoldFullBottomSheet();

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.hqq.core.R;
 import com.hqq.core.glide.ImageLoadUtils;
-import com.hqq.core.recycler.BaseBannerBean;
 import com.hqq.core.recycler.RecycleViewBanner;
 
 import java.util.ArrayList;
@@ -93,9 +92,7 @@ public class RecycleBannerAdapter<T> extends RecyclerView.Adapter {
         ImageView img = holder.itemView.findViewById(R.id.iv_banner);
         TextView tv = holder.itemView.findViewById(R.id.tv_code_banner);
         T data = mData.get(position % mData.size());
-        if (data instanceof BaseBannerBean) {
-
-        } else if (data instanceof String) {
+        if (data instanceof String) {
             tv.setVisibility(View.GONE);
             ImageLoadUtils.with((String) data, img);
         } else if (data instanceof Integer) {

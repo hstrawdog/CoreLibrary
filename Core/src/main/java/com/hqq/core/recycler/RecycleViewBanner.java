@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.hqq.core.R;
-import com.hqq.core.recycler.adapter.BaseBannerAdapter;
 import com.hqq.core.recycler.adapter.RecycleBannerAdapter;
 import com.hqq.core.recycler.indicator.CircleIndicatorView;
 import com.hqq.core.utils.ScreenUtils;
@@ -61,10 +60,7 @@ public class RecycleViewBanner extends FrameLayout {
      * 是否无限轮播
      */
     private boolean mIsUnlimited = true;
-    /**
-     * 轮播图改变
-     */
-    OnRvBannerChangeListener mOnRvBannerChangeListener;
+
     LinearLayoutManager mLinearLayoutManager;
     private RecycleBannerAdapter mAdapter;
 
@@ -79,7 +75,7 @@ public class RecycleViewBanner extends FrameLayout {
         }
     };
 
-    public List<BaseBannerBean> getData() {
+    public List getData() {
         return mData;
     }
 
@@ -97,32 +93,29 @@ public class RecycleViewBanner extends FrameLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BannerLayout);
-        mInterval = a.getInt(R.styleable.BannerLayout_rvb_interval, 3000);
-        isShowIndicator = a.getBoolean(R.styleable.BannerLayout_rvb_showIndicator, true);
-        isShowTip = a.getBoolean(R.styleable.BannerLayout_rvb_isShowTip, true);
-        isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_rvb_autoPlaying, true);
-        int margin = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8));
+        int margin = initAttributeSet(context, attrs);
+        initRecycleView();
 
 
-        if (mRecyclerView == null) {
-            mRecyclerView = new RecyclerView(context);
-            mLinearLayout = new CircleIndicatorView(context);
-            mAdapter = new RecycleBannerAdapter();
-            mLinearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        }
+        addView(mRecyclerView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        LayoutParams linearLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        linearLayoutParams.gravity = Gravity.BOTTOM;
+        linearLayoutParams.setMargins(margin, margin, margin, margin);
+        addView(mLinearLayout, linearLayoutParams);
 
-        initIndicator(a);
-        a.recycle();
+        initEditMode();
 
+    }
+
+    private void initRecycleView() {
         // 直接使用卡片布局 貌似 也是可以的
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
         new PagerSnapHelper().attachToRecyclerView(mRecyclerView);
-
         mAdapter.setData(mData);
         mAdapter.setIsShowTip(isShowTip);
-
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -141,26 +134,45 @@ public class RecycleViewBanner extends FrameLayout {
                 }
             }
         });
+    }
 
+    /**
+     * 初始化属性
+     *
+     * @param context
+     * @param attrs
+     * @return
+     */
+    private int initAttributeSet(Context context, AttributeSet attrs) {
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BannerLayout);
+        mInterval = a.getInt(R.styleable.BannerLayout_rvb_interval, 3000);
+        isShowIndicator = a.getBoolean(R.styleable.BannerLayout_rvb_showIndicator, true);
+        isShowTip = a.getBoolean(R.styleable.BannerLayout_rvb_isShowTip, true);
+        isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_rvb_autoPlaying, true);
+        int margin = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8));
 
-        addView(mRecyclerView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+        if (mRecyclerView == null) {
+            mRecyclerView = new RecyclerView(context);
+            mLinearLayout = new CircleIndicatorView(context);
+            mAdapter = new RecycleBannerAdapter();
+            mLinearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        }
 
-        LayoutParams linearLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        linearLayoutParams.gravity = Gravity.BOTTOM;
-        linearLayoutParams.setMargins(margin, margin, margin, margin);
-        addView(mLinearLayout, linearLayoutParams);
+        initIndicator(a);
+        a.recycle();
+        return margin;
+    }
 
-        // 便于在xml中编辑时观察，运行时不执行
-//        if (isInEditMode()) {
-//            for (int i = 0; i < 3; i++) {
-//                mData.add("");
-//            }
-//            createIndicators();
-//        }
-
-
+    /**
+     * 便于在xml中编辑时观察，运行时不执行
+     */
+    private void initEditMode() {
+        if (isInEditMode()) {
+            for (int i = 0; i < 3; i++) {
+                mData.add("");
+            }
+            createIndicators();
+        }
     }
 
 
@@ -345,10 +357,6 @@ public class RecycleViewBanner extends FrameLayout {
         if (isShowIndicator) {
             mLinearLayout.setCurrentItem(currentIndex % mData.size());
         }
-        if (mOnRvBannerChangeListener != null) {
-            mOnRvBannerChangeListener.onChange(currentIndex % mData.size());
-        }
-
     }
 
     /**
@@ -371,15 +379,7 @@ public class RecycleViewBanner extends FrameLayout {
         mAdapter.setUnlimited(unlimited);
     }
 
-    /**
-     * 设置 分页监听
-     *
-     * @param onRvBannerChangeListener OnRvBannerChangeListener
-     */
-    public void setOnRvBannerChangeListener(OnRvBannerChangeListener onRvBannerChangeListener) {
-        mOnRvBannerChangeListener = onRvBannerChangeListener;
 
-    }
 
     /**
      * 滑动到指定位置
