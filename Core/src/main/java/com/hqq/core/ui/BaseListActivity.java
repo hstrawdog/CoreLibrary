@@ -103,7 +103,6 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
     }
 
     @Override

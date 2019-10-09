@@ -44,11 +44,9 @@ public class TestDialogActivity extends BaseActivity {
 
 
     @OnClick({R.id.button9, R.id.button14, R.id.button15, R.id.button16, R.id.button10, R.id.button17, R.id.button18
-
     })
     public void onViewClicked(View v) {
         switch (v.getId()) {
-
             case R.id.button9:
                 FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
                 mFullBottomSheetFragment.show(getSupportFragmentManager());

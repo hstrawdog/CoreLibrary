@@ -45,5 +45,4 @@ public class BannerActivity extends BaseActivity {
         mRcBanner2.setRvBannerData(list2);
     }
 
-
 }

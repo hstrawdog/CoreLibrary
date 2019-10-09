@@ -67,6 +67,6 @@ public class ListActivity extends BaseListActivity<MainAdapter> {
 
             }
         }, 3 * 1000);
-
     }
+
 }

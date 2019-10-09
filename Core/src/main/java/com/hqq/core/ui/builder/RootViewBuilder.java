@@ -94,6 +94,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         return mRootView;
     }
 
+    /*********************************Builder 方法*********************************************/
     /**
      * 获取默认状态栏
      *
@@ -112,8 +113,6 @@ public class RootViewBuilder implements IRootViewBuilder {
             return null;
         }
     }
-
-    /*********************************Builder 方法*********************************************/
 
     /**
      * 获取跟布局
@@ -178,7 +177,6 @@ public class RootViewBuilder implements IRootViewBuilder {
         return this;
 
     }
-
 
     /**
      * 设置状态栏模式

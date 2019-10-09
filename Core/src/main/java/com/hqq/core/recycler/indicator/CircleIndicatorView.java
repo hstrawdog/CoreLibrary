@@ -34,7 +34,6 @@ public class CircleIndicatorView extends View implements Indicator {
         init();
     }
 
-
     /**
      * 小圆点的 总数
      */
