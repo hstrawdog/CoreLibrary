@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.hqq.core.R;
 
-import retrofit2.Call;
 
 
 
@@ -31,11 +30,7 @@ import retrofit2.Call;
 public class LoadingView extends Dialog {
     private TextView tvMsg;
     Context mContext;
-    Call mCall;
 
-    public void setCall(Call call) {
-        mCall = call;
-    }
 
     @Override
     public void dismiss() {
@@ -43,11 +38,6 @@ public class LoadingView extends Dialog {
             return;
         }
         super.dismiss();
-        if (mCall != null && mCall.isExecuted() && !mCall.isCanceled()) {
-            mCall.cancel();
-            mCall = null;
-        }
-
     }
 
     public LoadingView(Context context) {

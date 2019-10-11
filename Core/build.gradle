@@ -101,16 +101,12 @@ dependencies {
     api rootProject.ext.dependencies.IDimensCompat
     api rootProject.ext.dependencies.appcompatV7
     api rootProject.ext.dependencies.recyclerview
-    api rootProject.ext.dependencies.cardview
 
     api rootProject.ext.dependencies.design
 
-    api rootProject.ext.dependencies.eventBus
 
     api rootProject.ext.dependencies.gson
-    api rootProject.ext.dependencies.retrofit
-    //  api rootProject.ext.dependencies.converterGson
-    api rootProject.ext.dependencies.loggingInterceptor
+
 
     api rootProject.ext.dependencies.Luban
 
