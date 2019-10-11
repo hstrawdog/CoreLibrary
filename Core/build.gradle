@@ -1,7 +1,4 @@
 apply plugin: 'com.android.library'
-// add these
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.huangqiqiang' // ××××代表你github名字
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -14,9 +11,6 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-
-
-
         def versionPropsFile = file('version.properties')
         if (versionPropsFile.canRead()) {
             //载入version.properties
@@ -36,7 +30,10 @@ android {
         }
 
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -99,9 +96,6 @@ artifacts {
 
 
 dependencies {
-    api(rootProject.ext.dependencies.arouterApi) {
-        exclude group: 'com.android.support'
-    }
 
     api rootProject.ext.dependencies.constraintlayout
     api rootProject.ext.dependencies.IDimensCompat
@@ -110,7 +104,6 @@ dependencies {
     api rootProject.ext.dependencies.cardview
 
     api rootProject.ext.dependencies.design
-
 
     api rootProject.ext.dependencies.eventBus
 

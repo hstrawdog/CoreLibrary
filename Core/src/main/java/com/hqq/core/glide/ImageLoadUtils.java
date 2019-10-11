@@ -3,9 +3,9 @@ package com.hqq.core.glide;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.RawRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.RawRes;
 import android.view.View;
 import android.widget.ImageView;
 

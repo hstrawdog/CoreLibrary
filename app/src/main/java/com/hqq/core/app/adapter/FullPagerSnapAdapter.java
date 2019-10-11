@@ -1,9 +1,7 @@
 package com.hqq.core.app.adapter;
 
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

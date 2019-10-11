@@ -1,6 +1,6 @@
 package com.hqq.core.app.dialog;
 
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 import android.view.WindowManager;
 
 import com.hqq.core.annotation.ToolBarMode;

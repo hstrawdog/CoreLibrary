@@ -3,7 +3,7 @@ package com.hqq.core.utils;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 

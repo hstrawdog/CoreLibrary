@@ -1,10 +1,8 @@
 package com.hqq.core.permission;
 
 import android.app.Activity;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-
-import com.hqq.core.CoreBuildConfig;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @Author : huangqiqiang

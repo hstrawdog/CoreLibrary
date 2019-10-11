@@ -1,6 +1,6 @@
 package com.hqq.core.app.ui.soft.hide.keyboard;
 
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 

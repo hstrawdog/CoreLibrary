@@ -1,6 +1,6 @@
 package com.hqq.core.adapter;
 
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;

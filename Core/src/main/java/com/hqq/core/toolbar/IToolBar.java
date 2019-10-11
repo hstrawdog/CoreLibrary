@@ -1,8 +1,8 @@
 package com.hqq.core.toolbar;
 
 import android.app.Activity;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import android.view.View;
 import android.view.ViewGroup;
 

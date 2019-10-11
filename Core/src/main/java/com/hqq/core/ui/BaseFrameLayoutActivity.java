@@ -1,6 +1,6 @@
 package com.hqq.core.ui;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * @Author : huangqiqiang

@@ -1,7 +1,7 @@
 package com.hqq.core.app.dialog;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hqq.core.ui.BaseBottomDialog;
 import com.hqq.core.utils.ResourcesUtils;

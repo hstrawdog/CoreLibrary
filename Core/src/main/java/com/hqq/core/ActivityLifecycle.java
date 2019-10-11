@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.alibaba.android.arouter.exception.InitException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +62,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
      */
     protected Activity getActivity() {
         if (null == activities || activities.size() == 0) {
-            throw new InitException("Core 未初始化");
+            throw new IllegalStateException("Core 未初始化");
         }
         // 获取最上面的 Activity
         for (int i = activities.size() - 1; i >= 0; i--) {

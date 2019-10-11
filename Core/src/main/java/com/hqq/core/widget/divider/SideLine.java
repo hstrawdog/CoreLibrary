@@ -1,6 +1,6 @@
 package com.hqq.core.widget.divider;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 /**
  * @Author : huangqiqiang

@@ -1,6 +1,6 @@
 package com.hqq.core.annotation;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 
 /**

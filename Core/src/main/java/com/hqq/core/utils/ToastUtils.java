@@ -10,7 +10,7 @@ package com.hqq.core.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.Toast;

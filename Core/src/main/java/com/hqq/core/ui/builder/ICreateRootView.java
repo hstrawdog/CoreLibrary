@@ -1,8 +1,7 @@
 package com.hqq.core.ui.builder;
 
-import android.os.Bundle;
-import android.support.annotation.IntegerRes;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.IntegerRes;
+import androidx.fragment.app.FragmentManager;
 import android.view.View;
 
 /**

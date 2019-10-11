@@ -2,21 +2,19 @@ package com.hqq.core.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.LoadingView;
-
-import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -70,7 +68,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
             mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
-        LogUtils.d(this,"onCreateView " + getClass().getSimpleName() + this.toString());
+        LogUtils.d(this.getClass().getName(), "onCreateView " + getClass().getSimpleName() + this.toString());
         return mRootView;
     }
 
@@ -86,7 +84,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
         if (isLazyLoad() && mIsCreate && !mLazyInitEnd && isVisibleToUser) {
             initView();
             mLazyInitEnd = true;
-            LogUtils.d(this,"setUserVisibleHint  initBasic " + getClass().getSimpleName() + this.toString());
+            LogUtils.d(this.getClass().getName(), "setUserVisibleHint  initBasic " + getClass().getSimpleName() + this.toString());
         } else if (isLazyLoad() && mIsCreate && mLazyInitEnd && !isVisibleToUser) {
             onFragmentHit();
         }
@@ -106,11 +104,11 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
             if (!isLazyLoad()) {
                 initView();
 
-                LogUtils.d(this,"onViewCreated initBasic   false  " + getClass().getSimpleName() + this.toString());
+                LogUtils.d(this.getClass().getName(), "onViewCreated initBasic   false  " + getClass().getSimpleName() + this.toString());
 
             } else if (isLazyLoad() && getUserVisibleHint()) {
                 mLazyInitEnd = true;
-                LogUtils.d(this,"onViewCreated initBasic   True " + getClass().getSimpleName() + this.toString());
+                LogUtils.d(this.getClass().getName(), "onViewCreated initBasic   True " + getClass().getSimpleName() + this.toString());
                 initView();
             }
         }
@@ -123,7 +121,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.d(this,"onDestroy " + getClass().getSimpleName() + this.toString());
+        LogUtils.d(this.getClass().getName(), "onDestroy " + getClass().getSimpleName() + this.toString());
         //    mLoadingView = null;
         if (mUnkinder != null) {
             mUnkinder.unbind();

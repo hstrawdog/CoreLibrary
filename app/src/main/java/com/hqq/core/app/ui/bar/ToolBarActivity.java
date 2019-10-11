@@ -1,6 +1,6 @@
 package com.hqq.core.app.ui.bar;
 
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.view.View;
 
 import com.hqq.core.ui.BaseActivity;

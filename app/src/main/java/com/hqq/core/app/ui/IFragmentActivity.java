@@ -1,6 +1,6 @@
 package com.hqq.core.app.ui;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.hqq.core.app.R;
 import com.hqq.core.app.adapter.IFragmentAdapter;

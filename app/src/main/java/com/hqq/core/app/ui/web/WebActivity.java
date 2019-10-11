@@ -1,7 +1,6 @@
 package com.hqq.core.app.ui.web;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.hqq.core.app.R;
 import com.hqq.core.ui.BaseFrameLayoutActivity;

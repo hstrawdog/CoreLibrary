@@ -8,7 +8,7 @@
     tools:context="com.hqq.app.ui.activity.tab.layout.TabLayoutActivity">
 
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tb_tablayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,19 +16,19 @@
         app:tabMode="fixed"
         tools:ignore="MissingConstraints">
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tb_tablayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         tools:ignore="MissingConstraints">
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tb_tablayout3"
         android:layout_width="match_parent"
 
@@ -39,7 +39,7 @@
         app:tabMode="fixed"
         tools:ignore="MissingConstraints">
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
 
     <LinearLayout
@@ -48,7 +48,7 @@
         android:layout_marginBottom="@dimen/x2"
         android:background="@color/color_main">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tb_tablayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,18 +57,18 @@
             app:tabMode="fixed"
             tools:ignore="MissingConstraints">
 
-        </android.support.design.widget.TabLayout>
+        </com.google.android.material.tabs.TabLayout>
 
 
     </LinearLayout>
 
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
 
 </LinearLayout>

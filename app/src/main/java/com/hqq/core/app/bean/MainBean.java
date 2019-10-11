@@ -1,6 +1,6 @@
 package com.hqq.core.app.bean;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @Author : huangqiqiang

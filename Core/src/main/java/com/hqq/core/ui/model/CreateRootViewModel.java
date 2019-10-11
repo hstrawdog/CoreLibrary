@@ -1,7 +1,7 @@
 package com.hqq.core.ui.model;
 
 import android.app.Activity;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;

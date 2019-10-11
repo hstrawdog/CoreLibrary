@@ -6,7 +6,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -23,7 +23,6 @@ import com.hqq.core.listenner.WebLoadListener;
 import com.hqq.core.ui.BaseFragment;
 import com.hqq.core.utils.BundleUtils;
 import com.hqq.core.utils.RegexUtils;
-import com.hqq.core.utils.ResourcesUtils;
 
 /**
  * @Author : huangqiqiang

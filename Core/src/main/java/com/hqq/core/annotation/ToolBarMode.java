@@ -9,7 +9,7 @@ package com.hqq.core.annotation;
  * @Descrive :
  */
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 
 @IntDef({ToolBarMode.LIGHT_MODE, ToolBarMode.DARK_MODE})

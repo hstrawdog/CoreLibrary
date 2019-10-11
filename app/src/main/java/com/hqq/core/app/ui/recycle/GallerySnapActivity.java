@@ -1,7 +1,7 @@
 package com.hqq.core.app.ui.recycle;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hqq.core.app.R;
 import com.hqq.core.app.adapter.SnapHelperAdapter;
