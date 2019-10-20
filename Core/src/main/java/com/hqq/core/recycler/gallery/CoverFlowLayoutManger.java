@@ -6,12 +6,13 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Cover Flow布局类
@@ -610,7 +611,7 @@ public class CoverFlowLayoutManger extends RecyclerView.LayoutManager {
 
     /**
      * 获取中间位置
-     * <p>Note:该方法主要用于{@link RecyclerCoverFlow#getChildDrawingOrder(int, int)}判断中间位置
+     * <p>Note:该方法主要用于{@link RecyclerCoverFlow#(int, int)}判断中间位置
      * <p>如果需要获取被选中的Item位置，调用{@link #getSelectedPos()}
      */
     public int getCenterPosition() {
