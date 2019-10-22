@@ -7,7 +7,7 @@ android {
         applicationId "com.hqq.core"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        versionName rootProject.ext.android.versionName
+        versionName "1.0.0"
 
         //如果version.properties文件可读则执行操作
         def versionPropsFile = file('version.properties')
@@ -41,11 +41,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.dependencies.butterknife
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation project(':Core')

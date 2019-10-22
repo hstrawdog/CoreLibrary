@@ -77,7 +77,7 @@ public class BezierView extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float t = (float) animation.getAnimatedValue();
-                PointF p = BezierUtil.CalculateBezierPointForQuadratic(t,
+                PointF p = BezierUtil.calculateBezierPointForQuadratic(t,
                         new PointF(mStartPoint.x, mStartPoint.y),
                         new PointF(mCtrlPoint.x, mCtrlPoint.y),
                         new PointF(mEndPoint.x, mEndPoint.y));

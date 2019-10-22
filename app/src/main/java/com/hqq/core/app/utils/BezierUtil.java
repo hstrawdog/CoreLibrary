@@ -22,7 +22,7 @@ public class BezierUtil {
      * @param p2 终止点
      * @return t对应的点
      */
-    public static PointF CalculateBezierPointForQuadratic(float t, PointF p0, PointF p1, PointF p2) {
+    public static PointF calculateBezierPointForQuadratic(float t, PointF p0, PointF p1, PointF p2) {
         PointF point = new PointF();
         float temp = 1 - t;
         point.x = temp * temp * p0.x + 2 * t * temp * p1.x + t * t * p2.x;
@@ -41,7 +41,7 @@ public class BezierUtil {
      * @param p3 终止点
      * @return t对应的点
      */
-    public static PointF CalculateBezierPointForCubic(float t, PointF p0, PointF p1, PointF p2, PointF p3) {
+    public static PointF calculateBezierPointForCubic(float t, PointF p0, PointF p1, PointF p2, PointF p3) {
         PointF point = new PointF();
         float temp = 1 - t;
         point.x = p0.x * temp * temp * temp + 3 * p1.x * t * temp * temp + 3 * p2.x * t * t * temp + p3.x * t * t * t;

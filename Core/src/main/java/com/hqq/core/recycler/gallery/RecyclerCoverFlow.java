@@ -1,8 +1,10 @@
 package com.hqq.core.recycler.gallery;
 
 import android.content.Context;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -114,8 +116,11 @@ public class RecyclerCoverFlow extends RecyclerView {
     protected int getChildDrawingOrder(int childCount, int i) {
         int center = getCoverFlowLayout().getCenterPosition()
                 - getCoverFlowLayout().getFirstVisiblePosition(); //计算正在显示的所有Item的中间位置
-        if (center < 0) center = 0;
-        else if (center > childCount) center = childCount;
+        if (center < 0) {
+            center = 0;
+        } else if (center > childCount) {
+            center = childCount;
+        }
         int order;
         if (i == center) {
             order = childCount - 1;

@@ -101,15 +101,9 @@ dependencies {
     api rootProject.ext.dependencies.IDimensCompat
     api rootProject.ext.dependencies.appcompatV7
     api rootProject.ext.dependencies.recyclerview
-
     api rootProject.ext.dependencies.design
-
-
     api rootProject.ext.dependencies.gson
-
-
     api rootProject.ext.dependencies.Luban
-
     api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
     api rootProject.ext.dependencies.ultraPtr
 

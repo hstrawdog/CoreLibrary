@@ -8,6 +8,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:overScrollMode">never</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:activityOpenEnterAnimation">@android:anim/slide_in_left</item>
         <item name="android:activityOpenExitAnimation">@android:anim/slide_in_left</item>
         <item name="android:activityCloseEnterAnimation">@android:anim/slide_out_right</item>
