@@ -37,4 +37,14 @@ public class User {
         user.setLevel((int) (Math.random() * 77));
         return user;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", score=" + score +
+                ", level=" + level +
+                ", avatar=" + avatar +
+                '}';
+    }
 }

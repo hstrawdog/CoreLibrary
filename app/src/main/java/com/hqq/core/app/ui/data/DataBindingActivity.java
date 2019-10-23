@@ -1,21 +1,17 @@
 package com.hqq.core.app.ui.data;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 
 import com.hqq.core.app.R;
-import com.hqq.core.app.databinding.ActivityDataBindingBinding;
-import com.hqq.core.toolbar.BaseDefToolBarImpl;
-import com.hqq.core.toolbar.IToolBarBuilder;
 import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.utils.log.LogUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -25,38 +21,37 @@ import butterknife.BindView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : DataBinding 与现在的设计冲突
  */
-public class DataBindingActivity extends AppCompatActivity {
+public class DataBindingActivity extends BaseActivity {
 
     @BindView(R.id.textView2)
     TextView mTextView2;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_data_binding);
-        initView();
+    public int setViewId() {
+        return R.layout.activity_data_binding;
     }
 
-//    @Override
-//    public int setViewId() {
-//        return R.layout.activity_data_binding;
-//    }
-
-//    @Override
+    @Override
     public void initView() {
-        ActivityDataBindingBinding
-                binding = DataBindingUtil.setContentView(this, R.layout.activity_data_binding);
-        binding.setUser(User.newInstance());
 
-
-        Toolbar toolbar = (Toolbar)
-                LayoutInflater.from(this).inflate(com.hqq.core.R.layout.layout_def_toolbar, null);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
-
+        LiveUser.getInstance(this).observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                LogUtils.e("onChanged        " + user.toString());
+            }
+        });
 
     }
 
 
+    @OnClick(R.id.button19)
+    public void onViewClicked() {
+        User user = LiveUser.getInstance(this).getValue();
+        if (null == user) {
+            user = User.newInstance();
+        }
+        user.setLevel(user.getLevel() + 2);
+        LiveUser.getInstance(this).setValue(user);
+
+    }
 }
