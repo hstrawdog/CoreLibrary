@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
 
-    <com.hqq.core.app.ui.customize.weight.BezierView
+    <com.hqq.example.app.ui.customize.weight.BezierView
         android:id="@+id/view_bezier"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
