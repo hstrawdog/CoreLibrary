@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hqq.example">
+    package="com.hqq.core">
 
     <application>
         <provider
-            android:name="com.hqq.example.CoreInitProvider"
+            android:name="com.hqq.core.CoreInitProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:multiprocess="true" />

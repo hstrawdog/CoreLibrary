@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hqq.example.widget.CusPtrClassicFrameLayout
+    <com.hqq.core.widget.CusPtrClassicFrameLayout
         android:id="@id/ptr_pull_down"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,7 +15,7 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-    </com.hqq.example.widget.CusPtrClassicFrameLayout>
+    </com.hqq.core.widget.CusPtrClassicFrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

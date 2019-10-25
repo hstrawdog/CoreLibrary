@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hqq.example.app">
+    package="com.hqq.core.example">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.hqq.example.app.APP"
+        android:name="com.hqq.core.example.APP"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,25 +17,25 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.hqq.example.app.ui.launch.mode.SingleInstanceActivity"
+            android:name="com.hqq.core.example.ui.launch.mode.SingleInstanceActivity"
             android:label="栈顶"
             android:launchMode="singleInstance" />
         <activity
-            android:name="com.hqq.example.app.ui.launch.mode.LaunchModeDActivity"
+            android:name="com.hqq.core.example.ui.launch.mode.LaunchModeDActivity"
             android:label="界面1" />
         <activity
-            android:name="com.hqq.example.app.ui.launch.mode.LaunchModeCActivity"
+            android:name="com.hqq.core.example.ui.launch.mode.LaunchModeCActivity"
             android:label="界面2" />
         <activity
-            android:name="com.hqq.example.app.ui.launch.mode.LaunchModeBActivity"
+            android:name="com.hqq.core.example.ui.launch.mode.LaunchModeBActivity"
             android:label="界面3" />
         <activity
-            android:name="com.hqq.example.app.ui.launch.mode.LaunchModeAActivity"
+            android:name="com.hqq.core.example.ui.launch.mode.LaunchModeAActivity"
             android:label="界面4" />
-        <activity android:name="com.hqq.example.app.ui.data.DataBindingActivity">
+        <activity android:name="com.hqq.core.example.ui.data.DataBindingActivity">
 
         </activity>
-        <activity android:name="com.hqq.example.app.ui.web.WebActivity">
+        <activity android:name="com.hqq.core.example.ui.web.WebActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -43,7 +43,7 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <activity android:name="com.hqq.example.app.ui.customize.FishActivity">
+        <activity android:name="com.hqq.core.example.ui.customize.FishActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -52,7 +52,7 @@
 
         </activity>
         <activity
-            android:name="com.hqq.example.app.ui.BaseInfoActivity"
+            android:name="com.hqq.core.example.ui.BaseInfoActivity"
             android:label="设备信息">
 
             <!-- <intent-filter> -->
@@ -61,8 +61,8 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <activity android:name="com.hqq.example.app.ui.LayoutTestActivity" />
-        <activity android:name="com.hqq.example.app.ui.customize.ProgressBarViewActivity">
+        <activity android:name="com.hqq.core.example.ui.LayoutTestActivity" />
+        <activity android:name="com.hqq.core.example.ui.customize.ProgressBarViewActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -70,62 +70,62 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <activity android:name="com.hqq.example.app.ui.MainActivity">
+        <activity android:name="com.hqq.core.example.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hqq.example.app.ui.recycle.GallerySnapActivity" />
-        <activity android:name="com.hqq.example.app.ui.recycle.RecycleIndexActivity" />
+        <activity android:name="com.hqq.core.example.ui.recycle.GallerySnapActivity" />
+        <activity android:name="com.hqq.core.example.ui.recycle.RecycleIndexActivity" />
         <activity
-            android:name="com.hqq.example.app.ui.recycle.FullPagerSnapActivity"
+            android:name="com.hqq.core.example.ui.recycle.FullPagerSnapActivity"
             android:label="Recycle多个item 分页" />
         <activity
-            android:name="com.hqq.example.app.ui.tab.layout.TabLayoutActivity"
+            android:name="com.hqq.core.example.ui.tab.layout.TabLayoutActivity"
             android:label="tabLayout  测试" />
-        <activity android:name="com.hqq.example.app.ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
-        <activity android:name="com.hqq.example.app.ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity" />
-        <activity android:name="com.hqq.example.app.ui.soft.hide.keyboard.SoftHideKeyBoardActivity" />
+        <activity android:name="com.hqq.core.example.ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
+        <activity android:name="com.hqq.core.example.ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity" />
+        <activity android:name="com.hqq.core.example.ui.soft.hide.keyboard.SoftHideKeyBoardActivity" />
         <activity
-            android:name="com.hqq.example.app.ui.bar.ToolBarActivity"
+            android:name="com.hqq.core.example.ui.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
-        <activity android:name="com.hqq.example.app.ui.IFragmentActivity" />
+        <activity android:name="com.hqq.core.example.ui.IFragmentActivity" />
         <activity
-            android:name="com.hqq.example.app.ui.list.LoadMoreActivity"
+            android:name="com.hqq.core.example.ui.list.LoadMoreActivity"
             android:label="加载数据" />
         <activity
-            android:name="com.hqq.example.app.ui.DefActivity"
+            android:name="com.hqq.core.example.ui.DefActivity"
             android:label="默认Activity" />
         <activity
-            android:name="com.hqq.example.app.ui.list.ListActivity"
+            android:name="com.hqq.core.example.ui.list.ListActivity"
             android:label="列表数据" />
-        <activity android:name="com.hqq.example.app.ui.bar.SearchBarActivity" />
+        <activity android:name="com.hqq.core.example.ui.bar.SearchBarActivity" />
         <activity
-            android:name="com.hqq.example.app.ui.recycle.BannerActivity"
+            android:name="com.hqq.core.example.ui.recycle.BannerActivity"
             android:label="轮播图测试" />
         <activity
-            android:name="com.hqq.example.app.ui.DefImgActivity"
+            android:name="com.hqq.core.example.ui.DefImgActivity"
             android:label="默认图显示" />
         <activity
-            android:name="com.hqq.example.app.ui.PermissionActivity"
+            android:name="com.hqq.core.example.ui.PermissionActivity"
             android:label="权限测试" />
         <activity
-            android:name="com.hqq.example.app.ui.dialog.BottomSheetActivity"
+            android:name="com.hqq.core.example.ui.dialog.BottomSheetActivity"
             android:label="知乎评论列表" />
         <activity
-            android:name="com.hqq.example.app.ui.screen.TextViewSizeActivity"
+            android:name="com.hqq.core.example.ui.screen.TextViewSizeActivity"
             android:label="文字大小" />
         <activity
-            android:name="com.hqq.example.app.ui.screen.DimenActivity"
+            android:name="com.hqq.core.example.ui.screen.DimenActivity"
             android:label="1像素大小测试" />
         <activity
-            android:name="com.hqq.example.app.ui.ThrowActivity"
+            android:name="com.hqq.core.example.ui.ThrowActivity"
             android:label="Throw异常测试" />
-        <activity android:name="com.hqq.example.app.ui.bar.SettingToolBarActivity" />
+        <activity android:name="com.hqq.core.example.ui.bar.SettingToolBarActivity" />
         <activity
-            android:name="com.hqq.example.app.ui.dialog.TestDialogActivity"
+            android:name="com.hqq.core.example.ui.dialog.TestDialogActivity"
             android:label="dialog 测试">
 
             <!-- <intent-filter> -->
@@ -133,12 +133,12 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name="com.hqq.example.app.ui.customize.BezierActivity" />
-        <activity android:name="com.hqq.example.app.ui.customize.CustomizeIndexActivity" />
+        <activity android:name="com.hqq.core.example.ui.customize.BezierActivity" />
+        <activity android:name="com.hqq.core.example.ui.customize.CustomizeIndexActivity" />
         <activity
-            android:name="com.hqq.example.app.ui.dialog.DialogIndexActivity"
+            android:name="com.hqq.core.example.ui.dialog.DialogIndexActivity"
             android:label="dialog 系列" />
-        <activity android:name="com.hqq.example.app.ui.list.ListIndexActivity" />
+        <activity android:name="com.hqq.core.example.ui.list.ListIndexActivity" />
     </application>
 
 </manifest>

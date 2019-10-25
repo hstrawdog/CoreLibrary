@@ -38,7 +38,7 @@
             android:layout_height="wrap_content" />
 
 
-        <com.hqq.example.widget.FilterImageView
+        <com.hqq.core.widget.FilterImageView
             android:id="@+id/iv_bar_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -78,7 +78,7 @@
         </LinearLayout>
 
 
-        <com.hqq.example.widget.FilterImageView
+        <com.hqq.core.widget.FilterImageView
             android:id="@+id/iv_bar_right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
