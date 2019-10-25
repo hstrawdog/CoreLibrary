@@ -1,6 +1,5 @@
 package com.hqq.core.app.ui.data;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
@@ -10,7 +9,6 @@ import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

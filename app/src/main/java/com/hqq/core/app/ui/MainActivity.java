@@ -7,7 +7,9 @@ import com.hqq.core.app.adapter.MainAdapter;
 import com.hqq.core.app.bean.MainBean;
 import com.hqq.core.app.ui.bar.ToolBarActivity;
 import com.hqq.core.app.ui.customize.CustomizeIndexActivity;
+import com.hqq.core.app.ui.data.DataBindingActivity;
 import com.hqq.core.app.ui.dialog.TestDialogActivity;
+import com.hqq.core.app.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.core.app.ui.list.ListIndexActivity;
 import com.hqq.core.app.ui.recycle.RecycleIndexActivity;
 import com.hqq.core.app.ui.screen.DimenActivity;
@@ -15,7 +17,6 @@ import com.hqq.core.app.ui.screen.TextViewSizeActivity;
 import com.hqq.core.app.ui.web.WebActivity;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
-import com.hqq.core.utils.log.LogUtils;
 
 /**
  * @Author : huangqiqiang
@@ -41,6 +42,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 
     @Override
     public void initData() {
+        mAdapter.addData(new MainBean("启动模式", SingleInstanceActivity.class));
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("Recycle 相关", RecycleIndexActivity.class));
@@ -53,6 +55,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
         mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
         mAdapter.addData(new MainBean("网页测试", WebActivity.class));
+        mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
 
     }
 

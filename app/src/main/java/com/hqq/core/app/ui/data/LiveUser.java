@@ -2,7 +2,6 @@ package com.hqq.core.app.ui.data;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 /**
