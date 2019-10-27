@@ -5,6 +5,8 @@ import android.app.Application;
 import android.os.Bundle;
 
 
+import com.hqq.core.utils.log.LogUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         activities.add(activity);
-
+        LogUtils.d("onActivityCreated",activity.getLocalClassName());
     }
 
     @Override
@@ -53,6 +55,8 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityDestroyed(Activity activity) {
         activities.remove(activity);
+        LogUtils.d("onActivityDestroyed",activity.getLocalClassName());
+
     }
 
     /**
