@@ -1,10 +1,12 @@
 package com.hqq.core.toolbar;
 
 import android.app.Activity;
+
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,9 @@ import com.hqq.core.R;
  * @Email :  qiqiang213@gmail.com
  */
 public class BaseDefToolBarImpl extends BaseToolBar {
-    protected ImageView mImageViewBg;
-    protected int mDefToolBarColor = R.color.toolbar_bg_color;
-    protected int mDefTitleColor = R.color.color_333;
+    private ImageView mImageViewBg;
+    private int mDefToolBarColor = R.color.toolbar_bg_color;
+    private int mDefTitleColor = R.color.color_333;
 
     @Override
     public View iniToolBar(final Activity activity, ViewGroup viewGroup) {

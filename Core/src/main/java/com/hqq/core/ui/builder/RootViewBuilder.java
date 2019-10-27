@@ -2,9 +2,11 @@ package com.hqq.core.ui.builder;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+
 import androidx.annotation.ColorRes;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -39,15 +41,16 @@ public class RootViewBuilder implements IRootViewBuilder {
      * 是否强制竖屏
      */
     private boolean alwaysPortrait = true;
-    /**
-     * 是否全屏显示
-     */
-    private boolean fullScreen = false;
+
 
     /**
      * 布局构建器
      */
     CreateRootViewModel mCreateRootViewModel;
+
+    public <T> RootViewBuilder(T activity) {
+        this(activity, false, false);
+    }
 
     public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
         mCreateRootViewModel = new CreateRootViewModel(isShowStatus, isShowToolBar);
@@ -69,12 +72,16 @@ public class RootViewBuilder implements IRootViewBuilder {
         mCreateRootViewModel.setActivity(mActivity);
     }
 
-    public <T> RootViewBuilder(T activity) {
-        this(activity, false, false);
+
+    @Override
+    public View buildContentView(int layoutId, View rootView) {
+        mRootView = mCreateRootViewModel.initContentView(layoutId, rootView);
+        return mRootView;
     }
 
     @Override
-    public void initActivity() {
+    public void initActivity(boolean fullScreen) {
+        // 全屏的需求只有在activity上才需要的
         if (fullScreen) {
             //隐藏状态 上的字体还颜色
             mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -85,13 +92,6 @@ public class RootViewBuilder implements IRootViewBuilder {
         if (alwaysPortrait) {
             mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-    }
-
-
-    @Override
-    public View initContentView(int layoutId, View rootView) {
-        mRootView = mCreateRootViewModel.initContentView(layoutId, rootView);
-        return mRootView;
     }
 
     /*********************************Builder 方法*********************************************/
@@ -151,7 +151,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showToolBar 标题栏
      */
     public RootViewBuilder setToolbatVisibility(boolean showStatus, boolean showToolBar) {
-        mCreateRootViewModel.setToolbatVisibility(showStatus, showToolBar);
+        mCreateRootViewModel.setToolbarVisibility(showStatus, showToolBar);
         return this;
 
     }
@@ -162,7 +162,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showStatus
      */
     public RootViewBuilder setShowStatus(boolean showStatus) {
-        mCreateRootViewModel.setShowStatus(showStatus);
+        mCreateRootViewModel.setShowStatusBar(showStatus);
         return this;
 
     }
@@ -229,26 +229,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         return this;
     }
 
-    /**
-     * 是否全屏
-     *
-     * @return
-     */
-    public boolean isFullScreen() {
-        return fullScreen;
-    }
 
-    /**
-     * 设置是否全屏
-     *
-     * @param fullScreen
-     * @return
-     */
-    public RootViewBuilder setFullScreen(boolean fullScreen) {
-        this.fullScreen = fullScreen;
-        return this;
-
-    }
 }
 
 

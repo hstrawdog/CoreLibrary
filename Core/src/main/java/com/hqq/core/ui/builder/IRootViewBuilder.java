@@ -17,7 +17,7 @@ public interface IRootViewBuilder {
      * 是否全屏
      * 是否竖屏
      */
-    void initActivity();
+    void initActivity(boolean fullScreen);
 
     /**
      * 构建后的页面布局
@@ -26,6 +26,6 @@ public interface IRootViewBuilder {
      * @param rootView 自定义View
      * @return rootView
      */
-    View initContentView(int layoutId, View rootView);
+    View buildContentView(int layoutId, View rootView);
 
 }

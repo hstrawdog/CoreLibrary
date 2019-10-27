@@ -37,7 +37,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
     @Override
     public void initDefConfig() {
         super.initDefConfig();
-        mRootViewBuild.setShowToolBar(false);
+//        mRootViewBuild.setShowToolBar(false);
     }
 
     @Override

@@ -57,7 +57,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         if (mRootView == null) {
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-            mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
+            mRootView = mRootViewBuild.buildContentView(setViewId(), setRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());

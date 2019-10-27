@@ -3,8 +3,10 @@ package com.hqq.core.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 
 import com.hqq.core.ui.builder.ICreateRootView;
@@ -32,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         mActivity = this;
         mRootViewBuild = new RootViewBuilder(this, true, true);
         initDefConfig();
-        setContentView(mRootViewBuild.initContentView(setViewId(), setRootView()));
+        setContentView(mRootViewBuild.buildContentView(setViewId(), setRootView()));
         mLoadingView = new LoadingView(this);
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
@@ -76,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
      */
     @Override
     public void initDefConfig() {
-        mRootViewBuild.initActivity();
+        mRootViewBuild.initActivity(false);
     }
 
     /**

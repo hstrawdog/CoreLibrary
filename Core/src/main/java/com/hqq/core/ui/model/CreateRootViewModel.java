@@ -1,7 +1,9 @@
 package com.hqq.core.ui.model;
 
 import android.app.Activity;
+
 import androidx.annotation.ColorRes;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -25,12 +27,24 @@ import java.lang.ref.WeakReference;
  * @Date : 2019/7/17 0017  下午 5:53
  * @Email : qiqiang213@gmail.com
  * @Descrive : 根布局的创建
+ * 目的
+ * 1.创建根布局
+ * 2.创建标题栏
+ * 3.状态栏适配控制
+ * <p>
+ * 需求
+ * 1.虚拟导航栏适配
+ * 2.标题栏的多种创建方式
+ * 3.微博详情的布局
  */
 public class CreateRootViewModel {
     /**
      * 标题栏类型
      */
     private Class<? extends IToolBar> mClass = CoreBuildConfig.getInstance().getDefItoobar();
+    /**
+     * 布局类型
+     */
     @LayoutModel
     private int mLayoutMode = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT;
     /**
@@ -42,7 +56,6 @@ public class CreateRootViewModel {
      */
     @ColorRes
     int mStatusColor = R.color.white;
-
     /**
      * dialogFragment 不带背景颜色
      */
@@ -86,8 +99,10 @@ public class CreateRootViewModel {
         //  构建  ContentView 默认 LineLayout 构建   支持  xml /view
         // 优先构建xml
         if (layoutId != 0) {
+
             return createRootView(null, layoutId);
         } else {
+            // 通过View 去构建
             if (rootView != null) {
                 return createRootView(rootView, 0);
             } else {
@@ -185,7 +200,6 @@ public class CreateRootViewModel {
         }
     }
 
-
     /**
      * 可以重写 这个方法 去自定义  头部
      *
@@ -224,7 +238,7 @@ public class CreateRootViewModel {
      * @param showStatus  状态栏
      * @param showToolBar 标题栏
      */
-    public void setToolbatVisibility(boolean showStatus, boolean showToolBar) {
+    public void setToolbarVisibility(boolean showStatus, boolean showToolBar) {
         mIsShowStatus = showStatus;
         mIsShowToolBar = showToolBar;
 
@@ -235,7 +249,7 @@ public class CreateRootViewModel {
      *
      * @param showStatus
      */
-    public void setShowStatus(boolean showStatus) {
+    public void setShowStatusBar(boolean showStatus) {
         mIsShowStatus = showStatus;
 
     }

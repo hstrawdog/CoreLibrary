@@ -44,7 +44,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
 
     /**
      * 重写了 setViewId    执行 setRootView
-     * 默认都会执行一般这个方法 但是没有添加到rooVoiew中
+     * 默认都会执行一般这个方法 但是没有添加到rooView中
      *
      * @return
      */

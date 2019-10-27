@@ -9,32 +9,45 @@
 
 
     <Button
+        android:textAllCaps="false"
         android:id="@+id/button20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="LaunchModeAActivity" />
 
     <Button
         android:id="@+id/button21"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="LaunchModeBActivity" />
 
     <Button
         android:id="@+id/button22"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="LaunchModeCActivity" />
 
     <Button
         android:id="@+id/button23"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="LaunchModeDActivity" />
 
     <Button
         android:id="@+id/button24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="SingleInstanceActivity" />
+
+    <Button
+        android:id="@+id/button26"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SingleTaskActivity" />
+
+    <Button
+        android:id="@+id/button27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SingleTopActivity" />
 </LinearLayout>

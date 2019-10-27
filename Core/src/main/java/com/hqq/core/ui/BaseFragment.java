@@ -65,7 +65,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootView.I
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
 
-            mRootView = mRootViewBuild.initContentView(setViewId(), setRootView());
+            mRootView = mRootViewBuild.buildContentView(setViewId(), setRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d(this.getClass().getName(), "onCreateView " + getClass().getSimpleName() + this.toString());
