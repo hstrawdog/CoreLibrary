@@ -17,6 +17,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.transitions.animation.TransitionsAnimationActivity"
+            android:label="转场动画" />
+        <activity
             android:name=".ui.launch.mode.SingleTaskActivity"
             android:label="栈内"
             android:launchMode="singleTask" />
@@ -62,7 +65,7 @@
 
         </activity>
         <activity
-            android:name=".ui.BaseInfoActivity"
+            android:name=".ui.web.BaseInfoActivity"
             android:label="设备信息">
 
             <!-- <intent-filter> -->
@@ -71,7 +74,7 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <activity android:name=".ui.LayoutTestActivity" />
+        <activity android:name=".ui.adaptation.LayoutTestActivity" />
         <activity android:name=".ui.customize.ProgressBarViewActivity">
 
             <!-- <intent-filter> -->
@@ -103,12 +106,12 @@
         <activity
             android:name=".ui.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
-        <activity android:name=".ui.IFragmentActivity" />
+        <activity android:name=".ui.view.page.IFragmentActivity" />
         <activity
             android:name=".ui.list.LoadMoreActivity"
             android:label="加载数据" />
         <activity
-            android:name=".ui.DefActivity"
+            android:name=".ui.adaptation.DefActivity"
             android:label="默认Activity" />
         <activity
             android:name=".ui.list.ListActivity"
@@ -118,10 +121,10 @@
             android:name=".ui.recycle.BannerActivity"
             android:label="轮播图测试" />
         <activity
-            android:name=".ui.DefImgActivity"
+            android:name=".ui.adaptation.DefImgActivity"
             android:label="默认图显示" />
         <activity
-            android:name=".ui.PermissionActivity"
+            android:name=".ui.adaptation.PermissionActivity"
             android:label="权限测试" />
         <activity
             android:name=".ui.dialog.BottomSheetActivity"
@@ -133,7 +136,7 @@
             android:name=".ui.screen.DimenActivity"
             android:label="1像素大小测试" />
         <activity
-            android:name=".ui.ThrowActivity"
+            android:name=".ui.exception.ThrowActivity"
             android:label="Throw异常测试" />
         <activity android:name=".ui.bar.SettingToolBarActivity" />
         <activity

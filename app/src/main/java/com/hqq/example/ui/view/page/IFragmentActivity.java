@@ -1,4 +1,4 @@
-package com.hqq.example.ui;
+package com.hqq.example.ui.view.page;
 
 import androidx.viewpager.widget.ViewPager;
 

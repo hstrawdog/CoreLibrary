@@ -1,9 +1,6 @@
 package com.hqq.example.ui.launch.mode;
 
-import android.os.Bundle;
 import android.view.View;
-
-import androidx.annotation.Nullable;
 
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;

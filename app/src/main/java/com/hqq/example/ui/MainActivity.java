@@ -5,15 +5,20 @@ import android.view.KeyEvent;
 
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
+import com.hqq.example.ui.adaptation.DefImgActivity;
+import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
+import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.list.ListIndexActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.screen.DimenActivity;
 import com.hqq.example.ui.screen.TextViewSizeActivity;
+import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
+import com.hqq.example.ui.web.BaseInfoActivity;
 import com.hqq.example.ui.web.WebActivity;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
@@ -43,6 +48,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
     @Override
     public void initData() {
         mAdapter.addData(new MainBean("启动模式", SingleInstanceActivity.class));
+        mAdapter.addData(new MainBean("转场动画", TransitionsAnimationActivity.class));
         mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("Recycle 相关", RecycleIndexActivity.class));

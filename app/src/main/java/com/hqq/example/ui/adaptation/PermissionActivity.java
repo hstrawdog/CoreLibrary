@@ -1,4 +1,4 @@
-package com.hqq.example.ui;
+package com.hqq.example.ui.adaptation;
 
 import com.hqq.core.permission.PermissionsResult;
 import com.hqq.core.permission.PermissionsUtils;

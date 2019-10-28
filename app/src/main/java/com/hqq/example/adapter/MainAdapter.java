@@ -30,7 +30,6 @@ public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> impl
     protected void convert(BaseViewHolder helper, MainBean item) {
         helper.setText(R.id.tv_title, item.getTitle());
         setOnItemClickListener(this);
-
     }
 
     @Override

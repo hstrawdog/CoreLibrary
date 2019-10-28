@@ -8,7 +8,7 @@ import com.hqq.core.ui.BaseListFragment;
 import com.hqq.example.R;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
-import com.hqq.example.ui.IFragmentActivity;
+import com.hqq.example.ui.view.page.IFragmentActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 
 import java.util.ArrayList;

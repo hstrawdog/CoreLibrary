@@ -1,4 +1,4 @@
-package com.hqq.example.ui;
+package com.hqq.example.ui.adaptation;
 
 import com.hqq.example.R;
 import com.hqq.core.ui.BaseActivity;

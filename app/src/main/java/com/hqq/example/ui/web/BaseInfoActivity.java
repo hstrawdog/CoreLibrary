@@ -1,4 +1,4 @@
-package com.hqq.example.ui;
+package com.hqq.example.ui.web;
 
 import android.widget.TextView;
 
