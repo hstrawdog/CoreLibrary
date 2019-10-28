@@ -16,26 +16,36 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.launch.mode.SingleTaskActivity"></activity>
-        <activity android:name=".ui.launch.mode.SingleTopActivity" />
+        <activity
+            android:name=".ui.launch.mode.SingleTaskActivity"
+            android:label="栈内"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.launch.mode.SingleTopActivity"
+            android:label="栈顶"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.launch.mode.SingleInstanceActivity"
             android:label="栈顶"
             android:launchMode="singleInstance" />
         <activity
             android:name=".ui.launch.mode.LaunchModeDActivity"
-            android:label="界面1" />
+            android:label="界面4" />
         <activity
             android:name=".ui.launch.mode.LaunchModeCActivity"
-            android:label="界面2" />
-        <activity
-            android:name=".ui.launch.mode.LaunchModeBActivity"
             android:label="界面3" />
         <activity
+            android:name=".ui.launch.mode.LaunchModeBActivity"
+            android:label="界面2" />
+        <activity
             android:name=".ui.launch.mode.LaunchModeAActivity"
-            android:label="界面4" />
-        <activity android:name=".ui.data.DataBindingActivity" />
-        <activity android:name=".ui.web.WebActivity">
+            android:label="界面1" />
+        <activity
+            android:name=".ui.data.DataBindingActivity"
+            android:label="dataBinding测试" />
+        <activity
+            android:name=".ui.web.WebActivity"
+            android:label="网页测试">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
+
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
@@ -26,6 +29,5 @@ public class SingleInstanceActivity extends LaunchActivity {
         Intent starter = new Intent(context, SingleInstanceActivity.class);
         context.startActivityForResult(starter, -1);
     }
-
 
 }

@@ -1,5 +1,6 @@
 package com.hqq.example.ui.launch.mode;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -27,6 +28,7 @@ public class SingleTopActivity extends LaunchActivity {
         Intent starter = new Intent(context, SingleTopActivity.class);
         context.startActivityForResult(starter, -1);
     }
+
 
 
 }

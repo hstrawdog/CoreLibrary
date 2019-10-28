@@ -3,6 +3,7 @@ package com.hqq.example.ui.screen;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
  /**
   * @Author : huangqiqiang
@@ -12,11 +13,17 @@ import com.hqq.example.R;
   * @Email :  qiqiang213@gmail.com
   * @Descrive : TODO
   */
-public class TextViewSizeActivity extends AppCompatActivity {
+public class TextViewSizeActivity extends BaseActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_text_view_size);
-    }
-}
+
+
+     @Override
+     public int setViewId() {
+         return R.layout.activity_text_view_size;
+     }
+
+     @Override
+     public void initView() {
+
+     }
+ }

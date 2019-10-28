@@ -1,6 +1,8 @@
 package com.hqq.core.ui.builder;
 
 import androidx.fragment.app.FragmentManager;
+
+import android.content.Intent;
 import android.view.View;
 
 /**
@@ -39,6 +41,24 @@ public interface ICreateRootView {
 
     interface IActivity extends ICreateRootView {
 
+        /**
+         * 进入动画
+         */
+        void initAnimEnter();
+
+        /**
+         * 结束动画
+         */
+        void initAnimExit();
+
+        /**
+         * 判断后的 onActivityResult
+         *
+         * @param requestCode
+         * @param resultCode
+         * @param data
+         */
+        void onResult(int requestCode, int resultCode, Intent data);
 
     }
 

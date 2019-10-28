@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import com.hqq.core.R;
 import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.widget.LoadingView;
@@ -30,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        initAnimEnter();
         super.onCreate(savedInstanceState);
         mActivity = this;
         mRootViewBuild = new RootViewBuilder(this, true, true);
@@ -39,14 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         initView();
-        //  ARouter.getInstance().inject(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // 手动回收
-        mRootViewBuild = null;
     }
 
     @Override
@@ -57,14 +51,35 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         }
     }
 
-    /**
-     * 判断后的 onActivityResult
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    protected void onResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    public void finish() {
+        super.finish();
+        initAnimExit();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 手动回收
+        mRootViewBuild = null;
+    }
+
+    @Override
+    public void initAnimEnter() {
+        overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
+
+    }
+
+    @Override
+    public void initAnimExit() {
+        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+
+    }
+
+
+    @Override
+    public void onResult(int requestCode, int resultCode, Intent data) {
 
     }
 

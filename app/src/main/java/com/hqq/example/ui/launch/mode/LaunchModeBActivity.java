@@ -12,7 +12,7 @@ import butterknife.OnClick;
   * @Author : huangqiqiang
   * @Package : com.hqq.example.ui.launch.mode
   * @FileName :   LaunchModeBActivity
-  * @Date  : 2019/10/25 0025  下午 5:22
+  * @Date  : 2019/10/28 0028  上午 9:43
   * @Email :  qiqiang213@gmail.com
   * @Descrive : 
   */

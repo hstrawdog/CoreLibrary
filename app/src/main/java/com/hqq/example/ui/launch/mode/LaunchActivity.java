@@ -1,6 +1,9 @@
 package com.hqq.example.ui.launch.mode;
 
+import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
@@ -26,7 +29,6 @@ public class LaunchActivity extends BaseActivity {
 
     }
 
-
     @OnClick({R.id.button20, R.id.button21, R.id.button22, R.id.button23, R.id.button24, R.id.button26, R.id.button27})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -37,7 +39,7 @@ public class LaunchActivity extends BaseActivity {
                 LaunchModeBActivity.open(this);
                 break;
             case R.id.button22:
-                LaunchModeBActivity.open(this);
+                LaunchModeCActivity.open(this);
                 break;
             case R.id.button23:
                 LaunchModeDActivity.open(this);
