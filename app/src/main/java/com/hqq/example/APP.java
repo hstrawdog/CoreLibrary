@@ -25,6 +25,5 @@ public class APP extends Application {
         }
         LeakCanary.install(this);
 
-
     }
 }

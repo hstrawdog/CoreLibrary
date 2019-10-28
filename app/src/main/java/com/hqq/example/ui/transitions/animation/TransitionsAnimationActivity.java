@@ -29,6 +29,18 @@ public class TransitionsAnimationActivity extends BaseListActivity<StringListAda
 
     }
 
+    /**
+     *  md风格
+     * @param activity
+     */
+    private static void openMakeCustomAnimation(Activity activity) {
+        Intent starter = new Intent(activity, TransitionsAnimationActivity.class);
+        ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(activity,
+                R.anim.slide_left_in, R.anim.slide_left_in);
+        ActivityCompat.startActivity(activity,
+                starter, compat.toBundle());
+    }
+
     @Override
     public StringListAdapter initAdapter() {
         return new StringListAdapter();
@@ -55,13 +67,6 @@ public class TransitionsAnimationActivity extends BaseListActivity<StringListAda
         }
     }
 
-    private static void openMakeCustomAnimation(Activity activity) {
-        Intent starter = new Intent(activity, TransitionsAnimationActivity.class);
-        ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(activity,
-                R.anim.slide_left_in, R.anim.slide_left_in);
-        ActivityCompat.startActivity(activity,
-                starter, compat.toBundle());
-    }
 
     @Override
     public void initAnimEnter() {
