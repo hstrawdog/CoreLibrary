@@ -128,4 +128,9 @@ public interface ICreateRootView {
     interface IDialogActivity extends ICreateRootView {
 
     }
+
+    interface IBaseViewHolder extends ICreateRootView {
+
+    }
+
 }

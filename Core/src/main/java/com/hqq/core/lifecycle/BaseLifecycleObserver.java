@@ -1,4 +1,4 @@
-package com.hqq.core.adapter;
+package com.hqq.core.lifecycle;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;

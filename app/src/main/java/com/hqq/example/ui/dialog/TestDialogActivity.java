@@ -11,6 +11,7 @@ import com.hqq.example.dialog.FullBottomSheet;
 import com.hqq.example.dialog.FullDialog;
 import com.hqq.example.dialog.LeftDialog;
 import com.hqq.example.dialog.RightDialog;
+import com.hqq.example.dialog.SelectADialog;
 import com.hqq.example.dialog.SelectDialog;
 import com.hqq.core.ui.BaseActivity;
 
@@ -43,7 +44,7 @@ public class TestDialogActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.button9, R.id.button14, R.id.button15, R.id.button16, R.id.button10, R.id.button17, R.id.button18
+    @OnClick({R.id.button9, R.id.button14, R.id.button15, R.id.button16, R.id.button10, R.id.button17, R.id.button18, R.id.button28
     })
     public void onViewClicked(View v) {
         switch (v.getId()) {
@@ -69,6 +70,9 @@ public class TestDialogActivity extends BaseActivity {
                 break;
             case R.id.button17:
                 LeftDialog.showDialog(getSupportFragmentManager());
+                break;
+            case R.id.button28:
+                SelectADialog.showDialog(getSupportFragmentManager());
                 break;
             default:
         }
