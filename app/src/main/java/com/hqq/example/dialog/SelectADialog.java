@@ -27,9 +27,12 @@ public class SelectADialog extends BaseSelectDialog<SelectADialog.ViewHolderA> {
 
 
     @Override
-    public void initView() {
-        mViewHolder = new ViewHolderA(this, mRootView.findViewById(R.id.ll_content));
-        mViewHolder.addToParent();
+    protected ViewHolderA getViewHolder() {
+        return new ViewHolderA(this, mRootView.findViewById(R.id.ll_content));
+    }
+    @Override
+    protected void initData() {
+
     }
 
     class ViewHolderA extends BaseViewHolder {

@@ -20,32 +20,70 @@ import com.hqq.core.ui.builder.ICreateRootView;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public abstract class BaseViewHolder implements ICreateRootView.IBaseViewHolder, BaseLifecycleObserver {
+public abstract class BaseViewHolder extends ViewHolder implements ICreateRootView.IBaseViewHolder, BaseLifecycleObserver {
 
-    private View mContentView;
     private ViewGroup mParentView;
     Activity mActivity;
 
 
+    /**
+     * 构建activity
+     *
+     * @param appCompatActivity
+     * @param parentView
+     */
     public BaseViewHolder(AppCompatActivity appCompatActivity, ViewGroup parentView) {
+        super();
         mParentView = parentView;
         mActivity = appCompatActivity;
-        mContentView = LayoutInflater.from(appCompatActivity).inflate(setViewId(), mParentView, false);
+        mConvertView = LayoutInflater.from(appCompatActivity).inflate(setViewId(), mParentView, false);
         appCompatActivity.getLifecycle().addObserver(this);
         initView();
     }
+
+    /**
+     * 直接使用 activity 中的view
+     *
+     * @param appCompatActivity
+     * @param view
+     */
+    public BaseViewHolder(AppCompatActivity appCompatActivity, View view) {
+        super();
+        mActivity = appCompatActivity;
+        mConvertView = view;
+        appCompatActivity.getLifecycle().addObserver(this);
+        initView();
+    }
+
+    /**
+     * 转移fragment
+     *
+     * @param fragment
+     * @param parentView
+     */
     public BaseViewHolder(Fragment fragment, ViewGroup parentView) {
+        super();
         mParentView = parentView;
         mActivity = fragment.getActivity();
-        mContentView = LayoutInflater.from(fragment.getContext()).inflate(setViewId(), mParentView, false);
+        mConvertView = LayoutInflater.from(fragment.getContext()).inflate(setViewId(), mParentView, false);
         fragment.getLifecycle().addObserver(this);
         initView();
     }
 
-
-    protected View findViewById(int res) {
-        return mContentView.findViewById(res);
+    /**
+     * 直接使用 fragment中的View
+     *
+     * @param fragment
+     * @param view
+     */
+    public BaseViewHolder(Fragment fragment, View view) {
+        super();
+        mActivity = fragment.getActivity();
+        mConvertView = view;
+        fragment.getLifecycle().addObserver(this);
+        initView();
     }
+
 
     @Override
     public void initDefConfig() {
@@ -84,18 +122,17 @@ public abstract class BaseViewHolder implements ICreateRootView.IBaseViewHolder,
     }
 
     public void addToParent() {
-        if (mParentView != null && mContentView != null) {
-            mParentView.addView(mContentView);
+        if (mParentView != null && mConvertView != null) {
+            mParentView.addView(mConvertView);
         }
     }
 
     public void removeFromParent() {
-        ViewParent parent = mContentView.getParent();
+        ViewParent parent = mConvertView.getParent();
         if (parent != null) {
-            ((ViewGroup) parent).removeView(mContentView);
+            ((ViewGroup) parent).removeView(mConvertView);
         }
     }
-
 
 
 }

@@ -20,7 +20,6 @@ public abstract class BaseSelectDialog<T extends BaseViewHolder> extends BaseDia
         return R.layout.dialog_base_select_dialog;
     }
 
-
     @Override
     public int setAnimation() {
         return R.style.dialogAnimation_fade_in2fade_out;
@@ -31,5 +30,24 @@ public abstract class BaseSelectDialog<T extends BaseViewHolder> extends BaseDia
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
 
+    @Override
+    public void initView() {
+        mViewHolder = getViewHolder();
+        mViewHolder.addToParent();
+
+        initData();
+    }
+
+    /**
+     * 将所有的操作 过度到viewHolder 中去
+     *
+     * @return
+     */
+    protected abstract T getViewHolder();
+
+    /**
+     * 初始化数据 传递数据到viewHolder 中
+     */
+    protected abstract void initData();
 
 }
