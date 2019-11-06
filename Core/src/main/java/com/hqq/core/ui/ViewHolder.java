@@ -53,9 +53,8 @@ public abstract class ViewHolder implements View.OnClickListener {
      *
      * @return the ViewHolder root view
      */
-    @Deprecated
-    public View getConvertView() {
 
+    public View getConvertView() {
         return mConvertView;
     }
 
@@ -306,7 +305,7 @@ public abstract class ViewHolder implements View.OnClickListener {
      * @param listener The on click listener;
      * @return The ViewHolder for chaining.
      */
-    @Deprecated
+
     public ViewHolder setOnClickListener(@IdRes int viewId, View.OnClickListener listener) {
         View view = getView(viewId);
         view.setOnClickListener(listener);
@@ -321,7 +320,7 @@ public abstract class ViewHolder implements View.OnClickListener {
      * @param listener The on touch listener;
      * @return The ViewHolder for chaining.
      */
-    @Deprecated
+
     public ViewHolder setOnTouchListener(@IdRes int viewId, View.OnTouchListener listener) {
         View view = getView(viewId);
         view.setOnTouchListener(listener);
@@ -336,7 +335,7 @@ public abstract class ViewHolder implements View.OnClickListener {
      * @return The ViewHolder for chaining.
      * Please use {@link #(int)} (adapter.setOnItemChildLongClickListener(listener))}
      */
-    @Deprecated
+
     public ViewHolder setOnLongClickListener(@IdRes int viewId, View.OnLongClickListener listener) {
         View view = getView(viewId);
         view.setOnLongClickListener(listener);
@@ -351,7 +350,7 @@ public abstract class ViewHolder implements View.OnClickListener {
      * @return The ViewHolder for chaining.
      * Please use {@link #addOnClickListener(int)} (int)} (adapter.setOnItemChildClickListener(listener))}
      */
-    @Deprecated
+
     public ViewHolder setOnItemClickListener(@IdRes int viewId, AdapterView.OnItemClickListener listener) {
         AdapterView view = getView(viewId);
         view.setOnItemClickListener(listener);

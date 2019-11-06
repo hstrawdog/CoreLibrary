@@ -1,6 +1,7 @@
 package com.hqq.core.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.view.ViewParent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 
 import com.hqq.core.lifecycle.BaseLifecycleObserver;
 import com.hqq.core.ui.builder.ICreateRootView;
@@ -25,7 +27,6 @@ public abstract class BaseViewHolder extends ViewHolder implements ICreateRootVi
     private ViewGroup mParentView;
     Activity mActivity;
 
-
     /**
      * 构建activity
      *
@@ -33,27 +34,9 @@ public abstract class BaseViewHolder extends ViewHolder implements ICreateRootVi
      * @param parentView
      */
     public BaseViewHolder(AppCompatActivity appCompatActivity, ViewGroup parentView) {
-        super();
-        mParentView = parentView;
-        mActivity = appCompatActivity;
-        mConvertView = LayoutInflater.from(appCompatActivity).inflate(setViewId(), mParentView, false);
-        appCompatActivity.getLifecycle().addObserver(this);
-        initView();
+        createRootView(parentView, appCompatActivity, appCompatActivity, appCompatActivity.getLifecycle());
     }
 
-    /**
-     * 直接使用 activity 中的view
-     *
-     * @param appCompatActivity
-     * @param view
-     */
-    public BaseViewHolder(AppCompatActivity appCompatActivity, View view) {
-        super();
-        mActivity = appCompatActivity;
-        mConvertView = view;
-        appCompatActivity.getLifecycle().addObserver(this);
-        initView();
-    }
 
     /**
      * 转移fragment
@@ -62,25 +45,21 @@ public abstract class BaseViewHolder extends ViewHolder implements ICreateRootVi
      * @param parentView
      */
     public BaseViewHolder(Fragment fragment, ViewGroup parentView) {
-        super();
-        mParentView = parentView;
-        mActivity = fragment.getActivity();
-        mConvertView = LayoutInflater.from(fragment.getContext()).inflate(setViewId(), mParentView, false);
-        fragment.getLifecycle().addObserver(this);
-        initView();
+        createRootView(parentView, fragment.getActivity(), fragment.getContext(), fragment.getLifecycle());
+
     }
 
-    /**
-     * 直接使用 fragment中的View
-     *
-     * @param fragment
-     * @param view
-     */
-    public BaseViewHolder(Fragment fragment, View view) {
-        super();
-        mActivity = fragment.getActivity();
-        mConvertView = view;
-        fragment.getLifecycle().addObserver(this);
+    @Override
+
+    public void createRootView(ViewGroup parentView, Activity activity, Context context, Lifecycle lifecycle) {
+        mParentView = parentView;
+        mActivity = activity;
+        if (setViewId() <= 0) {
+            mConvertView = parentView;
+        } else {
+            mConvertView = LayoutInflater.from(context).inflate(setViewId(), mParentView, false);
+        }
+        lifecycle.addObserver(this);
         initView();
     }
 

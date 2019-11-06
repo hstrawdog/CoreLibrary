@@ -1,9 +1,13 @@
 package com.hqq.core.ui.builder;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * @Author : huangqiqiang
@@ -130,7 +134,15 @@ public interface ICreateRootView {
     }
 
     interface IBaseViewHolder extends ICreateRootView {
-
+        /**
+         * 构建更布局
+         *
+         * @param parentView
+         * @param activity
+         * @param context
+         * @param lifecycle
+         */
+        void createRootView(ViewGroup parentView, Activity activity, Context context, Lifecycle lifecycle);
     }
 
 }
