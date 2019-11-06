@@ -8,7 +8,7 @@ import com.hqq.core.ui.BaseListFragment;
 import com.hqq.example.R;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
-import com.hqq.example.ui.view.page.IFragmentActivity;
+import com.hqq.example.ui.view.page.IFragmentActivityBuilder;
 import com.hqq.example.ui.bar.ToolBarActivity;
 
 import java.util.ArrayList;
@@ -83,31 +83,31 @@ public class MainFragment extends BaseListFragment<MainAdapter> {
     private void initListData() {
         List<MainBean> list = new ArrayList<>();
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         list.add(new MainBean("ItoolBar 控制 ", ToolBarActivity.class));
-        list.add(new MainBean("fragment 加载", IFragmentActivity.class));
+        list.add(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         mBaseListModel.fillingData(list);
     }
 }

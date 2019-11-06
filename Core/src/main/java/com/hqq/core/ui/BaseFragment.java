@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.LoadingView;
@@ -27,7 +27,7 @@ import butterknife.Unbinder;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseFragment extends Fragment implements ICreateRootView.IFragment, View.OnClickListener {
+public abstract class BaseFragment extends Fragment implements ICreateRootViewBuilder.IFragmentBuilder, View.OnClickListener {
     /**
      * 缓存根布局对象
      */

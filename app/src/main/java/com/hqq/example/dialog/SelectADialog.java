@@ -2,14 +2,12 @@ package com.hqq.example.dialog;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.hqq.core.ui.BaseSelectDialog;
-import com.hqq.core.ui.BaseViewHolder;
+import com.hqq.core.ui.BaseViewBuilderHolder;
 import com.hqq.example.R;
 
 /**
@@ -20,7 +18,7 @@ import com.hqq.example.R;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class SelectADialog extends BaseSelectDialog<BaseViewHolder> {
+public class SelectADialog extends BaseSelectDialog<BaseViewBuilderHolder> {
 
     public static void showDialog(FragmentManager fragmentManager) {
         SelectADialog dialog = new SelectADialog();
@@ -29,8 +27,8 @@ public class SelectADialog extends BaseSelectDialog<BaseViewHolder> {
 
 
     @Override
-    protected BaseViewHolder getViewHolder() {
-        return new ViewHolderA(this, mRootView.findViewById(R.id.ll_content));
+    protected BaseViewBuilderHolder getViewHolder() {
+        return new ViewBuilderHolderA(this, mRootView.findViewById(R.id.ll_content));
     }
 
     @Override
@@ -38,9 +36,9 @@ public class SelectADialog extends BaseSelectDialog<BaseViewHolder> {
 
     }
 
-    class ViewHolderA extends BaseViewHolder {
+    class ViewBuilderHolderA extends BaseViewBuilderHolder {
 
-        public ViewHolderA(Fragment fragment, ViewGroup parentView) {
+        public ViewBuilderHolderA(Fragment fragment, ViewGroup parentView) {
             super(fragment, parentView);
         }
 

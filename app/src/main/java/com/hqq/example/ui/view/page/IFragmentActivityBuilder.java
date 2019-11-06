@@ -11,12 +11,12 @@ import butterknife.BindView;
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.iblibrary.ui.activity
- * @FileName :   IFragmentActivity
+ * @FileName :   IFragmentActivityBuilder
  * @Date : 2018/11/23 0023
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class IFragmentActivity extends BaseActivity {
+public class IFragmentActivityBuilder extends BaseActivity {
 
     @BindView(R.id.vp_page)
     ViewPager mVpPage;

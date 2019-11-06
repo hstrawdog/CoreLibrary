@@ -3,7 +3,7 @@ package com.hqq.example.ui.list;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
-import com.hqq.example.ui.view.page.IFragmentActivity;
+import com.hqq.example.ui.view.page.IFragmentActivityBuilder;
 
 /**
  * @Author : huangqiqiang
@@ -22,7 +22,7 @@ public class ListIndexActivity extends BaseListActivity<MainAdapter> {
     @Override
     public void initData() {
         mAdapter.addData(new MainBean("加载数据", LoadMoreActivity.class));
-        mAdapter.addData(new MainBean("fragment 加载", IFragmentActivity.class));
+        mAdapter.addData(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
         mAdapter.addData(new MainBean("ListActivity 加载", ListActivity.class));
 
     }

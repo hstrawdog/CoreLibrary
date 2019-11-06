@@ -16,7 +16,7 @@ import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.list.ListIndexActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.screen.DimenActivity;
-import com.hqq.example.ui.screen.TextViewSizeActivity;
+import com.hqq.example.ui.screen.TextViewBuilderSizeActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
 import com.hqq.example.ui.web.BaseInfoActivity;
 import com.hqq.example.ui.web.WebActivity;
@@ -53,7 +53,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("Recycle 相关", RecycleIndexActivity.class));
         mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
-        mAdapter.addData(new MainBean("文字适配测试", TextViewSizeActivity.class));
+        mAdapter.addData(new MainBean("文字适配测试", TextViewBuilderSizeActivity.class));
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
         mAdapter.addData(new MainBean("列表系列", ListIndexActivity.class));

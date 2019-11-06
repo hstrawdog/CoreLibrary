@@ -29,7 +29,7 @@ public class CustomizeIndexActivity extends BaseListActivity<MainAdapter> {
     public void initData() {
 
         mAdapter.addData(new MainBean("贝塞尔曲线鉴定绘制", BezierActivity.class));
-        mAdapter.addData(new MainBean("进度条/星星", ProgressBarViewActivity.class));
+        mAdapter.addData(new MainBean("进度条/星星", ProgressBarViewBuilderActivity.class));
         mAdapter.addData(new MainBean("高逼格的鱼", FishActivity.class));
     }
 

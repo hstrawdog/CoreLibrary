@@ -5,12 +5,12 @@ import com.hqq.core.ui.BaseActivity;
  /**
   * @Author : huangqiqiang
   * @Package : com.hqq.core.app.ui.customize
-  * @FileName :   ProgressBarViewActivity
+  * @FileName :   ProgressBarViewBuilderActivity
   * @Date  : 2019/6/25 0025  下午 8:26
   * @Email :  qiqiang213@gmail.com
   * @Descrive :
   */
-public class ProgressBarViewActivity extends BaseActivity {
+public class ProgressBarViewBuilderActivity extends BaseActivity {
 
     @Override
     public int setViewId() {

@@ -36,6 +36,10 @@ import java.lang.ref.WeakReference;
  * 1.虚拟导航栏适配
  * 2.标题栏的多种创建方式
  * 3.微博详情的布局
+ * <p>
+ * <p>
+ * 真正核心的内容 应该拆成两个部分
+ * 一个view  一个头部
  */
 public class CreateRootViewModel {
     /**

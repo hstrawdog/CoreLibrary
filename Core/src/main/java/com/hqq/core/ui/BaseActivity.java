@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.hqq.core.R;
-import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.widget.LoadingView;
 
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : 1.
  */
-public abstract class BaseActivity extends AppCompatActivity implements ICreateRootView.IActivity, View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements ICreateRootViewBuilder.IActivityBuilder, View.OnClickListener {
     protected Activity mActivity;
     public LoadingView mLoadingView;
     protected RootViewBuilder mRootViewBuild;

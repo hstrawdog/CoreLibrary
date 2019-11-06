@@ -12,7 +12,7 @@ import com.hqq.core.R;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public abstract class BaseSelectDialog<T extends BaseViewHolder> extends BaseDialog {
+public abstract class BaseSelectDialog<T extends BaseViewBuilderHolder> extends BaseDialog {
     protected T mViewHolder;
 
     @Override

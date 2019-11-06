@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.core.ui
- * @FileName :   ICreateRootView
+ * @FileName :   ICreateRootViewBuilder
  * @Date : 2019/5/17 0017  下午 4:58
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  * - 目的 进行接口隔离
  */
-public interface ICreateRootView {
+public interface ICreateRootViewBuilder {
     /**
      * 获取id
      *
@@ -43,7 +43,7 @@ public interface ICreateRootView {
      */
     void initView();
 
-    interface IActivity extends ICreateRootView {
+    interface IActivityBuilder extends ICreateRootViewBuilder {
 
         /**
          * 进入动画
@@ -66,7 +66,7 @@ public interface ICreateRootView {
 
     }
 
-    interface IFragment extends ICreateRootView {
+    interface IFragmentBuilder extends ICreateRootViewBuilder {
 
         /**
          * 是否延迟加载
@@ -77,7 +77,7 @@ public interface ICreateRootView {
         boolean isLazyLoad();
     }
 
-    interface IBaseDialogFragment extends ICreateRootView {
+    interface IBaseDialogFragmentBuilder extends ICreateRootViewBuilder {
 
         /**
          * 显示dialog
@@ -94,11 +94,11 @@ public interface ICreateRootView {
         int setHeight();
     }
 
-    interface IBottomDialogFragment extends IBaseDialogFragment {
+    interface IBottomDialogFragmentBuilder extends IBaseDialogFragmentBuilder {
 
     }
 
-    interface IDialogFragment extends IBaseDialogFragment {
+    interface IDialogFragmentBuilder extends IBaseDialogFragmentBuilder {
         /**
          * dialog 的背景颜色
          *
@@ -129,11 +129,11 @@ public interface ICreateRootView {
 
     }
 
-    interface IDialogActivity extends ICreateRootView {
+    interface IDialogActivityBuilder extends ICreateRootViewBuilder {
 
     }
 
-    interface IBaseViewHolder extends ICreateRootView {
+    interface IBaseViewBuilderHolder extends ICreateRootViewBuilder {
         /**
          * 构建更布局
          *

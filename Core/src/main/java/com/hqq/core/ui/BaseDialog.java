@@ -17,7 +17,7 @@ import android.view.WindowManager;
 import com.hqq.core.R;
 import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.listenner.DialogClickListener;
-import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
@@ -38,7 +38,7 @@ import butterknife.Unbinder;
  * - 宽度需要在代码上写死
  * - DialogFragment自带内存泄漏
  */
-public abstract class BaseDialog extends DialogFragment implements ICreateRootView.IDialogFragment {
+public abstract class BaseDialog extends DialogFragment implements ICreateRootViewBuilder.IDialogFragmentBuilder {
 
     Unbinder mUnkinder;
     protected LoadingView mLoadingView;

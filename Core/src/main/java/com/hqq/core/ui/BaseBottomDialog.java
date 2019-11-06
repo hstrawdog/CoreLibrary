@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.hqq.core.R;
-import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 
@@ -34,7 +34,7 @@ import butterknife.Unbinder;
  * 宽度是全屏
  * 高度自定义
  */
-public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootView.IBottomDialogFragment {
+public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootViewBuilder.IBottomDialogFragmentBuilder {
 
     protected View mRootView = null;
     Unbinder mUnkinder;

@@ -12,17 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 
 import com.hqq.core.lifecycle.BaseLifecycleObserver;
-import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.core.ui
- * @FileName :   BaseViewHolder
+ * @FileName :   BaseViewBuilderHolder
  * @Date : 2019/10/31 0031  下午 1:23
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public abstract class BaseViewHolder extends ViewHolder implements ICreateRootView.IBaseViewHolder, BaseLifecycleObserver {
+public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreateRootViewBuilder.IBaseViewBuilderHolder, BaseLifecycleObserver {
 
     private ViewGroup mParentView;
     Activity mActivity;
@@ -33,7 +33,7 @@ public abstract class BaseViewHolder extends ViewHolder implements ICreateRootVi
      * @param appCompatActivity
      * @param parentView
      */
-    public BaseViewHolder(AppCompatActivity appCompatActivity, ViewGroup parentView) {
+    public BaseViewBuilderHolder(AppCompatActivity appCompatActivity, ViewGroup parentView) {
         createRootView(parentView, appCompatActivity, appCompatActivity, appCompatActivity.getLifecycle());
     }
 
@@ -44,7 +44,7 @@ public abstract class BaseViewHolder extends ViewHolder implements ICreateRootVi
      * @param fragment
      * @param parentView
      */
-    public BaseViewHolder(Fragment fragment, ViewGroup parentView) {
+    public BaseViewBuilderHolder(Fragment fragment, ViewGroup parentView) {
         createRootView(parentView, fragment.getActivity(), fragment.getContext(), fragment.getLifecycle());
 
     }

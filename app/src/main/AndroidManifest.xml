@@ -75,7 +75,7 @@
 
         </activity>
         <activity android:name=".ui.adaptation.LayoutTestActivity" />
-        <activity android:name=".ui.customize.ProgressBarViewActivity">
+        <activity android:name=".ui.customize.ProgressBarViewBuilderActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -106,7 +106,7 @@
         <activity
             android:name=".ui.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
-        <activity android:name=".ui.view.page.IFragmentActivity" />
+        <activity android:name=".ui.view.page.IFragmentActivityBuilder" />
         <activity
             android:name=".ui.list.LoadMoreActivity"
             android:label="加载数据" />
@@ -130,7 +130,7 @@
             android:name=".ui.dialog.BottomSheetActivity"
             android:label="知乎评论列表" />
         <activity
-            android:name=".ui.screen.TextViewSizeActivity"
+            android:name=".ui.screen.TextViewBuilderSizeActivity"
             android:label="文字大小" />
         <activity
             android:name=".ui.screen.DimenActivity"
