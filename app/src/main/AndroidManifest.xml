@@ -83,15 +83,7 @@
             <!-- </intent-filter> -->
 
         </activity>
-        <activity
-            android:name=".ui.MainActivity"
-            android:label="功能主页">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".ui.recycle.GallerySnapActivity" />
         <activity android:name=".ui.recycle.RecycleIndexActivity" />
         <activity
@@ -154,6 +146,16 @@
             android:name=".ui.dialog.DialogIndexActivity"
             android:label="dialog 系列" />
         <activity android:name=".ui.list.ListIndexActivity" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="功能主页">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
