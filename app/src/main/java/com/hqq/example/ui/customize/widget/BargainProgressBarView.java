@@ -1,4 +1,4 @@
-package com.hqq.example.ui.customize.weight;
+package com.hqq.example.ui.customize.widget;
 
 import android.animation.FloatEvaluator;
 import android.animation.ValueAnimator;
@@ -10,14 +10,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.RequiresApi;
 
 import com.hqq.core.utils.ResourcesUtils;
-import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
 

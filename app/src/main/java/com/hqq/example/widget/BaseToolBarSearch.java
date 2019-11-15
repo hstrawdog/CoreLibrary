@@ -1,4 +1,4 @@
-package com.hqq.example.weight;
+package com.hqq.example.widget;
 
 import android.app.Activity;
 import androidx.appcompat.app.AppCompatActivity;

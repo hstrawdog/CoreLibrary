@@ -1,4 +1,4 @@
-package com.hqq.example.weight;
+package com.hqq.example.widget;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

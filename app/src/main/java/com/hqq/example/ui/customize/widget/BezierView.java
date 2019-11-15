@@ -1,4 +1,4 @@
-package com.hqq.example.ui.customize.weight;
+package com.hqq.example.ui.customize.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.hqq.example.R;
-import com.hqq.example.weight.BaseToolBarSearch;
+import com.hqq.example.widget.BaseToolBarSearch;
 import com.hqq.core.ui.BaseActivity;
 
 /**

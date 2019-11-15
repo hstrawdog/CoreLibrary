@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.customize.WidgetActivity"  android:label="小部件测试">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".ui.transitions.animation.TransitionsAnimationActivity"
             android:label="转场动画" />
@@ -83,7 +92,6 @@
             <!-- </intent-filter> -->
 
         </activity>
-
         <activity android:name=".ui.recycle.GallerySnapActivity" />
         <activity android:name=".ui.recycle.RecycleIndexActivity" />
         <activity
@@ -149,13 +157,8 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="功能主页">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
