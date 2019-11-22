@@ -34,7 +34,6 @@ public abstract class BaseSelectDialog<T extends BaseViewBuilderHolder> extends 
     public void initView() {
         mViewHolder = getViewHolder();
         mViewHolder.addToParent();
-
         initData();
     }
 

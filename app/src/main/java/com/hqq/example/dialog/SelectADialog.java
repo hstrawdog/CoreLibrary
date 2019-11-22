@@ -28,7 +28,7 @@ public class SelectADialog extends BaseSelectDialog<BaseViewBuilderHolder> {
 
     @Override
     protected BaseViewBuilderHolder getViewHolder() {
-        return new ViewBuilderHolderA(this, mRootView.findViewById(R.id.ll_content));
+        return new ViewBuilderHolderA().builder(this, mRootView.findViewById(R.id.ll_content));
     }
 
     @Override
@@ -38,9 +38,6 @@ public class SelectADialog extends BaseSelectDialog<BaseViewBuilderHolder> {
 
     class ViewBuilderHolderA extends BaseViewBuilderHolder {
 
-        public ViewBuilderHolderA(Fragment fragment, ViewGroup parentView) {
-            super(fragment, parentView);
-        }
 
         @Override
         public int setViewId() {

@@ -33,8 +33,9 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
      * @param appCompatActivity
      * @param parentView
      */
-    public BaseViewBuilderHolder(AppCompatActivity appCompatActivity, ViewGroup parentView) {
+    public BaseViewBuilderHolder builder(AppCompatActivity appCompatActivity, ViewGroup parentView) {
         createRootView(parentView, appCompatActivity, appCompatActivity, appCompatActivity.getLifecycle());
+        return this;
     }
 
     /**
@@ -43,9 +44,9 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
      * @param fragment
      * @param parentView
      */
-    public BaseViewBuilderHolder(Fragment fragment, ViewGroup parentView) {
+    public BaseViewBuilderHolder builder(Fragment fragment, ViewGroup parentView) {
         createRootView(parentView, fragment.getActivity(), fragment.getContext(), fragment.getLifecycle());
-
+        return this;
     }
 
     @Override
