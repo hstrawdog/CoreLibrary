@@ -37,7 +37,6 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
         createRootView(parentView, appCompatActivity, appCompatActivity, appCompatActivity.getLifecycle());
     }
 
-
     /**
      * 转移fragment
      *
@@ -50,7 +49,6 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
     }
 
     @Override
-
     public void createRootView(ViewGroup parentView, Activity activity, Context context, Lifecycle lifecycle) {
         mParentView = parentView;
         mActivity = activity;
@@ -97,7 +95,6 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
     @Override
     public void onDestroy() {
         removeFromParent();
-
     }
 
     public void addToParent() {
@@ -112,6 +109,5 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
             ((ViewGroup) parent).removeView(mConvertView);
         }
     }
-
 
 }

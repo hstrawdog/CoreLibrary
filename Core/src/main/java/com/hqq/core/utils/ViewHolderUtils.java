@@ -5,10 +5,13 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
+import androidx.lifecycle.ViewModel;
+
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.View;
@@ -318,7 +321,6 @@ public class ViewHolderUtils {
         view.setOnClickListener(listener);
         return this;
     }
-
 
 
     /**

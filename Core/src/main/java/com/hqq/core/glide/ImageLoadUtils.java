@@ -3,9 +3,11 @@ package com.hqq.core.glide;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
+
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,39 +22,31 @@ import com.hqq.core.R;
 import com.hqq.core.utils.ResourcesUtils;
 
 /**
- * 这里的 封装 只是为了更方便的替换 glide  并不只是为了更好的是使用
- * http://blog.csdn.net/hexingen/article/details/72578066
- * http://blog.csdn.net/wyb112233/article/details/52337392
- *
  * @Author : huangqiqiang
  * @Package : com.hqq.blibrary.glide
  * @FileName :   ImageLoadUtils
  * @Date : 2018/2/9  9:23
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
+ * 目的 只是为了更方便的替换Glide以及维护图片的加载
+ * 参考 http://blog.csdn.net/hexingen/article/details/72578066
+ * 参考 http://blog.csdn.net/wyb112233/article/details/52337392
  */
-
 public class ImageLoadUtils {
-    protected static RequestOptions mDefRequestOptions;
-    protected static RequestOptions mRoundRequestOptions;
-
     /**
      * 默认配置
      *
      * @return
      */
-    public static synchronized RequestOptions getRequestOptions() {
-        if (mDefRequestOptions == null) {
-            mDefRequestOptions = new RequestOptions()
-                    .format(DecodeFormat.PREFER_RGB_565)
-                    //缓存SOURC和RESULT
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    //不做内存缓存
-                    .skipMemoryCache(false)
-                    .dontAnimate()
-                    .placeholder(CoreBuildConfig.getInstance().getDefImg());
-        }
-        return mDefRequestOptions;
+    public static RequestOptions getRequestOptions() {
+        return new RequestOptions()
+                .format(DecodeFormat.PREFER_RGB_565)
+                //缓存SOURC和RESULT
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //不做内存缓存
+                .skipMemoryCache(false)
+                .dontAnimate()
+                .placeholder(CoreBuildConfig.getInstance().getDefImg());
     }
 
     /**
@@ -60,18 +54,15 @@ public class ImageLoadUtils {
      *
      * @return
      */
-    public static synchronized RequestOptions getRoundRequestOptions() {
-        if (mRoundRequestOptions == null) {
-            mRoundRequestOptions = new RequestOptions()
-                    .format(DecodeFormat.PREFER_RGB_565)
-                    //缓存SOURC和RESULT
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    //不做内存缓存
-                    .skipMemoryCache(false)
-                    .dontAnimate()
-                    .placeholder(CoreBuildConfig.getInstance().getDefImg());
-        }
-        return mRoundRequestOptions;
+    public static RequestOptions getRoundRequestOptions() {
+        return new RequestOptions()
+                .format(DecodeFormat.PREFER_RGB_565)
+                //缓存SOURC和RESULT
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //不做内存缓存
+                .skipMemoryCache(false)
+                .dontAnimate()
+                .placeholder(CoreBuildConfig.getInstance().getDefImg());
     }
 
     public static RequestOptions getDefRoundRequestOptions(Context context) {
@@ -86,20 +77,16 @@ public class ImageLoadUtils {
      * @return
      */
     public static RequestOptions getRoundRequestOptions(int px) {
-        if (mRoundRequestOptions == null) {
-            mRoundRequestOptions = new RequestOptions()
-                    .format(DecodeFormat.PREFER_RGB_565)
-                    //缓存SOURC和RESULT
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    //不做内存缓存
-                    .skipMemoryCache(false)
-                    .dontAnimate()
-                    .placeholder(CoreBuildConfig.getInstance().getDefImg())
-                    .transform(new GlideRoundTransform(px));
-        }
-        return mRoundRequestOptions;
+        return new RequestOptions()
+                .format(DecodeFormat.PREFER_RGB_565)
+                //缓存SOURC和RESULT
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //不做内存缓存
+                .skipMemoryCache(false)
+                .dontAnimate()
+                .placeholder(CoreBuildConfig.getInstance().getDefImg())
+                .transform(new GlideRoundTransform(px));
     }
-
 
     /**
      * 验证  view   是否 合法
@@ -109,7 +96,6 @@ public class ImageLoadUtils {
      * @return
      */
     public static boolean checkFinish(View view) {
-
         if (view == null || view.getContext() == null) {
             return true;
         }
@@ -121,6 +107,7 @@ public class ImageLoadUtils {
         }
         return false;
     }
+
 
     /**
      * 加载图片
@@ -139,23 +126,8 @@ public class ImageLoadUtils {
     }
 
     /**
-     * 圆角
+     * 加载本地图片
      *
-     * @param url
-     * @param imageView
-     */
-    public static void withFillet(String url, ImageView imageView) {
-        if (checkFinish(imageView)) {
-            return;
-        }
-        GlideApp.with(imageView)
-                .load(url)
-                .apply(getDefRoundRequestOptions(imageView.getContext()))
-                .into(imageView);
-    }
-
-
-    /**
      * @param url
      * @param imageView
      */
@@ -169,8 +141,9 @@ public class ImageLoadUtils {
                 ).into(imageView);
     }
 
-
     /**
+     * 加载图片  指定宽度
+     *
      * @param url
      * @param imageView
      * @param width     宽
@@ -187,6 +160,22 @@ public class ImageLoadUtils {
                                 .override(width, height)
                 ).into(imageView);
 
+    }
+
+    /**
+     * 圆角
+     *
+     * @param url
+     * @param imageView
+     */
+    public static void withFillet(String url, ImageView imageView) {
+        if (checkFinish(imageView)) {
+            return;
+        }
+        GlideApp.with(imageView)
+                .load(url)
+                .apply(getDefRoundRequestOptions(imageView.getContext()))
+                .into(imageView);
     }
 
     /**
@@ -264,19 +253,5 @@ public class ImageLoadUtils {
                 .into(imageView);
     }
 
-    /**
-     * 通过图片Uri加载图片
-     *
-     * @param context
-     * @param resource
-     * @param imageView
-     */
-    public static void loadImagebyUri(Context context, Uri resource, ImageView imageView) {
-        if (context != null) {
-            if (context instanceof Activity && ((Activity) context).isDestroyed()) {
-                return;
-            }
-            Glide.with(context).load(resource).thumbnail().apply(RequestOptions.centerCropTransform().placeholder(CoreBuildConfig.getInstance().getDefImg())).into(imageView);
-        }
-    }
+
 }
