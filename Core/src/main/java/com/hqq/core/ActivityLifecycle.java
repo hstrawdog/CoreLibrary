@@ -16,7 +16,7 @@ import java.util.List;
  * @FileName :   ActivityLifecycle
  * @Date : 2019/6/6 0006  上午 10:20
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : Activity生命周期栈
  */
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
     private List<Activity> activities = new ArrayList<>();
@@ -24,7 +24,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         activities.add(activity);
-        LogUtils.d("onActivityCreated",activity.getLocalClassName());
+        LogUtils.d("onActivityCreated", activity.getLocalClassName());
     }
 
     @Override
@@ -55,8 +55,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityDestroyed(Activity activity) {
         activities.remove(activity);
-        LogUtils.d("onActivityDestroyed",activity.getLocalClassName());
-
+        LogUtils.d("onActivityDestroyed", activity.getLocalClassName());
     }
 
     /**

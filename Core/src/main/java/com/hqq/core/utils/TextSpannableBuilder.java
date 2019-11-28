@@ -1,9 +1,11 @@
 package com.hqq.core.utils;
 
 import android.content.Context;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
+
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -70,7 +72,6 @@ public class TextSpannableBuilder {
         mStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
-
     public TextSpannableBuilder addTextPart(CharSequence text) {
         mStringBuilder.append(text);
         return this;
@@ -79,7 +80,6 @@ public class TextSpannableBuilder {
     public TextSpannableBuilder addTextPart(Context context, @ColorRes int colorId, CharSequence text) {
         return addTextPart(ContextCompat.getColor(context, colorId), text);
     }
-
 
     public TextSpannableBuilder addTextPart(@ColorInt int color, CharSequence text) {
         if (!TextUtils.isEmpty(text)) {
@@ -108,8 +108,6 @@ public class TextSpannableBuilder {
         return this;
     }
 
-
-
     public TextSpannableBuilder addTextSizeSpan(float proportion
             , CharSequence text) {
         if (!TextUtils.isEmpty(text)) {
@@ -130,8 +128,6 @@ public class TextSpannableBuilder {
         }
         return this;
     }
-
-
 
     public TextSpannableBuilder addTextPart(CharSequence text, int color, OnClickListener listener) {
         if (!TextUtils.isEmpty(text)) {

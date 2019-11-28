@@ -25,7 +25,6 @@ public class LuBanUttils {
      * @param onCompressListener
      */
     public static void compression(Activity activity, String path, int size, final OnCompressListener onCompressListener) {
-
         Luban.with(activity).load(path).ignoreBy(size).setCompressListener(new top.zibin.luban.OnCompressListener() {
             @Override
             public void onStart() {
@@ -51,7 +50,6 @@ public class LuBanUttils {
      * @param onCompressListener
      */
     public static void compression(Activity activity, List<String> path, int size, final OnCompressListener onCompressListener) {
-
         Luban.with(activity).load(path).ignoreBy(size).setCompressListener(new top.zibin.luban.OnCompressListener() {
             @Override
             public void onStart() {

@@ -5,11 +5,14 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+
 import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+
+import com.hqq.core.CoreBuildConfig;
 
 /**
  * @Author : huangqiqiang
@@ -21,8 +24,13 @@ import androidx.core.content.ContextCompat;
  * 资源辅助类
  */
 public class ResourcesUtils {
-    public static Resources getResources(Context context) {
-        return context.getResources();
+    public static Resources sResources;
+
+    public static Resources getResources() {
+        if (sResources == null) {
+            sResources = CoreBuildConfig.getInstance().getApplication().getResources();
+        }
+        return sResources;
     }
 
     /**
@@ -32,7 +40,7 @@ public class ResourcesUtils {
      * @param resId   资源ID
      */
     public static String getString(Context context, @StringRes int resId) {
-        return getResources(context).getString(resId);
+        return getResources().getString(resId);
     }
 
     /**
@@ -46,6 +54,17 @@ public class ResourcesUtils {
     }
 
     /**
+     * 同上
+     *
+     * @param resId
+     * @return
+     */
+    public static int getColor(@ColorRes int resId) {
+        return ContextCompat.getColor(CoreBuildConfig.getInstance().getApplication(), resId);
+    }
+
+
+    /**
      * 获取颜色
      *
      * @param context 上下文
@@ -53,10 +72,10 @@ public class ResourcesUtils {
      */
     public static ColorStateList getColorStateList(Context context, @ColorRes int resId) {
         if (Build.VERSION.SDK_INT >= 23) {
-            return getResources(context).getColorStateList(resId, context.getTheme());
+            return getResources().getColorStateList(resId, context.getTheme());
         }
 
-        return getResources(context).getColorStateList(resId);
+        return getResources().getColorStateList(resId);
     }
 
     /**
@@ -69,26 +88,28 @@ public class ResourcesUtils {
         return ContextCompat.getDrawable(context, resId);
     }
 
-    /**
-     * 获取尺寸资源
-     *
-     * @param context 上下文
-     * @param resId   资源ID
-     * @return px
-     */
-    public static float getDimen(Context context, @DimenRes int resId) {
-        return getResources(context).getDimension(resId);
+    public static Drawable getDrawable(@DrawableRes int resId) {
+        return ContextCompat.getDrawable(CoreBuildConfig.getInstance().getApplication(), resId);
     }
 
     /**
      * 获取尺寸资源
      *
-     * @param context 上下文
+     * @param resId 资源ID
+     * @return px
+     */
+    public static float getDimen(@DimenRes int resId) {
+        return getResources().getDimension(resId);
+    }
+
+    /**
+     * 获取尺寸资源
+     *
      * @param resId   资源ID
      * @return dp
      */
-    public static float getDimen2dp(Context context, @DimenRes int resId) {
-        return ScreenUtils.px2dip(context, context.getResources().getDimension(resId));
+    public static float getDimen2dp( @DimenRes int resId) {
+        return ScreenUtils.px2dip(CoreBuildConfig.getInstance().getApplication(), getResources().getDimension(resId));
     }
 
 }
