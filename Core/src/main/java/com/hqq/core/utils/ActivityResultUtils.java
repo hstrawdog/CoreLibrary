@@ -21,7 +21,6 @@ import java.util.Random;
  */
 public class ActivityResultUtils {
 
-
     ArrayMap<Activity, SparseArray<ActivityForResult>> mActivitySparseArrayArrayMap = new ArrayMap<>();
     Random codeGenerator = new Random();
 
@@ -31,7 +30,6 @@ public class ActivityResultUtils {
         mActivitySparseArrayArrayMap.get(activity).append(requestCode, activityForResult);
 
     }
-
 
     interface ActivityForResult {
         void onActivityResult();

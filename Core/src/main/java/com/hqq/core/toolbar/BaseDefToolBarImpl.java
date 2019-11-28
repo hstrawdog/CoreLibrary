@@ -77,6 +77,20 @@ public class BaseDefToolBarImpl extends BaseToolBar {
 
     }
 
+    @Override
+    public void setToolBarColor(int color) {
+        if (null != getToolBarBg()) {
+            getToolBarBg().setImageResource(color);
+        } else {
+            mDefToolBarColor = color;
+        }
+        if (null != getStatusBar()) {
+            getStatusBar().setBackgroundResource(color);
+        } else {
+            mDefStatusColor = color;
+        }
+    }
+
     public void initScrollNoImage(float ahpla) {
         if (ahpla > 1) {
             ahpla = 1;
@@ -87,7 +101,6 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         } else {
             getLeftView().setAlpha((float) ((ahpla - 0.5) * 2));
         }
-
         if (getToolbarTitle() != null) {
             getToolbarTitle().setAlpha(ahpla);
         }
@@ -96,7 +109,6 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         }
 
     }
-
 
     /**
      * 获取左边 图标View
@@ -122,19 +134,6 @@ public class BaseDefToolBarImpl extends BaseToolBar {
      *
      * @param color
      */
-    @Override
-    public void setToolBarColor(int color) {
-        if (null != getToolBarBg()) {
-            getToolBarBg().setImageResource(color);
-        } else {
-            mDefToolBarColor = color;
-        }
-        if (null != getStatusBar()) {
-            getStatusBar().setBackgroundResource(color);
-        } else {
-            mDefStatusColor = color;
-        }
-    }
 
     /**
      * 设置标题
@@ -188,7 +187,6 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         getRightSecondaryTextView().setOnClickListener(clickListener);
     }
 
-
     /**
      * 设置右边 文字 点击事件
      *
@@ -226,7 +224,6 @@ public class BaseDefToolBarImpl extends BaseToolBar {
             return new ImageView(mActivity.get());
         }
     }
-
 
     /**
      * 设置  右边图标
@@ -274,6 +271,12 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         return this;
     }
 
+    /**
+     * 设置标题颜色
+     *
+     * @param defTitleColor
+     * @return
+     */
     public BaseDefToolBarImpl setDefTitleColor(int defTitleColor) {
         getToolbarTitle().setTextColor(ContextCompat.getColor(getToolbarTitle().getContext(), defTitleColor));
         return this;

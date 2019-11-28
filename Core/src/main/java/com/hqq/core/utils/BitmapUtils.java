@@ -91,8 +91,10 @@ public class BitmapUtils {
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                 Uri.fromFile(new File(appDir.getPath()))));
     }
+
     /**
      * 等比缩放图片
+     *
      * @param bm
      * @param newWidth
      * @param newHeight
@@ -113,6 +115,11 @@ public class BitmapUtils {
         return newbm;
     }
 
+    /**
+     * @param bm
+     * @param newWidth
+     * @return
+     */
     public static Bitmap zoomImg(Bitmap bm, int newWidth) {
         // 获得图片的宽高
         int width = bm.getWidth();
@@ -173,8 +180,7 @@ public class BitmapUtils {
     }
 
 
-
-    public static  Bitmap zoomDrawable(Drawable drawable, int w, int h) {
+    public static Bitmap zoomDrawable(Drawable drawable, int w, int h) {
         int width = drawable.getIntrinsicWidth();
         int height = drawable.getIntrinsicHeight();
         Bitmap oldbmp = drawableToBitmap(drawable);
@@ -198,7 +204,6 @@ public class BitmapUtils {
         drawable.draw(canvas);
         return bitmap;
     }
-
 
     public synchronized static String getBase64(String path) {
         Bitmap bitmap = null;
@@ -247,6 +252,7 @@ public class BitmapUtils {
         }
         return baos;
     }
+
     public static String getImageHead(String key) {
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("JPEG", "data:image/jpeg;base64,");

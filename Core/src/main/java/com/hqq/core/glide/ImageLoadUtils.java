@@ -67,7 +67,7 @@ public class ImageLoadUtils {
 
     public static RequestOptions getDefRoundRequestOptions(Context context) {
 
-        return getRoundRequestOptions((int) ResourcesUtils.getDimen(context, R.dimen.x10));
+        return getRoundRequestOptions((int) ResourcesUtils.getDimen(R.dimen.x10));
     }
 
     /**
@@ -107,7 +107,6 @@ public class ImageLoadUtils {
         }
         return false;
     }
-
 
     /**
      * 加载图片
@@ -179,6 +178,23 @@ public class ImageLoadUtils {
     }
 
     /**
+     * @param url
+     * @param imageView
+     * @param radius    圆角  单位 px
+     */
+    public static void withFillet2PX(String url, ImageView imageView, int radius) {
+        if (checkFinish(imageView)) {
+            return;
+        }
+        GlideApp.with(imageView)
+                .load(url)
+                .apply(
+                        getRoundRequestOptions().transforms(new CenterCrop(), new RoundedCorners(radius))
+                )
+                .into(imageView);
+    }
+
+    /**
      * 加载圆形图
      *
      * @param url
@@ -212,43 +228,6 @@ public class ImageLoadUtils {
                         .skipMemoryCache(true)
                         .dontAnimate()
                         .placeholder(R.mipmap.ic_def_head_circular)
-                )
-                .into(imageView);
-    }
-
-    /**
-     * 圆角图片加载
-     * transformCircularHead
-     *
-     * @param url
-     * @param imageView
-     */
-    @Deprecated
-    public static void withRounded(String url, ImageView imageView) {
-        if (checkFinish(imageView)) {
-            return;
-        }
-        GlideApp.with(imageView)
-                .load(url)
-                .apply(getRoundRequestOptions()
-                        .transform(new GlideRoundTransform(20))
-                )
-                .into(imageView);
-    }
-
-    /**
-     * @param url
-     * @param imageView
-     * @param radius    圆角  单位 px
-     */
-    public static void withRound2PX(String url, ImageView imageView, int radius) {
-        if (checkFinish(imageView)) {
-            return;
-        }
-        GlideApp.with(imageView)
-                .load(url)
-                .apply(
-                        getRoundRequestOptions().transforms(new CenterCrop(), new RoundedCorners(radius))
                 )
                 .into(imageView);
     }

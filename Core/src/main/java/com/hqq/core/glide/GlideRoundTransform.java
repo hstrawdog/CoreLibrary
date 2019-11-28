@@ -24,9 +24,8 @@ public class GlideRoundTransform extends BitmapTransformation {
 
     private static float radius = 0f;
 
-
     public GlideRoundTransform(int dp) {
-        radius =dp;
+        radius = dp;
     }
 
     @Override
@@ -34,6 +33,13 @@ public class GlideRoundTransform extends BitmapTransformation {
         Bitmap bitmap = TransformationUtils.centerCrop(pool, toTransform, outWidth, outHeight);
         return roundCrop(pool, bitmap);
     }
+
+
+    @Override
+    public void updateDiskCacheKey(MessageDigest messageDigest) {
+
+    }
+
 
     private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
         if (source == null) {
@@ -52,15 +58,6 @@ public class GlideRoundTransform extends BitmapTransformation {
         RectF rectF = new RectF(0f, 0f, source.getWidth(), source.getHeight());
         canvas.drawRoundRect(rectF, radius, radius, paint);
         return result;
-    }
-
-    public String getId() {
-        return getClass().getName() + Math.round(radius);
-    }
-
-    @Override
-    public void updateDiskCacheKey(MessageDigest messageDigest) {
-
     }
 
 }

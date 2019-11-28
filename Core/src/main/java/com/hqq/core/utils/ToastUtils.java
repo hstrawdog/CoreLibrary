@@ -33,7 +33,6 @@ public class ToastUtils {
      */
     private static Toast mToast;
 
-
     @SuppressLint("ShowToast")
     private static void showToast(final Context context, final String text, final int duration) {
         if (TextUtils.isEmpty(text)) {
@@ -71,7 +70,6 @@ public class ToastUtils {
     public static void showToast(Context context, @StringRes int strId) {
         showToast(context, context.getString(strId), Toast.LENGTH_LONG);
     }
-
 
     /**
      * 默认显示   content 是Application

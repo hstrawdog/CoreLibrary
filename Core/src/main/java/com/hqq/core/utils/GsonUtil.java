@@ -31,7 +31,6 @@ public class GsonUtil {
 
     public static <T> T fromJson(String json, Class<T> clazz) {
         try {
-
             return GSON.fromJson(json, clazz);
         } catch (JsonSyntaxException e) {
             return null;
@@ -70,8 +69,16 @@ public class GsonUtil {
         return GSON.toJsonTree(o, type);
     }
 
+    /**
+     * 从json 中获取到value
+     *
+     * @param json
+     * @param key
+     * @return
+     */
     public static JsonElement getValue(String json, String key) {
-        return new JsonParser().parse(json).getAsJsonObject().get(key);
+        return JsonParser.parseString(json).getAsJsonObject().get(key);
     }
+
 
 }

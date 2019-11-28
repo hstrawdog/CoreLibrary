@@ -3,6 +3,7 @@ package com.hqq.core.utils;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
+
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -76,7 +77,6 @@ public class BundleUtils {
         return getValue(activity.getIntent().getExtras(), key, defaultValue);
     }
 
-
     /**
      * 获取Int 类型
      *
@@ -121,6 +121,13 @@ public class BundleUtils {
         return "";
     }
 
+    /**
+     * 同上
+     *
+     * @param fragment
+     * @param key
+     * @return
+     */
     public static String getString(Fragment fragment, String key) {
 
         return getString(fragment.getArguments(), key);

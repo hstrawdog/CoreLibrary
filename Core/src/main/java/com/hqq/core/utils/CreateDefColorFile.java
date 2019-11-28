@@ -21,8 +21,17 @@ import java.util.List;
  */
 public class CreateDefColorFile {
 
-    public static void main(String[] args) {
+    /**
+     * 生成文件路径
+     */
+    private static String path = "./Core/src/main/res/values/def_text_style.xml";
 
+    /**
+     * 文件路径+名称
+     */
+    private static String filenameTemp;
+
+    public static void main(String[] args) {
 
         List<String> list = new ArrayList<>();
         list.add("333");
@@ -55,11 +64,6 @@ public class CreateDefColorFile {
         createFile(stringBuilder.toString());
     }
 
-    //生成文件路径
-    private static String path = "./Core/src/main/res/values/def_text_style.xml";
-
-    //文件路径+名称
-    private static String filenameTemp;
 
     /**
      * 创建文件
@@ -134,7 +138,6 @@ public class CreateDefColorFile {
             pw.flush();
             bool = true;
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         } finally {
             //不要忘记关闭

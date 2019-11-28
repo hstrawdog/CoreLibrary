@@ -59,8 +59,8 @@ public class BargainProgressBarView extends View {
 
 
     private void init() {
-        mHeight = ResourcesUtils.getDimen(getContext(), R.dimen.x16);
-        mFilletSize = (int) ResourcesUtils.getDimen(getContext(), R.dimen.x8);
+        mHeight = ResourcesUtils.getDimen(R.dimen.x16);
+        mFilletSize = (int) ResourcesUtils.getDimen(R.dimen.x8);
         mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_ax);
 
         setProgress(100);

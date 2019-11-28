@@ -26,7 +26,12 @@ import com.hqq.core.CoreBuildConfig;
 public class ResourcesUtils {
     public static Resources sResources;
 
-    public static Resources getResources() {
+    /**
+     * 单利缓存 resources
+     *
+     * @return
+     */
+    public static synchronized Resources getResources() {
         if (sResources == null) {
             sResources = CoreBuildConfig.getInstance().getApplication().getResources();
         }
@@ -63,7 +68,6 @@ public class ResourcesUtils {
         return ContextCompat.getColor(CoreBuildConfig.getInstance().getApplication(), resId);
     }
 
-
     /**
      * 获取颜色
      *
@@ -88,6 +92,12 @@ public class ResourcesUtils {
         return ContextCompat.getDrawable(context, resId);
     }
 
+    /**
+     * 同上
+     *
+     * @param resId
+     * @return
+     */
     public static Drawable getDrawable(@DrawableRes int resId) {
         return ContextCompat.getDrawable(CoreBuildConfig.getInstance().getApplication(), resId);
     }
@@ -105,11 +115,15 @@ public class ResourcesUtils {
     /**
      * 获取尺寸资源
      *
-     * @param resId   资源ID
+     * @param resId 资源ID
      * @return dp
      */
-    public static float getDimen2dp( @DimenRes int resId) {
+    public static float getDimen2dp(@DimenRes int resId) {
         return ScreenUtils.px2dip(CoreBuildConfig.getInstance().getApplication(), getResources().getDimension(resId));
     }
 
+    @Deprecated
+    public static float getDimen(Context context, @DimenRes int resId) {
+        return getResources().getDimension(resId);
+    }
 }

@@ -27,9 +27,6 @@ import android.view.View;
  */
 public class TextSpannableBuilder {
 
-    public interface OnClickListener {
-        void onClick(View widget, CharSequence clickedText);
-    }
 
     /**
      * 点击事件
@@ -95,7 +92,6 @@ public class TextSpannableBuilder {
         return addTextPart(text, ContextCompat.getColor(context, colorId), listener);
     }
 
-
     public TextSpannableBuilder addTextPartColorAndSize(Context context, @ColorRes int colorId, float proportion, CharSequence text) {
         if (!TextUtils.isEmpty(text)) {
             final int start = mStringBuilder.length();
@@ -143,6 +139,11 @@ public class TextSpannableBuilder {
 
     public Spannable build() {
         return mStringBuilder;
+    }
+
+
+    public interface OnClickListener {
+        void onClick(View widget, CharSequence clickedText);
     }
 
 }

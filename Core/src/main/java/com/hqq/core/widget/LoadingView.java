@@ -31,7 +31,6 @@ public class LoadingView extends Dialog {
     private TextView tvMsg;
     Context mContext;
 
-
     @Override
     public void dismiss() {
         if (this == null) {
@@ -55,7 +54,6 @@ public class LoadingView extends Dialog {
         super(context, themeResId);
         mContext = context;
     }
-
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {

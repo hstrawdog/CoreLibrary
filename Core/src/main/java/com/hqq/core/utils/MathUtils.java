@@ -75,6 +75,52 @@ public class MathUtils {
         return o.toString();
     }
 
+    /**
+     * 如果是小数，保留两位，非小数，保留整数
+     * 默认是不支持四舍五入
+     *
+     * @param number
+     * @return
+     */
+
+    public static String getDoubleString(double number) {
+        return getDoubleString(number, RoundingMode.FLOOR);
+    }
+
+    /**
+     * 同上
+     *
+     * @param number
+     * @return
+     */
+    public static String getDoubleString(String number) {
+        return getDoubleString(Double.parseDouble(number));
+    }
+
+    /**
+     * 同上
+     *
+     * @param number
+     * @param roundingMode
+     * @return
+     */
+    public static String getDoubleString(double number, RoundingMode roundingMode) {
+        String numberStr = number + "";
+        try {
+            if (((long) number * 1000) == (long) (number * 1000)) {
+                //如果是一个整数
+                numberStr = String.valueOf((long) number);
+            } else {
+                DecimalFormat df = new DecimalFormat("######0.00");
+                df.setRoundingMode(roundingMode);
+                numberStr = df.format(number);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return numberStr;
+    }
 
     public static void main(String[] args) {
 //        System.out.println(Double.parseDouble("100495") / 1000.00);
