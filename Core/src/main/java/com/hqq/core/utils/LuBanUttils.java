@@ -19,6 +19,8 @@ import top.zibin.luban.Luban;
  */
 public class LuBanUttils {
     /**
+     * 压缩单张图片
+     *
      * @param activity
      * @param path
      * @param size
@@ -44,6 +46,8 @@ public class LuBanUttils {
     }
 
     /**
+     * 压缩图片集合
+     *
      * @param activity
      * @param path
      * @param size

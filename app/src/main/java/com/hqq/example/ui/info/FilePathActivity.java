@@ -28,7 +28,6 @@ public class FilePathActivity extends BaseActivity {
         return R.layout.activity_base_info;
     }
 
-
     @Override
     public void initView() {
         mTvInfo.setText(new TextSpannableBuilder()
@@ -61,6 +60,5 @@ public class FilePathActivity extends BaseActivity {
 
                 .build());
     }
-
 
 }
