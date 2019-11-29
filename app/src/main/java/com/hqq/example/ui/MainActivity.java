@@ -12,13 +12,14 @@ import com.hqq.example.ui.customize.CustomizeIndexActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
 import com.hqq.example.ui.exception.ThrowActivity;
+import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.list.ListIndexActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.screen.DimenActivity;
 import com.hqq.example.ui.screen.TextViewBuilderSizeActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
-import com.hqq.example.ui.web.BaseInfoActivity;
+import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.web.WebActivity;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("Dialog系列", TestDialogActivity.class));
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
         mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
+        mAdapter.addData(new MainBean("文件路径信息", FilePathActivity.class));
         mAdapter.addData(new MainBean("网页测试", WebActivity.class));
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
 

@@ -1,4 +1,4 @@
-package com.hqq.example.ui.web;
+package com.hqq.example.ui.info;
 
 import android.widget.TextView;
 
@@ -57,6 +57,7 @@ public class BaseInfoActivity extends BaseActivity {
                 .addTextPart(ScreenUtils.getScreenYDPI(this) + "dpi")
                 .addTextPart("\n屏幕密度    ")
                 .addTextPart(ScreenUtils.getScreenDensityDpi(this) + "dpi")
+
 
                 .build());
     }

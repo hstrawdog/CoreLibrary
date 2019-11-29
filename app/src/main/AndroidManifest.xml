@@ -16,15 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.customize.WidgetActivity"  android:label="小部件测试">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+        <activity android:name=".ui.info.FilePathActivity" android:label="路径" ></activity>
+        <activity
+            android:name=".ui.customize.WidgetActivity"
+            android:label="小部件测试"></activity>
         <activity
             android:name=".ui.transitions.animation.TransitionsAnimationActivity"
             android:label="转场动画" />
@@ -57,41 +52,13 @@
             android:label="dataBinding测试" />
         <activity
             android:name=".ui.web.WebActivity"
-            android:label="网页测试">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
-        </activity>
-        <activity android:name=".ui.customize.FishActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
-        </activity>
+            android:label="网页测试"></activity>
+        <activity android:name=".ui.customize.FishActivity"></activity>
         <activity
-            android:name=".ui.web.BaseInfoActivity"
-            android:label="设备信息">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
-        </activity>
+            android:name=".ui.info.BaseInfoActivity"
+            android:label="设备信息"></activity>
         <activity android:name=".ui.adaptation.LayoutTestActivity" />
-        <activity android:name=".ui.customize.ProgressBarViewBuilderActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
-        </activity>
+        <activity android:name=".ui.customize.ProgressBarViewBuilderActivity"></activity>
         <activity android:name=".ui.recycle.GallerySnapActivity" />
         <activity android:name=".ui.recycle.RecycleIndexActivity" />
         <activity
@@ -157,7 +124,11 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="功能主页">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
