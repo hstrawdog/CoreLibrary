@@ -18,6 +18,8 @@ import butterknife.OnClick;
  * @Date : 2019/10/22 0022  下午 1:37
  * @Email :  qiqiang213@gmail.com
  * @Descrive : DataBinding 与现在的设计冲突
+ * 主要冲突在于 自动添加 TabLayout
+ * LiveData  change 需要在ui前台才会触发 并不能再后台执行
  */
 public class DataBindingActivity extends BaseActivity {
 
@@ -36,6 +38,7 @@ public class DataBindingActivity extends BaseActivity {
             @Override
             public void onChanged(User user) {
                 LogUtils.e("onChanged        " + user.toString());
+                mTextView2.setText(user.getLevel());
             }
         });
 
