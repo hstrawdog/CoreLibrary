@@ -54,16 +54,17 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("Recycle 相关", RecycleIndexActivity.class));
         mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
-        mAdapter.addData(new MainBean("文字适配测试", TextViewBuilderSizeActivity.class));
-        mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
-        mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
         mAdapter.addData(new MainBean("列表系列", ListIndexActivity.class));
         mAdapter.addData(new MainBean("Dialog系列", TestDialogActivity.class));
+        mAdapter.addData(new MainBean("Shape测试", ShapeTestActivity.class));
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
         mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
-        mAdapter.addData(new MainBean("文件路径信息", FilePathActivity.class));
         mAdapter.addData(new MainBean("网页测试", WebActivity.class));
+        mAdapter.addData(new MainBean("文件路径信息", FilePathActivity.class));
+        mAdapter.addData(new MainBean("文字适配测试", TextViewBuilderSizeActivity.class));
+        mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
+        mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
 
     }
 

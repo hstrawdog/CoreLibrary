@@ -38,6 +38,10 @@ public class ResourcesUtils {
         return sResources;
     }
 
+    public static Resources getResources(Context context) {
+        return context.getResources();
+    }
+
     /**
      * 获取字符串
      *
@@ -124,6 +128,6 @@ public class ResourcesUtils {
 
     @Deprecated
     public static float getDimen(Context context, @DimenRes int resId) {
-        return getResources().getDimension(resId);
+        return getResources(context).getDimension(resId);
     }
 }

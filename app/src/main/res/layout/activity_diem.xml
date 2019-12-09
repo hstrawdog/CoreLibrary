@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.app.ui.activity.screen.DimenActivity">
+    tools:context=".ui.screen.DimenActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,6 +112,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x30"
         android:background="@color/color_cd3b3b"
-        android:text="360dp" />
+        android:text="100dp" />
 
 </LinearLayout>

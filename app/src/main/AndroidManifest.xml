@@ -16,10 +16,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.info.FilePathActivity" android:label="路径" ></activity>
+        <activity
+            android:name=".ui.ShapeTestActivity"
+            android:label="shape测试" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".ui.info.FilePathActivity"
+            android:label="文件路径测试" />
         <activity
             android:name=".ui.customize.WidgetActivity"
-            android:label="小部件测试"></activity>
+            android:label="小部件测试" />
         <activity
             android:name=".ui.transitions.animation.TransitionsAnimationActivity"
             android:label="转场动画" />
@@ -124,11 +136,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="功能主页">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

@@ -6,11 +6,6 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionName "1.0"
         versionCode 1
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
         def versionPropsFile = file('version.properties')
         if (versionPropsFile.canRead()) {
             //载入version.properties

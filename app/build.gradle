@@ -19,10 +19,16 @@ android {
             def verCode = versionProps['VERSION_CODE'].toInteger()
             //判断build模式，如果是发布模式（':app:assembleRelease'）则自增版本号，并且写回version.properties文件中
             def runTasks = gradle.startParameter.taskNames
-            if (runTasks.contains("assemble")) {
-                //if ('assembleRelease' in runTasks) {
-                versionProps['VERSION_CODE'] = (++verCode).toString()
-                versionProps.store(versionPropsFile.newWriter(), null)
+            for (String runName in runTasks) {
+                if (runName.contains("Release")) {
+                    versionProps['VERSION_CODE'] = (++verCode).toString()
+                    versionProps.store(versionPropsFile.newWriter(), null)
+                    break
+                }else if ("assemble".equals(runName)){
+                    versionProps['VERSION_CODE'] = (++verCode).toString()
+                    versionProps.store(versionPropsFile.newWriter(), null)
+                    break
+                }
             }
             versionCode verCode
             flavorDimensions versionCode + ""
@@ -35,11 +41,51 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildTypes {
+
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('./debug.keystore')
+            storePassword 'android'
+        }
         release {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('./debug.keystore')
+            storePassword 'android'
+        }
+    }
+
+    productFlavors {
+        debugApp {
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+
+    productFlavors.all {
+            // 渠道名称
+        flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+    }
+
+    android.applicationVariants.all { variant ->
+        if (variant.buildType.name.equals('release'))
+            variant.outputs.all {
+                // outputFileName = "driver_${variant.productFlavors[0].name}_v${variant.versionName}(${variant.versionCode}).apk"
+                outputFileName = "${variant.productFlavors[0].name}_v${variant.versionName}(${variant.versionCode}).apk"
+            }
     }
 
 }
