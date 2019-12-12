@@ -1,7 +1,11 @@
 package com.hqq.example.ui.list;
 
 import android.os.Handler;
+import android.view.View;
 
+import com.hqq.core.recycler.HeaderItemDecoration;
+import com.hqq.core.utils.log.LogUtils;
+import com.hqq.example.R;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
 import com.hqq.core.ui.BaseListActivity;
@@ -67,6 +71,38 @@ public class ListActivity extends BaseListActivity<MainAdapter> {
 
             }
         }, 3 * 1000);
+
+
+        mRcList.addItemDecoration(new HeaderItemDecoration(mRcList, new HeaderItemDecoration.StickyHeaderInterface() {
+            @Override
+            public int getHeaderPositionForItem(int itemPosition) {
+                LogUtils.e("getHeaderPositionForItem----------------  " + itemPosition);
+                int headerPosition = 0;
+                do {
+                    if (this.isHeader(itemPosition)) {
+                        headerPosition = itemPosition;
+                        break;
+                    }
+                    itemPosition -= 1;
+                } while (itemPosition >= 0);
+                return headerPosition;
+            }
+
+            @Override
+            public int getHeaderLayout(int headerPosition) {
+                return R.layout.item_main;
+            }
+
+            @Override
+            public void bindHeaderData(View header, int headerPosition) {
+
+            }
+
+            @Override
+            public boolean isHeader(int itemPosition) {
+                return itemPosition == 6;
+            }
+        }));
     }
 
 }

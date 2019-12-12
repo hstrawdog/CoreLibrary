@@ -19,11 +19,7 @@
         <activity
             android:name=".ui.ShapeTestActivity"
             android:label="shape测试" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -136,7 +132,11 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="功能主页">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
