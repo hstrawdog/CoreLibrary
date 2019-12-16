@@ -24,7 +24,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         activities.add(activity);
-        LogUtils.d("onActivityCreated", activity.getLocalClassName());
+        LogUtils.d("ActivityLifecycle -> onActivityCreated", activity.getLocalClassName());
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityDestroyed(Activity activity) {
         activities.remove(activity);
-        LogUtils.d("onActivityDestroyed", activity.getLocalClassName());
+        LogUtils.d("ActivityLifecycle -> onActivityDestroyed", activity.getLocalClassName());
     }
 
     /**

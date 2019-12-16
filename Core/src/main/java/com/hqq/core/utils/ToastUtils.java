@@ -10,7 +10,9 @@ package com.hqq.core.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+
 import androidx.annotation.StringRes;
+
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -33,17 +35,16 @@ public class ToastUtils {
      */
     private static Toast mToast;
 
-    @SuppressLint("ShowToast")
     private static void showToast(final Context context, final String text, final int duration) {
         if (TextUtils.isEmpty(text)) {
             return;
         }
-        if (mToast != null ) {
+        if (mToast != null) {
             mToast.cancel();
         }
-            mToast = Toast.makeText(context.getApplicationContext(), text, duration);
-            mToast.setGravity(Gravity.CENTER, 0, 0);
-            mToast.setText(text);
+        mToast = Toast.makeText(context.getApplicationContext(), text, duration);
+        mToast.setGravity(Gravity.CENTER, 0, 0);
+        mToast.setText(text);
 
         mToast.show();
     }

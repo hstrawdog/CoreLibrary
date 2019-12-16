@@ -50,7 +50,6 @@ public class DateUtils {
         return simpleDateFormat;
     }
 
-
     /**
      * 获取当前东八区的时间
      *
@@ -63,7 +62,6 @@ public class DateUtils {
 
         return ee;
     }
-
 
     /**
      * 月日时分秒，0-9前补0
@@ -100,7 +98,6 @@ public class DateUtils {
         }
     }
 
-
     /**
      * 将时分秒转为秒数
      *
@@ -118,7 +115,6 @@ public class DateUtils {
         return hh * 60 * 60 + mi * 60 + ss;
     }
 
-
     /**
      * @param time yyyy-MM-dd HH-mm-ss
      * @return
@@ -134,7 +130,6 @@ public class DateUtils {
         }
         return "";
     }
-
 
     /**
      * @param time 00:00:00
@@ -168,7 +163,6 @@ public class DateUtils {
         }
         return hh * 60 * 60 + mi * 60 + ss;
     }
-
     /**
      * @param time 00:00:00:00
      * @return 000000
@@ -288,7 +282,6 @@ public class DateUtils {
 
         return stringBuilder.toString() + minute + "分" + second + "秒";
     }
-
 
     /**
      * yyyy-MM-dd HH:mm:ss
