@@ -18,10 +18,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.ShapeTestActivity"
-            android:label="shape测试" >
-
-
-        </activity>
+            android:label="shape测试"></activity>
         <activity
             android:name=".ui.info.FilePathActivity"
             android:label="文件路径测试" />
@@ -60,13 +57,13 @@
             android:label="dataBinding测试" />
         <activity
             android:name=".ui.web.WebActivity"
-            android:label="网页测试"></activity>
-        <activity android:name=".ui.customize.FishActivity"></activity>
+            android:label="网页测试" />
+        <activity android:name=".ui.customize.FishActivity" />
         <activity
             android:name=".ui.info.BaseInfoActivity"
-            android:label="设备信息"></activity>
+            android:label="设备信息" />
         <activity android:name=".ui.adaptation.LayoutTestActivity" />
-        <activity android:name=".ui.customize.ProgressBarViewBuilderActivity"></activity>
+        <activity android:name=".ui.customize.ProgressBarViewBuilderActivity" />
         <activity android:name=".ui.recycle.GallerySnapActivity" />
         <activity android:name=".ui.recycle.RecycleIndexActivity" />
         <activity
@@ -124,19 +121,27 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ui.customize.BezierActivity" />
-        <activity android:name=".ui.customize.CustomizeIndexActivity" />
         <activity
             android:name=".ui.dialog.DialogIndexActivity"
             android:label="dialog 系列" />
         <activity android:name=".ui.list.ListIndexActivity" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:label="功能主页">
+
+        <activity android:name=".ui.customize.CustomizeIndexActivity" />
+        <activity android:name=".ui.customize.SwipeMenuLayoutActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+        </activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="功能主页">
+
         </activity>
     </application>
 

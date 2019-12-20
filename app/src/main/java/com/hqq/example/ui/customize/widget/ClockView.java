@@ -110,6 +110,7 @@ public class ClockView extends View {
         canvas.drawCircle(0, getHeight() / 2, 20, paint);
         canvas.restore();
 
+
         return paint;
     }
 }

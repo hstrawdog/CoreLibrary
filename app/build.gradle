@@ -24,7 +24,7 @@ android {
                     versionProps['VERSION_CODE'] = (++verCode).toString()
                     versionProps.store(versionPropsFile.newWriter(), null)
                     break
-                }else if ("assemble".equals(runName)){
+                } else if ("assemble".equals(runName)) {
                     versionProps['VERSION_CODE'] = (++verCode).toString()
                     versionProps.store(versionPropsFile.newWriter(), null)
                     break
