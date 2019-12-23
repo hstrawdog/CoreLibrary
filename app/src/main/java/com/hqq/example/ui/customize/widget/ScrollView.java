@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import com.hqq.core.utils.ScreenUtils;
 import com.hqq.core.utils.log.LogUtils;
 
+import java.security.acl.LastOwnerException;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.example.ui.customize.widget
@@ -45,6 +47,15 @@ public class ScrollView extends View {
         paint.setColor(Color.RED);
 
         canvas.drawLine(0, 0, getWidth(), getHeight(), paint);
+
+
+//        LogUtils.e("800",""+getWidth());
+//        LogUtils.e("getMeasuredWidth()",""+getMeasuredWidth());
+//        LogUtils.e("getMeasuredWidth()",""+getMeasuredWidth());
+//        LogUtils.e("getMeasuredWidth()",""+getMinimumWidth());
+//        LogUtils.e("onDraw",""+ScreenUtils.dip2px(getContext(),800));
+        LogUtils.e("onDraw", getScrollX());
+        LogUtils.e("getScreenWidth", "" + ScreenUtils.getScreenWidth(getContext()));
     }
 
     float distanceX = 0;
@@ -65,8 +76,8 @@ public class ScrollView extends View {
                 if (getScrollX() < 0) {
                     scrollTo(0, 0);
                 } else {
-                    if (getScrollX() > getWidth()- ScreenUtils.getScreenWidth(getContext())) {
-                        scrollTo(ScreenUtils.getScreenWidth(getContext()), 0);
+                    if (getScrollX() > getWidth() - ScreenUtils.getScreenWidth(getContext())) {
+                        scrollTo(getWidth() - ScreenUtils.getScreenWidth(getContext()), 0);
                     }
 
                 }
@@ -76,7 +87,7 @@ public class ScrollView extends View {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 LogUtils.e("ACTION_UP -----------" + event.getRawX());
-
+                LogUtils.e("distanceX", distanceX);
                 break;
             default:
 
@@ -91,13 +102,11 @@ public class ScrollView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
-
                 return true;
             case MotionEvent.ACTION_MOVE:
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-
                 break;
             default:
 
