@@ -108,9 +108,9 @@ public class DateUtils {
         String s = time;
         int index1 = s.indexOf(":");
         int index2 = s.indexOf(":", index1 + 1);
-        int hh = Integer.parseInt(s.substring(0, index1));
-        int mi = Integer.parseInt(s.substring(index1 + 1, index2));
-        int ss = Integer.parseInt(s.substring(index2 + 1));
+        long hh = Integer.parseInt(s.substring(0, index1));
+        long mi = Integer.parseInt(s.substring(index1 + 1, index2));
+        long ss = Integer.parseInt(s.substring(index2 + 1));
 
         return hh * 60 * 60 + mi * 60 + ss;
     }
@@ -135,15 +135,15 @@ public class DateUtils {
      * @param time 00:00:00
      * @return 000000
      */
-    public static int format2Second(String time) {
+    public static long format2Second(String time) {
         if (RegexUtils.checkNull(time)) {
             return 0;
         }
 
         String[] str = time.split(":");
-        int hh = 0;
-        int mi = 0;
-        int ss = 0;
+        long hh = 0;
+        long mi = 0;
+        long ss = 0;
 
         switch (str.length) {
             case 0:
@@ -173,10 +173,10 @@ public class DateUtils {
         }
 
         String[] str = time.split(":");
-        int hh = 0;
-        int mi = 0;
-        int ss = 0;
-        int mm = 0;
+        long hh = 0;
+        long mi = 0;
+        long ss = 0;
+        long mm = 0;
 
         switch (str.length) {
             case 0:
@@ -246,9 +246,9 @@ public class DateUtils {
      * @return string
      */
     public static String formatTime(int leftsecond) {
-        int day = (int) Math.floor(leftsecond / (60 * 60 * 24));
-        int hour = (int) Math.floor((leftsecond - day * 24 * 60 * 60) / 3600);
-        int minute = (int) Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60);
+        long day = (int) Math.floor(leftsecond / (60 * 60 * 24));
+        long hour = (int) Math.floor((leftsecond - day * 24 * 60 * 60) / 3600);
+        long minute = (int) Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60);
         return "剩" + day + "天" + hour + "时" + minute + "分";
     }
 
@@ -261,10 +261,10 @@ public class DateUtils {
     }
 
     public static String formatTime2Second(int leftsecond, int type) {
-        int day = (int) Math.floor(leftsecond / (60 * 60 * 24));
-        int hour = (int) Math.floor((leftsecond - day * 24 * 60 * 60) / 3600);
-        int minute = (int) Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60);
-        int second = (int) Math.floor(leftsecond - day * 24 * 60 * 60 - hour * 3600 - minute * 60);
+        long day = (int) Math.floor(leftsecond / (60 * 60 * 24));
+        long hour = (int) Math.floor((leftsecond - day * 24 * 60 * 60) / 3600);
+        long minute = (int) Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60);
+        long second = (int) Math.floor(leftsecond - day * 24 * 60 * 60 - hour * 3600 - minute * 60);
 
         StringBuilder stringBuilder = new StringBuilder("剩");
 
