@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.hqq.example.ui.customize.SwipeMenuLayoutActivity">
 
-    <com.hqq.example.ui.customize.widget.ScrollView
+    <com.hqq.example.ui.customize.widget.ViewScrollView
         android:layout_width="800dp"
         android:layout_height="@dimen/x300"
         android:background="@color/color_fff" />
