@@ -18,7 +18,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.ShapeTestActivity"
-            android:label="shape测试"></activity>
+            android:label="shape测试" />
         <activity
             android:name=".ui.info.FilePathActivity"
             android:label="文件路径测试" />
@@ -125,24 +125,21 @@
             android:name=".ui.dialog.DialogIndexActivity"
             android:label="dialog 系列" />
         <activity android:name=".ui.list.ListIndexActivity" />
-
         <activity android:name=".ui.customize.CustomizeIndexActivity" />
         <activity android:name=".ui.customize.SwipeMenuLayoutActivity">
 
+        </activity>
+        <activity android:name=".ui.customize.RoundCountdownActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
 
         <activity
             android:name=".ui.MainActivity"
-            android:label="功能主页">
-
-        </activity>
+            android:label="功能主页"></activity>
     </application>
 
 </manifest>
