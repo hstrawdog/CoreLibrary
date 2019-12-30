@@ -8,6 +8,7 @@ import com.hqq.example.bean.MainBean;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
+import com.hqq.example.ui.customize.BezierActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
@@ -15,6 +16,7 @@ import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.list.ListIndexActivity;
+import com.hqq.example.ui.recycle.EmptyListActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.screen.DimenActivity;
 import com.hqq.example.ui.screen.TextViewBuilderSizeActivity;
@@ -65,6 +67,9 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
+
+
+        startActivity(new Intent(this, EmptyListActivity.class));
 
     }
 

@@ -20,7 +20,7 @@ public class BezierUtil {
      * @param p0 起始点
      * @param p1 控制点
      * @param p2 终止点
-     * @return t对应的点
+     * @return t对应的点 0-1
      */
     public static PointF calculateBezierPointForQuadratic(float t, PointF p0, PointF p1, PointF p2) {
         PointF point = new PointF();

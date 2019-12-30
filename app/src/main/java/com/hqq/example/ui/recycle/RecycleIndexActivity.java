@@ -25,6 +25,7 @@ public class RecycleIndexActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("轮播图", BannerActivity.class));
         mAdapter.addData(new MainBean("多Item 分页滑动", FullPagerSnapActivity.class));
         mAdapter.addData(new MainBean("画廊 分页滑动", GallerySnapActivity.class));
+        mAdapter.addData(new MainBean("空数据测试", EmptyListActivity.class));
 
     }
 }

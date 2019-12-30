@@ -1,6 +1,9 @@
 package com.hqq.example.ui.customize.widget;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,6 +11,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.Transformation;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,6 +31,24 @@ import com.hqq.example.R;
  */
 public class RoundCountdownView extends View {
 
+
+    /**
+     * 进度
+     */
+    private float mSweepAngle = 0;
+    /**
+     * 开始角度
+     */
+    private float mStarAngle = 270;
+
+    /**
+     * 总时间
+     */
+    private int mCountdown = 60;
+    /**
+     * 剩余时间
+     */
+    private int mNowCountdown = mCountdown;
 
     public RoundCountdownView(Context context) {
         super(context);
@@ -52,9 +75,23 @@ public class RoundCountdownView extends View {
         startCountdownAnimation();
     }
 
+    /**
+     * 执行动画
+     */
     private void startCountdownAnimation() {
-
-
+        ValueAnimator animatorSet = ValueAnimator.ofFloat(0, (360));
+        animatorSet.setInterpolator(new LinearInterpolator());
+        animatorSet.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mSweepAngle = (float) animation.getAnimatedValue();
+                mNowCountdown = (int) ((360 - mSweepAngle) / (360 / mCountdown));
+                LogUtils.e("onAnimationUpdate", mNowCountdown);
+                invalidate();
+            }
+        });
+        animatorSet.setDuration(mCountdown * 1000);
+        animatorSet.start();
 
     }
 
@@ -83,9 +120,11 @@ public class RoundCountdownView extends View {
 //        } else if (hSpecMode == MeasureSpec.AT_MOST) {
 //            setMeasuredDimension(300, 300);
 //        }
-        wSpecSize = 300;
-        setMeasuredDimension(wSpecSize, 300);
-        LogUtils.e("onMeasure getWidth", getMeasuredWidth());
+        wSpecSize = 600;
+        hSpecSize = 600;
+        setMeasuredDimension(wSpecSize, hSpecSize);
+        LogUtils.e("onMeasure getMeasuredWidth", getMeasuredWidth());
+        LogUtils.e("onMeasure getMeasuredHeight", getMeasuredHeight());
 
 
     }
@@ -93,13 +132,10 @@ public class RoundCountdownView extends View {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-
         LogUtils.e("getWidth", getWidth());
         canvasText(canvas);
         canvasBg(canvas);
         cancasArc(canvas);
-
-
     }
 
     private void canvasText(Canvas canvas) {
@@ -108,9 +144,9 @@ public class RoundCountdownView extends View {
         mPaint.getFontMetrics(fontMetrics);
         mPaint.setTextSize(ResourcesUtils.getDimen(R.dimen.x30));
         float offset = (fontMetrics.descent + fontMetrics.ascent) / 2;
-        int centerX = (int) (getWidth() / 2 - (mPaint.measureText("AajJÂâ") / 2));
+        int centerX = (int) (getWidth() / 2 - (mPaint.measureText(mNowCountdown + "秒") / 2));
         int centerY = getHeight() / 2;
-        canvas.drawText("AajJÂâ", centerX, centerY - offset, mPaint);
+        canvas.drawText(mNowCountdown + "秒", centerX, centerY - offset, mPaint);
     }
 
     private void cancasArc(Canvas canvas) {
@@ -119,7 +155,7 @@ public class RoundCountdownView extends View {
         paint1.setColor(Color.BLUE);
         paint1.setStyle(Paint.Style.STROKE);
         paint1.setStrokeWidth(ResourcesUtils.getDimen(R.dimen.x5));
-        canvas.drawArc(0 + mPadding, 0+mPadding, getWidth() - mPadding*2, getWidth() - mPadding, 0, 720, false, paint1);
+        canvas.drawArc(0 + mPadding, 0 + mPadding, getWidth() - mPadding, getWidth() - mPadding, mStarAngle, mSweepAngle, false, paint1);
     }
 
     int mPadding = 5;
@@ -130,7 +166,7 @@ public class RoundCountdownView extends View {
         paint.setStrokeWidth(5);
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawCircle(getWidth() / 2 -mPadding, getHeight() / 2, getWidth() / 2 - mPadding, paint);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, getWidth() / 2 - mPadding, paint);
 
     }
 

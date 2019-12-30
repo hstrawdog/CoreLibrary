@@ -9,7 +9,9 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Typeface;
+
 import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -30,7 +32,7 @@ public class BezierView extends View {
     }
 
     public BezierView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public BezierView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -94,8 +96,7 @@ public class BezierView extends View {
     Point mStartPoint = new Point(10, 10);
     Point mEndPoint = new Point(300, 300);
     Point mCtrlPoint = new Point(180, 10);
-    Point mMovePoint =new Point(10,10);
-
+    Point mMovePoint = new Point(10, 10);
 
 
     private void drawBezier(Canvas canvas) {
@@ -114,15 +115,13 @@ public class BezierView extends View {
         canvas.drawLine(180, 10, 300, 300, paint);
 
 
-
-
         Path path = new Path();
         path.moveTo(mStartPoint.x, mStartPoint.y);
         path.quadTo(mCtrlPoint.x, mCtrlPoint.y, mEndPoint.x, mEndPoint.x);
         canvas.drawPath(path, paint);
 
         paint.setColor(Color.BLUE);
-        canvas.drawCircle(mMovePoint.x,mMovePoint.y,5,paint);
+        canvas.drawCircle(mMovePoint.x, mMovePoint.y, 5, paint);
 
         canvas.save();
 

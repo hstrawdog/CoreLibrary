@@ -1,14 +1,19 @@
 package com.hqq.core.ui.model;
 
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.R;
+import com.hqq.core.utils.RegexUtils;
 import com.hqq.core.widget.CusPtrClassicFrameLayout;
 
 import java.util.List;
@@ -27,7 +32,7 @@ import in.srain.cube.views.ptr.PtrHandler;
  */
 public class BaseListModel {
     BaseListModelView mBaseListModelView;
-    View mLoadMoreFoodView;
+    View mViewEmptyFoot;
     protected CusPtrClassicFrameLayout mPtrPullDown;
     Context mContext;
     private int mDefLayoutEmptyViewById = R.layout.layout_load_more_empty;
@@ -59,29 +64,68 @@ public class BaseListModel {
      */
     public void fillingData(List data) {
         if (mBaseListModelView.getPageCount() == 1) {
-            mBaseListModelView.getAdapter().replaceData(data);
+            getAdapter().replaceData(data);
         } else {
-            mBaseListModelView.getAdapter().addData(data);
+            getAdapter().addData(data);
         }
         removeLoadMoreFood();
-        if (mBaseListModelView.getAdapter().getItemCount() == 0) {
+        if (getAdapter().getItemCount() == 0) {
             // 没有头部的时候才可以加这个
             // 这边需要适配两种情况 空布局如果可以点击的话
-            mBaseListModelView.getAdapter().setEmptyView(getLayoutEmptyView(), mBaseListModelView.getListView());
-        } else if (mBaseListModelView.getAdapter().getData().size() == 0) {
+            getAdapter().setEmptyView(getLayoutEmptyView(), mBaseListModelView.getListView());
+            initEmptyView(getAdapter().getEmptyView());
+        } else if (getAdapter().getData().size() == 0) {
             //这个是空数据的显示
             addLoadMoreFoodView();
+            initEmptyView(mViewEmptyFoot);
         } else if (data.size() < mBaseListModelView.getPageSize()) {
-            mBaseListModelView.getAdapter().loadMoreEnd();
+            getAdapter().loadMoreEnd();
         } else {
             mBaseListModelView.addPageCount();
-            mBaseListModelView.getAdapter().loadMoreComplete();
+            getAdapter().loadMoreComplete();
         }
 
         if (mPtrPullDown != null) {
             mPtrPullDown.refreshComplete();
         }
 
+    }
+
+    /**
+     * 初始化 空布局
+     *
+     * @param emptyView
+     */
+    private void initEmptyView(View emptyView) {
+        TextView tvRefresh = emptyView.findViewById(R.id.tv_Refresh);
+        TextView tvEmptyMessage = emptyView.findViewById(R.id.tv_empty_message);
+        ImageView ivEmpty = emptyView.findViewById(R.id.iv_empty);
+
+
+        if (RegexUtils.checkNotNull(tvRefresh)) {
+            tvRefresh.setVisibility(View.GONE);
+        }
+
+        if (RegexUtils.checkNotNull(tvEmptyMessage)) {
+            tvEmptyMessage.setText(getEmptyTextMessage());
+        }
+        if (RegexUtils.checkNotNull(ivEmpty)) {
+            ivEmpty.setImageResource(getEmptyImage());
+        }
+
+    }
+
+    /**
+     * 应该要可以全局配置的 配置在xml中 可以替换
+     *
+     * @return string
+     */
+    private CharSequence getEmptyTextMessage() {
+        return "亲!没有更多数据哦~";
+    }
+
+    private int getEmptyImage() {
+        return R.mipmap.ic_empty_def;
     }
 
     /**
@@ -98,15 +142,15 @@ public class BaseListModel {
      */
     private void addLoadMoreFoodView() {
         createLoadMoreFoodView();
-        if (mBaseListModelView.getAdapter().getFooterLayout() == null) {
-            mBaseListModelView.getAdapter().addFooterView(mLoadMoreFoodView);
+        if (getAdapter().getFooterLayout() == null) {
+            getAdapter().addFooterView(mViewEmptyFoot);
         } else {
-            LinearLayout adapterFoodView = mBaseListModelView.getAdapter().getFooterLayout();
+            LinearLayout adapterFoodView = getAdapter().getFooterLayout();
             if (adapterFoodView.getChildCount() == 0) {
-                mBaseListModelView.getAdapter().addFooterView(mLoadMoreFoodView);
-            } else if (adapterFoodView.getChildAt(adapterFoodView.getChildCount() - 1) != mLoadMoreFoodView) {
+                getAdapter().addFooterView(mViewEmptyFoot);
+            } else if (adapterFoodView.getChildAt(adapterFoodView.getChildCount() - 1) != mViewEmptyFoot) {
                 // 目前没测试 不知道会不会有问题
-                mBaseListModelView.getAdapter().addFooterView(mLoadMoreFoodView);
+                getAdapter().addFooterView(mViewEmptyFoot);
             }
         }
     }
@@ -115,9 +159,9 @@ public class BaseListModel {
      * 移除更更多数据
      */
     private void removeLoadMoreFood() {
-        if (mLoadMoreFoodView != null && mBaseListModelView.getAdapter().getFooterLayout() != null) {
-            LinearLayout adapterFoodView = mBaseListModelView.getAdapter().getFooterLayout();
-            adapterFoodView.removeView(mLoadMoreFoodView);
+        if (mViewEmptyFoot != null && getAdapter().getFooterLayout() != null) {
+            LinearLayout adapterFoodView = getAdapter().getFooterLayout();
+            adapterFoodView.removeView(mViewEmptyFoot);
         }
     }
 
@@ -127,10 +171,10 @@ public class BaseListModel {
      * @return
      */
     private View createLoadMoreFoodView() {
-        if (mLoadMoreFoodView == null) {
-            mLoadMoreFoodView = LayoutInflater.from(mContext).inflate(R.layout.layout_load_more_empty, null);
+        if (mViewEmptyFoot == null) {
+            mViewEmptyFoot = LayoutInflater.from(mContext).inflate(R.layout.layout_load_more_empty, null);
         }
-        return mLoadMoreFoodView;
+        return mViewEmptyFoot;
     }
 
 
@@ -226,6 +270,16 @@ public class BaseListModel {
 
         return rcList;
     }
+
+    /**
+     * adapter
+     *
+     * @return
+     */
+    private BaseQuickAdapter getAdapter() {
+        return mBaseListModelView.getAdapter();
+    }
+
 
     /**
      * m->v 的接口

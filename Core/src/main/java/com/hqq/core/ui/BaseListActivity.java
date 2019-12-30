@@ -1,6 +1,7 @@
 package com.hqq.core.ui;
 
 import android.os.Bundle;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;

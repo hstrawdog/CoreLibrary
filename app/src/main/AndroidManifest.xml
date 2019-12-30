@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.recycle.EmptyListActivity"></activity>
         <activity
             android:name=".ui.ShapeTestActivity"
             android:label="shape测试" />
@@ -126,20 +127,19 @@
             android:label="dialog 系列" />
         <activity android:name=".ui.list.ListIndexActivity" />
         <activity android:name=".ui.customize.CustomizeIndexActivity" />
-        <activity android:name=".ui.customize.SwipeMenuLayoutActivity">
-
-        </activity>
-        <activity android:name=".ui.customize.RoundCountdownActivity">
+        <activity android:name=".ui.customize.SwipeMenuLayoutActivity"></activity>
+        <activity
+            android:name=".ui.customize.RoundCountdownActivity"
+            android:label="圆形倒计时"></activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="功能主页">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".ui.MainActivity"
-            android:label="功能主页"></activity>
     </application>
 
 </manifest>
