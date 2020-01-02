@@ -3,8 +3,10 @@ package com.hqq.example.ui.exception;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
 import butterknife.BindView;
@@ -40,8 +42,11 @@ public class ThrowActivity extends BaseActivity {
             case R.id.button11:
                 try {
                     throw new Exception("一个异常 ");
+//                    TextView textView = null;
+//                    textView.setText("");
                 } catch (Exception e) {
                     e.printStackTrace();
+                    LogUtils.e(e.getLocalizedMessage());
                 }
                 break;
             case R.id.button12:

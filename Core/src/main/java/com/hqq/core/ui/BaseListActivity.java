@@ -39,7 +39,6 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        mBaseListModel = new BaseListModel(this, this);
         super.onCreate(savedInstanceState);
     }
 
@@ -52,7 +51,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     @Override
     public View setRootView() {
         if (setViewId() <= 0) {
-            return mBaseListModel.createRecycleView(this);
+            return BaseListModel.createRecycleView(this);
         } else {
             return null;
         }
@@ -64,11 +63,11 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     @Override
     @CallSuper
     public void initView() {
+        mBaseListModel = new BaseListModel(this, this);
         mLayoutManager = getRcLayoutManager();
         mAdapter = initAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());
-        mBaseListModel.initRecycleView(mRcList, mAdapter, mLayoutManager,
-                this, this, this);
+        mBaseListModel.initRecycleView(mRcList, mAdapter, mLayoutManager);
         mBaseListModel.initPtrPullDown(mRootViewBuild.getRootView());
         initData();
     }

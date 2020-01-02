@@ -2,13 +2,18 @@ package com.hqq.core.ui.web;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -23,6 +28,7 @@ import com.hqq.core.listenner.WebLoadListener;
 import com.hqq.core.ui.BaseFragment;
 import com.hqq.core.utils.BundleUtils;
 import com.hqq.core.utils.RegexUtils;
+import com.hqq.core.utils.VersionUtils;
 
 /**
  * @Author : huangqiqiang
@@ -34,14 +40,12 @@ import com.hqq.core.utils.RegexUtils;
  */
 public class BaseWebFragment extends BaseFragment {
 
-
     private ProgressBar mProgressBar;
     private WebView mWebView;
     private String mUrl;
     private CharSequence mTitle = "";
     WebLoadListener mWebLoadListener;
     private ColorStateList mProgressBarColor;
-
 
     public static BaseWebFragment instantiate(Context context, String title, String url) {
         BaseWebFragment baseWebFragment = new BaseWebFragment();
@@ -52,12 +56,10 @@ public class BaseWebFragment extends BaseFragment {
         return baseWebFragment;
     }
 
-
     @Override
     public int setViewId() {
         return R.layout.fragment_web;
     }
-
 
     @Override
     public void onPause() {
@@ -77,7 +79,6 @@ public class BaseWebFragment extends BaseFragment {
         mRootViewBuild.setShowStatus(true);
         mRootViewBuild.setShowToolBar(true);
     }
-
 
     @SuppressLint("JavascriptInterface")
     @Override
@@ -103,8 +104,8 @@ public class BaseWebFragment extends BaseFragment {
         // 标识 为Android的 js 支持 对象是activity
         mWebView.addJavascriptInterface(getActivity(), "android");
 
-        mUrl = BundleUtils.getString(this,getString(R.string.key_url));
-        mTitle =   BundleUtils.getString(this,getString(R.string.key_title)) ;
+        mUrl = BundleUtils.getString(this, getString(R.string.key_url));
+        mTitle = BundleUtils.getString(this, getString(R.string.key_title));
         getActivity().setTitle(mTitle);
         mWebView.loadUrl(mUrl);
 
@@ -144,9 +145,27 @@ public class BaseWebFragment extends BaseFragment {
         }
     }
 
-
     protected WebViewClient getWebViewClient() {
         return new WebViewClient() {
+
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                //处理 android err_unknown_url_scheme异常
+                if (URLUtil.isNetworkUrl(request.getUrl().toString())) {
+                    return false;
+                }
+                if (VersionUtils.appInstalledOrNot(getActivity(), request.getUrl().toString())) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
+                    startActivity(intent);
+                } else {
+                    // do something if app is not installed
+                }
+
+
+                return super.shouldOverrideUrlLoading(view, request);
+
+            }
 
             @Nullable
             @Override
@@ -182,7 +201,6 @@ public class BaseWebFragment extends BaseFragment {
 
         };
     }
-
 
     protected WebChromeClient getWebChromeClient() {
         return new WebChromeClient() {
@@ -252,4 +270,6 @@ public class BaseWebFragment extends BaseFragment {
     public void setProgressBarColor(ColorStateList progressBarColor) {
         mProgressBarColor = progressBarColor;
     }
+
+
 }

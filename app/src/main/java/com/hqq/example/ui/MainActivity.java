@@ -3,28 +3,25 @@ package com.hqq.example.ui;
 import android.content.Intent;
 import android.view.KeyEvent;
 
+import com.hqq.core.ui.BaseListActivity;
+import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
+import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
-import com.hqq.example.ui.customize.BezierActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
 import com.hqq.example.ui.exception.ThrowActivity;
+import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
-import com.hqq.example.ui.list.ListIndexActivity;
 import com.hqq.example.ui.recycle.EmptyListActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
-import com.hqq.example.ui.screen.DimenActivity;
-import com.hqq.example.ui.screen.TextViewBuilderSizeActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
-import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.web.WebActivity;
-import com.hqq.core.ui.BaseListActivity;
-import com.hqq.core.utils.ToastUtils;
 
 /**
  * @Author : huangqiqiang
@@ -56,15 +53,13 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
         mAdapter.addData(new MainBean("Recycle 相关", RecycleIndexActivity.class));
         mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
-        mAdapter.addData(new MainBean("列表系列", ListIndexActivity.class));
         mAdapter.addData(new MainBean("Dialog系列", TestDialogActivity.class));
         mAdapter.addData(new MainBean("Shape测试", ShapeTestActivity.class));
         mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
         mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
         mAdapter.addData(new MainBean("网页测试", WebActivity.class));
         mAdapter.addData(new MainBean("文件路径信息", FilePathActivity.class));
-        mAdapter.addData(new MainBean("文字适配测试", TextViewBuilderSizeActivity.class));
-        mAdapter.addData(new MainBean("1像素大小测试", DimenActivity.class));
+        mAdapter.addData(new MainBean("适配相关", AdaptationIndexActivity.class));
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
 

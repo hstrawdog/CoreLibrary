@@ -52,6 +52,10 @@ public class ResourcesUtils {
         return getResources().getString(resId);
     }
 
+    public static String getString(@StringRes int resId) {
+        return getResources().getString(resId);
+    }
+
     /**
      * 获取颜色
      *

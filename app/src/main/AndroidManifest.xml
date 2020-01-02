@@ -123,14 +123,17 @@
         </activity>
         <activity android:name=".ui.customize.BezierActivity" />
         <activity
+            android:name=".ui.adaptation.AdaptationIndexActivity"
+            android:label="适配相关" />
+        <activity
             android:name=".ui.dialog.DialogIndexActivity"
             android:label="dialog 系列" />
         <activity android:name=".ui.list.ListIndexActivity" />
         <activity android:name=".ui.customize.CustomizeIndexActivity" />
-        <activity android:name=".ui.customize.SwipeMenuLayoutActivity"></activity>
+        <activity android:name=".ui.customize.SwipeMenuLayoutActivity" />
         <activity
             android:name=".ui.customize.RoundCountdownActivity"
-            android:label="圆形倒计时"></activity>
+            android:label="圆形倒计时" />
         <activity
             android:name=".ui.MainActivity"
             android:label="功能主页">

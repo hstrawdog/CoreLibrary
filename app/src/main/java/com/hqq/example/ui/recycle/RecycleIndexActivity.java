@@ -3,6 +3,9 @@ package com.hqq.example.ui.recycle;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
 import com.hqq.core.ui.BaseListActivity;
+import com.hqq.example.ui.list.ListActivity;
+import com.hqq.example.ui.list.LoadMoreActivity;
+import com.hqq.example.ui.view.page.IFragmentActivityBuilder;
 
 /**
  * @Author : huangqiqiang
@@ -26,6 +29,8 @@ public class RecycleIndexActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("多Item 分页滑动", FullPagerSnapActivity.class));
         mAdapter.addData(new MainBean("画廊 分页滑动", GallerySnapActivity.class));
         mAdapter.addData(new MainBean("空数据测试", EmptyListActivity.class));
-
+        mAdapter.addData(new MainBean("加载数据", LoadMoreActivity.class));
+        mAdapter.addData(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
+        mAdapter.addData(new MainBean("ListActivity 加载", ListActivity.class));
     }
 }

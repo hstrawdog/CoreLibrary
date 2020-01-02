@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.R;
 import com.hqq.core.utils.RegexUtils;
+import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.core.widget.CusPtrClassicFrameLayout;
 
 import java.util.List;
@@ -57,6 +58,49 @@ public class BaseListModel {
     }
 
     /**
+     * 初始化下拉刷新
+     */
+    protected void initPull() {
+
+        mPtrPullDown.setPullToRefresh(false);
+        mPtrPullDown.setKeepHeaderWhenRefresh(true);
+        mPtrPullDown.setLastUpdateTimeRelateObject(this);
+        mPtrPullDown.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, mBaseListModelView.getListView(), header);
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                mBaseListModelView.onRefreshBegin();
+            }
+        });
+    }
+
+    /**
+     * 初始化 空布局
+     *
+     * @param emptyView
+     */
+    private void initEmptyView(View emptyView) {
+        TextView tvRefresh = emptyView.findViewById(R.id.tv_Refresh);
+        TextView tvEmptyMessage = emptyView.findViewById(R.id.tv_empty_message);
+        ImageView ivEmpty = emptyView.findViewById(R.id.iv_empty);
+
+        if (RegexUtils.checkNotNull(tvRefresh)) {
+            tvRefresh.setVisibility(View.GONE);
+        }
+        if (RegexUtils.checkNotNull(tvEmptyMessage)) {
+            tvEmptyMessage.setText(getEmptyTextMessage());
+        }
+        if (RegexUtils.checkNotNull(ivEmpty)) {
+            ivEmpty.setImageResource(getEmptyImage());
+        }
+
+    }
+
+    /**
      * 统一 标准的填充数据
      * 需要考虑 使用工厂模式 对 填充进行抽离
      *
@@ -92,27 +136,15 @@ public class BaseListModel {
     }
 
     /**
-     * 初始化 空布局
+     * 创建更多数据
      *
-     * @param emptyView
+     * @return
      */
-    private void initEmptyView(View emptyView) {
-        TextView tvRefresh = emptyView.findViewById(R.id.tv_Refresh);
-        TextView tvEmptyMessage = emptyView.findViewById(R.id.tv_empty_message);
-        ImageView ivEmpty = emptyView.findViewById(R.id.iv_empty);
-
-
-        if (RegexUtils.checkNotNull(tvRefresh)) {
-            tvRefresh.setVisibility(View.GONE);
+    private View createLoadMoreFoodView() {
+        if (mViewEmptyFoot == null) {
+            mViewEmptyFoot = LayoutInflater.from(mContext).inflate(R.layout.layout_load_more_empty, null);
         }
-
-        if (RegexUtils.checkNotNull(tvEmptyMessage)) {
-            tvEmptyMessage.setText(getEmptyTextMessage());
-        }
-        if (RegexUtils.checkNotNull(ivEmpty)) {
-            ivEmpty.setImageResource(getEmptyImage());
-        }
-
+        return mViewEmptyFoot;
     }
 
     /**
@@ -121,7 +153,7 @@ public class BaseListModel {
      * @return string
      */
     private CharSequence getEmptyTextMessage() {
-        return "亲!没有更多数据哦~";
+        return ResourcesUtils.getString(R.string.def_empty_message);
     }
 
     private int getEmptyImage() {
@@ -166,53 +198,13 @@ public class BaseListModel {
     }
 
     /**
-     * 创建更多数据
-     *
-     * @return
-     */
-    private View createLoadMoreFoodView() {
-        if (mViewEmptyFoot == null) {
-            mViewEmptyFoot = LayoutInflater.from(mContext).inflate(R.layout.layout_load_more_empty, null);
-        }
-        return mViewEmptyFoot;
-    }
-
-
-    /**
-     * 初始化下拉刷新
-     */
-    protected void initPull() {
-
-        mPtrPullDown.setPullToRefresh(false);
-        mPtrPullDown.setKeepHeaderWhenRefresh(true);
-        mPtrPullDown.setLastUpdateTimeRelateObject(this);
-        mPtrPullDown.setPtrHandler(new PtrHandler() {
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, mBaseListModelView.getListView(), header);
-            }
-
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                mBaseListModelView.onRefreshBegin();
-            }
-        });
-    }
-
-    /**
      * 初始化 RecycleView 等一切操作
      *
      * @param rcList
      * @param adapter
      * @param layoutManager
-     * @param requestLoadMoreListener
-     * @param onItemClickListener
-     * @param onItemChildClickListener
      */
-    public void initRecycleView(RecyclerView rcList, BaseQuickAdapter adapter, RecyclerView.LayoutManager layoutManager,
-                                BaseQuickAdapter.RequestLoadMoreListener requestLoadMoreListener,
-                                BaseQuickAdapter.OnItemClickListener onItemClickListener,
-                                BaseQuickAdapter.OnItemChildClickListener onItemChildClickListener) {
+    public void initRecycleView(RecyclerView rcList, BaseQuickAdapter adapter, RecyclerView.LayoutManager layoutManager) {
         try {
             if (null == rcList) {
                 throw new Exception("  listView is null ");
@@ -227,10 +219,10 @@ public class BaseListModel {
             // 添加焦点
             rcList.setAdapter(adapter);
             if (mBaseListModelView.isShowLoadMore()) {
-                adapter.setOnLoadMoreListener(requestLoadMoreListener, rcList);
+                adapter.setOnLoadMoreListener(mBaseListModelView, rcList);
             }
-            adapter.setOnItemClickListener(onItemClickListener);
-            adapter.setOnItemChildClickListener(onItemChildClickListener);
+            adapter.setOnItemClickListener(mBaseListModelView);
+            adapter.setOnItemChildClickListener(mBaseListModelView);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -243,12 +235,19 @@ public class BaseListModel {
      * @param context
      * @return
      */
-    public View createRecycleView(Context context) {
+    public static View createRecycleView(Context context) {
         //正常情况下父布局应该会是LinearLayout
         return createRecycleView(context, ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
-    public View createRecycleView(Context context, int height) {
+    /**
+     * 创建一个RecycleView
+     *
+     * @param context
+     * @param height
+     * @return
+     */
+    public static View createRecycleView(Context context, int height) {
         View view = new RecyclerView(context);
         view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         view.setId(R.id.rc_list);
@@ -263,11 +262,17 @@ public class BaseListModel {
         mPtrPullDown = null;
     }
 
+    /**
+     * 检查是否有是否存在
+     *
+     * @param rcList
+     * @param view
+     * @return
+     */
     public RecyclerView checkRecycleView(RecyclerView rcList, View view) {
         if (rcList == null) {
             rcList = view.findViewById(R.id.rc_list);
         }
-
         return rcList;
     }
 
@@ -280,12 +285,13 @@ public class BaseListModel {
         return mBaseListModelView.getAdapter();
     }
 
-
     /**
      * m->v 的接口
      * k  adapter
      */
-    public interface BaseListModelView<K extends BaseQuickAdapter> {
+    public interface BaseListModelView<K extends BaseQuickAdapter> extends
+            BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
+            BaseQuickAdapter.OnItemChildClickListener {
 
         /**
          * 分页下标
@@ -341,6 +347,11 @@ public class BaseListModel {
          */
         void initData();
 
+        /**
+         * 布局类型
+         *
+         * @return
+         */
         RecyclerView.LayoutManager getRcLayoutManager();
 
     }

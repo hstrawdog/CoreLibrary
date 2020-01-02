@@ -34,4 +34,14 @@ public class WebActivity extends BaseFrameLayoutActivity {
         BaseWebFragment mBaseFragment = BaseWebFragment.instantiate(this, "网页", "https://www.baidu.com/");
         addOrShowFragment(mBaseFragment, R.id.fl_layout);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (mCurrentFragment != null) {
+            if (!((BaseWebFragment) mCurrentFragment).onBackPressed()) {
+                super.onBackPressed();
+            }
+        }
+    }
 }

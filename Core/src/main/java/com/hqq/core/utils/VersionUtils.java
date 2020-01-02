@@ -1,5 +1,6 @@
 package com.hqq.core.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -64,6 +65,23 @@ public class VersionUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     *https://stackoverflow.com/questions/41693263/android-webview-err-unknown-url-scheme
+     * @param activity
+     * @param uri
+     * @return
+     */
+    public static boolean appInstalledOrNot(Activity activity, String uri) {
+        PackageManager pm = activity.getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        return false;
     }
 
 }
