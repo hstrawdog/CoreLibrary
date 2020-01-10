@@ -139,9 +139,7 @@ public class ViewScrollView extends View {
             case MotionEvent.ACTION_DOWN:
                 return true;
             default:
-
         }
         return super.onTouchEvent(event);
-
     }
 }
