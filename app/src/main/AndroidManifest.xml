@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.recycle.EmptyListActivity"></activity>
+        <activity android:name=".ui.web.ImageViewActivity"></activity>
+        <activity android:name=".ui.view.EditTextActivity" />
+        <activity android:name=".ui.recycle.EmptyListActivity" />
         <activity
             android:name=".ui.ShapeTestActivity"
             android:label="shape测试" />

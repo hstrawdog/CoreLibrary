@@ -37,11 +37,13 @@ public class ShapeTestActivity extends BaseActivity {
                 .setStroke(R.dimen.x20, R.color.color_main)
                 .builder()
         );
+
         findViewById(R.id.textView4).setBackground(new BaseShapeBuilder().setRectangle()
                 .setColor(R.color.color_b36d61)
                 .setCornerRadius(R.dimen.x20)
                 .builder()
         );
+
         ((ImageView) findViewById(R.id.textView5)).setImageDrawable(new BaseShapeBuilder().setRectangle()
                 .setColor(R.color.color_2b)
                 .setCornerRadius(R.dimen.x20)

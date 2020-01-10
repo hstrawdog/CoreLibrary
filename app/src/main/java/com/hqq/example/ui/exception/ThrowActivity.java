@@ -40,21 +40,11 @@ public class ThrowActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button11:
-                try {
-                    throw new Exception("一个异常 ");
-//                    TextView textView = null;
-//                    textView.setText("");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    LogUtils.e(e.getLocalizedMessage());
-                }
+                LogUtils.e(new Exception("一个异常 "));
+
                 break;
             case R.id.button12:
-                try {
-                    throw new RuntimeException("一个运行异常 ");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                LogUtils.e(new RuntimeException("一个运行异常 "));
                 break;
 
             default:

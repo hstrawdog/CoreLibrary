@@ -30,7 +30,7 @@ public class RegexUtils {
      * @param object Object
      * @return boolean
      */
-    public static boolean checkNull(Object object) {
+    public static boolean isNull(Object object) {
         if (object == null) {
             return true;
         } else if (object instanceof String) {
@@ -45,9 +45,17 @@ public class RegexUtils {
 //                return true;
 //            }
 //        }
-
-
         return false;
+    }
+
+    /**
+     * 非空判断
+     *
+     * @param object
+     * @return
+     */
+    public static boolean unNull(Object object) {
+        return !isNull(object);
     }
 
     /**
@@ -56,8 +64,8 @@ public class RegexUtils {
      * @param str
      * @return
      */
-    public static boolean checkStringNull(String str) {
-        if (checkNull(str)) {
+    public static boolean stringIsNull(String str) {
+        if (isNull(str)) {
             return true;
         } else if ("null".equals(str)) {
             return true;
@@ -68,37 +76,25 @@ public class RegexUtils {
     }
 
     /**
-     * 非空判断
-     *
-     * @param object
-     * @return
-     */
-    public static boolean checkNotNull(Object object) {
-        return !checkNull(object);
-    }
-
-    /**
      * 判断手机号码
      *
      * @param contactPhone
      * @return
      */
     public static boolean checkPhone(String contactPhone) {
-        if (RegexUtils.checkNull(contactPhone)) {
+        if (RegexUtils.isNull(contactPhone)) {
             ToastUtils.showToast("请输入手机号码");
             return true;
         } else if (contactPhone.trim().length() != 11) {
             ToastUtils.showToast("请输入正确的手机号码");
             return true;
         }
-
-        // TODO: 2018/8/15 0015  手机号码
         return false;
     }
 
     public static boolean isPhone(String phone) {
         String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
-        if (RegexUtils.checkNull(phone)) {
+        if (RegexUtils.isNull(phone)) {
             ToastUtils.showToast("请输入手机号码");
             return false;
         } else if (phone.length() != 11) {
@@ -123,7 +119,7 @@ public class RegexUtils {
      * @return
      */
     public static boolean checkName(String name, Activity activity) {
-        if (RegexUtils.checkNull(name)) {
+        if (RegexUtils.isNull(name)) {
             ToastUtils.showToast("请输入姓名");
             return true;
         }
@@ -224,7 +220,7 @@ public class RegexUtils {
      * @return
      */
     public static boolean checkAddress(String address) {
-        if (checkNull(address)) {
+        if (isNull(address)) {
             ToastUtils.showToast("收货地址不能为空");
 
         }
@@ -267,7 +263,7 @@ public class RegexUtils {
      * @return
      */
     public static String htmlFormatImg(String html) {
-        if (RegexUtils.checkNull(html)) {
+        if (RegexUtils.isNull(html)) {
             return "";
         }
         return html.replace("<img", "<img style='max-width:100%;height:auto;'");
@@ -305,12 +301,13 @@ public class RegexUtils {
 
 
     /**
-     *  格式化数据  ***
+     * 格式化数据  ***
+     *
      * @param userName
      * @return
      */
     public static String format2xxx(String userName) {
-        if (checkNotNull(userName)) {
+        if (unNull(userName)) {
             StringBuilder stringBuilder = new StringBuilder(userName.substring(0, 1));
             stringBuilder.append("***");
             stringBuilder.append(userName.substring(userName.length() - 1, userName.length()));
@@ -325,6 +322,8 @@ public class RegexUtils {
         String url = "http://172.12.1.123/test.txt";
         String regex = "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})";
         System.out.println(getMatcher(regex, url));
+        String[][] strings = new String[0][];
+        isNull(strings);
     }
 
 

@@ -88,7 +88,7 @@ public class CoreBuildConfig {
         mApplication = application;
         mDebug = isDebug;
         // 监听Activity 的生命周期
-        if (RegexUtils.checkNull(mActivityLifecycle)) {
+        if (RegexUtils.isNull(mActivityLifecycle)) {
             mActivityLifecycle = new ActivityLifecycle();
             application.registerActivityLifecycleCallbacks(mActivityLifecycle);
         }

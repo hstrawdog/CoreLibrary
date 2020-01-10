@@ -17,6 +17,7 @@ import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.ui.model.CreateRootViewModel;
+import com.hqq.core.utils.log.LogUtils;
 
 /**
  * @Author : huangqiqiang
@@ -42,7 +43,6 @@ public class RootViewBuilder implements IRootViewBuilder {
      */
     private boolean alwaysPortrait = true;
 
-
     /**
      * 布局构建器
      */
@@ -56,6 +56,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         mCreateRootViewModel = new CreateRootViewModel(isShowStatus, isShowToolBar);
         if (activity instanceof Activity) {
             mActivity = (Activity) activity;
+            // 只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
             mCreateRootViewModel.setImmersiveStatusBar(true);
         } else if (activity instanceof DialogFragment) {
             mActivity = ((DialogFragment) activity).getActivity();
@@ -63,11 +64,7 @@ public class RootViewBuilder implements IRootViewBuilder {
         } else if (activity instanceof Fragment) {
             mActivity = ((Fragment) activity).getActivity();
         } else {
-            try {
-                throw new Exception("不支持的类" + activity.getClass().getName());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            LogUtils.e(new Exception("不支持的类" + activity.getClass().getName()));
         }
         mCreateRootViewModel.setActivity(mActivity);
     }
@@ -103,12 +100,8 @@ public class RootViewBuilder implements IRootViewBuilder {
         if (mCreateRootViewModel.getIToolBar() != null && mCreateRootViewModel.getIToolBar() instanceof BaseDefToolBarImpl) {
             return (BaseDefToolBarImpl) mCreateRootViewModel.getIToolBar();
         } else {
-            try {
-                // 自定义的异常 目前先抛出 类型不正确
-                throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            // 自定义的异常 目前先抛出 类型不正确
+            LogUtils.e(new Exception("RootViewBuilder no fount BaseDefToolBarImpl "));
             return null;
         }
     }

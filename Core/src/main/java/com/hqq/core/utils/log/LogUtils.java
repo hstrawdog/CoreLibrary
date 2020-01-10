@@ -58,6 +58,15 @@ public class LogUtils {
         }
     }
 
+    public static void e(Exception object) {
+        if (CoreBuildConfig.getInstance().isDebug()) {
+            if (object == null) {
+                d("标签" + TAG + "的打印内容为空！");
+            }
+            Log.e(TAG, TAG, object);
+        }
+    }
+
     /**
      * ERROR 类型日志
      *

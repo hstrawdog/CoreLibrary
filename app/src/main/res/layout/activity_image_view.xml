@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hqq.example.ui.web.ImageViewActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="matrix"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="matrix" />
+
+        </LinearLayout>
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="center"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="center" />
+
+        </LinearLayout>
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="centerCrop" />
+
+        </LinearLayout>
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="centerInside"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="centerInside" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fitXY" />
+
+        </LinearLayout>
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fitXY" />
+
+        </LinearLayout>
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="fitCenter"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="原图" />
+
+        </LinearLayout>
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/x20">
+
+            <ImageView
+                android:scaleType="fitEnd"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:background="@color/color_red"
+                android:src="@mipmap/ic_banner2" />
+
+            <TextView
+                style="@style/def_text.28.333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fitEnd" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView
+        android:scaleType="fitCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/color_red"
+        android:src="@mipmap/ic_banner2" />
+
+    <TextView
+        style="@style/def_text.28.333"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="原图" />
+    <ImageView
+        android:scaleType="fitCenter"
+        android:layout_width="@dimen/x150"
+        android:layout_height="@dimen/x150"
+        android:background="@color/color_red"
+        />
+</LinearLayout>

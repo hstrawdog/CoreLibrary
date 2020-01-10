@@ -3,7 +3,6 @@ package com.hqq.core.ui.web;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -85,7 +84,7 @@ public class BaseWebFragment extends BaseFragment {
     public void initView() {
         mWebView = (WebView) findViewById(R.id.web_view);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_progressbar);
-        if (RegexUtils.checkNotNull(mProgressBarColor)) {
+        if (RegexUtils.unNull(mProgressBarColor)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 mProgressBar.setIndeterminateTintList(mProgressBarColor);
             }
@@ -208,7 +207,7 @@ public class BaseWebFragment extends BaseFragment {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                if (TextUtils.isEmpty(mTitle) && RegexUtils.checkNotNull(title) && mRootViewBuild != null && mRootViewBuild.getDefToolBar() != null) {
+                if (TextUtils.isEmpty(mTitle) && RegexUtils.unNull(title) && mRootViewBuild != null && mRootViewBuild.getDefToolBar() != null) {
                     if (null != mRootViewBuild && null != mRootViewBuild.getDefToolBar()) {
                         mRootViewBuild.getDefToolBar().setToolbarTitle(title);
                     }

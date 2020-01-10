@@ -24,7 +24,7 @@ public class CoreInitProvider extends ContentProvider {
         /**
          * 默认初始化
          */
-        if (RegexUtils.checkNull(CoreBuildConfig.getInstance().getApplication())) {
+        if (RegexUtils.isNull(CoreBuildConfig.getInstance().getApplication())) {
             CoreBuildConfig.getInstance().init((Application) getContext(), true);
         }
 

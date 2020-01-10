@@ -16,6 +16,7 @@ import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.IToolBar;
 import com.hqq.core.toolbar.IToolBarBuilder;
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
 import java.lang.ref.WeakReference;
@@ -103,18 +104,13 @@ public class CreateRootViewModel {
         //  构建  ContentView 默认 LineLayout 构建   支持  xml /view
         // 优先构建xml
         if (layoutId != 0) {
-
             return createRootView(null, layoutId);
         } else {
             // 通过View 去构建
             if (rootView != null) {
                 return createRootView(rootView, 0);
             } else {
-                try {
-                    throw new Exception("no fount layoutId and rootView  , must init RootView");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                LogUtils.e(new Exception("no fount layoutId and rootView  , must init RootView"));
                 return null;
             }
         }
@@ -226,11 +222,7 @@ public class CreateRootViewModel {
     public <T extends BaseToolBar> T getIToolBar() {
         if (mIToolBar == null) {
             //  自定义异常
-            try {
-                throw new Exception("RootViewBuilder no fount BaseDefToolBarImpl ");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            LogUtils.e(new Exception("RootViewBuilder no fount BaseDefToolBarImpl "));
             return null;
         }
         return (T) mIToolBar;

@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.R;
 import com.hqq.core.utils.RegexUtils;
 import com.hqq.core.utils.ResourcesUtils;
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.CusPtrClassicFrameLayout;
 
 import java.util.List;
@@ -88,13 +89,13 @@ public class BaseListModel {
         TextView tvEmptyMessage = emptyView.findViewById(R.id.tv_empty_message);
         ImageView ivEmpty = emptyView.findViewById(R.id.iv_empty);
 
-        if (RegexUtils.checkNotNull(tvRefresh)) {
+        if (RegexUtils.unNull(tvRefresh)) {
             tvRefresh.setVisibility(View.GONE);
         }
-        if (RegexUtils.checkNotNull(tvEmptyMessage)) {
+        if (RegexUtils.unNull(tvEmptyMessage)) {
             tvEmptyMessage.setText(getEmptyTextMessage());
         }
-        if (RegexUtils.checkNotNull(ivEmpty)) {
+        if (RegexUtils.unNull(ivEmpty)) {
             ivEmpty.setImageResource(getEmptyImage());
         }
 
@@ -207,11 +208,11 @@ public class BaseListModel {
     public void initRecycleView(RecyclerView rcList, BaseQuickAdapter adapter, RecyclerView.LayoutManager layoutManager) {
         try {
             if (null == rcList) {
-                throw new Exception("  listView is null ");
+                LogUtils.e(new Exception("  listView is null "));
             }
 
             if (adapter == null) {
-                throw new Exception("adapter is null ");
+                LogUtils.e(new Exception("adapter is null "));
             }
 
             rcList.setOverScrollMode(View.OVER_SCROLL_NEVER);

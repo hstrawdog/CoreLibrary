@@ -21,6 +21,7 @@ import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.EmptyListActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
+import com.hqq.example.ui.view.EditTextActivity;
 import com.hqq.example.ui.web.WebActivity;
 
 /**
@@ -62,9 +63,10 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("适配相关", AdaptationIndexActivity.class));
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
+        PermissionActivity.open(this);
 
-
-        startActivity(new Intent(this, EmptyListActivity.class));
+        //  startActivity(new Intent(this, EmptyListActivity.class));
+        // EditTextActivity.open(this);
 
     }
 

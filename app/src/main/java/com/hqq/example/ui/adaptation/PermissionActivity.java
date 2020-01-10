@@ -1,5 +1,8 @@
 package com.hqq.example.ui.adaptation;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.hqq.core.permission.PermissionsResult;
 import com.hqq.core.permission.PermissionsUtils;
 import com.hqq.core.ui.BaseActivity;
@@ -17,6 +20,11 @@ import butterknife.OnClick;
  * @Descrive : TODO
  */
 public class PermissionActivity extends BaseActivity {
+
+    public static void open(Activity context) {
+        Intent starter = new Intent(context, PermissionActivity.class);
+        context.startActivityForResult(starter, -1);
+    }
 
     @Override
     public int setViewId() {

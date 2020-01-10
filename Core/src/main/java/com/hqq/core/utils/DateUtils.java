@@ -121,7 +121,7 @@ public class DateUtils {
      */
     public static String getDayInData(String time) {
 
-        if (RegexUtils.checkNotNull(time)) {
+        if (RegexUtils.unNull(time)) {
             String[] str = time.split(" ");
             if (str.length > 1) {
                 return str[1];
@@ -136,7 +136,7 @@ public class DateUtils {
      * @return 000000
      */
     public static long format2Second(String time) {
-        if (RegexUtils.checkNull(time)) {
+        if (RegexUtils.isNull(time)) {
             return 0;
         }
 
@@ -168,7 +168,7 @@ public class DateUtils {
      * @return 000000
      */
     public static long format2Millisecond(String time) {
-        if (RegexUtils.checkNull(time)) {
+        if (RegexUtils.isNull(time)) {
             return 0;
         }
 
@@ -290,7 +290,7 @@ public class DateUtils {
      * @return
      */
     public static Long string2Millisecond(String date) {
-        if (RegexUtils.checkNull(date)) {
+        if (RegexUtils.isNull(date)) {
             return 0L;
         }
         try {
