@@ -1,23 +1,26 @@
 package com.hqq.example.ui.customize.widget;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
-import com.hqq.core.utils.ScreenUtils;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
+import com.hqq.example.ui.customize.widget.imageedit.DrawableSticker;
+
+import java.util.Arrays;
 
 /**
  * @Author : huangqiqiang
@@ -45,13 +48,32 @@ public class TemplatesImage extends View {
     }
 
     Path mClipPath = new Path();
+    float distanceX = 0;
+    float distanceY = 0;
+    float mKeyX;
+    float mKeyY;
+    float mFrame = getWidth() / 8;
+    Matrix mCurrentMatrix;
+    private Paint borderPaint;
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
+    private void init() {
+        mCurrentMatrix = new Matrix();
+        mClipPath.moveTo(0, 0);
+        mClipPath.lineTo(300, 0);
+        mClipPath.lineTo(300, 300);
+        mClipPath.lineTo(0, 300);
+        mClipPath.lineTo(0, 0);
+        mDrawableSticker = new DrawableSticker(ContextCompat.getDrawable(getContext(), R.mipmap.ic_content));
     }
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        mFrame = getWidth() / 8;
+        LogUtils.e("onLayout", "" + getWidth());
+    }
+
+    DrawableSticker mDrawableSticker;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -63,45 +85,90 @@ public class TemplatesImage extends View {
 
         drawClipBg(canvas);
 
-        canvas.save();
-        canvas.translate(-distanceX, -distanceY);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_content);
-        canvas.drawBitmap(bitmap2, getWidth() / 2 - getWidth() / 4, getHeight() / 2 - getWidth() / 4, null);
+        mDrawableSticker.draw(canvas);
 
-        canvas.restore();
+        float[] dst = new float[8];
+        mDrawableSticker.getMatrix()
+                .mapPoints(dst, getBitmapSize());
+        LogUtils.e(Arrays.toString(dst));
+        float x1 = dst[0];
+        float y1 = dst[1];
+        float x2 = dst[2];
+        float y2 = dst[3];
+        float x3 = dst[4];
+        float y3 = dst[5];
+        float x4 = dst[6];
+        float y4 = dst[7];
+        borderPaint = new Paint();
+        borderPaint.setAntiAlias(true);
+        borderPaint.setColor(Color.RED);
+//        borderPaint.setAlpha(128);
+        borderPaint.setStrokeWidth(6);
+        canvas.drawLine(x1, y1, x2, y2, borderPaint);
+        canvas.drawLine(x1, y1, x3, y3, borderPaint);
+        canvas.drawLine(x2, y2, x4, y4, borderPaint);
+        canvas.drawLine(x4, y4, x3, y3, borderPaint);
 
 
     }
 
+    private float[] getBitmapSize() {
+        return new float[]{
+                0f, 0f, mDrawableSticker
+                .getWidth(), 0f, 0f, mDrawableSticker.getHeight(), mDrawableSticker.getWidth(), mDrawableSticker.getHeight()
+        };
+    }
 
-    float distanceX = 0;
-    float distanceY = 0;
-    float mKeyX;
-    float mKeyY;
+    boolean isTounch = false;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 LogUtils.e("getRight", getRight());
-                LogUtils.e("ACTION_DOWN -----------" + event.getRawX());
-                mKeyX = event.getRawX();
-                mKeyY = event.getRawY();
+                LogUtils.e("ACTION_DOWN -----------" + event.getX());
+                mKeyX = event.getX();
+                mKeyY = event.getY();
+
+                if (mDrawableSticker.contains(mKeyX, mKeyY)) {
+                    isTounch = true;
+
+                    mCurrentMatrix.set(mDrawableSticker.getMatrix()
+                    );
+                }
+
                 break;
             case MotionEvent.ACTION_MOVE:
-                LogUtils.e("ACTION_MOVE -----------" + event.getRawX());
-                distanceX = distanceX + mKeyX - event.getRawX();
-                distanceY = distanceY + mKeyY - event.getRawY();
+                LogUtils.e("ACTION_MOVE -----------" + event.getX());
+                distanceX = event.getX() - mKeyX;
+                distanceY = event.getY() - mKeyY;
+//                mKeyX = event.getX();
+//                mKeyY = event.getY();
+
+
+                float xx = ((getWidth() - mFrame * 2) / getWidth());
+                float yy = ((getHeight() - mFrame * 2) / getHeight());
+
+
                 LogUtils.e("ACTION_MOVE --------distanceX---" + distanceX);
                 LogUtils.e("ACTION_MOVE --------distanceY---" + distanceY);
+                LogUtils.e("-------------------     " + xx + "            " + yy);
 
-                invalidate();
-                mKeyX = event.getRawX();
-                mKeyY = event.getRawY();
+                if (isTounch) {
+
+                    mDrawableSticker.getMatrix()
+                            .set(mCurrentMatrix);
+
+                    mDrawableSticker.getMatrix()
+                            .postTranslate(distanceX, distanceY);
+                    invalidate();
+                }
+
 
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
+                isTounch = false;
                 LogUtils.e("---------------------------------------------------------------------------------------------------------------------");
                 LogUtils.e("distanceX", distanceX);
                 LogUtils.e("getRawX -----------" + event.getRawX());
@@ -120,6 +187,7 @@ public class TemplatesImage extends View {
         return super.dispatchTouchEvent(event);
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -130,26 +198,15 @@ public class TemplatesImage extends View {
         return super.onTouchEvent(event);
     }
 
-    private void init() {
-        mClipPath.moveTo(0, 0);
-        mClipPath.lineTo(300, 0);
-        mClipPath.lineTo(300, 300);
-        mClipPath.lineTo(0, 300);
-        mClipPath.lineTo(0, 0);
-    }
 
     private void initClipPath() {
         mClipPath.reset();
-
-        float frame = getWidth() / 8;
-
-        mClipPath.moveTo(frame, frame);
-        mClipPath.lineTo(getWidth() - frame, frame);
-        mClipPath.lineTo(getWidth() - frame, getHeight() - frame);
-        mClipPath.lineTo(frame, getHeight() - frame);
-        mClipPath.lineTo(frame, frame);
+        mClipPath.moveTo(mFrame, mFrame);
+        mClipPath.lineTo(getWidth() - mFrame, mFrame);
+        mClipPath.lineTo(getWidth() - mFrame, getHeight() - mFrame);
+        mClipPath.lineTo(mFrame, getHeight() - mFrame);
+        mClipPath.lineTo(mFrame, mFrame);
     }
-
 
     private void drawClipBg(Canvas canvas) {
 
@@ -159,13 +216,15 @@ public class TemplatesImage extends View {
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawPath(mClipPath, paint);
         canvas.clipPath(mClipPath);
+        refreshDrawableState();
     }
 
     private void drawBg(Canvas canvas) {
         canvas.save();
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.bg_sty);
-        RectF rectF = new RectF(0, 0, getWidth(), getHeight());
-        canvas.drawBitmap(bitmap, null, rectF, null);
+        Matrix matrix = new Matrix();
+        matrix.setScale(Float.valueOf(getWidth()) / bitmap.getWidth(), Float.valueOf(getHeight()) / bitmap.getHeight());
+        canvas.drawBitmap(bitmap, matrix, null);
         canvas.restore();
     }
 }

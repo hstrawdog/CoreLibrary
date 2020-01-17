@@ -159,7 +159,6 @@ public class RoundCountdownView extends View {
     }
 
     int mPadding = 5;
-
     private void canvasBg(Canvas canvas) {
 
         Paint paint = new Paint();
