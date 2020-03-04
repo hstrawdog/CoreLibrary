@@ -7,9 +7,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.URLUtil;
@@ -22,7 +19,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import androidx.annotation.Nullable;
+
 import com.hqq.core.R;
+import com.hqq.core.listenner.ScriptInterface;
 import com.hqq.core.listenner.WebLoadListener;
 import com.hqq.core.ui.BaseFragment;
 import com.hqq.core.utils.BundleUtils;
@@ -43,15 +43,21 @@ public class BaseWebFragment extends BaseFragment {
     private WebView mWebView;
     private String mUrl;
     private CharSequence mTitle = "";
-    WebLoadListener mWebLoadListener;
+    private WebLoadListener mWebLoadListener;
     private ColorStateList mProgressBarColor;
+    private ScriptInterface mScriptInterface;
 
     public static BaseWebFragment instantiate(Context context, String title, String url) {
+        return instantiate(context, title, url, null);
+    }
+
+    public static BaseWebFragment instantiate(Context context, String title, String url, ScriptInterface scriptInterface) {
         BaseWebFragment baseWebFragment = new BaseWebFragment();
         Bundle bundle = new Bundle();
         bundle.putString(context.getString(R.string.key_url), url);
         bundle.putString(context.getString(R.string.key_title), title);
         baseWebFragment.setArguments(bundle);
+        baseWebFragment.setScriptInterface(scriptInterface);
         return baseWebFragment;
     }
 
@@ -101,7 +107,9 @@ public class BaseWebFragment extends BaseFragment {
         mWebView.setWebViewClient(getWebViewClient());
         mWebView.setWebChromeClient(getWebChromeClient());
         // 标识 为Android的 js 支持 对象是activity
-        mWebView.addJavascriptInterface(getActivity(), "android");
+        if (mScriptInterface != null) {
+            mWebView.addJavascriptInterface(getActivity(), "android");
+        }
 
         mUrl = BundleUtils.getString(this, getString(R.string.key_url));
         mTitle = BundleUtils.getString(this, getString(R.string.key_title));
@@ -248,6 +256,10 @@ public class BaseWebFragment extends BaseFragment {
     public BaseWebFragment setWebLoadListener(WebLoadListener webLoadListener) {
         mWebLoadListener = webLoadListener;
         return this;
+    }
+
+    public void setScriptInterface(ScriptInterface scriptInterface) {
+        mScriptInterface = scriptInterface;
     }
 
     public ProgressBar getProgressBar() {
