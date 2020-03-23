@@ -10,6 +10,7 @@ import com.hqq.example.bean.MainBean;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
+import com.hqq.example.ui.animate.AnimateIndexActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
 import com.hqq.example.ui.customize.TemplatesImageActivity;
@@ -19,10 +20,8 @@ import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
-import com.hqq.example.ui.recycle.EmptyListActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
-import com.hqq.example.ui.view.EditTextActivity;
 import com.hqq.example.ui.web.WebActivity;
 
 /**
@@ -68,7 +67,8 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 
         //  startActivity(new Intent(this, EmptyListActivity.class));
         // EditTextActivity.open(this);
-         TemplatesImageActivity.open(this);
+        TemplatesImageActivity.open(this);
+        AnimateIndexActivity.open(this);
 
     }
 

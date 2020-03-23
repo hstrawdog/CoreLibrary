@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.customize.TemplatesImageActivity"></activity>
+        <activity android:name=".ui.animate.ViewAnimateActivity"></activity>
+        <activity android:name=".ui.animate.AnimateIndexActivity" />
+        <activity android:name=".ui.customize.TemplatesImageActivity" />
         <activity android:name=".ui.web.ImageViewActivity" />
         <activity android:name=".ui.view.EditTextActivity" />
         <activity android:name=".ui.recycle.EmptyListActivity" />
