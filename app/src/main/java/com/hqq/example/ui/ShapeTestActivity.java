@@ -31,7 +31,7 @@ public class ShapeTestActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mTextView3.setBackground(new BaseShapeBuilder().setRectangle()
+        findViewById(R.id.textView3).setBackground(new BaseShapeBuilder().setRectangle()
                 .setColor(R.color.color_b36d61)
                 .setCornerRadius(R.dimen.x20)
                 .setStroke(R.dimen.x20, R.color.color_main)

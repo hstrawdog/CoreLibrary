@@ -13,7 +13,6 @@ import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.animate.AnimateIndexActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
-import com.hqq.example.ui.customize.TemplatesImageActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
 import com.hqq.example.ui.exception.ThrowActivity;
@@ -63,11 +62,11 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("适配相关", AdaptationIndexActivity.class));
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
-        PermissionActivity.open(this);
+//        PermissionActivity.open(this);
 
         //  startActivity(new Intent(this, EmptyListActivity.class));
         // EditTextActivity.open(this);
-        TemplatesImageActivity.open(this);
+//        TemplatesImageActivity.open(this);
         AnimateIndexActivity.open(this);
 
     }

@@ -6,7 +6,6 @@ import android.content.Intent;
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
-import com.hqq.example.ui.exception.ThrowActivity;
 
 public class AnimateIndexActivity extends BaseListActivity<MainAdapter> {
     public static void open(Context context) {
@@ -21,7 +20,7 @@ public class AnimateIndexActivity extends BaseListActivity<MainAdapter> {
 
     @Override
     public void initData() {
-        mAdapter.addData(new MainBean("ViewAnimateActivity", ViewAnimateActivity.class));
+        mAdapter.addData(new MainBean("隐藏动画", ViewAnimateActivity.class));
     }
 
     @Override

@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.animate.ViewAnimateActivity"></activity>
+        <activity android:name=".ui.animate.ViewAnimateActivity" android:label="隐藏动画"></activity>
         <activity android:name=".ui.animate.AnimateIndexActivity" />
         <activity android:name=".ui.customize.TemplatesImageActivity" />
         <activity android:name=".ui.web.ImageViewActivity" />
