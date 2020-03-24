@@ -3,11 +3,10 @@ package com.hqq.core.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 
 import com.hqq.core.R;
 import com.hqq.core.ui.builder.ICreateRootViewBuilder;
@@ -106,6 +105,8 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
     public View setRootView() {
         return null;
     }
+
+
 
 
 }

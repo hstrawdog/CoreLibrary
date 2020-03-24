@@ -63,7 +63,6 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
 //        PermissionActivity.open(this);
-
         //  startActivity(new Intent(this, EmptyListActivity.class));
         // EditTextActivity.open(this);
 //        TemplatesImageActivity.open(this);
