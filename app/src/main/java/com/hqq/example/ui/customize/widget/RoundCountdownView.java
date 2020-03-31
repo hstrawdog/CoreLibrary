@@ -1,8 +1,5 @@
 package com.hqq.example.ui.customize.widget;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,7 +9,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.Transformation;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -49,6 +45,10 @@ public class RoundCountdownView extends View {
      * 剩余时间
      */
     private int mNowCountdown = mCountdown;
+    /**
+     * 动画
+     */
+    ValueAnimator mAnimatorSet = ValueAnimator.ofFloat(0, (360));
 
     public RoundCountdownView(Context context) {
         super(context);
@@ -79,9 +79,9 @@ public class RoundCountdownView extends View {
      * 执行动画
      */
     private void startCountdownAnimation() {
-        ValueAnimator animatorSet = ValueAnimator.ofFloat(0, (360));
-        animatorSet.setInterpolator(new LinearInterpolator());
-        animatorSet.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+        mAnimatorSet.setInterpolator(new LinearInterpolator());
+        mAnimatorSet.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mSweepAngle = (float) animation.getAnimatedValue();
@@ -90,9 +90,8 @@ public class RoundCountdownView extends View {
                 invalidate();
             }
         });
-        animatorSet.setDuration(mCountdown * 1000);
-        animatorSet.start();
-
+        mAnimatorSet.setDuration(mCountdown * 1000);
+        mAnimatorSet.start();
     }
 
     @Override
@@ -138,6 +137,13 @@ public class RoundCountdownView extends View {
         cancasArc(canvas);
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+
+        mAnimatorSet.cancel();
+    }
+
     private void canvasText(Canvas canvas) {
         Paint mPaint = new Paint();
         Paint.FontMetrics fontMetrics = new Paint.FontMetrics();
@@ -159,6 +165,7 @@ public class RoundCountdownView extends View {
     }
 
     int mPadding = 5;
+
     private void canvasBg(Canvas canvas) {
 
         Paint paint = new Paint();
