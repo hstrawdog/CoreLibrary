@@ -30,8 +30,6 @@ public class BlackAndWhiteActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
-
         findViewById(R.id.button29).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
