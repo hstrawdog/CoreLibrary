@@ -21,6 +21,7 @@ import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
+import com.hqq.example.ui.view.BlackAndWhiteActivity;
 import com.hqq.example.ui.view.TextViewActivity;
 import com.hqq.example.ui.web.WebActivity;
 
@@ -68,7 +69,8 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         // EditTextActivity.open(this);
 //        TemplatesImageActivity.open(this);
 //        AnimateIndexActivity.open(this);
-        TextViewActivity.open(this);
+//        TextViewActivity.open(this);
+        BlackAndWhiteActivity.open(this);
 
     }
 

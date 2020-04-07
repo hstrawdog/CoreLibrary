@@ -40,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         initView();
+
     }
 
     @Override
@@ -76,7 +77,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
 
     }
 
-
     @Override
     public void onResult(int requestCode, int resultCode, Intent data) {
 
@@ -105,8 +105,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
     public View setRootView() {
         return null;
     }
-
-
 
 
 }

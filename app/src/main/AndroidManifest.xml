@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.view.TextViewActivity"></activity>
+        <activity android:name=".ui.view.BlackAndWhiteActivity"></activity>
+        <activity android:name=".ui.view.TextViewActivity" />
         <activity
             android:name=".ui.animate.ViewAnimateActivity"
             android:label="隐藏动画" />

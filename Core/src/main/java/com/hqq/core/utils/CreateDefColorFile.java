@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * @version V1.0 <描述当前版本功能>
  * @author: huangqiqiang
- * 在此写用途
  * @FileName: com.hqq.core.utils.CreateDefColorFile.java
  * @emain: 593979591@qq.com
  * @date: 2019-04-24 20:32
+ * 在此写用途
  */
 public class CreateDefColorFile {
 
