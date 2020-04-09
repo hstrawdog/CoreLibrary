@@ -10,7 +10,6 @@ import com.hqq.example.bean.MainBean;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
-import com.hqq.example.ui.animate.AnimateIndexActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
@@ -22,7 +21,6 @@ import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
 import com.hqq.example.ui.view.BlackAndWhiteActivity;
-import com.hqq.example.ui.view.TextViewActivity;
 import com.hqq.example.ui.web.WebActivity;
 
 /**
@@ -35,6 +33,7 @@ import com.hqq.example.ui.web.WebActivity;
  */
 public class MainActivity extends BaseListActivity<MainAdapter> {
 
+    private long mExitTime = 0;
 
     @Override
     public MainAdapter initAdapter() {
@@ -64,6 +63,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("适配相关", AdaptationIndexActivity.class));
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
+        mAdapter.addData(new MainBean("黑白化测试", BlackAndWhiteActivity.class));
 //        PermissionActivity.open(this);
         //  startActivity(new Intent(this, EmptyListActivity.class));
         // EditTextActivity.open(this);
@@ -75,14 +75,12 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
     }
 
 
-    private long exitTime = 0;
-
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
-            if (System.currentTimeMillis() - exitTime > 2000) {
+            if (System.currentTimeMillis() - mExitTime > 2000) {
                 ToastUtils.showToast("再按一次退出程序");
-                exitTime = System.currentTimeMillis();
+                mExitTime = System.currentTimeMillis();
             } else {
                 Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
                 mHomeIntent.addCategory(Intent.CATEGORY_HOME);

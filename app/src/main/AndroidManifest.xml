@@ -16,18 +16,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.view.BlackAndWhiteActivity"></activity>
-        <activity android:name=".ui.view.TextViewActivity" />
+        <activity
+            android:name=".ui.view.BlackAndWhiteActivity"
+            android:label="黑白化" />
+        <activity
+            android:name=".ui.view.TextViewActivity"
+            android:label="TextView 测试" />
         <activity
             android:name=".ui.animate.ViewAnimateActivity"
             android:label="隐藏动画" />
         <activity
             android:name=".ui.animate.AnimateIndexActivity"
             android:label="View动画" />
-        <activity android:name=".ui.customize.TemplatesImageActivity" />
-        <activity android:name=".ui.web.ImageViewActivity" />
-        <activity android:name=".ui.view.EditTextActivity" />
-        <activity android:name=".ui.recycle.EmptyListActivity" />
+        <activity
+            android:name=".ui.customize.TemplatesImageActivity"
+            android:label="图片模板 空" />
+        <activity
+            android:name=".ui.web.ImageViewActivity"
+            android:label="图片测试" />
+        <activity
+            android:name=".ui.view.EditTextActivity"
+            android:label="EditText测试" />
+        <activity
+            android:name=".ui.recycle.EmptyListActivity"
+            android:label="EmptyList" />
         <activity
             android:name=".ui.ShapeTestActivity"
             android:label="shape测试" />
@@ -74,19 +86,31 @@
         <activity
             android:name=".ui.info.BaseInfoActivity"
             android:label="设备信息" />
-        <activity android:name=".ui.adaptation.LayoutTestActivity" />
-        <activity android:name=".ui.customize.ProgressBarViewBuilderActivity" />
+        <activity
+            android:name=".ui.adaptation.LayoutTestActivity"
+            android:label="空" />
+        <activity
+            android:name=".ui.customize.ProgressBarViewBuilderActivity"
+            android:label="进度条测试" />
         <activity android:name=".ui.recycle.GallerySnapActivity" />
-        <activity android:name=".ui.recycle.RecycleIndexActivity" />
+        <activity
+            android:name=".ui.recycle.RecycleIndexActivity"
+            android:label="RecycleView 相关" />
         <activity
             android:name=".ui.recycle.FullPagerSnapActivity"
             android:label="Recycle多个item 分页" />
         <activity
             android:name=".ui.tab.layout.TabLayoutActivity"
             android:label="tabLayout  测试" />
-        <activity android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity" />
-        <activity android:name=".ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity" />
-        <activity android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardActivity" />
+        <activity
+            android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity"
+            android:label="键盘滑动" />
+        <activity
+            android:name=".ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity"
+            android:label="键盘测试" />
+        <activity
+            android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardActivity"
+            android:label="键盘隐藏" />
         <activity
             android:name=".ui.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
@@ -122,16 +146,12 @@
         <activity
             android:name=".ui.exception.ThrowActivity"
             android:label="Throw异常测试" />
-        <activity android:name=".ui.bar.SettingToolBarActivity" />
+        <activity
+            android:name=".ui.bar.SettingToolBarActivity"
+            android:label="ToolBar 设置" />
         <activity
             android:name=".ui.dialog.TestDialogActivity"
-            android:label="dialog 测试">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+            android:label="dialog 测试" />
         <activity android:name=".ui.customize.BezierActivity" />
         <activity
             android:name=".ui.adaptation.AdaptationIndexActivity"
@@ -139,9 +159,15 @@
         <activity
             android:name=".ui.dialog.DialogIndexActivity"
             android:label="dialog 系列" />
-        <activity android:name=".ui.list.ListIndexActivity" />
-        <activity android:name=".ui.customize.CustomizeIndexActivity" />
-        <activity android:name=".ui.customize.SwipeMenuLayoutActivity" />
+        <activity
+            android:name=".ui.list.ListIndexActivity"
+            android:label="列表加载" />
+        <activity
+            android:name=".ui.customize.CustomizeIndexActivity"
+            android:label="自定义View" />
+        <activity
+            android:name=".ui.customize.SwipeMenuLayoutActivity"
+            android:label="View 的拖动" />
         <activity
             android:name=".ui.customize.RoundCountdownActivity"
             android:label="圆形倒计时" />
@@ -150,7 +176,6 @@
             android:label="功能主页">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
