@@ -29,9 +29,6 @@
             android:text="文本测试"
             android:textColor="@color/color_text_skin" />
 
-        <skin.support.widget.SkinCompatImageView
-            android:layout_width=""
-            android:layout_height=""
         <TextView
             style="@style/def_text.22.999"
             android:layout_width="wrap_content"
