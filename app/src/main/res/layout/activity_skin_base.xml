@@ -18,12 +18,27 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_collection_pre" />
 
+     <com.google.android.material.textfield.TextInputEditText
+         android:layout_width="match_parent"
+         android:background="@color/color_999"
+         android:layout_height="wrap_content"/>
         <TextView
-            android:textColor="@color/color_text_skin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@mipmap/ic_collection_pre"
-            android:text="文本测试" />
+            android:text="文本测试"
+            android:textColor="@color/color_text_skin" />
+
+        <skin.support.widget.SkinCompatImageView
+            android:layout_width=""
+            android:layout_height=""
+        <TextView
+            style="@style/def_text.22.999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/ic_collection_pre"
+            android:text="文本测试"
+            />
 
     </LinearLayout>
 
