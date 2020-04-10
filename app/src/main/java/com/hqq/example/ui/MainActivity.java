@@ -19,7 +19,7 @@ import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
-import com.hqq.example.ui.system.AppIconActivity;
+import com.hqq.example.ui.skin.SkinAActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
 import com.hqq.example.ui.view.BlackAndWhiteActivity;
 import com.hqq.example.ui.web.WebActivity;
@@ -65,6 +65,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
         mAdapter.addData(new MainBean("黑白化测试", BlackAndWhiteActivity.class));
+        mAdapter.addData(new MainBean("换肤测试", SkinAActivity.class));
 //        PermissionActivity.open(this);
         //  startActivity(new Intent(this, EmptyListActivity.class));
         // EditTextActivity.open(this);
@@ -72,7 +73,8 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        AnimateIndexActivity.open(this);
 //        TextViewActivity.open(this);
 //        BlackAndWhiteActivity.open(this);
-        AppIconActivity.open(this);
+//        SkinAActivity.open(this);
+//        AppIconActivity.open(this);
 
     }
 

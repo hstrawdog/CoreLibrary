@@ -9,6 +9,7 @@
 
 
     <color name="toolbar_bg_color">@color/white</color>
+    <color name="color_text_skin">#999999</color>
 
 
 </resources>

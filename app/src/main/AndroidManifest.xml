@@ -17,6 +17,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.skin.SkinCActivity"
+            android:label="换肤界面C" />
+        <activity
+            android:name=".ui.skin.SkinBActivity"
+            android:label="换肤界面B" />
+        <activity
+            android:name=".ui.skin.SkinAActivity"
+            android:label="换肤界面A" />
+        <activity
             android:name=".ui.system.AppIconActivity"
             android:label="设置App图标" />
         <activity
@@ -179,18 +188,20 @@
             android:label="功能主页">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity-alias
-            android:name="RoundActivity"
-            android:targetActivity=".ui.MainActivity"
+            android:name=".RoundActivity"
             android:enabled="false"
             android:icon="@drawable/dlzs"
-            android:label="功能主页">
+            android:label="功能主页"
+            android:targetActivity=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>

@@ -4,6 +4,9 @@ import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
 
+import skin.support.SkinCompatManager;
+import skin.support.app.SkinAppCompatViewInflater;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.iblibrary
@@ -25,5 +28,11 @@ public class APP extends Application {
         }
         LeakCanary.install(this);
 
+
+        SkinCompatManager.withoutActivity(this)
+                .addInflater(new SkinAppCompatViewInflater())           // 基础控件换肤初始化
+                .setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
+                .setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
+                .loadSkin();
     }
 }
