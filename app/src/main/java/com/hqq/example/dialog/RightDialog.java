@@ -23,7 +23,7 @@ public class RightDialog extends BaseDialog {
     }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.dialog_right;
     }
 
@@ -33,22 +33,22 @@ public class RightDialog extends BaseDialog {
     }
 
     @Override
-    public int setWeight() {
+    public int getWeight() {
         return (int) ResourcesUtils.getDimen(getActivity(), R.dimen.x200);
     }
 
     @Override
-    public int setHeight() {
+    public int getHeight() {
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
 
     @Override
-    public int setGravity() {
+    public int getGravity() {
         return Gravity.RIGHT;
     }
 
     @Override
-    public int setAnimation() {
+    public int getAnimation() {
         return R.anim.dialog_right_left;
     }
 }

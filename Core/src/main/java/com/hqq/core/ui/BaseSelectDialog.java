@@ -16,17 +16,17 @@ public abstract class BaseSelectDialog<T extends BaseViewBuilderHolder> extends 
     protected T mViewHolder;
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.dialog_base_select_dialog;
     }
 
     @Override
-    public int setAnimation() {
+    public int getAnimation() {
         return R.style.dialogAnimation_fade_in2fade_out;
     }
 
     @Override
-    public int setWeight() {
+    public int getWeight() {
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
 

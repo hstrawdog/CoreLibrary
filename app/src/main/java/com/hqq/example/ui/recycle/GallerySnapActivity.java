@@ -32,7 +32,7 @@ public class GallerySnapActivity extends BaseActivity {
     RecyclerCoverFlow mRcfView;
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_gallery_snap;
     }
 

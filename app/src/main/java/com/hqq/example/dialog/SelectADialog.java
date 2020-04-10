@@ -40,7 +40,7 @@ public class SelectADialog extends BaseSelectDialog<BaseViewBuilderHolder> {
 
 
         @Override
-        public int setViewId() {
+        public int getViewId() {
             return R.layout.view_holder_a;
         }
 

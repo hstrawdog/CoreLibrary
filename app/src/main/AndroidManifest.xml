@@ -17,6 +17,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.system.AppIconActivity"
+            android:label="设置App图标" />
+        <activity
             android:name=".ui.view.BlackAndWhiteActivity"
             android:label="黑白化" />
         <activity
@@ -179,6 +182,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name="RoundActivity"
+            android:targetActivity=".ui.MainActivity"
+            android:enabled="false"
+            android:icon="@drawable/dlzs"
+            android:label="功能主页">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>

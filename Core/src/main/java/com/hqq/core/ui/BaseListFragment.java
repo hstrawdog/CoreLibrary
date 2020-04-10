@@ -1,8 +1,5 @@
 package com.hqq.core.ui;
 
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,13 +34,13 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     protected BaseListModel mBaseListModel;
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return 0;
     }
 
     @Override
-    public View setRootView() {
-        if (setViewId() <= 0) {
+    public View getRootView() {
+        if (getViewId() <= 0) {
             return BaseListModel.createRecycleView(getContext());
         } else {
             return null;

@@ -23,7 +23,7 @@ public class TemplatesImageActivity extends BaseActivity {
     }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_templates_image;
     }
 

@@ -65,7 +65,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
 
-            mRootView = mRootViewBuild.buildContentView(setViewId(), setRootView());
+            mRootView = mRootViewBuild.buildContentView(getViewId(), getRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d(this.getClass().getName(), "onCreateView " + getClass().getSimpleName() + this.toString());
@@ -164,7 +164,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
      * 关联主界面 <b>只有在使用自定义View时使用</b>
      */
     @Override
-    public View setRootView() {
+    public View getRootView() {
         return null;
     }
 

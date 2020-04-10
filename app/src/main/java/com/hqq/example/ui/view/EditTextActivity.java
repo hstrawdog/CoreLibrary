@@ -24,7 +24,7 @@ public static void open(Activity context) {
 }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_edit_text;
     }
 

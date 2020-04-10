@@ -14,7 +14,7 @@ import com.hqq.core.ui.BaseActivity;
 public class DefActivity extends BaseActivity {
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_def;
     }
 

@@ -20,7 +20,7 @@ public class FoldFullBottomSheet extends BaseBottomDialog {
     StringAdapter mStringAdapter = new StringAdapter();
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.dialog_bottom_sheet;
 
     }
@@ -36,7 +36,7 @@ public class FoldFullBottomSheet extends BaseBottomDialog {
     }
 
     @Override
-    public int setHeight() {
+    public int getHeight() {
         return (int) ResourcesUtils.getDimen(getContext(), R.dimen.x750);
     }
 

@@ -53,10 +53,10 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
     public void createRootView(ViewGroup parentView, Activity activity, Context context, Lifecycle lifecycle) {
         mParentView = parentView;
         mActivity = activity;
-        if (setViewId() <= 0) {
+        if (getViewId() <= 0) {
             mConvertView = parentView;
         } else {
-            mConvertView = LayoutInflater.from(context).inflate(setViewId(), mParentView, false);
+            mConvertView = LayoutInflater.from(context).inflate(getViewId(), mParentView, false);
         }
         lifecycle.addObserver(this);
         initView();
@@ -69,7 +69,7 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
     }
 
     @Override
-    public View setRootView() {
+    public View getRootView() {
         return null;
     }
 

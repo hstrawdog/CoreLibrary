@@ -69,12 +69,12 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getDialog().getWindow().setWindowAnimations(setAnimation());
+        getDialog().getWindow().setWindowAnimations(getAnimation());
         if (mRootView == null) {
             mLoadingView = new LoadingView(getActivity());
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-            mRootView = mRootViewBuild.buildContentView(setViewId(), setRootView());
+            mRootView = mRootViewBuild.buildContentView(getViewId(), getRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
             LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         }
@@ -106,9 +106,9 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         LogUtils.e(mRootView.getMeasuredWidth());
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(setBackground()));
-        getDialog().getWindow().setLayout(setWeight(), setHeight());
-        getDialog().getWindow().setGravity(setGravity());
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getBackground()));
+        getDialog().getWindow().setLayout(getWeight(), getHeight());
+        getDialog().getWindow().setGravity(getGravity());
     }
 
     @Override
@@ -126,7 +126,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     }
 
     @Override
-    public View setRootView() {
+    public View getRootView() {
         return null;
     }
 
@@ -151,27 +151,27 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
      * @return 背景颜色
      */
     @Override
-    public int setBackground() {
+    public int getBackground() {
         return 0x00000000;
     }
 
     @Override
-    public int setGravity() {
+    public int getGravity() {
         return Gravity.CENTER;
     }
 
     @Override
-    public int setWeight() {
+    public int getWeight() {
         return WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
     @Override
-    public int setHeight() {
+    public int getHeight() {
         return WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
     @Override
-    public int setAnimation() {
+    public int getAnimation() {
         return R.style.DialogAnimation_bottom2top;
     }
 

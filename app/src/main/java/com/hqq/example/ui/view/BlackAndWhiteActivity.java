@@ -24,7 +24,7 @@ public class BlackAndWhiteActivity extends BaseActivity {
     }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_black_and_white;
     }
 

@@ -32,7 +32,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
     protected BaseListModel mBaseListModel;
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return 0;
     }
 
@@ -48,8 +48,8 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
      * @return
      */
     @Override
-    public View setRootView() {
-        if (setViewId() <= 0) {
+    public View getRootView() {
+        if (getViewId() <= 0) {
             return BaseListModel.createRecycleView(this);
         } else {
             return null;

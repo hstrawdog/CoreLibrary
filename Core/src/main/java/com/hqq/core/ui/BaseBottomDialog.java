@@ -57,7 +57,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         if (mRootView == null) {
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-            mRootView = mRootViewBuild.buildContentView(setViewId(), setRootView());
+            mRootView = mRootViewBuild.buildContentView(getViewId(), getRootView());
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
@@ -87,7 +87,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         FrameLayout bottomSheet = dialog.getDelegate().findViewById(R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomSheet.getLayoutParams();
-            layoutParams.height = setHeight();
+            layoutParams.height = getHeight();
             behavior = BottomSheetBehavior.from(bottomSheet);
             // 初始为展开状态
             behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -102,7 +102,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
     }
 
     @Override
-    public int setHeight() {
+    public int getHeight() {
         return CoordinatorLayout.LayoutParams.MATCH_PARENT;
     }
 
@@ -133,7 +133,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
 
 
     @Override
-    public View setRootView() {
+    public View getRootView() {
         return null;
     }
 

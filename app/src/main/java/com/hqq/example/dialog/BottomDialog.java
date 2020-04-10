@@ -22,7 +22,7 @@ public class BottomDialog extends BaseDialog {
     }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.dialog_bottom_sheet;
     }
 
@@ -32,17 +32,17 @@ public class BottomDialog extends BaseDialog {
     }
 
     @Override
-    public int setWeight() {
+    public int getWeight() {
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
 
     @Override
-    public int setHeight() {
+    public int getHeight() {
         return  WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
     @Override
-    public int setGravity() {
+    public int getGravity() {
         return Gravity.BOTTOM;
     }
 }

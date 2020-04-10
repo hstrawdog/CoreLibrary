@@ -1,13 +1,13 @@
 package com.hqq.core.ui.builder;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
 /**
  * @Author : huangqiqiang
@@ -24,14 +24,14 @@ public interface ICreateRootViewBuilder {
      *
      * @return
      */
-    int setViewId();
+    int getViewId();
 
     /**
      * 设置跟布局
      *
      * @return
      */
-    View setRootView();
+    View getRootView();
 
     /**
      * 初始化默认配置 RootView
@@ -91,7 +91,7 @@ public interface ICreateRootViewBuilder {
          *
          * @return int
          */
-        int setHeight();
+        int getHeight();
     }
 
     interface IBottomDialogFragmentBuilder extends IBaseDialogFragmentBuilder {
@@ -104,28 +104,28 @@ public interface ICreateRootViewBuilder {
          *
          * @return int
          */
-        int setBackground();
+        int getBackground();
 
         /**
          * dialog gravity 模式
          *
          * @return int
          */
-        int setGravity();
+        int getGravity();
 
         /**
          * dialog  宽度
          *
          * @return int
          */
-        int setWeight();
+        int getWeight();
 
         /**
          * dialog 动画
          *
          * @return int
          */
-        int setAnimation();
+        int getAnimation();
 
     }
 

@@ -27,7 +27,7 @@ public class DataBindingActivity extends BaseActivity {
     TextView mTextView2;
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_data_binding;
     }
 

@@ -24,7 +24,7 @@ public class SelectDialog extends BaseDialog {
     }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.dialog_select;
     }
 
@@ -34,23 +34,23 @@ public class SelectDialog extends BaseDialog {
     }
 
     @Override
-    public int setWeight() {
+    public int getWeight() {
         return (int) ResourcesUtils.getDimen(getActivity(), R.dimen.x560);
     }
 
 
     @Override
-    public int setHeight() {
+    public int getHeight() {
         return WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
     @Override
-    public int setGravity() {
+    public int getGravity() {
         return Gravity.CENTER;
     }
 
     @Override
-    public int setAnimation() {
+    public int getAnimation() {
         return R.style.dialogAnimation_fade_in2fade_out;
     }
 

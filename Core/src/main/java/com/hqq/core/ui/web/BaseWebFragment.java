@@ -62,7 +62,7 @@ public class BaseWebFragment extends BaseFragment {
     }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.fragment_web;
     }
 

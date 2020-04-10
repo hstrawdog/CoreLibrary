@@ -35,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         mActivity = this;
         mRootViewBuild = new RootViewBuilder(this, true, true);
         initDefConfig();
-        setContentView(mRootViewBuild.buildContentView(setViewId(), setRootView()));
+        setContentView(mRootViewBuild.buildContentView(getViewId(), getRootView()));
         mLoadingView = new LoadingView(this);
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
@@ -102,7 +102,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
      * @return
      */
     @Override
-    public View setRootView() {
+    public View getRootView() {
         return null;
     }
 

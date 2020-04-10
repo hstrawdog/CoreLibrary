@@ -12,7 +12,7 @@ public class TextViewActivity extends BaseActivity {
         context.startActivity(starter);
     }
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_text_view;
     }
 

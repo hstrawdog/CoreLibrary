@@ -26,7 +26,7 @@ public class BaseInfoActivity extends BaseActivity {
     TextView mTvInfo;
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_base_info;
     }
 

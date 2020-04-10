@@ -28,7 +28,7 @@ public class FullPagerSnapActivity extends BaseActivity {
     RecyclerView mRcList;
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.activity_full_pager_snap;
     }
 

@@ -23,17 +23,17 @@ public class FullDialog extends BaseDialog {
     }
 
     @Override
-    public int setHeight() {
+    public int getHeight() {
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
 
     @Override
-    public int setWeight() {
+    public int getWeight() {
         return WindowManager.LayoutParams.MATCH_PARENT;
     }
 
     @Override
-    public int setViewId() {
+    public int getViewId() {
         return R.layout.dialog_full;
     }
 
@@ -43,7 +43,7 @@ public class FullDialog extends BaseDialog {
     }
 
     @Override
-    public int setAnimation() {
+    public int getAnimation() {
         return R.anim.fade_in;
     }
 
