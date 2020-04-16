@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hqq.example.ui.view.SvgActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_red"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="123123123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color_main"
+            android:drawableTop="@mipmap/ic_delete" />
+
+        <TextView
+            android:text="123123123"
+            android:textColor="@color/white"
+            android:background="@color/color_000"
+            android:drawableTop="@drawable/ic_delete_svg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_red"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color_main"
+            android:src="@mipmap/ic_delete" />
+
+        <ImageView
+            android:background="@color/color_000"
+            android:src="@drawable/ic_delete_svg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/color_red"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color_main"
+            android:src="@mipmap/ic_bg" />
+
+        <ImageView
+            android:background="@color/color_000"
+            android:src="@drawable/ic_bg_svg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/color_red"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:background="@color/color_main"
+            android:src="@mipmap/ic_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:background="@color/color_000"
+            android:src="@drawable/ic_bg_svg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
