@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.view.SvgActivity"></activity>
+        <activity
+            android:name=".ui.view.SvgActivity"
+            android:label="svg 测试"/>
         <activity
             android:name=".ui.skin.SkinCActivity"
             android:label="换肤界面C" />

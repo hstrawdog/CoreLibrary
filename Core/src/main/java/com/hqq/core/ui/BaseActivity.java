@@ -24,8 +24,17 @@ import butterknife.ButterKnife;
  * @Descrive : 1.
  */
 public abstract class BaseActivity extends AppCompatActivity implements ICreateRootViewBuilder.IActivityBuilder, View.OnClickListener {
+    /**
+     * 当前对象
+     */
     protected Activity mActivity;
+    /**
+     * LoadingDialog
+     */
     public LoadingView mLoadingView;
+    /**
+     * 根布局
+     */
     protected RootViewBuilder mRootViewBuild;
 
     @Override
@@ -68,13 +77,11 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
     @Override
     public void initAnimEnter() {
         overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
-
     }
 
     @Override
     public void initAnimExit() {
         overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
-
     }
 
     @Override

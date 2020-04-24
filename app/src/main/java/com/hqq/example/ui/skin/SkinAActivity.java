@@ -3,7 +3,10 @@ package com.hqq.example.ui.skin;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
 /**
@@ -26,6 +29,14 @@ public class SkinAActivity extends BaseSkinActivity {
     @Override
     public void initView() {
         super.initView();
+
+        ((Switch) findViewById(R.id.switch_def)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                LogUtils.e("------");
+            }
+        });
+
         findViewById(R.id.button34).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

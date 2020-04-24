@@ -2,14 +2,13 @@ package com.hqq.core.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.ui.builder.RootViewBuilder;
@@ -32,8 +31,13 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
      * 缓存根布局对象
      */
     protected View mRootView = null;
-
+    /**
+     * 当前Activity
+     */
     protected Activity mActivity;
+    /**
+     * LoadingDialog
+     */
     public LoadingView mLoadingView;
     /**
      * fragment 是否创建
@@ -47,6 +51,9 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
      * 布局创建 容器
      */
     protected RootViewBuilder mRootViewBuild;
+    /**
+     * 绑定
+     */
     Unbinder mUnkinder;
 
     /**

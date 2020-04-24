@@ -8,7 +8,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionName "1.0.0"
-
+        vectorDrawables.useSupportLibrary = true
         //如果version.properties文件可读则执行操作
         def versionPropsFile = file('version.properties')
         if (versionPropsFile.canRead()) {
@@ -82,7 +82,7 @@ android {
                 outputFileName = "${variant.productFlavors[0].name}_v${variant.versionName}(${variant.versionCode}).apk"
             }
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res-night'] } }
+    sourceSets { main { res.srcDirs = ['src/main/res','src/main/res-main', 'src/main/res-night'] } }
 }
 
 dependencies {
@@ -97,5 +97,8 @@ dependencies {
     debugImplementation rootProject.ext.dependencies.leakcanary_support_fragmen
 //    implementation 'skin.support:skin-support:3.1.4'                   // skin-support 基础控件支持
     implementation 'skin.support:skin-support:4.0.4'                   // skin-support
-    implementation 'skin.support:skin-support-appcompat:4.0.4'
+    implementation 'skin.support:skin-support-appcompat:4.0.4'         // skin-support 基础控件支持
+    implementation 'skin.support:skin-support-design:4.0.4'            // skin-support-design material design 控件支持[可选]
+    implementation 'skin.support:skin-support-cardview:4.0.4'          // skin-support-cardview CardView 控件支持[可选]
+    implementation 'skin.support:skin-support-constraint-layout:4.0.4' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 }

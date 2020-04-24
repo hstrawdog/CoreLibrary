@@ -18,4 +18,10 @@
     </style>
 
 
+    <declare-styleable name="SkinSwitch">
+        <attr name="android:thumb"/>
+        <attr name="android:track"/>
+    </declare-styleable>
+
+
 </resources>

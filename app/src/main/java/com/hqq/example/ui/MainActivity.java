@@ -75,7 +75,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        AnimateIndexActivity.open(this);
 //        TextViewActivity.open(this);
 //        BlackAndWhiteActivity.open(this);
-//        SkinAActivity.open(this);
+       SkinAActivity.open(this);
 //        AppIconActivity.open(this);
 //        SvgActivity.open(this);
     }
