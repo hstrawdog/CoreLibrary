@@ -17,8 +17,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.color.HSLActivity"
+            android:label="HSL颜色值计算"/>
+        <activity
             android:name=".ui.view.SvgActivity"
-            android:label="svg 测试"/>
+            android:label="svg 测试" />
         <activity
             android:name=".ui.skin.SkinCActivity"
             android:label="换肤界面C" />

@@ -82,7 +82,9 @@ android {
                 outputFileName = "${variant.productFlavors[0].name}_v${variant.versionName}(${variant.versionCode}).apk"
             }
     }
-    sourceSets { main { res.srcDirs = ['src/main/res','src/main/res-main', 'src/main/res-night'] } }
+    sourceSets {
+        main { res.srcDirs = ['src/main/res', 'src/main/res-main', 'src/main/res-night'] }
+    }
 }
 
 dependencies {
@@ -98,7 +100,10 @@ dependencies {
 //    implementation 'skin.support:skin-support:3.1.4'                   // skin-support 基础控件支持
     implementation 'skin.support:skin-support:4.0.4'                   // skin-support
     implementation 'skin.support:skin-support-appcompat:4.0.4'         // skin-support 基础控件支持
-    implementation 'skin.support:skin-support-design:4.0.4'            // skin-support-design material design 控件支持[可选]
-    implementation 'skin.support:skin-support-cardview:4.0.4'          // skin-support-cardview CardView 控件支持[可选]
-    implementation 'skin.support:skin-support-constraint-layout:4.0.4' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
+    implementation 'skin.support:skin-support-design:4.0.4'
+    // skin-support-design material design 控件支持[可选]
+    implementation 'skin.support:skin-support-cardview:4.0.4'
+    // skin-support-cardview CardView 控件支持[可选]
+    implementation 'skin.support:skin-support-constraint-layout:4.0.4'
+    // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 }
