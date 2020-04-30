@@ -42,6 +42,7 @@ public class HSLActivity extends BaseActivity {
 
         float[] outHsl = new float[]{0f, 0f, 0f};
 
+
         ColorUtils.colorToHSL(Color.parseColor("#ef2b2c"), outHsl);
         ((ImageView) findViewById(R.id.imageView5)).setBackgroundColor(Color.parseColor("#ef2b2c"));
 
@@ -52,7 +53,7 @@ public class HSLActivity extends BaseActivity {
 
 
         ColorUtils.HSLToColor(newHsl);
-        ((ImageView) findViewById(R.id.imageView6)).setBackgroundColor(ColorUtils.HSLToColor(newHsl));
+        ((ImageView) findViewById(R.id.imageView6)).setBackgroundColor(computeHSL("#ef2b2c", 15f, 1.16f, 0.93f));
         ((ImageView) findViewById(R.id.imageView7)).setBackgroundColor(Color.parseColor("#ff4306"));
         float[] outHsl1 = new float[]{0f, 0f, 0f};
         ColorUtils.colorToHSL(Color.parseColor("#ff4306"), outHsl1);
@@ -64,7 +65,22 @@ public class HSLActivity extends BaseActivity {
                 "C1 SHL" + Arrays.toString(outHsl1) + "\n"
 
         );
+    }
 
+
+    /**
+     *
+     * @param color 颜色值
+     * @param outHsl 输出比例
+     * @return
+     */
+    public static int computeHSL(String color, float... outHsl) {
+        float[] hsl = new float[]{0f, 0f, 0f};
+        ColorUtils.colorToHSL(Color.parseColor(color), hsl);
+        float[] newHsl = new float[]{outHsl[0], hsl[1] * outHsl[1], hsl[2] * outHsl[2]};
+        return ColorUtils.HSLToColor(newHsl);
 
     }
+
+
 }
