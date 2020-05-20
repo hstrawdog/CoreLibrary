@@ -12,6 +12,8 @@ import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 import com.hqq.example.ui.color.HSLActivity;
+import com.hqq.example.ui.customize.BezierActivity;
+import com.hqq.example.ui.customize.CurtainActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
@@ -76,7 +78,8 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        AnimateIndexActivity.open(this);
 //        TextViewActivity.open(this);
 //        BlackAndWhiteActivity.open(this);
-        HSLActivity.open(this);
+//        HSLActivity.open(this);
+        CurtainActivity.open(this);
 //        AppIconActivity.open(this);
 //        SvgActivity.open(this);
     }

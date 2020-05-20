@@ -23,7 +23,6 @@ import java.util.Arrays;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-
 public class HSLActivity extends BaseActivity {
 
     public static void open(Context context) {
@@ -47,17 +46,11 @@ public class HSLActivity extends BaseActivity {
         ((ImageView) findViewById(R.id.imageView5)).setBackgroundColor(Color.parseColor("#ef2b2c"));
 
         LogUtils.e("" + outHsl.toString());
-
-
         float[] newHsl = new float[]{15, outHsl[1] * 1.16f, outHsl[2] * 0.93f};
-
-
-        ColorUtils.HSLToColor(newHsl);
         ((ImageView) findViewById(R.id.imageView6)).setBackgroundColor(computeHSL("#ef2b2c", 15f, 1.16f, 0.93f));
         ((ImageView) findViewById(R.id.imageView7)).setBackgroundColor(Color.parseColor("#ff4306"));
         float[] outHsl1 = new float[]{0f, 0f, 0f};
         ColorUtils.colorToHSL(Color.parseColor("#ff4306"), outHsl1);
-
         ((TextView) findViewById(R.id.textView10)).setText("主 #ef2b2c \n" +
                 "SHL" + Arrays.toString(outHsl) + "\n" +
                 "C1 #ff4306 \n" +

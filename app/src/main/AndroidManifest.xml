@@ -16,9 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.customize.CurtainActivity"></activity>
         <activity
             android:name=".ui.color.HSLActivity"
-            android:label="HSL颜色值计算"/>
+            android:label="HSL颜色值计算" />
         <activity
             android:name=".ui.view.SvgActivity"
             android:label="svg 测试" />
