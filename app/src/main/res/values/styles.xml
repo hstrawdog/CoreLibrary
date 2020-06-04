@@ -24,4 +24,10 @@
     </declare-styleable>
 
 
+
+    <style name="editText">
+        <item name="android:colorControlNormal">@color/color_main</item>
+
+    </style>
+
 </resources>

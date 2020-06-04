@@ -23,7 +23,7 @@ public class LogUtils {
     /**
      * Log 输出标签
      */
-    public static String TAG = BuildConfig.APPLICATION_ID;
+    public static String TAG = BuildConfig.LIBRARY_PACKAGE_NAME;
 
     public static void i(Object object) {
         if (CoreBuildConfig.getInstance().isDebug()) {

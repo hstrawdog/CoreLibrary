@@ -1,6 +1,6 @@
 package com.hqq.example.ui.recycle;
 
-import com.hqq.core.recycler.RecycleViewBanner;
+import com.hqq.core.recycle.RecycleViewBanner;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 

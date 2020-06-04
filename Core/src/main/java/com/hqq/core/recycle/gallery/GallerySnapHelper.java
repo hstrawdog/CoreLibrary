@@ -1,4 +1,4 @@
-package com.hqq.core.recycler.gallery;
+package com.hqq.core.recycle.gallery;
 
 import android.graphics.PointF;
 import androidx.annotation.NonNull;

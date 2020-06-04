@@ -1,4 +1,4 @@
-package com.hqq.core.recycler.indicator;
+package com.hqq.core.recycle.indicator;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -1,11 +1,13 @@
-package com.hqq.core.recycler;
+package com.hqq.core.recycle;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Handler;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -13,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.hqq.core.R;
-import com.hqq.core.recycler.adapter.RecycleBannerAdapter;
-import com.hqq.core.recycler.indicator.CircleIndicatorView;
+import com.hqq.core.recycle.adapter.RecycleBannerAdapter;
+import com.hqq.core.recycle.indicator.CircleIndicatorView;
 import com.hqq.core.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -35,22 +37,26 @@ import java.util.List;
  * 2. 考虑再次封装 adapter  不应该绑定在这边 需要解耦
  */
 public class RecycleViewBanner extends FrameLayout {
-
-
+    /**
+     * 轮播间隔时间
+     */
     private int mInterval;
+    /**
+     * 是否显示指示器
+     */
     private boolean isShowIndicator;
     /**
      * 是否显示标题
      */
     private boolean isShowTip;
-
     private RecyclerView mRecyclerView;
     private CircleIndicatorView mLinearLayout;
-    private List mData = new ArrayList<>();
     private int startX, startY, currentIndex;
+    /**
+     * 是否正在轮播
+     */
     private boolean isPlaying;
     private Handler handler = new Handler();
-
     private boolean isTouched;
     /**
      * 是否自动轮播
@@ -60,10 +66,10 @@ public class RecycleViewBanner extends FrameLayout {
      * 是否无限轮播
      */
     private boolean mIsUnlimited = true;
+    private List mData = new ArrayList<>();
 
     LinearLayoutManager mLinearLayoutManager;
     private RecycleBannerAdapter mAdapter;
-
     private Runnable playTask = new Runnable() {
 
         @Override
@@ -378,7 +384,6 @@ public class RecycleViewBanner extends FrameLayout {
         mIsUnlimited = unlimited;
         mAdapter.setUnlimited(unlimited);
     }
-
 
 
     /**

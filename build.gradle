@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:4.0.0'
 //        classpath "com.alibaba:arouter-register:1.0.2"
         //支持butterknife在Library中使用
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.0'

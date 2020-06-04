@@ -1,4 +1,4 @@
-package com.hqq.core.recycler;
+package com.hqq.core.recycle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

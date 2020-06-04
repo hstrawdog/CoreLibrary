@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hqq.example.R;
 import com.hqq.example.adapter.SnapHelperAdapter;
-import com.hqq.core.recycler.gallery.GallerySnapHelper;
-import com.hqq.core.recycler.gallery.RecyclerCoverFlow;
+import com.hqq.core.recycle.gallery.GallerySnapHelper;
+import com.hqq.core.recycle.gallery.RecyclerCoverFlow;
 import com.hqq.core.ui.BaseActivity;
 
 import java.util.ArrayList;

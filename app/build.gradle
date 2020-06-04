@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -35,7 +34,6 @@ android {
         } else {
             throw new GradleException("Could not read version.properties!")
         }
-
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -91,6 +89,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':Core')
     api rootProject.ext.dependencies.constraintlayout
+
+    api rootProject.ext.dependencies.butterknife
+    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+
+
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

@@ -18,10 +18,10 @@ import com.hqq.example.R;
  * @Descrive :
  */
 public class EditTextActivity extends BaseActivity {
-public static void open(Activity context) {
-    Intent starter = new Intent(context, EditTextActivity.class);
-    context.startActivityForResult(starter,-1);
-}
+    public static void open(Activity context) {
+        Intent starter = new Intent(context, EditTextActivity.class);
+        context.startActivityForResult(starter, -1);
+    }
 
     @Override
     public int getViewId() {

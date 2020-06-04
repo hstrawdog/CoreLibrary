@@ -3,7 +3,7 @@ package com.hqq.example.ui.list;
 import android.os.Handler;
 import android.view.View;
 
-import com.hqq.core.recycler.HeaderItemDecoration;
+import com.hqq.core.recycle.HeaderItemDecoration;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 import com.hqq.example.adapter.MainAdapter;

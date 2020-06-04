@@ -47,7 +47,28 @@ public class RegexUtils {
 //        }
         return false;
     }
-
+    /**
+     * 检查 null
+     * 支持类型
+     * String
+     * List  有待 验证
+     *
+     * @param object Object
+     * @return boolean
+     */
+    public static boolean checkNull(Object object) {
+        if (object == null) {
+            return true;
+        } else if (object instanceof String) {
+            return TextUtils.isEmpty(((String) object));
+            // return ((String) object).isEmpty();
+        } else if (object instanceof List) {
+            return ((List) object).isEmpty();
+        } else if (object instanceof String[]) {
+            return ((String[]) object).length <= 0;
+        }
+        return false;
+    }
     /**
      * 非空判断
      *
@@ -181,11 +202,10 @@ public class RegexUtils {
      * @return
      */
     public static boolean checkBankNum(String cardId) {
-        char bit = getBankCardCheckCode(cardId.substring(0, cardId.length() - 1));
-        if (bit == 'N') {
+        if (RegexUtils.checkNull(cardId)) {
             return false;
         }
-        return cardId.charAt(cardId.length() - 1) == bit;
+        return cardId.matches("^([0-9]{15}|[0-9]{16}|[0-9]{17}|[0-9]{18}|[0-9]{19})$");
     }
 
     /**
@@ -319,11 +339,15 @@ public class RegexUtils {
     }
 
     public static void main(String[] args) {
-        String url = "http://172.12.1.123/test.txt";
-        String regex = "(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})";
-        System.out.println(getMatcher(regex, url));
-        String[][] strings = new String[0][];
-        isNull(strings);
+
+
+
+        System.out.println("" + checkBankNum("6227001823770993846"));
+        System.out.println("" + checkBankNum("6221386102180111123"));
+        System.out.println("" + checkBankNum("6222600260001072321"));
+
+
+
     }
 
 

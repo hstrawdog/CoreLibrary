@@ -1,6 +1,7 @@
-package com.hqq.core.recycler.adapter;
+package com.hqq.core.recycle.adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 
 import com.hqq.core.R;
 import com.hqq.core.glide.ImageLoadUtils;
-import com.hqq.core.recycler.RecycleViewBanner;
+import com.hqq.core.recycle.RecycleViewBanner;
 
 import java.util.ArrayList;
 import java.util.List;
