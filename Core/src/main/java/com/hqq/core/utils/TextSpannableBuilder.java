@@ -26,7 +26,163 @@ import android.view.View;
  * @Email :  qiqiang213@gmail.com
  */
 public class TextSpannableBuilder {
+    /**
+     * 缓存的集合
+     */
+    private final SpannableStringBuilder mStringBuilder = new SpannableStringBuilder();
 
+    /**
+     * 添加文本颜色
+     *
+     * @param color
+     * @param start
+     * @param end
+     */
+    private void addPartTextColor(int color, int start, int end) {
+        mStringBuilder.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    /**
+     * 添加文字大小
+     *
+     * @param proportion
+     * @param start
+     * @param end
+     */
+    private void addPartTextSize(float proportion, int start, int end) {
+        mStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @return
+     */
+    public TextSpannableBuilder addTextPart(CharSequence text) {
+        mStringBuilder.append(text);
+        return this;
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param context context
+     * @param colorId 颜色值
+     * @param text    内容
+     * @return
+     */
+    public TextSpannableBuilder addTextPart(Context context, @ColorRes int colorId, CharSequence text) {
+        return addTextPart(ContextCompat.getColor(context, colorId), text);
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param color
+     * @param text
+     * @return
+     */
+    public TextSpannableBuilder addTextPart(@ColorInt int color, CharSequence text) {
+        if (!TextUtils.isEmpty(text)) {
+            final int start = mStringBuilder.length();
+            final int end = start + text.length();
+            mStringBuilder.append(text);
+            addPartTextColor(color, start, end);
+        }
+        return this;
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @param context
+     * @param colorId
+     * @param listener
+     * @return
+     */
+    public TextSpannableBuilder addTextPart(CharSequence text, Context context, int colorId, OnClickListener listener) {
+        return addTextPart(text, ContextCompat.getColor(context, colorId), listener);
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param context
+     * @param colorId
+     * @param proportion
+     * @param text
+     * @return
+     */
+    public TextSpannableBuilder addTextPartColorAndSize(Context context, @ColorRes int colorId, float proportion, CharSequence text) {
+        if (!TextUtils.isEmpty(text)) {
+            final int start = mStringBuilder.length();
+            final int end = start + text.length();
+            mStringBuilder.append(text);
+            addPartTextColor(ContextCompat.getColor(context, colorId), start, end);
+            addPartTextSize(proportion, start, end);
+
+        }
+        return this;
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param proportion 文字大小
+     * @param text       内容
+     * @return
+     */
+    public TextSpannableBuilder addTextSizeSpan(float proportion, CharSequence text) {
+        if (!TextUtils.isEmpty(text)) {
+            final int start = mStringBuilder.length();
+            final int end = start + text.length();
+            mStringBuilder.append(text);
+            addPartTextSize(proportion, start, end);
+        }
+        return this;
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @param characterStyle
+     * @return
+     */
+    public TextSpannableBuilder addTextPart(CharSequence text, CharacterStyle characterStyle) {
+        if (!TextUtils.isEmpty(text)) {
+            final int start = mStringBuilder.length();
+            final int end = start + text.length();
+            mStringBuilder.append(text);
+            mStringBuilder.setSpan(characterStyle, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return this;
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @param color
+     * @param listener
+     * @return
+     */
+    public TextSpannableBuilder addTextPart(CharSequence text, int color, OnClickListener listener) {
+        if (!TextUtils.isEmpty(text)) {
+            final int start = mStringBuilder.length();
+            final int end = start + text.length();
+            mStringBuilder.append(text);
+            mStringBuilder.setSpan(new TextClickableSpan(text, color, listener)
+                    , start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return this;
+    }
+
+    public Spannable build() {
+        return mStringBuilder;
+    }
 
     /**
      * 点击事件
@@ -59,90 +215,16 @@ public class TextSpannableBuilder {
         }
     }
 
-    private final SpannableStringBuilder mStringBuilder = new SpannableStringBuilder();
-
-    private void addPartTextColor(int color, int start, int end) {
-        mStringBuilder.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
-
-    private void addPartTextSize(float proportion, int start, int end) {
-        mStringBuilder.setSpan(new RelativeSizeSpan(proportion), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
-
-    public TextSpannableBuilder addTextPart(CharSequence text) {
-        mStringBuilder.append(text);
-        return this;
-    }
-
-    public TextSpannableBuilder addTextPart(Context context, @ColorRes int colorId, CharSequence text) {
-        return addTextPart(ContextCompat.getColor(context, colorId), text);
-    }
-
-    public TextSpannableBuilder addTextPart(@ColorInt int color, CharSequence text) {
-        if (!TextUtils.isEmpty(text)) {
-            final int start = mStringBuilder.length();
-            final int end = start + text.length();
-            mStringBuilder.append(text);
-            addPartTextColor(color, start, end);
-        }
-        return this;
-    }
-
-    public TextSpannableBuilder addTextPart(CharSequence text, Context context, int colorId, OnClickListener listener) {
-        return addTextPart(text, ContextCompat.getColor(context, colorId), listener);
-    }
-
-    public TextSpannableBuilder addTextPartColorAndSize(Context context, @ColorRes int colorId, float proportion, CharSequence text) {
-        if (!TextUtils.isEmpty(text)) {
-            final int start = mStringBuilder.length();
-            final int end = start + text.length();
-            mStringBuilder.append(text);
-            addPartTextColor(ContextCompat.getColor(context, colorId), start, end);
-            addPartTextSize(proportion, start, end);
-
-        }
-        return this;
-    }
-
-    public TextSpannableBuilder addTextSizeSpan(float proportion
-            , CharSequence text) {
-        if (!TextUtils.isEmpty(text)) {
-            final int start = mStringBuilder.length();
-            final int end = start + text.length();
-            mStringBuilder.append(text);
-            addPartTextSize(proportion, start, end);
-        }
-        return this;
-    }
-
-    public TextSpannableBuilder addTextPart(CharSequence text, CharacterStyle characterStyle) {
-        if (!TextUtils.isEmpty(text)) {
-            final int start = mStringBuilder.length();
-            final int end = start + text.length();
-            mStringBuilder.append(text);
-            mStringBuilder.setSpan(characterStyle, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        return this;
-    }
-
-    public TextSpannableBuilder addTextPart(CharSequence text, int color, OnClickListener listener) {
-        if (!TextUtils.isEmpty(text)) {
-            final int start = mStringBuilder.length();
-            final int end = start + text.length();
-            mStringBuilder.append(text);
-            mStringBuilder.setSpan(new TextClickableSpan(text, color, listener)
-                    , start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        return this;
-    }
-
-
-    public Spannable build() {
-        return mStringBuilder;
-    }
-
-
+    /**
+     * 接口
+     */
     public interface OnClickListener {
+        /**
+         * 回调
+         *
+         * @param widget
+         * @param clickedText
+         */
         void onClick(View widget, CharSequence clickedText);
     }
 

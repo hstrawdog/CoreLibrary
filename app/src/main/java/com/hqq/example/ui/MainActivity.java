@@ -27,6 +27,7 @@ import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
 import com.hqq.example.ui.view.BlackAndWhiteActivity;
 import com.hqq.example.ui.view.EditTextActivity;
 import com.hqq.example.ui.view.SvgActivity;
+import com.hqq.example.ui.view.TextViewActivity;
 import com.hqq.example.ui.web.WebActivity;
 
 /**
@@ -77,13 +78,13 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         // EditTextActivity.open(this);
 //        TemplatesImageActivity.open(this);
 //        AnimateIndexActivity.open(this);
-//        TextViewActivity.open(this);
+        TextViewActivity.open(this);
 //        BlackAndWhiteActivity.open(this);
 //        HSLActivity.open(this);
 //        CurtainActivity.open(this);
 //        AppIconActivity.open(this);
 //        SvgActivity.open(this);
-        EditTextActivity.open(this);
+//        EditTextActivity.open(this);
     }
 
 

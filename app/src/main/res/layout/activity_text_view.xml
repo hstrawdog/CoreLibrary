@@ -23,24 +23,22 @@
         android:background="@color/color_999"
         android:ellipsize="end"
         android:maxLines="2"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:text="123123123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-
-
     <TextView
-        android:layout_marginTop="@dimen/x20"
-        android:id="@+id/tv_goodsName"
+        android:id="@+id/textView10"
         style="@style/def_text.28.333"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="2"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        android:layout_marginTop="@dimen/x20"
         android:ellipsize="end"
+        android:maxLines="2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
         tools:text="121231231231231231231231231231231231231231231231231231231231231231231233121231231231231231231231231231231231231231231231231231231231231231231233" />
 
 
