@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
@@ -23,6 +24,7 @@ import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.skin.SkinAActivity;
+import com.hqq.example.ui.toast.ToastActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
 import com.hqq.example.ui.view.BlackAndWhiteActivity;
 import com.hqq.example.ui.view.EditTextActivity;
@@ -78,13 +80,16 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         // EditTextActivity.open(this);
 //        TemplatesImageActivity.open(this);
 //        AnimateIndexActivity.open(this);
-        TextViewActivity.open(this);
+//        TextViewActivity.open(this);
 //        BlackAndWhiteActivity.open(this);
 //        HSLActivity.open(this);
 //        CurtainActivity.open(this);
 //        AppIconActivity.open(this);
 //        SvgActivity.open(this);
 //        EditTextActivity.open(this);
+        ToastActivity.open(this);
+
+
     }
 
 

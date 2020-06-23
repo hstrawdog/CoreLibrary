@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.customize.CurtainActivity"></activity>
+        <activity
+            android:name=".ui.toast.ToastActivity"
+            android:label="Toast测试" />
+        <activity android:name=".ui.customize.CurtainActivity" />
         <activity
             android:name=".ui.color.HSLActivity"
             android:label="HSL颜色值计算" />

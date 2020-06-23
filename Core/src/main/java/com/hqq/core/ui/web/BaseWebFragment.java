@@ -81,7 +81,7 @@ public class BaseWebFragment extends BaseFragment {
     @Override
     public void initDefConfig() {
         super.initDefConfig();
-        mRootViewBuild.setShowStatus(true);
+        mRootViewBuild.setShowStatusBar(true);
         mRootViewBuild.setShowToolBar(true);
     }
 
@@ -121,12 +121,9 @@ public class BaseWebFragment extends BaseFragment {
     protected void initWebViewSettings() {
         WebSettings settings = mWebView.getSettings();
         settings.setUserAgentString(settings.getUserAgentString() + "" + mActivity.getPackageName());
-
         settings.setJavaScriptEnabled(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
-
         settings.setAllowFileAccess(true);
-
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true);
@@ -135,11 +132,9 @@ public class BaseWebFragment extends BaseFragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             settings.setDisplayZoomControls(false);
         }
-/**
- * MIXED_CONTENT_ALWAYS_ALLOW：允许从任何来源加载内容，即使起源是不安全的；
- * MIXED_CONTENT_NEVER_ALLOW：不允许Https加载Http的内容，即不允许从安全的起源去加载一个不安全的资源；
- * MIXED_CONTENT_COMPATIBILITY_MODE：当涉及到混合式内容时，WebView 会尝试去兼容最新Web浏览器的风格。
- **/
+        // MIXED_CONTENT_ALWAYS_ALLOW：允许从任何来源加载内容，即使起源是不安全的；
+        // MIXED_CONTENT_NEVER_ALLOW：不允许Https加载Http的内容，即不允许从安全的起源去加载一个不安全的资源；
+        // MIXED_CONTENT_COMPATIBILITY_MODE：当涉及到混合式内容时，WebView 会尝试去兼容最新Web浏览器的风格。
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mWebView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
@@ -154,8 +149,6 @@ public class BaseWebFragment extends BaseFragment {
 
     protected WebViewClient getWebViewClient() {
         return new WebViewClient() {
-
-
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 //处理 android err_unknown_url_scheme异常

@@ -51,19 +51,19 @@ public class RootViewBuilder implements IRootViewBuilder {
         this(activity, false, false);
     }
 
-    public <T> RootViewBuilder(T activity, boolean isShowStatus, boolean isShowToolBar) {
+    public <T> RootViewBuilder(T context, boolean isShowStatus, boolean isShowToolBar) {
         mCreateRootViewModel = new CreateRootViewModel(isShowStatus, isShowToolBar);
-        if (activity instanceof Activity) {
-            mActivity = (Activity) activity;
+        if (context instanceof Activity) {
+            mActivity = (Activity) context;
             // 只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
             mCreateRootViewModel.setImmersiveStatusBar(true);
-        } else if (activity instanceof DialogFragment) {
-            mActivity = ((DialogFragment) activity).getActivity();
+        } else if (context instanceof DialogFragment) {
+            mActivity = ((DialogFragment) context).getActivity();
             mCreateRootViewModel.setBgColor(R.color.transparent);
-        } else if (activity instanceof Fragment) {
-            mActivity = ((Fragment) activity).getActivity();
+        } else if (context instanceof Fragment) {
+            mActivity = ((Fragment) context).getActivity();
         } else {
-            LogUtils.e(new Exception("不支持的类" + activity.getClass().getName()));
+            LogUtils.e(new Exception("不支持的类" + context.getClass().getName()));
         }
         mCreateRootViewModel.setActivity(mActivity);
     }
@@ -141,7 +141,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showStatus  状态栏
      * @param showToolBar 标题栏
      */
-    public RootViewBuilder setToolbatVisibility(boolean showStatus, boolean showToolBar) {
+    public RootViewBuilder setToolbarVisibility(boolean showStatus, boolean showToolBar) {
         mCreateRootViewModel.setToolbarVisibility(showStatus, showToolBar);
         return this;
 
@@ -152,7 +152,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @param showStatus
      */
-    public RootViewBuilder setShowStatus(boolean showStatus) {
+    public RootViewBuilder setShowStatusBar(boolean showStatus) {
         mCreateRootViewModel.setShowStatusBar(showStatus);
         return this;
 

@@ -88,6 +88,12 @@ public class CreateRootViewModel {
      */
     private boolean mIsShowToolBar;
 
+    /**
+     * 创建rootView
+     *
+     * @param isShowStatus  状态栏
+     * @param isShowToolBar 标题栏
+     */
     public CreateRootViewModel(boolean isShowStatus, boolean isShowToolBar) {
         mIsShowStatus = isShowStatus;
         mIsShowToolBar = isShowToolBar;
@@ -109,11 +115,10 @@ public class CreateRootViewModel {
             // 通过View 去构建
             if (rootView != null) {
                 return createRootView(rootView, 0);
-            } else {
-                LogUtils.e(new Exception("no fount layoutId and rootView  , must init RootView"));
-                return null;
             }
         }
+        LogUtils.e(new Exception("no fount layoutId and rootView  , must init RootView"));
+        return null;
     }
 
     /**
@@ -206,11 +211,11 @@ public class CreateRootViewModel {
      * @return
      */
     public IToolBar initIToolBar() {
-        IToolBarBuilder iToolBarBuilder = new IToolBarBuilder();
-        iToolBarBuilder.setActivity(mActivity.get());
-        iToolBarBuilder.setShowStatusBar(mIsShowStatus);
-        iToolBarBuilder.setShowToolBar(mIsShowToolBar);
-        iToolBarBuilder.setStatusBarColor(mStatusColor);
+        IToolBarBuilder iToolBarBuilder = new IToolBarBuilder()
+                .setActivity(mActivity.get())
+                .setShowStatusBar(mIsShowStatus)
+                .setShowToolBar(mIsShowToolBar)
+                .setStatusBarColor(mStatusColor);
         return iToolBarBuilder.create(mClass);
     }
 
@@ -322,7 +327,6 @@ public class CreateRootViewModel {
      */
     public void setImmersiveStatusBar(boolean immersiveStatusBar) {
         this.immersiveStatusBar = immersiveStatusBar;
-
     }
 
     /**

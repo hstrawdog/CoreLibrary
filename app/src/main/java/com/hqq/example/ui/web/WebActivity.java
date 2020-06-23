@@ -26,7 +26,7 @@ public class WebActivity extends BaseFrameLayoutActivity {
     public void initDefConfig() {
         super.initDefConfig();
         mRootViewBuild.setShowToolBar(false);
-        mRootViewBuild.setShowStatus(false);
+        mRootViewBuild.setShowStatusBar(false);
     }
 
     @Override
