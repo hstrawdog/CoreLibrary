@@ -2,6 +2,7 @@ package com.hqq.example.ui.toast;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -32,9 +33,8 @@ public class ToastActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
         findViewById(R.id.button35).setOnClickListener(this::onClickButton);
-
+        findViewById(R.id.button36).setOnClickListener(this::onClickButton2);
     }
 
     public void onClickButton(View v) {
@@ -43,7 +43,15 @@ public class ToastActivity extends BaseActivity {
         View view = layoutInflater.inflate(R.layout.view_toast, null);
         toast.setView(view);
         toast.show();
+    }
 
+    public void onClickButton2(View v) {
+        Toast toast = new Toast(mActivity);
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.view_toast, null);
+        toast.setView(view);
+        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.show();
     }
 
 }
