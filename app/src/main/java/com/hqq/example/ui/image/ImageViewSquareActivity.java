@@ -1,4 +1,4 @@
-package com.hqq.example.ui.web;
+package com.hqq.example.ui.image;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +15,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class ImageViewActivity extends BaseActivity {
+public class ImageViewSquareActivity extends BaseActivity {
 
     @Override
     public int getViewId() {

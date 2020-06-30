@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.image.ImageViewRectangle2Activity"></activity>
+        <activity
+            android:name=".ui.image.ImageViewRectangleActivity"
+            android:label="图片测试" />
         <activity
             android:name=".ui.toast.ToastActivity"
             android:label="Toast测试" />
@@ -54,7 +58,7 @@
             android:name=".ui.customize.TemplatesImageActivity"
             android:label="图片模板 空" />
         <activity
-            android:name=".ui.web.ImageViewActivity"
+            android:name=".ui.image.ImageViewSquareActivity"
             android:label="图片测试" />
         <activity
             android:name=".ui.view.EditTextActivity"
