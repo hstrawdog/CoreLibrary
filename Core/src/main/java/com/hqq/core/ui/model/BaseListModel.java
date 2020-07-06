@@ -249,7 +249,7 @@ public class BaseListModel {
      * @return
      */
     public static View createRecycleView(Context context, int height) {
-        View view = new RecyclerView(context);
+        RecyclerView view = new RecyclerView(context);
         view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         view.setId(R.id.rc_list);
         return view;

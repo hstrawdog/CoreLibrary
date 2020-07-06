@@ -16,6 +16,8 @@ import com.hqq.example.ui.color.HSLActivity;
 import com.hqq.example.ui.customize.BezierActivity;
 import com.hqq.example.ui.customize.CurtainActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
+import com.hqq.example.ui.customize.SemicircularActivity;
+import com.hqq.example.ui.customize.TemplatesImageActivity;
 import com.hqq.example.ui.data.DataBindingActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
 import com.hqq.example.ui.exception.ThrowActivity;
@@ -90,7 +92,9 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        ToastActivity.open(this);
 
 //        CustomizeIndexActivity.open(this);
-        BezierActivity.open(this);
+//        BezierActivity.open(this);
+//        TemplatesImageActivity.open(this);
+        SemicircularActivity.open(this);
     }
 
 

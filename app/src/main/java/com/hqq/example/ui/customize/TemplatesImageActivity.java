@@ -13,7 +13,7 @@ import com.hqq.example.R;
  * @FileName :   TemplatesImageActivity
  * @Date : 2020/1/10 0010  下午 1:41
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : 限定区域内图片拖动
  */
 public class TemplatesImageActivity extends BaseActivity {
 
