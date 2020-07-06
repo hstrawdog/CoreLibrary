@@ -1,5 +1,6 @@
 package com.hqq.example.ui.customize;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
@@ -16,8 +17,13 @@ import com.hqq.example.bean.MainBean;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-
 public class CustomizeIndexActivity extends BaseListActivity<MainAdapter> {
+
+
+    public static void open(Activity context) {
+        Intent starter = new Intent(context, CustomizeIndexActivity.class);
+        context.startActivityForResult(starter, -1);
+    }
 
 
     @Override

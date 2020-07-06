@@ -2,8 +2,6 @@ package com.hqq.example;
 
 import android.app.Application;
 
-import com.squareup.leakcanary.LeakCanary;
-
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinAppCompatViewInflater;
 import skin.support.app.SkinCardViewInflater;
@@ -25,12 +23,6 @@ public class APP extends Application {
         //配置 默认加载的 toolBar    CoreInitProvider   会比 Application  更加优先
         //  CoreBuildConfig.getInstance().init(this, true);
         //.setDefItoobar(BaseDefToolBarImpl.class);
-
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
-
 
 
         SkinCompatManager.withoutActivity(this)

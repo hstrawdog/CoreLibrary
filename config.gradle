@@ -58,9 +58,8 @@ ext {
             // -------------  图片预览效果  缩放等 -------------
             photoview                     : 'com.bm.photoview:library:1.4.1',
             // -------------  leakcanary -------------
-            leakcanary_ndroid          : 'com.squareup.leakcanary:leakcanary-android:1.6.2',
-            leakcanary_android_no_op: 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2',
-            leakcanary_support_fragmen: 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3',
+            leakcanary          : 'com.squareup.leakcanary:leakcanary-android:2.4',
+
 
     ]
 }

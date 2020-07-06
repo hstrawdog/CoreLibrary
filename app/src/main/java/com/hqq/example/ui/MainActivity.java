@@ -87,9 +87,10 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        AppIconActivity.open(this);
 //        SvgActivity.open(this);
 //        EditTextActivity.open(this);
-        ToastActivity.open(this);
+//        ToastActivity.open(this);
 
-
+//        CustomizeIndexActivity.open(this);
+        BezierActivity.open(this);
     }
 
 

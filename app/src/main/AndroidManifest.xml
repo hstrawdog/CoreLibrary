@@ -16,13 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.image.ImageViewRectangle2Activity"></activity>
+        <activity
+            android:name=".ui.image.ImageViewRectangle2Activity"
+            android:label="scaleType 测试" />
         <activity
             android:name=".ui.image.ImageViewRectangleActivity"
-            android:label="图片测试" />
+            android:label="图片 scaleType 测试" />
         <activity
             android:name=".ui.toast.ToastActivity"
-            android:label="Toast测试" />
+            android:label="自定义Toast测试" />
         <activity android:name=".ui.customize.CurtainActivity" />
         <activity
             android:name=".ui.color.HSLActivity"
@@ -178,7 +180,9 @@
         <activity
             android:name=".ui.dialog.TestDialogActivity"
             android:label="dialog 测试" />
-        <activity android:name=".ui.customize.BezierActivity" />
+        <activity
+            android:name=".ui.customize.BezierActivity"
+            android:label="贝塞尔曲线" />
         <activity
             android:name=".ui.adaptation.AdaptationIndexActivity"
             android:label="适配相关" />

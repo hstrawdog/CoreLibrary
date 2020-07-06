@@ -25,7 +25,7 @@ import static com.hqq.core.utils.ScreenUtils.getStatusBarHeight;
  * @FileName :   GuideView
  * @Date : 2020/5/12 0012  下午 2:01
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : 引导页
  */
 public class GuideView extends View {
 
@@ -74,18 +74,17 @@ public class GuideView extends View {
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
 
 
-
-             Rect targetBound =new Rect();
+            Rect targetBound = new Rect();
             targetBound.left = viewLocation[0];
             targetBound.top = viewLocation[1];
             targetBound.right += targetBound.left;
             targetBound.bottom += targetBound.top;
             //计算偏移量(对外)
 
-            canvas.drawOval(new RectF( viewLocation[0],
-                    viewLocation[1]- getStatusBarHeight(getContext())- ResourcesUtils.getDimen(R.dimen.x88),
-                    rect.right +  viewLocation[0],
-                    rect.bottom + viewLocation[1]- getStatusBarHeight(getContext())- ResourcesUtils.getDimen(R.dimen.x88)
+            canvas.drawOval(new RectF(viewLocation[0],
+                    viewLocation[1] - getStatusBarHeight(getContext()) - ResourcesUtils.getDimen(R.dimen.x88),
+                    rect.right + viewLocation[0],
+                    rect.bottom + viewLocation[1] - getStatusBarHeight(getContext()) - ResourcesUtils.getDimen(R.dimen.x88)
             ), paint);
 
         }

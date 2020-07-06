@@ -48,27 +48,34 @@ public class BezierView extends View {
         drawCubicTo(canvas);
     }
 
-
+    /**
+     * 三阶的贝塞尔曲线
+     *
+     * @param canvas
+     */
     private void drawCubicTo(Canvas canvas) {
-        canvas.translate(100, 350);
+        canvas.translate(0, 350);
         Paint paint = new Paint();
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
         paint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
         paint.setStrokeWidth(5.0f);
 
-        canvas.drawCircle(10, 10, 5, paint);
-        canvas.drawCircle(180, 10, 5, paint);
-        canvas.drawCircle(180, 50, 5, paint);
-        canvas.drawCircle(300, 300, 5, paint);
-        canvas.drawLine(10, 10, 180, 10, paint);
-        canvas.drawLine(180, 10, 180, 50, paint);
-        canvas.drawLine(180, 50, 300, 300, paint);
+        canvas.drawCircle(mCubicPoint.x, mCubicPoint.y, 5, paint);
+        canvas.drawCircle(mStartPoint.x, mStartPoint.y, 5, paint);
+        canvas.drawCircle(mCtrlPoint.x, mCtrlPoint.y, 5, paint);
+        canvas.drawCircle(mEndPoint.x, mEndPoint.y, 5, paint);
+
+        canvas.drawLine(mCubicPoint.x, mCubicPoint.y, mStartPoint.x, mStartPoint.y, paint);
+        canvas.drawLine(mStartPoint.x, mStartPoint.y, mCtrlPoint.x, mCtrlPoint.y, paint);
+        canvas.drawLine(mCtrlPoint.x, mCtrlPoint.y, mEndPoint.x, mEndPoint.y, paint);
 
         Path path = new Path();
-        path.moveTo(10, 10);
-        path.cubicTo(180, 10, 180, 50, 300, 300);
+        path.moveTo(mCubicPoint.x, mCubicPoint.y);
+        path.cubicTo(mStartPoint.x, mStartPoint.y, mCtrlPoint.x, mCtrlPoint.y, mEndPoint.x, mEndPoint.y);
         canvas.drawPath(path, paint);
+        paint.setColor(Color.BLUE);
+        canvas.drawCircle(mMoveThreePoint.x, mMoveThreePoint.y, 5, paint);
         canvas.save();
 
     }
@@ -85,6 +92,15 @@ public class BezierView extends View {
                         new PointF(mEndPoint.x, mEndPoint.y));
                 mMovePoint.x = (int) p.x;
                 mMovePoint.y = (int) p.y;
+
+
+                PointF p3 = BezierUtil.calculateBezierPointForCubic(t,
+                        new PointF(mCubicPoint.x, mCubicPoint.y), new PointF(mStartPoint.x, mStartPoint.y),
+                        new PointF(mCtrlPoint.x, mCtrlPoint.y),
+                        new PointF(mEndPoint.x, mEndPoint.y));
+                mMoveThreePoint.x = (int) p3.x;
+                mMoveThreePoint.y = (int) p3.y;
+
                 //重新绘制View
                 invalidate();
             }
@@ -93,12 +109,22 @@ public class BezierView extends View {
         valueAnimator.start();
     }
 
-    Point mStartPoint = new Point(10, 10);
-    Point mEndPoint = new Point(300, 300);
-    Point mCtrlPoint = new Point(180, 10);
+    Point mStartPoint = new Point(100, 500);
+    Point mCtrlPoint = new Point(300, 100);
+    Point mEndPoint = new Point(600, 500);
+
+    Point mCubicPoint = new Point(0, 0);
+
+
+
     Point mMovePoint = new Point(10, 10);
+    Point mMoveThreePoint = new Point(10, 10);
 
-
+    /**
+     * 二阶
+     *
+     * @param canvas
+     */
     private void drawBezier(Canvas canvas) {
         canvas.translate(100, 50);
         Paint paint = new Paint();
@@ -107,17 +133,18 @@ public class BezierView extends View {
         paint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD));
         paint.setStrokeWidth(5.0f);
 
-
-        canvas.drawCircle(mStartPoint.x, mStartPoint.y, 5, paint);
-        canvas.drawCircle(180, 10, 5, paint);
-        canvas.drawCircle(300, 300, 5, paint);
-        canvas.drawLine(10, 10, 180, 10, paint);
-        canvas.drawLine(180, 10, 300, 300, paint);
-
-
         Path path = new Path();
         path.moveTo(mStartPoint.x, mStartPoint.y);
-        path.quadTo(mCtrlPoint.x, mCtrlPoint.y, mEndPoint.x, mEndPoint.x);
+        path.quadTo(mCtrlPoint.x, mCtrlPoint.y, mEndPoint.x, mEndPoint.y);
+
+        canvas.drawCircle(mStartPoint.x, mStartPoint.y, 5, paint);
+        canvas.drawCircle(mCtrlPoint.x, mCtrlPoint.y, 5, paint);
+        canvas.drawCircle(mEndPoint.x, mEndPoint.y, 5, paint);
+
+        canvas.drawLine(mStartPoint.x, mStartPoint.y, mCtrlPoint.x, mCtrlPoint.y, paint);
+        canvas.drawLine(mCtrlPoint.x, mCtrlPoint.y, mEndPoint.x, mEndPoint.y, paint);
+
+
         canvas.drawPath(path, paint);
 
         paint.setColor(Color.BLUE);
