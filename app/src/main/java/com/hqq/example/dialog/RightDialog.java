@@ -1,12 +1,14 @@
 package com.hqq.example.dialog;
 
-import androidx.fragment.app.FragmentManager;
 import android.view.Gravity;
 import android.view.WindowManager;
 
-import com.hqq.example.R;
+import androidx.fragment.app.FragmentManager;
+
+import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.ui.BaseDialog;
 import com.hqq.core.utils.ResourcesUtils;
+import com.hqq.example.R;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -28,7 +30,15 @@ public class RightDialog extends BaseDialog {
     }
 
     @Override
+    public void initDefConfig() {
+        super.initDefConfig();
+        mStatusBarMode = ToolBarMode.LIGHT_MODE;
+
+    }
+
+    @Override
     public void initView() {
+//        StatusBarManager.setStatusBarModel(getDialog().getWindow(), true);
 
     }
 

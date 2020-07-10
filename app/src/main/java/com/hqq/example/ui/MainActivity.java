@@ -95,7 +95,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        BezierActivity.open(this);
 //        TemplatesImageActivity.open(this);
 //        SemicircularActivity.open(this);
-        ToolBarActivity.open(this);
+        TestDialogActivity.open(this);
     }
 
 

@@ -1,6 +1,8 @@
 package com.hqq.example.ui.dialog;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,10 +30,16 @@ import butterknife.OnClick;
  */
 public class TestDialogActivity extends BaseActivity {
 
+
     @BindView(R.id.button14)
     Button mButton14;
     @BindView(R.id.button15)
     Button mButton15;
+
+    public static void open(Activity context) {
+        Intent starter = new Intent(context, TestDialogActivity.class);
+        context.startActivityForResult(starter, -1);
+    }
 
     @Override
     public int getViewId() {
@@ -66,6 +74,7 @@ public class TestDialogActivity extends BaseActivity {
                 FullDialog.showDialog(getSupportFragmentManager());
                 break;
             case R.id.button16:
+//                NewRightDialog.showDialog(getSupportFragmentManager());
                 RightDialog.showDialog(getSupportFragmentManager());
                 break;
             case R.id.button17:

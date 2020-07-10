@@ -24,6 +24,7 @@
 
         
         <TextView
+            android:id="@+id/textView13"
             android:layout_centerInParent="true"
             android:background="@color/banner_2"
             android:layout_width="@dimen/x80"

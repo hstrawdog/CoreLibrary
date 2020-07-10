@@ -89,7 +89,6 @@ public class StatusBarManager {
      * <item name="android:windowLightStatusBar">true</item>
      * 在theme或style中使用这个属性改变StatusBar的字体颜色，这种形式相对不灵活
      */
-    @TargetApi(Build.VERSION_CODES.M)
     public static void setStatusBarTextColor(Window window, boolean lightStatusBar) {
         if (window == null) {
             return;

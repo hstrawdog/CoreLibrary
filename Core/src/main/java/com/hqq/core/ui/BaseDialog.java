@@ -2,17 +2,21 @@ package com.hqq.core.ui;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.hqq.core.R;
 import com.hqq.core.annotation.ToolBarMode;
@@ -74,7 +78,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             mLoadingView = new LoadingView(getActivity());
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-            mRootView = mRootViewBuild.buildContentView(getViewId(), getRootView());
+            mRootView = mRootViewBuild.buildContentView(R.layout.dialog_new, null);
             mUnkinder = ButterKnife.bind(this, mRootView);
             LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         }
@@ -88,6 +92,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         if (!mLoaded && mRootView != null) {
             if (mStatusBarMode == ToolBarMode.LIGHT_MODE) {
                 StatusBarManager.setStatusBarModel(getDialog().getWindow(), true);
+//                StatusBarManager.setStatusBarModel(getActivity().getWindow(), true);
             } else if (mStatusBarMode == ToolBarMode.DARK_MODE) {
                 StatusBarManager.setStatusBarModel(getDialog().getWindow(), false);
             } else {
@@ -95,11 +100,29 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
                 StatusBarManager.transparencyBar(getDialog().getWindow());
             }
             mLoaded = true;
-            initView();
+
+            initContentView();
+
+
             LogUtils.e(mRootView.getWidth());
 
-
         }
+    }
+
+    private void initContentView() {
+        LinearLayout linearLayout = mRootView.findViewById(R.id.ll_rootView);
+        View view = LayoutInflater.from(getContext()).inflate(getViewId(), linearLayout, false);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+        params.height = getHeight();
+        params.weight = getWeight();
+        linearLayout.addView(view, params);
+        params.gravity = getGravity();
+
+        view.setOnClickListener(view1 -> {
+        });
+        linearLayout.setOnClickListener(view2 -> dismiss());
+
+        initView();
     }
 
     @Override
@@ -107,7 +130,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         super.onActivityCreated(savedInstanceState);
         LogUtils.e(mRootView.getMeasuredWidth());
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getBackground()));
-        getDialog().getWindow().setLayout(getWeight(), getHeight());
+        getDialog().getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setGravity(getGravity());
     }
 
