@@ -91,6 +91,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x100"
+        android:src="@drawable/ic_method_draw_image" />
 
 </LinearLayout>

@@ -2,18 +2,25 @@ package com.hqq.core.toolbar;
 
 import android.app.Activity;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hqq.core.R;
+import com.hqq.core.utils.ResourcesUtils;
+import com.hqq.core.widget.FilterImageView;
 
 /**
  * @Author : huangqiqiang
@@ -91,6 +98,12 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         }
     }
 
+
+    /**
+     * 设置背景的透明度
+     *
+     * @param ahpla
+     */
     public void initScrollNoImage(float ahpla) {
         if (ahpla > 1) {
             ahpla = 1;
@@ -157,95 +170,6 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         return mRootView.findViewById(R.id.tv_bar_title);
     }
 
-    /**
-     * 获取右边TextView
-     *
-     * @return TextView
-     */
-    public TextView getRightTextView() {
-        return mRootView.findViewById(R.id.tv_bar_right);
-    }
-
-    /**
-     * 二级 text  获取
-     *
-     * @return
-     */
-    public TextView getRightSecondaryTextView() {
-        return mRootView.findViewById(R.id.tv_menu_right_secondary);
-    }
-
-    /**
-     * 二级 text 设置
-     *
-     * @param text
-     * @param clickListener
-     */
-    public void setRightSecondaryTextView(String text, View.OnClickListener clickListener) {
-        getRightSecondaryTextView().setText(text);
-        getRightSecondaryTextView().setVisibility(View.VISIBLE);
-        getRightSecondaryTextView().setOnClickListener(clickListener);
-    }
-
-    /**
-     * 设置右边 文字 点击事件
-     *
-     * @param text            text
-     * @param onClickListener onClickListener
-     */
-    public void setRightTextView(String text, View.OnClickListener onClickListener) {
-        TextView textView = getRightTextView();
-        textView.setText(text);
-        textView.setVisibility(View.VISIBLE);
-        textView.setOnClickListener(onClickListener);
-
-    }
-
-    /**
-     * 设置右边　文字
-     *
-     * @param text text
-     */
-    public void setRightTextView(String text) {
-        TextView textView = getRightTextView();
-        textView.setText(text);
-        textView.setVisibility(View.VISIBLE);
-    }
-
-    /**
-     * 获取右边View
-     *
-     * @return ImageView
-     */
-    public ImageView getRightImageView() {
-        if (mRootView != null) {
-            return mRootView.findViewById(R.id.iv_bar_right);
-        } else {
-            return new ImageView(mActivity.get());
-        }
-    }
-
-    /**
-     * 设置  右边图标
-     *
-     * @param ic ic
-     */
-    public void setRightBackgroundResource(@DrawableRes int ic) {
-        ImageView imageView = getRightImageView();
-        imageView.setVisibility(View.VISIBLE);
-        imageView.setImageResource(ic);
-    }
-
-    /**
-     * 右边点击事件
-     *
-     * @param onClickListener onClickListener
-     */
-    public void setRightClickListener(View.OnClickListener onClickListener) {
-        getRightTextView().setOnClickListener(onClickListener);
-        getRightImageView().setOnClickListener(onClickListener);
-
-    }
 
     /**
      * 设置背景颜色 需要在view创建完成
@@ -282,19 +206,6 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         return this;
     }
 
-    /**
-     * 设置  右边图标  以及点击事件
-     *
-     * @param ic              ic
-     * @param onClickListener onClickListener
-     */
-    public BaseDefToolBarImpl setRightBackgroundResource(int ic, View.OnClickListener onClickListener) {
-        ImageView imageView = getRightImageView();
-        imageView.setVisibility(View.VISIBLE);
-        imageView.setImageResource(ic);
-        imageView.setOnClickListener(onClickListener);
-        return this;
-    }
 
     /**
      * 设置 左边图片
@@ -306,5 +217,111 @@ public class BaseDefToolBarImpl extends BaseToolBar {
         getLeftView().setImageResource(id);
         return this;
     }
+
+    /**
+     * 添加View
+     *
+     * @param view
+     */
+    public void addRightView(View view) {
+        ((LinearLayout) mRootView.findViewById(R.id.ll_right)).addView(view);
+    }
+
+    //region 添加右边文字
+
+    /**
+     * 添加文字
+     *
+     * @param title
+     * @param clickListener
+     */
+    public void addRightTextView(String title, View.OnClickListener clickListener) {
+        addRightTextView(title, R.color.color_333, clickListener);
+    }
+
+    /**
+     * @param title
+     * @param color
+     * @param clickListener
+     */
+    public void addRightTextView(String title, @ColorRes int color, View.OnClickListener clickListener) {
+        addRightTextView(title, R.color.color_333, R.dimen.x28, clickListener);
+
+    }
+
+    /**
+     * @param title
+     * @param color
+     * @param size
+     * @param clickListener
+     */
+    public void addRightTextView(String title, @ColorRes int color, @DimenRes int size, View.OnClickListener clickListener) {
+        addRightView(newTextView(title, color, size, clickListener));
+    }
+
+    /**
+     * 默认文本
+     *
+     * @param title
+     * @param color
+     * @param size
+     * @param clickListener
+     * @return
+     */
+    private View newTextView(String title, @ColorRes int color, @DimenRes int size, View.OnClickListener clickListener) {
+        TextView textView = new TextView(mRootView.getContext());
+        textView.setText(title);
+        textView.setPadding(0, 0, (int) ResourcesUtils.getDimen(R.dimen.x20), 0);
+        textView.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        textView.setLayoutParams(params);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ResourcesUtils.getDimen(size));
+        textView.setOnClickListener(clickListener);
+        textView.setTextColor(ResourcesUtils.getColor(color));
+        return textView;
+    }
+
+
+    //endregion
+
+
+    /**
+     * 添加图片
+     *
+     * @param icImage
+     * @param listener
+     */
+    public void addRightImageView(@DrawableRes int icImage, View.OnClickListener listener) {
+        addRightImageView(icImage, 0, 0, (int) ResourcesUtils.getDimen(R.dimen.x20), 0, listener);
+    }
+
+    public void addRightImageView(@DrawableRes int icImage, int left, int top, int right, int bottom, View.OnClickListener listener) {
+        addRightView(newImageView(icImage, left, top, right, bottom, listener));
+    }
+
+    /**
+     * 默认的图片
+     *
+     * @param icImage
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @param listener
+     * @return
+     */
+    private View newImageView(@DrawableRes int icImage, int left, int top, int right, int bottom, View.OnClickListener listener) {
+        FilterImageView imageView = new FilterImageView(mRootView.getContext());
+        imageView.setAdjustViewBounds(true);
+        imageView.setImageResource(icImage);
+        imageView.setScaleType(ImageView.ScaleType.CENTER);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        imageView.setLayoutParams(params);
+        imageView.setPadding(left, top, right, bottom);
+        imageView.setOnClickListener(listener);
+        return imageView;
+    }
+
+
 }
 

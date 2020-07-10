@@ -1,6 +1,9 @@
 package com.hqq.example.ui.bar;
 
 import androidx.core.content.ContextCompat;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 
 import com.hqq.core.ui.BaseActivity;
@@ -19,6 +22,10 @@ import butterknife.OnClick;
  * @Email :  qiqiang213@gmail.com
  */
 public class ToolBarActivity extends BaseActivity {
+    public static void open(Activity context) {
+        Intent starter = new Intent(context, ToolBarActivity.class);
+        context.startActivityForResult(starter, -1);
+    }
 
     @Override
     public int getViewId() {
@@ -28,10 +35,37 @@ public class ToolBarActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        mRootViewBuild.getDefToolBar().setRightTextView("分享", new View.OnClickListener() {
+//        mRootViewBuild.getDefToolBar().setRightTextView("分享", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ToastUtils.showToast(mActivity, "点击分享");
+//
+//            }
+//        });
+
+        mRootViewBuild.getDefToolBar().addRightTextView("分享", new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 ToastUtils.showToast(mActivity, "点击分享");
+            }
+        });
+        mRootViewBuild.getDefToolBar().addRightTextView("分享",R.color.color_333, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.showToast(mActivity, "点击分享");
+            }
+        });
+//        mRootViewBuild.getDefToolBar().addRightTextView("分享2", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ToastUtils.showToast(mActivity, "点击分享2");
+//
+//            }
+//        });
+        mRootViewBuild.getDefToolBar().addRightImageView(R.mipmap.ic_more, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.showToast(mActivity, "点击more");
 
             }
         });

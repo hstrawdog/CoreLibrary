@@ -86,7 +86,7 @@ public abstract class BaseToolBar implements IToolBar {
 
         if (mIsShowStatusBar) {
             initStatusBar(mActivity.get());
-            int mStatusBarHeight = ScreenUtils.getStatusBarHeight(activity);
+            int mStatusBarHeight = ScreenUtils.getStatusBarHeight4Resources(activity);
             linearLayout.addView(mStatusBar, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight));
         }
 

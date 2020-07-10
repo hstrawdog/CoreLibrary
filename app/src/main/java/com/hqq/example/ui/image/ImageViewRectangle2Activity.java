@@ -23,6 +23,5 @@ public class ImageViewRectangle2Activity extends BaseActivity {
 
      @Override
      public void initView() {
-
      }
  }
