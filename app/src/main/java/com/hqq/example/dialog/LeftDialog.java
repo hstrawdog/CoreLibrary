@@ -32,16 +32,6 @@ public class LeftDialog extends BaseDialog {
 
     }
     @Override
-    public int getWeight() {
-        return (int) ResourcesUtils.getDimen(getActivity(), R.dimen.x200);
-    }
-
-    @Override
-    public int getHeight() {
-        return WindowManager.LayoutParams.MATCH_PARENT;
-    }
-
-    @Override
     public int getGravity() {
         return Gravity.LEFT;
     }

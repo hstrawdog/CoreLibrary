@@ -23,23 +23,13 @@ public class FullDialog extends BaseDialog {
     }
 
     @Override
-    public int getHeight() {
-        return WindowManager.LayoutParams.MATCH_PARENT;
-    }
-
-    @Override
-    public int getWeight() {
-        return WindowManager.LayoutParams.MATCH_PARENT;
-    }
-
-    @Override
     public int getViewId() {
         return R.layout.dialog_full;
     }
 
     @Override
     public void initDefConfig() {
-        mStatusBarMode = ToolBarMode.LIGHT_MODE;
+
     }
 
     @Override

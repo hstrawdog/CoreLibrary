@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
 import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.listenner.DialogClickListener;
@@ -58,7 +59,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
      * 状态栏模式
      */
     @ToolBarMode
-    protected int mStatusBarMode;
+    protected int mStatusBarMode = CoreBuildConfig.getInstance().isStatusMode();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +80,8 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
             mRootView = mRootViewBuild.buildContentView(R.layout.dialog_new, null);
+            initContentView();
+
             mUnkinder = ButterKnife.bind(this, mRootView);
             LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         }
@@ -92,7 +95,6 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         if (!mLoaded && mRootView != null) {
             if (mStatusBarMode == ToolBarMode.LIGHT_MODE) {
                 StatusBarManager.setStatusBarModel(getDialog().getWindow(), true);
-//                StatusBarManager.setStatusBarModel(getActivity().getWindow(), true);
             } else if (mStatusBarMode == ToolBarMode.DARK_MODE) {
                 StatusBarManager.setStatusBarModel(getDialog().getWindow(), false);
             } else {
@@ -100,9 +102,6 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
                 StatusBarManager.transparencyBar(getDialog().getWindow());
             }
             mLoaded = true;
-
-            initContentView();
-
 
             LogUtils.e(mRootView.getWidth());
 
@@ -112,15 +111,13 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     private void initContentView() {
         LinearLayout linearLayout = mRootView.findViewById(R.id.ll_rootView);
         View view = LayoutInflater.from(getContext()).inflate(getViewId(), linearLayout, false);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-        params.height = getHeight();
-        params.weight = getWeight();
-        linearLayout.addView(view, params);
-        params.gravity = getGravity();
-
+        linearLayout.setGravity(getGravity());
+        linearLayout.addView(view);
         view.setOnClickListener(view1 -> {
         });
-        linearLayout.setOnClickListener(view2 -> dismiss());
+        if (isDismissBackground()) {
+            linearLayout.setOnClickListener(view2 -> dismiss());
+        }
 
         initView();
     }
@@ -165,10 +162,17 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         ft.commitAllowingStateLoss();
     }
 
+    /**
+     * 默认配置
+     */
     @Override
     public void initDefConfig() {
-
     }
+
+    public boolean isDismissBackground() {
+        return true;
+    }
+
 
     /**
      * @return 背景颜色

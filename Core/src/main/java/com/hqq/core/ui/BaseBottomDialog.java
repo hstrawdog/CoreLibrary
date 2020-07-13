@@ -101,7 +101,6 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         mRootView = null;
     }
 
-    @Override
     public int getHeight() {
         return CoordinatorLayout.LayoutParams.MATCH_PARENT;
     }

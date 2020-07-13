@@ -32,16 +32,6 @@ public class BottomDialog extends BaseDialog {
     }
 
     @Override
-    public int getWeight() {
-        return WindowManager.LayoutParams.MATCH_PARENT;
-    }
-
-    @Override
-    public int getHeight() {
-        return  WindowManager.LayoutParams.WRAP_CONTENT;
-    }
-
-    @Override
     public int getGravity() {
         return Gravity.BOTTOM;
     }

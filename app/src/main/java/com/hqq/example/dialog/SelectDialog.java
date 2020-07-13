@@ -1,13 +1,11 @@
 package com.hqq.example.dialog;
 
+import android.view.Gravity;
+
 import androidx.fragment.app.FragmentManager;
 
-import android.view.Gravity;
-import android.view.WindowManager;
-
-import com.hqq.example.R;
 import com.hqq.core.ui.BaseDialog;
-import com.hqq.core.utils.ResourcesUtils;
+import com.hqq.example.R;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -31,17 +29,6 @@ public class SelectDialog extends BaseDialog {
     @Override
     public void initView() {
 
-    }
-
-    @Override
-    public int getWeight() {
-        return (int) ResourcesUtils.getDimen(getActivity(), R.dimen.x560);
-    }
-
-
-    @Override
-    public int getHeight() {
-        return WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
     @Override
