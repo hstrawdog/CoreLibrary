@@ -5,7 +5,7 @@
     <data>
         <variable
             name="user"
-            type="com.hqq.example.ui.dagger.User" />
+            type="com.hqq.example.ui.jetpack.livedata.User" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

@@ -10,7 +10,7 @@ import androidx.databinding.ViewDataBinding;
 import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.BR;
 import com.hqq.example.R;
-import com.hqq.example.ui.dagger.User;
+import com.hqq.example.ui.jetpack.livedata.User;
 
 /**
  * @Author : huangqiqiang
@@ -42,11 +42,11 @@ public class DataBindingActivity extends BaseActivity {
     public void initView() {
 
         ViewDataBinding viewDataBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.item_data_binding, null, false);
-        ((LinearLayout)findViewById(R.id.ll_rootView)).addView(viewDataBinding.getRoot());
-        User user =new User();
+        ((LinearLayout) findViewById(R.id.ll_rootView)).addView(viewDataBinding.getRoot());
+        User user = new User();
         user.setName("1111");
         viewDataBinding.setLifecycleOwner(this);
-        viewDataBinding.setVariable(BR.user,user);
+        viewDataBinding.setVariable(BR.user, user);
     }
 
 
