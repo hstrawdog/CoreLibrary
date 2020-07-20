@@ -1,5 +1,7 @@
-package com.hqq.example.ui.data;
+package com.hqq.example.ui.jetpack.livedata;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
@@ -21,7 +23,14 @@ import butterknife.OnClick;
  * 主要冲突在于 自动添加 TabLayout
  * LiveData  change 需要在ui前台才会触发 并不能再后台执行
  */
-public class DataBindingActivity extends BaseActivity {
+public class LiveDateActivity extends BaseActivity {
+
+
+    public static void open(Activity context) {
+        Intent starter = new Intent(context, LiveDateActivity.class);
+        context.startActivityForResult(starter,-1);
+    }
+
 
     @BindView(R.id.textView2)
     TextView mTextView2;
@@ -38,7 +47,7 @@ public class DataBindingActivity extends BaseActivity {
             @Override
             public void onChanged(User user) {
                 LogUtils.e("onChanged        " + user.toString());
-                mTextView2.setText(user.getLevel());
+                mTextView2.setText(user.getName()+user.getLevel());
             }
         });
 

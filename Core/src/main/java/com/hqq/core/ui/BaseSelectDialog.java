@@ -4,6 +4,7 @@ import android.view.WindowManager;
 
 import com.hqq.core.R;
 
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.core.ui

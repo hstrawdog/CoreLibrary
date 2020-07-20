@@ -5,20 +5,14 @@ import android.view.KeyEvent;
 
 import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
-import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
-import com.hqq.example.ui.color.HSLActivity;
-import com.hqq.example.ui.customize.BezierActivity;
-import com.hqq.example.ui.customize.CurtainActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
-import com.hqq.example.ui.customize.SemicircularActivity;
-import com.hqq.example.ui.customize.TemplatesImageActivity;
-import com.hqq.example.ui.data.DataBindingActivity;
+import com.hqq.example.ui.jetpack.livedata.LiveDateActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
 import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.BaseInfoActivity;
@@ -26,12 +20,9 @@ import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.skin.SkinAActivity;
-import com.hqq.example.ui.toast.ToastActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
 import com.hqq.example.ui.view.BlackAndWhiteActivity;
-import com.hqq.example.ui.view.EditTextActivity;
 import com.hqq.example.ui.view.SvgActivity;
-import com.hqq.example.ui.view.TextViewActivity;
 import com.hqq.example.ui.web.WebActivity;
 
 /**
@@ -72,7 +63,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         mAdapter.addData(new MainBean("网页测试", WebActivity.class));
         mAdapter.addData(new MainBean("文件路径信息", FilePathActivity.class));
         mAdapter.addData(new MainBean("适配相关", AdaptationIndexActivity.class));
-        mAdapter.addData(new MainBean("DateBinding测试", DataBindingActivity.class));
+        mAdapter.addData(new MainBean("DateBinding测试", LiveDateActivity.class));
         mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
         mAdapter.addData(new MainBean("黑白化测试", BlackAndWhiteActivity.class));
         mAdapter.addData(new MainBean("换肤测试", SkinAActivity.class));
@@ -95,7 +86,8 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        BezierActivity.open(this);
 //        TemplatesImageActivity.open(this);
 //        SemicircularActivity.open(this);
-        TestDialogActivity.open(this);
+//        DaggerAActivity.open(this);
+        LiveDateActivity.open(this);
     }
 
 

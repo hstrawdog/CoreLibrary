@@ -10,6 +10,8 @@ import com.hqq.core.ui.BaseSelectDialog;
 import com.hqq.core.ui.BaseViewBuilderHolder;
 import com.hqq.example.R;
 
+import javax.inject.Inject;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.example.dialog
@@ -36,8 +38,11 @@ public class SelectADialog extends BaseSelectDialog<BaseViewBuilderHolder> {
 
     }
 
-    class ViewBuilderHolderA extends BaseViewBuilderHolder {
 
+    class ViewBuilderHolderA extends BaseViewBuilderHolder {
+        public ViewBuilderHolderA() {
+
+        }
 
         @Override
         public int getViewId() {

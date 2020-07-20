@@ -16,11 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
+        <activity
+            android:name=".ui.jetpack.databinding.DataBindingActivity"
+            android:label="dataBinding测试" />
 
-        <activity android:name=".ui.customize.SemicircularActivity" />
+        <activity
+            android:name=".ui.customize.SemicircularActivity"
+            android:label="环形进度条" />
         <activity
             android:name=".ui.image.ImageViewRectangle2Activity"
             android:label="scaleType 测试" />
@@ -110,8 +112,8 @@
             android:name=".ui.launch.mode.LaunchModeAActivity"
             android:label="界面1" />
         <activity
-            android:name=".ui.data.DataBindingActivity"
-            android:label="dataBinding测试" />
+            android:name=".ui.jetpack.livedata.LiveDateActivity"
+            android:label="liveDate测试" />
         <activity
             android:name=".ui.web.WebActivity"
             android:label="网页测试" />

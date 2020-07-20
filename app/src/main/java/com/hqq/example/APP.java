@@ -2,6 +2,10 @@ package com.hqq.example;
 
 import android.app.Application;
 
+
+
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinAppCompatViewInflater;
 import skin.support.app.SkinCardViewInflater;
@@ -24,7 +28,6 @@ public class APP extends Application {
         //  CoreBuildConfig.getInstance().init(this, true);
         //.setDefItoobar(BaseDefToolBarImpl.class);
 
-
         SkinCompatManager.withoutActivity(this)
                 // 基础控件换肤初始化
                 .addInflater(new SkinAppCompatViewInflater())
@@ -40,4 +43,6 @@ public class APP extends Application {
                 .setSkinWindowBackgroundEnable(false)
                 .loadSkin();
     }
+
+
 }

@@ -1,11 +1,18 @@
 package com.hqq.example.dialog;
 
-import androidx.fragment.app.FragmentManager;
 import android.view.Gravity;
-import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.hqq.example.R;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.hqq.core.ui.BaseDialog;
+import com.hqq.example.R;
+
+import butterknife.BindView;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -16,6 +23,8 @@ import com.hqq.core.ui.BaseDialog;
  * @date: 2019-07-03 22:22
  */
 public class BottomDialog extends BaseDialog {
+
+
     public static void showDialog(FragmentManager fragmentManager) {
         BottomDialog fragment = new BottomDialog();
         fragment.show(fragmentManager);
@@ -28,7 +37,6 @@ public class BottomDialog extends BaseDialog {
 
     @Override
     public void initView() {
-
     }
 
     @Override

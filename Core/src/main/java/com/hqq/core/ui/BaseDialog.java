@@ -81,8 +81,9 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             initDefConfig();
             mRootView = mRootViewBuild.buildContentView(R.layout.dialog_new, null);
             initContentView();
-
             mUnkinder = ButterKnife.bind(this, mRootView);
+            initView();
+
             LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         }
 
@@ -119,7 +120,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             linearLayout.setOnClickListener(view2 -> dismiss());
         }
 
-        initView();
+
     }
 
     @Override

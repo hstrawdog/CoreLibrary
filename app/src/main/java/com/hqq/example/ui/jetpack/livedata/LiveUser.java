@@ -1,4 +1,4 @@
-package com.hqq.example.ui.data;
+package com.hqq.example.ui.jetpack.livedata;
 
 import android.content.Context;
 
