@@ -15,12 +15,12 @@ import com.hqq.core.ui.BaseFragment;
  */
 public class TabFragment extends BaseFragment {
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return 0;
     }
 
     @Override
-    public View getRootView() {
+    public View getLayoutView() {
         TextView textView = new TextView(mActivity);
         textView.setText("viewPage Fragment");
         return textView;

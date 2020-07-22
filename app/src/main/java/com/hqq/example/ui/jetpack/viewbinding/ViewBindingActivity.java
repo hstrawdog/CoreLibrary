@@ -20,7 +20,7 @@ public class ViewBindingActivity extends BaseActivity {
 //TODO  等待学习
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_view_binding;
     }
 

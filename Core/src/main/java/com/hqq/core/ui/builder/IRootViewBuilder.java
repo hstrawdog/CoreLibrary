@@ -26,6 +26,6 @@ public interface IRootViewBuilder {
      * @param rootView 自定义View
      * @return rootView
      */
-    View buildContentView(int layoutId, View rootView);
+    View buildContentView(ICreateRootViewBuilder rootViewBuilder);
 
 }

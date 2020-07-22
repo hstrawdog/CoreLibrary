@@ -24,14 +24,14 @@ public interface ICreateRootViewBuilder {
      *
      * @return
      */
-    int getViewId();
+    int getLayoutViewId();
 
     /**
      * 设置跟布局
      *
      * @return
      */
-    View getRootView();
+    View getLayoutView(ViewGroup parent);
 
     /**
      * 初始化默认配置 RootView

@@ -57,7 +57,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         if (mRootView == null) {
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-            mRootView = mRootViewBuild.buildContentView(getViewId(), getRootView());
+            mRootView = mRootViewBuild.buildContentView(this);
             mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
@@ -101,6 +101,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
         mRootView = null;
     }
 
+    @Override
     public int getHeight() {
         return CoordinatorLayout.LayoutParams.MATCH_PARENT;
     }
@@ -132,7 +133,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
 
 
     @Override
-    public View getRootView() {
+    public View getLayoutView(ViewGroup parent) {
         return null;
     }
 

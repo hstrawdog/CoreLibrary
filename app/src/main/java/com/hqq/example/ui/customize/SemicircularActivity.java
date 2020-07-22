@@ -26,7 +26,7 @@ public class SemicircularActivity extends BaseActivity {
 
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_semicircular;
     }
 

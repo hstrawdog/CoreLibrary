@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
     dataBinding {
         enabled = true
     }
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         applicationId "com.hqq.core"
         minSdkVersion rootProject.ext.android.minSdkVersion

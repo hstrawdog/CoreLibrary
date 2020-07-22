@@ -17,7 +17,7 @@ public class WebActivity extends BaseFrameLayoutActivity {
 
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_web;
     }
 

@@ -23,7 +23,7 @@ public class FullDialog extends BaseDialog {
     }
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.dialog_full;
     }
 

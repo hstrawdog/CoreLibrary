@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.jetpack.package1.Package1Activity"></activity>
+        <activity android:name=".ui.view.InflateTestActivity"></activity>
+        <activity android:name=".ui.jetpack.package1.Package1Activity" />
         <activity android:name=".ui.jetpack.viewbinding.ViewBindingActivity" />
         <activity
             android:name=".ui.jetpack.viewmodel.ViewModelActivity"

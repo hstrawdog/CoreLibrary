@@ -14,7 +14,7 @@ import com.hqq.core.ui.BaseActivity;
 public class LayoutTestActivity extends BaseActivity {
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_layout_test;
     }
 

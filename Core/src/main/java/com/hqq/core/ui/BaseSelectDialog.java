@@ -17,7 +17,7 @@ public abstract class BaseSelectDialog<T extends BaseViewBuilderHolder> extends 
     protected T mViewHolder;
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.dialog_base_select_dialog;
     }
 

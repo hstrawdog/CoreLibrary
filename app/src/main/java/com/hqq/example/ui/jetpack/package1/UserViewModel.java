@@ -18,6 +18,12 @@ import com.hqq.example.ui.jetpack.livedata.User;
 public class UserViewModel extends ViewModel {
     MutableLiveData<User> mLiveData = new MutableLiveData<>();
 
+
+    public UserViewModel() {
+        getUser();
+    }
+
+
     public UserViewModel setLiveData(User user) {
         mLiveData.setValue(user);
         return this;

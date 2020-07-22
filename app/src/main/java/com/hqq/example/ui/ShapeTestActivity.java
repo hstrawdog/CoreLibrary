@@ -25,7 +25,7 @@ public class ShapeTestActivity extends BaseActivity {
     TextView mTextView3;
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_shape_test;
     }
 

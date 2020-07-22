@@ -69,8 +69,8 @@ public class RootViewBuilder implements IRootViewBuilder {
     }
 
     @Override
-    public View buildContentView(int layoutId, View rootView) {
-        mRootView = mCreateRootViewModel.initContentView(layoutId, rootView);
+    public View buildContentView(ICreateRootViewBuilder  iActivityBuilder) {
+        mRootView = mCreateRootViewModel.createRootView(iActivityBuilder);
         return mRootView;
     }
 

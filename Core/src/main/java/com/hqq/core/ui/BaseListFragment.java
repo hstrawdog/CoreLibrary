@@ -34,13 +34,13 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     protected BaseListModel mBaseListModel;
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return 0;
     }
 
     @Override
-    public View getRootView() {
-        if (getViewId() <= 0) {
+    public View getLayoutView() {
+        if (getLayoutViewId() <= 0) {
             return BaseListModel.createRecycleView(getContext());
         } else {
             return null;

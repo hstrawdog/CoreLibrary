@@ -30,7 +30,7 @@ public class DataBindingActivity extends BaseActivity {
 
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_dagger_a;
     }
 

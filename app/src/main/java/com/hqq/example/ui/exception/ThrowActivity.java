@@ -26,7 +26,7 @@ public class ThrowActivity extends BaseActivity {
     Button mButton11;
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_throw;
     }
 

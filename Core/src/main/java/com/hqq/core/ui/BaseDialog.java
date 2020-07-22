@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -79,7 +78,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             mLoadingView = new LoadingView(getActivity());
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-            mRootView = mRootViewBuild.buildContentView(R.layout.dialog_new, null);
+            mRootView = mRootViewBuild.buildContentView(R.layout.dialog_new);
             initContentView();
             mUnkinder = ButterKnife.bind(this, mRootView);
             initView();
@@ -111,7 +110,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
 
     private void initContentView() {
         LinearLayout linearLayout = mRootView.findViewById(R.id.ll_rootView);
-        View view = LayoutInflater.from(getContext()).inflate(getViewId(), linearLayout, false);
+        View view = LayoutInflater.from(getContext()).inflate(getLayoutViewId(), linearLayout, false);
         linearLayout.setGravity(getGravity());
         linearLayout.addView(view);
         view.setOnClickListener(view1 -> {
@@ -147,7 +146,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     }
 
     @Override
-    public View getRootView() {
+    public View getLayoutView(ViewGroup parent) {
         return null;
     }
 

@@ -33,7 +33,7 @@ public class ViewModelActivity extends BaseActivity {
 
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_view_model;
     }
 

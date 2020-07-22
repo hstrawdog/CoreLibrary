@@ -16,6 +16,7 @@ import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.IToolBar;
 import com.hqq.core.toolbar.IToolBarBuilder;
+import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
@@ -100,39 +101,16 @@ public class CreateRootViewModel {
     }
 
     /**
-     * 构建布局
-     *
-     * @param layoutId xml id
-     * @param rootView 布局View
-     * @return
-     */
-    public View initContentView(int layoutId, View rootView) {
-        //  构建  ContentView 默认 LineLayout 构建   支持  xml /view
-        // 优先构建xml
-        if (layoutId != 0) {
-            return createRootView(null, layoutId);
-        } else {
-            // 通过View 去构建
-            if (rootView != null) {
-                return createRootView(rootView, 0);
-            }
-        }
-        LogUtils.e(new Exception("no fount layoutId and rootView  , must init RootView"));
-        return null;
-    }
-
-    /**
      * 构建跟布局
      *
-     * @param rootView 布局View
-     * @param vid      布局id
-     * @return 构建后的View
+     * @param iActivityBuilder
+     * @return构建后的View
      */
-    public View createRootView(View rootView, int vid) {
+    public View createRootView(ICreateRootViewBuilder iActivityBuilder) {
         if (mLayoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
-            return createLayoutView(rootView, vid);
+            return createLayoutView(iActivityBuilder);
         } else if (mLayoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
-            return createFrameLayoutView(rootView, vid);
+            return createFrameLayoutView(iActivityBuilder);
         } else {
             return null;
         }
@@ -141,19 +119,15 @@ public class CreateRootViewModel {
     /**
      * 正常 情况下只有 帧布局 才需要 有渐变
      *
-     * @param rootView
-     * @param vid
+     * @param iActivityBuilder
      * @return
      */
-    protected View createFrameLayoutView(View rootView, int vid) {
+    protected View createFrameLayoutView(ICreateRootViewBuilder iActivityBuilder) {
         FrameLayout frameLayout = new FrameLayout(mActivity.get());
         frameLayout.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        View view;
-        if (vid > 0) {
-            view = mActivity.get().getLayoutInflater().inflate(vid, frameLayout, false);
-        } else {
-            view = rootView;
-        }
+
+        View view = getLayoutView(iActivityBuilder, frameLayout);
+
         frameLayout.setBackgroundResource(mBgColor);
         frameLayout.addView(view);
         createToolBar(frameLayout);
@@ -163,25 +137,33 @@ public class CreateRootViewModel {
     /**
      * 线性 布局
      *
-     * @param rootView
-     * @param vid
+     * @param iActivityBuilder
      * @return
      */
-    protected View createLayoutView(View rootView, int vid) {
+    protected View createLayoutView(ICreateRootViewBuilder iActivityBuilder) {
         LinearLayout layout = new LinearLayout(mActivity.get());
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setOverScrollMode(View.OVER_SCROLL_NEVER);
         createToolBar(layout);
-        View view;
-        if (vid > 0) {
-            view = mActivity.get().getLayoutInflater().inflate(vid, layout, false);
-        } else {
-            view = rootView;
-        }
+        View view = getLayoutView(iActivityBuilder, layout);
 
         layout.setBackgroundResource(mBgColor);
         layout.addView(view);
         return layout;
+    }
+
+    private View getLayoutView(ICreateRootViewBuilder iActivityBuilder, ViewGroup layout) {
+        View view;
+        if (iActivityBuilder.getLayoutViewId() > 0) {
+            view = mActivity.get().getLayoutInflater().inflate(iActivityBuilder.getLayoutViewId(), layout, false);
+        } else {
+            view = iActivityBuilder.getLayoutView(layout);
+            if (view == null) {
+                LogUtils.e(new Exception("no fount layoutId and rootView  , must init RootView"));
+                view = new View(mActivity.get());
+            }
+        }
+        return view;
     }
 
     /**

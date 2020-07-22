@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
 
         mRootViewBuild = new RootViewBuilder(this, true, true);
         initDefConfig();
-        setContentView(mRootViewBuild.buildContentView(getViewId(), getRootView()));
+        setContentView(mRootViewBuild.buildContentView(this));
         //绑定初始化ButterKnife
         ButterKnife.bind(this);
         initView();
@@ -110,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
      * @return
      */
     @Override
-    public View getRootView() {
+    public View getLayoutView(ViewGroup parent) {
         return null;
     }
 

@@ -18,7 +18,7 @@ import butterknife.OnClick;
 public class LaunchActivity extends BaseActivity {
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_launch_mode_a;
     }
 

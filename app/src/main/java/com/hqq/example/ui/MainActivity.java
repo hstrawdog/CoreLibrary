@@ -25,6 +25,7 @@ import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.skin.SkinAActivity;
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity;
 import com.hqq.example.ui.view.BlackAndWhiteActivity;
+import com.hqq.example.ui.view.InflateTestActivity;
 import com.hqq.example.ui.view.SvgActivity;
 import com.hqq.example.ui.web.WebActivity;
 
@@ -93,7 +94,8 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        LiveDateActivity.open(this);
 //        ViewModelActivity.open(this);
 //        DataBindingActivity.open(this);
-        Package1Activity.open(this);
+//        Package1Activity.open(this);
+        InflateTestActivity.open(this);
     }
 
 

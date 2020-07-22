@@ -22,7 +22,7 @@ public class IFragmentActivityBuilder extends BaseActivity {
     ViewPager mVpPage;
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_ifragment;
     }
 

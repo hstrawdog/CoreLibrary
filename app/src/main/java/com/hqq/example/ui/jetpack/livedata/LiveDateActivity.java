@@ -35,7 +35,7 @@ public class LiveDateActivity extends BaseActivity {
     TextView mTextView2;
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_data_binding;
     }
 

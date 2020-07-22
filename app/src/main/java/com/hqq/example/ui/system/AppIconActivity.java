@@ -25,7 +25,7 @@ public class AppIconActivity extends BaseActivity {
     }
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_app_icon;
     }
 

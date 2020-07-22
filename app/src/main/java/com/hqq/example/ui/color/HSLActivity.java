@@ -32,7 +32,7 @@ public class HSLActivity extends BaseActivity {
 
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_h_s_l;
     }
 

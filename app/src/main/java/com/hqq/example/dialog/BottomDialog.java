@@ -31,7 +31,7 @@ public class BottomDialog extends BaseDialog {
     }
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.dialog_bottom_sheet;
     }
 

@@ -32,7 +32,7 @@ public class TabLayoutActivity extends BaseActivity {
     TabLayout mTbTablayout4;
 
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_tab_layout;
     }
 

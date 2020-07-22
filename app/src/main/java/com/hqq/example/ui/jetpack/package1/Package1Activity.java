@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.vm.BaseActivity;
 import com.hqq.example.BR;
 import com.hqq.example.R;
 
@@ -25,27 +25,20 @@ public class Package1Activity extends BaseActivity {
         context.startActivityForResult(starter, -1);
     }
 
-    @Override
-    public int getViewId() {
-        return 0;
-    }
-
     ViewDataBinding mBinding;
-    UserViewModel mUserViewModel;
 
     @Override
-    public View getRootView() {
-        mBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.activity_package1, null, false);
-        mUserViewModel = new UserViewModel();
-        mBinding.setVariable(BR.userViewModel, mUserViewModel);
-        mBinding.setLifecycleOwner(this);
-
-        return mBinding.getRoot();
+    protected void addViewModel() {
+        mBinding.setVariable(BR.userViewModel, new UserViewModel());
     }
 
     @Override
-    public void initView() {
-        mUserViewModel.getUser();
+    protected int getLayoutId() {
+        return R.layout.activity_package1;
+    }
+
+    @Override
+    protected void initViews() {
 
     }
 }

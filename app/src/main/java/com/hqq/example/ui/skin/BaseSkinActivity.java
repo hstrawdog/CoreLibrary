@@ -21,7 +21,7 @@ import skin.support.SkinCompatManager;
  */
 public abstract class BaseSkinActivity extends BaseActivity {
     @Override
-    public int getViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_skin_base;
     }
 
