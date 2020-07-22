@@ -39,7 +39,7 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseF
     }
 
     @Override
-    public View getLayoutView() {
+    public View getLayoutView(ViewGroup group) {
         if (getLayoutViewId() <= 0) {
             return BaseListModel.createRecycleView(getContext());
         } else {

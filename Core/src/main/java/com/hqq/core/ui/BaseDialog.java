@@ -2,6 +2,12 @@ package com.hqq.core.ui;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,13 +15,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
@@ -78,7 +77,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             mLoadingView = new LoadingView(getActivity());
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
-            mRootView = mRootViewBuild.buildContentView(R.layout.dialog_new);
+            mRootView = mRootViewBuild.buildContentView(this);
             initContentView();
             mUnkinder = ButterKnife.bind(this, mRootView);
             initView();
@@ -110,7 +109,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
 
     private void initContentView() {
         LinearLayout linearLayout = mRootView.findViewById(R.id.ll_rootView);
-        View view = LayoutInflater.from(getContext()).inflate(getLayoutViewId(), linearLayout, false);
+        View view = LayoutInflater.from(getContext()).inflate(getViewId(), linearLayout, false);
         linearLayout.setGravity(getGravity());
         linearLayout.addView(view);
         view.setOnClickListener(view1 -> {
@@ -150,6 +149,17 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         return null;
     }
 
+    protected abstract int getViewId();
+
+    /**
+     * 禁止子类重写
+     *
+     * @return
+     */
+    @Override
+    public final int getLayoutViewId() {
+        return R.layout.dialog_new;
+    }
 
     @Override
     public void show(FragmentManager manager) {

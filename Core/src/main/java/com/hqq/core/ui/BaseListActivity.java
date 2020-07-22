@@ -48,7 +48,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseA
      * @return
      */
     @Override
-    public View getLayoutView() {
+    public View getLayoutView(ViewGroup group) {
         if (getLayoutViewId() <= 0) {
             return BaseListModel.createRecycleView(this);
         } else {

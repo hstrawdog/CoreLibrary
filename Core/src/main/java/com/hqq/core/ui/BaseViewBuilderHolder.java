@@ -69,7 +69,7 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
     }
 
     @Override
-    public View getLayoutView() {
+    public View getLayoutView(ViewGroup viewGroup) {
         return null;
     }
 

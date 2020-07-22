@@ -1,6 +1,7 @@
 package com.hqq.example.ui.tab.layout;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hqq.core.ui.BaseFragment;
@@ -20,7 +21,7 @@ public class TabFragment extends BaseFragment {
     }
 
     @Override
-    public View getLayoutView() {
+    public View getLayoutView(ViewGroup group) {
         TextView textView = new TextView(mActivity);
         textView.setText("viewPage Fragment");
         return textView;
