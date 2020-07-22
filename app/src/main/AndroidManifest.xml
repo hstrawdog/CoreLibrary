@@ -16,10 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.jetpack.package1.Package1Activity"></activity>
+        <activity android:name=".ui.jetpack.viewbinding.ViewBindingActivity" />
+        <activity
+            android:name=".ui.jetpack.viewmodel.ViewModelActivity"
+            android:label="ViewModel例子" />
         <activity
             android:name=".ui.jetpack.databinding.DataBindingActivity"
             android:label="dataBinding测试" />
-
         <activity
             android:name=".ui.customize.SemicircularActivity"
             android:label="环形进度条" />

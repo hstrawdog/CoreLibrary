@@ -1,5 +1,10 @@
 package com.hqq.example.ui.jetpack.livedata;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
+import com.hqq.example.BR;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.core.app.ui.databing
@@ -8,31 +13,52 @@ package com.hqq.example.ui.jetpack.livedata;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class User {
+public class User  extends BaseObservable  {
     private String name;
     private int score;
     private int level;
     private int avatar;
 
-    public String getName() { return name; }
+    @Bindable
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
 
-    public int getScore() { return score; }
+    public void setName(String name) {
+        this.name = name;
 
-    public void setScore(int score) { this.score = score; }
+        notifyPropertyChanged(BR.name);
+    }
 
-    public int getLevel() { return level; }
+    public int getScore() {
+        return score;
+    }
 
-    public int getAvatar() { return avatar; }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-    public void setAvatar(int avatar) { this.avatar = avatar; }
+    public int getLevel() {
+        return level;
+    }
 
-    public void setLevel(int level) { this.level = level; }
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
+    }
+
+    public User setLevel(int level) {
+        this.level = level;
+        return this;
+    }
 
     public static User newInstance() {
         User user = new User();
-        user.setName("王大锤:" + (int)(Math.random() * 10));
+        user.setName("王大锤:" + (int) (Math.random() * 10));
         user.setScore((int) (Math.random() * 999));
         user.setLevel((int) (Math.random() * 77));
         return user;

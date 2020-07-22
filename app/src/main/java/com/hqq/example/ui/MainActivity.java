@@ -12,11 +12,14 @@ import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
+import com.hqq.example.ui.jetpack.databinding.DataBindingActivity;
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
 import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
+import com.hqq.example.ui.jetpack.package1.Package1Activity;
+import com.hqq.example.ui.jetpack.viewmodel.ViewModelActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.skin.SkinAActivity;
@@ -87,7 +90,10 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        TemplatesImageActivity.open(this);
 //        SemicircularActivity.open(this);
 //        DaggerAActivity.open(this);
-        LiveDateActivity.open(this);
+//        LiveDateActivity.open(this);
+//        ViewModelActivity.open(this);
+//        DataBindingActivity.open(this);
+        Package1Activity.open(this);
     }
 
 

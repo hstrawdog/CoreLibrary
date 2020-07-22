@@ -3,10 +3,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="user"
             type="com.hqq.example.ui.jetpack.livedata.User" />
+
+        <variable
+            name="dataBinding"
+            type="com.hqq.example.ui.jetpack.databinding.DataBanding" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,9 +20,31 @@
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@{user.name}" />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@color/color_main"
+            android:text="@={user.name}" />
+
+        <Button
+            android:id="@+id/button38"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{dataBinding::onClickButton}"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button39"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->dataBinding.onClickButton4Text(&quot;点击了我&quot;)}"
+            android:text="Button" />
+
     </LinearLayout>
 </layout>

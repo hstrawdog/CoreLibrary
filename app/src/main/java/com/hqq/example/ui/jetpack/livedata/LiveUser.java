@@ -19,8 +19,6 @@ public class LiveUser extends MutableLiveData<User> {
     public LiveUser(Context context) {
 
     }
-
-
     public static LiveUser getInstance(Context context) {
         if (mLiveUser == null) {
             mLiveUser = new LiveUser(context);

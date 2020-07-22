@@ -18,16 +18,13 @@ import com.hqq.example.ui.jetpack.livedata.User;
  * @FileName :   DaggerAActivity
  * @Date : 2020/7/15 0015  下午 4:18
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : dataBinding  双向绑定 需要实现BaseObservable 进行观察 以及通知回调
+ * 注意 setVariable
  */
-
 public class DataBindingActivity extends BaseActivity {
-
-
     public static void open(Activity context) {
         Intent starter = new Intent(context, DataBindingActivity.class);
         context.startActivityForResult(starter, -1);
-
 
     }
 
@@ -44,9 +41,19 @@ public class DataBindingActivity extends BaseActivity {
         ViewDataBinding viewDataBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.item_data_binding, null, false);
         ((LinearLayout) findViewById(R.id.ll_rootView)).addView(viewDataBinding.getRoot());
         User user = new User();
-        user.setName("1111");
         viewDataBinding.setLifecycleOwner(this);
         viewDataBinding.setVariable(BR.user, user);
+        viewDataBinding.setVariable(BR.dataBinding, new DataBanding());
+        user.setName("1111");
+
+//        findViewById(R.id.button38).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LogUtils.e("-----------" + user.getName());
+//            }
+//        });
+
+
     }
 
 
