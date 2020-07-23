@@ -16,9 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.view.InflateTestActivity"></activity>
-        <activity android:name=".ui.jetpack.package1.Package1Activity" />
-        <activity android:name=".ui.jetpack.viewbinding.ViewBindingActivity" />
+        <activity
+            android:name=".ui.matrix.MatrixActivity"
+            android:label="矩阵相关" />
+        <activity
+            android:name=".ui.view.InflateTestActivity"
+            android:label="Inflate对比" />
+        <activity
+            android:name=".ui.jetpack.package1.Package1Activity"
+            android:label="jetpack套餐搭建mvvm" />
+        <activity
+            android:name=".ui.jetpack.viewbinding.ViewBindingActivity"
+            android:label="viewBinding测试" />
         <activity
             android:name=".ui.jetpack.viewmodel.ViewModelActivity"
             android:label="ViewModel例子" />

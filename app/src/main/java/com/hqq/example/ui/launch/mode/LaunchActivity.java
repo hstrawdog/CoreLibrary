@@ -13,7 +13,7 @@ import butterknife.OnClick;
  * @FileName :   LaunchActivity
  * @Date : 2019/10/25 0025  下午 5:20
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : 启动模式
  */
 public class LaunchActivity extends BaseActivity {
 

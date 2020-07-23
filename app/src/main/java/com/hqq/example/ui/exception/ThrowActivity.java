@@ -18,7 +18,7 @@ import butterknife.OnClick;
  * @FileName :   ThrowActivity
  * @Date : 2019/5/22 0022
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive :异常
  */
 public class ThrowActivity extends BaseActivity {
 

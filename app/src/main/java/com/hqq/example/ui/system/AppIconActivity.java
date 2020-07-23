@@ -16,7 +16,7 @@ import com.hqq.example.R;
  * @FileName :   AppIconActivity
  * @Date : 2020/4/9  下午2:04
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : 替换桌面图标
  */
 public class AppIconActivity extends BaseActivity {
     public static void open(Context context) {
