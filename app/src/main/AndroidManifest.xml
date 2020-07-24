@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.jetpack.dagger.DaggerActivity"></activity>
         <activity
             android:name=".ui.matrix.MatrixActivity"
             android:label="矩阵相关" />

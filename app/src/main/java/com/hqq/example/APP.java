@@ -20,6 +20,7 @@ import skin.support.design.app.SkinMaterialViewInflater;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
+
 public class APP extends Application {
     @Override
     public void onCreate() {

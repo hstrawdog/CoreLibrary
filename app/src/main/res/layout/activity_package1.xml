@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="userViewModel"
+            name="vm"
             type="com.hqq.example.ui.jetpack.package1.UserViewModel" />
 
     </data>
@@ -21,13 +21,13 @@
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{userViewModel.liveData.name+ userViewModel.liveData.level}" />
+            android:text="@{vm.liveData.name+ vm.liveData.level}" />
 
         <Button
             android:id="@+id/button40"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{userViewModel::update}"
+            android:onClick="@{vm::update}"
             android:text="Button" />
 
     </LinearLayout>

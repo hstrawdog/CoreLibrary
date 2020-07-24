@@ -1,15 +1,16 @@
 package com.hqq.example.ui.jetpack.package1;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
+
+import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.hqq.core.ui.vm.BaseActivity;
 import com.hqq.example.BR;
 import com.hqq.example.R;
+
+import java.lang.reflect.ParameterizedType;
 
 /**
  * @Author : huangqiqiang
@@ -29,7 +30,7 @@ public class Package1Activity extends BaseActivity {
 
     @Override
     protected void addViewModel() {
-        mBinding.setVariable(BR.userViewModel, new UserViewModel());
+        mBinding.setVariable(BR.vm, new ViewModelProvider(this).get(UserViewModel.class));
     }
 
     @Override

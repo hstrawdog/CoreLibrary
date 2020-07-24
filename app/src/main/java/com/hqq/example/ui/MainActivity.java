@@ -19,6 +19,7 @@ import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.jetpack.package1.Package1Activity;
+import com.hqq.example.ui.jetpack.viewbinding.ViewBindingActivity;
 import com.hqq.example.ui.jetpack.viewmodel.ViewModelActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.matrix.MatrixActivity;
@@ -95,9 +96,11 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        LiveDateActivity.open(this);
 //        ViewModelActivity.open(this);
 //        DataBindingActivity.open(this);
-        Package1Activity.open(this);
+//        Package1Activity.open(this);
 //       InflateTestActivity.open(this);
 //        MatrixActivity.open(this);
+
+        ViewBindingActivity.open(this);
     }
 
 

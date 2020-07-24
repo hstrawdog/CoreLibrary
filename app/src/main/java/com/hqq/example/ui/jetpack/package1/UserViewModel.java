@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.hqq.example.ui.jetpack.livedata.User;
 
+import javax.inject.Inject;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.example.ui.jetpack.package1
@@ -18,6 +20,7 @@ import com.hqq.example.ui.jetpack.livedata.User;
 public class UserViewModel extends ViewModel {
     MutableLiveData<User> mLiveData = new MutableLiveData<>();
 
+    MutableLiveData<String> mString;
 
     public UserViewModel() {
         getUser();
