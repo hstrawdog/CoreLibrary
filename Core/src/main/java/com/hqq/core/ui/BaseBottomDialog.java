@@ -21,8 +21,6 @@ import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @Author : huangqiqiang
@@ -37,7 +35,6 @@ import butterknife.Unbinder;
 public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootViewBuilder.IBottomDialogFragmentBuilder {
 
     protected View mRootView = null;
-    Unbinder mUnkinder;
     boolean mLoaded = false;
     protected BottomSheetBehavior<FrameLayout> behavior;
     /**
@@ -58,7 +55,6 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
             mRootViewBuild = new RootViewBuilder(this);
             initDefConfig();
             mRootView = mRootViewBuild.buildContentView(this);
-            mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
         return mRootView;
@@ -97,7 +93,6 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mUnkinder.unbind();
         mRootView = null;
     }
 

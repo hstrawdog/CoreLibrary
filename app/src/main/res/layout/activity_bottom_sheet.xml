@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.hqq.app.ui.activity.dialog.BottomSheetActivity">
+    tools:context=".ui.dialog.BottomSheetActivity">
 
     <Button
         android:id="@+id/button9"
+        android:onClick="onViewClicked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="无折叠效果"
@@ -16,6 +17,7 @@
         tools:layout_editor_absoluteY="38dp" />
      <Button
         android:id="@+id/button10"
+         android:onClick="button10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="带叠效果"

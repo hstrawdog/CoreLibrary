@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.core.graphics.ColorUtils;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
@@ -23,7 +23,7 @@ import java.util.Arrays;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class HSLActivity extends BaseActivity {
+public class HSLActivity extends BaseCoreActivity {
 
     public static void open(Context context) {
         Intent starter = new Intent(context, HSLActivity.class);

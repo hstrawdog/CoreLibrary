@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
 /**
@@ -18,7 +18,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class ToastActivity extends BaseActivity {
+public class ToastActivity extends BaseCoreActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, ToastActivity.class);

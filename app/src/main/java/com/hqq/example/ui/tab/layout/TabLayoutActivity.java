@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.hqq.core.adapter.BaseFragmentAdapter;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
 import butterknife.BindView;
@@ -19,7 +19,7 @@ import butterknife.BindView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class TabLayoutActivity extends BaseActivity {
+public class TabLayoutActivity extends BaseCoreActivity {
     @BindView(R.id.tb_tablayout1)
     TabLayout mTbTablayout1;
     @BindView(R.id.vp_page)

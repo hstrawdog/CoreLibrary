@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.app.ui.activity.PermissionActivity">
+    tools:context=".ui.adaptation.PermissionActivity">
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onMButton7Clicked"
         android:text="摄像头"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="40dp" />
@@ -19,6 +20,7 @@
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onMButton8Clicked"
         android:text="读写"
         tools:layout_editor_absoluteX="263dp"
         tools:layout_editor_absoluteY="38dp" />

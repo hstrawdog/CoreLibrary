@@ -1,6 +1,6 @@
 package com.hqq.example.ui.jetpack.dagger;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
  /**
   * @Author : huangqiqiang
@@ -10,7 +10,7 @@ import com.hqq.example.R;
   * @Email :  qiqiang213@gmail.com
   * @Descrive :
   */
-public class DaggerActivity extends BaseActivity {
+public class DaggerActivity extends BaseCoreActivity {
 
 
     @Override

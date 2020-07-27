@@ -2,12 +2,11 @@ package com.hqq.example.ui.info;
 
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.FilePathUtils;
 import com.hqq.core.utils.TextSpannableBuilder;
 import com.hqq.example.R;
 
-import butterknife.BindView;
 
 /**
  * @Author : huangqiqiang
@@ -17,10 +16,9 @@ import butterknife.BindView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class FilePathActivity extends BaseActivity {
+public class FilePathActivity extends BaseCoreActivity {
 
 
-    @BindView(R.id.tv_info)
     TextView mTvInfo;
 
     @Override
@@ -30,6 +28,7 @@ public class FilePathActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        mTvInfo=findViewById(R.id.tv_info);
         mTvInfo.setText(new TextSpannableBuilder()
                 .addTextPart("\nEnvironment.getDataDirectory()    ")
                 .addTextPart(FilePathUtils.getPath4Data())

@@ -1,18 +1,17 @@
 package com.hqq.example.ui.jetpack.viewbinding;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewbinding.ViewBinding;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.example.BR;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityViewBindingBinding;
+import com.hqq.example.ui.jetpack.package1.UserViewModel;
 
 /**
  * @Author : huangqiqiang
@@ -25,7 +24,7 @@ import com.hqq.example.databinding.ActivityViewBindingBinding;
  * 旧版官方文档 https://www.jb51.net/article/182708.htm
  * 错误解决 https://www.it610.com/article/1281824114532696064.htm
  */
-public class ViewBindingActivity extends BaseActivity {
+public class ViewBindingActivity extends BaseCoreActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, ViewBindingActivity.class);
@@ -37,20 +36,25 @@ public class ViewBindingActivity extends BaseActivity {
         return 0;
     }
 
-    ActivityViewBindingBinding binding;
+    ActivityViewBindingBinding mBinding;
 
     @Override
     public View getLayoutView(ViewGroup parent) {
         // ActivityViewBindingBinding 对应生成的 布局  驼峰命名
-        binding = ActivityViewBindingBinding.inflate(getLayoutInflater(), parent, false);
-        return binding.getRoot();
+        mBinding = ActivityViewBindingBinding.inflate(getLayoutInflater(), parent, false);
+
+
+        return mBinding.getRoot();
     }
 
     @Override
     public void initView() {
-        binding.textView17.setText("12312312312");
-        binding.button48.setText("3333");
-        binding.imageView10.setBackgroundResource(R.drawable.dfh);
+        mBinding.textView17.setText("12312312312");
+        mBinding.button48.setText("3333");
+        mBinding.imageView10.setBackgroundResource(R.drawable.dfh);
+        UserViewModel viewModel= new ViewModelProvider(this).get(UserViewModel.class);
+        mBinding.setVariable(BR.vm,viewModel );
+        mBinding.setLifecycleOwner(this);
 
     }
 }

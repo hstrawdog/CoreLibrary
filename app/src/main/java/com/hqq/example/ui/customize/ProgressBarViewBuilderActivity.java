@@ -1,7 +1,7 @@
 package com.hqq.example.ui.customize;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
  /**
   * @Author : huangqiqiang
   * @Package : com.hqq.core.app.ui.customize
@@ -10,7 +10,7 @@ import com.hqq.core.ui.BaseActivity;
   * @Email :  qiqiang213@gmail.com
   * @Descrive :
   */
-public class ProgressBarViewBuilderActivity extends BaseActivity {
+public class ProgressBarViewBuilderActivity extends BaseCoreActivity {
 
     @Override
     public int getLayoutViewId() {

@@ -6,12 +6,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.example.R;
 
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -21,7 +20,7 @@ import butterknife.OnClick;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class ToolBarActivity extends BaseActivity {
+public class ToolBarActivity extends BaseCoreActivity {
     public static void open(Activity context) {
         Intent starter = new Intent(context, ToolBarActivity.class);
         context.startActivityForResult(starter, -1);
@@ -69,12 +68,21 @@ public class ToolBarActivity extends BaseActivity {
 
             }
         });
+
+        findViewById(R.id.button).setOnClickListener(this);
+        findViewById(R.id.button2).setOnClickListener(this);
+        findViewById(R.id.button3).setOnClickListener(this);
+        findViewById(R.id.button4).setOnClickListener(this);
+        findViewById(R.id.button5).setOnClickListener(this);
+        findViewById(R.id.button6).setOnClickListener(this);
+        findViewById(R.id.button7).setOnClickListener(this);
+        findViewById(R.id.button8).setOnClickListener(this);
+        findViewById(R.id.button12).setOnClickListener(this);
+        findViewById(R.id.button13).setOnClickListener(this);
     }
 
 
-    @Override
-    @OnClick({R.id.button, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6,
-            R.id.button7, R.id.button8, R.id.button12, R.id.button13})
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_bar_right:

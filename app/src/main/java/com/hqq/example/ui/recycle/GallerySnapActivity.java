@@ -7,7 +7,7 @@ import com.hqq.example.R;
 import com.hqq.example.adapter.SnapHelperAdapter;
 import com.hqq.core.recycle.gallery.GallerySnapHelper;
 import com.hqq.core.recycle.gallery.RecyclerCoverFlow;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import butterknife.BindView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class GallerySnapActivity extends BaseActivity {
+public class GallerySnapActivity extends BaseCoreActivity {
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;

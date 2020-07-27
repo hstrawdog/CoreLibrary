@@ -15,8 +15,6 @@ import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.LoadingView;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @Author : huangqiqiang
@@ -51,10 +49,6 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
      * 布局创建 容器
      */
     protected RootViewBuilder mRootViewBuild;
-    /**
-     * 绑定
-     */
-    Unbinder mUnkinder;
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法
@@ -73,7 +67,6 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
             initDefConfig();
 
             mRootView = mRootViewBuild.buildContentView(this);
-            mUnkinder = ButterKnife.bind(this, mRootView);
         }
         LogUtils.d(this.getClass().getName(), "onCreateView " + getClass().getSimpleName() + this.toString());
         return mRootView;
@@ -129,11 +122,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
     public void onDestroy() {
         super.onDestroy();
         LogUtils.d(this.getClass().getName(), "onDestroy " + getClass().getSimpleName() + this.toString());
-        //    mLoadingView = null;
-        if (mUnkinder != null) {
-            mUnkinder.unbind();
-            mUnkinder = null;
-        }
+
         if (mRootView != null) {
             if (mRootView instanceof ViewGroup) {
                 ((ViewGroup) mRootView).removeAllViews();

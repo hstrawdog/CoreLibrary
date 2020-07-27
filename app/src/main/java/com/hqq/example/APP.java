@@ -2,10 +2,6 @@ package com.hqq.example;
 
 import android.app.Application;
 
-
-
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinAppCompatViewInflater;
 import skin.support.app.SkinCardViewInflater;

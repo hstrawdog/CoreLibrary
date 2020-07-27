@@ -1,10 +1,9 @@
 package com.hqq.example.ui;
 
-import android.graphics.Color;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.core.utils.shape.BaseShapeBuilder;
 import com.hqq.example.R;
@@ -19,7 +18,7 @@ import butterknife.BindView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class ShapeTestActivity extends BaseActivity {
+public class ShapeTestActivity extends BaseCoreActivity {
 
     @BindView(R.id.textView3)
     TextView mTextView3;

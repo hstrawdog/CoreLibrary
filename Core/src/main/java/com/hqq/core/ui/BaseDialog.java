@@ -26,8 +26,6 @@ import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.core.widget.LoadingView;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @Author : huangqiqiang
@@ -43,7 +41,6 @@ import butterknife.Unbinder;
  */
 public abstract class BaseDialog extends DialogFragment implements ICreateRootViewBuilder.IDialogFragmentBuilder {
 
-    Unbinder mUnkinder;
     protected LoadingView mLoadingView;
     boolean mLoaded = false;
     protected DialogClickListener mDialogClickListener;
@@ -79,7 +76,6 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
             initDefConfig();
             mRootView = mRootViewBuild.buildContentView(this);
             initContentView();
-            mUnkinder = ButterKnife.bind(this, mRootView);
             initView();
 
             LogUtils.d("onCreateView " + getClass().getSimpleName() + this.toString());
@@ -139,7 +135,6 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mUnkinder.unbind();
         mLoadingView = null;
         mRootView = null;
     }

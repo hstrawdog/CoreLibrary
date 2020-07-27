@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.BaseCommonUtils;
 import com.hqq.example.R;
 
@@ -17,7 +17,7 @@ import com.hqq.example.R;
  * @Email : qiqiang213@gmail.com
  * @Descrive :  黑白化
  */
-public class BlackAndWhiteActivity extends BaseActivity {
+public class BlackAndWhiteActivity extends BaseCoreActivity {
     public static void open(Context context) {
         Intent starter = new Intent(context, BlackAndWhiteActivity.class);
         context.startActivity(starter);

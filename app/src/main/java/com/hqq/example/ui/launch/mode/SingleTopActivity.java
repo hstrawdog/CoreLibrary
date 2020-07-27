@@ -1,17 +1,7 @@
 package com.hqq.example.ui.launch.mode;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
-import com.hqq.core.ui.BaseActivity;
-import com.hqq.example.R;
-
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang

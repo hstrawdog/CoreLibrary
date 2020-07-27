@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hqq.core.ui.BaseDialog;
 import com.hqq.example.R;
 
-import butterknife.BindView;
 
 /**
  * @version V1.0 <描述当前版本功能>

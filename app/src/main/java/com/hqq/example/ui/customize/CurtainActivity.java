@@ -1,14 +1,11 @@
 package com.hqq.example.ui.customize;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.view.View;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 import com.hqq.example.ui.customize.widget.GuideView;
@@ -21,7 +18,7 @@ import com.hqq.example.ui.customize.widget.GuideView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class CurtainActivity extends BaseActivity {
+public class CurtainActivity extends BaseCoreActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, CurtainActivity.class);

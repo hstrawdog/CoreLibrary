@@ -2,7 +2,7 @@ package com.hqq.example.ui.launch.mode;
 
 import android.view.View;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
 import butterknife.OnClick;
@@ -15,7 +15,7 @@ import butterknife.OnClick;
  * @Email : qiqiang213@gmail.com
  * @Descrive : 启动模式
  */
-public class LaunchActivity extends BaseActivity {
+public class LaunchActivity extends BaseCoreActivity {
 
     @Override
     public int getLayoutViewId() {

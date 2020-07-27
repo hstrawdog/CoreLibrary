@@ -1,15 +1,12 @@
 package com.hqq.example.ui.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
 /**
@@ -21,7 +18,7 @@ import com.hqq.example.R;
   * @Descrive :
   */
 
-public class InflateTestActivity extends BaseActivity {
+public class InflateTestActivity extends BaseCoreActivity {
 
 public static void open(Activity context) {
     Intent starter = new Intent(context, InflateTestActivity.class);

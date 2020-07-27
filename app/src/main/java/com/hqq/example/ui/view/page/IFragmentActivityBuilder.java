@@ -4,7 +4,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.hqq.example.R;
 import com.hqq.example.adapter.IFragmentAdapter;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 
 import butterknife.BindView;
 
@@ -16,7 +16,7 @@ import butterknife.BindView;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class IFragmentActivityBuilder extends BaseActivity {
+public class IFragmentActivityBuilder extends BaseCoreActivity {
 
     @BindView(R.id.vp_page)
     ViewPager mVpPage;

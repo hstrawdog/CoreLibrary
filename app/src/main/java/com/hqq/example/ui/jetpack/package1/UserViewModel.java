@@ -3,11 +3,10 @@ package com.hqq.example.ui.jetpack.package1;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import com.hqq.core.ui.vm.BaseViewModel;
 import com.hqq.example.ui.jetpack.livedata.User;
 
-import javax.inject.Inject;
 
 /**
  * @Author : huangqiqiang
@@ -17,8 +16,9 @@ import javax.inject.Inject;
  * @Email : qiqiang213@gmail.com
  * @Descrive : ViewModel
  */
-public class UserViewModel extends ViewModel {
+public class UserViewModel extends BaseViewModel {
     MutableLiveData<User> mLiveData = new MutableLiveData<>();
+    MutableLiveData<String> mButtonText = new MutableLiveData<>("更新User数据");
 
     MutableLiveData<String> mString;
 
@@ -39,7 +39,10 @@ public class UserViewModel extends ViewModel {
 
     public void getUser() {
         setLiveData(new UserDataRepository().getUser());
+    }
 
+    public MutableLiveData<String> getButtonText() {
+        return mButtonText;
     }
 
     public void update(View view) {

@@ -14,7 +14,6 @@ import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.ui.builder.RootViewBuilder;
 import com.hqq.core.widget.LoadingView;
 
-import butterknife.ButterKnife;
 
 /**
  * @Author : huangqiqiang
@@ -24,7 +23,7 @@ import butterknife.ButterKnife;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : 1.
  */
-public abstract class BaseActivity extends AppCompatActivity implements ICreateRootViewBuilder.IActivityBuilder, View.OnClickListener {
+public abstract class BaseCoreActivity extends AppCompatActivity implements ICreateRootViewBuilder.IActivityBuilder, View.OnClickListener {
     /**
      * 当前对象
      */
@@ -48,8 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         mRootViewBuild = new RootViewBuilder(this, true, true);
         initDefConfig();
         setContentView(mRootViewBuild.buildContentView(this));
-        //绑定初始化ButterKnife
-        ButterKnife.bind(this);
         initView();
 
     }

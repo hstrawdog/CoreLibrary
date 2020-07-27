@@ -3,13 +3,12 @@ package com.hqq.example.ui.info;
 import android.widget.TextView;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.CacheUtil;
 import com.hqq.core.utils.ScreenUtils;
 import com.hqq.core.utils.TextSpannableBuilder;
 import com.hqq.core.utils.VersionUtils;
 
-import butterknife.BindView;
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -20,9 +19,8 @@ import butterknife.BindView;
  * @Descrive : TODO
  * @Email :
  */
-public class BaseInfoActivity extends BaseActivity {
+public class BaseInfoActivity extends BaseCoreActivity {
 
-    @BindView(R.id.tv_info)
     TextView mTvInfo;
 
     @Override
@@ -32,6 +30,7 @@ public class BaseInfoActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        mTvInfo = findViewById(R.id.tv_info);
         mTvInfo.setText(new TextSpannableBuilder()
                 .addTextPart("包名    ")
                 .addTextPart(VersionUtils.getPackageName(this))

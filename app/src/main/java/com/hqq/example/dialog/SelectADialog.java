@@ -10,7 +10,6 @@ import com.hqq.core.ui.BaseSelectDialog;
 import com.hqq.core.ui.BaseViewBuilderHolder;
 import com.hqq.example.R;
 
-import javax.inject.Inject;
 
 /**
  * @Author : huangqiqiang

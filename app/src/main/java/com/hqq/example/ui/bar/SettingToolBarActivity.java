@@ -3,7 +3,7 @@ package com.hqq.example.ui.bar;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
 /**
@@ -14,7 +14,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class SettingToolBarActivity extends BaseActivity {
+public class SettingToolBarActivity extends BaseCoreActivity {
     public static void open(Activity context) {
         Intent starter = new Intent(context, SettingToolBarActivity.class);
         context.startActivityForResult(starter, -1);

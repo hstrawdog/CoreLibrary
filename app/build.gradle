@@ -95,19 +95,9 @@ dependencies {
     implementation project(':Core')
     api rootProject.ext.dependencies.constraintlayout
 
-    api rootProject.ext.dependencies.butterknife
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
-
-
-
     debugImplementation  rootProject.ext.dependencies.leakcanary
 
-    api 'com.google.dagger:dagger:2.28'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.28'
-    api 'com.google.dagger:dagger-android-support:2.28'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.28'
+
 
 //    implementation 'skin.support:skin-support:3.1.4'                   // skin-support 基础控件支持
     implementation 'skin.support:skin-support:4.0.4'                   // skin-support

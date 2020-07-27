@@ -3,14 +3,11 @@ package com.hqq.example.ui.exception;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -20,10 +17,8 @@ import butterknife.OnClick;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :异常
  */
-public class ThrowActivity extends BaseActivity {
+public class ThrowActivity extends BaseCoreActivity {
 
-    @BindView(R.id.button11)
-    Button mButton11;
 
     @Override
     public int getLayoutViewId() {
@@ -32,11 +27,11 @@ public class ThrowActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+    findViewById(R.id.button11).setOnClickListener(this::onViewClicked);
+    findViewById(R.id.button12).setOnClickListener(this::onViewClicked);
     }
 
 
-    @OnClick({R.id.button11, R.id.button12})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button11:

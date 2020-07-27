@@ -5,11 +5,10 @@ import android.content.Intent;
 
 import com.hqq.core.permission.PermissionsResult;
 import com.hqq.core.permission.PermissionsUtils;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.R;
 
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -19,7 +18,7 @@ import butterknife.OnClick;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class PermissionActivity extends BaseActivity {
+public class PermissionActivity extends BaseCoreActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, PermissionActivity.class);
@@ -36,7 +35,6 @@ public class PermissionActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.button7)
     public void onMButton7Clicked() {
         PermissionsUtils.requestCameraPermission(new PermissionsResult() {
             @Override
@@ -47,7 +45,6 @@ public class PermissionActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.button8)
     public void onMButton8Clicked() {
         PermissionsUtils.requestStoragePermission(new PermissionsResult() {
             @Override

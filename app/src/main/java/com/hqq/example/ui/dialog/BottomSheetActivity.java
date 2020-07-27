@@ -3,12 +3,11 @@ package com.hqq.example.ui.dialog;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 import com.hqq.example.dialog.FoldFullBottomSheet;
 import com.hqq.example.dialog.FullBottomSheet;
 
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -18,7 +17,7 @@ import butterknife.OnClick;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class BottomSheetActivity extends BaseActivity {
+public class BottomSheetActivity extends BaseCoreActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, BottomSheetActivity.class);
@@ -34,13 +33,11 @@ public class BottomSheetActivity extends BaseActivity {
     public void initView() {
     }
 
-    @OnClick(R.id.button9)
     public void onViewClicked() {
         FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
         mFullBottomSheetFragment.show(getSupportFragmentManager());
     }
 
-    @OnClick(R.id.button10)
     public void onViewClicked1() {
         FoldFullBottomSheet mFullBottomSheetFragment = new FoldFullBottomSheet();
         mFullBottomSheetFragment.show(getSupportFragmentManager());

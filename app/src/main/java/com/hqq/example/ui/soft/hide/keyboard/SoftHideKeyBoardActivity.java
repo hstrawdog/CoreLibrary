@@ -1,6 +1,6 @@
 package com.hqq.example.ui.soft.hide.keyboard;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.keyboard.SoftHideKeyboardListener;
 import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils;
@@ -14,7 +14,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class SoftHideKeyBoardActivity extends BaseActivity {
+public class SoftHideKeyBoardActivity extends BaseCoreActivity {
 
     @Override
     public int getLayoutViewId() {

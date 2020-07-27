@@ -2,16 +2,15 @@ package com.hqq.example.ui.jetpack.livedata;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.lifecycle.Observer;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.log.LogUtils;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -22,7 +21,7 @@ import butterknife.OnClick;
  * @Descrive :
  * LiveData  change 需要在ui前台才会触发 并不能再后台执行
  */
-public class LiveDateActivity extends BaseActivity {
+public class LiveDateActivity extends BaseCoreActivity {
 
 
     public static void open(Activity context) {
@@ -31,7 +30,6 @@ public class LiveDateActivity extends BaseActivity {
     }
 
 
-    @BindView(R.id.textView2)
     TextView mTextView2;
 
     @Override
@@ -41,7 +39,8 @@ public class LiveDateActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        mTextView2=findViewById(R.id.textView2);
+        mTextView2.setOnClickListener(this::onViewClicked);
         LiveUser.getInstance(this).observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
@@ -53,8 +52,7 @@ public class LiveDateActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.button19)
-    public void onViewClicked() {
+    public void onViewClicked(View view) {
         User user = LiveUser.getInstance(this).getValue();
         if (null == user) {
             user = User.newInstance();

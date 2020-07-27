@@ -15,10 +15,8 @@ import com.hqq.example.dialog.LeftDialog;
 import com.hqq.example.dialog.RightDialog;
 import com.hqq.example.dialog.SelectADialog;
 import com.hqq.example.dialog.SelectDialog;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -28,13 +26,8 @@ import butterknife.OnClick;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class TestDialogActivity extends BaseActivity {
+public class TestDialogActivity extends BaseCoreActivity {
 
-
-    @BindView(R.id.button14)
-    Button mButton14;
-    @BindView(R.id.button15)
-    Button mButton15;
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, TestDialogActivity.class);
@@ -48,13 +41,19 @@ public class TestDialogActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        findViewById(R.id.button9).setOnClickListener(this);
+        findViewById(R.id.button14).setOnClickListener(this);
+        findViewById(R.id.button15).setOnClickListener(this);
+        findViewById(R.id.button16).setOnClickListener(this);
+        findViewById(R.id.button10).setOnClickListener(this);
+        findViewById(R.id.button17).setOnClickListener(this);
+        findViewById(R.id.button18).setOnClickListener(this);
+        findViewById(R.id.button28).setOnClickListener(this);
     }
 
 
-    @OnClick({R.id.button9, R.id.button14, R.id.button15, R.id.button16, R.id.button10, R.id.button17, R.id.button18, R.id.button28
-    })
-    public void onViewClicked(View v) {
+    @Override
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button9:
                 FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();

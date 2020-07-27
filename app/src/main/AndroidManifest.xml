@@ -24,7 +24,7 @@
             android:name=".ui.view.InflateTestActivity"
             android:label="Inflate对比" />
         <activity
-            android:name=".ui.jetpack.package1.Package1Activity"
+            android:name=".ui.jetpack.package1.MvvmTestActivity"
             android:label="jetpack套餐搭建mvvm" />
         <activity
             android:name=".ui.jetpack.viewbinding.ViewBindingActivity"

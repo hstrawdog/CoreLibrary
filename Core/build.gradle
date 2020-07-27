@@ -62,7 +62,7 @@ dependencies {
 
     api rootProject.ext.dependencies.constraintlayout
     api rootProject.ext.dependencies.IDimensCompat
-    api rootProject.ext.dependencies.appcompat
+    api rootProject.ext.dependencies.appcompatV7
     api rootProject.ext.dependencies.recyclerview
     api rootProject.ext.dependencies.material
     api rootProject.ext.dependencies.viewpager2
@@ -71,11 +71,13 @@ dependencies {
     api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
     api rootProject.ext.dependencies.ultraPtr
 
+
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+
     api rootProject.ext.dependencies.glide
     annotationProcessor rootProject.ext.dependencies.glideCompiler
 
-    api rootProject.ext.dependencies.butterknife
-    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
 
 
 

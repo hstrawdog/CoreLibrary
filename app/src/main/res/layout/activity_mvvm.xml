@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <import type="androidx.databinding.ObservableArrayMap" />
+
+        <import type="androidx.databinding.ObservableArrayList" />
+
+        <import type="com.hqq.example.ui.jetpack.package1.MvvmTestActivity.Fields" />
+
+        <variable
+            name="vm"
+            type="com.hqq.example.ui.jetpack.package1.UserViewModel" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="map"
+            type="ObservableArrayMap&lt;String,String&gt;" />
+
+        <variable
+            name="list"
+            type="ObservableArrayList&lt;String&gt;" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.hqq.example.ui.jetpack.package1.MvvmTestActivity">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.liveData.name+ vm.liveData.level}" />
+
+        <Button
+            android:id="@+id/button40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{vm::update}"
+            android:text="@{vm.buttonText}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{title}" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{map.get(&quot;key1&quot;)}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{list.get(0)}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{list[Fields.AGE2]}" />
+    </LinearLayout>
+
+
+</layout>

@@ -1,7 +1,7 @@
 package com.hqq.example.ui.adaptation;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 
 /**
  * @Author : huangqiqiang
@@ -11,7 +11,7 @@ import com.hqq.core.ui.BaseActivity;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class LayoutTestActivity extends BaseActivity {
+public class LayoutTestActivity extends BaseCoreActivity {
 
     @Override
     public int getLayoutViewId() {

@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.SkinAppCompatDelegateImpl;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
 import skin.support.SkinCompatManager;
@@ -19,7 +19,7 @@ import skin.support.SkinCompatManager;
  * @emain: 593979591@qq.com
  * @date: 2020-04-10 10:01
  */
-public abstract class BaseSkinActivity extends BaseActivity {
+public abstract class BaseSkinActivity extends BaseCoreActivity {
     @Override
     public int getLayoutViewId() {
         return R.layout.activity_skin_base;

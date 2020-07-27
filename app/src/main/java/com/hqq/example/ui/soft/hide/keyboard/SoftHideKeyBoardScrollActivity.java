@@ -4,7 +4,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils;
 import com.hqq.example.R;
 
@@ -18,7 +18,7 @@ import butterknife.BindView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class SoftHideKeyBoardScrollActivity extends BaseActivity {
+public class SoftHideKeyBoardScrollActivity extends BaseCoreActivity {
 
     @BindView(R.id.tv_login)
     TextView mTvLogin;

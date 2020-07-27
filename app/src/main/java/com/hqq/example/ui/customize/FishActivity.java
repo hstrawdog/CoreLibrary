@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 
 /**
  * @Author : huangqiqiang
@@ -14,7 +14,7 @@ import com.hqq.core.ui.BaseActivity;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : https://www.jianshu.com/p/3dd3d1524851
  */
-public class FishActivity extends BaseActivity {
+public class FishActivity extends BaseCoreActivity {
 
 
     public static void open(Activity context) {

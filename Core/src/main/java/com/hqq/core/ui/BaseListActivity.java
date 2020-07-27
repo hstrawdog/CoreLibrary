@@ -21,7 +21,7 @@ import com.hqq.core.ui.model.BaseListModel;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseActivity implements
+public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseCoreActivity implements
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
         BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView<T> {
     protected RecyclerView mRcList;

@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.os.Bundle;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 
-import com.hqq.core.ui.BaseActivity;
+import androidx.annotation.RequiresApi;
+
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @Author : huangqiqiang
@@ -24,22 +24,15 @@ import butterknife.ButterKnife;
  * @Descrive : 矩阵的简单使用
  * 参考 https://blog.csdn.net/MonaLisaTearr/article/details/80177726
  */
-public class MatrixActivity extends BaseActivity {
+public class MatrixActivity extends BaseCoreActivity {
 
 
-    @BindView(R.id.button41)
     Button mButton41;
-    @BindView(R.id.button42)
     Button mButton42;
-    @BindView(R.id.button43)
     Button mButton43;
-    @BindView(R.id.button44)
     Button mButton44;
-    @BindView(R.id.button45)
     Button mButton45;
-    @BindView(R.id.button46)
     Button mButton46;
-    @BindView(R.id.button47)
     Button mButton47;
 
     public static void open(Activity context) {
@@ -52,9 +45,18 @@ public class MatrixActivity extends BaseActivity {
     public int getLayoutViewId() {
         return R.layout.activity_matrix;
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void initView() {
+        mButton47=findViewById(R.id.button47);
+        mButton46=findViewById(R.id.button46);
+        mButton45=findViewById(R.id.button45);
+        mButton44=findViewById(R.id.button44);
+        mButton43=findViewById(R.id.button43);
+        mButton42=findViewById(R.id.button42);
+        mButton41=findViewById(R.id.button41);
+
+
         mButton41.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

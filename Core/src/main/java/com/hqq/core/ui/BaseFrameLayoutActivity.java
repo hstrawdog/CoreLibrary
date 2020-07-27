@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseFrameLayoutActivity extends BaseActivity {
+public abstract class BaseFrameLayoutActivity extends BaseCoreActivity {
     public Fragment mCurrentFragment;
 
     /**

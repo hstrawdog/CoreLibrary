@@ -1,7 +1,7 @@
 package com.hqq.example.ui.recycle;
 
 import com.hqq.core.recycle.RecycleViewBanner;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import butterknife.BindView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class BannerActivity extends BaseActivity {
+public class BannerActivity extends BaseCoreActivity {
 
     @BindView(R.id.rc_banner)
     RecycleViewBanner mRcBanner;
