@@ -9,7 +9,6 @@ import com.hqq.core.adapter.BaseFragmentAdapter;
 import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
-import butterknife.BindView;
 
 /**
  * @Author : huangqiqiang
@@ -20,15 +19,10 @@ import butterknife.BindView;
  * @Descrive :
  */
 public class TabLayoutActivity extends BaseCoreActivity {
-    @BindView(R.id.tb_tablayout1)
     TabLayout mTbTablayout1;
-    @BindView(R.id.vp_page)
     ViewPager mVpPage;
-    @BindView(R.id.tb_tablayout2)
     TabLayout mTbTablayout2;
-    @BindView(R.id.tb_tablayout3)
     TabLayout mTbTablayout3;
-    @BindView(R.id.tb_tablayout4)
     TabLayout mTbTablayout4;
 
     @Override
@@ -39,13 +33,17 @@ public class TabLayoutActivity extends BaseCoreActivity {
     @Override
     public void initDefConfig() {
         super.initDefConfig();
-
         mRootViewBuild.setStatusColor(R.color.color_main);
-
     }
 
     @Override
     public void initView() {
+        mTbTablayout4=findViewById(R.id.tb_tablayout4);
+        mTbTablayout3=findViewById(R.id.tb_tablayout3);
+        mTbTablayout2=findViewById(R.id.tb_tablayout2);
+        mVpPage=findViewById(R.id.vp_page);
+        mTbTablayout1=findViewById(R.id.tb_tablayout1);
+
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
         mVpPage.setAdapter(adapter);
         mTbTablayout1.setupWithViewPager(mVpPage);

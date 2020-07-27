@@ -8,8 +8,6 @@ import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.core.utils.shape.BaseShapeBuilder;
 import com.hqq.example.R;
 
-import butterknife.BindView;
-
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.example.ui
@@ -20,7 +18,6 @@ import butterknife.BindView;
  */
 public class ShapeTestActivity extends BaseCoreActivity {
 
-    @BindView(R.id.textView3)
     TextView mTextView3;
 
     @Override
@@ -30,6 +27,8 @@ public class ShapeTestActivity extends BaseCoreActivity {
 
     @Override
     public void initView() {
+        mTextView3=findViewById(R.id.textView3);
+
         findViewById(R.id.textView3).setBackground(new BaseShapeBuilder().setRectangle()
                 .setColor(R.color.color_b36d61)
                 .setCornerRadius(R.dimen.x20)

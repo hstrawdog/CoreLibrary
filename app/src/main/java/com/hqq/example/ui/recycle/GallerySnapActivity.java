@@ -11,7 +11,6 @@ import com.hqq.core.ui.BaseCoreActivity;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 
 /**
  * @Author : huangqiqiang
@@ -23,12 +22,10 @@ import butterknife.BindView;
  */
 public class GallerySnapActivity extends BaseCoreActivity {
 
-    @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
     ArrayList<String> mData;
     LinearLayoutManager mLayoutManager;
     GallerySnapHelper mGallerySnapHelper;
-    @BindView(R.id.rcf_view)
     RecyclerCoverFlow mRcfView;
 
     @Override
@@ -38,6 +35,8 @@ public class GallerySnapActivity extends BaseCoreActivity {
 
     @Override
     public void initView() {
+        mRecyclerview=findViewById(R.id.recyclerview);
+        mRcfView=findViewById(R.id.rcf_view);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerview.setLayoutManager(mLayoutManager);
         initData();

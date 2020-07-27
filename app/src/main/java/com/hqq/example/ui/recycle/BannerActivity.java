@@ -7,7 +7,6 @@ import com.hqq.example.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * @Author : huangqiqiang
@@ -19,9 +18,7 @@ import butterknife.BindView;
  */
 public class BannerActivity extends BaseCoreActivity {
 
-    @BindView(R.id.rc_banner)
     RecycleViewBanner mRcBanner;
-    @BindView(R.id.rc_banner2)
     RecycleViewBanner mRcBanner2;
 
     @Override
@@ -32,6 +29,10 @@ public class BannerActivity extends BaseCoreActivity {
 
     @Override
     public void initView() {
+        mRcBanner=findViewById(R.id.rc_banner);
+        mRcBanner2=findViewById(R.id.rc_banner2);
+
+
         List<String> list = new ArrayList<>();
         list.add(("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));
         list.add(("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg"));

@@ -2,11 +2,10 @@ package com.hqq.example.ui.view.page;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 import com.hqq.example.adapter.IFragmentAdapter;
-import com.hqq.core.ui.BaseCoreActivity;
 
-import butterknife.BindView;
 
 /**
  * @Author : huangqiqiang
@@ -18,7 +17,6 @@ import butterknife.BindView;
  */
 public class IFragmentActivityBuilder extends BaseCoreActivity {
 
-    @BindView(R.id.vp_page)
     ViewPager mVpPage;
 
     @Override
@@ -28,8 +26,14 @@ public class IFragmentActivityBuilder extends BaseCoreActivity {
 
     @Override
     public void initView() {
+        mVpPage = findViewById(R.id.vp_page);
         mVpPage.setAdapter(new IFragmentAdapter(getSupportFragmentManager()));
     }
+
+
+
+
+
 
 
 }

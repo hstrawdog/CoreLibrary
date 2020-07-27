@@ -5,7 +5,6 @@ import android.view.View;
 import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.example.R;
 
-import butterknife.OnClick;
 
 /**
  * @Author : huangqiqiang
@@ -24,10 +23,15 @@ public class LaunchActivity extends BaseCoreActivity {
 
     @Override
     public void initView() {
-
+        findViewById(R.id.button20).setOnClickListener(this::onViewClicked);
+        findViewById(R.id.button21).setOnClickListener(this::onViewClicked);
+        findViewById(R.id.button22).setOnClickListener(this::onViewClicked);
+        findViewById(R.id.button23).setOnClickListener(this::onViewClicked);
+        findViewById(R.id.button24).setOnClickListener(this::onViewClicked);
+        findViewById(R.id.button26).setOnClickListener(this::onViewClicked);
+        findViewById(R.id.button27).setOnClickListener(this::onViewClicked);
     }
 
-    @OnClick({R.id.button20, R.id.button21, R.id.button22, R.id.button23, R.id.button24, R.id.button26, R.id.button27})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button20:

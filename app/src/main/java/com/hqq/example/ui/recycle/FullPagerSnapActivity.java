@@ -12,7 +12,6 @@ import com.hqq.core.widget.divider.Divider;
 import com.hqq.core.widget.divider.DividerBuilder;
 import com.hqq.core.widget.divider.DividerItemDecoration;
 
-import butterknife.BindView;
 
 /**
  * @Author : huangqiqiang
@@ -24,7 +23,6 @@ import butterknife.BindView;
  */
 public class FullPagerSnapActivity extends BaseCoreActivity {
 
-    @BindView(R.id.rc_list)
     RecyclerView mRcList;
 
     @Override
@@ -36,6 +34,7 @@ public class FullPagerSnapActivity extends BaseCoreActivity {
 
     @Override
     public void initView() {
+        mRcList=findViewById(R.id.rc_list);
         mRcList.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false));
         mFullPagerSnapAdapter = new FullPagerSnapAdapter();
         mRcList.setAdapter(mFullPagerSnapAdapter);

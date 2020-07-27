@@ -8,7 +8,6 @@ import com.hqq.core.ui.BaseCoreActivity;
 import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils;
 import com.hqq.example.R;
 
-import butterknife.BindView;
 
 /**
  * @Author : huangqiqiang
@@ -20,14 +19,7 @@ import butterknife.BindView;
  */
 public class SoftHideKeyBoardScrollActivity extends BaseCoreActivity {
 
-    @BindView(R.id.tv_login)
-    TextView mTvLogin;
-    @BindView(R.id.cl_root)
-    ConstraintLayout mClRoot;
-    @BindView(R.id.ll_content)
-    LinearLayout mLlContent;
-    @BindView(R.id.ll_login)
-    LinearLayout mLlLogin;
+
 
     @Override
     public int getLayoutViewId() {
@@ -36,7 +28,7 @@ public class SoftHideKeyBoardScrollActivity extends BaseCoreActivity {
 
     @Override
     public void initView() {
-        SoftHideKeyboardUtils.addSoftHideKeyboardScrollView(mLlContent, mTvLogin);
+        SoftHideKeyboardUtils.addSoftHideKeyboardScrollView(findViewById(R.id.ll_content), findViewById(R.id.tv_login));
     }
 
 
