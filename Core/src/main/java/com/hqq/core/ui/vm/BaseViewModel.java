@@ -16,4 +16,12 @@ public class BaseViewModel extends ViewModel {
     MutableLiveData<Boolean> mShowLoading = new MutableLiveData<>();
 
 
+    public Boolean getShowLoading() {
+        return mShowLoading.getValue();
+    }
+
+    public BaseViewModel setShowLoading(Boolean showLoading) {
+        mShowLoading.setValue(showLoading);
+        return this;
+    }
 }

@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewbinding.ViewBinding;
 
 import com.hqq.core.ui.BaseCoreActivity;
 
@@ -24,7 +24,7 @@ import java.lang.reflect.Type;
  * T 泛型 正常使用布局生成的 ViewBanding
  * DataBindingUtil 放回的对象支持DataBinding 与 ViewBanding
  */
-public abstract class BaseActivity<T extends ViewBinding, K extends BaseViewModel> extends BaseCoreActivity {
+public abstract class BaseActivity<T extends ViewDataBinding, K extends BaseViewModel> extends BaseCoreActivity {
     protected T mBinding;
     protected K mViewModel;
 
@@ -41,12 +41,13 @@ public abstract class BaseActivity<T extends ViewBinding, K extends BaseViewMode
     @Override
     public View getLayoutView(ViewGroup parent) {
         mBinding = (T) DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), parent, false);
+        mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
     }
 
     @Override
     public void initView() {
-
+        // 利用反射获取泛型类型 创建ViewModel 对象
         Class modelClass;
         Type type = getClass().getGenericSuperclass();
         if (type instanceof ParameterizedType) {
@@ -55,6 +56,16 @@ public abstract class BaseActivity<T extends ViewBinding, K extends BaseViewMode
             modelClass = BaseViewModel.class;
         }
         mViewModel = createViewModel(this, modelClass);
+        mViewModel.mShowLoading.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    mLoadingView.show();
+                } else {
+                    mLoadingView.dismiss();
+                }
+            }
+        });
 
         addViewModel();
         initViews();

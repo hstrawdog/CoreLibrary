@@ -12,12 +12,12 @@ import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
 import com.hqq.example.ui.bar.ToolBarActivity;
 import com.hqq.example.ui.customize.CustomizeIndexActivity;
-import com.hqq.example.ui.jetpack.livedata.LiveDateActivity;
 import com.hqq.example.ui.dialog.TestDialogActivity;
 import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
-import com.hqq.example.ui.jetpack.package1.MvvmTestActivity;
+import com.hqq.example.ui.jetpack.livedata.LiveDateActivity;
+import com.hqq.example.ui.jetpack.package1.VmTestActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.skin.SkinAActivity;
@@ -91,10 +91,10 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        LiveDateActivity.open(this);
 //        ViewModelActivity.open(this);
 //        DataBindingActivity.open(this);
-        MvvmTestActivity.open(this);
+//        MvvmTestActivity.open(this);
 //       InflateTestActivity.open(this);
 //        MatrixActivity.open(this);
-
+        VmTestActivity.open(this);
 //        ViewBindingActivity.open(this);
     }
 
