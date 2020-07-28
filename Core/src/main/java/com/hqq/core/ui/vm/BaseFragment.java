@@ -3,12 +3,11 @@ package com.hqq.core.ui.vm;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseCoreFragment;
 import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.utils.ToastUtils;
 
@@ -18,24 +17,17 @@ import java.lang.reflect.Type;
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.core.ui.vm
- * @FileName :   BaseActivity
- * @Date : 2020/7/22 0022  下午 3:37
+ * @FileName :   BaseFragment
+ * @Date : 2020/7/28 0028  下午 5:36
  * @Email : qiqiang213@gmail.com
  * @Descrive :
- * T 泛型 正常使用布局生成的 ViewBanding
- * DataBindingUtil 放回的对象支持DataBinding 与 ViewBanding
  */
-public abstract class BaseActivity<T extends ViewDataBinding, K extends BaseViewModel> extends BaseCoreActivity implements ICreateRootViewBuilder.IBaseVMBuilder {
+public abstract class BaseFragment<T extends ViewDataBinding, K extends BaseViewModel> extends BaseCoreFragment implements ICreateRootViewBuilder.IBaseVMBuilder {
     protected T mBinding;
     protected K mViewModel;
 
-    /**
-     * 禁止 子类继承使用 保证走的都是getLayoutView方法
-     *
-     * @return
-     */
     @Override
-    public final int getLayoutViewId() {
+    final public int getLayoutViewId() {
         return 0;
     }
 
@@ -44,8 +36,8 @@ public abstract class BaseActivity<T extends ViewDataBinding, K extends BaseView
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), parent, false);
         mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
-    }
 
+    }
 
     @Override
     public void initView() {
@@ -53,7 +45,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, K extends BaseView
         initBaseViewModel();
         addViewModel();
         initViews();
-
     }
 
     /**
@@ -88,10 +79,9 @@ public abstract class BaseActivity<T extends ViewDataBinding, K extends BaseView
         }
     }
 
-    private K createViewModel(AppCompatActivity tkBaseActivity, Class modelClass) {
+    private K createViewModel(BaseFragment tkBaseActivity, Class modelClass) {
         return (K) new ViewModelProvider(tkBaseActivity).get(modelClass);
     }
-
 
 
 }

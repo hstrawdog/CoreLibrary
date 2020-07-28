@@ -7,6 +7,7 @@ import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
+import com.hqq.example.demo.login.LoginActivity;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
@@ -17,7 +18,6 @@ import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity;
-import com.hqq.example.ui.jetpack.package1.VmTestActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.skin.SkinAActivity;
@@ -94,8 +94,9 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        MvvmTestActivity.open(this);
 //       InflateTestActivity.open(this);
 //        MatrixActivity.open(this);
-        VmTestActivity.open(this);
+//        VmTestActivity.open(this);
 //        ViewBindingActivity.open(this);
+        LoginActivity.open(this);
     }
 
 

@@ -22,8 +22,6 @@ public interface IRootViewBuilder {
     /**
      * 构建后的页面布局
      *
-     * @param layoutId xml ViewId
-     * @param rootView 自定义View
      * @return rootView
      */
     View buildContentView(ICreateRootViewBuilder rootViewBuilder);

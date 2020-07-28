@@ -12,16 +12,24 @@ import androidx.lifecycle.ViewModel;
  * @Descrive :
  */
 public class BaseViewModel extends ViewModel {
+    /**
+     * 是否显示Loading
+     */
+   protected MutableLiveData<Boolean> mShowLoading = new MutableLiveData<>();
+    /**
+     * 显示Toast
+     */
+    MutableLiveData<String> mShowToast = new MutableLiveData<>();
 
-    MutableLiveData<Boolean> mShowLoading = new MutableLiveData<>();
-
-
-    public Boolean getShowLoading() {
-        return mShowLoading.getValue();
-    }
 
     public BaseViewModel setShowLoading(Boolean showLoading) {
         mShowLoading.setValue(showLoading);
+        return this;
+    }
+
+
+    public BaseViewModel setShowToast(String showToast) {
+        mShowToast.setValue(showToast);
         return this;
     }
 }

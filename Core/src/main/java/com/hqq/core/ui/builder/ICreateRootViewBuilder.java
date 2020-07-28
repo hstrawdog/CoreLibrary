@@ -145,4 +145,25 @@ public interface ICreateRootViewBuilder {
         void createRootView(ViewGroup parentView, Activity activity, Context context, Lifecycle lifecycle);
     }
 
+
+    interface IBaseVMBuilder{
+        /**
+         * 添加ViewModel 与布局使用的对象
+         */
+          void addViewModel();
+
+        /**
+         * 通过布局id 生成对应的 banding类
+         * 只是单独使用ViewBanding的话直接用banding生成的对应类就可以
+         *
+         * @return
+         */
+          int getLayoutId();
+
+        /**
+         * 初始化View的要实现的默认值 正常应该通过ViewModel驱动到xml 或者Activity中
+         */
+          void initViews();
+    }
+
 }

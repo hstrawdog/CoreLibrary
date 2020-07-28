@@ -16,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.jetpack.package1.VmTestActivity"></activity>
+        <activity android:name=".demo.FragmentTestActivity"></activity>
+        <activity android:name=".demo.login.LoginActivity" />
+        <activity
+            android:name=".ui.jetpack.package1.VmTestActivity"
+            android:label="ViewModel 测试" />
         <activity android:name=".ui.jetpack.dagger.DaggerActivity" />
         <activity
             android:name=".ui.matrix.MatrixActivity"

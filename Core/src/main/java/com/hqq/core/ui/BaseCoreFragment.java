@@ -24,7 +24,7 @@ import com.hqq.core.widget.LoadingView;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseFragment extends Fragment implements ICreateRootViewBuilder.IFragmentBuilder, View.OnClickListener {
+public abstract class BaseCoreFragment extends Fragment implements ICreateRootViewBuilder.IFragmentBuilder, View.OnClickListener {
     /**
      * 缓存根布局对象
      */
@@ -160,7 +160,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
      * 关联主界面 <b>只有在使用自定义View时使用</b>
      */
     @Override
-    public View getLayoutView(ViewGroup viewGroup) {
+    public View getLayoutView(ViewGroup parent) {
         return null;
     }
 

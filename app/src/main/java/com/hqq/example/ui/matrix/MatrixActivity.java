@@ -45,16 +45,17 @@ public class MatrixActivity extends BaseCoreActivity {
     public int getLayoutViewId() {
         return R.layout.activity_matrix;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void initView() {
-        mButton47=findViewById(R.id.button47);
-        mButton46=findViewById(R.id.button46);
-        mButton45=findViewById(R.id.button45);
-        mButton44=findViewById(R.id.button44);
-        mButton43=findViewById(R.id.button43);
-        mButton42=findViewById(R.id.button42);
-        mButton41=findViewById(R.id.button41);
+        mButton47 = findViewById(R.id.button47);
+        mButton46 = findViewById(R.id.button46);
+        mButton45 = findViewById(R.id.button45);
+        mButton44 = findViewById(R.id.button44);
+        mButton43 = findViewById(R.id.button43);
+        mButton42 = findViewById(R.id.button42);
+        mButton41 = findViewById(R.id.button41);
 
 
         mButton41.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +167,6 @@ public class MatrixActivity extends BaseCoreActivity {
             }
         });
     }
-
 
 
 }

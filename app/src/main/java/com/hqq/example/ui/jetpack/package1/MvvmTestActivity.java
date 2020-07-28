@@ -5,7 +5,6 @@ import android.content.Intent;
 
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableArrayMap;
-import androidx.databinding.ObservableMap;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
