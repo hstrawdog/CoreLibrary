@@ -11,11 +11,11 @@ import androidx.lifecycle.ViewModel;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class BaseViewModel extends ViewModel {
+public abstract class BaseViewModel extends ViewModel {
     /**
      * 是否显示Loading
      */
-   protected MutableLiveData<Boolean> mShowLoading = new MutableLiveData<>();
+    protected MutableLiveData<Boolean> mShowLoading = new MutableLiveData<>();
     /**
      * 显示Toast
      */
@@ -32,4 +32,5 @@ public class BaseViewModel extends ViewModel {
         mShowToast.setValue(showToast);
         return this;
     }
+
 }

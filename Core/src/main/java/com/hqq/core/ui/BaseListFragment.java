@@ -20,7 +20,7 @@ import com.hqq.core.ui.model.BaseListModel;
  */
 public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseCoreFragment implements
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
-        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView<T> {
+        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.IBaseListModelView<T> {
     protected RecyclerView mRcList;
     protected T mAdapter;
     /**
@@ -87,8 +87,8 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseC
     }
 
     @Override
-    public int addPageCount() {
-        return (mPageCount++);
+    public void addPageCount() {
+        mPageCount++;
     }
 
     @Override

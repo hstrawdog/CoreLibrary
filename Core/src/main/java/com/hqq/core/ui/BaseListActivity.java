@@ -23,7 +23,7 @@ import com.hqq.core.ui.model.BaseListModel;
  */
 public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseCoreActivity implements
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
-        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.BaseListModelView<T> {
+        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.IBaseListModelView<T> {
     protected RecyclerView mRcList;
     protected T mAdapter;
     protected int mPageSize = BaseCommonsKey.PAGE_SIZE;
@@ -106,8 +106,8 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseC
     }
 
     @Override
-    public int addPageCount() {
-        return (mPageCount++);
+    public void addPageCount() {
+        mPageCount = mPageCount + 1;
     }
 
     @Override

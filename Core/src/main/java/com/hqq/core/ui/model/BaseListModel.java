@@ -33,13 +33,13 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @Descrive :
  */
 public class BaseListModel {
-    BaseListModelView mBaseListModelView;
+    IBaseListModelView mBaseListModelView;
     View mViewEmptyFoot;
     protected CusPtrClassicFrameLayout mPtrPullDown;
     Context mContext;
     private int mDefLayoutEmptyViewById = R.layout.layout_load_more_empty;
 
-    public BaseListModel(BaseListModelView baseListModelView, Context context) {
+    public BaseListModel(IBaseListModelView baseListModelView, Context context) {
         mBaseListModelView = baseListModelView;
         mContext = context;
     }
@@ -290,7 +290,7 @@ public class BaseListModel {
      * m->v 的接口
      * k  adapter
      */
-    public interface BaseListModelView<K extends BaseQuickAdapter> extends
+    public interface IBaseListModelView<K extends BaseQuickAdapter> extends
             BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
             BaseQuickAdapter.OnItemChildClickListener {
 
@@ -313,7 +313,7 @@ public class BaseListModel {
          *
          * @return
          */
-        int addPageCount();
+        void addPageCount();
 
         /**
          * 是否加载更多

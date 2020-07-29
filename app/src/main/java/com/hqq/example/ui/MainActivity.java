@@ -3,11 +3,13 @@ package com.hqq.example.ui;
 import android.content.Intent;
 import android.view.KeyEvent;
 
-import com.hqq.core.ui.BaseListActivity;
+import androidx.databinding.ViewDataBinding;
+
+import com.hqq.core.ui.vm.BaseListActivity;
+import com.hqq.core.ui.vm.BaseListViewModel;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
-import com.hqq.example.demo.FragmentTestActivity;
 import com.hqq.example.demo.login.LoginActivity;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
@@ -27,6 +29,8 @@ import com.hqq.example.ui.view.BlackAndWhiteActivity;
 import com.hqq.example.ui.view.SvgActivity;
 import com.hqq.example.ui.web.WebActivity;
 
+import java.util.ArrayList;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.iblibrary
@@ -35,7 +39,7 @@ import com.hqq.example.ui.web.WebActivity;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class MainActivity extends BaseListActivity<MainAdapter> {
+public class MainActivity extends BaseListActivity<ViewDataBinding, MainActivity.MainModel, MainAdapter> {
 
     private long mExitTime = 0;
 
@@ -45,31 +49,12 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
     }
 
     @Override
-    public void initDefConfig() {
-        super.initDefConfig();
-//        mRootViewBuild.setShowToolBar(false);
+    public void addViewModel() {
     }
 
     @Override
     public void initData() {
-        mAdapter.addData(new MainBean("启动模式", SingleInstanceActivity.class));
-        mAdapter.addData(new MainBean("转场动画", TransitionsAnimationActivity.class));
-        mAdapter.addData(new MainBean("标题/状态栏设置", ToolBarActivity.class));
-        mAdapter.addData(new MainBean("默认图显示", DefImgActivity.class));
-        mAdapter.addData(new MainBean("Recycle 相关", RecycleIndexActivity.class));
-        mAdapter.addData(new MainBean("权限测试", PermissionActivity.class));
-        mAdapter.addData(new MainBean("Dialog系列", TestDialogActivity.class));
-        mAdapter.addData(new MainBean("Shape测试", ShapeTestActivity.class));
-        mAdapter.addData(new MainBean("自定义系列", CustomizeIndexActivity.class));
-        mAdapter.addData(new MainBean("设备信息", BaseInfoActivity.class));
-        mAdapter.addData(new MainBean("网页测试", WebActivity.class));
-        mAdapter.addData(new MainBean("文件路径信息", FilePathActivity.class));
-        mAdapter.addData(new MainBean("适配相关", AdaptationIndexActivity.class));
-        mAdapter.addData(new MainBean("DateBinding测试", LiveDateActivity.class));
-        mAdapter.addData(new MainBean("Throw异常测试", ThrowActivity.class));
-        mAdapter.addData(new MainBean("黑白化测试", BlackAndWhiteActivity.class));
-        mAdapter.addData(new MainBean("换肤测试", SkinAActivity.class));
-        mAdapter.addData(new MainBean("SVG测试", SvgActivity.class));
+        mViewModel.initData();
 //        PermissionActivity.open(this);
         //  startActivity(new Intent(this, EmptyListActivity.class));
         // EditTextActivity.open(this);
@@ -83,7 +68,6 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        SvgActivity.open(this);
 //        EditTextActivity.open(this);
 //        ToastActivity.open(this);
-
 //        CustomizeIndexActivity.open(this);
 //        BezierActivity.open(this);
 //        TemplatesImageActivity.open(this);
@@ -97,8 +81,7 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        MatrixActivity.open(this);
 //        VmTestActivity.open(this);
 //        ViewBindingActivity.open(this);
-//        LoginActivity.open(this);
-        FragmentTestActivity.open(this);
+        LoginActivity.open(this);
     }
 
 
@@ -121,4 +104,33 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
         }
         return super.dispatchKeyEvent(event);
     }
+
+    public static class MainModel extends BaseListViewModel {
+
+
+        @Override
+        public void initData() {
+            ArrayList arrayList = new ArrayList();
+            arrayList.add(new MainBean("启动模式", SingleInstanceActivity.class));
+            arrayList.add(new MainBean("转场动画", TransitionsAnimationActivity.class));
+            arrayList.add(new MainBean("标题/状态栏设置", ToolBarActivity.class));
+            arrayList.add(new MainBean("默认图显示", DefImgActivity.class));
+            arrayList.add(new MainBean("Recycle 相关", RecycleIndexActivity.class));
+            arrayList.add(new MainBean("权限测试", PermissionActivity.class));
+            arrayList.add(new MainBean("Dialog系列", TestDialogActivity.class));
+            arrayList.add(new MainBean("Shape测试", ShapeTestActivity.class));
+            arrayList.add(new MainBean("自定义系列", CustomizeIndexActivity.class));
+            arrayList.add(new MainBean("设备信息", BaseInfoActivity.class));
+            arrayList.add(new MainBean("网页测试", WebActivity.class));
+            arrayList.add(new MainBean("文件路径信息", FilePathActivity.class));
+            arrayList.add(new MainBean("适配相关", AdaptationIndexActivity.class));
+            arrayList.add(new MainBean("DateBinding测试", LiveDateActivity.class));
+            arrayList.add(new MainBean("Throw异常测试", ThrowActivity.class));
+            arrayList.add(new MainBean("黑白化测试", BlackAndWhiteActivity.class));
+            arrayList.add(new MainBean("换肤测试", SkinAActivity.class));
+            arrayList.add(new MainBean("SVG测试", SvgActivity.class));
+            setDate(arrayList);
+        }
+    }
+
 }
