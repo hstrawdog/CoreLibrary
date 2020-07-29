@@ -16,8 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".demo.FragmentTestActivity"></activity>
-        <activity android:name=".demo.login.LoginActivity" />
+        <activity
+            android:name=".demo.FragmentTestActivity"
+            android:label="Fragment 测试" />
+        <activity
+            android:name=".demo.login.LoginActivity"
+            android:label="模拟登陆" />
         <activity
             android:name=".ui.jetpack.package1.VmTestActivity"
             android:label="ViewModel 测试" />

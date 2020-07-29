@@ -29,7 +29,7 @@ public class MvvmTestActivity extends BaseActivity<ActivityMvvmBinding,UserViewM
     }
 
     @Override
-    protected void addViewModel() {
+    public void addViewModel() {
 //       mBinding.setVariable(BR.vm, new ViewModelProvider(this).get(UserViewModel.class));
         mBinding.setVm(new ViewModelProvider(this).get(UserViewModel.class));
         mBinding.setTitle("这是一个变量String");
@@ -47,12 +47,12 @@ public class MvvmTestActivity extends BaseActivity<ActivityMvvmBinding,UserViewM
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_mvvm;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
 
         mBinding.getVm().getLiveData().observeForever(new Observer<User>() {
             @Override

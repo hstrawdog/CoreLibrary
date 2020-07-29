@@ -23,17 +23,17 @@ public static void open(Activity context) {
 
 
     @Override
-    protected void addViewModel() {
+    public void addViewModel() {
         mBinding.setVm(mViewModel);
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_login;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
 
     }
 }

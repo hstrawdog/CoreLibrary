@@ -26,17 +26,17 @@ public class VmTestActivity extends BaseActivity<ActivityVmTestBinding, BaseView
     }
 
     @Override
-    protected void addViewModel() {
+    public void addViewModel() {
         mBinding.setLifecycleOwner(this);
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_vm_test;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
         mBinding.button49.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -7,6 +7,7 @@ import com.hqq.core.ui.BaseListActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
+import com.hqq.example.demo.FragmentTestActivity;
 import com.hqq.example.demo.login.LoginActivity;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
@@ -96,7 +97,8 @@ public class MainActivity extends BaseListActivity<MainAdapter> {
 //        MatrixActivity.open(this);
 //        VmTestActivity.open(this);
 //        ViewBindingActivity.open(this);
-        LoginActivity.open(this);
+//        LoginActivity.open(this);
+        FragmentTestActivity.open(this);
     }
 
 

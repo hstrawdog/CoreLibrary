@@ -1,5 +1,7 @@
 package com.hqq.example.demo;
 
+import android.os.Bundle;
+
 import com.hqq.core.ui.vm.BaseFragment;
 import com.hqq.example.R;
 import com.hqq.example.databinding.FragmentTestBinding;
@@ -14,8 +16,16 @@ import com.hqq.example.ui.jetpack.package1.UserViewModel;
  * @Descrive :
  */
 public class TestFragment extends BaseFragment<FragmentTestBinding, UserViewModel> {
+    public static TestFragment newInstance() {
+        Bundle args = new Bundle();
+        TestFragment fragment = new TestFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void addViewModel() {
+        mBinding.setVm(mViewModel);
     }
 
     @Override
