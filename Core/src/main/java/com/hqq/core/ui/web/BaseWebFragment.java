@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
 import com.hqq.core.R;
 import com.hqq.core.listenner.ScriptInterface;
 import com.hqq.core.listenner.WebLoadListener;
-import com.hqq.core.ui.BaseCoreFragment;
+import com.hqq.core.ui.BaseFragment;
 import com.hqq.core.utils.BundleUtils;
 import com.hqq.core.utils.RegexUtils;
 import com.hqq.core.utils.VersionUtils;
@@ -37,7 +37,7 @@ import com.hqq.core.utils.VersionUtils;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class BaseWebFragment extends BaseCoreFragment {
+public class BaseWebFragment extends BaseFragment {
 
     private ProgressBar mProgressBar;
     private WebView mWebView;

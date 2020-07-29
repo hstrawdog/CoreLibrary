@@ -1,7 +1,7 @@
 package com.hqq.example.ui.adaptation;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 
 /**
   * @Author : huangqiqiang
@@ -11,7 +11,7 @@ import com.hqq.core.ui.BaseCoreActivity;
   * @Descrive : TODO
   * @Email :  qiqiang213@gmail.com
   */
-public class DefActivity extends BaseCoreActivity {
+public class DefActivity extends BaseActivity {
 
     @Override
     public int getLayoutViewId() {

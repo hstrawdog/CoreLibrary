@@ -2,7 +2,7 @@ package com.hqq.example.ui.view.page;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 import com.hqq.example.adapter.IFragmentAdapter;
 
@@ -15,7 +15,7 @@ import com.hqq.example.adapter.IFragmentAdapter;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class IFragmentActivityBuilder extends BaseCoreActivity {
+public class IFragmentActivityBuilder extends BaseActivity {
 
     ViewPager mVpPage;
 

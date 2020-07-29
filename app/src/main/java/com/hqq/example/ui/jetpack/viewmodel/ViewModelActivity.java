@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 import com.hqq.example.ui.jetpack.livedata.User;
@@ -22,7 +22,7 @@ import com.hqq.example.ui.jetpack.livedata.User;
  * @Descrive :
  * 正常 ViewModel 搭配LiveData 使用
  */
-public class ViewModelActivity extends BaseCoreActivity {
+public class ViewModelActivity extends BaseActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, ViewModelActivity.class);

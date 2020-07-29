@@ -3,7 +3,7 @@ package com.hqq.example.ui.view;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 /**
@@ -14,7 +14,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class EditTextActivity extends BaseCoreActivity {
+public class EditTextActivity extends BaseActivity {
     public static void open(Activity context) {
         Intent starter = new Intent(context, EditTextActivity.class);
         context.startActivityForResult(starter, -1);

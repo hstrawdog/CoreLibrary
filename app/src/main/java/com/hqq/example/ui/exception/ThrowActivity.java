@@ -2,9 +2,8 @@ package com.hqq.example.ui.exception;
 
 
 import android.view.View;
-import android.widget.Button;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
@@ -17,7 +16,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :异常
  */
-public class ThrowActivity extends BaseCoreActivity {
+public class ThrowActivity extends BaseActivity {
 
 
     @Override

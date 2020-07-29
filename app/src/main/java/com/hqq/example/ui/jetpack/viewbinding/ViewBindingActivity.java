@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.BR;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityViewBindingBinding;
@@ -24,7 +24,7 @@ import com.hqq.example.ui.jetpack.package1.UserViewModel;
  * 旧版官方文档 https://www.jb51.net/article/182708.htm
  * 错误解决 https://www.it610.com/article/1281824114532696064.htm
  */
-public class ViewBindingActivity extends BaseCoreActivity {
+public class ViewBindingActivity extends BaseActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, ViewBindingActivity.class);

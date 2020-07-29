@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseCoreFragment;
+import com.hqq.core.ui.BaseFragment;
 
 /**
  * @Author : huangqiqiang
@@ -14,7 +14,7 @@ import com.hqq.core.ui.BaseCoreFragment;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class TabFragment extends BaseCoreFragment {
+public class TabFragment extends BaseFragment {
     @Override
     public int getLayoutViewId() {
         return 0;

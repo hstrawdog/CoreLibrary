@@ -32,14 +32,14 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class BaseListModel {
+public class BaseListModelView {
     IBaseListModelView mBaseListModelView;
     View mViewEmptyFoot;
     protected CusPtrClassicFrameLayout mPtrPullDown;
     Context mContext;
     private int mDefLayoutEmptyViewById = R.layout.layout_load_more_empty;
 
-    public BaseListModel(IBaseListModelView baseListModelView, Context context) {
+    public BaseListModelView(IBaseListModelView baseListModelView, Context context) {
         mBaseListModelView = baseListModelView;
         mContext = context;
     }

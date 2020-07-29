@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.hqq.core.adapter.BaseFragmentAdapter;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 
@@ -18,7 +18,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class TabLayoutActivity extends BaseCoreActivity {
+public class TabLayoutActivity extends BaseActivity {
     TabLayout mTbTablayout1;
     ViewPager mVpPage;
     TabLayout mTbTablayout2;

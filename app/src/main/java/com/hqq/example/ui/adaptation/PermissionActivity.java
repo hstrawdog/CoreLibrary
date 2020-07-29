@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.hqq.core.permission.PermissionsResult;
 import com.hqq.core.permission.PermissionsUtils;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.R;
 
@@ -18,7 +18,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class PermissionActivity extends BaseCoreActivity {
+public class PermissionActivity extends BaseActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, PermissionActivity.class);

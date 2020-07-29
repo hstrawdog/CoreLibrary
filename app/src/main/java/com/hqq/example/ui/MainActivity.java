@@ -5,7 +5,7 @@ import android.view.KeyEvent;
 
 import androidx.databinding.ViewDataBinding;
 
-import com.hqq.core.ui.vm.BaseListActivity;
+import com.hqq.core.ui.vm.BaseVmListActivity;
 import com.hqq.core.ui.vm.BaseListViewModel;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
@@ -39,9 +39,7 @@ import java.util.ArrayList;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class MainActivity extends BaseListActivity<ViewDataBinding, MainActivity.MainModel, MainAdapter> {
-
-    private long mExitTime = 0;
+public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivity.MainModel, MainAdapter> {
 
     @Override
     public MainAdapter initAdapter() {
@@ -84,7 +82,7 @@ public class MainActivity extends BaseListActivity<ViewDataBinding, MainActivity
         LoginActivity.open(this);
     }
 
-
+    private long mExitTime = 0;
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {

@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import androidx.annotation.RequiresApi;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 
@@ -24,7 +24,7 @@ import com.hqq.example.R;
  * @Descrive : 矩阵的简单使用
  * 参考 https://blog.csdn.net/MonaLisaTearr/article/details/80177726
  */
-public class MatrixActivity extends BaseCoreActivity {
+public class MatrixActivity extends BaseActivity {
 
 
     Button mButton41;

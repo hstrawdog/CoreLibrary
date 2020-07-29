@@ -1,10 +1,6 @@
 package com.hqq.example.ui.soft.hide.keyboard;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils;
 import com.hqq.example.R;
 
@@ -17,7 +13,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class SoftHideKeyBoardScrollActivity extends BaseCoreActivity {
+public class SoftHideKeyBoardScrollActivity extends BaseActivity {
 
 
 

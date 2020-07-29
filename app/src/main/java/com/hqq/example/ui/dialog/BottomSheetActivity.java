@@ -3,7 +3,7 @@ package com.hqq.example.ui.dialog;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 import com.hqq.example.dialog.FoldFullBottomSheet;
 import com.hqq.example.dialog.FullBottomSheet;
@@ -17,7 +17,7 @@ import com.hqq.example.dialog.FullBottomSheet;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class BottomSheetActivity extends BaseCoreActivity {
+public class BottomSheetActivity extends BaseActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, BottomSheetActivity.class);

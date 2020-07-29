@@ -2,7 +2,7 @@ package com.hqq.example.demo;
 
 import android.os.Bundle;
 
-import com.hqq.core.ui.vm.BaseFragment;
+import com.hqq.core.ui.vm.BaseVmFragment;
 import com.hqq.example.R;
 import com.hqq.example.databinding.FragmentTestBinding;
 import com.hqq.example.ui.jetpack.package1.UserViewModel;
@@ -15,7 +15,7 @@ import com.hqq.example.ui.jetpack.package1.UserViewModel;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class TestFragment extends BaseFragment<FragmentTestBinding, UserViewModel> {
+public class TestFragment extends BaseVmFragment<FragmentTestBinding, UserViewModel> {
     public static TestFragment newInstance() {
         Bundle args = new Bundle();
         TestFragment fragment = new TestFragment();

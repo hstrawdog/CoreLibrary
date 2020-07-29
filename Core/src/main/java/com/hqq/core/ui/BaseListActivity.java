@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.BaseCommonsKey;
-import com.hqq.core.ui.model.BaseListModel;
+import com.hqq.core.ui.model.BaseListModelView;
 
 /**
  * @Author : huangqiqiang
@@ -21,15 +21,15 @@ import com.hqq.core.ui.model.BaseListModel;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseCoreActivity implements
+public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseActivity implements
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
-        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.IBaseListModelView<T> {
+        BaseQuickAdapter.OnItemChildClickListener, BaseListModelView.IBaseListModelView<T> {
     protected RecyclerView mRcList;
     protected T mAdapter;
     protected int mPageSize = BaseCommonsKey.PAGE_SIZE;
     protected int mPageCount = 1;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected BaseListModel mBaseListModel;
+    protected BaseListModelView mBaseListModel;
 
     @Override
     public int getLayoutViewId() {
@@ -50,7 +50,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseC
     @Override
     public View getLayoutView(ViewGroup group) {
         if (getLayoutViewId() <= 0) {
-            return BaseListModel.createRecycleView(this);
+            return BaseListModelView.createRecycleView(this);
         } else {
             return null;
         }
@@ -62,7 +62,7 @@ public abstract class BaseListActivity<T extends BaseQuickAdapter> extends BaseC
     @Override
     @CallSuper
     public void initView() {
-        mBaseListModel = new BaseListModel(this, this);
+        mBaseListModel = new BaseListModelView(this, this);
         mLayoutManager = getRcLayoutManager();
         mAdapter = initAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());

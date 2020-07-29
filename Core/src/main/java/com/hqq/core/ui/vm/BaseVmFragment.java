@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hqq.core.ui.BaseCoreFragment;
+import com.hqq.core.ui.BaseFragment;
 import com.hqq.core.ui.builder.ICreateRootViewBuilder;
 import com.hqq.core.utils.ToastUtils;
 
@@ -20,9 +20,9 @@ import java.lang.reflect.Type;
  * @FileName :   BaseFragment
  * @Date : 2020/7/28 0028  下午 5:36
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive :  同理Activity
  */
-public abstract class BaseFragment<T extends ViewDataBinding, K extends BaseViewModel> extends BaseCoreFragment implements ICreateRootViewBuilder.IBaseVMBuilder {
+public abstract class BaseVmFragment<T extends ViewDataBinding, K extends BaseViewModel> extends BaseFragment implements ICreateRootViewBuilder.IBaseVMBuilder {
     protected T mBinding;
     protected K mViewModel;
 
@@ -79,7 +79,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, K extends BaseView
         }
     }
 
-    private K createViewModel(BaseFragment tkBaseActivity, Class modelClass) {
+    private K createViewModel(BaseVmFragment tkBaseActivity, Class modelClass) {
         return (K) new ViewModelProvider(tkBaseActivity).get(modelClass);
     }
 

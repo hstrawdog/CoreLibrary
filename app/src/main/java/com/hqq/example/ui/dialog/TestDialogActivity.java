@@ -4,7 +4,6 @@ package com.hqq.example.ui.dialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 
 import com.hqq.example.R;
 import com.hqq.example.dialog.BottomDialog;
@@ -15,7 +14,7 @@ import com.hqq.example.dialog.LeftDialog;
 import com.hqq.example.dialog.RightDialog;
 import com.hqq.example.dialog.SelectADialog;
 import com.hqq.example.dialog.SelectDialog;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 
 
 /**
@@ -26,7 +25,7 @@ import com.hqq.core.ui.BaseCoreActivity;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class TestDialogActivity extends BaseCoreActivity {
+public class TestDialogActivity extends BaseActivity {
 
 
     public static void open(Activity context) {

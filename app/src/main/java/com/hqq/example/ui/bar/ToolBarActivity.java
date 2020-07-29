@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.example.R;
@@ -20,7 +20,7 @@ import com.hqq.example.R;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class ToolBarActivity extends BaseCoreActivity {
+public class ToolBarActivity extends BaseActivity {
     public static void open(Activity context) {
         Intent starter = new Intent(context, ToolBarActivity.class);
         context.startActivityForResult(starter, -1);

@@ -1,13 +1,11 @@
 package com.hqq.example.demo;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
-import com.hqq.core.ui.vm.BaseActivity;
+import com.hqq.core.ui.vm.BaseVmActivity;
 import com.hqq.core.ui.vm.BaseViewModel;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityFragmentTestBinding;
@@ -20,7 +18,7 @@ import com.hqq.example.databinding.ActivityFragmentTestBinding;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class FragmentTestActivity extends BaseActivity<ActivityFragmentTestBinding, BaseViewModel> {
+public class FragmentTestActivity extends BaseVmActivity<ActivityFragmentTestBinding, BaseViewModel> {
     public static void open(Activity context) {
         Intent starter = new Intent(context, FragmentTestActivity.class);
         context.startActivityForResult(starter, -1);

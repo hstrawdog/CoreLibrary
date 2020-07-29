@@ -6,7 +6,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.core.utils.TextSpannableBuilder;
 import com.hqq.core.utils.ToastUtils;
@@ -21,7 +21,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class TextViewActivity extends BaseCoreActivity {
+public class TextViewActivity extends BaseActivity {
     TextView mTextView8;
     TextView mTextView9;
     TextView mTextView10;

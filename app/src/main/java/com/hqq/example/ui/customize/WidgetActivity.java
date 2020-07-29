@@ -1,6 +1,6 @@
 package com.hqq.example.ui.customize;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 /**
@@ -11,7 +11,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class WidgetActivity extends BaseCoreActivity {
+public class WidgetActivity extends BaseActivity {
 
 
     @Override

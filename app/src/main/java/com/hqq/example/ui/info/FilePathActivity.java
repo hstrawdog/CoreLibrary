@@ -2,7 +2,7 @@ package com.hqq.example.ui.info;
 
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.FilePathUtils;
 import com.hqq.core.utils.TextSpannableBuilder;
 import com.hqq.example.R;
@@ -16,7 +16,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class FilePathActivity extends BaseCoreActivity {
+public class FilePathActivity extends BaseActivity {
 
 
     TextView mTvInfo;

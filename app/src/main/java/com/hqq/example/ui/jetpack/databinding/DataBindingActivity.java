@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.BR;
 import com.hqq.example.R;
 import com.hqq.example.ui.jetpack.livedata.User;
@@ -21,7 +21,7 @@ import com.hqq.example.ui.jetpack.livedata.User;
  * @Descrive : dataBinding  双向绑定 需要实现BaseObservable 进行观察 以及通知回调
  * 注意 setVariable
  */
-public class DataBindingActivity extends BaseCoreActivity {
+public class DataBindingActivity extends BaseActivity {
     public static void open(Activity context) {
         Intent starter = new Intent(context, DataBindingActivity.class);
         context.startActivityForResult(starter, -1);

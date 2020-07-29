@@ -3,7 +3,7 @@ package com.hqq.example.ui;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.core.utils.shape.BaseShapeBuilder;
 import com.hqq.example.R;
@@ -16,7 +16,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class ShapeTestActivity extends BaseCoreActivity {
+public class ShapeTestActivity extends BaseActivity {
 
     TextView mTextView3;
 

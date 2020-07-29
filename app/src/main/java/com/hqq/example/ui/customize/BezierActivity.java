@@ -3,7 +3,7 @@ package com.hqq.example.ui.customize;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 /**
@@ -14,7 +14,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class BezierActivity extends BaseCoreActivity {
+public class BezierActivity extends BaseActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, BezierActivity.class);

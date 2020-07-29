@@ -4,10 +4,10 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
-public class ViewAnimateActivity extends BaseCoreActivity {
+public class ViewAnimateActivity extends BaseActivity {
 
 
     private android.widget.TextView mTextView6;

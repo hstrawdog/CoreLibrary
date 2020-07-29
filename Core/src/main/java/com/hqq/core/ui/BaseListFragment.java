@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.BaseCommonsKey;
-import com.hqq.core.ui.model.BaseListModel;
+import com.hqq.core.ui.model.BaseListModelView;
 
 /**
  * @Author : huangqiqiang
@@ -18,9 +18,9 @@ import com.hqq.core.ui.model.BaseListModel;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseCoreFragment implements
+public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment implements
         BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener,
-        BaseQuickAdapter.OnItemChildClickListener, BaseListModel.IBaseListModelView<T> {
+        BaseQuickAdapter.OnItemChildClickListener, BaseListModelView.IBaseListModelView<T> {
     protected RecyclerView mRcList;
     protected T mAdapter;
     /**
@@ -31,7 +31,7 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseC
     protected int mPageSize = BaseCommonsKey.PAGE_SIZE;
     protected int mPageCount = 1;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected BaseListModel mBaseListModel;
+    protected BaseListModelView mBaseListModel;
 
     @Override
     public int getLayoutViewId() {
@@ -41,7 +41,7 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseC
     @Override
     public View getLayoutView(ViewGroup group) {
         if (getLayoutViewId() <= 0) {
-            return BaseListModel.createRecycleView(getContext());
+            return BaseListModelView.createRecycleView(getContext());
         } else {
             return null;
         }
@@ -51,7 +51,7 @@ public abstract class BaseListFragment<T extends BaseQuickAdapter> extends BaseC
 
     @Override
     public void initView() {
-        mBaseListModel = new BaseListModel(this, getContext());
+        mBaseListModel = new BaseListModelView(this, getContext());
         mLayoutManager = getRcLayoutManager();
         mAdapter = initAdapter();
         mRcList = mBaseListModel.checkRecycleView(mRcList, mRootViewBuild.getRootView());

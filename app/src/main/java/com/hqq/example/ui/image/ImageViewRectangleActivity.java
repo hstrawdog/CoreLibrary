@@ -4,7 +4,7 @@ package com.hqq.example.ui.image;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 /**
@@ -15,7 +15,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : 长方形控件 正方形图片测试
  */
-public class ImageViewRectangleActivity extends BaseCoreActivity {
+public class ImageViewRectangleActivity extends BaseActivity {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, ImageViewRectangleActivity.class);

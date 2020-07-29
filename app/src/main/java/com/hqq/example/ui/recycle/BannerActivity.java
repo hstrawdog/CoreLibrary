@@ -1,7 +1,7 @@
 package com.hqq.example.ui.recycle;
 
 import com.hqq.core.recycle.RecycleViewBanner;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class BannerActivity extends BaseCoreActivity {
+public class BannerActivity extends BaseActivity {
 
     RecycleViewBanner mRcBanner;
     RecycleViewBanner mRcBanner2;

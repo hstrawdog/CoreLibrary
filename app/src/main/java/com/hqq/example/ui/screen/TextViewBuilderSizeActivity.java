@@ -1,6 +1,6 @@
 package com.hqq.example.ui.screen;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 /**
@@ -11,7 +11,7 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class TextViewBuilderSizeActivity extends BaseCoreActivity {
+public class TextViewBuilderSizeActivity extends BaseActivity {
 
     @Override
     public int getLayoutViewId() {

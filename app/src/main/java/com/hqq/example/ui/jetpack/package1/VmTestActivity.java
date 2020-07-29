@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.hqq.core.ui.vm.BaseActivity;
+import com.hqq.core.ui.vm.BaseVmActivity;
 import com.hqq.core.ui.vm.BaseViewModel;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityVmTestBinding;
@@ -19,7 +19,7 @@ import com.hqq.example.databinding.ActivityVmTestBinding;
  * @Descrive :
  */
 
-public class VmTestActivity extends BaseActivity<ActivityVmTestBinding, BaseViewModel> {
+public class VmTestActivity extends BaseVmActivity<ActivityVmTestBinding, BaseViewModel> {
     public static void open(Context context) {
         Intent starter = new Intent(context, VmTestActivity.class);
         context.startActivity(starter);

@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hqq.core.ui.vm.BaseActivity;
+import com.hqq.core.ui.vm.BaseVmActivity;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityMvvmBinding;
 import com.hqq.example.ui.jetpack.livedata.User;
@@ -22,7 +22,7 @@ import com.hqq.example.ui.jetpack.livedata.User;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : ViewBinding + ViewModel + liveData
  */
-public class MvvmTestActivity extends BaseActivity<ActivityMvvmBinding,UserViewModel> {
+public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding,UserViewModel> {
     public static void open(Activity context) {
         Intent starter = new Intent(context, MvvmTestActivity.class);
         context.startActivityForResult(starter, -1);

@@ -3,7 +3,7 @@ package com.hqq.example.demo.login;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.vm.BaseActivity;
+import com.hqq.core.ui.vm.BaseVmActivity;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityLoginBinding;
  /**
@@ -14,7 +14,7 @@ import com.hqq.example.databinding.ActivityLoginBinding;
   * @Email :  qiqiang213@gmail.com
   * @Descrive :
   */
-public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginModel> {
+public class LoginActivity extends BaseVmActivity<ActivityLoginBinding, LoginModel> {
 
 public static void open(Activity context) {
     Intent starter = new Intent(context, LoginActivity.class);

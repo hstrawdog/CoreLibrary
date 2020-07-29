@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.lifecycle.Observer;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 
 
@@ -21,7 +21,7 @@ import com.hqq.core.utils.log.LogUtils;
  * @Descrive :
  * LiveData  change 需要在ui前台才会触发 并不能再后台执行
  */
-public class LiveDateActivity extends BaseCoreActivity {
+public class LiveDateActivity extends BaseActivity {
 
 
     public static void open(Activity context) {

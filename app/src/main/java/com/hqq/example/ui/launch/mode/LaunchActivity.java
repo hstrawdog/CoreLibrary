@@ -2,7 +2,7 @@ package com.hqq.example.ui.launch.mode;
 
 import android.view.View;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 
@@ -14,7 +14,7 @@ import com.hqq.example.R;
  * @Email : qiqiang213@gmail.com
  * @Descrive : 启动模式
  */
-public class LaunchActivity extends BaseCoreActivity {
+public class LaunchActivity extends BaseActivity {
 
     @Override
     public int getLayoutViewId() {

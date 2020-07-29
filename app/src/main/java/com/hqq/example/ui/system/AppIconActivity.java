@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.view.View;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
 
 /**
@@ -18,7 +18,7 @@ import com.hqq.example.R;
  * @Email : qiqiang213@gmail.com
  * @Descrive : 替换桌面图标
  */
-public class AppIconActivity extends BaseCoreActivity {
+public class AppIconActivity extends BaseActivity {
     public static void open(Context context) {
         Intent starter = new Intent(context, AppIconActivity.class);
         context.startActivity(starter);

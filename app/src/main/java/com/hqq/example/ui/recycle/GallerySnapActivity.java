@@ -7,7 +7,7 @@ import com.hqq.example.R;
 import com.hqq.example.adapter.SnapHelperAdapter;
 import com.hqq.core.recycle.gallery.GallerySnapHelper;
 import com.hqq.core.recycle.gallery.RecyclerCoverFlow;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class GallerySnapActivity extends BaseCoreActivity {
+public class GallerySnapActivity extends BaseActivity {
 
     RecyclerView mRecyclerview;
     ArrayList<String> mData;

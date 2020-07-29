@@ -3,7 +3,7 @@ package com.hqq.example.ui.view;
 import android.content.Context;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
  /**
   * @Author : huangqiqiang
@@ -13,7 +13,7 @@ import com.hqq.example.R;
   * @Email :  qiqiang213@gmail.com
   * @Descrive :
   */
-public class SvgActivity extends BaseCoreActivity {
+public class SvgActivity extends BaseActivity {
 
     public static void open(Context context) {
         Intent starter = new Intent(context, SvgActivity.class);

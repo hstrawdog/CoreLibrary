@@ -1,6 +1,6 @@
 package com.hqq.example.ui.image;
 
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.example.R;
  /**
   * @Author : huangqiqiang
@@ -10,7 +10,7 @@ import com.hqq.example.R;
   * @Email :  qiqiang213@gmail.com
   * @Descrive :
   */
-public class ImageViewRectangle2Activity extends BaseCoreActivity {
+public class ImageViewRectangle2Activity extends BaseActivity {
 
      @Override
      public int getLayoutViewId() {

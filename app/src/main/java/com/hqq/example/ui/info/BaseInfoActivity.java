@@ -3,7 +3,7 @@ package com.hqq.example.ui.info;
 import android.widget.TextView;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 import com.hqq.core.utils.CacheUtil;
 import com.hqq.core.utils.ScreenUtils;
 import com.hqq.core.utils.TextSpannableBuilder;
@@ -19,7 +19,7 @@ import com.hqq.core.utils.VersionUtils;
  * @Descrive : TODO
  * @Email :
  */
-public class BaseInfoActivity extends BaseCoreActivity {
+public class BaseInfoActivity extends BaseActivity {
 
     TextView mTvInfo;
 

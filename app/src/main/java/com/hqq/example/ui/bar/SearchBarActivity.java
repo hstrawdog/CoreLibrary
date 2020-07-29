@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.hqq.example.R;
 import com.hqq.example.widget.BaseToolBarSearch;
-import com.hqq.core.ui.BaseCoreActivity;
+import com.hqq.core.ui.BaseActivity;
 
 /**
  * @Author : huangqiqiang
@@ -15,7 +15,7 @@ import com.hqq.core.ui.BaseCoreActivity;
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-public class SearchBarActivity extends BaseCoreActivity {
+public class SearchBarActivity extends BaseActivity {
     public static void open(Activity context) {
         Intent starter = new Intent(context, SearchBarActivity.class);
         context.startActivityForResult(starter, -1);

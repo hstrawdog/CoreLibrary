@@ -10,26 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.R;
-import com.hqq.core.ui.model.BaseListModel;
+import com.hqq.core.ui.model.BaseListModelView;
 
 import java.util.ArrayList;
 
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.core.ui.vm
- * @FileName :   BaseListActivity
- * @Date : 2020/7/29 0029  上午 9:54
+ * @FileName :   BaseListFragment
+ * @Date : 2020/7/29 0029  下午 2:29
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public abstract class BaseListActivity<T extends ViewDataBinding, K extends BaseListViewModel, AD extends BaseQuickAdapter>
-        extends BaseActivity<T, K> implements BaseListModel.IBaseListModelView<AD> {
-
+public abstract class BaseVmListFragment<T extends ViewDataBinding, K extends BaseListViewModel, AD extends BaseQuickAdapter>
+        extends BaseVmFragment<T, K> implements BaseListModelView.IBaseListModelView<AD> {
     protected RecyclerView mRcList;
     protected AD mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected BaseListModel mBaseListModel;
+    protected BaseListModelView mBaseListModel;
 
+    @Override
+    public void addViewModel() {
+
+    }
 
     @Override
     public int getLayoutId() {
@@ -38,7 +41,7 @@ public abstract class BaseListActivity<T extends ViewDataBinding, K extends Base
 
     @Override
     public void initViews() {
-        mBaseListModel = new BaseListModel(this, this);
+        mBaseListModel = new BaseListModelView(this, getContext());
         mLayoutManager = getRcLayoutManager();
         mAdapter = initAdapter();
 
@@ -104,7 +107,7 @@ public abstract class BaseListActivity<T extends ViewDataBinding, K extends Base
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mBaseListModel.onDestroy();
         mBaseListModel = null;
@@ -112,7 +115,7 @@ public abstract class BaseListActivity<T extends ViewDataBinding, K extends Base
 
     @Override
     public RecyclerView.LayoutManager getRcLayoutManager() {
-        return new LinearLayoutManager(this);
+        return new LinearLayoutManager(getContext());
     }
 
 
@@ -124,6 +127,4 @@ public abstract class BaseListActivity<T extends ViewDataBinding, K extends Base
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
     }
-
-
 }

@@ -23,7 +23,7 @@ import com.hqq.core.widget.LoadingView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : 1.
  */
-public abstract class BaseCoreActivity extends AppCompatActivity implements ICreateRootViewBuilder.IActivityBuilder, View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements ICreateRootViewBuilder.IActivityBuilder, View.OnClickListener {
     /**
      * 当前对象
      */
