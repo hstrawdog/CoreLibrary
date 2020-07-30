@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 
 /**
  * @Author : huangqiqiang

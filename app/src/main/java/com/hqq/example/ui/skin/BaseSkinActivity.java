@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.app.SkinAppCompatDelegateImpl;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
 
 import skin.support.SkinCompatManager;

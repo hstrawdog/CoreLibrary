@@ -1,7 +1,7 @@
 package com.hqq.example.ui.customize;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
  /**
   * @Author : huangqiqiang
   * @Package : com.hqq.core.app.ui.customize

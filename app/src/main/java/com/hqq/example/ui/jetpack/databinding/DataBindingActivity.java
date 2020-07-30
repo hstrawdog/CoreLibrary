@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.BR;
 import com.hqq.example.R;
 import com.hqq.example.ui.jetpack.livedata.User;

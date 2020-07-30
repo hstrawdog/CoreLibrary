@@ -1,7 +1,7 @@
 package com.hqq.example.ui.recycle;
 
 import com.hqq.core.recycle.RecycleViewBanner;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
 
 import java.util.ArrayList;

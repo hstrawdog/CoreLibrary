@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseFragment;
+import com.hqq.core.ui.base.BaseFragment;
 
 /**
  * @Author : huangqiqiang

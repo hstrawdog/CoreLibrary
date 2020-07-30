@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.hqq.core.adapter.BaseFragmentAdapter;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
 
 

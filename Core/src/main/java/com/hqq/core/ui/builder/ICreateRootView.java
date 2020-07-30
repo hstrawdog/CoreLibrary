@@ -18,7 +18,7 @@ import androidx.lifecycle.Lifecycle;
  * @Descrive :
  * - 目的 进行接口隔离
  */
-public interface ICreateRootViewBuilder {
+public interface ICreateRootView {
     /**
      * 获取id
      *
@@ -43,7 +43,7 @@ public interface ICreateRootViewBuilder {
      */
     void initView();
 
-    interface IActivityBuilder extends ICreateRootViewBuilder {
+    interface IActivityRootView extends ICreateRootView {
 
         /**
          * 进入动画
@@ -66,7 +66,7 @@ public interface ICreateRootViewBuilder {
 
     }
 
-    interface IFragmentBuilder extends ICreateRootViewBuilder {
+    interface IFragmentRootView extends ICreateRootView {
 
         /**
          * 是否延迟加载
@@ -77,7 +77,7 @@ public interface ICreateRootViewBuilder {
         boolean isLazyLoad();
     }
 
-    interface IBaseDialogFragmentBuilder extends ICreateRootViewBuilder {
+    interface IBaseDialogFragment extends ICreateRootView {
 
         /**
          * 显示dialog
@@ -94,11 +94,11 @@ public interface ICreateRootViewBuilder {
         int getHeight();
     }
 
-    interface IBottomDialogFragmentBuilder extends IBaseDialogFragmentBuilder {
+    interface IBottomDialogFragment extends IBaseDialogFragment {
 
     }
 
-    interface IDialogFragmentBuilder extends IBaseDialogFragmentBuilder {
+    interface IDialogFragment extends IBaseDialogFragment {
         /**
          * dialog 的背景颜色
          *
@@ -129,11 +129,11 @@ public interface ICreateRootViewBuilder {
 
     }
 
-    interface IDialogActivityBuilder extends ICreateRootViewBuilder {
+    interface IDialogActivity extends ICreateRootView {
 
     }
 
-    interface IBaseViewBuilderHolder extends ICreateRootViewBuilder {
+    interface IBaseViewBuilderHolder extends ICreateRootView {
         /**
          * 构建更布局
          *
@@ -145,25 +145,34 @@ public interface ICreateRootViewBuilder {
         void createRootView(ViewGroup parentView, Activity activity, Context context, Lifecycle lifecycle);
     }
 
-
-    interface IBaseVMBuilder{
-        /**
-         * 添加ViewModel 与布局使用的对象
-         */
-          void addViewModel();
-
+    /**
+     * dataBinding Activity 使用
+     */
+    interface IBanding {
         /**
          * 通过布局id 生成对应的 banding类
          * 只是单独使用ViewBanding的话直接用banding生成的对应类就可以
          *
          * @return
          */
-          int getLayoutId();
+        int getLayoutId();
 
         /**
          * 初始化View的要实现的默认值 正常应该通过ViewModel驱动到xml 或者Activity中
          */
-          void initViews();
+        void initViews();
+    }
+
+    /**
+     * 同上  多了一个ViewModel要banding
+     */
+    interface IBaseViewModel extends IBanding {
+        /**
+         * 添加ViewModel 与布局使用的对象
+         */
+        void addViewModel();
+
+
     }
 
 }

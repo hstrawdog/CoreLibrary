@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.hqq.core.permission.PermissionsResult;
 import com.hqq.core.permission.PermissionsUtils;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.R;
 

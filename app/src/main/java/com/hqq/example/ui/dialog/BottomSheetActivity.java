@@ -3,7 +3,7 @@ package com.hqq.example.ui.dialog;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
 import com.hqq.example.dialog.FoldFullBottomSheet;
 import com.hqq.example.dialog.FullBottomSheet;

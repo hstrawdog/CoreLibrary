@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 
 import com.hqq.core.lifecycle.BaseLifecycleObserver;
-import com.hqq.core.ui.builder.ICreateRootViewBuilder;
+import com.hqq.core.ui.builder.ICreateRootView;
 
 /**
  * @Author : huangqiqiang
@@ -22,7 +22,7 @@ import com.hqq.core.ui.builder.ICreateRootViewBuilder;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreateRootViewBuilder.IBaseViewBuilderHolder, BaseLifecycleObserver {
+public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreateRootView.IBaseViewBuilderHolder, BaseLifecycleObserver {
 
     private ViewGroup mParentView;
     Activity mActivity;
@@ -54,7 +54,7 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
         mParentView = parentView;
         mActivity = activity;
         if (getLayoutViewId() <= 0) {
-            mConvertView = parentView;
+            mConvertView = getLayoutView(mParentView);
         } else {
             mConvertView = LayoutInflater.from(context).inflate(getLayoutViewId(), mParentView, false);
         }
@@ -65,6 +65,11 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
 
     @Override
     public void initDefConfig() {
+
+    }
+
+    @Override
+    public void onClick(View view) {
 
     }
 

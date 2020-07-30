@@ -1,18 +1,9 @@
 package com.hqq.core.ui.vm;
 
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.hqq.core.ui.BaseFragment;
-import com.hqq.core.ui.builder.ICreateRootViewBuilder;
-import com.hqq.core.utils.ToastUtils;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import com.hqq.core.ui.binding.BaseBindingFragment;
+import com.hqq.core.ui.builder.ICreateRootView;
 
 /**
  * @Author : huangqiqiang
@@ -22,66 +13,18 @@ import java.lang.reflect.Type;
  * @Email : qiqiang213@gmail.com
  * @Descrive :  同理Activity
  */
-public abstract class BaseVmFragment<T extends ViewDataBinding, K extends BaseViewModel> extends BaseFragment implements ICreateRootViewBuilder.IBaseVMBuilder {
-    protected T mBinding;
+public abstract class BaseVmFragment<T extends ViewDataBinding, K extends BaseViewModel>
+        extends BaseBindingFragment implements ICreateRootView.IBaseViewModel {
     protected K mViewModel;
 
     @Override
-    final public int getLayoutViewId() {
-        return 0;
-    }
-
-    @Override
-    public View getLayoutView(ViewGroup parent) {
-        mBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), parent, false);
-        mBinding.setLifecycleOwner(this);
-        return mBinding.getRoot();
-
-    }
-
-    @Override
     public void initView() {
-        createViewModel();
-        initBaseViewModel();
+        mViewModel = ViewModelFactory.createViewModel(this, getClass(), mViewModel);
+        ViewModelFactory.initBaseViewModel(mViewModel, this, mLoadingView);
         addViewModel();
         initViews();
     }
 
-    /**
-     * 初始化 BaseViewModel中关联ui的字段
-     */
-    private void initBaseViewModel() {
-        mViewModel.mShowLoading.observe(this, aBoolean -> {
-            if (aBoolean) {
-                mLoadingView.show();
-            } else {
-                mLoadingView.dismiss();
-            }
-        });
-        mViewModel.mShowToast.observe(this, s -> ToastUtils.showToast(s));
-    }
-
-    /**
-     * 创建ViewModel 保证不为空
-     * viewModel 的创建需要在 onCreate 之后
-     */
-    private void createViewModel() {
-        if (mViewModel == null) {
-            // 利用反射获取泛型类型 创建ViewModel 对象
-            Class modelClass;
-            Type type = getClass().getGenericSuperclass();
-            if (type instanceof ParameterizedType) {
-                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
-            } else {
-                modelClass = BaseViewModel.class;
-            }
-            mViewModel = createViewModel(this, modelClass);
-        }
-    }
-
-    private K createViewModel(BaseVmFragment tkBaseActivity, Class modelClass) {
-        return (K) new ViewModelProvider(tkBaseActivity).get(modelClass);
-    }
 
 
 }

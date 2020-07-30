@@ -3,7 +3,7 @@ package com.hqq.example.ui;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.ResourcesUtils;
 import com.hqq.core.utils.shape.BaseShapeBuilder;
 import com.hqq.example.R;

@@ -1,4 +1,4 @@
-package com.hqq.core.ui;
+package com.hqq.core.ui.base;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.hqq.core.R;
-import com.hqq.core.ui.builder.ICreateRootViewBuilder;
-import com.hqq.core.ui.builder.RootViewBuilder;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.base.IRootViewImpl;
 import com.hqq.core.utils.log.LogUtils;
 
 
@@ -32,7 +32,7 @@ import com.hqq.core.utils.log.LogUtils;
  * 宽度是全屏
  * 高度自定义
  */
-public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootViewBuilder.IBottomDialogFragmentBuilder {
+public abstract class BaseBottomDialog extends BottomSheetDialogFragment implements ICreateRootView.IBottomDialogFragment {
 
     protected View mRootView = null;
     boolean mLoaded = false;
@@ -40,7 +40,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
     /**
      * 布局创建 容器
      */
-    protected RootViewBuilder mRootViewBuild;
+    protected IRootViewImpl mRootViewBuild;
 
 
     @Override
@@ -52,7 +52,7 @@ public abstract class BaseBottomDialog extends BottomSheetDialogFragment impleme
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mRootView == null) {
-            mRootViewBuild = new RootViewBuilder(this);
+            mRootViewBuild = new IRootViewImpl(this);
             initDefConfig();
             mRootView = mRootViewBuild.buildContentView(this);
         }

@@ -1,4 +1,4 @@
-package com.hqq.core.ui;
+package com.hqq.core.ui.base;
 
 import androidx.fragment.app.Fragment;
 

@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
+import com.hqq.core.ui.BaseViewBuilderHolder;
+import com.hqq.core.ui.dialog.BaseSelectDialog;
 import com.hqq.example.R;
 import com.hqq.example.dialog.BottomDialog;
 import com.hqq.example.dialog.FoldFullBottomSheet;
@@ -12,9 +14,8 @@ import com.hqq.example.dialog.FullBottomSheet;
 import com.hqq.example.dialog.FullDialog;
 import com.hqq.example.dialog.LeftDialog;
 import com.hqq.example.dialog.RightDialog;
-import com.hqq.example.dialog.SelectADialog;
 import com.hqq.example.dialog.SelectDialog;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 
 
 /**
@@ -48,6 +49,7 @@ public class TestDialogActivity extends BaseActivity {
         findViewById(R.id.button17).setOnClickListener(this);
         findViewById(R.id.button18).setOnClickListener(this);
         findViewById(R.id.button28).setOnClickListener(this);
+        findViewById(R.id.button51).setOnClickListener(this);
     }
 
 
@@ -72,16 +74,64 @@ public class TestDialogActivity extends BaseActivity {
                 FullDialog.showDialog(getSupportFragmentManager());
                 break;
             case R.id.button16:
-//                NewRightDialog.showDialog(getSupportFragmentManager());
                 RightDialog.showDialog(getSupportFragmentManager());
                 break;
             case R.id.button17:
                 LeftDialog.showDialog(getSupportFragmentManager());
                 break;
             case R.id.button28:
-                SelectADialog.showDialog(getSupportFragmentManager());
+                new BaseSelectDialog.Builder()
+                        .setBaseViewBuilderHolder(new ViewBuilderHolderA())
+                        .create()
+                        .show(getSupportFragmentManager());
+
+                break;
+
+            case R.id.button51:
+                new BaseSelectDialog.Builder()
+                        .setBaseViewBuilderHolder(new BaseViewBuilderHolder() {
+                            @Override
+                            public int getLayoutViewId() {
+                                return R.layout.view_holder_a;
+                            }
+
+                            @Override
+                            public void initView() {
+
+                            }
+
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .create()
+                        .show(getSupportFragmentManager());
+
+
                 break;
             default:
+        }
+    }
+
+    public static class ViewBuilderHolderA extends BaseViewBuilderHolder {
+        public ViewBuilderHolderA() {
+
+        }
+
+        @Override
+        public int getLayoutViewId() {
+            return R.layout.view_holder_a;
+        }
+
+        @Override
+        public void initView() {
+
+        }
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 

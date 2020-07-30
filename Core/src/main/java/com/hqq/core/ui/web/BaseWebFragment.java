@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
 import com.hqq.core.R;
 import com.hqq.core.listenner.ScriptInterface;
 import com.hqq.core.listenner.WebLoadListener;
-import com.hqq.core.ui.BaseFragment;
+import com.hqq.core.ui.base.BaseFragment;
 import com.hqq.core.utils.BundleUtils;
 import com.hqq.core.utils.RegexUtils;
 import com.hqq.core.utils.VersionUtils;

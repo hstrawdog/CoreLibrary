@@ -7,7 +7,7 @@ import com.hqq.example.R;
 import com.hqq.example.adapter.SnapHelperAdapter;
 import com.hqq.core.recycle.gallery.GallerySnapHelper;
 import com.hqq.core.recycle.gallery.RecyclerCoverFlow;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 
 import java.util.ArrayList;
 

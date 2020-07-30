@@ -10,7 +10,7 @@ import android.view.View;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public interface IRootViewBuilder {
+public interface IRootView {
 
     /**
      * 初始化activity的配置
@@ -24,6 +24,6 @@ public interface IRootViewBuilder {
      *
      * @return rootView
      */
-    View buildContentView(ICreateRootViewBuilder rootViewBuilder);
+    View buildContentView(ICreateRootView rootViewBuilder);
 
 }

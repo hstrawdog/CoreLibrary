@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import androidx.annotation.RequiresApi;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 

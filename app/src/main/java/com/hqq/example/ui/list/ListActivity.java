@@ -8,7 +8,7 @@ import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
-import com.hqq.core.ui.BaseListActivity;
+import com.hqq.core.ui.base.BaseListActivity;
 import com.hqq.example.ui.view.page.IFragmentActivityBuilder;
 import com.hqq.example.ui.bar.ToolBarActivity;
 

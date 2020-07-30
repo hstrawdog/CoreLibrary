@@ -1,4 +1,4 @@
-package com.hqq.core.ui;
+package com.hqq.core.ui.dialog;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,8 +20,8 @@ import com.hqq.core.CoreBuildConfig;
 import com.hqq.core.R;
 import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.listenner.DialogClickListener;
-import com.hqq.core.ui.builder.ICreateRootViewBuilder;
-import com.hqq.core.ui.builder.RootViewBuilder;
+import com.hqq.core.ui.base.IRootViewImpl;
+import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.core.widget.LoadingView;
@@ -39,7 +39,7 @@ import com.hqq.core.widget.LoadingView;
  * - 宽度需要在代码上写死
  * - DialogFragment自带内存泄漏
  */
-public abstract class BaseDialog extends DialogFragment implements ICreateRootViewBuilder.IDialogFragmentBuilder {
+public abstract class BaseDialog extends DialogFragment implements ICreateRootView.IDialogFragment {
 
     protected LoadingView mLoadingView;
     boolean mLoaded = false;
@@ -48,7 +48,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
     /**
      * 布局创建 容器
      */
-    protected RootViewBuilder mRootViewBuild;
+    protected IRootViewImpl mRootViewBuild;
 
     /**
      * 状态栏模式
@@ -72,7 +72,7 @@ public abstract class BaseDialog extends DialogFragment implements ICreateRootVi
         getDialog().getWindow().setWindowAnimations(getAnimation());
         if (mRootView == null) {
             mLoadingView = new LoadingView(getActivity());
-            mRootViewBuild = new RootViewBuilder(this);
+            mRootViewBuild = new IRootViewImpl(this);
             initDefConfig();
             mRootView = mRootViewBuild.buildContentView(this);
             initContentView();

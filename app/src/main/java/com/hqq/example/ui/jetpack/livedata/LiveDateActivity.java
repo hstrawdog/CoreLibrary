@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.lifecycle.Observer;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 
 

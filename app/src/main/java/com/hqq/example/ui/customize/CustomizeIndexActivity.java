@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.hqq.core.ui.BaseListActivity;
+import com.hqq.core.ui.base.BaseListActivity;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
 

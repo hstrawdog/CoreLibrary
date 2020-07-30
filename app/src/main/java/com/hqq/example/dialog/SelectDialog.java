@@ -4,7 +4,7 @@ import android.view.Gravity;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.hqq.core.ui.BaseDialog;
+import com.hqq.core.ui.dialog.BaseDialog;
 import com.hqq.example.R;
 
 /**

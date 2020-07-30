@@ -16,7 +16,7 @@ import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseToolBar;
 import com.hqq.core.toolbar.IToolBar;
 import com.hqq.core.toolbar.IToolBarBuilder;
-import com.hqq.core.ui.builder.ICreateRootViewBuilder;
+import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 
@@ -106,7 +106,7 @@ public class CreateRootViewModel {
      * @param iActivityBuilder
      * @return构建后的View
      */
-    public View createRootView(ICreateRootViewBuilder iActivityBuilder) {
+    public View createRootView(ICreateRootView iActivityBuilder) {
         if (mLayoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
             return createLayoutView(iActivityBuilder);
         } else if (mLayoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
@@ -122,7 +122,7 @@ public class CreateRootViewModel {
      * @param iActivityBuilder
      * @return
      */
-    protected View createFrameLayoutView(ICreateRootViewBuilder iActivityBuilder) {
+    protected View createFrameLayoutView(ICreateRootView iActivityBuilder) {
         FrameLayout frameLayout = new FrameLayout(mActivity.get());
         frameLayout.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
@@ -140,7 +140,7 @@ public class CreateRootViewModel {
      * @param iActivityBuilder
      * @return
      */
-    protected View createLayoutView(ICreateRootViewBuilder iActivityBuilder) {
+    protected View createLayoutView(ICreateRootView iActivityBuilder) {
         LinearLayout layout = new LinearLayout(mActivity.get());
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -152,7 +152,7 @@ public class CreateRootViewModel {
         return layout;
     }
 
-    private View getLayoutView(ICreateRootViewBuilder iActivityBuilder, ViewGroup layout) {
+    private View getLayoutView(ICreateRootView iActivityBuilder, ViewGroup layout) {
         View view;
         if (iActivityBuilder.getLayoutViewId() > 0) {
             view = mActivity.get().getLayoutInflater().inflate(iActivityBuilder.getLayoutViewId(), layout, false);

@@ -5,12 +5,11 @@ import android.view.KeyEvent;
 
 import androidx.databinding.ViewDataBinding;
 
-import com.hqq.core.ui.vm.BaseVmListActivity;
 import com.hqq.core.ui.vm.BaseListViewModel;
+import com.hqq.core.ui.vm.BaseVmListActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
-import com.hqq.example.demo.login.LoginActivity;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
@@ -52,34 +51,9 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
 
     @Override
     public void initData() {
+        TestDialogActivity.open(this);
         mViewModel.initData();
-//        PermissionActivity.open(this);
-        //  startActivity(new Intent(this, EmptyListActivity.class));
-        // EditTextActivity.open(this);
-//        TemplatesImageActivity.open(this);
-//        AnimateIndexActivity.open(this);
-//        TextViewActivity.open(this);
-//        BlackAndWhiteActivity.open(this);
-//        HSLActivity.open(this);
-//        CurtainActivity.open(this);
-//        AppIconActivity.open(this);
-//        SvgActivity.open(this);
-//        EditTextActivity.open(this);
-//        ToastActivity.open(this);
-//        CustomizeIndexActivity.open(this);
-//        BezierActivity.open(this);
-//        TemplatesImageActivity.open(this);
-//        SemicircularActivity.open(this);
-//        DaggerAActivity.open(this);
-//        LiveDateActivity.open(this);
-//        ViewModelActivity.open(this);
-//        DataBindingActivity.open(this);
-//        MvvmTestActivity.open(this);
-//       InflateTestActivity.open(this);
-//        MatrixActivity.open(this);
-//        VmTestActivity.open(this);
-//        ViewBindingActivity.open(this);
-        LoginActivity.open(this);
+
     }
 
     private long mExitTime = 0;

@@ -1,4 +1,4 @@
-package com.hqq.core.ui;
+package com.hqq.core.ui.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.hqq.core.ui.builder.ICreateRootViewBuilder;
-import com.hqq.core.ui.builder.RootViewBuilder;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.base.IRootViewImpl;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.core.widget.LoadingView;
 
@@ -24,7 +24,7 @@ import com.hqq.core.widget.LoadingView;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public abstract class BaseFragment extends Fragment implements ICreateRootViewBuilder.IFragmentBuilder, View.OnClickListener {
+public abstract class BaseFragment extends Fragment implements ICreateRootView.IFragmentRootView, View.OnClickListener {
     /**
      * 缓存根布局对象
      */
@@ -48,7 +48,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
     /**
      * 布局创建 容器
      */
-    protected RootViewBuilder mRootViewBuild;
+    protected IRootViewImpl mRootViewBuild;
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法
@@ -63,7 +63,7 @@ public abstract class BaseFragment extends Fragment implements ICreateRootViewBu
         if (mRootView == null) {
             mActivity = getActivity();
             mLoadingView = new LoadingView(mActivity);
-            mRootViewBuild = new RootViewBuilder(this);
+            mRootViewBuild = new IRootViewImpl(this);
             initDefConfig();
 
             mRootView = mRootViewBuild.buildContentView(this);

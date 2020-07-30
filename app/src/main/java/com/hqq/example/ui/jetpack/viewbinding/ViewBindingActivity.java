@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.BR;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityViewBindingBinding;

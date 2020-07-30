@@ -2,11 +2,9 @@ package com.hqq.example.dialog;
 
 import androidx.fragment.app.FragmentManager;
 import android.view.Gravity;
-import android.view.WindowManager;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseDialog;
-import com.hqq.core.utils.ResourcesUtils;
+import com.hqq.core.ui.dialog.BaseDialog;
 
 /**
  * @version V1.0 <描述当前版本功能>

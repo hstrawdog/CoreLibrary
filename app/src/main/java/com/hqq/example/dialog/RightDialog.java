@@ -1,13 +1,11 @@
 package com.hqq.example.dialog;
 
 import android.view.Gravity;
-import android.view.WindowManager;
 
 import androidx.fragment.app.FragmentManager;
 
 import com.hqq.core.annotation.ToolBarMode;
-import com.hqq.core.ui.BaseDialog;
-import com.hqq.core.utils.ResourcesUtils;
+import com.hqq.core.ui.dialog.BaseDialog;
 import com.hqq.example.R;
 
 /**

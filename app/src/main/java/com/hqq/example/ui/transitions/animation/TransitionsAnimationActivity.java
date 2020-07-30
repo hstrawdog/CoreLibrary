@@ -8,7 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.hqq.core.ui.BaseListActivity;
+import com.hqq.core.ui.base.BaseListActivity;
 import com.hqq.example.R;
 import com.hqq.example.adapter.StringListAdapter;
 

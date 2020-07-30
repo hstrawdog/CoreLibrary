@@ -2,7 +2,7 @@ package com.hqq.example.ui.view.page;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
 import com.hqq.example.adapter.IFragmentAdapter;
 

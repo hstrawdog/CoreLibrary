@@ -1,15 +1,10 @@
 package com.hqq.example.dialog;
 
 import android.view.Gravity;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.hqq.core.ui.BaseDialog;
+import com.hqq.core.ui.dialog.BaseDialog;
 import com.hqq.example.R;
 
 

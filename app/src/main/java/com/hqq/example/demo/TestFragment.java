@@ -3,6 +3,7 @@ package com.hqq.example.demo;
 import android.os.Bundle;
 
 import com.hqq.core.ui.vm.BaseVmFragment;
+import com.hqq.example.BR;
 import com.hqq.example.R;
 import com.hqq.example.databinding.FragmentTestBinding;
 import com.hqq.example.ui.jetpack.package1.UserViewModel;
@@ -25,7 +26,7 @@ public class TestFragment extends BaseVmFragment<FragmentTestBinding, UserViewMo
 
     @Override
     public void addViewModel() {
-        mBinding.setVm(mViewModel);
+        mBinding.setVariable(BR.vm, mViewModel);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.hqq.example.ui.customize;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
 
 /**

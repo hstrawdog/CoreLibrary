@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.statusbar.StatusBarManager;
 import com.hqq.example.R;

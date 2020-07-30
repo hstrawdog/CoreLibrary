@@ -3,7 +3,7 @@ package com.hqq.example.ui.info;
 import android.widget.TextView;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.CacheUtil;
 import com.hqq.core.utils.ScreenUtils;
 import com.hqq.core.utils.TextSpannableBuilder;

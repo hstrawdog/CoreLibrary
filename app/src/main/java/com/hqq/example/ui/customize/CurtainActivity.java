@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.view.View;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 import com.hqq.example.ui.customize.widget.GuideView;

@@ -1,10 +1,8 @@
 package com.hqq.example.dialog;
 
 import androidx.fragment.app.FragmentManager;
-import android.view.WindowManager;
 
-import com.hqq.core.annotation.ToolBarMode;
-import com.hqq.core.ui.BaseDialog;
+import com.hqq.core.ui.dialog.BaseDialog;
 import com.hqq.example.R;
 
 /**

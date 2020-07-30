@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.fragment.app.Fragment;
 
-import com.hqq.core.ui.BaseListFragment;
+import com.hqq.core.ui.base.BaseListFragment;
 import com.hqq.example.R;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;

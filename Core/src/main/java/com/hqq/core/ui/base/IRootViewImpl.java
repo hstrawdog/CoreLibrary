@@ -1,4 +1,4 @@
-package com.hqq.core.ui.builder;
+package com.hqq.core.ui.base;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -15,6 +15,8 @@ import com.hqq.core.annotation.LayoutModel;
 import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.core.toolbar.BaseDefToolBarImpl;
 import com.hqq.core.toolbar.BaseToolBar;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.builder.IRootView;
 import com.hqq.core.ui.model.CreateRootViewModel;
 import com.hqq.core.utils.log.LogUtils;
 
@@ -28,7 +30,7 @@ import com.hqq.core.utils.log.LogUtils;
  * 　动态添加　布局
  * 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
-public class RootViewBuilder implements IRootViewBuilder {
+public class IRootViewImpl implements IRootView {
     /**
      * 当前activity
      */
@@ -47,11 +49,11 @@ public class RootViewBuilder implements IRootViewBuilder {
      */
     CreateRootViewModel mCreateRootViewModel;
 
-    public <T> RootViewBuilder(T activity) {
+    public <T> IRootViewImpl(T activity) {
         this(activity, false, false);
     }
 
-    public <T> RootViewBuilder(T context, boolean isShowStatus, boolean isShowToolBar) {
+    public <T> IRootViewImpl(T context, boolean isShowStatus, boolean isShowToolBar) {
         mCreateRootViewModel = new CreateRootViewModel(isShowStatus, isShowToolBar);
         if (context instanceof Activity) {
             mActivity = (Activity) context;
@@ -69,7 +71,7 @@ public class RootViewBuilder implements IRootViewBuilder {
     }
 
     @Override
-    public View buildContentView(ICreateRootViewBuilder  iActivityBuilder) {
+    public View buildContentView(ICreateRootView iActivityBuilder) {
         mRootView = mCreateRootViewModel.createRootView(iActivityBuilder);
         return mRootView;
     }
@@ -119,7 +121,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @param layoutMode
      */
-    public RootViewBuilder setLayoutMode(@LayoutModel int layoutMode) {
+    public IRootViewImpl setLayoutMode(@LayoutModel int layoutMode) {
         mCreateRootViewModel.setLayoutMode(layoutMode);
         return this;
     }
@@ -129,7 +131,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @param clss
      */
-    public RootViewBuilder setIToolBarClass(Class<? extends BaseToolBar> clss) {
+    public IRootViewImpl setIToolBarClass(Class<? extends BaseToolBar> clss) {
         mCreateRootViewModel.setIToolBarClass(clss);
         return this;
 
@@ -141,7 +143,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param showStatus  状态栏
      * @param showToolBar 标题栏
      */
-    public RootViewBuilder setToolbarVisibility(boolean showStatus, boolean showToolBar) {
+    public IRootViewImpl setToolbarVisibility(boolean showStatus, boolean showToolBar) {
         mCreateRootViewModel.setToolbarVisibility(showStatus, showToolBar);
         return this;
 
@@ -152,7 +154,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @param showStatus
      */
-    public RootViewBuilder setShowStatusBar(boolean showStatus) {
+    public IRootViewImpl setShowStatusBar(boolean showStatus) {
         mCreateRootViewModel.setShowStatusBar(showStatus);
         return this;
 
@@ -163,7 +165,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      *
      * @param showToolBar
      */
-    public RootViewBuilder setShowToolBar(boolean showToolBar) {
+    public IRootViewImpl setShowToolBar(boolean showToolBar) {
         mCreateRootViewModel.setShowToolBar(showToolBar);
         return this;
 
@@ -175,7 +177,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param statusBarMode
      * @return
      */
-    public RootViewBuilder setStatusBarMode(@ToolBarMode int statusBarMode) {
+    public IRootViewImpl setStatusBarMode(@ToolBarMode int statusBarMode) {
 
         mCreateRootViewModel.setStatusBarMode(statusBarMode);
         return this;
@@ -215,7 +217,7 @@ public class RootViewBuilder implements IRootViewBuilder {
      * @param alwaysPortrait
      * @return
      */
-    public RootViewBuilder setAlwaysPortrait(boolean alwaysPortrait) {
+    public IRootViewImpl setAlwaysPortrait(boolean alwaysPortrait) {
         this.alwaysPortrait = alwaysPortrait;
         return this;
     }

@@ -1,7 +1,7 @@
 package com.hqq.example.ui.web;
 
 import com.hqq.example.R;
-import com.hqq.core.ui.BaseFrameLayoutActivity;
+import com.hqq.core.ui.base.BaseFrameLayoutActivity;
 import com.hqq.core.ui.web.BaseWebFragment;
 
 /**

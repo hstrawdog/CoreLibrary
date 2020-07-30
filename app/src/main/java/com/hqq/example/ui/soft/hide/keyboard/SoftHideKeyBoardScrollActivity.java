@@ -1,6 +1,6 @@
 package com.hqq.example.ui.soft.hide.keyboard;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils;
 import com.hqq.example.R;
 

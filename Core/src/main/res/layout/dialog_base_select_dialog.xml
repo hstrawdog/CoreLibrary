@@ -10,12 +10,13 @@
 
 
     <TextView
+        android:id="@+id/tv_title"
         style="@style/def_text.32.333"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/x40"
         android:gravity="center"
-        android:text="请选择数量" />
+        android:text="提示" />
 
     <LinearLayout
         android:id="@+id/ll_content"

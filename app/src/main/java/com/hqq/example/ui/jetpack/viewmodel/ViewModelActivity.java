@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 import com.hqq.example.ui.jetpack.livedata.User;

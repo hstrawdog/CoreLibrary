@@ -3,7 +3,7 @@ package com.hqq.example.ui.view;
 import android.content.Context;
 import android.content.Intent;
 
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
  /**
   * @Author : huangqiqiang

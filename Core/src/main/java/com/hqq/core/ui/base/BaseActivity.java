@@ -1,4 +1,4 @@
-package com.hqq.core.ui;
+package com.hqq.core.ui.base;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hqq.core.R;
-import com.hqq.core.ui.builder.ICreateRootViewBuilder;
-import com.hqq.core.ui.builder.RootViewBuilder;
+import com.hqq.core.ui.builder.ICreateRootView;
+import com.hqq.core.ui.base.IRootViewImpl;
 import com.hqq.core.widget.LoadingView;
 
 
@@ -23,7 +23,7 @@ import com.hqq.core.widget.LoadingView;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : 1.
  */
-public abstract class BaseActivity extends AppCompatActivity implements ICreateRootViewBuilder.IActivityBuilder, View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements ICreateRootView.IActivityRootView, View.OnClickListener {
     /**
      * 当前对象
      */
@@ -35,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
     /**
      * 根布局
      */
-    protected RootViewBuilder mRootViewBuild;
+    protected IRootViewImpl mRootViewBuild;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ICreateR
         mActivity = this;
         mLoadingView = new LoadingView(this);
 
-        mRootViewBuild = new RootViewBuilder(this, true, true);
+        mRootViewBuild = new IRootViewImpl(this, true, true);
         initDefConfig();
         setContentView(mRootViewBuild.buildContentView(this));
         initView();

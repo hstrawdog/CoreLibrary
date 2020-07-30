@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hqq.example.R;
 import com.hqq.example.adapter.FullPagerSnapAdapter;
 import com.hqq.core.recycle.PagerSnapHelper;
-import com.hqq.core.ui.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.core.widget.divider.Divider;
 import com.hqq.core.widget.divider.DividerBuilder;
 import com.hqq.core.widget.divider.DividerItemDecoration;
