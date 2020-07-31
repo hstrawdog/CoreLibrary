@@ -40,12 +40,9 @@ public class BaseSelectDialog<T extends BaseViewBuilderHolder> extends BaseDialo
 
     @Override
     public void initView() {
-
         if (mAlertParams != null) {
             initAlertParams();
         }
-
-
         mViewHolder = getViewHolder();
         mViewHolder.builder(this, mRootView.findViewById(R.id.ll_content));
         mViewHolder.addToParent();

@@ -3,9 +3,7 @@ android {
     dataBinding {
         enabled = true
     }
-    viewBinding {
-        enabled = true
-    }
+
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         applicationId "com.hqq.core"
@@ -99,9 +97,9 @@ dependencies {
     debugImplementation  rootProject.ext.dependencies.leakcanary
 
     api rootProject.ext.dependencies.gson
-    api rootProject.ext.dependencies.retrofit
-    api rootProject.ext.dependencies.converterGson
-    api rootProject.ext.dependencies.loggingInterceptor
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.8.0'
 
 //    implementation 'skin.support:skin-support:3.1.4'                   // skin-support 基础控件支持
     implementation 'skin.support:skin-support:4.0.4'                   // skin-support

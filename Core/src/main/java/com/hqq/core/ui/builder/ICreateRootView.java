@@ -172,7 +172,6 @@ public interface ICreateRootView {
          */
         void addViewModel();
 
-
     }
 
 }

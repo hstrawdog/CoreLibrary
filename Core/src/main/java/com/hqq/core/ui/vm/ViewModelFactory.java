@@ -1,9 +1,14 @@
 package com.hqq.core.ui.vm;
 
+import android.content.Intent;
+
+import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.hqq.core.ui.builder.IOpenActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.widget.LoadingView;
 
@@ -35,9 +40,6 @@ class ViewModelFactory {
     }
 
 
-
-
-
     /**
      * 创建ViewModel 保证不为空
      * viewModel 的创建需要在 onCreate 之后
@@ -61,7 +63,8 @@ class ViewModelFactory {
     }
 
     /**
-     *  创建 ViewModel
+     * 创建 ViewModel
+     *
      * @param viewModelStoreOwner
      * @param modelClass
      * @param <K>
@@ -71,4 +74,17 @@ class ViewModelFactory {
         return (K) new ViewModelProvider(viewModelStoreOwner).get(modelClass);
     }
 
+
+    public static void initOpenActivity(BaseViewModel viewModel,LifecycleOwner lifecycleOwner, IOpenActivity openActivity) {
+        viewModel.mOpenActivityComponentMutableLiveData.observe(lifecycleOwner, new Observer<BaseViewModel.OpenActivityComponent>() {
+            @Override
+            public void onChanged(BaseViewModel.OpenActivityComponent openActivityComponent) {
+                openActivity.openActivity(openActivityComponent);
+
+
+            }
+        });
+
+
+    }
 }

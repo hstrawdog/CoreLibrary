@@ -71,8 +71,10 @@ dependencies {
     api rootProject.ext.dependencies.BaseRecyclerViewAdapterHelper
     api rootProject.ext.dependencies.ultraPtr
 
+    api rootProject.ext.dependencies.ViewModel
+    api rootProject.ext.dependencies.LiveData
+    api rootProject.ext.dependencies.LifecyclesRuntime
 
-    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
 
     api rootProject.ext.dependencies.glide

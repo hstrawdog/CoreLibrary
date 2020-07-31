@@ -1,6 +1,7 @@
 package com.hqq.example.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.KeyEvent;
 
 import androidx.databinding.ViewDataBinding;
@@ -57,6 +58,7 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
     }
 
     private long mExitTime = 0;
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
@@ -104,5 +106,4 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
             setDate(arrayList);
         }
     }
-
 }
