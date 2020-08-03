@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
         <import type="androidx.databinding.ObservableArrayMap" />
@@ -65,6 +66,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{list[Fields.AGE2]}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{vm::openActivity}"
+            android:text="打开Activity" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{vm::showLoading}"
+            android:text="测试Loading" />
+
+
     </LinearLayout>
 
 

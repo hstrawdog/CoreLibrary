@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hqq.core.ui.vm.BaseVmActivity;
+import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityMvvmBinding;
 import com.hqq.example.ui.jetpack.livedata.User;
@@ -22,7 +23,7 @@ import com.hqq.example.ui.jetpack.livedata.User;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : ViewBinding + ViewModel + liveData
  */
-public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding,UserViewModel> {
+public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding, UserViewModel> {
     public static void open(Activity context) {
         Intent starter = new Intent(context, MvvmTestActivity.class);
         context.startActivityForResult(starter, -1);
@@ -30,6 +31,7 @@ public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding,UserVie
 
     @Override
     public void addViewModel() {
+        LogUtils.e(" MvvmTestActivity   addViewModel 1 ");
 //       mBinding.setVariable(BR.vm, new ViewModelProvider(this).get(UserViewModel.class));
         mBinding.setVm(new ViewModelProvider(this).get(UserViewModel.class));
         mBinding.setTitle("这是一个变量String");
@@ -44,6 +46,8 @@ public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding,UserVie
         observableArrayList.add("key1");
         observableArrayList.add("key2");
         mBinding.setList(observableArrayList);
+        LogUtils.e(" MvvmTestActivity   addViewModel 2 ");
+
     }
 
     @Override
@@ -53,7 +57,6 @@ public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding,UserVie
 
     @Override
     public void initViews() {
-
         mBinding.getVm().getLiveData().observeForever(new Observer<User>() {
             @Override
             public void onChanged(User user) {
@@ -63,9 +66,9 @@ public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding,UserVie
 
     }
 
-   public static final class Fields {
+    public static final class Fields {
         public final static MutableLiveData<Integer> AGE = new MutableLiveData<>(1);
-        public final  static int AGE2=1;
+        public final static int AGE2 = 1;
     }
 
 }

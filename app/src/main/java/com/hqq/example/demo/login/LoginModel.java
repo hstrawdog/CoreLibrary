@@ -16,7 +16,7 @@ import com.hqq.example.demo.Repository;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public  class LoginModel extends BaseViewModel {
+public class LoginModel extends BaseViewModel {
 
     MutableLiveData<String> mPhone = new MediatorLiveData<>();
     MutableLiveData<String> mPassWord = new MediatorLiveData<>();
@@ -24,8 +24,7 @@ public  class LoginModel extends BaseViewModel {
 
     public void onLoginClick(View view) {
 
-
-        setShowToast(mPhone.getValue()+""+mPassWord.getValue());
+        setShowToast(mPhone.getValue() + "" + mPassWord.getValue());
         Repository.login(mShowLoading);
     }
 

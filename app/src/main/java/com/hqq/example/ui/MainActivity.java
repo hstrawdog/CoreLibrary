@@ -21,6 +21,7 @@ import com.hqq.example.ui.exception.ThrowActivity;
 import com.hqq.example.ui.info.BaseInfoActivity;
 import com.hqq.example.ui.info.FilePathActivity;
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity;
+import com.hqq.example.ui.jetpack.package1.MvvmTestActivity;
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity;
 import com.hqq.example.ui.recycle.RecycleIndexActivity;
 import com.hqq.example.ui.skin.SkinAActivity;
@@ -52,7 +53,7 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
 
     @Override
     public void initData() {
-        TestDialogActivity.open(this);
+        MvvmTestActivity.open(this);
         mViewModel.initData();
 
     }

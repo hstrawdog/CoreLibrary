@@ -99,6 +99,16 @@ public abstract class BaseViewBuilderHolder extends ViewHolder implements ICreat
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onAny() {
+
+    }
+
+    @Override
     public void onDestroy() {
         removeFromParent();
     }

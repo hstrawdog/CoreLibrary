@@ -27,8 +27,8 @@ import com.hqq.core.utils.log.LogUtils;
  * @Date : 2018/12/4 0004  下午 7:03
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
- * 　动态添加　布局
- * 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
+ * 1. 　动态添加 生成根布局  支持LineLayout 与FarmLayout
+ * 2. 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
 public class IRootViewImpl implements IRootView {
     /**
@@ -80,12 +80,12 @@ public class IRootViewImpl implements IRootView {
     public void initActivity(boolean fullScreen) {
         // 全屏的需求只有在activity上才需要的
         if (fullScreen) {
-            //隐藏状态 上的字体还颜色
+            //隐藏状态 上的字体和颜色
             mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mActivity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                     , WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        //竖屏
+        //强制竖屏
         if (alwaysPortrait) {
             mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }

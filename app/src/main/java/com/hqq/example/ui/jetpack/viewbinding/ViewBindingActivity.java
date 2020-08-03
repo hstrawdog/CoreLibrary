@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.BR;
@@ -42,7 +44,6 @@ public class ViewBindingActivity extends BaseActivity {
     public View getLayoutView(ViewGroup parent) {
         // ActivityViewBindingBinding 对应生成的 布局  驼峰命名
         mBinding = ActivityViewBindingBinding.inflate(getLayoutInflater(), parent, false);
-
 
         return mBinding.getRoot();
     }

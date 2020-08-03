@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hqq.core.R;
 import com.hqq.core.ui.builder.ICreateRootView;
-import com.hqq.core.ui.base.IRootViewImpl;
 import com.hqq.core.widget.LoadingView;
 
 
@@ -21,7 +20,10 @@ import com.hqq.core.widget.LoadingView;
  * @FileName :   BaseActivity
  * @Date : 2018/2/9  10:01
  * @Email :  qiqiang213@gmail.com
- * @Descrive : 1.
+ * @Descrive :
+ * 1. 生成根布局与ToolBar 与Manifest中的label 添加页面标题
+ * 2. 默认强制竖屏
+ * 3. 初始化 LoadingView
  */
 public abstract class BaseActivity extends AppCompatActivity implements ICreateRootView.IActivityRootView, View.OnClickListener {
     /**

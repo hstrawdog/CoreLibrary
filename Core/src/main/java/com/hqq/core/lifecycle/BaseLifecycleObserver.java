@@ -17,6 +17,9 @@ public interface BaseLifecycleObserver extends LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCrete();
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    void onStart();
+
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     void onResume();
 
@@ -28,4 +31,7 @@ public interface BaseLifecycleObserver extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy();
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+    void onAny();
 }

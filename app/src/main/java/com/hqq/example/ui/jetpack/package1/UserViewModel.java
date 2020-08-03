@@ -1,5 +1,6 @@
 package com.hqq.example.ui.jetpack.package1;
 
+import android.os.Handler;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
@@ -50,4 +51,20 @@ public class UserViewModel extends BaseViewModel {
         setLiveData(user);
     }
 
+
+    public void openActivity(View view) {
+        startActivity(MvvmTestActivity.class);
+    }
+
+    public void showLoading(View view) {
+        setShowLoading(true);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setShowLoading(false);
+            }
+        },3*1000);
+
+    }
 }

@@ -18,7 +18,6 @@ import retrofit2.Response;
  */
 public class Repository {
 
-
     public static void login(MutableLiveData<Boolean> showLoading) {
         showLoading.setValue(true);
         ApiManager.getWangAndroidInterface().getUserCenter("13696891101","zz789789").enqueue(new Callback<String>() {

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer;
 import com.hqq.core.ui.binding.BaseBindingActivity;
 import com.hqq.core.ui.builder.ICreateRootView;
 import com.hqq.core.ui.builder.IOpenActivity;
+import com.hqq.core.utils.log.LogUtils;
 
 /**
  * @Author : huangqiqiang
@@ -28,10 +29,17 @@ public abstract class BaseVmActivity<T extends ViewDataBinding, K extends BaseVi
     public void initView() {
         mViewModel = ViewModelFactory.createViewModel(this, getClass(), mViewModel);
         ViewModelFactory.initBaseViewModel(mViewModel, this, mLoadingView);
-        ViewModelFactory.initOpenActivity(mViewModel,this,this);
-
+        ViewModelFactory.initOpenActivity(mViewModel, this, this);
         addViewModel();
         initViews();
+        getLifecycle().addObserver(mViewModel);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getLifecycle().removeObserver(mViewModel);
     }
 
     @Override
