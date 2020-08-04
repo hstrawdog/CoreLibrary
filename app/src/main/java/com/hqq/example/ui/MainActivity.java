@@ -11,6 +11,7 @@ import com.hqq.core.ui.vm.BaseVmListActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
+import com.hqq.example.demo.weather.WeatherActivity;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
 import com.hqq.example.ui.adaptation.PermissionActivity;
@@ -47,13 +48,15 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
         return new MainAdapter();
     }
 
+
     @Override
-    public void addViewModel() {
+    public int getBindingViewModelId() {
+        return 0;
     }
 
     @Override
     public void initData() {
-        MvvmTestActivity.open(this);
+        WeatherActivity.open(this);
         mViewModel.initData();
 
     }

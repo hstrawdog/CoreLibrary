@@ -26,8 +26,8 @@ public class FragmentTestActivity extends BaseVmActivity<ActivityFragmentTestBin
 
 
     @Override
-    public void addViewModel() {
-
+    public int getBindingViewModelId() {
+        return 0;
     }
 
     @Override

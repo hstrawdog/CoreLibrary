@@ -51,6 +51,11 @@ public class MvvmTestActivity extends BaseVmActivity<ActivityMvvmBinding, UserVi
     }
 
     @Override
+    public int getBindingViewModelId() {
+        return 0;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_mvvm;
     }

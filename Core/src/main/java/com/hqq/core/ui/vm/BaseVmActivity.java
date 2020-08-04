@@ -28,18 +28,28 @@ public abstract class BaseVmActivity<T extends ViewDataBinding, K extends BaseVi
     @Override
     public void initView() {
         mViewModel = ViewModelFactory.createViewModel(this, getClass(), mViewModel);
+        getLifecycle().addObserver(mViewModel);
         ViewModelFactory.initBaseViewModel(mViewModel, this, mLoadingView);
         ViewModelFactory.initOpenActivity(mViewModel, this, this);
         addViewModel();
         initViews();
-        getLifecycle().addObserver(mViewModel);
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         getLifecycle().removeObserver(mViewModel);
+    }
+
+    /**
+     * 正常情况下 v对应一个VM
+     * 如果需要添加多个VM  重写此方法
+     */
+    @Override
+    public void addViewModel() {
+        if (getBindingViewModelId() != 0) {
+            mBinding.setVariable(getBindingViewModelId(), mViewModel);
+        }
     }
 
     @Override

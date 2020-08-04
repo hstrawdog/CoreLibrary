@@ -29,6 +29,16 @@ public abstract class BaseVmFragment<T extends ViewDataBinding, K extends BaseVi
         addViewModel();
         initViews();
     }
+    /**
+     * 正常情况下 v对应一个VM
+     * 如果需要添加多个VM  重写此方法
+     */
+    @Override
+    public void addViewModel() {
+        if (getBindingViewModelId() != 0) {
+            mBinding.setVariable(getBindingViewModelId(), mViewModel);
+        }
+    }
 
     @Override
     public void openActivity(BaseViewModel.OpenActivityComponent openActivityComponent) {

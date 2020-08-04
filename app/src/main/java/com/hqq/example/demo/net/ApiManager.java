@@ -49,8 +49,33 @@ public class ApiManager {
                     .build().create(WangAndroidInterface.class);
         }
         return mWangAndroidInterface;
+    }
 
+    public static JuHeInterface getJuHeInterface(String url ) {
+        JuHeInterface juHeInterface;
 
+            //设置出现错误进行重新连接
+            OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
+            okHttpClient.retryOnConnectionFailure(true)
+                    .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
+                    .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
+
+            HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+            if (BuildConfig.DEBUG) {
+                //打印拦截器
+                logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                okHttpClient.addInterceptor(logInterceptor);
+            } else {
+                logInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+            }
+
+        juHeInterface = new Retrofit.Builder()
+                    .client(okHttpClient.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(url)
+                    .build().create(JuHeInterface.class);
+
+        return juHeInterface;
     }
 
 

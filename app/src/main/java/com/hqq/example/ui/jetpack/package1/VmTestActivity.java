@@ -25,9 +25,10 @@ public class VmTestActivity extends BaseVmActivity<ActivityVmTestBinding, BaseVi
         context.startActivity(starter);
     }
 
+
     @Override
-    public void addViewModel() {
-        mBinding.setLifecycleOwner(this);
+    public int getBindingViewModelId() {
+        return 0;
     }
 
     @Override

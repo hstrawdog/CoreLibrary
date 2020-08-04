@@ -172,6 +172,12 @@ public interface ICreateRootView {
          */
         void addViewModel();
 
+        /**
+         * 绑定ViewModel
+         *
+         * @return
+         */
+        int getBindingViewModelId();
     }
 
 }
