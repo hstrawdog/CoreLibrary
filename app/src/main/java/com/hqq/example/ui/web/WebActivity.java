@@ -1,5 +1,8 @@
 package com.hqq.example.ui.web;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.hqq.example.R;
 import com.hqq.core.ui.base.BaseFrameLayoutActivity;
 import com.hqq.core.ui.web.BaseWebFragment;
@@ -14,6 +17,16 @@ import com.hqq.core.ui.web.BaseWebFragment;
  */
 
 public class WebActivity extends BaseFrameLayoutActivity {
+
+    public static final String URL = "URL";
+    public static final String TITLE = "TITLE";
+
+    public static void open(Activity context, String url, String title) {
+        Intent starter = new Intent(context, WebActivity.class);
+        starter.putExtra(URL, url);
+        starter.putExtra(TITLE, title);
+        context.startActivityForResult(starter, -1);
+    }
 
 
     @Override
@@ -31,7 +44,12 @@ public class WebActivity extends BaseFrameLayoutActivity {
 
     @Override
     public void initView() {
-        BaseWebFragment mBaseFragment = BaseWebFragment.instantiate(this, "网页", "https://www.baidu.com/");
+
+        String url = getIntent().getExtras().getString(URL, "https://www.baidu.com/");
+        String title = getIntent().getExtras().getString(TITLE, "网页");
+
+
+        BaseWebFragment mBaseFragment = BaseWebFragment.instantiate(this, title, url);
         addOrShowFragment(mBaseFragment, R.id.fl_layout);
     }
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.hqq.core.ui.vm.BaseViewModel;
 import com.hqq.core.utils.log.LogUtils;
-import com.hqq.example.demo.Repository;
+import com.hqq.example.demo.net.HttpManager;
 import com.hqq.example.demo.net.NetCallback;
 
 /**
@@ -25,7 +25,7 @@ public class WeatherViewModel extends BaseViewModel {
         LogUtils.e(" -------WeatherViewModel--------- onCrete ------");
 
         setShowLoading(true);
-        Repository.getWeather("福州", new NetCallback<Weather>() {
+        HttpManager.getWeather("福州", new NetCallback<Weather>() {
             @Override
             public void onSuccess(Weather response) {
                 setShowLoading(false);

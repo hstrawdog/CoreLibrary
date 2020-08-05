@@ -114,6 +114,7 @@ public class BaseWebFragment extends BaseFragment {
         mUrl = BundleUtils.getString(this, getString(R.string.key_url));
         mTitle = BundleUtils.getString(this, getString(R.string.key_title));
         getActivity().setTitle(mTitle);
+        mRootViewBuild.getDefToolBar().setToolbarTitle(mTitle);
         mWebView.loadUrl(mUrl);
 
     }

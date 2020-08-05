@@ -31,6 +31,11 @@ import in.srain.cube.views.ptr.PtrHandler;
  * @Date : 2019/5/5 0005  上午 10:41
  * @Email : qiqiang213@gmail.com
  * @Descrive :
+ * <p>
+ * <p>
+ * <p>
+ * ---  这边不应该这样设计  应该当已 recycleView  adapter  为一组对象  这样扩充拓展性
+ * 当一个页面出现两个列表加载的时候 就不会被局限
  */
 public class BaseListModelView {
     IBaseListModelView mBaseListModelView;

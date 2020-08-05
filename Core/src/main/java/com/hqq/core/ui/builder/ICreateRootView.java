@@ -157,10 +157,7 @@ public interface ICreateRootView {
          */
         int getLayoutId();
 
-        /**
-         * 初始化View的要实现的默认值 正常应该通过ViewModel驱动到xml 或者Activity中
-         */
-        void initViews();
+
     }
 
     /**
@@ -178,6 +175,11 @@ public interface ICreateRootView {
          * @return
          */
         int getBindingViewModelId();
+
+        /**
+         * 初始化View的要实现的默认值 正常应该通过ViewModel驱动到xml 或者Activity中
+         */
+        void initViews();
     }
 
 }

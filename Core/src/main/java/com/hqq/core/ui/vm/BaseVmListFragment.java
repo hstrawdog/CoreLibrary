@@ -13,6 +13,7 @@ import com.hqq.core.R;
 import com.hqq.core.ui.model.BaseListModelView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author : huangqiqiang
@@ -51,9 +52,9 @@ public abstract class BaseVmListFragment<T extends ViewDataBinding, K extends Ba
 
         mBaseListModel.initPtrPullDown(mRootViewBuild.getRootView());
 
-        mViewModel.mDate.observe(this, new Observer<ArrayList>() {
+        mViewModel.mDate.observe(this, new Observer<List>() {
             @Override
-            public void onChanged(ArrayList arrayList) {
+            public void onChanged(List arrayList) {
                 mBaseListModel.fillingData(arrayList);
 
             }

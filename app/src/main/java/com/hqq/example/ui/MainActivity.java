@@ -11,6 +11,8 @@ import com.hqq.core.ui.vm.BaseVmListActivity;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.example.adapter.MainAdapter;
 import com.hqq.example.bean.MainBean;
+import com.hqq.example.demo.joke.JokeActivity;
+import com.hqq.example.demo.news.NewsActivity;
 import com.hqq.example.demo.weather.WeatherActivity;
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity;
 import com.hqq.example.ui.adaptation.DefImgActivity;
@@ -56,9 +58,7 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
 
     @Override
     public void initData() {
-        WeatherActivity.open(this);
-        mViewModel.initData();
-
+        JokeActivity.open(this);
     }
 
     private long mExitTime = 0;
@@ -87,7 +87,8 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
 
 
         @Override
-        public void initData() {
+        public void onCrete() {
+            super.onCrete();
             ArrayList arrayList = new ArrayList();
             arrayList.add(new MainBean("启动模式", SingleInstanceActivity.class));
             arrayList.add(new MainBean("转场动画", TransitionsAnimationActivity.class));

@@ -153,7 +153,7 @@ public class BaseDefToolBarImpl extends BaseToolBar {
      *
      * @param title
      */
-    public BaseDefToolBarImpl setToolbarTitle(String title) {
+    public BaseDefToolBarImpl setToolbarTitle(CharSequence title) {
         if (mRootView == null) {
             return null;
         }

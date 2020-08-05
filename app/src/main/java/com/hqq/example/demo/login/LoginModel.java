@@ -6,7 +6,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.hqq.core.ui.vm.BaseViewModel;
-import com.hqq.example.demo.Repository;
+import com.hqq.example.demo.net.HttpManager;
 
 /**
  * @Author : huangqiqiang
@@ -25,7 +25,7 @@ public class LoginModel extends BaseViewModel {
     public void onLoginClick(View view) {
 
         setShowToast(mPhone.getValue() + "" + mPassWord.getValue());
-        Repository.login(mShowLoading);
+        HttpManager.login(mShowLoading);
     }
 
 

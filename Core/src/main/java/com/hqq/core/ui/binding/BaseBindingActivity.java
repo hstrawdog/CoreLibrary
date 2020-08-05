@@ -34,7 +34,6 @@ public abstract class BaseBindingActivity<T extends ViewDataBinding> extends Bas
     public View getLayoutView(ViewGroup parent) {
         mBinding = DataBindingUtil.inflate(getLayoutInflater(), getLayoutId(), parent, false);
         mBinding.setLifecycleOwner(this);
-
         return mBinding.getRoot();
     }
 

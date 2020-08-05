@@ -16,13 +16,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingLeft="@dimen/x20"
         tools:context="com.hqq.example.demo.weather.WeatherActivity">
 
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text='@{"city :   "+vm.mWeather.result.city}' />
+            android:layout_height="@dimen/x90"
+            android:text='@{"城市 :   "+vm.mWeather.city}' />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x90"
+            android:text='@{"天气情况 :   "+vm.mWeather.realtime.info}' />
 
     </LinearLayout>
 

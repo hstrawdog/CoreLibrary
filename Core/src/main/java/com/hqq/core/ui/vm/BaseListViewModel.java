@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.hqq.core.BaseCommonsKey;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author : huangqiqiang
@@ -16,14 +17,9 @@ import java.util.ArrayList;
  * @Descrive :
  */
 public abstract class BaseListViewModel extends BaseViewModel {
-    public MutableLiveData<ArrayList> mDate = new MediatorLiveData<>();
+    public MutableLiveData<List> mDate = new MediatorLiveData<List>();
     protected int mPageCount = 1;
     protected int mPageSize = BaseCommonsKey.PAGE_SIZE;
-
-    /**
-     * 初始化数据
-     */
-    abstract public void initData();
 
 
     /**
@@ -33,11 +29,6 @@ public abstract class BaseListViewModel extends BaseViewModel {
 
     }
 
-
-    public BaseListViewModel setDate(MutableLiveData<ArrayList> date) {
-        mDate = date;
-        return this;
-    }
 
     public int getPageCount() {
         return mPageCount;
@@ -57,11 +48,11 @@ public abstract class BaseListViewModel extends BaseViewModel {
         return this;
     }
 
-    public ArrayList getDate() {
+    public List getDate() {
         return mDate.getValue();
     }
 
-    public BaseListViewModel setDate(ArrayList date) {
+    public BaseListViewModel setDate(List date) {
         mDate.setValue(date);
         return this;
     }
