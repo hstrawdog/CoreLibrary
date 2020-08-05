@@ -39,6 +39,21 @@ public class PermissionsUtils {
             permissionsResult.onPermissionsResult(true);
         }
     }
+
+    /**
+     * 定位权限
+     *
+     * @param permissionsResult
+     */
+    public static void requestLocationPermission(PermissionsResult permissionsResult) {
+        if (!new PermissionsHasImpl().hasCamera(CoreBuildConfig.getInstance().getApplication())) {
+            new FragmentProxy().requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS}, permissionsResult);
+        } else {
+            permissionsResult.onPermissionsResult(true);
+        }
+    }
 }
 
 

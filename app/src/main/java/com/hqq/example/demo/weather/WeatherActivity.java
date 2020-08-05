@@ -3,11 +3,15 @@ package com.hqq.example.demo.weather;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.hqq.core.permission.PermissionsResult;
+import com.hqq.core.permission.PermissionsUtils;
 import com.hqq.core.ui.vm.BaseVmActivity;
+import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.example.BR;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityWeatherBinding;
+import com.hqq.example.ui.adaptation.PermissionActivity;
 
 /**
  * @Author : huangqiqiang
@@ -38,5 +42,7 @@ public class WeatherActivity extends BaseVmActivity<ActivityWeatherBinding, Weat
     @Override
     public void initViews() {
         LogUtils.e(" -------WeatherActivity--------- initViews ------");
+
+
     }
 }

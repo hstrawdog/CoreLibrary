@@ -101,6 +101,11 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
     api 'com.squareup.okhttp3:logging-interceptor:4.8.0'
 
+
+
+    compile 'com.amap.api:location:latest.integration'
+
+
 //    implementation 'skin.support:skin-support:3.1.4'                   // skin-support 基础控件支持
     implementation 'skin.support:skin-support:4.0.4'                   // skin-support
     implementation 'skin.support:skin-support-appcompat:4.0.4'         // skin-support 基础控件支持

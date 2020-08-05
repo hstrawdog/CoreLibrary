@@ -58,7 +58,7 @@ public class MainActivity extends BaseVmListActivity<ViewDataBinding, MainActivi
 
     @Override
     public void initData() {
-        JokeActivity.open(this);
+        WeatherActivity.open(this);
     }
 
     private long mExitTime = 0;
