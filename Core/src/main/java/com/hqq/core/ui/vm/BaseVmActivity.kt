@@ -18,9 +18,11 @@ import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
  * DataBindingUtil 放回的对象支持DataBinding 与 ViewBanding
  * BaseViewModel 驱动 ui显示 Toast以及Loading
  */
-abstract class BaseVmActivity<T : ViewDataBinding?, K : BaseViewModel?> : BaseBindingActivity<T>(), IBaseViewModel, IOpenActivity {
+abstract class BaseVmActivity<T : ViewDataBinding?, K : BaseViewModel?>
+    : BaseBindingActivity<T>(), IBaseViewModel, IOpenActivity {
     public var mViewModel: K? = null
-        get set
+        get
+        set
 
     override fun initView() {
         mViewModel = ViewModelFactory.createViewModel(this, javaClass, mViewModel)

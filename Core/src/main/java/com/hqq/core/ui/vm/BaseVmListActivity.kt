@@ -20,7 +20,8 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  * @Descrive :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
-abstract class BaseVmListActivity<T : ViewDataBinding?, K : BaseListViewModel?, AD : BaseQuickAdapter<*, *>?> : BaseVmActivity<T, K>(), IBaseListModelView<AD> {
+abstract class BaseVmListActivity<T : ViewDataBinding?, K : BaseListViewModel?, AD : BaseQuickAdapter<*, *>?>
+    : BaseVmActivity<T, K>(), IBaseListModelView<AD> {
     @JvmField
     protected var mRcList: RecyclerView? = null
 
@@ -90,6 +91,7 @@ abstract class BaseVmListActivity<T : ViewDataBinding?, K : BaseListViewModel?, 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {
 
     }
+
     override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {
 
     }

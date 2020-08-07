@@ -15,7 +15,8 @@ import com.hqq.core.ui.builder.ICreateRootView.IBanding
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingActivity<T : ViewDataBinding?> : BaseActivity(), IBanding {
+abstract class BaseBindingActivity<T : ViewDataBinding?>
+    : BaseActivity(), IBanding {
     @JvmField
     protected var mBinding: T? = null
 

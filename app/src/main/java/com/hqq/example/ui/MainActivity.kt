@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.view.KeyEvent
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.ui.vm.BaseListViewModel
@@ -31,6 +32,7 @@ import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
 import com.hqq.example.ui.web.WebActivity
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @Author : huangqiqiang
@@ -78,7 +80,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding?, MainModel?, MainAdapte
     class MainModel : BaseListViewModel() {
         override fun onCrete() {
             super.onCrete()
-            val arrayList: MutableList<*> = MutableList<Any?>()
+            val arrayList = mutableListOf<MainBean<*>>()
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
             arrayList.add(MainBean("转场动画", TransitionsAnimationActivity::class.java))
             arrayList.add(MainBean("标题/状态栏设置", ToolBarActivity::class.java))

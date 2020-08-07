@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hqq.core.lifecycle.BaseLifecycleObserver
 import com.hqq.core.utils.log.LogUtils
+import kotlin.reflect.KProperty
 
 /**
  * @Author : huangqiqiang
@@ -93,6 +94,8 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
         mShowToast.value = showToast
         return this
     }
+
+
 
     /**
      * 打开Activity的对象零件
