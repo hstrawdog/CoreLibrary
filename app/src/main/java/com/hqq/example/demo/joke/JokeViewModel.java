@@ -29,7 +29,7 @@ public class JokeViewModel extends BaseListViewModel {
     }
 
     private void getJokeList() {
-        HttpManager.getJoke(mPageCount, new NetCallback<Joke>() {
+        HttpManager.getJoke(getPageCount(), new NetCallback<Joke>() {
             @Override
             public void onSuccess(Joke response) {
                 setDate(response.getData());

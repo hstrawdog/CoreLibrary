@@ -2,6 +2,7 @@ package com.hqq.example.demo.joke;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hqq.core.ui.vm.BaseVmListActivity;
@@ -16,7 +17,7 @@ import com.hqq.example.databinding.ActivityJokeBinding;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class JokeActivity extends BaseVmListActivity<ActivityJokeBinding, JokeViewModel, BaseQuickAdapter> {
+public class JokeActivity extends BaseVmListActivity<ActivityJokeBinding, JokeViewModel, JokeAdapter> {
 
     public static void open(Activity context) {
         Intent starter = new Intent(context, JokeActivity.class);
@@ -29,7 +30,7 @@ public class JokeActivity extends BaseVmListActivity<ActivityJokeBinding, JokeVi
     }
 
     @Override
-    public BaseQuickAdapter initAdapter() {
+    public JokeAdapter initAdapter() {
         return new JokeAdapter();
     }
 
@@ -39,6 +40,13 @@ public class JokeActivity extends BaseVmListActivity<ActivityJokeBinding, JokeVi
     }
 
 
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
+    }
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+    }
 }
