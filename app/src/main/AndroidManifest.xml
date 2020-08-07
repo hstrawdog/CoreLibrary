@@ -175,7 +175,9 @@
         <activity
             android:name=".ui.customize.ProgressBarViewBuilderActivity"
             android:label="进度条测试" />
-        <activity android:name=".ui.recycle.GallerySnapActivity" />
+        <activity
+            android:name=".ui.recycle.GallerySnapActivity"
+            android:label="画廊横向效果" />
         <activity
             android:name=".ui.recycle.RecycleIndexActivity"
             android:label="RecycleView 相关" />
@@ -280,7 +282,9 @@
         </activity-alias>
 
         <service android:name="com.amap.api.location.APSService"></service>
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="42b4f553aa37838bc95de449f8ff8116"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="42b4f553aa37838bc95de449f8ff8116" />
 
     </application>
 

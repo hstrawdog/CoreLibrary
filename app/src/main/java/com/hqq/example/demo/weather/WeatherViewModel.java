@@ -26,6 +26,21 @@ import com.hqq.example.demo.net.NetCallback;
 public class WeatherViewModel extends BaseViewModel {
 
     public MutableLiveData<Weather> mWeather = new MutableLiveData<>();
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            LogUtils.e(aMapLocation.getAddress());
+            getWeather(aMapLocation.getCity());
+
+        }
+    };
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+    public AMapLocationClientOption option = new AMapLocationClientOption();
+
 
     @Override
     public void onCrete() {
@@ -46,7 +61,6 @@ public class WeatherViewModel extends BaseViewModel {
             mLocationClient.setLocationOption(option);
             //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
             mLocationClient.stopLocation();
-            mLocationClient.startLocation();
         }
 //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
@@ -63,7 +77,9 @@ public class WeatherViewModel extends BaseViewModel {
         PermissionsUtils.requestLocationPermission(new PermissionsResult() {
             @Override
             public void onPermissionsResult(boolean status) {
-                startLocation();
+                if (status) {
+                    startLocation();
+                }
             }
         });
     }
@@ -85,22 +101,6 @@ public class WeatherViewModel extends BaseViewModel {
             }
         });
     }
-
-    //声明AMapLocationClient类对象
-    public AMapLocationClient mLocationClient = null;
-    //声明定位回调监听器
-    public AMapLocationListener mLocationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation aMapLocation) {
-            LogUtils.e(aMapLocation.getAddress());
-            getWeather(aMapLocation.getCity());
-
-        }
-    };
-    //声明AMapLocationClientOption对象
-    public AMapLocationClientOption mLocationOption = null;
-    AMapLocationClientOption option = new AMapLocationClientOption();
-
 
     public void startLocation() {
         //启动定位
