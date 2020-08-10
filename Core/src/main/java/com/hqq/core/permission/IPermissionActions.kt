@@ -19,7 +19,7 @@ interface IPermissionActions {
      * @param permissions 权限组
      * @param listener    回调
      */
-    fun requestPermissions(permissions: Array<String?>, listener: PermissionsResult?)
+    fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?)
 
     companion object {
         /**

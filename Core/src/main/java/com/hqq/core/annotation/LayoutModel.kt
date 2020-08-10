@@ -18,12 +18,13 @@ annotation class LayoutModel {
          * 布局
          * LinearLayout
          */
-        var LAYOUT_MODE_LINEAR_LAYOUT = 1
+        const val LAYOUT_MODE_LINEAR_LAYOUT = 1
 
         /**
          * 布局
          * frameLayout
          */
-        var LAYOUT_MODE_FRAME_LAYOUT = 2
+        const val LAYOUT_MODE_FRAME_LAYOUT = 2
     }
 }
+

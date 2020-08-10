@@ -94,7 +94,7 @@ class CoreBuildConfig private constructor() {
      * @return
      */
     val currActivity: Activity?
-        get() = mActivityLifecycle.getActivity()
+        get() = mActivityLifecycle?.activity
 
     companion object {
         /**

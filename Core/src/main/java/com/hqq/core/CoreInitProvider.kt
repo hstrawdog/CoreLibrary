@@ -20,8 +20,8 @@ class CoreInitProvider : ContentProvider() {
         /**
          * 默认初始化
          */
-        if (RegexUtils.isNull(CoreBuildConfig.Companion.getInstance().getApplication())) {
-            CoreBuildConfig.Companion.getInstance().init(context as Application?, true)
+        if (RegexUtils.isNull(CoreBuildConfig.instance!!.application)) {
+            CoreBuildConfig.instance!!.init(context as Application?, true)
         }
         return false
     }

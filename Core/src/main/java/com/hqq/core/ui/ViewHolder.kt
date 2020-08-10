@@ -424,7 +424,7 @@ abstract class ViewHolder protected constructor() : View.OnClickListener {
      * @param adapter The adapter;
      * @return The ViewHolder for chaining.
      */
-    fun setAdapter(@IdRes viewId: Int, adapter: Adapter?): ViewHolder {
+    fun setAdapter(@IdRes viewId: Int, adapter: Nothing): ViewHolder {
         val view = getView<AdapterView<*>>(viewId)!!
         view.setAdapter(adapter)
         return this

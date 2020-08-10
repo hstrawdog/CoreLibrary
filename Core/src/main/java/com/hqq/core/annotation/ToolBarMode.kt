@@ -14,8 +14,7 @@ import com.hqq.core.annotation.ToolBarMode
 @IntDef(ToolBarMode.LIGHT_MODE, ToolBarMode.DARK_MODE)
 annotation class ToolBarMode {
     companion object {
-        @kotlin.jvm.JvmField
-        var LIGHT_MODE = 1
-        var DARK_MODE = 2
+        const val LIGHT_MODE = 1
+        const val DARK_MODE = 2
     }
 }

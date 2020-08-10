@@ -29,7 +29,7 @@ abstract class BaseBindingActivity<T : ViewDataBinding?>
         return 0
     }
 
-    override fun getLayoutView(parent: ViewGroup): View {
+    override fun getLayoutView(parent: ViewGroup?): View {
         mBinding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false)
         mBinding!!.lifecycleOwner = this
         return mBinding!!.root

@@ -126,10 +126,10 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private var visibleItemCount = ITEM_OFF_SET * 2 + 1
 
     //控件高度
-    private var measuredHeight = 0
+    private var measuredHeight = 0.0
 
     //控件宽度
-    private var measuredWidth = 0
+    private var measuredWidth = 0.0
 
     //半径
     private var radius = 0
@@ -326,7 +326,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         paintShadow!!.alpha = config.shadowAlpha
     }
 
-    fun setLineSpaceMultiplier(@FloatRange(from = 2, to = 4) multiplier: Float) {
+    fun setLineSpaceMultiplier(@FloatRange(from = 2.0, to = 4.0) multiplier: Float) {
         lineSpaceMultiplier = multiplier
         judgeLineSpace()
     }
@@ -416,17 +416,17 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         //半圆的周长
         val halfCircumference = (itemHeight * (visibleItemCount - 1)).toInt()
         //整个圆的周长除以PI得到直径，这个直径用作控件的总高度
-        measuredHeight = (halfCircumference * 2 / Math.PI).toInt()
+        measuredHeight = (halfCircumference * 2 / Math.PI).toInt().toDouble()
         //求出半径
         radius = (halfCircumference / Math.PI).toInt()
         val params = layoutParams
         //控件宽度
         if (useWeight) {
-            measuredWidth = MeasureSpec.getSize(widthMeasureSpec)
+            measuredWidth = MeasureSpec.getSize(widthMeasureSpec).toDouble()
         } else if (params != null && params.width > 0) {
-            measuredWidth = params.width
+            measuredWidth = params.width.toDouble()
         } else {
-            measuredWidth = maxTextWidth
+            measuredWidth = maxTextWidth.toDouble()
             if (textPadding < 0) {
                 textPadding = ScreenUtils.dip2px(context, ITEM_PADDING)
             }
@@ -436,8 +436,8 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             }
         }
         //计算两条横线 和 选中项画笔的基线Y位置
-        firstLineY = (measuredHeight - itemHeight) / 2.0f
-        secondLineY = (measuredHeight + itemHeight) / 2.0f
+        firstLineY = ((measuredHeight - itemHeight) / 2.0f).toFloat()
+        secondLineY = ((measuredHeight + itemHeight) / 2.0f).toFloat()
         //初始化显示的item的position
         if (initPosition == -1) {
             initPosition = if (isLoop) {
@@ -564,8 +564,8 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         //绘制中间两条横线
         if (dividerConfig.visible) {
             val ratio = dividerConfig.ratio
-            canvas.drawLine(measuredWidth * ratio, firstLineY, measuredWidth * (1 - ratio), firstLineY, paintIndicator!!)
-            canvas.drawLine(measuredWidth * ratio, secondLineY, measuredWidth * (1 - ratio), secondLineY, paintIndicator!!)
+            canvas.drawLine((measuredWidth * ratio).toFloat(), firstLineY, (measuredWidth * (1 - ratio)).toFloat(), this.firstLineY, paintIndicator!!)
+            canvas.drawLine((measuredWidth * ratio).toFloat(), secondLineY, (measuredWidth * (1 - ratio)).toFloat(), secondLineY, paintIndicator!!)
         }
         if (dividerConfig.shadowVisible) {
             paintShadow!!.color = dividerConfig.shadowColor
@@ -613,7 +613,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                     canvas.drawText(contentText!!, drawOutContentStart.toFloat(), maxTextHeight.toFloat(), paintOuterText!!)
                     canvas.restore()
                     canvas.save()
-                    canvas.clipRect(0f, firstLineY - translateY, measuredWidth.toFloat(), itemHeight as Int.toFloat())
+                    canvas.clipRect(0f, firstLineY - translateY, measuredWidth.toFloat(), itemHeight)
                     canvas.scale(1.0f, Math.sin(radian).toFloat() * 1.0f)
                     canvas.drawText(contentText, drawCenterContentStart.toFloat(), maxTextHeight - centerContentOffset, paintCenterText!!)
                     canvas.restore()
@@ -625,13 +625,13 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                     canvas.drawText(contentText!!, drawCenterContentStart.toFloat(), maxTextHeight - centerContentOffset, paintCenterText!!)
                     canvas.restore()
                     canvas.save()
-                    canvas.clipRect(0f, secondLineY - translateY, measuredWidth.toFloat(), itemHeight as Int.toFloat())
+                    canvas.clipRect(0f, secondLineY - translateY, measuredWidth.toFloat(), itemHeight )
                     canvas.scale(1.0f, Math.sin(radian).toFloat() * SCALE_CONTENT)
                     canvas.drawText(contentText, drawOutContentStart.toFloat(), maxTextHeight.toFloat(), paintOuterText!!)
                     canvas.restore()
                 } else if (translateY >= firstLineY && maxTextHeight + translateY <= secondLineY) {
                     // 中间条目
-                    canvas.clipRect(0, 0, measuredWidth, maxTextHeight)
+                    canvas.clipRect(0, 0, measuredWidth.toInt(), maxTextHeight)
                     //让文字居中
                     val y = maxTextHeight - centerContentOffset //因为圆弧角换算的向下取值，导致角度稍微有点偏差，加上画笔的基线会偏上，因此需要偏移量修正一下
                     var i = 0
@@ -728,7 +728,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         when (gravity) {
             Gravity.CENTER -> drawCenterContentStart = ((measuredWidth - rect.width()) * 0.5).toInt()
             Gravity.LEFT -> drawCenterContentStart = ScreenUtils.dip2px(context, 8f)
-            Gravity.RIGHT -> drawCenterContentStart = measuredWidth - rect.width() - centerContentOffset.toInt()
+            Gravity.RIGHT -> drawCenterContentStart = (measuredWidth - rect.width() - centerContentOffset.toInt()).toInt()
             else -> {
             }
         }
@@ -740,7 +740,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         when (gravity) {
             Gravity.CENTER -> drawOutContentStart = ((measuredWidth - rect.width()) * 0.5).toInt()
             Gravity.LEFT -> drawOutContentStart = ScreenUtils.dip2px(context, 8f)
-            Gravity.RIGHT -> drawOutContentStart = measuredWidth - rect.width() - centerContentOffset.toInt()
+            Gravity.RIGHT -> drawOutContentStart = (measuredWidth - rect.width() - centerContentOffset.toInt()).toInt()
             else -> {
             }
         }
@@ -749,7 +749,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         this.widthMeasureSpec = widthMeasureSpec
         remeasure()
-        setMeasuredDimension(measuredWidth, measuredHeight)
+        setMeasuredDimension(measuredWidth.toInt(), measuredHeight.toInt())
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -776,9 +776,9 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                         bottom = totalScrollY - dy
                     }
                     if (totalScrollY < top) {
-                        totalScrollY = top as Int.toFloat()
+                        totalScrollY = top
                     } else if (totalScrollY > bottom) {
-                        totalScrollY = bottom as Int.toFloat()
+                        totalScrollY = bottom
                     }
                 }
             }
@@ -867,7 +867,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         var thick = DIVIDER_THICK
 
         constructor() : super() {}
-        constructor(@FloatRange(from = 0, to = 1) ratio: Float) {
+        constructor(@FloatRange(from = 0.0, to = 1.0) ratio: Float) {
             this.ratio = ratio
         }
 
@@ -927,7 +927,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         /**
          * 线比例，范围为0-1,0表示最长，1表示最短
          */
-        fun setRatio(@FloatRange(from = 0, to = 1) ratio: Float): DividerConfig {
+        fun setRatio(@FloatRange(from = 0.0, to = 1.0) ratio: Float): DividerConfig {
             this.ratio = ratio
             return this
         }
@@ -1069,9 +1069,9 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                 }
                 if (view.totalScrollY <= top) {
                     a = 40f
-                    view.totalScrollY = top as Int.toFloat()
+                    view.totalScrollY = top
                 } else if (view.totalScrollY >= bottom) {
-                    view.totalScrollY = bottom as Int.toFloat()
+                    view.totalScrollY = bottom
                     a = -40f
                 }
             }

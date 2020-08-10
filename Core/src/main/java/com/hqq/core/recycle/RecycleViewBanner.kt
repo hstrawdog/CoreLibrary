@@ -108,8 +108,10 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         recyclerView!!.layoutManager = mLinearLayoutManager
         // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
         PagerSnapHelper().attachToRecyclerView(recyclerView)
-        mAdapter!!.setData(mData)
-        mAdapter.setIsShowTip(isShowTip)
+        if (mAdapter != null) {
+            mAdapter!!.setData(mData)
+            mAdapter!!.isShowTip = isShowTip;
+        }
         recyclerView!!.adapter = mAdapter
         recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -361,11 +363,11 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         this.currentIndex = currentIndex
     }
 
-    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>?) {
+    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>) {
         mAdapter!!.setOnRvBannerClickListener(onRvBannerClickListener)
     }
 
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>?) {
+    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>) {
         mAdapter!!.setRecycleViewBannerChangeListener(recycleViewBannerChangeListener)
     }
 
@@ -373,7 +375,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         /**
          * @param t
          */
-        fun onBannerClick(t: T)
+        fun onBannerClick(t: Int)
     }
 
     interface RecycleViewBannerChangeListener<T> {
@@ -381,13 +383,13 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
          * @param t
          * @return
          */
-        fun getUrl(t: T): String?
+        fun getUrl(t: T): String
 
         /**
          * @param t
          * @return
          */
-        fun getTitle(t: T): String?
+        fun getTitle(t: T): String
     }
 
     init {

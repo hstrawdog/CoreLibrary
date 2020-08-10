@@ -1,5 +1,8 @@
 package com.hqq.core.widget.ptr
 
+import `in`.srain.cube.views.ptr.PtrFrameLayout
+import `in`.srain.cube.views.ptr.PtrUIHandler
+import `in`.srain.cube.views.ptr.indicator.PtrIndicator
 import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
@@ -95,11 +98,11 @@ class PtrClassicDefaultHeader : FrameLayout, PtrUIHandler {
     }
 
     private fun buildAnimation() {
-        mFlipAnimation = RotateAnimation(0, (-180).toFloat(), RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
+        mFlipAnimation = RotateAnimation(0f, (-180).toFloat(), RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
         mFlipAnimation!!.interpolator = LinearInterpolator()
         mFlipAnimation!!.duration = mRotateAniTime.toLong()
         mFlipAnimation!!.fillAfter = true
-        mReverseFlipAnimation = RotateAnimation((-180).toFloat(), 0, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
+        mReverseFlipAnimation = RotateAnimation((-180).toFloat(), 0f, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
         mReverseFlipAnimation!!.interpolator = LinearInterpolator()
         mReverseFlipAnimation!!.duration = mRotateAniTime.toLong()
         mReverseFlipAnimation!!.fillAfter = true

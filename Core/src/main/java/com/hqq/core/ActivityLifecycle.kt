@@ -40,10 +40,12 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
         get() {
             check(!(null == activities || activities.size == 0)) { "Core 未初始化" }
             // 获取最上面的 Activity
-            for (i in activities.indices.reversed()) {
-                val activity = activities[i]
-                if (!activity.isFinishing) {
-                    return activity
+            if (activities != null) {
+                for (i in activities.indices.reversed()) {
+                    val activity = activities[i]
+                    if (!activity.isFinishing) {
+                        return activity
+                    }
                 }
             }
             throw IllegalStateException("未获取到栈内对象 当前Activity 异常")

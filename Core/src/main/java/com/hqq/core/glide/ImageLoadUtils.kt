@@ -39,7 +39,7 @@ object ImageLoadUtils {//缓存SOURC和RESULT
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreBuildConfig.Companion.getInstance().getDefImg())//缓存SOURC和RESULT
+                .placeholder(CoreBuildConfig.instance!!.defImg)//缓存SOURC和RESULT
     //不做内存缓存
 
     /**
@@ -53,7 +53,7 @@ object ImageLoadUtils {//缓存SOURC和RESULT
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreBuildConfig.Companion.getInstance().getDefImg())
+                .placeholder(CoreBuildConfig.instance!!.defImg)
 
     fun getDefRoundRequestOptions(context: Context?): RequestOptions {
         return getRoundRequestOptions(ResourcesUtils.getDimen(R.dimen.x10).toInt())
@@ -71,7 +71,7 @@ object ImageLoadUtils {//缓存SOURC和RESULT
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreBuildConfig.Companion.getInstance().getDefImg())
+                .placeholder(CoreBuildConfig.instance!!.defImg)
                 .transform(GlideRoundTransform(px))
     }
 

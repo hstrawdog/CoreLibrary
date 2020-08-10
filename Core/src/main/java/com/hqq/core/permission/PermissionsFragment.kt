@@ -26,7 +26,7 @@ class PermissionsFragment : Fragment(), IPermissionActions {
     /**
      * 申请的权限组
      */
-    var mPermissions: Array<String?>
+    lateinit var mPermissions: Array<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -38,7 +38,7 @@ class PermissionsFragment : Fragment(), IPermissionActions {
      *
      * @param
      */
-    override fun requestPermissions(permissions: Array<String?>, listener: PermissionsResult?) {
+    override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
         mPermissions = permissions
         mPermissionsResult = listener
         if (IPermissionActions.Companion.hasPermission(context, *permissions)) {

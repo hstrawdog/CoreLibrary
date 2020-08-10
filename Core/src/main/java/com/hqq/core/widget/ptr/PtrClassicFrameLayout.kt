@@ -1,5 +1,6 @@
 package com.hqq.core.widget.ptr
 
+import `in`.srain.cube.views.ptr.PtrFrameLayout
 import android.content.Context
 import android.util.AttributeSet
 

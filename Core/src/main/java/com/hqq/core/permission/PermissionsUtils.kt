@@ -16,7 +16,7 @@ object PermissionsUtils {
      */
     @kotlin.jvm.JvmStatic
     fun requestStoragePermission(permissionsResult: PermissionsResult?) {
-        FragmentProxy().requestPermissions(IPermissionsHas.Companion.getStorage()
+        FragmentProxy().requestPermissions(IPermissionsHas.storage
                 , permissionsResult)
     }
 
@@ -27,7 +27,7 @@ object PermissionsUtils {
      */
     @kotlin.jvm.JvmStatic
     fun requestCameraPermission(permissionsResult: PermissionsResult?) {
-        FragmentProxy().requestPermissions(IPermissionsHas.Companion.getCamera(), permissionsResult)
+        FragmentProxy().requestPermissions(IPermissionsHas.camera, permissionsResult)
     }
 
     /**
@@ -37,6 +37,6 @@ object PermissionsUtils {
      */
     @kotlin.jvm.JvmStatic
     fun requestLocationPermission(permissionsResult: PermissionsResult?) {
-        FragmentProxy().requestPermissions(IPermissionsHas.Companion.getLocation(), permissionsResult)
+        FragmentProxy().requestPermissions(IPermissionsHas.location, permissionsResult)
     }
 }

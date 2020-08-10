@@ -24,23 +24,23 @@ class PermissionsHasImpl : IPermissionsHas {
         var result = true
         if (permissions != null && permissions.size > 0) {
             for (permission in permissions) {
-                if (Arrays.asList<String>(*IPermissionsHas.Companion.getCalendar()).contains(permission)) {
+                if (Arrays.asList<String>(*IPermissionsHas.calendar).contains(permission)) {
                     result = result && hasCalendar(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getCamera()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.camera).contains(permission)) {
                     result = result && hasCamera(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getContacts()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.contacts).contains(permission)) {
                     result = result && hasContacts(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getLocation()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.location).contains(permission)) {
                     result = result && hasLocation(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getMicrophone()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.microphone).contains(permission)) {
                     result = result && hasMicrophone(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getPhone()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.phone).contains(permission)) {
                     result = result && hasPhone(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getSensors()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.sensors).contains(permission)) {
                     result = result && hasSensors(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getSMS()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.sMS).contains(permission)) {
                     result = result && hasSMS(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.Companion.getStorage()).contains(permission)) {
+                } else if (Arrays.asList<String>(*IPermissionsHas.storage).contains(permission)) {
                     result = result && hasStorage(context)
                 }
             }
@@ -51,45 +51,45 @@ class PermissionsHasImpl : IPermissionsHas {
     override fun hasCalendar(context: Context?): Boolean {
         //(允许程序读取用户的日程信息)
         return IPermissionActions.Companion.hasPermission(context,
-                *IPermissionsHas.Companion.getCalendar()
+                *IPermissionsHas.calendar
         )
     }
 
     override fun hasCamera(context: Context?): Boolean {
         //(允许访问摄像头进行拍照)
         return IPermissionActions.Companion.hasPermission(context,
-                *IPermissionsHas.Companion.getCamera())
+                *IPermissionsHas.camera)
     }
 
     override fun hasContacts(context: Context?): Boolean {
         return hasStorage(context) && IPermissionActions.Companion.hasPermission(context,
-                *IPermissionsHas.Companion.getContacts()
+                *IPermissionsHas.contacts
         )
     }
 
     override fun hasLocation(context: Context?): Boolean {
-        return hasStorage(context) && IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.Companion.getLocation())
+        return hasStorage(context) && IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.location)
     }
 
     override fun hasMicrophone(context: Context?): Boolean {
-        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.Companion.getMicrophone())
+        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.microphone)
     }
 
     override fun hasPhone(context: Context?): Boolean {
-        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.Companion.getPhone())
+        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.phone)
     }
 
     override fun hasSensors(context: Context?): Boolean {
-        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.Companion.getSensors())
+        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.sensors)
     }
 
     override fun hasSMS(context: Context?): Boolean {
         return IPermissionActions.Companion.hasPermission(context,
-                *IPermissionsHas.Companion.getSMS()
+                *IPermissionsHas.sMS
         )
     }
 
     override fun hasStorage(context: Context?): Boolean {
-        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.Companion.getStorage())
+        return IPermissionActions.Companion.hasPermission(context, *IPermissionsHas.storage)
     }
 }

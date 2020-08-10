@@ -12,10 +12,12 @@ import com.hqq.core.CoreBuildConfig
  * 代理类
  */
 class FragmentProxy : IPermissionActions {
-    override fun requestPermissions(permissions: Array<String?>, listener: PermissionsResult?) {
+
+
+    override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
         // PermissionsHasImpl 判断
-        if (!PermissionsHasImpl().hasPermission(CoreBuildConfig.Companion.getInstance().getApplication(), *permissions)) {
-            val mPermissionsFragment = PermissionsFragmentFactory.getPermissionsFragment(CoreBuildConfig.Companion.getInstance().getCurrActivity())
+        if (!PermissionsHasImpl().hasPermission(CoreBuildConfig.instance?.application, *permissions)) {
+            val mPermissionsFragment = PermissionsFragmentFactory.getPermissionsFragment(CoreBuildConfig.instance!!.currActivity)
             mPermissionsFragment!!.requestPermissions(permissions, listener)
         } else {
             listener!!.onPermissionsResult(true)

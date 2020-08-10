@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter.RequestLoadMoreListener
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.ui.model.BaseListModelView
+import com.hqq.core.ui.model.BaseListModelView.Companion.createRecycleView
 import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
 
 /**
@@ -20,7 +21,8 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> : BaseActivity(), RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, IBaseListModelView<T?> {
+abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
+        BaseActivity(), RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, IBaseListModelView<T?> {
     @kotlin.jvm.JvmField
     protected var mRcList: RecyclerView? = null
     override var adapter: T? = null
@@ -30,6 +32,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> : BaseActivity(), R
     override var pageCount = 1
         protected set
     protected var mLayoutManager: RecyclerView.LayoutManager? = null
+
     @kotlin.jvm.JvmField
     protected var mBaseListModel: BaseListModelView? = null
     override fun getLayoutViewId(): Int {
@@ -46,8 +49,8 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> : BaseActivity(), R
      *
      * @return
      */
-    override fun getLayoutView(group: ViewGroup): View? {
-        return if (layoutViewId <= 0) {
+    override fun getLayoutView(group: ViewGroup?): View? {
+        return if (getLayoutViewId() <= 0) {
             createRecycleView(this)
         } else {
             null
@@ -62,9 +65,9 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> : BaseActivity(), R
         mBaseListModel = BaseListModelView(this, this)
         mLayoutManager = rcLayoutManager
         adapter = initAdapter()
-        mRcList = mBaseListModel!!.checkRecycleView(mRcList, mRootViewBuild.getRootView())
+        mRcList = mBaseListModel!!.checkRecycleView(mRcList, mRootViewBuild!!.rootView)
         mBaseListModel!!.initRecycleView(mRcList, adapter, mLayoutManager)
-        mBaseListModel!!.initPtrPullDown(mRootViewBuild.getRootView())
+        mBaseListModel!!.initPtrPullDown(mRootViewBuild!!.rootView)
         initData()
     }
 

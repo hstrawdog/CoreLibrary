@@ -10,7 +10,6 @@ import com.hqq.core.R
 import com.hqq.core.glide.ImageLoadUtils
 import com.hqq.core.recycle.RecycleViewBanner.RecycleViewBannerChangeListener
 import com.hqq.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
-import java.util.*
 
 /**
  * @Author : huangqiqiang
@@ -20,35 +19,36 @@ import java.util.*
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class RecycleBannerAdapter<T> : RecyclerView.Adapter<Any?>() {
-    private var mData: List<T>? = ArrayList()
+class RecycleBannerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    lateinit var mData: List<T>
     private var onRvBannerClickListener: RecycleViewBannerClickListener<*>? = null
     private var mRecycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>? = null
     var isShowTip = false
+
     private var mIsUnlimited = true
     fun setUnlimited(unlimited: Boolean) {
         mIsUnlimited = unlimited
     }
 
-    fun setData(data: List<T>?) {
+    fun setData(data: List<T>) {
         mData = data
     }
 
-    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>?) {
+    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>) {
         this.onRvBannerClickListener = onRvBannerClickListener
     }
 
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>?): RecycleBannerAdapter<*> {
+    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>?): RecycleBannerAdapter<T> {
         mRecycleViewBannerChangeListener = recycleViewBannerChangeListener
         return this
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Any {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = onCreateView(parent)
         return object : RecyclerView.ViewHolder(view) {}
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         onBindView(holder, position)
     }
 
@@ -60,9 +60,6 @@ class RecycleBannerAdapter<T> : RecyclerView.Adapter<Any?>() {
         }
     }
 
-    fun setShowTip(isShowTip: Boolean) {
-        this.isShowTip = isShowTip
-    }
 
     private fun onCreateView(parent: ViewGroup): View {
         return LayoutInflater.from(parent.context).inflate(R.layout.item_banner, parent, false)
@@ -71,17 +68,17 @@ class RecycleBannerAdapter<T> : RecyclerView.Adapter<Any?>() {
     private fun onBindView(holder: RecyclerView.ViewHolder?, position: Int) {
         val img = holder!!.itemView.findViewById<ImageView>(R.id.iv_banner)
         val tv = holder.itemView.findViewById<TextView>(R.id.tv_code_banner)
-        val data = mData!![position % mData!!.size]
-        if (data is String) {
+        val item = mData!![position % mData!!.size]
+        if (item is String) {
             tv.visibility = View.GONE
-            ImageLoadUtils.with(data as String, img)
-        } else if (data is Int) {
+            ImageLoadUtils.with(item as String, img)
+        } else if (item is Int) {
             tv.visibility = View.GONE
-            ImageLoadUtils.with(data as Int, img)
+            ImageLoadUtils.with(item as Int, img)
         } else if (null != mRecycleViewBannerChangeListener) {
-            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(data), img)
+            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item) , img)
             if (isShowTip) {
-                tv.text = mRecycleViewBannerChangeListener!!.getTitle(data)
+                tv.text = mRecycleViewBannerChangeListener!!.getTitle(item)
                 tv.visibility = View.VISIBLE
             } else {
                 tv.visibility = View.GONE
@@ -89,8 +86,10 @@ class RecycleBannerAdapter<T> : RecyclerView.Adapter<Any?>() {
         }
         holder.itemView.setOnClickListener {
             if (onRvBannerClickListener != null) {
-                onRvBannerClickListener!!.onBannerClick(position % mData!!.size)
+                onRvBannerClickListener!!.onBannerClick(position % (mData!!.size))
             }
         }
     }
+
+
 }

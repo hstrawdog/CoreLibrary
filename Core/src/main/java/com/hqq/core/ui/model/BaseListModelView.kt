@@ -1,5 +1,8 @@
 package com.hqq.core.ui.model
 
+import `in`.srain.cube.views.ptr.PtrDefaultHandler
+import `in`.srain.cube.views.ptr.PtrFrameLayout
+import `in`.srain.cube.views.ptr.PtrHandler
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +37,7 @@ import com.hqq.core.widget.CusPtrClassicFrameLayout
  */
 class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mContext: Context?) {
     var mViewEmptyFoot: View? = null
-    protected var mPtrPullDown: CusPtrClassicFrameLayout? = null
+    lateinit var mPtrPullDown: CusPtrClassicFrameLayout
 
     /**
      * 空布局 layout Id
@@ -50,7 +53,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      */
     fun initPtrPullDown(view: View?) {
         if (mPtrPullDown == null) {
-            mPtrPullDown = view!!.findViewById(R.id.ptr_pull_down)
+            mPtrPullDown = view!!.findViewById(R.id.ptr_pull_down) as (CusPtrClassicFrameLayout)
         }
         if (mPtrPullDown != null) {
             initPull()
@@ -101,7 +104,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      *
      * @param data
      */
-    fun fillingData(data: List<*>) {
+    fun fillingData(data: MutableCollection<out Nothing>) {
         if (mBaseListModelView.pageCount == 1) {
             adapter.replaceData(data)
         } else {
@@ -213,7 +216,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      */
     fun onDestroy() {
         mContext = null
-        mPtrPullDown = null
     }
 
     /**

@@ -76,7 +76,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
         overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out)
     }
 
-    override fun onResult(requestCode: Int, resultCode: Int, data: Intent) {}
+    override fun onResult(requestCode: Int, resultCode: Int, data: Intent?) {}
     override fun onClick(v: View) {}
 
     /**
@@ -92,7 +92,8 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      *
      * @return
      */
-    override fun getLayoutView(parent: ViewGroup): View? {
+    override fun getLayoutView(parent: ViewGroup?): View? {
         return null
     }
+
 }

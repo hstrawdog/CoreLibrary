@@ -34,7 +34,7 @@ class GlideRoundTransform(dp: Int) : BitmapTransformation() {
             }
             val canvas = Canvas(result!!)
             val paint = Paint()
-            paint.shader = BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP)
+            paint.shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
             paint.isAntiAlias = true
             val rectF = RectF(0f, 0f, source.width.toFloat(), source.height.toFloat())
             canvas.drawRoundRect(rectF, radius, radius, paint)
