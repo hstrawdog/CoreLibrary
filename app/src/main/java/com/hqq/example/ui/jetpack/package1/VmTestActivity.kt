@@ -17,13 +17,12 @@ import com.hqq.example.databinding.ActivityVmTestBinding
  * @Descrive :
 </描述当前版本功能> */
 class VmTestActivity : BaseVmActivity<ActivityVmTestBinding?, BaseViewModel?>() {
-    override fun getBindingViewModelId(): Int {
-        return 0
-    }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_vm_test
-    }
+
+    override val bindingViewModelId: Int
+        get() = 0
+    override val layoutId: Int
+        get() = R.layout.activity_vm_test
 
     override fun initViews() {
         mBinding!!.button49.setOnClickListener { mViewModel!!.setShowLoading(true) }

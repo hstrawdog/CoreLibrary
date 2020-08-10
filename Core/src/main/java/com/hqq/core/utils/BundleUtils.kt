@@ -130,8 +130,8 @@ object BundleUtils {
      * @param <T>
      * @return
     </T> */
-    fun <T : Parcelable?> getParcelable(arguments: Bundle?, key: String?): T? {
-        return arguments?.getParcelable(key)
+    fun <T : Parcelable> getParcelable(arguments: Bundle, key: String): T? {
+        return arguments.getParcelable(key)
     }
 
     /**

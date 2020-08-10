@@ -35,7 +35,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBottomDialogFrag
     /**
      * 布局创建 容器
      */
-    protected var mRootViewBuild: IRootViewImpl? = null
+    lateinit var mRootViewBuild: IRootViewImpl<BaseBottomDialog>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NO_TITLE, transparentBottomSheetStyle)
@@ -82,9 +82,8 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBottomDialogFrag
         mRootView = null
     }
 
-    override fun getHeight(): Int {
-        return CoordinatorLayout.LayoutParams.MATCH_PARENT
-    }
+    override val height: Int
+        get() = CoordinatorLayout.LayoutParams.MATCH_PARENT
 
     override fun initDefConfig() {}
     override fun show(manager: FragmentManager) {
@@ -100,7 +99,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBottomDialogFrag
     protected open val transparentBottomSheetStyle: Int
         protected get() = R.style.TransparentBottomSheetStyle
 
-    override fun getLayoutView(parent: ViewGroup): View? {
+    override fun getLayoutView(parent: ViewGroup?): View? {
         return null
     }
 }

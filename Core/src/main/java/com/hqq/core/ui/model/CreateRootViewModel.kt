@@ -60,7 +60,7 @@ class CreateRootViewModel
     /**
      * 标题栏类型
      */
-    private var mClass: Class<out IToolBar?> = CoreBuildConfig.Companion.getInstance().getDefItoobar()
+    private var mClass: Class<out IToolBar?> = CoreBuildConfig.instance.defItoobar
 
     /**
      * 布局类型
@@ -110,7 +110,7 @@ class CreateRootViewModel
      * 状态栏模式
      */
     @ToolBarMode
-    var statusBarMode: Int = CoreBuildConfig.Companion.getInstance().isStatusMode()
+    var statusBarMode: Int = CoreBuildConfig.instance.isStatusMode
 
     /**
      * 构建跟布局
@@ -163,8 +163,8 @@ class CreateRootViewModel
 
     private fun getLayoutView(iActivityBuilder: ICreateRootView, layout: ViewGroup): View? {
         var view: View?
-        if (iActivityBuilder.layoutViewId > 0) {
-            view = mActivity!!.get()!!.layoutInflater.inflate(iActivityBuilder.layoutViewId, layout, false)
+        if (iActivityBuilder.getLayoutViewId()!! > 0) {
+            view = mActivity!!.get()!!.layoutInflater.inflate(iActivityBuilder.getLayoutViewId()!!, layout, false)
         } else {
             view = iActivityBuilder.getLayoutView(layout)
             if (view == null) {
@@ -192,7 +192,7 @@ class CreateRootViewModel
         }
         if (mIsShowToolBar || mIsShowStatus) {
             mIToolBar = initIToolBar()
-            layout.addView(mIToolBar.getRootView())
+            layout.addView(mIToolBar?.rootView)
         }
     }
 

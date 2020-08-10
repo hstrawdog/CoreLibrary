@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 android {
     dataBinding {
         enabled = true
@@ -76,14 +77,16 @@ dependencies {
     api rootProject.ext.dependencies.LiveData
     api rootProject.ext.dependencies.LifecyclesRuntime
 
-    implementation "androidx.activity:activity-ktx:1.1.0"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+
     api rootProject.ext.dependencies.glide
-    annotationProcessor rootProject.ext.dependencies.glideCompiler
+    kapt  rootProject.ext.dependencies.glideCompiler
 
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    //版本要与gradle版本一致
+    kapt  "com.android.databinding:compiler:4.0.1"
 
 }
 repositories {

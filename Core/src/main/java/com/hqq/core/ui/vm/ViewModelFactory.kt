@@ -27,7 +27,7 @@ internal object ViewModelFactory {
                 loadingView.dismiss()
             }
         })
-        viewModel.mShowToast.observe(lifecycleOwner, Observer { s: String? -> ToastUtils.showToast(s) })
+        viewModel.mShowToast.observe(lifecycleOwner, Observer { s: String -> ToastUtils.showToast(s) })
     }
 
     /**

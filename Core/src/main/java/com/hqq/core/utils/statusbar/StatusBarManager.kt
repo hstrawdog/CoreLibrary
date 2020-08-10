@@ -65,16 +65,16 @@ object StatusBarManager {
     @kotlin.jvm.JvmStatic
     fun setStatusBarModel(window: Window?, lightStatusBar: Boolean) {
         transparencyBar(window)
-        if (OSUtils.isFlymeOS()) {
-            if (OSUtils.isFlymeOS4Later()) {
+        if (OSUtils.isFlymeOS) {
+            if (OSUtils.isFlymeOS4Later) {
                 //参数 false 白色 true 黑色
                 FlymeOSStatusBarFontUtils.setStatusBarDarkIcon(window, lightStatusBar)
-            } else if (!OSUtils.isFlymeOS4Later()) {
+            } else if (!OSUtils.isFlymeOS4Later) {
                 processFlyMe(lightStatusBar, window)
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setStatusBarTextColor(window, lightStatusBar)
-        } else if (OSUtils.isMIUI6Later()) {
+        } else if (OSUtils.isMIUI6Later) {
             MIUISetStatusBarLightMode(window, lightStatusBar)
         }
     }

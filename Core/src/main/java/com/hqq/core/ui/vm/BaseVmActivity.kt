@@ -20,14 +20,14 @@ import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmActivity<T : ViewDataBinding?, K : BaseViewModel?>
     : BaseBindingActivity<T>(), IBaseViewModel, IOpenActivity {
-    public var mViewModel: K? = null
+    var mViewModel: K? = null
         get
         set
 
     override fun initView() {
         mViewModel = ViewModelFactory.createViewModel(this, javaClass, mViewModel)
         lifecycle.addObserver(mViewModel!!)
-        ViewModelFactory.initBaseViewModel(mViewModel!!, this, mLoadingView)
+        mLoadingView?.let { ViewModelFactory.initBaseViewModel(mViewModel!!, this, it) }
         ViewModelFactory.initOpenActivity(mViewModel!!, this, this)
         addViewModel()
         initViews()
@@ -53,6 +53,6 @@ abstract class BaseVmActivity<T : ViewDataBinding?, K : BaseViewModel?>
         if (openActivityComponent.mBundle != null) {
             intent.putExtras(openActivityComponent.mBundle!!)
         }
-        mActivity.startActivityForResult(intent, openActivityComponent.mActivityResult)
+        mActivity!!.startActivityForResult(intent, openActivityComponent.mActivityResult)
     }
 }

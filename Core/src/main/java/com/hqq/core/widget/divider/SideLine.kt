@@ -28,6 +28,7 @@ class SideLine(isHave: Boolean, @ColorInt color: Int, widthDp: Float, startPaddi
      * endPaddingDp,分割线尾部的padding，水平方向右为end，垂直方向下为end
      */
     var startPaddingDp: Float
+
     var endPaddingDp: Float
 
     init {

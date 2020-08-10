@@ -100,10 +100,8 @@ class CoreBuildConfig private constructor() {
         /**
          * 单利维持对象
          */
-        @Volatile
-        private var singleton: CoreBuildConfig? = null
-        @kotlin.jvm.JvmStatic
-        val instance: CoreBuildConfig?
+        lateinit var singleton: CoreBuildConfig
+        val instance: CoreBuildConfig
             get() {
                 if (singleton == null) {
                     synchronized(CoreBuildConfig::class.java) {

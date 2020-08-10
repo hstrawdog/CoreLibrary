@@ -47,12 +47,12 @@ class MainActivity : BaseVmListActivity<ViewDataBinding?, MainModel?, MainAdapte
         return MainAdapter()
     }
 
-    override fun getBindingViewModelId(): Int {
-        return 0
-    }
+    override val bindingViewModelId: Int
+        get() = 0
 
     override fun initData() {
         WeatherActivity.open(this)
+
     }
 
     private var mExitTime: Long = 0
@@ -75,8 +75,6 @@ class MainActivity : BaseVmListActivity<ViewDataBinding?, MainModel?, MainAdapte
         return super.dispatchKeyEvent(event)
     }
 
-    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {}
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {}
     class MainModel : BaseListViewModel() {
         override fun onCrete() {
             super.onCrete()
@@ -102,4 +100,6 @@ class MainActivity : BaseVmListActivity<ViewDataBinding?, MainModel?, MainAdapte
             setDate(arrayList)
         }
     }
+
+
 }

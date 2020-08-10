@@ -64,7 +64,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否正在轮播
      */
     private var isPlaying = false
-    private val handler = Handler()
+    var  mHandlers = Handler()
     private var isTouched = false
 
     /**
@@ -76,14 +76,14 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否无限轮播
      */
     private var mIsUnlimited = true
-    private var mData: MutableList<*>? = ArrayList<Any>()
+    private var mData: MutableList<Nothing> = ArrayList<Nothing>()
     var mLinearLayoutManager: LinearLayoutManager? = null
-    private var mAdapter: RecycleBannerAdapter<*>? = null
+    private var mAdapter: RecycleBannerAdapter<Nothing>? = null
     private val playTask: Runnable = object : Runnable {
         override fun run() {
             recyclerView!!.smoothScrollToPosition(++currentIndex)
             switchIndicator()
-            handler.postDelayed(this, mInterval.toLong())
+            mHandlers.postDelayed(this, mInterval.toLong())
         }
     }
 
@@ -148,7 +148,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         if (recyclerView == null) {
             recyclerView = RecyclerView(context)
             mLinearLayout = CircleIndicatorView(context)
-            mAdapter = RecycleBannerAdapter<Any?>()
+            mAdapter = RecycleBannerAdapter<Nothing>()
             mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
         initIndicator(a)
@@ -162,7 +162,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
     private fun initEditMode() {
         if (isInEditMode) {
             for (i in 0..2) {
-                mData!!.add("")
+                mData!!.add("" as Nothing)
             }
             createIndicators()
         }
@@ -245,10 +245,10 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
     private fun setPlaying(playing: Boolean) {
         if (isAutoPlaying) {
             if (!isPlaying && playing && mAdapter != null && mAdapter!!.itemCount > 2) {
-                handler.postDelayed(playTask, mInterval.toLong())
+                mHandlers.postDelayed(playTask, mInterval.toLong())
                 isPlaying = true
             } else if (isPlaying && !playing) {
-                handler.removeCallbacksAndMessages(null)
+                mHandlers.removeCallbacksAndMessages(null)
                 isPlaying = false
             }
         }
@@ -259,11 +259,11 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      *
      * @param data Banner对象列表
      */
-    fun <T> setRvBannerData(data: List<T>?) {
+    fun setRvBannerData(data: List<Nothing>) {
         setPlaying(false)
         // 避免空指针
         if (mData == null) {
-            mData = ArrayList<Any>()
+            mData = ArrayList<Nothing>()
         }
         mData!!.clear()
         mData!!.addAll(data)
@@ -285,7 +285,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         }
     }
 
-    fun <T : RecycleBannerAdapter<*>?> setAdapter(adapter: T) {
+    fun <T : RecycleBannerAdapter<Nothing>> setAdapter(adapter: T) {
         mAdapter = adapter
     }
 
@@ -367,7 +367,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         mAdapter!!.setOnRvBannerClickListener(onRvBannerClickListener)
     }
 
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>) {
+    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<Nothing>) {
         mAdapter!!.setRecycleViewBannerChangeListener(recycleViewBannerChangeListener)
     }
 
@@ -378,18 +378,18 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         fun onBannerClick(t: Int)
     }
 
-    interface RecycleViewBannerChangeListener<T> {
+    interface RecycleViewBannerChangeListener<Any> {
         /**
          * @param t
          * @return
          */
-        fun getUrl(t: T): String
+        fun getUrl(t: Any): String
 
         /**
          * @param t
          * @return
          */
-        fun getTitle(t: T): String
+        fun getTitle(t: Any): String
     }
 
     init {

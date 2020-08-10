@@ -98,7 +98,7 @@ class CoverFlowLayoutManger(isFlat: Boolean, isGreyItem: Boolean,
     /**
      * 滚动动画
      */
-    private var mAnimation: ValueAnimator? = null
+    lateinit var mAnimation: ValueAnimator
 
     /**
      * 获取被选中Item位置
@@ -556,7 +556,7 @@ class CoverFlowLayoutManger(isFlat: Boolean, isGreyItem: Boolean,
     /**
      * 获取中间位置
      *
-     * Note:该方法主要用于[RecyclerCoverFlow.]判断中间位置
+     * Note:该方法主要用于[RecyclerCoverFlow]判断中间位置
      *
      * 如果需要获取被选中的Item位置，调用[.getSelectedPos]
      */

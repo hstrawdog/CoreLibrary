@@ -432,7 +432,7 @@ class ViewHolderUtils(view: View, onItemChildClick: View.OnClickListener) {
      * @return The ViewHolderUtils for chaining.
      */
     fun setAdapter(@IdRes viewId: Int, adapter: Adapter?): ViewHolderUtils {
-        val view = getView<AdapterView<*>>(viewId)!!
+        val view = getView<AdapterView<Adapter>>(viewId)!!
         view.setAdapter(adapter)
         return this
     }

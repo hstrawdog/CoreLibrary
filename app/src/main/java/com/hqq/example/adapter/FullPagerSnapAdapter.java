@@ -3,7 +3,7 @@ package com.hqq.example.adapter;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.hqq.example.R;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class FullPagerSnapAdapter extends BaseQuickAdapter<String, BaseViewHolde
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-        mScreenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
+        mScreenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
         GridLayoutManager.LayoutParams layoutParams = (GridLayoutManager.LayoutParams) helper.itemView.getLayoutParams();
         layoutParams.width = (mScreenWidth) / itemCountPerRowOrColumn;
         layoutParams.height = layoutParams.width * 4 / 3;

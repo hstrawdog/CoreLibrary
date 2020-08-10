@@ -19,13 +19,13 @@ class LoginActivity : BaseVmActivity<ActivityLoginBinding?, LoginModel?>() {
         mBinding!!.vm = mViewModel
     }
 
-    override fun getBindingViewModelId(): Int {
-        return 0
-    }
+    override val bindingViewModelId: Int
+        get() = 0
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_login
-    }
+    override val layoutId: Int
+        get() = R.layout.activity_login
+
+
 
     override fun initViews() {}
 

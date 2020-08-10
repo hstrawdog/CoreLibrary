@@ -23,7 +23,7 @@ abstract class BaseVmFragment<T : ViewDataBinding?, K : BaseViewModel?> : BaseBi
     protected var mViewModel: K? = null
     override fun initView() {
         mViewModel = createViewModel(this, javaClass, mViewModel)
-        initBaseViewModel(mViewModel!!, this, mLoadingView)
+        mLoadingView?.let { initBaseViewModel(mViewModel!!, this, it) }
         initOpenActivity(mViewModel!!!!, this, this)
         addViewModel()
         initViews()
@@ -44,6 +44,6 @@ abstract class BaseVmFragment<T : ViewDataBinding?, K : BaseViewModel?> : BaseBi
         if (openActivityComponent.mBundle != null) {
             intent.putExtras(openActivityComponent.mBundle!!)
         }
-        mActivity.startActivityForResult(intent, openActivityComponent.mActivityResult)
+        mActivity!!.startActivityForResult(intent, openActivityComponent.mActivityResult)
     }
 }

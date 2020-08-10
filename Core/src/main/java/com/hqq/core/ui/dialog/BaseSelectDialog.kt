@@ -23,6 +23,8 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
     override val animation: Int
         get() = R.style.dialogAnimation_fade_in2fade_out
 
+
+
     override val weight: Int
         get() = WindowManager.LayoutParams.MATCH_PARENT
 
@@ -77,7 +79,7 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @return
          */
         fun create(): BaseSelectDialog<*> {
-            val baseSelectDialog: BaseSelectDialog<*> = BaseSelectDialog<Any?>()
+            val baseSelectDialog: BaseSelectDialog<*> = BaseSelectDialog<BaseViewBuilderHolder>()
             baseSelectDialog.alertParams = mAlertParams
             return baseSelectDialog
         }

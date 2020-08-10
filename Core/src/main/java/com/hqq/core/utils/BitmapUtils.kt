@@ -22,6 +22,7 @@ import java.util.*
  * @Email :  qiqiang213@gmail.com
  */
 object BitmapUtils {
+
     fun generatBitmap(v: View): Bitmap {
         val bitmap = Bitmap.createBitmap(v.width, v.height,
                 Bitmap.Config.ARGB_8888)
@@ -183,6 +184,7 @@ object BitmapUtils {
         return bitmap
     }
 
+
     @Synchronized
     fun getBase64(path: String?): String {
         var bitmap: Bitmap? = null
@@ -192,7 +194,8 @@ object BitmapUtils {
         var base64 = ""
         try {
             val byteArray = ScalePicture(path, 30).toByteArray()
-            base64 = String(Base64.encode(byteArray, Base64.DEFAULT), "UTF-8")
+            // , UTF8
+            base64 = String(Base64.encode(byteArray, Base64.DEFAULT))
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {

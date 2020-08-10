@@ -56,7 +56,7 @@ class IToolBarBuilder {
      */
     fun <T : IToolBar?> create(clss: Class<T?>): T? {
         try {
-            val toolBar: T = clss.newInstance()
+            val toolBar: T = clss.newInstance()!!
             toolBar!!.setShowStatusBar(mIsShowStatusBar)
                     .setShowBar(mIsShowToolBar)
                     .setDefStatusColor(mStatusBarColor)

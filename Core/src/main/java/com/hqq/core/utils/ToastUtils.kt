@@ -27,7 +27,7 @@ object ToastUtils {
      * 全局单利
      * 吐司部分，只显示一个
      */
-    private var mToast: Toast? = null
+    lateinit var mToast: Toast
     private fun showToast(context: Context?, text: String, duration: Int) {
         if (TextUtils.isEmpty(text)) {
             return
@@ -71,6 +71,6 @@ object ToastUtils {
      */
     @kotlin.jvm.JvmStatic
     fun showToast(text: String) {
-        showToast(CoreBuildConfig.Companion.getInstance().getApplication().getBaseContext(), text)
+        showToast(CoreBuildConfig.instance!!.application, text)
     }
 }

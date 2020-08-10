@@ -92,7 +92,7 @@ class DividerBuilder {
 
     fun create(): Divider {
         //提供一个默认不显示的sideline，防止空指针
-        val defaultSideLine = SideLine(false, -0x99999a, 0, 0, 0)
+        val defaultSideLine = SideLine(false, -0x99999a, 0f, 0f, 0f)
         leftSideLine = if (leftSideLine != null) leftSideLine else defaultSideLine
         topSideLine = if (topSideLine != null) topSideLine else defaultSideLine
         rightSideLine = if (rightSideLine != null) rightSideLine else defaultSideLine

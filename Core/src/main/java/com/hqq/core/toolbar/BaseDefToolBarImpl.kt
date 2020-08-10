@@ -33,7 +33,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
      *
      * @returnImageView
      */
-    var toolBarBg: ImageView? = null
+    lateinit var toolBarBg: ImageView
         private set
     private var mDefToolBarColor = R.color.toolbar_bg_color
     private val mDefTitleColor = R.color.color_333
@@ -83,7 +83,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
             mDefToolBarColor = color
         }
         if (null != statusBar) {
-            statusBar.setBackgroundResource(color)
+            statusBar!!.setBackgroundResource(color)
         } else {
             mDefStatusColor = color
         }
@@ -119,7 +119,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @return ImageView
      */
     val leftView: ImageView
-        get() = mRootView.findViewById(R.id.iv_bar_back)
+        get() = rootView!!.findViewById(R.id.iv_bar_back)
 
     /**
      * 设置 bar 的颜色
@@ -132,7 +132,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @param title
      */
     fun setToolbarTitle(title: CharSequence?): BaseDefToolBarImpl? {
-        if (mRootView == null) {
+        if (rootView == null) {
             return null
         }
         toolbarTitle!!.text = title
@@ -145,7 +145,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @return
      */
     val toolbarTitle: TextView?
-        get() = mRootView.findViewById(R.id.tv_bar_title)
+        get() = rootView?.findViewById(R.id.tv_bar_title)
 
     /**
      * 设置背景颜色 需要在view创建完成
@@ -199,7 +199,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @param view
      */
     fun addRightView(view: View?) {
-        (mRootView.findViewById<View>(R.id.ll_right) as LinearLayout).addView(view)
+        (rootView?.findViewById<View>(R.id.ll_right) as LinearLayout).addView(view)
     }
     //region 添加右边文字
     /**
@@ -241,7 +241,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @return
      */
     private fun newTextView(title: String?, @ColorRes color: Int, @DimenRes size: Int, clickListener: View.OnClickListener?): View {
-        val textView = TextView(mRootView.context)
+        val textView = TextView(rootView?.context)
         textView.text = title
         textView.setPadding(0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt(), 0)
         textView.gravity = Gravity.CENTER
@@ -279,7 +279,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @return
      */
     private fun newImageView(@DrawableRes icImage: Int, left: Int, top: Int, right: Int, bottom: Int, listener: View.OnClickListener?): View {
-        val imageView = FilterImageView(mRootView.context)
+        val imageView = FilterImageView(rootView?.context)
         imageView.adjustViewBounds = true
         imageView.setImageResource(icImage)
         imageView.scaleType = ImageView.ScaleType.CENTER

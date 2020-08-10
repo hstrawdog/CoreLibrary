@@ -223,9 +223,9 @@ object DateUtils {
      * @return string
      */
     fun formatTime(leftsecond: Int): String {
-        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()) as Int.toLong()
-        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()) as Int.toLong()
-        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Int.toLong()
+        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()) as Long
+        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()) as Long
+        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Long
         return "剩" + day + "天" + hour + "时" + minute + "分"
     }
 
@@ -235,10 +235,10 @@ object DateUtils {
      */
     @JvmOverloads
     fun formatTime2Second(leftsecond: Int, type: Int = 1): String {
-        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()) as Int.toLong()
-        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()) as Int.toLong()
-        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Int.toLong()
-        val second: Long = Math.floor(leftsecond - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble()) as Int.toLong()
+        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()) as Long
+        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()) as Long
+        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Long
+        val second: Long = Math.floor(leftsecond - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble()) as Long
         val stringBuilder = StringBuilder("剩")
         if (type == 1) {
             if (day > 0) {

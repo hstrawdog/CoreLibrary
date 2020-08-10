@@ -45,11 +45,12 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     var mLazyInitEnd = false
 
+    override val isLazyLoad: Boolean = false
+
     /**
      * 布局创建 容器
      */
-    @JvmField
-    protected var mRootViewBuild: IRootViewImpl? = null
+    lateinit var mRootViewBuild: IRootViewImpl<BaseFragment>
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法
@@ -125,9 +126,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
                 mRootView = null
             }
         }
-        if (mRootViewBuild != null) {
-            mRootViewBuild = null
-        }
+
         if (mLoadingView != null) {
             mLoadingView = null
         }
@@ -136,19 +135,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
 
     override fun initDefConfig() {}
 
-    /**
-     * 默认不开启延迟 加载
-     *
-     * @return
-     */
-    override fun isLazyLoad(): Boolean {
-        return false
-    }
 
     /**
      * 关联主界面 **只有在使用自定义View时使用**
      */
-    override fun getLayoutView(parent: ViewGroup): View? {
+    override fun getLayoutView(parent: ViewGroup?): View? {
         return null
     }
 

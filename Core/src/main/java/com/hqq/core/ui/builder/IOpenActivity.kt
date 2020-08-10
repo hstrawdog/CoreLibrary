@@ -17,5 +17,5 @@ interface IOpenActivity {
      *
      * @param openActivityComponent
      */
-    fun openActivity(openActivityComponent: OpenActivityComponent?)
+    fun openActivity(openActivityComponent: OpenActivityComponent)
 }

@@ -20,49 +20,37 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  * @Descrive :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
-abstract class BaseVmListActivity<T : ViewDataBinding?, K : BaseListViewModel?, AD : BaseQuickAdapter<*, *>?>
+ abstract class BaseVmListActivity<T : ViewDataBinding?, K : BaseListViewModel?, AD : BaseQuickAdapter<*, *>?>
     : BaseVmActivity<T, K>(), IBaseListModelView<AD> {
-    @JvmField
     protected var mRcList: RecyclerView? = null
-
-    @JvmField
     protected var mAdapter: AD? = null
     protected var mLayoutManager: RecyclerView.LayoutManager? = null
     protected var mBaseListModel: BaseListModelView? = null
-    override fun getLayoutId(): Int {
-        return R.layout.activity_recycle_view
-    }
+    override val layoutId: Int
+        get() = R.layout.activity_recycle_view
+
+    override val adapter: AD
+        get() = mAdapter!!
+    override val pageCount: Int
+        get() = mViewModel!!.pageCount
+    override val pageSize: Int
+        get() = mViewModel!!.pageSize
+    override val listView: ViewGroup?
+        get() = mRcList!!
+    override val rcLayoutManager: RecyclerView.LayoutManager
+        get() = LinearLayoutManager(this)
 
     override fun initViews() {
         mBaseListModel = BaseListModelView(this, this)
         mLayoutManager = rcLayoutManager
         mAdapter = initAdapter()
-        mRcList = mBaseListModel!!.checkRecycleView(mRcList, mRootViewBuild.rootView)
+        mRcList = mBaseListModel!!.checkRecycleView(mRcList, mRootViewBuild?.rootView)
         mBaseListModel!!.initRecycleView(mRcList, mAdapter, mLayoutManager)
-        mBaseListModel!!.initPtrPullDown(mRootViewBuild.rootView)
-        mViewModel!!.mDate.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList) })
+        mBaseListModel!!.initPtrPullDown(mRootViewBuild!!.rootView)
+        mViewModel!!.mDate.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList as List<Nothing>) })
         initData()
     }
 
-    override fun onLoadMoreRequested() {
-        mViewModel!!.onLoadMore()
-    }
-
-    override fun isShowLoadMore(): Boolean {
-        return false
-    }
-
-    override fun getAdapter(): AD {
-        return mAdapter!!
-    }
-
-    override fun getPageCount(): Int {
-        return mViewModel!!.pageCount
-    }
-
-    override fun getPageSize(): Int {
-        return mViewModel!!.pageSize
-    }
 
     override fun addPageCount() {
         mViewModel!!.pageCount = mViewModel!!.pageCount + 1
@@ -70,12 +58,8 @@ abstract class BaseVmListActivity<T : ViewDataBinding?, K : BaseListViewModel?, 
 
     override fun onRefreshBegin() {
         mViewModel!!.pageCount = 1
-        mAdapter!!.loadMoreComplete()
+        mAdapter!!.loadMoreModule.loadMoreComplete()
         mViewModel!!.onLoadMore()
-    }
-
-    override fun getListView(): ViewGroup {
-        return mRcList!!
     }
 
     override fun onDestroy() {
@@ -84,15 +68,12 @@ abstract class BaseVmListActivity<T : ViewDataBinding?, K : BaseListViewModel?, 
         mBaseListModel = null
     }
 
-    override fun getRcLayoutManager(): RecyclerView.LayoutManager {
-        return LinearLayoutManager(this)
+    override fun onLoadMore() {
     }
 
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {
-
+    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
     }
 
-    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {
-
+    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
     }
 }

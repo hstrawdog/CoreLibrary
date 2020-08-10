@@ -13,10 +13,10 @@ import java.lang.reflect.Method
  * Created by wangchende on 15-9-7.
  */
 object FlymeOSStatusBarFontUtils {
-    private var mSetStatusBarColorIcon: Method? = null
-    private var mSetStatusBarDarkIcon: Method? = null
-    private var mStatusBarColorFiled: Field? = null
-    private var SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 0
+    lateinit var mSetStatusBarColorIcon: Method
+    lateinit var  mSetStatusBarDarkIcon: Method
+    lateinit var  mStatusBarColorFiled: Field
+    var  SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 0
 
     /**
      * 判断颜色是否偏黑色
@@ -218,7 +218,7 @@ object FlymeOSStatusBarFontUtils {
         }
         try {
             val field = View::class.java.getField("SYSTEM_UI_FLAG_LIGHT_STATUS_BAR")
-            SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = com.hqq.core.utils.statusbar.field.getInt(null)
+            SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = field.getInt(null)
         } catch (e: NoSuchFieldException) {
             e.printStackTrace()
         } catch (e: IllegalAccessException) {

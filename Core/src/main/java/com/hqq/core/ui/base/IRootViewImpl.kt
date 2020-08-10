@@ -28,7 +28,7 @@ import com.hqq.core.utils.log.LogUtils
  * 1. 　动态添加 生成根布局  支持LineLayout 与FarmLayout
  * 2. 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
-class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) : IRootView {
+class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) : IRootView {
     /**
      * 当前activity
      */
@@ -102,7 +102,7 @@ class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) :
      *
      * @param layoutMode
      */
-    fun setLayoutMode(@LayoutModel layoutMode: Int): IRootViewImpl {
+    fun setLayoutMode(@LayoutModel layoutMode: Int): IRootViewImpl<T> {
         mCreateRootViewModel.setLayoutMode(layoutMode)
         return this
     }
@@ -112,7 +112,7 @@ class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) :
      *
      * @param clss
      */
-    fun setIToolBarClass(clss: Class<out BaseToolBar?>): IRootViewImpl {
+    fun setIToolBarClass(clss: Class<out BaseToolBar?>): IRootViewImpl<T> {
         mCreateRootViewModel.setIToolBarClass(clss)
         return this
     }
@@ -123,7 +123,7 @@ class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) :
      * @param showStatus  状态栏
      * @param showToolBar 标题栏
      */
-    fun setToolbarVisibility(showStatus: Boolean, showToolBar: Boolean): IRootViewImpl {
+    fun setToolbarVisibility(showStatus: Boolean, showToolBar: Boolean): IRootViewImpl<T> {
         mCreateRootViewModel.setToolbarVisibility(showStatus, showToolBar)
         return this
     }
@@ -133,7 +133,7 @@ class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) :
      *
      * @param showStatus
      */
-    fun setShowStatusBar(showStatus: Boolean): IRootViewImpl {
+    fun setShowStatusBar(showStatus: Boolean): IRootViewImpl<T> {
         mCreateRootViewModel.setShowStatusBar(showStatus)
         return this
     }
@@ -143,7 +143,7 @@ class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) :
      *
      * @param showToolBar
      */
-    fun setShowToolBar(showToolBar: Boolean): IRootViewImpl {
+    fun setShowToolBar(showToolBar: Boolean): IRootViewImpl<T> {
         mCreateRootViewModel.setShowToolBar(showToolBar)
         return this
     }
@@ -154,7 +154,7 @@ class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) :
      * @param statusBarMode
      * @return
      */
-    fun setStatusBarMode(@ToolBarMode statusBarMode: Int): IRootViewImpl {
+    fun setStatusBarMode(@ToolBarMode statusBarMode: Int): IRootViewImpl<T> {
         mCreateRootViewModel.statusBarMode = statusBarMode
         return this
     }
@@ -182,7 +182,7 @@ class IRootViewImpl(context: T, isShowStatus: Boolean, isShowToolBar: Boolean) :
      * @param alwaysPortrait
      * @return
      */
-    fun setAlwaysPortrait(alwaysPortrait: Boolean): IRootViewImpl {
+    fun setAlwaysPortrait(alwaysPortrait: Boolean): IRootViewImpl<T> {
         isAlwaysPortrait = alwaysPortrait
         return this
     }

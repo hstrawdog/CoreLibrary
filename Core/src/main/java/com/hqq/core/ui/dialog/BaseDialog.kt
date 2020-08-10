@@ -37,14 +37,14 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      * 布局创建 容器
      */
-    protected var mRootViewBuild: IRootViewImpl? = null
+   lateinit var mRootViewBuild: IRootViewImpl<BaseDialog>
 
     /**
      * 状态栏模式
      */
     @kotlin.jvm.JvmField
     @ToolBarMode
-    protected var mStatusBarMode: Int = CoreBuildConfig.Companion.getInstance().isStatusMode()
+    protected var mStatusBarMode: Int = CoreBuildConfig.instance.isStatusMode
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //        //代码设置 无标题 无边框
@@ -126,8 +126,10 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      *
      * @return
      */
-    override val layoutViewId: Int
-        get() = R.layout.dialog_new
+
+    final override fun getLayoutViewId(): Int {
+        return R.layout.dialog_new
+    }
 
     override fun show(manager: FragmentManager) {
         val ft = manager.beginTransaction()

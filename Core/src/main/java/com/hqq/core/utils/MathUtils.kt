@@ -40,7 +40,7 @@ object MathUtils {
         val numberStr: String
         if (number.toLong() * 1000 == (number * 1000) as Long) {
             //如果是一个整数
-            numberStr = number as Long.toString()
+            numberStr = number.toString()
         } else {
             val df = DecimalFormat("######0.00")
             df.roundingMode = roundingMode
@@ -105,7 +105,7 @@ object MathUtils {
         try {
             if (number.toLong() * 1000 == (number * 1000) as Long) {
                 //如果是一个整数
-                numberStr = number as Long.toString()
+                numberStr = number.toString()
             } else {
                 val df = DecimalFormat("######0.00")
                 df.roundingMode = roundingMode

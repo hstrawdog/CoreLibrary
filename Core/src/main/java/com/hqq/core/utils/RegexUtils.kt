@@ -32,7 +32,7 @@ object RegexUtils {
             return TextUtils.isEmpty(`object` as String?)
         } else if (`object` is List<*>) {
             return `object`.isEmpty()
-        } else if (`object` is Array<String>) {
+        } else if (`object` is Array<*>) {
             return (`object` as Array<String?>).size <= 0
         }
         return false
@@ -54,7 +54,7 @@ object RegexUtils {
             return TextUtils.isEmpty(`object` as String?)
         } else if (`object` is List<*>) {
             return `object`.isEmpty()
-        } else if (`object` is Array<String>) {
+        } else if (`object` is Array<*>) {
             return (`object` as Array<String?>).size <= 0
         }
         return false
@@ -189,7 +189,7 @@ object RegexUtils {
     fun checkBankNum(cardId: String): Boolean {
         return if (checkNull(cardId)) {
             false
-        } else cardId.matches("^([0-9]{15}|[0-9]{16}|[0-9]{17}|[0-9]{18}|[0-9]{19})$")
+        } else cardId.matches(Regex("^([0-9]{15}|[0-9]{16}|[0-9]{17}|[0-9]{18}|[0-9]{19})$"))
     }
 
     /**
@@ -198,8 +198,10 @@ object RegexUtils {
      * @param nonCheckCodeCardId
      * @return
      */
-    fun getBankCardCheckCode(nonCheckCodeCardId: String?): Char {
-        if (nonCheckCodeCardId == null || nonCheckCodeCardId.trim { it <= ' ' }.length == 0 || !nonCheckCodeCardId.matches("\\d+")) {
+    fun getBankCardCheckCode(nonCheckCodeCardId: String): Char {
+
+
+        if (nonCheckCodeCardId == null || nonCheckCodeCardId.trim { it <= ' ' }.length == 0 || !nonCheckCodeCardId.matches(Regex("\\d+"))) {
             //如果传的不是数据返回N
             return 'N'
         }

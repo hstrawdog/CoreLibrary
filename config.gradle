@@ -20,9 +20,9 @@ ext {
             viewpager2                   : 'androidx.viewpager2:viewpager2:1.0.0',
             recyclerview                 : 'androidx.recyclerview:recyclerview:1.1.0',
             // ------------- JetPack -------------
-            ViewModel                 : "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version",
-            LiveData                 : "androidx.lifecycle:lifecycle-livedata:$lifecycle_version",
-            LifecyclesRuntime                 : "androidx.lifecycle:lifecycle-runtime:$lifecycle_version",
+            ViewModel                 : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            LiveData                 : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            LifecyclesRuntime                 : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
 
 
             // ------------- 网络请求 -------------
@@ -38,7 +38,7 @@ ext {
             gson                         : 'com.google.code.gson:gson:2.8.6',
 
             // ------------- recycleView  适配器 上拉刷新  -------------
-            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50',
+            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
             // ------------- 下拉刷新  已经停止维护多年  正在寻找合适的替换框架 -------------
             ultraPtr                     : 'in.srain.cube:ultra-ptr:1.0.11',
             // ------------- Luban 图片压缩  -------------

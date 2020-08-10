@@ -31,14 +31,13 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * LoadingDialog
      */
-    @JvmField
     var mLoadingView: LoadingView? = null
 
     /**
      * 根布局
      */
-    @JvmField
-    protected var mRootViewBuild: IRootViewImpl? = null
+    lateinit var mRootViewBuild: IRootViewImpl<BaseActivity>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         initAnimEnter()
         super.onCreate(savedInstanceState)
@@ -53,7 +52,6 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     override fun onDestroy() {
         super.onDestroy()
         // 手动回收
-        mRootViewBuild = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

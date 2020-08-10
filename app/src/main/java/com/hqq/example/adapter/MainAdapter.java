@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.hqq.example.R;
 import com.hqq.example.bean.MainBean;
 
@@ -16,15 +17,11 @@ import com.hqq.example.bean.MainBean;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> implements BaseQuickAdapter.OnItemClickListener {
+public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> implements OnItemClickListener {
     public MainAdapter() {
         super(R.layout.item_main);
     }
 
-    @Override
-    public boolean isLoading() {
-        return false;
-    }
 
     @Override
     protected void convert(BaseViewHolder helper, MainBean item) {
@@ -39,7 +36,7 @@ public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> impl
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        mContext.startActivity(new Intent(mContext, getItem(position).getClassName()));
+        getContext().startActivity(new Intent(getContext(), getItem(position).getClassName()));
     }
 
 }

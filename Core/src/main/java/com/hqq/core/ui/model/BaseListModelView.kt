@@ -12,7 +12,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseQuickAdapter.RequestLoadMoreListener
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
+import com.chad.library.adapter.base.listener.OnItemClickListener
+import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.hqq.core.R
 import com.hqq.core.utils.RegexUtils
 import com.hqq.core.utils.ResourcesUtils
@@ -26,11 +28,6 @@ import com.hqq.core.widget.CusPtrClassicFrameLayout
  * @Date : 2019/5/5 0005  上午 10:41
  * @Email : qiqiang213@gmail.com
  * @Descrive :
- *
- *
- *
- *
- *
  *
  * ---  这边不应该这样设计  应该当已 recycleView  adapter  为一组对象  这样扩充拓展性
  * 当一个页面出现两个列表加载的时候 就不会被局限
@@ -104,9 +101,9 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      *
      * @param data
      */
-    fun fillingData(data: MutableCollection<out Nothing>) {
+    fun fillingData(data: Collection<Nothing>) {
         if (mBaseListModelView.pageCount == 1) {
-            adapter.replaceData(data)
+            adapter.setList(data)
         } else {
             adapter.addData(data)
         }
@@ -114,17 +111,17 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
         if (adapter.itemCount == 0) {
             // 没有头部的时候才可以加这个
             // 这边需要适配两种情况 空布局如果可以点击的话
-            adapter.setEmptyView(layoutEmptyView, mBaseListModelView.listView)
-            initEmptyView(adapter.emptyView)
+            adapter.setEmptyView(layoutEmptyView)
+            initEmptyView(adapter.emptyLayout)
         } else if (adapter.data.size == 0) {
             //这个是空数据的显示
             addLoadMoreFoodView()
             initEmptyView(mViewEmptyFoot)
         } else if (data.size < mBaseListModelView.pageSize) {
-            adapter.loadMoreEnd()
+            adapter.loadMoreModule.loadMoreEnd()
         } else {
             mBaseListModelView.addPageCount()
-            adapter.loadMoreComplete()
+            adapter.loadMoreModule.loadMoreComplete();
         }
         if (mPtrPullDown != null) {
             mPtrPullDown.refreshComplete()
@@ -160,14 +157,16 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
     private fun addLoadMoreFoodView() {
         createLoadMoreFoodView()
         if (adapter.footerLayout == null) {
-            adapter.addFooterView(mViewEmptyFoot)
+            adapter.addFooterView(mViewEmptyFoot!!)
         } else {
             val adapterFoodView = adapter.footerLayout
-            if (adapterFoodView.childCount == 0) {
-                adapter.addFooterView(mViewEmptyFoot)
-            } else if (adapterFoodView.getChildAt(adapterFoodView.childCount - 1) !== mViewEmptyFoot) {
-                // 目前没测试 不知道会不会有问题
-                adapter.addFooterView(mViewEmptyFoot)
+            if (adapterFoodView != null) {
+                if (adapterFoodView.childCount == 0) {
+                    adapter.addFooterView(mViewEmptyFoot!!)
+                } else if (adapterFoodView.getChildAt(adapterFoodView.childCount - 1) !== mViewEmptyFoot) {
+                    // 目前没测试 不知道会不会有问题
+                    adapter.addFooterView(mViewEmptyFoot!!)
+                }
             }
         }
     }
@@ -178,7 +177,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
     private fun removeLoadMoreFood() {
         if (mViewEmptyFoot != null && adapter.footerLayout != null) {
             val adapterFoodView = adapter.footerLayout
-            adapterFoodView.removeView(mViewEmptyFoot)
+            adapterFoodView!!.removeView(mViewEmptyFoot)
         }
     }
 
@@ -201,9 +200,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
             rcList.layoutManager = layoutManager
             // 添加焦点
             rcList.adapter = adapter
-            if (mBaseListModelView.isShowLoadMore) {
-                adapter!!.setOnLoadMoreListener(mBaseListModelView, rcList)
-            }
             adapter!!.setOnItemClickListener(mBaseListModelView)
             adapter.setOnItemChildClickListener(mBaseListModelView)
         } catch (e: Exception) {
@@ -245,7 +241,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * m->v 的接口
      * k  adapter
      */
-    interface IBaseListModelView<K : BaseQuickAdapter<*, *>?> : RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
+    interface IBaseListModelView<K : BaseQuickAdapter<*, *>?> : OnLoadMoreListener, OnItemClickListener, OnItemChildClickListener {
         /**
          * 分页下标
          *
@@ -267,12 +263,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
          */
         fun addPageCount()
 
-        /**
-         * 是否加载更多
-         *
-         * @return
-         */
-        val isShowLoadMore: Boolean
 
         /**
          * 开始下拉刷新
@@ -285,6 +275,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
          * @return
          */
         val adapter: K
+
         fun initAdapter(): K
 
         /**

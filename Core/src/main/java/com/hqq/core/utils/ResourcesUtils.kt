@@ -33,7 +33,7 @@ object ResourcesUtils {
     val resources: Resources?
         get() {
             if (sResources == null) {
-                sResources = CoreBuildConfig.Companion.getInstance().getApplication().getResources()
+                sResources = CoreBuildConfig.instance.application!!.applicationContext.getResources()
             }
             return sResources
         }
@@ -74,7 +74,7 @@ object ResourcesUtils {
      */
     @kotlin.jvm.JvmStatic
     fun getColor(@ColorRes resId: Int): Int {
-        return ContextCompat.getColor(CoreBuildConfig.Companion.getInstance().getApplication(), resId)
+        return ContextCompat.getColor(CoreBuildConfig.instance.application!!.applicationContext, resId)
     }
 
     /**
@@ -106,7 +106,7 @@ object ResourcesUtils {
      * @return
      */
     fun getDrawable(@DrawableRes resId: Int): Drawable? {
-        return ContextCompat.getDrawable(CoreBuildConfig.Companion.getInstance().getApplication(), resId)
+        return ContextCompat.getDrawable(CoreBuildConfig.instance.application!!.applicationContext, resId)
     }
 
     /**
@@ -126,7 +126,7 @@ object ResourcesUtils {
      * @return dp
      */
     fun getDimen2dp(@DimenRes resId: Int): Float {
-        return ScreenUtils.px2dip(CoreBuildConfig.Companion.getInstance().getApplication(), resources!!.getDimension(resId)).toFloat()
+        return ScreenUtils.px2dip(CoreBuildConfig.instance.application, resources!!.getDimension(resId)).toFloat()
     }
 
     @kotlin.jvm.JvmStatic

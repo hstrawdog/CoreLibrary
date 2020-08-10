@@ -17,8 +17,9 @@ import com.hqq.core.ui.builder.ICreateRootView.IBanding
  */
 abstract class BaseBindingActivity<T : ViewDataBinding?>
     : BaseActivity(), IBanding {
-    @JvmField
-    protected var mBinding: T? = null
+    var mBinding: T? = null
+        get
+        set
 
     /**
      * 禁止 子类继承使用 保证走的都是getLayoutView方法

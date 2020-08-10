@@ -105,8 +105,8 @@ class RecyclerCoverFlow : RecyclerView {
     }
 
     override fun getChildDrawingOrder(childCount: Int, i: Int): Int {
-        var center = (coverFlowLayout.getCenterPosition()
-                - coverFlowLayout.getFirstVisiblePosition()) //计算正在显示的所有Item的中间位置
+        var center = (coverFlowLayout.centerPosition
+                - coverFlowLayout.firstVisiblePosition) //计算正在显示的所有Item的中间位置
         if (center < 0) {
             center = 0
         } else if (center > childCount) {
@@ -126,14 +126,14 @@ class RecyclerCoverFlow : RecyclerView {
     /**
      * 获取LayoutManger，并强制转换为CoverFlowLayoutManger
      */
-    val coverFlowLayout: CoverFlowLayoutManger?
-        get() = layoutManager as CoverFlowLayoutManger?
+    val coverFlowLayout: CoverFlowLayoutManger
+        get() = layoutManager as CoverFlowLayoutManger
 
     /**
      * 获取被选中的Item位置
      */
     val selectedPos: Int
-        get() = coverFlowLayout.getSelectedPos()
+        get() = coverFlowLayout.selectedPos
 
     /**
      * 设置选中监听
@@ -151,8 +151,8 @@ class RecyclerCoverFlow : RecyclerView {
                 //设置父类不拦截滑动事件
                 parent.requestDisallowInterceptTouchEvent(true)
             }
-            MotionEvent.ACTION_MOVE -> if (ev.x > mDownX && coverFlowLayout.getCenterPosition() == 0 ||
-                    ev.x < mDownX && coverFlowLayout.getCenterPosition() ==
+            MotionEvent.ACTION_MOVE -> if (ev.x > mDownX && coverFlowLayout.centerPosition == 0 ||
+                    ev.x < mDownX && coverFlowLayout.centerPosition ==
                     coverFlowLayout!!.itemCount - 1) {
 
                 //如果是滑动到了最前和最后，开放父类滑动事件拦截

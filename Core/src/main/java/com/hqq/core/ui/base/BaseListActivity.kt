@@ -7,7 +7,6 @@ import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseQuickAdapter.RequestLoadMoreListener
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.ui.model.BaseListModelView
 import com.hqq.core.ui.model.BaseListModelView.Companion.createRecycleView
@@ -22,8 +21,7 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  * @Email :  qiqiang213@gmail.com
  */
 abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
-        BaseActivity(), RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener, IBaseListModelView<T?> {
-    @kotlin.jvm.JvmField
+        BaseActivity(), IBaseListModelView<T?> {
     protected var mRcList: RecyclerView? = null
     override var adapter: T? = null
         protected set
@@ -33,8 +31,8 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         protected set
     protected var mLayoutManager: RecyclerView.LayoutManager? = null
 
-    @kotlin.jvm.JvmField
     protected var mBaseListModel: BaseListModelView? = null
+
     override fun getLayoutViewId(): Int {
         return 0
     }
@@ -71,15 +69,6 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         initData()
     }
 
-    override fun onLoadMoreRequested() {
-        onLoadMore()
-    }
-
-    override val isShowLoadMore: Boolean
-        get() = false
-
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {}
-    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View, position: Int) {}
 
     override fun addPageCount() {
         pageCount = pageCount + 1
@@ -87,7 +76,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
 
     override fun onRefreshBegin() {
         pageCount = 1
-        adapter!!.loadMoreComplete()
+        adapter!!.loadMoreModule.loadMoreComplete()
         onLoadMore()
     }
 
@@ -103,5 +92,13 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
     override val rcLayoutManager: RecyclerView.LayoutManager
         get() = LinearLayoutManager(this)
 
-    protected open fun onLoadMore() {}
+    override fun onLoadMore() {
+    }
+
+    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+    }
+
+    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+    }
+
 }

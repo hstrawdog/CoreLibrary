@@ -19,10 +19,10 @@ import com.hqq.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class RecycleBannerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    lateinit var mData: List<T>
+class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    lateinit var mData: List<Any>
     private var onRvBannerClickListener: RecycleViewBannerClickListener<*>? = null
-    private var mRecycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>? = null
+    private var mRecycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>? = null
     var isShowTip = false
 
     private var mIsUnlimited = true
@@ -30,7 +30,7 @@ class RecycleBannerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         mIsUnlimited = unlimited
     }
 
-    fun setData(data: List<T>) {
+    fun setData(data: List<Any>) {
         mData = data
     }
 
@@ -38,7 +38,7 @@ class RecycleBannerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         this.onRvBannerClickListener = onRvBannerClickListener
     }
 
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<*>?): RecycleBannerAdapter<T> {
+    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>?): RecycleBannerAdapter<Any> {
         mRecycleViewBannerChangeListener = recycleViewBannerChangeListener
         return this
     }
@@ -76,9 +76,9 @@ class RecycleBannerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
             tv.visibility = View.GONE
             ImageLoadUtils.with(item as Int, img)
         } else if (null != mRecycleViewBannerChangeListener) {
-            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item) , img)
+            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item!!) , img)
             if (isShowTip) {
-                tv.text = mRecycleViewBannerChangeListener!!.getTitle(item)
+                tv.text = mRecycleViewBannerChangeListener!!.getTitle(item!!)
                 tv.visibility = View.VISIBLE
             } else {
                 tv.visibility = View.GONE
