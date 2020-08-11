@@ -42,7 +42,7 @@ import kotlin.collections.ArrayList
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class MainActivity : BaseVmListActivity<ViewDataBinding?, MainModel?, MainAdapter?>() {
+class MainActivity : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>() {
     override fun initAdapter(): MainAdapter {
         return MainAdapter()
     }

@@ -27,7 +27,7 @@ object ToastUtils {
      * 全局单利
      * 吐司部分，只显示一个
      */
-    lateinit var mToast: Toast
+    var mToast: Toast? = null;
     private fun showToast(context: Context?, text: String, duration: Int) {
         if (TextUtils.isEmpty(text)) {
             return
@@ -36,9 +36,9 @@ object ToastUtils {
             mToast!!.cancel()
         }
         mToast = Toast.makeText(context!!.applicationContext, text, duration)
-        mToast.setGravity(Gravity.CENTER, 0, 0)
-        mToast.setText(text)
-        mToast.show()
+        mToast!!.setGravity(Gravity.CENTER, 0, 0)
+        mToast!!.setText(text)
+        mToast!!.show()
     }
 
     fun showToast(context: Context?, text: String) {

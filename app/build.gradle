@@ -1,3 +1,5 @@
+import com.hqq.core.plugin.*
+
 apply plugin: 'com.android.application'
 apply plugin:'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -6,11 +8,11 @@ android {
         enabled = true
     }
 
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion BuildConfig.compileSdkVersion
     defaultConfig {
         applicationId "com.hqq.core"
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
         versionName "1.0.0"
         vectorDrawables.useSupportLibrary = true
         //如果version.properties文件可读则执行操作
@@ -64,6 +66,7 @@ android {
     }
     buildTypes {
         debug {
+            debuggable true
             minifyEnabled false
             signingConfig signingConfigs.release
             proguardFiles 'proguard-rules.pro'
@@ -93,15 +96,13 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':Core')
-    api rootProject.ext.dependencies.constraintlayout
-    implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    debugImplementation  rootProject.ext.dependencies.leakcanary
+    debugImplementation  Leakcanary.leakcanary
 
-    api rootProject.ext.dependencies.gson
-    api 'com.squareup.retrofit2:retrofit:2.9.0'
-    api 'com.squareup.retrofit2:converter-gson:2.9.0'
-    api 'com.squareup.okhttp3:logging-interceptor:4.8.0'
+    api Gson.gson
+    api Retrofit.retrofit
+    api Retrofit.converterGson
+    api Retrofit.loggingInterceptor
 
 
 

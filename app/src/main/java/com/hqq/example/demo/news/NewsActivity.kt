@@ -18,7 +18,7 @@ import com.hqq.example.ui.web.WebActivity
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class NewsActivity : BaseVmListActivity<ActivityNewsBinding?, NewsViewModel?, NewsAdapter?>() {
+class NewsActivity : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, NewsAdapter>() {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, NewsActivity::class.java)

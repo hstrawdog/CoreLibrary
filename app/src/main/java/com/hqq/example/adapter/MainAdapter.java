@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.hqq.example.R;
 import com.hqq.example.bean.MainBean;
@@ -17,7 +18,7 @@ import com.hqq.example.bean.MainBean;
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> implements OnItemClickListener {
+public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> implements OnItemClickListener, LoadMoreModule {
     public MainAdapter() {
         super(R.layout.item_main);
     }

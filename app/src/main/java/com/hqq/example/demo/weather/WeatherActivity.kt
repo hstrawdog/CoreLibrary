@@ -16,7 +16,7 @@ import com.hqq.example.databinding.ActivityWeatherBinding
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class WeatherActivity : BaseVmActivity<ActivityWeatherBinding?, WeatherViewModel?>() {
+class WeatherActivity : BaseVmActivity<ActivityWeatherBinding, WeatherViewModel>() {
     override val layoutId: Int
         get() = R.layout.activity_weather
 

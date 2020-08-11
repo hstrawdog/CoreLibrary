@@ -14,7 +14,7 @@ import com.hqq.example.databinding.ActivityLoginBinding
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class LoginActivity : BaseVmActivity<ActivityLoginBinding?, LoginModel?>() {
+class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginModel>() {
     override fun addViewModel() {
         mBinding!!.vm = mViewModel
     }

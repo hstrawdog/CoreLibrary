@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 //apply plugin: 'com.alibaba.arouter'
-apply from: "config.gradle"
+import com.hqq.core.plugin.*
 apply plugin: 'kotlin'
 
 buildscript {

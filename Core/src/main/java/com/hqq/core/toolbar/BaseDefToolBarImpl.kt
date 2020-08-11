@@ -39,9 +39,9 @@ class BaseDefToolBarImpl : BaseToolBar() {
     private val mDefTitleColor = R.color.color_333
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
         val toolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_def_toolbar, viewGroup, false) as Toolbar
-        if (activity is AppCompatActivity) {
-            activity.setSupportActionBar(toolbar)
-        }
+//        if (activity is AppCompatActivity) {
+//            activity.setSupportActionBar(toolbar)
+//        }
         toolbar.findViewById<View>(R.id.iv_bar_back).setOnClickListener { activity.onBackPressed() }
         toolBarBg = toolbar.findViewById(R.id.iv_toolBar_Bg)
         toolBarBg.setBackgroundResource(mDefToolBarColor)
