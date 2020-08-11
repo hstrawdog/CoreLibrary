@@ -13,7 +13,6 @@ import com.hqq.core.BaseCommonsKey
  * @Descrive :
  */
 abstract class BaseListViewModel : BaseViewModel() {
-    @JvmField
     var mDate: MutableLiveData<List<*>> = MediatorLiveData()
     var pageCount = 1
         get

@@ -25,8 +25,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * 当前对象
      */
-    @JvmField
-    protected var mActivity: Activity? = null
+    var mActivity: Activity? = null
 
     /**
      * LoadingDialog

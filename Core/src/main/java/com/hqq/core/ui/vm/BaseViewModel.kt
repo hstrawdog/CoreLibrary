@@ -27,7 +27,6 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
     /**
      * 是否显示Loading
      */
-    @JvmField
     var mShowLoading = MutableLiveData<Boolean>()
 
     /**

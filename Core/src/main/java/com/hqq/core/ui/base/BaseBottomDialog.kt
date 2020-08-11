@@ -26,7 +26,6 @@ import com.hqq.core.utils.log.LogUtils
  * 高度自定义
  */
 abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBottomDialogFragment {
-    @JvmField
     protected var mRootView: View? = null
     var mLoaded = false
     var behavior: BottomSheetBehavior<FrameLayout>? = null

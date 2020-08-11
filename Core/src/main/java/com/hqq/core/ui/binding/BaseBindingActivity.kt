@@ -17,7 +17,7 @@ import com.hqq.core.ui.builder.ICreateRootView.IBanding
  */
 abstract class BaseBindingActivity<T : ViewDataBinding?>
     : BaseActivity(), IBanding {
-    var mBinding: T? = null
+   public var mBinding: T? = null
         get
         set
 

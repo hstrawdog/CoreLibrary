@@ -12,7 +12,6 @@ import com.hqq.core.ui.base.BaseActivity
  * @Email :  qiqiang213@gmail.com
  */
 abstract class BaseFrameLayoutActivity : BaseActivity() {
-    @JvmField
     var mCurrentFragment: Fragment? = null
 
     /**

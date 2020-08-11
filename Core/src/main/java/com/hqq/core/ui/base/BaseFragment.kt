@@ -27,7 +27,6 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
     /**
      * 当前Activity
      */
-    @JvmField
     protected var mActivity: Activity? = null
 
     /**
