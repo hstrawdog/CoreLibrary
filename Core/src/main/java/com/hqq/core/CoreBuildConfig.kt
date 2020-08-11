@@ -100,9 +100,12 @@ class CoreBuildConfig private constructor() {
         /**
          * 单利维持对象
          */
-        lateinit var singleton: CoreBuildConfig
+         var singleton: CoreBuildConfig = instance
         val instance: CoreBuildConfig
             get() {
+
+
+
                 if (singleton == null) {
                     synchronized(CoreBuildConfig::class.java) {
                         if (singleton == null) {

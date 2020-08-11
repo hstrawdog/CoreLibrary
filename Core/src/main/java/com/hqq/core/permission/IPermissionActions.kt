@@ -13,14 +13,6 @@ import androidx.core.content.ContextCompat
  * @Descrive : 代理关键接口
  */
 interface IPermissionActions {
-    /**
-     * 请求权限
-     *
-     * @param permissions 权限组
-     * @param listener    回调
-     */
-    fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?)
-
     companion object {
         /**
          * 判断是否有权限
@@ -39,4 +31,12 @@ interface IPermissionActions {
             return has
         }
     }
+
+    /**
+     * 请求权限
+     *
+     * @param permissions 权限组
+     * @param listener    回调
+     */
+    fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?)
 }

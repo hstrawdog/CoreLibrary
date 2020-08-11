@@ -34,7 +34,7 @@ import com.hqq.core.widget.CusPtrClassicFrameLayout
  */
 class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mContext: Context?) {
     var mViewEmptyFoot: View? = null
-    lateinit var mPtrPullDown: CusPtrClassicFrameLayout
+    var mPtrPullDown: CusPtrClassicFrameLayout? = null
 
     /**
      * 空布局 layout Id
@@ -50,7 +50,9 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      */
     fun initPtrPullDown(view: View?) {
         if (mPtrPullDown == null) {
-            mPtrPullDown = view!!.findViewById(R.id.ptr_pull_down) as (CusPtrClassicFrameLayout)
+            if (view!!.findViewById<View>(R.id.ptr_pull_down) != null) {
+                mPtrPullDown = view!!.findViewById(R.id.ptr_pull_down) as (CusPtrClassicFrameLayout)
+            }
         }
         if (mPtrPullDown != null) {
             initPull()
@@ -61,18 +63,25 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * 初始化下拉刷新
      */
     protected fun initPull() {
-        mPtrPullDown.setPullToRefresh(false)
-        mPtrPullDown.setKeepHeaderWhenRefresh(true)
-        mPtrPullDown!!.setLastUpdateTimeRelateObject(this)
-        mPtrPullDown.setPtrHandler(object : PtrHandler {
-            override fun checkCanDoRefresh(frame: PtrFrameLayout, content: View, header: View): Boolean {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, mBaseListModelView.listView, header)
-            }
+        if (mPtrPullDown != null) {
 
-            override fun onRefreshBegin(frame: PtrFrameLayout) {
-                mBaseListModelView.onRefreshBegin()
-            }
-        })
+            mPtrPullDown!!.setPullToRefresh(false)
+            mPtrPullDown!!.setKeepHeaderWhenRefresh(true)
+            mPtrPullDown!!.setLastUpdateTimeRelateObject(this)
+            mPtrPullDown!!.setPtrHandler(object : PtrHandler {
+                override fun onRefreshBegin(frame: PtrFrameLayout?) {
+
+                    mBaseListModelView.onRefreshBegin()
+
+                }
+
+                override fun checkCanDoRefresh(frame: PtrFrameLayout, content: View, header: View): Boolean {
+                    return PtrDefaultHandler.checkContentCanBePulledDown(frame, mBaseListModelView.listView, header)
+                }
+
+            })
+
+        }
     }
 
     /**
@@ -124,7 +133,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
             adapter.loadMoreModule.loadMoreComplete();
         }
         if (mPtrPullDown != null) {
-            mPtrPullDown.refreshComplete()
+            mPtrPullDown!!.refreshComplete()
         }
     }
 

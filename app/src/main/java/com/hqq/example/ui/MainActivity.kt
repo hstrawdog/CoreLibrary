@@ -97,6 +97,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding?, MainModel?, MainAdapte
             arrayList.add(MainBean("黑白化测试", BlackAndWhiteActivity::class.java))
             arrayList.add(MainBean("换肤测试", SkinAActivity::class.java))
             arrayList.add(MainBean("SVG测试", SvgActivity::class.java))
+            arrayList.add(MainBean("demo测试", SvgActivity::class.java))
             setDate(arrayList)
         }
     }

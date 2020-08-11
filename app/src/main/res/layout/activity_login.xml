@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -24,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x100"
             android:ems="10"
+            android:hint="请输入账号"
             android:inputType="phone"
             android:text="@={vm.phone}"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x350"
             android:ems="10"
+            android:hint="请输入密码"
             android:inputType="phone"
             android:text="@={vm.passWord}"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -47,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/x100"
-            android:text="Button"
             android:onClick="@{vm::onLoginClick}"
+            android:text="登录"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

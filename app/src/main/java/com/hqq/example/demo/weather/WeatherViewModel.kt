@@ -21,7 +21,7 @@ import com.hqq.example.demo.net.NetCallback
  * @Descrive :
  */
 class WeatherViewModel : BaseViewModel() {
-    @JvmField
+
     var mWeather = MutableLiveData<Weather>()
 
     //声明AMapLocationClient类对象
@@ -36,6 +36,8 @@ class WeatherViewModel : BaseViewModel() {
     //声明AMapLocationClientOption对象
     var mLocationOption: AMapLocationClientOption? = null
     var option = AMapLocationClientOption()
+
+
     override fun onCrete() {
         super.onCrete()
         e(" -------WeatherViewModel--------- onCrete ------")
@@ -74,6 +76,8 @@ class WeatherViewModel : BaseViewModel() {
                 }
             }
         })
+
+
     }
 
     private fun getWeather(city: String) {

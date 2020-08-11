@@ -70,9 +70,9 @@ class BargainProgressBarView : View {
         paint.color = mUnselectedColor
         canvas.drawRoundRect(0 + mBitmap!!.width / 2.toFloat(), 0f, width - mBitmap!!.width / 2.toFloat(), mHeight, mFilletSize.toFloat(), mFilletSize.toFloat(), paint)
         paint.color = mSelectedColor
-        canvas.drawRoundRect(0 + mBitmap!!.width / 2.toFloat(), 0f, mBitmap!!.width / 2 + (width - mBitmap!!.width / 2) / 100.0f * (if (mProgress >= 100) 100 else mProgress), mHeight, mFilletSize.toFloat(), mFilletSize.toFloat(), paint)
+        canvas.drawRoundRect(0 + mBitmap!!.width / 2.toFloat(), 0f, mBitmap!!.width / 2 + (width - mBitmap!!.width / 2) / 100.0f * if (mProgress >= 100) 100f else mProgress, mHeight, mFilletSize.toFloat(), mFilletSize.toFloat(), paint)
         canvas.restore()
-        var left: Float = width / 100.0f * (if (mProgress >= 100) 100 else mProgress - mBitmap!!.width / 2)
+        var left: Float =( width / 100.0f) * if (mProgress >= 100) 100f else mProgress -( mBitmap!!.width / 2)
         if (left < 1) {
             left = 1f
         } else if (left + mBitmap!!.width >= width) {
