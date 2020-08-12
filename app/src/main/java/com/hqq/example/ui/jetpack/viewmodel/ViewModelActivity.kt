@@ -21,9 +21,9 @@ import com.hqq.example.ui.jetpack.livedata.User
  * 正常 ViewModel 搭配LiveData 使用
  */
 class ViewModelActivity : BaseActivity() {
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_view_model
-    }
+
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_view_model
 
     override fun initView() {
         val userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)

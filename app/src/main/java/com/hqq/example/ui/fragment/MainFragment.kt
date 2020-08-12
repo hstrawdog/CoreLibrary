@@ -21,10 +21,10 @@ import kotlin.collections.ArrayList
  * @Email :  qiqiang213@gmail.com
  */
 class MainFragment : BaseListFragment<MainAdapter?>() {
-    override fun getLayoutViewId(): Int {
-        return R.layout.fragment_i
-    }
 
+
+    override val mLayoutViewId: Int
+        get() =  R.layout.fragment_i
     /**
      * 只有界面显示的时候才会加载
      *
@@ -49,7 +49,7 @@ class MainFragment : BaseListFragment<MainAdapter?>() {
     }
 
     private val data: Unit
-        private get() {
+         get() {
             Handler().postDelayed({ initListData() }, 3 * 1000.toLong())
         }
 

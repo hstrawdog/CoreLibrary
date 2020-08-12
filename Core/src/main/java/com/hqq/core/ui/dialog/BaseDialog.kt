@@ -37,7 +37,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      * 布局创建 容器
      */
-   lateinit var mRootViewBuild: IRootViewImpl<BaseDialog>
+    lateinit var mRootViewBuild: IRootViewImpl<BaseDialog>
 
     /**
      * 状态栏模式
@@ -115,21 +115,14 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         mRootView = null
     }
 
-    override fun getLayoutView(parent: ViewGroup?): View? {
+    override fun getLayoutView(parent: ViewGroup): View? {
         return null
     }
 
     protected abstract val viewId: Int
 
-    /**
-     * 禁止子类重写
-     *
-     * @return
-     */
-
-    final override fun getLayoutViewId(): Int {
-        return R.layout.dialog_new
-    }
+    override val mLayoutViewId: Int
+        get() = R.layout.dialog_new
 
     override fun show(manager: FragmentManager) {
         val ft = manager.beginTransaction()

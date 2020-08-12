@@ -48,10 +48,10 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
     override fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle) {
         mParentView = parentView
         mActivity = activity
-        convertView = if (getLayoutViewId()!! <= 0) {
-            getLayoutView(mParentView)
+        convertView = if (mLayoutViewId!! <= 0) {
+            getLayoutView(mParentView!!)
         } else {
-            LayoutInflater.from(context).inflate(getLayoutViewId()!!, mParentView, false)
+            LayoutInflater.from(context).inflate(mLayoutViewId!!, mParentView, false)
         }
         lifecycle.addObserver(this)
         initView()
@@ -59,7 +59,7 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
 
     override fun initDefConfig() {}
     override fun onClick(view: View) {}
-    override fun getLayoutView(viewGroup: ViewGroup?): View? {
+    override fun getLayoutView(viewGroup: ViewGroup): View? {
         return null
     }
 

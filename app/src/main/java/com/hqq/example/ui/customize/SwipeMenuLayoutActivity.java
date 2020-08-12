@@ -15,7 +15,7 @@ public class SwipeMenuLayoutActivity extends BaseActivity {
 
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_swipe_menu_layout;
     }
 

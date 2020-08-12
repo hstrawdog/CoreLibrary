@@ -23,14 +23,14 @@ interface ICreateRootView {
      *
      * @return
      */
-    fun getLayoutViewId(): Int
+    val mLayoutViewId: Int
 
     /**
      * 设置跟布局
      *
      * @return
      */
-    fun getLayoutView(parent: ViewGroup?): View?
+    fun getLayoutView(parent: ViewGroup): View?
 
     /**
      * 初始化默认配置 RootView
@@ -90,7 +90,6 @@ interface ICreateRootView {
         val height: Int
     }
 
-    interface IBottomDialogFragment : IBaseDialogFragment
     interface IDialogFragment : IBaseDialogFragment {
         /**
          * dialog 的背景颜色
@@ -121,7 +120,6 @@ interface ICreateRootView {
         val animation: Int
     }
 
-    interface IDialogActivity : ICreateRootView
     interface IBaseViewBuilderHolder : ICreateRootView {
         /**
          * 构建更布局
@@ -151,10 +149,6 @@ interface ICreateRootView {
      * 同上  多了一个ViewModel要banding
      */
     interface IBaseViewModel : IBanding {
-        /**
-         * 添加ViewModel 与布局使用的对象
-         */
-        fun addViewModel()
 
         /**
          * 绑定ViewModel
@@ -162,6 +156,11 @@ interface ICreateRootView {
          * @return
          */
         val bindingViewModelId: Int
+
+        /**
+         * 添加ViewModel 与布局使用的对象
+         */
+        fun addViewModel()
 
         /**
          * 初始化View的要实现的默认值 正常应该通过ViewModel驱动到xml 或者Activity中

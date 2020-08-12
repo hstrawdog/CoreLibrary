@@ -13,7 +13,7 @@ import com.hqq.example.R;
  */
 public class RoundCountdownActivity extends BaseActivity {
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_round_countdown;
     }
 

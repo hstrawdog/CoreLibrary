@@ -22,10 +22,10 @@ import java.util.*
  * @Descrive :
 </描述当前版本功能> */
 class HSLActivity : BaseActivity() {
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_h_s_l
-    }
 
+
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_h_s_l
     override fun initView() {
         val outHsl = floatArrayOf(0f, 0f, 0f)
         ColorUtils.colorToHSL(Color.parseColor("#ef2b2c"), outHsl)

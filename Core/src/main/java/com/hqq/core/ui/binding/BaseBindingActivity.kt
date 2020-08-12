@@ -17,7 +17,7 @@ import com.hqq.core.ui.builder.ICreateRootView.IBanding
  */
 abstract class BaseBindingActivity<T : ViewDataBinding?>
     : BaseActivity(), IBanding {
-   public var mBinding: T? = null
+    var mBinding: T? = null
         get
         set
 
@@ -26,11 +26,10 @@ abstract class BaseBindingActivity<T : ViewDataBinding?>
      *
      * @return
      */
-    override fun getLayoutViewId(): Int {
-        return 0
-    }
+    override val mLayoutViewId: Int
+        get() = 0
 
-    override fun getLayoutView(parent: ViewGroup?): View {
+    override fun getLayoutView(parent: ViewGroup): View {
         mBinding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false)
         mBinding!!.lifecycleOwner = this
         return mBinding!!.root

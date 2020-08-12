@@ -22,7 +22,7 @@ public class BannerActivity extends BaseActivity {
     RecycleViewBanner mRcBanner2;
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_banner;
     }
 

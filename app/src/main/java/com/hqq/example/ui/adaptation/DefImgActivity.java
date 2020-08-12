@@ -14,7 +14,7 @@ import com.hqq.example.R;
 public class DefImgActivity extends BaseActivity {
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_def_img;
     }
 

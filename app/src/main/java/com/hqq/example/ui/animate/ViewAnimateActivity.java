@@ -13,7 +13,7 @@ public class ViewAnimateActivity extends BaseActivity {
     private android.widget.TextView mTextView6;
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_view_animate;
     }
 

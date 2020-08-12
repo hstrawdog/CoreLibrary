@@ -22,10 +22,9 @@ class TabLayoutActivity : BaseActivity() {
     var mTbTablayout2: TabLayout? = null
     var mTbTablayout3: TabLayout? = null
     var mTbTablayout4: TabLayout? = null
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_tab_layout
-    }
 
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_tab_layout
     override fun initDefConfig() {
         super.initDefConfig()
         mRootViewBuild?.setStatusColor(R.color.color_main)

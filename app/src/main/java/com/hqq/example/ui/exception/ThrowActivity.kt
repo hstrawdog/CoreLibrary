@@ -14,10 +14,9 @@ import com.hqq.example.R
  * @Descrive :异常
  */
 class ThrowActivity : BaseActivity() {
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_throw
-    }
 
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_throw
     override fun initView() {
         findViewById<View>(R.id.button11).setOnClickListener { view: View -> onViewClicked(view) }
         findViewById<View>(R.id.button12).setOnClickListener { view: View -> onViewClicked(view) }

@@ -18,7 +18,7 @@ public class SoftHideKeyBoardScrollActivity extends BaseActivity {
 
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_soft_hide_key_board_scoller;
     }
 

@@ -18,10 +18,9 @@ import com.hqq.example.R
  * @Email :  qiqiang213@gmail.com
  */
 class ToolBarActivity : BaseActivity() {
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_tool_bar
-    }
 
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_tool_bar
     override fun initView() {
 
 //        mRootViewBuild.getDefToolBar().setRightTextView("分享", new View.OnClickListener() {

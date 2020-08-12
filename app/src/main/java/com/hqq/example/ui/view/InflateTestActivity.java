@@ -26,7 +26,7 @@ public static void open(Activity context) {
 }
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_inflate_test;
     }
 

@@ -20,10 +20,9 @@ import com.hqq.example.adapter.FullPagerSnapAdapter
  */
 class FullPagerSnapActivity : BaseActivity() {
     var mRcList: RecyclerView? = null
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_full_pager_snap
-    }
 
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_full_pager_snap
     var mFullPagerSnapAdapter: FullPagerSnapAdapter? = null
     override fun initView() {
         mRcList = findViewById(R.id.rc_list)

@@ -48,10 +48,6 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
         initView()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        // 手动回收
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -89,7 +85,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      *
      * @return
      */
-    override fun getLayoutView(parent: ViewGroup?): View? {
+    override fun getLayoutView(parent: ViewGroup): View? {
         return null
     }
 

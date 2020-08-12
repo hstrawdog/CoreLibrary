@@ -9,6 +9,7 @@ android {
     }
 
     compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion  BuildConfig.buildToolsVersion
     defaultConfig {
         applicationId "com.hqq.core"
         minSdkVersion BuildConfig.minSdkVersion

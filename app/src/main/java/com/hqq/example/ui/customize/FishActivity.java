@@ -24,7 +24,7 @@ public class FishActivity extends BaseActivity {
 
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_fish;
     }
 

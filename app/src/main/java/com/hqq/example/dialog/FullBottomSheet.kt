@@ -3,6 +3,7 @@ package com.hqq.example.dialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hqq.core.ui.base.BaseBottomDialog
+import com.hqq.core.utils.ResourcesUtils
 import com.hqq.core.utils.ResourcesUtils.getDimen
 import com.hqq.example.R
 import com.hqq.example.adapter.StringAdapter
@@ -17,10 +18,9 @@ import com.hqq.example.adapter.StringAdapter
  */
 class FullBottomSheet : BaseBottomDialog() {
     var mStringAdapter = StringAdapter()
-    override fun getLayoutViewId(): Int {
-        return R.layout.dialog_bottom_sheet
-    }
 
+    override val mLayoutViewId: Int
+        get() = R.layout.dialog_bottom_sheet
     override fun initView() {
         val recyclerView: RecyclerView = mRootView!!.findViewById(R.id.rc_list)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -31,5 +31,5 @@ class FullBottomSheet : BaseBottomDialog() {
     }
 
     override val height: Int
-        get() = getDimen(context!!, R.dimen.x750).toInt()
+        get() = ResourcesUtils.getDimen( R.dimen.x750).toInt()
 }

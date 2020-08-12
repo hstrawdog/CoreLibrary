@@ -163,8 +163,8 @@ class CreateRootViewModel
 
     private fun getLayoutView(iActivityBuilder: ICreateRootView, layout: ViewGroup): View? {
         var view: View?
-        if (iActivityBuilder.getLayoutViewId()!! > 0) {
-            view = mActivity!!.get()!!.layoutInflater.inflate(iActivityBuilder.getLayoutViewId()!!, layout, false)
+        if (iActivityBuilder.mLayoutViewId!! > 0) {
+            view = mActivity!!.get()!!.layoutInflater.inflate(iActivityBuilder.mLayoutViewId!!, layout, false)
         } else {
             view = iActivityBuilder.getLayoutView(layout)
             if (view == null) {

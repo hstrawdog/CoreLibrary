@@ -15,10 +15,10 @@ import com.hqq.example.R
  * @Descrive :
  */
 class WebActivity : BaseFrameLayoutActivity() {
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_web
-    }
 
+
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_web
     override fun initDefConfig() {
         super.initDefConfig()
         mRootViewBuild?.setShowToolBar(false)

@@ -19,7 +19,7 @@ import com.hqq.example.R
 class SkinAActivity : BaseSkinActivity() {
     override fun initView() {
         super.initView()
-        (findViewById<View>(R.id.switch_def) as Switch).setOnCheckedChangeListener { buttonView, isChecked -> e("------") }
+        (findViewById<View>(R.id.switch_def) as Switch).setOnCheckedChangeListener { _, _ -> e("------") }
         findViewById<View>(R.id.button34).setOnClickListener { SkinBActivity.open(mActivity!!) }
     }
 

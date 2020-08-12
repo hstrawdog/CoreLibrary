@@ -18,10 +18,9 @@ import com.hqq.example.R
  */
 class ShapeTestActivity : BaseActivity() {
     var mTextView3: TextView? = null
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_shape_test
-    }
 
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_shape_test
     override fun initView() {
         mTextView3 = findViewById(R.id.textView3)
         findViewById<View>(R.id.textView3).background = BaseShapeBuilder().setRectangle()

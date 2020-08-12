@@ -20,10 +20,10 @@ import com.hqq.example.R
  */
 class LiveDateActivity : BaseActivity() {
    lateinit var mTextView2: TextView
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_data_binding
-    }
 
+
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_data_binding
     override fun initView() {
         mTextView2 = findViewById(R.id.textView2)
         mTextView2.setOnClickListener(View.OnClickListener { view: View? -> onViewClicked(view) })

@@ -37,12 +37,10 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
     @kotlin.jvm.JvmField
     protected var mBaseListModel: BaseListModelView? = null
-    override fun getLayoutViewId(): Int {
-        return 0
-    }
+    override val mLayoutViewId: Int = 0;
 
-    override fun getLayoutView(group: ViewGroup?): View? {
-        return if (getLayoutViewId() <= 0) {
+    override fun getLayoutView(group: ViewGroup): View? {
+        return if (mLayoutViewId <= 0) {
             createRecycleView(context)
         } else {
             null

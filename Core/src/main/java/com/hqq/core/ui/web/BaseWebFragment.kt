@@ -36,9 +36,9 @@ class BaseWebFragment : BaseFragment() {
     private var mWebLoadListener: WebLoadListener? = null
     var progressBarColor: ColorStateList? = null
     private var mScriptInterface: ScriptInterface? = null
-    override fun getLayoutViewId(): Int {
-        return R.layout.fragment_web
-    }
+
+    override val mLayoutViewId: Int = R.layout.fragment_web
+
 
     override fun onPause() {
         super.onPause()

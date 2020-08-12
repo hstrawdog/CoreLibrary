@@ -21,7 +21,7 @@ public class SvgActivity extends BaseActivity {
     }
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_svg;
     }
 

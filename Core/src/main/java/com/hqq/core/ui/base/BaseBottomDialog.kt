@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hqq.core.R
-import com.hqq.core.ui.builder.ICreateRootView.IBottomDialogFragment
+import com.hqq.core.ui.builder.ICreateRootView
 import com.hqq.core.utils.log.LogUtils
 
 /**
@@ -25,7 +25,7 @@ import com.hqq.core.utils.log.LogUtils
  * 宽度是全屏
  * 高度自定义
  */
-abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBottomDialogFragment {
+abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.IBaseDialogFragment {
     protected var mRootView: View? = null
     var mLoaded = false
     var behavior: BottomSheetBehavior<FrameLayout>? = null
@@ -98,7 +98,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBottomDialogFrag
     protected open val transparentBottomSheetStyle: Int
         protected get() = R.style.TransparentBottomSheetStyle
 
-    override fun getLayoutView(parent: ViewGroup?): View? {
+    override fun getLayoutView(parent: ViewGroup): View? {
         return null
     }
 }

@@ -138,7 +138,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
     /**
      * 关联主界面 **只有在使用自定义View时使用**
      */
-    override fun getLayoutView(parent: ViewGroup?): View? {
+    override fun getLayoutView(parent: ViewGroup): View? {
         return null
     }
 

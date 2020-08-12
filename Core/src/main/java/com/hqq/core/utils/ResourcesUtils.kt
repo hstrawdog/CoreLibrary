@@ -129,7 +129,6 @@ object ResourcesUtils {
         return ScreenUtils.px2dip(CoreBuildConfig.instance.application, resources!!.getDimension(resId)).toFloat()
     }
 
-    @kotlin.jvm.JvmStatic
     @Deprecated("")
     fun getDimen(context: Context, @DimenRes resId: Int): Float {
         return getResources(context).getDimension(resId)

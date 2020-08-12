@@ -16,9 +16,8 @@ import com.hqq.example.adapter.StringAdapter
  */
 class FoldFullBottomSheet : BaseBottomDialog() {
     var mStringAdapter = StringAdapter()
-    override fun getLayoutViewId(): Int {
-        return R.layout.dialog_bottom_sheet
-    }
+    override val mLayoutViewId: Int
+        get() = R.layout.dialog_bottom_sheet
 
     override fun initView() {
         val recyclerView: RecyclerView = mRootView!!.findViewById(R.id.rc_list)
@@ -30,5 +29,5 @@ class FoldFullBottomSheet : BaseBottomDialog() {
     }
 
     override val transparentBottomSheetStyle: Int
-        protected get() = R.style.TransparentBottomSheetStyle_behavior
+        get() = R.style.TransparentBottomSheetStyle_behavior
 }

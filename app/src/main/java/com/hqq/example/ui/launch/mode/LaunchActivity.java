@@ -17,7 +17,7 @@ import com.hqq.example.R;
 public class LaunchActivity extends BaseActivity {
 
     @Override
-    public int getLayoutViewId() {
+    public int getMLayoutViewId() {
         return R.layout.activity_launch_mode_a;
     }
 

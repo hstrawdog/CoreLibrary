@@ -10,7 +10,7 @@ package com.hqq.core.plugin
  */
 object BuildConfig {
     val compileSdkVersion = 30
-    val buildToolsVersion = "29.0.3"
+    val buildToolsVersion = "30.0.0"
     val minSdkVersion = 21
     val targetSdkVersion = 30
     val versionCode = 1

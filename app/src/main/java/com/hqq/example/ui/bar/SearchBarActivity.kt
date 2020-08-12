@@ -15,10 +15,9 @@ import com.hqq.example.widget.BaseToolBarSearch
  * @Email :  qiqiang213@gmail.com
  */
 class SearchBarActivity : BaseActivity() {
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_search_bar
-    }
 
+    override val mLayoutViewId: Int
+        get() = R.layout.activity_search_bar
     override fun initDefConfig() {
         super.initDefConfig()
         mRootViewBuild!!.setIToolBarClass(BaseToolBarSearch::class.java)
