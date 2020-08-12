@@ -226,12 +226,12 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
     /**
      * 检查是否有是否存在
      *
-     * @param rcList
+     * @param recyclerView
      * @param view
      * @return
      */
-    fun checkRecycleView(rcList: RecyclerView?, view: View?): RecyclerView? {
-        var rcList = rcList
+    fun checkRecycleView(recyclerView: RecyclerView?, view: View?): RecyclerView? {
+        var rcList = recyclerView
         if (rcList == null) {
             rcList = view!!.findViewById(R.id.rc_list)
         }
@@ -252,6 +252,13 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      */
     interface IBaseListModelView<K : BaseQuickAdapter<*, *>?> : OnLoadMoreListener, OnItemClickListener, OnItemChildClickListener {
         /**
+         * 布局类型
+         *
+         * @return
+         */
+        val rcLayoutManager: RecyclerView.LayoutManager
+
+        /**
          * 分页下标
          *
          * @return
@@ -266,26 +273,11 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
         val pageSize: Int
 
         /**
-         * 进入下一页
-         *
-         * @return
-         */
-        fun addPageCount()
-
-
-        /**
-         * 开始下拉刷新
-         */
-        fun onRefreshBegin()
-
-        /**
          * 获取adapter
          *
          * @return
          */
         val adapter: K
-
-        fun initAdapter(): K
 
         /**
          * 获取 recycleView
@@ -295,16 +287,26 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
         val listView: ViewGroup?
 
         /**
+         * 进入下一页
+         *
+         * @return
+         */
+        fun addPageCount()
+
+        /**
+         * 开始下拉刷新
+         */
+        fun onRefreshBegin()
+
+
+        fun initAdapter(): K
+
+        /**
          * 初始化数据
          */
         fun initData()
 
-        /**
-         * 布局类型
-         *
-         * @return
-         */
-        val rcLayoutManager: RecyclerView.LayoutManager
+
     }
 
     companion object {

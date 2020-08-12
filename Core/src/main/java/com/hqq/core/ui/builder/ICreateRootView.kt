@@ -41,6 +41,8 @@ interface ICreateRootView {
      * 初始化 view 等
      */
     fun initView()
+
+
     interface IActivityRootView : ICreateRootView {
         /**
          * 进入动画
