@@ -3,6 +3,7 @@ package com.hqq.example.demo.news;
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.hqq.example.R;
 
@@ -14,7 +15,7 @@ import com.hqq.example.R;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class NewsAdapter extends BaseQuickAdapter<News.DataBean, BaseViewHolder> {
+public class NewsAdapter extends BaseQuickAdapter<News.DataBean, BaseViewHolder> implements LoadMoreModule {
     public NewsAdapter() {
         super(R.layout.item_news);
     }

@@ -3,6 +3,7 @@ package com.hqq.example.demo.joke;
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.hqq.example.R;
 
@@ -14,7 +15,7 @@ import com.hqq.example.R;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class JokeAdapter extends BaseQuickAdapter<Joke.DataBean, BaseViewHolder> {
+public class JokeAdapter extends BaseQuickAdapter<Joke.DataBean, BaseViewHolder> implements LoadMoreModule {
     public JokeAdapter() {
         super(R.layout.item_joke);
     }
