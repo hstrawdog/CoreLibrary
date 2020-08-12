@@ -27,7 +27,7 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
     override fun initView() {
         mViewModel = ViewModelFactory.createViewModel(this, javaClass, mViewModel)
         lifecycle.addObserver(mViewModel!!)
-        mLoadingView?.let { ViewModelFactory.initBaseViewModel(mViewModel!!, this, it) }
+        ViewModelFactory.initBaseViewModel(mViewModel!!, this, mLoadingView!!)
         ViewModelFactory.initOpenActivity(mViewModel!!, this, this)
         addViewModel()
         initViews()

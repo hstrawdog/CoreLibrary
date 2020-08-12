@@ -28,7 +28,7 @@ class TabLayoutActivity : BaseActivity() {
 
     override fun initDefConfig() {
         super.initDefConfig()
-        mRootViewBuild.setStatusColor(R.color.color_main)
+        mRootViewBuild?.setStatusColor(R.color.color_main)
     }
 
     override fun initView() {

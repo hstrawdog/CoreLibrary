@@ -27,17 +27,17 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
     /**
      * 是否显示Loading
      */
-    var mShowLoading = MutableLiveData<Boolean>()
+    val mShowLoading = MutableLiveData<Boolean>()
 
     /**
      * 显示Toast
      */
-    var mShowToast = MutableLiveData<String>()
+    val mShowToast = MutableLiveData<String>()
 
     /**
      * Activity跳转对象
      */
-    var mOpenActivityComponentMutableLiveData = MutableLiveData<OpenActivityComponent>()
+    val mOpenActivityComponentMutableLiveData = MutableLiveData<OpenActivityComponent>()
 
     /**
      * View 的intent 对象
@@ -79,18 +79,17 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
      *
      * @param cls
      */
-    @JvmOverloads
     fun startActivity(cls: Class<out Activity?>?, bundle: Bundle? = null, resultCode: Int = -1) {
         mOpenActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, resultCode)
     }
 
     fun setShowLoading(showLoading: Boolean): BaseViewModel {
-        mShowLoading.value = showLoading
+        mShowLoading.postValue(showLoading)
         return this
     }
 
     fun setShowToast(showToast: String): BaseViewModel {
-        mShowToast.value = showToast
+        mShowToast.postValue(showToast)
         return this
     }
 

@@ -12,6 +12,7 @@ import com.hqq.core.ui.vm.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
+import com.hqq.example.demo.DemoIndexActivity
 import com.hqq.example.demo.weather.WeatherActivity
 import com.hqq.example.ui.MainActivity.MainModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
@@ -97,7 +98,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>
             arrayList.add(MainBean("黑白化测试", BlackAndWhiteActivity::class.java))
             arrayList.add(MainBean("换肤测试", SkinAActivity::class.java))
             arrayList.add(MainBean("SVG测试", SvgActivity::class.java))
-            arrayList.add(MainBean("demo测试", SvgActivity::class.java))
+            arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
             setDate(arrayList)
         }
     }

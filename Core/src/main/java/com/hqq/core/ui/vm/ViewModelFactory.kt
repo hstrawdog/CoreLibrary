@@ -18,16 +18,17 @@ internal object ViewModelFactory {
     /**
      * 初始化 BaseViewModel中关联ui的字段
      */
-    @JvmStatic
-    fun initBaseViewModel(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner?, loadingView: LoadingView) {
-        viewModel.mShowLoading.observe(lifecycleOwner!!, Observer { aBoolean: Boolean ->
-            if (aBoolean) {
-                loadingView.show()
-            } else {
-                loadingView.dismiss()
+    fun initBaseViewModel(viewModel: BaseViewModel?, lifecycleOwner: LifecycleOwner?, loadingView: LoadingView?) {
+        viewModel?.mShowLoading?.observe(lifecycleOwner!!, Observer { aBoolean: Boolean? ->
+            if (loadingView != null) {
+                if (aBoolean!!) {
+                    loadingView?.show()
+                } else {
+                    loadingView?.dismiss()
+                }
             }
         })
-        viewModel.mShowToast.observe(lifecycleOwner, Observer { s: String -> ToastUtils.showToast(s) })
+        viewModel?.mShowToast?.observe(lifecycleOwner!!, Observer { s: String -> ToastUtils.showToast(s) })
     }
 
     /**
@@ -65,7 +66,6 @@ internal object ViewModelFactory {
         return ViewModelProvider(viewModelStoreOwner!!)[modelClass!!]
     }
 
-    @JvmStatic
     fun initOpenActivity(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner?, openActivity: IOpenActivity) {
         viewModel.mOpenActivityComponentMutableLiveData.observe(lifecycleOwner!!, Observer { openActivityComponent -> openActivity.openActivity(openActivityComponent) })
     }

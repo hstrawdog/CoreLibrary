@@ -1,10 +1,3 @@
-/*
- * Copyright (c) 2017. auth huangqiqiang Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
 package com.hqq.core.widget
 
 import android.app.Dialog
@@ -23,21 +16,7 @@ import com.hqq.core.R
  * @Email :  qiqiang213@gmail.com
  * @Descrive : loadingView
  */
-class LoadingView //        this.rlContent.setVisibility(0);
-//        if(this.circleAnim != null) {
-//            this.ivLoading.startAnimation(this.circleAnim);
-//        }
-//
-//    }
-//
-//    public void stop() {
-//        if(this.ivLoading != null) {
-//            this.ivLoading.clearAnimation();
-//        }
-//
-//        this.rlContent.setVisibility(8);
-//    }
-@JvmOverloads constructor(var mContext: Context?, themeResId: Int = R.style.LoadingDialogStyle) : Dialog(mContext!!, themeResId) {
+class LoadingView constructor(var mContext: Context?, themeResId: Int = R.style.LoadingDialogStyle) : Dialog(mContext!!, themeResId) {
     private var tvMsg: TextView? = null
     override fun dismiss() {
         if (this == null) {
@@ -52,7 +31,7 @@ class LoadingView //        this.rlContent.setVisibility(0);
         mMsg = msg
     }
 
-    override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.loading_layout)
         tvMsg = findViewById<View>(R.id.tv_msg) as TextView

@@ -20,7 +20,7 @@ class SkinAActivity : BaseSkinActivity() {
     override fun initView() {
         super.initView()
         (findViewById<View>(R.id.switch_def) as Switch).setOnCheckedChangeListener { buttonView, isChecked -> e("------") }
-        findViewById<View>(R.id.button34).setOnClickListener { SkinBActivity.open(mActivity) }
+        findViewById<View>(R.id.button34).setOnClickListener { SkinBActivity.open(mActivity!!) }
     }
 
     companion object {

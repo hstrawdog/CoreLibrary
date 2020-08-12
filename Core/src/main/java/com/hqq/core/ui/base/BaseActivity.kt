@@ -35,13 +35,13 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * 根布局
      */
-    lateinit var mRootViewBuild: IRootViewImpl<BaseActivity>
+    var mRootViewBuild: IRootViewImpl<BaseActivity>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initAnimEnter()
         super.onCreate(savedInstanceState)
-        mActivity = this
         mLoadingView = LoadingView(this)
+        mActivity = this
         mRootViewBuild = IRootViewImpl(this, true, true)
         initDefConfig()
         setContentView(mRootViewBuild!!.buildContentView(this))

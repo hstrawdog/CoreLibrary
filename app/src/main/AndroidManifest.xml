@@ -32,6 +32,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".demo.DemoIndexActivity"
+            android:label="Demo首页" />
+        <activity
             android:name=".demo.joke.JokeActivity"
             android:label="笑话大全" />
         <activity
