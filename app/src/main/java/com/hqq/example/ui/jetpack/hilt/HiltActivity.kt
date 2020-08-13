@@ -29,6 +29,9 @@ class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
     lateinit var analytics: AnalyticsAdapter
 
     @Inject
+    lateinit var any: Any
+
+    @Inject
     lateinit var analytics2: AnalyticsAdapter
     override fun initView() {
         viewModel.getData()
@@ -39,6 +42,7 @@ class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
 
         mBinding?.textView22?.setText(analytics.service.analyticsMethods())
         mBinding?.textView23?.setText(analytics2.service.analyticsMethods())
+        mBinding?.textView24?.setText((any as AnalyticsAdapter).service.analyticsMethods())
 //        mBinding?.textView21?.setText(mUserHilt.name + "心情: " + mUserHilt.mood
 //                + " --- 头发  :" + mUserHilt.hair.color)
     }
