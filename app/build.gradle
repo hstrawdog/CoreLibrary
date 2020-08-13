@@ -1,8 +1,8 @@
 import com.hqq.core.plugin.*
-
 apply plugin: 'com.android.application'
 apply plugin:'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 android {
     dataBinding {
         enabled = true
@@ -47,6 +47,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
     signingConfigs {
         debug {
             keyAlias 'androiddebugkey'
@@ -97,6 +103,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':Core')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     debugImplementation  Leakcanary.leakcanary
 
@@ -106,6 +114,14 @@ dependencies {
     api Retrofit.loggingInterceptor
 
 
+    // Hilt dependencies
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation Hilt.daggerRuntime
+    kapt Hilt.daggerCompiler
+
+    implementation Hilt.viewModule
+    kapt Hilt.compiler
 
     api 'com.amap.api:location:latest.integration'
 

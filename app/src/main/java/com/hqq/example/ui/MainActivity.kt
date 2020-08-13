@@ -24,6 +24,7 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
+import com.hqq.example.ui.jetpack.hilt.HiltActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
@@ -52,7 +53,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>
         get() = 0
 
     override fun initData() {
-        WeatherActivity.open(this)
+        HiltActivity.open(this)
 
     }
 

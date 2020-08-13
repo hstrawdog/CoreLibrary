@@ -57,7 +57,7 @@ object AndroidX {
 
 object Android {
     val meteria = "com.google.android.material:material:${Versions.material}"
-    val activityKtx = "androidx.activity:activity-ktx:1.1.0"
+    val activityKtx = "androidx.activity:activity-ktx:${Versions.material}"
     val databindingCompiler = "com.android.databinding:compiler:4.0.1"
 }
 
@@ -87,7 +87,12 @@ object Glide {
     val glideCompiler = "com.github.bumptech.glide:compiler:4.11.0"
 }
 
-
+object Hilt {
+    val daggerRuntime = "com.google.dagger:hilt-android:${Versions.hit}"
+    val daggerCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hit}"
+    val viewModule = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hitViewModule}"
+    val compiler = "androidx.hilt:hilt-compiler:${Versions.hitViewModule}"
+}
 object Gson {
     val gson = "com.google.code.gson:gson:2.8.6"
 }
