@@ -1,19 +1,14 @@
 package com.hqq.example.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.view.KeyEvent
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.ui.vm.BaseListViewModel
 import com.hqq.core.ui.vm.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
-import com.hqq.example.demo.weather.WeatherActivity
 import com.hqq.example.ui.MainActivity.MainModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
@@ -24,8 +19,9 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
-import com.hqq.example.ui.jetpack.hilt.HiltActivity
+import com.hqq.example.ui.jetpack.di.hilt.HiltActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
+import com.hqq.example.ui.jetpack.room.RoomActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.skin.SkinAActivity
@@ -33,8 +29,6 @@ import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
 import com.hqq.example.ui.web.WebActivity
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @Author : huangqiqiang
@@ -53,7 +47,8 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>
         get() = 0
 
     override fun initData() {
-        HiltActivity.open(this)
+        RoomActivity.open(this)
+
 
     }
 

@@ -1,4 +1,4 @@
-package com.hqq.example.ui.jetpack.hilt
+package com.hqq.example.ui.jetpack.di.hilt
 
 import android.app.Activity
 import android.content.Intent
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.ui.jetpack.hilt
+ * @Package : com.hqq.example.ui.jetpack.di.hilt
  * @FileName :   HiltActivity
  * @Date : 2020/8/14 0014  下午 3:40
  * @Email : qiqiang213@gmail.com

@@ -1,4 +1,4 @@
-package com.hqq.example.ui.jetpack.hilt
+package com.hqq.example.ui.jetpack.di.hilt
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.ui.jetpack.hilt
+ * @Package : com.hqq.example.ui.jetpack.di.hilt
  * @FileName :   BindBean
  * @Date : 2020/8/14 0014  上午 11:00
  * @Email : qiqiang213@gmail.com

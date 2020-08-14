@@ -1,4 +1,4 @@
-package com.hqq.example.ui.jetpack.hilt
+package com.hqq.example.ui.jetpack.di.hilt
 
 import dagger.Binds
 import dagger.Module
@@ -8,7 +8,7 @@ import javax.inject.Qualifier
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.ui.jetpack.hilt
+ * @Package : com.hqq.example.ui.jetpack.di.hilt
  * @FileName :   AppHiltBindModel
  * @Date : 2020/8/14 0014  上午 11:03
  * @Email : qiqiang213@gmail.com

@@ -1,10 +1,10 @@
-package com.hqq.example.ui.jetpack.dagger;
+package com.hqq.example.ui.jetpack.di.dagger;
 
 import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
  /**
   * @Author : huangqiqiang
-  * @Package : com.hqq.example.ui.jetpack.dagger
+  * @Package : com.hqq.example.ui.jetpack.di.dagger
   * @FileName :   DaggerActivity
   * @Date  : 2020/7/23 0023  下午 4:03
   * @Email :  qiqiang213@gmail.com

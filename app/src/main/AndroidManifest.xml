@@ -22,8 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.jetpack.room.RoomActivity"></activity>
         <activity
-            android:name=".ui.jetpack.hilt.HiltActivity"
+            android:name=".ui.jetpack.di.hilt.HiltActivity"
             android:label="hilt 测试" />
         <activity
             android:name=".demo.DemoIndexActivity"
@@ -46,7 +47,7 @@
         <activity
             android:name=".ui.jetpack.package1.VmTestActivity"
             android:label="ViewModel 测试" />
-        <activity android:name=".ui.jetpack.dagger.DaggerActivity" />
+        <activity android:name=".ui.jetpack.di.dagger.DaggerActivity" />
         <activity
             android:name=".ui.matrix.MatrixActivity"
             android:label="矩阵相关" />
