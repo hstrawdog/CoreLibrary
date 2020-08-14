@@ -10,6 +10,22 @@ import com.hqq.example.databinding.ActivityHiltBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**
+ * @Author : huangqiqiang
+ * @Package : com.hqq.example.ui.jetpack.hilt
+ * @FileName :   HiltActivity
+ * @Date : 2020/8/14 0014  下午 3:40
+ * @Email : qiqiang213@gmail.com
+ * @Descrive :
+ * 包含Hilt内容
+ * 1.默认注入
+ * 2.搭配Jetpack 中 ViewModel 的使用
+ * 3.@Bings 的注入
+ * 4.@Provides 的注入
+ * 5.通过限定符注入 类中的 接口
+ * 6. 内置的限定符使用  ApplicationComponent 默认会自动注入
+ *
+ */
 @AndroidEntryPoint
 class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
     : BaseBindingActivity<ActivityHiltBinding>() {
@@ -20,19 +36,45 @@ class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
         }
     }
 
+    /**
+     *  jetpack 套餐的用用法 用 by viewModels()
+     *  注入 UserHilt 内置对象
+     *  UserHilt 通过 provides 的注入内置 hair  对象
+     */
     val viewModel: HiltViewModel by viewModels()
 
     @Inject
-    lateinit var mUserHilt: UserHilt
+    lateinit var bindBean: BindBean
 
+    /**
+     *  AnalyticsAdapter  内置  AnalyticsService 接口
+     *  可以用 provides 注入 AnalyticsService 的实现类 ---> BindBean
+     */
+    @AppHiltModel.AnalyticsService1
     @Inject
     lateinit var analytics: AnalyticsAdapter
 
-    @Inject
-    lateinit var any: Any
-
+    /**
+     * 自定义限定符    Qualifier约束provides 的对象   通过 provides 去注入类中接口实现对象
+     */
+    @AppHiltModel.AnalyticsService2
     @Inject
     lateinit var analytics2: AnalyticsAdapter
+
+    /**
+     *  通过@Binds 注入  AnalyticsService 的实现类
+     */
+    @AppHiltBindModel.Binds1
+    @Inject
+    lateinit var analyticsService: AnalyticsService
+
+    /**
+     *  通过@Binds 注入  AnalyticsService 的实现类
+     */
+    @AppHiltBindModel.Binds2
+    @Inject
+    lateinit var analyticsService2: AnalyticsService
+
     override fun initView() {
         viewModel.getData()
         viewModel.mData.observe(this, Observer {
@@ -42,9 +84,11 @@ class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
 
         mBinding?.textView22?.setText(analytics.service.analyticsMethods())
         mBinding?.textView23?.setText(analytics2.service.analyticsMethods())
-        mBinding?.textView24?.setText((any as AnalyticsAdapter).service.analyticsMethods())
-//        mBinding?.textView21?.setText(mUserHilt.name + "心情: " + mUserHilt.mood
-//                + " --- 头发  :" + mUserHilt.hair.color)
+        mBinding?.textView24?.setText(bindBean.name + "-- " + bindBean.context.javaClass.name +"---  "+ bindBean.server.analyticsMethods())
+        mBinding?.textView25?.setText(analyticsService
+                .analyticsMethods() + "-- ")
+        mBinding?.textView26?.setText(analyticsService2
+                .analyticsMethods() + "-- ")
     }
 
 

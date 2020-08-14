@@ -11,6 +11,11 @@ import javax.inject.Inject
  * @Descrive :
  */
 class UserHilt {
+
+    /**
+     *  Inject 表示  ViewModel  才能自动注入
+     *  或者使用 provides  自定义注入的属性值
+     */
     @Inject
     constructor()
 
