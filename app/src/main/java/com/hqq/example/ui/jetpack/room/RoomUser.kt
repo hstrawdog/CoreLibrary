@@ -18,10 +18,12 @@ import javax.inject.Singleton
  */
 @Entity
 data class User(
-        @PrimaryKey val uid: Int,
         @ColumnInfo(name = "first_name") val firstName: String?,
         @ColumnInfo(name = "last_name") val lastName: String?
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var uid: Int = 0
+}
 
 @Dao
 interface UserDao {
@@ -40,32 +42,5 @@ interface UserDao {
 
     @Delete
     fun delete(user: User)
-}
-
-@Database(entities = arrayOf(User::class), version = 1, exportSchema = false)
-abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao(): UserDao
-}
-
-
-@Module
-@InstallIn(ApplicationComponent::class)
-object UserHitModel {
-    @Provides
-    @Singleton
-    fun getUserDataBase(context: Application): AppDatabase {
-        return Room.databaseBuilder(
-                context,
-                AppDatabase::class.java, "dhl.db"
-        ).allowMainThreadQueries().build()
-    }
-
-    @Provides
-    @Singleton
-    fun getUserDao(appDatabase: AppDatabase): UserDao {
-        return appDatabase.userDao()
-    }
-
-
 }
 

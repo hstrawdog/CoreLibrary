@@ -18,11 +18,16 @@ class RoomActivity(override val layoutId: Int = R.layout.activity_room) : BaseBi
 
     @Inject
     lateinit var userDao: UserDao
+
+    @Inject
+    lateinit var studentDao: StudentDao
+
     override fun initView() {
+        userDao.insertAll(User("名称1", "名称2"))
+        studentDao.insertAll(Student("1班级", "15"))
 
-
-        userDao.insertAll(User(1, "名称1", "名称2"))
         var user = userDao.getAll().get(0)
-        mBinding?.textView27?.setText(user.lastName + "--" + user.firstName)
+        var student = studentDao.getAll().get(0)
+        mBinding?.textView27?.setText(user.lastName + "--" + user.firstName + " " + student.grade + "   " + student.age)
     }
 }
