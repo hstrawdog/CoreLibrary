@@ -1,7 +1,6 @@
 package com.hqq.core.ui.base
 
 import androidx.fragment.app.Fragment
-import com.hqq.core.ui.base.BaseActivity
 
 /**
  * @Author : huangqiqiang
@@ -12,7 +11,7 @@ import com.hqq.core.ui.base.BaseActivity
  * @Email :  qiqiang213@gmail.com
  */
 abstract class BaseFrameLayoutActivity : BaseActivity() {
-    var mCurrentFragment: Fragment? = null
+    var currentFragment: Fragment? = null
 
     /**
      * 添加或者显示 fragment
@@ -21,24 +20,24 @@ abstract class BaseFrameLayoutActivity : BaseActivity() {
      * @param id       FrameLayout
      */
     fun addOrShowFragment(fragment: Fragment, id: Int) {
-        if (mCurrentFragment === fragment) {
+        if (currentFragment === fragment) {
             return
         }
         // 如果当前fragment未被添加，则添加到Fragment管理器中
         if (!fragment.isAdded) {
-            if (mCurrentFragment == null) {
+            if (currentFragment == null) {
                 supportFragmentManager.beginTransaction().add(id, fragment).commit()
             } else {
-                supportFragmentManager.beginTransaction().hide(mCurrentFragment!!).add(id, fragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment!!).add(id, fragment).commit()
             }
         } else {
-            if (mCurrentFragment == null) {
+            if (currentFragment == null) {
                 supportFragmentManager.beginTransaction().show(fragment).commit()
             } else {
-                supportFragmentManager.beginTransaction().hide(mCurrentFragment!!).show(fragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment!!).show(fragment).commit()
             }
         }
-        mCurrentFragment = fragment
+        currentFragment = fragment
     }
 
     /**
@@ -51,7 +50,7 @@ abstract class BaseFrameLayoutActivity : BaseActivity() {
     fun addFragment(fragment: Fragment, id: Int) {
         if (!fragment.isAdded) {
             supportFragmentManager.beginTransaction().add(id, fragment).commit()
-            mCurrentFragment = fragment
+            currentFragment = fragment
         }
     }
 }

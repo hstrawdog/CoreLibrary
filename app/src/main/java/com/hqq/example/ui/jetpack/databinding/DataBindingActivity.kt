@@ -21,7 +21,7 @@ import com.hqq.example.ui.jetpack.livedata.User
  * 注意 setVariable
  */
 class DataBindingActivity : BaseActivity() {
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_dagger_a
 
     override fun initView() {

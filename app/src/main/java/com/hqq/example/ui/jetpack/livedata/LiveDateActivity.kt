@@ -22,7 +22,7 @@ class LiveDateActivity : BaseActivity() {
    lateinit var mTextView2: TextView
 
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_data_binding
     override fun initView() {
         mTextView2 = findViewById(R.id.textView2)

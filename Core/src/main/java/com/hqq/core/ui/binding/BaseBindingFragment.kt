@@ -16,13 +16,13 @@ import com.hqq.core.ui.builder.ICreateRootView.IBanding
  * @Descrive :
  */
 abstract class BaseBindingFragment<T : ViewDataBinding?> : BaseFragment(), IBanding {
-    protected var mBinding: T? = null
-    override val mLayoutViewId: Int
+    protected var binding: T? = null
+    override val layoutViewId: Int
         get() = 0
 
     override fun getLayoutView(parent: ViewGroup): View {
-        mBinding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false)
-        mBinding!!.lifecycleOwner = this
-        return mBinding!!.root
+        binding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false)
+        binding!!.lifecycleOwner = this
+        return binding!!.root
     }
 }

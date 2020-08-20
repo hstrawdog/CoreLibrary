@@ -25,7 +25,7 @@ class VmTestActivity : BaseVmActivity<ActivityVmTestBinding, BaseViewModel>() {
         get() = R.layout.activity_vm_test
 
     override fun initViews() {
-        mBinding!!.button49.setOnClickListener { mViewModel!!.setShowLoading(true) }
+        binding!!.button49.setOnClickListener { viewMode!!.setShowLoading(true) }
     }
 
     companion object {

@@ -19,7 +19,7 @@ import com.hqq.example.R
 class ShapeTestActivity : BaseActivity() {
     var mTextView3: TextView? = null
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_shape_test
     override fun initView() {
         mTextView3 = findViewById(R.id.textView3)

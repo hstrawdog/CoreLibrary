@@ -14,7 +14,7 @@ public class DimenActivity extends BaseActivity {
 
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_diem;
     }
 

@@ -25,30 +25,35 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * 当前对象
      */
-    var mActivity: Activity? = null
+    lateinit var activity: Activity
 
     /**
      * LoadingDialog
      */
-    var mLoadingView: LoadingView? = null
+    lateinit var loadingView: LoadingView
 
     /**
      * 根布局
      */
-    var mRootViewBuild: IRootViewImpl<BaseActivity>? = null
+    lateinit var rootViewBuild: IRootViewImpl<BaseActivity>
 
+    /**
+     *  初始化  不知道与init 有什么区别
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         initAnimEnter()
         super.onCreate(savedInstanceState)
-        mLoadingView = LoadingView(this)
-        mActivity = this
-        mRootViewBuild = IRootViewImpl(this, true, true)
+        loadingView = LoadingView(this)
+        activity = this
+        rootViewBuild = IRootViewImpl(this, true, true)
         initDefConfig()
-        setContentView(mRootViewBuild!!.buildContentView(this))
+        setContentView(rootViewBuild!!.buildContentView(this))
         initView()
     }
 
-
+    /**
+     *  统一的判断
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -56,27 +61,43 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
         }
     }
 
+    /**
+     *  结束Activity
+     */
     override fun finish() {
         super.finish()
         initAnimExit()
     }
 
+    /**
+     *  打开动画
+     */
     override fun initAnimEnter() {
         overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out)
     }
 
+    /**
+     *  退出动画
+     */
     override fun initAnimExit() {
         overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out)
     }
 
+    /**
+     *  统一判断  onActivityResult 方法
+     */
     override fun onResult(requestCode: Int, resultCode: Int, data: Intent?) {}
+
+    /**
+     *  实现点击事件发方法
+     */
     override fun onClick(v: View) {}
 
     /**
      * 默认配置
      */
     override fun initDefConfig() {
-        mRootViewBuild!!.initActivity(false)
+        rootViewBuild!!.initActivity(false)
     }
 
     /**

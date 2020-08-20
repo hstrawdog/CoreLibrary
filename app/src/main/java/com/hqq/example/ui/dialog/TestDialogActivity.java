@@ -35,7 +35,7 @@ public class TestDialogActivity extends BaseActivity {
     }
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_test_dialog;
     }
 
@@ -91,7 +91,7 @@ public class TestDialogActivity extends BaseActivity {
                 new BaseSelectDialog.Builder()
                         .setBaseViewBuilderHolder(new BaseViewBuilderHolder() {
                             @Override
-                            public int getMLayoutViewId() {
+                            public int getLayoutViewId() {
                                 return R.layout.view_holder_a;
                             }
 
@@ -120,7 +120,7 @@ public class TestDialogActivity extends BaseActivity {
         }
 
         @Override
-        public int getMLayoutViewId() {
+        public int getLayoutViewId() {
             return R.layout.view_holder_a;
         }
 

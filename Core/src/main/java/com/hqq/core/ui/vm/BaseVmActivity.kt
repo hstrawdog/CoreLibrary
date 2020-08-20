@@ -20,22 +20,21 @@ import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
     : BaseBindingActivity<T>(), IBaseViewModel, IOpenActivity {
-    var mViewModel: K? = null
-        get
-        set
+    var viewMode: K? = null
+
 
     override fun initView() {
-        mViewModel = ViewModelFactory.createViewModel(this, javaClass, mViewModel)
-        lifecycle.addObserver(mViewModel!!)
-        ViewModelFactory.initBaseViewModel(mViewModel!!, this, mLoadingView!!)
-        ViewModelFactory.initOpenActivity(mViewModel!!, this, this)
+        viewMode = ViewModelFactory.createViewModel(this, javaClass, viewMode)
+        lifecycle.addObserver(viewMode!!)
+        ViewModelFactory.initBaseViewModel(viewMode!!, this, loadingView!!)
+        ViewModelFactory.initOpenActivity(viewMode!!, this, this)
         addViewModel()
         initViews()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        lifecycle.removeObserver(mViewModel!!)
+        lifecycle.removeObserver(viewMode!!)
     }
 
     /**
@@ -44,15 +43,15 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
      */
     override fun addViewModel() {
         if (bindingViewModelId != 0) {
-            mBinding!!.setVariable(bindingViewModelId, mViewModel)
+            binding!!.setVariable(bindingViewModelId, viewMode)
         }
     }
 
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
-        val intent = Intent(mActivity, openActivityComponent.mActivityClass)
+        val intent = Intent(activity, openActivityComponent.mActivityClass)
         if (openActivityComponent.mBundle != null) {
             intent.putExtras(openActivityComponent.mBundle!!)
         }
-        mActivity!!.startActivityForResult(intent, openActivityComponent.mActivityResult)
+        activity!!.startActivityForResult(intent, openActivityComponent.mActivityResult)
     }
 }

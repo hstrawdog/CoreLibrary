@@ -17,12 +17,12 @@ import androidx.lifecycle.ViewModel
  */
 class HiltViewModel @ViewModelInject constructor(val userHilt: UserHilt) : ViewModel() {
 
-    var mData = MutableLiveData<UserHilt>()
+    var data = MutableLiveData<UserHilt>()
 
 
     fun getData(): LiveData<UserHilt> {
-        mData.postValue(userHilt)
-        return mData
+        data.postValue(userHilt)
+        return data
     }
 
 }

@@ -23,7 +23,7 @@ interface ICreateRootView {
      *
      * @return
      */
-    val mLayoutViewId: Int
+    val layoutViewId: Int
 
     /**
      * 设置跟布局

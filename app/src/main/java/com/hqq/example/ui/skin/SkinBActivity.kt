@@ -17,7 +17,7 @@ import com.hqq.example.R
 class SkinBActivity : BaseSkinActivity() {
     override fun initView() {
         super.initView()
-        findViewById<View>(R.id.button34).setOnClickListener { SkinCActivity.open(mActivity) }
+        findViewById<View>(R.id.button34).setOnClickListener { SkinCActivity.open(activity) }
     }
 
     companion object {

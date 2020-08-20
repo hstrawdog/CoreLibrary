@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.hqq.core.R
@@ -85,7 +84,7 @@ class BaseDefToolBarImpl : BaseToolBar() {
         if (null != statusBar) {
             statusBar!!.setBackgroundResource(color)
         } else {
-            mDefStatusColor = color
+            defStatusColor = color
         }
     }
 

@@ -26,10 +26,9 @@ import com.hqq.core.utils.log.LogUtils
  * 高度自定义
  */
 abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.IBaseDialogFragment {
-    protected var mRootView: View? = null
+    var mRootView: View? = null
     var mLoaded = false
     var behavior: BottomSheetBehavior<FrameLayout>? = null
-        protected set
 
     /**
      * 布局创建 容器

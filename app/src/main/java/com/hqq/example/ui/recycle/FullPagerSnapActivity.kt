@@ -21,7 +21,7 @@ import com.hqq.example.adapter.FullPagerSnapAdapter
 class FullPagerSnapActivity : BaseActivity() {
     var mRcList: RecyclerView? = null
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_full_pager_snap
     var mFullPagerSnapAdapter: FullPagerSnapAdapter? = null
     override fun initView() {
@@ -37,8 +37,8 @@ class FullPagerSnapActivity : BaseActivity() {
             override fun getDivider(parent: RecyclerView?, itemPosition: Int): Divider? {
                 val divider: DividerBuilder
                 divider = DividerBuilder()
-                divider.setRightSideLine(mActivity!!, R.color.color_main, R.dimen.x5)
-                divider.setBottomSideLine(mActivity!!, R.color.color_main, R.dimen.x5)
+                divider.setRightSideLine(activity!!, R.color.color_main, R.dimen.x5)
+                divider.setBottomSideLine(activity!!, R.color.color_main, R.dimen.x5)
                 return divider.create()
             }
         })

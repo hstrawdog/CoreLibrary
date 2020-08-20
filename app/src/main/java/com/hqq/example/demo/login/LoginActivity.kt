@@ -16,7 +16,7 @@ import com.hqq.example.databinding.ActivityLoginBinding
  */
 class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginModel>() {
     override fun addViewModel() {
-        mBinding!!.vm = mViewModel
+        binding!!.vm = viewMode
     }
 
     override val bindingViewModelId: Int
@@ -24,7 +24,6 @@ class LoginActivity : BaseVmActivity<ActivityLoginBinding, LoginModel>() {
 
     override val layoutId: Int
         get() = R.layout.activity_login
-
 
 
     override fun initViews() {}

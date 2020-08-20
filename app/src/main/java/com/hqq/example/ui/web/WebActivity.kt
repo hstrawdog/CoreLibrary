@@ -17,12 +17,12 @@ import com.hqq.example.R
 class WebActivity : BaseFrameLayoutActivity() {
 
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_web
     override fun initDefConfig() {
         super.initDefConfig()
-        mRootViewBuild?.setShowToolBar(false)
-        mRootViewBuild?.setShowStatusBar(false)
+        rootViewBuild?.setShowToolBar(false)
+        rootViewBuild?.setShowStatusBar(false)
     }
 
     override fun initView() {
@@ -33,8 +33,8 @@ class WebActivity : BaseFrameLayoutActivity() {
     }
 
     override fun onBackPressed() {
-        if (mCurrentFragment != null) {
-            if (!(mCurrentFragment as BaseWebFragment).onBackPressed()) {
+        if (currentFragment != null) {
+            if (!(currentFragment as BaseWebFragment).onBackPressed()) {
                 super.onBackPressed()
             }
         }

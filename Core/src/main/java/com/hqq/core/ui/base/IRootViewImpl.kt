@@ -40,10 +40,9 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @return
      */
     /**
-     * 根布局
+     *  延迟加载  根布局
      */
-    var rootView: View? = null
-        private set
+    lateinit var rootView: View
 
     /**
      * 是否强制竖屏
@@ -54,17 +53,16 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * 是否强制竖屏
      */
     var isAlwaysPortrait = true
-        private set
 
     /**
      * 布局构建器
      */
-    var mCreateRootViewModel: CreateRootViewModel
+    var createRootViewModel: CreateRootViewModel
 
     constructor(activity: T) : this(activity, false, false) {}
 
-    override fun buildContentView(iActivityBuilder: ICreateRootView): View? {
-        rootView = mCreateRootViewModel.createRootView(iActivityBuilder)
+    override fun buildContentView(iActivityBuilder: ICreateRootView): View {
+        rootView = createRootViewModel.createRootView(iActivityBuilder)
         return rootView
     }
 
@@ -88,8 +86,8 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @return
      */
     fun <T> getDefToolBar(): BaseDefToolBarImpl? {
-        return if (mCreateRootViewModel.getIToolBar<BaseToolBar?>() != null && mCreateRootViewModel.getIToolBar<BaseToolBar>() is BaseDefToolBarImpl) {
-            mCreateRootViewModel.getIToolBar<BaseToolBar>() as BaseDefToolBarImpl
+        return if (createRootViewModel.getIToolBar<BaseToolBar?>() != null && createRootViewModel.getIToolBar<BaseToolBar>() is BaseDefToolBarImpl) {
+            createRootViewModel.getIToolBar<BaseToolBar>() as BaseDefToolBarImpl
         } else {
             // 自定义的异常 目前先抛出 类型不正确
             LogUtils.e(Exception("RootViewBuilder no fount BaseDefToolBarImpl "))
@@ -103,7 +101,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param layoutMode
      */
     fun setLayoutMode(@LayoutModel layoutMode: Int): IRootViewImpl<T> {
-        mCreateRootViewModel.setLayoutMode(layoutMode)
+        createRootViewModel.setLayoutMode(layoutMode)
         return this
     }
 
@@ -113,7 +111,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param clss
      */
     fun setIToolBarClass(clss: Class<out BaseToolBar?>): IRootViewImpl<T> {
-        mCreateRootViewModel.setIToolBarClass(clss)
+        createRootViewModel.setIToolBarClass(clss)
         return this
     }
 
@@ -124,7 +122,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param showToolBar 标题栏
      */
     fun setToolbarVisibility(showStatus: Boolean, showToolBar: Boolean): IRootViewImpl<T> {
-        mCreateRootViewModel.setToolbarVisibility(showStatus, showToolBar)
+        createRootViewModel.setToolbarVisibility(showStatus, showToolBar)
         return this
     }
 
@@ -134,7 +132,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param showStatus
      */
     fun setShowStatusBar(showStatus: Boolean): IRootViewImpl<T> {
-        mCreateRootViewModel.setShowStatusBar(showStatus)
+        createRootViewModel.setShowStatusBar(showStatus)
         return this
     }
 
@@ -144,7 +142,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param showToolBar
      */
     fun setShowToolBar(showToolBar: Boolean): IRootViewImpl<T> {
-        mCreateRootViewModel.setShowToolBar(showToolBar)
+        createRootViewModel.setShowToolBar(showToolBar)
         return this
     }
 
@@ -155,7 +153,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @return
      */
     fun setStatusBarMode(@ToolBarMode statusBarMode: Int): IRootViewImpl<T> {
-        mCreateRootViewModel.statusBarMode = statusBarMode
+        createRootViewModel.statusBarMode = statusBarMode
         return this
     }
 
@@ -165,7 +163,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param statusColor
      */
     fun setStatusColor(@ColorRes statusColor: Int) {
-        mCreateRootViewModel.setStatusColor(statusColor)
+        createRootViewModel.setStatusColor(statusColor)
     }
 
     /**
@@ -174,7 +172,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @return
      */
     val statusBarMode: Int
-        get() = mCreateRootViewModel.statusBarMode
+        get() = createRootViewModel.statusBarMode
 
     /**
      * 设置是否竖屏
@@ -188,19 +186,19 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
     }
 
     init {
-        mCreateRootViewModel = CreateRootViewModel(isShowStatus, isShowToolBar)
+        createRootViewModel = CreateRootViewModel(isShowStatus, isShowToolBar)
         if (context is Activity) {
             mActivity = context
             // 只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
-            mCreateRootViewModel.setImmersiveStatusBar(true)
+            createRootViewModel.setImmersiveStatusBar(true)
         } else if (context is DialogFragment) {
             mActivity = (context as DialogFragment).activity
-            mCreateRootViewModel.setBgColor(R.color.transparent)
+            createRootViewModel.setBgColor(R.color.transparent)
         } else if (context is Fragment) {
             mActivity = (context as Fragment).activity
         } else {
             LogUtils.e(Exception("不支持的类" + context.javaClass.getName()))
         }
-        mCreateRootViewModel.setActivity(mActivity)
+        createRootViewModel.setActivity(mActivity)
     }
 }

@@ -45,9 +45,9 @@ class GallerySnapActivity : BaseBindingActivity<ActivityGallerySnapBinding?>() {
         mRcfView!!.setFlatFlow(false)
         val gridLayoutManager = GridLayoutManager(this, 2)
         gridLayoutManager.orientation = GridLayoutManager.HORIZONTAL
-        mBinding!!.rcList.layoutManager = gridLayoutManager
-        mBinding!!.rcList.adapter = SnapHelperAdapter(this, mData)
-        PagerSnapHelper().attachToRecyclerView(mBinding!!.rcList)
+        binding!!.rcList.layoutManager = gridLayoutManager
+        binding!!.rcList.adapter = SnapHelperAdapter(this, mData)
+        PagerSnapHelper().attachToRecyclerView(binding!!.rcList)
     }
 
     private fun initData() {

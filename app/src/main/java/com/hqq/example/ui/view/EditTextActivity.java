@@ -21,7 +21,7 @@ public class EditTextActivity extends BaseActivity {
     }
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_edit_text;
     }
 

@@ -25,6 +25,7 @@ import com.hqq.example.ui.jetpack.room.RoomActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.skin.SkinAActivity
+import com.hqq.example.ui.tab.layout.TabLayoutActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
@@ -39,15 +40,14 @@ import com.hqq.example.ui.web.WebActivity
  * @Email :  qiqiang213@gmail.com
  */
 class MainActivity : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>() {
-    override fun initAdapter(): MainAdapter {
-        return MainAdapter()
-    }
 
+    override val adapter: MainAdapter
+        get() = MainAdapter()
     override val bindingViewModelId: Int
         get() = 0
 
     override fun initData() {
-        RoomActivity.open(this)
+        TabLayoutActivity.open(this)
 
 
     }

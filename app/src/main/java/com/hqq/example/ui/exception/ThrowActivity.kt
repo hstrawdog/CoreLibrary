@@ -15,7 +15,7 @@ import com.hqq.example.R
  */
 class ThrowActivity : BaseActivity() {
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_throw
     override fun initView() {
         findViewById<View>(R.id.button11).setOnClickListener { view: View -> onViewClicked(view) }

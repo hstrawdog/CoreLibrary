@@ -32,7 +32,7 @@ public class ViewBindingActivity extends BaseActivity {
     }
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return 0;
     }
 

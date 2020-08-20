@@ -22,7 +22,7 @@ import com.hqq.example.ui.jetpack.livedata.User
  */
 class ViewModelActivity : BaseActivity() {
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_view_model
 
     override fun initView() {

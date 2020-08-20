@@ -33,8 +33,8 @@ import com.hqq.core.widget.CusPtrClassicFrameLayout
  * 当一个页面出现两个列表加载的时候 就不会被局限
  */
 class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mContext: Context?) {
-    var mViewEmptyFoot: View? = null
-    var mPtrPullDown: CusPtrClassicFrameLayout? = null
+    var viewEmptyFoot: View? = null
+    var ptrPullDown: CusPtrClassicFrameLayout? = null
 
     /**
      * 空布局 layout Id
@@ -49,12 +49,12 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * @param view
      */
     fun initPtrPullDown(view: View?) {
-        if (mPtrPullDown == null) {
+        if (ptrPullDown == null) {
             if (view!!.findViewById<View>(R.id.ptr_pull_down) != null) {
-                mPtrPullDown = view!!.findViewById(R.id.ptr_pull_down) as (CusPtrClassicFrameLayout)
+                ptrPullDown = view!!.findViewById(R.id.ptr_pull_down) as (CusPtrClassicFrameLayout)
             }
         }
-        if (mPtrPullDown != null) {
+        if (ptrPullDown != null) {
             initPull()
         }
     }
@@ -63,12 +63,12 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * 初始化下拉刷新
      */
     protected fun initPull() {
-        if (mPtrPullDown != null) {
+        if (ptrPullDown != null) {
 
-            mPtrPullDown!!.setPullToRefresh(false)
-            mPtrPullDown!!.setKeepHeaderWhenRefresh(true)
-            mPtrPullDown!!.setLastUpdateTimeRelateObject(this)
-            mPtrPullDown!!.setPtrHandler(object : PtrHandler {
+            ptrPullDown!!.setPullToRefresh(false)
+            ptrPullDown!!.setKeepHeaderWhenRefresh(true)
+            ptrPullDown!!.setLastUpdateTimeRelateObject(this)
+            ptrPullDown!!.setPtrHandler(object : PtrHandler {
                 override fun onRefreshBegin(frame: PtrFrameLayout?) {
 
                     mBaseListModelView.onRefreshBegin()
@@ -125,15 +125,15 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
         } else if (adapter.data.size == 0) {
             //这个是空数据的显示
             addLoadMoreFoodView()
-            initEmptyView(mViewEmptyFoot)
+            initEmptyView(viewEmptyFoot)
         } else if (data.size < mBaseListModelView.pageSize) {
             adapter.loadMoreModule.loadMoreEnd()
         } else {
             mBaseListModelView.addPageCount()
             adapter.loadMoreModule.loadMoreComplete();
         }
-        if (mPtrPullDown != null) {
-            mPtrPullDown!!.refreshComplete()
+        if (ptrPullDown != null) {
+            ptrPullDown!!.refreshComplete()
         }
     }
 
@@ -143,10 +143,10 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * @return
      */
     private fun createLoadMoreFoodView(): View? {
-        if (mViewEmptyFoot == null) {
-            mViewEmptyFoot = LayoutInflater.from(mContext).inflate(R.layout.layout_load_more_empty, null)
+        if (viewEmptyFoot == null) {
+            viewEmptyFoot = LayoutInflater.from(mContext).inflate(R.layout.layout_load_more_empty, null)
         }
-        return mViewEmptyFoot
+        return viewEmptyFoot
     }
 
     /**
@@ -166,15 +166,15 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
     private fun addLoadMoreFoodView() {
         createLoadMoreFoodView()
         if (adapter.footerLayout == null) {
-            adapter.addFooterView(mViewEmptyFoot!!)
+            adapter.addFooterView(viewEmptyFoot!!)
         } else {
             val adapterFoodView = adapter.footerLayout
             if (adapterFoodView != null) {
                 if (adapterFoodView.childCount == 0) {
-                    adapter.addFooterView(mViewEmptyFoot!!)
-                } else if (adapterFoodView.getChildAt(adapterFoodView.childCount - 1) !== mViewEmptyFoot) {
+                    adapter.addFooterView(viewEmptyFoot!!)
+                } else if (adapterFoodView.getChildAt(adapterFoodView.childCount - 1) !== viewEmptyFoot) {
                     // 目前没测试 不知道会不会有问题
-                    adapter.addFooterView(mViewEmptyFoot!!)
+                    adapter.addFooterView(viewEmptyFoot!!)
                 }
             }
         }
@@ -184,9 +184,9 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * 移除更更多数据
      */
     private fun removeLoadMoreFood() {
-        if (mViewEmptyFoot != null && adapter.footerLayout != null) {
+        if (viewEmptyFoot != null && adapter.footerLayout != null) {
             val adapterFoodView = adapter.footerLayout
-            adapterFoodView!!.removeView(mViewEmptyFoot)
+            adapterFoodView!!.removeView(viewEmptyFoot)
         }
     }
 
@@ -297,9 +297,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
          * 开始下拉刷新
          */
         fun onRefreshBegin()
-
-
-        fun initAdapter(): K
 
         /**
          * 初始化数据

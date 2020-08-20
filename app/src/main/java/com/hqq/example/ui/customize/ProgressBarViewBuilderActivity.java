@@ -13,7 +13,7 @@ import com.hqq.core.ui.base.BaseActivity;
 public class ProgressBarViewBuilderActivity extends BaseActivity {
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_progress_bar_view;
     }
 

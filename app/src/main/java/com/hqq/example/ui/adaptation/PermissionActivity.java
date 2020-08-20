@@ -26,7 +26,7 @@ public class PermissionActivity extends BaseActivity {
     }
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_permission;
     }
 

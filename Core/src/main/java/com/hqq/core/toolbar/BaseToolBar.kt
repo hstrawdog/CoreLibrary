@@ -41,7 +41,7 @@ abstract class BaseToolBar : IToolBar {
      * 状态栏背景颜色
      */
     @ColorRes
-    protected var mDefStatusColor = R.color.toolbar_status_color
+    protected var defStatusColor = R.color.toolbar_status_color
 
     /**
      * 获取状态 底部的View
@@ -57,7 +57,7 @@ abstract class BaseToolBar : IToolBar {
     /**
      * 当前activity
      */
-    protected var mActivity: WeakReference<Activity?>? = null
+    protected var activity: WeakReference<Activity?>? = null
 
     /**
      * 获取分割线
@@ -73,19 +73,20 @@ abstract class BaseToolBar : IToolBar {
     /**
      * 是否显示 分割线
      */
-    protected var mIsShowLine = true
+    protected var isShowLine = true
 
     /**
      * 是否显示 标题栏
      */
-    protected var mIsShowBar = true
+    protected var isShowBar = true
 
     /**
      * 是否显示状态栏
      */
-    protected var mIsShowStatusBar = true
+    protected var isShowStatusBar = true
+
     override fun setShowStatusBar(showStatusBar: Boolean): BaseToolBar {
-        mIsShowStatusBar = showStatusBar
+        isShowStatusBar = showStatusBar
         return this
     }
 
@@ -93,24 +94,24 @@ abstract class BaseToolBar : IToolBar {
      * 创建 toolbar
      */
     override fun createToolBar(activity: Activity?): BaseToolBar {
-        mActivity = WeakReference(activity)
+        this.activity = WeakReference(activity)
         val linearLayout = LinearLayout(activity)
         linearLayout.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         linearLayout.orientation = LinearLayout.VERTICAL
-        if (mIsShowStatusBar) {
-            initStatusBar(mActivity!!.get())
+        if (isShowStatusBar) {
+            initStatusBar(this.activity!!.get())
             val mStatusBarHeight = ScreenUtils.getStatusBarHeight4Resources(activity)
             linearLayout.addView(statusBar, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight))
         }
 
         // 目前不知道是否需要都执行 createToolBar
         val toolBar = iniToolBar(activity!!, linearLayout)
-        if (mIsShowBar && toolBar != null) {
+        if (isShowBar && toolBar != null) {
             linearLayout.addView(toolBar)
         }
-        if (mIsShowLine) {
-            viewLine = View(mActivity!!.get())
-            viewLine!!.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(mActivity!!.get(), 1f))
+        if (isShowLine) {
+            viewLine = View(this.activity!!.get())
+            viewLine!!.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(this.activity!!.get(), 1f))
             viewLine!!.setBackgroundResource(R.color.toolbar_line_bg)
             linearLayout.addView(viewLine)
         }
@@ -128,13 +129,13 @@ abstract class BaseToolBar : IToolBar {
         if (statusBar != null) {
             statusBar!!.setBackgroundColor(colorInt)
         } else {
-            mDefStatusColor = colorInt
+            defStatusColor = colorInt
         }
         return this
     }
 
     override fun setShowBar(showBar: Boolean): BaseToolBar {
-        mIsShowBar = showBar
+        isShowBar = showBar
         return this
     }
 
@@ -159,22 +160,11 @@ abstract class BaseToolBar : IToolBar {
      */
     fun initStatusBar(activity: Activity?) {
         statusBar = View(activity)
-        statusBar!!.setBackgroundResource(mDefStatusColor)
+        statusBar!!.setBackgroundResource(defStatusColor)
     }
     /***************** Toolbar   */
     /***************** Line   */
-    /**
-     * 需要在 createToolBar 之前调用才会生效
-     * 这个方法会导致 mViewLine 是 null
-     * 但是会优化布局
-     * [.showLine]
-     *
-     * @param showLine
-     */
-    @Deprecated("")
-    fun setShowLine(showLine: Boolean) {
-        mIsShowLine = showLine
-    }
+
 
     /**
      * 是否显示分割线

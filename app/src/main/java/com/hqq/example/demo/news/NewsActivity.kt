@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.hqq.core.ui.vm.BaseVmListActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityNewsBinding
@@ -36,7 +35,7 @@ class NewsActivity : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, News
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-        WebActivity.open(mActivity!!, mAdapter!!.getItem(position)!!.url, mAdapter!!.getItem(position)!!.title)
+        WebActivity.open(activity!!, mAdapter!!.getItem(position)!!.url, mAdapter!!.getItem(position)!!.title)
     }
 
 

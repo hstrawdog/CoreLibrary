@@ -22,44 +22,40 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  */
 abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD : BaseQuickAdapter<*, *>>
     : BaseVmActivity<T, K>(), IBaseListModelView<AD> {
-    protected var mRcList: RecyclerView? = null
-    protected var mAdapter: AD? = null
+    protected var rcList: RecyclerView? = null
     protected var mLayoutManager: RecyclerView.LayoutManager? = null
     protected var mBaseListModel: BaseListModelView? = null
     override val layoutId: Int
         get() = R.layout.activity_recycle_view
 
-    override val adapter: AD
-        get() = mAdapter!!
     override val pageCount: Int
-        get() = mViewModel!!.pageCount
+        get() = viewMode!!.pageCount
     override val pageSize: Int
-        get() = mViewModel!!.pageSize
+        get() = viewMode!!.pageSize
     override val listView: ViewGroup?
-        get() = mRcList!!
+        get() = rcList!!
     override val rcLayoutManager: RecyclerView.LayoutManager
         get() = LinearLayoutManager(this)
 
     override fun initViews() {
         mBaseListModel = BaseListModelView(this, this)
         mLayoutManager = rcLayoutManager
-        mAdapter = initAdapter()
-        mRcList = mBaseListModel!!.checkRecycleView(mRcList, mRootViewBuild?.rootView)
-        mBaseListModel!!.initRecycleView(mRcList, mAdapter, mLayoutManager)
-        mBaseListModel!!.initPtrPullDown(mRootViewBuild!!.rootView)
-        mViewModel!!.mDate.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList as List<Nothing>) })
+        rcList = mBaseListModel?.checkRecycleView(rcList, rootViewBuild?.rootView)
+        mBaseListModel?.initRecycleView(rcList, adapter, mLayoutManager)
+        mBaseListModel?.initPtrPullDown(rootViewBuild!!.rootView)
+        viewMode?.data?.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList as List<Nothing>) })
         initData()
     }
 
 
     override fun addPageCount() {
-        mViewModel!!.pageCount = mViewModel!!.pageCount + 1
+        viewMode!!.pageCount = viewMode!!.pageCount + 1
     }
 
     override fun onRefreshBegin() {
-        mViewModel!!.pageCount = 1
-        mAdapter!!.loadMoreModule.loadMoreComplete()
-        mViewModel!!.onLoadMore()
+        viewMode?.pageCount = 1
+        adapter?.loadMoreModule.loadMoreComplete()
+        viewMode?.onLoadMore()
     }
 
     override fun onDestroy() {
@@ -69,7 +65,7 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
     }
 
     override fun onLoadMore() {
-        mViewModel?.onLoadMore()
+        viewMode?.onLoadMore()
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {

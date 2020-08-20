@@ -15,15 +15,14 @@ import com.hqq.core.ui.BaseViewBuilderHolder
  * @Descrive :
  */
 class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
-    protected var mViewHolder: T? = null
     var alertParams: AlertParams? = null
     override val viewId: Int
         get() = R.layout.dialog_base_select_dialog
 
     override val animation: Int
         get() = R.style.dialogAnimation_fade_in2fade_out
-
-
+    private val viewHolder: T?
+        private get() = alertParams!!.baseViewBuilderHolder as T
 
     override val weight: Int
         get() = WindowManager.LayoutParams.MATCH_PARENT
@@ -32,10 +31,9 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
         if (alertParams != null) {
             initAlertParams()
         }
-        mViewHolder = viewHolder
-        mViewHolder!!.builder(this, mRootView!!.findViewById(R.id.ll_content))
-        mViewHolder!!.addToParent()
-        mViewHolder!!.initView()
+        viewHolder!!.builder(this, rootView!!.findViewById(R.id.ll_content))
+        viewHolder!!.addToParent()
+        viewHolder!!.initView()
     }
 
     /**
@@ -43,28 +41,26 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
      */
     private fun initAlertParams() {
         // 左边按钮 取消
-        val tvCancel = mRootView!!.findViewById<TextView>(R.id.tv_cancel)
-        tvCancel.text = alertParams!!.mNegativeButtonText
+        val tvCancel = rootView!!.findViewById<TextView>(R.id.tv_cancel)
+        tvCancel.text = alertParams!!.negativeButtonText
         tvCancel.setOnClickListener {
-            if (alertParams!!.mNegativeButtonListener != null) {
-                alertParams!!.mNegativeButtonListener!!.onClick(this@BaseSelectDialog, DialogInterface.BUTTON_NEGATIVE)
+            if (alertParams!!.negativeButtonListener != null) {
+                alertParams!!.negativeButtonListener!!.onClick(this@BaseSelectDialog, DialogInterface.BUTTON_NEGATIVE)
             }
         }
         // 右边按钮 确认
-        val tvDetermine = mRootView!!.findViewById<TextView>(R.id.tv_determine)
-        tvDetermine.text = alertParams!!.mPositiveButtonText
+        val tvDetermine = rootView!!.findViewById<TextView>(R.id.tv_determine)
+        tvDetermine.text = alertParams!!.positiveButtonText
         tvDetermine.setOnClickListener {
-            if (alertParams!!.mPositiveButtonListener != null) {
-                alertParams!!.mPositiveButtonListener!!.onClick(this@BaseSelectDialog, DialogInterface.BUTTON_POSITIVE)
+            if (alertParams!!.positiveButtonListener != null) {
+                alertParams!!.positiveButtonListener!!.onClick(this@BaseSelectDialog, DialogInterface.BUTTON_POSITIVE)
             }
         }
         // 提示
-        val tvTitle = mRootView!!.findViewById<TextView>(R.id.tv_title)
-        tvTitle.text = alertParams!!.mTitle
+        val tvTitle = rootView!!.findViewById<TextView>(R.id.tv_title)
+        tvTitle.text = alertParams!!.title
     }
 
-    private val viewHolder: T?
-        private get() = alertParams!!.mBaseViewBuilderHolder as T
 
     override fun cancel() {
         dismiss()
@@ -91,7 +87,7 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @return
          */
         fun setBaseViewBuilderHolder(baseViewBuilderHolder: BaseViewBuilderHolder?): Builder {
-            mAlertParams.mBaseViewBuilderHolder = baseViewBuilderHolder
+            mAlertParams.baseViewBuilderHolder = baseViewBuilderHolder
             return this
         }
 
@@ -102,7 +98,7 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @return
          */
         fun setOnCancelListener(onCancelListener: DialogInterface.OnClickListener?): Builder {
-            mAlertParams.mNegativeButtonListener = onCancelListener
+            mAlertParams.negativeButtonListener = onCancelListener
             return this
         }
 
@@ -114,8 +110,8 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @return
          */
         fun setOnCancelListener(onCancelText: String?, onCancelListener: DialogInterface.OnClickListener?): Builder {
-            mAlertParams.mNegativeButtonListener = onCancelListener
-            mAlertParams.mNegativeButtonText = onCancelText!!
+            mAlertParams.negativeButtonListener = onCancelListener
+            mAlertParams.negativeButtonText = onCancelText!!
             return this
         }
 
@@ -126,7 +122,7 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @return
          */
         fun setPositiveButton(listener: DialogInterface.OnClickListener?): Builder {
-            mAlertParams.mPositiveButtonListener = listener
+            mAlertParams.positiveButtonListener = listener
             return this
         }
 
@@ -138,8 +134,8 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @return
          */
         fun setPositiveButton(text: CharSequence?, listener: DialogInterface.OnClickListener?): Builder {
-            mAlertParams.mPositiveButtonText = text!!
-            mAlertParams.mPositiveButtonListener = listener
+            mAlertParams.positiveButtonText = text!!
+            mAlertParams.positiveButtonListener = listener
             return this
         }
 
@@ -150,7 +146,7 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @return
          */
         fun setTitle(text: CharSequence?): Builder {
-            mAlertParams.mTitle = text!!
+            mAlertParams.title = text!!
             return this
         }
 

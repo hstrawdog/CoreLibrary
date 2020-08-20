@@ -32,7 +32,7 @@ public class TextViewActivity extends BaseActivity {
     }
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_text_view;
     }
 

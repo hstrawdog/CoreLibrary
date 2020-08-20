@@ -19,11 +19,11 @@ import com.hqq.core.ui.vm.ViewModelFactory.initOpenActivity
  * @Descrive :  同理Activity
  */
 abstract class BaseVmFragment<T : ViewDataBinding?, K : BaseViewModel?> : BaseBindingFragment<T>(), IBaseViewModel, IOpenActivity {
-    protected var mViewModel: K? = null
+    protected var viewMode: K? = null
     override fun initView() {
-        mViewModel = createViewModel(this, javaClass, mViewModel)
-        mLoadingView?.let { initBaseViewModel(mViewModel!!, this, it) }
-        initOpenActivity(mViewModel!!!!, this, this)
+        viewMode = createViewModel(this, javaClass, viewMode)
+        loadingView?.let { initBaseViewModel(viewMode!!, this, it) }
+        initOpenActivity(viewMode!!!!, this, this)
         addViewModel()
         initViews()
     }
@@ -34,15 +34,15 @@ abstract class BaseVmFragment<T : ViewDataBinding?, K : BaseViewModel?> : BaseBi
      */
     override fun addViewModel() {
         if (bindingViewModelId != 0) {
-            mBinding!!.setVariable(bindingViewModelId, mViewModel)
+            binding!!.setVariable(bindingViewModelId, viewMode)
         }
     }
 
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
-        val intent = Intent(mActivity, openActivityComponent.mActivityClass)
+        val intent = Intent(activity, openActivityComponent.mActivityClass)
         if (openActivityComponent.mBundle != null) {
             intent.putExtras(openActivityComponent.mBundle!!)
         }
-        mActivity!!.startActivityForResult(intent, openActivityComponent.mActivityResult)
+        activity!!.startActivityForResult(intent, openActivityComponent.mActivityResult)
     }
 }

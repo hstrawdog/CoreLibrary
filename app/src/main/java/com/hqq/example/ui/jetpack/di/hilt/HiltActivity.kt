@@ -77,17 +77,17 @@ class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
 
     override fun initView() {
         viewModel.getData()
-        viewModel.mData.observe(this, Observer {
-            mBinding?.textView21?.setText(it.name + "心情: " + it.mood
+        viewModel.data.observe(this, Observer {
+            binding?.textView21?.setText(it.name + "心情: " + it.mood
                     + " --- 头发  :" + it.hair.color)
         })
 
-        mBinding?.textView22?.setText(analytics.service.analyticsMethods())
-        mBinding?.textView23?.setText(analytics2.service.analyticsMethods())
-        mBinding?.textView24?.setText(bindBean.name + "-- " + bindBean.context.javaClass.name +"---  "+ bindBean.server.analyticsMethods())
-        mBinding?.textView25?.setText(analyticsService
+        binding?.textView22?.setText(analytics.service.analyticsMethods())
+        binding?.textView23?.setText(analytics2.service.analyticsMethods())
+        binding?.textView24?.setText(bindBean.name + "-- " + bindBean.context.javaClass.name +"---  "+ bindBean.server.analyticsMethods())
+        binding?.textView25?.setText(analyticsService
                 .analyticsMethods() + "-- ")
-        mBinding?.textView26?.setText(analyticsService2
+        binding?.textView26?.setText(analyticsService2
                 .analyticsMethods() + "-- ")
     }
 

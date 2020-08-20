@@ -16,11 +16,11 @@ import com.hqq.example.widget.BaseToolBarSearch
  */
 class SearchBarActivity : BaseActivity() {
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_search_bar
     override fun initDefConfig() {
         super.initDefConfig()
-        mRootViewBuild!!.setIToolBarClass(BaseToolBarSearch::class.java)
+        rootViewBuild!!.setIToolBarClass(BaseToolBarSearch::class.java)
     }
 
     override fun initView() {}

@@ -13,40 +13,40 @@ import com.hqq.core.R
  * @Email :  qiqiang213@gmail.com
  */
 class IToolBarBuilder {
-    private var mActivity: Activity? = null
+    private var activity: Activity? = null
 
     /**
      * 是否显示 状态栏 背景
      */
-    private var mIsShowStatusBar = true
+    private var isShowStatusBar = true
 
     /**
      * 是否显示 ToolBar
      */
-    private var mIsShowToolBar = true
+    private var isShowToolBar = true
 
     /**
      * 默认白色
      */
     @ColorRes
-    private var mStatusBarColor = R.color.white
+    private var statusBarColor = R.color.white
     fun setStatusBarColor(@ColorRes statusBarColor: Int): IToolBarBuilder {
-        mStatusBarColor = statusBarColor
+        this.statusBarColor = statusBarColor
         return this
     }
 
     fun setActivity(activity: Activity?): IToolBarBuilder {
-        mActivity = activity
+        this.activity = activity
         return this
     }
 
     fun setShowStatusBar(isShowStatusBar: Boolean): IToolBarBuilder {
-        mIsShowStatusBar = isShowStatusBar
+        this.isShowStatusBar = isShowStatusBar
         return this
     }
 
     fun setShowToolBar(showToolBar: Boolean): IToolBarBuilder {
-        mIsShowToolBar = showToolBar
+        isShowToolBar = showToolBar
         return this
     }
 
@@ -57,10 +57,10 @@ class IToolBarBuilder {
     fun <T : IToolBar?> create(clss: Class<T?>): T? {
         try {
             val toolBar: T = clss.newInstance()!!
-            toolBar!!.setShowStatusBar(mIsShowStatusBar)
-                    .setShowBar(mIsShowToolBar)
-                    .setDefStatusColor(mStatusBarColor)
-                    .createToolBar(mActivity)
+            toolBar!!.setShowStatusBar(isShowStatusBar)
+                    .setShowBar(isShowToolBar)
+                    .setDefStatusColor(statusBarColor)
+                    .createToolBar(activity)
             return toolBar
         } catch (e: Exception) {
             e.printStackTrace()

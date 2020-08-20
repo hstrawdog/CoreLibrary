@@ -22,7 +22,7 @@ public class BezierActivity extends BaseActivity {
     }
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_bezier;
     }
 

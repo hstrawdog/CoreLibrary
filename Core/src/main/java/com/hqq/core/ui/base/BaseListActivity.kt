@@ -33,7 +33,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
 
     protected var mBaseListModel: BaseListModelView? = null
 
-    override val mLayoutViewId :Int = 0;
+    override val layoutViewId :Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
      * @return
      */
     override fun getLayoutView(group: ViewGroup): View? {
-        return if (mLayoutViewId <= 0) {
+        return if (layoutViewId <= 0) {
             createRecycleView(this)
         } else {
             null
@@ -61,9 +61,9 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         mBaseListModel = BaseListModelView(this, this)
         mLayoutManager = rcLayoutManager
         adapter = initAdapter()
-        mRcList = mBaseListModel!!.checkRecycleView(mRcList, mRootViewBuild!!.rootView)
+        mRcList = mBaseListModel!!.checkRecycleView(mRcList, rootViewBuild!!.rootView)
         mBaseListModel!!.initRecycleView(mRcList, adapter, mLayoutManager)
-        mBaseListModel!!.initPtrPullDown(mRootViewBuild!!.rootView)
+        mBaseListModel!!.initPtrPullDown(rootViewBuild!!.rootView)
         initData()
     }
 

@@ -29,7 +29,7 @@ class MatrixActivity : BaseActivity() {
     lateinit var mButton45: Button
     lateinit var mButton46: Button
     lateinit var mButton47: Button
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_matrix
     @RequiresApi(api = Build.VERSION_CODES.Q)
     override fun initView() {

@@ -29,22 +29,21 @@ import com.hqq.core.widget.LoadingView
  * - DialogFragment自带内存泄漏
  */
 abstract class BaseDialog : DialogFragment(), IDialogFragment {
-    protected var mLoadingView: LoadingView? = null
-    var mLoaded = false
-    protected var mDialogClickListener: DialogClickListener<*>? = null
-    protected var mRootView: View? = null
+    protected var loadingView: LoadingView? = null
+    var loaded = false
+    protected var dialogClickListener: DialogClickListener<*>? = null
+    protected var rootView: View? = null
 
     /**
      * 布局创建 容器
      */
-    lateinit var mRootViewBuild: IRootViewImpl<BaseDialog>
+    lateinit var rootViewBuild: IRootViewImpl<BaseDialog>
 
     /**
      * 状态栏模式
      */
-    @kotlin.jvm.JvmField
     @ToolBarMode
-    protected var mStatusBarMode: Int = CoreBuildConfig.instance.isStatusMode
+    protected var statusBarMode: Int = CoreBuildConfig.instance.isStatusMode
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //        //代码设置 无标题 无边框
@@ -57,36 +56,36 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog!!.window!!.setWindowAnimations(animation)
-        if (mRootView == null) {
-            mLoadingView = LoadingView(activity)
-            mRootViewBuild = IRootViewImpl(this)
+        if (rootView == null) {
+            loadingView = LoadingView(activity)
+            rootViewBuild = IRootViewImpl(this)
             initDefConfig()
-            mRootView = mRootViewBuild!!.buildContentView(this)
+            rootView = rootViewBuild!!.buildContentView(this)
             initContentView()
             initView()
             LogUtils.d("onCreateView " + javaClass.simpleName + this.toString())
         }
-        return mRootView
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!mLoaded && mRootView != null) {
-            if (mStatusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
+        if (!loaded && rootView != null) {
+            if (statusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
                 StatusBarManager.setStatusBarModel(dialog!!.window, true)
-            } else if (mStatusBarMode == ToolBarMode.Companion.DARK_MODE) {
+            } else if (statusBarMode == ToolBarMode.Companion.DARK_MODE) {
                 StatusBarManager.setStatusBarModel(dialog!!.window, false)
             } else {
                 // 默认进行全屏显示
                 StatusBarManager.transparencyBar(dialog!!.window)
             }
-            mLoaded = true
-            LogUtils.e(mRootView!!.width)
+            loaded = true
+            LogUtils.e(rootView!!.width)
         }
     }
 
     private fun initContentView() {
-        val linearLayout = mRootView!!.findViewById<LinearLayout>(R.id.ll_rootView)
+        val linearLayout = rootView!!.findViewById<LinearLayout>(R.id.ll_rootView)
         val view = LayoutInflater.from(context).inflate(viewId, linearLayout, false)
         linearLayout.gravity = gravity
         linearLayout.addView(view)
@@ -98,7 +97,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtils.e(mRootView!!.measuredWidth)
+        LogUtils.e(rootView!!.measuredWidth)
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(background))
         dialog!!.window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         dialog!!.window!!.setGravity(gravity)
@@ -111,8 +110,8 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onDestroy() {
         super.onDestroy()
-        mLoadingView = null
-        mRootView = null
+        loadingView = null
+        rootView = null
     }
 
     override fun getLayoutView(parent: ViewGroup): View? {
@@ -121,7 +120,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     protected abstract val viewId: Int
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.dialog_new
 
     override fun show(manager: FragmentManager) {
@@ -160,7 +159,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         get() = R.style.DialogAnimation_bottom2top
 
     fun setDialogClickListener(dialogClickListener: DialogClickListener<*>?): BaseDialog {
-        mDialogClickListener = dialogClickListener
+        this.dialogClickListener = dialogClickListener
         return this
     }
 }

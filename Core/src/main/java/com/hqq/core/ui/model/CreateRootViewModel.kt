@@ -118,13 +118,13 @@ class CreateRootViewModel
      * @param iActivityBuilder
      * @return构建后的View
      */
-    fun createRootView(iActivityBuilder: ICreateRootView): View? {
+    fun createRootView(iActivityBuilder: ICreateRootView): View {
         return if (mLayoutMode == LayoutModel.Companion.LAYOUT_MODE_LINEAR_LAYOUT) {
             createLayoutView(iActivityBuilder)
         } else if (mLayoutMode == LayoutModel.Companion.LAYOUT_MODE_FRAME_LAYOUT) {
             createFrameLayoutView(iActivityBuilder)
         } else {
-            null
+            View(mActivity?.get())
         }
     }
 
@@ -163,8 +163,8 @@ class CreateRootViewModel
 
     private fun getLayoutView(iActivityBuilder: ICreateRootView, layout: ViewGroup): View? {
         var view: View?
-        if (iActivityBuilder.mLayoutViewId!! > 0) {
-            view = mActivity!!.get()!!.layoutInflater.inflate(iActivityBuilder.mLayoutViewId!!, layout, false)
+        if (iActivityBuilder.layoutViewId!! > 0) {
+            view = mActivity!!.get()!!.layoutInflater.inflate(iActivityBuilder.layoutViewId!!, layout, false)
         } else {
             view = iActivityBuilder.getLayoutView(layout)
             if (view == null) {

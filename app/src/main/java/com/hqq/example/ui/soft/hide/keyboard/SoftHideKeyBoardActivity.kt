@@ -18,7 +18,7 @@ import com.hqq.example.R
 class SoftHideKeyBoardActivity : BaseActivity() {
 
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_soft_hide_key_board
     override fun initView() {
         softHideKeyboardRedraw(this)

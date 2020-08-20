@@ -28,6 +28,6 @@ class RoomActivity(override val layoutId: Int = R.layout.activity_room) : BaseBi
 
         var user = userDao.getAll().get(0)
         var student = studentDao.getAll().get(0)
-        mBinding?.textView27?.setText(user.lastName + "--" + user.firstName + " " + student.grade + "   " + student.age)
+        binding?.textView27?.setText(user.lastName + "--" + user.firstName + " " + student.grade + "   " + student.age)
     }
 }

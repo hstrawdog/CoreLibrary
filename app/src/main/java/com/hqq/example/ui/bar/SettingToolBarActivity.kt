@@ -15,11 +15,11 @@ import com.hqq.example.R
  */
 class SettingToolBarActivity : BaseActivity() {
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_setting_tool_bar
 
     override fun initView() {
-        mRootViewBuild!!.getDefToolBar<Any>()!!.setToolBarColor(R.color.color_main)
+        rootViewBuild!!.getDefToolBar<Any>()!!.setToolBarColor(R.color.color_main)
     }
 
     companion object {

@@ -37,10 +37,10 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
     @kotlin.jvm.JvmField
     protected var mBaseListModel: BaseListModelView? = null
-    override val mLayoutViewId: Int = 0;
+    override val layoutViewId: Int = 0;
 
     override fun getLayoutView(group: ViewGroup): View? {
-        return if (mLayoutViewId <= 0) {
+        return if (layoutViewId <= 0) {
             createRecycleView(context)
         } else {
             null
@@ -51,9 +51,9 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
         mBaseListModel = BaseListModelView(this, context)
         mLayoutManager = rcLayoutManager
         adapter = initAdapter()
-        mRcList = mBaseListModel!!.checkRecycleView(mRcList, mRootViewBuild?.rootView)
+        mRcList = mBaseListModel!!.checkRecycleView(mRcList, rootViewBuild?.rootView)
         mBaseListModel!!.initRecycleView(mRcList, adapter, mLayoutManager)
-        mBaseListModel!!.initPtrPullDown(mRootViewBuild?.rootView)
+        mBaseListModel!!.initPtrPullDown(rootViewBuild?.rootView)
         initData()
     }
 
@@ -78,7 +78,7 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
 
     override val rcLayoutManager: RecyclerView.LayoutManager
-        get() = LinearLayoutManager(mActivity)
+        get() = LinearLayoutManager(activity)
 
     override fun onLoadMore() {
     }

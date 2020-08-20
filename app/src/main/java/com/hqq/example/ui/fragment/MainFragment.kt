@@ -23,7 +23,7 @@ import kotlin.collections.ArrayList
 class MainFragment : BaseListFragment<MainAdapter?>() {
 
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() =  R.layout.fragment_i
     /**
      * 只有界面显示的时候才会加载

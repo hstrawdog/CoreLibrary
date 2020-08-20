@@ -37,7 +37,7 @@ class BaseWebFragment : BaseFragment() {
     var progressBarColor: ColorStateList? = null
     private var mScriptInterface: ScriptInterface? = null
 
-    override val mLayoutViewId: Int = R.layout.fragment_web
+    override val layoutViewId: Int = R.layout.fragment_web
 
 
     override fun onPause() {
@@ -52,8 +52,8 @@ class BaseWebFragment : BaseFragment() {
 
     override fun initDefConfig() {
         super.initDefConfig()
-        mRootViewBuild!!.setShowStatusBar(true)
-        mRootViewBuild!!.setShowToolBar(true)
+        rootViewBuild!!.setShowStatusBar(true)
+        rootViewBuild!!.setShowToolBar(true)
     }
 
     @SuppressLint("JavascriptInterface")
@@ -78,13 +78,13 @@ class BaseWebFragment : BaseFragment() {
         mUrl = BundleUtils.getString(this, getString(R.string.key_url))
         mTitle = BundleUtils.getString(this, getString(R.string.key_title))
         activity!!.title = mTitle
-        mRootViewBuild!!.getDefToolBar<Any>()!!.setToolbarTitle(mTitle)
+        rootViewBuild!!.getDefToolBar<Any>()!!.setToolbarTitle(mTitle)
         webView!!.loadUrl(mUrl!!)
     }
 
     protected fun initWebViewSettings() {
         val settings = webView!!.settings
-        settings.setUserAgentString(settings.userAgentString + "" + mActivity!!.packageName)
+        settings.setUserAgentString(settings.userAgentString + "" + activity!!.packageName)
         settings.javaScriptEnabled = true
         settings.javaScriptCanOpenWindowsAutomatically = true
         settings.allowFileAccess = true
@@ -157,9 +157,9 @@ class BaseWebFragment : BaseFragment() {
         protected get() = object : WebChromeClient() {
             override fun onReceivedTitle(view: WebView, title: String) {
                 super.onReceivedTitle(view, title)
-                if (TextUtils.isEmpty(mTitle) && RegexUtils.unNull(title) && mRootViewBuild != null && mRootViewBuild!!.getDefToolBar<Any>() != null) {
-                    if (null != mRootViewBuild && null != mRootViewBuild!!.getDefToolBar<Any>()) {
-                        mRootViewBuild!!.getDefToolBar<Any>()!!.setToolbarTitle(title)
+                if (TextUtils.isEmpty(mTitle) && RegexUtils.unNull(title) && rootViewBuild != null && rootViewBuild!!.getDefToolBar<Any>() != null) {
+                    if (null != rootViewBuild && null != rootViewBuild!!.getDefToolBar<Any>()) {
+                        rootViewBuild!!.getDefToolBar<Any>()!!.setToolbarTitle(title)
                     }
                 }
             }

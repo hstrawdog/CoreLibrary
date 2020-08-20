@@ -20,7 +20,7 @@ import com.hqq.example.R
  */
 class ToastActivity : BaseActivity() {
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_toast
     override fun initView() {
         findViewById<View>(R.id.button35).setOnClickListener { v: View? -> onClickButton(v) }
@@ -28,7 +28,7 @@ class ToastActivity : BaseActivity() {
     }
 
     fun onClickButton(v: View?) {
-        val toast = Toast(mActivity)
+        val toast = Toast(activity)
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater.inflate(R.layout.view_toast, null)
         toast.setView(view)
@@ -36,7 +36,7 @@ class ToastActivity : BaseActivity() {
     }
 
     fun onClickButton2(v: View?) {
-        val toast = Toast(mActivity)
+        val toast = Toast(activity)
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater.inflate(R.layout.view_toast, null)
         toast.view = view

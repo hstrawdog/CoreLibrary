@@ -24,7 +24,7 @@ public class ImageViewRectangleActivity extends BaseActivity {
 
 
     @Override
-    public int getMLayoutViewId() {
+    public int getLayoutViewId() {
         return R.layout.activity_image_view_rectangle;
     }
 

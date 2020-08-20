@@ -24,7 +24,7 @@ import java.util.*
 class HSLActivity : BaseActivity() {
 
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = R.layout.activity_h_s_l
     override fun initView() {
         val outHsl = floatArrayOf(0f, 0f, 0f)

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.hqq.core.lifecycle.BaseLifecycleObserver
 import com.hqq.core.ui.builder.ICreateRootView.IBaseViewBuilderHolder
+import java.lang.ref.WeakReference
 
 /**
  * @Author : huangqiqiang
@@ -20,8 +21,14 @@ import com.hqq.core.ui.builder.ICreateRootView.IBaseViewBuilderHolder
  * @Descrive :
  */
 abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, BaseLifecycleObserver {
-    private var mParentView: ViewGroup? = null
-    var mActivity: Activity? = null
+    private var parentView: ViewGroup? = null
+
+    var activity: WeakReference<Activity>? = null
+
+    fun getActivity(): Activity? {
+        return activity?.get()
+    }
+
 
     /**
      * 构建activity
@@ -46,12 +53,12 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
     }
 
     override fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle) {
-        mParentView = parentView
-        mActivity = activity
-        convertView = if (mLayoutViewId!! <= 0) {
-            getLayoutView(mParentView!!)
+        this.parentView = parentView
+        this.activity = WeakReference<Activity>(activity)
+        convertView = if (layoutViewId!! <= 0) {
+            getLayoutView(this.parentView!!)
         } else {
-            LayoutInflater.from(context).inflate(mLayoutViewId!!, mParentView, false)
+            LayoutInflater.from(context).inflate(layoutViewId!!, this.parentView, false)
         }
         lifecycle.addObserver(this)
         initView()
@@ -74,8 +81,8 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
     }
 
     fun addToParent() {
-        if (mParentView != null && convertView != null) {
-            mParentView!!.addView(convertView)
+        if (parentView != null && convertView != null) {
+            parentView!!.addView(convertView)
         }
     }
 
@@ -85,4 +92,6 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
             (parent as ViewGroup).removeView(convertView)
         }
     }
+
+
 }

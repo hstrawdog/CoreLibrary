@@ -15,30 +15,30 @@ class AlertParams {
     /**
      * 取消按钮监听
      */
-    var mNegativeButtonListener: DialogInterface.OnClickListener? = null
+    var negativeButtonListener: DialogInterface.OnClickListener? = null
 
     /**
      * 中间布局
      */
-    var mBaseViewBuilderHolder: BaseViewBuilderHolder? = null
+    var baseViewBuilderHolder: BaseViewBuilderHolder? = null
 
     /**
      * 取消按钮上的文字
      */
-    var mNegativeButtonText = "取消"
+    var negativeButtonText = "取消"
 
     /**
      * 确定按钮
      */
-    var mPositiveButtonText: CharSequence = "确定"
+    var positiveButtonText: CharSequence = "确定"
 
     /**
      * 确定按钮监听
      */
-    var mPositiveButtonListener: DialogInterface.OnClickListener? = null
+    var positiveButtonListener: DialogInterface.OnClickListener? = null
 
     /**
      * 顶部标题
      */
-    var mTitle: CharSequence = "提示"
+    var title: CharSequence = "提示"
 }

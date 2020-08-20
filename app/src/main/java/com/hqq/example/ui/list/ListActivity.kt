@@ -11,7 +11,6 @@ import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.view.page.IFragmentActivityBuilder
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -33,7 +32,7 @@ class ListActivity : BaseListActivity<MainAdapter?>() {
 
     private val data: Unit
         private get() {
-            mLoadingView!!.show()
+            loadingView!!.show()
             Handler().postDelayed({
                 val list: MutableList<MainBean<*>> = ArrayList()
                 list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
@@ -62,7 +61,7 @@ class ListActivity : BaseListActivity<MainAdapter?>() {
                 list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
                 list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
                 list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                mLoadingView!!.dismiss()
+                loadingView!!.dismiss()
                 mBaseListModel!!.fillingData(list as ArrayList<Nothing>)
             }, 3 * 1000.toLong())
             mRcList!!.addItemDecoration(HeaderItemDecoration(mRcList!!, object : StickyHeaderInterface {

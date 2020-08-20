@@ -1,6 +1,5 @@
 package com.hqq.core.ui.base
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,34 +21,30 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
     /**
      * 缓存根布局对象
      */
-    protected var mRootView: View? = null
+    protected var rootView: View? = null
 
-    /**
-     * 当前Activity
-     */
-    protected var mActivity: Activity? = null
 
     /**
      * LoadingDialog
      */
-    var mLoadingView: LoadingView? = null
+    var loadingView: LoadingView? = null
 
     /**
      * fragment 是否创建
      */
-    var mIsCreate = false
+    var isCreate = false
 
     /**
      * 延迟加载是否结束
      */
-    var mLazyInitEnd = false
+    var lazyInitEnd = false
 
     override val isLazyLoad: Boolean = false
 
     /**
      * 布局创建 容器
      */
-    lateinit var mRootViewBuild: IRootViewImpl<BaseFragment>
+    lateinit var rootViewBuild: IRootViewImpl<BaseFragment>
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法
@@ -60,15 +55,14 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      * @return View
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (mRootView == null) {
-            mActivity = activity
-            mLoadingView = LoadingView(mActivity)
-            mRootViewBuild = IRootViewImpl(this)
+        if (rootView == null) {
+            loadingView = LoadingView(activity)
+            rootViewBuild = IRootViewImpl(this)
             initDefConfig()
-            mRootView = mRootViewBuild!!.buildContentView(this)
+            rootView = rootViewBuild.buildContentView(this)
         }
         LogUtils.d(this.javaClass.name, "onCreateView " + javaClass.simpleName + this.toString())
-        return mRootView
+        return rootView
     }
 
     /**
@@ -79,11 +73,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isLazyLoad && mIsCreate && !mLazyInitEnd && isVisibleToUser) {
+        if (isLazyLoad && isCreate && !lazyInitEnd && isVisibleToUser) {
             initView()
-            mLazyInitEnd = true
+            lazyInitEnd = true
             LogUtils.d(this.javaClass.name, "setUserVisibleHint  initBasic " + javaClass.simpleName + this.toString())
-        } else if (isLazyLoad && mIsCreate && mLazyInitEnd && !isVisibleToUser) {
+        } else if (isLazyLoad && isCreate && lazyInitEnd && !isVisibleToUser) {
             onFragmentHit()
         }
     }
@@ -96,13 +90,13 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!mIsCreate && mRootView != null) {
-            mIsCreate = true
+        if (!isCreate && rootView != null) {
+            isCreate = true
             if (!isLazyLoad) {
                 initView()
                 LogUtils.d(this.javaClass.name, "onViewCreated initBasic   false  " + javaClass.simpleName + this.toString())
             } else if (isLazyLoad && userVisibleHint) {
-                mLazyInitEnd = true
+                lazyInitEnd = true
                 LogUtils.d(this.javaClass.name, "onViewCreated initBasic   True " + javaClass.simpleName + this.toString())
                 initView()
             }
@@ -116,20 +110,19 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
     override fun onDestroy() {
         super.onDestroy()
         LogUtils.d(this.javaClass.name, "onDestroy " + javaClass.simpleName + this.toString())
-        if (mRootView != null) {
-            if (mRootView is ViewGroup) {
-                (mRootView as ViewGroup).removeAllViews()
+        if (rootView != null) {
+            if (rootView is ViewGroup) {
+                (rootView as ViewGroup).removeAllViews()
             }
-            if (null != mRootView!!.parent) {
-                (mRootView!!.parent as ViewGroup).removeView(mRootView)
-                mRootView = null
+            if (null != rootView!!.parent) {
+                (rootView!!.parent as ViewGroup).removeView(rootView)
+                rootView = null
             }
         }
 
-        if (mLoadingView != null) {
-            mLoadingView = null
+        if (loadingView != null) {
+            loadingView = null
         }
-        mActivity = null
     }
 
     override fun initDefConfig() {}
@@ -151,11 +144,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
 
     /******************************** 繁生方法   */
     fun findViewById(id: Int): View? {
-        if (mRootView == null) {
+        if (rootView == null) {
             return null
         }
         return if (id < 0) {
             null
-        } else mRootView!!.findViewById(id)
+        } else rootView!!.findViewById(id)
     }
 }

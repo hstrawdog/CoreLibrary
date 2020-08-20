@@ -13,12 +13,9 @@ import com.hqq.core.BaseCommonsKey
  * @Descrive :
  */
 abstract class BaseListViewModel : BaseViewModel() {
-    var mDate: MutableLiveData<List<*>> = MediatorLiveData()
+    var data: MutableLiveData<List<*>> = MediatorLiveData()
     var pageCount = 1
-        get
-        set
     var pageSize = BaseCommonsKey.PAGE_SIZE
-        set
 
     /**
      * 加载更多
@@ -36,10 +33,10 @@ abstract class BaseListViewModel : BaseViewModel() {
     }
 
     val date: List<*>
-        get() = mDate.value!!
+        get() = data.value!!
 
     fun setDate(date: List<*>): BaseListViewModel {
-        mDate.value = date
+        data.value = date
         return this
     }
 }

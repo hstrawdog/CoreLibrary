@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hqq.core.lifecycle.BaseLifecycleObserver
 import com.hqq.core.utils.log.LogUtils
-import kotlin.reflect.KProperty
 
 /**
  * @Author : huangqiqiang
@@ -27,22 +26,22 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
     /**
      * 是否显示Loading
      */
-    val mShowLoading = MutableLiveData<Boolean>()
+    val showLoading = MutableLiveData<Boolean>()
 
     /**
      * 显示Toast
      */
-    val mShowToast = MutableLiveData<String>()
+    val showToast = MutableLiveData<String>()
 
     /**
      * Activity跳转对象
      */
-    val mOpenActivityComponentMutableLiveData = MutableLiveData<OpenActivityComponent>()
+    val openActivityComponentMutableLiveData = MutableLiveData<OpenActivityComponent>()
 
     /**
      * View 的intent 对象
      */
-    var mBundle: Bundle? = null
+    var bundle: Bundle? = null
 
     /**
      * ViewModel 的部分数据可以在这边进行初始化
@@ -61,7 +60,7 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
     override fun onDestroy() {}
     override fun onAny() {}
     fun setBundle(bundle: Bundle?): BaseViewModel {
-        mBundle = bundle
+        this.bundle = bundle
         return this
     }
     /**
@@ -80,16 +79,16 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
      * @param cls
      */
     fun startActivity(cls: Class<out Activity?>?, bundle: Bundle? = null, resultCode: Int = -1) {
-        mOpenActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, resultCode)
+        openActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, resultCode)
     }
 
     fun setShowLoading(showLoading: Boolean): BaseViewModel {
-        mShowLoading.postValue(showLoading)
+        this.showLoading.postValue(showLoading)
         return this
     }
 
     fun setShowToast(showToast: String): BaseViewModel {
-        mShowToast.postValue(showToast)
+        this.showToast.postValue(showToast)
         return this
     }
 

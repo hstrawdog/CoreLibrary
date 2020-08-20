@@ -16,10 +16,10 @@ import com.hqq.core.ui.base.BaseFragment
 class TabFragment : BaseFragment() {
 
 
-    override val mLayoutViewId: Int
+    override val layoutViewId: Int
         get() = 0
     override fun getLayoutView(group: ViewGroup): View? {
-        val textView = TextView(mActivity)
+        val textView = TextView(activity)
         textView.text = "viewPage Fragment"
         return textView
     }
