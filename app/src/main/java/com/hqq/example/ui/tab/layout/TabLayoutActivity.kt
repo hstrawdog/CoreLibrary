@@ -50,6 +50,7 @@ class TabLayoutActivity : BaseActivity() {
 
         val adapter = ViewPageAdapter(this)
         mVpPage!!.setAdapter(adapter)
+        mVpPage?.offscreenPageLimit=adapter.itemCount
         adapter.setupWithViewPager(mTbTablayout1!!, mVpPage!!)
         adapter.setupWithViewPager(mTbTablayout2!!, mVpPage!!)
         adapter.setupWithViewPager(mTbTablayout3!!, mVpPage!!)

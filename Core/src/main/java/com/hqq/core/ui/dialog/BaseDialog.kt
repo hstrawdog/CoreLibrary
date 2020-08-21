@@ -43,7 +43,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      * 状态栏模式
      */
     @ToolBarMode
-    protected var statusBarMode: Int = CoreBuildConfig.instance.isStatusMode
+    var statusBarMode: Int = CoreBuildConfig.instance.isStatusMode
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //        //代码设置 无标题 无边框

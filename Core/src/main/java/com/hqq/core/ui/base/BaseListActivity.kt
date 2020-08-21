@@ -23,8 +23,6 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
 abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         BaseActivity(), IBaseListModelView<T?> {
     protected var mRcList: RecyclerView? = null
-    override var adapter: T? = null
-        protected set
     override var pageSize = BaseCommonsKey.PAGE_SIZE
         protected set
     override var pageCount = 1
@@ -33,7 +31,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
 
     protected var mBaseListModel: BaseListModelView? = null
 
-    override val layoutViewId :Int = 0;
+    override val layoutViewId: Int = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +58,8 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
     override fun initView() {
         mBaseListModel = BaseListModelView(this, this)
         mLayoutManager = rcLayoutManager
-        adapter = initAdapter()
         mRcList = mBaseListModel!!.checkRecycleView(mRcList, rootViewBuild!!.rootView)
-        mBaseListModel!!.initRecycleView(mRcList, adapter, mLayoutManager)
+        mBaseListModel!!.initRecycleView(mRcList, baseAdapter, mLayoutManager)
         mBaseListModel!!.initPtrPullDown(rootViewBuild!!.rootView)
         initData()
     }
@@ -74,7 +71,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
 
     override fun onRefreshBegin() {
         pageCount = 1
-        adapter!!.loadMoreModule.loadMoreComplete()
+        baseAdapter!!.loadMoreModule.loadMoreComplete()
         onLoadMore()
     }
 

@@ -39,15 +39,13 @@ import com.hqq.example.ui.web.WebActivity
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class MainActivity : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>() {
+class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>() {
 
-    override val adapter: MainAdapter
-        get() = MainAdapter()
+
     override val bindingViewModelId: Int
         get() = 0
 
     override fun initData() {
-        TabLayoutActivity.open(this)
 
 
     }

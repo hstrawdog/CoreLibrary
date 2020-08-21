@@ -16,10 +16,7 @@ import java.util.*
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class LoadMoreActivity : BaseListActivity<MainAdapter?>() {
-    override fun initAdapter(): MainAdapter? {
-        return MainAdapter()
-    }
+class LoadMoreActivity(override val baseAdapter: MainAdapter?=MainAdapter()) : BaseListActivity<MainAdapter?>() {
 
     override fun initData() {
         mBaseListModel!!.fillingData(data as Nothing)
@@ -29,7 +26,7 @@ class LoadMoreActivity : BaseListActivity<MainAdapter?>() {
         Handler().postDelayed({
             if (mBaseListModel != null) {
                 mBaseListModel!!.fillingData(data  as Nothing)
-                adapter!!.loadMoreModule.loadMoreComplete()
+                baseAdapter!!.loadMoreModule.loadMoreComplete()
             }
         }, 2000)
     }

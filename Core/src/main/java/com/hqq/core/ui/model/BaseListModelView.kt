@@ -44,6 +44,17 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
     private val layoutEmptyView = R.layout.layout_load_more_empty
 
     /**
+     * 应该要可以全局配置的 配置在xml中 可以替换
+     *
+     * @return string
+     */
+    private val emptyTextMessage: CharSequence?
+        private get() = ResourcesUtils.getString(R.string.def_empty_message)
+
+    private val emptyImage: Int
+        private get() = R.mipmap.ic_empty_def
+
+    /**
      * 初始化 下拉刷新
      *
      * @param view
@@ -90,6 +101,10 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * @param emptyView
      */
     private fun initEmptyView(emptyView: View?) {
+        if (emptyView ==null){
+            return
+        }
+
         val tvRefresh = emptyView!!.findViewById<TextView>(R.id.tv_Refresh)
         val tvEmptyMessage = emptyView.findViewById<TextView>(R.id.tv_empty_message)
         val ivEmpty = emptyView.findViewById<ImageView>(R.id.iv_empty)
@@ -149,16 +164,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
         return viewEmptyFoot
     }
 
-    /**
-     * 应该要可以全局配置的 配置在xml中 可以替换
-     *
-     * @return string
-     */
-    private val emptyTextMessage: CharSequence?
-        private get() = ResourcesUtils.getString(R.string.def_empty_message)
-
-    private val emptyImage: Int
-        private get() = R.mipmap.ic_empty_def
 
     /**
      * 添加 没有更多数据
@@ -244,7 +249,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * @return
      */
     private val adapter: BaseQuickAdapter<*, *>
-        private get() = mBaseListModelView.adapter!!
+        private get() = mBaseListModelView.baseAdapter!!
 
     /**
      * m->v 的接口
@@ -277,7 +282,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
          *
          * @return
          */
-        val adapter: K
+        val baseAdapter: K
 
         /**
          * 获取 recycleView

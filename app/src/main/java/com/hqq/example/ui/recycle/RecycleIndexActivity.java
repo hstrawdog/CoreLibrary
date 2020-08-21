@@ -22,19 +22,14 @@ public class RecycleIndexActivity extends BaseListActivity<MainAdapter> {
 
 
     @Override
-    public MainAdapter initAdapter() {
-        return new MainAdapter();
-    }
-
-    @Override
     public void initData() {
-        getAdapter().addData(new MainBean("轮播图", BannerActivity.class));
-        getAdapter().addData(new MainBean("多Item 分页滑动", FullPagerSnapActivity.class));
-        getAdapter().addData(new MainBean("画廊 分页滑动", GallerySnapActivity.class));
-        getAdapter().addData(new MainBean("空数据测试", EmptyListActivity.class));
-        getAdapter().addData(new MainBean("加载数据", LoadMoreActivity.class));
-        getAdapter().addData(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
-        getAdapter().addData(new MainBean("ListActivity 加载", ListActivity.class));
+        getBaseAdapter().addData(new MainBean("轮播图", BannerActivity.class));
+        getBaseAdapter().addData(new MainBean("多Item 分页滑动", FullPagerSnapActivity.class));
+        getBaseAdapter().addData(new MainBean("画廊 分页滑动", GallerySnapActivity.class));
+        getBaseAdapter().addData(new MainBean("空数据测试", EmptyListActivity.class));
+        getBaseAdapter().addData(new MainBean("加载数据", LoadMoreActivity.class));
+        getBaseAdapter().addData(new MainBean("fragment 加载", IFragmentActivityBuilder.class));
+        getBaseAdapter().addData(new MainBean("Activity 悬停加载", ListActivity.class));
     }
 
     @Override
@@ -46,4 +41,11 @@ public class RecycleIndexActivity extends BaseListActivity<MainAdapter> {
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
     }
+
+    MainAdapter mMainAdapter = new MainAdapter();
+    @Override
+    public MainAdapter getBaseAdapter() {
+        return mMainAdapter;
+    }
+
 }

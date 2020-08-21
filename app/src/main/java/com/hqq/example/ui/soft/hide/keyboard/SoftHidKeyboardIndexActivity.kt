@@ -1,6 +1,5 @@
 package com.hqq.example.ui.soft.hide.keyboard
 
-import androidx.appcompat.app.AppCompatActivity
 import com.hqq.core.ui.base.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
@@ -13,14 +12,11 @@ import com.hqq.example.bean.MainBean
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class SoftHidKeyboardIndexActivity : BaseListActivity<MainAdapter>() {
-    override fun initAdapter(): MainAdapter? {
-        return MainAdapter()
-    }
+class SoftHidKeyboardIndexActivity(override val baseAdapter: MainAdapter?=MainAdapter()) : BaseListActivity<MainAdapter>() {
 
     override fun initData() {
         var bean = MainBean("底部按钮测试", SoftHideKeyBoardActivity::class.java);
-        adapter!!.addData(bean)
-        adapter!!.addData(MainBean("遮挡滑动测试", SoftHideKeyBoardScrollActivity::class.java))
+        baseAdapter!!.addData(bean)
+        baseAdapter!!.addData(MainBean("遮挡滑动测试", SoftHideKeyBoardScrollActivity::class.java))
     }
 }

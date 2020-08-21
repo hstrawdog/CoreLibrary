@@ -17,7 +17,7 @@ import com.hqq.example.ui.web.WebActivity
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class NewsActivity : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, NewsAdapter>() {
+class NewsActivity(override val baseAdapter: NewsAdapter= NewsAdapter()) : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, NewsAdapter>() {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, NewsActivity::class.java)
@@ -30,12 +30,10 @@ class NewsActivity : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, News
     override val bindingViewModelId: Int
         get() = 0
 
-    override fun initAdapter(): NewsAdapter {
-        return NewsAdapter()
-    }
+
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-        WebActivity.open(activity!!, mAdapter!!.getItem(position)!!.url, mAdapter!!.getItem(position)!!.title)
+        WebActivity.open(activity!!, baseAdapter!!.getItem(position)!!.url, baseAdapter!!.getItem(position)!!.title)
     }
 
 

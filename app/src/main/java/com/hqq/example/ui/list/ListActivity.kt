@@ -5,13 +5,11 @@ import android.view.View
 import com.hqq.core.recycle.HeaderItemDecoration
 import com.hqq.core.recycle.HeaderItemDecoration.StickyHeaderInterface
 import com.hqq.core.ui.base.BaseListActivity
-import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.view.page.IFragmentActivityBuilder
-import kotlin.collections.ArrayList
 
 /**
  * @Author : huangqiqiang
@@ -21,12 +19,35 @@ import kotlin.collections.ArrayList
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class ListActivity : BaseListActivity<MainAdapter?>() {
-    override fun initAdapter(): MainAdapter? {
-        return MainAdapter()
+class ListActivity(override val baseAdapter: MainAdapter? = MainAdapter()) : BaseListActivity<MainAdapter?>() {
+    override fun initData() {
+
+        mRcList?.addItemDecoration(HeaderItemDecoration(mRcList!!, object : StickyHeaderInterface {
+            override fun getHeaderPositionForItem(itemPosition: Int): Int {
+                return if (itemPosition >= 6) 6 else -1
+            }
+
+            override fun getHeaderLayout(headerPosition: Int): Int {
+                return R.layout.head_list_activity
+            }
+
+            override fun bindHeaderData(header: View?, headerPosition: Int) {
+
+            }
+
+            override fun isHeader(itemPosition: Int): Boolean {
+                return itemPosition == 6
+            }
+        }))
+
+        baseAdapter?.loadMoreModule?.setOnLoadMoreListener(this)
+
+
+
+        data
     }
 
-    override fun initData() {
+    override fun onLoadMore() {
         data
     }
 
@@ -64,29 +85,5 @@ class ListActivity : BaseListActivity<MainAdapter?>() {
                 loadingView!!.dismiss()
                 mBaseListModel!!.fillingData(list as ArrayList<Nothing>)
             }, 3 * 1000.toLong())
-            mRcList!!.addItemDecoration(HeaderItemDecoration(mRcList!!, object : StickyHeaderInterface {
-                override fun getHeaderPositionForItem(itemPosition: Int): Int {
-                    var itemPosition = itemPosition
-                    e("getHeaderPositionForItem----------------  $itemPosition")
-                    var headerPosition = 0
-                    do {
-                        if (isHeader(itemPosition)) {
-                            headerPosition = itemPosition
-                            break
-                        }
-                        itemPosition -= 1
-                    } while (itemPosition >= 0)
-                    return headerPosition
-                }
-
-                override fun getHeaderLayout(headerPosition: Int): Int {
-                    return R.layout.item_main
-                }
-
-                override fun bindHeaderData(header: View?, headerPosition: Int) {}
-                override fun isHeader(itemPosition: Int): Boolean {
-                    return itemPosition == 6
-                }
-            }))
         }
 }

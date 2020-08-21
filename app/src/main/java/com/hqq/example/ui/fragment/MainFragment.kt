@@ -20,24 +20,22 @@ import kotlin.collections.ArrayList
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-class MainFragment : BaseListFragment<MainAdapter?>() {
+class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
+                   override val isLazyLoad: Boolean = true,//只有界面显示的时候才会加载
+                   override val baseAdapter: MainAdapter? = MainAdapter()) : BaseListFragment<MainAdapter?>() {
 
-
-    override val layoutViewId: Int
-        get() =  R.layout.fragment_i
-    /**
-     * 只有界面显示的时候才会加载
-     *
-     * @return
-     */
-    override val isLazyLoad: Boolean
-        get() = true
-
-
-
-    override fun initAdapter(): MainAdapter? {
-        return MainAdapter()
+    companion object {
+        @JvmStatic
+        fun getIFragment(position: Int): Fragment {
+            val fragment = MainFragment()
+            val bundle = Bundle()
+            bundle.putInt("postition", position)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
+
+
 
     override fun initData() {
         initListData()
@@ -49,7 +47,7 @@ class MainFragment : BaseListFragment<MainAdapter?>() {
     }
 
     private val data: Unit
-         get() {
+        get() {
             Handler().postDelayed({ initListData() }, 3 * 1000.toLong())
         }
 
@@ -85,14 +83,5 @@ class MainFragment : BaseListFragment<MainAdapter?>() {
         mBaseListModel!!.fillingData(list as ArrayList<Nothing>)
     }
 
-    companion object {
-        @JvmStatic
-        fun getIFragment(position: Int): Fragment {
-            val fragment = MainFragment()
-            val bundle = Bundle()
-            bundle.putInt("postition", position)
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
+
 }

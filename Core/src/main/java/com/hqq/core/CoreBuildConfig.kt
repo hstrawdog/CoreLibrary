@@ -16,10 +16,38 @@ import com.hqq.core.utils.RegexUtils
  * @Descrive :  配置文件
  */
 class CoreBuildConfig private constructor() {
+
+
+    /**
+     * 获取当前的 Activity
+     *
+     * @return
+     */
+    val currActivity: Activity? get() = mActivityLifecycle?.activity
+
+    companion object {
+        /**
+         * 单利维持对象
+         */
+        var singleton: CoreBuildConfig = instance
+        val instance: CoreBuildConfig
+            get() {
+
+                if (singleton == null) {
+                    synchronized(CoreBuildConfig::class.java) {
+                        if (singleton == null) {
+                            singleton = CoreBuildConfig()
+                        }
+                    }
+                }
+                return singleton
+            }
+    }
+
     /**
      * 默认 标题栏 内容
      */
-    var defItoobar: Class<out IToolBar?> = BaseDefToolBarImpl::class.java
+    var defToolbar: Class<out IToolBar?> = BaseDefToolBarImpl::class.java
         private set
 
     /**
@@ -77,10 +105,10 @@ class CoreBuildConfig private constructor() {
     }
 
     val defIToolbar: Class<*>
-        get() = defItoobar
+        get() = defToolbar
 
     fun setDefIToolbar(defIToolbar: Class<out IToolBar?>) {
-        defItoobar = defIToolbar
+        defToolbar = defIToolbar
     }
 
     fun setStatusModeLight(@ToolBarMode statusModeLight: Int): CoreBuildConfig {
@@ -88,30 +116,5 @@ class CoreBuildConfig private constructor() {
         return this
     }
 
-    /**
-     * 获取当前的 Activity
-     *
-     * @return
-     */
-    val currActivity: Activity?
-        get() = mActivityLifecycle?.activity
 
-    companion object {
-        /**
-         * 单利维持对象
-         */
-        var singleton: CoreBuildConfig = instance
-        val instance: CoreBuildConfig
-            get() {
-
-                if (singleton == null) {
-                    synchronized(CoreBuildConfig::class.java) {
-                        if (singleton == null) {
-                            singleton = CoreBuildConfig()
-                        }
-                    }
-                }
-                return singleton
-            }
-    }
 }

@@ -21,9 +21,6 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
 abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
         BaseFragment(), IBaseListModelView<T?> {
     protected var mRcList: RecyclerView? = null
-    override var adapter: T? = null
-        protected set
-
     /**
      * 默认的填充数据
      *
@@ -50,9 +47,8 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
     override fun initView() {
         mBaseListModel = BaseListModelView(this, context)
         mLayoutManager = rcLayoutManager
-        adapter = initAdapter()
         mRcList = mBaseListModel!!.checkRecycleView(mRcList, rootViewBuild?.rootView)
-        mBaseListModel!!.initRecycleView(mRcList, adapter, mLayoutManager)
+        mBaseListModel!!.initRecycleView(mRcList, baseAdapter, mLayoutManager)
         mBaseListModel!!.initPtrPullDown(rootViewBuild?.rootView)
         initData()
     }
@@ -69,7 +65,7 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
     override fun onRefreshBegin() {
         pageCount = 1
-        adapter!!.loadMoreModule.loadMoreComplete()
+        baseAdapter!!.loadMoreModule.loadMoreComplete()
         onLoadMore()
     }
 

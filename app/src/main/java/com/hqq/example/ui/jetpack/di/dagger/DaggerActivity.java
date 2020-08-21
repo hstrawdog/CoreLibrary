@@ -13,13 +13,14 @@ import com.hqq.example.R;
 public class DaggerActivity extends BaseActivity {
 
 
-    @Override
-    public int getMLayoutViewId() {
-        return R.layout.activity_dagger;
-    }
 
     @Override
     public void initView() {
 
     }
-}
+
+     @Override
+     public int getLayoutViewId() {
+         return R.layout.activity_dagger;
+     }
+ }

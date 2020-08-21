@@ -39,7 +39,7 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
         baseListMode = BaseListModelView(this, context)
         mLayoutManager = rcLayoutManager
         rcList = baseListMode!!.checkRecycleView(rcList, rootViewBuild!!.rootView)
-        baseListMode!!.initRecycleView(rcList, adapter, mLayoutManager)
+        baseListMode!!.initRecycleView(rcList, baseAdapter, mLayoutManager)
         baseListMode!!.initPtrPullDown(rootViewBuild?.rootView)
         viewMode!!.data.observe(this, Observer<List<*>> { arrayList ->
             baseListMode!!.fillingData(arrayList as List<Nothing>)
@@ -54,7 +54,7 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
 
     override fun onRefreshBegin() {
         viewMode!!.setPageCount(1)
-        adapter!!.loadMoreModule.loadMoreComplete()
+        baseAdapter!!.loadMoreModule.loadMoreComplete()
         viewMode!!.onLoadMore()
     }
 

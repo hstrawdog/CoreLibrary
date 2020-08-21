@@ -19,7 +19,13 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
  * 使用这个 在rc 一直滑动的时候 会不断的去创建对象
  */
 abstract class DividerItemDecoration : ItemDecoration() {
-    private val mPaint: Paint
+     var mPaint: Paint
+
+    init {
+        mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        mPaint.style = Paint.Style.FILL
+    }
+
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         //left, top, right, bottom
         val childCount = parent.childCount
@@ -30,31 +36,31 @@ abstract class DividerItemDecoration : ItemDecoration() {
             if (divider != null) {
                 if (divider.leftSideLine!!.isHave) {
                     if (divider != null) {
-                        drawChildLeftVertical(child, c, parent, divider.leftSideLine!!.color, divider.leftSideLine!!.widthDp as Int
-                                , divider.leftSideLine!!.startPaddingDp as Int
-                                , divider.leftSideLine!!.endPaddingDp as Int)
+                        drawChildLeftVertical(child, c, parent, divider.leftSideLine!!.color, divider.leftSideLine!!.widthDp.toInt()
+                                , divider.leftSideLine!!.startPaddingDp.toInt()
+                                , divider.leftSideLine!!.endPaddingDp.toInt())
                     }
                 }
             }
             if (divider != null) {
                 if (divider.topSideLine!!.isHave) {
-                    drawChildTopHorizontal(child, c, parent, divider!!.topSideLine!!.color, divider.topSideLine!!.widthDp as Int
-                            , divider.topSideLine!!.startPaddingDp as Int
-                            , divider.topSideLine!!.endPaddingDp as Int)
+                    drawChildTopHorizontal(child, c, parent, divider!!.topSideLine!!.color, divider.topSideLine!!.widthDp.toInt()
+                            , divider.topSideLine!!.startPaddingDp.toInt()
+                            , divider.topSideLine!!.endPaddingDp.toInt())
                 }
             }
             if (divider != null) {
                 if (divider.rightSideLine!!.isHave) {
-                    drawChildRightVertical(child, c, parent, divider.rightSideLine!!.color, divider.rightSideLine!!.widthDp as Int
-                            , divider.rightSideLine!!.startPaddingDp as Int
-                            , (divider.rightSideLine!!.endPaddingDp )as Int)
+                    drawChildRightVertical(child, c, parent, divider.rightSideLine!!.color, divider.rightSideLine!!.widthDp.toInt()
+                            , divider.rightSideLine!!.startPaddingDp.toInt()
+                            , (divider.rightSideLine!!.endPaddingDp).toInt())
                 }
             }
             if (divider != null) {
                 if (divider.bottomSideLine!!.isHave) {
-                    drawChildBottomHorizontal(child, c, parent, divider.bottomSideLine!!.color, divider.bottomSideLine!!.widthDp as Int
-                            , divider.bottomSideLine!!.startPaddingDp as Int
-                            , divider.bottomSideLine!!.endPaddingDp as Int)
+                    drawChildBottomHorizontal(child, c, parent, divider.bottomSideLine!!.color, divider.bottomSideLine!!.widthDp.toInt()
+                            , divider.bottomSideLine!!.startPaddingDp.toInt()
+                            , divider.bottomSideLine!!.endPaddingDp.toInt())
                 }
             }
         }
@@ -176,10 +182,10 @@ abstract class DividerItemDecoration : ItemDecoration() {
         if (divider == null) {
             divider = DividerBuilder().create()
         }
-        val left: Int = if (divider.leftSideLine!!.isHave) divider.leftSideLine!!.widthDp as Int else 0
-        val top: Int = if (divider.topSideLine!!.isHave) divider.topSideLine!!.widthDp as Int else 0
-        val right: Int = if (divider.rightSideLine!!.isHave) divider.rightSideLine!!.widthDp as Int else 0
-        val bottom: Int = if (divider.bottomSideLine!!.isHave) divider.bottomSideLine!!.widthDp as Int else 0
+        val left: Int = if (divider.leftSideLine!!.isHave) divider.leftSideLine!!.widthDp.toInt() else 0
+        val top: Int = if (divider.topSideLine!!.isHave) divider.topSideLine!!.widthDp.toInt() else 0
+        val right: Int = if (divider.rightSideLine!!.isHave) divider.rightSideLine!!.widthDp.toInt() else 0
+        val bottom: Int = if (divider.bottomSideLine!!.isHave) divider.bottomSideLine!!.widthDp.toInt() else 0
         outRect[left, top, right] = bottom
     }
 
@@ -191,8 +197,5 @@ abstract class DividerItemDecoration : ItemDecoration() {
      */
     abstract fun getDivider(parent: RecyclerView?, itemPosition: Int): Divider?
 
-    init {
-        mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        mPaint.style = Paint.Style.FILL
-    }
+
 }

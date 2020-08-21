@@ -60,7 +60,7 @@ class CreateRootViewModel
     /**
      * 标题栏类型
      */
-    private var mClass: Class<out IToolBar?> = CoreBuildConfig.instance.defItoobar
+    private var mClass: Class<out IToolBar?> = CoreBuildConfig.instance.defToolbar
 
     /**
      * 布局类型

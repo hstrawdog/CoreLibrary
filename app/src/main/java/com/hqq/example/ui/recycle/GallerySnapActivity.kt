@@ -22,31 +22,28 @@ import java.util.*
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class GallerySnapActivity : BaseBindingActivity<ActivityGallerySnapBinding?>() {
+class GallerySnapActivity(override val layoutId: Int = R.layout.activity_gallery_snap) : BaseBindingActivity<ActivityGallerySnapBinding?>() {
     var mRecyclerview: RecyclerView? = null
     var mData: ArrayList<String>? = null
     var mLayoutManager: LinearLayoutManager? = null
     var mGallerySnapHelper: GallerySnapHelper? = null
     var mRcfView: RecyclerCoverFlow? = null
-    override val layoutId: Int
-        get() = R.layout.activity_gallery_snap
-
     override fun initView() {
         mRecyclerview = findViewById(R.id.recyclerview)
         mRcfView = findViewById(R.id.rcf_view)
         mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         mRecyclerview!!.setLayoutManager(mLayoutManager)
         initData()
-        mRecyclerview!!.setAdapter(SnapHelperAdapter(this, mData))
+        mRecyclerview!!.setAdapter(SnapHelperAdapter(this, mData!!))
         mGallerySnapHelper = GallerySnapHelper()
         mGallerySnapHelper!!.attachToRecyclerView(mRecyclerview)
-        mRcfView!!.setAdapter(SnapHelperAdapter(this, mData))
+        mRcfView!!.setAdapter(SnapHelperAdapter(this, mData!!))
         //        mRcfView.setAlphaItem(true);
         mRcfView!!.setFlatFlow(false)
         val gridLayoutManager = GridLayoutManager(this, 2)
         gridLayoutManager.orientation = GridLayoutManager.HORIZONTAL
         binding!!.rcList.layoutManager = gridLayoutManager
-        binding!!.rcList.adapter = SnapHelperAdapter(this, mData)
+        binding!!.rcList.adapter = SnapHelperAdapter(this, mData!!)
         PagerSnapHelper().attachToRecyclerView(binding!!.rcList)
     }
 

@@ -26,10 +26,11 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     override fun onActivityPaused(activity: Activity) {}
     override fun onActivityStopped(activity: Activity) {}
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+
     override fun onActivityDestroyed(activity: Activity) {
         activities!!.remove(activity)
         LogUtils.d("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
-    }// 获取最上面的 Activity
+    }
 
     /**
      * 获取APP中activity栈中最上层一个activity

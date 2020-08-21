@@ -8,6 +8,7 @@ import androidx.core.app.ActivityOptionsCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.ui.base.BaseListActivity
 import com.hqq.example.R
+import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.adapter.StringListAdapter
 
 /**
@@ -18,14 +19,11 @@ import com.hqq.example.adapter.StringListAdapter
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class TransitionsAnimationActivity : BaseListActivity<StringListAdapter?>() {
-    override fun initAdapter(): StringListAdapter? {
-        return StringListAdapter()
-    }
+class TransitionsAnimationActivity(override val baseAdapter: StringListAdapter?=StringListAdapter()) : BaseListActivity<StringListAdapter?>() {
 
     override fun initData() {
-        adapter!!.addData("overridePendingTransition")
-        adapter!!.addData("makeCustomAnimation")
+        baseAdapter!!.addData("overridePendingTransition")
+        baseAdapter!!.addData("makeCustomAnimation")
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {

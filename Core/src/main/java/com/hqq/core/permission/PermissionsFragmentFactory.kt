@@ -12,15 +12,16 @@ import androidx.appcompat.app.AppCompatActivity
  * @Descrive :  工厂 用于生产 PermissionsFragment
  */
 object PermissionsFragmentFactory {
-    private const val PERMISSIONS_FRAGMENT_TAG = "PermissionsFragment"
+    private const val TAG_PERMISSIONS_FRAGMENT = "PermissionsFragment"
+
     fun getPermissionsFragment(currActivity: Activity?): PermissionsFragment? {
         var permissionsFragment: PermissionsFragment?
         if (currActivity is AppCompatActivity) {
             val fragmentManager = currActivity.supportFragmentManager
-            permissionsFragment = fragmentManager.findFragmentByTag(PERMISSIONS_FRAGMENT_TAG) as PermissionsFragment?
+            permissionsFragment = fragmentManager.findFragmentByTag(TAG_PERMISSIONS_FRAGMENT) as PermissionsFragment?
             if (null == permissionsFragment) {
                 permissionsFragment = PermissionsFragment.Companion.newInstance()
-                fragmentManager.beginTransaction().add(permissionsFragment, PERMISSIONS_FRAGMENT_TAG).commitNow()
+                fragmentManager.beginTransaction().add(permissionsFragment, TAG_PERMISSIONS_FRAGMENT).commitNow()
             }
         } else {
             throw IllegalStateException("不支持的Activity  Activity需要继承 AppCompatActivity ")

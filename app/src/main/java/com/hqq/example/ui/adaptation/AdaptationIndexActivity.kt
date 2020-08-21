@@ -1,7 +1,5 @@
 package com.hqq.example.ui.adaptation
 
-import android.view.View
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.ui.base.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
@@ -16,14 +14,10 @@ import com.hqq.example.ui.screen.TextViewBuilderSizeActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class AdaptationIndexActivity : BaseListActivity<MainAdapter?>() {
-    override fun initAdapter(): MainAdapter? {
-        return MainAdapter()
-    }
-
+class AdaptationIndexActivity(override val baseAdapter: MainAdapter? = MainAdapter()) : BaseListActivity<MainAdapter?>() {
     override fun initData() {
-        adapter!!.addData(MainBean("文字适配测试", TextViewBuilderSizeActivity::class.java))
-        adapter!!.addData(MainBean("1像素大小测试", DimenActivity::class.java))
+        baseAdapter!!.addData(MainBean("文字适配测试", TextViewBuilderSizeActivity::class.java))
+        baseAdapter!!.addData(MainBean("1像素大小测试", DimenActivity::class.java))
     }
 
 }

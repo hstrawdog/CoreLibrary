@@ -98,7 +98,7 @@ class CoverFlowLayoutManger(isFlat: Boolean, isGreyItem: Boolean,
     /**
      * 滚动动画
      */
-    lateinit var mAnimation: ValueAnimator
+    var mAnimation: ValueAnimator? = null
 
     /**
      * 获取被选中Item位置
@@ -217,14 +217,16 @@ class CoverFlowLayoutManger(isFlat: Boolean, isGreyItem: Boolean,
         var position = 0
         for (i in 0 until childCount) {
             val child = getChildAt(i)
-            position = getPosition(child!!)
-            val rect = getFrame(position)
-            if (!Rect.intersects(displayFrame, rect)) { //Item没有在显示区域，就说明需要回收
-                removeAndRecycleView(child, recycler!!) //回收滑出屏幕的View
-                mHasAttachedItems.delete(position)
-            } else { //Item还在显示区域内，更新滑动后Item的位置
-                layoutItem(child, rect) //更新Item位置
-                mHasAttachedItems.put(position, true)
+            child?.let {
+                position = getPosition(child)
+                val rect = getFrame(position)
+                if (!Rect.intersects(displayFrame, rect)) { //Item没有在显示区域，就说明需要回收
+                    removeAndRecycleView(child, recycler!!) //回收滑出屏幕的View
+                    mHasAttachedItems.delete(position)
+                } else { //Item还在显示区域内，更新滑动后Item的位置
+                    layoutItem(child, rect) //更新Item位置
+                    mHasAttachedItems.put(position, true)
+                }
             }
         }
         if (position == 0) {
@@ -473,13 +475,13 @@ class CoverFlowLayoutManger(isFlat: Boolean, isGreyItem: Boolean,
         }
         val direction = if (from < to) SCROLL_RIGHT else SCROLL_LEFT
         mAnimation = ValueAnimator.ofFloat(from.toFloat(), to.toFloat())
-        mAnimation.setDuration(500)
-        mAnimation.setInterpolator(DecelerateInterpolator())
-        mAnimation.addUpdateListener(AnimatorUpdateListener { animation ->
+        mAnimation?.setDuration(500)
+        mAnimation?.setInterpolator(DecelerateInterpolator())
+        mAnimation?.addUpdateListener(AnimatorUpdateListener { animation ->
             mOffsetAll = Math.round(animation.animatedValue as Float)
             layoutItems(mRecycle, mState, direction)
         })
-        mAnimation.addListener(object : Animator.AnimatorListener {
+        mAnimation?.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {}
             override fun onAnimationEnd(animation: Animator) {
                 onSelectedCallBack()
@@ -488,7 +490,7 @@ class CoverFlowLayoutManger(isFlat: Boolean, isGreyItem: Boolean,
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
         })
-        mAnimation.start()
+        mAnimation?.start()
     }
 
     /**

@@ -41,7 +41,7 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
         mBaseListModel = BaseListModelView(this, this)
         mLayoutManager = rcLayoutManager
         rcList = mBaseListModel?.checkRecycleView(rcList, rootViewBuild?.rootView)
-        mBaseListModel?.initRecycleView(rcList, adapter, mLayoutManager)
+        mBaseListModel?.initRecycleView(rcList, baseAdapter, mLayoutManager)
         mBaseListModel?.initPtrPullDown(rootViewBuild!!.rootView)
         viewMode?.data?.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList as List<Nothing>) })
         initData()
@@ -54,7 +54,7 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
 
     override fun onRefreshBegin() {
         viewMode?.pageCount = 1
-        adapter?.loadMoreModule.loadMoreComplete()
+        baseAdapter?.loadMoreModule.loadMoreComplete()
         viewMode?.onLoadMore()
     }
 
