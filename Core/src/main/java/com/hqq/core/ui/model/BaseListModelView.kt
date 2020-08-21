@@ -33,6 +33,23 @@ import com.hqq.core.widget.CusPtrClassicFrameLayout
  * 当一个页面出现两个列表加载的时候 就不会被局限
  */
 class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mContext: Context?) {
+    companion object {
+        /**
+         * 创建一个 rootView = recycleView
+         *
+         * @param context
+         * @return
+         */
+        @JvmOverloads
+        fun createRecycleView(context: Context?, height: Int = ViewGroup.LayoutParams.MATCH_PARENT): View {
+            val view = RecyclerView(context!!)
+            view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
+            view.id = R.id.rc_list
+            return view
+        }
+    }
+
+
     var viewEmptyFoot: View? = null
     var ptrPullDown: CusPtrClassicFrameLayout? = null
 
@@ -101,7 +118,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
      * @param emptyView
      */
     private fun initEmptyView(emptyView: View?) {
-        if (emptyView ==null){
+        if (emptyView == null) {
             return
         }
 
@@ -311,27 +328,5 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
 
     }
 
-    companion object {
-        /**
-         * 创建一个RecycleView
-         *
-         * @param context
-         * @param height
-         * @return
-         */
-        /**
-         * 创建一个 rootView = recycleView
-         *
-         * @param context
-         * @return
-         */
-        @JvmOverloads
-        fun createRecycleView(context: Context?, height: Int = ViewGroup.LayoutParams.MATCH_PARENT): View {
-            val view = RecyclerView(context!!)
-            view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
-            view.id = R.id.rc_list
-            return view
-        }
-    }
 
 }

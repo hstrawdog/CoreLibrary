@@ -1,6 +1,5 @@
 package com.hqq.core.ui.base
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.ui.model.BaseListModelView
-import com.hqq.core.ui.model.BaseListModelView.Companion.createRecycleView
 import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
 
 /**
@@ -22,20 +20,15 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  */
 abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         BaseActivity(), IBaseListModelView<T?> {
-    protected var mRcList: RecyclerView? = null
     override var pageSize = BaseCommonsKey.PAGE_SIZE
-        protected set
     override var pageCount = 1
-        protected set
-    protected var mLayoutManager: RecyclerView.LayoutManager? = null
-
-    protected var mBaseListModel: BaseListModelView? = null
-
     override val layoutViewId: Int = 0;
+    override val rcLayoutManager: RecyclerView.LayoutManager
+        get() = LinearLayoutManager(this)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    var layoutManager: RecyclerView.LayoutManager? = null
+    var mBaseListModel: BaseListModelView? = null
+    var rcList: RecyclerView? = null
 
     /**
      * 重写了 setViewId    执行 setRootView
@@ -45,7 +38,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
      */
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
-            createRecycleView(this)
+            BaseListModelView.createRecycleView(this)
         } else {
             null
         }
@@ -57,35 +50,33 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
     @CallSuper
     override fun initView() {
         mBaseListModel = BaseListModelView(this, this)
-        mLayoutManager = rcLayoutManager
-        mRcList = mBaseListModel!!.checkRecycleView(mRcList, rootViewBuild!!.rootView)
-        mBaseListModel!!.initRecycleView(mRcList, baseAdapter, mLayoutManager)
+        layoutManager = rcLayoutManager
+        rcList = mBaseListModel!!.checkRecycleView(rcList, rootViewBuild!!.rootView)
+        mBaseListModel!!.initRecycleView(rcList, baseAdapter, layoutManager)
         mBaseListModel!!.initPtrPullDown(rootViewBuild!!.rootView)
         initData()
     }
 
 
     override fun addPageCount() {
-        pageCount = pageCount + 1
+        pageCount += 1
     }
 
     override fun onRefreshBegin() {
         pageCount = 1
-        baseAdapter!!.loadMoreModule.loadMoreComplete()
+        baseAdapter?.loadMoreModule?.loadMoreComplete()
         onLoadMore()
     }
 
     override val listView: ViewGroup?
-        get() = mRcList
+        get() = rcList
 
     override fun onDestroy() {
         super.onDestroy()
-        mBaseListModel!!.onDestroy()
+        mBaseListModel?.onDestroy()
         mBaseListModel = null
     }
 
-    override val rcLayoutManager: RecyclerView.LayoutManager
-        get() = LinearLayoutManager(this)
 
     override fun onLoadMore() {
     }
