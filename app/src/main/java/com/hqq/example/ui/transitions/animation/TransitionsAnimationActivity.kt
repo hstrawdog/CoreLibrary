@@ -19,11 +19,11 @@ import com.hqq.example.adapter.StringListAdapter
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class TransitionsAnimationActivity(override val baseAdapter: StringListAdapter?=StringListAdapter()) : BaseListActivity<StringListAdapter?>() {
+class TransitionsAnimationActivity(override val baseAdapter: StringListAdapter? = StringListAdapter()) : BaseListActivity<StringListAdapter?>() {
 
     override fun initData() {
-        baseAdapter!!.addData("overridePendingTransition")
-        baseAdapter!!.addData("makeCustomAnimation")
+        baseAdapter?.addData("overridePendingTransition")
+        baseAdapter?.addData("makeCustomAnimation")
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {

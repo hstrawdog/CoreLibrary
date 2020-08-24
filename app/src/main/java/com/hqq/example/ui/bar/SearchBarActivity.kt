@@ -2,6 +2,8 @@ package com.hqq.example.ui.bar
 
 import android.app.Activity
 import android.content.Intent
+import com.hqq.core.toolbar.ICreateToolbar
+import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.example.R
 import com.hqq.example.widget.BaseToolBarSearch
@@ -18,9 +20,14 @@ class SearchBarActivity : BaseActivity() {
 
     override val layoutViewId: Int
         get() = R.layout.activity_search_bar
+
     override fun initDefConfig() {
         super.initDefConfig()
-        rootViewBuild!!.setIToolBarClass(BaseToolBarSearch::class.java)
+        rootViewBuild.iToolBarClass = object : ICreateToolbar {
+            override fun createTooBar(): IToolBar {
+                return BaseToolBarSearch()
+            }
+        }
     }
 
     override fun initView() {}

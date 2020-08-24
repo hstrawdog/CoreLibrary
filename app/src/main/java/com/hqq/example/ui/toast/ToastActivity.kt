@@ -27,7 +27,7 @@ class ToastActivity : BaseActivity() {
         findViewById<View>(R.id.button36).setOnClickListener { v: View? -> onClickButton2(v) }
     }
 
-    fun onClickButton(v: View?) {
+    private fun onClickButton(v: View?) {
         val toast = Toast(activity)
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater.inflate(R.layout.view_toast, null)
@@ -35,7 +35,7 @@ class ToastActivity : BaseActivity() {
         toast.show()
     }
 
-    fun onClickButton2(v: View?) {
+    private fun onClickButton2(v: View?) {
         val toast = Toast(activity)
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater.inflate(R.layout.view_toast, null)

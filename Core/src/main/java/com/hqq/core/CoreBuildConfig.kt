@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.BaseDefToolBarImpl
+import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.utils.RegexUtils
 
@@ -49,6 +50,7 @@ class CoreBuildConfig private constructor() {
      */
     var defToolbar: Class<out IToolBar?> = BaseDefToolBarImpl::class.java
         private set
+
 
     /**
      * Application   主要获取 context
@@ -114,6 +116,13 @@ class CoreBuildConfig private constructor() {
     fun setStatusModeLight(@ToolBarMode statusModeLight: Int): CoreBuildConfig {
         isStatusMode = statusModeLight
         return this
+    }
+
+    var iCreateToolbar: ICreateToolbar = object : ICreateToolbar {
+        override fun createTooBar(): IToolBar {
+            return BaseDefToolBarImpl()
+        }
+
     }
 
 

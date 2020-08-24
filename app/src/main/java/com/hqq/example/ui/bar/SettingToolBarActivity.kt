@@ -19,7 +19,7 @@ class SettingToolBarActivity : BaseActivity() {
         get() = R.layout.activity_setting_tool_bar
 
     override fun initView() {
-        rootViewBuild!!.getDefToolBar<Any>()!!.setToolBarColor(R.color.color_main)
+        rootViewBuild?.getDefToolBar()?.setToolBarColor(R.color.color_main)
     }
 
     companion object {

@@ -21,8 +21,8 @@ class WebActivity : BaseFrameLayoutActivity() {
         get() = R.layout.activity_web
     override fun initDefConfig() {
         super.initDefConfig()
-        rootViewBuild?.setShowToolBar(false)
-        rootViewBuild?.setShowStatusBar(false)
+        rootViewBuild.setShowToolBar(false)
+        rootViewBuild.setShowStatusBar(false)
     }
 
     override fun initView() {

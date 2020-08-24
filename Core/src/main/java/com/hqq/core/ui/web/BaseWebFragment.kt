@@ -73,18 +73,18 @@ class BaseWebFragment : BaseFragment() {
         webView!!.webChromeClient = webChromeClient
         // 标识 为Android的 js 支持 对象是activity
         if (mScriptInterface != null) {
-            webView!!.addJavascriptInterface(activity!!, "android")
+            webView!!.addJavascriptInterface(requireActivity(), "android")
         }
         mUrl = BundleUtils.getString(this, getString(R.string.key_url))
         mTitle = BundleUtils.getString(this, getString(R.string.key_title))
-        activity!!.title = mTitle
-        rootViewBuild!!.getDefToolBar<Any>()!!.setToolbarTitle(mTitle)
+        requireActivity().title = mTitle
+        rootViewBuild!!.getDefToolBar()!!.setToolbarTitle(mTitle)
         webView!!.loadUrl(mUrl!!)
     }
 
     protected fun initWebViewSettings() {
         val settings = webView!!.settings
-        settings.setUserAgentString(settings.userAgentString + "" + activity!!.packageName)
+        settings.setUserAgentString(settings.userAgentString + "" + requireActivity().packageName)
         settings.javaScriptEnabled = true
         settings.javaScriptCanOpenWindowsAutomatically = true
         settings.allowFileAccess = true
@@ -155,11 +155,11 @@ class BaseWebFragment : BaseFragment() {
 
     protected val webChromeClient: WebChromeClient
         protected get() = object : WebChromeClient() {
-            override fun onReceivedTitle(view: WebView, title: String) {
+            override fun onReceivedTitle(view: WebView, title: String?) {
                 super.onReceivedTitle(view, title)
-                if (TextUtils.isEmpty(mTitle) && RegexUtils.unNull(title) && rootViewBuild != null && rootViewBuild!!.getDefToolBar<Any>() != null) {
-                    if (null != rootViewBuild && null != rootViewBuild!!.getDefToolBar<Any>()) {
-                        rootViewBuild!!.getDefToolBar<Any>()!!.setToolbarTitle(title)
+                title?.let {
+                    if (mTitle.isNullOrEmpty()) {
+                        rootViewBuild?.getDefToolBar()?.setToolbarTitle(mTitle)
                     }
                 }
             }

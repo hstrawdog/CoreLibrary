@@ -54,9 +54,9 @@ class IToolBarBuilder {
      * @param clss 类型
      * @return
      */
-    fun <T : IToolBar?> create(clss: Class<T?>): T? {
+    fun create(iCreateToolbar: ICreateToolbar): IToolBar? {
         try {
-            val toolBar: T = clss.newInstance()!!
+            var toolBar = iCreateToolbar.createTooBar()
             toolBar!!.setShowStatusBar(isShowStatusBar)
                     .setShowBar(isShowToolBar)
                     .setDefStatusColor(statusBarColor)

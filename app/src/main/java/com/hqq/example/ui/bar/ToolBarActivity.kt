@@ -31,8 +31,8 @@ class ToolBarActivity : BaseActivity() {
 //
 //            }
 //        });
-        rootViewBuild?.getDefToolBar<Any>()!!.addRightTextView("分享", View.OnClickListener { showToast(activity, "点击分享") })
-        rootViewBuild?.getDefToolBar<Any>()!!.addRightTextView("分享", R.color.color_333, View.OnClickListener { showToast(activity, "点击分享") })
+        rootViewBuild?.getDefToolBar()!!.addRightTextView("分享", View.OnClickListener { showToast(activity, "点击分享") })
+        rootViewBuild?.getDefToolBar()!!.addRightTextView("分享", R.color.color_333, View.OnClickListener { showToast(activity, "点击分享") })
         //        mRootViewBuild.getDefToolBar().addRightTextView("分享2", new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -40,7 +40,7 @@ class ToolBarActivity : BaseActivity() {
 //
 //            }
 //        });
-        rootViewBuild?.getDefToolBar<Any>()!!.addRightImageView(R.mipmap.ic_more, View.OnClickListener { showToast(activity, "点击more") })
+        rootViewBuild?.getDefToolBar()!!.addRightImageView(R.mipmap.ic_more, View.OnClickListener { showToast(activity, "点击more") })
         findViewById<View>(R.id.button).setOnClickListener(this)
         findViewById<View>(R.id.button2).setOnClickListener(this)
         findViewById<View>(R.id.button3).setOnClickListener(this)
@@ -57,14 +57,14 @@ class ToolBarActivity : BaseActivity() {
         when (view.id) {
             R.id.tv_bar_right -> {
             }
-            R.id.button5 -> rootViewBuild?.getDefToolBar<Any>()!!.setDefStatusColor(R.color.color_77400a)
-            R.id.button4 -> rootViewBuild?.getDefToolBar<Any>()!!.toolBarBg.setImageResource(R.color.white)
-            R.id.button7 -> rootViewBuild?.getDefToolBar<Any>()!!.toolBarBg.setImageResource(R.color.color_000)
-            R.id.button3 -> rootViewBuild?.getDefToolBar<Any>()!!.toolBarBg.setImageResource(R.color.color_77400a)
+            R.id.button5 -> rootViewBuild?.getDefToolBar()!!.setDefStatusColor(R.color.color_77400a)
+            R.id.button4 -> rootViewBuild?.getDefToolBar()!!.toolBarBg.setImageResource(R.color.white)
+            R.id.button7 -> rootViewBuild?.getDefToolBar()!!.toolBarBg.setImageResource(R.color.color_000)
+            R.id.button3 -> rootViewBuild?.getDefToolBar()!!.toolBarBg.setImageResource(R.color.color_77400a)
             R.id.button -> setStatusBarModel(activity!!.window, true)
             R.id.button2 -> setStatusBarModel(activity!!.window, false)
-            R.id.button6 -> rootViewBuild?.getDefToolBar<Any>()!!.setToolbarTitle("new标题")
-            R.id.button8 -> rootViewBuild?.getDefToolBar<Any>()!!.setToolBarColor(R.color.color_main)
+            R.id.button6 -> rootViewBuild?.getDefToolBar()!!.setToolbarTitle("new标题")
+            R.id.button8 -> rootViewBuild?.getDefToolBar()!!.setToolBarColor(R.color.color_main)
             R.id.button12 -> SettingToolBarActivity.open(this)
             R.id.button13 -> SearchBarActivity.open(this)
             else -> {

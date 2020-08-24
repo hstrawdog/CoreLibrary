@@ -11,6 +11,7 @@ import com.hqq.core.R
 import com.hqq.core.annotation.LayoutModel
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.BaseToolBar
+import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.toolbar.IToolBarBuilder
 import com.hqq.core.ui.builder.ICreateRootView
@@ -42,31 +43,29 @@ import java.lang.ref.WeakReference
  * 真正核心的内容 应该拆成两个部分
  * 一个view  一个头部
  */
-class CreateRootViewModel
-/**
- * 创建rootView
- *
- * @param isShowStatus  状态栏
- * @param isShowToolBar 标题栏
- */(
-        /**
-         * 是否显示状态栏
-         */
-        private var mIsShowStatus: Boolean,
-        /**
-         * 是否显示 标题栏
-         */
-        private var mIsShowToolBar: Boolean) {
+
+
+class CreateRootViewModel() {
+    /**
+     * 是否显示状态栏
+     */
+    var isShowStatus: Boolean = true
+
+    /**
+     * 是否显示 标题栏
+     */
+    var isShowToolBar: Boolean = true
+
     /**
      * 标题栏类型
      */
-    private var mClass: Class<out IToolBar?> = CoreBuildConfig.instance.defToolbar
+    var iCreateToolbar: ICreateToolbar = CoreBuildConfig.instance.iCreateToolbar
 
     /**
      * 布局类型
      */
     @LayoutModel
-    private var mLayoutMode: Int = LayoutModel.Companion.LAYOUT_MODE_LINEAR_LAYOUT
+    var layoutMode: Int = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT
 
     /**
      * 当前上下文
@@ -77,35 +76,27 @@ class CreateRootViewModel
      * 状态栏颜色
      */
     @ColorRes
-    var mStatusColor = R.color.white
+    var statusColor = R.color.white
 
     /**
      * dialogFragment 不带背景颜色
+     *     背景颜色 默认是color_bg
+     * 当前是dialog 的时候默认设置为透明颜色
      */
     @ColorRes
-    var mBgColor = R.color.bg_color
+    var bgColor = R.color.bg_color
 
     /**
      * 标题栏
      */
-    private var mIToolBar: IToolBar? = null
+    var mIToolBar: IToolBar? = null
 
     /**
      * 是否执行 状态栏 透明化
+     * 是否设置状态适配  activity 是默认设置的
      */
-    private var immersiveStatusBar = false
+    var immersiveStatusBar = false
 
-    /**
-     * 获取状态栏模式
-     *
-     * @return
-     */
-    /**
-     * 设置状态栏模式
-     *
-     * @param statusBarMode
-     * @return
-     */
     /**
      * 状态栏模式
      */
@@ -119,9 +110,9 @@ class CreateRootViewModel
      * @return构建后的View
      */
     fun createRootView(iActivityBuilder: ICreateRootView): View {
-        return if (mLayoutMode == LayoutModel.Companion.LAYOUT_MODE_LINEAR_LAYOUT) {
+        return if (layoutMode == LayoutModel.Companion.LAYOUT_MODE_LINEAR_LAYOUT) {
             createLayoutView(iActivityBuilder)
-        } else if (mLayoutMode == LayoutModel.Companion.LAYOUT_MODE_FRAME_LAYOUT) {
+        } else if (layoutMode == LayoutModel.Companion.LAYOUT_MODE_FRAME_LAYOUT) {
             createFrameLayoutView(iActivityBuilder)
         } else {
             View(mActivity?.get())
@@ -138,7 +129,7 @@ class CreateRootViewModel
         val frameLayout = FrameLayout(mActivity!!.get()!!)
         frameLayout.overScrollMode = View.OVER_SCROLL_NEVER
         val view = getLayoutView(iActivityBuilder, frameLayout)
-        frameLayout.setBackgroundResource(mBgColor)
+        frameLayout.setBackgroundResource(bgColor)
         frameLayout.addView(view)
         createToolBar(frameLayout)
         return frameLayout
@@ -156,7 +147,7 @@ class CreateRootViewModel
         layout.overScrollMode = View.OVER_SCROLL_NEVER
         createToolBar(layout)
         val view = getLayoutView(iActivityBuilder, layout)
-        layout.setBackgroundResource(mBgColor)
+        layout.setBackgroundResource(bgColor)
         layout.addView(view)
         return layout
     }
@@ -190,7 +181,7 @@ class CreateRootViewModel
                 StatusBarManager.setStatusBarModel(mActivity!!.get()!!.window, false)
             }
         }
-        if (mIsShowToolBar || mIsShowStatus) {
+        if (isShowToolBar || isShowStatus) {
             mIToolBar = initIToolBar()
             layout.addView(mIToolBar?.rootView)
         }
@@ -204,10 +195,10 @@ class CreateRootViewModel
     fun initIToolBar(): IToolBar? {
         val iToolBarBuilder = IToolBarBuilder()
                 .setActivity(mActivity!!.get())
-                .setShowStatusBar(mIsShowStatus)
-                .setShowToolBar(mIsShowToolBar)
-                .setStatusBarColor(mStatusColor)
-        return iToolBarBuilder?.create(mClass)
+                .setShowStatusBar(isShowStatus)
+                .setShowToolBar(isShowToolBar)
+                .setStatusBarColor(statusColor)
+        return iToolBarBuilder?.create(iCreateToolbar)
     }
 
     /**
@@ -231,54 +222,13 @@ class CreateRootViewModel
      * @param showToolBar 标题栏
      */
     fun setToolbarVisibility(showStatus: Boolean, showToolBar: Boolean) {
-        mIsShowStatus = showStatus
-        mIsShowToolBar = showToolBar
+        isShowStatus = showStatus
+        isShowToolBar = showToolBar
     }
 
-    /**
-     * 是否显示标题栏
-     *
-     * @param showStatus
-     */
-    fun setShowStatusBar(showStatus: Boolean) {
-        mIsShowStatus = showStatus
-    }
 
-    /**
-     * 是否显示标题栏
-     *
-     * @param showToolBar
-     */
-    fun setShowToolBar(showToolBar: Boolean) {
-        mIsShowToolBar = showToolBar
-    }
 
-    /**
-     * toolBar 的类名
-     *
-     * @param clss
-     */
-    fun setIToolBarClass(clss: Class<out BaseToolBar?>) {
-        mClass = clss
-    }
 
-    /**
-     * 设置根部的样式  目前只支持两种  布局
-     *
-     * @param layoutMode
-     */
-    fun setLayoutMode(@LayoutModel layoutMode: Int) {
-        mLayoutMode = layoutMode
-    }
-
-    /**
-     * 状态栏颜色
-     *
-     * @param statusColor
-     */
-    fun setStatusColor(@ColorRes statusColor: Int) {
-        mStatusColor = statusColor
-    }
 
     /**
      * 当前Activity 对象
@@ -289,23 +239,5 @@ class CreateRootViewModel
         mActivity = WeakReference(activity)
     }
 
-    /**
-     * 是否设置状态适配  activity 是默认设置的
-     *
-     * @param immersiveStatusBar
-     */
-    fun setImmersiveStatusBar(immersiveStatusBar: Boolean) {
-        this.immersiveStatusBar = immersiveStatusBar
-    }
-
-    /**
-     * 背景颜色 默认是color_bg
-     * 当前是dialog 的时候默认设置为透明颜色
-     *
-     * @param bgColor
-     */
-    fun setBgColor(@ColorRes bgColor: Int) {
-        mBgColor = bgColor
-    }
 
 }

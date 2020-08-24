@@ -13,6 +13,7 @@ import com.hqq.core.annotation.LayoutModel
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.BaseDefToolBarImpl
 import com.hqq.core.toolbar.BaseToolBar
+import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.ui.builder.ICreateRootView
 import com.hqq.core.ui.builder.IRootView
 import com.hqq.core.ui.model.CreateRootViewModel
@@ -85,7 +86,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      *
      * @return
      */
-    fun <T> getDefToolBar(): BaseDefToolBarImpl? {
+    fun getDefToolBar(): BaseDefToolBarImpl? {
         return if (createRootViewModel.getIToolBar<BaseToolBar?>() != null && createRootViewModel.getIToolBar<BaseToolBar>() is BaseDefToolBarImpl) {
             createRootViewModel.getIToolBar<BaseToolBar>() as BaseDefToolBarImpl
         } else {
@@ -101,7 +102,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param layoutMode
      */
     fun setLayoutMode(@LayoutModel layoutMode: Int): IRootViewImpl<T> {
-        createRootViewModel.setLayoutMode(layoutMode)
+        createRootViewModel.layoutMode = (layoutMode)
         return this
     }
 
@@ -110,10 +111,12 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      *
      * @param clss
      */
-    fun setIToolBarClass(clss: Class<out BaseToolBar?>): IRootViewImpl<T> {
-        createRootViewModel.setIToolBarClass(clss)
-        return this
-    }
+    var iToolBarClass: ICreateToolbar
+        get() = createRootViewModel.iCreateToolbar
+        set(value) {
+            createRootViewModel.iCreateToolbar = value
+        }
+
 
     /**
      * 是否显示  状态栏  与标题栏
@@ -126,15 +129,18 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
         return this
     }
 
+
     /**
      * 是否显示标题栏
      *
      * @param showStatus
      */
-    fun setShowStatusBar(showStatus: Boolean): IRootViewImpl<T> {
-        createRootViewModel.setShowStatusBar(showStatus)
-        return this
-    }
+    var showStatus: Boolean
+        get() = createRootViewModel.isShowStatus
+        set(value) {
+            createRootViewModel.isShowStatus = (value)
+
+        }
 
     /**
      * 是否显示标题栏
@@ -142,7 +148,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param showToolBar
      */
     fun setShowToolBar(showToolBar: Boolean): IRootViewImpl<T> {
-        createRootViewModel.setShowToolBar(showToolBar)
+        createRootViewModel.isShowToolBar = (showToolBar)
         return this
     }
 
@@ -163,7 +169,7 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
      * @param statusColor
      */
     fun setStatusColor(@ColorRes statusColor: Int) {
-        createRootViewModel.setStatusColor(statusColor)
+        createRootViewModel.statusColor = statusColor
     }
 
     /**
@@ -186,14 +192,16 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
     }
 
     init {
-        createRootViewModel = CreateRootViewModel(isShowStatus, isShowToolBar)
+        createRootViewModel = CreateRootViewModel()
+        createRootViewModel.isShowStatus = isShowStatus
+        createRootViewModel.isShowToolBar = isShowToolBar
         if (context is Activity) {
             mActivity = context
             // 只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
-            createRootViewModel.setImmersiveStatusBar(true)
+            createRootViewModel.immersiveStatusBar = true
         } else if (context is DialogFragment) {
             mActivity = (context as DialogFragment).activity
-            createRootViewModel.setBgColor(R.color.transparent)
+            createRootViewModel.bgColor = R.color.transparent
         } else if (context is Fragment) {
             mActivity = (context as Fragment).activity
         } else {

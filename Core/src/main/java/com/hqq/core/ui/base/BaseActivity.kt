@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.hqq.core.R
+import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.ui.builder.ICreateRootView.IActivityRootView
 import com.hqq.core.widget.LoadingView
 
@@ -36,6 +37,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      * 根布局
      */
     lateinit var rootViewBuild: IRootViewImpl<BaseActivity>
+
 
     /**
      *  初始化  不知道与init 有什么区别
