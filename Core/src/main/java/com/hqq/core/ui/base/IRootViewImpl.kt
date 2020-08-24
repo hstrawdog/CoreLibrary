@@ -46,10 +46,75 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
     lateinit var rootView: View
 
     /**
-     * 是否强制竖屏
+     * 是否显示标题栏
      *
+     * @param showStatus
+     */
+    var showStatus: Boolean
+        get() = createRootViewModel.isShowStatus
+        set(value) {
+            createRootViewModel.isShowStatus = (value)
+        }
+
+    /**
+     * toolBar 的类名
+     *
+     * @param clss
+     */
+    var iToolBarClass: ICreateToolbar
+        get() = createRootViewModel.iCreateToolbar
+        set(value) {
+            createRootViewModel.iCreateToolbar = value
+        }
+
+
+    /**
+     * 状态栏颜色
+     *
+     * @param statusColor
+     */
+    var statusColor: Int
+        get() = createRootViewModel.statusColor
+        set(value) {
+            createRootViewModel.statusColor = value
+        }
+
+    /**
+     * 设置状态栏模式
+     *
+     * @param statusBarMode
      * @return
      */
+    @ToolBarMode
+    var statusBarMode: Int
+        get() = createRootViewModel.statusBarMode
+        set(value) {
+            createRootViewModel.statusBarMode = value
+        }
+
+    /**
+     * 设置根部的样式  目前只支持两种  布局
+     *
+     * @param layoutMode
+     */
+    @LayoutModel
+    var layoutMode
+        get() = createRootViewModel.layoutMode
+        set(value) {
+            createRootViewModel.layoutMode = value
+        }
+
+    /**
+     * 是否显示标题栏
+     *
+     * @param showToolBar
+     */
+    var isShowToolBar
+        get() = createRootViewModel.isShowToolBar
+        set(value) {
+            createRootViewModel.isShowToolBar = value
+        }
+
     /**
      * 是否强制竖屏
      */
@@ -97,28 +162,6 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
     }
 
     /**
-     * 设置根部的样式  目前只支持两种  布局
-     *
-     * @param layoutMode
-     */
-    fun setLayoutMode(@LayoutModel layoutMode: Int): IRootViewImpl<T> {
-        createRootViewModel.layoutMode = (layoutMode)
-        return this
-    }
-
-    /**
-     * toolBar 的类名
-     *
-     * @param clss
-     */
-    var iToolBarClass: ICreateToolbar
-        get() = createRootViewModel.iCreateToolbar
-        set(value) {
-            createRootViewModel.iCreateToolbar = value
-        }
-
-
-    /**
      * 是否显示  状态栏  与标题栏
      *
      * @param showStatus  状态栏
@@ -129,67 +172,6 @@ class IRootViewImpl<T : Any>(context: T, isShowStatus: Boolean, isShowToolBar: B
         return this
     }
 
-
-    /**
-     * 是否显示标题栏
-     *
-     * @param showStatus
-     */
-    var showStatus: Boolean
-        get() = createRootViewModel.isShowStatus
-        set(value) {
-            createRootViewModel.isShowStatus = (value)
-
-        }
-
-    /**
-     * 是否显示标题栏
-     *
-     * @param showToolBar
-     */
-    fun setShowToolBar(showToolBar: Boolean): IRootViewImpl<T> {
-        createRootViewModel.isShowToolBar = (showToolBar)
-        return this
-    }
-
-    /**
-     * 设置状态栏模式
-     *
-     * @param statusBarMode
-     * @return
-     */
-    fun setStatusBarMode(@ToolBarMode statusBarMode: Int): IRootViewImpl<T> {
-        createRootViewModel.statusBarMode = statusBarMode
-        return this
-    }
-
-    /**
-     * 状态栏颜色
-     *
-     * @param statusColor
-     */
-    fun setStatusColor(@ColorRes statusColor: Int) {
-        createRootViewModel.statusColor = statusColor
-    }
-
-    /**
-     * 获取状态栏模式
-     *
-     * @return
-     */
-    val statusBarMode: Int
-        get() = createRootViewModel.statusBarMode
-
-    /**
-     * 设置是否竖屏
-     *
-     * @param alwaysPortrait
-     * @return
-     */
-    fun setAlwaysPortrait(alwaysPortrait: Boolean): IRootViewImpl<T> {
-        isAlwaysPortrait = alwaysPortrait
-        return this
-    }
 
     init {
         createRootViewModel = CreateRootViewModel()
