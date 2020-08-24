@@ -21,6 +21,7 @@ class ToolBarActivity : BaseActivity() {
 
     override val layoutViewId: Int
         get() = R.layout.activity_tool_bar
+
     override fun initView() {
 
 //        mRootViewBuild.getDefToolBar().setRightTextView("分享", new View.OnClickListener() {
@@ -56,7 +57,7 @@ class ToolBarActivity : BaseActivity() {
         when (view.id) {
             R.id.tv_bar_right -> {
             }
-            R.id.button5 -> rootViewBuild?.getDefToolBar<Any>()!!.setDefStatusColor(ContextCompat.getColor(activity!!, R.color.color_77400a))
+            R.id.button5 -> rootViewBuild?.getDefToolBar<Any>()!!.setDefStatusColor(R.color.color_77400a)
             R.id.button4 -> rootViewBuild?.getDefToolBar<Any>()!!.toolBarBg.setImageResource(R.color.white)
             R.id.button7 -> rootViewBuild?.getDefToolBar<Any>()!!.toolBarBg.setImageResource(R.color.color_000)
             R.id.button3 -> rootViewBuild?.getDefToolBar<Any>()!!.toolBarBg.setImageResource(R.color.color_77400a)

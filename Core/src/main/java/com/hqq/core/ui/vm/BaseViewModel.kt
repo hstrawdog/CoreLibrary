@@ -43,6 +43,10 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
      */
     var bundle: Bundle? = null
 
+    init {
+        LogUtils .e(" BaseViewModel  init " )
+    }
+
     /**
      * ViewModel 的部分数据可以在这边进行初始化
      * 建议  单独方法给Activity 进行调用

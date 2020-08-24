@@ -125,9 +125,9 @@ abstract class BaseToolBar : IToolBar {
      *
      * @param colorInt
      */
-    override fun setDefStatusColor(@ColorInt colorInt: Int): BaseToolBar {
+    override fun setDefStatusColor(@ColorRes colorInt: Int): BaseToolBar {
         if (statusBar != null) {
-            statusBar!!.setBackgroundColor(colorInt)
+            statusBar!!.setBackgroundResource(colorInt)
         } else {
             defStatusColor = colorInt
         }

@@ -39,6 +39,9 @@ interface ICreateRootView {
 
     /**
      * 初始化 view 等
+     * init 是父类onCreate 中执行的最后方法
+     * 之后才会是liveCycle监听的 onCreate
+     *
      */
     fun initView()
 

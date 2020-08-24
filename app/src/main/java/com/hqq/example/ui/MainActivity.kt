@@ -1,11 +1,14 @@
 package com.hqq.example.ui
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.viewModelScope
 import com.hqq.core.ui.vm.BaseListViewModel
 import com.hqq.core.ui.vm.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
+import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
@@ -30,6 +33,7 @@ import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
 import com.hqq.example.ui.web.WebActivity
+import kotlinx.coroutines.launch
 
 /**
  * @Author : huangqiqiang
@@ -45,9 +49,17 @@ class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
     override val bindingViewModelId: Int
         get() = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        LogUtils.e("MainActivity    onCreate1")
+
+        super.onCreate(savedInstanceState)
+        LogUtils.e("MainActivity    onCreate2")
+
+    }
+
     override fun initData() {
 
-
+        LogUtils.e("MainActivity    initData")
     }
 
     private var mExitTime: Long = 0
@@ -71,8 +83,19 @@ class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
     }
 
     class MainModel : BaseListViewModel() {
+        init {
+            LogUtils.e("MainModel init 1")
+            viewModelScope.launch {
+                LogUtils.e("MainModel init viewModelScope")
+            }
+            LogUtils.e("MainModel init 2")
+
+        }
+
         override fun onCrete() {
+            LogUtils.e("MainModel onCrete 1")
             super.onCrete()
+            LogUtils.e("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
             arrayList.add(MainBean("转场动画", TransitionsAnimationActivity::class.java))
@@ -94,6 +117,7 @@ class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
             arrayList.add(MainBean("SVG测试", SvgActivity::class.java))
             arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
             setDate(arrayList)
+
         }
     }
 

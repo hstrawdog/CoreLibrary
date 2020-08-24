@@ -15,27 +15,21 @@ object Versions {
     val coreKtx = "1.3.0"
     val constraintlayout = "2.0.0-beta3"
     val paging = "3.0.0-alpha02"
-    val timber = "4.7.1"
     val kotlin = "1.3.72"
-    val koin = "2.1.5"
     val work = "2.2.0"
-    val room = "2.3.0-alpha01"
+    val room = "2.2.5"
     val cardview = "1.0.0"
     val recyclerview = "1.0.0"
     val fragment = "1.3.0-alpha06"
     val anko = "0.10.8"
     val swiperefreshlayout = "1.0.0"
-    val junit = "4.12"
-    val junitExt = "1.1.1"
-    val espressoCore = "3.2.0"
-    val jDatabinding = "1.0.1"
-    val progressview = "1.0.0"
-    val runtime = "0.11.0"
     val hit = "2.28-alpha"
     val hitViewModule = "1.0.0-alpha01"
     val appStartup = "1.0.0-alpha01"
     val material = "1.2.0-alpha06"
     val lifecycle_version = "2.2.0"
+    val viewPage2 = "1.0.0"
+    val dataBinding_Compoler = "4.0.1"
 }
 
 object AndroidX {
@@ -52,18 +46,19 @@ object AndroidX {
     val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle_version}"
     val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_version}"
     val runTimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
-    val viewpager2="androidx.viewpager2:viewpager2:1.0.0"
+    val viewpager2 = "androidx.viewpager2:viewpager2:${Versions.viewPage2}"
 }
 
 object Android {
     val meteria = "com.google.android.material:material:${Versions.material}"
     val activityKtx = "androidx.activity:activity-ktx:${Versions.material}"
-    val databindingCompiler = "com.android.databinding:compiler:4.0.1"
+    val databindingCompiler = "com.android.databinding:compiler:${Versions.dataBinding_Compoler}"
 }
 
 object Fragment {
     val runtime = "androidx.fragment:fragment:${Versions.fragment}"
     val runtimeKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+    // 目测是用于测试的一个库 好像也支持Dagger的注入
     val testing = "androidx.fragment:fragment-testing:${Versions.fragment}"
 }
 
@@ -93,6 +88,12 @@ object Hilt {
     val viewModule = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hitViewModule}"
     val compiler = "androidx.hilt:hilt-compiler:${Versions.hitViewModule}"
 }
+
+object  Room{
+    val runtime="androidx.room:room-runtime:${Versions.room}"
+    val compiler="androidx.room:room-compiler:${Versions.room}"
+}
+
 object Gson {
     val gson = "com.google.code.gson:gson:2.8.6"
 }
@@ -118,5 +119,5 @@ object IDimensCompat {
 }
 
 object IHAlbum {
-    val iHAlbum="com.github.huangqiqiang:AlbumApp:1.0.10"
+    val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.0.10"
 }

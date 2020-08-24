@@ -2,6 +2,7 @@ import com.hqq.core.plugin.*
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
     dataBinding {
@@ -77,6 +78,11 @@ dependencies {
     api AndroidX.appcompat
     api AndroidX.recyclerview
     api AndroidX.viewpager2
+
+
+    api Fragment.runtime
+    api Fragment.runtimeKtx
+//    api Fragment.testing
 
     api IDimensCompat.iDimensCompat
     api Gson.gson

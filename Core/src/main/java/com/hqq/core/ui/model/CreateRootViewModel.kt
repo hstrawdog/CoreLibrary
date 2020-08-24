@@ -207,7 +207,7 @@ class CreateRootViewModel
                 .setShowStatusBar(mIsShowStatus)
                 .setShowToolBar(mIsShowToolBar)
                 .setStatusBarColor(mStatusColor)
-        return iToolBarBuilder!!.create(mClass)
+        return iToolBarBuilder?.create(mClass)
     }
 
     /**

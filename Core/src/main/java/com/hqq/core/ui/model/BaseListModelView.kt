@@ -322,6 +322,8 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>, var mCont
 
         /**
          * 初始化数据
+         *  initData 也是执行在 onCreate 中
+         *
          */
         fun initData()
 
