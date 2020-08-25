@@ -3,6 +3,7 @@ package com.hqq.core.toolbar
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.annotation.ColorRes
 
 /**
@@ -72,10 +73,15 @@ interface IToolBar {
      */
     fun setDefStatusColor(@ColorRes statusBarColor: Int): IToolBar
 
+    fun setToolbarTitle(mTitle: CharSequence?)
+
     /**
      * 构建后生成的View
      *
      * @return view
      */
     val rootView: View?
+
+    var toolBarBg: ImageView?
+
 }

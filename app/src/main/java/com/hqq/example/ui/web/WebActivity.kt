@@ -19,10 +19,11 @@ class WebActivity : BaseFrameLayoutActivity() {
 
     override val layoutViewId: Int
         get() = R.layout.activity_web
-    override fun initDefConfig() {
-        super.initDefConfig()
-        rootViewBuild.setShowToolBar(false)
-        rootViewBuild.setShowStatusBar(false)
+
+    override fun initConfig() {
+        super.initConfig()
+        rootViewBuild.createRootViewModel.iToolBarBuilder.showStatusBar=false
+        rootViewBuild.createRootViewModel.iToolBarBuilder.showToolBar=false
     }
 
     override fun initView() {

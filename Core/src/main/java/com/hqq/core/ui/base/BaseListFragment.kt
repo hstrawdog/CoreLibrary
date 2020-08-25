@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.BaseCommonsKey
-import com.hqq.core.ui.model.BaseListModelView
-import com.hqq.core.ui.model.BaseListModelView.Companion.createRecycleView
-import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
+import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
 
 /**
  * @Author : huangqiqiang
@@ -20,7 +18,9 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  */
 abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
         BaseFragment(), IBaseListModelView<T?> {
-    protected var mRcList: RecyclerView? = null
+
+    override var listView: RecyclerView? = null
+
     /**
      * 默认的填充数据
      *
@@ -38,26 +38,20 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
-            createRecycleView(context)
+            context?.let {
+                BaseListModelView.createRecycleView(it)
+            }
         } else {
             null
         }
     }
 
     override fun initView() {
-        mBaseListModel = BaseListModelView(this, context)
+        mBaseListModel = BaseListModelView(this, rootViewBuild)
         mLayoutManager = rcLayoutManager
-        mRcList = mBaseListModel!!.checkRecycleView(mRcList, rootViewBuild?.rootView)
-        mBaseListModel!!.initRecycleView(mRcList, baseAdapter, mLayoutManager)
-        mBaseListModel!!.initPtrPullDown(rootViewBuild?.rootView)
         initData()
     }
 
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-    }
-
-    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-    }
 
     override fun addPageCount() {
         pageCount++
@@ -68,9 +62,6 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
         baseAdapter!!.loadMoreModule.loadMoreComplete()
         onLoadMore()
     }
-
-    override val listView: ViewGroup?
-        get() = mRcList
 
 
     override val rcLayoutManager: RecyclerView.LayoutManager

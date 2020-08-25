@@ -3,8 +3,7 @@ package com.hqq.core.ui.vm
 import android.content.Intent
 import androidx.databinding.ViewDataBinding
 import com.hqq.core.ui.binding.BaseBindingActivity
-import com.hqq.core.ui.builder.ICreateRootView.IBaseViewModel
-import com.hqq.core.ui.builder.IOpenActivity
+import com.hqq.core.ui.base.ICreateRootView.IBaseViewModel
 import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
 
 /**

@@ -22,7 +22,10 @@ import com.hqq.example.R
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-class BaseToolBarSearch : BaseToolBar() {
+class BaseToolBarSearch() : BaseToolBar() {
+
+    override var toolBarBg: ImageView? = null
+
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
         val mToolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_toolbar_order_search, viewGroup, false) as Toolbar
         if (activity is AppCompatActivity) {
@@ -50,6 +53,9 @@ class BaseToolBarSearch : BaseToolBar() {
     }
 
     override fun setToolBarColor(colorId: Int) {}
+    override fun setToolbarTitle(mTitle: CharSequence?) {
+
+    }
     val deleteView: ImageView
         get() = rootView!!.findViewById(R.id.iv_delete)
 
@@ -57,7 +63,7 @@ class BaseToolBarSearch : BaseToolBar() {
         get() = rootView!!.findViewById(R.id.edt_search)
 
     val rightTextView: TextView
-        get() =rootView!!.findViewById(R.id.tv_bar_right)
+        get() = rootView!!.findViewById(R.id.tv_bar_right)
 
     fun setRightTextView(text: String?, onClickListener: View.OnClickListener?) {
         val textView = rightTextView

@@ -7,7 +7,6 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.webkit.*
 import android.widget.ProgressBar
@@ -50,10 +49,10 @@ class BaseWebFragment : BaseFragment() {
         webView!!.onResume()
     }
 
-    override fun initDefConfig() {
-        super.initDefConfig()
-        rootViewBuild!!.setShowStatusBar(true)
-        rootViewBuild!!.setShowToolBar(true)
+    override fun initConfig() {
+        super.initConfig()
+        rootViewBuild.createRootViewModel.iToolBarBuilder.showToolBar=true
+        rootViewBuild.createRootViewModel.iToolBarBuilder.showStatusBar=true
     }
 
     @SuppressLint("JavascriptInterface")
@@ -78,7 +77,7 @@ class BaseWebFragment : BaseFragment() {
         mUrl = BundleUtils.getString(this, getString(R.string.key_url))
         mTitle = BundleUtils.getString(this, getString(R.string.key_title))
         requireActivity().title = mTitle
-        rootViewBuild!!.getDefToolBar()!!.setToolbarTitle(mTitle)
+        iToolBar?.setToolbarTitle(mTitle)
         webView!!.loadUrl(mUrl!!)
     }
 
@@ -159,7 +158,7 @@ class BaseWebFragment : BaseFragment() {
                 super.onReceivedTitle(view, title)
                 title?.let {
                     if (mTitle.isNullOrEmpty()) {
-                        rootViewBuild?.getDefToolBar()?.setToolbarTitle(mTitle)
+                        iToolBar?.setToolbarTitle(mTitle)
                     }
                 }
             }

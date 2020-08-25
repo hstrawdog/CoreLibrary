@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.BaseCommonsKey
-import com.hqq.core.ui.model.BaseListModelView
-import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
+import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
 
 /**
  * @Author : huangqiqiang
@@ -20,15 +19,14 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  */
 abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         BaseActivity(), IBaseListModelView<T?> {
+
     override var pageSize = BaseCommonsKey.PAGE_SIZE
     override var pageCount = 1
     override val layoutViewId: Int = 0;
-    override val rcLayoutManager: RecyclerView.LayoutManager
-        get() = LinearLayoutManager(this)
+    override val rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+    override var listView: RecyclerView? = null
 
-    var layoutManager: RecyclerView.LayoutManager? = null
     var mBaseListModel: BaseListModelView? = null
-    var rcList: RecyclerView? = null
 
     /**
      * 重写了 setViewId    执行 setRootView
@@ -49,14 +47,9 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
      */
     @CallSuper
     override fun initView() {
-        mBaseListModel = BaseListModelView(this, this)
-        layoutManager = rcLayoutManager
-        rcList = mBaseListModel!!.checkRecycleView(rcList, rootViewBuild!!.rootView)
-        mBaseListModel!!.initRecycleView(rcList, baseAdapter, layoutManager)
-        mBaseListModel!!.initPtrPullDown(rootViewBuild!!.rootView)
+        mBaseListModel = BaseListModelView(this, rootViewBuild)
         initData()
     }
-
 
     override fun addPageCount() {
         pageCount += 1
@@ -68,23 +61,14 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         onLoadMore()
     }
 
-    override val listView: ViewGroup?
-        get() = rcList
-
     override fun onDestroy() {
         super.onDestroy()
-        mBaseListModel?.onDestroy()
         mBaseListModel = null
     }
-
 
     override fun onLoadMore() {
     }
 
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-    }
 
-    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-    }
 
 }

@@ -22,13 +22,10 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
-import com.hqq.example.ui.jetpack.di.hilt.HiltActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
-import com.hqq.example.ui.jetpack.room.RoomActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.skin.SkinAActivity
-import com.hqq.example.ui.tab.layout.TabLayoutActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
@@ -58,7 +55,6 @@ class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
     }
 
     override fun initData() {
-
         LogUtils.e("MainActivity    initData")
     }
 
@@ -82,7 +78,13 @@ class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
         return super.dispatchKeyEvent(event)
     }
 
-    class MainModel : BaseListViewModel() {
+     class MainModel() : BaseListViewModel() {
+
+        constructor(a: String) : this() {
+            LogUtils.e("MainModel constructor ")
+        }
+
+
         init {
             LogUtils.e("MainModel init 1")
             viewModelScope.launch {

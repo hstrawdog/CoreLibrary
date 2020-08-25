@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.R
-import com.hqq.core.ui.model.BaseListModelView
-import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
+import com.hqq.core.ui.base.BaseListModelView
+import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
 
 /**
  * @Author : huangqiqiang
@@ -22,8 +22,6 @@ import com.hqq.core.ui.model.BaseListModelView.IBaseListModelView
  */
 abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD : BaseQuickAdapter<*, *>>
     : BaseVmActivity<T, K>(), IBaseListModelView<AD> {
-    protected var rcList: RecyclerView? = null
-    protected var mLayoutManager: RecyclerView.LayoutManager? = null
     protected var mBaseListModel: BaseListModelView? = null
     override val layoutId: Int
         get() = R.layout.activity_recycle_view
@@ -32,17 +30,12 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
         get() = viewMode!!.pageCount
     override val pageSize: Int
         get() = viewMode!!.pageSize
-    override val listView: ViewGroup?
-        get() = rcList!!
+    override var listView: RecyclerView?=null
     override val rcLayoutManager: RecyclerView.LayoutManager
         get() = LinearLayoutManager(this)
 
     override fun initViews() {
-        mBaseListModel = BaseListModelView(this, this)
-        mLayoutManager = rcLayoutManager
-        rcList = mBaseListModel?.checkRecycleView(rcList, rootViewBuild?.rootView)
-        mBaseListModel?.initRecycleView(rcList, baseAdapter, mLayoutManager)
-        mBaseListModel?.initPtrPullDown(rootViewBuild!!.rootView)
+        mBaseListModel = BaseListModelView(this, rootViewBuild)
         viewMode?.data?.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList as List<Nothing>) })
         initData()
     }
@@ -60,7 +53,6 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
 
     override fun onDestroy() {
         super.onDestroy()
-        mBaseListModel!!.onDestroy()
         mBaseListModel = null
     }
 
@@ -68,9 +60,5 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
         viewMode?.onLoadMore()
     }
 
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-    }
 
-    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-    }
 }

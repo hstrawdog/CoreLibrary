@@ -35,9 +35,9 @@ class TabLayoutActivity : BaseActivity() {
     override val layoutViewId: Int
         get() = R.layout.activity_tab_layout
 
-    override fun initDefConfig() {
-        super.initDefConfig()
-        rootViewBuild?.setStatusColor(R.color.color_main)
+    override fun initConfig() {
+        super.initConfig()
+        iToolBar?.setDefStatusColor(R.color.color_main)
     }
 
     override fun initView() {
@@ -50,7 +50,7 @@ class TabLayoutActivity : BaseActivity() {
 
         val adapter = ViewPageAdapter(this)
         mVpPage!!.setAdapter(adapter)
-        mVpPage?.offscreenPageLimit=adapter.itemCount
+        mVpPage?.offscreenPageLimit = adapter.itemCount
         adapter.setupWithViewPager(mTbTablayout1!!, mVpPage!!)
         adapter.setupWithViewPager(mTbTablayout2!!, mVpPage!!)
         adapter.setupWithViewPager(mTbTablayout3!!, mVpPage!!)
@@ -61,6 +61,7 @@ class TabLayoutActivity : BaseActivity() {
         override fun newFragment(position: Int): Fragment {
             return TabFragment()
         }
+
         init {
             stringSparseArray.append(0, "咖啡")
             stringSparseArray.append(1, "奶茶")

@@ -1,7 +1,6 @@
 package com.hqq.core.ui.vm
 
 import androidx.lifecycle.*
-import com.hqq.core.ui.builder.IOpenActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.widget.LoadingView
 import java.lang.reflect.ParameterizedType

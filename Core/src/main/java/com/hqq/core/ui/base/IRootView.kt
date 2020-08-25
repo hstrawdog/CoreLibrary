@@ -1,6 +1,7 @@
-package com.hqq.core.ui.builder
+package com.hqq.core.ui.base
 
 import android.view.View
+import com.hqq.core.ui.base.ICreateRootView
 
 /**
  * @Author : huangqiqiang

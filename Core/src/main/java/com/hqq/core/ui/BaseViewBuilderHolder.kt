@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.hqq.core.lifecycle.BaseLifecycleObserver
-import com.hqq.core.ui.builder.ICreateRootView.IBaseViewBuilderHolder
+import com.hqq.core.ui.base.ICreateRootView.IBaseViewBuilderHolder
 import java.lang.ref.WeakReference
 
 /**
@@ -64,7 +64,7 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
         initView()
     }
 
-    override fun initDefConfig() {}
+    override fun initConfig() {}
     override fun onClick(view: View) {}
     override fun getLayoutView(viewGroup: ViewGroup): View? {
         return null

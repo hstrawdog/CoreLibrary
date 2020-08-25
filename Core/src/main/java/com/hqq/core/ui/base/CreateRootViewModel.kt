@@ -1,4 +1,4 @@
-package com.hqq.core.ui.model
+package com.hqq.core.ui.base
 
 import android.app.Activity
 import android.view.View
@@ -10,11 +10,10 @@ import com.hqq.core.CoreBuildConfig
 import com.hqq.core.R
 import com.hqq.core.annotation.LayoutModel
 import com.hqq.core.annotation.ToolBarMode
-import com.hqq.core.toolbar.BaseToolBar
 import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.toolbar.IToolBarBuilder
-import com.hqq.core.ui.builder.ICreateRootView
+import com.hqq.core.ui.base.ICreateRootView
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.utils.statusbar.StatusBarManager
 import java.lang.ref.WeakReference
@@ -31,30 +30,21 @@ import java.lang.ref.WeakReference
  * 2.创建标题栏
  * 3.状态栏适配控制
  *
- *
  * 需求
  * 1.虚拟导航栏适配
  * 2.标题栏的多种创建方式
  * 3.微博详情的布局
- *
- *
- *
  *
  * 真正核心的内容 应该拆成两个部分
  * 一个view  一个头部
  */
 
 
-class CreateRootViewModel() {
+open class CreateRootViewModel() {
     /**
-     * 是否显示状态栏
+     * 当前上下文
      */
-    var isShowStatus: Boolean = true
-
-    /**
-     * 是否显示 标题栏
-     */
-    var isShowToolBar: Boolean = true
+    var activity: WeakReference<Activity>? = null
 
     /**
      * 标题栏类型
@@ -68,17 +58,6 @@ class CreateRootViewModel() {
     var layoutMode: Int = LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT
 
     /**
-     * 当前上下文
-     */
-    var mActivity: WeakReference<Activity?>? = null
-
-    /**
-     * 状态栏颜色
-     */
-    @ColorRes
-    var statusColor = R.color.white
-
-    /**
      * dialogFragment 不带背景颜色
      *     背景颜色 默认是color_bg
      * 当前是dialog 的时候默认设置为透明颜色
@@ -89,7 +68,15 @@ class CreateRootViewModel() {
     /**
      * 标题栏
      */
-    var mIToolBar: IToolBar? = null
+    var iToolBar: IToolBar? = null
+
+    /**
+     *  builder 构建 toolBar对象
+     *  需要在 initConfig 中配置
+     *  initConfig 后执行 create 之后 在设置就无效了
+     *  initConfig 后就需要 去执行 iToolBar 对象 进行更新
+     */
+    val iToolBarBuilder = IToolBarBuilder()
 
     /**
      * 是否执行 状态栏 透明化
@@ -115,7 +102,7 @@ class CreateRootViewModel() {
         } else if (layoutMode == LayoutModel.Companion.LAYOUT_MODE_FRAME_LAYOUT) {
             createFrameLayoutView(iActivityBuilder)
         } else {
-            View(mActivity?.get())
+            View(activity?.get())
         }
     }
 
@@ -125,8 +112,8 @@ class CreateRootViewModel() {
      * @param iActivityBuilder
      * @return
      */
-    protected fun createFrameLayoutView(iActivityBuilder: ICreateRootView): View {
-        val frameLayout = FrameLayout(mActivity!!.get()!!)
+    private fun createFrameLayoutView(iActivityBuilder: ICreateRootView): View {
+        val frameLayout = FrameLayout(activity!!.get()!!)
         frameLayout.overScrollMode = View.OVER_SCROLL_NEVER
         val view = getLayoutView(iActivityBuilder, frameLayout)
         frameLayout.setBackgroundResource(bgColor)
@@ -141,8 +128,8 @@ class CreateRootViewModel() {
      * @param iActivityBuilder
      * @return
      */
-    protected fun createLayoutView(iActivityBuilder: ICreateRootView): View {
-        val layout = LinearLayout(mActivity!!.get())
+    private fun createLayoutView(iActivityBuilder: ICreateRootView): View {
+        val layout = LinearLayout(activity!!.get())
         layout.orientation = LinearLayout.VERTICAL
         layout.overScrollMode = View.OVER_SCROLL_NEVER
         createToolBar(layout)
@@ -152,15 +139,18 @@ class CreateRootViewModel() {
         return layout
     }
 
+    /**
+     *  获取根布局  也就是Activity中绑定的View
+     */
     private fun getLayoutView(iActivityBuilder: ICreateRootView, layout: ViewGroup): View? {
         var view: View?
         if (iActivityBuilder.layoutViewId!! > 0) {
-            view = mActivity!!.get()!!.layoutInflater.inflate(iActivityBuilder.layoutViewId!!, layout, false)
+            view = activity!!.get()!!.layoutInflater.inflate(iActivityBuilder.layoutViewId!!, layout, false)
         } else {
             view = iActivityBuilder.getLayoutView(layout)
             if (view == null) {
                 LogUtils.e(Exception("no fount layoutId and rootView  , must init RootView"))
-                view = View(mActivity!!.get())
+                view = View(activity!!.get())
             }
         }
         return view
@@ -176,67 +166,25 @@ class CreateRootViewModel() {
         // 默认只有Activity 会去执行设置状态栏的颜色
         if (immersiveStatusBar) {
             if (statusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
-                StatusBarManager.setStatusBarModel(mActivity!!.get()!!.window, true)
+                StatusBarManager.setStatusBarModel(activity!!.get()!!.window, true)
             } else {
-                StatusBarManager.setStatusBarModel(mActivity!!.get()!!.window, false)
+                StatusBarManager.setStatusBarModel(activity!!.get()!!.window, false)
             }
         }
-        if (isShowToolBar || isShowStatus) {
-            mIToolBar = initIToolBar()
-            layout.addView(mIToolBar?.rootView)
+        if (iToolBarBuilder.showToolBar || iToolBarBuilder.showStatusBar) {
+            iToolBar = iToolBarBuilder?.create(iCreateToolbar)
+            layout.addView(iToolBar?.rootView)
         }
     }
-
-    /**
-     * 可以重写 这个方法 去自定义  头部
-     *
-     * @return
-     */
-    fun initIToolBar(): IToolBar? {
-        val iToolBarBuilder = IToolBarBuilder()
-                .setActivity(mActivity!!.get())
-                .setShowStatusBar(isShowStatus)
-                .setShowToolBar(isShowToolBar)
-                .setStatusBarColor(statusColor)
-        return iToolBarBuilder?.create(iCreateToolbar)
-    }
-
-    /**
-     * 获取 父类态栏
-     *
-     * @return
-     */
-    fun <T : BaseToolBar?> getIToolBar(): T? {
-        if (mIToolBar == null) {
-            //  自定义异常
-            LogUtils.e(Exception("RootViewBuilder no fount BaseDefToolBarImpl "))
-            return null
-        }
-        return mIToolBar as T
-    }
-
-    /**
-     * 是否显示  状态栏  与标题栏
-     *
-     * @param showStatus  状态栏
-     * @param showToolBar 标题栏
-     */
-    fun setToolbarVisibility(showStatus: Boolean, showToolBar: Boolean) {
-        isShowStatus = showStatus
-        isShowToolBar = showToolBar
-    }
-
-
-
-
 
     /**
      * 当前Activity 对象
      *
      * @param activity
      */
-    fun setActivity(activity: Activity?) {
-        mActivity = WeakReference(activity)
+    fun setActivity(activity: Activity) {
+        this.activity = WeakReference(activity)
+        iToolBarBuilder.activity = this.activity
     }
 
 

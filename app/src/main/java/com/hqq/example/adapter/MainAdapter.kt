@@ -17,14 +17,13 @@ import com.hqq.example.bean.MainBean
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-class MainAdapter : BaseQuickAdapter<MainBean<*>, BaseViewHolder>(R.layout.item_main), OnItemClickListener, LoadMoreModule {
-    override fun convert(helper: BaseViewHolder, item: MainBean<*>) {
-        helper.setText(R.id.tv_title, item.title)
+class MainAdapter : BaseQuickAdapter<MainBean<*>, BaseViewHolder>(R.layout.item_main), LoadMoreModule, OnItemClickListener {
+    init {
         setOnItemClickListener(this)
     }
 
-    public override fun setOnItemClick(v: View, position: Int) {
-        super.setOnItemClick(v, position)
+    override fun convert(helper: BaseViewHolder, item: MainBean<*>) {
+        helper.setText(R.id.tv_title, item.title)
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {

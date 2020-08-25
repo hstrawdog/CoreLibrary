@@ -21,9 +21,9 @@ class SearchBarActivity : BaseActivity() {
     override val layoutViewId: Int
         get() = R.layout.activity_search_bar
 
-    override fun initDefConfig() {
-        super.initDefConfig()
-        rootViewBuild.iToolBarClass = object : ICreateToolbar {
+    override fun initConfig() {
+        super.initConfig()
+        rootViewBuild.createRootViewModel.iCreateToolbar = object : ICreateToolbar {
             override fun createTooBar(): IToolBar {
                 return BaseToolBarSearch()
             }

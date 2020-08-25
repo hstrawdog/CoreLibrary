@@ -12,7 +12,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hqq.core.R
-import com.hqq.core.ui.builder.ICreateRootView
 import com.hqq.core.utils.log.LogUtils
 
 /**
@@ -42,7 +41,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.I
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mRootView == null) {
             mRootViewBuild = IRootViewImpl(this)
-            initDefConfig()
+            initConfig()
             mRootView = mRootViewBuild!!.buildContentView(this)
         }
         LogUtils.d("onCreateView " + javaClass.simpleName + this.toString())
@@ -83,7 +82,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.I
     override val height: Int
         get() = CoordinatorLayout.LayoutParams.MATCH_PARENT
 
-    override fun initDefConfig() {}
+    override fun initConfig() {}
     override fun show(manager: FragmentManager) {
         val ft = manager.beginTransaction()
         val prev = manager.findFragmentByTag(javaClass.simpleName)

@@ -1,4 +1,4 @@
-package com.hqq.core.ui.builder
+package com.hqq.core.ui.base
 
 import android.app.Activity
 import android.content.Context
@@ -35,7 +35,7 @@ interface ICreateRootView {
     /**
      * 初始化默认配置 RootView
      */
-    fun initDefConfig()
+    fun initConfig()
 
     /**
      * 初始化 view 等
@@ -44,7 +44,6 @@ interface ICreateRootView {
      *
      */
     fun initView()
-
 
     interface IActivityRootView : ICreateRootView {
         /**

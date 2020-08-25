@@ -27,23 +27,15 @@ import com.hqq.core.widget.FilterImageView
  * @Email :  qiqiang213@gmail.com
  */
 class BaseDefToolBarImpl : BaseToolBar() {
-    /**
-     * 背景View
-     *
-     * @returnImageView
-     */
-    lateinit var toolBarBg: ImageView
-        private set
+
+    override var toolBarBg: ImageView? = null
     private var mDefToolBarColor = R.color.toolbar_bg_color
     private val mDefTitleColor = R.color.color_333
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
         val toolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_def_toolbar, viewGroup, false) as Toolbar
-//        if (activity is AppCompatActivity) {
-//            activity.setSupportActionBar(toolbar)
-//        }
         toolbar.findViewById<View>(R.id.iv_bar_back).setOnClickListener { activity.onBackPressed() }
         toolBarBg = toolbar.findViewById(R.id.iv_toolBar_Bg)
-        toolBarBg.setBackgroundResource(mDefToolBarColor)
+        toolBarBg?.setBackgroundResource(mDefToolBarColor)
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).text = activity.title
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).setTextColor(ContextCompat.getColor(toolbar.context, mDefTitleColor))
         return toolbar
@@ -88,6 +80,14 @@ class BaseDefToolBarImpl : BaseToolBar() {
         }
     }
 
+    override fun setToolbarTitle(title: CharSequence?) {
+        title?.let {
+            toolbarTitle?.text = title
+        }
+
+    }
+
+
     /**
      * 设置背景的透明度
      *
@@ -120,23 +120,6 @@ class BaseDefToolBarImpl : BaseToolBar() {
     val leftView: ImageView
         get() = rootView!!.findViewById(R.id.iv_bar_back)
 
-    /**
-     * 设置 bar 的颜色
-     *
-     * @param color
-     */
-    /**
-     * 设置标题
-     *
-     * @param title
-     */
-    fun setToolbarTitle(title: CharSequence?): BaseDefToolBarImpl? {
-        if (rootView == null) {
-            return null
-        }
-        toolbarTitle!!.text = title
-        return this
-    }
 
     /**
      * 获取标题View

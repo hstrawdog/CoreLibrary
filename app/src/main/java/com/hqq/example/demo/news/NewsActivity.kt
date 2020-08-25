@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.hqq.core.ui.vm.BaseVmListActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityNewsBinding
@@ -17,7 +18,8 @@ import com.hqq.example.ui.web.WebActivity
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class NewsActivity(override val baseAdapter: NewsAdapter= NewsAdapter()) : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, NewsAdapter>() {
+class NewsActivity(override val baseAdapter: NewsAdapter= NewsAdapter())
+    : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, NewsAdapter>(), OnItemClickListener {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, NewsActivity::class.java)
@@ -38,7 +40,6 @@ class NewsActivity(override val baseAdapter: NewsAdapter= NewsAdapter()) : BaseV
 
 
     override fun initData() {
-
-
+        baseAdapter.setOnItemClickListener(this)
     }
 }

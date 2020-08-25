@@ -22,7 +22,7 @@ import com.hqq.example.ui.view.page.IFragmentActivityBuilder
 class ListActivity(override val baseAdapter: MainAdapter? = MainAdapter()) : BaseListActivity<MainAdapter?>() {
     override fun initData() {
 
-        rcList?.addItemDecoration(HeaderItemDecoration(rcList!!, object : StickyHeaderInterface {
+        listView?.addItemDecoration(HeaderItemDecoration(listView!!, object : StickyHeaderInterface {
             override fun getHeaderPositionForItem(itemPosition: Int): Int {
                 return if (itemPosition >= 6) 6 else -1
             }

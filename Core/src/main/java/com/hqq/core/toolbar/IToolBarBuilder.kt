@@ -3,6 +3,7 @@ package com.hqq.core.toolbar
 import android.app.Activity
 import androidx.annotation.ColorRes
 import com.hqq.core.R
+import java.lang.ref.WeakReference
 
 /**
  * @Author : huangqiqiang
@@ -13,42 +14,23 @@ import com.hqq.core.R
  * @Email :  qiqiang213@gmail.com
  */
 class IToolBarBuilder {
-    private var activity: Activity? = null
+    var activity: WeakReference<Activity>? = null
 
     /**
      * 是否显示 状态栏 背景
      */
-    private var isShowStatusBar = true
+    var showStatusBar = true
 
     /**
      * 是否显示 ToolBar
      */
-    private var isShowToolBar = true
+    var showToolBar = true
 
     /**
      * 默认白色
      */
     @ColorRes
-    private var statusBarColor = R.color.white
-    fun setStatusBarColor(@ColorRes statusBarColor: Int): IToolBarBuilder {
-        this.statusBarColor = statusBarColor
-        return this
-    }
-
-    fun setActivity(activity: Activity?): IToolBarBuilder {
-        this.activity = activity
-        return this
-    }
-
-    fun setShowStatusBar(isShowStatusBar: Boolean): IToolBarBuilder {
-        this.isShowStatusBar = isShowStatusBar
-        return this
-    }
-
-    fun setShowToolBar(showToolBar: Boolean): IToolBarBuilder {
-        isShowToolBar = showToolBar
-        return this
-    }
+     var statusBarColor = R.color.white
 
     /**
      * @param clss 类型
@@ -57,10 +39,10 @@ class IToolBarBuilder {
     fun create(iCreateToolbar: ICreateToolbar): IToolBar? {
         try {
             var toolBar = iCreateToolbar.createTooBar()
-            toolBar!!.setShowStatusBar(isShowStatusBar)
-                    .setShowBar(isShowToolBar)
+            toolBar!!.setShowStatusBar(showStatusBar)
+                    .setShowBar(showToolBar)
                     .setDefStatusColor(statusBarColor)
-                    .createToolBar(activity)
+                    .createToolBar(activity?.get())
             return toolBar
         } catch (e: Exception) {
             e.printStackTrace()

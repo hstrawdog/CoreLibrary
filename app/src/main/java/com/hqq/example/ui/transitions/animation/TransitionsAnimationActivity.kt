@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.hqq.core.ui.base.BaseListActivity
 import com.hqq.example.R
 import com.hqq.example.adapter.MainAdapter
@@ -19,9 +20,10 @@ import com.hqq.example.adapter.StringListAdapter
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class TransitionsAnimationActivity(override val baseAdapter: StringListAdapter? = StringListAdapter()) : BaseListActivity<StringListAdapter?>() {
+class TransitionsAnimationActivity(override val baseAdapter: StringListAdapter = StringListAdapter()) : BaseListActivity<StringListAdapter?>(), OnItemClickListener {
 
     override fun initData() {
+        baseAdapter.setOnItemClickListener(this)
         baseAdapter?.addData("overridePendingTransition")
         baseAdapter?.addData("makeCustomAnimation")
     }

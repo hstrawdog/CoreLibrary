@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.hqq.core.R
 import com.hqq.core.toolbar.IToolBar
-import com.hqq.core.ui.builder.ICreateRootView.IActivityRootView
+import com.hqq.core.ui.base.ICreateRootView.IActivityRootView
 import com.hqq.core.widget.LoadingView
 
 /**
@@ -38,6 +38,8 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      */
     lateinit var rootViewBuild: IRootViewImpl<BaseActivity>
 
+    var iToolBar: IToolBar? = null
+    get() = rootViewBuild.createRootViewModel.iToolBar
 
     /**
      *  初始化  不知道与init 有什么区别
@@ -48,7 +50,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
         loadingView = LoadingView(this)
         activity = this
         rootViewBuild = IRootViewImpl(this, true, true)
-        initDefConfig()
+        initConfig()
         setContentView(rootViewBuild!!.buildContentView(this))
         initView()
     }
@@ -98,7 +100,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * 默认配置
      */
-    override fun initDefConfig() {
+    override fun initConfig() {
         rootViewBuild!!.initActivity(false)
     }
 

@@ -11,7 +11,7 @@ import com.hqq.core.R
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.listenner.DialogClickListener
 import com.hqq.core.ui.base.IRootViewImpl
-import com.hqq.core.ui.builder.ICreateRootView.IDialogFragment
+import com.hqq.core.ui.base.ICreateRootView.IDialogFragment
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.utils.statusbar.StatusBarManager
 import com.hqq.core.widget.LoadingView
@@ -59,7 +59,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         if (rootView == null) {
             loadingView = LoadingView(activity)
             rootViewBuild = IRootViewImpl(this)
-            initDefConfig()
+            initConfig()
             rootView = rootViewBuild!!.buildContentView(this)
             initContentView()
             initView()
@@ -136,7 +136,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      * 默认配置
      */
-    override fun initDefConfig() {}
+    override fun initConfig() {}
     val isDismissBackground: Boolean
         get() = true
 

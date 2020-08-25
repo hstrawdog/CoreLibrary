@@ -26,7 +26,7 @@ public class FullDialog extends BaseDialog {
     }
 
     @Override
-    public void initDefConfig() {
+    public void initConfig() {
 
     }
 

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.hqq.core.ui.base.BaseActivity
-import com.hqq.core.ui.builder.ICreateRootView.IBanding
+import com.hqq.core.ui.base.ICreateRootView.IBanding
 
 /**
  * @Author : huangqiqiang

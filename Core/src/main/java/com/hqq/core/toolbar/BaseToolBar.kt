@@ -126,11 +126,8 @@ abstract class BaseToolBar : IToolBar {
      * @param colorInt
      */
     override fun setDefStatusColor(@ColorRes colorInt: Int): BaseToolBar {
-        if (statusBar != null) {
-            statusBar!!.setBackgroundResource(colorInt)
-        } else {
-            defStatusColor = colorInt
-        }
+        statusBar?.setBackgroundResource(colorInt)
+        defStatusColor = colorInt
         return this
     }
 
@@ -145,12 +142,8 @@ abstract class BaseToolBar : IToolBar {
      * @param alpha 0 -1
      */
     open fun initScroll(alpha: Float) {
-        if (statusBar != null) {
-            statusBar!!.alpha = alpha
-        }
-        if (viewLine != null) {
-            viewLine!!.alpha = alpha
-        }
+        statusBar?.alpha = alpha
+        viewLine?.alpha = alpha
     }
 
     /**
@@ -160,11 +153,8 @@ abstract class BaseToolBar : IToolBar {
      */
     fun initStatusBar(activity: Activity?) {
         statusBar = View(activity)
-        statusBar!!.setBackgroundResource(defStatusColor)
+        statusBar?.setBackgroundResource(defStatusColor)
     }
-    /***************** Toolbar   */
-    /***************** Line   */
-
 
     /**
      * 是否显示分割线
@@ -172,11 +162,7 @@ abstract class BaseToolBar : IToolBar {
      * @param isShow isShow
      */
     fun showLine(isShow: Boolean) {
-        if (isShow) {
-            viewLine!!.visibility = View.VISIBLE
-        } else {
-            viewLine!!.visibility = View.GONE
-        }
+        viewLine?.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     /**
@@ -185,6 +171,6 @@ abstract class BaseToolBar : IToolBar {
      * @param color color id
      */
     fun setLineColor(color: Int) {
-        viewLine!!.setBackgroundResource(color)
+        viewLine?.setBackgroundResource(color)
     }
 }

@@ -28,8 +28,8 @@ public class RightDialog extends BaseDialog {
     }
 
     @Override
-    public void initDefConfig() {
-        super.initDefConfig();
+    public void initConfig() {
+        super.initConfig();
         setStatusBarMode(ToolBarMode.LIGHT_MODE);
     }
 

@@ -9,5 +9,8 @@ package com.hqq.core.toolbar
  * @Descrive :
  */
 interface ICreateToolbar {
+    /**
+     *  创建ToolBar的接口
+     */
     fun createTooBar(): IToolBar
 }

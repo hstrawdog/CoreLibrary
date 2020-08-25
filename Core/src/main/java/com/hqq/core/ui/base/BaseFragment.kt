@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.hqq.core.ui.builder.ICreateRootView.IFragmentRootView
+import com.hqq.core.toolbar.IToolBar
+import com.hqq.core.ui.base.ICreateRootView.IFragmentRootView
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.widget.LoadingView
 
@@ -22,7 +23,6 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      * 缓存根布局对象
      */
     protected var rootView: View? = null
-
 
     /**
      * LoadingDialog
@@ -46,6 +46,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     lateinit var rootViewBuild: IRootViewImpl<BaseFragment>
 
+
+    var iToolBar: IToolBar? = null
+        get() = rootViewBuild.createRootViewModel.iToolBar
+
+
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法
      *
@@ -58,7 +63,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
         if (rootView == null) {
             loadingView = LoadingView(activity)
             rootViewBuild = IRootViewImpl(this)
-            initDefConfig()
+            initConfig()
             rootView = rootViewBuild.buildContentView(this)
         }
         LogUtils.d(this.javaClass.name, "onCreateView " + javaClass.simpleName + this.toString())
@@ -125,7 +130,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
         }
     }
 
-    override fun initDefConfig() {}
+    override fun initConfig() {}
 
 
     /**
