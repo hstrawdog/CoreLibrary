@@ -17,7 +17,7 @@ import com.hqq.core.ui.vm.ViewModelFactory.initOpenActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :  同理Activity
  */
-abstract class BaseVmFragment<T : ViewDataBinding?, K : BaseViewModel?> : BaseBindingFragment<T>(), IBaseViewModel, IOpenActivity {
+abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBindingFragment<T>(), IBaseViewModel, IOpenActivity {
     protected var viewMode: K? = null
     override fun initView() {
         viewMode = createViewModel(this, javaClass, viewMode)
