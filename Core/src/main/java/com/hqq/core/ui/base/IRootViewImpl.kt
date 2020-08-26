@@ -24,7 +24,7 @@ class IRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar: Boole
     /**
      * 当前activity
      */
-     var activity: Activity? = null
+    var activity: Activity? = null
 
     /**
      *  延迟加载  根布局
@@ -70,13 +70,12 @@ class IRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar: Boole
         // 全屏的需求只有在activity上才需要的
         if (fullScreen) {
             //隐藏状态 上的字体和颜色
-            activity!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            activity!!.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
-                    , WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            activity?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            activity?.window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
         //强制竖屏
         if (isAlwaysPortrait) {
-            activity!!.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
     }
 }

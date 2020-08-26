@@ -1,7 +1,7 @@
-package com.hqq.example.ui.adaptation;
+package com.hqq.example.ui.adaptation
 
-import com.hqq.example.R;
-import com.hqq.core.ui.base.BaseActivity;
+import com.hqq.core.ui.base.BaseActivity
+import com.hqq.example.R
 
 /**
  * @Author : huangqiqiang
@@ -11,16 +11,9 @@ import com.hqq.core.ui.base.BaseActivity;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class LayoutTestActivity extends BaseActivity {
+class LayoutTestActivity : BaseActivity() {
+    override val layoutViewId: Int
+        get() = R.layout.activity_layout_test
 
-    @Override
-    public int getLayoutViewId() {
-        return R.layout.activity_layout_test;
-    }
-
-
-    @Override
-    public void initView() {
-
-    }
+    override fun initView() {}
 }

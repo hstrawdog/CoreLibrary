@@ -10,18 +10,16 @@ package com.hqq.example
  */
 class Test {
 
-    class A {
-        var aa = 0
+    interface AS {
+
     }
 
-    class B {
-        var a = A()
+    class A1 : AS {
 
-        var aa
-            get() = a.aa
-            set(value) {
-                a.aa = value
-            }
+
+    }
+
+    class A2(a: AS) : AS by a {
 
 
     }
@@ -31,21 +29,6 @@ class Test {
         /** 我是main入口函数 **/
         @JvmStatic
         fun main(args: Array<String>) {
-
-            var b = B();
-
-
-            println(b.aa)
-            println(b.a.aa)
-            b.a.aa = 3
-            println(b.aa)
-            println(b.a.aa)
-            b.a.aa = 4
-            println(b.aa)
-            println(b.a.aa)
-            b.aa = 6
-            println(b.aa)
-            println(b.a.aa)
 
 
         }

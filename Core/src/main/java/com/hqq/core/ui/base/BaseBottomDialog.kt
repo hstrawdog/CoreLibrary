@@ -28,11 +28,29 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.I
     var mRootView: View? = null
     var mLoaded = false
     var behavior: BottomSheetBehavior<FrameLayout>? = null
+    open val transparentBottomSheetStyle: Int = R.style.TransparentBottomSheetStyle
 
     /**
      * 布局创建 容器
      */
     lateinit var mRootViewBuild: IRootViewImpl<BaseBottomDialog>
+
+    override val height: Int = CoordinatorLayout.LayoutParams.MATCH_PARENT
+    override fun initConfig() {}
+    override fun show(manager: FragmentManager) {
+        val ft = manager.beginTransaction()
+        val prev = manager.findFragmentByTag(javaClass.simpleName)
+        if (prev != null) {
+            ft.remove(prev)
+        }
+        ft.add(this, javaClass.simpleName)
+        ft.commitAllowingStateLoss()
+    }
+
+    override fun getLayoutView(parent: ViewGroup): View? {
+        return null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NO_TITLE, transparentBottomSheetStyle)
@@ -56,10 +74,6 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.I
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     override fun onStart() {
         super.onStart()
         // 设置软键盘不自动弹出
@@ -79,24 +93,5 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.I
         mRootView = null
     }
 
-    override val height: Int
-        get() = CoordinatorLayout.LayoutParams.MATCH_PARENT
 
-    override fun initConfig() {}
-    override fun show(manager: FragmentManager) {
-        val ft = manager.beginTransaction()
-        val prev = manager.findFragmentByTag(javaClass.simpleName)
-        if (prev != null) {
-            ft.remove(prev)
-        }
-        ft.add(this, javaClass.simpleName)
-        ft.commitAllowingStateLoss()
-    }
-
-    protected open val transparentBottomSheetStyle: Int
-        protected get() = R.style.TransparentBottomSheetStyle
-
-    override fun getLayoutView(parent: ViewGroup): View? {
-        return null
-    }
 }

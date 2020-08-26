@@ -39,17 +39,21 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     var lazyInitEnd = false
 
-    override val isLazyLoad: Boolean = false
-
     /**
      * 布局创建 容器
      */
     lateinit var rootViewBuild: IRootViewImpl<BaseFragment>
 
+    /**
+     *  是否延迟加载
+     */
+    override val isLazyLoad: Boolean = false
 
+    /**
+     * 标题栏
+     */
     var iToolBar: IToolBar? = null
         get() = rootViewBuild.createRootViewModel.iToolBar
-
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法
@@ -132,7 +136,6 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
 
     override fun initConfig() {}
 
-
     /**
      * 关联主界面 **只有在使用自定义View时使用**
      */
@@ -145,15 +148,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
     /**
      * fragment 隐藏
      */
-    protected fun onFragmentHit() {}
+    private fun onFragmentHit() {}
 
     /******************************** 繁生方法   */
     fun findViewById(id: Int): View? {
-        if (rootView == null) {
-            return null
-        }
-        return if (id < 0) {
-            null
-        } else rootView!!.findViewById(id)
+        return if (rootView == null || id < 0) null else rootView!!.findViewById(id)
+
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 
@@ -39,9 +40,9 @@ interface ICreateRootView {
 
     /**
      * 初始化 view 等
-     * init 是父类onCreate 中执行的最后方法
+     * initView 是父类onCreate 中执行的最后方法
      * 之后才会是liveCycle监听的 onCreate
-     *
+     * 子类必须实现super.initView
      */
     fun initView()
 

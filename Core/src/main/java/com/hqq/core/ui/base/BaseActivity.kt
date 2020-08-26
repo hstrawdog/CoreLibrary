@@ -38,20 +38,24 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      */
     lateinit var rootViewBuild: IRootViewImpl<BaseActivity>
 
-    var iToolBar: IToolBar? = null
-    get() = rootViewBuild.createRootViewModel.iToolBar
+    /**
+     *  顶部标题栏与状态栏
+     *  不支持赋值
+     */
+    val iToolBar: IToolBar?
+        get() = rootViewBuild.createRootViewModel.iToolBar
 
     /**
-     *  初始化  不知道与init 有什么区别
+     *  初始化
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         initAnimEnter()
         super.onCreate(savedInstanceState)
-        loadingView = LoadingView(this)
         activity = this
+        loadingView = LoadingView(this)
         rootViewBuild = IRootViewImpl(this, true, true)
         initConfig()
-        setContentView(rootViewBuild!!.buildContentView(this))
+        setContentView(rootViewBuild.buildContentView(this))
         initView()
     }
 

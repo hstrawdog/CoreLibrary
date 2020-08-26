@@ -15,21 +15,21 @@ import com.hqq.core.ui.base.ICreateRootView.IBanding
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingActivity<T : ViewDataBinding?>
+abstract class BaseBindingActivity<T : ViewDataBinding>
     : BaseActivity(), IBanding {
-    var binding: T? = null
+    lateinit var binding: T
 
     /**
      * 禁止 子类继承使用 保证走的都是getLayoutView方法
-     *
      * @return
      */
-    override val layoutViewId: Int
-        get() = 0
-
+    final override val layoutViewId: Int = 0
+    /**
+     * 绑定Binding
+     */
     override fun getLayoutView(parent: ViewGroup): View {
         binding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false)
-        binding!!.lifecycleOwner = this
-        return binding!!.root
+        binding.lifecycleOwner = this
+        return binding.root
     }
 }

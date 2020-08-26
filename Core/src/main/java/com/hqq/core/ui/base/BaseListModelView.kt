@@ -52,8 +52,8 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
 
     constructor(mBaseListModelView: IBaseListModelView<*>, iRootView: IRootViewImpl<*>?) : this(mBaseListModelView) {
         iRootView?.let {
-            this.context=WeakReference<Context>(it.activity)
-            mBaseListModelView.listView=  initRecycleView(iRootView.rootView)
+            this.context = WeakReference<Context>(it.activity)
+            mBaseListModelView.listView = initRecycleView(iRootView.rootView)
         }
     }
 
@@ -267,17 +267,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
     }
 
 
-    /**
-     * m->v 的接口
-     * k  adapter
-     */
-    interface IBaseListModelView<K : BaseQuickAdapter<*, *>?> : OnLoadMoreListener {
-        /**
-         * 布局类型
-         *
-         * @return
-         */
-        val rcLayoutManager: RecyclerView.LayoutManager
+    interface IListModelView {
 
         /**
          * 分页下标
@@ -294,6 +284,32 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
         val pageSize: Int
 
         /**
+         * 进入下一页
+         *
+         * @return
+         */
+        fun addPageCount()
+
+        /**
+         * 开始下拉刷新
+         */
+        fun onRefreshBegin()
+    }
+
+    /**
+     * m->v 的接口
+     * k  adapter
+     */
+    interface IBaseListModelView<K : BaseQuickAdapter<*, *>?> : OnLoadMoreListener, IListModelView {
+        /**
+         * 布局类型
+         *
+         * @return
+         */
+        val rcLayoutManager: RecyclerView.LayoutManager
+
+
+        /**
          * 获取adapter
          *
          * @return
@@ -307,17 +323,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
          */
         var listView: RecyclerView?
 
-        /**
-         * 进入下一页
-         *
-         * @return
-         */
-        fun addPageCount()
-
-        /**
-         * 开始下拉刷新
-         */
-        fun onRefreshBegin()
 
         /**
          * 初始化数据

@@ -13,8 +13,6 @@ import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.toolbar.IToolBarBuilder
-import com.hqq.core.ui.base.ICreateRootView
-import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.utils.statusbar.StatusBarManager
 import java.lang.ref.WeakReference
 
@@ -49,7 +47,10 @@ open class CreateRootViewModel() {
     /**
      * 标题栏类型
      */
-    var iCreateToolbar: ICreateToolbar = CoreBuildConfig.instance.iCreateToolbar
+    var iCreateToolbar: ICreateToolbar? = null
+        get() {
+            return field ?: CoreBuildConfig.instance.iCreateToolbar
+        }
 
     /**
      * 布局类型
@@ -88,7 +89,10 @@ open class CreateRootViewModel() {
      * 状态栏模式
      */
     @ToolBarMode
-    var statusBarMode: Int = CoreBuildConfig.instance.isStatusMode
+    var statusBarMode: Int? = null
+        get() {
+            return field ?: CoreBuildConfig.instance.isStatusMode
+        }
 
     /**
      * 构建跟布局
@@ -97,9 +101,9 @@ open class CreateRootViewModel() {
      * @return构建后的View
      */
     fun createRootView(iActivityBuilder: ICreateRootView): View {
-        return if (layoutMode == LayoutModel.Companion.LAYOUT_MODE_LINEAR_LAYOUT) {
+        return if (layoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
             createLayoutView(iActivityBuilder)
-        } else if (layoutMode == LayoutModel.Companion.LAYOUT_MODE_FRAME_LAYOUT) {
+        } else if (layoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
             createFrameLayoutView(iActivityBuilder)
         } else {
             View(activity?.get())
@@ -143,17 +147,11 @@ open class CreateRootViewModel() {
      *  获取根布局  也就是Activity中绑定的View
      */
     private fun getLayoutView(iActivityBuilder: ICreateRootView, layout: ViewGroup): View? {
-        var view: View?
-        if (iActivityBuilder.layoutViewId!! > 0) {
-            view = activity!!.get()!!.layoutInflater.inflate(iActivityBuilder.layoutViewId!!, layout, false)
+        return if (iActivityBuilder.layoutViewId > 0) {
+            activity?.get()?.layoutInflater?.inflate(iActivityBuilder.layoutViewId, layout, false)
         } else {
-            view = iActivityBuilder.getLayoutView(layout)
-            if (view == null) {
-                LogUtils.e(Exception("no fount layoutId and rootView  , must init RootView"))
-                view = View(activity!!.get())
-            }
+            iActivityBuilder.getLayoutView(layout)
         }
-        return view
     }
 
     /**
@@ -165,14 +163,14 @@ open class CreateRootViewModel() {
     private fun createToolBar(layout: ViewGroup) {
         // 默认只有Activity 会去执行设置状态栏的颜色
         if (immersiveStatusBar) {
-            if (statusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
+            if (statusBarMode == ToolBarMode.LIGHT_MODE) {
                 StatusBarManager.setStatusBarModel(activity!!.get()!!.window, true)
             } else {
                 StatusBarManager.setStatusBarModel(activity!!.get()!!.window, false)
             }
         }
         if (iToolBarBuilder.showToolBar || iToolBarBuilder.showStatusBar) {
-            iToolBar = iToolBarBuilder?.create(iCreateToolbar)
+            iToolBar = iToolBarBuilder.create(iCreateToolbar)
             layout.addView(iToolBar?.rootView)
         }
     }

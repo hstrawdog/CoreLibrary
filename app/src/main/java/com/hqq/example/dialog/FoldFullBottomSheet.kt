@@ -16,6 +16,7 @@ import com.hqq.example.adapter.StringAdapter
  */
 class FoldFullBottomSheet : BaseBottomDialog() {
     var mStringAdapter = StringAdapter()
+
     override val layoutViewId: Int
         get() = R.layout.dialog_bottom_sheet
 

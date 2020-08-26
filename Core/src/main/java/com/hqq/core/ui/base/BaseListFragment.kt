@@ -13,28 +13,26 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Package : com.core.library.ui
  * @FileName :   BaseListFragment
  * @Date : 2018/11/23 0023  上午 11:47
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
         BaseFragment(), IBaseListModelView<T?> {
 
+    // Fragment 的用法与 Activity保持一致  注释
+
+    var mBaseListModel: BaseListModelView? = null
+
     override var listView: RecyclerView? = null
 
-    /**
-     * 默认的填充数据
-     *
-     * @param data
-     */
     override var pageSize = BaseCommonsKey.PAGE_SIZE
-        protected set
-    override var pageCount = 1
-        protected set
-    protected var mLayoutManager: RecyclerView.LayoutManager? = null
 
-    @kotlin.jvm.JvmField
-    protected var mBaseListModel: BaseListModelView? = null
+    override var pageCount = 1
+
     override val layoutViewId: Int = 0;
+
+    override val rcLayoutManager: RecyclerView.LayoutManager
+        get() = LinearLayoutManager(activity)
 
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
@@ -48,24 +46,18 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
     override fun initView() {
         mBaseListModel = BaseListModelView(this, rootViewBuild)
-        mLayoutManager = rcLayoutManager
         initData()
     }
 
-
     override fun addPageCount() {
-        pageCount++
+        pageCount += 1
     }
 
     override fun onRefreshBegin() {
         pageCount = 1
-        baseAdapter!!.loadMoreModule.loadMoreComplete()
+        baseAdapter?.loadMoreModule?.loadMoreComplete()
         onLoadMore()
     }
-
-
-    override val rcLayoutManager: RecyclerView.LayoutManager
-        get() = LinearLayoutManager(activity)
 
     override fun onLoadMore() {
     }

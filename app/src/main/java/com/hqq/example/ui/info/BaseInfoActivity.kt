@@ -1,14 +1,21 @@
-package com.hqq.example.ui.info;
+package com.hqq.example.ui.info
 
-import android.widget.TextView;
-
-import com.hqq.example.R;
-import com.hqq.core.ui.base.BaseActivity;
-import com.hqq.core.utils.CacheUtil;
-import com.hqq.core.utils.ScreenUtils;
-import com.hqq.core.utils.TextSpannableBuilder;
-import com.hqq.core.utils.VersionUtils;
-
+import android.widget.TextView
+import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.CacheUtil.getAppCacheSize
+import com.hqq.core.utils.CacheUtil.getCacheSize
+import com.hqq.core.utils.CacheUtil.getTotalCacheSize
+import com.hqq.core.utils.ScreenUtils.getScreenDensityDpi
+import com.hqq.core.utils.ScreenUtils.getScreenHeight
+import com.hqq.core.utils.ScreenUtils.getScreenWidth
+import com.hqq.core.utils.ScreenUtils.getScreenXDPI
+import com.hqq.core.utils.ScreenUtils.getScreenYDPI
+import com.hqq.core.utils.ScreenUtils.getStatusBarHeight4Resources
+import com.hqq.core.utils.TextSpannableBuilder
+import com.hqq.core.utils.VersionUtils.getPackageName
+import com.hqq.core.utils.VersionUtils.getVerName
+import com.hqq.core.utils.VersionUtils.getVersionCode
+import com.hqq.example.R
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -18,48 +25,39 @@ import com.hqq.core.utils.VersionUtils;
  * @Date : 2019-07-02  21:51
  * @Descrive : TODO
  * @Email :
- */
-public class BaseInfoActivity extends BaseActivity {
+</描述当前版本功能> */
+class BaseInfoActivity : BaseActivity() {
+    lateinit var mTvInfo: TextView
+    override val layoutViewId: Int
+        get() = R.layout.activity_base_info
 
-    TextView mTvInfo;
-
-    @Override
-    public int getLayoutViewId() {
-        return R.layout.activity_base_info;
-    }
-
-    @Override
-    public void initView() {
-        mTvInfo = findViewById(R.id.tv_info);
-        mTvInfo.setText(new TextSpannableBuilder()
+    override fun initView() {
+        mTvInfo = findViewById(R.id.tv_info)
+        mTvInfo.setText(TextSpannableBuilder()
                 .addTextPart("包名    ")
-                .addTextPart(VersionUtils.getPackageName(this))
+                .addTextPart(getPackageName(this))
                 .addTextPart("\n版本    ")
-                .addTextPart(VersionUtils.getVerName(this))
+                .addTextPart(getVerName(this))
                 .addTextPart("\n版本号    ")
-                .addTextPart(VersionUtils.getVersionCode(this) + "")
+                .addTextPart(getVersionCode(this).toString() + "")
                 .addTextPart("\n系统分配大小    ")
-                .addTextPart(CacheUtil.getAppCacheSize(this) + "M")
+                .addTextPart(getAppCacheSize(this).toString() + "M")
                 .addTextPart("\nGlide缓存大小    ")
-                .addTextPart(CacheUtil.getCacheSize(this) + "")
+                .addTextPart(getCacheSize(this) + "")
                 .addTextPart("\n缓存总大小    ")
-                .addTextPart(CacheUtil.getTotalCacheSize(this) + "")
+                .addTextPart(getTotalCacheSize(this) + "")
                 .addTextPart("\n状态栏高度    ")
-                .addTextPart(ScreenUtils.getStatusBarHeight4Resources(this) + "px")
+                .addTextPart(getStatusBarHeight4Resources(this).toString() + "px")
                 .addTextPart("\n屏幕宽度    ")
-                .addTextPart(ScreenUtils.getScreenWidth(this) + "px")
+                .addTextPart(getScreenWidth(this).toString() + "px")
                 .addTextPart("\n屏幕高度    ")
-                .addTextPart(ScreenUtils.getScreenHeight(this) + "px")
+                .addTextPart(getScreenHeight(this).toString() + "px")
                 .addTextPart("\nx密度    ")
-                .addTextPart(ScreenUtils.getScreenXDPI(this) + "dpi")
+                .addTextPart(getScreenXDPI(this).toString() + "dpi")
                 .addTextPart("\ny密度    ")
-                .addTextPart(ScreenUtils.getScreenYDPI(this) + "dpi")
+                .addTextPart(getScreenYDPI(this).toString() + "dpi")
                 .addTextPart("\n屏幕密度    ")
-                .addTextPart(ScreenUtils.getScreenDensityDpi(this) + "dpi")
-
-
-                .build());
+                .addTextPart(getScreenDensityDpi(this).toString() + "dpi")
+                .build())
     }
-
-
 }

@@ -25,9 +25,9 @@ import com.hqq.example.R
  */
 class FilePathActivity : BaseActivity() {
     lateinit var mTvInfo: TextView
-
     override val layoutViewId: Int
         get() = R.layout.activity_base_info
+
     override fun initView() {
         mTvInfo = findViewById(R.id.tv_info)
         mTvInfo.setText(TextSpannableBuilder()

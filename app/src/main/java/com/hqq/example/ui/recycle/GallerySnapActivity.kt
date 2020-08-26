@@ -22,7 +22,7 @@ import java.util.*
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class GallerySnapActivity(override val layoutId: Int = R.layout.activity_gallery_snap) : BaseBindingActivity<ActivityGallerySnapBinding?>() {
+class GallerySnapActivity(override val layoutId: Int = R.layout.activity_gallery_snap) : BaseBindingActivity<ActivityGallerySnapBinding>() {
     var mRecyclerview: RecyclerView? = null
     var mData: ArrayList<String>? = null
     var mLayoutManager: LinearLayoutManager? = null

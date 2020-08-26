@@ -20,13 +20,35 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
 abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         BaseActivity(), IBaseListModelView<T?> {
 
-    override var pageSize = BaseCommonsKey.PAGE_SIZE
-    override var pageCount = 1
-    override val layoutViewId: Int = 0;
-    override val rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
-    override var listView: RecyclerView? = null
-
+    /**
+     * List列表模型
+     */
     var mBaseListModel: BaseListModelView? = null
+
+    /**
+     *  分页大小 默认是20 可以在Config 中统一配置
+     */
+    override var pageSize = BaseCommonsKey.PAGE_SIZE
+
+    /**
+     *  分页下标
+     */
+    override var pageCount = 1
+
+    /**
+     *  正常List 默认使用 自带的ListView  如果页面包含其他内容 则使用 LayoutViewId
+     */
+    override val layoutViewId: Int = 0;
+
+    /**
+     *  RecycleView Manager
+     */
+    override val rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+
+    /**
+     *  RecycleView 对象
+     */
+    override var listView: RecyclerView? = null
 
     /**
      * 重写了 setViewId    执行 setRootView
@@ -51,24 +73,36 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
         initData()
     }
 
+    /**
+     *  分页增加
+     */
     override fun addPageCount() {
         pageCount += 1
     }
 
+    /**
+     *  下拉刷新 开始从第一页 获取数据
+     */
     override fun onRefreshBegin() {
         pageCount = 1
         baseAdapter?.loadMoreModule?.loadMoreComplete()
         onLoadMore()
     }
 
+    /**
+     *  销毁
+     */
+    @CallSuper
     override fun onDestroy() {
         super.onDestroy()
         mBaseListModel = null
     }
 
+    /**
+     *  加载更多数据
+     */
     override fun onLoadMore() {
     }
-
 
 
 }

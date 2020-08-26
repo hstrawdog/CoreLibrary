@@ -1,14 +1,14 @@
-package com.hqq.example.ui.adaptation;
+package com.hqq.example.ui.adaptation
 
-import android.app.Activity;
-import android.content.Intent;
-
-import com.hqq.core.permission.PermissionsResult;
-import com.hqq.core.permission.PermissionsUtils;
-import com.hqq.core.ui.base.BaseActivity;
-import com.hqq.core.utils.ToastUtils;
-import com.hqq.example.R;
-
+import android.app.Activity
+import android.content.Intent
+import com.hqq.core.permission.PermissionsResult
+import com.hqq.core.permission.PermissionsUtils.requestCameraPermission
+import com.hqq.core.permission.PermissionsUtils.requestStoragePermission
+import com.hqq.core.ui.binding.BaseBindingActivity
+import com.hqq.core.utils.ToastUtils.showToast
+import com.hqq.example.R
+import com.hqq.example.databinding.ActivityPermissionBinding
 
 /**
  * @Author : huangqiqiang
@@ -18,39 +18,30 @@ import com.hqq.example.R;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class PermissionActivity extends BaseActivity {
+class PermissionActivity : BaseBindingActivity<ActivityPermissionBinding>() {
+    override val layoutId: Int = R.layout.activity_permission
 
-    public static void open(Activity context) {
-        Intent starter = new Intent(context, PermissionActivity.class);
-        context.startActivityForResult(starter, -1);
+    override fun initView() {
+        binding?.button7?.setOnClickListener {
+            requestCameraPermission(object : PermissionsResult {
+                override fun onPermissionsResult(status: Boolean) {
+                    showToast("拥有摄像头权限")
+                }
+            })
+        }
+        binding?.button8?.setOnClickListener {
+            requestStoragePermission(object : PermissionsResult {
+                override fun onPermissionsResult(status: Boolean) {
+                    showToast("拥有文件读写权限")
+                }
+            })
+        }
     }
 
-    @Override
-    public int getLayoutViewId() {
-        return R.layout.activity_permission;
-    }
-
-    @Override
-    public void initView() {
-
-    }
-
-    public void onMButton7Clicked() {
-        PermissionsUtils.requestCameraPermission(new PermissionsResult() {
-            @Override
-            public void onPermissionsResult(boolean status) {
-                ToastUtils.showToast("拥有摄像头权限");
-            }
-        });
-
-    }
-
-    public void onMButton8Clicked() {
-        PermissionsUtils.requestStoragePermission(new PermissionsResult() {
-            @Override
-            public void onPermissionsResult(boolean status) {
-                ToastUtils.showToast("拥有文件读写权限");
-            }
-        });
+    companion object {
+        fun open(context: Activity) {
+            val starter = Intent(context, PermissionActivity::class.java)
+            context.startActivityForResult(starter, -1)
+        }
     }
 }

@@ -30,23 +30,20 @@ class IToolBarBuilder {
      * 默认白色
      */
     @ColorRes
-     var statusBarColor = R.color.white
+    var statusBarColor = R.color.white
 
     /**
      * @param clss 类型
      * @return
      */
-    fun create(iCreateToolbar: ICreateToolbar): IToolBar? {
-        try {
-            var toolBar = iCreateToolbar.createTooBar()
-            toolBar!!.setShowStatusBar(showStatusBar)
+    fun create(iCreateToolbar: ICreateToolbar?): IToolBar? {
+        var toolBar = iCreateToolbar?.createTooBar()
+        toolBar?.let {
+            it.setShowStatusBar(showStatusBar)
                     .setShowBar(showToolBar)
                     .setDefStatusColor(statusBarColor)
                     .createToolBar(activity?.get())
-            return toolBar
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
-        return null
+        return toolBar
     }
 }
