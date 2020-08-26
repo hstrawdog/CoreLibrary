@@ -107,7 +107,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
         return listView
     }
 
-
     /**
      * 检查是否有是否存在
      *
@@ -121,7 +120,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
         }
         return view?.findViewById(R.id.rc_list)
     }
-
 
     /**
      * 初始化 下拉刷新
@@ -265,8 +263,6 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
             adapterFoodView!!.removeView(viewEmptyFoot)
         }
     }
-
-
 
     /**
      * m->v 的接口

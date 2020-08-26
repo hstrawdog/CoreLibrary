@@ -65,6 +65,9 @@ internal object ViewModelFactory {
         return ViewModelProvider(viewModelStoreOwner!!)[modelClass!!]
     }
 
+    /**
+     *  打开某个Activity
+     */
     fun initOpenActivity(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner?, openActivity: IOpenActivity) {
         viewModel.openActivityComponentMutableLiveData.observe(lifecycleOwner!!, Observer { openActivityComponent -> openActivity.openActivity(openActivityComponent) })
     }

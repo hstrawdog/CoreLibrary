@@ -16,13 +16,14 @@ import com.hqq.core.ui.BaseViewBuilderHolder
  */
 class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
     var alertParams: AlertParams? = null
+    val viewHolder: T?
+        get() = alertParams!!.baseViewBuilderHolder as T
+
     override val viewId: Int
         get() = R.layout.dialog_base_select_dialog
 
     override val animation: Int
         get() = R.style.dialogAnimation_fade_in2fade_out
-    private val viewHolder: T?
-        private get() = alertParams!!.baseViewBuilderHolder as T
 
     override val weight: Int
         get() = WindowManager.LayoutParams.MATCH_PARENT
@@ -60,7 +61,6 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
         val tvTitle = rootView!!.findViewById<TextView>(R.id.tv_title)
         tvTitle.text = alertParams!!.title
     }
-
 
     override fun cancel() {
         dismiss()

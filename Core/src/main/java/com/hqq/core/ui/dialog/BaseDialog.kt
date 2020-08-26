@@ -29,15 +29,34 @@ import com.hqq.core.widget.LoadingView
  * - DialogFragment自带内存泄漏
  */
 abstract class BaseDialog : DialogFragment(), IDialogFragment {
-    protected var loadingView: LoadingView? = null
+    var loadingView: LoadingView? = null
     var loaded = false
-    protected var dialogClickListener: DialogClickListener<*>? = null
-    protected var rootView: View? = null
+    var dialogClickListener: DialogClickListener<*>? = null
+    var rootView: View? = null
 
     /**
      * 布局创建 容器
      */
     lateinit var rootViewBuild: IRootViewImpl<BaseDialog>
+    val isDismissBackground: Boolean
+        get() = true
+
+    /**
+     * 背景颜色
+     */
+    override val background: Int
+        get() = 0x00000000
+    override val gravity: Int
+        get() = Gravity.CENTER
+
+    override val weight: Int
+        get() = WindowManager.LayoutParams.WRAP_CONTENT
+
+    override val height: Int
+        get() = WindowManager.LayoutParams.WRAP_CONTENT
+
+    override val animation: Int
+        get() = R.style.DialogAnimation_bottom2top
 
     /**
      * 状态栏模式
@@ -137,26 +156,6 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      * 默认配置
      */
     override fun initConfig() {}
-    val isDismissBackground: Boolean
-        get() = true
-
-    /**
-     * @return 背景颜色
-     */
-    override val background: Int
-        get() = 0x00000000
-
-    override val gravity: Int
-        get() = Gravity.CENTER
-
-    override val weight: Int
-        get() = WindowManager.LayoutParams.WRAP_CONTENT
-
-    override val height: Int
-        get() = WindowManager.LayoutParams.WRAP_CONTENT
-
-    override val animation: Int
-        get() = R.style.DialogAnimation_bottom2top
 
     fun setDialogClickListener(dialogClickListener: DialogClickListener<*>?): BaseDialog {
         this.dialogClickListener = dialogClickListener

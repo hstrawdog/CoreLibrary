@@ -17,6 +17,7 @@ import com.hqq.core.ui.base.ICreateRootView.IBanding
  */
 abstract class BaseBindingActivity<T : ViewDataBinding>
     : BaseActivity(), IBanding {
+
     lateinit var binding: T
 
     /**

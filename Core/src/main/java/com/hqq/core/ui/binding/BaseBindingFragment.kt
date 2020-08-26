@@ -15,8 +15,10 @@ import com.hqq.core.ui.base.ICreateRootView.IBanding
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingFragment<T : ViewDataBinding?> : BaseFragment(), IBanding {
-    protected var binding: T? = null
+abstract class BaseBindingFragment<T : ViewDataBinding> : BaseFragment(), IBanding {
+
+    lateinit var binding: T
+
     override val layoutViewId: Int
         get() = 0
 
