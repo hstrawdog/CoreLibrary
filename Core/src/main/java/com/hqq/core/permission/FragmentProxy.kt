@@ -13,7 +13,6 @@ import com.hqq.core.CoreBuildConfig
  */
 class FragmentProxy : IPermissionActions {
 
-
     override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
         // PermissionsHasImpl 判断
         if (!PermissionsHasImpl().hasPermission(CoreBuildConfig.instance?.application, *permissions)) {

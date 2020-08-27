@@ -19,10 +19,20 @@ import java.util.*
  * @Email :  qiqiang213@gmail.com
  */
 class PermissionsFragment : Fragment(), IPermissionActions {
+
+    companion object {
+        fun newInstance(): PermissionsFragment {
+            val args = Bundle()
+            val fragment = PermissionsFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+
     var OPEN_SETTING_CODE = 0x55
     var CODE = 0x5186
     var mPermissionsResult: PermissionsResult? = null
-
     /**
      * 申请的权限组
      */
@@ -35,7 +45,6 @@ class PermissionsFragment : Fragment(), IPermissionActions {
     /**
      * 发现 系统选择 与 厂商权限不一致
      * 取消判断是否拥有权限 直接去申请
-     *
      * @param
      */
     override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
@@ -108,12 +117,5 @@ class PermissionsFragment : Fragment(), IPermissionActions {
         }
     }
 
-    companion object {
-        fun newInstance(): PermissionsFragment {
-            val args = Bundle()
-            val fragment = PermissionsFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
+
 }

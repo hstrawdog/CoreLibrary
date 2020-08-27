@@ -26,7 +26,7 @@ import com.hqq.core.utils.ResourcesUtils
  * 参考 http://blog.csdn.net/hexingen/article/details/72578066
  * 参考 http://blog.csdn.net/wyb112233/article/details/52337392
  */
-object ImageLoadUtils {//缓存SOURC和RESULT
+object ImageLoadUtils {
     //不做内存缓存
     /**
      * 默认配置

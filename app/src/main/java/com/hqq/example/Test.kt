@@ -16,7 +16,7 @@ object Test {
     }
 
     open class A {
-
+        final var a = 10
     }
 
     open class A1 : A() {
@@ -31,6 +31,9 @@ object Test {
 
     @JvmStatic
     fun main(args: Array<String>) {
+
+        var list: List<String> = mutableListOf<String>()
+
     }
 
 

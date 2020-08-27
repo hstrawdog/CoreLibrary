@@ -16,19 +16,32 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @FileName :   BaseFragmentAdapter
  * @Date : 2019/1/24 0024  下午 2:26
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive :ViewPage2 的 Adapter 简单封装
+ *  注意 设置缓存大小 否则会内存泄漏
+ *  setupWithViewPager 是与 TabLayout 一起使用
+ * 采用了从Manager中获取Fragment  与设置的缓存大小有关系
+ * 这样也避免了用集合缓存Fragment对象 当Fragment被回收后 Fragment内存泄漏
+ *
  */
 abstract class BaseFragmentAdapter : FragmentStateAdapter {
-    var mFragmentSparseArray = SparseArray<Fragment>()
     var stringSparseArray = SparseArray<String>()
+    var fragmentManager: FragmentManager? = null
 
+    constructor(fragment: Fragment) : super(fragment) {
+        fragmentManager = fragment.childFragmentManager
+    }
 
-    constructor(fm: FragmentManager, lifecycle: Lifecycle) : super(fm, lifecycle)
+    constructor(fragmentActivity: FragmentActivity) : super(fragmentActivity) {
+        fragmentManager = fragmentActivity.supportFragmentManager
+    }
 
-    constructor(fragmentActivity: FragmentActivity) : super(fragmentActivity)
+    constructor(fm: FragmentManager, lifecycle: Lifecycle) : super(fm, lifecycle) {
+        fragmentManager = fm
+    }
 
-    constructor(fragment: Fragment) : super(fragment)
-
+    /**
+     *  item 的数量
+     */
     override fun getItemCount(): Int {
         return stringSparseArray.size()
     }
@@ -37,10 +50,9 @@ abstract class BaseFragmentAdapter : FragmentStateAdapter {
      *  创建Fragment
      */
     override fun createFragment(position: Int): Fragment {
-        var fragment = mFragmentSparseArray[position]
+        var fragment = fragmentManager?.findFragmentByTag("f" + position)
         if (fragment == null) {
             fragment = newFragment(position)
-            mFragmentSparseArray.put(position, fragment)
         }
         return fragment
     }
@@ -57,6 +69,13 @@ abstract class BaseFragmentAdapter : FragmentStateAdapter {
     }
 
     /**
+     *  获取标题
+     */
+    fun getItemTitle(position: Int): String {
+        return stringSparseArray.get(position)
+    }
+
+    /**
      * 只会执行一次
      *
      * @param position position
@@ -64,12 +83,7 @@ abstract class BaseFragmentAdapter : FragmentStateAdapter {
      */
     protected abstract fun newFragment(position: Int): Fragment
 
-    fun getItemTitle(position: Int): String {
-        return stringSparseArray.get(position)
-    }
-
-
-
-
 
 }
+
+

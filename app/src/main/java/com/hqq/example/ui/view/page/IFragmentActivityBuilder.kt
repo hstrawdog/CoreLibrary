@@ -22,6 +22,5 @@ class IFragmentActivityBuilder : BaseActivity() {
     override fun initView() {
         mVpPage = findViewById(R.id.vp_page)
         mVpPage.setAdapter(IFragmentAdapter(this))
-        mVpPage.offscreenPageLimit = mVpPage.adapter?.itemCount!!
     }
 }
