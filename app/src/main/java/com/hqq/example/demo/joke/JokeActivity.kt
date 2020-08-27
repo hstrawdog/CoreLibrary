@@ -14,10 +14,12 @@ import com.hqq.example.databinding.ActivityJokeBinding
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class JokeActivity(override val baseAdapter: JokeAdapter =JokeAdapter()) : BaseVmListActivity<ActivityJokeBinding, JokeViewModel, JokeAdapter>() {
-    override val bindingViewModelId: Int
+class JokeActivity(override val baseAdapter: JokeAdapter = JokeAdapter())
+    : BaseVmListActivity<ActivityJokeBinding, JokeViewModel, JokeAdapter>() {
+    override val layoutId: Int
         get() = R.layout.activity_joke
-
+    override val bindingViewModelId: Int
+        get() = 0
 
     override fun initData() {
         baseAdapter!!.loadMoreModule.setOnLoadMoreListener(this)

@@ -26,11 +26,6 @@ public class FragmentTestActivity extends BaseVmActivity<ActivityFragmentTestBin
 
 
     @Override
-    public int getBindingViewModelId() {
-        return 0;
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.activity_fragment_test;
     }
@@ -56,4 +51,8 @@ public class FragmentTestActivity extends BaseVmActivity<ActivityFragmentTestBin
 
     }
 
+    @Override
+    public int getBindingViewModelId() {
+        return 0;
+    }
 }

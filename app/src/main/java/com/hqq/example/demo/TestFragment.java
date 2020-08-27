@@ -24,10 +24,6 @@ public class TestFragment extends BaseVmFragment<FragmentTestBinding, UserViewMo
         return fragment;
     }
 
-    @Override
-    public int getBindingViewModelId() {
-        return BR.vm;
-    }
 
     @Override
     public int getLayoutId() {
@@ -37,5 +33,10 @@ public class TestFragment extends BaseVmFragment<FragmentTestBinding, UserViewMo
     @Override
     public void initViews() {
 
+    }
+
+    @Override
+    public int getBindingViewModelId() {
+        return R.layout.fragment_test;
     }
 }

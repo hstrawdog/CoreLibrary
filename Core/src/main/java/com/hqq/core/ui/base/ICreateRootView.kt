@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
 
 /**
  * @Author : huangqiqiang
@@ -154,8 +155,18 @@ interface ICreateRootView {
     interface IBaseViewModel : IBanding {
 
         /**
-         * 绑定ViewModel
+         * 独立出ViewModel的初始化
+         * 默认使用 ViewModelProviders 创建
+         * 当有Hilt时 可以重写此方法
+         * 搭配 @ViewModelInject  与by viewModes() 构建 注入参数
          *
+         */
+        fun getViewModel(): ViewModel?
+
+        /**
+         * 绑定ViewModel id
+         * 用于xml 中viewModel 对象的绑定
+         * 正常情况下一个界面(Activity  xml) 对应一个viewModel
          * @return
          */
         val bindingViewModelId: Int

@@ -2,6 +2,7 @@ package com.hqq.core.ui.vm
 
 import android.content.Intent
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 import com.hqq.core.ui.binding.BaseBindingActivity
 import com.hqq.core.ui.base.ICreateRootView.IBaseViewModel
 import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
@@ -23,12 +24,18 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
 
 
     override fun initView() {
-        viewMode = ViewModelFactory.createViewModel(this, javaClass, viewMode)
-        lifecycle.addObserver(viewMode!!)
-        ViewModelFactory.initBaseViewModel(viewMode!!, this, loadingView!!)
-        ViewModelFactory.initOpenActivity(viewMode!!, this, this)
+        viewMode = getViewModel() as? K
+        viewMode?.let {
+            lifecycle.addObserver(it)
+            ViewModelFactory.initBaseViewModel(it, this, loadingView)
+            ViewModelFactory.initOpenActivity(it, this, this)
+        }
         addViewModel()
         initViews()
+    }
+
+    override fun getViewModel(): ViewModel? {
+        return ViewModelFactory.createViewModel(this, javaClass, viewMode)
     }
 
     override fun onDestroy() {
@@ -41,8 +48,8 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
-        if (bindingViewModelId != 0) {
-            binding!!.setVariable(bindingViewModelId, viewMode)
+        if (layoutId != 0) {
+            binding!!.setVariable(layoutId, viewMode)
         }
     }
 

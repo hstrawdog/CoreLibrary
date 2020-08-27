@@ -2,6 +2,7 @@ package com.hqq.core.ui.vm
 
 import android.content.Intent
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 import com.hqq.core.ui.binding.BaseBindingFragment
 import com.hqq.core.ui.base.ICreateRootView.IBaseViewModel
 import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
@@ -20,11 +21,16 @@ import com.hqq.core.ui.vm.ViewModelFactory.initOpenActivity
 abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBindingFragment<T>(), IBaseViewModel, IOpenActivity {
     protected var viewMode: K? = null
     override fun initView() {
-        viewMode = createViewModel(this, javaClass, viewMode)
+        viewMode = getViewModel() as? K
         loadingView?.let { initBaseViewModel(viewMode!!, this, it) }
         initOpenActivity(viewMode!!!!, this, this)
         addViewModel()
         initViews()
+    }
+
+
+    override fun getViewModel(): ViewModel? {
+      return  createViewModel(this, javaClass, viewMode)
     }
 
     /**
@@ -32,8 +38,8 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBin
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
-        if (bindingViewModelId != 0) {
-            binding!!.setVariable(bindingViewModelId, viewMode)
+        if (layoutId != 0) {
+            binding!!.setVariable(layoutId, viewMode)
         }
     }
 
@@ -42,6 +48,6 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBin
         if (openActivityComponent.mBundle != null) {
             intent.putExtras(openActivityComponent.mBundle!!)
         }
-        activity!!.startActivityForResult(intent, openActivityComponent.mActivityResult)
+        activity?.startActivityForResult(intent, openActivityComponent.mActivityResult)
     }
 }

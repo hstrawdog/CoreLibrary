@@ -17,17 +17,17 @@ internal object ViewModelFactory {
     /**
      * 初始化 BaseViewModel中关联ui的字段
      */
-    fun initBaseViewModel(viewModel: BaseViewModel?, lifecycleOwner: LifecycleOwner?, loadingView: LoadingView?) {
-        viewModel?.showLoading?.observe(lifecycleOwner!!, Observer { aBoolean: Boolean? ->
+    fun initBaseViewModel(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner, loadingView: LoadingView?) {
+        viewModel.showLoading.observe(lifecycleOwner, Observer { aBoolean: Boolean? ->
             if (loadingView != null) {
                 if (aBoolean!!) {
-                    loadingView?.show()
+                    loadingView.show()
                 } else {
-                    loadingView?.dismiss()
+                    loadingView.dismiss()
                 }
             }
         })
-        viewModel?.showToast?.observe(lifecycleOwner!!, Observer { s: String -> ToastUtils.showToast(s) })
+        viewModel.showToast.observe(lifecycleOwner, Observer { s: String -> ToastUtils.showToast(s) })
     }
 
     /**
@@ -37,10 +37,10 @@ internal object ViewModelFactory {
      * @param aClass
      * @return
      */
-    fun <K : ViewModel?> createViewModel(viewModelStoreOwner: ViewModelStoreOwner?, aClass: Class<*>, mViewModel: K): K? {
+    fun <K : ViewModel?> createViewModel(viewModelStoreOwner: ViewModelStoreOwner, aClass: Class<*>, mViewModel: K): K? {
         var mViewModel: K? = mViewModel
         if (mViewModel == null) {
-            // 利用反射获取泛型类型 创建ViewModel 对象
+            // 利用反射获取泛型类型 ViewModel子类 对象名称
             val modelClass: Class<out ViewModel>
             val type = aClass.genericSuperclass
             if (type is ParameterizedType) {
@@ -48,12 +48,13 @@ internal object ViewModelFactory {
             } else {
                 modelClass = BaseViewModel::class.java
             }
-            mViewModel = createViewModel(viewModelStoreOwner, modelClass) as K
+            mViewModel = createViewModel(viewModelStoreOwner, modelClass) as? K
         }
         return mViewModel
     }
 
     /**
+     * 通过 ViewModelProvider
      * 创建 ViewModel
      *
      * @param viewModelStoreOwner
@@ -61,7 +62,7 @@ internal object ViewModelFactory {
      * @param <K>
      * @return
      */
-    fun <K : ViewModel?> createViewModel(viewModelStoreOwner: ViewModelStoreOwner?, modelClass: Class<K>?): K {
+    fun <K : ViewModel?> createViewModel(viewModelStoreOwner: ViewModelStoreOwner, modelClass: Class<K>): K {
         return ViewModelProvider(viewModelStoreOwner!!)[modelClass!!]
     }
 
