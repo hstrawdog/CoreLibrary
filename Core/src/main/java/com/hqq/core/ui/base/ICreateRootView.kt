@@ -16,7 +16,7 @@ interface ICreateRootView {
     /**
      *  延迟加载  根布局
      */
-    var rootView: View
+    var rootView: View?
 
     /**
      * 初始化activity的配置

@@ -100,13 +100,17 @@ open class IRootViewImpl() {
      * @param iActivityBuilder
      * @return构建后的View
      */
-    fun createRootView(iActivityBuilder: IRootView): View {
-        return if (layoutMode == LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT) {
-            createLayoutView(iActivityBuilder)
-        } else if (layoutMode == LayoutModel.LAYOUT_MODE_FRAME_LAYOUT) {
-            createFrameLayoutView(iActivityBuilder)
-        } else {
-            View(activity?.get())
+    fun createRootView(iActivityBuilder: IRootView): View? {
+        return when (layoutMode) {
+            LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT -> {
+                createLayoutView(iActivityBuilder)
+            }
+            LayoutModel.LAYOUT_MODE_FRAME_LAYOUT -> {
+                createFrameLayoutView(iActivityBuilder)
+            }
+            else -> {
+                null
+            }
         }
     }
 

@@ -37,7 +37,7 @@ class ICreateRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar:
      */
     var mIRootViewImpl: IRootViewImpl = IRootViewImpl()
 
-    override lateinit var rootView: View
+    override var rootView: View? = null
 
     constructor(activity: T) : this(activity, false, false)
 
@@ -59,7 +59,7 @@ class ICreateRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar:
         activity?.let { mIRootViewImpl.setActivity(it) }
     }
 
-    override fun buildContentView(iActivityBuilder: IRootView): View {
+    override fun buildContentView(iActivityBuilder: IRootView): View? {
         rootView = mIRootViewImpl.createRootView(iActivityBuilder)
         return rootView
     }

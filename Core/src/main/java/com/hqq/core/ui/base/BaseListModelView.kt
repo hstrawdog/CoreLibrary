@@ -52,8 +52,8 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
 
     constructor(mBaseListModelView: IBaseListModelView<*>, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
         iRootView?.let {
-            this.context=WeakReference<Context>(it.activity)
-            mBaseListModelView.listView=  initRecycleView(iRootView.rootView)
+            this.context = WeakReference<Context>(it.activity)
+            mBaseListModelView.listView = initRecycleView(iRootView?.rootView)
         }
     }
 
@@ -75,10 +75,10 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      * @return string
      */
     private val emptyTextMessage: CharSequence?
-        private get() = ResourcesUtils.getString(R.string.def_empty_message)
+         get() = ResourcesUtils.getString(R.string.def_empty_message)
 
     private val emptyImage: Int
-        private get() = R.mipmap.ic_empty_def
+         get() = R.mipmap.ic_empty_def
 
     /**
      * adapter
@@ -86,7 +86,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      * @return
      */
     private val adapter: BaseQuickAdapter<*, *>
-        private get() = mBaseListModelView.baseAdapter!!
+         get() = mBaseListModelView.baseAdapter!!
 
 
     /**
@@ -96,7 +96,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      * @param adapter
      * @param layoutManager
      */
-    fun initRecycleView(view: View): RecyclerView? {
+    fun initRecycleView(view: View?): RecyclerView? {
         var listView = checkRecycleView(mBaseListModelView.listView, view)
         if (listView != null && adapter != null) {
             listView.overScrollMode = View.OVER_SCROLL_NEVER

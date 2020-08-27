@@ -23,17 +23,17 @@ class BannerActivity : BaseActivity() {
     override fun initView() {
         mRcBanner = findViewById(R.id.rc_banner)
         mRcBanner2 = findViewById(R.id.rc_banner2)
-        val list = ArrayList<String>()
+        val list = mutableListOf<Any>()
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
 
-        mRcBanner?.setRvBannerData(list as List<Nothing>)
-        val list2: MutableList<Int> = ArrayList()
+        mRcBanner?.setRvBannerData(list)
+        val list2: MutableList<Any> = ArrayList()
         list2.add(R.mipmap.ic_banner2)
         list2.add(R.mipmap.ic_banner2)
-        mRcBanner2?.setRvBannerData(list2 as List<Nothing>)
+        mRcBanner2?.setRvBannerData(list2)
     }
 }

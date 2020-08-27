@@ -64,7 +64,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否正在轮播
      */
     private var isPlaying = false
-    var  mHandlers = Handler()
+    var mHandlers = Handler()
     private var isTouched = false
 
     /**
@@ -76,9 +76,9 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否无限轮播
      */
     private var mIsUnlimited = true
-    private var mData: MutableList<Nothing> = ArrayList<Nothing>()
+    private var mData: MutableList<Any> = mutableListOf()
     var mLinearLayoutManager: LinearLayoutManager? = null
-    private var mAdapter: RecycleBannerAdapter<Nothing>? = null
+    private var mAdapter: RecycleBannerAdapter<Any>? = null
     private val playTask: Runnable = object : Runnable {
         override fun run() {
             recyclerView!!.smoothScrollToPosition(++currentIndex)
@@ -108,10 +108,10 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         recyclerView!!.layoutManager = mLinearLayoutManager
         // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
         PagerSnapHelper().attachToRecyclerView(recyclerView)
-        if (mAdapter != null) {
-            mAdapter!!.setData(mData)
-            mAdapter!!.isShowTip = isShowTip;
-        }
+
+        mAdapter?.mData = mData
+        mAdapter?.isShowTip = isShowTip;
+
         recyclerView!!.adapter = mAdapter
         recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -148,7 +148,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         if (recyclerView == null) {
             recyclerView = RecyclerView(context)
             mLinearLayout = CircleIndicatorView(context)
-            mAdapter = RecycleBannerAdapter<Nothing>()
+            mAdapter = RecycleBannerAdapter<Any>()
             mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
         initIndicator(a)
@@ -162,7 +162,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
     private fun initEditMode() {
         if (isInEditMode) {
             for (i in 0..2) {
-                mData!!.add("" as Nothing)
+                mData!!.add("")
             }
             createIndicators()
         }
@@ -259,11 +259,11 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      *
      * @param data Banner对象列表
      */
-    fun setRvBannerData(data: List<Nothing>) {
+    fun setRvBannerData(data: MutableList<Any>) {
         setPlaying(false)
         // 避免空指针
         if (mData == null) {
-            mData = ArrayList<Nothing>()
+            mData = mutableListOf()
         }
         mData!!.clear()
         mData!!.addAll(data)
@@ -285,7 +285,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         }
     }
 
-    fun <T : RecycleBannerAdapter<Nothing>> setAdapter(adapter: T) {
+    fun <T : RecycleBannerAdapter<Any>> setAdapter(adapter: T) {
         mAdapter = adapter
     }
 
@@ -367,7 +367,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         mAdapter!!.setOnRvBannerClickListener(onRvBannerClickListener)
     }
 
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<Nothing>) {
+    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>) {
         mAdapter!!.setRecycleViewBannerChangeListener(recycleViewBannerChangeListener)
     }
 

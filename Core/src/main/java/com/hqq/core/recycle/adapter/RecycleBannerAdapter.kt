@@ -20,7 +20,7 @@ import com.hqq.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
  * @Email :  qiqiang213@gmail.com
  */
 class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    lateinit var mData: List<Any>
+    lateinit var mData: MutableList<Any>
     private var onRvBannerClickListener: RecycleViewBannerClickListener<*>? = null
     private var mRecycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>? = null
     var isShowTip = false
@@ -30,8 +30,10 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         mIsUnlimited = unlimited
     }
 
-    fun setData(data: List<Any>) {
-        mData = data
+    fun setData(data: MutableList<Any>?) {
+        data?.let {
+            mData = it
+        }
     }
 
     fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>) {
@@ -76,7 +78,7 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             tv.visibility = View.GONE
             ImageLoadUtils.with(item as Int, img)
         } else if (null != mRecycleViewBannerChangeListener) {
-            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item!!) , img)
+            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item!!), img)
             if (isShowTip) {
                 tv.text = mRecycleViewBannerChangeListener!!.getTitle(item!!)
                 tv.visibility = View.VISIBLE
