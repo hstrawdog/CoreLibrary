@@ -8,7 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.R
 import com.hqq.core.ui.base.BaseListModelView
-import com.hqq.core.ui.vm.BaseListViewModel
 
 /**
  * @Author : huangqiqiang
@@ -45,7 +44,7 @@ abstract class BaseBindingListActivity<T : ViewDataBinding, AD : BaseQuickAdapte
      */
     @CallSuper
     override fun initView() {
-        mBaseListModel = BaseListModelView(this, rootViewBuild)
+        mBaseListModel = BaseListModelView(this, iCreateRootView)
         initData()
     }
 

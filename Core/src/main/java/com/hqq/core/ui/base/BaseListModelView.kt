@@ -50,7 +50,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
         }
     }
 
-    constructor(mBaseListModelView: IBaseListModelView<*>, iRootView: IRootViewImpl<*>?) : this(mBaseListModelView) {
+    constructor(mBaseListModelView: IBaseListModelView<*>, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
         iRootView?.let {
             this.context=WeakReference<Context>(it.activity)
             mBaseListModelView.listView=  initRecycleView(iRootView.rootView)

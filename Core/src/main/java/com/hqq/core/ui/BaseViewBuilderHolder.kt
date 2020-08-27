@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.hqq.core.lifecycle.BaseLifecycleObserver
-import com.hqq.core.ui.base.ICreateRootView.IBaseViewBuilderHolder
+import com.hqq.core.ui.base.IRootView.IBaseViewBuilderHolder
 import java.lang.ref.WeakReference
 
 /**

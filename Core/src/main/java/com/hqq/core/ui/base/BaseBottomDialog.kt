@@ -24,7 +24,7 @@ import com.hqq.core.utils.log.LogUtils
  * 宽度是全屏
  * 高度自定义
  */
-abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.IBaseDialogFragment {
+abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDialogFragment {
     var mRootView: View? = null
     var mLoaded = false
     var behavior: BottomSheetBehavior<FrameLayout>? = null
@@ -33,7 +33,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.I
     /**
      * 布局创建 容器
      */
-    lateinit var mRootViewBuild: IRootViewImpl<BaseBottomDialog>
+    lateinit var mRootViewBuild: ICreateRootViewImpl<BaseBottomDialog>
 
     override val height: Int = CoordinatorLayout.LayoutParams.MATCH_PARENT
     override fun initConfig() {}
@@ -58,7 +58,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), ICreateRootView.I
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mRootView == null) {
-            mRootViewBuild = IRootViewImpl(this)
+            mRootViewBuild = ICreateRootViewImpl(this)
             initConfig()
             mRootView = mRootViewBuild!!.buildContentView(this)
         }

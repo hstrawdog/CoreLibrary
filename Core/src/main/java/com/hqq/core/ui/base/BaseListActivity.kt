@@ -69,7 +69,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
      */
     @CallSuper
     override fun initView() {
-        mBaseListModel = BaseListModelView(this, rootViewBuild)
+        mBaseListModel = BaseListModelView(this, iCreateRootView)
         initData()
     }
 

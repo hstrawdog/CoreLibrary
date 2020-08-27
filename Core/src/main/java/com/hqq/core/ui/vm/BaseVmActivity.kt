@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import com.hqq.core.ui.binding.BaseBindingActivity
-import com.hqq.core.ui.base.ICreateRootView.IBaseViewModel
+import com.hqq.core.ui.base.IRootView.IBaseViewModel
 import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
 
 /**

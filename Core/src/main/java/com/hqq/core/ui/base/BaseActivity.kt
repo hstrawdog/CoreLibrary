@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.hqq.core.R
 import com.hqq.core.toolbar.IToolBar
-import com.hqq.core.ui.base.ICreateRootView.IActivityRootView
+import com.hqq.core.ui.base.IRootView.IActivityRootView
 import com.hqq.core.widget.LoadingView
 
 /**
@@ -36,14 +36,14 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * 根布局
      */
-    lateinit var rootViewBuild: IRootViewImpl<BaseActivity>
+    lateinit var iCreateRootView: ICreateRootViewImpl<BaseActivity>
 
     /**
      *  顶部标题栏与状态栏
      *  不支持赋值
      */
     val iToolBar: IToolBar?
-        get() = rootViewBuild.createRootViewModel.iToolBar
+        get() = iCreateRootView.mIRootViewImpl.iToolBar
 
     /**
      *  初始化
@@ -53,9 +53,10 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
         super.onCreate(savedInstanceState)
         activity = this
         loadingView = LoadingView(this)
-        rootViewBuild = IRootViewImpl(this, true, true)
+        iCreateRootView = ICreateRootViewImpl(this, true, true)
+        iCreateRootView.rootView
         initConfig()
-        setContentView(rootViewBuild.buildContentView(this))
+        setContentView(iCreateRootView.buildContentView(this))
         initView()
     }
 
@@ -105,7 +106,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      * 默认配置
      */
     override fun initConfig() {
-        rootViewBuild!!.initActivity(false)
+        iCreateRootView!!.initActivity(false)
     }
 
     /**

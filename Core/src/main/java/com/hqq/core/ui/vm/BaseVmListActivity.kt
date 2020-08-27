@@ -1,7 +1,5 @@
 package com.hqq.core.ui.vm
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +32,7 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
         get() = LinearLayoutManager(this)
 
     override fun initViews() {
-        mBaseListModel = BaseListModelView(this, rootViewBuild)
+        mBaseListModel = BaseListModelView(this, iCreateRootView)
         viewMode?.data?.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList as List<Nothing>) })
         initData()
     }
