@@ -17,10 +17,13 @@ import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
  * T 泛型 正常使用布局生成的 ViewBanding
  * DataBindingUtil 放回的对象支持DataBinding 与 ViewBanding
  * BaseViewModel 驱动 ui显示 Toast以及Loading
+ *
+ * 正常情况下 viewModel  不应该在Base中初始化
+ *
  */
 abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
     : BaseBindingActivity<T>(), IBaseViewModel, IOpenActivity {
-    var viewMode: K? = null
+    open var viewMode: K? = null
 
 
     override fun initView() {

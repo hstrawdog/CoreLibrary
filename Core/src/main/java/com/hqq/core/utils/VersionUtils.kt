@@ -39,13 +39,7 @@ object VersionUtils {
      */
     @kotlin.jvm.JvmStatic
     fun getVerName(context: Context): String {
-        var verName = ""
-        try {
-            verName = context.packageManager.getPackageInfo(context.packageName, 0).versionName
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
-        return verName
+        return context.packageManager.getPackageInfo(context.packageName, 0).versionName
     }
 
     /**

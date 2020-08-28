@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.jetpack.livedata.LiveDataSpanViewActivity"></activity>
         <activity
             android:name=".ui.jetpack.room.RoomActivity"
             android:label="Room 数据库" />

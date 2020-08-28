@@ -8,7 +8,9 @@ android {
     dataBinding {
         enabled = true
     }
-
+    viewBinding {
+        enabled = true
+    }
     compileSdkVersion BuildConfig.compileSdkVersion
     buildToolsVersion BuildConfig.buildToolsVersion
     defaultConfig {

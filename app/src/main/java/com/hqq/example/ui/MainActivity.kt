@@ -3,7 +3,10 @@ package com.hqq.example.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hqq.core.ui.vm.BaseListViewModel
 import com.hqq.core.ui.vm.BaseVmListActivity
@@ -12,7 +15,7 @@ import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
-import com.hqq.example.ui.MainActivity.MainModel
+import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.PermissionActivity
@@ -30,6 +33,7 @@ import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
 import com.hqq.example.ui.web.WebActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 /**
@@ -40,15 +44,15 @@ import kotlinx.coroutines.launch
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseVmListActivity<ViewDataBinding, MainModel, MainAdapter>() {
+@AndroidEntryPoint
+class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdapter>() {
 
-
+    override val baseAdapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int
         get() = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         LogUtils.e("MainActivity    onCreate1")
-
         super.onCreate(savedInstanceState)
         LogUtils.e("MainActivity    onCreate2")
 
@@ -56,7 +60,13 @@ class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
 
     override fun initData() {
         LogUtils.e("MainActivity    initData")
+
+        LiveDateActivity.open(this)
+
     }
+
+
+    val mV: MainViewModel by viewModels()
 
     private var mExitTime: Long = 0
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -78,20 +88,21 @@ class MainActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
         return super.dispatchKeyEvent(event)
     }
 
-     class MainModel() : BaseListViewModel() {
+    val mVl: MainViewModel by viewModels()
 
-        constructor(a: String) : this() {
-            LogUtils.e("MainModel constructor ")
-        }
+    override fun getViewModel(): ViewModel {
+        return mVl
+    }
+
+    class MainViewModel @ViewModelInject constructor() : BaseListViewModel() {
 
 
         init {
-            LogUtils.e("MainModel init 1")
+            LogUtils.e("MainModel init 1  " )
             viewModelScope.launch {
                 LogUtils.e("MainModel init viewModelScope")
             }
             LogUtils.e("MainModel init 2")
-
         }
 
         override fun onCrete() {

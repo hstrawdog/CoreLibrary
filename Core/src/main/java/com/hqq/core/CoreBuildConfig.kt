@@ -17,19 +17,10 @@ import com.hqq.core.utils.RegexUtils
  * @Descrive :  配置文件
  */
 class CoreBuildConfig private constructor() {
-
-
     /**
-     * 获取当前的 Activity
-     *
-     * @return
+     * 单利维持对象
      */
-    val currActivity: Activity? get() = mActivityLifecycle?.activity
-
     companion object {
-        /**
-         * 单利维持对象
-         */
         var singleton: CoreBuildConfig = instance
         val instance: CoreBuildConfig
             get() {
@@ -45,11 +36,13 @@ class CoreBuildConfig private constructor() {
             }
     }
 
+
     /**
-     * 默认 标题栏 内容
+     * 获取当前的 Activity
+     *
+     * @return
      */
-    var defToolbar: Class<out IToolBar?> = BaseDefToolBarImpl::class.java
-        private set
+    val currActivity: Activity? get() = mActivityLifecycle?.activity
 
 
     /**
@@ -106,12 +99,6 @@ class CoreBuildConfig private constructor() {
         }
     }
 
-    val defIToolbar: Class<*>
-        get() = defToolbar
-
-    fun setDefIToolbar(defIToolbar: Class<out IToolBar?>) {
-        defToolbar = defIToolbar
-    }
 
     fun setStatusModeLight(@ToolBarMode statusModeLight: Int): CoreBuildConfig {
         isStatusMode = statusModeLight

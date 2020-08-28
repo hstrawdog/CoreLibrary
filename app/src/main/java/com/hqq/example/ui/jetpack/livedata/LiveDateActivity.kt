@@ -19,14 +19,21 @@ import com.hqq.example.R
  * LiveData  change 需要在ui前台才会触发 并不能再后台执行
  */
 class LiveDateActivity : BaseActivity() {
-   lateinit var mTextView2: TextView
+    companion object {
+        fun open(context: Activity) {
+            val starter = Intent(context, LiveDateActivity::class.java)
+            context.startActivityForResult(starter, -1)
+        }
+    }
 
-
+    lateinit var mTextView2: TextView
     override val layoutViewId: Int
         get() = R.layout.activity_data_binding
+
     override fun initView() {
         mTextView2 = findViewById(R.id.textView2)
-        mTextView2.setOnClickListener(View.OnClickListener { view: View? -> onViewClicked(view) })
+        findViewById<View>(R.id.button19).setOnClickListener(View.OnClickListener { view: View? -> onViewClicked(view) })
+
         LiveUser.getInstance(this).observe(this, Observer { user ->
             e("onChanged        $user")
             mTextView2.setText(user.name + user.level)
@@ -42,10 +49,5 @@ class LiveDateActivity : BaseActivity() {
         LiveUser.getInstance(this).value = user
     }
 
-    companion object {
-        fun open(context: Activity) {
-            val starter = Intent(context, LiveDateActivity::class.java)
-            context.startActivityForResult(starter, -1)
-        }
-    }
+
 }
