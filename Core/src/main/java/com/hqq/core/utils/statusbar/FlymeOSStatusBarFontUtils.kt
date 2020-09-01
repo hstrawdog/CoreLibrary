@@ -9,9 +9,14 @@ import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
-/**
- * Created by wangchende on 15-9-7.
- */
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.hqq.core.utils.statusbar
+  * @FileName :
+  * @Date  : 2020/9/1 0001  下午 5:20
+  * @Email :  qiqiang213@gmail.com
+  * @Descrive :
+  */
 object FlymeOSStatusBarFontUtils {
     lateinit var mSetStatusBarColorIcon: Method
     lateinit var  mSetStatusBarDarkIcon: Method

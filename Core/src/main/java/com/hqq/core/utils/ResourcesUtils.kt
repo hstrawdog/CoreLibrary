@@ -17,8 +17,8 @@ import com.hqq.core.CoreBuildConfig
  * @Package : com.core.library.utils
  * @FileName :   ResourcesUtils
  * @Date : 2018/12/14 0014  上午 11:18
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  * 资源辅助类
  */
 object ResourcesUtils {

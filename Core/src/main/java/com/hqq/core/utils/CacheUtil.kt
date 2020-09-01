@@ -12,8 +12,8 @@ import java.math.BigDecimal
  * @Package : com.fjcndz.supertesco.utils
  * @FileName :   CacheUtil
  * @Date : 2018/1/23  14:24
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive : 
  */
 object CacheUtil {
     const val NULL = "0k"

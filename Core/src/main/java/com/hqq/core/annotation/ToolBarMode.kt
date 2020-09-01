@@ -1,7 +1,6 @@
 package com.hqq.core.annotation
 
 import androidx.annotation.IntDef
-import com.hqq.core.annotation.ToolBarMode
 
 /**
  * @Author : huangqiqiang

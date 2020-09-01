@@ -2,6 +2,14 @@ package com.hqq.core.utils.sp
 
 import android.content.Context
 
+  /**
+   * @Author : huangqiqiang
+   * @Package : com.hqq.core.utils.sp
+   * @FileName :   SharedPreferencesUtil.kt
+   * @Date  : 2020/9/1 0001  下午 5:20
+   * @Email :  qiqiang213@gmail.com
+   * @Descrive :
+   */
 object SharedPreferencesUtil {
     @Synchronized
     fun putObject(context: Context, key: String?, `object`: Any) {

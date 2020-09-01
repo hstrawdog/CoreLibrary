@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
  * @Package : com.core.library.widget.divider
  * @FileName :   DividerItemDecoration
  * @Date : 2018/7/5 0005  下午 5:11
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  * https://juejin.im/post/5940a020a0bb9f006b734228
  * 使用这个 在rc 一直滑动的时候 会不断的去创建对象
  */

@@ -10,8 +10,8 @@ import com.hqq.core.R
  * @Package : com.core.library.widget.divider
  * @FileName :   DividerBuilder
  * @Date : 2018/7/5 0005  下午 5:16
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 class DividerBuilder {
     private var leftSideLine: SideLine? = null

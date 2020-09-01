@@ -11,8 +11,8 @@ import java.lang.reflect.Type
  * @Package : com.qi.core.utils
  * @FileName :   GsonUtil
  * @Date : 2019/1/3 0003  上午 10:30
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 object GsonUtil {
     private val GSON = GsonBuilder()

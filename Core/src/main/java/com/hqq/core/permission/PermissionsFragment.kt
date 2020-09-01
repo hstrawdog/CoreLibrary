@@ -15,8 +15,8 @@ import java.util.*
  * @Package : com.core.library.permission
  * @FileName :   PermissionsFragment
  * @Date : 2018/11/22 0022  上午 10:41
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 class PermissionsFragment : Fragment(), IPermissionActions {
 

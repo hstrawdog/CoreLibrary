@@ -9,8 +9,8 @@ import android.content.pm.PackageManager
  * @Package : com.core.library.utils
  * @FileName :   VersionUtils
  * @Date : 2018/7/3 0003  下午 1:44
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 object VersionUtils {
     /**

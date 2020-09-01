@@ -15,8 +15,8 @@ import com.hqq.core.utils.log.LogUtils
  * @Package : com.core.library.ui
  * @FileName :   RootViewBuilder
  * @Date : 2018/12/4 0004  下午 7:03
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  * 1. 　动态添加 生成根布局  支持LineLayout 与FarmLayout
  * 2. 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */

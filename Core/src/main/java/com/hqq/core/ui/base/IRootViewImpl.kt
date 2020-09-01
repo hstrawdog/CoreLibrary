@@ -36,8 +36,6 @@ import java.lang.ref.WeakReference
  * 真正核心的内容 应该拆成两个部分
  * 一个view  一个头部
  */
-
-
 open class IRootViewImpl() {
     /**
      * 当前上下文

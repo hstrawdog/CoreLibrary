@@ -10,8 +10,8 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
  * @Package : com.rongji.shangwenwan.utils
  * @FileName :   SoftHideKeyboardListener
  * @Date : 2018/6/21 0021  下午 2:23
- * @Descrive : TODO
- * @Email : https://blog.csdn.net/u011181222/article/details/52043001
+ * @Email : qiqiang213@gmail.com
+ * @Descrive :https://blog.csdn.net/u011181222/article/details/52043001
  */
 class SoftHideKeyboardListener private constructor(activity: Activity) {
     /**

@@ -26,7 +26,6 @@ public class APP extends Application {
         //配置 默认加载的 toolBar    CoreInitProvider   会比 Application  更加优先
         //  CoreBuildConfig.getInstance().init(this, true);
         //.setDefItoobar(BaseDefToolBarImpl.class);
-
         SkinCompatManager.withoutActivity(this)
                 // 基础控件换肤初始化
                 .addInflater(new SkinAppCompatViewInflater())

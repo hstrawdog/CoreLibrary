@@ -23,8 +23,8 @@ import androidx.annotation.StringRes
  * @Package : com.core.library.utils
  * @FileName :   ViewHolderUtils
  * @Date : 2018/6/13 0013  上午 9:44
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  * 与旧帮帮 BRVAH是一样的  方便 HeadView 的一些操作
  */
 class ViewHolderUtils(view: View, onItemChildClick: View.OnClickListener) {

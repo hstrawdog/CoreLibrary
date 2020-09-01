@@ -15,8 +15,8 @@ import com.hqq.core.widget.LoadingView
  * @Package : com.core.library
  * @FileName :   BaseFragment
  * @Date : 2018/5/28 0028  下午 2:14
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListener {
     /**

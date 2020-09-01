@@ -16,8 +16,8 @@ import com.hqq.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
  * @Package : com.core.library.banner
  * @FileName :   BaseBannerAdapter
  * @Date : 2018/6/15 0015  下午 5:26
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var mData: MutableList<Any>

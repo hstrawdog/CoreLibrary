@@ -17,8 +17,8 @@ import com.hqq.core.utils.keyboard.SoftHideKeyboardRedraw
  * @Package : com.core.library.utils
  * @FileName :   SoftHideKeyboardUtils
  * @Date : 2018/9/26 0026  下午 6:20
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  * https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/src/main/java/com/blankj/utilcode/util/KeyboardUtils.java
  */
 object SoftHideKeyboardUtils {

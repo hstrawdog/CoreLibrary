@@ -12,8 +12,8 @@ import android.view.View
  * @FileName: com.hqq.core.utils.BaseCommonUtils.java
  * @emain: 593979591@qq.com
  * @date: 2020-04-07 10:54
- * 在此写用途
-</描述当前版本功能> */
+ *
+ */
 object BaseCommonUtils {
     /**
      * 黑白化的一种解决方案

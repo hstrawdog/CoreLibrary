@@ -18,8 +18,8 @@ import java.util.*
  * @Package : com.core.library.utils
  * @FileName :   BitmapUtils
  * @Date : 2018/6/25 0025  上午 11:35
- * @Descrive :
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 object BitmapUtils {
 

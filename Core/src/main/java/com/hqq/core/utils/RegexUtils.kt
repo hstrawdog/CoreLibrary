@@ -12,8 +12,8 @@ import java.util.regex.Pattern
  * @Package : com..common.utils
  * @FileName :   RegexUtils
  * @Date : 2018/12/24 0024  下午 4:53
- * @Descrive :  验证工具类 包含空判断 正则判断
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :  验证工具类 包含空判断 正则判断
  */
 object RegexUtils {
     /**

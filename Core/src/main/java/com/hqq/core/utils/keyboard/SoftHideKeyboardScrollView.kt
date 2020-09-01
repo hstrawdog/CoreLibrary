@@ -9,9 +9,8 @@ import android.view.View
  * @Package : com.core.library.utils
  * @FileName :   SoftHideKeyboardScrollView
  * @Date : 2018/7/9 0009  下午 2:52
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
- *
+ * @Descrive :
  * SoftHideKeyboardRedraw   重绘 view
  * SoftHideKeyboardScrollView  保留一部分view 被键盘遮挡效果是类似的
  */

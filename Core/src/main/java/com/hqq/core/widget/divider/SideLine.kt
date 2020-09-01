@@ -7,8 +7,8 @@ import androidx.annotation.ColorInt
  * @Package : com.core.library.widget.divider
  * @FileName :   SideLine
  * @Date : 2018/7/5 0005  下午 5:14
- * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
+ * @Descrive :
  */
 class SideLine(isHave: Boolean, @ColorInt color: Int, widthDp: Float, startPaddingDp: Float, endPaddingDp: Float) {
     var isHave = false

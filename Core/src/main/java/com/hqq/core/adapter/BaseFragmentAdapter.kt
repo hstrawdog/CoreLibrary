@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @FileName :   BaseFragmentAdapter
  * @Date : 2019/1/24 0024  下午 2:26
  * @Email : qiqiang213@gmail.com
- * @Descrive :ViewPage2 的 Adapter 简单封装
+ * @Describe :  ViewPage2 的 Adapter 简单封装
  *  注意 设置缓存大小 否则会内存泄漏
  *  setupWithViewPager 是与 TabLayout 一起使用
  * 采用了从Manager中获取Fragment  与设置的缓存大小有关系
