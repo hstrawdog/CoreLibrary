@@ -38,6 +38,8 @@ class BaseWebFragment : BaseFragment() {
 
     override val layoutViewId: Int = R.layout.fragment_web
 
+    var showToolBar = true
+    var showStatusBar = true
 
     override fun onPause() {
         super.onPause()
