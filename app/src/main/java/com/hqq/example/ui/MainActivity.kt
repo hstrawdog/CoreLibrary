@@ -60,10 +60,10 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
 
     override fun initData() {
         LogUtils.e("MainActivity    initData")
-
         LiveDateActivity.open(this)
 
     }
+
 
 
     val mV: MainViewModel by viewModels()
@@ -95,10 +95,8 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
     }
 
     class MainViewModel @ViewModelInject constructor() : BaseListViewModel() {
-
-
         init {
-            LogUtils.e("MainModel init 1  " )
+            LogUtils.e("MainModel init 1  ")
             viewModelScope.launch {
                 LogUtils.e("MainModel init viewModelScope")
             }

@@ -16,19 +16,19 @@ import com.hqq.core.utils.RegexUtils
  * @Email :  qiqiang213@gmail.com
  * @Descrive :  配置文件
  */
-class CoreBuildConfig private constructor() {
+class CoreConfig private constructor() {
     /**
      * 单利维持对象
      */
     companion object {
-        var singleton: CoreBuildConfig = instance
-        val instance: CoreBuildConfig
+        var singleton: CoreConfig = instance
+        val instance: CoreConfig
             get() {
 
                 if (singleton == null) {
-                    synchronized(CoreBuildConfig::class.java) {
+                    synchronized(CoreConfig::class.java) {
                         if (singleton == null) {
-                            singleton = CoreBuildConfig()
+                            singleton = CoreConfig()
                         }
                     }
                 }
@@ -67,13 +67,23 @@ class CoreBuildConfig private constructor() {
     /**
      * 状态栏 模式
      */
+    @ToolBarMode
     var isStatusMode: Int = ToolBarMode.Companion.LIGHT_MODE
-        private set
 
     /**
      * Activity生命周期管理
      */
     private var mActivityLifecycle: ActivityLifecycle? = null
+
+    /**
+     *  toolBar 的构建方法 可以重新赋值
+     */
+    var iCreateToolbar: ICreateToolbar = object : ICreateToolbar {
+        override fun createTooBar(): IToolBar {
+            return BaseDefToolBarImpl()
+        }
+    }
+
 
     /**
      * [.init]
@@ -98,19 +108,5 @@ class CoreBuildConfig private constructor() {
             application!!.registerActivityLifecycleCallbacks(mActivityLifecycle)
         }
     }
-
-
-    fun setStatusModeLight(@ToolBarMode statusModeLight: Int): CoreBuildConfig {
-        isStatusMode = statusModeLight
-        return this
-    }
-
-    var iCreateToolbar: ICreateToolbar = object : ICreateToolbar {
-        override fun createTooBar(): IToolBar {
-            return BaseDefToolBarImpl()
-        }
-
-    }
-
 
 }

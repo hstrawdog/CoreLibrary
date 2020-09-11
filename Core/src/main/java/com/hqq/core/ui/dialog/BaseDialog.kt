@@ -6,7 +6,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.hqq.core.CoreBuildConfig
+import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.listenner.DialogClickListener
@@ -62,7 +62,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      * 状态栏模式
      */
     @ToolBarMode
-    var statusBarMode: Int = CoreBuildConfig.instance.isStatusMode
+    var statusBarMode: Int = CoreConfig.instance.isStatusMode
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //        //代码设置 无标题 无边框
@@ -76,7 +76,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog!!.window!!.setWindowAnimations(animation)
         if (rootView == null) {
-            loadingView = LoadingView(activity)
+            activity?.let {
+                loadingView = LoadingView(it)
+            }
             rootViewBuild = ICreateRootViewImpl(this)
             initConfig()
             rootView = rootViewBuild!!.buildContentView(this)

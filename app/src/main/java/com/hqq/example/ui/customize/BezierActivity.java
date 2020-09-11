@@ -2,6 +2,7 @@ package com.hqq.example.ui.customize;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.KeyEvent;
 
 import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
@@ -31,5 +32,9 @@ public class BezierActivity extends BaseActivity {
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return super.onKeyDown(keyCode, event);
 
+    }
 }

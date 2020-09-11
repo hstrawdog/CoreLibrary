@@ -12,7 +12,7 @@ import android.text.TextUtils
 import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.StringRes
-import com.hqq.core.CoreBuildConfig
+import com.hqq.core.CoreConfig
 
 /**
  * @Author : huangqiqiang
@@ -71,6 +71,6 @@ object ToastUtils {
      */
     @kotlin.jvm.JvmStatic
     fun showToast(text: String) {
-        showToast(CoreBuildConfig.instance!!.application, text)
+        showToast(CoreConfig.instance!!.application, text)
     }
 }

@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.hqq.core.CoreBuildConfig
+import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.utils.ResourcesUtils
 
@@ -39,7 +39,7 @@ object ImageLoadUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreBuildConfig.instance!!.defImg)//缓存SOURC和RESULT
+                .placeholder(CoreConfig.instance!!.defImg)//缓存SOURC和RESULT
     //不做内存缓存
 
     /**
@@ -53,7 +53,7 @@ object ImageLoadUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreBuildConfig.instance!!.defImg)
+                .placeholder(CoreConfig.instance!!.defImg)
 
     fun getDefRoundRequestOptions(context: Context?): RequestOptions {
         return getRoundRequestOptions(ResourcesUtils.getDimen(R.dimen.x10).toInt())
@@ -71,7 +71,7 @@ object ImageLoadUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreBuildConfig.instance!!.defImg)
+                .placeholder(CoreConfig.instance!!.defImg)
                 .transform(GlideRoundTransform(px))
     }
 

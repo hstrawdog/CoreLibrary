@@ -12,7 +12,7 @@ import java.util.*
  * @FileName :   ActivityLifecycle
  * @Date : 2019/6/6 0006  上午 10:20
  * @Email : qiqiang213@gmail.com
- * @Descrive : Activity生命周期栈
+ * @Descrive : 缓存 Activity生命周期栈
  */
 class ActivityLifecycle : ActivityLifecycleCallbacks {
     private val activities: MutableList<Activity>? = ArrayList()

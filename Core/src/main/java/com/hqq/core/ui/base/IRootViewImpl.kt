@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
-import com.hqq.core.CoreBuildConfig
+import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.annotation.LayoutModel
 import com.hqq.core.annotation.ToolBarMode
@@ -47,7 +47,7 @@ open class IRootViewImpl() {
      */
     var iCreateToolbar: ICreateToolbar? = null
         get() {
-            return field ?: CoreBuildConfig.instance.iCreateToolbar
+            return field ?: CoreConfig.instance.iCreateToolbar
         }
 
     /**
@@ -89,7 +89,7 @@ open class IRootViewImpl() {
     @ToolBarMode
     var statusBarMode: Int? = null
         get() {
-            return field ?: CoreBuildConfig.instance.isStatusMode
+            return field ?: CoreConfig.instance.isStatusMode
         }
 
     /**

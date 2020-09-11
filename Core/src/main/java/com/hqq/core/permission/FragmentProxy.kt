@@ -1,6 +1,6 @@
 package com.hqq.core.permission
 
-import com.hqq.core.CoreBuildConfig
+import com.hqq.core.CoreConfig
 
 /**
  * @Author : huangqiqiang
@@ -15,8 +15,8 @@ class FragmentProxy : IPermissionActions {
 
     override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
         // PermissionsHasImpl 判断
-        if (!PermissionsHasImpl().hasPermission(CoreBuildConfig.instance?.application, *permissions)) {
-            val mPermissionsFragment = PermissionsFragmentFactory.getPermissionsFragment(CoreBuildConfig.instance!!.currActivity)
+        if (!PermissionsHasImpl().hasPermission(CoreConfig.instance?.application, *permissions)) {
+            val mPermissionsFragment = PermissionsFragmentFactory.getPermissionsFragment(CoreConfig.instance!!.currActivity)
             mPermissionsFragment!!.requestPermissions(permissions, listener)
         } else {
             listener!!.onPermissionsResult(true)

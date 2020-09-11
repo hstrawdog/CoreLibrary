@@ -10,7 +10,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import com.hqq.core.CoreBuildConfig
+import com.hqq.core.CoreConfig
 
 /**
  * @Author : huangqiqiang
@@ -33,7 +33,7 @@ object ResourcesUtils {
     val resources: Resources?
         get() {
             if (sResources == null) {
-                sResources = CoreBuildConfig.instance.application!!.applicationContext.getResources()
+                sResources = CoreConfig.instance.application!!.applicationContext.getResources()
             }
             return sResources
         }
@@ -74,7 +74,7 @@ object ResourcesUtils {
      */
     @kotlin.jvm.JvmStatic
     fun getColor(@ColorRes resId: Int): Int {
-        return ContextCompat.getColor(CoreBuildConfig.instance.application!!.applicationContext, resId)
+        return ContextCompat.getColor(CoreConfig.instance.application!!.applicationContext, resId)
     }
 
     /**
@@ -106,7 +106,7 @@ object ResourcesUtils {
      * @return
      */
     fun getDrawable(@DrawableRes resId: Int): Drawable? {
-        return ContextCompat.getDrawable(CoreBuildConfig.instance.application!!.applicationContext, resId)
+        return ContextCompat.getDrawable(CoreConfig.instance.application!!.applicationContext, resId)
     }
 
     /**
@@ -126,7 +126,7 @@ object ResourcesUtils {
      * @return dp
      */
     fun getDimen2dp(@DimenRes resId: Int): Float {
-        return ScreenUtils.px2dip(CoreBuildConfig.instance.application, resources!!.getDimension(resId)).toFloat()
+        return ScreenUtils.px2dip(CoreConfig.instance.application, resources!!.getDimension(resId)).toFloat()
     }
 
     @Deprecated("")

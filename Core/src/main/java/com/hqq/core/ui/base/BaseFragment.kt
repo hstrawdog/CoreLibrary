@@ -65,7 +65,9 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView == null) {
-            loadingView = LoadingView(activity)
+            activity?.let {
+                loadingView = LoadingView(it)
+            }
             rootViewBuild = ICreateRootViewImpl(this)
             initConfig()
             rootView = rootViewBuild.buildContentView(this)

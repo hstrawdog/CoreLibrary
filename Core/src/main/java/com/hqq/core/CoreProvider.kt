@@ -14,14 +14,15 @@ import com.hqq.core.utils.RegexUtils
  * @Date : 2019/6/6 0006  上午 9:54
  * @Email : qiqiang213@gmail.com
  * @Descrive :
+ * 利用 Provider 监听 初始化
  */
-class CoreInitProvider : ContentProvider() {
+class CoreProvider : ContentProvider() {
     override fun onCreate(): Boolean {
         /**
-         * 默认初始化
+         * 默认初始化 CoreConfig
          */
-        if (RegexUtils.isNull(CoreBuildConfig.instance!!.application)) {
-            CoreBuildConfig.instance!!.init(context as Application?, true)
+        if (RegexUtils.isNull(CoreConfig.instance.application)) {
+            CoreConfig.instance.init(context as Application?, true)
         }
         return false
     }
