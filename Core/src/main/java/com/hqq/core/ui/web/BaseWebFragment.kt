@@ -41,116 +41,119 @@ class BaseWebFragment : BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        webView!!.onPause()
+        webView?.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        webView!!.onResume()
+        webView?.onResume()
     }
 
     override fun initConfig() {
         super.initConfig()
-        rootViewBuild.mIRootViewImpl.iToolBarBuilder.showToolBar=true
-        rootViewBuild.mIRootViewImpl.iToolBarBuilder.showStatusBar=true
+        rootViewBuild.mIRootViewImpl.iToolBarBuilder.showToolBar = true
+        rootViewBuild.mIRootViewImpl.iToolBarBuilder.showStatusBar = true
     }
 
     @SuppressLint("JavascriptInterface")
     override fun initView() {
         webView = findViewById(R.id.web_view) as WebView?
-        progressBar = findViewById(R.id.pb_progressbar) as ProgressBar?
+        progressBar = findViewById(R.id.pb_progressbar) as ProgressBar
         if (RegexUtils.unNull(progressBarColor)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                progressBar!!.indeterminateTintList = progressBarColor
+                progressBar?.indeterminateTintList = progressBarColor
             }
         }
-        progressBar!!.max = 100
+        progressBar?.max = 100
         //先加载5%，以使用户觉得界面没有卡死
-        progressBar!!.progress = 5
+        progressBar?.progress = 5
         initWebViewSettings()
-        webView!!.webViewClient = webViewClient
-        webView!!.webChromeClient = webChromeClient
+        webView?.webViewClient = webViewClient
+        webView?.webChromeClient = webChromeClient
         // 标识 为Android的 js 支持 对象是activity
         if (mScriptInterface != null) {
-            webView!!.addJavascriptInterface(requireActivity(), "android")
+            webView?.addJavascriptInterface(requireActivity(), "android")
         }
         mUrl = BundleUtils.getString(this, getString(R.string.key_url))
         mTitle = BundleUtils.getString(this, getString(R.string.key_title))
         requireActivity().title = mTitle
         iToolBar?.setToolbarTitle(mTitle)
-        webView!!.loadUrl(mUrl!!)
+        mUrl?.let {
+            webView?.loadUrl(it)
+        }
     }
 
     protected fun initWebViewSettings() {
-        val settings = webView!!.settings
-        settings.setUserAgentString(settings.userAgentString + "" + requireActivity().packageName)
-        settings.javaScriptEnabled = true
-        settings.javaScriptCanOpenWindowsAutomatically = true
-        settings.allowFileAccess = true
-        settings.useWideViewPort = true
-        settings.loadWithOverviewMode = true
-        settings.builtInZoomControls = true
-        settings.domStorageEnabled = true
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            settings.displayZoomControls = false
+        val settings = webView?.settings
+        settings?.let {
+            it.setUserAgentString(it.userAgentString + "" + requireActivity().packageName)
+            it.javaScriptEnabled = true
+            it.javaScriptCanOpenWindowsAutomatically = true
+            it.allowFileAccess = true
+            it.useWideViewPort = true
+            it.loadWithOverviewMode = true
+            it.builtInZoomControls = true
+            it.domStorageEnabled = true
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                it.displayZoomControls = false
+            }
+            // MIXED_CONTENT_ALWAYS_ALLOW：允许从任何来源加载内容，即使起源是不安全的；
+            // MIXED_CONTENT_NEVER_ALLOW：不允许Https加载Http的内容，即不允许从安全的起源去加载一个不安全的资源；
+            // MIXED_CONTENT_COMPATIBILITY_MODE：当涉及到混合式内容时，WebView 会尝试去兼容最新Web浏览器的风格。
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                it.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                //提高渲染优先级
+                it.setRenderPriority(WebSettings.RenderPriority.HIGH)
+                it.savePassword = false
+                it.pluginState = WebSettings.PluginState.ON
+            }
         }
-        // MIXED_CONTENT_ALWAYS_ALLOW：允许从任何来源加载内容，即使起源是不安全的；
-        // MIXED_CONTENT_NEVER_ALLOW：不允许Https加载Http的内容，即不允许从安全的起源去加载一个不安全的资源；
-        // MIXED_CONTENT_COMPATIBILITY_MODE：当涉及到混合式内容时，WebView 会尝试去兼容最新Web浏览器的风格。
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webView!!.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            //提高渲染优先级
-            settings.setRenderPriority(WebSettings.RenderPriority.HIGH)
-            settings.savePassword = false
-            settings.pluginState = WebSettings.PluginState.ON
-        }
-    }//request.getUrl()// do something if app is not installed
+    }
 
     //处理 android err_unknown_url_scheme异常
-    protected val webViewClient: WebViewClient
-        protected get() = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                //处理 android err_unknown_url_scheme异常
-                if (URLUtil.isNetworkUrl(request.url.toString())) {
-                    return false
-                }
-                if (VersionUtils.appInstalledOrNot(activity, request.url.toString())) {
-                    val intent = Intent(Intent.ACTION_VIEW, request.url)
-                    startActivity(intent)
-                } else {
-                    // do something if app is not installed
-                }
-                return super.shouldOverrideUrlLoading(view, request)
+    val webViewClient: WebViewClient = object : WebViewClient() {
+        override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+            //处理 android err_unknown_url_scheme异常
+            if (URLUtil.isNetworkUrl(request.url.toString())) {
+                return false
             }
-
-            override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
-                return super.shouldInterceptRequest(view, request)
-                //request.getUrl()
+            if (VersionUtils.appInstalledOrNot(activity, request.url.toString())) {
+                val intent = Intent(Intent.ACTION_VIEW, request.url)
+                startActivity(intent)
+            } else {
+                // do something if app is not installed
             }
+            return super.shouldOverrideUrlLoading(view, request)
+        }
 
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
-                super.onPageStarted(view, url, favicon)
-                progressBar!!.visibility = View.VISIBLE
-                if (null != mWebLoadListener) {
-                    mWebLoadListener!!.onPageStarted(url, favicon)
-                }
-            }
+        override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
+            return super.shouldInterceptRequest(view, request)
+            //request.getUrl()
+        }
 
-            override fun onPageFinished(view: WebView, url: String) {
-                super.onPageFinished(view, url)
-                progressBar!!.visibility = View.GONE
-                if (null != mWebLoadListener) {
-                    mWebLoadListener!!.onPageFinished(url)
-                }
-            }
-
-            override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
-                super.onReceivedError(view, request, error)
-                progressBar!!.visibility = View.GONE
+        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+            super.onPageStarted(view, url, favicon)
+            progressBar?.visibility = View.VISIBLE
+            if (null != mWebLoadListener) {
+                mWebLoadListener?.onPageStarted(url, favicon)
             }
         }
+
+        override fun onPageFinished(view: WebView, url: String) {
+            super.onPageFinished(view, url)
+            progressBar?.visibility = View.GONE
+            if (null != mWebLoadListener) {
+                mWebLoadListener?.onPageFinished(url)
+            }
+        }
+
+        override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+            super.onReceivedError(view, request, error)
+            progressBar?.visibility = View.GONE
+        }
+    }
 
     protected val webChromeClient: WebChromeClient
         protected get() = object : WebChromeClient() {
@@ -165,15 +168,15 @@ class BaseWebFragment : BaseFragment() {
 
             override fun onProgressChanged(view: WebView, newProgress: Int) {
                 if (newProgress >= 5) {
-                    progressBar!!.progress = newProgress
+                    progressBar?.progress = newProgress
                 }
                 super.onProgressChanged(view, newProgress)
             }
         }
 
     fun onBackPressed(): Boolean {
-        if (webView!!.canGoBack()) {
-            webView!!.goBack()
+        webView?.let {
+            it.goBack()
             return true
         }
         return false
@@ -183,9 +186,9 @@ class BaseWebFragment : BaseFragment() {
     fun loadUrl(url: String, clear: Boolean = true) {
         if (webView != null) {
             if (clear) {
-                webView!!.clearHistory()
+                webView?.clearHistory()
             }
-            webView!!.loadUrl(url.also { mUrl = it })
+            webView?.loadUrl(url.also { mUrl = it })
         }
     }
 

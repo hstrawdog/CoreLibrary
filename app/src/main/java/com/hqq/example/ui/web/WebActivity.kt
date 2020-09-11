@@ -22,13 +22,15 @@ class WebActivity : BaseFrameLayoutActivity() {
 
     override fun initConfig() {
         super.initConfig()
-        iCreateRootView.mIRootViewImpl.iToolBarBuilder.showStatusBar=false
-        iCreateRootView.mIRootViewImpl.iToolBarBuilder.showToolBar=false
+        iCreateRootView.mIRootViewImpl.iToolBarBuilder.showStatusBar = false
+        iCreateRootView.mIRootViewImpl.iToolBarBuilder.showToolBar = false
     }
 
     override fun initView() {
-        val url = intent.extras!!.getString(URL, "https://www.baidu.com/")
-        val title = intent.extras!!.getString(TITLE, "网页")
+        var url = intent.extras?.getString(URL, "https://www.baidu.com/")
+        var title = intent.extras?.getString(TITLE, "网页")
+        url = if (url == null)"https://www.baidu.com/" else url
+        title = if (title == null)"网页" else title
         val mBaseFragment = BaseWebFragment.instantiate(this, title, url)
         addOrShowFragment(mBaseFragment, R.id.fl_layout)
     }
