@@ -51,8 +51,8 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
-        if (layoutId != 0) {
-            binding!!.setVariable(layoutId, viewMode)
+        if (bindingViewModelId != 0) {
+            binding!!.setVariable(bindingViewModelId, viewMode)
         }
     }
 
