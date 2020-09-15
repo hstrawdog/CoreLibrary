@@ -18,7 +18,7 @@ internal object ViewModelFactory {
      * 初始化 BaseViewModel中关联ui的字段
      */
     fun initBaseViewModel(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner, loadingView: LoadingView?) {
-        viewModel.showLoading.observe(lifecycleOwner, Observer { aBoolean: Boolean? ->
+        viewModel.loadingView.observe(lifecycleOwner, Observer { aBoolean: Boolean? ->
             if (loadingView != null) {
                 if (aBoolean!!) {
                     loadingView.show()
@@ -27,7 +27,7 @@ internal object ViewModelFactory {
                 }
             }
         })
-        viewModel.showToast.observe(lifecycleOwner, Observer { s: String -> ToastUtils.showToast(s) })
+        viewModel.toast.observe(lifecycleOwner, Observer { s: String -> ToastUtils.showToast(s) })
     }
 
     /**

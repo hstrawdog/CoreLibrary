@@ -26,12 +26,12 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
     /**
      * 是否显示Loading
      */
-    val showLoading = MutableLiveData<Boolean>()
+    val loadingView = MutableLiveData<Boolean>()
 
     /**
      * 显示Toast
      */
-    val showToast = MutableLiveData<String>()
+    val toast = MutableLiveData<String>()
 
     /**
      * Activity跳转对象
@@ -87,12 +87,12 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
     }
 
     fun setShowLoading(showLoading: Boolean): BaseViewModel {
-        this.showLoading.postValue(showLoading)
+        this.loadingView.postValue(showLoading)
         return this
     }
 
     fun setShowToast(showToast: String): BaseViewModel {
-        this.showToast.postValue(showToast)
+        this.toast.postValue(showToast)
         return this
     }
 
