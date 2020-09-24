@@ -47,7 +47,7 @@ open class IRootViewImpl() {
      */
     var iCreateToolbar: ICreateToolbar? = null
         get() {
-            return field ?: CoreConfig.instance.iCreateToolbar
+            return field ?: CoreConfig.get().iCreateToolbar
         }
 
     /**
@@ -89,7 +89,7 @@ open class IRootViewImpl() {
     @ToolBarMode
     var statusBarMode: Int? = null
         get() {
-            return field ?: CoreConfig.instance.isStatusMode
+            return field ?: CoreConfig.get().isStatusMode
         }
 
     /**

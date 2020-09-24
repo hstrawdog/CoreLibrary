@@ -53,7 +53,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      * 标题栏
      */
     var iToolBar: IToolBar? = null
-        get() = rootViewBuild.mIRootViewImpl.iToolBar
+        get() = rootViewBuild.iRootViewImpl.iToolBar
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法

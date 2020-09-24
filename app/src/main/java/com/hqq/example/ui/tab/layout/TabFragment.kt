@@ -18,7 +18,7 @@ class TabFragment : BaseFragment() {
 
     override val layoutViewId: Int
         get() = 0
-    override fun getLayoutView(group: ViewGroup): View? {
+    override fun getLayoutView(parent: ViewGroup): View? {
         val textView = TextView(activity)
         textView.text = "viewPage Fragment"
         return textView

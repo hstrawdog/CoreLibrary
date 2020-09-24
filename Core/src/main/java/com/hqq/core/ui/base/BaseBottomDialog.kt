@@ -25,15 +25,15 @@ import com.hqq.core.utils.log.LogUtils
  * 高度自定义
  */
 abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDialogFragment {
-    var mRootView: View? = null
-    var mLoaded = false
+    var rootView: View? = null
+    var loaded = false
     var behavior: BottomSheetBehavior<FrameLayout>? = null
     open val transparentBottomSheetStyle: Int = R.style.TransparentBottomSheetStyle
 
     /**
      * 布局创建 容器
      */
-    lateinit var mRootViewBuild: ICreateRootViewImpl<BaseBottomDialog>
+    lateinit var rootViewBuild: ICreateRootViewImpl<BaseBottomDialog>
 
     override val height: Int = CoordinatorLayout.LayoutParams.MATCH_PARENT
     override fun initConfig() {}
@@ -57,19 +57,19 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (mRootView == null) {
-            mRootViewBuild = ICreateRootViewImpl(this)
+        if (rootView == null) {
+            rootViewBuild = ICreateRootViewImpl(this)
             initConfig()
-            mRootView = mRootViewBuild!!.buildContentView(this)
+            rootView = rootViewBuild!!.buildContentView(this)
         }
         LogUtils.d("onCreateView " + javaClass.simpleName + this.toString())
-        return mRootView
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!mLoaded && mRootView != null) {
-            mLoaded = true
+        if (!loaded && rootView != null) {
+            loaded = true
             initView()
         }
     }
@@ -90,7 +90,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
 
     override fun onDestroy() {
         super.onDestroy()
-        mRootView = null
+        rootView = null
     }
 
 

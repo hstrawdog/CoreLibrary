@@ -2,7 +2,7 @@ package com.hqq.example.ui.jetpack.package1
 
 import android.content.Context
 import android.content.Intent
-import com.hqq.core.ui.vm.BaseViewModel
+import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.ui.vm.BaseVmActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityVmTestBinding

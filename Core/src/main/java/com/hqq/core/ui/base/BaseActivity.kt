@@ -43,7 +43,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      *  不支持赋值
      */
     val iToolBar: IToolBar?
-        get() = iCreateRootView.mIRootViewImpl.iToolBar
+        get() = iCreateRootView.iRootViewImpl.iToolBar
 
     /**
      *  初始化

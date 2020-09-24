@@ -55,10 +55,10 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
     override fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle) {
         this.parentView = parentView
         this.activity = WeakReference<Activity>(activity)
-        convertView = if (layoutViewId!! <= 0) {
+        convertView = if (layoutViewId <= 0) {
             getLayoutView(this.parentView!!)
         } else {
-            LayoutInflater.from(context).inflate(layoutViewId!!, this.parentView, false)
+            LayoutInflater.from(context).inflate(layoutViewId, this.parentView, false)
         }
         lifecycle.addObserver(this)
         initView()

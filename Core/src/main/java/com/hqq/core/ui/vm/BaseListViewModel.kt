@@ -3,6 +3,7 @@ package com.hqq.core.ui.vm
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.hqq.core.BaseCommonsKey
+import com.hqq.core.ui.base.BaseViewModel
 
 /**
  * @Author : huangqiqiang

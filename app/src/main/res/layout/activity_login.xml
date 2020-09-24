@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.hqq.example.demo.login.LoginModel" />
+            type="com.hqq.example.demo.login.LoginViewModel" />
 
     </data>
 

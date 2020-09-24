@@ -3,12 +3,11 @@ package com.hqq.core.ui.vm
 import android.content.Intent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
+import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.ui.binding.BaseBindingFragment
-import com.hqq.core.ui.base.IRootView.IBaseViewModel
-import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
+import com.hqq.core.ui.base.IRootView.IBaseViewModelActivity
+import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
 import com.hqq.core.ui.vm.ViewModelFactory.createViewModel
-import com.hqq.core.ui.vm.ViewModelFactory.initBaseViewModel
-import com.hqq.core.ui.vm.ViewModelFactory.initOpenActivity
 
 /**
  * @Author : huangqiqiang
@@ -18,12 +17,15 @@ import com.hqq.core.ui.vm.ViewModelFactory.initOpenActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :  同理Activity
  */
-abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBindingFragment<T>(), IBaseViewModel, IOpenActivity {
+abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
     protected var viewMode: K? = null
     override fun initView() {
         viewMode = getViewModel() as? K
-        loadingView?.let { initBaseViewModel(viewMode!!, this, it) }
-        initOpenActivity(viewMode!!!!, this, this)
+        viewMode?.let {
+            lifecycle.addObserver(it)
+            ViewModelFactory.initBaseViewModel(it, this, loadingView)
+            ViewModelFactory.initOpenActivity(it, this, this)
+        }
         addViewModel()
         initViews()
     }
@@ -44,10 +46,10 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBin
     }
 
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
-        val intent = Intent(activity, openActivityComponent.mActivityClass)
-        if (openActivityComponent.mBundle != null) {
-            intent.putExtras(openActivityComponent.mBundle!!)
+        val intent = Intent(activity, openActivityComponent.activityClass)
+        if (openActivityComponent.bundle != null) {
+            intent.putExtras(openActivityComponent.bundle!!)
         }
-        activity?.startActivityForResult(intent, openActivityComponent.mActivityResult)
+        activity?.startActivityForResult(intent, openActivityComponent.activityResult)
     }
 }

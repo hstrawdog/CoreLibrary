@@ -39,7 +39,7 @@ object ImageLoadUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreConfig.instance!!.defImg)//缓存SOURC和RESULT
+                .placeholder(CoreConfig.get().defImg)//缓存SOURC和RESULT
     //不做内存缓存
 
     /**
@@ -53,7 +53,7 @@ object ImageLoadUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreConfig.instance!!.defImg)
+                .placeholder(CoreConfig.get().defImg)
 
     fun getDefRoundRequestOptions(context: Context?): RequestOptions {
         return getRoundRequestOptions(ResourcesUtils.getDimen(R.dimen.x10).toInt())
@@ -71,7 +71,7 @@ object ImageLoadUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
-                .placeholder(CoreConfig.instance!!.defImg)
+                .placeholder(CoreConfig.get().defImg)
                 .transform(GlideRoundTransform(px))
     }
 

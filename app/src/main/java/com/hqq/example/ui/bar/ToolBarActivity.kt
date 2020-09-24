@@ -48,7 +48,7 @@ class ToolBarActivity : BaseActivity() {
         when (view.id) {
             R.id.tv_bar_right -> {
             }
-            R.id.button5 -> iToolBar?.setDefStatusColor(R.color.color_77400a)
+            R.id.button5 -> iToolBar?.setStatusColor(R.color.color_77400a)
             R.id.button4 -> iToolBar?.toolBarBg?.setImageResource(R.color.white)
             R.id.button7 -> iToolBar?.toolBarBg?.setImageResource(R.color.color_000)
             R.id.button3 -> iToolBar?.toolBarBg?.setImageResource(R.color.color_77400a)

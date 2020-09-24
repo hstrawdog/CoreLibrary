@@ -25,6 +25,20 @@ import androidx.annotation.ColorRes
  * - 在View 初始化完成 已经添加到 Activity后
  */
 interface IToolBar {
+
+    /**
+     * 构建后生成的View
+     *
+     * @return view
+     */
+    val rootView: View?
+
+    /**
+     * 背景颜色
+     */
+    var toolBarBg: ImageView?
+
+
     /**
      * 构建  标题栏
      *
@@ -71,17 +85,18 @@ interface IToolBar {
      * @param statusBarColor 颜色值
      * @return this
      */
-    fun setDefStatusColor(@ColorRes statusBarColor: Int): IToolBar
+    fun setStatusColor(@ColorRes statusBarColor: Int): IToolBar
 
-    fun setToolbarTitle(mTitle: CharSequence?)
 
     /**
-     * 构建后生成的View
-     *
-     * @return view
+     *  设置 toolBar 中的 标题
      */
-    val rootView: View?
+    fun setToolbarTitle(title: CharSequence?)
 
-    var toolBarBg: ImageView?
+    /**
+     *  中间的一条线
+     */
+    fun showLine(boolean: Boolean): IToolBar
+
 
 }

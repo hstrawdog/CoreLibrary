@@ -14,6 +14,7 @@ import java.lang.ref.WeakReference
  * @Email :  qiqiang213@gmail.com
  */
 class IToolBarBuilder {
+
     var activity: WeakReference<Activity>? = null
 
     /**
@@ -25,6 +26,8 @@ class IToolBarBuilder {
      * 是否显示 ToolBar
      */
     var showToolBar = true
+
+    var showLine = true
 
     /**
      * 默认白色
@@ -40,9 +43,10 @@ class IToolBarBuilder {
         var toolBar = iCreateToolbar?.createTooBar()
         toolBar?.let {
             it.setShowStatusBar(showStatusBar)
-                    .setShowBar(showToolBar)
-                    .setDefStatusColor(statusBarColor)
-                    .createToolBar(activity?.get())
+                .setShowBar(showToolBar)
+                .showLine(showLine)
+                .setStatusColor(statusBarColor)
+                .createToolBar(activity?.get())
         }
         return toolBar
     }

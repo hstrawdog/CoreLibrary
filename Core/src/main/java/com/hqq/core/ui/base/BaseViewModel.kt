@@ -1,10 +1,10 @@
-package com.hqq.core.ui.vm
+package com.hqq.core.ui.base
 
 import android.app.Activity
 import android.os.Bundle
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hqq.core.lifecycle.BaseLifecycleObserver
 import com.hqq.core.utils.log.LogUtils
 
 /**
@@ -22,7 +22,7 @@ import com.hqq.core.utils.log.LogUtils
  * 2.  实现lifeCycle接口  -> 问题 viewModel的lifeCycle中onCreate的方法的执行顺序是否与init中绑定有关系呢
  * ViewModel 中的 OnCreate 为什么是在BaseActivity的InitView 之后
  */
-abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
+abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     /**
      * 是否显示Loading
      */
@@ -43,8 +43,11 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
      */
     var bundle: Bundle? = null
 
+    var goBack = MutableLiveData<GoBackComponent>()
+
+
     init {
-        LogUtils .e(" BaseViewModel  init " )
+        LogUtils.e(" BaseViewModel  init ")
     }
 
     /**
@@ -67,25 +70,12 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
         this.bundle = bundle
         return this
     }
+
     /**
      * @param cls        Activity 类型
      * @param bundle     传递的值
      * @param resultCode 回调code
      */
-    /**
-     * @param cls
-     * @param bundle
-     */
-    /**
-     * 不建议使用此方法进行跳转
-     * Activity 应当是要有统一的入口 方便维护与排查入参数
-     *
-     * @param cls
-     */
-    fun startActivity(cls: Class<out Activity?>?, bundle: Bundle? = null, resultCode: Int = -1) {
-        openActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, resultCode)
-    }
-
     fun setShowLoading(showLoading: Boolean): BaseViewModel {
         this.loadingView.postValue(showLoading)
         return this
@@ -96,10 +86,30 @@ abstract class BaseViewModel : ViewModel(), BaseLifecycleObserver {
         return this
     }
 
+    /**
+     * 不建议使用此方法进行跳转
+     * Activity 应当是要有统一的入口 方便维护与排查入参数
+     *
+     * @param cls
+     */
+    fun startActivity(cls: Class<out Activity?>?, bundle: Bundle? = null, resultCode: Int = -1) {
+        openActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, resultCode)
+    }
 
+    fun finish() {
+        goBack.value = GoBackComponent(true)
+    }
 
     /**
      * 打开Activity的对象零件
      */
-    class OpenActivityComponent @JvmOverloads constructor(var mActivityClass: Class<out Activity?>?, var mBundle: Bundle? = null, var mActivityResult: Int = -1) : MutableLiveData<Any?>()
+    class OpenActivityComponent @JvmOverloads constructor(
+        var activityClass: Class<out Activity?>?,
+        var bundle: Bundle? = null,
+        var activityResult: Int = -1
+    )
+
+    class GoBackComponent @JvmOverloads  constructor(
+        var goBack: Boolean = false, var bundle: Bundle? = null,
+    ) : LiveData<Boolean>(goBack)
 }

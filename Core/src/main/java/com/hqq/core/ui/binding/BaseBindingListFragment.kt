@@ -23,7 +23,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding, AD : BaseQuickAdapte
     /**
      * List列表模型
      */
-    var mBaseListModel: BaseListModelView? = null
+    var baseListModel: BaseListModelView? = null
 
     override val layoutId: Int
         get() = R.layout.activity_recycle_view
@@ -44,7 +44,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding, AD : BaseQuickAdapte
      */
     @CallSuper
     override fun initView() {
-        mBaseListModel = BaseListModelView(this, rootViewBuild)
+        baseListModel = BaseListModelView(this, rootViewBuild)
         initData()
     }
 
@@ -70,7 +70,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding, AD : BaseQuickAdapte
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
-        mBaseListModel = null
+        baseListModel = null
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.hqq.core.ui.vm
 
 import androidx.lifecycle.*
+import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.widget.LoadingView
 import java.lang.reflect.ParameterizedType
@@ -17,7 +18,11 @@ internal object ViewModelFactory {
     /**
      * 初始化 BaseViewModel中关联ui的字段
      */
-    fun initBaseViewModel(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner, loadingView: LoadingView?) {
+    fun initBaseViewModel(
+        viewModel: BaseViewModel,
+        lifecycleOwner: LifecycleOwner,
+        loadingView: LoadingView?
+    ) {
         viewModel.loadingView.observe(lifecycleOwner, Observer { aBoolean: Boolean? ->
             if (loadingView != null) {
                 if (aBoolean!!) {
@@ -37,7 +42,11 @@ internal object ViewModelFactory {
      * @param aClass
      * @return
      */
-    fun <K : ViewModel?> createViewModel(viewModelStoreOwner: ViewModelStoreOwner, aClass: Class<*>, mViewModel: K): K? {
+    fun <K : ViewModel?> createViewModel(
+        viewModelStoreOwner: ViewModelStoreOwner,
+        aClass: Class<*>,
+        mViewModel: K
+    ): K? {
         var mViewModel: K? = mViewModel
         if (mViewModel == null) {
             // 利用反射获取泛型类型 ViewModel子类 对象名称
@@ -62,14 +71,30 @@ internal object ViewModelFactory {
      * @param <K>
      * @return
      */
-    fun <K : ViewModel?> createViewModel(viewModelStoreOwner: ViewModelStoreOwner, modelClass: Class<K>): K {
-        return ViewModelProvider(viewModelStoreOwner!!)[modelClass!!]
+    fun <K : ViewModel?> createViewModel(
+        viewModelStoreOwner: ViewModelStoreOwner,
+        modelClass: Class<K>
+    ): K {
+        return ViewModelProvider(viewModelStoreOwner)[modelClass]
     }
 
     /**
      *  打开某个Activity
      */
-    fun initOpenActivity(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner?, openActivity: IOpenActivity) {
-        viewModel.openActivityComponentMutableLiveData.observe(lifecycleOwner!!, Observer { openActivityComponent -> openActivity.openActivity(openActivityComponent) })
+    fun initOpenActivity(
+        viewModel: BaseViewModel,
+        lifecycleOwner: LifecycleOwner?,
+        openActivity: IOpenActivity
+    ) {
+        viewModel.openActivityComponentMutableLiveData.observe(
+            lifecycleOwner!!,
+            Observer { openActivityComponent -> openActivity.openActivity(openActivityComponent) })
     }
+
+    fun initGoBack(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner, iGoBack: IFinishActivity) {
+        viewModel.goBack.observe(lifecycleOwner, Observer { goBackComponent ->
+            iGoBack.finishActivity(goBackComponent)
+        })
+    }
+
 }

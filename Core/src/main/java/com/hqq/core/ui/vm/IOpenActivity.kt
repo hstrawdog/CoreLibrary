@@ -1,6 +1,7 @@
 package com.hqq.core.ui.vm
 
-import com.hqq.core.ui.vm.BaseViewModel.OpenActivityComponent
+import com.hqq.core.ui.base.BaseViewModel
+import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
 
 /**
  * @Author : huangqiqiang
@@ -18,4 +19,9 @@ interface IOpenActivity {
      * @param openActivityComponent
      */
     fun openActivity(openActivityComponent: OpenActivityComponent)
+}
+
+interface IFinishActivity {
+
+    fun finishActivity(goBackComponent: BaseViewModel.GoBackComponent)
 }

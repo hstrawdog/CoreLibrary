@@ -26,41 +26,40 @@ class ICreateRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar:
      */
     var activity: Activity? = null
 
-
     /**
      * 是否强制竖屏
      */
-    val isAlwaysPortrait: Boolean = true
+    private val isAlwaysPortrait: Boolean = true
 
     /**
      * 布局构建器
      */
-    var mIRootViewImpl: IRootViewImpl = IRootViewImpl()
+    var iRootViewImpl: IRootViewImpl = IRootViewImpl()
 
     override var rootView: View? = null
 
     constructor(activity: T) : this(activity, false, false)
 
     init {
-        mIRootViewImpl.iToolBarBuilder.showStatusBar = showStatus
-        mIRootViewImpl.iToolBarBuilder.showToolBar = showToolBar
+        iRootViewImpl.iToolBarBuilder.showStatusBar = showStatus
+        iRootViewImpl.iToolBarBuilder.showToolBar = showToolBar
         if (context is Activity) {
             activity = context
             // 只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
-            mIRootViewImpl.immersiveStatusBar = true
+            iRootViewImpl.immersiveStatusBar = true
         } else if (context is DialogFragment) {
             activity = (context as DialogFragment).activity
-            mIRootViewImpl.bgColor = R.color.transparent
+            iRootViewImpl.bgColor = R.color.transparent
         } else if (context is Fragment) {
             activity = (context as Fragment).activity
         } else {
             LogUtils.e(Exception("不支持的类" + context.javaClass.getName()))
         }
-        activity?.let { mIRootViewImpl.setActivity(it) }
+        activity?.let { iRootViewImpl.setActivity(it) }
     }
 
     override fun buildContentView(iActivityBuilder: IRootView): View? {
-        rootView = mIRootViewImpl.createRootView(iActivityBuilder)
+        rootView = iRootViewImpl.createRootView(iActivityBuilder)
         return rootView
     }
 

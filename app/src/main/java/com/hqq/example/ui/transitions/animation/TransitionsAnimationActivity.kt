@@ -24,8 +24,8 @@ class TransitionsAnimationActivity(override val baseAdapter: StringListAdapter =
 
     override fun initData() {
         baseAdapter.setOnItemClickListener(this)
-        baseAdapter?.addData("overridePendingTransition")
-        baseAdapter?.addData("makeCustomAnimation")
+        baseAdapter.addData("overridePendingTransition")
+        baseAdapter.addData("makeCustomAnimation")
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {

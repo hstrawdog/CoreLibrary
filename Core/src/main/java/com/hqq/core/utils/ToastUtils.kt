@@ -71,6 +71,6 @@ object ToastUtils {
      */
     @kotlin.jvm.JvmStatic
     fun showToast(text: String) {
-        showToast(CoreConfig.instance!!.application, text)
+        showToast(CoreConfig.get().application, text)
     }
 }

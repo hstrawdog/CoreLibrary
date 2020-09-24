@@ -53,7 +53,7 @@ class BaseToolBarSearch() : BaseToolBar() {
     }
 
     override fun setToolBarColor(colorId: Int) {}
-    override fun setToolbarTitle(mTitle: CharSequence?) {
+    override fun setToolbarTitle(title: CharSequence?) {
 
     }
     val deleteView: ImageView

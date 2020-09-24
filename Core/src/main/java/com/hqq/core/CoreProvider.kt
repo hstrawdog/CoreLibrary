@@ -21,8 +21,8 @@ class CoreProvider : ContentProvider() {
         /**
          * 默认初始化 CoreConfig
          */
-        if (RegexUtils.isNull(CoreConfig.instance.application)) {
-            CoreConfig.instance.init(context as Application?, true)
+        if (RegexUtils.isNull(CoreConfig.get().application)) {
+            CoreConfig.get().init(context as Application?, true)
         }
         return false
     }

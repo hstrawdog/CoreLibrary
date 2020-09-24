@@ -37,7 +37,7 @@ class TabLayoutActivity : BaseActivity() {
 
     override fun initConfig() {
         super.initConfig()
-        iToolBar?.setDefStatusColor(R.color.color_main)
+        iToolBar?.setStatusColor(R.color.color_main)
     }
 
     override fun initView() {

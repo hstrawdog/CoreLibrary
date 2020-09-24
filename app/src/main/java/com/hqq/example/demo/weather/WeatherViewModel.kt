@@ -7,7 +7,7 @@ import com.amap.api.location.AMapLocationListener
 import com.hqq.core.CoreConfig
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils.requestLocationPermission
-import com.hqq.core.ui.vm.BaseViewModel
+import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.demo.net.HttpManager
 import com.hqq.example.demo.net.NetCallback
@@ -43,7 +43,7 @@ class WeatherViewModel : BaseViewModel() {
         e(" -------WeatherViewModel--------- onCrete ------")
 
 //初始化定位
-        mLocationClient = AMapLocationClient(CoreConfig.instance.application)
+        mLocationClient = AMapLocationClient(CoreConfig.get().application)
         //设置定位回调监听
         mLocationClient!!.setLocationListener(mLocationListener)
         //初始化AMapLocationClientOption对象

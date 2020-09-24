@@ -20,7 +20,7 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  */
 abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD : BaseQuickAdapter<*, *>>
     : BaseVmActivity<T, K>(), IBaseListModelView<AD> {
-     var mBaseListModel: BaseListModelView? = null
+     private var mBaseListModel: BaseListModelView? = null
     override val layoutId: Int
         get() = R.layout.activity_recycle_view
     override val pageCount: Int

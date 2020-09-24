@@ -23,7 +23,7 @@ object LogUtils {
      */
     var TAG = BuildConfig.LIBRARY_PACKAGE_NAME
     fun i(`object`: Any?) {
-        if (CoreConfig.instance.isDebug) {
+        if (CoreConfig.get().isDebug) {
             if (`object` == null) {
                 i("标签" + TAG + "的打印内容为空！")
             }
@@ -47,7 +47,7 @@ object LogUtils {
      * @param object
      */
     fun d(tag: String, `object`: Any?) {
-        if (CoreConfig.instance.isDebug) {
+        if (CoreConfig.get().isDebug) {
             if (`object` == null) {
                 d("标签" + tag + "的打印内容为空！")
             }
@@ -56,7 +56,7 @@ object LogUtils {
     }
 
     fun e(`object`: Exception?) {
-        if (CoreConfig.instance.isDebug) {
+        if (CoreConfig.get().isDebug) {
             if (`object` == null) {
                 d("标签" + TAG + "的打印内容为空！")
             }
@@ -81,7 +81,7 @@ object LogUtils {
      */
     @kotlin.jvm.JvmStatic
     fun e(tag: String, `object`: Any?) {
-        if (CoreConfig.instance.isDebug) {
+        if (CoreConfig.get().isDebug) {
             if (`object` == null) {
                 e("标签" + tag + "的打印内容为空！")
             }
@@ -103,7 +103,7 @@ object LogUtils {
     }
 
     fun v(`object`: Any?) {
-        if (CoreConfig.instance.isDebug) {
+        if (CoreConfig.get().isDebug) {
             if (`object` == null) {
                 v("标签" + TAG + "的打印内容为空！")
             }
@@ -112,7 +112,7 @@ object LogUtils {
     }
 
     fun w(`object`: Any?) {
-        if (CoreConfig.instance.isDebug) {
+        if (CoreConfig.get().isDebug) {
             if (`object` == null) {
                 w("标签" + TAG + "的打印内容为空！")
             }

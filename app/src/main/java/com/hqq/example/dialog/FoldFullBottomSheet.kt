@@ -21,7 +21,7 @@ class FoldFullBottomSheet : BaseBottomDialog() {
         get() = R.layout.dialog_bottom_sheet
 
     override fun initView() {
-        val recyclerView: RecyclerView = mRootView!!.findViewById(R.id.rc_list)
+        val recyclerView: RecyclerView = rootView!!.findViewById(R.id.rc_list)
         recyclerView.layoutManager = LinearLayoutManager(context)
         for (i in 0..19) {
             mStringAdapter.addData("    $i")

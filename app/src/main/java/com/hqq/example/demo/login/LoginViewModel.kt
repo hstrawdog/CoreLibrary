@@ -3,7 +3,7 @@ package com.hqq.example.demo.login
 import android.view.View
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.hqq.core.ui.vm.BaseViewModel
+import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.example.demo.net.HttpManager.login
 
 /**
@@ -14,7 +14,7 @@ import com.hqq.example.demo.net.HttpManager.login
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class LoginModel : BaseViewModel() {
+class LoginViewModel : BaseViewModel() {
     var mPhone: MutableLiveData<String> = MediatorLiveData()
     var mPassWord: MutableLiveData<String> = MediatorLiveData()
     fun onLoginClick(view: View?) {
@@ -25,7 +25,7 @@ class LoginModel : BaseViewModel() {
     val phone: String?
         get() = mPhone.value
 
-    fun setPhone(phone: String): LoginModel {
+    fun setPhone(phone: String): LoginViewModel {
         mPhone.value = phone
         return this
     }
@@ -33,7 +33,7 @@ class LoginModel : BaseViewModel() {
     val passWord: String?
         get() = mPassWord.value
 
-    fun setPassWord(passWord: String): LoginModel {
+    fun setPassWord(passWord: String): LoginViewModel {
         mPassWord.value = passWord
         return this
     }

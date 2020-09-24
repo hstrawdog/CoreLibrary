@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
+import com.hqq.core.lifecycle.BaseLifecycleObserver
 
 /**
  * @Author : huangqiqiang
@@ -132,7 +133,12 @@ interface IRootView {
          * @param context
          * @param lifecycle
          */
-        fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle)
+        fun createRootView(
+            parentView: ViewGroup?,
+            activity: Activity?,
+            context: Context?,
+            lifecycle: Lifecycle
+        )
     }
 
     /**
@@ -151,7 +157,7 @@ interface IRootView {
     /**
      * 同上  多了一个ViewModel要banding
      */
-    interface IBaseViewModel : IBanding {
+    interface IBaseViewModelActivity : IBanding {
 
         /**
          * 独立出ViewModel的初始化
@@ -180,4 +186,11 @@ interface IRootView {
          */
         fun initViews()
     }
+
+
+    interface IBaseViewModel : BaseLifecycleObserver {
+
+    }
+
+
 }

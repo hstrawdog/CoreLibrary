@@ -21,7 +21,7 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
     // Fragment 的用法与 Activity保持一致  注释
 
-    var mBaseListModel: BaseListModelView? = null
+    var baseListModel: BaseListModelView? = null
 
     override var listView: RecyclerView? = null
 
@@ -45,7 +45,7 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
     }
 
     override fun initView() {
-        mBaseListModel = BaseListModelView(this, rootViewBuild)
+        baseListModel = BaseListModelView(this, rootViewBuild)
         initData()
     }
 

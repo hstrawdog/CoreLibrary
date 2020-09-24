@@ -9,7 +9,6 @@ import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.view.page.IFragmentActivityBuilder
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -80,7 +79,7 @@ class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
         list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
         list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
         list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-        mBaseListModel!!.fillingData(list as ArrayList<Nothing>)
+        baseListModel!!.fillingData(list as ArrayList<Nothing>)
     }
 
 

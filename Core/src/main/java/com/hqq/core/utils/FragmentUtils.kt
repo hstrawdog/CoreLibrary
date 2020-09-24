@@ -1,17 +1,18 @@
-package com.hqq.core.ui.base
+package com.hqq.core.utils
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 /**
  * @Author : huangqiqiang
- * @Package : com.core.library
- * @FileName :   BaseFrameLayoutActivity
- * @Date : 2018/9/18 0018  下午 2:08
- * @Email :  qiqiang213@gmail.com
+ * @Package : com.hqq.core.utils
+ * @Date : 下午 2:11
+ * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseFrameLayoutActivity : BaseActivity() {
+class FragmentUtils(val supportFragmentManager: FragmentManager) {
     var currentFragment: Fragment? = null
+
     /**
      * 添加或者显示 fragment
      *
@@ -27,13 +28,15 @@ abstract class BaseFrameLayoutActivity : BaseActivity() {
             if (currentFragment == null) {
                 supportFragmentManager.beginTransaction().add(id, fragment).commit()
             } else {
-                supportFragmentManager.beginTransaction().hide(currentFragment!!).add(id, fragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment!!).add(id, fragment)
+                    .commit()
             }
         } else {
             if (currentFragment == null) {
                 supportFragmentManager.beginTransaction().show(fragment).commit()
             } else {
-                supportFragmentManager.beginTransaction().hide(currentFragment!!).show(fragment).commit()
+                supportFragmentManager.beginTransaction().hide(currentFragment!!).show(fragment)
+                    .commit()
             }
         }
         currentFragment = fragment

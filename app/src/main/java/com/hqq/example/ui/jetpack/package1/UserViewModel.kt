@@ -3,9 +3,8 @@ package com.hqq.example.ui.jetpack.package1
 import android.os.Handler
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import com.hqq.core.ui.vm.BaseViewModel
+import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.example.ui.jetpack.livedata.User
-import com.hqq.example.ui.jetpack.package1.MvvmTestActivity
 
 /**
  * @Author : huangqiqiang

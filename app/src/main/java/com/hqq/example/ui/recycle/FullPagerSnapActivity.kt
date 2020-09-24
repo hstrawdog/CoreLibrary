@@ -37,8 +37,8 @@ class FullPagerSnapActivity : BaseActivity() {
             override fun getDivider(parent: RecyclerView?, itemPosition: Int): Divider? {
                 val divider: DividerBuilder
                 divider = DividerBuilder()
-                divider.setRightSideLine(activity!!, R.color.color_main, R.dimen.x5)
-                divider.setBottomSideLine(activity!!, R.color.color_main, R.dimen.x5)
+                divider.setRightSideLine(activity, R.color.color_main, R.dimen.x5)
+                divider.setBottomSideLine(activity, R.color.color_main, R.dimen.x5)
                 return divider.create()
             }
         })

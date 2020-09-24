@@ -22,6 +22,7 @@ class ToastActivity : BaseActivity() {
 
     override val layoutViewId: Int
         get() = R.layout.activity_toast
+
     override fun initView() {
         findViewById<View>(R.id.button35).setOnClickListener { v: View? -> onClickButton(v) }
         findViewById<View>(R.id.button36).setOnClickListener { v: View? -> onClickButton2(v) }
@@ -31,7 +32,7 @@ class ToastActivity : BaseActivity() {
         val toast = Toast(activity)
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = layoutInflater.inflate(R.layout.view_toast, null)
-        toast.setView(view)
+        toast.view = view
         toast.show()
     }
 

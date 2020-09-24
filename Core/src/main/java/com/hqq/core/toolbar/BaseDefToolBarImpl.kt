@@ -29,17 +29,38 @@ import com.hqq.core.widget.FilterImageView
 class BaseDefToolBarImpl : BaseToolBar() {
 
     override var toolBarBg: ImageView? = null
-    private var mDefToolBarColor = R.color.toolbar_bg_color
     private val mDefTitleColor = R.color.color_333
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
-        val toolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_def_toolbar, viewGroup, false) as Toolbar
+        val toolbar = LayoutInflater.from(activity.baseContext)
+            .inflate(R.layout.layout_def_toolbar, viewGroup, false) as Toolbar
         toolbar.findViewById<View>(R.id.iv_bar_back).setOnClickListener { activity.onBackPressed() }
         toolBarBg = toolbar.findViewById(R.id.iv_toolBar_Bg)
         toolBarBg?.setBackgroundResource(mDefToolBarColor)
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).text = activity.title
-        (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).setTextColor(ContextCompat.getColor(toolbar.context, mDefTitleColor))
+        (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).setTextColor(
+            ContextCompat.getColor(
+                toolbar.context,
+                mDefTitleColor
+            )
+        )
         return toolbar
     }
+
+    /**
+     * 获取左边 图标View
+     *
+     * @return ImageView
+     */
+    val leftView: ImageView
+        get() = rootView!!.findViewById(R.id.iv_bar_back)
+
+    /**
+     * 获取标题View
+     *
+     * @return
+     */
+    val toolbarTitle: TextView?
+        get() = rootView?.findViewById(R.id.tv_bar_title)
 
     /**
      * 滑动效果
@@ -68,11 +89,8 @@ class BaseDefToolBarImpl : BaseToolBar() {
     }
 
     override fun setToolBarColor(color: Int) {
-        if (null != toolBarBg) {
-            toolBarBg!!.setImageResource(color)
-        } else {
-            mDefToolBarColor = color
-        }
+        toolBarBg?.setImageResource(color)
+        mDefToolBarColor = color
         if (null != statusBar) {
             statusBar!!.setBackgroundResource(color)
         } else {
@@ -86,7 +104,6 @@ class BaseDefToolBarImpl : BaseToolBar() {
         }
 
     }
-
 
     /**
      * 设置背景的透明度
@@ -111,23 +128,6 @@ class BaseDefToolBarImpl : BaseToolBar() {
             toolBarBg!!.alpha = ahpla
         }
     }
-
-    /**
-     * 获取左边 图标View
-     *
-     * @return ImageView
-     */
-    val leftView: ImageView
-        get() = rootView!!.findViewById(R.id.iv_bar_back)
-
-
-    /**
-     * 获取标题View
-     *
-     * @return
-     */
-    val toolbarTitle: TextView?
-        get() = rootView?.findViewById(R.id.tv_bar_title)
 
     /**
      * 设置背景颜色 需要在view创建完成
@@ -199,7 +199,11 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @param color
      * @param clickListener
      */
-    fun addRightTextView(title: String?, @ColorRes color: Int, clickListener: View.OnClickListener?) {
+    fun addRightTextView(
+        title: String?,
+        @ColorRes color: Int,
+        clickListener: View.OnClickListener?
+    ) {
         addRightTextView(title, R.color.color_333, R.dimen.x28, clickListener)
     }
 
@@ -209,7 +213,12 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @param size
      * @param clickListener
      */
-    fun addRightTextView(title: String?, @ColorRes color: Int, @DimenRes size: Int, clickListener: View.OnClickListener?) {
+    fun addRightTextView(
+        title: String?,
+        @ColorRes color: Int,
+        @DimenRes size: Int,
+        clickListener: View.OnClickListener?
+    ) {
         addRightView(newTextView(title, color, size, clickListener))
     }
 
@@ -222,12 +231,20 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @param clickListener
      * @return
      */
-    private fun newTextView(title: String?, @ColorRes color: Int, @DimenRes size: Int, clickListener: View.OnClickListener?): View {
+    private fun newTextView(
+        title: String?,
+        @ColorRes color: Int,
+        @DimenRes size: Int,
+        clickListener: View.OnClickListener?
+    ): View {
         val textView = TextView(rootView?.context)
         textView.text = title
         textView.setPadding(0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt(), 0)
         textView.gravity = Gravity.CENTER
-        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         textView.layoutParams = params
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, ResourcesUtils.getDimen(size))
         textView.setOnClickListener(clickListener)
@@ -245,7 +262,14 @@ class BaseDefToolBarImpl : BaseToolBar() {
         addRightImageView(icImage, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt(), 0, listener)
     }
 
-    fun addRightImageView(@DrawableRes icImage: Int, left: Int, top: Int, right: Int, bottom: Int, listener: View.OnClickListener?) {
+    fun addRightImageView(
+        @DrawableRes icImage: Int,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+        listener: View.OnClickListener?
+    ) {
         addRightView(newImageView(icImage, left, top, right, bottom, listener))
     }
 
@@ -260,12 +284,22 @@ class BaseDefToolBarImpl : BaseToolBar() {
      * @param listener
      * @return
      */
-    private fun newImageView(@DrawableRes icImage: Int, left: Int, top: Int, right: Int, bottom: Int, listener: View.OnClickListener?): View {
+    private fun newImageView(
+        @DrawableRes icImage: Int,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+        listener: View.OnClickListener?
+    ): View {
         val imageView = FilterImageView(rootView?.context)
         imageView.adjustViewBounds = true
         imageView.setImageResource(icImage)
         imageView.scaleType = ImageView.ScaleType.CENTER
-        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         imageView.layoutParams = params
         imageView.setPadding(left, top, right, bottom)
         imageView.setOnClickListener(listener)

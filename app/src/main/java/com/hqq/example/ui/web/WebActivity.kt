@@ -22,8 +22,8 @@ class WebActivity : BaseFrameLayoutActivity() {
 
     override fun initConfig() {
         super.initConfig()
-        iCreateRootView.mIRootViewImpl.iToolBarBuilder.showStatusBar = false
-        iCreateRootView.mIRootViewImpl.iToolBarBuilder.showToolBar = false
+        iCreateRootView.iRootViewImpl.iToolBarBuilder.showStatusBar = false
+        iCreateRootView.iRootViewImpl.iToolBarBuilder.showToolBar = false
     }
 
     override fun initView() {

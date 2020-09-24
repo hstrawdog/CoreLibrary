@@ -21,19 +21,22 @@ class CoreConfig private constructor() {
      * 单利维持对象
      */
     companion object {
-        var singleton: CoreConfig = instance
-        val instance: CoreConfig
-            get() {
 
-                if (singleton == null) {
+        private var instance: CoreConfig? = null
+            get() {
+                if (field == null) {
                     synchronized(CoreConfig::class.java) {
-                        if (singleton == null) {
-                            singleton = CoreConfig()
+                        if (field == null) {
+                            field = CoreConfig()
                         }
                     }
                 }
-                return singleton
+                return field
             }
+
+        fun get(): CoreConfig {
+            return instance!!
+        }
     }
 
 
