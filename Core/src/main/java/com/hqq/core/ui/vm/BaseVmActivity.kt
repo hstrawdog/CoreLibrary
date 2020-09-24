@@ -37,6 +37,9 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
         }
         addViewModel()
         initViews()
+        viewMode?.let {
+            it.initData()
+        }
     }
 
     override fun getViewModel(): ViewModel? {

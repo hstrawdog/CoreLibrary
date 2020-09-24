@@ -28,11 +28,14 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBin
         }
         addViewModel()
         initViews()
+        viewMode?.let {
+            it.initData()
+        }
     }
 
 
     override fun getViewModel(): ViewModel? {
-      return  createViewModel(this, javaClass, viewMode)
+        return createViewModel(this, javaClass, viewMode)
     }
 
     /**

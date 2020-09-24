@@ -134,10 +134,10 @@ interface IRootView {
          * @param lifecycle
          */
         fun createRootView(
-            parentView: ViewGroup?,
-            activity: Activity?,
-            context: Context?,
-            lifecycle: Lifecycle
+                parentView: ViewGroup?,
+                activity: Activity?,
+                context: Context?,
+                lifecycle: Lifecycle
         )
     }
 
@@ -189,7 +189,12 @@ interface IRootView {
 
 
     interface IBaseViewModel : BaseLifecycleObserver {
-
+        /**
+         * 是在 Activity中执行onCreate 是可以的 ViewModel的onCreate 是最后执行的  被子类的 onCreate 执行还晚
+         *  Fragment 不一样  Fragment 涉及到延迟加载  需要当界面显示出来后再执行ViewModel 所以需要initData
+         *
+         */
+        fun initData()
     }
 
 
