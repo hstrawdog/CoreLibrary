@@ -33,10 +33,8 @@ abstract class BaseListViewModel : BaseViewModel() {
         return this
     }
 
-    val date: List<*>
-        get() = data.value!!
 
-    fun setDate(date: List<*>): BaseListViewModel {
+    fun setData(date: List<*>): BaseListViewModel {
         data.value = date
         return this
     }

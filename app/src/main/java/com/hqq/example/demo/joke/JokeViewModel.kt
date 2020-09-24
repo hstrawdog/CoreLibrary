@@ -27,7 +27,7 @@ class JokeViewModel : BaseListViewModel() {
         private get() {
             getJoke(pageCount, object : NetCallback<Joke>() {
                 override fun onSuccess(response: Joke) {
-                    setDate(response.data)
+                    setData(response.data)
                 }
             })
         }

@@ -19,9 +19,9 @@ class NewsViewModel : BaseListViewModel() {
         getNews(object : NetCallback<News>() {
             override fun onSuccess(response: News) {
                 if (response != null) {
-                    setDate(response.data)
+                    setData(response.data)
                 } else {
-                    setDate(ArrayList<Any?>())
+                    setData(ArrayList<Any?>())
                 }
             }
 

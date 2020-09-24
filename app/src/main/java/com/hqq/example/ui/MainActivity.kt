@@ -127,7 +127,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
             arrayList.add(MainBean("换肤测试", SkinAActivity::class.java))
             arrayList.add(MainBean("SVG测试", SvgActivity::class.java))
             arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
-            setDate(arrayList)
+            setData(arrayList)
 
         }
     }
