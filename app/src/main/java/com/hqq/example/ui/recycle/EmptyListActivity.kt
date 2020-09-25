@@ -2,8 +2,6 @@ package com.hqq.example.ui.recycle
 
 import com.hqq.core.ui.base.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @Author : huangqiqiang

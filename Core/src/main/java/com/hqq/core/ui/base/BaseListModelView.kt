@@ -86,7 +86,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      * @return
      */
     private val adapter: BaseQuickAdapter<*, *>
-         get() = mBaseListModelView.baseAdapter!!
+         get() = mBaseListModelView.baseAdapter
 
 
     /**
