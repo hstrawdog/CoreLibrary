@@ -13,7 +13,7 @@ import java.util.*
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class NewsViewModel : BaseListViewModel() {
+class NewsViewModel : BaseListViewModel<News.DataBean>() {
     override fun onCrete() {
         super.onCrete()
         getNews(object : NetCallback<News>() {
@@ -21,7 +21,7 @@ class NewsViewModel : BaseListViewModel() {
                 if (response != null) {
                     setData(response.data)
                 } else {
-                    setData(ArrayList<Any?>())
+                    setData(ArrayList<News.DataBean>())
                 }
             }
 

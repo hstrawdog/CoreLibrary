@@ -16,12 +16,11 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseListFragment<T : BaseQuickAdapter<*, *>> :
-        BaseFragment(), IBaseListModelView<T> {
+abstract class BaseListFragment<B> :
+        BaseFragment(), IBaseListModelView<B> {
 
     // Fragment 的用法与 Activity保持一致  注释
 
-    var baseListModel: BaseListModelView? = null
 
     override var listView: RecyclerView? = null
 

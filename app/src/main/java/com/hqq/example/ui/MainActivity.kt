@@ -46,7 +46,7 @@ import kotlinx.coroutines.launch
  * @Email :  qiqiang213@gmail.com
  */
 @AndroidEntryPoint
-class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdapter>() {
+class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel,MainBean<*>>() {
 
     override val baseAdapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int
@@ -64,7 +64,6 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
 //        LiveDateActivity.open(this)
 
     }
-
 
 
     val mV: MainViewModel by viewModels()
@@ -95,7 +94,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
         return mVl
     }
 
-    class MainViewModel @ViewModelInject constructor() : BaseListViewModel() {
+    class MainViewModel @ViewModelInject constructor() : BaseListViewModel<MainBean<*>>() {
         init {
             LogUtils.e("MainModel init 1  ")
             viewModelScope.launch {
@@ -132,7 +131,6 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
 
         }
     }
-
 
 
 }

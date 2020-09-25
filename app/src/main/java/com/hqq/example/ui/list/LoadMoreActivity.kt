@@ -16,16 +16,16 @@ import java.util.*
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class LoadMoreActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainAdapter>() {
+class LoadMoreActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainBean<*>>() {
 
     override fun initData() {
-        mBaseListModel?.fillingData(data as List<Nothing>)
+        baseListModel?.fillingData(data as List<Nothing>)
     }
 
     override fun onLoadMore() {
         Handler().postDelayed({
-            if (mBaseListModel != null) {
-                mBaseListModel!!.fillingData(data as List<Nothing>)
+            if (baseListModel != null) {
+                baseListModel!!.fillingData(data as List<Nothing>)
                 baseAdapter!!.loadMoreModule.loadMoreComplete()
             }
         }, 2000)

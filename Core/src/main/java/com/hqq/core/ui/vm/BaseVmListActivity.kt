@@ -18,9 +18,9 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Descrive :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
-abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD : BaseQuickAdapter<*, *>>
-    : BaseVmActivity<T, K>(), IBaseListModelView<AD> {
-    private var mBaseListModel: BaseListModelView? = null
+abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel<B>, B>
+    : BaseVmActivity<T, K>(), IBaseListModelView<B> {
+    private var mBaseListModel: BaseListModelView<B>? = null
 
     override val layoutId: Int
         get() = R.layout.activity_recycle_view
@@ -34,10 +34,13 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel, AD
     override var listView: RecyclerView? = null
 
     override val rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
+    override lateinit var baseListModel: BaseListModelView<*>
 
     override fun initViews() {
         mBaseListModel = BaseListModelView(this, iCreateRootView)
-        viewMode?.data?.observe(this, Observer { arrayList -> mBaseListModel!!.fillingData(arrayList as List<Nothing>) })
+        viewMode?.data?.observe(this, Observer {
+            mBaseListModel?.fillingData(it)
+        })
         initData()
     }
 

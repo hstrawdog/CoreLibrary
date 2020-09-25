@@ -2,6 +2,7 @@ package com.hqq.example.ui.recycle
 
 import com.hqq.core.ui.base.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
+import com.hqq.example.bean.MainBean
 
 /**
  * @Author : huangqiqiang
@@ -11,7 +12,7 @@ import com.hqq.example.adapter.MainAdapter
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class EmptyListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainAdapter>() {
+class EmptyListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainBean<*>>() {
 
     override fun initData() {
         mBaseListModel!!.fillingData(ArrayList<String>() as ArrayList<Nothing>)

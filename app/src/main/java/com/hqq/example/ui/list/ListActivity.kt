@@ -19,7 +19,7 @@ import com.hqq.example.ui.view.page.IFragmentActivityBuilder
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class ListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainAdapter>() {
+class ListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainBean<*>>() {
     override fun initData() {
 
         listView?.addItemDecoration(HeaderItemDecoration(listView!!, object : StickyHeaderInterface {
@@ -82,8 +82,8 @@ class ListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : Base
                 list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
                 list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
                 list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                loadingView!!.dismiss()
-                mBaseListModel!!.fillingData(list as ArrayList<Nothing>)
+                loadingView.dismiss()
+                baseListModel.fillingData(list as ArrayList<Nothing>)
             }, 3 * 1000.toLong())
         }
 }

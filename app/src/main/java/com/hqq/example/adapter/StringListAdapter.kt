@@ -12,8 +12,8 @@ import com.hqq.example.R
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class StringListAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_main) {
-    override fun convert(helper: BaseViewHolder, item: String?) {
+class StringListAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_main) {
+    override fun convert(helper: BaseViewHolder, item: String) {
         helper.setText(R.id.tv_title, item)
     }
 }

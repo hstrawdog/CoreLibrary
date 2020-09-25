@@ -1,12 +1,9 @@
 package com.hqq.core.ui.vm
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.R
 import com.hqq.core.ui.base.BaseListModelView
 import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
@@ -19,22 +16,21 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseVmListFragment<T : ViewDataBinding, K : BaseListViewModel?, AD : BaseQuickAdapter<*, *>>
-    : BaseVmFragment<T, K>(), IBaseListModelView<AD> {
+abstract class BaseVmListFragment<T : ViewDataBinding, K : BaseListViewModel<B>, B>
+    : BaseVmFragment<T, K>(), IBaseListModelView<B> {
 
     override var listView: RecyclerView? = null
-    var baseListMode: BaseListModelView? = null
 
     override val layoutId: Int = R.layout.activity_recycle_view
     override val pageCount: Int get() = viewMode!!.pageCount
     override val pageSize: Int get() = viewMode!!.pageSize
 
+    override lateinit var baseListModel: BaseListModelView<*>
     override val rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
-
     override fun initViews() {
-        baseListMode = BaseListModelView(this, rootViewBuild)
+        baseListModel = BaseListModelView(this, rootViewBuild)
         viewMode!!.data.observe(this, Observer<List<*>> { arrayList ->
-            baseListMode!!.fillingData(arrayList as List<Nothing>)
+            baseListModel!!.fillingData(arrayList as List<Nothing>)
         })
         initData()
     }
@@ -52,7 +48,6 @@ abstract class BaseVmListFragment<T : ViewDataBinding, K : BaseListViewModel?, A
 
     override fun onDestroy() {
         super.onDestroy()
-        baseListMode = null
     }
 
     override fun onLoadMore() {

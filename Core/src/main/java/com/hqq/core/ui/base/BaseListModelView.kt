@@ -7,6 +7,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -33,7 +34,7 @@ import java.lang.ref.WeakReference
  * 1. 点击事件的绑定交给Activity 来操作  adapter的点击事件绑定有两种 在多种布局的的情况下 点击事件写在adapter中可能会更合适一些
  *
  */
-class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
+class BaseListModelView<B>(var mBaseListModelView: IBaseListModelView<B>) {
     companion object {
         /**
          * 创建一个 rootView = recycleView
@@ -50,7 +51,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
         }
     }
 
-    constructor(mBaseListModelView: IBaseListModelView<*>, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
+    constructor(mBaseListModelView: IBaseListModelView<B>, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
         iRootView?.let {
             this.context = WeakReference<Context>(it.activity)
             mBaseListModelView.listView = initRecycleView(it.rootView)
@@ -75,18 +76,17 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      * @return string
      */
     private val emptyTextMessage: CharSequence?
-         get() = ResourcesUtils.getString(R.string.def_empty_message)
+        get() = ResourcesUtils.getString(R.string.def_empty_message)
 
     private val emptyImage: Int
-         get() = R.mipmap.ic_empty_def
+        get() = R.mipmap.ic_empty_def
 
     /**
      * adapter
      *
      * @return
      */
-    private val adapter: BaseQuickAdapter<*, *>
-         get() = mBaseListModelView.baseAdapter
+    private val adapter = mBaseListModelView.baseAdapter
 
 
     /**
@@ -187,7 +187,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      *
      * @param data
      */
-    fun fillingData(data: Collection<Nothing>) {
+    fun fillingData(data: Collection<B>) {
         if (mBaseListModelView.pageCount == 1) {
             adapter.setList(data)
         } else {
@@ -268,7 +268,12 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      * m->v 的接口
      * k  adapter
      */
-    interface IBaseListModelView<K : BaseQuickAdapter<*, *>> : OnLoadMoreListener {
+    interface IBaseListModelView<T> : OnLoadMoreListener {
+        /**
+         * List列表模型
+         */
+        var baseListModel: BaseListModelView<*>
+
         /**
          * 布局类型
          *
@@ -295,7 +300,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
          *
          * @return
          */
-        val baseAdapter: K
+        val baseAdapter: BaseQuickAdapter<T, *>
 
         /**
          * 获取 recycleView

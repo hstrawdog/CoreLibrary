@@ -17,13 +17,9 @@ import com.hqq.core.ui.base.BaseListModelView
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingListActivity<T : ViewDataBinding, AD : BaseQuickAdapter<*, *>>
-    : BaseBindingActivity<T>(), BaseListModelView.IBaseListModelView<AD> {
+abstract class BaseBindingListActivity<T : ViewDataBinding, B>
+    : BaseBindingActivity<T>(), BaseListModelView.IBaseListModelView<B> {
 
-    /**
-     * List列表模型
-     */
-    var baseListModel: BaseListModelView? = null
 
     override val layoutId: Int
         get() = R.layout.activity_recycle_view
@@ -70,7 +66,6 @@ abstract class BaseBindingListActivity<T : ViewDataBinding, AD : BaseQuickAdapte
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
-        baseListModel = null
     }
 
     /**

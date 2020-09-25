@@ -17,13 +17,8 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-abstract class BaseListActivity<T : BaseQuickAdapter<*, *>> :
-        BaseActivity(), IBaseListModelView<T> {
-
-    /**
-     * List列表模型
-     */
-    var mBaseListModel: BaseListModelView? = null
+abstract class BaseListActivity<B> :
+        BaseActivity(), IBaseListModelView<B> {
 
     /**
      *  分页大小 默认是20 可以在Config 中统一配置
@@ -64,12 +59,14 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>> :
         }
     }
 
+    override lateinit var baseListModel: BaseListModelView<*>
+
     /**
      * 初始化  基础数据
      */
     @CallSuper
     override fun initView() {
-        mBaseListModel = BaseListModelView(this, iCreateRootView)
+        baseListModel = BaseListModelView(this, iCreateRootView)
         initData()
     }
 
@@ -95,7 +92,6 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>> :
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
-        mBaseListModel = null
     }
 
     /**

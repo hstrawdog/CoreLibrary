@@ -16,12 +16,16 @@ import com.hqq.example.demo.weather.WeatherActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class DemoIndexActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainAdapter>() {
+class DemoIndexActivity() : BaseListActivity<MainBean<*>>() {
+    override val baseAdapter: MainAdapter = MainAdapter()
+
 
     override fun initData() {
-        baseAdapter?.addData(MainBean("聚合天气", WeatherActivity::class.java))
-        baseAdapter?.addData(MainBean("热点新闻", NewsActivity::class.java))
-        baseAdapter?.addData(MainBean("热门笑话", JokeActivity::class.java))
-        baseAdapter?.addData(MainBean("模拟登录", LoginActivity::class.java))
+        baseAdapter.addData(MainBean("聚合天气", WeatherActivity::class.java))
+        baseAdapter.addData(MainBean("热点新闻", NewsActivity::class.java))
+        baseAdapter.addData(MainBean("热门笑话", JokeActivity::class.java))
+        baseAdapter.addData(MainBean("模拟登录", LoginActivity::class.java))
     }
+
+
 }
