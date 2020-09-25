@@ -166,7 +166,7 @@ interface IRootView {
          * 搭配 @ViewModelInject  与by viewModes() 构建 注入参数
          *
          */
-        fun getViewModel(): ViewModel?
+        fun getViewModel(): ViewModel
 
         /**
          * 绑定ViewModel id

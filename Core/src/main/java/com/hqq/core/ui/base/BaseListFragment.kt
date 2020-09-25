@@ -16,8 +16,8 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
-        BaseFragment(), IBaseListModelView<T?> {
+abstract class BaseListFragment<T : BaseQuickAdapter<*, *>> :
+        BaseFragment(), IBaseListModelView<T> {
 
     // Fragment 的用法与 Activity保持一致  注释
 
@@ -55,7 +55,7 @@ abstract class BaseListFragment<T : BaseQuickAdapter<*, *>?> :
 
     override fun onRefreshBegin() {
         pageCount = 1
-        baseAdapter?.loadMoreModule?.loadMoreComplete()
+        baseAdapter.loadMoreModule.loadMoreComplete()
         onLoadMore()
     }
 

@@ -19,7 +19,7 @@ import com.hqq.example.ui.view.page.IFragmentActivityBuilder
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class ListActivity(override val baseAdapter: MainAdapter? = MainAdapter()) : BaseListActivity<MainAdapter?>() {
+class ListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainAdapter>() {
     override fun initData() {
 
         listView?.addItemDecoration(HeaderItemDecoration(listView!!, object : StickyHeaderInterface {

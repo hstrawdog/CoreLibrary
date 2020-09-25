@@ -42,7 +42,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
          * @return
          */
         @JvmOverloads
-        fun createRecycleView(context: Context): View? {
+        fun createRecycleView(context: Context): View {
             val view = RecyclerView(context)
             view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             view.id = R.id.rc_list
@@ -53,7 +53,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
     constructor(mBaseListModelView: IBaseListModelView<*>, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
         iRootView?.let {
             this.context = WeakReference<Context>(it.activity)
-            mBaseListModelView.listView = initRecycleView(iRootView?.rootView)
+            mBaseListModelView.listView = initRecycleView(it.rootView)
         }
     }
 
@@ -268,7 +268,7 @@ class BaseListModelView(var mBaseListModelView: IBaseListModelView<*>) {
      * m->v 的接口
      * k  adapter
      */
-    interface IBaseListModelView<K : BaseQuickAdapter<*, *>?> : OnLoadMoreListener {
+    interface IBaseListModelView<K : BaseQuickAdapter<*, *>> : OnLoadMoreListener {
         /**
          * 布局类型
          *

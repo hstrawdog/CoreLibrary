@@ -19,7 +19,7 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseVmListFragment<T : ViewDataBinding, K : BaseListViewModel?, AD : BaseQuickAdapter<*, *>?>
+abstract class BaseVmListFragment<T : ViewDataBinding, K : BaseListViewModel?, AD : BaseQuickAdapter<*, *>>
     : BaseVmFragment<T, K>(), IBaseListModelView<AD> {
 
     override var listView: RecyclerView? = null

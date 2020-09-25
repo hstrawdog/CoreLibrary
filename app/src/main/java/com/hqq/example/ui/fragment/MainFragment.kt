@@ -21,7 +21,7 @@ import kotlin.collections.ArrayList
  */
 class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
                    override val isLazyLoad: Boolean = true,//只有界面显示的时候才会加载
-                   override val baseAdapter: MainAdapter? = MainAdapter()) : BaseListFragment<MainAdapter?>() {
+                   override val baseAdapter: MainAdapter = MainAdapter()) : BaseListFragment<MainAdapter>() {
 
     companion object {
         @JvmStatic

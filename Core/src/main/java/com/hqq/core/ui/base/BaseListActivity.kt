@@ -17,8 +17,8 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
-        BaseActivity(), IBaseListModelView<T?> {
+abstract class BaseListActivity<T : BaseQuickAdapter<*, *>> :
+        BaseActivity(), IBaseListModelView<T> {
 
     /**
      * List列表模型
@@ -85,7 +85,7 @@ abstract class BaseListActivity<T : BaseQuickAdapter<*, *>?> :
      */
     override fun onRefreshBegin() {
         pageCount = 1
-        baseAdapter?.loadMoreModule?.loadMoreComplete()
+        baseAdapter.loadMoreModule.loadMoreComplete()
         onLoadMore()
     }
 

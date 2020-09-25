@@ -13,7 +13,7 @@ import kotlin.collections.ArrayList
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class EmptyListActivity(override val baseAdapter: MainAdapter?=MainAdapter()) : BaseListActivity<MainAdapter?>() {
+class EmptyListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainAdapter>() {
 
     override fun initData() {
         mBaseListModel!!.fillingData(ArrayList<String>() as ArrayList<Nothing>)

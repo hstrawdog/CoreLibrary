@@ -16,7 +16,7 @@ import com.hqq.example.demo.weather.WeatherActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class DemoIndexActivity(override val baseAdapter: MainAdapter?= MainAdapter()) : BaseListActivity<MainAdapter?>() {
+class DemoIndexActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainAdapter>() {
 
     override fun initData() {
         baseAdapter?.addData(MainBean("聚合天气", WeatherActivity::class.java))

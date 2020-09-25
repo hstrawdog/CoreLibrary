@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.ui.vm.BaseListViewModel
 import com.hqq.core.ui.vm.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -90,7 +91,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
 
     val mVl: MainViewModel by viewModels()
 
-    override fun getViewModel(): ViewModel {
+    override fun getViewModel(): MainViewModel {
         return mVl
     }
 
@@ -131,6 +132,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel, MainAdap
 
         }
     }
+
 
 
 }

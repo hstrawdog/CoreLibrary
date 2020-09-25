@@ -19,9 +19,9 @@ internal object ViewModelFactory {
      * 初始化 BaseViewModel中关联ui的字段
      */
     fun initBaseViewModel(
-        viewModel: BaseViewModel,
-        lifecycleOwner: LifecycleOwner,
-        loadingView: LoadingView?
+            viewModel: BaseViewModel,
+            lifecycleOwner: LifecycleOwner,
+            loadingView: LoadingView?
     ) {
         viewModel.loadingView.observe(lifecycleOwner, Observer { aBoolean: Boolean? ->
             if (loadingView != null) {
@@ -42,13 +42,16 @@ internal object ViewModelFactory {
      * @param aClass
      * @return
      */
-    fun <K : ViewModel?> createViewModel(
-        viewModelStoreOwner: ViewModelStoreOwner,
-        aClass: Class<*>,
-        mViewModel: K
-    ): K? {
-        var mViewModel: K? = mViewModel
-        if (mViewModel == null) {
+    fun <K : ViewModel> createViewModel(
+            viewModelStoreOwner: ViewModelStoreOwner,
+            aClass: Class<*>,
+            viewModelK: K?
+    ): ViewModel {
+        var viewModel: ViewModel? = null
+        viewModelK?.let {
+            viewModel = it
+        }
+        if (viewModel == null) {
             // 利用反射获取泛型类型 ViewModel子类 对象名称
             val modelClass: Class<out ViewModel>
             val type = aClass.genericSuperclass
@@ -57,9 +60,9 @@ internal object ViewModelFactory {
             } else {
                 modelClass = BaseViewModel::class.java
             }
-            mViewModel = createViewModel(viewModelStoreOwner, modelClass) as? K
+            viewModel = createViewModel(viewModelStoreOwner, modelClass)
         }
-        return mViewModel
+        return viewModel!!
     }
 
     /**
@@ -71,10 +74,9 @@ internal object ViewModelFactory {
      * @param <K>
      * @return
      */
-    fun <K : ViewModel?> createViewModel(
-        viewModelStoreOwner: ViewModelStoreOwner,
-        modelClass: Class<K>
-    ): K {
+    fun <K : ViewModel> createViewModel(
+            viewModelStoreOwner: ViewModelStoreOwner,
+            modelClass: Class<K>): ViewModel {
         return ViewModelProvider(viewModelStoreOwner)[modelClass]
     }
 
@@ -82,15 +84,17 @@ internal object ViewModelFactory {
      *  打开某个Activity
      */
     fun initOpenActivity(
-        viewModel: BaseViewModel,
-        lifecycleOwner: LifecycleOwner?,
-        openActivity: IOpenActivity
-    ) {
+            viewModel: BaseViewModel,
+            lifecycleOwner: LifecycleOwner?,
+            openActivity: IOpenActivity) {
         viewModel.openActivityComponentMutableLiveData.observe(
-            lifecycleOwner!!,
-            Observer { openActivityComponent -> openActivity.openActivity(openActivityComponent) })
+                lifecycleOwner!!,
+                Observer { openActivityComponent -> openActivity.openActivity(openActivityComponent) })
     }
 
+    /**
+     *  绑定返回事件
+     */
     fun initGoBack(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner, iGoBack: IFinishActivity) {
         viewModel.goBack.observe(lifecycleOwner, Observer { goBackComponent ->
             iGoBack.finishActivity(goBackComponent)

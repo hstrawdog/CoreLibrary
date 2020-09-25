@@ -16,7 +16,7 @@ import com.hqq.example.ui.view.page.IFragmentActivityBuilder
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class RecycleIndexActivity : BaseListActivity<MainAdapter?>() {
+class RecycleIndexActivity : BaseListActivity<MainAdapter>() {
     override fun initData() {
         baseAdapter.addData(MainBean("轮播图", BannerActivity::class.java))
         baseAdapter.addData(MainBean("多Item 分页滑动", FullPagerSnapActivity::class.java))

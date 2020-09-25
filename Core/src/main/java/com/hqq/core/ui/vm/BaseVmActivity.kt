@@ -24,11 +24,10 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
     : BaseBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
-    open var viewMode: K? = null
-
+    var viewMode: K? = null
 
     override fun initView() {
-        viewMode = getViewModel() as? K
+        viewMode = getViewModel()
         viewMode?.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
@@ -42,8 +41,8 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
         }
     }
 
-    override fun getViewModel(): ViewModel? {
-        return ViewModelFactory.createViewModel(this, javaClass, viewMode)
+    override fun getViewModel(): K {
+        return ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
     }
 
     override fun onDestroy() {
@@ -57,7 +56,7 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
      */
     override fun addViewModel() {
         if (bindingViewModelId != 0) {
-            binding!!.setVariable(bindingViewModelId, viewMode)
+            binding.setVariable(bindingViewModelId, viewMode)
         }
     }
 
@@ -72,6 +71,6 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
         if (openActivityComponent.bundle != null) {
             intent.putExtras(openActivityComponent.bundle!!)
         }
-        activity!!.startActivityForResult(intent, openActivityComponent.activityResult)
+        activity.startActivityForResult(intent, openActivityComponent.activityResult)
     }
 }

@@ -34,7 +34,7 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBin
     }
 
 
-    override fun getViewModel(): ViewModel? {
+    override fun getViewModel(): ViewModel {
         return createViewModel(this, javaClass, viewMode)
     }
 

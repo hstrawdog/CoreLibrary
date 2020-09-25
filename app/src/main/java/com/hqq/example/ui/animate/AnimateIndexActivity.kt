@@ -6,7 +6,7 @@ import com.hqq.core.ui.base.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 
-class AnimateIndexActivity(override val baseAdapter: MainAdapter?=MainAdapter()) : BaseListActivity<MainAdapter?>() {
+class AnimateIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity<MainAdapter>() {
     override fun initData() {
         baseAdapter!!.addData(MainBean("隐藏动画", ViewAnimateActivity::class.java))
     }
