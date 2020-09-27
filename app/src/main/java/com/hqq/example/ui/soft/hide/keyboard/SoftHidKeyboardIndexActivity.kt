@@ -12,7 +12,7 @@ import com.hqq.example.bean.MainBean
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class SoftHidKeyboardIndexActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainBean<*>>() {
+class SoftHidKeyboardIndexActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
         var bean = MainBean("底部按钮测试", SoftHideKeyBoardActivity::class.java);

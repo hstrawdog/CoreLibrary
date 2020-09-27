@@ -7,7 +7,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -34,7 +33,7 @@ import java.lang.ref.WeakReference
  * 1. 点击事件的绑定交给Activity 来操作  adapter的点击事件绑定有两种 在多种布局的的情况下 点击事件写在adapter中可能会更合适一些
  *
  */
-class BaseListModelView<B>(var mBaseListModelView: IBaseListModelView<B>) {
+class BaseListModel(var mBaseListModelView: IBaseListModelView) {
     companion object {
         /**
          * 创建一个 rootView = recycleView
@@ -51,7 +50,7 @@ class BaseListModelView<B>(var mBaseListModelView: IBaseListModelView<B>) {
         }
     }
 
-    constructor(mBaseListModelView: IBaseListModelView<B>, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
+    constructor(mBaseListModelView: IBaseListModelView, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
         iRootView?.let {
             this.context = WeakReference<Context>(it.activity)
             mBaseListModelView.listView = initRecycleView(it.rootView)
@@ -187,7 +186,8 @@ class BaseListModelView<B>(var mBaseListModelView: IBaseListModelView<B>) {
      *
      * @param data
      */
-    fun fillingData(data: Collection<B>) {
+    fun fillingData(data: Collection<*>) {
+        data as Collection<Nothing>
         if (mBaseListModelView.pageCount == 1) {
             adapter.setList(data)
         } else {
@@ -268,18 +268,18 @@ class BaseListModelView<B>(var mBaseListModelView: IBaseListModelView<B>) {
      * m->v 的接口
      * k  adapter
      */
-    interface IBaseListModelView<T> : OnLoadMoreListener {
+    interface IBaseListModelView : OnLoadMoreListener {
         /**
          * List列表模型
          */
-        var baseListModel: BaseListModelView<*>
+        var baseListModel: BaseListModel
 
         /**
          * 布局类型
          *
          * @return
          */
-        val rcLayoutManager: RecyclerView.LayoutManager
+        var rcLayoutManager: RecyclerView.LayoutManager
 
         /**
          * 分页下标
@@ -300,7 +300,7 @@ class BaseListModelView<B>(var mBaseListModelView: IBaseListModelView<B>) {
          *
          * @return
          */
-        val baseAdapter: BaseQuickAdapter<T, *>
+        val baseAdapter: BaseQuickAdapter<*, *>
 
         /**
          * 获取 recycleView

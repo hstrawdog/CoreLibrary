@@ -12,7 +12,7 @@ import com.hqq.example.bean.MainBean
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class DialogIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity<MainBean<*>>() {
+class DialogIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
         baseAdapter?.addData(MainBean("仿知乎评论列表", BottomSheetActivity::class.java))

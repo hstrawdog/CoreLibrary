@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.BaseCommonsKey
-import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
+import com.hqq.core.ui.base.BaseListModel.IBaseListModelView
 
 /**
  * @Author : huangqiqiang
@@ -17,8 +16,8 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-abstract class BaseListActivity<B> :
-        BaseActivity(), IBaseListModelView<B> {
+abstract class BaseListActivity :
+        BaseActivity(), IBaseListModelView {
 
     /**
      *  分页大小 默认是20 可以在Config 中统一配置
@@ -38,7 +37,7 @@ abstract class BaseListActivity<B> :
     /**
      *  RecycleView Manager
      */
-    override val rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+    override var rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
 
     /**
      *  RecycleView 对象
@@ -53,20 +52,20 @@ abstract class BaseListActivity<B> :
      */
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
-            BaseListModelView.createRecycleView(this)
+            BaseListModel.createRecycleView(this)
         } else {
             null
         }
     }
 
-    override lateinit var baseListModel: BaseListModelView<*>
+    override lateinit var baseListModel: BaseListModel
 
     /**
      * 初始化  基础数据
      */
     @CallSuper
     override fun initView() {
-        baseListModel = BaseListModelView(this, iCreateRootView)
+        baseListModel = BaseListModel(this, iCreateRootView)
         initData()
     }
 

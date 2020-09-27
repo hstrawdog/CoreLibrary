@@ -4,9 +4,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.BaseCommonsKey
-import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
+import com.hqq.core.ui.base.BaseListModel.IBaseListModelView
 
 /**
  * @Author : huangqiqiang
@@ -16,8 +15,8 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseListFragment<B> :
-        BaseFragment(), IBaseListModelView<B> {
+abstract class BaseListFragment :
+        BaseFragment(), IBaseListModelView {
 
     // Fragment 的用法与 Activity保持一致  注释
 
@@ -30,13 +29,14 @@ abstract class BaseListFragment<B> :
 
     override val layoutViewId: Int = 0;
 
-    override val rcLayoutManager: RecyclerView.LayoutManager
-        get() = LinearLayoutManager(activity)
+    override var rcLayoutManager: RecyclerView.LayoutManager= LinearLayoutManager(activity)
+
+    override lateinit var baseListModel: BaseListModel
 
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
             context?.let {
-                BaseListModelView.createRecycleView(it)
+                BaseListModel.createRecycleView(it)
             }
         } else {
             null
@@ -44,7 +44,7 @@ abstract class BaseListFragment<B> :
     }
 
     override fun initView() {
-        baseListModel = BaseListModelView(this, rootViewBuild)
+        baseListModel = BaseListModel(this, rootViewBuild)
         initData()
     }
 
@@ -60,5 +60,6 @@ abstract class BaseListFragment<B> :
 
     override fun onLoadMore() {
     }
+
 
 }

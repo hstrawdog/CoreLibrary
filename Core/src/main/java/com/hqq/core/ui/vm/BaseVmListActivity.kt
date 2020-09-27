@@ -4,10 +4,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.R
-import com.hqq.core.ui.base.BaseListModelView
-import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
+import com.hqq.core.ui.base.BaseListModel
+import com.hqq.core.ui.base.BaseListModel.IBaseListModelView
 
 /**
  * @Author : huangqiqiang
@@ -18,9 +17,9 @@ import com.hqq.core.ui.base.BaseListModelView.IBaseListModelView
  * @Descrive :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
-abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel<B>, B>
-    : BaseVmActivity<T, K>(), IBaseListModelView<B> {
-    private var mBaseListModel: BaseListModelView<B>? = null
+abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel>
+    : BaseVmActivity<T, K>(), IBaseListModelView {
+    private var mBaseListModel: BaseListModel? = null
 
     override val layoutId: Int
         get() = R.layout.activity_recycle_view
@@ -33,11 +32,12 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel<B>,
 
     override var listView: RecyclerView? = null
 
-    override val rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
-    override lateinit var baseListModel: BaseListModelView<*>
+    override lateinit var rcLayoutManager: RecyclerView.LayoutManager
+    override lateinit var baseListModel: BaseListModel
 
     override fun initViews() {
-        mBaseListModel = BaseListModelView(this, iCreateRootView)
+        rcLayoutManager = LinearLayoutManager(activity)
+        mBaseListModel = BaseListModel(this, iCreateRootView)
         viewMode?.data?.observe(this, Observer {
             mBaseListModel?.fillingData(it)
         })

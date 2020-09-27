@@ -13,7 +13,7 @@ import com.hqq.example.ui.view.page.IFragmentActivityBuilder
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class ListIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity<MainBean<*>>() {
+class ListIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
         baseAdapter!!.addData(MainBean("加载数据", LoadMoreActivity::class.java))

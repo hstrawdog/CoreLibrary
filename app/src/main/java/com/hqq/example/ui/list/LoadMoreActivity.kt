@@ -16,7 +16,7 @@ import java.util.*
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class LoadMoreActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainBean<*>>() {
+class LoadMoreActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
         baseListModel?.fillingData(data as List<Nothing>)

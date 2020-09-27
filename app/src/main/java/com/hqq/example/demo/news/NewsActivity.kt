@@ -19,7 +19,7 @@ import com.hqq.example.ui.web.WebActivity
  * @Descrive :
  */
 class NewsActivity(override val baseAdapter: NewsAdapter= NewsAdapter())
-    : BaseVmListActivity<ActivityNewsBinding, NewsViewModel, News.DataBean>(), OnItemClickListener {
+    : BaseVmListActivity<ActivityNewsBinding, NewsViewModel>(), OnItemClickListener {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, NewsActivity::class.java)

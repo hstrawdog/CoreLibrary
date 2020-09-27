@@ -46,7 +46,7 @@ import kotlinx.coroutines.launch
  * @Email :  qiqiang213@gmail.com
  */
 @AndroidEntryPoint
-class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel,MainBean<*>>() {
+class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
 
     override val baseAdapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int
@@ -94,7 +94,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel,MainBean<
         return mVl
     }
 
-    class MainViewModel @ViewModelInject constructor() : BaseListViewModel<MainBean<*>>() {
+    class MainViewModel @ViewModelInject constructor() : BaseListViewModel() {
         init {
             LogUtils.e("MainModel init 1  ")
             viewModelScope.launch {

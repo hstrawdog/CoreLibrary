@@ -12,7 +12,7 @@ import com.hqq.example.demo.net.NetCallback
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class JokeViewModel : BaseListViewModel<Joke.DataBean>() {
+class JokeViewModel : BaseListViewModel() {
     override fun onCrete() {
         super.onCrete()
         jokeList

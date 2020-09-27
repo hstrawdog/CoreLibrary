@@ -4,10 +4,9 @@ import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.R
-import com.hqq.core.ui.base.BaseListModelView
+import com.hqq.core.ui.base.BaseListModel
 
 /**
  * @Author : huangqiqiang
@@ -17,8 +16,8 @@ import com.hqq.core.ui.base.BaseListModelView
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingListFragment<T : ViewDataBinding, B>
-    : BaseBindingFragment<T>(), BaseListModelView.IBaseListModelView<B> {
+abstract class BaseBindingListFragment<T : ViewDataBinding>
+    : BaseBindingFragment<T>(), BaseListModel.IBaseListModelView {
 
 
     override val layoutId: Int
@@ -31,8 +30,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding, B>
     override var pageSize = BaseCommonsKey.PAGE_SIZE
 
     override var listView: RecyclerView? = null
-    override val rcLayoutManager: RecyclerView.LayoutManager
-        get() = LinearLayoutManager(activity)
+    override var rcLayoutManager: RecyclerView.LayoutManager=LinearLayoutManager(activity)
 
 
     /**
@@ -40,7 +38,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding, B>
      */
     @CallSuper
     override fun initView() {
-        baseListModel = BaseListModelView(this, rootViewBuild)
+        baseListModel = BaseListModel(this, rootViewBuild)
         initData()
     }
 

@@ -20,7 +20,7 @@ import com.hqq.example.adapter.StringListAdapter
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class TransitionsAnimationActivity : BaseListActivity<String>(), OnItemClickListener {
+class TransitionsAnimationActivity : BaseListActivity(), OnItemClickListener {
     override val baseAdapter: StringListAdapter = StringListAdapter()
     override fun initData() {
         baseAdapter.setOnItemClickListener(this)

@@ -17,7 +17,7 @@ import com.hqq.example.bean.MainBean
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class CustomizeIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity<MainBean<*>>(), OnItemClickListener {
+class CustomizeIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity(), OnItemClickListener {
 
     override fun initData() {
         baseAdapter.setOnItemClickListener(this)

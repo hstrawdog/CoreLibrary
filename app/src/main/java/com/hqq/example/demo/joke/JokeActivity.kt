@@ -15,7 +15,7 @@ import com.hqq.example.databinding.ActivityJokeBinding
  * @Descrive :
  */
 class JokeActivity(override val baseAdapter: JokeAdapter = JokeAdapter())
-    : BaseVmListActivity<ActivityJokeBinding, JokeViewModel, Joke.DataBean>() {
+    : BaseVmListActivity<ActivityJokeBinding, JokeViewModel>() {
     override val layoutId: Int
         get() = R.layout.activity_joke
     override val bindingViewModelId: Int

@@ -12,9 +12,9 @@ import com.hqq.example.bean.MainBean
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class EmptyListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity<MainBean<*>>() {
+class EmptyListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
-        mBaseListModel!!.fillingData(ArrayList<String>() as ArrayList<Nothing>)
+        baseListModel.fillingData(ArrayList<String>() as ArrayList<Nothing>)
     }
 }

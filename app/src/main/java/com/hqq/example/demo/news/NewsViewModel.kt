@@ -13,7 +13,7 @@ import java.util.*
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class NewsViewModel : BaseListViewModel<News.DataBean>() {
+class NewsViewModel : BaseListViewModel() {
     override fun onCrete() {
         super.onCrete()
         getNews(object : NetCallback<News>() {
