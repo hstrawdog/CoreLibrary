@@ -1,12 +1,10 @@
-package com.hqq.example.ui.list
+package com.hqq.example.ui.recycle
 
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.hqq.core.ui.base.BaseListActivity
+import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
-import com.hqq.example.ui.recycle.RecycleIndexActivity
-import java.util.*
 
 /**
  * @Author : huangqiqiang

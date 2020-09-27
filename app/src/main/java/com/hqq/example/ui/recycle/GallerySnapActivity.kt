@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.hqq.core.recycle.gallery.GallerySnapHelper
 import com.hqq.core.recycle.gallery.RecyclerCoverFlow
-import com.hqq.core.ui.binding.BaseBindingActivity
+import com.hqq.core.ui.base.BaseDataBindingActivity
 import com.hqq.example.R
 import com.hqq.example.adapter.SnapHelperAdapter
 import com.hqq.example.databinding.ActivityGallerySnapBinding
@@ -22,7 +22,7 @@ import java.util.*
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class GallerySnapActivity(override val layoutId: Int = R.layout.activity_gallery_snap) : BaseBindingActivity<ActivityGallerySnapBinding>() {
+class GallerySnapActivity(override val layoutId: Int = R.layout.activity_gallery_snap) : BaseDataBindingActivity<ActivityGallerySnapBinding>() {
     var mRecyclerview: RecyclerView? = null
     var mData: ArrayList<String>? = null
     var mLayoutManager: LinearLayoutManager? = null

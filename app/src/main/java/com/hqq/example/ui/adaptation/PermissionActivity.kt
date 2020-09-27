@@ -5,7 +5,7 @@ import android.content.Intent
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils.requestCameraPermission
 import com.hqq.core.permission.PermissionsUtils.requestStoragePermission
-import com.hqq.core.ui.binding.BaseBindingActivity
+import com.hqq.core.ui.base.BaseDataBindingActivity
 import com.hqq.core.utils.ToastUtils.showToast
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityPermissionBinding
@@ -18,7 +18,7 @@ import com.hqq.example.databinding.ActivityPermissionBinding
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-class PermissionActivity : BaseBindingActivity<ActivityPermissionBinding>() {
+class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() {
     override val layoutId: Int = R.layout.activity_permission
 
     override fun initView() {

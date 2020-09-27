@@ -2,7 +2,7 @@ package com.hqq.example.dialog
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hqq.core.ui.base.BaseBottomDialog
+import com.hqq.core.ui.dialog.BaseBottomDialog
 import com.hqq.example.R
 import com.hqq.example.adapter.StringAdapter
 

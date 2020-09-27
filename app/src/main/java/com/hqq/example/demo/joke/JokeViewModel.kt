@@ -1,6 +1,6 @@
 package com.hqq.example.demo.joke
 
-import com.hqq.core.ui.vm.BaseListViewModel
+import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.example.demo.net.HttpManager.getJoke
 import com.hqq.example.demo.net.NetCallback
 

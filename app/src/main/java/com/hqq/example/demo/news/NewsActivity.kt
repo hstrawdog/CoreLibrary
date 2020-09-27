@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.hqq.core.ui.vm.BaseVmListActivity
+import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityNewsBinding
 import com.hqq.example.ui.web.WebActivity

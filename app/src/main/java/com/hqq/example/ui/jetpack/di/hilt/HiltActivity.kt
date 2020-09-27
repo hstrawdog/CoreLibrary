@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.hqq.core.ui.binding.BaseBindingActivity
+import com.hqq.core.ui.base.BaseDataBindingActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityHiltBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +28,7 @@ import javax.inject.Inject
  */
 @AndroidEntryPoint
 class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
-    : BaseBindingActivity<ActivityHiltBinding>() {
+    : BaseDataBindingActivity<ActivityHiltBinding>() {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, HiltActivity::class.java)

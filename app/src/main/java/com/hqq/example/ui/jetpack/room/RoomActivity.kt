@@ -2,14 +2,14 @@ package com.hqq.example.ui.jetpack.room
 
 import android.app.Activity
 import android.content.Intent
-import com.hqq.core.ui.binding.BaseBindingActivity
+import com.hqq.core.ui.base.BaseDataBindingActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityRoomBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RoomActivity(override val layoutId: Int = R.layout.activity_room) : BaseBindingActivity<ActivityRoomBinding>() {
+class RoomActivity(override val layoutId: Int = R.layout.activity_room) : BaseDataBindingActivity<ActivityRoomBinding>() {
     companion object {
         fun open(context: Activity) {
             context.startActivityForResult(Intent(context, RoomActivity::class.java), -1)

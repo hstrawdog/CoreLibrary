@@ -1,4 +1,4 @@
-package com.hqq.core.ui.base
+package com.hqq.core.ui.list
 
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.hqq.core.R
+import com.hqq.core.ui.base.ICreateRootViewImpl
 import com.hqq.core.utils.RegexUtils
 import com.hqq.core.utils.ResourcesUtils
 import com.hqq.core.widget.CusPtrClassicFrameLayout

@@ -1,4 +1,4 @@
-package com.hqq.core.ui.vm
+package com.hqq.core.ui.list
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData

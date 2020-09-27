@@ -1,13 +1,11 @@
-package com.hqq.core.ui.vm
+package com.hqq.core.ui.base
 
 import android.content.Intent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import com.hqq.core.ui.base.BaseViewModel
-import com.hqq.core.ui.binding.BaseBindingFragment
 import com.hqq.core.ui.base.IRootView.IBaseViewModelActivity
 import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
-import com.hqq.core.ui.vm.ViewModelFactory.createViewModel
+import com.hqq.core.ui.base.ViewModelFactory.createViewModel
 
 /**
  * @Author : huangqiqiang
@@ -17,7 +15,7 @@ import com.hqq.core.ui.vm.ViewModelFactory.createViewModel
  * @Email : qiqiang213@gmail.com
  * @Descrive :  同理Activity
  */
-abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel?> : BaseBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
+abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseDataBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
     protected var viewMode: K? = null
     override fun initView() {
         viewMode = getViewModel() as? K

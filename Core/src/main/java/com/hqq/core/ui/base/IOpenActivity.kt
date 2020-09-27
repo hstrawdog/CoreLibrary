@@ -1,4 +1,4 @@
-package com.hqq.core.ui.vm
+package com.hqq.core.ui.base
 
 import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent

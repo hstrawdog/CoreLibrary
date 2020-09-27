@@ -6,11 +6,9 @@ import android.view.KeyEvent
 import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hqq.core.ui.base.BaseViewModel
-import com.hqq.core.ui.vm.BaseListViewModel
-import com.hqq.core.ui.vm.BaseVmListActivity
+import com.hqq.core.ui.list.BaseListViewModel
+import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
@@ -29,6 +27,7 @@ import com.hqq.example.ui.info.FilePathActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
+import com.hqq.example.ui.recycle.VmFragmentActivity
 import com.hqq.example.ui.skin.SkinAActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
@@ -62,7 +61,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
     override fun initData() {
         LogUtils.e("MainActivity    initData")
 //        LiveDateActivity.open(this)
-
+        VmFragmentActivity.open(this)
     }
 
 

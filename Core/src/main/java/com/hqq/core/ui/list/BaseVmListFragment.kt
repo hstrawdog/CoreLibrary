@@ -1,12 +1,12 @@
-package com.hqq.core.ui.vm
+package com.hqq.core.ui.list
 
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hqq.core.R
-import com.hqq.core.ui.base.BaseListModel
-import com.hqq.core.ui.base.BaseListModel.IBaseListModelView
+import com.hqq.core.ui.base.BaseVmFragment
+import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
 
 /**
  * @Author : huangqiqiang

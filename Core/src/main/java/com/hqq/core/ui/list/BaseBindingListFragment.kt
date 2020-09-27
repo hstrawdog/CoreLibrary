@@ -1,4 +1,4 @@
-package com.hqq.core.ui.binding
+package com.hqq.core.ui.list
 
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.R
-import com.hqq.core.ui.base.BaseListModel
+import com.hqq.core.ui.base.BaseDataBindingFragment
 
 /**
  * @Author : huangqiqiang
@@ -17,7 +17,7 @@ import com.hqq.core.ui.base.BaseListModel
  * @Descrive :
  */
 abstract class BaseBindingListFragment<T : ViewDataBinding>
-    : BaseBindingFragment<T>(), BaseListModel.IBaseListModelView {
+    : BaseDataBindingFragment<T>(), BaseListModel.IBaseListModelView {
 
 
     override val layoutId: Int

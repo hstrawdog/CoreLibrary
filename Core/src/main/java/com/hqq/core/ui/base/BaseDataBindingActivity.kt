@@ -1,10 +1,9 @@
-package com.hqq.core.ui.binding
+package com.hqq.core.ui.base
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.ui.base.IRootView.IBanding
 
 /**
@@ -15,7 +14,7 @@ import com.hqq.core.ui.base.IRootView.IBanding
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingActivity<T : ViewDataBinding>
+abstract class BaseDataBindingActivity<T : ViewDataBinding>
     : BaseActivity(), IBanding {
 
     lateinit var binding: T

@@ -1,6 +1,6 @@
 package com.hqq.example.demo
 
-import com.hqq.core.ui.base.BaseListActivity
+import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.joke.JokeActivity

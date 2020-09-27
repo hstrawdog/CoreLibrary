@@ -1,10 +1,7 @@
-package com.hqq.core.ui.vm
+package com.hqq.core.ui.base
 
 import android.content.Intent
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import com.hqq.core.ui.base.BaseViewModel
-import com.hqq.core.ui.binding.BaseBindingActivity
 import com.hqq.core.ui.base.IRootView.IBaseViewModelActivity
 import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
 
@@ -23,7 +20,7 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  *
  */
 abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
-    : BaseBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
+    : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
     var viewMode: K? = null
 
     override fun initView() {

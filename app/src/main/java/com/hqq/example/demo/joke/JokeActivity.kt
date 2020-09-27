@@ -2,7 +2,7 @@ package com.hqq.example.demo.joke
 
 import android.app.Activity
 import android.content.Intent
-import com.hqq.core.ui.vm.BaseVmListActivity
+import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityJokeBinding
 

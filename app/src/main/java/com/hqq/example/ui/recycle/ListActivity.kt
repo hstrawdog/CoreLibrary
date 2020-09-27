@@ -1,10 +1,10 @@
-package com.hqq.example.ui.list
+package com.hqq.example.ui.recycle
 
 import android.os.Handler
 import android.view.View
 import com.hqq.core.recycle.HeaderItemDecoration
 import com.hqq.core.recycle.HeaderItemDecoration.StickyHeaderInterface
-import com.hqq.core.ui.base.BaseListActivity
+import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.R
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean

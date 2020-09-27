@@ -7,9 +7,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.hqq.core.ui.base.BaseListActivity
+import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.R
-import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.adapter.StringListAdapter
 
 /**

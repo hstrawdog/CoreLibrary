@@ -1,11 +1,8 @@
 package com.hqq.example.ui.recycle
 
-import com.hqq.core.ui.base.BaseListActivity
+import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
-import com.hqq.example.ui.list.ListActivity
-import com.hqq.example.ui.list.LoadMoreActivity
-import com.hqq.example.ui.recycle.GallerySnapActivity
 import com.hqq.example.ui.view.page.IFragmentActivityBuilder
 
 /**

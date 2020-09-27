@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.hqq.core.ui.base.BaseViewModel;
-import com.hqq.core.ui.vm.BaseVmActivity;
+import com.hqq.core.ui.base.BaseVmActivity;
 import com.hqq.example.R;
 import com.hqq.example.databinding.ActivityFragmentTestBinding;
 

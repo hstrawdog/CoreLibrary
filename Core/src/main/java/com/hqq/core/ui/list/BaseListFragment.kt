@@ -1,11 +1,12 @@
-package com.hqq.core.ui.base
+package com.hqq.core.ui.list
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hqq.core.BaseCommonsKey
-import com.hqq.core.ui.base.BaseListModel.IBaseListModelView
+import com.hqq.core.ui.base.BaseFragment
+import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
 
 /**
  * @Author : huangqiqiang

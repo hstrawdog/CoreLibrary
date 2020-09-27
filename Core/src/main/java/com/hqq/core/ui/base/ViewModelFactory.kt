@@ -1,7 +1,6 @@
-package com.hqq.core.ui.vm
+package com.hqq.core.ui.base
 
 import androidx.lifecycle.*
-import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.widget.LoadingView
 import java.lang.reflect.ParameterizedType
@@ -45,8 +44,7 @@ internal object ViewModelFactory {
     fun <K : ViewModel> createViewModel(
             viewModelStoreOwner: ViewModelStoreOwner,
             aClass: Class<*>,
-            viewModelK: K?
-    ): ViewModel {
+            viewModelK: K?): ViewModel {
         var viewModel: ViewModel? = null
         viewModelK?.let {
             viewModel = it

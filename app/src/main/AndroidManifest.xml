@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.jetpack.livedata.LiveDataSpanViewActivity"></activity>
+        <activity android:name=".ui.recycle.VmFragmentActivity"></activity>
+        <activity android:name=".ui.jetpack.livedata.LiveDataSpanViewActivity" />
         <activity
             android:name=".ui.jetpack.room.RoomActivity"
             android:label="Room 数据库" />
@@ -202,13 +203,13 @@
             android:label="标题/状态栏设置" />
         <activity android:name=".ui.view.page.IFragmentActivityBuilder" />
         <activity
-            android:name=".ui.list.LoadMoreActivity"
+            android:name=".ui.recycle.LoadMoreActivity"
             android:label="加载数据" />
         <activity
             android:name=".ui.adaptation.DefActivity"
             android:label="默认Activity" />
         <activity
-            android:name=".ui.list.ListActivity"
+            android:name=".ui.recycle.ListActivity"
             android:label="列表数据" />
         <activity android:name=".ui.bar.SearchBarActivity" />
         <activity

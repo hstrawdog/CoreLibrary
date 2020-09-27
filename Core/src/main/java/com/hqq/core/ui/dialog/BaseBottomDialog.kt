@@ -1,4 +1,4 @@
-package com.hqq.core.ui.base
+package com.hqq.core.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hqq.core.R
+import com.hqq.core.ui.base.ICreateRootViewImpl
+import com.hqq.core.ui.base.IRootView
 import com.hqq.core.utils.log.LogUtils
 
 /**

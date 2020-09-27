@@ -6,7 +6,7 @@ import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableArrayMap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import com.hqq.core.ui.vm.BaseVmActivity
+import com.hqq.core.ui.base.BaseVmActivity
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityMvvmBinding
