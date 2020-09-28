@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.R
 import com.hqq.core.ui.base.ICreateRootViewImpl
 import com.hqq.core.utils.RegexUtils
@@ -194,7 +195,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         } else {
             adapter.addData(data)
         }
-        removeLoadMoreFood()
+        removeFoodEmptyView()
         when {
             // 没有头部的时候才可以加这个
             // 这边需要适配两种情况 空布局如果可以点击的话
@@ -204,17 +205,22 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
             }
             //这个是空数据的显示
             adapter.data.size == 0 -> {
-                addLoadMoreFoodView()
+                addFoodEmptyView()
                 initEmptyView(viewEmptyFoot)
             }
-            data.size < mBaseListModelView.pageSize -> {
-                adapter.loadMoreModule.loadMoreEnd()
-            }
             else -> {
-                mBaseListModelView.addPageCount()
-                adapter.loadMoreModule.loadMoreComplete();
+                // 只有 adapter实现了 LoadMoreModule 才可以实现上啦加载
+                if (adapter is LoadMoreModule) {
+                    if (data.size < mBaseListModelView.pageSize) {
+                        adapter.loadMoreModule.loadMoreEnd()
+                    } else {
+                        mBaseListModelView.addPageCount()
+                        adapter.loadMoreModule.loadMoreComplete();
+                    }
+                }
             }
         }
+
         ptrPullDown?.let {
             it.refreshComplete()
         }
@@ -228,7 +234,6 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
     private fun createLoadMoreFoodView(): View? {
         if (viewEmptyFoot == null) {
             context?.let {
-
                 viewEmptyFoot = LayoutInflater.from(it.get()).inflate(R.layout.layout_load_more_empty, null)
             }
         }
@@ -238,7 +243,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
     /**
      * 添加 没有更多数据
      */
-    private fun addLoadMoreFoodView() {
+    private fun addFoodEmptyView() {
         createLoadMoreFoodView()
         if (adapter.footerLayout == null) {
             adapter.addFooterView(viewEmptyFoot!!)
@@ -258,10 +263,9 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
     /**
      * 移除更更多数据
      */
-    private fun removeLoadMoreFood() {
-        if (viewEmptyFoot != null && adapter.footerLayout != null) {
-            val adapterFoodView = adapter.footerLayout
-            adapterFoodView!!.removeView(viewEmptyFoot)
+    private fun removeFoodEmptyView() {
+        if (viewEmptyFoot != null) {
+            adapter.footerLayout?.removeView(viewEmptyFoot)
         }
     }
 

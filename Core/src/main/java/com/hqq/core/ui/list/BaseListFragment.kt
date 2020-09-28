@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.ui.base.BaseFragment
 import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
@@ -30,7 +31,7 @@ abstract class BaseListFragment :
 
     override val layoutViewId: Int = 0;
 
-    override var rcLayoutManager: RecyclerView.LayoutManager= LinearLayoutManager(activity)
+    override var rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
 
     override lateinit var baseListModel: BaseListModel
 
@@ -54,9 +55,12 @@ abstract class BaseListFragment :
     }
 
     override fun onRefreshBegin() {
-        pageCount = 1
-        baseAdapter.loadMoreModule.loadMoreComplete()
-        onLoadMore()
+        if (baseAdapter is LoadMoreModule) {
+
+            pageCount = 1
+            baseAdapter.loadMoreModule.loadMoreComplete()
+            onLoadMore()
+        }
     }
 
     override fun onLoadMore() {

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.BaseCommonsKey
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
@@ -81,9 +82,12 @@ abstract class BaseListActivity :
      *  下拉刷新 开始从第一页 获取数据
      */
     override fun onRefreshBegin() {
-        pageCount = 1
-        baseAdapter.loadMoreModule.loadMoreComplete()
-        onLoadMore()
+        if (baseAdapter is LoadMoreModule) {
+
+            pageCount = 1
+            baseAdapter.loadMoreModule.loadMoreComplete()
+            onLoadMore()
+        }
     }
 
     /**

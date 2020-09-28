@@ -4,6 +4,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.R
 import com.hqq.core.ui.base.BaseVmActivity
 import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
@@ -50,9 +51,11 @@ abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel>
     }
 
     override fun onRefreshBegin() {
-        viewMode?.pageCount = 1
-        baseAdapter?.loadMoreModule.loadMoreComplete()
-        viewMode?.onLoadMore()
+        if (baseAdapter is LoadMoreModule) {
+            viewMode?.pageCount = 1
+            baseAdapter.loadMoreModule.loadMoreComplete()
+            viewMode?.onLoadMore()
+        }
     }
 
     override fun onDestroy() {
