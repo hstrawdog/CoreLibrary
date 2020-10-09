@@ -71,7 +71,7 @@ abstract class BaseFragmentAdapter : FragmentStateAdapter {
     /**
      *  获取标题
      */
-    fun getItemTitle(position: Int): String {
+   open fun getItemTitle(position: Int): String {
         return stringSparseArray.get(position)
     }
 
