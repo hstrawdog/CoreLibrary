@@ -32,7 +32,11 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseData
 
 
     override fun getViewModel(): ViewModel {
-        return ViewModelFactory.createViewModel(this, javaClass, viewMode)
+        return if (this::viewMode.isInitialized) {
+            ViewModelFactory.createViewModel(this, javaClass, viewMode)
+        } else {
+            ViewModelFactory.createViewModel(this, javaClass, null)
+        }
     }
 
     /**
