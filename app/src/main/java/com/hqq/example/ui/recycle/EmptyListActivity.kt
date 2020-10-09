@@ -11,9 +11,9 @@ import com.hqq.example.adapter.MainAdapter
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class EmptyListActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity() {
+class EmptyListActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
-        baseListModel.fillingData(ArrayList<String>() as ArrayList<Nothing>)
+        listModel.fillingData(ArrayList<String>() as ArrayList<Nothing>)
     }
 }

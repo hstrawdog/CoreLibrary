@@ -14,10 +14,10 @@ import com.hqq.example.ui.screen.TextViewBuilderSizeActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class AdaptationIndexActivity(override val baseAdapter: MainAdapter= MainAdapter()) : BaseListActivity() {
+class AdaptationIndexActivity(override val adapter: MainAdapter= MainAdapter()) : BaseListActivity() {
     override fun initData() {
-        baseAdapter!!.addData(MainBean("文字适配测试", TextViewBuilderSizeActivity::class.java))
-        baseAdapter!!.addData(MainBean("1像素大小测试", DimenActivity::class.java))
+        adapter!!.addData(MainBean("文字适配测试", TextViewBuilderSizeActivity::class.java))
+        adapter!!.addData(MainBean("1像素大小测试", DimenActivity::class.java))
     }
 
 }

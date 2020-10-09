@@ -18,7 +18,7 @@ import com.hqq.example.ui.web.WebActivity
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class NewsActivity(override val baseAdapter: NewsAdapter= NewsAdapter())
+class NewsActivity(override val adapter: NewsAdapter= NewsAdapter())
     : BaseVmListActivity<ActivityNewsBinding, NewsViewModel>(), OnItemClickListener {
     companion object {
         fun open(context: Activity) {
@@ -35,11 +35,11 @@ class NewsActivity(override val baseAdapter: NewsAdapter= NewsAdapter())
 
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-        WebActivity.open(activity!!, baseAdapter!!.getItem(position)!!.url, baseAdapter!!.getItem(position)!!.title)
+        WebActivity.open(activity!!, this.adapter!!.getItem(position)!!.url, this.adapter!!.getItem(position)!!.title)
     }
 
 
     override fun initData() {
-        baseAdapter.setOnItemClickListener(this)
+        adapter.setOnItemClickListener(this)
     }
 }

@@ -52,15 +52,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         }
     }
 
-    constructor(mBaseListModelView: IBaseListModelView, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
-        iRootView?.let {
-            this.context = WeakReference<Context>(it.activity)
-            mBaseListModelView.listView = initRecycleView(it.rootView)
-        }
-    }
-
     var context: WeakReference<Context>? = null
-
     var viewEmptyFoot: View? = null
     var ptrPullDown: CusPtrClassicFrameLayout? = null
 
@@ -76,19 +68,23 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      *
      * @return string
      */
-    private val emptyTextMessage: CharSequence?
-        get() = ResourcesUtils.getString(R.string.def_empty_message)
+    private val emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
 
-    private val emptyImage: Int
-        get() = R.mipmap.ic_empty_def
+    private val emptyImage: Int = R.mipmap.ic_empty_def
 
     /**
      * adapter
      *
      * @return
      */
-    private val adapter = mBaseListModelView.baseAdapter
+    private val adapter = mBaseListModelView.adapter
 
+    constructor(mBaseListModelView: IBaseListModelView, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
+        iRootView?.let {
+            this.context = WeakReference<Context>(it.activity)
+            mBaseListModelView.listView = initRecycleView(it.rootView)
+        }
+    }
 
     /**
      * 初始化 RecycleView 等一切操作
@@ -101,7 +97,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         var listView = checkRecycleView(mBaseListModelView.listView, view)
         if (listView != null && adapter != null) {
             listView.overScrollMode = View.OVER_SCROLL_NEVER
-            listView.layoutManager = mBaseListModelView.rcLayoutManager
+            listView.layoutManager = mBaseListModelView.layoutManager
             listView.adapter = adapter
         }
         initPtrPullDown(view)
@@ -277,14 +273,14 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         /**
          * List列表模型
          */
-        var baseListModel: BaseListModel
+        var listModel: BaseListModel
 
         /**
          * 布局类型
          *
          * @return
          */
-        var rcLayoutManager: RecyclerView.LayoutManager
+        var layoutManager: RecyclerView.LayoutManager
 
         /**
          * 分页下标
@@ -305,7 +301,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
          *
          * @return
          */
-        val baseAdapter: BaseQuickAdapter<*, *>
+        val adapter: BaseQuickAdapter<*, *>
 
         /**
          * 获取 recycleView

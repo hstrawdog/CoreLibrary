@@ -27,7 +27,6 @@ import com.hqq.example.ui.info.FilePathActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
-import com.hqq.example.ui.recycle.VmFragmentActivity
 import com.hqq.example.ui.skin.SkinAActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
@@ -47,7 +46,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
 
-    override val baseAdapter: MainAdapter = MainAdapter()
+    override val adapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int
         get() = 0
 
@@ -61,7 +60,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
     override fun initData() {
         LogUtils.e("MainActivity    initData")
 //        LiveDateActivity.open(this)
-        VmFragmentActivity.open(this)
+        DefImgActivity.open(this)
     }
 
 

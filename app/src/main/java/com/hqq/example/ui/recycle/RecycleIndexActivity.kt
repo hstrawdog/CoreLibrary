@@ -15,14 +15,14 @@ import com.hqq.example.ui.view.page.IFragmentActivityBuilder
  */
 class RecycleIndexActivity : BaseListActivity() {
     override fun initData() {
-        baseAdapter.addData(MainBean("轮播图", BannerActivity::class.java))
-        baseAdapter.addData(MainBean("多Item 分页滑动", FullPagerSnapActivity::class.java))
-        baseAdapter.addData(MainBean("画廊 分页滑动", GallerySnapActivity::class.java))
-        baseAdapter.addData(MainBean("空数据测试", EmptyListActivity::class.java))
-        baseAdapter.addData(MainBean("加载数据", LoadMoreActivity::class.java))
-        baseAdapter.addData(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-        baseAdapter.addData(MainBean("Activity 悬停加载", ListActivity::class.java))
+        adapter.addData(MainBean("轮播图", BannerActivity::class.java))
+        adapter.addData(MainBean("多Item 分页滑动", FullPagerSnapActivity::class.java))
+        adapter.addData(MainBean("画廊 分页滑动", GallerySnapActivity::class.java))
+        adapter.addData(MainBean("空数据测试", EmptyListActivity::class.java))
+        adapter.addData(MainBean("加载数据", LoadMoreActivity::class.java))
+        adapter.addData(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
+        adapter.addData(MainBean("Activity 悬停加载", ListActivity::class.java))
     }
 
-    override var baseAdapter = MainAdapter()
+    override var adapter = MainAdapter()
 }

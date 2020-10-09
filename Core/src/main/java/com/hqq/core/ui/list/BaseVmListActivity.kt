@@ -20,51 +20,43 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
  */
 abstract class BaseVmListActivity<T : ViewDataBinding, K : BaseListViewModel>
     : BaseVmActivity<T, K>(), IBaseListModelView {
-    private var mBaseListModel: BaseListModel? = null
 
-    override val layoutId: Int
-        get() = R.layout.activity_recycle_view
+    override val layoutId: Int = R.layout.activity_recycle_view
 
     override val pageCount: Int
-        get() = viewMode!!.pageCount
+        get() = viewMode.pageCount
 
     override val pageSize: Int
-        get() = viewMode!!.pageSize
+        get() = viewMode.pageSize
 
     override var listView: RecyclerView? = null
 
-    override lateinit var rcLayoutManager: RecyclerView.LayoutManager
-    override lateinit var baseListModel: BaseListModel
+    override lateinit var layoutManager: RecyclerView.LayoutManager
+    override lateinit var listModel: BaseListModel
 
     override fun initViews() {
-        rcLayoutManager = LinearLayoutManager(activity)
-        mBaseListModel = BaseListModel(this, iCreateRootView)
-        viewMode?.data?.observe(this, Observer {
-            mBaseListModel?.fillingData(it)
+        layoutManager = LinearLayoutManager(activity)
+        listModel = BaseListModel(this, iCreateRootView)
+        viewMode.data.observe(this, Observer {
+            listModel.fillingData(it)
         })
         initData()
     }
 
-
     override fun addPageCount() {
-        viewMode!!.pageCount = viewMode!!.pageCount + 1
+        viewMode.pageCount = viewMode.pageCount + 1
     }
 
     override fun onRefreshBegin() {
-        if (baseAdapter is LoadMoreModule) {
-            viewMode?.pageCount = 1
-            baseAdapter.loadMoreModule.loadMoreComplete()
-            viewMode?.onLoadMore()
+        if (adapter is LoadMoreModule) {
+            viewMode.pageCount = 1
+            adapter.loadMoreModule.loadMoreComplete()
+            viewMode.onLoadMore()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mBaseListModel = null
-    }
-
     override fun onLoadMore() {
-        viewMode?.onLoadMore()
+        viewMode.onLoadMore()
     }
 
 

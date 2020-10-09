@@ -14,17 +14,17 @@ import com.hqq.example.bean.MainBean
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class LoadMoreActivity(override val baseAdapter: MainAdapter = MainAdapter()) : BaseListActivity() {
+class LoadMoreActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
-        baseListModel?.fillingData(data as List<Nothing>)
+        listModel?.fillingData(data as List<Nothing>)
     }
 
     override fun onLoadMore() {
         Handler().postDelayed({
-            if (baseListModel != null) {
-                baseListModel!!.fillingData(data as List<Nothing>)
-                baseAdapter!!.loadMoreModule.loadMoreComplete()
+            if (listModel != null) {
+                listModel!!.fillingData(data as List<Nothing>)
+                adapter!!.loadMoreModule.loadMoreComplete()
             }
         }, 2000)
     }

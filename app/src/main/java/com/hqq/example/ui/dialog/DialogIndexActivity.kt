@@ -12,10 +12,10 @@ import com.hqq.example.bean.MainBean
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class DialogIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity() {
+class DialogIndexActivity(override val adapter: MainAdapter=MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
-        baseAdapter?.addData(MainBean("仿知乎评论列表", BottomSheetActivity::class.java))
-        baseAdapter?.addData(MainBean("dialog样式测试", TestDialogActivity::class.java))
+        adapter?.addData(MainBean("仿知乎评论列表", BottomSheetActivity::class.java))
+        adapter?.addData(MainBean("dialog样式测试", TestDialogActivity::class.java))
     }
 }

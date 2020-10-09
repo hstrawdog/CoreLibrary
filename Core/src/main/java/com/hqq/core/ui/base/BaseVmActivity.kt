@@ -21,7 +21,7 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
     : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
-    var viewMode: K? = null
+    lateinit var viewMode: K
 
     override fun initView() {
         viewMode = getViewModel()

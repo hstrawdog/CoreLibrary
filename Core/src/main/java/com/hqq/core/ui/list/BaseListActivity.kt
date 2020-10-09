@@ -39,7 +39,7 @@ abstract class BaseListActivity :
     /**
      *  RecycleView Manager
      */
-    override var rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+    override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
 
     /**
      *  RecycleView 对象
@@ -60,14 +60,14 @@ abstract class BaseListActivity :
         }
     }
 
-    override lateinit var baseListModel: BaseListModel
+    override lateinit var listModel: BaseListModel
 
     /**
      * 初始化  基础数据
      */
     @CallSuper
     override fun initView() {
-        baseListModel = BaseListModel(this, iCreateRootView)
+        listModel = BaseListModel(this, iCreateRootView)
         initData()
     }
 
@@ -82,10 +82,10 @@ abstract class BaseListActivity :
      *  下拉刷新 开始从第一页 获取数据
      */
     override fun onRefreshBegin() {
-        if (baseAdapter is LoadMoreModule) {
+        if (adapter is LoadMoreModule) {
 
             pageCount = 1
-            baseAdapter.loadMoreModule.loadMoreComplete()
+            adapter.loadMoreModule.loadMoreComplete()
             onLoadMore()
         }
     }

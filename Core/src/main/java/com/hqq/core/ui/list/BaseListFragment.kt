@@ -31,9 +31,9 @@ abstract class BaseListFragment :
 
     override val layoutViewId: Int = 0;
 
-    override var rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
+    override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
 
-    override lateinit var baseListModel: BaseListModel
+    override lateinit var listModel: BaseListModel
 
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
@@ -46,7 +46,7 @@ abstract class BaseListFragment :
     }
 
     override fun initView() {
-        baseListModel = BaseListModel(this, rootViewBuild)
+        listModel = BaseListModel(this, rootViewBuild)
         initData()
     }
 
@@ -55,10 +55,10 @@ abstract class BaseListFragment :
     }
 
     override fun onRefreshBegin() {
-        if (baseAdapter is LoadMoreModule) {
+        if (adapter is LoadMoreModule) {
 
             pageCount = 1
-            baseAdapter.loadMoreModule.loadMoreComplete()
+            adapter.loadMoreModule.loadMoreComplete()
             onLoadMore()
         }
     }

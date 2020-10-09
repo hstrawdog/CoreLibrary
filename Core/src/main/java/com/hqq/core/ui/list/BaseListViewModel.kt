@@ -18,11 +18,6 @@ abstract class BaseListViewModel : BaseViewModel() {
     var pageCount = 1
     var pageSize = BaseCommonsKey.PAGE_SIZE
 
-    /**
-     * 加载更多
-     */
-    open fun onLoadMore() {}
-
     fun setPageSize(pageSize: Int): BaseListViewModel {
         this.pageSize = pageSize
         return this
@@ -33,9 +28,13 @@ abstract class BaseListViewModel : BaseViewModel() {
         return this
     }
 
-
     fun setData(date: List<*>): BaseListViewModel {
         data.value = date
         return this
     }
+
+    /**
+     * 加载更多
+     */
+    open fun onLoadMore() {}
 }

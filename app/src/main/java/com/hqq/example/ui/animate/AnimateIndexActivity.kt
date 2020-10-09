@@ -6,9 +6,9 @@ import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 
-class AnimateIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity() {
+class AnimateIndexActivity(override val adapter: MainAdapter=MainAdapter()) : BaseListActivity() {
     override fun initData() {
-        baseAdapter!!.addData(MainBean("隐藏动画", ViewAnimateActivity::class.java))
+        adapter!!.addData(MainBean("隐藏动画", ViewAnimateActivity::class.java))
     }
 
     override fun onPointerCaptureChanged(hasCapture: Boolean) {}

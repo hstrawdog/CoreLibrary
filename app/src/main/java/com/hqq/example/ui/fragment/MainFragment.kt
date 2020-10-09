@@ -21,7 +21,7 @@ import kotlin.collections.ArrayList
  */
 class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
                    override val isLazyLoad: Boolean = true,//只有界面显示的时候才会加载
-                   override val baseAdapter: MainAdapter = MainAdapter()) : BaseListFragment() {
+                   override val adapter: MainAdapter = MainAdapter()) : BaseListFragment() {
 
     companion object {
         @JvmStatic
@@ -79,7 +79,7 @@ class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
         list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
         list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
         list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-        baseListModel!!.fillingData(list as ArrayList<Nothing>)
+        listModel!!.fillingData(list as ArrayList<Nothing>)
     }
 
 

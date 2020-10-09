@@ -17,16 +17,16 @@ import com.hqq.example.bean.MainBean
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class CustomizeIndexActivity(override val baseAdapter: MainAdapter=MainAdapter()) : BaseListActivity(), OnItemClickListener {
+class CustomizeIndexActivity(override val adapter: MainAdapter=MainAdapter()) : BaseListActivity(), OnItemClickListener {
 
     override fun initData() {
-        baseAdapter.setOnItemClickListener(this)
+        adapter.setOnItemClickListener(this)
 
-        baseAdapter!!.addData(MainBean("圆形倒计时", RoundCountdownActivity::class.java))
-        baseAdapter!!.addData(MainBean("贝塞尔曲线鉴定绘制", BezierActivity::class.java))
-        baseAdapter!!.addData(MainBean("进度条/星星", ProgressBarViewBuilderActivity::class.java))
-        baseAdapter!!.addData(MainBean("高逼格的鱼", FishActivity::class.java))
-        baseAdapter!!.addData(MainBean("vie滑动以及回弹", SwipeMenuLayoutActivity::class.java))
+        adapter!!.addData(MainBean("圆形倒计时", RoundCountdownActivity::class.java))
+        adapter!!.addData(MainBean("贝塞尔曲线鉴定绘制", BezierActivity::class.java))
+        adapter!!.addData(MainBean("进度条/星星", ProgressBarViewBuilderActivity::class.java))
+        adapter!!.addData(MainBean("高逼格的鱼", FishActivity::class.java))
+        adapter!!.addData(MainBean("vie滑动以及回弹", SwipeMenuLayoutActivity::class.java))
 
     }
 

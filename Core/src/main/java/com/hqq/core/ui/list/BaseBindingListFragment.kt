@@ -31,7 +31,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding>
     override var pageSize = BaseCommonsKey.PAGE_SIZE
 
     override var listView: RecyclerView? = null
-    override var rcLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
+    override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
 
 
     /**
@@ -39,7 +39,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding>
      */
     @CallSuper
     override fun initView() {
-        baseListModel = BaseListModel(this, rootViewBuild)
+        listModel = BaseListModel(this, rootViewBuild)
         initData()
     }
 
@@ -54,9 +54,9 @@ abstract class BaseBindingListFragment<T : ViewDataBinding>
      *  下拉刷新 开始从第一页 获取数据
      */
     override fun onRefreshBegin() {
-        if (baseAdapter is LoadMoreModule) {
+        if (adapter is LoadMoreModule) {
             pageCount = 1
-            baseAdapter.loadMoreModule.loadMoreComplete()
+            adapter.loadMoreModule.loadMoreComplete()
             onLoadMore()
         }
     }

@@ -42,18 +42,6 @@ object ImageLoadUtils {
                 .placeholder(CoreConfig.get().defImg)//缓存SOURC和RESULT
     //不做内存缓存
 
-    /**
-     * 默认配置
-     *
-     * @return
-     */
-    val roundRequestOptions: RequestOptions
-        get() = RequestOptions()
-                .format(DecodeFormat.PREFER_RGB_565) //缓存SOURC和RESULT
-                .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
-                .skipMemoryCache(false)
-                .dontAnimate()
-                .placeholder(CoreConfig.get().defImg)
 
     fun getDefRoundRequestOptions(context: Context?): RequestOptions {
         return getRoundRequestOptions(ResourcesUtils.getDimen(R.dimen.x10).toInt())
@@ -123,8 +111,8 @@ object ImageLoadUtils {
         }
         GlideApp.with(imageView!!)
                 .load(url)
-                .apply(requestOptions
-                ).into(imageView)
+                .apply(requestOptions)
+                .into(imageView)
     }
 
     /**
@@ -175,7 +163,7 @@ object ImageLoadUtils {
         GlideApp.with(imageView!!)
                 .load(url)
                 .apply(
-                        roundRequestOptions.transforms(CenterCrop(), RoundedCorners(radius))
+                        requestOptions.transforms(CenterCrop(), RoundedCorners(radius))
                 )
                 .into(imageView)
     }

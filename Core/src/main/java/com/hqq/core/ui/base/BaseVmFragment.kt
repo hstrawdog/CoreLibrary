@@ -5,7 +5,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import com.hqq.core.ui.base.IRootView.IBaseViewModelActivity
 import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
-import com.hqq.core.ui.base.ViewModelFactory.createViewModel
 
 /**
  * @Author : huangqiqiang
@@ -16,9 +15,9 @@ import com.hqq.core.ui.base.ViewModelFactory.createViewModel
  * @Descrive :  同理Activity
  */
 abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseDataBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
-    protected var viewMode: K? = null
+    protected lateinit var viewMode: K
     override fun initView() {
-        viewMode = getViewModel() as? K
+        viewMode = getViewModel() as K
         viewMode?.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
@@ -33,7 +32,7 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseData
 
 
     override fun getViewModel(): ViewModel {
-        return createViewModel(this, javaClass, viewMode)
+        return ViewModelFactory.createViewModel(this, javaClass, viewMode)
     }
 
     /**

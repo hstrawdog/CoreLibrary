@@ -20,11 +20,11 @@ import com.hqq.example.adapter.StringListAdapter
  * @Descrive :
  */
 class TransitionsAnimationActivity : BaseListActivity(), OnItemClickListener {
-    override val baseAdapter: StringListAdapter = StringListAdapter()
+    override val adapter: StringListAdapter = StringListAdapter()
     override fun initData() {
-        baseAdapter.setOnItemClickListener(this)
-        baseAdapter.addData("overridePendingTransition")
-        baseAdapter.addData("makeCustomAnimation")
+        adapter.setOnItemClickListener(this)
+        adapter.addData("overridePendingTransition")
+        adapter.addData("makeCustomAnimation")
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {

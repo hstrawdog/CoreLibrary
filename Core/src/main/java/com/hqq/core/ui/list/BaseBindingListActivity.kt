@@ -30,7 +30,7 @@ abstract class BaseBindingListActivity<T : ViewDataBinding>
     override var pageSize = BaseCommonsKey.PAGE_SIZE
 
     override var listView: RecyclerView? = null
-    override var rcLayoutManager: RecyclerView.LayoutManager= LinearLayoutManager(this)
+    override var layoutManager: RecyclerView.LayoutManager= LinearLayoutManager(this)
 
 
     /**
@@ -38,7 +38,7 @@ abstract class BaseBindingListActivity<T : ViewDataBinding>
      */
     @CallSuper
     override fun initView() {
-        baseListModel = BaseListModel(this, iCreateRootView)
+        listModel = BaseListModel(this, iCreateRootView)
         initData()
     }
 
@@ -54,7 +54,7 @@ abstract class BaseBindingListActivity<T : ViewDataBinding>
      */
     override fun onRefreshBegin() {
         pageCount = 1
-        baseAdapter?.loadMoreModule?.loadMoreComplete()
+        adapter?.loadMoreModule?.loadMoreComplete()
         onLoadMore()
     }
 

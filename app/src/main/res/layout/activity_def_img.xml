@@ -40,4 +40,10 @@
         android:src="@drawable/ic_def_img" />
 
 
+    <ImageView
+        android:id="@+id/iv_gif"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"/>
+
+
 </LinearLayout>
