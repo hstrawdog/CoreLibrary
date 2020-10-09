@@ -39,7 +39,11 @@ abstract class BaseVmActivity<T : ViewDataBinding, K : BaseViewModel>
     }
 
     override fun getViewModel(): K {
-        return ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
+        return if (this::viewMode.isInitialized) {
+            ViewModelFactory.createViewModel(this, javaClass, viewMode)as K
+        } else {
+            ViewModelFactory.createViewModel(this, javaClass, null)as K
+        }
     }
 
     override fun onDestroy() {
