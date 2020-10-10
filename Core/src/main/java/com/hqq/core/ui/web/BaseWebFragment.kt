@@ -38,9 +38,20 @@ class BaseWebFragment : BaseFragment() {
 
     override val layoutViewId: Int = R.layout.fragment_web
 
+    /**
+     *  标题栏
+     */
     var showToolBar = true
+
+    /**
+     *  状态栏
+     */
     var showStatusBar = true
 
+    /**
+     *  是否可以返回到上一个网页
+     */
+    var isGoBackWebView = true
     override fun onPause() {
         super.onPause()
         webView?.onPause()
@@ -177,9 +188,15 @@ class BaseWebFragment : BaseFragment() {
         }
 
     fun onBackPressed(): Boolean {
-        webView?.let {
-            it.goBack()
-            return true
+        if (isGoBackWebView) {
+            webView?.let {
+                return if (it.canGoBack()) {
+                    it.goBack()
+                    true
+                } else {
+                    false
+                }
+            }
         }
         return false
     }
