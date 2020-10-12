@@ -29,7 +29,6 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
         return activity?.get()
     }
 
-
     /**
      * 构建activity
      *

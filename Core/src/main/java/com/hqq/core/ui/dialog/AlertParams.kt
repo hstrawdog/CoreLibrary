@@ -41,4 +41,9 @@ class AlertParams {
      * 顶部标题
      */
     var title: CharSequence = "提示"
+
+    /**
+     *  中间内容或者提示
+     */
+    var content: CharSequence = ""
 }

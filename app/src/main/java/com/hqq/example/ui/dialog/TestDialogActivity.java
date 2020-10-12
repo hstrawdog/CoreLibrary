@@ -3,7 +3,11 @@ package com.hqq.example.ui.dialog;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hqq.core.ui.BaseViewBuilderHolder;
 import com.hqq.core.ui.dialog.BaseSelectDialog;
@@ -16,6 +20,9 @@ import com.hqq.example.dialog.LeftDialog;
 import com.hqq.example.dialog.RightDialog;
 import com.hqq.example.dialog.SelectDialog;
 import com.hqq.core.ui.base.BaseActivity;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 /**
@@ -50,6 +57,8 @@ public class TestDialogActivity extends BaseActivity {
         findViewById(R.id.button18).setOnClickListener(this);
         findViewById(R.id.button28).setOnClickListener(this);
         findViewById(R.id.button51).setOnClickListener(this);
+        findViewById(R.id.button52).setOnClickListener(this);
+        findViewById(R.id.button53).setOnClickListener(this);
     }
 
 
@@ -84,7 +93,6 @@ public class TestDialogActivity extends BaseActivity {
                         .setBaseViewBuilderHolder(new ViewBuilderHolderA())
                         .create()
                         .show(getSupportFragmentManager());
-
                 break;
 
             case R.id.button51:
@@ -108,6 +116,49 @@ public class TestDialogActivity extends BaseActivity {
                         .create()
                         .show(getSupportFragmentManager());
 
+
+                break;
+
+            case R.id.button52:
+                new BaseSelectDialog.Builder()
+                        .setTitle("1111111111111")
+                        .setBaseViewBuilderHolder(new BaseViewBuilderHolder() {
+                            @Override
+                            public int getLayoutViewId() {
+                                return -1;
+                            }
+
+                            @Nullable
+                            @Override
+                            public View getLayoutView(@NotNull ViewGroup viewGroup) {
+                                TextView textView = new TextView(TestDialogActivity.this);
+                                textView.setText("我是代码中创建的View");
+                                textView.setGravity(Gravity.CENTER);
+                                textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                                return textView;
+
+                            }
+
+                            @Override
+                            public void initView() {
+
+                            }
+
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .create()
+                        .show(getSupportFragmentManager());
+
+                break;
+            case R.id.button53:
+                new BaseSelectDialog.Builder()
+                        .setTitle("1111111111111")
+                        .s
+                        .create()
+                        .show(getSupportFragmentManager());
 
                 break;
             default:

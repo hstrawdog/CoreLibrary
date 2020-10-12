@@ -65,5 +65,17 @@
         android:layout_height="wrap_content"
         android:text="简化后的SelectDialog2" />
 
+    <Button
+        android:id="@+id/button52"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="简化后的SelectDialog3" />
+
+    <Button
+        android:id="@+id/button53"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="简化后的SelectDialog4" />
+
 
 </LinearLayout>

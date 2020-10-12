@@ -60,7 +60,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
     override fun initData() {
         LogUtils.e("MainActivity    initData")
 //        LiveDateActivity.open(this)
-        DefImgActivity.open(this)
+        TestDialogActivity.open(this)
     }
 
 
