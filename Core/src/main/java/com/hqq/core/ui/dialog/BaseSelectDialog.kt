@@ -71,6 +71,7 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
             if (alertParams?.baseViewBuilderHolder == null && it.isNotEmpty()) {
                 var tv = TextView(activity)
                 tv.gravity = Gravity.CENTER
+                tv.text = it
                 tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
                 rootView?.findViewById<LinearLayout>(R.id.ll_content)?.let {
                     it.addView(tv)
