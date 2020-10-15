@@ -27,10 +27,7 @@
 
     </LinearLayout>
 
-    <View
-        style="@style/line_vertical"
-        android:layout_marginTop="@dimen/x20" />
-
+    <View style="@style/line_vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"

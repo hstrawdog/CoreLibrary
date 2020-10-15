@@ -1,29 +1,18 @@
-package com.hqq.example.ui.dialog;
+package com.hqq.example.ui.dialog
 
-
-import android.app.Activity;
-import android.content.Intent;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.hqq.core.ui.BaseViewBuilderHolder;
-import com.hqq.core.ui.dialog.BaseSelectDialog;
-import com.hqq.example.R;
-import com.hqq.example.dialog.BottomDialog;
-import com.hqq.example.dialog.FoldFullBottomSheet;
-import com.hqq.example.dialog.FullBottomSheet;
-import com.hqq.example.dialog.FullDialog;
-import com.hqq.example.dialog.LeftDialog;
-import com.hqq.example.dialog.RightDialog;
-import com.hqq.example.dialog.SelectDialog;
-import com.hqq.core.ui.base.BaseActivity;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
+import android.app.Activity
+import android.content.Intent
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.hqq.core.ui.BaseViewBuilderHolder
+import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.ui.dialog.SelectDialog
+import com.hqq.example.R
+import com.hqq.example.dialog.*
+import com.hqq.example.ui.dialog.TestDialogActivity
 
 /**
  * @Author : huangqiqiang
@@ -33,157 +22,89 @@ import org.jetbrains.annotations.Nullable;
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-public class TestDialogActivity extends BaseActivity {
-
-
-    public static void open(Activity context) {
-        Intent starter = new Intent(context, TestDialogActivity.class);
-        context.startActivityForResult(starter, -1);
-    }
-
-    @Override
-    public int getLayoutViewId() {
-        return R.layout.activity_test_dialog;
-    }
-
-    @Override
-    public void initView() {
-        findViewById(R.id.button9).setOnClickListener(this);
-        findViewById(R.id.button14).setOnClickListener(this);
-        findViewById(R.id.button15).setOnClickListener(this);
-        findViewById(R.id.button16).setOnClickListener(this);
-        findViewById(R.id.button10).setOnClickListener(this);
-        findViewById(R.id.button17).setOnClickListener(this);
-        findViewById(R.id.button18).setOnClickListener(this);
-        findViewById(R.id.button28).setOnClickListener(this);
-        findViewById(R.id.button51).setOnClickListener(this);
-        findViewById(R.id.button52).setOnClickListener(this);
-        findViewById(R.id.button53).setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button9:
-                FullBottomSheet mFullBottomSheetFragment = new FullBottomSheet();
-                mFullBottomSheetFragment.show(getSupportFragmentManager());
-                break;
-            case R.id.button10:
-                FoldFullBottomSheet mFullBottomSheetFragments = new FoldFullBottomSheet();
-                mFullBottomSheetFragments.show(getSupportFragmentManager());
-                break;
-            case R.id.button18:
-                SelectDialog.showDialog(getSupportFragmentManager());
-                break;
-            case R.id.button14:
-                BottomDialog.showDialog(getSupportFragmentManager());
-                break;
-            case R.id.button15:
-                FullDialog.showDialog(getSupportFragmentManager());
-                break;
-            case R.id.button16:
-                RightDialog.showDialog(getSupportFragmentManager());
-                break;
-            case R.id.button17:
-                LeftDialog.showDialog(getSupportFragmentManager());
-                break;
-            case R.id.button28:
-                new BaseSelectDialog.Builder()
-                        .setBaseViewBuilderHolder(new ViewBuilderHolderA())
-                        .create()
-                        .show(getSupportFragmentManager());
-                break;
-
-            case R.id.button51:
-                new BaseSelectDialog.Builder()
-                        .setBaseViewBuilderHolder(new BaseViewBuilderHolder() {
-                            @Override
-                            public int getLayoutViewId() {
-                                return R.layout.view_holder_a;
-                            }
-
-                            @Override
-                            public void initView() {
-
-                            }
-
-                            @Override
-                            public void onClick(View view) {
-
-                            }
-                        })
-                        .create()
-                        .show(getSupportFragmentManager());
-
-
-                break;
-
-            case R.id.button52:
-                new BaseSelectDialog.Builder()
-                        .setTitle("1111111111111")
-                        .setBaseViewBuilderHolder(new BaseViewBuilderHolder() {
-                            @Override
-                            public int getLayoutViewId() {
-                                return -1;
-                            }
-
-                            @Nullable
-                            @Override
-                            public View getLayoutView(@NotNull ViewGroup viewGroup) {
-                                TextView textView = new TextView(TestDialogActivity.this);
-                                textView.setText("我是代码中创建的View");
-                                textView.setGravity(Gravity.CENTER);
-                                textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                                return textView;
-
-                            }
-
-                            @Override
-                            public void initView() {
-
-                            }
-
-                            @Override
-                            public void onClick(View view) {
-
-                            }
-                        })
-                        .create()
-                        .show(getSupportFragmentManager());
-
-                break;
-            case R.id.button53:
-                new BaseSelectDialog.Builder()
-                        .setTitle("标题")
-                        .setContent("我是内容")
-                        .create()
-                        .show(getSupportFragmentManager());
-
-                break;
-            default:
+class TestDialogActivity : BaseActivity() {
+    companion object {
+        fun open(context: Activity) {
+            val starter = Intent(context, TestDialogActivity::class.java)
+            context.startActivityForResult(starter, -1)
         }
     }
 
-    public static class ViewBuilderHolderA extends BaseViewBuilderHolder {
-        public ViewBuilderHolderA() {
+    override val layoutViewId: Int = R.layout.activity_test_dialog
 
+    override fun initView() {
+        findViewById<View>(R.id.button9).setOnClickListener(this)
+        findViewById<View>(R.id.button14).setOnClickListener(this)
+        findViewById<View>(R.id.button15).setOnClickListener(this)
+        findViewById<View>(R.id.button16).setOnClickListener(this)
+        findViewById<View>(R.id.button10).setOnClickListener(this)
+        findViewById<View>(R.id.button17).setOnClickListener(this)
+        findViewById<View>(R.id.button18).setOnClickListener(this)
+        findViewById<View>(R.id.button28).setOnClickListener(this)
+        findViewById<View>(R.id.button51).setOnClickListener(this)
+        findViewById<View>(R.id.button52).setOnClickListener(this)
+        findViewById<View>(R.id.button53).setOnClickListener(this)
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.button9 -> {
+                val mFullBottomSheetFragment = FullBottomSheet()
+                mFullBottomSheetFragment.show(supportFragmentManager)
+            }
+            R.id.button10 -> {
+                val mFullBottomSheetFragments = FoldFullBottomSheet()
+                mFullBottomSheetFragments.show(supportFragmentManager)
+            }
+            R.id.button18 -> com.hqq.example.dialog.SelectDialog.showDialog(supportFragmentManager)
+            R.id.button14 -> BottomDialog.showDialog(supportFragmentManager)
+            R.id.button15 -> FullDialog.showDialog(supportFragmentManager)
+            R.id.button16 -> RightDialog.showDialog(supportFragmentManager)
+            R.id.button17 -> LeftDialog.showDialog(supportFragmentManager)
+            R.id.button28 -> SelectDialog.Builder()
+                    .setBaseViewBuilderHolder(ViewBuilderHolderA())
+                    .create()
+                    .show(supportFragmentManager)
+            R.id.button51 -> SelectDialog.Builder()
+                    .setBaseViewBuilderHolder(object : BaseViewBuilderHolder() {
+                        override val layoutViewId: Int
+                            get() = R.layout.view_holder_a
+
+                        override fun initView() {}
+                        override fun onClick(view: View) {}
+                    })
+                    .create()
+                    .show(supportFragmentManager)
+            R.id.button52 -> SelectDialog.Builder()
+                    .setTitle("标题")
+                    .setBaseViewBuilderHolder(object : BaseViewBuilderHolder() {
+                        override val layoutViewId: Int = -1
+
+                        override fun getLayoutView(viewGroup: ViewGroup): View? {
+                            val textView = TextView(this@TestDialogActivity)
+                            textView.text = "我是代码中创建的View"
+                            textView.gravity = Gravity.CENTER
+                            textView.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                            return textView
+                        }
+
+                        override fun initView() {}
+                        override fun onClick(view: View) {}
+                    })
+                    .create()
+                    .show(supportFragmentManager)
+            R.id.button53 -> SelectDialog.Builder()
+                    .setTitle("标题")
+                    .setContent("我是内容")
+                    .create()
+                    .show(supportFragmentManager)
         }
+    }
 
-        @Override
-        public int getLayoutViewId() {
-            return R.layout.view_holder_a;
-        }
-
-        @Override
-        public void initView() {
-
-        }
-
-        @Override
-        public void onClick(View v) {
-
-        }
+    open class ViewBuilderHolderA : BaseViewBuilderHolder() {
+        override fun initView() {}
+        override fun onClick(v: View) {}
+        override val layoutViewId: Int = R.layout.view_holder_a
     }
 
 

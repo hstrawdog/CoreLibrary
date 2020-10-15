@@ -1,13 +1,14 @@
 package com.hqq.core.ui.dialog
 
 import android.content.DialogInterface
-import android.text.Layout
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.hqq.core.R
 import com.hqq.core.ui.BaseViewBuilderHolder
+import com.hqq.core.utils.ResourcesUtils
 
 /**
  * @Author : huangqiqiang
@@ -15,59 +16,86 @@ import com.hqq.core.ui.BaseViewBuilderHolder
  * @FileName :   BaseSelectDialog
  * @Date : 2019/10/31 0031  上午 11:12
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : 选择弹窗
+ *  使用 AlertParams Builder 进行构建
  */
-class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
+class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
+
+    /**
+     *  属性对象
+     */
     var alertParams: AlertParams? = null
-    private val viewHolder: T?
-        get() = alertParams!!.baseViewBuilderHolder as T
 
-    override val viewId: Int
-        get() = R.layout.dialog_base_select_dialog
+    /**
+     *  viewHolder
+     */
+    private val _viewHolder: T? = alertParams?.baseViewBuilderHolder as? T
 
-    override val animation: Int
-        get() = R.style.dialogAnimation_fade_in2fade_out
+    /**
+     *  布局ID
+     */
+    override val layoutId: Int = R.layout.dialog_base_select_dialog
 
-    override val weight: Int
-        get() = WindowManager.LayoutParams.MATCH_PARENT
+    /**
+     *  动画
+     */
+    override val animation: Int = R.style.dialogAnimation_fade_in2fade_out
 
+    /**
+     *  宽度
+     */
+    override val weight: Int = WindowManager.LayoutParams.MATCH_PARENT
+
+    /**
+     *  初始化
+     */
     override fun initView() {
-        if (alertParams != null) {
+        alertParams?.let {
             initAlertParams()
         }
-        viewHolder?.builder(this, rootView!!.findViewById(R.id.ll_content))
-        viewHolder?.addToParent()
-        viewHolder?.initView()
+        _viewHolder?.apply {
+            builder(this@SelectDialog, rootView!!.findViewById(R.id.ll_content))
+            addToParent()
+            initView()
+        }
     }
 
     /**
      * builder 对象处理
      */
     private fun initAlertParams() {
-        // 左边按钮 取消
-        rootView?.findViewById<TextView>(R.id.tv_cancel)?.let {
-            it.text = alertParams?.negativeButtonText
-            it.setOnClickListener {
-                if (alertParams?.negativeButtonListener != null) {
-                    alertParams?.negativeButtonListener?.onClick(this@BaseSelectDialog, DialogInterface.BUTTON_NEGATIVE)
-                } else {
-                    // 没有实现事件回调
-                    dismiss()
+
+        rootView?.let {
+            // 左边按钮 取消
+            it.findViewById<TextView>(R.id.tv_cancel)?.let {
+                it.text = alertParams?.negativeButtonText
+                it.setOnClickListener {
+                    if (alertParams?.negativeButtonListener != null) {
+                        alertParams?.negativeButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_NEGATIVE)
+                    } else {
+                        // 没有实现事件回调
+                        dismiss()
+                    }
                 }
             }
-        }
-        // 右边按钮 确认
-        rootView?.findViewById<TextView>(R.id.tv_determine)?.let {
-            it.text = alertParams?.positiveButtonText
-            it.setOnClickListener {
-                if (alertParams?.positiveButtonListener != null) {
-                    alertParams?.positiveButtonListener?.onClick(this@BaseSelectDialog, DialogInterface.BUTTON_POSITIVE)
+            // 右边按钮 确认
+            it.findViewById<TextView>(R.id.tv_determine)?.let {
+                it.text = alertParams?.positiveButtonText
+                it.setOnClickListener {
+                    if (alertParams?.positiveButtonListener != null) {
+                        alertParams?.positiveButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                    }
                 }
             }
-        }
-        // 提示
-        rootView?.findViewById<TextView>(R.id.tv_title)?.let {
-            it.text = alertParams!!.title
+            // 提示
+            it.findViewById<TextView>(R.id.tv_title)?.apply {
+                alertParams?.let {
+                    this.text = it.title
+                    // 标题大小
+                    this.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.titleFontSize)
+                }
+            }
+
         }
         // 内容
         alertParams?.content?.let {
@@ -76,13 +104,12 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
                 tv.gravity = Gravity.CENTER
                 tv.text = it
                 tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
-                rootView?.findViewById<LinearLayout>(R.id.ll_content)?.let {
-                    it.addView(tv)
+                rootView?.findViewById<LinearLayout>(R.id.ll_content)?.apply {
+                    addView(tv)
+                    setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt())
                 }
-
             }
         }
-
 
     }
 
@@ -91,6 +118,7 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
     }
 
     class Builder {
+
         /**
          *  属性池
          */
@@ -101,8 +129,8 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          *
          * @return
          */
-        fun create(): BaseSelectDialog<*> {
-            val baseSelectDialog: BaseSelectDialog<*> = BaseSelectDialog<BaseViewBuilderHolder>()
+        fun create(): SelectDialog<*> {
+            val baseSelectDialog: SelectDialog<*> = SelectDialog<BaseViewBuilderHolder>()
             baseSelectDialog.alertParams = alertParams
             return baseSelectDialog
         }
@@ -176,10 +204,11 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
          * @param text
          * @return
          */
-        fun setTitle(text: CharSequence?): Builder {
+        fun setTitle(text: CharSequence?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x40)): Builder {
             text?.let {
                 alertParams.title = it
             }
+            alertParams.titleFontSize = fontSize
             return this
         }
 

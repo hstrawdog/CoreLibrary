@@ -107,7 +107,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     private fun initContentView() {
         val linearLayout = rootView!!.findViewById<LinearLayout>(R.id.ll_rootView)
-        val view = LayoutInflater.from(context).inflate(viewId, linearLayout, false)
+        val view = LayoutInflater.from(context).inflate(layoutId, linearLayout, false)
         linearLayout.gravity = gravity
         linearLayout.addView(view)
         view.setOnClickListener { view1: View? -> }
@@ -139,7 +139,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         return null
     }
 
-    protected abstract val viewId: Int
+    protected abstract val layoutId: Int
 
     override val layoutViewId: Int
         get() = R.layout.dialog_new

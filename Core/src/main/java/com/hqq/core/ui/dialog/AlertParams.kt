@@ -43,6 +43,11 @@ class AlertParams {
     var title: CharSequence = "提示"
 
     /**
+     *  标题字体大小
+     */
+    var titleFontSize: Float = 0f
+
+    /**
      *  中间内容或者提示
      */
     var content: CharSequence = ""

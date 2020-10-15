@@ -21,7 +21,7 @@ public class LeftDialog extends BaseDialog {
     }
 
     @Override
-    public int getViewId() {
+    public int getLayoutId() {
         return R.layout.dialog_right;
     }
 
