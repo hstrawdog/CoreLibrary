@@ -50,6 +50,9 @@ class BaseSelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterfa
             it.setOnClickListener {
                 if (alertParams?.negativeButtonListener != null) {
                     alertParams?.negativeButtonListener?.onClick(this@BaseSelectDialog, DialogInterface.BUTTON_NEGATIVE)
+                } else {
+                    // 没有实现事件回调
+                    dismiss()
                 }
             }
         }

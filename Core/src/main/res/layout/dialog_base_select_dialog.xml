@@ -27,7 +27,9 @@
 
     </LinearLayout>
 
-    <View style="@style/line_vertical" />
+    <View
+        style="@style/line_vertical"
+        android:layout_marginTop="@dimen/x20" />
 
 
     <LinearLayout

@@ -3,8 +3,7 @@ package com.hqq.example.ui.bar
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import androidx.core.content.ContextCompat
-import com.hqq.core.toolbar.BaseDefToolBarImpl
+import com.hqq.core.toolbar.DefToolBarImpl
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.utils.ToastUtils.showToast
 import com.hqq.core.utils.statusbar.StatusBarManager.setStatusBarModel
@@ -27,9 +26,9 @@ class ToolBarActivity : BaseActivity() {
 
 
         iToolBar?.let {
-            (iToolBar as BaseDefToolBarImpl).addRightTextView("分享", View.OnClickListener { showToast(activity, "点击分享") })
-            (iToolBar as BaseDefToolBarImpl).addRightTextView("分享", R.color.color_333, View.OnClickListener { showToast(activity, "点击分享") })
-            (iToolBar as BaseDefToolBarImpl).addRightImageView(R.mipmap.ic_more, View.OnClickListener { showToast(activity, "点击more") })
+            (iToolBar as DefToolBarImpl).addRightTextView("分享", View.OnClickListener { showToast(activity, "点击分享") })
+            (iToolBar as DefToolBarImpl).addRightTextView("分享", R.color.color_333, View.OnClickListener { showToast(activity, "点击分享") })
+            (iToolBar as DefToolBarImpl).addRightImageView(R.mipmap.ic_more, View.OnClickListener { showToast(activity, "点击more") })
         }
 
         findViewById<View>(R.id.button).setOnClickListener(this)

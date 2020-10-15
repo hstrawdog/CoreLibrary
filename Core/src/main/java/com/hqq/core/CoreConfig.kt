@@ -3,7 +3,7 @@ package com.hqq.core
 import android.app.Activity
 import android.app.Application
 import com.hqq.core.annotation.ToolBarMode
-import com.hqq.core.toolbar.BaseDefToolBarImpl
+import com.hqq.core.toolbar.DefToolBarImpl
 import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.utils.RegexUtils
@@ -83,7 +83,7 @@ class CoreConfig private constructor() {
      */
     var iCreateToolbar: ICreateToolbar = object : ICreateToolbar {
         override fun createTooBar(): IToolBar {
-            return BaseDefToolBarImpl()
+            return DefToolBarImpl()
         }
     }
 

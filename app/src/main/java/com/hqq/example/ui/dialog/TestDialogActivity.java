@@ -155,8 +155,8 @@ public class TestDialogActivity extends BaseActivity {
                 break;
             case R.id.button53:
                 new BaseSelectDialog.Builder()
-                        .setTitle("1111111111111")
-                        .s
+                        .setTitle("标题")
+                        .setContent("我是内容")
                         .create()
                         .show(getSupportFragmentManager());
 
