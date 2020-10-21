@@ -14,7 +14,10 @@
         style="@style/def_text.32.333"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/x40"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginTop="@dimen/x40"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginBottom="@dimen/x30"
         android:gravity="center"
         android:text="提示" />
 

@@ -113,10 +113,16 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
 
     }
 
+    /**
+     *  重写返回  关闭对话框
+     */
     override fun cancel() {
         dismiss()
     }
 
+    /**
+     * Builder 对象 构建 SelectDialog
+     */
     class Builder {
 
         /**
@@ -149,25 +155,14 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
         /**
          * 设置取消按钮
          *
-         * @param onCancelListener
-         * @return
-         */
-        fun setOnCancelListener(onCancelListener: DialogInterface.OnClickListener?): Builder {
-            alertParams.negativeButtonListener = onCancelListener
-            return this
-        }
-
-        /**
-         * 设置取消按钮
-         *
          * @param text
          * @param onCancelListener
          * @return
          */
-        fun setOnCancelListener(text: String?, onCancelListener: DialogInterface.OnClickListener?): Builder {
+        fun setOnCancelListener(text: String?, onCancelListener: DialogInterface.OnClickListener? = null): Builder {
             alertParams.negativeButtonListener = onCancelListener
             text?.let {
-                alertParams.positiveButtonText = it
+                alertParams.negativeButtonText = it
             }
             return this
         }
@@ -175,22 +170,11 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
         /**
          * 确定按钮
          *
-         * @param listener
-         * @return
-         */
-        fun setPositiveButton(listener: DialogInterface.OnClickListener?): Builder {
-            alertParams.positiveButtonListener = listener
-            return this
-        }
-
-        /**
-         * 确定按钮
-         *
          * @param text
          * @param listener
          * @return
          */
-        fun setPositiveButton(text: CharSequence?, listener: DialogInterface.OnClickListener?): Builder {
+        fun setPositiveButton(text: CharSequence?, listener: DialogInterface.OnClickListener? = null): Builder {
             text?.let {
                 alertParams.positiveButtonText = it
             }
@@ -204,7 +188,7 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
          * @param text
          * @return
          */
-        fun setTitle(text: CharSequence?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x40)): Builder {
+        fun setTitle(text: CharSequence?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)): Builder {
             text?.let {
                 alertParams.title = it
             }
@@ -221,6 +205,14 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
             }
             return this
         }
+
+        /**
+         *  分割线
+         */
+        fun setDividingLine(showDividingLine: Boolean) {
+            alertParams.showDividingLine = showDividingLine
+        }
+
 
     }
 }

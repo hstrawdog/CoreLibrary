@@ -13,5 +13,5 @@ interface DialogClickListener<T> {
      * 传递
      * @param t  点击
      */
-    fun onClickDefine(t: T)
+    fun onClick(t: T)
 }

@@ -1,15 +1,19 @@
 package com.hqq.example.ui.dialog
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import com.hqq.core.listenner.DialogClickListener
 import com.hqq.core.ui.BaseViewBuilderHolder
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.ui.dialog.SelectDialog
+import com.hqq.core.utils.ToastUtils
 import com.hqq.example.R
 import com.hqq.example.dialog.*
 import com.hqq.example.ui.dialog.TestDialogActivity
@@ -96,6 +100,8 @@ class TestDialogActivity : BaseActivity() {
             R.id.button53 -> SelectDialog.Builder()
                     .setTitle("标题")
                     .setContent("我是内容")
+                    .setPositiveButton("确定2") { dialog, which -> ToastUtils.showToast("确定2") }
+                    .setOnCancelListener("取消1") { dialog, which -> ToastUtils.showToast("取消1") }
                     .create()
                     .show(supportFragmentManager)
         }

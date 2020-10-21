@@ -1,6 +1,7 @@
 package com.hqq.core.ui.dialog
 
 import android.content.DialogInterface
+import com.hqq.core.R
 import com.hqq.core.ui.BaseViewBuilderHolder
 
 /**
@@ -51,4 +52,16 @@ class AlertParams {
      *  中间内容或者提示
      */
     var content: CharSequence = ""
+
+    /**
+     * 分割线
+     */
+    var showDividingLine: Boolean = true
+
+    /**
+     *  分割线颜色
+     */
+    var dividingLineColor: Int = R.color.color_line_gray
+
+
 }

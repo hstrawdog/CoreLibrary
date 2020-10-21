@@ -9,8 +9,7 @@ package com.hqq.core.plugin
  * @Descrive :
  */
 object Versions {
-    val retrofit = "2.9.0"
-    val okhttpLogging = "4.8.0"
+
     val appcompat = "1.1.0"
     val coreKtx = "1.3.0"
     val constraintlayout = "2.0.0-beta3"
@@ -30,7 +29,24 @@ object Versions {
     val lifecycle_version = "2.2.0"
     val viewPage2 = "1.0.0"
     val dataBinding_Compoler = "4.0.1"
+
+    val retrofit = "2.9.0"
+    val okhttpLogging = "4.8.0"
+    val okhttp = "4.2.1"
+
+    val gldie = "4.11.0"
+
+    val gson = "2.8.6"
+
+    val Leakcanary = "2.4"
+
+    val BRVAH = "3.0.4"
+
+    val ultraPtr = "1.0.11"
+
+    val Luban = "1.1.8"
 }
+
 
 object AndroidX {
     val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
@@ -58,12 +74,13 @@ object Android {
 object Fragment {
     val runtime = "androidx.fragment:fragment:${Versions.fragment}"
     val runtimeKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+
     // 目测是用于测试的一个库 好像也支持Dagger的注入
     val testing = "androidx.fragment:fragment-testing:${Versions.fragment}"
 }
 
 object Retrofit {
-    val okhttp = "com.squareup.okhttp3:okhttp:4.2.1"
+    val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     val mock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
@@ -78,8 +95,8 @@ object Kt {
 }
 
 object Glide {
-    val glide = "com.github.bumptech.glide:glide:4.11.0"
-    val glideCompiler = "com.github.bumptech.glide:compiler:4.11.0"
+    val glide = "com.github.bumptech.glide:glide:${Versions.gldie}"
+    val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.gldie}"
 }
 
 object Hilt {
@@ -89,29 +106,29 @@ object Hilt {
     val compiler = "androidx.hilt:hilt-compiler:${Versions.hitViewModule}"
 }
 
-object  Room{
-    val runtime="androidx.room:room-runtime:${Versions.room}"
-    val compiler="androidx.room:room-compiler:${Versions.room}"
+object Room {
+    val runtime = "androidx.room:room-runtime:${Versions.room}"
+    val compiler = "androidx.room:room-compiler:${Versions.room}"
 }
 
 object Gson {
-    val gson = "com.google.code.gson:gson:2.8.6"
+    val gson = "com.google.code.gson:gson:${Versions.gson}"
 }
 
 object Leakcanary {
-    val leakcanary = "com.squareup.leakcanary:leakcanary-android:2.4"
+    val leakcanary = "com.squareup.leakcanary:leakcanary-android:${Versions.Leakcanary}"
 }
 
 object BaseRecyclerViewAdapterHelper {
-    val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
+    val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.BRVAH}"
 }
 
 object UltraPtr {
-    val ultraPtr = "in.srain.cube:ultra-ptr:1.0.11"
+    val ultraPtr = "in.srain.cube:ultra-ptr:${Versions.ultraPtr}"
 }
 
 object Luban {
-    val luban = "top.zibin:Luban:1.1.8"
+    val luban = "top.zibin:Luban:${Versions.Luban}"
 }
 
 object IDimensCompat {
