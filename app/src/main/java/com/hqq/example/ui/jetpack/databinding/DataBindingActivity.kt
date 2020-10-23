@@ -21,30 +21,25 @@ import com.hqq.example.ui.jetpack.livedata.User
  * 注意 setVariable
  */
 class DataBindingActivity : BaseActivity() {
-    override val layoutViewId: Int
-        get() = R.layout.activity_dagger_a
-
-    override fun initView() {
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_data_binding, null, false)
-        (findViewById<View>(R.id.ll_rootView) as LinearLayout).addView(viewDataBinding.root)
-        val user = User()
-        viewDataBinding.lifecycleOwner = this
-        viewDataBinding.setVariable(BR.user, user)
-        viewDataBinding.setVariable(BR.dataBinding, DataBanding())
-        user.name = "1111"
-
-//        findViewById(R.id.button38).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                LogUtils.e("-----------" + user.getName());
-//            }
-//        });
-    }
-
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, DataBindingActivity::class.java)
             context.startActivityForResult(starter, -1)
         }
     }
+
+
+    override val layoutViewId: Int = R.layout.activity_dagger_a
+
+    override fun initView() {
+        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_data_binding, null, false)
+        (findViewById<View>(R.id.ll_rootView) as LinearLayout).addView(viewDataBinding.root)
+        val user = User.newInstance()
+        viewDataBinding.lifecycleOwner = this
+        viewDataBinding.setVariable(BR.user, user)
+        viewDataBinding.setVariable(BR.dataBinding, DataBanding())
+        user.name = user.name + "M"
+    }
+
+
 }

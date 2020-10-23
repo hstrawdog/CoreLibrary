@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-
     <data>
-
         <variable
             name="user"
             type="com.hqq.example.ui.jetpack.livedata.User" />
@@ -22,22 +20,21 @@
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user.name}" />
-
+            android:text='@{(user.name!=null) &amp;&amp; (user.level &lt; 5)? "2222":"3333" }' />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x20"
             android:background="@color/color_main"
-            android:text="@={user.name}" />
+            android:text="@={user.name }" />
 
         <Button
             android:id="@+id/button38"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{dataBinding::onClickButton}"
-            android:text="Button" />
+            android:text='@{user.level+""}' />
 
         <Button
             android:id="@+id/button39"

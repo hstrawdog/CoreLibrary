@@ -24,6 +24,7 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
+import com.hqq.example.ui.jetpack.databinding.DataBindingActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
@@ -60,7 +61,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
     override fun initData() {
         LogUtils.e("MainActivity    initData")
 //        LiveDateActivity.open(this)
-        TestDialogActivity.open(this)
+        DataBindingActivity.open(this)
     }
 
 

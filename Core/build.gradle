@@ -5,8 +5,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
     }
     dataBinding {
         enabled = true
@@ -54,7 +54,7 @@ android {
         }
     }
 
-//    //主要是下面这一段
+//    //自定义aar名称
 //    android.libraryVariants.all { variant ->
 //        variant.outputs.each { output ->
 //            def outputFile = output.outputFile
