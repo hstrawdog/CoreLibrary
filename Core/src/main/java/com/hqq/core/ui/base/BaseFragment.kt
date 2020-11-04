@@ -51,6 +51,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
 
     /**
      * 标题栏
+     * get  类似代理 每次从 rootViewBuild.iRootViewImp 获取对象
      */
     var iToolBar: IToolBar? = null
         get() = rootViewBuild.iRootViewImpl.iToolBar
@@ -78,7 +79,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
 
     /**
      * 延迟加载
-     * 当页面在前台显示时 才开始记载数据
+     * 当页面在前台显示时 才开始加载数据
      *
      * @param isVisibleToUser
      */

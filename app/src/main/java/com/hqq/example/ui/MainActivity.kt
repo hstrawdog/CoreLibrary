@@ -20,6 +20,7 @@ import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
+import com.hqq.example.ui.customize.DiskViewActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
@@ -61,7 +62,7 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
     override fun initData() {
         LogUtils.e("MainActivity    initData")
 //        LiveDateActivity.open(this)
-        DataBindingActivity.open(this)
+        DiskViewActivity.open(this)
     }
 
 

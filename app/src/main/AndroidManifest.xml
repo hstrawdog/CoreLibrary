@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.recycle.VmFragmentActivity"></activity>
+
+        <activity android:name=".ui.customize.DiskViewActivity" android:label="时间选择"/>
+
+
+        <activity android:name=".ui.recycle.VmFragmentActivity" />
         <activity android:name=".ui.jetpack.livedata.LiveDataSpanViewActivity" />
         <activity
             android:name=".ui.jetpack.room.RoomActivity"

@@ -119,6 +119,11 @@ object ResourcesUtils {
         return resources!!.getDimension(resId)
     }
 
+    @Deprecated("")
+    fun getDimen(context: Context, @DimenRes resId: Int): Float {
+        return getResources(context).getDimension(resId)
+    }
+
     /**
      * 获取尺寸资源
      *
@@ -129,8 +134,17 @@ object ResourcesUtils {
         return ScreenUtils.px2dip(CoreConfig.get().application, resources!!.getDimension(resId)).toFloat()
     }
 
-    @Deprecated("")
-    fun getDimen(context: Context, @DimenRes resId: Int): Float {
-        return getResources(context).getDimension(resId)
+
+    @JvmStatic
+    fun sp2px(context: Context, spValue: Int): Float {
+        val fontScale: Float = context.getResources().getDisplayMetrics().scaledDensity
+        return ((spValue * fontScale + 0.5f)).toFloat()
     }
+
+    @JvmStatic
+    fun sp2px(spValue: Int): Float {
+        return sp2px(CoreConfig.get().application?.applicationContext!!, spValue)
+    }
+
+
 }
