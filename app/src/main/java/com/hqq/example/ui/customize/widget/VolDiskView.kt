@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 
 /**
@@ -41,6 +42,7 @@ class VolDiskView : View {
             drawScale(it)
         }
     }
+
     /**
      * 旋钮半径
      */
@@ -51,24 +53,54 @@ class VolDiskView : View {
      */
     var centerX: Float = 0F
     var centerY: Float = 0F
+
     /**
      * 刻度线长度
      */
-    var scaleWidth: Float = 20F
+    var scaleWidth: Float = 50F
+
     /**
      * 刻度间的夹角
      */
     var scaleSpace: Float = 10F
     var paint: Paint = Paint()
+
+    var shadowSize: Float = 30F
+
+
     private fun drawScale(canvas: Canvas) {
-        paint.color = Color.GRAY
-        var scaleCount = 360 / scaleSpace.toInt()
-        for (i in 0 until scaleCount) {
-            canvas.drawRect(width - scaleWidth, centerY - 4F, width.toFloat(), centerY + 4F, paint)
-            canvas.rotate(scaleSpace, centerX, centerY)
-        }
-        canvas.drawCircle(centerX, centerY, radius, paint)
+
+        drawRotate(canvas)
+        drawCircle(canvas)
 
     }
 
+    private fun drawRotate(canvas: Canvas) {
+        paint.color = Color.GRAY
+        var scaleCount = 360 / scaleSpace.toInt()
+        for (i in 0 until scaleCount) {
+            canvas.drawRect(width - scaleWidth - 20, centerY - 4F, width.toFloat() - 20, centerY + 4F, paint)
+            canvas.rotate(scaleSpace, centerX, centerY)
+        }
+    }
+
+    private fun drawCircle(canvas: Canvas) {
+        paint.color = Color.WHITE
+        paint.setShadowLayer(shadowSize, 0F, 15F, Color.GRAY)
+        canvas.drawCircle(centerX, centerY, radius - 20, paint)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_UP->{
+                startUpShadowAnim()
+            }
+        }
+        return super.onTouchEvent(event)
+    }
+
+    private fun startUpShadowAnim() {
+
+
+    }
 }
