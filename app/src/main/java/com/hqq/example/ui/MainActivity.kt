@@ -47,11 +47,10 @@ import kotlinx.coroutines.launch
  */
 @AndroidEntryPoint
 class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
-
+    //  这边是kotlin
     override val adapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int
         get() = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         LogUtils.e("MainActivity    onCreate1")
         super.onCreate(savedInstanceState)
