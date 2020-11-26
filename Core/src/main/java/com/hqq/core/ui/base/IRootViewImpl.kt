@@ -10,9 +10,7 @@ import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.annotation.LayoutModel
 import com.hqq.core.annotation.ToolBarMode
-import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.toolbar.IToolBar
-import com.hqq.core.toolbar.IToolBarBuilder
 import com.hqq.core.utils.statusbar.StatusBarManager
 import java.lang.ref.WeakReference
 
@@ -36,7 +34,7 @@ import java.lang.ref.WeakReference
  * 真正核心的内容 应该拆成两个部分
  * 一个view  一个头部
  */
-open class IRootViewImpl() {
+open class IRootViewImpl {
     /**
      * 当前上下文
      */
@@ -45,7 +43,7 @@ open class IRootViewImpl() {
     /**
      * 标题栏类型
      */
-    var iCreateToolbar: ICreateToolbar? = null
+    var iCreateToolbar: IToolBar? = null
         get() {
             return field ?: CoreConfig.get().iCreateToolbar
         }
@@ -75,7 +73,7 @@ open class IRootViewImpl() {
      *  initConfig 后执行 create 之后 在设置就无效了
      *  initConfig 后就需要 去执行 iToolBar 对象 进行更新
      */
-    val iToolBarBuilder = IToolBarBuilder()
+    val iToolBarBuilder = IToolBar.Builder()
 
     /**
      * 是否执行 状态栏 透明化
@@ -87,10 +85,7 @@ open class IRootViewImpl() {
      * 状态栏模式
      */
     @ToolBarMode
-    var statusBarMode: Int? = null
-        get() {
-            return field ?: CoreConfig.get().isStatusMode
-        }
+    var statusBarMode: Int = CoreConfig.get().isStatusMode
 
     /**
      * 构建跟布局
@@ -138,10 +133,9 @@ open class IRootViewImpl() {
         val layout = LinearLayout(activity!!.get())
         layout.orientation = LinearLayout.VERTICAL
         layout.overScrollMode = View.OVER_SCROLL_NEVER
-        createToolBar(layout)
-        val view = getLayoutView(iActivityBuilder, layout)
         layout.setBackgroundResource(bgColor)
-        layout.addView(view)
+        createToolBar(layout)
+        layout.addView(getLayoutView(iActivityBuilder, layout))
         return layout
     }
 
@@ -166,9 +160,9 @@ open class IRootViewImpl() {
         // 默认只有Activity 会去执行设置状态栏的颜色
         if (immersiveStatusBar) {
             if (statusBarMode == ToolBarMode.LIGHT_MODE) {
-                StatusBarManager.setStatusBarModel(activity!!.get()!!.window, true)
+                StatusBarManager.setStatusBarModel(activity?.get()?.window, true)
             } else {
-                StatusBarManager.setStatusBarModel(activity!!.get()!!.window, false)
+                StatusBarManager.setStatusBarModel(activity?.get()?.window, false)
             }
         }
         if (iToolBarBuilder.showToolBar || iToolBarBuilder.showStatusBar) {

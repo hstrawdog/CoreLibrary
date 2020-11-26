@@ -100,16 +100,16 @@ abstract class BaseToolBar : IToolBar {
         this.activity = WeakReference(activity)
         val linearLayout = LinearLayout(activity)
         linearLayout.layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayout.orientation = LinearLayout.VERTICAL
         if (isShowStatusBar) {
             initStatusBar(this.activity!!.get())
             val mStatusBarHeight = ScreenUtils.getStatusBarHeight4Resources(activity)
             linearLayout.addView(
-                statusBar,
-                LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
+                    statusBar,
+                    LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
             )
         }
 
@@ -121,8 +121,8 @@ abstract class BaseToolBar : IToolBar {
         if (isShowLine) {
             viewLine = View(this.activity!!.get())
             viewLine!!.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ScreenUtils.dip2px(this.activity!!.get(), 1f)
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ScreenUtils.dip2px(this.activity!!.get(), 1f)
             )
             viewLine!!.setBackgroundResource(R.color.toolbar_line_bg)
             linearLayout.addView(viewLine)
@@ -143,6 +143,12 @@ abstract class BaseToolBar : IToolBar {
         return this
     }
 
+    /**
+     * 是否显示 toolBar
+     *
+     * @param showBar 是否显示
+     * @return this
+     */
     override fun setShowBar(showBar: Boolean): BaseToolBar {
         isShowBar = showBar
         return this

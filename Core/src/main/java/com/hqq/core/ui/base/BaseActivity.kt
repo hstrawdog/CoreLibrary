@@ -31,19 +31,22 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * LoadingDialog
      */
-    lateinit var loadingView: LoadingView
+    val loadingView: LoadingView by lazy {
+        LoadingView(this)
+    }
 
     /**
      * 根布局
      */
-    lateinit var iCreateRootView: ICreateRootViewImpl<BaseActivity>
+     val iCreateRootView: ICreateRootViewImpl<BaseActivity>  by lazy {
+        ICreateRootViewImpl(this, showStatus = true, showToolBar = true)
+    }
 
     /**
      *  顶部标题栏与状态栏
      *  不支持赋值
      */
-    val iToolBar: IToolBar?
-        get() = iCreateRootView.iRootViewImpl.iToolBar
+    val iToolBar: IToolBar? = iCreateRootView.iRootViewImpl.iToolBar
 
     /**
      *  初始化
@@ -52,9 +55,6 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
         initAnimEnter()
         super.onCreate(savedInstanceState)
         activity = this
-        loadingView = LoadingView(this)
-        iCreateRootView = ICreateRootViewImpl(this, true, true)
-        iCreateRootView.rootView
         initConfig()
         setContentView(iCreateRootView.buildContentView(this))
         initView()
@@ -106,7 +106,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      * 默认配置
      */
     override fun initConfig() {
-        iCreateRootView!!.initActivity(false)
+        iCreateRootView.initActivity(false)
     }
 
     /**

@@ -22,6 +22,8 @@ interface IOpenActivity {
 }
 
 interface IFinishActivity {
-
+    /**
+     *  返回上一页接口
+     */
     fun finishActivity(goBackComponent: BaseViewModel.GoBackComponent)
 }

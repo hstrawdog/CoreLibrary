@@ -14,8 +14,7 @@ import com.hqq.core.ui.base.IRootView.IBanding
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseDataBindingActivity<T : ViewDataBinding>
-    : BaseActivity(), IBanding {
+abstract class BaseDataBindingActivity<T : ViewDataBinding> : BaseActivity(), IBanding {
 
     lateinit var binding: T
 
@@ -24,6 +23,7 @@ abstract class BaseDataBindingActivity<T : ViewDataBinding>
      * @return
      */
     final override val layoutViewId: Int = 0
+
     /**
      * 绑定Binding
      */

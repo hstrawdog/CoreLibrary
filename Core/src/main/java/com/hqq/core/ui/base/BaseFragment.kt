@@ -137,7 +137,12 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
         }
     }
 
-    override fun initConfig() {}
+    /**
+     *   初始化配置
+     */
+    override fun initConfig() {
+
+    }
 
     /**
      * 关联主界面 **只有在使用自定义View时使用**
@@ -146,7 +151,12 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
         return null
     }
 
-    override fun onClick(v: View) {}
+    /**
+     *  重写点击接口
+     */
+    override fun onClick(v: View) {
+
+    }
 
     /**
      * fragment 隐藏

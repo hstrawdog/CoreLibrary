@@ -254,6 +254,9 @@ class DefToolBarImpl : BaseToolBar() {
         return textView
     }
     //endregion
+
+    //region   图片
+
     /**
      * 添加图片
      *
@@ -264,6 +267,9 @@ class DefToolBarImpl : BaseToolBar() {
         return addRightImageView(icImage, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt(), 0, listener)
     }
 
+    /**
+     * 添加右边的图片
+     */
     fun addRightImageView(
             @DrawableRes icImage: Int,
             left: Int,
@@ -307,4 +313,6 @@ class DefToolBarImpl : BaseToolBar() {
         imageView.setOnClickListener(listener)
         return imageView
     }
+    //endregion
+
 }

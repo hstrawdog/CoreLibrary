@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
+import com.hqq.core.R
+import java.lang.ref.WeakReference
 
 /**
  * @Author : huangqiqiang
@@ -37,7 +39,6 @@ interface IToolBar {
      * 背景颜色
      */
     var toolBarBg: ImageView?
-
 
     /**
      * 构建  标题栏
@@ -99,4 +100,40 @@ interface IToolBar {
     fun showLine(boolean: Boolean): IToolBar
 
 
+    open class Builder {
+        var activity: WeakReference<Activity>? = null
+
+        /**
+         * 是否显示 状态栏 背景
+         */
+        var showStatusBar = true
+
+        /**
+         * 是否显示 ToolBar
+         */
+        var showToolBar = true
+
+        var showLine = true
+
+        /**
+         * 默认白色
+         */
+        @ColorRes
+        var statusBarColor = R.color.white
+
+        /**
+         * @param clss 类型
+         * @return
+         */
+        fun create(iCreateToolbar: IToolBar?): IToolBar? {
+            iCreateToolbar?.run {
+                setShowStatusBar(showStatusBar)
+                setShowBar(showToolBar)
+                showLine(showLine)
+                setStatusColor(statusBarColor)
+                createToolBar(activity?.get())
+            }
+            return iCreateToolbar
+        }
+    }
 }

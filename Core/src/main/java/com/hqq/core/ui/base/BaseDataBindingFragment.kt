@@ -16,15 +16,23 @@ import com.hqq.core.ui.base.IRootView.IBanding
  * DataBinding 需要标识xml 支持双向绑定 以及 布局中声明动态界面内容
  */
 abstract class BaseDataBindingFragment<T : ViewDataBinding> : BaseFragment(), IBanding {
-
+    /**
+     *   DataBinding 对象
+     */
     lateinit var binding: T
 
-    override val layoutViewId: Int
-        get() = 0
+    /**
+     *  布局ID
+     */
+    override val layoutViewId: Int = 0
 
+    /**
+     *  重写
+     */
     override fun getLayoutView(parent: ViewGroup): View {
-        binding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false)
-        binding!!.lifecycleOwner = this
-        return binding!!.root
+        binding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false).apply {
+            lifecycleOwner = this@BaseDataBindingFragment
+        }
+        return binding.root
     }
 }

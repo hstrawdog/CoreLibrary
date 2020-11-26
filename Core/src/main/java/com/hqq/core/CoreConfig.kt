@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.DefToolBarImpl
-import com.hqq.core.toolbar.ICreateToolbar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.utils.RegexUtils
 
@@ -81,11 +80,7 @@ class CoreConfig private constructor() {
     /**
      *  toolBar 的构建方法 可以重新赋值
      */
-    var iCreateToolbar: ICreateToolbar = object : ICreateToolbar {
-        override fun createTooBar(): IToolBar {
-            return DefToolBarImpl()
-        }
-    }
+    var iCreateToolbar: IToolBar = DefToolBarImpl()
 
 
     /**

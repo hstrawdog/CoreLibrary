@@ -1,5 +1,6 @@
 package com.hqq.example.ui.customize.widget
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -37,6 +38,7 @@ class VolDiskView : View {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+        setLayerType(LAYER_TYPE_SOFTWARE, null)
 
         canvas?.let {
             drawScale(it)
@@ -66,13 +68,12 @@ class VolDiskView : View {
     var paint: Paint = Paint()
 
     var shadowSize: Float = 30F
+    var shadowAnim: ValueAnimator? = null
 
 
     private fun drawScale(canvas: Canvas) {
-
         drawRotate(canvas)
         drawCircle(canvas)
-
     }
 
     private fun drawRotate(canvas: Canvas) {
@@ -86,21 +87,46 @@ class VolDiskView : View {
 
     private fun drawCircle(canvas: Canvas) {
         paint.color = Color.WHITE
-        paint.setShadowLayer(shadowSize, 0F, 15F, Color.GRAY)
-        canvas.drawCircle(centerX, centerY, radius - 20, paint)
+        paint.setShadowLayer(shadowSize, 0F, 15F, Color.RED)
+        canvas.drawCircle(centerX, centerY, radius, paint)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
-            MotionEvent.ACTION_UP->{
+            MotionEvent.ACTION_UP -> {
                 startUpShadowAnim()
             }
+            MotionEvent.ACTION_DOWN -> {
+                startDownShadowAnim()
+            }
         }
-        return super.onTouchEvent(event)
+        return true
+    }
+
+    private fun startDownShadowAnim() {
+        shadowAnim?.cancel()
+        shadowAnim = ValueAnimator.ofFloat(shadowSize, 10f)
+        with(shadowAnim!!) {
+            duration = 300L
+            addUpdateListener {
+                shadowSize = animatedValue as Float
+                postInvalidate()
+            }
+            start()
+        }
+
     }
 
     private fun startUpShadowAnim() {
-
-
+        shadowAnim?.cancel()
+        shadowAnim = ValueAnimator.ofFloat(shadowSize, 30F)
+        with(shadowAnim!!) {
+            duration = 300L
+            addUpdateListener {
+                shadowSize = animatedValue as Float
+                postInvalidate()
+            }
+            start()
+        }
     }
 }

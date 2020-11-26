@@ -36,6 +36,9 @@ class ICreateRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar:
      */
     var iRootViewImpl: IRootViewImpl = IRootViewImpl()
 
+    /**
+     *  跟布局
+     */
     override var rootView: View? = null
 
     constructor(activity: T) : this(activity, false, false)
@@ -43,27 +46,37 @@ class ICreateRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar:
     init {
         iRootViewImpl.iToolBarBuilder.showStatusBar = showStatus
         iRootViewImpl.iToolBarBuilder.showToolBar = showToolBar
-        if (context is Activity) {
-            activity = context
-            // 只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
-            iRootViewImpl.immersiveStatusBar = true
-        } else if (context is DialogFragment) {
-            activity = (context as DialogFragment).activity
-            iRootViewImpl.bgColor = R.color.transparent
-        } else if (context is Fragment) {
-            activity = (context as Fragment).activity
-        } else {
-            LogUtils.e(Exception("不支持的类" + context.javaClass.getName()))
+        when (context) {
+            is Activity -> {
+                activity = context
+                //只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
+                iRootViewImpl.immersiveStatusBar = true
+            }
+            is DialogFragment -> {
+                activity = (context as DialogFragment).activity
+                iRootViewImpl.bgColor = R.color.transparent
+            }
+            is Fragment -> {
+                activity = (context as Fragment).activity
+            }
+            else -> {
+                LogUtils.e(Exception("不支持的类" + context.javaClass.name))
+            }
         }
         activity?.let { iRootViewImpl.setActivity(it) }
     }
 
+    /**
+     *  绑定 rootView
+     */
     override fun buildContentView(iActivityBuilder: IRootView): View? {
         rootView = iRootViewImpl.createRootView(iActivityBuilder)
         return rootView
     }
 
-
+    /**
+     *  Activity 需要处理的 是否全屏
+     */
     override fun initActivity(fullScreen: Boolean) {
         // 全屏的需求只有在activity上才需要的
         if (fullScreen) {

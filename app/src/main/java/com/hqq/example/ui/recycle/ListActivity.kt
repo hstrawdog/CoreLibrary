@@ -53,7 +53,7 @@ class ListActivity(override val adapter: MainAdapter = MainAdapter()) : BaseList
 
     private val data: Unit
         private get() {
-            loadingView!!.show()
+            loadingView.show()
             Handler().postDelayed({
                 val list: MutableList<MainBean<*>> = ArrayList()
                 list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))

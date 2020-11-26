@@ -17,12 +17,7 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
 abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseDataBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
     protected lateinit var viewMode: K
     override fun initView() {
-        viewMode = getViewModel() as K
-        viewMode?.let {
-            lifecycle.addObserver(it)
-            ViewModelFactory.initBaseViewModel(it, this, loadingView)
-            ViewModelFactory.initOpenActivity(it, this, this)
-        }
+        initViewModel()
         addViewModel()
         initViews()
         viewMode?.let {
@@ -30,7 +25,21 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseData
         }
     }
 
+    /**
+     *  创建ViewModel
+     */
+    private fun initViewModel() {
+        viewMode = getViewModel() as K
+        viewMode?.let {
+            lifecycle.addObserver(it)
+            ViewModelFactory.initBaseViewModel(it, this, loadingView)
+            ViewModelFactory.initOpenActivity(it, this, this)
+        }
+    }
 
+    /**
+     *  创建ViewModel
+     */
     override fun getViewModel(): K {
         return if (this::viewMode.isInitialized) {
             ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
@@ -45,15 +54,18 @@ abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseData
      */
     override fun addViewModel() {
         if (bindingViewModelId != 0) {
-            binding!!.setVariable(bindingViewModelId, viewMode)
+            binding.setVariable(bindingViewModelId, viewMode)
         }
     }
 
+    /**
+     * 打开新的界面
+     */
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
         val intent = Intent(activity, openActivityComponent.activityClass)
         if (openActivityComponent.bundle != null) {
             intent.putExtras(openActivityComponent.bundle!!)
         }
-        activity?.startActivityForResult(intent, openActivityComponent.activityResult)
+        startActivityForResult(intent, openActivityComponent.activityResult)
     }
 }
