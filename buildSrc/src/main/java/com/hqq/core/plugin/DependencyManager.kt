@@ -47,7 +47,9 @@ object Versions {
     val Luban = "1.1.8"
 }
 
-
+/**
+ *  Androidx  jetpack
+ */
 object AndroidX {
     val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
@@ -65,12 +67,18 @@ object AndroidX {
     val viewpager2 = "androidx.viewpager2:viewpager2:${Versions.viewPage2}"
 }
 
+/**
+ * Android
+ */
 object Android {
     val meteria = "com.google.android.material:material:${Versions.material}"
     val activityKtx = "androidx.activity:activity-ktx:${Versions.material}"
-    val databindingCompiler = "com.android.databinding:compiler:${Versions.dataBinding_Compoler}"
+    val dataBindingCompiler = "com.android.databinding:compiler:${Versions.dataBinding_Compoler}"
 }
 
+/**
+ *   Fragment
+ */
 object Fragment {
     val runtime = "androidx.fragment:fragment:${Versions.fragment}"
     val runtimeKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
@@ -79,6 +87,9 @@ object Fragment {
     val testing = "androidx.fragment:fragment-testing:${Versions.fragment}"
 }
 
+/**
+ *  网络请求
+ */
 object Retrofit {
     val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
@@ -87,6 +98,9 @@ object Retrofit {
     val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLogging}"
 }
 
+/**
+ *  KT 相关
+ */
 object Kt {
     val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
@@ -94,11 +108,17 @@ object Kt {
     val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 }
 
+/**
+ * 图片加载
+ */
 object Glide {
     val glide = "com.github.bumptech.glide:glide:${Versions.gldie}"
     val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.gldie}"
 }
 
+/**
+ *  注解 依赖注入   dagger
+ */
 object Hilt {
     val daggerRuntime = "com.google.dagger:hilt-android:${Versions.hit}"
     val daggerCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hit}"
@@ -106,35 +126,60 @@ object Hilt {
     val compiler = "androidx.hilt:hilt-compiler:${Versions.hitViewModule}"
 }
 
+/**
+ *   数据库
+ */
 object Room {
     val runtime = "androidx.room:room-runtime:${Versions.room}"
     val compiler = "androidx.room:room-compiler:${Versions.room}"
 }
 
+/**
+ *  JSON
+ */
 object Gson {
     val gson = "com.google.code.gson:gson:${Versions.gson}"
 }
 
+/**
+ *  内存检测
+ */
 object Leakcanary {
     val leakcanary = "com.squareup.leakcanary:leakcanary-android:${Versions.Leakcanary}"
 }
 
+/**
+ *  RC  适配器
+ */
 object BaseRecyclerViewAdapterHelper {
     val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.BRVAH}"
 }
 
+/**
+ *   下拉刷新
+ */
 object UltraPtr {
     val ultraPtr = "in.srain.cube:ultra-ptr:${Versions.ultraPtr}"
 }
 
+/**
+ *  压缩
+ */
 object Luban {
     val luban = "top.zibin:Luban:${Versions.Luban}"
 }
 
-object IDimensCompat {
+/**
+ *  屏幕适配
+ */
+object DimensCompat {
     val iDimensCompat = "com.github.huangqiqiang:IDimensCompat:1.0.1"
 }
 
-object IHAlbum {
+/**
+ *  相册
+ */
+object Album {
     val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.0.10"
 }
+

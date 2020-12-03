@@ -9,7 +9,7 @@ import java.util.*
  * @FileName: com.hqq.core.utils.CreateDefColorFile.java
  * @emain: 593979591@qq.com
  * @date: 2019-04-24 20:32
- *
+ * @Describe 自动生成颜色 大小
  */
 object CreateDefColorFile {
     /**

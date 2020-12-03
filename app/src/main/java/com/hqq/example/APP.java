@@ -1,6 +1,7 @@
 package com.hqq.example;
 
 import android.app.Application;
+import android.content.pm.ApplicationInfo;
 
 import dagger.hilt.android.HiltAndroidApp;
 import dagger.hilt.android.qualifiers.ApplicationContext;
@@ -40,6 +41,16 @@ public class APP extends Application {
                 // 关闭windowBackground换肤，默认打开[可选]
                 .setSkinWindowBackgroundEnable(false)
                 .loadSkin();
+    }
+    public boolean isApkDebugable() {
+        //debug 返回true  release 返回false
+        try {
+            ApplicationInfo info = getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception e) {
+
+        }
+        return false;
     }
 
 

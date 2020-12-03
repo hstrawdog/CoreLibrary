@@ -1,11 +1,6 @@
 package com.hqq.core.glide
 
-import android.app.Activity
-import android.content.Context
-import android.view.View
 import android.widget.ImageView
-import androidx.annotation.DrawableRes
-import androidx.annotation.RawRes
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -27,24 +22,18 @@ import com.hqq.core.utils.ResourcesUtils
  * 参考 http://blog.csdn.net/wyb112233/article/details/52337392
  */
 object ImageLoadUtils {
-    //不做内存缓存
     /**
      * 默认配置
      *
      * @return
      */
-    val requestOptions: RequestOptions
-        get() = RequestOptions()
+    fun getRequestOption(): RequestOptions {
+        return RequestOptions()
                 .format(DecodeFormat.PREFER_RGB_565) //缓存SOURC和RESULT
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
                 .skipMemoryCache(false)
                 .dontAnimate()
                 .placeholder(CoreConfig.get().defImg)//缓存SOURC和RESULT
-    //不做内存缓存
-
-
-    fun getDefRoundRequestOptions(context: Context?): RequestOptions {
-        return getRoundRequestOptions(ResourcesUtils.getDimen(R.dimen.x10).toInt())
     }
 
     /**
@@ -53,67 +42,11 @@ object ImageLoadUtils {
      * @param px
      * @return
      */
-    fun getRoundRequestOptions(px: Int): RequestOptions {
-        return RequestOptions()
-                .format(DecodeFormat.PREFER_RGB_565) //缓存SOURC和RESULT
-                .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
-                .skipMemoryCache(false)
-                .dontAnimate()
-                .placeholder(CoreConfig.get().defImg)
+    fun getRequestOptionRound(px: Int = ResourcesUtils.getDimen(R.dimen.x10).toInt()): RequestOptions {
+        return getRequestOption()
                 .transform(GlideRoundTransform(px))
     }
 
-    /**
-     * 验证  view   是否 合法
-     * 判断  界面是否销毁
-     *
-     * @param view
-     * @return
-     */
-    fun checkFinish(view: View?): Boolean {
-        if (view == null || view.context == null) {
-            return true
-        }
-        if (view.context is Activity) {
-            val activity = view.context as Activity
-            if (activity.isFinishing) {
-                return true
-            }
-        }
-        return false
-    }
-
-    /**
-     * 加载图片
-     *
-     * @param url       String 地址
-     * @param imageView
-     */
-    fun with(url: String?, imageView: ImageView?) {
-        if (checkFinish(imageView)) {
-            return
-        }
-        GlideApp.with(imageView!!)
-                .load(url)
-                .apply(requestOptions)
-                .into(imageView)
-    }
-
-    /**
-     * 加载本地图片
-     *
-     * @param url
-     * @param imageView
-     */
-    fun with(@RawRes @DrawableRes url: Int, imageView: ImageView?) {
-        if (checkFinish(imageView)) {
-            return
-        }
-        GlideApp.with(imageView!!)
-                .load(url)
-                .apply(requestOptions)
-                .into(imageView)
-    }
 
     /**
      * 加载图片  指定宽度
@@ -123,16 +56,12 @@ object ImageLoadUtils {
      * @param width     宽
      * @param height    高
      */
-    fun with(url: String?, imageView: ImageView?, width: Int, height: Int) {
-        if (checkFinish(imageView)) {
-            return
-        }
-        GlideApp.with(imageView!!)
+    fun with(url: Any, imageView: ImageView, width: Int = -1, height: Int = -1) {
+
+        GlideApp.with(imageView)
                 .load(url)
-                .apply(
-                        requestOptions
-                                .override(width, height)
-                ).into(imageView)
+                .apply(getRequestOption().override(width, height))
+                .into(imageView)
     }
 
     /**
@@ -142,12 +71,9 @@ object ImageLoadUtils {
      * @param imageView
      */
     fun withFillet(url: String?, imageView: ImageView) {
-        if (checkFinish(imageView)) {
-            return
-        }
         GlideApp.with(imageView)
                 .load(url)
-                .apply(getDefRoundRequestOptions(imageView.context))
+                .apply(getRequestOptionRound())
                 .into(imageView)
     }
 
@@ -157,13 +83,10 @@ object ImageLoadUtils {
      * @param radius    圆角  单位 px
      */
     fun withFillet2PX(url: String?, imageView: ImageView?, radius: Int) {
-        if (checkFinish(imageView)) {
-            return
-        }
         GlideApp.with(imageView!!)
                 .load(url)
                 .apply(
-                        requestOptions.transforms(CenterCrop(), RoundedCorners(radius))
+                        getRequestOption().transforms(CenterCrop(), RoundedCorners(radius))
                 )
                 .into(imageView)
     }
@@ -175,9 +98,6 @@ object ImageLoadUtils {
      * @param imageView
      */
     fun transformHead(url: String?, imageView: ImageView?) {
-        if (checkFinish(imageView)) {
-            return
-        }
         GlideApp.with(imageView!!).load(url).apply(
                 RequestOptions.circleCropTransform()
                         .placeholder(R.mipmap.ic_def_head)
@@ -191,9 +111,6 @@ object ImageLoadUtils {
      * @param imageView
      */
     fun transformCircularHead(url: String?, imageView: ImageView?) {
-        if (checkFinish(imageView)) {
-            return
-        }
         GlideApp.with(imageView!!)
                 .load(url)
                 .thumbnail()

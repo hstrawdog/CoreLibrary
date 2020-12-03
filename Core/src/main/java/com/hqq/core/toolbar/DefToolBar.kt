@@ -1,7 +1,6 @@
 package com.hqq.core.toolbar
 
 import android.app.Activity
-import android.media.Image
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -27,7 +26,7 @@ import com.hqq.core.widget.FilterImageView
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-class DefToolBarImpl : BaseToolBar() {
+class DefToolBar : BaseToolBar() {
 
     override var toolBarBg: ImageView? = null
     private val mDefTitleColor = R.color.color_333
@@ -88,6 +87,29 @@ class DefToolBarImpl : BaseToolBar() {
             toolBarBg!!.alpha = ahpla
         }
     }
+    /**
+     * 设置背景的透明度
+     *
+     * @param aphla
+     */
+    fun initScrollNoImage(float: Float) {
+        var ahpla = float
+        if (ahpla > 1) {
+            ahpla = 1f
+        }
+        super.initScroll(ahpla)
+        if (ahpla < 0.5) {
+            leftView.alpha = 1 - ahpla * 2
+        } else {
+            leftView.alpha = ((ahpla - 0.5) * 2).toFloat()
+        }
+        if (toolbarTitle != null) {
+            toolbarTitle!!.alpha = ahpla
+        }
+        if (toolBarBg != null) {
+            toolBarBg!!.alpha = ahpla
+        }
+    }
 
     override fun setToolBarColor(color: Int) {
         toolBarBg?.setImageResource(color)
@@ -106,36 +128,13 @@ class DefToolBarImpl : BaseToolBar() {
 
     }
 
-    /**
-     * 设置背景的透明度
-     *
-     * @param ahpla
-     */
-    fun initScrollNoImage(ahpla: Float) {
-        var ahpla = ahpla
-        if (ahpla > 1) {
-            ahpla = 1f
-        }
-        super.initScroll(ahpla)
-        if (ahpla < 0.5) {
-            leftView.alpha = 1 - ahpla * 2
-        } else {
-            leftView.alpha = ((ahpla - 0.5) * 2).toFloat()
-        }
-        if (toolbarTitle != null) {
-            toolbarTitle!!.alpha = ahpla
-        }
-        if (toolBarBg != null) {
-            toolBarBg!!.alpha = ahpla
-        }
-    }
 
     /**
      * 设置背景颜色 需要在view创建完成
      *
      * @param resid
      */
-    fun setToolBarBg(@DrawableRes resid: Int): DefToolBarImpl {
+    fun setToolBarBg(@DrawableRes resid: Int): DefToolBar {
         mDefToolBarColor = resid
         if (toolBarBg != null) {
             toolBarBg!!.setImageResource(resid)
@@ -149,7 +148,7 @@ class DefToolBarImpl : BaseToolBar() {
      * @param defToolBarColor
      * @return
      */
-    fun setDefToolBarColor(defToolBarColor: Int): DefToolBarImpl {
+    fun setDefToolBarColor(defToolBarColor: Int): DefToolBar {
         mDefToolBarColor = defToolBarColor
         return this
     }
@@ -160,7 +159,7 @@ class DefToolBarImpl : BaseToolBar() {
      * @param defTitleColor
      * @return
      */
-    fun setDefTitleColor(defTitleColor: Int): DefToolBarImpl {
+    fun setDefTitleColor(defTitleColor: Int): DefToolBar {
         toolbarTitle!!.setTextColor(ContextCompat.getColor(toolbarTitle!!.context, defTitleColor))
         return this
     }
@@ -171,20 +170,11 @@ class DefToolBarImpl : BaseToolBar() {
      * @param id
      * @return
      */
-    fun setLetImageView(id: Int): DefToolBarImpl {
+    fun setLetImageView(id: Int): DefToolBar {
         leftView.setImageResource(id)
         return this
     }
 
-    /**
-     * 添加View
-     *
-     * @param view
-     */
-    fun addRightView(view: View): View {
-        (rootView?.findViewById<View>(R.id.ll_right) as LinearLayout).addView(view)
-        return view
-    }
     //region 添加右边文字
     /**
      * 添加文字
@@ -255,7 +245,7 @@ class DefToolBarImpl : BaseToolBar() {
     }
     //endregion
 
-    //region   图片
+    //region   添加图片
 
     /**
      * 添加图片
@@ -315,4 +305,13 @@ class DefToolBarImpl : BaseToolBar() {
     }
     //endregion
 
+    /**
+     * 添加View
+     *
+     * @param view
+     */
+    fun addRightView(view: View): View {
+        (rootView?.findViewById<View>(R.id.ll_right) as LinearLayout).addView(view)
+        return view
+    }
 }

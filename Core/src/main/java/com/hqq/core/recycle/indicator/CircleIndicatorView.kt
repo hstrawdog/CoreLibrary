@@ -135,6 +135,11 @@ open class CircleIndicatorView @JvmOverloads constructor(context: Context?, attr
         mModel = model
     }
 
+    init {
+        setWillNotDraw(false)
+        init()
+    }
+
     open fun init() {
         mPaintPageFill.style = Paint.Style.FILL
         mPaintPageFill.color = mDefColor
@@ -148,10 +153,6 @@ open class CircleIndicatorView @JvmOverloads constructor(context: Context?, attr
      * @return
      */
     private val pointSize: Int
-        private get() = mDefRadius * 2 + mDefPointPadding
+        get() = mDefRadius * 2 + mDefPointPadding
 
-    init {
-        setWillNotDraw(false)
-        init()
-    }
 }

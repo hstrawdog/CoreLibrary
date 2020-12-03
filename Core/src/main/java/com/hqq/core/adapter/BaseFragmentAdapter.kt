@@ -24,7 +24,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  *
  */
 abstract class BaseFragmentAdapter : FragmentStateAdapter {
-    var stringSparseArray = SparseArray<String>()
+     public var stringSparseArray = SparseArray<String>()
     var fragmentManager: FragmentManager? = null
 
     constructor(fragment: Fragment) : super(fragment) {

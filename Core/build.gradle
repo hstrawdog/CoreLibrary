@@ -87,7 +87,7 @@ dependencies {
     api Fragment.runtimeKtx
 //    api Fragment.testing
 
-    api IDimensCompat.iDimensCompat
+    api DimensCompat.iDimensCompat
     api Gson.gson
     api Luban.luban
     api BaseRecyclerViewAdapterHelper.baseRecyclerViewAdapterHelper
@@ -96,7 +96,7 @@ dependencies {
     kapt Glide.glideCompiler
 
     //版本要与gradle版本一致
-    kapt Android.databindingCompiler
+    kapt Android.dataBindingCompiler
 
 }
 repositories {

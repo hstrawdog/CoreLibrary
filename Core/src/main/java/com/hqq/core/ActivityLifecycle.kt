@@ -20,13 +20,11 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
         activities!!.add(activity)
         LogUtils.d("ActivityLifecycle -> onActivityCreated", activity.localClassName)
     }
-
     override fun onActivityStarted(activity: Activity) {}
     override fun onActivityResumed(activity: Activity) {}
     override fun onActivityPaused(activity: Activity) {}
     override fun onActivityStopped(activity: Activity) {}
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
-
     override fun onActivityDestroyed(activity: Activity) {
         activities!!.remove(activity)
         LogUtils.d("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)

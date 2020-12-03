@@ -2,8 +2,10 @@ package com.hqq.example.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.KeyEvent
 import androidx.activity.viewModels
+import androidx.core.os.postDelayed
 import androidx.databinding.ViewDataBinding
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
@@ -14,6 +16,7 @@ import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
+import com.hqq.example.dialog.MyPopupWindow
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
@@ -51,17 +54,20 @@ class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
     override val adapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int
         get() = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         LogUtils.e("MainActivity    onCreate1")
         super.onCreate(savedInstanceState)
         LogUtils.e("MainActivity    onCreate2")
-
     }
 
     override fun initData() {
         LogUtils.e("MainActivity    initData")
-//        LiveDateActivity.open(this)
-        DiskViewActivity.open(this)
+
+//        Handler().postDelayed(3 * 1000) {
+//            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
+//
+//        }
     }
 
 

@@ -13,6 +13,4 @@ object BuildConfig {
     val buildToolsVersion = "30.0.0"
     val minSdkVersion = 21
     val targetSdkVersion = 30
-    val versionCode = 1
-    val versionName = "1.0.0"
 }

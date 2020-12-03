@@ -2,8 +2,9 @@ package com.hqq.core
 
 import android.app.Activity
 import android.app.Application
+import android.content.pm.ApplicationInfo
 import com.hqq.core.annotation.ToolBarMode
-import com.hqq.core.toolbar.DefToolBarImpl
+import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.utils.RegexUtils
 
@@ -20,7 +21,6 @@ class CoreConfig private constructor() {
      * 单利维持对象
      */
     companion object {
-
         private var instance: CoreConfig? = null
             get() {
                 if (field == null) {
@@ -59,7 +59,6 @@ class CoreConfig private constructor() {
      * 是否开启 log日志  BuildConfig.Debug
      */
     var isDebug = true
-        private set
 
     /**
      * 默认图
@@ -80,30 +79,24 @@ class CoreConfig private constructor() {
     /**
      *  toolBar 的构建方法 可以重新赋值
      */
-    var iCreateToolbar: IToolBar = DefToolBarImpl()
+    var iCreateToolbar: IToolBar = DefToolBar()
 
 
-    /**
-     * [.init]
-     *
-     * @param application Application
-     */
-    @Deprecated("")
-    fun init(application: Application?) {
-        init(application, true)
-    }
 
     /**
      * @param application Application
      * @param isDebug     是否 开启log日志
      */
-    fun init(application: Application?, isDebug: Boolean) {
+    fun init(application: Application) {
+        // 设置当前APK  是否是Debug版本
+        var info = application.applicationInfo
+        this.isDebug = info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
         this.application = application
-        this.isDebug = isDebug
+
         // 监听Activity 的生命周期
         if (RegexUtils.isNull(mActivityLifecycle)) {
             mActivityLifecycle = ActivityLifecycle()
-            application!!.registerActivityLifecycleCallbacks(mActivityLifecycle)
+            application.registerActivityLifecycleCallbacks(mActivityLifecycle)
         }
     }
 

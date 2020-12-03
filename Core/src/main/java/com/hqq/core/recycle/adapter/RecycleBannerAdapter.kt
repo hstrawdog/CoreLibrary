@@ -20,21 +20,31 @@ import com.hqq.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
  * @Descrive :
  */
 class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    lateinit var mData: MutableList<Any>
+    /**
+     *   数据源对象
+     */
+    var data = ArrayList<Any>()
+
+    /**
+     * 点击事件
+     */
     private var onRvBannerClickListener: RecycleViewBannerClickListener<*>? = null
+
+    /**
+     *  改变事件     重新绑定数据源地址与标题
+     */
     private var mRecycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>? = null
+
+    /**
+     *  是否显示标题/提示
+     */
     var isShowTip = false
 
-    private var mIsUnlimited = true
-    fun setUnlimited(unlimited: Boolean) {
-        mIsUnlimited = unlimited
-    }
+    /**
+     *  是否开始无限循环
+     */
+    var isUnlimited = true
 
-    fun setData(data: MutableList<Any>?) {
-        data?.let {
-            mData = it
-        }
-    }
 
     fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>) {
         this.onRvBannerClickListener = onRvBannerClickListener
@@ -55,22 +65,21 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
     }
 
     override fun getItemCount(): Int {
-        return if (mIsUnlimited) {
-            if (mData == null) 0 else if (mData.size < 2) mData.size else Int.MAX_VALUE
+        return if (isUnlimited) {
+            if (data == null) 0 else if (data.size < 2) data.size else Int.MAX_VALUE
         } else {
-            if (mData == null) 0 else mData.size
+            if (data == null) 0 else data.size
         }
     }
-
 
     private fun onCreateView(parent: ViewGroup): View {
         return LayoutInflater.from(parent.context).inflate(R.layout.item_banner, parent, false)
     }
 
-    private fun onBindView(holder: RecyclerView.ViewHolder?, position: Int) {
-        val img = holder!!.itemView.findViewById<ImageView>(R.id.iv_banner)
+    private fun onBindView(holder: RecyclerView.ViewHolder, position: Int) {
+        val img = holder.itemView.findViewById<ImageView>(R.id.iv_banner)
         val tv = holder.itemView.findViewById<TextView>(R.id.tv_code_banner)
-        val item = mData!![position % mData!!.size]
+        val item = data[position % data.size]
         if (item is String) {
             tv.visibility = View.GONE
             ImageLoadUtils.with(item as String, img)
@@ -78,9 +87,9 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             tv.visibility = View.GONE
             ImageLoadUtils.with(item as Int, img)
         } else if (null != mRecycleViewBannerChangeListener) {
-            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item!!), img)
+            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item), img)
             if (isShowTip) {
-                tv.text = mRecycleViewBannerChangeListener!!.getTitle(item!!)
+                tv.text = mRecycleViewBannerChangeListener!!.getTitle(item)
                 tv.visibility = View.VISIBLE
             } else {
                 tv.visibility = View.GONE
@@ -88,7 +97,7 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         }
         holder.itemView.setOnClickListener {
             if (onRvBannerClickListener != null) {
-                onRvBannerClickListener!!.onBannerClick(position % (mData!!.size))
+                onRvBannerClickListener!!.onBannerClick(position % (data.size))
             }
         }
     }

@@ -13,7 +13,14 @@ import androidx.annotation.IntDef
 @IntDef(ToolBarMode.LIGHT_MODE, ToolBarMode.DARK_MODE)
 annotation class ToolBarMode {
     companion object {
+        /**
+         *  亮色模式
+         */
         const val LIGHT_MODE = 1
+
+        /**
+         * 暗色模式
+         */
         const val DARK_MODE = 2
     }
 }

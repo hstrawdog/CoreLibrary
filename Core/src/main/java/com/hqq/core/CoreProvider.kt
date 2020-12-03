@@ -22,7 +22,7 @@ class CoreProvider : ContentProvider() {
          * 默认初始化 CoreConfig
          */
         if (RegexUtils.isNull(CoreConfig.get().application)) {
-            CoreConfig.get().init(context as Application?, true)
+            CoreConfig.get().init(context as Application)
         }
         return false
     }

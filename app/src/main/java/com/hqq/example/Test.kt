@@ -1,5 +1,8 @@
 package com.hqq.example
 
+import kotlinx.coroutines.*
+import java.lang.Thread.sleep
+
 /**
  * @Author : huangqiqiang
  * @Package : com.hqq.example
@@ -29,10 +32,28 @@ object Test {
 
     }
 
+
     @JvmStatic
     fun main(args: Array<String>) {
-
         var list: List<String> = mutableListOf<String>()
+        var a = "1a"
+        var a1 = "1a"
+        println("1a".equals(a).toString())
+        println(("1a" == a).toString())
+        println(("1a" === a).toString())
+        println("-------------")
+        println(a1.equals(a).toString())
+        println((a1 == a).toString())
+        println((a1 === a).toString())
+        println("111111111111111111111111")
+
+        var str: String? = "5"
+        str?.run {
+
+            "1"
+            println(this + "aaa")
+        }
+
 
     }
 

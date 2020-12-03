@@ -16,7 +16,6 @@ import com.hqq.core.R
 import com.hqq.core.recycle.adapter.RecycleBannerAdapter
 import com.hqq.core.recycle.indicator.CircleIndicatorView
 import com.hqq.core.utils.ScreenUtils
-import java.util.*
 
 /**
  * https://github.com/loonggg/RecyclerViewBanner
@@ -76,7 +75,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否无限轮播
      */
     private var mIsUnlimited = true
-    private var mData: MutableList<Any> = mutableListOf()
+    private var mData: ArrayList<Any> = ArrayList()
     var mLinearLayoutManager: LinearLayoutManager? = null
     private var mAdapter: RecycleBannerAdapter<Any>? = null
     private val playTask: Runnable = object : Runnable {
@@ -109,7 +108,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
         PagerSnapHelper().attachToRecyclerView(recyclerView)
 
-        mAdapter?.mData = mData
+        mAdapter?.data = mData
         mAdapter?.isShowTip = isShowTip;
 
         recyclerView!!.adapter = mAdapter
@@ -263,7 +262,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         setPlaying(false)
         // 避免空指针
         if (mData == null) {
-            mData = mutableListOf()
+            mData = ArrayList()
         }
         mData!!.clear()
         mData!!.addAll(data)
@@ -343,7 +342,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      */
     fun setUnlimited(unlimited: Boolean) {
         mIsUnlimited = unlimited
-        mAdapter!!.setUnlimited(unlimited)
+        mAdapter?.isUnlimited = unlimited
     }
 
     /**

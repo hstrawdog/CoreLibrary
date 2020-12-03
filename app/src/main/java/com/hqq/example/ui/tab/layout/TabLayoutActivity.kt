@@ -57,7 +57,7 @@ class TabLayoutActivity : BaseActivity() {
         adapter.setupWithViewPager(mTbTablayout4!!, mVpPage!!)
     }
 
-    internal inner class ViewPageAdapter(fragmentActivity: FragmentActivity) : BaseFragmentAdapter(fragmentActivity) {
+    open internal inner class ViewPageAdapter(fragmentActivity: FragmentActivity) : BaseFragmentAdapter(fragmentActivity) {
         override fun newFragment(position: Int): Fragment {
             return TabFragment()
         }

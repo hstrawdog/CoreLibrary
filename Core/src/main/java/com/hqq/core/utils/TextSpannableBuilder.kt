@@ -167,8 +167,7 @@ class TextSpannableBuilder {
             val start = mStringBuilder.length
             val end = start + text.length
             mStringBuilder.append(text)
-            mStringBuilder.setSpan(TextClickableSpan(text, color, listener)
-                    , start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            mStringBuilder.setSpan(TextClickableSpan(text, color, listener), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         return this
     }
@@ -178,7 +177,7 @@ class TextSpannableBuilder {
     }
 
     /**
-     * 点击事件
+     *  点击事件 类
      */
     class TextClickableSpan(private val mText: CharSequence, private val mColor: Int, private val mOnClickListener: OnClickListener?) : ClickableSpan() {
         override fun onClick(widget: View) {
@@ -195,7 +194,7 @@ class TextSpannableBuilder {
     }
 
     /**
-     * 接口
+     * 点击回调
      */
     interface OnClickListener {
         /**

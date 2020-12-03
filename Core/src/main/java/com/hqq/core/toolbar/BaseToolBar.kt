@@ -18,8 +18,8 @@ import java.lang.ref.WeakReference
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  * -  第一层 背景    toolBar
- * -  第二层 状态栏  statusBar
- * -  第三层 标题栏  TitleBar
+ * -    第二层 状态栏  statusBar
+ * -    第三层 标题栏  TitleBar
  */
 abstract class BaseToolBar : IToolBar {
     /**

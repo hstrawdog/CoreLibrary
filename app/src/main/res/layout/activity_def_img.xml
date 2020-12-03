@@ -43,7 +43,19 @@
     <ImageView
         android:id="@+id/iv_gif"
         android:layout_width="@dimen/x200"
-        android:layout_height="@dimen/x200"/>
+        android:layout_height="@dimen/x200"
+        android:background="@color/bg_color" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"
+        android:background="@color/bg_color" />
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x200"
+        android:background="@color/bg_color" />
 
 
 </LinearLayout>

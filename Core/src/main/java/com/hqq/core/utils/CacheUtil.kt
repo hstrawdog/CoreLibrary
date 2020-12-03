@@ -13,7 +13,7 @@ import java.math.BigDecimal
  * @FileName :   CacheUtil
  * @Date : 2018/1/23  14:24
  * @Email :  qiqiang213@gmail.com
- * @Descrive : 
+ * @Descrive : Describe
  */
 object CacheUtil {
     const val NULL = "0k"

@@ -26,16 +26,45 @@ import com.hqq.core.utils.VersionUtils
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class BaseWebFragment : BaseFragment() {
+open class BaseWebFragment : BaseFragment() {
+    /**
+     *  进度条
+     */
     var progressBar: ProgressBar? = null
-    var webView: WebView? = null
-        private set
-    private var mUrl: String? = null
-    private var mTitle: CharSequence? = ""
-    private var mWebLoadListener: WebLoadListener? = null
-    var progressBarColor: ColorStateList? = null
-    private var mScriptInterface: ScriptInterface? = null
 
+    /**
+     *  进度条颜色
+     */
+    var progressBarColor: ColorStateList? = null
+
+    /**
+     * WebView
+     */
+    var webView: WebView? = null
+
+    /**
+     *  URL
+     */
+    private var url: String? = null
+
+    /**
+     *  标题哦
+     */
+    private var title: CharSequence? = ""
+
+    /**
+     *  加载监听
+     */
+    private var webLoadListener: WebLoadListener? = null
+
+    /**
+     * 交互脚本
+     */
+    var scriptInterface: ScriptInterface? = null
+
+    /**
+     *  布局Id
+     */
     override val layoutViewId: Int = R.layout.fragment_web
 
     /**
@@ -52,6 +81,26 @@ class BaseWebFragment : BaseFragment() {
      *  是否可以返回到上一个网页
      */
     var isGoBackWebView = true
+
+    var webChromeClient: WebChromeClient = object : WebChromeClient() {
+        override fun onReceivedTitle(view: WebView, title: String?) {
+            super.onReceivedTitle(view, title)
+            title?.let {
+                if (this@BaseWebFragment.title.isNullOrEmpty()) {
+                    iToolBar?.setToolbarTitle(this@BaseWebFragment.title)
+                }
+            }
+        }
+
+        override fun onProgressChanged(view: WebView, newProgress: Int) {
+            if (newProgress >= 5) {
+                progressBar?.progress = newProgress
+            }
+            super.onProgressChanged(view, newProgress)
+        }
+    }
+
+
     override fun onPause() {
         super.onPause()
         webView?.onPause()
@@ -84,49 +133,49 @@ class BaseWebFragment : BaseFragment() {
         webView?.webViewClient = webViewClient
         webView?.webChromeClient = webChromeClient
         // 标识 为Android的 js 支持 对象是activity
-        if (mScriptInterface != null) {
+        if (scriptInterface != null) {
             webView?.addJavascriptInterface(requireActivity(), "android")
         }
-        mUrl = BundleUtils.getString(this, getString(R.string.key_url))
-        mTitle = BundleUtils.getString(this, getString(R.string.key_title))
-        requireActivity().title = mTitle
-        iToolBar?.setToolbarTitle(mTitle)
-        mUrl?.let {
+        url = BundleUtils.getString(this, getString(R.string.key_url))
+        title = BundleUtils.getString(this, getString(R.string.key_title))
+        requireActivity().title = title
+        iToolBar?.setToolbarTitle(title)
+        url?.let {
             webView?.loadUrl(it)
         }
     }
 
-    protected fun initWebViewSettings() {
+    private fun initWebViewSettings() {
         val settings = webView?.settings
-        settings?.let {
-            it.setUserAgentString(it.userAgentString + "" + requireActivity().packageName)
-            it.javaScriptEnabled = true
-            it.javaScriptCanOpenWindowsAutomatically = true
-            it.allowFileAccess = true
-            it.useWideViewPort = true
-            it.loadWithOverviewMode = true
-            it.builtInZoomControls = true
-            it.domStorageEnabled = true
+        settings?.run {
+            setUserAgentString(userAgentString + "" + requireActivity().packageName)
+            javaScriptEnabled = true
+            javaScriptCanOpenWindowsAutomatically = true
+            allowFileAccess = true
+            useWideViewPort = true
+            loadWithOverviewMode = true
+            builtInZoomControls = true
+            domStorageEnabled = true
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                it.displayZoomControls = false
+                displayZoomControls = false
             }
             // MIXED_CONTENT_ALWAYS_ALLOW：允许从任何来源加载内容，即使起源是不安全的；
             // MIXED_CONTENT_NEVER_ALLOW：不允许Https加载Http的内容，即不允许从安全的起源去加载一个不安全的资源；
             // MIXED_CONTENT_COMPATIBILITY_MODE：当涉及到混合式内容时，WebView 会尝试去兼容最新Web浏览器的风格。
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                it.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+                mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             }
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
                 //提高渲染优先级
-                it.setRenderPriority(WebSettings.RenderPriority.HIGH)
-                it.savePassword = false
-                it.pluginState = WebSettings.PluginState.ON
+                setRenderPriority(WebSettings.RenderPriority.HIGH)
+                savePassword = false
+                pluginState = WebSettings.PluginState.ON
             }
         }
     }
 
     //处理 android err_unknown_url_scheme异常
-    val webViewClient: WebViewClient = object : WebViewClient() {
+    private val webViewClient: WebViewClient = object : WebViewClient() {
         override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
             //处理 android err_unknown_url_scheme异常
             if (URLUtil.isNetworkUrl(request.url.toString())) {
@@ -149,16 +198,16 @@ class BaseWebFragment : BaseFragment() {
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             super.onPageStarted(view, url, favicon)
             progressBar?.visibility = View.VISIBLE
-            if (null != mWebLoadListener) {
-                mWebLoadListener?.onPageStarted(url, favicon)
+            if (null != webLoadListener) {
+                webLoadListener?.onPageStarted(url, favicon)
             }
         }
 
         override fun onPageFinished(view: WebView, url: String) {
             super.onPageFinished(view, url)
             progressBar?.visibility = View.GONE
-            if (null != mWebLoadListener) {
-                mWebLoadListener?.onPageFinished(url)
+            if (null != webLoadListener) {
+                webLoadListener?.onPageFinished(url)
             }
         }
 
@@ -168,30 +217,12 @@ class BaseWebFragment : BaseFragment() {
         }
     }
 
-    protected val webChromeClient: WebChromeClient
-        protected get() = object : WebChromeClient() {
-            override fun onReceivedTitle(view: WebView, title: String?) {
-                super.onReceivedTitle(view, title)
-                title?.let {
-                    if (mTitle.isNullOrEmpty()) {
-                        iToolBar?.setToolbarTitle(mTitle)
-                    }
-                }
-            }
-
-            override fun onProgressChanged(view: WebView, newProgress: Int) {
-                if (newProgress >= 5) {
-                    progressBar?.progress = newProgress
-                }
-                super.onProgressChanged(view, newProgress)
-            }
-        }
 
     fun onBackPressed(): Boolean {
         if (isGoBackWebView) {
-            webView?.let {
-                return if (it.canGoBack()) {
-                    it.goBack()
+            webView?.run {
+                return if (canGoBack()) {
+                    goBack()
                     true
                 } else {
                     false
@@ -203,32 +234,22 @@ class BaseWebFragment : BaseFragment() {
 
     @JvmOverloads
     fun loadUrl(url: String, clear: Boolean = true) {
-        if (webView != null) {
+        webView?.run {
             if (clear) {
-                webView?.clearHistory()
+                clearHistory()
             }
-            webView?.loadUrl(url.also { mUrl = it })
+            loadUrl(url)
         }
     }
 
-    fun setWebLoadListener(webLoadListener: WebLoadListener?): BaseWebFragment {
-        mWebLoadListener = webLoadListener
-        return this
-    }
-
-    fun setScriptInterface(scriptInterface: ScriptInterface?) {
-        mScriptInterface = scriptInterface
-    }
-
     companion object {
-        @JvmOverloads
         fun instantiate(context: Context, title: String?, url: String?, scriptInterface: ScriptInterface? = null): BaseWebFragment {
             val baseWebFragment = BaseWebFragment()
             val bundle = Bundle()
             bundle.putString(context.getString(R.string.key_url), url)
             bundle.putString(context.getString(R.string.key_title), title)
             baseWebFragment.arguments = bundle
-            baseWebFragment.setScriptInterface(scriptInterface)
+            baseWebFragment.scriptInterface=(scriptInterface)
             return baseWebFragment
         }
     }
