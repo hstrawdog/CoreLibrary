@@ -19,7 +19,7 @@ import com.hqq.example.databinding.ActivityMvvmBinding
  * @Email :  qiqiang213@gmail.com
  * @Descrive : ViewBinding + ViewModel + liveData
  */
-class MvvmTestActivity : BaseVmActivity<ActivityMvvmBinding, UserViewModel>() {
+class MvvmTestActivity : BaseVmActivity<UserViewModel,ActivityMvvmBinding, >() {
     override fun addViewModel() {
         e(" MvvmTestActivity   addViewModel 1 ")
         //       mBinding.setVariable(BR.vm, new ViewModelProvider(this).get(UserViewModel.class));

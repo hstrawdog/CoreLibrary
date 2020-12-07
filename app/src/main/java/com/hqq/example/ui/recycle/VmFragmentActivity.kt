@@ -27,7 +27,7 @@ VmFragmentActivity : BaseViewBindingActivity<ActivityVmFragmentBinding>() {
         FragmentUtils(supportFragmentManager).addOrShowFragment(FragmentA.newInstance(), binding.flLayout.id)
     }
 
-    class FragmentA : BaseVmListFragment<ActivityRecycleViewBinding, ListModel>() {
+    class FragmentA : BaseVmListFragment<ListModel,ActivityRecycleViewBinding >() {
         companion object {
             fun newInstance(): FragmentA {
                 val args = Bundle()

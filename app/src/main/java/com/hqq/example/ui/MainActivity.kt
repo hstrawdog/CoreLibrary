@@ -49,7 +49,7 @@ import kotlinx.coroutines.launch
  * @Email :  qiqiang213@gmail.com
  */
 @AndroidEntryPoint
-class MainActivity : BaseVmListActivity<ViewDataBinding, MainViewModel>() {
+class MainActivity : BaseVmListActivity<MainViewModel,ViewDataBinding>() {
     //  这边是kotlin
     override val adapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int

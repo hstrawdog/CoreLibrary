@@ -14,7 +14,7 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  * @Email : qiqiang213@gmail.com
  * @Descrive :  同理Activity
  */
-abstract class BaseVmFragment<T : ViewDataBinding, K : BaseViewModel> : BaseDataBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
+abstract class BaseVmFragment<K : BaseViewModel,T : ViewDataBinding > : BaseDataBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
     protected lateinit var viewMode: K
     override fun initView() {
         initViewModel()

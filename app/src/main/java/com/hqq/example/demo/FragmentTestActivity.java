@@ -18,7 +18,7 @@ import com.hqq.example.databinding.ActivityFragmentTestBinding;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-public class FragmentTestActivity extends BaseVmActivity<ActivityFragmentTestBinding, BaseViewModel> {
+public class FragmentTestActivity extends BaseVmActivity<BaseViewModel,ActivityFragmentTestBinding> {
     public static void open(Activity context) {
         Intent starter = new Intent(context, FragmentTestActivity.class);
         context.startActivityForResult(starter, -1);

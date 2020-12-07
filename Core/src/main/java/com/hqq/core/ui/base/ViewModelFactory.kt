@@ -54,7 +54,7 @@ internal object ViewModelFactory {
             val modelClass: Class<out ViewModel>
             val type = aClass.genericSuperclass
             if (type is ParameterizedType) {
-                modelClass = type.actualTypeArguments[1] as Class<ViewModel>
+                modelClass = type.actualTypeArguments[0] as Class<ViewModel>
             } else {
                 modelClass = BaseViewModel::class.java
             }

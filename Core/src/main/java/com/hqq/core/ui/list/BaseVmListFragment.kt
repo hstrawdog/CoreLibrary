@@ -17,8 +17,8 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseVmListFragment<T : ViewDataBinding, K : BaseListViewModel>
-    : BaseVmFragment<T, K>(), IBaseListModelView {
+abstract class BaseVmListFragment<K : BaseListViewModel,T : ViewDataBinding>
+    : BaseVmFragment<K,T >(), IBaseListModelView {
 
     override var listView: RecyclerView? = null
     override val layoutId: Int = R.layout.activity_recycle_view

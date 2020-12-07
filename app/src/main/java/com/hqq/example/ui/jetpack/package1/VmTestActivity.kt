@@ -16,7 +16,7 @@ import com.hqq.example.databinding.ActivityVmTestBinding
  * @Email : qiqiang213@gmail.com
  * @Descrive :
 </描述当前版本功能> */
-class VmTestActivity : BaseVmActivity<ActivityVmTestBinding, BaseViewModel>() {
+class VmTestActivity : BaseVmActivity<BaseViewModel,ActivityVmTestBinding, >() {
 
 
     override val bindingViewModelId: Int
