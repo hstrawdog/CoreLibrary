@@ -57,7 +57,6 @@ object ImageLoadUtils {
      * @param height    高
      */
     fun with(url: Any, imageView: ImageView, width: Int = -1, height: Int = -1) {
-
         GlideApp.with(imageView)
                 .load(url)
                 .apply(getRequestOption().override(width, height))
@@ -85,9 +84,7 @@ object ImageLoadUtils {
     fun withFillet2PX(url: String?, imageView: ImageView?, radius: Int) {
         GlideApp.with(imageView!!)
                 .load(url)
-                .apply(
-                        getRequestOption().transforms(CenterCrop(), RoundedCorners(radius))
-                )
+                .apply(getRequestOptionRound(radius))
                 .into(imageView)
     }
 
