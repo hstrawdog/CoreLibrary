@@ -8,6 +8,14 @@ package com.hqq.core.plugin
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
+object BuildConfig {
+    val compileSdkVersion = 30
+    val buildToolsVersion = "30.0.2"
+    val minSdkVersion = 21
+    val targetSdkVersion = 30
+}
+
+
 object Versions {
 
     val appcompat = "1.1.0"
@@ -46,6 +54,7 @@ object Versions {
 
     val Luban = "1.1.8"
 }
+
 
 /**
  *  Androidx  jetpack
@@ -183,3 +192,10 @@ object Album {
     val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.0.10"
 }
 
+/**
+ *  XML 解析器
+ */
+object Jsoup {
+    val jsoup = "org.jsoup:jsoup:1.13.1"
+
+}
