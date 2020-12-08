@@ -3,6 +3,8 @@ package com.hqq.example;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 
+import com.hqq.core.CoreConfig;
+
 import dagger.hilt.android.HiltAndroidApp;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import skin.support.SkinCompatManager;
@@ -24,6 +26,8 @@ public class APP extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         //配置 默认加载的 toolBar    CoreInitProvider   会比 Application  更加优先
         //  CoreBuildConfig.getInstance().init(this, true);
         //.setDefItoobar(BaseDefToolBarImpl.class);

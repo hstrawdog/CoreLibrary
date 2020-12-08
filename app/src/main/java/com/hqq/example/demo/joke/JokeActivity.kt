@@ -18,11 +18,10 @@ class JokeActivity(override val adapter: JokeAdapter = JokeAdapter())
     : BaseVmListActivity<JokeViewModel,ActivityJokeBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_joke
-    override val bindingViewModelId: Int
-        get() = 0
+    override val bindingViewModelId: Int = 0
 
     override fun initData() {
-        adapter!!.loadMoreModule.setOnLoadMoreListener(this)
+        adapter.loadMoreModule.setOnLoadMoreListener(this)
     }
 
 

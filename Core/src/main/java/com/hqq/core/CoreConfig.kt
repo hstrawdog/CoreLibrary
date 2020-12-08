@@ -3,10 +3,13 @@ package com.hqq.core
 import android.app.Activity
 import android.app.Application
 import android.content.pm.ApplicationInfo
+import com.google.gson.InstanceCreator
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.utils.RegexUtils
+import java.lang.reflect.Type
+import java.util.*
 
 /**
  * @Author : huangqiqiang
@@ -18,7 +21,7 @@ import com.hqq.core.utils.RegexUtils
  */
 class CoreConfig private constructor() {
     /**
-     * 单利维持对象
+     * 单利对象
      */
     companion object {
         private var instance: CoreConfig? = null
@@ -37,6 +40,30 @@ class CoreConfig private constructor() {
             return instance!!
         }
     }
+    /**
+     *  请求默认的地址
+     */
+    var baseUrl: String = ""
+
+    /**
+     * 读取超时
+     */
+    var readTimeout: Long = 15
+
+    /**
+     * 写超时
+     */
+    var writeTimeout: Long = 15
+
+    /**
+     * 连接超时
+     */
+    var connectTimeout: Long = 15
+
+    /**
+     *  Gson 转义对象
+     */
+    val instanceCreators: Map<Type, InstanceCreator<*>> = HashMap()
 
 
     /**
@@ -80,7 +107,6 @@ class CoreConfig private constructor() {
      *  toolBar 的构建方法 可以重新赋值
      */
     var iCreateToolbar: IToolBar = DefToolBar()
-
 
 
     /**

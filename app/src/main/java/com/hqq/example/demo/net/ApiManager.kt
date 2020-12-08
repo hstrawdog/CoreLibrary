@@ -1,5 +1,6 @@
 package com.hqq.example.demo.net
 
+import com.hqq.core.net.RetrofitService
 import com.hqq.example.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,50 +26,12 @@ object ApiManager {
     val wangAndroidInterface: WangAndroidInterface
         get() {
             if (mWangAndroidInterface == null) {
-
-                //设置出现错误进行重新连接
-                val okHttpClient = OkHttpClient.Builder()
-                okHttpClient.retryOnConnectionFailure(true)
-                        .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-                        .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-                val logInterceptor = HttpLoggingInterceptor()
-                if (BuildConfig.DEBUG) {
-                    //打印拦截器
-                    logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-                    okHttpClient.addInterceptor(logInterceptor)
-                } else {
-                    logInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE)
-                }
-                mWangAndroidInterface = Retrofit.Builder()
-                        .client(okHttpClient.build())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(mWangAndroidUrl)
-                        .build().create(WangAndroidInterface::class.java)
+                mWangAndroidInterface = RetrofitService.createService(mWangAndroidUrl, WangAndroidInterface::class.java)
             }
             return mWangAndroidInterface!!
         }
 
-    fun getJuHeInterface(url: String?): JuHeInterface {
-        val juHeInterface: JuHeInterface
-
-        //设置出现错误进行重新连接
-        val okHttpClient = OkHttpClient.Builder()
-        okHttpClient.retryOnConnectionFailure(true)
-                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-        val logInterceptor = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
-            //打印拦截器
-            logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-            okHttpClient.addInterceptor(logInterceptor)
-        } else {
-            logInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE)
-        }
-        juHeInterface = Retrofit.Builder()
-                .client(okHttpClient.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(url!!)
-                .build().create(JuHeInterface::class.java)
-        return juHeInterface
+    fun getJuHeInterface(url: String): JuHeInterface {
+        return RetrofitService.createService(url, JuHeInterface::class.java)
     }
 }

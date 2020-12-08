@@ -114,10 +114,7 @@ dependencies {
 
     debugImplementation Leakcanary.leakcanary
 
-    api Gson.gson
-    api Retrofit.retrofit
-    api Retrofit.converterGson
-    api Retrofit.loggingInterceptor
+
 
 
     // Hilt dependencies

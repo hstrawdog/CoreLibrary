@@ -98,6 +98,11 @@ dependencies {
     //版本要与gradle版本一致
     kapt Android.dataBindingCompiler
 
+
+    api Gson.gson
+    api Retrofit.retrofit
+    api Retrofit.converterGson
+    api Retrofit.loggingInterceptor
 }
 repositories {
     mavenCentral()
