@@ -3,6 +3,7 @@ package com.hqq.core.ui.base
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
@@ -190,11 +191,11 @@ interface IRootView {
 
     interface IBaseViewModel : BaseLifecycleObserver {
         /**
-         * 是在 Activity中执行onCreate 是可以的 ViewModel的onCreate 是最后执行的  被子类的 onCreate 执行还晚
-         *  Fragment 不一样  Fragment 涉及到延迟加载  需要当界面显示出来后再执行ViewModel 所以需要initData
-         *
+         * ViewModel的onCreate 是最后执行的  比子类的 onCreate 执行还晚
+         * Fragment 不一样  Fragment 涉及到延迟加载  需要当界面显示出来后再执行ViewModel 所以需要initData
+         * 共享界面数据到ViewModel中
          */
-        fun initData()
+        fun initData(extras: Bundle?)
     }
 
 

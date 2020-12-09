@@ -19,7 +19,7 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  * 正常情况下 viewModel  不应该在Base中初始化
  *
  */
-abstract class BaseVmActivity< K : BaseViewModel,T : ViewDataBinding>
+abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
     lateinit var viewMode: K
 
@@ -34,15 +34,15 @@ abstract class BaseVmActivity< K : BaseViewModel,T : ViewDataBinding>
         addViewModel()
         initViews()
         viewMode?.let {
-            it.initData()
+            it.initData(intent.extras)
         }
     }
 
     override fun getViewModel(): K {
         return if (this::viewMode.isInitialized) {
-            ViewModelFactory.createViewModel(this, javaClass, viewMode)as K
+            ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
         } else {
-            ViewModelFactory.createViewModel(this, javaClass, null)as K
+            ViewModelFactory.createViewModel(this, javaClass, null) as K
         }
     }
 

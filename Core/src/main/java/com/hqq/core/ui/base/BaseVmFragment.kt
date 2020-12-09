@@ -2,7 +2,6 @@ package com.hqq.core.ui.base
 
 import android.content.Intent
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
 import com.hqq.core.ui.base.IRootView.IBaseViewModelActivity
 import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
 
@@ -14,14 +13,14 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  * @Email : qiqiang213@gmail.com
  * @Descrive :  同理Activity
  */
-abstract class BaseVmFragment<K : BaseViewModel,T : ViewDataBinding > : BaseDataBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
+abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseDataBindingFragment<T>(), IBaseViewModelActivity, IOpenActivity {
     protected lateinit var viewMode: K
     override fun initView() {
         initViewModel()
         addViewModel()
         initViews()
         viewMode?.let {
-            it.initData()
+            it.initData(arguments)
         }
     }
 

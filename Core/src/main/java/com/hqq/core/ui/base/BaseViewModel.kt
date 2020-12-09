@@ -59,7 +59,8 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     override fun onCrete() {
         LogUtils.d(" BaseViewModel           onCrete ")
     }
-    override fun initData() {
+
+    override fun initData(extras: Bundle?) {
         LogUtils.d(" BaseViewModel           initData ")
 
     }

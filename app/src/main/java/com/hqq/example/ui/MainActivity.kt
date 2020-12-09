@@ -108,6 +108,10 @@ class MainActivity : BaseVmListActivity<MainViewModel,ViewDataBinding>() {
             LogUtils.e("MainModel init 2")
         }
 
+        override fun initData(extras: Bundle?) {
+            super.initData(extras)
+            LogUtils.e("MainModel initData 1")
+        }
         override fun onCrete() {
             LogUtils.e("MainModel onCrete 1")
             super.onCrete()

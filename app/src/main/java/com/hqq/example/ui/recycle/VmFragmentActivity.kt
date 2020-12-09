@@ -58,9 +58,7 @@ VmFragmentActivity : BaseViewBindingActivity<ActivityVmFragmentBinding>() {
 
 
     class ListModel : BaseListViewModel() {
-
-        override fun initData() {
-
+        override fun initData(extras: Bundle?) {
             setData(addData())
         }
 
