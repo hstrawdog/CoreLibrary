@@ -130,21 +130,11 @@ object ResourcesUtils {
      * @param resId 资源ID
      * @return dp
      */
+    @JvmStatic
     fun getDimen2dp(@DimenRes resId: Int): Float {
         return ScreenUtils.px2dip(CoreConfig.get().application, resources!!.getDimension(resId)).toFloat()
     }
 
-
-    @JvmStatic
-    fun sp2px(context: Context, spValue: Int): Float {
-        val fontScale: Float = context.getResources().getDisplayMetrics().scaledDensity
-        return ((spValue * fontScale + 0.5f)).toFloat()
-    }
-
-    @JvmStatic
-    fun sp2px(spValue: Int): Float {
-        return sp2px(CoreConfig.get().application?.applicationContext!!, spValue)
-    }
 
 
 }

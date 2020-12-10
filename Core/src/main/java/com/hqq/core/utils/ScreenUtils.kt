@@ -3,6 +3,8 @@ package com.hqq.core.utils
 import android.app.Activity
 import android.content.Context
 import android.util.DisplayMetrics
+import android.util.TypedValue
+import com.hqq.core.CoreConfig
 import java.lang.reflect.Field
 
 /**
@@ -14,9 +16,48 @@ import java.lang.reflect.Field
  * @Descrive :屏幕相关 单位换算  dp px 转换 状态栏高度
  */
 object ScreenUtils {
+
+    @JvmStatic
+    fun spToPx(sp: Float): Float {
+        return spToPx(CoreConfig.get().application?.applicationContext!!, sp)
+    }
+
+
     /**
-     * dp2px
+     *
      */
+    @JvmStatic
+    fun spToPx(context: Context, sp: Float): Float {
+        val metrics = context.resources.displayMetrics
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics)
+    }
+
+
+    /**
+     * sp2px
+     */
+    @JvmStatic
+    fun sp2px(context: Context, spValue: Int): Float {
+        val fontScale: Float = context.getResources().getDisplayMetrics().scaledDensity
+        return ((spValue * fontScale + 0.5f)).toFloat()
+    }
+
+    /**
+     * sp2px
+     */
+    @JvmStatic
+    fun sp2px(spValue: Int): Float {
+        return sp2px(CoreConfig.get().application?.applicationContext!!, spValue)
+    }
+
+    /**
+     * dip2px
+     */
+    @JvmStatic
+    fun dip2px(dpValue: Float): Int {
+        return dip2px(CoreConfig.get().application?.applicationContext!!, dpValue)
+    }
+
     /**
      * @param context context
      * @param dpValue dp
