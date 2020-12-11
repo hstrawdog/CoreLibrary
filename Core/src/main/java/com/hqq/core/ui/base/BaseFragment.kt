@@ -42,7 +42,17 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
     /**
      * 布局创建 容器
      */
-    lateinit var rootViewBuild: ICreateRootViewImpl<BaseFragment>
+    private val rootViewBuild: IRootViewBuildBuild<BaseFragment> by lazy {
+        IRootViewBuildBuild(this)
+    }
+
+    /**
+     *  根布局
+     */
+    val rootViewImpl: RootViewImpl
+        get() {
+            return rootViewBuild.rootViewImpl
+        }
 
     /**
      *  是否延迟加载
@@ -54,7 +64,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      * get  类似代理 每次从 rootViewBuild.iRootViewImp 获取对象
      */
     var iToolBar: IToolBar? = null
-        get() = rootViewBuild.iRootViewImpl.iToolBar
+        get() = rootViewImpl.iToolBar
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法
@@ -69,7 +79,6 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
             activity?.let {
                 loadingView = LoadingView(it)
             }
-            rootViewBuild = ICreateRootViewImpl(this)
             initConfig()
             rootView = rootViewBuild.buildContentView(this)
         }

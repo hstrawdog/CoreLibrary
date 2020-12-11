@@ -29,7 +29,7 @@ abstract class BaseVmListFragment<K : BaseListViewModel,T : ViewDataBinding>
 
 
     override fun initViews() {
-        listModel = BaseListModel(this, rootViewBuild)
+        listModel = BaseListModel(this, rootViewImpl)
         viewMode!!.data.observe(this, Observer<List<*>> { arrayList ->
             listModel!!.fillingData(arrayList as List<Nothing>)
         })

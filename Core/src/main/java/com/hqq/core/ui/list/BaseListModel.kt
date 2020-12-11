@@ -15,7 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.R
-import com.hqq.core.ui.base.ICreateRootViewImpl
+import com.hqq.core.ui.base.RootViewImpl
 import com.hqq.core.utils.RegexUtils
 import com.hqq.core.utils.ResourcesUtils
 import com.hqq.core.widget.CusPtrClassicFrameLayout
@@ -79,11 +79,9 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      */
     private val adapter = mBaseListModelView.adapter
 
-    constructor(mBaseListModelView: IBaseListModelView, iRootView: ICreateRootViewImpl<*>?) : this(mBaseListModelView) {
-        iRootView?.let {
-            this.context = WeakReference<Context>(it.activity)
-            mBaseListModelView.listView = initRecycleView(it.rootView)
-        }
+    constructor(mBaseListModelView: IBaseListModelView, iRootView: RootViewImpl) : this(mBaseListModelView) {
+        this.context = WeakReference<Context>(iRootView.activity?.get())
+        mBaseListModelView.listView = initRecycleView(iRootView.rootView)
     }
 
     /**

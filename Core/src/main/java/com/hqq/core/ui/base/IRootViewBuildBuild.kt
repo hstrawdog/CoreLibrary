@@ -20,41 +20,31 @@ import com.hqq.core.utils.log.LogUtils
  * 1. 　动态添加 生成根布局  支持LineLayout 与FarmLayout
  * 2. 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
-class ICreateRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar: Boolean) : ICreateRootView {
+class IRootViewBuildBuild<T : Any>(context: T, showStatus: Boolean, showToolBar: Boolean, private var isAlwaysPortrait: Boolean = true) : IRootViewBuild {
     /**
      * 当前activity
      */
     var activity: Activity? = null
 
     /**
-     * 是否强制竖屏
-     */
-    private val isAlwaysPortrait: Boolean = true
-
-    /**
      * 布局构建器
      */
-    var iRootViewImpl: IRootViewImpl = IRootViewImpl()
-
-    /**
-     *  跟布局
-     */
-    override var rootView: View? = null
+    var rootViewImpl: RootViewImpl = RootViewImpl()
 
     constructor(activity: T) : this(activity, false, false)
 
     init {
-        iRootViewImpl.iToolBarBuilder.showStatusBar = showStatus
-        iRootViewImpl.iToolBarBuilder.showToolBar = showToolBar
+        rootViewImpl.iToolBarBuilder.showStatusBar = showStatus
+        rootViewImpl.iToolBarBuilder.showToolBar = showToolBar
         when (context) {
             is Activity -> {
                 activity = context
                 //只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
-                iRootViewImpl.immersiveStatusBar = true
+                rootViewImpl.immersiveStatusBar = true
             }
             is DialogFragment -> {
                 activity = (context as DialogFragment).activity
-                iRootViewImpl.bgColor = R.color.transparent
+                rootViewImpl.bgColor = R.color.transparent
             }
             is Fragment -> {
                 activity = (context as Fragment).activity
@@ -63,15 +53,14 @@ class ICreateRootViewImpl<T : Any>(context: T, showStatus: Boolean, showToolBar:
                 LogUtils.e(Exception("不支持的类" + context.javaClass.name))
             }
         }
-        activity?.let { iRootViewImpl.setActivity(it) }
+        activity?.let { rootViewImpl.setActivity(it) }
     }
 
     /**
      *  绑定 rootView
      */
     override fun buildContentView(iActivityBuilder: IRootView): View? {
-        rootView = iRootViewImpl.createRootView(iActivityBuilder)
-        return rootView
+        return rootViewImpl.createRootView(iActivityBuilder)
     }
 
     /**

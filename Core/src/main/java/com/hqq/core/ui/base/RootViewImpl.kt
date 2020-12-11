@@ -34,7 +34,7 @@ import java.lang.ref.WeakReference
  * 真正核心的内容 应该拆成两个部分
  * 一个view  一个头部
  */
-open class IRootViewImpl {
+open class RootViewImpl {
     /**
      * 当前上下文
      */
@@ -88,13 +88,18 @@ open class IRootViewImpl {
     var statusBarMode: Int = CoreConfig.get().isStatusMode
 
     /**
+     *  跟布局
+     */
+    var rootView: View? = null
+
+    /**
      * 构建跟布局
      *
      * @param iActivityBuilder
      * @return构建后的View
      */
     fun createRootView(iActivityBuilder: IRootView): View? {
-        return when (layoutMode) {
+        rootView = when (layoutMode) {
             LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT -> {
                 createLayoutView(iActivityBuilder)
             }
@@ -105,6 +110,7 @@ open class IRootViewImpl {
                 null
             }
         }
+        return rootView;
     }
 
     /**

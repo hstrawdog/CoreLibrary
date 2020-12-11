@@ -36,7 +36,7 @@ public class DiskView extends View {
         mPaint.setColor(dotColor);
         mPaint.setTextAlign(Paint.Align.LEFT);
         //默认20sp
-        mPaint.setTextSize(ResourcesUtils.sp2px(20));
+        mPaint.setTextSize(ScreenUtils.sp2px(20));
         mRadius= 350;
     }
     float mRadius;
@@ -57,10 +57,10 @@ public class DiskView extends View {
         for (int i = 0; i < 60; i++) {
             if (i == 0) {
                 mPaint.setColor(indicatorColor);
-                canvas.drawCircle(mRadius, 2 * mRadius, ResourcesUtils.sp2px(20) / 5, mPaint);
+                canvas.drawCircle(mRadius, 2 * mRadius, ScreenUtils.sp2px(20) / 5, mPaint);
                 mPaint.setColor(dotColor);
             } else {
-                canvas.drawCircle(mRadius, 2 * mRadius, ResourcesUtils.sp2px( 20) / 5, mPaint);
+                canvas.drawCircle(mRadius, 2 * mRadius, ScreenUtils.sp2px( 20) / 5, mPaint);
             }
             canvas.rotate(-6, mRadius, mRadius);
         }

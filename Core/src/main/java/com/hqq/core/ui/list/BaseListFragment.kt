@@ -46,7 +46,7 @@ abstract class BaseListFragment :
     }
 
     override fun initView() {
-        listModel = BaseListModel(this, rootViewBuild)
+        listModel = BaseListModel(this, rootViewImpl)
         initData()
     }
 

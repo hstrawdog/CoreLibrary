@@ -22,7 +22,7 @@ class SearchBarActivity : BaseActivity() {
     override fun initConfig() {
         super.initConfig()
 
-        iCreateRootView.iRootViewImpl.iCreateToolbar=BaseToolBarSearch()
+        rootViewImpl.iCreateToolbar = BaseToolBarSearch()
 
 
     }

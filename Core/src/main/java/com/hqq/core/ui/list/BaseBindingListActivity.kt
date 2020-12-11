@@ -38,7 +38,7 @@ abstract class BaseBindingListActivity<T : ViewDataBinding>
      */
     @CallSuper
     override fun initView() {
-        listModel = BaseListModel(this, iCreateRootView)
+        listModel = BaseListModel(this, rootViewImpl)
         initData()
     }
 

@@ -67,7 +67,7 @@ abstract class BaseListActivity :
      */
     @CallSuper
     override fun initView() {
-        listModel = BaseListModel(this, iCreateRootView)
+        listModel = BaseListModel(this, rootViewImpl)
         initData()
     }
 

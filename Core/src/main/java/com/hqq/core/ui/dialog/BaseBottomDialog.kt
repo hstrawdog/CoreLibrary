@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hqq.core.R
-import com.hqq.core.ui.base.ICreateRootViewImpl
+import com.hqq.core.ui.base.IRootViewBuildBuild
 import com.hqq.core.ui.base.IRootView
 import com.hqq.core.utils.log.LogUtils
 
@@ -35,7 +35,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
     /**
      * 布局创建 容器
      */
-    lateinit var rootViewBuild: ICreateRootViewImpl<BaseBottomDialog>
+    lateinit var rootViewBuild: IRootViewBuildBuild<BaseBottomDialog>
 
     override val height: Int = CoordinatorLayout.LayoutParams.MATCH_PARENT
     override fun initConfig() {}
@@ -60,7 +60,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView == null) {
-            rootViewBuild = ICreateRootViewImpl(this)
+            rootViewBuild = IRootViewBuildBuild(this)
             initConfig()
             rootView = rootViewBuild!!.buildContentView(this)
         }

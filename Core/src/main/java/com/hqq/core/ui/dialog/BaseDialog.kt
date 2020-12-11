@@ -10,8 +10,9 @@ import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.listenner.DialogClickListener
-import com.hqq.core.ui.base.ICreateRootViewImpl
+import com.hqq.core.ui.base.IRootViewBuildBuild
 import com.hqq.core.ui.base.IRootView.IDialogFragment
+import com.hqq.core.ui.base.RootViewImpl
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.utils.statusbar.StatusBarManager
 import com.hqq.core.widget.LoadingView
@@ -35,9 +36,21 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     var rootView: View? = null
 
     /**
-     * 布局创建 容器
+     * 布局创建
      */
-    lateinit var rootViewBuild: ICreateRootViewImpl<BaseDialog>
+    private val rootViewBuild: IRootViewBuildBuild<BaseDialog> by lazy {
+        IRootViewBuildBuild(this)
+    }
+
+    /**
+     *  根布局
+     */
+    val rootViewImpl: RootViewImpl
+        get() {
+            return rootViewBuild.rootViewImpl
+        }
+
+
     val isDismissBackground: Boolean
         get() = true
 
@@ -79,9 +92,8 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             activity?.let {
                 loadingView = LoadingView(it)
             }
-            rootViewBuild = ICreateRootViewImpl(this)
             initConfig()
-            rootView = rootViewBuild!!.buildContentView(this)
+            rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
             LogUtils.d("onCreateView " + javaClass.simpleName + this.toString())

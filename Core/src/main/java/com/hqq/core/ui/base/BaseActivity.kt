@@ -37,17 +37,33 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     }
 
     /**
-     * 根布局
+     *  强制竖屏
+     * 正常互联网APP 竖屏比较多
+     * 横竖屏情况下不动 生命周期不会有关系
+     * 等待测试
      */
-     val iCreateRootView: ICreateRootViewImpl<BaseActivity>  by lazy {
-        ICreateRootViewImpl(this, showStatus = true, showToolBar = true)
+    val isAlwaysPortrait = true;
+
+    /**
+     * 根布局创建
+     */
+    private val iCreateRootView: IRootViewBuildBuild<BaseActivity> by lazy {
+        IRootViewBuildBuild(this, showStatus = true, showToolBar = true, isAlwaysPortrait)
     }
+
+    /**
+     *  根布局
+     */
+    val rootViewImpl: RootViewImpl
+        get() {
+            return iCreateRootView.rootViewImpl
+        }
 
     /**
      *  顶部标题栏与状态栏
      *  不支持赋值
      */
-    val iToolBar: IToolBar? = iCreateRootView.iRootViewImpl.iToolBar
+    val iToolBar: IToolBar? = rootViewImpl.iToolBar
 
     /**
      *  初始化

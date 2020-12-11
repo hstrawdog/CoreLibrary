@@ -39,7 +39,7 @@ abstract class BaseBindingListFragment<T : ViewDataBinding>
      */
     @CallSuper
     override fun initView() {
-        listModel = BaseListModel(this, rootViewBuild)
+        listModel = BaseListModel(this, rootViewImpl)
         initData()
     }
 

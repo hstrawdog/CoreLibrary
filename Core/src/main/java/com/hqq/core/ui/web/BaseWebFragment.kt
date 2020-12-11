@@ -113,8 +113,8 @@ open class BaseWebFragment : BaseFragment() {
 
     override fun initConfig() {
         super.initConfig()
-        rootViewBuild.iRootViewImpl.iToolBarBuilder.showToolBar = showToolBar
-        rootViewBuild.iRootViewImpl.iToolBarBuilder.showStatusBar = showStatusBar
+        rootViewImpl.iToolBarBuilder.showToolBar = showToolBar
+        rootViewImpl.iToolBarBuilder.showStatusBar = showStatusBar
     }
 
     @SuppressLint("JavascriptInterface")

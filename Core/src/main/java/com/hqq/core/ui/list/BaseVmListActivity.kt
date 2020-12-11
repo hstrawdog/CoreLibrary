@@ -36,7 +36,7 @@ abstract class BaseVmListActivity<K : BaseListViewModel,T : ViewDataBinding>
 
     override fun initViews() {
         layoutManager = LinearLayoutManager(activity)
-        listModel = BaseListModel(this, iCreateRootView)
+        listModel = BaseListModel(this, rootViewImpl)
         viewMode.data.observe(this, Observer {
             listModel.fillingData(it)
         })
