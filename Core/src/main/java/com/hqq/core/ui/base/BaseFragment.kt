@@ -63,8 +63,10 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      * 标题栏
      * get  类似代理 每次从 rootViewBuild.iRootViewImp 获取对象
      */
-    var iToolBar: IToolBar? = null
-        get() = rootViewImpl.iToolBar
+    val iToolBar: IToolBar?
+        get() {
+            return rootViewImpl.iToolBar
+        }
 
     /**
      * 在viewPage 中不断的切换 fragment  都会不断的去执行 onCreateView 的方法

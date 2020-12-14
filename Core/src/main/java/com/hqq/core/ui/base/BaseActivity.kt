@@ -63,7 +63,10 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      *  顶部标题栏与状态栏
      *  不支持赋值
      */
-    val iToolBar: IToolBar? = rootViewImpl.iToolBar
+    val iToolBar: IToolBar?
+    get()  {
+        return rootViewImpl.iToolBar
+    }
 
     /**
      *  初始化

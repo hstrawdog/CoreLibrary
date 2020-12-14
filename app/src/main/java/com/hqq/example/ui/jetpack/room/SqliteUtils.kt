@@ -70,7 +70,6 @@ object UserHitModel {
      */
     val MIGRATION_1_2: Migration = object : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
-
         }
     }
 }
