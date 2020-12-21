@@ -63,7 +63,7 @@ class MainActivity : BaseVmListActivity<MainViewModel,ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.e("MainActivity    initData")
-
+        loadingView.show()
 //        Handler().postDelayed(3 * 1000) {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
 //

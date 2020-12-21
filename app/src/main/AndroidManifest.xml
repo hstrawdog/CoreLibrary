@@ -25,7 +25,6 @@
 
         <activity android:name=".ui.customize.DiskViewActivity" android:label="时间选择"/>
 
-
         <activity android:name=".ui.recycle.VmFragmentActivity" />
         <activity android:name=".ui.jetpack.livedata.LiveDataSpanViewActivity" />
         <activity

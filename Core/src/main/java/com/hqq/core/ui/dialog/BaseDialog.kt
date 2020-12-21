@@ -71,6 +71,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     override val animation: Int
         get() = R.style.DialogAnimation_bottom2top
 
+
     /**
      * 状态栏模式
      */
