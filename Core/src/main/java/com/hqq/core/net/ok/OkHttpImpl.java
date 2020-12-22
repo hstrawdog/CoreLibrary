@@ -70,7 +70,24 @@ public class OkHttpImpl implements HttpCompat {
      */
     @Override
     public void getExecute(String url, ParamsCompat params, OkNetCallback callback) {
-        doGet(null, url, params, callback);
+        final String realUrl;
+        if (params != null) {
+            realUrl = url + '?' + params.paramGet();
+        } else {
+            realUrl = url;
+        }
+        Request.Builder request = new Request.Builder().url(realUrl).get();
+        try {
+            Response response = mOkHttpClient.newCall(request.build()).execute();
+            final String string = response.body().string();
+            final int code = response.code();
+            postHandler(null, callback, response.isSuccessful(), code, string);
+        } catch (IOException e) {
+            e.printStackTrace();
+            postHandler(null, callback, false, 0, "网络连接失败,请检查网络");
+
+        }
+
     }
 
     /**
@@ -93,7 +110,6 @@ public class OkHttpImpl implements HttpCompat {
             @Override
             public void onFailure(Call call, IOException e) {
                 postHandler(handler, callback, false, 0, "网络连接失败,请检查网络");
-
             }
 
             @Override
@@ -101,7 +117,6 @@ public class OkHttpImpl implements HttpCompat {
                 final String string = response.body().string();
                 final int code = response.code();
                 postHandler(handler, callback, response.isSuccessful(), code, string);
-
             }
         });
     }
@@ -127,7 +142,19 @@ public class OkHttpImpl implements HttpCompat {
      */
     @Override
     public void postExecute(String url, ParamsCompat params, OkNetCallback callback) {
-        doPost(url, params, callback, null);
+        RequestBody body = params.paramForm();
+        Request.Builder request = new Request.Builder().url(url).post(body);
+        try {
+            Response response = mOkHttpClient.newCall(request.build()).execute();
+            final int code = response.code();
+            final String string = response.body().string();
+            postHandler(null, callback, response.isSuccessful(), code, string);
+        } catch (IOException e) {
+            e.printStackTrace();
+            postHandler(null, callback, false, 0, "网络连接失败,请检查网络");
+
+        }
+
 
     }
 
