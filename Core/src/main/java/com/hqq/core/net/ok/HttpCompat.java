@@ -1,6 +1,8 @@
 package com.hqq.core.net.ok;
 
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.qq.readbook.net.ok
@@ -44,6 +46,15 @@ public interface HttpCompat {
     void get(String url, ParamsCompat params, OkNetCallback callback);
 
     /**
+     * 同步的get
+     *
+     * @param url
+     * @param params
+     * @param callback
+     */
+    void getExecute(String url, ParamsCompat params, OkNetCallback callback);
+
+    /**
      * post  方法
      *
      * @param url
@@ -52,8 +63,17 @@ public interface HttpCompat {
      */
     void post(String url, ParamsCompat params, OkNetCallback callback);
 
+    /**
+     * 同步的post
+     *
+     * @param url
+     * @param params
+     * @param callback
+     */
+    void postExecute(String url, ParamsCompat params, OkNetCallback callback);
 
-    //todo  请他请求方式
+
+    //  其他请求方式
 
 
 }
