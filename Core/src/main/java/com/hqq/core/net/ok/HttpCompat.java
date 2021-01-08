@@ -1,7 +1,7 @@
 package com.hqq.core.net.ok;
 
 
-import org.jetbrains.annotations.NotNull;
+import okhttp3.Call;
 
 /**
  * @Author : huangqiqiang
@@ -47,30 +47,30 @@ public interface HttpCompat {
 
     /**
      * 同步的get
-     *
-     * @param url
+     *  @param url
      * @param params
      * @param callback
+     * @return
      */
-    void getExecute(String url, ParamsCompat params, OkNetCallback callback);
+    Call getExecute(String url, ParamsCompat params, OkNetCallback callback);
 
     /**
      * post  方法
-     *
-     * @param url
+     *  @param url
      * @param params
      * @param callback
+     * @return
      */
-    void post(String url, ParamsCompat params, OkNetCallback callback);
+    Call post(String url, ParamsCompat params, OkNetCallback callback);
 
     /**
      * 同步的post
-     *
-     * @param url
+     *  @param url
      * @param params
      * @param callback
+     * @return
      */
-    void postExecute(String url, ParamsCompat params, OkNetCallback callback);
+    Call postExecute(String url, ParamsCompat params, OkNetCallback callback);
 
 
     //  其他请求方式

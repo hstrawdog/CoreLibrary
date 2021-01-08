@@ -11,7 +11,6 @@ package com.hqq.core.net.ok;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -67,9 +66,10 @@ public class OkHttpImpl implements HttpCompat {
      * @param url
      * @param params
      * @param callback
+     * @return
      */
     @Override
-    public void getExecute(String url, ParamsCompat params, OkNetCallback callback) {
+    public Call getExecute(String url, ParamsCompat params, OkNetCallback callback) {
         final String realUrl;
         if (params != null) {
             realUrl = url + '?' + params.paramGet();
@@ -77,17 +77,17 @@ public class OkHttpImpl implements HttpCompat {
             realUrl = url;
         }
         Request.Builder request = new Request.Builder().url(realUrl).get();
+        Call call = mOkHttpClient.newCall(request.build());
         try {
-            Response response = mOkHttpClient.newCall(request.build()).execute();
+            Response response = call.execute();
             final String string = response.body().string();
             final int code = response.code();
             postHandler(null, callback, response.isSuccessful(), code, string);
         } catch (IOException e) {
             e.printStackTrace();
             postHandler(null, callback, false, 0, "网络连接失败,请检查网络");
-
         }
-
+        return call;
     }
 
     /**
@@ -97,8 +97,9 @@ public class OkHttpImpl implements HttpCompat {
      * @param url
      * @param params
      * @param callback
+     * @return
      */
-    private void doGet(Handler handler, String url, ParamsCompat params, OkNetCallback callback) {
+    private Call doGet(Handler handler, String url, ParamsCompat params, OkNetCallback callback) {
         final String realUrl;
         if (params != null) {
             realUrl = url + '?' + params.paramGet();
@@ -106,7 +107,8 @@ public class OkHttpImpl implements HttpCompat {
             realUrl = url;
         }
         Request.Builder request = new Request.Builder().url(realUrl).get();
-        mOkHttpClient.newCall(request.build()).enqueue(new okhttp3.Callback() {
+        Call call = mOkHttpClient.newCall(request.build());
+        call.enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 postHandler(handler, callback, false, 0, "网络连接失败,请检查网络");
@@ -119,6 +121,7 @@ public class OkHttpImpl implements HttpCompat {
                 postHandler(handler, callback, response.isSuccessful(), code, string);
             }
         });
+        return call;
     }
 
     /**
@@ -127,25 +130,28 @@ public class OkHttpImpl implements HttpCompat {
      * @param url
      * @param params
      * @param callback
+     * @return
      */
     @Override
-    public void post(String url, ParamsCompat params, OkNetCallback callback) {
-        doPost(url, params, callback, mHandler);
+    public Call post(String url, ParamsCompat params, OkNetCallback callback) {
+        return doPost(url, params, callback, mHandler);
     }
 
     /**
      * 同步请求
-     *
-     * @param url
+     *  @param url
      * @param params
      * @param callback
+     * @return
      */
     @Override
-    public void postExecute(String url, ParamsCompat params, OkNetCallback callback) {
+    public Call postExecute(String url, ParamsCompat params, OkNetCallback callback) {
         RequestBody body = params.paramForm();
         Request.Builder request = new Request.Builder().url(url).post(body);
+        Call call = mOkHttpClient.newCall(request.build());
         try {
-            Response response = mOkHttpClient.newCall(request.build()).execute();
+            Response response = call.execute();
+
             final int code = response.code();
             final String string = response.body().string();
             postHandler(null, callback, response.isSuccessful(), code, string);
@@ -154,7 +160,7 @@ public class OkHttpImpl implements HttpCompat {
             postHandler(null, callback, false, 0, "网络连接失败,请检查网络");
 
         }
-
+        return call;
 
     }
 
@@ -165,11 +171,12 @@ public class OkHttpImpl implements HttpCompat {
      * @param params
      * @param callback
      * @param o
+     * @return
      */
-    private void doPost(String url, ParamsCompat params, OkNetCallback callback, Handler o) {
+    private Call doPost(String url, ParamsCompat params, OkNetCallback callback, Handler o) {
         RequestBody body = params.paramForm();
         Request.Builder request = new Request.Builder().url(url).post(body);
-        doRequest(o, request, callback);
+        return doRequest(o, request, callback);
     }
 
     /**
@@ -177,9 +184,11 @@ public class OkHttpImpl implements HttpCompat {
      *
      * @param request
      * @param callback
+     * @return
      */
-    private void doRequest(Handler handler, Request.Builder request, final OkNetCallback callback) {
-        mOkHttpClient.newCall(request.build()).enqueue(new okhttp3.Callback() {
+    private Call doRequest(Handler handler, Request.Builder request, final OkNetCallback callback) {
+        Call call = mOkHttpClient.newCall(request.build());
+        call.enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 postHandler(mHandler, callback, false, 0, "网络连接失败,请检查网络");
@@ -192,6 +201,7 @@ public class OkHttpImpl implements HttpCompat {
                 postHandler(mHandler, callback, response.isSuccessful(), code, string);
             }
         });
+        return call;
     }
 
     /**
