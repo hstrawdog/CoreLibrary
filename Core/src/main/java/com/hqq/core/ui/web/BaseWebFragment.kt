@@ -7,6 +7,7 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
+import android.provider.Contacts.SettingsColumns.KEY
 import android.view.View
 import android.webkit.*
 import android.widget.ProgressBar
@@ -113,8 +114,8 @@ open class BaseWebFragment : BaseFragment() {
 
     override fun initConfig() {
         super.initConfig()
-        rootViewImpl.iToolBarBuilder.showToolBar = showToolBar
-        rootViewImpl.iToolBarBuilder.showStatusBar = showStatusBar
+        rootViewImpl.iToolBarBuilder.showToolBar = arguments?.getBoolean(getString(R.string.key_showToolBar),true) == true
+        rootViewImpl.iToolBarBuilder.showStatusBar =  arguments?.getBoolean(getString(R.string.key_showstatusBar),true) == true
     }
 
     @SuppressLint("JavascriptInterface")
@@ -243,11 +244,13 @@ open class BaseWebFragment : BaseFragment() {
     }
 
     companion object {
-        fun instantiate(context: Context, title: String?, url: String?, scriptInterface: ScriptInterface? = null): BaseWebFragment {
+        fun instantiate(context: Context, title: String?, url: String?, scriptInterface: ScriptInterface? = null,showToolBar :Boolean=true ,showstatusBar:Boolean=true): BaseWebFragment {
             val baseWebFragment = BaseWebFragment()
             val bundle = Bundle()
             bundle.putString(context.getString(R.string.key_url), url)
             bundle.putString(context.getString(R.string.key_title), title)
+            bundle.putBoolean(context.getString(R.string.key_showToolBar), showToolBar)
+            bundle.putBoolean(context.getString(R.string.key_showstatusBar), showstatusBar)
             baseWebFragment.arguments = bundle
             baseWebFragment.scriptInterface=(scriptInterface)
             return baseWebFragment

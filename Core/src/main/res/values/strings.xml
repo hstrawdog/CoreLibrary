@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="def_empty_message">亲!没有更多数据哦~</string>
+    <string name="key_showToolBar" >showToolBar</string>
+    <string name="key_showstatusBar">showstatusBar</string>
 </resources>
