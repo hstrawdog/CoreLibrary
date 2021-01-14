@@ -14,7 +14,7 @@ import com.hqq.core.CoreConfig
  */
 object LogUtils {
     //规定每段显示的长度
-    private const val LOG_MAX_LENGTH = 4 * 1000
+    private const val LOG_MAX_LENGTH = 2000
 
     /**
      * Log 输出标签
