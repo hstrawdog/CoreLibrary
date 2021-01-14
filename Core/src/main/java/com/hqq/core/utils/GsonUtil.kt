@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
 import com.google.gson.JsonSyntaxException
+import com.google.gson.stream.JsonReader
 import java.lang.reflect.Type
 
 /**
@@ -25,6 +26,10 @@ object GsonUtil {
 
     fun toJsonString(o: Any?, type: Type?): String {
         return GSON.toJson(o, type)
+    }
+
+    fun fromJson(o: JsonReader, type: Type?): String {
+        return GSON.fromJson(o, type)
     }
 
     fun <T> fromJson(json: String?, clazz: Class<T>?): T? {
