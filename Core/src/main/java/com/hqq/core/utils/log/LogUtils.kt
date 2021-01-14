@@ -3,7 +3,6 @@ package com.hqq.core.utils.log
 import android.util.Log
 import com.hqq.core.BuildConfig
 import com.hqq.core.CoreConfig
-import java.lang.Exception
 
 /**
  * @Author : huangqiqiang
@@ -136,14 +135,19 @@ object LogUtils {
      */
     @kotlin.jvm.JvmStatic
     private fun doLog4Length(str: String, log: String, tag: String) {
-        var i = 0
-        while (i < log.length) {
-            if (i + LOG_MAX_LENGTH < log.length) {
-                printLog(str + i, log.substring(i, i + LOG_MAX_LENGTH), tag)
+        val strLength: Int = log.length
+        var start = 0
+        var end: Int = LOG_MAX_LENGTH
+        for (i in 0..99) {
+            //剩下的文本还是大于规定长度则继续重复截取并输出
+            if (strLength > end) {
+                printLog(str + i, log.substring(start, end), tag)
+                start = end
+                end = end + LOG_MAX_LENGTH
             } else {
-                printLog(str + i, log.substring(i, log.length), tag)
+                printLog(str + i, log.substring(start, strLength), tag)
+                break
             }
-            i += LOG_MAX_LENGTH
         }
     }
 
