@@ -20,7 +20,7 @@ import com.hqq.core.utils.log.LogUtils
  * 1. 　动态添加 生成根布局  支持LineLayout 与FarmLayout
  * 2. 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
-class IRootViewBuildBuild<T : Any>(context: T, showStatus: Boolean, showToolBar: Boolean, private var isAlwaysPortrait: Boolean = true) : IRootViewBuild {
+class IRootViewBuildBuild(context: Any, showStatus: Boolean, showToolBar: Boolean, private var isAlwaysPortrait: Boolean = true) : IRootViewBuild {
     /**
      * 当前activity
      */
@@ -31,7 +31,7 @@ class IRootViewBuildBuild<T : Any>(context: T, showStatus: Boolean, showToolBar:
      */
     var rootViewImpl: RootViewImpl = RootViewImpl()
 
-    constructor(activity: T) : this(activity, false, false)
+    constructor(activity: Any) : this(activity, false, false)
 
     init {
         rootViewImpl.iToolBarBuilder.showStatusBar = showStatus

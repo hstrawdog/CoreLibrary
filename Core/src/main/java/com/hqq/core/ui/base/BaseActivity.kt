@@ -47,9 +47,10 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
     /**
      * 根布局创建
      */
-    private val iCreateRootView: IRootViewBuildBuild<BaseActivity> by lazy {
-        IRootViewBuildBuild(this, showStatus = true, showToolBar = true, isAlwaysPortrait)
+    private val iCreateRootView: IRootViewBuildBuild by lazy {
+        IRootViewBuildBuild(this, showStatus = true, showToolBar = true, isAlwaysPortrait = isAlwaysPortrait)
     }
+
 
     /**
      *  根布局
@@ -64,9 +65,9 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
      *  不支持赋值
      */
     val iToolBar: IToolBar?
-    get()  {
-        return rootViewImpl.iToolBar
-    }
+        get() {
+            return rootViewImpl.iToolBar
+        }
 
     /**
      *  初始化

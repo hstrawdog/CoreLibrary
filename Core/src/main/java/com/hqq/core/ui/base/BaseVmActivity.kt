@@ -52,7 +52,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     }
 
     /**
-     * 正常情况下 v对应一个VM
+     * 正常情况下 一个v对应一个VM
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
@@ -61,11 +61,18 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        viewMode?.onActivityResult(requestCode,resultCode,data)
+    }
+
+
     override fun finishActivity(goBackComponent: BaseViewModel.GoBackComponent) {
         if (goBackComponent.goBack) {
             finish()
         }
     }
+
 
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
         val intent = Intent(activity, openActivityComponent.activityClass)

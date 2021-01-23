@@ -196,6 +196,15 @@ interface IRootView {
          * 共享界面数据到ViewModel中
          */
         fun initData(extras: Bundle?)
+
+        /**
+         *  传递数据
+         * @param requestCode Int
+         * @param resultCode Int
+         * @param data Intent?
+         */
+        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+
     }
 
 

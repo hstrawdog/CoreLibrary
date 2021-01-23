@@ -1,6 +1,7 @@
 package com.hqq.core.ui.base
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -64,6 +65,11 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
         LogUtils.d(" BaseViewModel           initData ")
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    }
+
+
     override fun onStart() {}
     override fun onResume() {}
     override fun onPause() {}
@@ -108,12 +114,11 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      * 打开Activity的对象零件
      */
     class OpenActivityComponent @JvmOverloads constructor(
-        var activityClass: Class<out Activity?>?,
-        var bundle: Bundle? = null,
-        var activityResult: Int = -1
+            var activityClass: Class<out Activity?>?,
+            var bundle: Bundle? = null,
+            var activityResult: Int = -1
     )
 
-    class GoBackComponent @JvmOverloads  constructor(
-        var goBack: Boolean = false, var bundle: Bundle? = null,
-    ) : LiveData<Boolean>(goBack)
+    class GoBackComponent @JvmOverloads constructor(var goBack: Boolean = false, var bundle: Bundle? = null)
+        : LiveData<Boolean>(goBack)
 }

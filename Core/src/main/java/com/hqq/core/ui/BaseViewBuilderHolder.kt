@@ -51,6 +51,7 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
         return this
     }
 
+
     override fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle) {
         this.parentView = parentView
         this.activity = WeakReference<Activity>(activity)

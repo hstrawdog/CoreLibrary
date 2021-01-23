@@ -54,8 +54,10 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
             initAlertParams()
         }
         _viewHolder?.apply {
-            builder(this@SelectDialog, rootView!!.findViewById(R.id.ll_content))
-            addToParent()
+            this?.let{
+                builder(this@SelectDialog, rootView!!.findViewById(R.id.ll_content))
+                addToParent()
+            }
             initView()
         }
     }

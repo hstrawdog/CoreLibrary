@@ -57,6 +57,10 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+           viewMode.onActivityResult(requestCode,resultCode,data)
+    }
     /**
      * 打开新的界面
      */
