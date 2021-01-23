@@ -35,7 +35,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
     /**
      * 布局创建 容器
      */
-    lateinit var rootViewBuild: IRootViewBuildBuild<BaseBottomDialog>
+    lateinit var rootViewBuild: IRootViewBuildBuild
 
     override val height: Int = CoordinatorLayout.LayoutParams.MATCH_PARENT
     override fun initConfig() {}

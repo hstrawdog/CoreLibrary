@@ -42,7 +42,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
     /**
      * 布局创建 容器
      */
-    private val rootViewBuild: IRootViewBuildBuild<BaseFragment> by lazy {
+    private val rootViewBuild: IRootViewBuildBuild by lazy {
         IRootViewBuildBuild(this)
     }
 

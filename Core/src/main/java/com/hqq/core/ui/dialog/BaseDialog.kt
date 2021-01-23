@@ -38,7 +38,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      * 布局创建
      */
-    private val rootViewBuild: IRootViewBuildBuild<BaseDialog> by lazy {
+    private val rootViewBuild: IRootViewBuildBuild by lazy {
         IRootViewBuildBuild(this)
     }
 
