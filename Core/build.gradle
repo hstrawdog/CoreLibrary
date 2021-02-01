@@ -68,7 +68,6 @@ android {
 }
 
 dependencies {
-    api Kt.stdlibJdk8
     api Android.activityKtx
     api Android.meteria
 
@@ -96,6 +95,7 @@ dependencies {
     kapt Glide.glideCompiler
 
     //版本要与gradle版本一致
+    api Kt.stdlibJdk8
     kapt Android.dataBindingCompiler
 
 

@@ -27,7 +27,7 @@ object HttpManager {
      */
     fun login(showLoading: MutableLiveData<Boolean>) {
 //        showLoading.value = true
-        ApiManager.wangAndroidInterface.getUserCenter("13696891101", "zz789789").enqueue(object : Callback<String?> {
+        ApiManager.wangAndroidInterface?.getUserCenter("13696891101", "zz789789")?.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
 //                showLoading.value = false
             }
