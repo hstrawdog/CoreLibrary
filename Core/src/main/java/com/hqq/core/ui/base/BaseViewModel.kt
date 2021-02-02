@@ -73,7 +73,6 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     }
 
-
     override fun onStart() {}
     override fun onResume() {}
     override fun onPause() {}

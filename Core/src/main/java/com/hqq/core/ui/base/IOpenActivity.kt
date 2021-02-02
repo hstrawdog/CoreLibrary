@@ -23,7 +23,7 @@ interface IOpenActivity {
 
 interface IFinishActivity {
     /**
-     *  返回上一页
+     *  返回上一页/ 关闭当前页面
      */
     fun finishActivity(goBackComponent: BaseViewModel.GoBackComponent)
 }

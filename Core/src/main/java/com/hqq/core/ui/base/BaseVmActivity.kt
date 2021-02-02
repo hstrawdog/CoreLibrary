@@ -15,9 +15,7 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  * T 泛型 正常使用布局生成的 ViewBanding
  * DataBindingUtil 放回的对象支持DataBinding 与 ViewBanding
  * BaseViewModel 驱动 ui显示 Toast以及Loading
- *
  * 正常情况下 viewModel  不应该在Base中初始化
- *
  */
 abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
@@ -25,7 +23,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
 
     override fun initView() {
         viewMode = getViewModel()
-        viewMode?.let {
+        viewMode.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
             ViewModelFactory.initOpenActivity(it, this, this)
@@ -33,11 +31,18 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
         }
         addViewModel()
         initViews()
-        viewMode?.let {
+        viewMode.let {
             it.initData(intent.extras)
         }
     }
 
+    /**
+     * 获取ViewModel
+     * 利用反射方式构建ViewMode
+     * 必要情况可重写次方法 构建过-> Hilt的方式
+     * 需要测试 反射构建与Hilt 注入是否有差别
+     * @return K
+     */
     override fun getViewModel(): K {
         return if (this::viewMode.isInitialized) {
             ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
@@ -46,6 +51,9 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
         }
     }
 
+    /**
+     *  解绑
+     */
     override fun onDestroy() {
         super.onDestroy()
         lifecycle.removeObserver(viewMode)
@@ -61,23 +69,35 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
         }
     }
 
+    /**
+     *  将结果回调给 ViewModel
+     * @param requestCode Int
+     * @param resultCode Int
+     * @param data Intent?
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        viewMode?.onActivityResult(requestCode,resultCode,data)
+        viewMode.onActivityResult(requestCode, resultCode, data)
     }
 
-
+    /**
+     * ViewModel 过来 关闭当前界面
+     * @param goBackComponent GoBackComponent
+     */
     override fun finishActivity(goBackComponent: BaseViewModel.GoBackComponent) {
         if (goBackComponent.goBack) {
             finish()
         }
     }
 
-
+    /**
+     * ViewModel 中过来的 打开新的页面
+     * @param openActivityComponent OpenActivityComponent
+     */
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
         val intent = Intent(activity, openActivityComponent.activityClass)
-        if (openActivityComponent.bundle != null) {
-            intent.putExtras(openActivityComponent.bundle!!)
+        openActivityComponent.bundle?.let {
+            intent.putExtras(it)
         }
         activity.startActivityForResult(intent, openActivityComponent.activityResult)
     }
