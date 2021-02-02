@@ -81,15 +81,15 @@ class WeatherViewModel : BaseViewModel() {
     }
 
     private fun getWeather(city: String) {
-        setShowLoading(true)
+        showLoading(true)
         HttpManager.getWeather(city.substring(0, city.length - 1), object : NetCallback<Weather>() {
             override fun onFail(code: Int, message: String) {
-                setShowToast(message!!)
-                setShowLoading(false)
+                showToast(message!!)
+                showLoading(false)
             }
 
             override fun onSuccess(response: Weather) {
-                setShowLoading(false)
+                showLoading(false)
                 mWeather.value = response
             }
 

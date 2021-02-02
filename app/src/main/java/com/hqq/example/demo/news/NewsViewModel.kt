@@ -26,7 +26,7 @@ class NewsViewModel : BaseListViewModel() {
             }
 
             override fun onFail(code: Int, message: String) {
-                setShowToast(message)
+                showToast(message)
             }
         })
     }

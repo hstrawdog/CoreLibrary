@@ -44,11 +44,14 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      */
     var bundle: Bundle? = null
 
+    /**
+     * 回到上个页面
+     */
     var goBack = MutableLiveData<GoBackComponent>()
 
 
     init {
-        LogUtils.d(" BaseViewModel  init ")
+        LogUtils.d(" BaseViewModel  init " + javaClass.name)
     }
 
     /**
@@ -62,6 +65,7 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     }
 
     override fun initData(extras: Bundle?) {
+        bundle = extras
         LogUtils.d(" BaseViewModel           initData ")
 
     }
@@ -76,22 +80,18 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     override fun onStop() {}
     override fun onDestroy() {}
     override fun onAny() {}
-    fun setBundle(bundle: Bundle?): BaseViewModel {
-        this.bundle = bundle
-        return this
-    }
 
     /**
      * @param cls        Activity 类型
      * @param bundle     传递的值
      * @param resultCode 回调code
      */
-    fun setShowLoading(showLoading: Boolean): BaseViewModel {
+    fun showLoading(showLoading: Boolean): BaseViewModel {
         this.loadingView.postValue(showLoading)
         return this
     }
 
-    fun setShowToast(showToast: String): BaseViewModel {
+    fun showToast(showToast: String): BaseViewModel {
         this.toast.postValue(showToast)
         return this
     }

@@ -13,9 +13,9 @@ import java.util.*
  * @Date : 2019/5/29 0029  下午 5:11
  * @Email : qiqiang213@gmail.com
  * @Descrive :
+ * Bundle空判断 避免取值中直接奔溃
  */
 object BundleUtils {
-    /******************************** Bundle空判断 避免取值中直接奔溃    */
     /**
      * 获取bandle
      *

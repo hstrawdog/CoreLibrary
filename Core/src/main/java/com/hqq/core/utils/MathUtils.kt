@@ -121,7 +121,6 @@ object MathUtils {
     fun main(args: Array<String>) {
 //        System.out.println(Double.parseDouble("100495") / 1000.00);
 //        System.out.println(MathUtils.getDoubleString(Double.parseDouble("100495") / 1000.00));
-
 //        System.out.println("args = [" + formatDecimals(0.0) + "]");
 //        System.out.println("args = [" + formatDecimals(1.0) + "]");
 //        System.out.println("args = [" + formatDecimals(1.1) + "]");

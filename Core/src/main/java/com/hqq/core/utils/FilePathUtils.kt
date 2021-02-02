@@ -146,6 +146,6 @@ object FilePathUtils {
      * @return
      */
     fun getDefFileName(suffix: String): String {
-        return System.currentTimeMillis().toString() + suffix
+        return defFileName + suffix
     }
 }

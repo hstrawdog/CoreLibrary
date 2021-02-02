@@ -48,7 +48,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
 
     override fun onDestroy() {
         super.onDestroy()
-        lifecycle.removeObserver(viewMode!!)
+        lifecycle.removeObserver(viewMode)
     }
 
     /**

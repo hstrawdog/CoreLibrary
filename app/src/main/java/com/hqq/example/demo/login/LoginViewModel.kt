@@ -18,7 +18,7 @@ class LoginViewModel : BaseViewModel() {
     var mPhone: MutableLiveData<String> = MediatorLiveData()
     var mPassWord: MutableLiveData<String> = MediatorLiveData()
     fun onLoginClick(view: View?) {
-        setShowToast(mPhone.value.toString() + "" + mPassWord.value)
+        showToast(mPhone.value.toString() + "" + mPassWord.value)
         login(loadingView)
     }
 

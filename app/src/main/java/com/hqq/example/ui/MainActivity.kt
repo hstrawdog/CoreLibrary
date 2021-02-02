@@ -12,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
+import com.hqq.core.utils.keyboard.SoftHideKeyboardScrollView
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
@@ -49,7 +50,7 @@ import kotlinx.coroutines.launch
  * @Email :  qiqiang213@gmail.com
  */
 @AndroidEntryPoint
-class MainActivity : BaseVmListActivity<MainViewModel,ViewDataBinding>() {
+class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     //  这边是kotlin
     override val adapter: MainAdapter = MainAdapter()
     override val bindingViewModelId: Int
@@ -63,13 +64,14 @@ class MainActivity : BaseVmListActivity<MainViewModel,ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.e("MainActivity    initData")
-        loadingView.show()
+//        loadingView.show()
 //        Handler().postDelayed(3 * 1000) {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
 //
 //        }
+        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
+        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
     }
-
 
     val mV: MainViewModel by viewModels()
 
@@ -112,6 +114,7 @@ class MainActivity : BaseVmListActivity<MainViewModel,ViewDataBinding>() {
             super.initData(extras)
             LogUtils.e("MainModel initData 1")
         }
+
         override fun onCrete() {
             LogUtils.e("MainModel onCrete 1")
             super.onCrete()

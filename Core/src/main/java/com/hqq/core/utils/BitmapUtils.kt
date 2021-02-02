@@ -133,11 +133,9 @@ object BitmapUtils {
         if (bm == null) {
             return null
         }
-
         // 原图片的宽高
         val bigW = bm.width
         val bigH = bm.height
-
         // 重新定义大小
         val newW = bigW + smallW * 2
         val newH = bigH + smallH * 2

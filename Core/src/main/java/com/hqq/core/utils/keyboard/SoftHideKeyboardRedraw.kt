@@ -18,7 +18,14 @@ import com.hqq.core.utils.ScreenUtils
  * 键盘显示的时候 重新绘制view 解决底部按钮被遮挡的问题
  */
 class SoftHideKeyboardRedraw private constructor(activity: Activity, content: FrameLayout = activity.findViewById<View>(R.id.content) as FrameLayout) {
-    private val mChildOfContent: View
+    /**
+     * 根布局
+     */
+    private val mChildOfContent: View = content.getChildAt(0)
+
+    /**
+     * 布局当前实际高度
+     */
     private var mUsableHeightPrevious = 0
 
     /**
@@ -34,7 +41,23 @@ class SoftHideKeyboardRedraw private constructor(activity: Activity, content: Fr
     /**
      * 状态栏高度
      */
-    private val mStatusBarHeight: Int
+    private val mStatusBarHeight: Int = ScreenUtils.getStatusBarHeight(activity)
+
+    init {
+        //1､找到Activity的最外层布局控件，它其实是一个DecorView,它所用的控件就是FrameLayout
+        //2､获取到setContentView放进去的View
+        //3､给Activity的xml布局设置View树监听，当布局有变化，如键盘弹出或收起时，都会回调此监听
+        mChildOfContent.viewTreeObserver.addOnGlobalLayoutListener {
+            if (mContentHeight <= 0) {
+                //兼容华为等机型
+                mContentHeight = mChildOfContent.height
+            }
+            //5､当前布局发生变化时，对Activity的xml布局进行重绘
+            possiblyResizeChildOfContent()
+        }
+        //6､获取到Activity的xml布局的放置参数
+        mFrameLayoutParams = mChildOfContent.layoutParams as FrameLayout.LayoutParams
+    }
 
     /**
      * 获取界面可用高度，如果软键盘弹起后，Activity的xml布局可用高度需要减去键盘高度
@@ -51,11 +74,7 @@ class SoftHideKeyboardRedraw private constructor(activity: Activity, content: Fr
             //5､高度差大于屏幕1/4时，说明键盘弹出
             if (heightDifference > usableHeightSansKeyboard / 4) {
                 // 6､键盘弹出了，Activity的xml布局高度应当减去键盘高度
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    mFrameLayoutParams.height = usableHeightSansKeyboard - heightDifference + mStatusBarHeight
-                } else {
-                    mFrameLayoutParams.height = usableHeightSansKeyboard - heightDifference
-                }
+                mFrameLayoutParams.height = usableHeightSansKeyboard - heightDifference + mStatusBarHeight
             } else {
                 mFrameLayoutParams.height = mContentHeight
             }
@@ -82,21 +101,5 @@ class SoftHideKeyboardRedraw private constructor(activity: Activity, content: Fr
         }
     }
 
-    init {
-        mStatusBarHeight = ScreenUtils.getStatusBarHeight(activity)
-        //1､找到Activity的最外层布局控件，它其实是一个DecorView,它所用的控件就是FrameLayout
-        //2､获取到setContentView放进去的View
-        mChildOfContent = content.getChildAt(0)
-        //3､给Activity的xml布局设置View树监听，当布局有变化，如键盘弹出或收起时，都会回调此监听
-        mChildOfContent.viewTreeObserver.addOnGlobalLayoutListener {
-            if (mContentHeight <= 0) {
-                //兼容华为等机型
-                mContentHeight = mChildOfContent.height
-            }
-            //5､当前布局发生变化时，对Activity的xml布局进行重绘
-            possiblyResizeChildOfContent()
-        }
-        //6､获取到Activity的xml布局的放置参数
-        mFrameLayoutParams = mChildOfContent.layoutParams as FrameLayout.LayoutParams
-    }
+
 }

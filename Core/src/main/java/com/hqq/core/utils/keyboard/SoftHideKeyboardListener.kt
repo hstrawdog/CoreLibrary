@@ -11,51 +11,24 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
  * @FileName :   SoftHideKeyboardListener
  * @Date : 2018/6/21 0021  下午 2:23
  * @Email : qiqiang213@gmail.com
- * @Descrive :https://blog.csdn.net/u011181222/article/details/52043001
+ * @Descrive :
+ * 监听键盘弹出收起
+ *  来源 https://blog.csdn.net/u011181222/article/details/52043001
  */
 class SoftHideKeyboardListener private constructor(activity: Activity) {
     /**
      * activity的根视图
      */
-    private val rootView: View
+    private val rootView: View = activity.window.decorView
 
     /**
      * 纪录根视图的显示高度
      */
     private var rootViewVisibleHeight = 0
     private var onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener? = null
-    private fun setOnSoftKeyBoardChangeListener(onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener?) {
-        this.onSoftKeyBoardChangeListener = onSoftKeyBoardChangeListener
-    }
-
-    interface OnSoftKeyBoardChangeListener {
-        /**
-         * 显示
-         *
-         * @param height
-         */
-        fun keyBoardShow(height: Int)
-
-        /**
-         * 隐藏
-         *
-         * @param height
-         */
-        fun keyBoardHide(height: Int)
-    }
-
-    companion object {
-        fun setListener(activity: Activity, onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener?): SoftHideKeyboardListener {
-            val softHideKeyBoardListener = SoftHideKeyboardListener(activity)
-            softHideKeyBoardListener.setOnSoftKeyBoardChangeListener(onSoftKeyBoardChangeListener)
-            return softHideKeyBoardListener
-        }
-    }
 
     init {
         //获取activity的根视图
-        rootView = activity.window.decorView
-
         //监听视图树中全局布局发生改变或者视图树中的某个视图的可视状态发生改变
         rootView.viewTreeObserver.addOnGlobalLayoutListener(OnGlobalLayoutListener { //获取当前根视图在屏幕上显示的大小
             val r = Rect()
@@ -90,4 +63,32 @@ class SoftHideKeyboardListener private constructor(activity: Activity) {
             }
         })
     }
+    private fun setOnSoftKeyBoardChangeListener(onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener?) {
+        this.onSoftKeyBoardChangeListener = onSoftKeyBoardChangeListener
+    }
+
+    interface OnSoftKeyBoardChangeListener {
+        /**
+         * 显示
+         *
+         * @param height
+         */
+        fun keyBoardShow(height: Int)
+
+        /**
+         * 隐藏
+         *
+         * @param height
+         */
+        fun keyBoardHide(height: Int)
+    }
+
+    companion object {
+        fun setListener(activity: Activity, onSoftKeyBoardChangeListener: OnSoftKeyBoardChangeListener?): SoftHideKeyboardListener {
+            val softHideKeyBoardListener = SoftHideKeyboardListener(activity)
+            softHideKeyBoardListener.setOnSoftKeyBoardChangeListener(onSoftKeyBoardChangeListener)
+            return softHideKeyBoardListener
+        }
+    }
+
 }
