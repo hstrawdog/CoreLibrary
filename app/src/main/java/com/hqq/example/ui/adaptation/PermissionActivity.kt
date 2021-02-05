@@ -3,8 +3,7 @@ package com.hqq.example.ui.adaptation
 import android.app.Activity
 import android.content.Intent
 import com.hqq.core.permission.PermissionsResult
-import com.hqq.core.permission.PermissionsUtils.requestCameraPermission
-import com.hqq.core.permission.PermissionsUtils.requestStoragePermission
+import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseDataBindingActivity
 import com.hqq.core.utils.ToastUtils.showToast
 import com.hqq.example.R
@@ -23,14 +22,14 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
 
     override fun initView() {
         binding?.button7?.setOnClickListener {
-            requestCameraPermission(object : PermissionsResult {
+            PermissionsUtils.requestCamera(object : PermissionsResult {
                 override fun onPermissionsResult(status: Boolean) {
                     showToast("拥有摄像头权限")
                 }
             })
         }
         binding?.button8?.setOnClickListener {
-            requestStoragePermission(object : PermissionsResult {
+            PermissionsUtils.requestStorage(object : PermissionsResult {
                 override fun onPermissionsResult(status: Boolean) {
                     showToast("拥有文件读写权限")
                 }

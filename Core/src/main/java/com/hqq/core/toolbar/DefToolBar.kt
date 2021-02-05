@@ -87,6 +87,7 @@ class DefToolBar : BaseToolBar() {
             toolBarBg!!.alpha = ahpla
         }
     }
+
     /**
      * 设置背景的透明度
      *
@@ -196,7 +197,7 @@ class DefToolBar : BaseToolBar() {
             @ColorRes color: Int,
             clickListener: View.OnClickListener?
     ): TextView {
-        return addRightTextView(title, R.color.color_333, R.dimen.x28, clickListener)
+        return addRightTextView(title, color, R.dimen.x28, clickListener)
     }
 
     /**

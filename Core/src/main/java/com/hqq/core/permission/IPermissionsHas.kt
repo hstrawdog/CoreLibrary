@@ -150,16 +150,12 @@ interface IPermissionsHas {
 
     companion object {
         val calendar: Array<String>
-            get() = arrayOf(Manifest.permission.READ_CALENDAR,
-                    Manifest.permission.WRITE_CALENDAR)
-
+            get() = arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
         /**
          * @return
          */
         val camera: Array<String>
-            get() = arrayOf(
-                    Manifest.permission.CAMERA
-            )
+            get() = arrayOf(Manifest.permission.CAMERA)
 
         //(允许应用访问联系人通讯录信息)
         //(写入联系人，但不可读取)
@@ -168,8 +164,7 @@ interface IPermissionsHas {
             get() = arrayOf( //(允许应用访问联系人通讯录信息)
                     Manifest.permission.READ_CONTACTS,  //(写入联系人，但不可读取)
                     Manifest.permission.WRITE_CONTACTS,  //(访问GMail账户列表)
-                    Manifest.permission.GET_ACCOUNTS
-            )//(通过WiFi或移动基站的方式获取用户错略的经纬度信息，定位精度大概误差在30~1500米)
+                    Manifest.permission.GET_ACCOUNTS) //(通过WiFi或移动基站的方式获取用户错略的经纬度信息，定位精度大概误差在30~1500米)
         //(通过GPS芯片接收卫星的定位信息，定位精度达10米以内)
         // 允许程序访问额外的定位提供者指令
 
@@ -182,14 +177,12 @@ interface IPermissionsHas {
             get() = arrayOf( //(通过WiFi或移动基站的方式获取用户错略的经纬度信息，定位精度大概误差在30~1500米)
                     Manifest.permission.ACCESS_COARSE_LOCATION,  //(通过GPS芯片接收卫星的定位信息，定位精度达10米以内)
                     Manifest.permission.ACCESS_FINE_LOCATION,  // 允许程序访问额外的定位提供者指令
-                    Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
-            )
+                    Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS)
 
         //(录制声音通过手机或耳机的麦克)
         val microphone: Array<String>
             get() = arrayOf( //(录制声音通过手机或耳机的麦克)
-                    Manifest.permission.RECORD_AUDIO
-            )
+                    Manifest.permission.RECORD_AUDIO)
 
         //(访问电话状态)
         //(允许程序从非系统拨号器里输入电话号码)
@@ -211,8 +204,7 @@ interface IPermissionsHas {
         //(允许从传感器，用户使用来衡量什么是他/她的身体内发生的事情，如心脏速率访问数据的应用程序)
         val sensors: Array<String>
             get() = arrayOf( //(允许从传感器，用户使用来衡量什么是他/她的身体内发生的事情，如心脏速率访问数据的应用程序)
-                    Manifest.permission.BODY_SENSORS
-            )
+                    Manifest.permission.BODY_SENSORS)
 
         //(发送短信)
         //(接收短信)
@@ -225,7 +217,7 @@ interface IPermissionsHas {
                     Manifest.permission.RECEIVE_SMS,  //(读取短信内容)
                     Manifest.permission.READ_SMS,  //(接收WAP PUSH信息)
                     Manifest.permission.RECEIVE_WAP_PUSH,  //(接收彩信)
-                    Manifest.permission.RECEIVE_MMS)//(允许程序读取外部存储，如SD卡读文件)
+                    Manifest.permission.RECEIVE_MMS) //(允许程序读取外部存储，如SD卡读文件)
         //(允许程序写入外部存储，如SD卡上写文件)
 
         /**
@@ -234,7 +226,14 @@ interface IPermissionsHas {
         val storage: Array<String>
             get() = arrayOf( //(允许程序读取外部存储，如SD卡读文件)
                     Manifest.permission.READ_EXTERNAL_STORAGE,  //(允许程序写入外部存储，如SD卡上写文件)
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        /**
+         *  蓝牙
+         */
+        val bluetooth: Array<String>
+            get() = arrayOf(
+                    Manifest.permission.BLUETOOTH_ADMIN,
+                    Manifest.permission.BLUETOOTH)
     }
 }

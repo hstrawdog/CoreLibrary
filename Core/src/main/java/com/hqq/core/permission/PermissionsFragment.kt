@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.VersionUtils
@@ -30,9 +31,9 @@ class PermissionsFragment : Fragment(), IPermissionActions {
     }
 
 
-    var OPEN_SETTING_CODE = 0x55
-    var CODE = 0x5186
+    private var OPEN_SETTING_CODE = 0x55
     var mPermissionsResult: PermissionsResult? = null
+
     /**
      * 申请的权限组
      */
@@ -50,15 +51,36 @@ class PermissionsFragment : Fragment(), IPermissionActions {
     override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
         mPermissions = permissions
         mPermissionsResult = listener
-        if (IPermissionActions.Companion.hasPermission(context, *permissions)) {
+        if (IPermissionActions.hasPermission(context, *permissions)) {
             mPermissionsResult!!.onPermissionsResult(true)
         } else {
-            requestPermissions(permissions, CODE)
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result: MutableMap<String, Boolean> ->
+                // 请求结果，返回一个map ，其中 key 为权限名称，value 为是否权限是否赋予
+                var success = true
+                for (mutableEntry in result) {
+                    success = success && mutableEntry.value
+                }
+                if (mPermissionsResult != null) {
+                    if (success) {
+                        mPermissionsResult!!.onPermissionsResult(true)
+                    } else {
+                        mPermissionsResult!!.onPermissionsResult(false)
+                        ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
+                        // 打开设置界面
+//                        val intent = Intent()
+//                        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+//                        val uri = Uri.fromParts("package", VersionUtils.getPackageName(context), null)
+//                        intent.data = uri
+//                        startActivityForResult(intent, OPEN_SETTING_CODE)
+                    }
+                }
+            }.launch(permissions)
+
+            //            requestPermissions(permissions, CODE)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0x55) {
             OPEN_SETTING_CODE++
             // 从设置界面过来 重新再去检测权限
@@ -66,56 +88,6 @@ class PermissionsFragment : Fragment(), IPermissionActions {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        val granted: MutableList<String> = ArrayList()
-        val denied: MutableList<String> = ArrayList()
-        if (grantResults == null) {
-            for (perm in permissions) {
-                if (IPermissionActions.Companion.hasPermission(context, perm)) {
-                    granted.add(perm)
-                } else {
-                    denied.add(perm)
-                }
-            }
-        } else {
-            var index = 0
-            val length = permissions.size
-            while (index < length) {
-                val perm = permissions[index]
-                if (grantResults[index] == PackageManager.PERMISSION_GRANTED) {
-                    granted.add(perm)
-                } else {
-                    denied.add(perm)
-                }
-                index++
-            }
-        }
-        if (denied.isEmpty() && !granted.isEmpty()) {
-            //   ToastUtils.showToast(getContext(), "同意了所有权限");
-            if (mPermissionsResult != null) {
-                mPermissionsResult!!.onPermissionsResult(true)
-            }
-        } else {
-            ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
-            mPermissionsResult!!.onPermissionsResult(false)
-            // 打开设置界面
-            val intent = Intent()
-            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-            val uri = Uri.fromParts("package", VersionUtils.getPackageName(context), null)
-            intent.data = uri
-            startActivityForResult(intent, OPEN_SETTING_CODE)
-
-            //勾选了对话框中”Don’t ask again”的选项, 返回false
-            for (deniedPermission in permissions) {
-                val flag = shouldShowRequestPermissionRationale(deniedPermission)
-                if (!flag) {
-                    //拒绝授权
-                    return
-                }
-            }
-        }
-    }
 
 
 }

@@ -3,6 +3,7 @@ package com.hqq.core.permission
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker
 
 /**
  * @Author : huangqiqiang
@@ -22,10 +23,18 @@ interface IPermissionActions {
          * @return
          */
         fun hasPermission(context: Context?, vararg permissions: String?): Boolean {
-            var has = permissions != null && permissions.size > 0
+            var has = permissions.size > 0
             if (has) {
                 for (permission in permissions) {
-                    has = has && ContextCompat.checkSelfPermission(context!!, permission!!) == PackageManager.PERMISSION_GRANTED
+                    val pre = context?.checkSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
+                    if (context != null) {
+                        if (permission != null) {
+                            PermissionChecker.checkSelfPermission(context, permission)
+                            ContextCompat.checkSelfPermission(context, permission)
+                            context.checkSelfPermission(permission)
+                        }
+                    }
+                    has = has && pre
                 }
             }
             return has
@@ -39,4 +48,5 @@ interface IPermissionActions {
      * @param listener    回调
      */
     fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?)
+
 }
