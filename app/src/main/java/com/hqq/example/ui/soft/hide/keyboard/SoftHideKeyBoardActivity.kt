@@ -2,9 +2,9 @@ package com.hqq.example.ui.soft.hide.keyboard
 
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.utils.ToastUtils.showToast
-import com.hqq.core.utils.keyboard.SoftHideKeyboardListener.OnSoftKeyBoardChangeListener
-import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils.addSoftHideKeyboardListener
-import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils.softHideKeyboardRedraw
+import com.hqq.core.utils.keyboard.SoftKeyboardListener.SoftKeyBoardChangeListener
+import com.hqq.core.utils.keyboard.SoftKeyboardUtils.addSoftHideKeyboardListener
+import com.hqq.core.utils.keyboard.SoftKeyboardUtils.softHideKeyboardRedraw
 import com.hqq.example.R
 
 /**
@@ -22,12 +22,12 @@ class SoftHideKeyBoardActivity : BaseActivity() {
         get() = R.layout.activity_soft_hide_key_board
     override fun initView() {
         softHideKeyboardRedraw(this)
-        addSoftHideKeyboardListener(this, object : OnSoftKeyBoardChangeListener {
-            override fun keyBoardShow(height: Int) {
+        addSoftHideKeyboardListener(this, object : SoftKeyBoardChangeListener {
+            override fun onKeyBoardShow(height: Int) {
                 showToast("键盘显示")
             }
 
-            override fun keyBoardHide(height: Int) {
+            override fun onKeyBoardHide(height: Int) {
                 showToast("键盘隐藏")
             }
         })

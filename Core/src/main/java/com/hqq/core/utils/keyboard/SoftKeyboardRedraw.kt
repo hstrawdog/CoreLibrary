@@ -3,7 +3,6 @@ package com.hqq.core.utils.keyboard
 import android.R
 import android.app.Activity
 import android.graphics.Rect
-import android.os.Build
 import android.view.View
 import android.widget.FrameLayout
 import com.hqq.core.utils.ScreenUtils
@@ -17,7 +16,7 @@ import com.hqq.core.utils.ScreenUtils
  * @Descrive :  解决键盘档住输入框
  * 键盘显示的时候 重新绘制view 解决底部按钮被遮挡的问题
  */
-class SoftHideKeyboardRedraw private constructor(activity: Activity, content: FrameLayout = activity.findViewById<View>(R.id.content) as FrameLayout) {
+class SoftKeyboardRedraw private constructor(activity: Activity, content: FrameLayout = activity.findViewById<View>(R.id.content) as FrameLayout) {
     /**
      * 根布局
      */
@@ -93,11 +92,11 @@ class SoftHideKeyboardRedraw private constructor(activity: Activity, content: Fr
 
     companion object {
         fun assistActivity(activity: Activity) {
-            SoftHideKeyboardRedraw(activity)
+            SoftKeyboardRedraw(activity)
         }
 
         fun assistActivity(activity: Activity, content: FrameLayout) {
-            SoftHideKeyboardRedraw(activity, content)
+            SoftKeyboardRedraw(activity, content)
         }
     }
 

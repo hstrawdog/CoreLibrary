@@ -16,7 +16,7 @@ class SoftHidKeyboardIndexActivity(override val adapter: MainAdapter = MainAdapt
 
     override fun initData() {
         var bean = MainBean("底部按钮测试", SoftHideKeyBoardActivity::class.java);
-        adapter!!.addData(bean)
-        adapter!!.addData(MainBean("遮挡滑动测试", SoftHideKeyBoardScrollActivity::class.java))
+        adapter.addData(bean)
+        adapter.addData(MainBean("遮挡滑动测试", SoftHideKeyBoardScrollActivity::class.java))
     }
 }

@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.hqq.example.demo.login.LoginActivity">
@@ -43,18 +44,67 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button50"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17"
+            app:layout_constraintBottom_toTopOf="@+id/button50"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/button50"
+            android:layout_width="@dimen/x300"
+            android:layout_height="@dimen/x100"
             android:layout_marginBottom="@dimen/x100"
+            android:background="@color/color_red"
             android:onClick="@{vm::onLoginClick}"
             android:text="登录"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <View
+                style="@style/line_vertical"
+                android:layout_height="@dimen/x2"
+                android:background="@color/color_2b" />
+
+            <View
+                style="@style/line_vertical"
+                android:layout_height="@dimen/x2"
+                android:background="@color/color_77400a" />
+
+            <View
+                style="@style/line_vertical"
+                android:layout_height="@dimen/x2"
+                android:background="@color/color_424749" />
+
+            <View
+                style="@style/line_vertical"
+                android:layout_height="@dimen/x2"
+                android:background="@color/color_33ae75" />
+
+            <View
+                style="@style/line_vertical"
+                android:layout_height="@dimen/x2"
+                android:background="@color/color_e88209" />
+
+            <View
+                style="@style/line_vertical"
+                android:layout_height="@dimen/x2"
+                android:background="@color/color_09f" />
+
+            <View
+                style="@style/line_vertical"
+                android:layout_height="@dimen/x2"
+                android:background="@color/color_red" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -21,14 +21,15 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
     override val layoutId: Int = R.layout.activity_permission
 
     override fun initView() {
-        binding?.button7?.setOnClickListener {
+        binding.button7.setOnClickListener {
             PermissionsUtils.requestCamera(object : PermissionsResult {
                 override fun onPermissionsResult(status: Boolean) {
                     showToast("拥有摄像头权限")
                 }
             })
+
         }
-        binding?.button8?.setOnClickListener {
+        binding.button8.setOnClickListener {
             PermissionsUtils.requestStorage(object : PermissionsResult {
                 override fun onPermissionsResult(status: Boolean) {
                     showToast("拥有文件读写权限")

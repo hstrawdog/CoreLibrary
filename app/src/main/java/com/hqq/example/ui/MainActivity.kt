@@ -2,34 +2,29 @@ package com.hqq.example.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.KeyEvent
 import androidx.activity.viewModels
-import androidx.core.os.postDelayed
 import androidx.databinding.ViewDataBinding
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
-import com.hqq.core.utils.keyboard.SoftHideKeyboardScrollView
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
-import com.hqq.example.dialog.MyPopupWindow
+import com.hqq.example.demo.login.LoginActivity
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
-import com.hqq.example.ui.customize.DiskViewActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
-import com.hqq.example.ui.jetpack.databinding.DataBindingActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
@@ -69,8 +64,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
 //
 //        }
-        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
-        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
+        startActivity(Intent(this, LoginActivity::class.java))
+
+//        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
+//        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
     }
 
     val mV: MainViewModel by viewModels()

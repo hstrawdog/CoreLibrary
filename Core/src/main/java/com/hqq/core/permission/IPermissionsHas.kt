@@ -35,7 +35,7 @@ interface IPermissionsHas {
      * * •	READ_CALENDAR
      * * •	WRITE_CALENDAR
      *
-     * <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+     * <uses-permission android:name="android.permission.CAMERA"/>
      * •	CAMERA
      *
      * <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
