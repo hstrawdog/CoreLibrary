@@ -16,15 +16,21 @@ import java.lang.reflect.Field
  * @Descrive :屏幕相关 单位换算  dp px 转换 状态栏高度
  */
 object ScreenUtils {
-
+    /**
+     *
+     * @param sp Float
+     * @return Float
+     */
     @JvmStatic
     fun spToPx(sp: Float): Float {
         return spToPx(CoreConfig.get().application?.applicationContext!!, sp)
     }
 
-
     /**
-     *
+     * sp2px
+     * @param context Context
+     * @param sp Float
+     * @return Float
      */
     @JvmStatic
     fun spToPx(context: Context, sp: Float): Float {
@@ -32,9 +38,11 @@ object ScreenUtils {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics)
     }
 
-
     /**
      * sp2px
+     * @param context Context
+     * @param spValue Int
+     * @return Float
      */
     @JvmStatic
     fun sp2px(context: Context, spValue: Int): Float {
@@ -43,7 +51,9 @@ object ScreenUtils {
     }
 
     /**
-     * sp2px
+     *
+     * @param spValue Int
+     * @return Float
      */
     @JvmStatic
     fun sp2px(spValue: Int): Float {
@@ -51,7 +61,9 @@ object ScreenUtils {
     }
 
     /**
-     * dip2px
+     *
+     * @param dpValue Float
+     * @return Int
      */
     @JvmStatic
     fun dip2px(dpValue: Float): Int {

@@ -13,7 +13,7 @@ import java.io.File
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-object LuBanUttils {
+object LuBanUtils {
     /**
      * 压缩单张图片
      *

@@ -1,7 +1,7 @@
 package com.hqq.example.ui.soft.hide.keyboard;
 
 import com.hqq.core.ui.base.BaseActivity;
-import com.hqq.core.utils.keyboard.SoftHideKeyboardUtils;
+import com.hqq.core.utils.keyboard.SoftKeyboardUtils;
 import com.hqq.example.R;
 
 
@@ -24,7 +24,7 @@ public class SoftHideKeyBoardScrollActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        SoftHideKeyboardUtils.addSoftHideKeyboardScrollView(findViewById(R.id.ll_content), findViewById(R.id.tv_login));
+        SoftKeyboardUtils.keepViewNotOverOnScroll(findViewById(R.id.ll_content), findViewById(R.id.tv_login),0);
     }
 
 

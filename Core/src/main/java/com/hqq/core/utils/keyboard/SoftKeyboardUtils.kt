@@ -7,8 +7,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
-import com.hqq.core.utils.keyboard.SoftHideKeyboardListener.OnSoftKeyBoardChangeListener
-import com.hqq.core.utils.keyboard.SoftHideKeyboardRedraw
+import com.hqq.core.utils.keyboard.SoftKeyboardListener.SoftKeyBoardChangeListener
 
 /**
  * 键盘 开启/关闭
@@ -21,7 +20,63 @@ import com.hqq.core.utils.keyboard.SoftHideKeyboardRedraw
  * @Descrive :
  * https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/src/main/java/com/blankj/utilcode/util/KeyboardUtils.java
  */
-object SoftHideKeyboardUtils {
+object SoftKeyboardUtils {
+
+    /**
+     * 滑动 rootView  保证  subView 不被键盘遮挡
+     * @param root View  需要滑动的布局
+     * @param subView View  需要不被遮挡的不急
+     * @param offset Int  偏移量:正数是底部距离  单位:px
+     */
+    @JvmStatic
+    fun keepViewNotOverOnScroll(root: View, subView: View, offset: Int = 0) {
+        SoftKeyboardListener.setListener(root.context as Activity, object : SoftKeyBoardChangeListener {
+            override fun onKeyBoardShow(height: Int) {
+                // view 距离底部的距离
+                val bottom = root.height - subView.bottom
+                val scrollHeight = root.height - (root.height - height) - bottom + offset
+                if (scrollHeight > 0) {
+                    root.scrollTo(0, scrollHeight)
+                }
+            }
+
+            override fun onKeyBoardHide(height: Int) {
+                root.scrollTo(0, 0)
+            }
+        })
+    }
+
+    /**
+     * 重绘Activity
+     *
+     * @param activity
+     */
+    fun softHideKeyboardRedraw(activity: Activity) {
+        SoftKeyboardRedraw.assistActivity(activity)
+    }
+
+    /**
+     * 同上
+     *
+     * @param activity
+     * @param frameLayout
+     */
+    fun softHideKeyboardRedraw(activity: Activity, frameLayout: FrameLayout) {
+        SoftKeyboardRedraw.assistActivity(activity, frameLayout)
+    }
+
+    /**
+     * 监听 键盘是否显示 隐藏
+     *
+     * @param activity
+     * @param listener
+     * @return
+     */
+    @kotlin.jvm.JvmStatic
+    fun addSoftHideKeyboardListener(activity: Activity, listener: SoftKeyBoardChangeListener?): SoftKeyboardListener {
+        return SoftKeyboardListener.setListener(activity, listener)
+    }
+
     /**
      * Show the soft input.
      *
@@ -87,45 +142,5 @@ object SoftHideKeyboardUtils {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    /**
-     * 重绘Activity
-     *
-     * @param activity
-     */
-    fun softHideKeyboardRedraw(activity: Activity) {
-        SoftHideKeyboardRedraw.Companion.assistActivity(activity)
-    }
 
-    /**
-     * 同上
-     *
-     * @param activity
-     * @param frameLayout
-     */
-    fun softHideKeyboardRedraw(activity: Activity, frameLayout: FrameLayout) {
-        SoftHideKeyboardRedraw.Companion.assistActivity(activity, frameLayout)
-    }
-
-    /**
-     * 同上
-     *
-     * @param root  全屏的跟布局
-     * @param child  更布局下的一个子View
-     */
-    @kotlin.jvm.JvmStatic
-    fun addSoftHideKeyboardScrollView(root: View, child: View) {
-        SoftHideKeyboardScrollView.keepLoginBtnNotOver(root, child)
-    }
-
-    /**
-     * 监听 键盘是否显示 隐藏
-     *
-     * @param activity
-     * @param listener
-     * @return
-     */
-    @kotlin.jvm.JvmStatic
-    fun addSoftHideKeyboardListener(activity: Activity, listener: OnSoftKeyBoardChangeListener?): SoftHideKeyboardListener {
-        return SoftHideKeyboardListener.Companion.setListener(activity, listener)
-    }
 }

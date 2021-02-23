@@ -6,7 +6,7 @@ import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.hqq.core.CoreConfig
 import com.hqq.core.permission.PermissionsResult
-import com.hqq.core.permission.PermissionsUtils.requestLocationPermission
+import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.demo.net.HttpManager
@@ -69,7 +69,7 @@ class WeatherViewModel : BaseViewModel() {
         mLocationOption!!.isNeedAddress = true
         //给定位客户端对象设置定位参数
         mLocationClient!!.setLocationOption(mLocationOption)
-        requestLocationPermission(object : PermissionsResult {
+        PermissionsUtils.requestLocation(object : PermissionsResult {
             override fun onPermissionsResult(status: Boolean) {
                 if (status) {
                     startLocation()
@@ -81,15 +81,15 @@ class WeatherViewModel : BaseViewModel() {
     }
 
     private fun getWeather(city: String) {
-        setShowLoading(true)
+        showLoading(true)
         HttpManager.getWeather(city.substring(0, city.length - 1), object : NetCallback<Weather>() {
             override fun onFail(code: Int, message: String) {
-                setShowToast(message!!)
-                setShowLoading(false)
+                showToast(message!!)
+                showLoading(false)
             }
 
             override fun onSuccess(response: Weather) {
-                setShowLoading(false)
+                showLoading(false)
                 mWeather.value = response
             }
 

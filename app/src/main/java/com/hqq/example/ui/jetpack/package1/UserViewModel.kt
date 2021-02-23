@@ -38,8 +38,8 @@ class UserViewModel : BaseViewModel() {
     }
 
     fun showLoading(view: View?) {
-        setShowLoading(true)
-        Handler().postDelayed({ setShowLoading(false) }, 3 * 1000.toLong())
+        showLoading(true)
+        Handler().postDelayed({ showLoading(false) }, 3 * 1000.toLong())
     }
 
     init {

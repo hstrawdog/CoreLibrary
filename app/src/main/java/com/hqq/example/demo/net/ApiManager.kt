@@ -17,13 +17,11 @@ import java.util.concurrent.TimeUnit
  * @Descrive :
  */
 object ApiManager {
-    //默认超时时间(毫秒)
-    internal const val DEFAULT_TIMEOUT: Long = 900000
     var mWangAndroidInterface: WangAndroidInterface? = null
     private const val mWangAndroidUrl = "https://www.wanandroid.com/"//打印拦截器
 
     //设置出现错误进行重新连接
-    val wangAndroidInterface: WangAndroidInterface
+    var wangAndroidInterface: WangAndroidInterface? = null
         get() {
             if (mWangAndroidInterface == null) {
                 mWangAndroidInterface = RetrofitService.createService(mWangAndroidUrl, WangAndroidInterface::class.java)

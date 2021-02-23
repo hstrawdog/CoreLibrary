@@ -17,7 +17,6 @@ import java.math.BigDecimal
  */
 object CacheUtil {
     const val NULL = "0k"
-
     /**
      * 获取缓存大小
      *

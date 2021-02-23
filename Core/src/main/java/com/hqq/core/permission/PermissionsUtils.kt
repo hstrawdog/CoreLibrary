@@ -14,10 +14,9 @@ object PermissionsUtils {
      *
      * @param permissionsResult
      */
-    @kotlin.jvm.JvmStatic
-    fun requestStoragePermission(permissionsResult: PermissionsResult?) {
-        FragmentProxy().requestPermissions(IPermissionsHas.storage
-                , permissionsResult)
+    @JvmStatic
+    fun requestStorage(permissionsResult: PermissionsResult?) {
+        FragmentProxy().requestPermissions(IPermissionsHas.storage, permissionsResult)
     }
 
     /**
@@ -25,8 +24,8 @@ object PermissionsUtils {
      *
      * @param permissionsResult
      */
-    @kotlin.jvm.JvmStatic
-    fun requestCameraPermission(permissionsResult: PermissionsResult?) {
+    @JvmStatic
+    fun requestCamera(permissionsResult: PermissionsResult?) {
         FragmentProxy().requestPermissions(IPermissionsHas.camera, permissionsResult)
     }
 
@@ -35,8 +34,15 @@ object PermissionsUtils {
      *
      * @param permissionsResult
      */
-    @kotlin.jvm.JvmStatic
-    fun requestLocationPermission(permissionsResult: PermissionsResult?) {
+    @JvmStatic
+    fun requestLocation(permissionsResult: PermissionsResult?) {
         FragmentProxy().requestPermissions(IPermissionsHas.location, permissionsResult)
+    }
+
+    @JvmStatic
+    fun requestBluetooth(permissionsResult: PermissionsResult) {
+        // 蓝牙权限 需要定位权限  定位权限需要 读写权限
+        FragmentProxy().requestPermissions(IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
+                .plus(IPermissionsHas.storage), permissionsResult)
     }
 }

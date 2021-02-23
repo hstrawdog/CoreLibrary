@@ -19,9 +19,7 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
         initViewModel()
         addViewModel()
         initViews()
-        viewMode?.let {
-            it.initData(arguments)
-        }
+        viewMode.initData(arguments)
     }
 
     /**
@@ -29,7 +27,7 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
      */
     private fun initViewModel() {
         viewMode = getViewModel() as K
-        viewMode?.let {
+        viewMode.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
             ViewModelFactory.initOpenActivity(it, this, this)
@@ -59,15 +57,17 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-           viewMode.onActivityResult(requestCode,resultCode,data)
+        viewMode.onActivityResult(requestCode, resultCode, data)
     }
+
     /**
      * 打开新的界面
      */
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
         val intent = Intent(activity, openActivityComponent.activityClass)
-        if (openActivityComponent.bundle != null) {
-            intent.putExtras(openActivityComponent.bundle!!)
+
+        openActivityComponent.bundle?.let {
+            intent.putExtras(it)
         }
         startActivityForResult(intent, openActivityComponent.activityResult)
     }
