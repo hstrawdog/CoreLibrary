@@ -12,6 +12,8 @@ package com.hqq.core.net.ok;
 import android.os.Handler;
 import android.os.Looper;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -23,17 +25,18 @@ import okhttp3.Response;
 
 
 /**
- * $desc$
- * author  黄其强
- * Created by Administrator on 2016/12/14 15:54.
+ * @version V1.0 <描述当前版本功能>
+ * @Author : huangqiqiang
+ * @Package : com.hqq.core.net.ok
+ * @FileName :   OkHttpImpl
+ * @Date : 2016/12/14  下午15:54
+ * @Email : qiqiang213@gmail.com
+ * @Descrive :
  */
-
 public class OkHttpImpl implements HttpCompat {
-
     OkHttpClient mOkHttpClient;
     Handler mHandler;
     public final static int WRITE_TIMEOUT = 60;
-    private static String TAG = "OkHttpImpl";
 
     @Override
     public HttpCompat create() {
@@ -70,24 +73,28 @@ public class OkHttpImpl implements HttpCompat {
      */
     @Override
     public Call getExecute(String url, ParamsCompat params, OkNetCallback callback) {
+        Request.Builder request = getBuilder(url, params);
+        Call call = mOkHttpClient.newCall(request.build());
+        try {
+            Response response = call.execute();
+
+            postHandler(null, callback, response, params);
+        } catch (IOException e) {
+            e.printStackTrace();
+            postHandler(null, callback, null, null);
+        }
+        return call;
+    }
+
+    @NotNull
+    private Request.Builder getBuilder(String url, ParamsCompat params) {
         final String realUrl;
         if (params != null) {
             realUrl = url + '?' + params.paramGet();
         } else {
             realUrl = url;
         }
-        Request.Builder request = new Request.Builder().url(realUrl).get();
-        Call call = mOkHttpClient.newCall(request.build());
-        try {
-            Response response = call.execute();
-            final String string = response.body().string();
-            final int code = response.code();
-            postHandler(null, callback, response.isSuccessful(), code, string);
-        } catch (IOException e) {
-            e.printStackTrace();
-            postHandler(null, callback, false, 0, "网络连接失败,请检查网络");
-        }
-        return call;
+        return new Request.Builder().url(realUrl).get();
     }
 
     /**
@@ -100,25 +107,17 @@ public class OkHttpImpl implements HttpCompat {
      * @return
      */
     private Call doGet(Handler handler, String url, ParamsCompat params, OkNetCallback callback) {
-        final String realUrl;
-        if (params != null) {
-            realUrl = url + '?' + params.paramGet();
-        } else {
-            realUrl = url;
-        }
-        Request.Builder request = new Request.Builder().url(realUrl).get();
+        Request.Builder request = getBuilder(url, params);
         Call call = mOkHttpClient.newCall(request.build());
         call.enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                postHandler(handler, callback, false, 0, "网络连接失败,请检查网络");
+                postHandler(handler, callback, null, null);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String string = response.body().string();
-                final int code = response.code();
-                postHandler(handler, callback, response.isSuccessful(), code, string);
+                postHandler(handler, callback, response, params);
             }
         });
         return call;
@@ -138,33 +137,6 @@ public class OkHttpImpl implements HttpCompat {
     }
 
     /**
-     * 同步请求
-     *  @param url
-     * @param params
-     * @param callback
-     * @return
-     */
-    @Override
-    public Call postExecute(String url, ParamsCompat params, OkNetCallback callback) {
-        RequestBody body = params.paramForm();
-        Request.Builder request = new Request.Builder().url(url).post(body);
-        Call call = mOkHttpClient.newCall(request.build());
-        try {
-            Response response = call.execute();
-
-            final int code = response.code();
-            final String string = response.body().string();
-            postHandler(null, callback, response.isSuccessful(), code, string);
-        } catch (IOException e) {
-            e.printStackTrace();
-            postHandler(null, callback, false, 0, "网络连接失败,请检查网络");
-
-        }
-        return call;
-
-    }
-
-    /**
      * 执行post 请求
      *
      * @param url
@@ -176,7 +148,32 @@ public class OkHttpImpl implements HttpCompat {
     private Call doPost(String url, ParamsCompat params, OkNetCallback callback, Handler o) {
         RequestBody body = params.paramForm();
         Request.Builder request = new Request.Builder().url(url).post(body);
-        return doRequest(o, request, callback);
+        return doRequest(o, request, callback, params);
+    }
+
+    /**
+     * 同步请求
+     *
+     * @param url
+     * @param params
+     * @param callback
+     * @return
+     */
+    @Override
+    public Call postExecute(String url, ParamsCompat params, OkNetCallback callback) {
+        RequestBody body = params.paramForm();
+        Request.Builder request = new Request.Builder().url(url).post(body);
+        Call call = mOkHttpClient.newCall(request.build());
+        try {
+            Response response = call.execute();
+            postHandler(null, callback, response, params);
+        } catch (IOException e) {
+            e.printStackTrace();
+            postHandler(null, callback, null, null);
+
+        }
+        return call;
+
     }
 
     /**
@@ -184,63 +181,88 @@ public class OkHttpImpl implements HttpCompat {
      *
      * @param request
      * @param callback
+     * @param params
      * @return
      */
-    private Call doRequest(Handler handler, Request.Builder request, final OkNetCallback callback) {
+    private Call doRequest(Handler handler, Request.Builder request, final OkNetCallback callback, ParamsCompat params) {
         Call call = mOkHttpClient.newCall(request.build());
         call.enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                postHandler(mHandler, callback, false, 0, "网络连接失败,请检查网络");
+                postHandler(handler, callback, null, null);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final int code = response.code();
-                final String string = response.body().string();
-                postHandler(mHandler, callback, response.isSuccessful(), code, string);
+            public void onResponse(Call call, Response response) {
+                postHandler(handler, callback, response, params);
             }
         });
         return call;
     }
 
     /**
-     * 回调数据
+     * 是否需要切换线程
      *
      * @param handler
      * @param callback
-     * @param successful
-     * @param statusCode
-     * @param responseString
+     * @param response
+     * @param paramsCompat
      */
-    private static void postHandler(Handler handler, final OkNetCallback callback
-            , final boolean successful, final int statusCode, final String responseString) {
+    private static void postHandler(Handler handler, OkNetCallback callback
+            , Response response, ParamsCompat paramsCompat) {
         if (handler != null) {
-            handler.post(() -> post(callback, successful, statusCode, responseString)
+            handler.post(() -> post(callback, response, paramsCompat)
             );
         } else {
-            post(callback, successful, statusCode, responseString);
+            post(callback, response, paramsCompat);
         }
 
     }
+
 
     /**
      * 回调数据
      *
      * @param callback
-     * @param successful
-     * @param statusCode
-     * @param responseString
+     * @param response
+     * @param paramsCompat
      */
-    private static void post(final OkNetCallback callback
-            , final boolean successful, final int statusCode, final String responseString) {
-        if (successful) {
-            callback.onSuccess(statusCode + "", responseString);
-            return;
+    private static void post(final OkNetCallback callback, Response response, ParamsCompat paramsCompat) {
+        if (response != null) {
+            try {
+                String string = getDecodeResponse(response, paramsCompat);
+                // 错误码二次校验
+                int code = response.code();
+
+                callback.onSuccess(code + "", string);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
-            callback.onFailure(String.valueOf(statusCode), "网络连接失败,请检查网络", "");
+            callback.onFailure("0", "网络连接失败,请检查网络", "");
         }
 
+    }
+
+    /**
+     * 解码数据
+     *
+     * @param response
+     * @param paramsCompat
+     * @return
+     * @throws IOException
+     */
+    @NotNull
+    private static String getDecodeResponse(Response response, ParamsCompat paramsCompat) throws IOException {
+        // 返回数据进行解码
+        String string = "";
+        if (paramsCompat.getDecode().isEmpty()) {
+            string = response.body().string();
+        } else {
+            byte bytes[] = response.body().bytes();
+            string = new String(bytes, paramsCompat.getDecode());
+        }
+        return string;
     }
 
 }

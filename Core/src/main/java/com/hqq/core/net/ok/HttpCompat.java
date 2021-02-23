@@ -26,6 +26,10 @@ public interface HttpCompat {
         <T> T paramMulti();
 
         String toString();
+
+        String getDecode();
+
+        void setDecode(String decode);
     }
 
 
@@ -47,7 +51,8 @@ public interface HttpCompat {
 
     /**
      * 同步的get
-     *  @param url
+     *
+     * @param url
      * @param params
      * @param callback
      * @return
@@ -56,7 +61,8 @@ public interface HttpCompat {
 
     /**
      * post  方法
-     *  @param url
+     *
+     * @param url
      * @param params
      * @param callback
      * @return
@@ -65,7 +71,8 @@ public interface HttpCompat {
 
     /**
      * 同步的post
-     *  @param url
+     *
+     * @param url
      * @param params
      * @param callback
      * @return

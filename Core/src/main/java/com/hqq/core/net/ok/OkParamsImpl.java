@@ -34,6 +34,18 @@ public class OkParamsImpl implements HttpCompat.ParamsCompat {
     private final List<String> keys = new ArrayList<>();
     private final List<Object> values = new ArrayList<>();
 
+    String decode = "";
+
+    @Override
+    public String getDecode() {
+        return decode == null ? "" : decode;
+    }
+
+    @Override
+    public void setDecode(String decode) {
+        this.decode = decode;
+    }
+
     @Override
     public HttpCompat.ParamsCompat put(String key, Object value) {
         keys.add(key);
