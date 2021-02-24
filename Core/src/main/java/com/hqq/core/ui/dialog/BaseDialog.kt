@@ -135,7 +135,10 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         }
     }
 
-    private fun initContentView() {
+    /**
+     * 嵌套内容
+     */
+    open fun initContentView() {
         val linearLayout = rootView!!.findViewById<LinearLayout>(R.id.ll_rootView)
         val view = LayoutInflater.from(context).inflate(layoutId, linearLayout, false)
         linearLayout.gravity = gravity

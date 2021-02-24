@@ -32,4 +32,7 @@ abstract class BaseDataBindingActivity<T : ViewDataBinding> : BaseActivity(), IB
         binding.lifecycleOwner = this
         return binding.root
     }
+
+
+
 }
