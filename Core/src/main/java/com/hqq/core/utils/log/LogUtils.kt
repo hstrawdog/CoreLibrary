@@ -109,7 +109,7 @@ object LogUtils {
     fun e(tag: String, any: Any?) {
         if (CoreConfig.get().isDebug) {
             if (any == null) {
-                e("标签" + tag + "的打印内容为空！")
+                e("标签 : " + tag + " 的打印内容为空！")
             } else {
                 doLog(tag, any, "e")
             }

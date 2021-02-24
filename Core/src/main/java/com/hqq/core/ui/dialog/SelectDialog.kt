@@ -20,7 +20,6 @@ import com.hqq.core.utils.ResourcesUtils
  *  使用 AlertParams Builder 进行构建
  */
 class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
-
     /**
      *  属性对象
      */
@@ -54,7 +53,7 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
             initAlertParams()
         }
         _viewHolder?.apply {
-            this?.let{
+            this?.let {
                 builder(this@SelectDialog, rootView!!.findViewById(R.id.ll_content))
                 addToParent()
             }
@@ -214,7 +213,5 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
         fun setDividingLine(showDividingLine: Boolean) {
             alertParams.showDividingLine = showDividingLine
         }
-
-
     }
 }

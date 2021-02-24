@@ -25,8 +25,6 @@ public interface HttpCompat {
 
         <T> T paramMulti();
 
-        String toString();
-
         String getDecode();
 
         void setDecode(String decode);

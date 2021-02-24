@@ -26,6 +26,7 @@ import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
+import com.hqq.example.ui.jetpack.room.RoomActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.skin.SkinAActivity
@@ -64,8 +65,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
 //
 //        }
-        startActivity(Intent(this, LoginActivity::class.java))
-
+//        startActivity(Intent(this, LoginActivity::class.java))
+        RoomActivity.open(this)
 //        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
 //        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
     }

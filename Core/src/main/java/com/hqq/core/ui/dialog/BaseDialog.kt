@@ -28,6 +28,8 @@ import com.hqq.core.widget.LoadingView
  * - 在高度全屏的情况下 进行状态栏模式设置
  * - 宽度需要在代码上写死
  * - DialogFragment自带内存泄漏
+ *
+ * --  考虑是否重构 引入Binding框架
  */
 abstract class BaseDialog : DialogFragment(), IDialogFragment {
     var loadingView: LoadingView? = null
@@ -50,7 +52,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             return rootViewBuild.rootViewImpl
         }
 
-
+    /**
+     *  是否点击空白关闭dialog
+     */
     val isDismissBackground: Boolean
         get() = true
 
@@ -59,15 +63,28 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      */
     override val background: Int
         get() = 0x00000000
+
+    /**
+     *方向
+     */
     override val gravity: Int
         get() = Gravity.CENTER
 
+    /**
+     *  宽
+     */
     override val weight: Int
         get() = WindowManager.LayoutParams.WRAP_CONTENT
 
+    /**
+     *  高
+     */
     override val height: Int
         get() = WindowManager.LayoutParams.WRAP_CONTENT
 
+    /**
+     *  动画
+     */
     override val animation: Int
         get() = R.style.DialogAnimation_bottom2top
 
@@ -88,7 +105,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog!!.window!!.setWindowAnimations(animation)
+        dialog?.window?.setWindowAnimations(animation)
         if (rootView == null) {
             activity?.let {
                 loadingView = LoadingView(it)
@@ -106,12 +123,12 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         super.onViewCreated(view, savedInstanceState)
         if (!loaded && rootView != null) {
             if (statusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
-                StatusBarManager.setStatusBarModel(dialog!!.window, true)
+                StatusBarManager.setStatusBarModel(dialog?.window, true)
             } else if (statusBarMode == ToolBarMode.Companion.DARK_MODE) {
-                StatusBarManager.setStatusBarModel(dialog!!.window, false)
+                StatusBarManager.setStatusBarModel(dialog?.window, false)
             } else {
                 // 默认进行全屏显示
-                StatusBarManager.transparencyBar(dialog!!.window)
+                StatusBarManager.transparencyBar(dialog?.window)
             }
             loaded = true
             LogUtils.e(rootView!!.width)
@@ -123,18 +140,18 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         val view = LayoutInflater.from(context).inflate(layoutId, linearLayout, false)
         linearLayout.gravity = gravity
         linearLayout.addView(view)
-        view.setOnClickListener { view1: View? -> }
+        view.setOnClickListener { }
         if (isDismissBackground) {
-            linearLayout.setOnClickListener { view2: View? -> dismiss() }
+            linearLayout.setOnClickListener { dismiss() }
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtils.e(rootView!!.measuredWidth)
-        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(background))
-        dialog!!.window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-        dialog!!.window!!.setGravity(gravity)
+        LogUtils.e(rootView?.measuredWidth)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(background))
+        dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        dialog?.window?.setGravity(gravity)
     }
 
     override fun onStart() {

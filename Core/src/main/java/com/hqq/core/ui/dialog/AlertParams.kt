@@ -11,6 +11,8 @@ import com.hqq.core.ui.BaseViewBuilderHolder
  * @Date : 2020/7/30 0030  下午 1:58
  * @Email : qiqiang213@gmail.com
  * @Descrive :
+ * 防源码Dialog的构建方式
+ * 需要不断补充属性
  */
 class AlertParams {
     /**

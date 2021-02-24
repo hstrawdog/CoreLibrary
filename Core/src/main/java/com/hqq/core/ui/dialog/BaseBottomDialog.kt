@@ -23,6 +23,7 @@ import com.hqq.core.utils.log.LogUtils
  * @Date : 2019/4/29 0029  下午 2:58
  * @Email : qiqiang213@gmail.com
  * @Descrive :
+ * BottomSheetDialogFragment  二级显示dialog 可以滑动两次显示关闭 类似知乎评论效果
  * 宽度是全屏
  * 高度自定义
  */
