@@ -28,6 +28,10 @@ public interface HttpCompat {
         String getDecode();
 
         void setDecode(String decode);
+
+        String getEncode();
+
+        void setEncode(String encode);
     }
 
 
