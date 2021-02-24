@@ -35,6 +35,15 @@ public class OkParamsImpl implements HttpCompat.ParamsCompat {
     private final List<Object> values = new ArrayList<>();
 
     String decode = "";
+    String encode = "";
+
+    public String getEncode() {
+        return encode == null ? "" : encode;
+    }
+
+    public void setEncode(String encode) {
+        this.encode = encode;
+    }
 
     @Override
     public String getDecode() {
@@ -90,7 +99,7 @@ public class OkParamsImpl implements HttpCompat.ParamsCompat {
             } else {
                 builder.addPart(Headers.of("Content-Disposition", "form-data; name=\"" + keys.get(index) + "\""),
                         RequestBody.create(null, value + ""));
-                stringBuilder.append(keys.get(index)).append('=').append(encode(value + "")).append('&');
+                stringBuilder.append(keys.get(index)).append('=').append(encodeString(value + "")).append('&');
             }
         }
         int len = stringBuilder.length();
@@ -117,17 +126,20 @@ public class OkParamsImpl implements HttpCompat.ParamsCompat {
         StringBuilder builder = new StringBuilder();
         final int length = keys.size();
         for (int index = 0; index < length - 1; index++) {
-            builder.append(keys.get(index)).append('=').append(encode(values.get(index) + "")).append('&');
+            builder.append(keys.get(index)).append('=').append(encodeString(values.get(index) + "")).append('&');
         }
         if (length - 1 >= 0) {
-            builder.append(keys.get(length - 1)).append('=').append(encode(values.get(length - 1) + ""));
+            builder.append(keys.get(length - 1)).append('=').append(encodeString(values.get(length - 1) + ""));
         }
         return builder.toString();
     }
 
-    private static String encode(String string) {
+    private String encodeString(String string) {
+        if (encode == null || encode.isEmpty()) {
+            return string;
+        }
         try {
-            return URLEncoder.encode(string, "UTF-8");
+            return URLEncoder.encode(string, encode);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
