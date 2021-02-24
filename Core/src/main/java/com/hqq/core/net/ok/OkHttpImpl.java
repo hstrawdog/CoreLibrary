@@ -256,7 +256,7 @@ public class OkHttpImpl implements HttpCompat {
     private static String getDecodeResponse(Response response, ParamsCompat paramsCompat) throws IOException {
         // 返回数据进行解码
         String string = "";
-        if (paramsCompat.getDecode().isEmpty()) {
+        if (paramsCompat == null || paramsCompat.getDecode().isEmpty()) {
             string = response.body().string();
         } else {
             byte bytes[] = response.body().bytes();
