@@ -61,16 +61,16 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      *
      * @return
      */
-    private val layoutEmptyView = R.layout.layout_load_more_empty
+    private var layoutEmptyView = R.layout.layout_load_more_empty
 
     /**
      * 应该要可以全局配置的 配置在xml中 可以替换
      *
      * @return string
      */
-    private val emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
+    private var emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
 
-    private val emptyImage: Int = R.mipmap.ic_empty_def
+    private var emptyImage: Int = R.mipmap.ic_empty_def
 
     /**
      * adapter
