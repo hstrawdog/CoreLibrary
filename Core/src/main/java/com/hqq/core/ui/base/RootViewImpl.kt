@@ -45,7 +45,7 @@ open class RootViewImpl {
      */
     var iCreateToolbar: IToolBar? = null
         get() {
-            return field ?: CoreConfig.get().iCreateToolbar
+            return field ?: CoreConfig.get().iCreateToolbar.newInstance()
         }
 
     /**

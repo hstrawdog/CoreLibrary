@@ -112,10 +112,8 @@ abstract class BaseToolBar : IToolBar {
                     LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
             )
         }
-
-        // 目前不知道是否需要都执行 createToolBar
         val toolBar = iniToolBar(activity!!, linearLayout)
-        if (isShowBar && toolBar != null) {
+        if (isShowBar) {
             linearLayout.addView(toolBar)
         }
         if (isShowLine) {

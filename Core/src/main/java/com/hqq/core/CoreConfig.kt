@@ -6,7 +6,6 @@ import android.content.pm.ApplicationInfo
 import com.google.gson.InstanceCreator
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.DefToolBar
-import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.utils.RegexUtils
 import java.lang.reflect.Type
 import java.util.*
@@ -40,6 +39,7 @@ class CoreConfig private constructor() {
             return instance!!
         }
     }
+
     /**
      *  请求默认的地址
      */
@@ -106,8 +106,7 @@ class CoreConfig private constructor() {
     /**
      *  toolBar 的构建方法 可以重新赋值
      */
-    var iCreateToolbar: IToolBar = DefToolBar()
-
+    var iCreateToolbar: Class<DefToolBar> = DefToolBar::class.java
 
     /**
      * @param application Application

@@ -30,18 +30,16 @@ class DefToolBar : BaseToolBar() {
 
     override var toolBarBg: ImageView? = null
     private val mDefTitleColor = R.color.color_333
+
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
-        val toolbar = LayoutInflater.from(activity.baseContext)
-                .inflate(R.layout.layout_def_toolbar, viewGroup, false) as Toolbar
+        val toolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_def_toolbar,
+                viewGroup, false) as Toolbar
         toolbar.findViewById<View>(R.id.iv_bar_back).setOnClickListener { activity.onBackPressed() }
         toolBarBg = toolbar.findViewById(R.id.iv_toolBar_Bg)
         toolBarBg?.setBackgroundResource(mDefToolBarColor)
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).text = activity.title
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).setTextColor(
-                ContextCompat.getColor(
-                        toolbar.context,
-                        mDefTitleColor
-                )
+                ContextCompat.getColor(toolbar.context, mDefTitleColor)
         )
         return toolbar
     }
