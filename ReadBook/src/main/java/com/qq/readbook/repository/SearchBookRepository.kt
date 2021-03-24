@@ -106,13 +106,13 @@ object SearchBookRepository {
      *  get 请求
      */
     private fun doGet(source: BookSource, key: String, callback: OkNetCallback) {
-        val url = if (source.searchEncode.isNotEmpty()) {
-            String.format(source.searchUrl, URLEncoder.encode(key, source.searchEncode))
+        val url = if (source.encode.isNotEmpty()) {
+            String.format(source.searchUrl, URLEncoder.encode(key, source.encode))
         } else {
             String.format(source.searchUrl, key)
         }
         LogUtils.e4Debug("-searchEncode----------     " + url)
-        OkHttp.newHttpCompat().getExecute(url,   ParamsUtils.getParams(source), callback)
+        OkHttp.newHttpCompat().getExecute(url, ParamsUtils.getParams(source), callback)
     }
 
     /**
@@ -120,12 +120,14 @@ object SearchBookRepository {
      * @param book Book
      */
     private fun addSearchLog(book: Book) {
-        val bookSources = SearchLog()
-        bookSources.bookId = book.bookId
-        bookSources.bookName = book.name
-        bookSources.sourcesName = book.sourceName
-        bookSources.bookDetailUrl = book.bookDetailUrl
-        bookSources.bookChapterUrl = book.chapterUrl
+        val bookSources = SearchLog().apply {
+            this.bookId = book.bookId
+            this.bookName = book.name
+            this.sourcesName = book.sourceName
+            this.bookDetailUrl = book.bookDetailUrl
+            this.bookChapterUrl = book.chapterUrl
+        }
+
         RoomUtils.getSearchLogDao().apply {
             book.sourceName?.let { it1 ->
                 val b = getBookSource(it1, book.bookId)

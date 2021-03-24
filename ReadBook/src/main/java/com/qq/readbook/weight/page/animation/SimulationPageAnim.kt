@@ -1,4 +1,5 @@
-package com.novel.read.widget.page.anim
+package com.qq.readbook.weight.page.animation
+
 
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable

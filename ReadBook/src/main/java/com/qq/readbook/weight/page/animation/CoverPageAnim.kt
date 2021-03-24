@@ -1,11 +1,11 @@
-package com.novel.read.widget.page.anim
+package com.qq.readbook.weight.page.animation
+
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.view.View
-import com.qq.readbook.weight.page.animation.PageAnimation
 
 /**
  * Created by zlj

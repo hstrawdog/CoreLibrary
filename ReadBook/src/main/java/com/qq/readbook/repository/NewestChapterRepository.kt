@@ -16,8 +16,7 @@ object NewestChapterRepository {
     fun doChapterUrl(url: String, sourceName: String, latestChapter: LatestChapter) {
         var source = RoomUtils.getBookSourceDao().getSource4Name(sourceName)
         val params = OkHttp.newParamsCompat()
-        params.decode = source?.searchEncode
-
+        params.decode = source?.encode
         OkHttp.newHttpCompat().get(url, params, object : OkNetCallback {
             override fun onSuccess(statusCode: String, response: String) {
                 val b = JsoupUtils.getNewChapterFormHtml(response, sourceName)

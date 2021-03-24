@@ -1,4 +1,4 @@
-import com.hqq.core.plugin.Versions
+import com.hqq.core.plugin.*
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -11,13 +11,13 @@ android {
     dataBinding {
         enabled = true
     }
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
         applicationId "com.qq.readbook"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
         versionCode 3
         versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

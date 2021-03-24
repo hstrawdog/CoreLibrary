@@ -1,4 +1,4 @@
-package com.novel.read.widget.page.anim
+package com.qq.readbook.weight.page.animation
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -6,12 +6,7 @@ import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
-import com.hqq.core.utils.log.LogUtils
-
-import com.qq.readbook.weight.page.animation.PageAnimation
-
-import java.util.ArrayDeque
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by zlj
@@ -22,8 +17,8 @@ import java.util.ArrayList
  * 3. 弱网环境下，显示的问题
  */
 class ScrollPageAnim(
-    w: Int, h: Int, marginWidth: Int, marginHeight: Int,
-    view: View, listener: OnPageChangeListener
+        w: Int, h: Int, marginWidth: Int, marginHeight: Int,
+        view: View, listener: OnPageChangeListener
 ) : PageAnimation(w, h, marginWidth, marginHeight, view, listener) {
     private var mVelocity: VelocityTracker? = null
 
@@ -237,7 +232,7 @@ class ScrollPageAnim(
             mScrapViews!!.removeFirst()
             // 加入到存活的对象中
             mActiveViews.add(0, view)
-            mDirection = PageAnimation.Direction.UP
+            mDirection = Direction.UP
             // 设置Bitmap的范围
             view.top = realEdge - view.bitmap!!.height
             view.bottom = realEdge
@@ -249,22 +244,6 @@ class ScrollPageAnim(
         }
     }
 
-    /**
-     * 对Bitmap进行擦除
-     *
-     * @param b
-     * @param width
-     * @param height
-     * @param paddingLeft
-     * @param paddingTop
-     */
-    private fun eraseBitmap(
-        b: Bitmap, width: Int, height: Int,
-        paddingLeft: Int, paddingTop: Int
-    ) {
-        /*   if (mInitBitmapPix == null) return;
-        b.setPixels(mInitBitmapPix, 0, width, paddingLeft, paddingTop, width, height);*/
-    }
 
     /**
      * 重置位移
@@ -355,14 +334,14 @@ class ScrollPageAnim(
     override fun startAnim() {
         isRunning = true
         mScroller.fling(
-            0,
-            mTouchY.toInt(),
-            0,
-            mVelocity!!.yVelocity.toInt(),
-            0,
-            0,
-            Integer.MAX_VALUE * -1,
-            Integer.MAX_VALUE
+                0,
+                mTouchY.toInt(),
+                0,
+                mVelocity!!.yVelocity.toInt(),
+                0,
+                0,
+                Integer.MAX_VALUE * -1,
+                Integer.MAX_VALUE
         )
     }
 
@@ -394,17 +373,18 @@ class ScrollPageAnim(
     }
 
     private class BitmapView {
-        internal var bitmap: Bitmap? = null
-        internal var srcRect: Rect? = null
-        internal var destRect: Rect? = null
-        internal var top: Int = 0
-        internal var bottom: Int = 0
+        var bitmap: Bitmap? = null
+        var srcRect: Rect? = null
+        var destRect: Rect? = null
+        var top: Int = 0
+        var bottom: Int = 0
     }
 
     companion object {
-        private val TAG = "ScrollAnimation"
 
-        // 滑动追踪的时间
-        private val VELOCITY_DURATION = 1000
+        /**
+         * 滑动追踪的时间
+         */
+        const val VELOCITY_DURATION = 1000
     }
 }

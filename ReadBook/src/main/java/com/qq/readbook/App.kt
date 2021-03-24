@@ -53,8 +53,8 @@ class App : Application(), Application.ActivityLifecycleCallbacks {
             val inputStreamReader = InputStreamReader(inputStream)
             val jsonReader = JsonReader(inputStreamReader)
             val sourceList = Gson().fromJson<ArrayList<BookSource>>(
-                jsonReader,
-                object : TypeToken<ArrayList<BookSource>>() {}.type
+                    jsonReader,
+                    object : TypeToken<ArrayList<BookSource>>() {}.type
             )
 
             RoomUtils.getBookSourceDao().deleteAll()
@@ -95,32 +95,30 @@ class App : Application(), Application.ActivityLifecycleCallbacks {
         }
     }
 
-    companion object {
-        fun handleSSLHandshake() {
-            // Create a trust manager that does not validate certificate chains
-            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-                override fun getAcceptedIssuers(): Array<X509Certificate> {
-                    return arrayOf()
-                }
-
-                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
-                    LogUtils.i("checkClientTrusted")
-                }
-
-                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
-                    LogUtils.i("checkServerTrusted")
-                }
-            })
-
-            // Install the all-trusting trust manager
-            try {
-                val sc = SSLContext.getInstance("TLS")
-                sc.init(null, trustAllCerts, SecureRandom())
-                HttpsURLConnection.setDefaultSSLSocketFactory(sc.socketFactory)
-                HttpsURLConnection.setDefaultHostnameVerifier { _, _ -> true }
-            } catch (e: Exception) {
-                e.printStackTrace()
+    private fun handleSSLHandshake() {
+        // Create a trust manager that does not validate certificate chains
+        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+            override fun getAcceptedIssuers(): Array<X509Certificate> {
+                return arrayOf()
             }
+
+            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+                LogUtils.i("checkClientTrusted")
+            }
+
+            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+                LogUtils.i("checkServerTrusted")
+            }
+        })
+
+        // Install the all-trusting trust manager
+        try {
+            val sc = SSLContext.getInstance("TLS")
+            sc.init(null, trustAllCerts, SecureRandom())
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.socketFactory)
+            HttpsURLConnection.setDefaultHostnameVerifier { _, _ -> true }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

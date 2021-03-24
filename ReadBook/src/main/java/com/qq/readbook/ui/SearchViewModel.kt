@@ -50,16 +50,16 @@ class SearchViewModel : BaseListViewModel() {
             ToastUtils.showToast("请输入关键字")
             return
         }
-
-
         pageCount = 1
         pageSize = 20
-        var logs = RoomUtils.getLocalSearchKeyDao().getLog4Key(key)
+        val logs = RoomUtils.getLocalSearchKeyDao().getLog4Key(key)
         var log = if (logs.isNullOrEmpty()) null else logs.first()
+
         if (log == null) {
-            log = LocalSearchKey()
-            log.key = key
-            log.searchTime = DateUtils.nowDate
+            log = LocalSearchKey().apply {
+                this.key = key
+                this.searchTime = DateUtils.nowDate
+            }
             RoomUtils.getLocalSearchKeyDao().insertAll(log)
         } else {
             log.searchTime = DateUtils.nowDate

@@ -31,8 +31,7 @@ object StringUtils {
     private fun deleteImgs(content: String?): String {
         return if (content != null && !TextUtils.isEmpty(content)) {
             // 去掉所有html元素,
-            var str =
-                content.replace("&[a-zA-Z]{1,10};".toRegex(), "").replace("<[^>]*>".toRegex(), "")
+            var str = content.replace("&[a-zA-Z]{1,10};".toRegex(), "").replace("<[^>]*>".toRegex(), "")
             str = str.replace("[(/>)<]".toRegex(), "")
             str
         } else {
@@ -48,6 +47,7 @@ object StringUtils {
         text = text.trim { it <= ' ' }
         return text
     }
+
     @JvmStatic
     fun isEmpty(str: String?): Boolean {
         var str = str

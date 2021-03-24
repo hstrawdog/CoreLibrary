@@ -36,7 +36,12 @@ class BookSource {
     /**
      *   是否需要encode
      */
-    var searchEncode = ""
+    var encode = ""
+
+    /**
+     * 是否需要decode
+     */
+    var decode = ""
 
     /**
      *  heads

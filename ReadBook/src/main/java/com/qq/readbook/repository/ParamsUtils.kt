@@ -15,7 +15,7 @@ import org.json.JSONObject
 object ParamsUtils {
     fun getParams(source: BookSource): HttpCompat.ParamsCompat {
         val params = OkHttp.newParamsCompat()
-        params.decode = source.searchEncode
+        params.decode = source.decode
         if (source.requestHeads.isNotEmpty()) {
             val json = JSONObject(source.requestHeads)
             json.keys().let {
