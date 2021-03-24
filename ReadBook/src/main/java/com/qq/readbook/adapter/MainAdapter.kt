@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
  */
 class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_main), LoadMoreModule {
     init {
-        addChildClickViewIds(R.id.tv_delete, R.id.tv_detail, R.id.ll_content, R.id.tv_top,R.id.iv_book_img)
+        addChildClickViewIds(R.id.tv_delete, R.id.tv_detail, R.id.ll_content, R.id.tv_top, R.id.iv_book_img)
     }
 
     override fun convert(holder: BaseViewHolder, item: Book) {
@@ -30,7 +30,6 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
         holder.setText(R.id.tv_book_author, item.author)
         holder.setText(R.id.tv_update_time, item.updateDate + "前更新  " + item.newestChapterTitle)
         holder.setText(R.id.tv_sources, "来源: " + item.sourceName)
-
         CoroutineScope(Dispatchers.IO).launch {
             item.sourceName?.let {
                 ReadRepository.getBookRecord(item)?.let {
@@ -41,12 +40,16 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
                 }
             }
         }
-
         if (item.topTime.isNullOrEmpty()) {
             holder.setText(R.id.tv_top, "置顶")
         } else {
             holder.setText(R.id.tv_top, "取消置顶")
         }
+
+        // 刷新逻辑
+        
+
+
     }
 
 }
