@@ -18,8 +18,7 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-abstract class BaseListActivity :
-        BaseActivity(), IBaseListModelView {
+abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
 
     /**
      *  分页大小 默认是20 可以在Config 中统一配置

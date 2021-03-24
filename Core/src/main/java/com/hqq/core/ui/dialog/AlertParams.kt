@@ -40,20 +40,21 @@ class AlertParams {
      */
     var positiveButtonListener: DialogInterface.OnClickListener? = null
 
-    /**
-     * 顶部标题
-     */
-    var title: CharSequence = "提示"
 
     /**
      *  标题字体大小
      */
-    var titleFontSize: Float = 0f
+    var titleFontSize: Float = 50f
 
     /**
      *  中间内容或者提示
      */
     var content: CharSequence = ""
+
+    /**
+     * 顶部标题
+     */
+    var title: CharSequence = "提示"
 
     /**
      * 分割线
@@ -65,5 +66,9 @@ class AlertParams {
      */
     var dividingLineColor: Int = R.color.color_line_gray
 
+    /**
+     *  点击空白位置 关闭dialog
+     */
+    var isDismissBackground = true
 
 }

@@ -100,27 +100,26 @@ abstract class BaseToolBar : IToolBar {
         this.activity = WeakReference(activity)
         val linearLayout = LinearLayout(activity)
         linearLayout.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayout.orientation = LinearLayout.VERTICAL
         if (isShowStatusBar) {
-            initStatusBar(this.activity!!.get())
+            initStatusBar(activity)
             val mStatusBarHeight = ScreenUtils.getStatusBarHeight4Resources(activity)
-            linearLayout.addView(
-                    statusBar,
-                    LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
+            linearLayout.addView(statusBar,
+                LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
             )
         }
-        val toolBar = iniToolBar(activity!!, linearLayout)
+        val toolBar = activity?.let { iniToolBar(it, linearLayout) }
         if (isShowBar) {
             linearLayout.addView(toolBar)
         }
         if (isShowLine) {
-            viewLine = View(this.activity!!.get())
+            viewLine = View(activity)
             viewLine!!.layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ScreenUtils.dip2px(this.activity!!.get(), 1f)
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ScreenUtils.dip2px(activity, 1f)
             )
             viewLine!!.setBackgroundResource(R.color.toolbar_line_bg)
             linearLayout.addView(viewLine)

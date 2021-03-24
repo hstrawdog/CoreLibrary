@@ -66,7 +66,7 @@ object MathUtils {
             try {
                 return formatDecimals(java.lang.Double.valueOf(o.toString()), RoundingMode.FLOOR)
             } catch (e: Exception) {
-                LogUtils.e(" formatDecimals $e")
+                LogUtils.e4Debug(" formatDecimals $e")
             }
         }
         return o.toString()

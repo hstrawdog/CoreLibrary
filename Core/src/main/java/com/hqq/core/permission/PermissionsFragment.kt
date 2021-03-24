@@ -62,9 +62,9 @@ class PermissionsFragment : Fragment(), IPermissionActions {
                 }
                 if (mPermissionsResult != null) {
                     if (success) {
-                        mPermissionsResult!!.onPermissionsResult(true)
+                        mPermissionsResult?.onPermissionsResult(true)
                     } else {
-                        mPermissionsResult!!.onPermissionsResult(false)
+                        mPermissionsResult?.onPermissionsResult(false)
                         ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
                         // 打开设置界面
 //                        val intent = Intent()

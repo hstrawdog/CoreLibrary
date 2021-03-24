@@ -92,6 +92,11 @@ object LogUtils {
         e(TAG, any)
     }
 
+    @kotlin.jvm.JvmStatic
+    fun e4Debug(any: Any?) {
+        e(TAG + "_core_log", any)
+    }
+
     /**
      * E 类型错误日志
      */

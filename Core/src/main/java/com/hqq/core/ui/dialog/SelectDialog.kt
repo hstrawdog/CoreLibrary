@@ -44,6 +44,13 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
      *  宽度
      */
     override val weight: Int = WindowManager.LayoutParams.MATCH_PARENT
+    override val isDismissBackground: Boolean
+        get() {
+            alertParams?.let {
+                return it.isDismissBackground
+            }
+            return true
+        }
 
     /**
      *  初始化
@@ -104,7 +111,8 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
                 var tv = TextView(activity)
                 tv.gravity = Gravity.CENTER
                 tv.text = it
-                tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT)
                 rootView?.findViewById<LinearLayout>(R.id.ll_content)?.apply {
                     addView(tv)
                     setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt())
@@ -212,6 +220,17 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
          */
         fun setDividingLine(showDividingLine: Boolean) {
             alertParams.showDividingLine = showDividingLine
+        }
+
+        /**
+         * 空白关闭
+         * @param dismiss Boolean
+         * @return Builder
+         */
+        fun setDismissBackground(dismiss: Boolean): Builder {
+            alertParams.isDismissBackground = dismiss
+            return this
+
         }
     }
 }

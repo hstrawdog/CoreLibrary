@@ -51,7 +51,7 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
 
 
     init {
-        LogUtils.d(" BaseViewModel  init " + javaClass.name)
+        LogUtils.e4Debug(" BaseViewModel  init " + javaClass.name)
     }
 
     /**
@@ -61,12 +61,12 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      * 实际开发要是没有问题的话可以 移除此注释
      */
     override fun onCrete() {
-        LogUtils.d(" BaseViewModel           onCrete ")
+        LogUtils.e4Debug(" BaseViewModel           onCrete ")
     }
 
     override fun initData(extras: Bundle?) {
         bundle = extras
-        LogUtils.d(" BaseViewModel           initData ")
+        LogUtils.e4Debug(" BaseViewModel           initData ")
 
     }
 

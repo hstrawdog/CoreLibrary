@@ -33,11 +33,12 @@ object ResourcesUtils {
     val resources: Resources?
         get() {
             if (sResources == null) {
-                sResources = CoreConfig.get().application!!.applicationContext.getResources()
+                sResources = CoreConfig.getApplicationContext().resources
             }
             return sResources
         }
 
+    @JvmStatic
     fun getResources(context: Context): Resources {
         return context.resources
     }
@@ -48,10 +49,12 @@ object ResourcesUtils {
      * @param context 上下文
      * @param resId   资源ID
      */
+    @JvmStatic
     fun getString(context: Context?, @StringRes resId: Int): String {
         return resources!!.getString(resId)
     }
 
+    @JvmStatic
     fun getString(@StringRes resId: Int): String {
         return resources!!.getString(resId)
     }
@@ -62,8 +65,9 @@ object ResourcesUtils {
      * @param context 上下文
      * @param resId   资源ID
      */
-    fun getColor(context: Context?, @ColorRes resId: Int): Int {
-        return ContextCompat.getColor(context!!, resId)
+    @JvmStatic
+    fun getColor(context: Context, @ColorRes resId: Int): Int {
+        return ContextCompat.getColor(context, resId)
     }
 
     /**
@@ -74,7 +78,7 @@ object ResourcesUtils {
      */
     @kotlin.jvm.JvmStatic
     fun getColor(@ColorRes resId: Int): Int {
-        return ContextCompat.getColor(CoreConfig.get().application!!.applicationContext, resId)
+        return ContextCompat.getColor(CoreConfig.getApplicationContext(), resId)
     }
 
     /**
@@ -83,6 +87,7 @@ object ResourcesUtils {
      * @param context 上下文
      * @param resId   资源ID
      */
+    @JvmStatic
     fun getColorStateList(context: Context, @ColorRes resId: Int): ColorStateList {
         return if (Build.VERSION.SDK_INT >= 23) {
             resources!!.getColorStateList(resId, context.theme)
@@ -95,8 +100,9 @@ object ResourcesUtils {
      * @param context 上下文
      * @param resId   资源ID
      */
-    fun getDrawable(context: Context?, @DrawableRes resId: Int): Drawable? {
-        return ContextCompat.getDrawable(context!!, resId)
+    @JvmStatic
+    fun getDrawable(context: Context, @DrawableRes resId: Int): Drawable? {
+        return ContextCompat.getDrawable(context, resId)
     }
 
     /**
@@ -105,8 +111,9 @@ object ResourcesUtils {
      * @param resId
      * @return
      */
+    @JvmStatic
     fun getDrawable(@DrawableRes resId: Int): Drawable? {
-        return ContextCompat.getDrawable(CoreConfig.get().application!!.applicationContext, resId)
+        return ContextCompat.getDrawable(CoreConfig.getApplicationContext(), resId)
     }
 
     /**
@@ -115,11 +122,12 @@ object ResourcesUtils {
      * @param resId 资源ID
      * @return px
      */
+    @JvmStatic
     fun getDimen(@DimenRes resId: Int): Float {
         return resources!!.getDimension(resId)
     }
 
-    @Deprecated("")
+    @JvmStatic
     fun getDimen(context: Context, @DimenRes resId: Int): Float {
         return getResources(context).getDimension(resId)
     }

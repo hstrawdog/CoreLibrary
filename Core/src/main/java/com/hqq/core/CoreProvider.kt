@@ -6,6 +6,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import com.hqq.core.utils.RegexUtils
+import com.hqq.core.utils.log.LogUtils
 
 /**
  * @Author : huangqiqiang
@@ -14,20 +15,26 @@ import com.hqq.core.utils.RegexUtils
  * @Date : 2019/6/6 0006  上午 9:54
  * @Email : qiqiang213@gmail.com
  * @Descrive :
- * 利用 Provider 监听 初始化
+ * 利用 Provider监听 初始化
  */
 class CoreProvider : ContentProvider() {
+    /**
+     * 默认初始化 CoreConfig
+     */
+
     override fun onCreate(): Boolean {
-        /**
-         * 默认初始化 CoreConfig
-         */
-        if (RegexUtils.isNull(CoreConfig.get().application)) {
+        LogUtils.e4Debug(" CoreProvider  onCreate")
+        if (!CoreConfig.get().isInitialized() || RegexUtils.isNull(CoreConfig.get().application)) {
             CoreConfig.get().init(context as Application)
+            LogUtils.e4Debug(" CoreProvider  setApplication")
         }
+
+
         return false
     }
 
-    override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
+    override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?,
+            sortOrder: String?): Cursor? {
         return null
     }
 

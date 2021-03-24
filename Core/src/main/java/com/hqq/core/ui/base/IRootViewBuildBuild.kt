@@ -50,7 +50,7 @@ class IRootViewBuildBuild(context: Any, showStatus: Boolean, showToolBar: Boolea
                 activity = (context as Fragment).activity
             }
             else -> {
-                LogUtils.e(Exception("不支持的类" + context.javaClass.name))
+                LogUtils.e4Debug(Exception("不支持的类" + context.javaClass.name))
             }
         }
         activity?.let { rootViewImpl.setActivity(it) }

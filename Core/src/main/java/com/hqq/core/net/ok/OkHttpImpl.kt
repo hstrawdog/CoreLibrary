@@ -40,10 +40,10 @@ class OkHttpImpl : HttpCompat {
      */
     override fun create(): HttpCompat {
         mOkHttpClient = OkHttpClient.Builder() //设置读取超时时间
-                .readTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS) //设置写的超时时
-                .writeTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-                .connectTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-                .build()
+            .readTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS) //设置写的超时时
+            .writeTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+            .connectTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+            .build()
         return this
     }
 
@@ -68,6 +68,7 @@ class OkHttpImpl : HttpCompat {
      */
     override fun getExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call {
         val request: Request.Builder = getBuilder(url, params)
+
         val call = mOkHttpClient!!.newCall(request.build())
         try {
             val response = call.execute()
@@ -100,7 +101,7 @@ class OkHttpImpl : HttpCompat {
      * @return
      */
     override fun postExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call {
-        val body = params.paramForm<RequestBody>()
+        val body = params.paramForm()
         val request: Request.Builder = Request.Builder().url(url).post(body)
         val call = mOkHttpClient!!.newCall(request.build())
         try {
@@ -120,24 +121,31 @@ class OkHttpImpl : HttpCompat {
      * @return Request.Builder
      */
     private fun getBuilder(url: String, params: ParamsCompat?): Request.Builder {
-        val realUrl: String = if (params != null && params.paramGet().isNotEmpty()) {
-            url + '?' + params.paramGet()
-        } else {
-            url
+        val request = Request.Builder()
+        var realUrl: String = url
+        params?.let {
+            it.paramGet()?.let { paramget ->
+                if (paramget.isNotEmpty()) {
+                    realUrl = "$url?$paramget"
+                }
+            }
+            for (key in it.headers.keys) {
+                it.headers[key]?.let { it1 -> request.addHeader(key, it1) }
+            }
         }
-        return Request.Builder().url(realUrl).get()
+        return request.url(realUrl).get()
     }
 
     /**
      * 执行get 请求
-     *
-     * @param handler
-     * @param url
-     * @param params
-     * @param callback
-     * @return
+     * @param coroutineContext CoroutineContext   协程 上下文
+     * @param url String
+     * @param params ParamsCompat
+     * @param callback OkNetCallback
+     * @return Call
      */
-    private fun doGet(coroutineContext: CoroutineContext, url: String, params: ParamsCompat, callback: OkNetCallback): Call {
+    private fun doGet(coroutineContext: CoroutineContext, url: String, params: ParamsCompat,
+            callback: OkNetCallback): Call {
         val request: Request.Builder = getBuilder(url, params)
         val call = mOkHttpClient!!.newCall(request.build())
         call.enqueue(object : Callback {
@@ -161,8 +169,11 @@ class OkHttpImpl : HttpCompat {
      * @param o
      * @return
      */
-    private fun doPost(url: String, params: ParamsCompat, callback: OkNetCallback, coroutineContext: CoroutineContext): Call {
-        val body = params.paramForm<RequestBody>()
+    private fun doPost(url: String,
+            params: ParamsCompat,
+            callback: OkNetCallback,
+            coroutineContext: CoroutineContext): Call {
+        val body = params.paramForm()
         val request: Request.Builder = Request.Builder().url(url).post(body)
         return doRequest(coroutineContext, request, callback, params)
     }
@@ -175,7 +186,10 @@ class OkHttpImpl : HttpCompat {
      * @param response
      * @param paramsCompat
      */
-    private fun postHandler(coroutineContext: CoroutineContext, callback: OkNetCallback, response: Response?, paramsCompat: ParamsCompat?) {
+    private fun postHandler(coroutineContext: CoroutineContext,
+            callback: OkNetCallback,
+            response: Response?,
+            paramsCompat: ParamsCompat?) {
         CoroutineScope(coroutineContext).launch {
             post(callback, response, paramsCompat)
         }
@@ -189,7 +203,10 @@ class OkHttpImpl : HttpCompat {
      * @param params
      * @return
      */
-    private fun doRequest(coroutineContext: CoroutineContext, request: Request.Builder, callback: OkNetCallback, params: ParamsCompat): Call {
+    private fun doRequest(coroutineContext: CoroutineContext,
+            request: Request.Builder,
+            callback: OkNetCallback,
+            params: ParamsCompat): Call {
         val call = mOkHttpClient!!.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -230,18 +247,19 @@ class OkHttpImpl : HttpCompat {
      *
      * @param response
      * @param paramsCompat
-     * @return
+     * @return返回数据进行解码
      * @throws IOException
      */
     private fun getDecodeResponse(response: Response, paramsCompat: ParamsCompat?): String {
-        // 返回数据进行解码
         var string = ""
-        if (paramsCompat == null || paramsCompat.decode.isEmpty()) {
-            string = response.body!!.string()
-        } else {
-            val bytes = response.body!!.bytes()
-            string = String(bytes, Charset.forName(paramsCompat.decode)
-            )
+        val body = response.body
+        if (body != null) {
+            if (paramsCompat != null && paramsCompat.decode?.isNotEmpty() == true) {
+                val bytes = body.bytes()
+                string = String(bytes, Charset.forName(paramsCompat.decode))
+            } else {
+                string = body.string()
+            }
         }
         return string
     }

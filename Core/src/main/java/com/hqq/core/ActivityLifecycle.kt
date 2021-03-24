@@ -18,7 +18,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     private val activities: MutableList<Activity>? = ArrayList()
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         activities!!.add(activity)
-        LogUtils.d("ActivityLifecycle -> onActivityCreated", activity.localClassName)
+        LogUtils.e("ActivityLifecycle -> onActivityCreated", activity.localClassName)
     }
     override fun onActivityStarted(activity: Activity) {}
     override fun onActivityResumed(activity: Activity) {}
@@ -27,7 +27,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
     override fun onActivityDestroyed(activity: Activity) {
         activities!!.remove(activity)
-        LogUtils.d("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
+        LogUtils.e("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
     }
 
     /**

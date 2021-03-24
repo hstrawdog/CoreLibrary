@@ -2,6 +2,7 @@ package com.hqq.core
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import com.google.gson.InstanceCreator
 import com.hqq.core.annotation.ToolBarMode
@@ -37,6 +38,10 @@ class CoreConfig private constructor() {
 
         fun get(): CoreConfig {
             return instance!!
+        }
+
+        fun getApplicationContext(): Context {
+            return get().application.applicationContext
         }
     }
 
@@ -79,8 +84,7 @@ class CoreConfig private constructor() {
      * 理论奔溃后 会再次执行 Application 中的 onCreate()
      * mApplication  应单是 非空的
      */
-    var application: Application? = null
-        private set
+    lateinit var application: Application
 
     /**
      * 是否开启 log日志  BuildConfig.Debug
@@ -114,7 +118,7 @@ class CoreConfig private constructor() {
      */
     fun init(application: Application) {
         // 设置当前APK  是否是Debug版本
-        var info = application.applicationInfo
+        val info = application.applicationInfo
         this.isDebug = info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
         this.application = application
 
@@ -123,6 +127,10 @@ class CoreConfig private constructor() {
             mActivityLifecycle = ActivityLifecycle()
             application.registerActivityLifecycleCallbacks(mActivityLifecycle)
         }
+    }
+
+    fun isInitialized(): Boolean {
+        return this::application.isInitialized
     }
 
 }

@@ -84,7 +84,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
             initConfig()
             rootView = rootViewBuild.buildContentView(this)
         }
-        LogUtils.d(this.javaClass.name, "onCreateView " + javaClass.simpleName + this.toString())
+        LogUtils.e(this.javaClass.name, "onCreateView " + javaClass.simpleName + this.toString())
         return rootView
     }
 
@@ -99,7 +99,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
         if (isLazyLoad && isCreate && !lazyInitEnd && isVisibleToUser) {
             initView()
             lazyInitEnd = true
-            LogUtils.d(this.javaClass.name, "setUserVisibleHint  initBasic " + javaClass.simpleName + this.toString())
+            LogUtils.e(this.javaClass.name, "setUserVisibleHint  initBasic " + javaClass.simpleName + this.toString())
         } else if (isLazyLoad && isCreate && lazyInitEnd && !isVisibleToUser) {
             onFragmentHit()
         }
@@ -117,10 +117,10 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
             isCreate = true
             if (!isLazyLoad) {
                 initView()
-                LogUtils.d(this.javaClass.name, "onViewCreated initBasic   false  " + javaClass.simpleName + this.toString())
+                LogUtils.e(this.javaClass.name, "onViewCreated initBasic   false  " + javaClass.simpleName + this.toString())
             } else if (isLazyLoad && userVisibleHint) {
                 lazyInitEnd = true
-                LogUtils.d(this.javaClass.name, "onViewCreated initBasic   True " + javaClass.simpleName + this.toString())
+                LogUtils.e(this.javaClass.name, "onViewCreated initBasic   True " + javaClass.simpleName + this.toString())
                 initView()
             }
         }
@@ -132,7 +132,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     override fun onDestroy() {
         super.onDestroy()
-        LogUtils.d(this.javaClass.name, "onDestroy " + javaClass.simpleName + this.toString())
+        LogUtils.e(this.javaClass.name, "onDestroy " + javaClass.simpleName + this.toString())
         if (rootView != null) {
             if (rootView is ViewGroup) {
                 (rootView as ViewGroup).removeAllViews()

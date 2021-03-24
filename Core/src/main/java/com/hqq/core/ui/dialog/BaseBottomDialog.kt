@@ -65,7 +65,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
             initConfig()
             rootView = rootViewBuild!!.buildContentView(this)
         }
-        LogUtils.d("onCreateView " + javaClass.simpleName + this.toString())
+        LogUtils.e4Debug("onCreateView " + javaClass.simpleName + this.toString())
         return rootView
     }
 

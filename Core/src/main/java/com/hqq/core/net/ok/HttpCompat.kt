@@ -1,7 +1,7 @@
-package com.hqq.core.net.ok;
+package com.hqq.core.net.ok
 
-
-import okhttp3.Call;
+import okhttp3.Call
+import okhttp3.RequestBody
 
 /**
  * @Author : huangqiqiang
@@ -11,36 +11,26 @@ import okhttp3.Call;
  * @Email :  qiqiang213@gmail.com
  * @Descrive :  坚持封装的 OkHttp 请求
  */
-public interface HttpCompat {
+interface HttpCompat {
     /**
      * 参数的通用性上还是有些问题
      */
     interface ParamsCompat {
-
-        ParamsCompat put(String key, Object value);
-
-        String paramGet();
-
-        <T> T paramForm();
-
-        <T> T paramMulti();
-
-        String getDecode();
-
-        void setDecode(String decode);
-
-        String getEncode();
-
-        void setEncode(String encode);
+        var decode: String?
+        var encode: String?
+        var headers: MutableMap<String, String>
+        fun put(key: String?, value: Any?): ParamsCompat?
+        fun paramGet(): String?
+        fun paramForm(): RequestBody
+        fun paramMulti(): RequestBody
     }
-
 
     /**
      * 请求对象
      *
      * @return
      */
-    HttpCompat create();
+    fun create(): HttpCompat?
 
     /**
      * get方法
@@ -49,7 +39,7 @@ public interface HttpCompat {
      * @param params
      * @param callback
      */
-    void get(String url, ParamsCompat params, OkNetCallback callback);
+    operator fun get(url: String, params: ParamsCompat, callback: OkNetCallback)
 
     /**
      * 同步的get
@@ -59,7 +49,7 @@ public interface HttpCompat {
      * @param callback
      * @return
      */
-    Call getExecute(String url, ParamsCompat params, OkNetCallback callback);
+    fun getExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call
 
     /**
      * post  方法
@@ -69,7 +59,7 @@ public interface HttpCompat {
      * @param callback
      * @return
      */
-    Call post(String url, ParamsCompat params, OkNetCallback callback);
+    fun post(url: String, params: ParamsCompat, callback: OkNetCallback): Call
 
     /**
      * 同步的post
@@ -79,10 +69,5 @@ public interface HttpCompat {
      * @param callback
      * @return
      */
-    Call postExecute(String url, ParamsCompat params, OkNetCallback callback);
-
-
-    //  其他请求方式
-
-
+    fun postExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call //  其他请求方式
 }

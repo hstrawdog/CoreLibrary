@@ -13,6 +13,9 @@ import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.hqq.core.CoreConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * @Author : huangqiqiang
@@ -32,13 +35,17 @@ object ToastUtils {
         if (TextUtils.isEmpty(text)) {
             return
         }
-        if (mToast != null) {
-            mToast!!.cancel()
+        // 切到主线程中显示 Toast
+        CoroutineScope(Dispatchers.Main).launch {
+            if (mToast != null) {
+                mToast!!.cancel()
+            }
+            mToast = Toast.makeText(context!!.applicationContext, text, duration)
+            mToast!!.setGravity(Gravity.CENTER, 0, 0)
+            mToast!!.setText(text)
+            mToast!!.show()
         }
-        mToast = Toast.makeText(context!!.applicationContext, text, duration)
-        mToast!!.setGravity(Gravity.CENTER, 0, 0)
-        mToast!!.setText(text)
-        mToast!!.show()
+
     }
 
     fun showToast(context: Context?, text: String) {

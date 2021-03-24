@@ -55,7 +55,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      *  是否点击空白关闭dialog
      */
-    val isDismissBackground: Boolean
+    open val isDismissBackground: Boolean
         get() = true
 
     /**
@@ -114,7 +114,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
-            LogUtils.d("onCreateView " + javaClass.simpleName + this.toString())
+            LogUtils.e4Debug("onCreateView " + javaClass.simpleName + this.toString())
         }
         return rootView
     }
@@ -131,7 +131,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
                 StatusBarManager.transparencyBar(dialog?.window)
             }
             loaded = true
-            LogUtils.e(rootView!!.width)
+            LogUtils.e4Debug(rootView!!.width)
         }
     }
 
@@ -151,7 +151,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtils.e(rootView?.measuredWidth)
+        LogUtils.e4Debug(rootView?.measuredWidth)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(background))
         dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         dialog?.window?.setGravity(gravity)
