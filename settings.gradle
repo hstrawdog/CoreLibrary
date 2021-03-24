@@ -1,1 +1,2 @@
+include ':ReadBook'
 include ':app', ':Core'

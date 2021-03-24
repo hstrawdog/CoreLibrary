@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="read_bg_one">#EFEFF7</color>
+    <color name="read_bg_two">#CCEBCC</color>
+    <color name="read_bg_four">#CEC29C</color>
+    <color name="read_bg_five">#001C27</color>
+    <color name="read_bg_six">#DDCEC29C</color>
+
+    <color name="read_font_one">#383429</color>
+    <color name="read_font_two">#2F332D</color>
+    <color name="read_font_three">#92918C</color>
+    <color name="read_font_four">#2C2C2C</color>
+    <color name="read_font_five">#627176</color>
+
+    <color name="read_bg_night">#212021</color>
+    <color name="read_font_night">#94969C</color>
+
+    <color name="colorSelect">#498EFF</color>
+    <color name="read_menu_color">#FFFDF6</color>
+    <!--二级标题-->
+    <color name="smallColor">#262626</color>
+    <color name="light_yellow">#B87324</color>
+    <!--描述-->
+    <color name="colorDesTitle">#707177</color>
+    <!--一级标题-->
+    <color name="colorTitle">#212121</color>
+    <color name="color_blue">#0092FF</color>
+</resources>

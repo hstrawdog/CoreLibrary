@@ -22,7 +22,7 @@ object Versions {
     val coreKtx = "1.3.0"
     val constraintlayout = "2.0.0-beta3"
     val paging = "3.0.0-alpha02"
-    val kotlin = "1.4.0"
+    val kotlin = "1.4.21"
     val work = "2.2.0"
     val room = "2.2.5"
     val cardview = "1.0.0"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/x2"
+    android:background="@color/white"
+    android:padding="@dimen/x20">
+
+
+    <TextView
+        android:id="@+id/tv_status"
+        style="@style/def_text.28.333"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="123" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/def_text.24.666"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status"
+        tools:text="123" />
+
+    <com.qq.readbook.weight.ActivityIndicatorView
+        android:id="@+id/pb_bar"
+        style="@android:style/Widget.ProgressBar.Small"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x80"
+        android:padding="@dimen/x25"
+        app:aiv_color="#A2A3B0"
+        app:aiv_strokeWidth="2.5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

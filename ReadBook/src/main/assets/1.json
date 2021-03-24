@@ -1,0 +1,149 @@
+[
+  {
+    "sourceName": "笔趣阁",
+    "searchDetail": 0,
+    "searchEncode": "gb2312",
+    "sourceUrl": "https://www.xxbqg.com/",
+    "searchUrl": "https://www.xxbqg.com/modules/article/search.php?searchkey=%s",
+    "weight": 10,
+    "parsingType": 0,
+    "ruleSearch": {
+      "searchListRule": "//*[@class='novelslistss']/li|//div[@class='box_con']"
+    },
+    "ruleBookInfo": {
+      "author": "//*[@class='s4']/text()|//div[@id='info']/p/a/text()",
+      "bookDetailUrl": "//*[@class='s2']/a/@href|replace('https://www.xxbqg.com/','https://m.xxbqg.com/',//div[@class='fr']/a/@href)",
+      "bookName": "//*[@class='s2']/a/text()|//div[@id='info']/h1/text()",
+      "chapterUrl": "//*[@class='s2']/a/@href|replace('https://www.xxbqg.com/','https://m.xxbqg.com/',//div[@class='fr']/a/@href)",
+      "desc": "//*[@class='result-game-item-desc']/text()|//div[@id='intro']/text()",
+      "img": "//img/@src",
+      "newestChapterTitle": "//*[@class='s3']/a/text()|//div[@id='info']/p[4]/a/html()",
+      "type": "//*[@class='s1']/text()",
+      "updateData": "//*[@class='s5'][4]/text()"
+    },
+    "ruleChapter": {
+      "chapterList": "//*[@id='list']/dl/dd",
+      "title": "//a/text()",
+      "url": "//a/@href"
+    },
+    "ruleArticleContent": {
+      "content": "//div[@id='content']"
+    }
+  },
+  {
+    "sourceName": "思路客",
+    "sourceUrl": "https://www.siluke.tv",
+    "searchUrl": "https://www.siluke.tv/search.php?q=%s",
+    "searchDetail": 0,
+    "weight": 10,
+    "ruleSearch": {
+      "searchListRule": "//*[@class='result-item result-game-item']"
+    },
+    "ruleBookInfo": {
+      "bookName": "//*[@class='result-game-item-title-link']/span/text()",
+      "desc": "//*[@class='result-game-item-desc']/text()",
+      "author": "//*[@class='result-game-item-info-tag']/span[2]/text()",
+      "newestChapterTitle": "//*[@id='info']/p[4]/a/html()",
+      "chapterUrl": "concat('https://www.siluke.tv',//*[@class='result-game-item-title-link']/@href)",
+      "bookDetailUrl": "concat('https://www.siluke.tv',//*[@class='result-game-item-title-link']/@href)",
+      "img": "//img[@class='result-game-item-pic-link-img']/@src",
+      "type": "//*[@class='result-game-item-info-tag-title']/text()",
+      "ruleWordCount": "//p[1]/text()[2]",
+      "updateData": "//p[3]/span[2]/text()"
+    },
+    "ruleChapter": {
+      "chapterList": "//div[@id='list']/dl//dd",
+      "title": "./a/text()",
+      "url": "concat('https://www.siluke.tv',./a/@href)"
+    },
+    "ruleArticleContent": {
+      "content": "//div[@id='content']"
+    }
+  },
+  {
+    "sourceName": "丹书铁卷⑫",
+    "sourceUrl": "https://www.dstiejuan.com",
+    "searchUrl": "https://www.dstiejuan.com/search.html@searchkey",
+    "searchDetail": 2,
+    "weight": 10,
+    "ruleSearch": {
+      "searchListRule": "//ul[@class='library']//li"
+    },
+    "ruleBookInfo": {
+      "bookName": "./a[@class='bookname']/text()",
+      "desc": "./p[@class='intro']/text()",
+      "author": "./p[1]/a[@class='author']/text()",
+      "newestChapterTitle": "substring-after(./a[@class='chapter']/text(),'最新章节：')",
+      "chapterUrl": "substring-before(./a[2]/@href,'.html')",
+      "bookDetailUrl": "./a[2]/@href",
+      "img": "./a[@class='bookimg']/img/@src",
+      "type": "./p/a[2]/text()",
+      "ruleWordCount": "./p[1]/text()[2]"
+    },
+    "ruleChapter": {
+      "chapterList": "//div[@class='read']/dl[2]//dd",
+      "title": "./a/text()",
+      "url": "concat('https://www.dstiejuan.com',./a/@href)"
+    },
+    "ruleArticleContent": {
+      "content": "//div[@id='content']"
+    }
+  },
+  {
+    "sourceName": "天籁小说",
+    "sourceUrl": "https://www.23txt.com/",
+    "searchUrl": "https://www.23txt.com/search.php?q=%s",
+    "ruleSearch": {
+      "searchListRule": "//*[@class='result-list']/*[@class='result-item result-game-item']"
+    },
+    "ruleBookInfo": {
+      "newestChapterTitle": "//div[@id='maininfo']/div/p[4]/a/html()",
+      "bookName": "//*[@class='result-game-item-title-link']/@title",
+      "author": "//*[@class='result-game-item-info-tag']/span[2]/text()",
+      "img": "//img/@src",
+      "desc": "//*[@class='result-game-item-desc']/text()",
+      "bookDetailUrl": "concat('https://www.23txt.com',//*[@class='result-game-item-title-link']/@href)",
+      "chapterUrl": "concat('https://www.23txt.com',//*[@class='result-game-item-pic-link']/@href)",
+      "type": "//*[@class='result-game-item-info-tag-title'][1]/text()",
+      "updateData": "//*[@class='result-game-item-info-tag-title'][4]/text()"
+    },
+    "ruleChapter": {
+      "chapterList": "//*[@id='list']/dl/dd",
+      "title": "//a/text()",
+      "url": "concat('https://www.23txt.com',//a/@href)"
+    },
+    "ruleArticleContent": {
+      "content": "//div[@id='content']"
+    }
+  },
+  {
+    "sourceName": "追书网",
+    "sourceUrl": "https://www.zhuishu5.com",
+    "searchUrl": "https://www.zhuishu5.com/modules/article/2021search.php?searchkey=+%s",
+    "searchEncode": "gbk",
+    "searchDetail": 0,
+    "ruleSearch": {
+      "searchListRule": "//*[@class=\"panel panel-default\"]"
+    },
+    "ruleBookInfo": {
+      "bookName": "//*[@class=\"bookTitle\"]/a[@class=\"b\"]/text()",
+      "author": "//*[@target=\"_blank\"]/text()",
+      "desc": "//*[@id=\"bookIntro\"]/allText()",
+      "newestChapterTitle": "//*[@class=\"col-md-10\"]/p[2]/a/html()",
+      "chapterUrl": "//*[@class=\"bookTitle\"]/a/@href",
+      "bookDetailUrl": "//*[@class=\"bookTitle\"]/a/@href",
+      "img": "//img[@class=\"img-thumbnail\"]/@src",
+      "type": "",
+      "wordCount": "//p[@class=\"booktag\"]/span[2]/text()",
+      "updateData": "substring-after(//div[@class=\"col-md-10\"]/p[3]/allText(),'更新时间：')"
+    },
+    "ruleChapter": {
+      "chapterList": "//*[@id='list-chapterAll']/dl/dd",
+      "title": "./a/text()",
+      "url": "concat('https://www.zhuishu5.com',./a/@href)"
+    },
+    "ruleArticleContent": {
+      "content": "//div[@id=\"htmlContent\"]"
+    }
+  }
+]

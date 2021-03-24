@@ -1,0 +1,33 @@
+[
+  {
+    "sourceName": "530p",
+    "sourceUrl": "http://www.530p.com",
+    "searchUrl": "http://www.530p.com/s/%s",
+    "searchEncode": "gbk",
+    "searchDetail": 0,
+    "requestHeads": "{\"User-Agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36\",\"Accept-Language\":\"zh-CN,zh;q=0.9\"}",
+    "ruleSearch": {
+      "searchListRule": "//*[@class='conter']/ul"
+    },
+    "ruleBookInfo": {
+      "bookName": "//*[@class='conter1']/a/text()",
+      "author": "//*[@class='conter3']/a/text()",
+      "desc": "",
+      "newestChapterTitle": "//*[@class='conter2']/a/text()",
+      "chapterUrl": "concat('http://www.530p.com',//*[@class='conter1']/a/@href)",
+      "bookDetailUrl": "concat('http://www.530p.com',//*[@class='conter1']/a/@href)",
+      "img": "",
+      "type": "",
+      "wordCount": "",
+      "updateData": "//*[@class='conter4']/a/text()"
+    },
+    "ruleChapter": {
+      "chapterList": "//*[@class='conter']/div[@class='clc']",
+      "title": "./a/text()",
+      "url": "concat('http://www.530p.com',./a/@href)"
+    },
+    "ruleArticleContent": {
+      "content": "//div[@id='cp_content']"
+    }
+  }
+]
