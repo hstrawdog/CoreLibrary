@@ -22,21 +22,21 @@ object BookDetailRepository {
     fun readBookDetail(book: Book, readSource: BookSource, latestChapter: ILatestChapter) {
         CoroutineScope(Dispatchers.IO).launch {
             LogUtils.e4Debug("详情页面:  " + book.bookDetailUrl)
-            OkHttp.newHttpCompat()
-                .getExecute(book.bookDetailUrl, OkHttp.newParamsCompat(), object : OkNetCallback {
-                    override fun onSuccess(statusCode: String, response: String) {
-                        val b = JsoupUtils.getBookDetail(response, book, readSource)
-                        b.refreshTime=System.currentTimeMillis()
-                        // 更新书籍
-                        RoomUtils.getBookDao().update(b)
-                        CoroutineScope(Dispatchers.Main).launch {
-                            latestChapter.onEndCall(b, true)
-                        }
+            OkHttp.newHttpCompat().getExecute(book.bookDetailUrl, ParamsUtils.getParams(readSource), object : OkNetCallback {
+                override fun onSuccess(statusCode: String, response: String) {
+                    val b = JsoupUtils.getBookDetail(response, book, readSource)
+                    b.refreshTime = System.currentTimeMillis()
+                    // 更新书籍
+                    RoomUtils.getBookDao().update(b)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        latestChapter.onEndCall(b, true)
                     }
-                    override fun onFailure(statusCode: String?, errMsg: String?, response: String?) {
-                        latestChapter.onEndCall(book, false)
-                    }
-                })
+                }
+
+                override fun onFailure(statusCode: String?, errMsg: String?, response: String?) {
+                    latestChapter.onEndCall(book, false)
+                }
+            })
         }
     }
 

@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.glide.ImageLoadUtils
 import com.qq.readbook.R
+import com.qq.readbook.down.UpdateManager
 import com.qq.readbook.repository.ReadRepository
 import com.qq.readbook.room.entity.Book
 import kotlinx.coroutines.CoroutineScope
@@ -47,8 +48,8 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
         }
 
         // 刷新逻辑
-        
 
+        UpdateManager.handlerBook(item)
 
     }
 

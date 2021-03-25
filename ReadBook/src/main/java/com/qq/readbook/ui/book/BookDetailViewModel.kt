@@ -99,9 +99,12 @@ class BookDetailViewModel : BaseViewModel() {
         // 插入数据
         val dataBaseBook = RoomUtils.getBookDao().getBookById(it.bookId)
         if (dataBaseBook == null) {
-            RoomUtils.getBookDao().insertAll(it)
+            RoomUtils.getBookDao().apply {
+                insertAll(it)
+                it.id = getBookById(it.bookId)?.id ?: 0
+
+            }
             bookLiveData.postValue(it)
-            addBookMenu.postValue(it.localType == 0)
             getBookRecord(it)?.let { it2 ->
                 currChapter.postValue(it2.chapter)
             }
@@ -109,6 +112,7 @@ class BookDetailViewModel : BaseViewModel() {
             // 用本地数据替换
             bookLiveData.postValue(dataBaseBook)
         }
+        addBookMenu.postValue(bookLiveData.value?.localType == 0)
 
 
     }
@@ -148,7 +152,7 @@ class BookDetailViewModel : BaseViewModel() {
                 // 避免 book 对象与数据库不一致   book 表中只会存在一种 书名
                 showToast("取消成功")
             }
-            RoomUtils.getBookDao().update(it)
+            RoomUtils.getBookDao().update(bookLiveData.value!!)
             addBookMenu.value = !(addBookMenu.value as Boolean)
         }
     }

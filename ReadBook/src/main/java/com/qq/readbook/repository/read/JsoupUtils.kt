@@ -88,8 +88,8 @@ object JsoupUtils {
     }
 
     private fun selN(element: JXDocument,
-            rule: String?,
-            value: String): String {
+                     rule: String?,
+                     value: String): String {
         var value1 = value
         val list = element.selN(rule)
         for (jxNode in list) {
@@ -232,9 +232,40 @@ object JsoupUtils {
      * @param readSource BookSource
      * @return Book
      */
-    fun getBookDetail(html: String, book: Book, readSource: BookSource): Book {
-        val bookDetail = readSource.ruleBookInfo
-        book.updateDate = getValue4key(html, bookDetail?.updateData)
+    fun getBookDetail(html: String, book: Book, source: BookSource): Book {
+        val bookDetail = RoomUtils.getBookInfoRuleDao().getBookInfoRule(source.sourceName)
+        bookDetail?.apply {
+            val name = getValue4key(html, bookName)
+            val author = getValue4key(html, author)
+            val imgUrl = getValue4key(html, img)
+            val desc = getValue4key(html, desc)
+            val type = getValue4key(html, type)
+            val wordCount = getValue4key(html, wordCount)
+            val updateDate = getValue4key(html, updateData)
+
+            if (name.isNotEmpty()) {
+                book.name = name
+            }
+            if (author.isNotEmpty()) {
+                book.author = author
+            }
+            if (imgUrl.isNotEmpty()) {
+                book.imgUrl = imgUrl
+            }
+            if (desc.isNotEmpty()) {
+                book.desc = desc
+            }
+            if (type.isNotEmpty()) {
+                book.type = type
+            }
+            if (wordCount.isNotEmpty()) {
+                book.wordCount = wordCount
+            }
+            if (updateDate.isNotEmpty()) {
+                book.updateDate = updateDate
+            }
+        }
+
         return book
     }
 

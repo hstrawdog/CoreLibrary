@@ -12,15 +12,15 @@
     },
     "ruleBookInfo": {
       "bookName": "//*[@class='conter1']/a/text()",
-      "author": "//*[@class='conter3']/a/text()",
-      "desc": "",
-      "newestChapterTitle": "//*[@class='conter2']/a/text()",
+      "author": "//*[@class='conter4']/text()|//*[@class='ffw']/tbody/tr/td[@class='tc'][1]/allText()",
+      "desc": "//*[@class='ffw']/tbody/tr[4]/td/allText()",
+      "newestChapterTitle": "//*[@class='conter2']/a/text()|//*[@class='ffw']/tbody/tr[2]/td/a/allText()",
       "chapterUrl": "concat('http://www.530p.com',//*[@class='conter1']/a/@href)",
       "bookDetailUrl": "concat('http://www.530p.com',//*[@class='conter1']/a/@href)",
-      "img": "",
-      "type": "",
+      "img": "//*[@class='ffw']/tbody/tr/td/img/@src",
+      "type": "//*[@class='ffw']/tbody/tr/td[@class='tc'][2]/allText()",
       "wordCount": "",
-      "updateData": "//*[@class='conter4']/a/text()"
+      "updateData": "//*[@class='ffw']/tbody/tr/td[@class='tc'][3]/allText()"
     },
     "ruleChapter": {
       "chapterList": "//*[@class='conter']/div[@class='clc']",

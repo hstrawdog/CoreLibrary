@@ -13,11 +13,13 @@ import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.BitmapUtils
 import com.hqq.core.utils.DateUtils
 import com.hqq.core.utils.FileUtils
+import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.BR
 import com.qq.readbook.R
 import com.qq.readbook.adapter.MainAdapter
 import com.qq.readbook.bean.ActivityBean
 import com.qq.readbook.databinding.ActivityMainBinding
+import com.qq.readbook.down.UpdateManager
 import com.qq.readbook.room.RoomUtils
 import com.qq.readbook.ui.book.BookDetailActivity
 import com.qq.readbook.ui.book.ReadBookActivity
@@ -84,7 +86,13 @@ class MainActivity : BaseVmListActivity<MainViewModel, ActivityMainBinding>() {
                 startActivity(Intent(activity, getItem(position).className))
             }
         }
+        UpdateManager.liveBook.observe(this) {
+            //  监听到 更新的数据
 
+            var position = adapter.data.indexOf(it)
+            adapter.notifyItemChanged(position)
+            LogUtils.e("通知了第${position}条")
+        }
     }
 
 
