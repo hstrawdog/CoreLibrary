@@ -14,7 +14,7 @@ import com.qq.readbook.room.entity.*
  * @Describe :
  */
 @Database(entities = [Book::class, SearchLog::class, LocalRecord::class, LocalSearchKey::class],
-    version = 8,
+    version = 9,
     exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bookDao(): BookDao

@@ -2,9 +2,9 @@ package com.qq.readbook.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.hqq.core.utils.DateUtils;
 import com.qq.readbook.R;
 import com.qq.readbook.room.entity.LocalSearchKey;
-import com.qq.readbook.weight.page.DateUtils;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -12,15 +12,6 @@ import com.qq.readbook.room.entity.Book
  */
 @Dao
 interface BookDao {
-    @Query("SELECT * FROM Book WhERE localType=1  ORDER BY topTime DESC ,lastRead DESC")
-    fun getFollowAll(): List<Book>
-
-    @Query("SELECT * FROM Book  ORDER BY lastRead DESC")
-    fun getAll(): List<Book>
-
-    @Query("SELECT * FROM Book where bookId =:bookId")
-    fun getBookById(bookId: String): Book?
-
     @Insert
     fun insertAll(vararg book: Book)
 
@@ -32,5 +23,14 @@ interface BookDao {
 
     @Update
     fun update(book: Book)
+
+    @Query("SELECT * FROM Book WhERE localType=1  ORDER BY topTime DESC ,lastRead DESC")
+    fun getFollowAll(): List<Book>
+
+    @Query("SELECT * FROM Book  ORDER BY lastRead DESC")
+    fun getAll(): List<Book>
+
+    @Query("SELECT * FROM Book where bookId =:bookId")
+    fun getBookById(bookId: String): Book?
 
 }

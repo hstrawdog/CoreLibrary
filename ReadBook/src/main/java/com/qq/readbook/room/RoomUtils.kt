@@ -27,17 +27,17 @@ object RoomUtils {
      */
     private val bookDatabase: AppDatabase by lazy {
         Room.databaseBuilder(CoreConfig.get().application, AppDatabase::class.java, "books.db")
-            //设置是否允许在主线程做查询操作
-            .allowMainThreadQueries()
-            //设置数据库升级(迁移)的逻辑
-            .addMigrations(CHAPTER_1_2)
-            //默认值是FrameworkSQLiteOpenHelperFactory，设置数据库的factory。比如我们想改变数据库的存储路径可以通过这个函数来实现
+                //设置是否允许在主线程做查询操作
+                .allowMainThreadQueries()
+                //设置数据库升级(迁移)的逻辑
+                .addMigrations(CHAPTER_1_2,CHAPTER_8_9)
+                //默认值是FrameworkSQLiteOpenHelperFactory，设置数据库的factory。比如我们想改变数据库的存储路径可以通过这个函数来实现
 //                .openHelperFactory {  }
-            //设置迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃
+                //设置迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃
 //            .fallbackToDestructiveMigration()
-            //监听数据库，创建和打开的操作
+                //监听数据库，创建和打开的操作
 //            .addCallback()
-            .build()
+                .build()
     }
 
     /**
@@ -45,9 +45,9 @@ object RoomUtils {
      */
     private val bookSourceDatabase: BookSourceDatabase by lazy {
         Room.databaseBuilder(CoreConfig.get().application, BookSourceDatabase::class.java, "BookSource.db")
-            .allowMainThreadQueries()
-            .addMigrations(BOOK_SOURCE_MIGRATION_1_2)
-            .build()
+                .allowMainThreadQueries()
+                .addMigrations(BOOK_SOURCE_MIGRATION_1_2)
+                .build()
     }
 
     /**
@@ -66,18 +66,18 @@ object RoomUtils {
         var dataBase = chapterDatabase.get(dbName)
         if (dataBase == null) {
             dataBase = Room.databaseBuilder(CoreConfig.get().application, ChapterDatabase::class.java, dbName)
-                //设置是否允许在主线程做查询操作
-                .allowMainThreadQueries()
-                //设置数据库升级(迁移)的逻辑
-                .addMigrations()
-                .addMigrations(CHAPTER_1_2)
-                //默认值是FrameworkSQLiteOpenHelperFactory，设置数据库的factory。比如我们想改变数据库的存储路径可以通过这个函数来实现
+                    //设置是否允许在主线程做查询操作
+                    .allowMainThreadQueries()
+                    //设置数据库升级(迁移)的逻辑
+                    .addMigrations()
+                    .addMigrations(CHAPTER_1_2)
+                    //默认值是FrameworkSQLiteOpenHelperFactory，设置数据库的factory。比如我们想改变数据库的存储路径可以通过这个函数来实现
 //                .openHelperFactory {  }
-                //设置迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃
-                .fallbackToDestructiveMigration()
-                //监听数据库，创建和打开的操作
+                    //设置迁移数据库如果发生错误，将会重新创建数据库，而不是发生崩溃
+                    .fallbackToDestructiveMigration()
+                    //监听数据库，创建和打开的操作
 //                .addCallback()
-                .build()
+                    .build()
             chapterDatabase[dbName] = dataBase
         }
         return dataBase
@@ -189,6 +189,10 @@ object RoomUtils {
             database.execSQL("DROP TABLE BookContent")
             // 改名
             database.execSQL("ALTER TABLE BookContent_New RENAME TO BookContent")
+        }
+    }
+    private val CHAPTER_8_9: Migration = object : Migration(8, 9) {
+        override fun migrate(database: SupportSQLiteDatabase) {
         }
     }
 

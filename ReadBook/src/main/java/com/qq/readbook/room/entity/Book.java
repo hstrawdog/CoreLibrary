@@ -92,7 +92,7 @@ public class Book implements Parcelable {
     /**
      * 本地刷新时间
      */
-    private Long refreshTime = 0L;
+    private String refreshTime = "";
     /**
      * 章节数量
      */
@@ -119,11 +119,11 @@ public class Book implements Parcelable {
         this.topTime = topTime;
     }
 
-    public Long getRefreshTime() {
+    public String getRefreshTime() {
         return refreshTime;
     }
 
-    public void setRefreshTime(Long refreshTime) {
+    public void setRefreshTime(String refreshTime) {
         this.refreshTime = refreshTime;
     }
 
@@ -304,9 +304,10 @@ public class Book implements Parcelable {
         dest.writeString(this.lastRead);
         dest.writeString(this.topTime);
         dest.writeByte(this.isUpdate ? (byte) 1 : (byte) 0);
-        dest.writeValue(this.refreshTime);
+        dest.writeString(this.refreshTime);
         dest.writeInt(this.chapterListSize);
         dest.writeInt(this.localType);
+        dest.writeTypedList(this.bookChapterList);
     }
 
     protected Book(Parcel in) {
@@ -326,9 +327,10 @@ public class Book implements Parcelable {
         this.lastRead = in.readString();
         this.topTime = in.readString();
         this.isUpdate = in.readByte() != 0;
-        this.refreshTime = (Long) in.readValue(Long.class.getClassLoader());
+        this.refreshTime = in.readString();
         this.chapterListSize = in.readInt();
         this.localType = in.readInt();
+        this.bookChapterList = in.createTypedArrayList(Chapter.CREATOR);
     }
 
     public static final Creator<Book> CREATOR = new Creator<Book>() {

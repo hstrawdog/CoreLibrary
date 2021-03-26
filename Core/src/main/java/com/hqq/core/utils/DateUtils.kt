@@ -1,5 +1,6 @@
 package com.hqq.core.utils
 
+import android.annotation.SuppressLint
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,8 +35,14 @@ import java.util.*
  */
 object DateUtils {
     private val SDF_THREAD_LOCAL = ThreadLocal<SimpleDateFormat>()
+
+    /**
+     * 时间戳格式转换
+     */
+    private val dayNames = arrayOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
+
     private val defaultFormat: SimpleDateFormat
-        private get() {
+        get() {
             var simpleDateFormat = SDF_THREAD_LOCAL.get()
             if (simpleDateFormat == null) {
                 simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -59,6 +66,7 @@ object DateUtils {
     /**
      * 月日时分秒，0-9前补0
      */
+    @JvmStatic
     fun fillZero(number: Int): String {
         return if (number < 10) "0$number" else "" + number
     }
@@ -66,6 +74,7 @@ object DateUtils {
     /**
      * 根据年份及月份计算每月的天数
      */
+    @JvmStatic
     fun calculateDaysInMonth(year: Int, month: Int): Int {
         // 添加大小月月份并将其转换为list,方便之后的判断
         val bigMonths = arrayOf("1", "3", "5", "7", "8", "10", "12")
@@ -96,6 +105,7 @@ object DateUtils {
      * @param time 秒
      * @return string
      */
+    @JvmStatic
     fun formatTurnSecond(time: String): Long {
         val index1 = time.indexOf(":")
         val index2 = time.indexOf(":", index1 + 1)
@@ -109,6 +119,7 @@ object DateUtils {
      * @param time yyyy-MM-dd HH-mm-ss
      * @return
      */
+    @JvmStatic
     fun getDayInData(time: String): String {
         if (RegexUtils.unNull(time)) {
             val str = time.split(" ".toRegex()).toTypedArray()
@@ -123,6 +134,7 @@ object DateUtils {
      * @param time 00:00:00
      * @return 000000
      */
+    @JvmStatic
     fun format2Second(time: String): Long {
         if (RegexUtils.isNull(time)) {
             return 0
@@ -152,6 +164,7 @@ object DateUtils {
      * @param time 00:00:00:00
      * @return 000000
      */
+    @JvmStatic
     fun format2Millisecond(time: String): Long {
         if (RegexUtils.isNull(time)) {
             return 0
@@ -190,6 +203,7 @@ object DateUtils {
      * @param second 秒
      * @return string 00:00:00
      */
+    @JvmStatic
     fun change(second: Int): String {
         var h = 0
         var d = 0
@@ -222,6 +236,7 @@ object DateUtils {
      * @param leftsecond 秒
      * @return string
      */
+    @JvmStatic
     fun formatTime(leftsecond: Int): String {
         val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()) as Long
         val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()) as Long
@@ -230,15 +245,15 @@ object DateUtils {
     }
 
     /**
-     * @param leftsecond 秒
+     * @param second 秒
      * @return string
      */
-    @JvmOverloads
-    fun formatTime2Second(leftsecond: Int, type: Int = 1): String {
-        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()) as Long
-        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()) as Long
-        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Long
-        val second: Long = Math.floor(leftsecond - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble()) as Long
+    @JvmStatic
+    fun formatTime2Second(second: Int, type: Int = 1): String {
+        val day: Long = Math.floor(second / (60 * 60 * 24).toDouble()) as Long
+        val hour: Long = Math.floor((second - day * 24 * 60 * 60) / 3600.toDouble()) as Long
+        val minute: Long = Math.floor((second - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Long
+        val second: Long = Math.floor(second - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble()) as Long
         val stringBuilder = StringBuilder("剩")
         if (type == 1) {
             if (day > 0) {
@@ -260,6 +275,7 @@ object DateUtils {
      * @param date
      * @return
      */
+    @JvmStatic
     fun string2Millisecond(date: String?): Long {
         if (RegexUtils.isNull(date)) {
             return 0L
@@ -272,14 +288,17 @@ object DateUtils {
         return 0L
     }
 
+    @JvmStatic
     fun millis2String(millis: Long, simpleDateFormat: SimpleDateFormat): String {
         return simpleDateFormat.format(Date(millis))
     }
 
+    @JvmStatic
     fun millis2String(millis: Long): String {
         return defaultFormat.format(Date(millis))
     }
 
+    @JvmStatic
     fun formatStringTime(time: String?, format: String?): String {
         val simpleDateFormat = SimpleDateFormat(format, Locale.getDefault())
         try {
@@ -288,6 +307,116 @@ object DateUtils {
             e.printStackTrace()
         }
         return ""
+    }
+
+    //将时间转换成日期
+    @JvmStatic
+    fun dateConvert(time: Long, pattern: String): String {
+        val date = Date(time)
+        @SuppressLint("SimpleDateFormat") val format = SimpleDateFormat(pattern)
+        return format.format(date)
+    }
+
+    @JvmStatic
+    fun dateConvert(timeSamp: Long, flag: Int): String {
+        var time = timeSamp
+        time *= 1000
+        val result: String
+        val todayCalendar = Calendar.getInstance()
+        val otherCalendar = Calendar.getInstance()
+        otherCalendar.timeInMillis = time
+
+        val timeFormat = "M月d日"
+        val yearTimeFormat = "yyyy年M月d日"
+
+        val yearTemp = todayCalendar.get(Calendar.YEAR) == otherCalendar.get(Calendar.YEAR)
+        if (yearTemp) {
+            val todayMonth = todayCalendar.get(Calendar.MONTH)
+            val otherMonth = otherCalendar.get(Calendar.MONTH)
+            if (todayMonth == otherMonth) {//表示是同一个月
+                when (todayCalendar.get(Calendar.DATE) - otherCalendar.get(Calendar.DATE)) {
+                    0 -> result = getHourAndMin(time)
+                    1 -> if (flag == 1) {
+                        result = "昨天 "
+                    } else {
+                        result = "昨天 " + getHourAndMin(time)
+                    }
+                    2, 3, 4, 5, 6 -> {
+                        val dayOfMonth = otherCalendar.get(Calendar.WEEK_OF_MONTH)
+                        val todayOfMonth = todayCalendar.get(Calendar.WEEK_OF_MONTH)
+                        if (dayOfMonth == todayOfMonth) {//表示是同一周
+                            val dayOfWeek = otherCalendar.get(Calendar.DAY_OF_WEEK)
+                            if (dayOfWeek != 1) {//判断当前是不是星期日     如想显示为：周日 12:09 可去掉此判断
+                                result = dayNames[otherCalendar.get(Calendar.DAY_OF_WEEK) - 1]
+                            } else {
+                                result = getTime(time, timeFormat)
+                            }
+                        } else {
+                            result = getTime(time, timeFormat)
+                        }
+                    }
+                    else -> result = getTime(time, timeFormat)
+                }
+            } else {
+                result = getTime(time, timeFormat)
+            }
+        } else {
+            result = getYearTime(time, yearTimeFormat)
+        }
+        return result
+    }
+
+    /**
+     * 当天的显示时间格式
+     */
+    @JvmStatic
+    fun getHourAndMin(time: Long): String {
+        val format = SimpleDateFormat("HH:mm")
+        return format.format(Date(time))
+    }
+
+    /**
+     * 不同一周的显示时间格式
+     */
+    @JvmStatic
+    fun getTime(time: Long, timeFormat: String): String {
+        val format = SimpleDateFormat(timeFormat)
+        return format.format(Date(time))
+    }
+
+    /**
+     * 不同年的显示时间格式
+     */
+    @JvmStatic
+    fun getYearTime(time: Long, yearTimeFormat: String): String {
+        val format = SimpleDateFormat(yearTimeFormat)
+        return format.format(Date(time))
+    }
+
+    /**
+     *
+     */
+    @JvmStatic
+    fun formatData(data: String): String {
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        format.timeZone = TimeZone.getTimeZone("GMT+08")
+        val dateOld = format.parse(data)
+        val dateNow = Date()
+        val result = dateNow.time - dateOld.time
+        print(result)
+        val minute = result / 1000 / 60
+        val hour = minute / 60
+        val day = hour / 24
+        if (minute < 60) {
+            return minute.toString() + "分钟前"
+        } else if (hour < 24) {
+            return hour.toString() + "小时前"
+        } else if (day < 7) {
+            return day.toString() + "天前"
+        } else {
+            return SimpleDateFormat("MM-dd", Locale.getDefault()).format(dateOld)
+        }
+
     }
 
     @JvmStatic

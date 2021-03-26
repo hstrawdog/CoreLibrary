@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.hqq.core.utils.DateUtils;
 import com.hqq.core.utils.ScreenUtils;
 import com.hqq.core.utils.log.LogUtils;
 import com.qq.readbook.R;
@@ -27,7 +28,6 @@ import com.qq.readbook.room.entity.Book;
 import com.qq.readbook.room.entity.Chapter;
 import com.qq.readbook.repository.ReadRepository;
 import com.qq.readbook.room.entity.LocalRecord;
-import com.qq.readbook.weight.page.DateUtils;
 import com.qq.readbook.weight.page.PageMode;
 import com.qq.readbook.weight.page.PageStyle;
 import com.qq.readbook.weight.page.PageView;
@@ -899,8 +899,7 @@ public abstract class PageLoader {
         //电极的制作
         int polarLeft = visibleRight - polarWidth;
         int polarTop = visibleBottom - (outFrameHeight + polarHeight) / 2;
-        Rect polar = new Rect(polarLeft, polarTop, visibleRight,
-                polarTop + polarHeight - ScreenUtils.dip2px(2));
+        Rect polar = new Rect(polarLeft, polarTop, visibleRight, polarTop + polarHeight - ScreenUtils.dip2px(2));
 
         mBatteryPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(polar, mBatteryPaint);
@@ -917,8 +916,7 @@ public abstract class PageLoader {
 
         //内框的制作
         float innerWidth = (outFrame.width() - innerMargin * 2 - border) * (mBatteryLevel / 100.0f);
-        RectF innerFrame = new RectF(outFrameLeft + border + innerMargin, outFrameTop + border + innerMargin,
-                outFrameLeft + border + innerMargin + innerWidth, outFrameBottom - border - innerMargin);
+        RectF innerFrame = new RectF(outFrameLeft + border + innerMargin, outFrameTop + border + innerMargin, outFrameLeft + border + innerMargin + innerWidth, outFrameBottom - border - innerMargin);
 
         mBatteryPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(innerFrame, mBatteryPaint);

@@ -18,6 +18,7 @@ import com.qq.readbook.room.entity.Chapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * @Author : huangqiqiang
@@ -30,6 +31,11 @@ class BookDetailViewModel : BaseViewModel() {
 
     val bookLiveData = MutableLiveData<Book>()
     val chapters = MutableLiveData<List<Chapter>>()
+
+    /**
+     *  true  加入书架
+     *  false 移除
+     */
     var addBookMenu = MutableLiveData<Boolean>(true)
     val currChapter = MutableLiveData<Int>(0)
     override fun initData(extras: Bundle?) {
@@ -96,25 +102,32 @@ class BookDetailViewModel : BaseViewModel() {
      * @param it Book
      */
     private fun readLocalBook(it: Book) {
-        // 插入数据
-        val dataBaseBook = RoomUtils.getBookDao().getBookById(it.bookId)
-        if (dataBaseBook == null) {
-            RoomUtils.getBookDao().apply {
-                insertAll(it)
-                it.id = getBookById(it.bookId)?.id ?: 0
-
+        CoroutineScope(Dispatchers.IO).launch {
+            // 插入数据
+            val dataBaseBook = RoomUtils.getBookDao().getBookById(it.bookId)
+            if (dataBaseBook == null) {
+                RoomUtils.getBookDao().apply {
+                    insertAll(it)
+                    it.id = getBookById(it.bookId)?.id ?: 0
+                }
+                withContext(Dispatchers.Main) {
+                    bookLiveData.value = it
+                }
+                getBookRecord(it)?.let { it2 ->
+                    withContext(Dispatchers.Main) {
+                        currChapter.value = it2.chapter
+                    }
+                }
+            } else {
+                // 用本地数据替换
+                withContext(Dispatchers.Main) {
+                    bookLiveData.setValue(dataBaseBook)
+                }
             }
-            bookLiveData.postValue(it)
-            getBookRecord(it)?.let { it2 ->
-                currChapter.postValue(it2.chapter)
+            withContext(Dispatchers.Main) {
+                addBookMenu.value = (bookLiveData.value?.localType == 0)
             }
-        } else {
-            // 用本地数据替换
-            bookLiveData.postValue(dataBaseBook)
         }
-        addBookMenu.postValue(bookLiveData.value?.localType == 0)
-
-
     }
 
     /**
@@ -131,7 +144,7 @@ class BookDetailViewModel : BaseViewModel() {
             if (CommentUtils.isRefresh(it, readSource.searchDetail)) {
                 BookDetailRepository.readBookDetail(it, readSource, object : BookDetailRepository.ILatestChapter {
                     override fun onEndCall(book: Book, isSuccess: Boolean) {
-                        bookLiveData.postValue(book)
+                        bookLiveData.setValue(book)
                     }
                 })
             }

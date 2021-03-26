@@ -5,14 +5,17 @@ import android.content.Context
 import android.provider.Settings
 import android.util.Log
 import android.view.WindowManager
+import com.hqq.core.utils.log.LogUtils
 
 /**
- * Created by zlj
- * 调节亮度的工具类
+ * @Author : huangqiqiang
+ * @Package : com.qq.readbook.weight.page
+ * @FileName :   BrightnessUtils.kt
+ * @Date  : 2021/3/26 0026  下午 2:20
+ * @Email :  qiqiang213@gmail.com
+ * @Describe :  亮度调节工具
  */
-
 object BrightnessUtils {
-    private val TAG = "BrightnessUtils"
 
     /**
      * 判断是否开启了自动亮度调节
@@ -21,8 +24,8 @@ object BrightnessUtils {
         var isAuto = false
         try {
             isAuto = Settings.System.getInt(
-                activity.contentResolver,
-                Settings.System.SCREEN_BRIGHTNESS_MODE
+                    activity.contentResolver,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE
             ) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
         } catch (e: Settings.SettingNotFoundException) {
             e.printStackTrace()
@@ -39,8 +42,8 @@ object BrightnessUtils {
             Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
         }
         return Settings.System.putInt(activity.getContentResolver(),
-            Settings.System.SCREEN_BRIGHTNESS_MODE,
-            value)
+                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                value)
     }
 
 
@@ -83,14 +86,14 @@ object BrightnessUtils {
         val resolver = activity.contentResolver
         try {
             nowBrightnessValue = Settings.System.getFloat(resolver, Settings.System.SCREEN_BRIGHTNESS)
-            Log.d(TAG, "getAutoScreenBrightness: $nowBrightnessValue")
+            LogUtils.d("getAutoScreenBrightness: $nowBrightnessValue")
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
         //转换范围为 (0~255)
         val fValue = nowBrightnessValue * 225.0f
-        Log.d(TAG, "brightness: $fValue")
+        LogUtils.d("brightness: $fValue")
         return fValue.toInt()
     }
 
@@ -103,7 +106,7 @@ object BrightnessUtils {
             val lp = activity.window.attributes
             //将 0~255 范围内的数据，转换为 0~1
             lp.screenBrightness = java.lang.Float.valueOf(brightness.toFloat()) * (1f / 255f)
-            Log.d(TAG, "lp.screenBrightness == " + lp.screenBrightness)
+            LogUtils.d("lp.screenBrightness == " + lp.screenBrightness)
             activity.window.attributes = lp
         } catch (ex: Exception) {
             ex.printStackTrace()
