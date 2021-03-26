@@ -3,6 +3,7 @@ package com.hqq.core.utils
 import android.app.ActivityManager
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
 import android.net.Uri
@@ -15,6 +16,7 @@ import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.hqq.core.CoreConfig
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils
+import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.math.BigDecimal
 
@@ -266,19 +268,19 @@ object FileUtils {
         if (megaByte < 1) {
             val result1 = BigDecimal(java.lang.Double.toString(kiloByte))
             return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "KB"
+                    .toPlainString() + "KB"
         }
         val gigaByte = megaByte / 1024
         if (gigaByte < 1) {
             val result2 = BigDecimal(java.lang.Double.toString(megaByte))
             return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "MB"
+                    .toPlainString() + "MB"
         }
         val teraBytes = gigaByte / 1024
         if (teraBytes < 1) {
             val result3 = BigDecimal(java.lang.Double.toString(gigaByte))
             return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "GB"
+                    .toPlainString() + "GB"
         }
         val result4 = BigDecimal(teraBytes)
         return (result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
@@ -365,7 +367,7 @@ object FileUtils {
     fun saveFile2Download(context: Context, fileName: String, data: String) {
         //使用ContentResolver创建需要操作的文件
         val outputStream =
-            getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
+                getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
         outputStream?.write(data.toByteArray())
         outputStream?.close()
     }
@@ -426,7 +428,7 @@ object FileUtils {
                 selectionArgs = arrayOf(dirName)
             }
             val resultCursor = resolver?.query(downloadUri, null,
-                selection, selectionArgs, null)
+                    selection, selectionArgs, null)
             if (resultCursor != null) {
                 val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
                 while (resultCursor.moveToNext()) {
@@ -490,7 +492,7 @@ object FileUtils {
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
     fun saveBitmap2Picture(context: Context = CoreConfig.getApplicationContext(),
-            bitmap: Bitmap, folderName: String = "", fileName: String) {
+                           bitmap: Bitmap, folderName: String = "", fileName: String) {
         val values = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
             put(MediaStore.Images.Media.MIME_TYPE, "image/png")
@@ -582,7 +584,11 @@ object FileUtils {
      * @throws IOException
      */
     @Throws(IOException::class)
-    fun saveBitmap(bm: Bitmap, filePath: String = getExternalPicturesPath() + getDefFileName(".png")) {
+    fun saveBitmap(bm: Bitmap?, filePath: String = getExternalPicturesPath() + getDefFileName(".png")) {
+        if (bm == null) {
+            LogUtils.d(" saveBitmap   is  null  ")
+            return
+        }
         val myCaptureFile = File(filePath)
         if (!myCaptureFile.exists()) {
             myCaptureFile.createNewFile()
@@ -606,12 +612,7 @@ object FileUtils {
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {
-            try {
-                bitmap.recycle()
-                os.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+            os.close()
         }
     }
     //endregion
@@ -662,7 +663,7 @@ object FileUtils {
      * @property fileName String
      * @constructor
      */
-    class SaveBitmapBuild(var bitmap: Bitmap) {
+    class SaveBitmapBuild(var bitmap: Bitmap?) {
         /**
          *  默认读取当前显示的界面
          */
@@ -677,14 +678,19 @@ object FileUtils {
          *  默认保存在picture 目录下
          */
         fun save() {
-            context?.let {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                    saveBitmap2Picture(it, bitmap, fileName = fileName)
+            if (bitmap != null && context != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    saveBitmap2Picture(context!!, bitmap!!, fileName = fileName)
+                    ToastUtils.showToast("保存成功")
                 } else {
                     //Android 10  一下 需要文件读写权限
                     PermissionsUtils.requestStorage(object : PermissionsResult {
                         override fun onPermissionsResult(status: Boolean) {
                             saveBitmap(bitmap, getExternalPicturesPath() + "/" + fileName)
+                            // 发送广播 通知相册
+                            MediaStore.Images.Media.insertImage(context!!.contentResolver, getExternalPicturesPath() + "/" + fileName, fileName, null)
+                            context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(getExternalPicturesPath() + "/" + fileName))))
+                            ToastUtils.showToast("保存成功")
                         }
                     })
                 }

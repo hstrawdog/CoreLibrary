@@ -1,11 +1,9 @@
-package com.hqq.core.utils;
+package com.hqq.core.utils
 
-import android.app.Application;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-
-import com.hqq.core.CoreConfig;
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import com.hqq.core.CoreConfig.Companion.getApplicationContext
 
 /**
  * @Author : huangqiqiang
@@ -14,7 +12,15 @@ import com.hqq.core.CoreConfig;
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-public class StringUtils {
+object StringUtils {
+    /**
+     * 月日时分秒，0-9前补0
+     */
+    @JvmStatic
+    fun fillZero(number: Int): String {
+        return if (number < 10) "0$number" else "" + number
+    }
+
 
     /**
      * 复制内容到剪贴板
@@ -22,17 +28,13 @@ public class StringUtils {
      * @param content
      * @param context
      */
-    public static void copyContentToClipboard(String content, Context context) {
+    @JvmOverloads
+    fun copyContentToClipboard(content: String?, context: Context = getApplicationContext()) {
         //获取剪贴板管理器：
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         // 创建普通字符型ClipData
-        ClipData mClipData = ClipData.newPlainText("Label", content);
+        val mClipData = ClipData.newPlainText("Label", content)
         // 将ClipData内容放到系统剪贴板里。
-        cm.setPrimaryClip(mClipData);
+        cm.setPrimaryClip(mClipData)
     }
-
-    public static void copyContentToClipboard(String content) {
-        copyContentToClipboard(content, CoreConfig.Companion.getApplicationContext());
-    }
-
 }

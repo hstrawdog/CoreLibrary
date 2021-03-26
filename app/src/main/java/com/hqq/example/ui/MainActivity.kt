@@ -26,6 +26,7 @@ import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
+import com.hqq.example.ui.file.SaveBitmapActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
@@ -74,7 +75,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        RoomActivity.open(this)
 //        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
 //        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
-
+        startActivity(Intent(this, SaveBitmapActivity::class.java))
         onBooks()
     }
 

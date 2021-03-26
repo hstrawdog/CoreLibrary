@@ -3,6 +3,7 @@ package com.hqq.core.utils
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Environment
@@ -10,8 +11,11 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.view.View.DRAWING_CACHE_QUALITY_HIGH
+import android.widget.ImageView
 import java.io.*
 import java.util.*
+
 
 /**
  * @Author : huangqiqiang
@@ -25,7 +29,7 @@ object BitmapUtils {
 
     fun generatBitmap(v: View): Bitmap {
         val bitmap = Bitmap.createBitmap(v.width, v.height,
-            Bitmap.Config.ARGB_8888)
+                Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         v.draw(canvas)
         return bitmap
@@ -66,15 +70,14 @@ object BitmapUtils {
         // 其次把文件插入到系统图库
         try {
             MediaStore.Images.Media.insertImage(context.contentResolver,
-                file.absolutePath, fileName, null)
+                    file.absolutePath, fileName, null)
         } catch (e: FileNotFoundException) {
             ToastUtils.showToast(context, "保存到相册失败！")
             e.printStackTrace()
         }
         ToastUtils.showToast(context, "已保存到手机相册！")
         // 最后通知图库更新
-        context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-            Uri.fromFile(File(appDir.path))))
+        context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(appDir.path))))
     }
 
     /**
@@ -168,7 +171,7 @@ object BitmapUtils {
         val scaleHeight = h.toFloat() / height
         matrix.postScale(scaleWidth, scaleHeight)
         return Bitmap.createBitmap(oldbmp, 0, 0, width, height,
-            matrix, true)
+                matrix, true)
     }
 
     private fun drawableToBitmap(drawable: Drawable): Bitmap {
@@ -182,17 +185,51 @@ object BitmapUtils {
         return bitmap
     }
 
+
     /**
-     *  view  2 Bitmap
+     * 该方式原理主要是：View组件显示的内容可以通过cache机制保存为bitmap
      * @param view View
      * @return Bitmap?
      */
-    fun convertViewToBitmap(view: View): Bitmap? {
-        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
-        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-        view.buildDrawingCache()
-        return view.drawingCache
+    fun createBitmapFromView(view: View): Bitmap? {
+        var bitmap: Bitmap? = null
+        //开启view缓存bitmap
+        view.isDrawingCacheEnabled = true
+        //设置view缓存Bitmap质量
+        view.drawingCacheQuality = DRAWING_CACHE_QUALITY_HIGH
+        //获取缓存的bitmap
+        val cache = view.drawingCache
+        if (cache != null && !cache.isRecycled) {
+            bitmap = Bitmap.createBitmap(cache)
+        }
+        //销毁view缓存bitmap
+        view.destroyDrawingCache()
+        //关闭view缓存bitmap
+        view.isDrawingCacheEnabled = false
+        return bitmap
+    }
+
+    /**
+     *  view 2 bitmap 第二种方式
+     * @param view View
+     * @return Bitmap?
+     */
+    fun createBitmapFromView2(view: View): Bitmap? {
+        //是ImageView直接获取
+        if (view is ImageView) {
+            val drawable: Drawable = (view as ImageView).getDrawable()
+            if (drawable is BitmapDrawable) {
+                return drawable.bitmap
+            }
+        }
+        view.clearFocus()
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        if (bitmap != null) {
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+            canvas.setBitmap(null)
+        }
+        return bitmap
     }
 
     @Synchronized
