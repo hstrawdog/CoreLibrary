@@ -48,7 +48,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks {
 
     private fun initConfig() {
         try {
-            val inputStream = applicationContext.assets.open("2.json")
+            val inputStream = applicationContext.assets.open("1.json")
             //            val inputStream = applicationContext.assets.open("2.json")
             val inputStreamReader = InputStreamReader(inputStream)
             val jsonReader = JsonReader(inputStreamReader)

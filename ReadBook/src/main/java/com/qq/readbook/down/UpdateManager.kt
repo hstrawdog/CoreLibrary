@@ -59,10 +59,11 @@ object UpdateManager : UpdateInterfaces {
     override fun loadSuccess(book: Book?) {
         if (book != null) {
             LoadBookMap.remove(book.bookId)
+            liveBook.value = book!!
         }
         if (needLoadBookMap.size == 0) {
             // 全部执行完毕
-            LogUtils.e("", "全部执行完毕")
+            LogUtils.e("全部执行完毕")
         } else {
             executeNextRequest()
         }
@@ -85,7 +86,6 @@ object UpdateManager : UpdateInterfaces {
                 BookDetailRepository.readBookDetail(book, bookSource, object : BookDetailRepository.ILatestChapter {
                     override fun onEndCall(book: Book, isSuccess: Boolean) {
                         loadSuccess(book)
-                        liveBook.value = book
                     }
                 })
             } else {

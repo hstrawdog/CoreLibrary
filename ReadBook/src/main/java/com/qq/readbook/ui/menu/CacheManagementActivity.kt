@@ -4,11 +4,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.glide.ImageLoadUtils
 import com.hqq.core.ui.list.BaseListActivity
-import com.hqq.core.utils.FileUtils
+import com.hqq.core.utils.file.FileUtils
 import com.qq.readbook.R
 import com.qq.readbook.room.RoomUtils
 import com.qq.readbook.room.entity.Book
-import com.qq.readbook.ui.menu.CacheManagementActivity.CacheAdapter
 
 /**
  * @Author : huangqiqiang

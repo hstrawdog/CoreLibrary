@@ -4,6 +4,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.glide.ImageLoadUtils
+import com.hqq.core.utils.DateUtils
+import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.R
 import com.qq.readbook.down.UpdateManager
 import com.qq.readbook.repository.ReadRepository
@@ -41,15 +43,27 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
                 }
             }
         }
+        LogUtils.e("刷新item: " + item.name)
+        LogUtils.e("刷新item: " +(System.currentTimeMillis() - DateUtils.string2Millisecond(item.refreshTime)))
+
+    LogUtils.e(item.isNeedRefresh    )
         if (item.topTime.isNullOrEmpty()) {
             holder.setText(R.id.tv_top, "置顶")
         } else {
             holder.setText(R.id.tv_top, "取消置顶")
         }
-
-        // 刷新逻辑
-
-        UpdateManager.handlerBook(item)
+        if ((System.currentTimeMillis() - DateUtils.string2Millisecond(item.refreshTime)) > (1 * 60 * 1000)) {
+            if (item.isNeedRefresh) {
+                LogUtils.e4Debug("添加刷新: " + item.name)
+                holder.setGone(R.id.pb_bar, false)
+                // 刷新逻辑
+                UpdateManager.handlerBook(item)
+            } else {
+                holder.setGone(R.id.pb_bar, true)
+            }
+        }else{
+            holder.setGone(R.id.pb_bar, true)
+        }
 
     }
 

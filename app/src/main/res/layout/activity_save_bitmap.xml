@@ -21,6 +21,15 @@
         android:gravity="center"
         android:text="保存View" />
 
+    <TextView
+        android:layout_marginTop="@dimen/x20"
+        android:id="@+id/textView29"
+        style="@style/def_text.28.333"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x80"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="保存View" />
 
 
 </LinearLayout>

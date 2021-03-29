@@ -110,6 +110,17 @@ public class Book implements Parcelable {
     @Ignore
     List<Chapter> bookChapterList = new ArrayList();
 
+    @Ignore
+    boolean isNeedRefresh = true;
+
+
+    public boolean isNeedRefresh() {
+        return isNeedRefresh;
+    }
+
+    public void setNeedRefresh(boolean needRefresh) {
+        isNeedRefresh = needRefresh;
+    }
 
     public String getTopTime() {
         return topTime;

@@ -9,6 +9,8 @@ import com.google.gson.FieldAttributes
  * @Date : 下午 5:55
  * @Email : qiqiang213@gmail.com
  * @Describe :  注解忽略字段
+ * GsonBuilder()
+ * .setExclusionStrategies( GsonExclusionStrategy())
  */
 class GsonExclusionStrategy : ExclusionStrategy {
     /**

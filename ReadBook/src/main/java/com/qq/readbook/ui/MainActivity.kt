@@ -1,18 +1,13 @@
 package com.qq.readbook.ui
 
 import android.content.Intent
-import android.os.Handler
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.hqq.core.permission.PermissionsResult
-import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.ui.list.BaseVmListActivity
-import com.hqq.core.utils.BitmapUtils
 import com.hqq.core.utils.DateUtils
-import com.hqq.core.utils.FileUtils
 import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.BR
 import com.qq.readbook.R
@@ -87,11 +82,18 @@ class MainActivity : BaseVmListActivity<MainViewModel, ActivityMainBinding>() {
             }
         }
         UpdateManager.liveBook.observe(this) {
-            //  监听到 更新的数据
+            synchronized(this) {
+                //  监听到 更新的数据
+                it.isNeedRefresh=false
+                var position = adapter.data.indexOf(it)
+                adapter.setData(position, it)
 
-            var position = adapter.data.indexOf(it)
-            adapter.notifyItemChanged(position)
-            LogUtils.e("通知了第${position}条")
+//            adapter.notifyItemChanged(position)
+//            adapter.getViewByPosition(position,R.id.pb_bar)?.visibility=View.GONE
+
+                LogUtils.e("通知了第${position}条")
+            }
+
         }
     }
 

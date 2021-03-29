@@ -2,7 +2,7 @@ package com.hqq.example.ui.info
 
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity
-import com.hqq.core.utils.FileUtils
+import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.TextSpannableBuilder
 import com.hqq.example.R
 

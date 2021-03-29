@@ -1,9 +1,8 @@
-package com.hqq.core.utils
+package com.hqq.core.utils.file
 
 import android.app.ActivityManager
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
 import android.net.Uri
@@ -14,8 +13,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.hqq.core.CoreConfig
-import com.hqq.core.permission.PermissionsResult
-import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.math.BigDecimal
@@ -63,16 +60,20 @@ object FileUtils {
     //region  内部私有存储
     /**
      * @param context
-     * @return /data/data/package/cache
+     * @return /storage/emulated/0/Android/data/com.hqq.core/files
      */
     @JvmStatic
     fun getCacheDir(context: Context): String {
+
+//        return context.getExternalFilesDir("")!!.path
         return context.cacheDir.path
+
+
     }
 
     /**
      * @param context
-     * @return /data/data/package/files
+     * @return /data/user/0/com.hqq.core/files
      */
     @JvmStatic
     fun getFilesDir(context: Context): String {
@@ -91,7 +92,7 @@ object FileUtils {
 
     /**
      * @param context
-     * @return /data/data/package/files
+     * @return /data/user/0/com.hqq.core/files
      */
     @JvmStatic
     fun getFileStreamPath(context: Context): String {
@@ -652,51 +653,6 @@ object FileUtils {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-
-    /**
-     *  保存图片 辅助类
-     *  Android 文件 存储 区分10以上 contentProvider存储 与Android10 一下File 操作
-     * @property bitmap Bitmap
-     * @property context Context?
-     * @property fileName String
-     * @constructor
-     */
-    class SaveBitmapBuild(var bitmap: Bitmap?) {
-        /**
-         *  默认读取当前显示的界面
-         */
-        var context: Context? = CoreConfig.get().currActivity
-
-        /**
-         *  文件名称
-         */
-        var fileName: String = getDefFileName(".png")
-
-        /**
-         *  默认保存在picture 目录下
-         */
-        fun save() {
-            if (bitmap != null && context != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    saveBitmap2Picture(context!!, bitmap!!, fileName = fileName)
-                    ToastUtils.showToast("保存成功")
-                } else {
-                    //Android 10  一下 需要文件读写权限
-                    PermissionsUtils.requestStorage(object : PermissionsResult {
-                        override fun onPermissionsResult(status: Boolean) {
-                            saveBitmap(bitmap, getExternalPicturesPath() + "/" + fileName)
-                            // 发送广播 通知相册
-                            MediaStore.Images.Media.insertImage(context!!.contentResolver, getExternalPicturesPath() + "/" + fileName, fileName, null)
-                            context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(getExternalPicturesPath() + "/" + fileName))))
-                            ToastUtils.showToast("保存成功")
-                        }
-                    })
-                }
-            }
-        }
-
     }
 
 }
