@@ -57,7 +57,8 @@ public class HttpDownloader extends HttpTask {
 //        RandomAccessFile savedFile = null;
         RandomAccessFile randomAccessFile = null;
         File file = null;
-        long downloadLength = 0;   //记录已经下载的文件长度
+        //记录已经下载的文件长度
+        long downloadLength = 0;
         long sum = 0;
         file = new File(savePath);
         if (file.exists()) {
@@ -66,6 +67,7 @@ public class HttpDownloader extends HttpTask {
             sum = downloadLength;
             //LogUtil.log(TAG, "downloadFromBreakPoint  file exists, file.length=" + downloadLength);
         } else {
+            //获取 获取父目录
             File parentDir = file.getParentFile();
             if (parentDir == null) {
                 //LogUtil.log(TAG, "downloadFromBreakPoint  getParentFile failed");
@@ -110,7 +112,6 @@ public class HttpDownloader extends HttpTask {
             //urlConn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
             //设置客户端与服务连接类型
             urlConn.addRequestProperty("Connection", "Keep-Alive");
-
             if (downloadLength > 0) {
                 // 设置断点续传的开始位置
                 urlConn.setRequestProperty("Range", "bytes=" + downloadLength + "-");
@@ -118,20 +119,21 @@ public class HttpDownloader extends HttpTask {
             // 判断请求是否成功
             int responseCode = urlConn.getResponseCode();
             //LogUtil.log(TAG, "downloadFromBreakPoint  responseCode=" + responseCode);
-            if (HttpURLConnection.HTTP_OK == responseCode || HttpURLConnection.HTTP_PARTIAL == responseCode) { //连接成功
+            //连接成功
+            if (HttpURLConnection.HTTP_OK == responseCode || HttpURLConnection.HTTP_PARTIAL == responseCode) {
                 //文件总长度,如果是200，才能获取全部长度，不然只能获取剩余的长度
                 int contentLength = urlConn.getContentLength();
                 //LogUtil.log(TAG, "downloadFromBreakPoint  contentLength=" + contentLength);
                 //这个才是总的长度
-	        	contentLength += sum;
+                contentLength += sum;
 
-                if(downloadLength == contentLength){
+                if (downloadLength == contentLength) {
                     urlConn.disconnect();
-                    if(callback != null){
+                    if (callback != null) {
                         callback.onDownloaded();
                     }
                     return;
-                }else if(downloadLength > contentLength){
+                } else if (downloadLength > contentLength) {
                     //LogUtil.log(TAG, "downloadFromBreakPoint  downloadLength > contentLength  delete");
                     file.delete();
                     downloadLength = 0;

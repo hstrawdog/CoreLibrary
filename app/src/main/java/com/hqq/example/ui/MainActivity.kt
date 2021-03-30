@@ -70,7 +70,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
 //        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
 //        startActivity(Intent(this, SaveBitmapActivity::class.java))
-        startActivity(Intent(this, DownLoadActivity::class.java))
+//        startActivity(Intent(this, DownLoadActivity::class.java))
+        startActivity(Intent(this, FilePathActivity::class.java))
         onBooks()
     }
 

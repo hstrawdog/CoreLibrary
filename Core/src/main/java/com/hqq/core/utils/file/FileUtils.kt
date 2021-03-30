@@ -60,14 +60,21 @@ object FileUtils {
     //region  内部私有存储
     /**
      * @param context
-     * @return /storage/emulated/0/Android/data/com.hqq.core/files
+     * @return /data/user/0/com.hqq.core/cache
      */
     @JvmStatic
     fun getCacheDir(context: Context): String {
-//        return context.getExternalFilesDir("")!!.path
         return context.cacheDir.path
+    }
 
-
+    /**
+     *
+     * @param context Context
+     * @return String /data/user/0/com.hqq.core/cache
+     */
+    @JvmStatic
+    fun getCodeCacheDir(context: Context): String {
+        return context.codeCacheDir.path
     }
 
     /**
@@ -80,25 +87,6 @@ object FileUtils {
     }
 
     /**
-     *
-     * 内部存储下的私有目录
-     * @return String
-     */
-    @JvmStatic
-    fun getDataBaseDir(fileName: String): String {
-        return CoreConfig.getApplicationContext().getDatabasePath(fileName)?.path + ""
-    }
-
-    /**
-     * @param context
-     * @return /data/user/0/com.hqq.core/files
-     */
-    @JvmStatic
-    fun getFileStreamPath(context: Context): String {
-        return context.getFileStreamPath("").path
-    }
-
-    /**
      * 同上
      *
      * @param context
@@ -106,8 +94,18 @@ object FileUtils {
      * @return /data/data/package/files/fileName
      */
     @JvmStatic
-    fun getFileStreamPath(context: Context, fileName: String?): String {
-        return context.getFileStreamPath("").path
+    fun getFileStreamPath(context: Context, fileName: String = ""): String {
+        return context.getFileStreamPath(fileName).path
+    }
+
+    /**
+     *
+     * 内部存储下的私有目录
+     * @return String
+     */
+    @JvmStatic
+    fun getDataBaseDir(fileName: String): String {
+        return CoreConfig.getApplicationContext().getDatabasePath(fileName)?.path + ""
     }
     //endregion
 
@@ -162,6 +160,10 @@ object FileUtils {
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).path
     }
 
+    /**
+     *  下载地址地址
+     * @return String
+     */
     open fun getExternalDownloadsPath(): String {
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path
     }

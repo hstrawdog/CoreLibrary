@@ -99,8 +99,12 @@ public class HttpClient {
     }
 
     private void promoteCalls() {
-        if (runningAsyncCalls.size() >= maxRequests) return; // Already running max capacity.
-        if (readyAsyncCalls.isEmpty()) return; // No ready calls to promote.
+        if (runningAsyncCalls.size() >= maxRequests) {
+            return; // Already running max capacity.
+        }
+        if (readyAsyncCalls.isEmpty()) {
+            return; // No ready calls to promote.
+        }
 
         for (Iterator<HttpTask> i = readyAsyncCalls.iterator(); i.hasNext(); ) {
             HttpTask call = i.next();
@@ -111,7 +115,9 @@ public class HttpClient {
                 executorService().execute(call);
             }
 
-            if (runningAsyncCalls.size() >= maxRequests) return; // Reached max capacity.
+            if (runningAsyncCalls.size() >= maxRequests) {
+                return; // Reached max capacity.
+            }
         }
     }
 
