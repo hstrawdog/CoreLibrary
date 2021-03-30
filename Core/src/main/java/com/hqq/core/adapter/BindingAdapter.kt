@@ -1,6 +1,9 @@
-package com.qq.readbook.utils
+package com.hqq.core.adapter
 
+import android.view.View
 import android.widget.ImageView
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.databinding.BindingAdapter
 import com.hqq.core.glide.ImageLoadUtils
 
@@ -18,6 +21,13 @@ object BindingAdapter {
         if (!src.isNullOrBlank()) {
             ImageLoadUtils.with(src, imageView)
         }
-
     }
+
+
+    @JvmStatic
+    @BindingAdapter("app:setB")
+    fun setB(view: View, @ColorRes id: Int) {
+        view.setBackgroundResource(id)
+    }
+
 }

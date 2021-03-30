@@ -26,6 +26,7 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
+import com.hqq.example.ui.jetpack.databinding.DataBindingActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
@@ -72,7 +73,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
 //        startActivity(Intent(this, SaveBitmapActivity::class.java))
 //        startActivity(Intent(this, DownLoadActivity::class.java))
-        open(FilePathActivity::class.java)
+//        open(FilePathActivity::class.java)
+        open(DataBindingActivity::class.java)
 
     }
 

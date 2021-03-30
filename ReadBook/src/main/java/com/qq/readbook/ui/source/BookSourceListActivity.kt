@@ -33,7 +33,7 @@ internal class BookSourceListActivity : BaseListActivity() {
 
     override fun initData() {
         val list = RoomUtils.getBookSourceDao().getAll()
-        if (list != null && list.isNotEmpty()) {
+        if (list.isNotEmpty()) {
             adapter.setNewInstance(list)
 
         }

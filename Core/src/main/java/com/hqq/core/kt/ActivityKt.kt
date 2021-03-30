@@ -27,7 +27,6 @@ fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap>) {
     PermissionsUtils.requestCamera(object : PermissionsResult {
         override fun onPermissionsResult(status: Boolean) {
             registerForActivityResult(ActivityResultContracts.TakePicturePreview(), result).launch(null)
-
         }
     })
 

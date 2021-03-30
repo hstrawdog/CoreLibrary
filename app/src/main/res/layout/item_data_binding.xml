@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="com.hqq.example.R" />
         <variable
             name="user"
             type="com.hqq.example.ui.jetpack.livedata.User" />
@@ -36,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{dataBinding::onClickButton}"
-            android:text="@{String.valueOf(user.level)}" />
+            android:text="@{String.valueOf(user.level)}"
+            app:setB='@{R.color.color_main}' />
 
         <Button
             android:id="@+id/button39"
