@@ -7,8 +7,8 @@ import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import com.hqq.core.net.ok.OkHttp
-import com.hqq.core.net.ok.OkNetCallback
+import com.hqq.core.ui.base.open
+import com.hqq.core.ui.base.takePicturePreview
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -45,6 +45,7 @@ import kotlinx.coroutines.launch
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
+
 @AndroidEntryPoint
 class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     //  这边是kotlin
@@ -71,23 +72,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
 //        startActivity(Intent(this, SaveBitmapActivity::class.java))
 //        startActivity(Intent(this, DownLoadActivity::class.java))
-        startActivity(Intent(this, FilePathActivity::class.java))
-        onBooks()
-    }
+        open(FilePathActivity::class.java)
 
-
-    fun onBooks() {
-        OkHttp.newHttpCompat()
-                .get("http://search.zongheng.com/search/suggest?keyword=天",
-                        OkHttp.newParamsCompat(),
-                        object : OkNetCallback {
-                            override fun onSuccess(statusCode: String?, response: String?) {
-                                LogUtils.e(response)
-                            }
-
-                            override fun onFailure(statusCode: String?, errMsg: String?, response: String?) {
-                            }
-                        })
     }
 
 

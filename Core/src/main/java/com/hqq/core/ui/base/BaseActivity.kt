@@ -23,6 +23,7 @@ import com.hqq.core.widget.LoadingView
  * 2. 默认强制竖屏
  * 3. 初始化 LoadingView
  */
+
 abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnClickListener {
     /**
      * 当前对象
