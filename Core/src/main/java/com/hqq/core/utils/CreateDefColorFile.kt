@@ -33,14 +33,12 @@ object CreateDefColorFile {
         list.add("white")
         val stringBuilder = StringBuilder()
         stringBuilder.append("""<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-""")
+            <resources>
+            """)
         stringBuilder.append("""    <style name="def_text">
         <item name="android:includeFontPadding">false</item>
-    </style>
-
-""")
+        </style>
+        """)
         run {
             var i = 16
             while (i < 72) {

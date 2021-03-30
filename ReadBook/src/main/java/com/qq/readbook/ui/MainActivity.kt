@@ -82,21 +82,17 @@ class MainActivity : BaseVmListActivity<MainViewModel, ActivityMainBinding>() {
             }
         }
         UpdateManager.liveBook.observe(this) {
-            synchronized(this) {
-                //  监听到 更新的数据
-                it.isNeedRefresh=false
-                var position = adapter.data.indexOf(it)
-                adapter.setData(position, it)
-
-//            adapter.notifyItemChanged(position)
-//            adapter.getViewByPosition(position,R.id.pb_bar)?.visibility=View.GONE
-
-                LogUtils.e("通知了第${position}条")
+            //  监听到 更新的数据
+            if (it != null) {
+                synchronized(this) {
+                    it.isNeedRefresh = false
+                    val position = adapter.data.indexOf(it)
+                    adapter.setData(position, it)
+                    LogUtils.e("通知了第${position}条")
+                }
             }
-
         }
     }
-
 
     class MenuAdapter : BaseQuickAdapter<ActivityBean, BaseViewHolder>(R.layout.item_main_menu) {
         override fun convert(holder: BaseViewHolder, item: ActivityBean) {

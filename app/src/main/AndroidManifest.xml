@@ -56,6 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.DownLoadActivity" android:label="下载测试"/>
         <activity
             android:name=".ui.customize.DiskViewActivity"
             android:label="时间选择" />

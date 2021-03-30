@@ -1,4 +1,4 @@
-package com.hqq.core.utils
+package com.hqq.core.utils.file
 
 import android.app.ActivityManager
 import android.content.Context

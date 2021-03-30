@@ -16,19 +16,6 @@ import java.util.*
  */
 class ActivityLifecycle : ActivityLifecycleCallbacks {
     private val activities: MutableList<Activity>? = ArrayList()
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        activities!!.add(activity)
-        LogUtils.e("ActivityLifecycle -> onActivityCreated", activity.localClassName)
-    }
-    override fun onActivityStarted(activity: Activity) {}
-    override fun onActivityResumed(activity: Activity) {}
-    override fun onActivityPaused(activity: Activity) {}
-    override fun onActivityStopped(activity: Activity) {}
-    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
-    override fun onActivityDestroyed(activity: Activity) {
-        activities!!.remove(activity)
-        LogUtils.e("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
-    }
 
     /**
      * 获取APP中activity栈中最上层一个activity
@@ -49,4 +36,20 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
             }
             throw IllegalStateException("未获取到栈内对象 当前Activity 异常")
         }
+
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        activities!!.add(activity)
+        LogUtils.e("ActivityLifecycle -> onActivityCreated", activity.localClassName)
+    }
+
+    override fun onActivityStarted(activity: Activity) {}
+    override fun onActivityResumed(activity: Activity) {}
+    override fun onActivityPaused(activity: Activity) {}
+    override fun onActivityStopped(activity: Activity) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+    override fun onActivityDestroyed(activity: Activity) {
+        activities!!.remove(activity)
+        LogUtils.e("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
+    }
+
 }

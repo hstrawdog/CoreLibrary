@@ -2,9 +2,9 @@ package com.hqq.example.ui.info
 
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity
-import com.hqq.core.utils.CacheUtil.getAppCacheSize
-import com.hqq.core.utils.CacheUtil.getCacheSize
-import com.hqq.core.utils.CacheUtil.getTotalCacheSize
+import com.hqq.core.utils.file.CacheUtil.getAppCacheSize
+import com.hqq.core.utils.file.CacheUtil.getCacheSize
+import com.hqq.core.utils.file.CacheUtil.getTotalCacheSize
 import com.hqq.core.utils.ScreenUtils.getScreenDensityDpi
 import com.hqq.core.utils.ScreenUtils.getScreenHeight
 import com.hqq.core.utils.ScreenUtils.getScreenWidth

@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Thread.sleep
 
 /**
  * @Author : huangqiqiang
@@ -43,10 +44,7 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
                 }
             }
         }
-        LogUtils.e("刷新item: " + item.name)
-        LogUtils.e("刷新item: " +(System.currentTimeMillis() - DateUtils.string2Millisecond(item.refreshTime)))
-
-    LogUtils.e(item.isNeedRefresh    )
+        LogUtils.e(item.isNeedRefresh)
         if (item.topTime.isNullOrEmpty()) {
             holder.setText(R.id.tv_top, "置顶")
         } else {
@@ -56,12 +54,16 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
             if (item.isNeedRefresh) {
                 LogUtils.e4Debug("添加刷新: " + item.name)
                 holder.setGone(R.id.pb_bar, false)
-                // 刷新逻辑
-                UpdateManager.handlerBook(item)
+                CoroutineScope(Dispatchers.IO).launch {
+                    // 避免请求太快导致界面异常
+                    sleep(500)
+                    // 刷新逻辑
+                    UpdateManager.handlerBook(item)
+                }
             } else {
                 holder.setGone(R.id.pb_bar, true)
             }
-        }else{
+        } else {
             holder.setGone(R.id.pb_bar, true)
         }
 

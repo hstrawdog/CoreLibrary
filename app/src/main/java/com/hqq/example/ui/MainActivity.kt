@@ -11,13 +11,11 @@ import com.hqq.core.net.ok.OkHttp
 import com.hqq.core.net.ok.OkNetCallback
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
-import com.hqq.core.utils.GsonUtil
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
-import com.hqq.example.demo.login.LoginActivity
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
@@ -26,11 +24,9 @@ import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
-import com.hqq.example.ui.file.SaveBitmapActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
-import com.hqq.example.ui.jetpack.room.RoomActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.skin.SkinAActivity
@@ -39,8 +35,6 @@ import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
 import com.hqq.example.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /**
@@ -75,7 +69,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        RoomActivity.open(this)
 //        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
 //        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
-        startActivity(Intent(this, SaveBitmapActivity::class.java))
+//        startActivity(Intent(this, SaveBitmapActivity::class.java))
+        startActivity(Intent(this, DownLoadActivity::class.java))
         onBooks()
     }
 

@@ -64,7 +64,6 @@ object FileUtils {
      */
     @JvmStatic
     fun getCacheDir(context: Context): String {
-
 //        return context.getExternalFilesDir("")!!.path
         return context.cacheDir.path
 
