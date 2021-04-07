@@ -40,7 +40,7 @@ object DateUtils {
      */
     private val dayNames = arrayOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
 
-    private val defaultFormat: SimpleDateFormat
+     val defaultFormat: SimpleDateFormat
         get() {
             var simpleDateFormat = SDF_THREAD_LOCAL.get()
             if (simpleDateFormat == null) {

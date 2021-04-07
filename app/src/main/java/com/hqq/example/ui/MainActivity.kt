@@ -15,6 +15,7 @@ import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
+import com.hqq.example.bean.ParcelableBean
 import com.hqq.example.demo.DemoIndexActivity
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
@@ -74,7 +75,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        startActivity(Intent(this, SaveBitmapActivity::class.java))
 //        startActivity(Intent(this, DownLoadActivity::class.java))
 //        open(FilePathActivity::class.java)
-        open(DataBindingActivity::class.java)
+//        open(DataBindingActivity::class.java)
+        open(ParcelableActivity::class.java,Bundle().apply {
+            putParcelable("A", ParcelableBean())
+        })
 
     }
 

@@ -3,6 +3,7 @@ package com.hqq.core.ui.dialog
 import android.content.DialogInterface
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -19,7 +20,7 @@ import com.hqq.core.utils.ResourcesUtils
  * @Descrive : 选择弹窗
  *  使用 AlertParams Builder 进行构建
  */
-class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
+class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, DialogInterface.OnKeyListener {
     /**
      *  属性对象
      */
@@ -60,10 +61,8 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
             initAlertParams()
         }
         _viewHolder?.apply {
-            this?.let {
-                builder(this@SelectDialog, rootView!!.findViewById(R.id.ll_content))
-                addToParent()
-            }
+            builder(this@SelectDialog, rootView!!.findViewById(R.id.ll_content))
+            addToParent()
             initView()
         }
     }
@@ -72,7 +71,6 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
      * builder 对象处理
      */
     private fun initAlertParams() {
-
         rootView?.let {
             // 左边按钮 取消
             it.findViewById<TextView>(R.id.tv_cancel)?.let {
@@ -112,14 +110,16 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
                 tv.gravity = Gravity.CENTER
                 tv.text = it
                 tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT)
+                        LinearLayout.LayoutParams.MATCH_PARENT)
                 rootView?.findViewById<LinearLayout>(R.id.ll_content)?.apply {
                     addView(tv)
                     setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt())
                 }
             }
         }
-
+        if (alertParams?.shieldReturn == true) {
+            dialog?.setOnKeyListener(this)
+        }
     }
 
     /**
@@ -127,6 +127,17 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
      */
     override fun cancel() {
         dismiss()
+    }
+
+    /**
+     *
+     * @param dialog DialogInterface
+     * @param keyCode Int
+     * @param event KeyEvent
+     * @return Boolean
+     */
+    override fun onKey(dialog: DialogInterface?, keyCode: Int, event: KeyEvent?): Boolean {
+        return keyCode == KeyEvent.KEYCODE_BACK && alertParams?.shieldReturn == true
     }
 
     /**
@@ -231,6 +242,16 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface {
             alertParams.isDismissBackground = dismiss
             return this
 
+        }
+
+        /**
+         *  屏蔽返回键
+         * @param shieldReturn Boolean
+         * @return Builder
+         */
+        fun setShieldReturn(shieldReturn: Boolean): Builder {
+            alertParams.shieldReturn = shieldReturn
+            return this
         }
     }
 }

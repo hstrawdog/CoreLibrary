@@ -87,8 +87,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ActivityMainBinding>() {
                 synchronized(this) {
                     it.isNeedRefresh = false
                     val position = adapter.data.indexOf(it)
-                    adapter.setData(position, it)
-                    LogUtils.e("通知了第${position}条")
+                    if (position > -1) {
+                        adapter.setData(position, it)
+                        LogUtils.e("通知了第${position}条")
+                    }
                 }
             }
         }

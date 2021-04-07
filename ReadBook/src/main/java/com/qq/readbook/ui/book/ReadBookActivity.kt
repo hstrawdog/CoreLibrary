@@ -41,8 +41,8 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
     companion object {
         fun open(context: Activity, item: Book) {
             context.startActivityForResult(
-                Intent(context, ReadBookActivity::class.java)
-                    .putExtra(Keys.BOOK, item), -1
+                    Intent(context, ReadBookActivity::class.java)
+                            .putExtra(Keys.BOOK, item), -1
             )
         }
     }
@@ -106,7 +106,7 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
                             }
                         } else {
                             binding.tvDownCache.text =
-                                "总缓存章节数: ${downChapter.list.indexOf(chapter)}/${downChapter.list.size - 1}\n正在缓存第" + chapter.title
+                                    "总缓存章节数: ${downChapter.list.indexOf(chapter)}/${downChapter.list.size - 1}\n正在缓存第" + chapter.title
                             if (downChapter.list.size == downChapter.successMap.size) {
                                 viewMode.cacheSchedule.value = false
 
@@ -117,7 +117,6 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
             }
             // 连接成功够在去 初始化 书籍文章
             initPageLoader()
-
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -178,15 +177,14 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
         pageLoader?.refreshChapterList()
         pageLoader?.setOnPageChangeListener(object : OnPageChangeListener {
             override fun onChapterChange(pos: Int) {
-                LogUtils.e4Debug("onChapterChange  :    " + pos)
-                var url = pageLoader?.chapterCategory?.get(pos)?.url
-                binding.tvUrl.text = url
+                LogUtils.e4Debug("onChapterChange  :    $pos")
+                binding.tvUrl.text = pageLoader?.chapterCategory?.get(pos)?.url
             }
 
             override fun requestChapters(requestChapters: MutableList<Chapter>) {
                 // 理论上需要用队列去维护 避免重复请求
                 LogUtils.e4Debug("requestChapters:  " + requestChapters.size)
-                LogUtils.e4Debug("taskBuilder:  " + taskBuilder == null)
+                LogUtils.e4Debug("taskBuilder:  $taskBuilder")
                 taskBuilder?.sendLoadMessage(1, requestChapters)
             }
 
@@ -197,11 +195,11 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
             }
 
             override fun onPageCountChange(count: Int) {
-                LogUtils.e4Debug("onPageCountChange : " + count)
+                LogUtils.e4Debug("onPageCountChange : $count")
             }
 
             override fun onPageChange(pos: Int) {
-                LogUtils.e4Debug("onPageChange  :  " + pos)
+                LogUtils.e4Debug("onPageChange  :  $pos")
             }
         })
     }

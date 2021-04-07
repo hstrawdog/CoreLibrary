@@ -99,7 +99,7 @@ class SearchActivity : BaseVmListActivity<SearchViewModel, ActivitySearchBinding
     private fun initLocalLog() {
         val list = RoomUtils.getLocalSearchKeyDao().getAll()
         val logAdapter = SearchLogAdapter().apply {
-            setOnItemClickListener { adapter, view, position ->
+            setOnItemClickListener { _, _, position ->
                 mKey = getItem(position).key
                 binding.edtSearch.setText(getItem(position).key)
                 binding.edtSearch.setSelection(getItem(position).key.length)

@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Thread.sleep
+import java.text.ParseException
 
 /**
  * @Author : huangqiqiang
@@ -32,7 +33,7 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
         ImageLoadUtils.withFillet(item.imgUrl, holder.getView(R.id.iv_book_img))
         holder.setText(R.id.tv_book_name, item.name)
         holder.setText(R.id.tv_book_author, item.author)
-        holder.setText(R.id.tv_update_time, item.updateDate + "前更新  " + item.newestChapterTitle)
+        holder.setText(R.id.tv_update_time, formatData(item.updateDate) + "  " + item.newestChapterTitle)
         holder.setText(R.id.tv_sources, "来源: " + item.sourceName)
         CoroutineScope(Dispatchers.IO).launch {
             item.sourceName?.let {
@@ -67,6 +68,16 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
             holder.setGone(R.id.pb_bar, true)
         }
 
+    }
+
+    private fun formatData(updateDate: String): String {
+
+        try {
+            return DateUtils.dateConvert(DateUtils.defaultFormat.parse(updateDate).time / 1000, 0)+"前更新"
+        } catch (e: ParseException) {
+            LogUtils.e4Debug("格式不正确 $updateDate")
+        }
+        return updateDate
     }
 
 }

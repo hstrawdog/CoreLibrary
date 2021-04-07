@@ -35,7 +35,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-
         <activity-alias
             android:name=".RoundActivity"
             android:enabled="false"
@@ -56,7 +55,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.DownLoadActivity" android:label="下载测试"/>
+        <activity
+            android:name=".ui.ParcelableActivity"
+            android:label="Parcelable测试" />
+        <activity
+            android:name=".ui.DownLoadActivity"
+            android:label="下载测试" />
         <activity
             android:name=".ui.customize.DiskViewActivity"
             android:label="时间选择" />

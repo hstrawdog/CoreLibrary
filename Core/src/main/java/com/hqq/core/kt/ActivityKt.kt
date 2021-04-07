@@ -2,6 +2,7 @@ package com.hqq.core.ui.base
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,8 +15,10 @@ import com.hqq.core.permission.PermissionsUtils
  * @param cls Class<*>
  * @param result ActivityResultCallback<ActivityResult>
  */
-fun BaseActivity.open(cls: Class<*>, result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
-    registerForActivityResult(ActivityResultContracts.StartActivityForResult(), result).launch(Intent(this, cls))
+fun BaseActivity.open(cls: Class<*>, bundle: Bundle= Bundle(), result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
+    registerForActivityResult(ActivityResultContracts.StartActivityForResult(), result).launch(Intent(this, cls).apply {
+        putExtras(bundle)
+    })
 }
 
 /**

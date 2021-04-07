@@ -70,5 +70,8 @@ class AlertParams {
      *  点击空白位置 关闭dialog
      */
     var isDismissBackground = true
-
+    /**
+     *  屏蔽返回键
+     */
+    var  shieldReturn=false
 }
