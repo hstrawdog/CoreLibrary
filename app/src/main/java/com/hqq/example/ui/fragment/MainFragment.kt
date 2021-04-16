@@ -34,10 +34,9 @@ class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
         }
     }
 
-
-
     override fun initData() {
-        initListData()
+        Handler().postDelayed({ initListData() }, 3 * 1000.toLong())
+
     }
 
     override fun onLoadMore() {
@@ -51,7 +50,6 @@ class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
         }
 
     private fun initListData() {
-
         val list: MutableList<MainBean<*>> = ArrayList()
         list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
         list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
@@ -79,7 +77,7 @@ class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
         list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
         list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
         list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-        listModel!!.fillingData(list as ArrayList<Nothing>)
+        listModel.fillingData(list as ArrayList<*>)
     }
 
 

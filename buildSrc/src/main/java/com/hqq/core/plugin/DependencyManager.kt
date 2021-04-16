@@ -91,7 +91,6 @@ object Android {
 object Fragment {
     val runtime = "androidx.fragment:fragment:${Versions.fragment}"
     val runtimeKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
-
     // 目测是用于测试的一个库 好像也支持Dagger的注入
     val testing = "androidx.fragment:fragment-testing:${Versions.fragment}"
 }

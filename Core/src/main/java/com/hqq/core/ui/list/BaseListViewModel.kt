@@ -14,8 +14,18 @@ import com.hqq.core.ui.base.BaseViewModel
  * @Descrive :
  */
 abstract class BaseListViewModel : BaseViewModel() {
-    var data: MutableLiveData<List<*>> = MediatorLiveData()
+    /**
+     *   数据集
+     */
+    var data: MutableLiveData<List<Any>> = MediatorLiveData()
+
+    /**
+     *  是否加载失败
+     */
+    var requestAdapterError = MediatorLiveData<Boolean>()
+
     var pageCount = 1
+
     var pageSize = BaseCommonsKey.PAGE_SIZE
 
     fun setPageSize(pageSize: Int): BaseListViewModel {
@@ -28,7 +38,7 @@ abstract class BaseListViewModel : BaseViewModel() {
         return this
     }
 
-    fun setData(date: List<*>): BaseListViewModel {
+    fun setData(date: List<Any>): BaseListViewModel {
         data.value = date
         return this
     }

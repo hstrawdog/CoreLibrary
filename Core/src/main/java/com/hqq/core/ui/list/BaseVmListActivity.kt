@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.R
+import com.hqq.core.lifecycle.LiveEventObserver
 import com.hqq.core.ui.base.BaseVmActivity
 import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
 
@@ -18,28 +19,29 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
  * @Descrive :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
-abstract class BaseVmListActivity<K : BaseListViewModel,T : ViewDataBinding>
-    : BaseVmActivity< K,T>(), IBaseListModelView {
+abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> : BaseVmActivity<K, T>(), IBaseListModelView {
 
     override val layoutId: Int = R.layout.activity_recycle_view
 
-    override val pageCount: Int
-        get() = viewMode.pageCount
+    override val pageCount: Int = viewMode.pageCount
 
-    override val pageSize: Int
-        get() = viewMode.pageSize
+    override val pageSize: Int = viewMode.pageSize
 
     override var listView: RecyclerView? = null
 
     override lateinit var layoutManager: RecyclerView.LayoutManager
+
     override lateinit var listModel: BaseListModel
 
     override fun initViews() {
         layoutManager = LinearLayoutManager(activity)
         listModel = BaseListModel(this, rootViewImpl)
-        viewMode.data.observe(this, Observer {
-            listModel.fillingData(it)
-        })
+        LiveEventObserver.bind(viewMode.data, this) { arrayList ->
+            listModel.fillingData(arrayList )
+        }
+        LiveEventObserver.bind(viewMode.requestAdapterError, this ){ arrayList ->
+            listModel.loadMoreError()
+        }
         initData()
     }
 

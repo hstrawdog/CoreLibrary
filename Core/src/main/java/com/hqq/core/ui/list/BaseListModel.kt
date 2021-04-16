@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.chad.library.adapter.base.module.LoadMoreModule
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.R
 import com.hqq.core.ui.base.RootViewImpl
 import com.hqq.core.utils.RegexUtils
@@ -61,16 +62,16 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      *
      * @return
      */
-     var layoutEmptyView = R.layout.layout_load_more_empty
+    var layoutEmptyView = R.layout.layout_load_more_empty
 
     /**
      * 应该要可以全局配置的 配置在xml中 可以替换
      *
      * @return string
      */
-     var emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
+    var emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
 
-     var emptyImage: Int = R.mipmap.ic_empty_def
+    var emptyImage: Int = R.mipmap.ic_empty_def
 
     /**
      * adapter
@@ -86,14 +87,12 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
 
     /**
      * 初始化 RecycleView 等一切操作
-     *
-     * @param rcList
-     * @param adapter
-     * @param layoutManager
+     * @param view View?
+     * @return RecyclerView?
      */
     fun initRecycleView(view: View?): RecyclerView? {
         var listView = checkRecycleView(mBaseListModelView.listView, view)
-        if (listView != null && adapter != null) {
+        if (listView != null) {
             listView.overScrollMode = View.OVER_SCROLL_NEVER
             listView.layoutManager = mBaseListModelView.layoutManager
             listView.adapter = adapter
@@ -135,10 +134,10 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      */
     private fun initPull() {
         ptrPullDown?.let {
-            ptrPullDown!!.setPullToRefresh(false)
-            ptrPullDown!!.setKeepHeaderWhenRefresh(true)
-            ptrPullDown!!.setLastUpdateTimeRelateObject(this)
-            ptrPullDown!!.setPtrHandler(object : PtrHandler {
+            it.isPullToRefresh = false
+            it.isKeepHeaderWhenRefresh = true
+            it.setLastUpdateTimeRelateObject(this)
+            it.setPtrHandler(object : PtrHandler {
                 override fun onRefreshBegin(frame: PtrFrameLayout?) {
                     mBaseListModelView.onRefreshBegin()
                 }
@@ -162,7 +161,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         if (emptyView == null) {
             return
         }
-        val tvRefresh = emptyView!!.findViewById<TextView>(R.id.tv_Refresh)
+        val tvRefresh = emptyView.findViewById<TextView>(R.id.tv_Refresh)
         val tvEmptyMessage = emptyView.findViewById<TextView>(R.id.tv_empty_message)
         val ivEmpty = emptyView.findViewById<ImageView>(R.id.iv_empty)
         if (RegexUtils.unNull(tvRefresh)) {
@@ -183,9 +182,8 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      * @param data
      */
     fun fillingData(data: Collection<*>) {
-        data as Collection<Nothing>
         if (mBaseListModelView.pageCount == 1) {
-            adapter.setList(data)
+            adapter.setList(data as Collection<Any>)
         } else {
             adapter.addData(data)
         }
@@ -209,15 +207,12 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
                         adapter.loadMoreModule.loadMoreEnd()
                     } else {
                         mBaseListModelView.addPageCount()
-                        adapter.loadMoreModule.loadMoreComplete();
+                        adapter.loadMoreModule.loadMoreComplete()
                     }
                 }
             }
         }
-
-        ptrPullDown?.let {
-            it.refreshComplete()
-        }
+        ptrPullDown?.refreshComplete()
     }
 
     /**
@@ -240,15 +235,15 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
     private fun addFoodEmptyView() {
         createLoadMoreFoodView()
         if (adapter.footerLayout == null) {
-            adapter.addFooterView(viewEmptyFoot!!)
+            viewEmptyFoot?.let { adapter.addFooterView(it) }
         } else {
             val adapterFoodView = adapter.footerLayout
             if (adapterFoodView != null) {
                 if (adapterFoodView.childCount == 0) {
-                    adapter.addFooterView(viewEmptyFoot!!)
+                    viewEmptyFoot?.let { adapter.addFooterView(it) }
                 } else if (adapterFoodView.getChildAt(adapterFoodView.childCount - 1) !== viewEmptyFoot) {
                     // 目前没测试 不知道会不会有问题
-                    adapter.addFooterView(viewEmptyFoot!!)
+                    viewEmptyFoot?.let { adapter.addFooterView(it) }
                 }
             }
         }
@@ -262,6 +257,22 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
             adapter.footerLayout?.removeView(viewEmptyFoot)
         }
     }
+
+    /**
+     *  检查是否是空数据了
+     */
+    fun checkAdapterDataIsNull() {
+        if (adapter.data.size == 0) {
+            adapter.setEmptyView(layoutEmptyView)
+            initEmptyView(adapter.emptyLayout)
+        }
+    }
+
+    fun loadMoreError() {
+        ptrPullDown?.refreshComplete()
+        adapter.loadMoreModule.loadMoreFail()
+    }
+
 
     /**
      * m->v 的接口
@@ -299,7 +310,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
          *
          * @return
          */
-        val adapter: BaseQuickAdapter<*, *>
+        val adapter: BaseQuickAdapter<Any, out BaseViewHolder>
 
         /**
          * 获取 recycleView

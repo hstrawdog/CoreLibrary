@@ -1,11 +1,11 @@
 package com.hqq.core.ui.list
 
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.R
+import com.hqq.core.lifecycle.LiveEventObserver
 import com.hqq.core.ui.base.BaseVmFragment
 import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
 
@@ -17,8 +17,7 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseVmListFragment<K : BaseListViewModel,T : ViewDataBinding>
-    : BaseVmFragment<K,T >(), IBaseListModelView {
+abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : BaseVmFragment<K, T>(), IBaseListModelView {
 
     override var listView: RecyclerView? = null
     override val layoutId: Int = R.layout.activity_recycle_view
@@ -27,35 +26,31 @@ abstract class BaseVmListFragment<K : BaseListViewModel,T : ViewDataBinding>
     override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
     override lateinit var listModel: BaseListModel
 
-
     override fun initViews() {
         listModel = BaseListModel(this, rootViewImpl)
-        viewMode!!.data.observe(this, Observer<List<*>> { arrayList ->
-            listModel!!.fillingData(arrayList as List<Nothing>)
-        })
+        LiveEventObserver.bind(viewMode.data, this) { arrayList ->
+            listModel.fillingData(arrayList)
+        }
+        LiveEventObserver.bind(viewMode.requestAdapterError, this) { arrayList ->
+            listModel.loadMoreError()
+        }
         initData()
     }
 
-
     override fun addPageCount() {
-        viewMode!!.setPageCount(viewMode!!.pageCount + 1)
+        viewMode.setPageCount(viewMode.pageCount + 1)
     }
 
     override fun onRefreshBegin() {
         if (adapter is LoadMoreModule) {
-            viewMode!!.setPageCount(1)
+            viewMode.setPageCount(1)
             adapter.loadMoreModule.loadMoreComplete()
-            viewMode!!.onLoadMore()
+            viewMode.onLoadMore()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun onLoadMore() {
-        viewMode!!.onLoadMore()
-
+        viewMode.onLoadMore()
     }
 
 }
