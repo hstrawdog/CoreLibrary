@@ -37,37 +37,20 @@ import java.lang.ref.WeakReference
  *
  */
 class BaseListModel(var mBaseListModelView: IBaseListModelView) {
-    companion object {
-        /**
-         * 创建一个 rootView = recycleView
-         *
-         * @param context
-         * @return
-         */
-        @JvmOverloads
-        fun createRecycleView(context: Context): View {
-            val view = RecyclerView(context)
-            view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            view.id = R.id.rc_list
-            return view
-        }
-    }
 
     var context: WeakReference<Context>? = null
+
     var viewEmptyFoot: View? = null
+
     var ptrPullDown: CusPtrClassicFrameLayout? = null
 
     /**
-     * 空布局 layout Id
-     *
-     * @return
+     *  空布局 layout Id
      */
     var layoutEmptyView = R.layout.layout_load_more_empty
 
     /**
      * 应该要可以全局配置的 配置在xml中 可以替换
-     *
-     * @return string
      */
     var emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
 
@@ -75,10 +58,8 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
 
     /**
      * adapter
-     *
-     * @return
      */
-    private val adapter = mBaseListModelView.adapter
+    private val _adapter get() = mBaseListModelView.adapter
 
     constructor(mBaseListModelView: IBaseListModelView, iRootView: RootViewImpl) : this(mBaseListModelView) {
         this.context = WeakReference<Context>(iRootView.activity?.get())
@@ -90,12 +71,12 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      * @param view View?
      * @return RecyclerView?
      */
-    fun initRecycleView(view: View?): RecyclerView? {
-        var listView = checkRecycleView(mBaseListModelView.listView, view)
+    private fun initRecycleView(view: View?): RecyclerView? {
+        val listView = checkRecycleView(mBaseListModelView.listView, view)
         if (listView != null) {
             listView.overScrollMode = View.OVER_SCROLL_NEVER
             listView.layoutManager = mBaseListModelView.layoutManager
-            listView.adapter = adapter
+            listView.adapter = _adapter
         }
         initPtrPullDown(view)
         return listView
@@ -183,31 +164,31 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      */
     fun fillingData(data: Collection<*>) {
         if (mBaseListModelView.pageCount == 1) {
-            adapter.setList(data as Collection<Any>)
+            _adapter.setList(data as Collection<Any>)
         } else {
-            adapter.addData(data)
+            _adapter.addData(data)
         }
         removeFoodEmptyView()
         when {
             // 没有头部的时候才可以加这个
             // 这边需要适配两种情况 空布局如果可以点击的话
-            adapter.itemCount == 0 -> {
-                adapter.setEmptyView(layoutEmptyView)
-                initEmptyView(adapter.emptyLayout)
+            _adapter.itemCount == 0 -> {
+                _adapter.setEmptyView(layoutEmptyView)
+                initEmptyView(_adapter.emptyLayout)
             }
             //这个是空数据的显示
-            adapter.data.size == 0 -> {
+            _adapter.data.size == 0 -> {
                 addFoodEmptyView()
                 initEmptyView(viewEmptyFoot)
             }
             else -> {
                 // 只有 adapter实现了 LoadMoreModule 才可以实现上啦加载
-                if (adapter is LoadMoreModule) {
+                if (this._adapter is LoadMoreModule) {
                     if (data.size < mBaseListModelView.pageSize) {
-                        adapter.loadMoreModule.loadMoreEnd()
+                        _adapter.loadMoreModule.loadMoreEnd()
                     } else {
                         mBaseListModelView.addPageCount()
-                        adapter.loadMoreModule.loadMoreComplete()
+                        _adapter.loadMoreModule.loadMoreComplete()
                     }
                 }
             }
@@ -234,16 +215,16 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      */
     private fun addFoodEmptyView() {
         createLoadMoreFoodView()
-        if (adapter.footerLayout == null) {
-            viewEmptyFoot?.let { adapter.addFooterView(it) }
+        if (_adapter.footerLayout == null) {
+            viewEmptyFoot?.let { _adapter.addFooterView(it) }
         } else {
-            val adapterFoodView = adapter.footerLayout
+            val adapterFoodView = _adapter.footerLayout
             if (adapterFoodView != null) {
                 if (adapterFoodView.childCount == 0) {
-                    viewEmptyFoot?.let { adapter.addFooterView(it) }
+                    viewEmptyFoot?.let { _adapter.addFooterView(it) }
                 } else if (adapterFoodView.getChildAt(adapterFoodView.childCount - 1) !== viewEmptyFoot) {
                     // 目前没测试 不知道会不会有问题
-                    viewEmptyFoot?.let { adapter.addFooterView(it) }
+                    viewEmptyFoot?.let { _adapter.addFooterView(it) }
                 }
             }
         }
@@ -254,7 +235,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      */
     private fun removeFoodEmptyView() {
         if (viewEmptyFoot != null) {
-            adapter.footerLayout?.removeView(viewEmptyFoot)
+            _adapter.footerLayout?.removeView(viewEmptyFoot)
         }
     }
 
@@ -262,17 +243,30 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      *  检查是否是空数据了
      */
     fun checkAdapterDataIsNull() {
-        if (adapter.data.size == 0) {
-            adapter.setEmptyView(layoutEmptyView)
-            initEmptyView(adapter.emptyLayout)
+        if (_adapter.data.size == 0) {
+            _adapter.setEmptyView(layoutEmptyView)
+            initEmptyView(_adapter.emptyLayout)
         }
     }
 
     fun loadMoreError() {
         ptrPullDown?.refreshComplete()
-        adapter.loadMoreModule.loadMoreFail()
+        _adapter.loadMoreModule.loadMoreFail()
     }
 
+    /**
+     * 创建一个 rootView = recycleView
+     *
+     * @param context
+     * @return
+     */
+    @JvmOverloads
+    fun createRecycleView(context: Context): View {
+        val view = RecyclerView(context)
+        view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        view.id = R.id.rc_list
+        return view
+    }
 
     /**
      * m->v 的接口

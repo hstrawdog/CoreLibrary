@@ -20,10 +20,15 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
 abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : BaseVmFragment<K, T>(), IBaseListModelView {
 
     override var listView: RecyclerView? = null
+
     override val layoutId: Int = R.layout.activity_recycle_view
+
     override val pageCount: Int get() = viewMode.pageCount
+
     override val pageSize: Int get() = viewMode.pageSize
+
     override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+
     override lateinit var listModel: BaseListModel
 
     override fun initViews() {
