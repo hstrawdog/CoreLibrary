@@ -17,7 +17,7 @@ abstract class BaseListViewModel : BaseViewModel() {
     /**
      *   数据集
      */
-    var data: MutableLiveData<List<Any>> = MediatorLiveData()
+    var data: MutableLiveData<List<*>> = MediatorLiveData()
 
     /**
      *  是否加载失败
@@ -38,7 +38,7 @@ abstract class BaseListViewModel : BaseViewModel() {
         return this
     }
 
-    fun setData(date: List<Any>): BaseListViewModel {
+    fun setData(date: List<*>): BaseListViewModel {
         data.value = date
         return this
     }

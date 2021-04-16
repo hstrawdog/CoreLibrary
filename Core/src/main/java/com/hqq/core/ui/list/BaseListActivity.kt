@@ -53,7 +53,7 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
      */
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
-            BaseListModel.createRecycleView(this)
+            listModel.createRecycleView(this)
         } else {
             null
         }

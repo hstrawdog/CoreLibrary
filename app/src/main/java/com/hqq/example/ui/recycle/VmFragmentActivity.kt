@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.databinding.ActivityRecycleViewBinding
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.ui.list.BaseListViewModel
@@ -27,7 +29,7 @@ VmFragmentActivity : BaseViewBindingActivity<ActivityVmFragmentBinding>() {
         FragmentUtils(supportFragmentManager).addOrShowFragment(FragmentA.newInstance(), binding.flLayout.id)
     }
 
-    class FragmentA : BaseVmListFragment<ListModel,ActivityRecycleViewBinding >() {
+    class FragmentA : BaseVmListFragment<ListModel, ActivityRecycleViewBinding>() {
         companion object {
             fun newInstance(): FragmentA {
                 val args = Bundle()

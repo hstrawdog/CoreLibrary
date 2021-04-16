@@ -83,7 +83,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     }
 
 
-    val mV: MainViewModel by viewModels()
+//    val mV: MainViewModel by viewModels()
 
     private var mExitTime: Long = 0
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -105,11 +105,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
         return super.dispatchKeyEvent(event)
     }
 
-    val mVl: MainViewModel by viewModels()
-
-    override fun getViewModel(): MainViewModel {
-        return mVl
-    }
+//    val mVl: MainViewModel by viewModels()
+//
+//    override fun getViewModel(): MainViewModel {
+//        return mVl
+//    }
 
     class MainViewModel @ViewModelInject constructor() : BaseListViewModel() {
         init {

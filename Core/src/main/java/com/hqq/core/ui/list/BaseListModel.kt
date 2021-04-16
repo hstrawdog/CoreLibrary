@@ -164,9 +164,9 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      */
     fun fillingData(data: Collection<*>) {
         if (mBaseListModelView.pageCount == 1) {
-            _adapter.setList(data as Collection<Any>)
+            _adapter.setList(data as Collection<Nothing>)
         } else {
-            _adapter.addData(data)
+            _adapter.addData(data as Collection<Nothing>)
         }
         removeFoodEmptyView()
         when {
@@ -304,7 +304,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
          *
          * @return
          */
-        val adapter: BaseQuickAdapter<Any, out BaseViewHolder>
+        val adapter: BaseQuickAdapter<*, *>
 
         /**
          * 获取 recycleView

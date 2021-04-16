@@ -38,7 +38,7 @@ abstract class BaseListFragment :
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
             context?.let {
-                BaseListModel.createRecycleView(it)
+                listModel.createRecycleView(it)
             }
         } else {
             null
