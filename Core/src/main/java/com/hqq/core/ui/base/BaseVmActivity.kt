@@ -1,6 +1,8 @@
 package com.hqq.core.ui.base
 
+import android.app.Activity
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
 import com.hqq.core.ui.base.IRootView.IBaseViewModelActivity
 import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
@@ -19,7 +21,7 @@ import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
-     lateinit var viewMode: K
+    lateinit var viewMode: K
 
     override fun initView() {
         viewMode = getViewModel()
@@ -86,6 +88,11 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      */
     override fun finishActivity(goBackComponent: BaseViewModel.GoBackComponent) {
         if (goBackComponent.goBack) {
+            goBackComponent.bundle?.let {
+                setResult(Activity.RESULT_OK, Intent().apply {
+                    putExtras(it)
+                })
+            }
             finish()
         }
     }
@@ -95,10 +102,11 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      * @param openActivityComponent OpenActivityComponent
      */
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
-        val intent = Intent(activity, openActivityComponent.activityClass)
-        openActivityComponent.bundle?.let {
-            intent.putExtras(it)
-        }
-        activity.startActivityForResult(intent, openActivityComponent.activityResult)
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult(), openActivityComponent.result)
+                .launch(Intent(this, openActivityComponent.activityClass).apply {
+                    openActivityComponent.bundle?.let {
+                        this.putExtras(it)
+                    }
+                })
     }
 }

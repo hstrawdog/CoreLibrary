@@ -3,6 +3,8 @@ package com.hqq.core.ui.base
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -101,8 +103,9 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      *
      * @param cls
      */
-    fun startActivity(cls: Class<out Activity?>?, bundle: Bundle? = null, resultCode: Int = -1) {
-        openActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, resultCode)
+    fun startActivity(cls: Class<out Activity?>?, bundle: Bundle? = null,
+                      result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
+        openActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, result)
     }
 
     fun finish() {
@@ -115,9 +118,8 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     class OpenActivityComponent @JvmOverloads constructor(
             var activityClass: Class<out Activity?>?,
             var bundle: Bundle? = null,
-            var activityResult: Int = -1
+            var result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { },
     )
 
-    class GoBackComponent @JvmOverloads constructor(var goBack: Boolean = false, var bundle: Bundle? = null)
-        : LiveData<Boolean>(goBack)
+    class GoBackComponent @JvmOverloads constructor(var goBack: Boolean = false, var bundle: Bundle? = null) : LiveData<Boolean>(goBack)
 }

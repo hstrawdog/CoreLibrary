@@ -3,12 +3,9 @@ package com.hqq.example.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.hqq.core.ui.base.open
-import com.hqq.core.ui.base.takePicturePreview
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -27,7 +24,6 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
-import com.hqq.example.ui.jetpack.databinding.DataBindingActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
@@ -36,7 +32,6 @@ import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
 import com.hqq.example.ui.web.WebActivity
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 /**
@@ -48,7 +43,6 @@ import kotlinx.coroutines.launch
  * @Email :  qiqiang213@gmail.com
  */
 
-@AndroidEntryPoint
 class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     //  这边是kotlin
     override val adapter: MainAdapter = MainAdapter()
@@ -76,7 +70,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        startActivity(Intent(this, DownLoadActivity::class.java))
 //        open(FilePathActivity::class.java)
 //        open(DataBindingActivity::class.java)
-        open(ParcelableActivity::class.java,Bundle().apply {
+        open(TestDialogActivity::class.java,Bundle().apply {
             putParcelable("A", ParcelableBean())
         })
 
@@ -111,7 +105,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        return mVl
 //    }
 
-    class MainViewModel @ViewModelInject constructor() : BaseListViewModel() {
+    class MainViewModel constructor() : BaseListViewModel() {
         init {
             LogUtils.e("MainModel init 1  ")
             viewModelScope.launch {

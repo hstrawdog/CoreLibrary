@@ -1,6 +1,7 @@
 package com.hqq.core.ui.base
 
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
 import com.hqq.core.ui.base.IRootView.IBaseViewModelActivity
 import com.hqq.core.ui.base.BaseViewModel.OpenActivityComponent
@@ -64,11 +65,11 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
      * 打开新的界面
      */
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
-        val intent = Intent(activity, openActivityComponent.activityClass)
-
-        openActivityComponent.bundle?.let {
-            intent.putExtras(it)
-        }
-        startActivityForResult(intent, openActivityComponent.activityResult)
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult(), openActivityComponent.result)
+                .launch(Intent(context, openActivityComponent.activityClass).apply {
+                    openActivityComponent.bundle?.let {
+                        this.putExtras(it)
+                    }
+                })
     }
 }

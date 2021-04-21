@@ -23,9 +23,10 @@ abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> : 
 
     override val layoutId: Int = R.layout.activity_recycle_view
 
-    override val pageCount: Int = viewMode.pageCount
+    override val pageCount: Int
+        get() = viewMode.pageCount
 
-    override val pageSize: Int = viewMode.pageSize
+    override val pageSize: Int get() = viewMode.pageSize
 
     override var listView: RecyclerView? = null
 
@@ -37,9 +38,9 @@ abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> : 
         layoutManager = LinearLayoutManager(activity)
         listModel = BaseListModel(this, rootViewImpl)
         LiveEventObserver.bind(viewMode.data, this) { arrayList ->
-            listModel.fillingData(arrayList )
+            listModel.fillingData(arrayList)
         }
-        LiveEventObserver.bind(viewMode.requestAdapterError, this ){ arrayList ->
+        LiveEventObserver.bind(viewMode.requestAdapterError, this) { arrayList ->
             listModel.loadMoreError()
         }
         initData()
