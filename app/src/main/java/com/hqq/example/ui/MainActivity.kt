@@ -1,5 +1,6 @@
 package com.hqq.example.ui
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -14,6 +15,7 @@ import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.bean.ParcelableBean
 import com.hqq.example.demo.DemoIndexActivity
+import com.hqq.example.demo.weather.WeatherActivity
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
@@ -70,9 +72,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        startActivity(Intent(this, DownLoadActivity::class.java))
 //        open(FilePathActivity::class.java)
 //        open(DataBindingActivity::class.java)
-        open(TestDialogActivity::class.java,Bundle().apply {
+        open(WeatherActivity::class.java,Bundle().apply {
             putParcelable("A", ParcelableBean())
         })
+
 
     }
 

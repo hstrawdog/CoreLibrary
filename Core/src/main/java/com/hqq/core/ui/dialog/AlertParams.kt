@@ -16,9 +16,20 @@ import com.hqq.core.ui.BaseViewBuilderHolder
  */
 class AlertParams {
     /**
-     * 取消按钮监听
+     * 顶部标题
      */
-    var negativeButtonListener: DialogInterface.OnClickListener? = null
+    var title: CharSequence = "提示"
+
+    /**
+     *  标题字体大小
+     */
+    var titleFontSize: Float = 50f
+
+    /**
+     *  中间内容或者提示
+     */
+    var content: CharSequence = ""
+
 
     /**
      * 中间布局
@@ -31,6 +42,11 @@ class AlertParams {
     var negativeButtonText = "取消"
 
     /**
+     * 取消按钮监听
+     */
+    var negativeButtonListener: DialogInterface.OnClickListener? = null
+
+    /**
      * 确定按钮
      */
     var positiveButtonText: CharSequence = "确定"
@@ -40,21 +56,16 @@ class AlertParams {
      */
     var positiveButtonListener: DialogInterface.OnClickListener? = null
 
+    /**
+     * 中立按钮
+     */
+    var neutralButtonText: CharSequence = ""
 
     /**
-     *  标题字体大小
+     *  中立按钮监听
      */
-    var titleFontSize: Float = 50f
+    var neutralButtonListener: DialogInterface.OnClickListener? = null
 
-    /**
-     *  中间内容或者提示
-     */
-    var content: CharSequence = ""
-
-    /**
-     * 顶部标题
-     */
-    var title: CharSequence = "提示"
 
     /**
      * 分割线
@@ -70,8 +81,9 @@ class AlertParams {
      *  点击空白位置 关闭dialog
      */
     var isDismissBackground = true
+
     /**
      *  屏蔽返回键
      */
-    var  shieldReturn=false
+    var shieldReturn = false
 }

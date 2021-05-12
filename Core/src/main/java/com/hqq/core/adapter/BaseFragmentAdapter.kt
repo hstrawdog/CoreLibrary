@@ -24,7 +24,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  *
  */
 abstract class BaseFragmentAdapter : FragmentStateAdapter {
-     public var stringSparseArray = SparseArray<String>()
+    public var stringSparseArray = SparseArray<String>()
     var fragmentManager: FragmentManager? = null
 
     constructor(fragment: Fragment) : super(fragment) {
@@ -71,7 +71,7 @@ abstract class BaseFragmentAdapter : FragmentStateAdapter {
     /**
      *  获取标题
      */
-   open fun getItemTitle(position: Int): String {
+    open fun getItemTitle(position: Int): String {
         return stringSparseArray.get(position)
     }
 

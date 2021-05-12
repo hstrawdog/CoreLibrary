@@ -5,12 +5,12 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.hqq.core.CoreConfig
+import com.hqq.core.kt.launch
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewModel
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.demo.net.HttpManager
-import com.hqq.example.demo.net.NetCallback
 
 /**
  * @Author : huangqiqiang
@@ -81,20 +81,31 @@ class WeatherViewModel : BaseViewModel() {
     }
 
     private fun getWeather(city: String) {
-        showLoading(true)
-        HttpManager.getWeather(city.substring(0, city.length - 1), object : NetCallback<Weather>() {
-            override fun onFail(code: Int, message: String) {
-                showToast(message!!)
-                showLoading(false)
+        launch({
+            HttpManager.getWeather2(city.substring(0, city.length - 1)).let {
+                mWeather.postValue( it.result)
             }
+        }, {
 
-            override fun onSuccess(response: Weather) {
-                showLoading(false)
-                mWeather.value = response
-            }
-
+        }, {
 
         })
+
+
+//        showLoading(true)
+//        HttpManager.getWeather(city.substring(0, city.length - 1), object : NetCallback<Weather>() {
+//            override fun onFail(code: Int, message: String) {
+//                showToast(message!!)
+//                showLoading(false)
+//            }
+//
+//            override fun onSuccess(response: Weather) {
+//                showLoading(false)
+//                mWeather.value = response
+//            }
+//
+//
+//        })
     }
 
     fun startLocation() {

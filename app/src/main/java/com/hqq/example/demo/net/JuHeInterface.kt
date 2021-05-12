@@ -19,6 +19,9 @@ interface JuHeInterface {
     @GET("simpleWeather/query")
     fun getWeather(@Query(value = "city", encoded = true) username: String?, @Query("key") password: String?): Call<NetResponseBody<Weather>>
 
+    @GET("simpleWeather/query")
+    suspend fun getWeather2(@Query(value = "city", encoded = true) username: String?, @Query("key") password: String?): NetResponseBody<Weather>
+
     @GET("toutiao/index")
     fun getNews(@Query("type") s: String?, @Query("key") key: String): Call<NetResponseBody<News>>
 

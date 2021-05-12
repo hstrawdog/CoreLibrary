@@ -3,12 +3,17 @@ package com.hqq.core.ui.base
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hqq.core.utils.log.LogUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 /**
  * @Author : huangqiqiang
@@ -51,7 +56,6 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      */
     var goBack = MutableLiveData<GoBackComponent>()
 
-
     init {
         LogUtils.e4Debug(" BaseViewModel  init " + javaClass.name)
     }
@@ -69,7 +73,6 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     override fun initData(extras: Bundle?) {
         bundle = extras
         LogUtils.e4Debug(" BaseViewModel           initData ")
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -81,6 +84,8 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
     override fun onStop() {}
     override fun onDestroy() {}
     override fun onAny() {}
+
+
 
     /**
      * @param cls        Activity 类型

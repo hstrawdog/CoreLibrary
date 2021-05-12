@@ -55,6 +55,18 @@ object HttpManager {
                 .getWeather(city, "dea6d7a061c30aba4e30e11ed51d852a").enqueue(netCallback)
     }
 
+
+    suspend fun  getWeather2(city: String): NetResponseBody<Weather> {
+        var city = city
+        try {
+            city = URLEncoder.encode(city, "utf-8")
+        } catch (e: UnsupportedEncodingException) {
+            e.printStackTrace()
+        }
+       return  ApiManager.getJuHeInterface("http://apis.juhe.cn/")
+                .getWeather2(city, "dea6d7a061c30aba4e30e11ed51d852a")
+    }
+
     /**
      * 热点新闻
      *

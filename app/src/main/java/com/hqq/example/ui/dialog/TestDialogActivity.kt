@@ -48,6 +48,7 @@ class TestDialogActivity : BaseActivity() {
         findViewById<View>(R.id.button51).setOnClickListener(this)
         findViewById<View>(R.id.button52).setOnClickListener(this)
         findViewById<View>(R.id.button53).setOnClickListener(this)
+        findViewById<View>(R.id.button54).setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -104,6 +105,17 @@ class TestDialogActivity : BaseActivity() {
                     .setOnCancelListener("取消1") { dialog, which -> ToastUtils.showToast("取消1") }
                     .create()
                     .show(supportFragmentManager)
+
+            R.id.button54 -> SelectDialog.Builder()
+                    .setTitle("标题")
+                    .setContent("我是内容")
+                    .setPositiveButton("确定2") { dialog, which -> ToastUtils.showToast("确定2") }
+                    .setNeutralButton("中立") { dialog, which -> ToastUtils.showToast("中立") }
+                    .setOnCancelListener("取消1") { dialog, which -> ToastUtils.showToast("取消1") }
+                    .create()
+                    .show(supportFragmentManager)
+
+
         }
     }
 

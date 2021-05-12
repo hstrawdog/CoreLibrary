@@ -1,9 +1,11 @@
 package com.hqq.core.ui.dialog
 
+import android.app.AlertDialog
 import android.content.DialogInterface
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.KeyEvent
+import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -29,7 +31,10 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
     /**
      *  viewHolder
      */
-    private val _viewHolder: T? = alertParams?.baseViewBuilderHolder as? T
+    private val _viewHolder: T?
+        get() {
+            return alertParams?.baseViewBuilderHolder as? T
+        }
 
     /**
      *  布局ID
@@ -77,7 +82,10 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
                 it.text = alertParams?.negativeButtonText
                 it.setOnClickListener {
                     if (alertParams?.negativeButtonListener != null) {
-                        alertParams?.negativeButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_NEGATIVE)
+                        alertParams?.negativeButtonListener?.onClick(
+                                this@SelectDialog,
+                                DialogInterface.BUTTON_NEGATIVE
+                        )
                     } else {
                         // 没有实现事件回调
                         dismiss()
@@ -89,10 +97,32 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
                 it.text = alertParams?.positiveButtonText
                 it.setOnClickListener {
                     if (alertParams?.positiveButtonListener != null) {
-                        alertParams?.positiveButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                        alertParams?.positiveButtonListener?.onClick(
+                                this@SelectDialog,
+                                DialogInterface.BUTTON_POSITIVE
+                        )
                     }
                 }
             }
+
+            if (!alertParams?.neutralButtonText.isNullOrEmpty()) {
+                it.findViewById<TextView>(R.id.tv_negative)?.apply {
+                    text = alertParams?.neutralButtonText
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        if (alertParams?.neutralButtonListener != null) {
+                            alertParams?.neutralButtonListener?.onClick(
+                                    this@SelectDialog,
+                                    DialogInterface.BUTTON_POSITIVE
+                            )
+                        }
+                    }
+                }
+                it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
+
+
+            }
+
             // 提示
             it.findViewById<TextView>(R.id.tv_title)?.apply {
                 alertParams?.let {
@@ -109,8 +139,10 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
                 var tv = TextView(activity)
                 tv.gravity = Gravity.CENTER
                 tv.text = it
-                tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT)
+                tv.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                )
                 rootView?.findViewById<LinearLayout>(R.id.ll_content)?.apply {
                     addView(tv)
                     setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt())
@@ -172,6 +204,7 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
             return this
         }
 
+        //region 按钮设置
         /**
          * 设置取消按钮
          *
@@ -179,7 +212,10 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
          * @param onCancelListener
          * @return
          */
-        fun setOnCancelListener(text: String?, onCancelListener: DialogInterface.OnClickListener? = null): Builder {
+        fun setOnCancelListener(
+                text: String?,
+                onCancelListener: DialogInterface.OnClickListener? = null
+        ): Builder {
             alertParams.negativeButtonListener = onCancelListener
             text?.let {
                 alertParams.negativeButtonText = it
@@ -194,7 +230,10 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
          * @param listener
          * @return
          */
-        fun setPositiveButton(text: CharSequence?, listener: DialogInterface.OnClickListener? = null): Builder {
+        fun setPositiveButton(
+                text: CharSequence?,
+                listener: DialogInterface.OnClickListener? = null
+        ): Builder {
             text?.let {
                 alertParams.positiveButtonText = it
             }
@@ -203,12 +242,32 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
         }
 
         /**
+         *  中立按钮
+         * @param text CharSequence
+         * @param listener OnClickListener
+         * @return Builder?
+         */
+        fun setNeutralButton(
+                text: CharSequence,
+                listener: DialogInterface.OnClickListener
+        ): Builder {
+            alertParams.neutralButtonText = text
+            alertParams.neutralButtonListener = listener
+            return this
+        }
+        //endregion
+
+
+        /**
          * 设置标题
          *
          * @param text
          * @return
          */
-        fun setTitle(text: CharSequence?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)): Builder {
+        fun setTitle(
+                text: CharSequence?,
+                fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)
+        ): Builder {
             text?.let {
                 alertParams.title = it
             }
