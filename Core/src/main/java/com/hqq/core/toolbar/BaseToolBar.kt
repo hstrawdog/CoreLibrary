@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.utils.ScreenUtils
 import java.lang.ref.WeakReference
@@ -100,15 +101,15 @@ abstract class BaseToolBar : IToolBar {
         this.activity = WeakReference(activity)
         val linearLayout = LinearLayout(activity)
         linearLayout.layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayout.orientation = LinearLayout.VERTICAL
         if (isShowStatusBar) {
             initStatusBar(activity)
-            val mStatusBarHeight = ScreenUtils.getStatusBarHeight4Resources(activity)
+            val mStatusBarHeight = CoreConfig.get().statusBarHeight
             linearLayout.addView(statusBar,
-                LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
+                    LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
             )
         }
         val toolBar = activity?.let { iniToolBar(it, linearLayout) }
@@ -118,8 +119,8 @@ abstract class BaseToolBar : IToolBar {
         if (isShowLine) {
             viewLine = View(activity)
             viewLine!!.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ScreenUtils.dip2px(activity, 1f)
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ScreenUtils.dip2px(activity, 1f)
             )
             viewLine!!.setBackgroundResource(R.color.toolbar_line_bg)
             linearLayout.addView(viewLine)

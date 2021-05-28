@@ -87,8 +87,6 @@ class WeatherViewModel : BaseViewModel() {
             }
         }, {
 
-        }, {
-
         })
 
 

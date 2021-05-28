@@ -62,7 +62,6 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        loadingView.show()
 //        Handler().postDelayed(3 * 1000) {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
-//
 //        }
 //        startActivity(Intent(this, LoginActivity::class.java))
 //        RoomActivity.open(this)
@@ -72,9 +71,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        startActivity(Intent(this, DownLoadActivity::class.java))
 //        open(FilePathActivity::class.java)
 //        open(DataBindingActivity::class.java)
-        open(WeatherActivity::class.java,Bundle().apply {
-            putParcelable("A", ParcelableBean())
-        })
+//        open(WeatherActivity::class.java,Bundle().apply {
+//            putParcelable("A", ParcelableBean())
+//        })
 
 
     }

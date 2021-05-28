@@ -33,7 +33,7 @@ object ResourcesUtils {
     val resources: Resources?
         get() {
             if (sResources == null) {
-                sResources = CoreConfig.getApplicationContext().resources
+                sResources = CoreConfig.applicationContext.resources
             }
             return sResources
         }
@@ -78,7 +78,7 @@ object ResourcesUtils {
      */
     @kotlin.jvm.JvmStatic
     fun getColor(@ColorRes resId: Int): Int {
-        return ContextCompat.getColor(CoreConfig.getApplicationContext(), resId)
+        return ContextCompat.getColor(CoreConfig.applicationContext, resId)
     }
 
     /**
@@ -113,7 +113,7 @@ object ResourcesUtils {
      */
     @JvmStatic
     fun getDrawable(@DrawableRes resId: Int): Drawable? {
-        return ContextCompat.getDrawable(CoreConfig.getApplicationContext(), resId)
+        return ContextCompat.getDrawable(CoreConfig.applicationContext, resId)
     }
 
     /**

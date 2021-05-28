@@ -53,7 +53,7 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
      */
     override fun getLayoutView(group: ViewGroup): View? {
         return if (layoutViewId <= 0) {
-            listModel.createRecycleView(this)
+            BaseListModel.createRecycleView(this)
         } else {
             null
         }
@@ -64,7 +64,6 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
     /**
      * 初始化  基础数据
      */
-    @CallSuper
     override fun initView() {
         listModel = BaseListModel(this, rootViewImpl)
         initData()

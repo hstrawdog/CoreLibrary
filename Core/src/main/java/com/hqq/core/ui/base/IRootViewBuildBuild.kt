@@ -43,11 +43,11 @@ class IRootViewBuildBuild(context: Any, showStatus: Boolean, showToolBar: Boolea
                 rootViewImpl.immersiveStatusBar = true
             }
             is DialogFragment -> {
-                activity = (context as DialogFragment).activity
+                activity = context.activity
                 rootViewImpl.bgColor = R.color.transparent
             }
             is Fragment -> {
-                activity = (context as Fragment).activity
+                activity =context.activity
             }
             else -> {
                 LogUtils.e4Debug(Exception("不支持的类" + context.javaClass.name))

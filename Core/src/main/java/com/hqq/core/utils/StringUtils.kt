@@ -3,7 +3,7 @@ package com.hqq.core.utils
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import com.hqq.core.CoreConfig.Companion.getApplicationContext
+import com.hqq.core.CoreConfig
 
 /**
  * @Author : huangqiqiang
@@ -29,7 +29,7 @@ object StringUtils {
      * @param context
      */
     @JvmOverloads
-    fun copyContentToClipboard(content: String?, context: Context = getApplicationContext()) {
+    fun copyContentToClipboard(content: String?, context: Context = CoreConfig.applicationContext) {
         //获取剪贴板管理器：
         val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         // 创建普通字符型ClipData

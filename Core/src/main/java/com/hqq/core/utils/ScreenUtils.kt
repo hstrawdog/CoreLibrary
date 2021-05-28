@@ -183,7 +183,7 @@ object ScreenUtils {
     }
     @kotlin.jvm.JvmStatic
     fun getStatusBarHeight(): Int {
-       return getStatusBarHeight(CoreConfig.getApplicationContext())
+       return getStatusBarHeight(CoreConfig.applicationContext)
     }
     /**
      * 获取状态栏高度

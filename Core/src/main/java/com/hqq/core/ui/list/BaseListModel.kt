@@ -254,19 +254,6 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         _adapter.loadMoreModule.loadMoreFail()
     }
 
-    /**
-     * 创建一个 rootView = recycleView
-     *
-     * @param context
-     * @return
-     */
-    @JvmOverloads
-    fun createRecycleView(context: Context): View {
-        val view = RecyclerView(context)
-        view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        view.id = R.id.rc_list
-        return view
-    }
 
     /**
      * m->v 的接口
@@ -335,5 +322,20 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
 
     }
 
+    companion object{
+        /**
+         * 创建一个 rootView = recycleView
+         *
+         * @param context
+         * @return
+         */
+        @JvmOverloads
+        fun createRecycleView(context: Context): View {
+            val view = RecyclerView(context)
+            view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            view.id = R.id.rc_list
+            return view
+        }
 
+    }
 }

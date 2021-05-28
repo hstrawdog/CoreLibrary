@@ -1,15 +1,13 @@
 package com.hqq.example.ui.recycle
 
-import android.os.Handler
 import android.view.View
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
+import com.chad.library.adapter.base.entity.MultiItemEntity
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.recycle.HeaderItemDecoration
 import com.hqq.core.recycle.HeaderItemDecoration.StickyHeaderInterface
 import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.R
-import com.hqq.example.adapter.MainAdapter
-import com.hqq.example.bean.MainBean
-import com.hqq.example.ui.bar.ToolBarActivity
-import com.hqq.example.ui.view.page.IFragmentActivityBuilder
 
 /**
  * @Author : huangqiqiang
@@ -19,9 +17,11 @@ import com.hqq.example.ui.view.page.IFragmentActivityBuilder
  * @Descrive : TODO
  * @Email :  qiqiang213@gmail.com
  */
-class ListActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {
-    override fun initData() {
+class ListActivity(override val adapter: ListAdapter = ListAdapter()) : BaseListActivity() {
 
+    override val layoutViewId: Int = R.layout.activity_list;
+
+    override fun initData() {
         listView?.addItemDecoration(HeaderItemDecoration(listView!!, object : StickyHeaderInterface {
             override fun getHeaderPositionForItem(itemPosition: Int): Int {
                 return if (itemPosition >= 6) 6 else -1
@@ -40,50 +40,66 @@ class ListActivity(override val adapter: MainAdapter = MainAdapter()) : BaseList
             }
         }))
 
-        adapter?.loadMoreModule?.setOnLoadMoreListener(this)
+        adapter.addData(ListBean(1))
+        adapter.addData(ListBean(1))
+        adapter.addData(ListBean(1))
+        adapter.addData(ListBean(1))
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
+        adapter.addData(ListBean())
 
-
-
-        data
     }
 
-    override fun onLoadMore() {
-        data
+    class ListBean(itemType1: Int = 0) : MultiItemEntity {
+        override var itemType: Int = itemType1
+
     }
 
-    private val data: Unit
-        private get() {
-            loadingView.show()
-            Handler().postDelayed({
-                val list: MutableList<MainBean<*>> = ArrayList()
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                list.add(MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
-                list.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-                loadingView.dismiss()
-                listModel.fillingData(list as ArrayList<Nothing>)
-            }, 3 * 1000.toLong())
+
+    class ListAdapter : BaseMultiItemQuickAdapter<ListBean, BaseViewHolder> {
+        constructor() {
+            addItemType(0, R.layout.item_main)
+            addItemType(1, R.layout.item_head)
         }
+
+        override fun convert(holder: BaseViewHolder, item: ListBean) {
+
+        }
+
+    }
+
+
 }

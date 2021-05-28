@@ -11,47 +11,47 @@ class ReadSettingManager private constructor() {
      *  屏幕亮度
      */
     var brightness: Int
-        get() = SharedPreferencesUtil.getObject(CoreConfig.getApplicationContext(), SHARED_READ_BRIGHTNESS, 40) as Int
-        set(progress) = SharedPreferencesUtil.putObject(CoreConfig.getApplicationContext(),
+        get() = SharedPreferencesUtil.getObject(CoreConfig.applicationContext, SHARED_READ_BRIGHTNESS, 40) as Int
+        set(progress) = SharedPreferencesUtil.putObject(CoreConfig.applicationContext,
             SHARED_READ_BRIGHTNESS, progress)
 
     /**
      *  字体大小
      */
     var textSize: Int
-        get() = SharedPreferencesUtil.getObject(CoreConfig.getApplicationContext(),
+        get() = SharedPreferencesUtil.getObject(CoreConfig.applicationContext,
             SHARED_READ_TEXT_SIZE,
             ScreenUtils.dip2px(CoreConfig.get().application, 16f)) as Int
-        set(textSize) = SharedPreferencesUtil.putObject(CoreConfig.getApplicationContext(),
+        set(textSize) = SharedPreferencesUtil.putObject(CoreConfig.applicationContext,
             SHARED_READ_TEXT_SIZE, textSize)
 
 
     var pageMode: PageMode
         get() {
-            val mode = SharedPreferencesUtil.getObject(CoreConfig.getApplicationContext(),
+            val mode = SharedPreferencesUtil.getObject(CoreConfig.applicationContext,
                 SHARED_READ_PAGE_MODE,
                 PageMode.SIMULATION.ordinal) as Int
             return PageMode.values()[mode]
         }
-        set(mode) = SharedPreferencesUtil.putObject(CoreConfig.getApplicationContext(),
+        set(mode) = SharedPreferencesUtil.putObject(CoreConfig.applicationContext,
             SHARED_READ_PAGE_MODE,
             mode.ordinal)
 
     var pageStyle: PageStyle
         get() {
-            val style = SharedPreferencesUtil.getObject(CoreConfig.getApplicationContext(),
+            val style = SharedPreferencesUtil.getObject(CoreConfig.applicationContext,
                 SHARED_READ_BG,
                 PageStyle.BG_0.ordinal) as Int
             return PageStyle.values()[style]
         }
-        set(pageStyle) = SharedPreferencesUtil.putObject(CoreConfig.getApplicationContext(),
+        set(pageStyle) = SharedPreferencesUtil.putObject(CoreConfig.applicationContext,
             SHARED_READ_BG, pageStyle.ordinal)
 
     var isNightMode: Boolean
-        get() = SharedPreferencesUtil.getObject(CoreConfig.getApplicationContext(),
+        get() = SharedPreferencesUtil.getObject(CoreConfig.applicationContext,
             SHARED_READ_NIGHT_MODE,
             false) as Boolean
-        set(isNight) = SharedPreferencesUtil.putObject(CoreConfig.getApplicationContext(),
+        set(isNight) = SharedPreferencesUtil.putObject(CoreConfig.applicationContext,
             SHARED_READ_NIGHT_MODE,
             isNight)
 
@@ -59,10 +59,10 @@ class ReadSettingManager private constructor() {
      * 全屏
      */
     var isFullScreen: Boolean
-        get() = SharedPreferencesUtil.getObject(CoreConfig.getApplicationContext(),
+        get() = SharedPreferencesUtil.getObject(CoreConfig.applicationContext,
             SHARED_READ_FULL_SCREEN,
             false) as Boolean
-        set(isFullScreen) = SharedPreferencesUtil.putObject(CoreConfig.getApplicationContext(),
+        set(isFullScreen) = SharedPreferencesUtil.putObject(CoreConfig.applicationContext,
             SHARED_READ_FULL_SCREEN,
             isFullScreen)
 
@@ -70,10 +70,10 @@ class ReadSettingManager private constructor() {
      *  是否跟随系统
      */
     var isBrightnessAuto: Boolean
-        get() = SharedPreferencesUtil.getObject(CoreConfig.getApplicationContext(),
+        get() = SharedPreferencesUtil.getObject(CoreConfig.applicationContext,
             SHARED_READ_IS_BRIGHTNESS_AUTO,
             false) as Boolean
-        set(isAuto) = SharedPreferencesUtil.putObject(CoreConfig.getApplicationContext(),
+        set(isAuto) = SharedPreferencesUtil.putObject(CoreConfig.applicationContext,
             SHARED_READ_IS_BRIGHTNESS_AUTO,
             isAuto)
 

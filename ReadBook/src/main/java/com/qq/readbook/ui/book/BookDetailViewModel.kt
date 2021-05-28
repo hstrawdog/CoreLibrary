@@ -192,7 +192,7 @@ class BookDetailViewModel : BaseViewModel() {
     fun onOtherSources(view: View) {
         startActivity(SwitchBookSourceActivity::class.java, Bundle().apply {
             putParcelable(Keys.BOOK, bookLiveData.value)
-        }, 1)
+        })
     }
 
 }

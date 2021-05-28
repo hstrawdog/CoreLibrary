@@ -8,6 +8,7 @@ import com.google.gson.InstanceCreator
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.utils.RegexUtils
+import com.hqq.core.utils.ScreenUtils
 import java.lang.reflect.Type
 import java.util.*
 
@@ -40,9 +41,10 @@ class CoreConfig private constructor() {
             return instance!!
         }
 
-        fun getApplicationContext(): Context {
-            return get().application.applicationContext
-        }
+        val applicationContext: Context
+            get() {
+                return get().application.applicationContext
+            }
     }
 
     /**
@@ -113,6 +115,10 @@ class CoreConfig private constructor() {
     var iCreateToolbar: Class<DefToolBar> = DefToolBar::class.java
 
     /**
+     *  状态栏高度
+     */
+    var statusBarHeight: Int = 0
+    /**
      * @param application Application
      * @param isDebug     是否 开启log日志
      */
@@ -121,7 +127,7 @@ class CoreConfig private constructor() {
         val info = application.applicationInfo
         this.isDebug = info.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
         this.application = application
-
+        statusBarHeight= ScreenUtils.getStatusBarHeight4Resources(applicationContext)
         // 监听Activity 的生命周期
         if (RegexUtils.isNull(mActivityLifecycle)) {
             mActivityLifecycle = ActivityLifecycle()

@@ -105,7 +105,7 @@ object FileUtils {
      */
     @JvmStatic
     fun getDataBaseDir(fileName: String): String {
-        return CoreConfig.getApplicationContext().getDatabasePath(fileName)?.path + ""
+        return CoreConfig.applicationContext.getDatabasePath(fileName)?.path + ""
     }
     //endregion
 
@@ -342,7 +342,7 @@ object FileUtils {
      */
     @JvmStatic
     fun getFile2Uri(file: File): Uri? {
-        val context = CoreConfig.getApplicationContext()
+        val context = CoreConfig.applicationContext
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //如果在Android7.0以上,使用FileProvider获取Uri
             try {
@@ -493,7 +493,7 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun saveBitmap2Picture(context: Context = CoreConfig.getApplicationContext(),
+    fun saveBitmap2Picture(context: Context = CoreConfig.applicationContext,
                            bitmap: Bitmap, folderName: String = "", fileName: String) {
         val values = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
@@ -531,7 +531,7 @@ object FileUtils {
      */
     @JvmStatic
     fun createNewFile(fileName: String): File {
-        val path = getCacheDir(CoreConfig.getApplicationContext()) + "/" + fileName
+        val path = getCacheDir(CoreConfig.applicationContext) + "/" + fileName
         val file = File(path)
         file.createNewFile()
         return file

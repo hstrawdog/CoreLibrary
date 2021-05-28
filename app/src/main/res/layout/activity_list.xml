@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/c_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+
+            <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/abl_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                <!--头部-->
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:id="@+id/ctl_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x680"
+                        android:background="@color/bg_color"
+                        android:elevation="0dp"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <ImageView
+                            android:id="@+id/iv_bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:background="@color/color_red"
+                            app:layout_collapseMode="parallax" /><!--设置视差模式-->
+
+
+
+
+                    <androidx.appcompat.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_marginBottom="@dimen/x30"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/x165"
+                            android:layout_gravity="bottom"
+                            android:padding="0dp"
+                            android:paddingBottom="0dp"
+                            app:contentInsetEnd="0dp"
+                            app:contentInsetLeft="0dp"
+                            app:contentInsetRight="0dp"
+                            app:contentInsetStart="0dp"
+                            app:layout_collapseMode="pin">
+                        <!--菜单部分-->
+                        <LinearLayout
+                                android:id="@+id/ll_bar"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/x165"
+                                android:gravity="center|bottom"
+                                android:orientation="horizontal"
+                                app:layout_collapseMode="pin">
+
+
+                            <ImageView
+                                    android:id="@+id/iv_2dMix"
+                                    android:layout_width="@dimen/x320"
+                                    android:layout_height="@dimen/x165"
+                                    android:layout_marginLeft="@dimen/x15"
+                                    android:src="@color/color_191919" />
+
+
+                        </LinearLayout>
+                    </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rc_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</LinearLayout>

@@ -32,10 +32,13 @@ class HeaderItemDecoration(recyclerView: RecyclerView, private val mListener: St
         val currentHeader = getHeaderViewForItem(topChildPosition, parent) ?: return
         fixLayoutSize(parent, currentHeader)
         val contactPoint = currentHeader.bottom
-        val childInContact = getChildInContact(parent, contactPoint) ?: return
-        if (mListener.isHeader(parent.getChildAdapterPosition(childInContact))) {
-            moveHeader(c, currentHeader, childInContact)
-            return
+        val childInContact = getChildInContact(parent, contactPoint)
+        if (childInContact != null) {
+            if (mListener.isHeader(parent.getChildAdapterPosition(childInContact))) {
+                moveHeader(c, currentHeader, childInContact);
+            } else {
+                drawHeader(c, currentHeader);
+            }
         }
         drawHeader(c, currentHeader)
     }
