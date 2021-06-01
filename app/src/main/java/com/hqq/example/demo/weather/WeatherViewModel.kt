@@ -83,12 +83,11 @@ class WeatherViewModel : BaseViewModel() {
     private fun getWeather(city: String) {
         launch({
             HttpManager.getWeather2(city.substring(0, city.length - 1)).let {
-                mWeather.postValue( it.result)
+                mWeather.postValue(it.result)
             }
         }, {
 
         })
-
 
 //        showLoading(true)
 //        HttpManager.getWeather(city.substring(0, city.length - 1), object : NetCallback<Weather>() {
@@ -96,13 +95,10 @@ class WeatherViewModel : BaseViewModel() {
 //                showToast(message!!)
 //                showLoading(false)
 //            }
-//
 //            override fun onSuccess(response: Weather) {
 //                showLoading(false)
 //                mWeather.value = response
 //            }
-//
-//
 //        })
     }
 

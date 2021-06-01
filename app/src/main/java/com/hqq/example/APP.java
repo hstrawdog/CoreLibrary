@@ -3,10 +3,9 @@ package com.hqq.example;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 
-import com.hqq.core.CoreConfig;
+import com.hqq.example.ui.crash.CrashHandler;
 
 import dagger.hilt.android.HiltAndroidApp;
-import dagger.hilt.android.qualifiers.ApplicationContext;
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinAppCompatViewInflater;
 import skin.support.app.SkinCardViewInflater;
@@ -45,7 +44,11 @@ public class APP extends Application {
                 // 关闭windowBackground换肤，默认打开[可选]
                 .setSkinWindowBackgroundEnable(false)
                 .loadSkin();
+
+        // 本地异常捕捉
+        CrashHandler.register(this);
     }
+
     public boolean isApkDebugable() {
         //debug 返回true  release 返回false
         try {

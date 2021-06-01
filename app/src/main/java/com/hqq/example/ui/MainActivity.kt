@@ -1,26 +1,23 @@
 package com.hqq.example.ui
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.viewModelScope
-import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
-import com.hqq.example.bean.ParcelableBean
 import com.hqq.example.demo.DemoIndexActivity
-import com.hqq.example.demo.weather.WeatherActivity
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
+import com.hqq.example.ui.crash.CrashActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
@@ -126,6 +123,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             super.onCrete()
             LogUtils.e("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
+            arrayList.add(MainBean("奔溃后启动", CrashActivity::class.java))
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
             arrayList.add(MainBean("转场动画", TransitionsAnimationActivity::class.java))
             arrayList.add(MainBean("标题/状态栏设置", ToolBarActivity::class.java))

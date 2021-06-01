@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hqq.core.R
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.ui.base.IRootView.IActivityRootView
+import com.hqq.core.utils.BundleAction
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.widget.LoadingView
 
@@ -24,7 +25,7 @@ import com.hqq.core.widget.LoadingView
  * 3. 初始化 LoadingView
  */
 
-abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnClickListener {
+abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener {
     /**
      * 当前对象
      */
@@ -69,6 +70,12 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, View.OnCli
         get() {
             return rootViewImpl.iToolBar
         }
+
+    /**
+     * bundle 集合
+     */
+    override val bundle: Bundle?
+        get() = intent.extras
 
     /**
      *  初始化

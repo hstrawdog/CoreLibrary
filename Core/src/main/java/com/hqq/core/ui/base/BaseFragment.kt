@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.ui.base.IRootView.IFragmentRootView
+import com.hqq.core.utils.BundleAction
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.widget.LoadingView
 
@@ -18,7 +19,7 @@ import com.hqq.core.widget.LoadingView
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListener {
+abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener {
     /**
      * 缓存根布局对象
      */
@@ -39,6 +40,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, View.OnClickListene
      */
     var lazyInitEnd = false
 
+    /**
+     * bundle 集合
+     */
+    override val bundle: Bundle?
+        get() = arguments
     /**
      * 布局创建 容器
      */
