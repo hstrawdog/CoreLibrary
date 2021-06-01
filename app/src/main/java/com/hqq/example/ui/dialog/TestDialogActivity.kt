@@ -1,22 +1,18 @@
 package com.hqq.example.ui.dialog
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import com.hqq.core.listenner.DialogClickListener
-import com.hqq.core.ui.BaseViewBuilderHolder
+import com.hqq.core.ui.dialog.DialogViewBuilder
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.ui.dialog.SelectDialog
 import com.hqq.core.utils.ToastUtils
 import com.hqq.example.R
 import com.hqq.example.dialog.*
-import com.hqq.example.ui.dialog.TestDialogActivity
 
 /**
  * @Author : huangqiqiang
@@ -67,11 +63,11 @@ class TestDialogActivity : BaseActivity() {
             R.id.button16 -> RightDialog.showDialog(supportFragmentManager)
             R.id.button17 -> LeftDialog.showDialog(supportFragmentManager)
             R.id.button28 -> SelectDialog.Builder()
-                    .setBaseViewBuilderHolder(ViewBuilderHolderA())
+                    .setBaseViewBuilderHolder(ViewBuilderA())
                     .create()
                     .show(supportFragmentManager)
             R.id.button51 -> SelectDialog.Builder()
-                    .setBaseViewBuilderHolder(object : BaseViewBuilderHolder() {
+                    .setBaseViewBuilderHolder(object : DialogViewBuilder() {
                         override val layoutViewId: Int
                             get() = R.layout.view_holder_a
 
@@ -82,7 +78,7 @@ class TestDialogActivity : BaseActivity() {
                     .show(supportFragmentManager)
             R.id.button52 -> SelectDialog.Builder()
                     .setTitle("标题")
-                    .setBaseViewBuilderHolder(object : BaseViewBuilderHolder() {
+                    .setBaseViewBuilderHolder(object : DialogViewBuilder() {
                         override val layoutViewId: Int = -1
 
                         override fun getLayoutView(viewGroup: ViewGroup): View? {
@@ -119,7 +115,7 @@ class TestDialogActivity : BaseActivity() {
         }
     }
 
-    open class ViewBuilderHolderA : BaseViewBuilderHolder() {
+    open class ViewBuilderA : DialogViewBuilder() {
         override fun initView() {}
         override fun onClick(v: View) {}
         override val layoutViewId: Int = R.layout.view_holder_a

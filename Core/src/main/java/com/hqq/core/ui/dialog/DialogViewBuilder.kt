@@ -1,14 +1,14 @@
-package com.hqq.core.ui
+package com.hqq.core.ui.dialog
 
 import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.hqq.core.lifecycle.BaseLifecycleObserver
+import com.hqq.core.ui.ViewHolder
 import com.hqq.core.ui.base.IRootView.IBaseViewBuilderHolder
 import java.lang.ref.WeakReference
 
@@ -18,40 +18,27 @@ import java.lang.ref.WeakReference
  * @FileName :   BaseViewBuilderHolder
  * @Date : 2019/10/31 0031  下午 1:23
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Descrive : 布局管理  与创建
  */
-abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, BaseLifecycleObserver {
+abstract class DialogViewBuilder : ViewHolder(), IBaseViewBuilderHolder, BaseLifecycleObserver {
+    /**
+     *  window 跟布局对象
+     */
     private var parentView: ViewGroup? = null
 
+    /**
+     *  弱引用 Activity
+     */
     var activity: WeakReference<Activity>? = null
 
-    fun getActivity(): Activity? {
-        return activity?.get()
-    }
 
     /**
-     * 构建activity
-     *
-     * @param appCompatActivity
-     * @param parentView
+     *  创建 布局
+     * @param parentView ViewGroup?
+     * @param activity Activity?
+     * @param context Context?
+     * @param lifecycle Lifecycle
      */
-    fun builder(appCompatActivity: AppCompatActivity, parentView: ViewGroup?): BaseViewBuilderHolder {
-        createRootView(parentView, appCompatActivity, appCompatActivity, appCompatActivity.lifecycle)
-        return this
-    }
-
-    /**
-     * 转移fragment
-     *
-     * @param fragment
-     * @param parentView
-     */
-    fun builder(fragment: Fragment, parentView: ViewGroup?): BaseViewBuilderHolder {
-        createRootView(parentView, fragment.activity, fragment.context, fragment.lifecycle)
-        return this
-    }
-
-
     override fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle) {
         this.parentView = parentView
         this.activity = WeakReference<Activity>(activity)
@@ -64,12 +51,17 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
         initView()
     }
 
-    override fun initConfig() {}
-    override fun onClick(view: View) {}
+    /**
+     *   忽略
+     * @param viewGroup ViewGroup
+     * @return View?
+     */
     override fun getLayoutView(viewGroup: ViewGroup): View? {
         return null
     }
 
+    override fun initConfig() {}
+    override fun onClick(view: View) {}
     override fun onCrete() {}
     override fun onResume() {}
     override fun onStop() {}
@@ -80,18 +72,44 @@ abstract class BaseViewBuilderHolder : ViewHolder(), IBaseViewBuilderHolder, Bas
         removeFromParent()
     }
 
+    /**
+     *  fragment  FragmentDialog  构建入口
+     *
+     * @param fragment
+     * @param parentView
+     */
+    fun builder(fragment: Fragment, parentView: ViewGroup?): DialogViewBuilder {
+        createRootView(parentView, fragment.activity, fragment.context, fragment.lifecycle)
+        return this
+    }
+
+    /**
+     *  添加到布局中
+     */
     fun addToParent() {
         if (parentView != null && convertView != null) {
             parentView!!.addView(convertView)
         }
     }
 
-    fun removeFromParent() {
-        val parent = convertView!!.parent
-        if (parent != null) {
-            (parent as ViewGroup).removeView(convertView)
+    /**
+     * 移除布局
+     */
+    private fun removeFromParent() {
+        convertView?.parent?.let {
+            if (it is ViewGroup) {
+                it.removeView(convertView)
+            }
+
         }
     }
 
+    /**
+     *  获取 Activity
+     * @return Activity?
+     */
+    fun getActivity(): Activity? {
+        return activity?.get()
+    }
 
 }

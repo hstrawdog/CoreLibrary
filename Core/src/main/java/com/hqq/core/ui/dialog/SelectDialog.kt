@@ -1,6 +1,5 @@
 package com.hqq.core.ui.dialog
 
-import android.app.AlertDialog
 import android.content.DialogInterface
 import android.util.TypedValue
 import android.view.Gravity
@@ -9,8 +8,8 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import com.hqq.core.R
-import com.hqq.core.ui.BaseViewBuilderHolder
 import com.hqq.core.utils.ResourcesUtils
 
 /**
@@ -22,7 +21,7 @@ import com.hqq.core.utils.ResourcesUtils
  * @Descrive : 选择弹窗
  *  使用 AlertParams Builder 进行构建
  */
-class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, DialogInterface.OnKeyListener {
+class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, DialogInterface.OnKeyListener {
     /**
      *  属性对象
      */
@@ -33,7 +32,7 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
      */
     private val _viewHolder: T?
         get() {
-            return alertParams?.baseViewBuilderHolder as? T
+            return alertParams?.dialogViewBuilder as? T
         }
 
     /**
@@ -50,6 +49,7 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
      *  宽度
      */
     override val weight: Int = WindowManager.LayoutParams.MATCH_PARENT
+
     override val isDismissBackground: Boolean
         get() {
             alertParams?.let {
@@ -135,7 +135,7 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
         }
         // 内容
         alertParams?.content?.let {
-            if (alertParams?.baseViewBuilderHolder == null && it.isNotEmpty()) {
+            if (alertParams?.dialogViewBuilder == null && it.isNotEmpty()) {
                 var tv = TextView(activity)
                 tv.gravity = Gravity.CENTER
                 tv.text = it
@@ -188,7 +188,7 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
          * @return
          */
         fun create(): SelectDialog<*> {
-            val baseSelectDialog: SelectDialog<*> = SelectDialog<BaseViewBuilderHolder>()
+            val baseSelectDialog: SelectDialog<*> = SelectDialog<DialogViewBuilder>()
             baseSelectDialog.alertParams = alertParams
             return baseSelectDialog
         }
@@ -196,11 +196,11 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
         /**
          * 设置中间布局  采用ViewHolder  方式构建
          *
-         * @param baseViewBuilderHolder
+         * @param dialogViewBuilder
          * @return
          */
-        fun setBaseViewBuilderHolder(baseViewBuilderHolder: BaseViewBuilderHolder?): Builder {
-            alertParams.baseViewBuilderHolder = baseViewBuilderHolder
+        fun setBaseViewBuilderHolder(dialogViewBuilder: DialogViewBuilder?): Builder {
+            alertParams.dialogViewBuilder = dialogViewBuilder
             return this
         }
 
@@ -285,12 +285,22 @@ class SelectDialog<T : BaseViewBuilderHolder?> : BaseDialog(), DialogInterface, 
             return this
         }
 
+        //region 分割线
         /**
          *  分割线
          */
         fun setDividingLine(showDividingLine: Boolean) {
             alertParams.showDividingLine = showDividingLine
         }
+
+        /**
+         * 设置分割线颜色
+         * @param dividingLineColor Int
+         */
+        fun setDividingLineColor(@ColorRes dividingLineColor: Int) {
+            alertParams.dividingLineColor = dividingLineColor
+        }
+        //endregion
 
         /**
          * 空白关闭

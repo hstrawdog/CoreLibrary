@@ -2,7 +2,6 @@ package com.hqq.core.ui.dialog
 
 import android.content.DialogInterface
 import com.hqq.core.R
-import com.hqq.core.ui.BaseViewBuilderHolder
 
 /**
  * @Author : huangqiqiang
@@ -34,7 +33,7 @@ class AlertParams {
     /**
      * 中间布局
      */
-    var baseViewBuilderHolder: BaseViewBuilderHolder? = null
+    var dialogViewBuilder: DialogViewBuilder? = null
 
     /**
      * 取消按钮上的文字
