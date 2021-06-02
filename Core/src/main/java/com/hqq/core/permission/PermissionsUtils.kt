@@ -39,6 +39,10 @@ object PermissionsUtils {
         FragmentProxy().requestPermissions(IPermissionsHas.location, permissionsResult)
     }
 
+    /**
+     *  读取 蓝牙权限
+     * @param permissionsResult PermissionsResult
+     */
     @JvmStatic
     fun requestBluetooth(permissionsResult: PermissionsResult) {
         // 蓝牙权限 需要定位权限  定位权限需要 读写权限
@@ -46,11 +50,5 @@ object PermissionsUtils {
                 .plus(IPermissionsHas.storage), permissionsResult)
     }
 
-    @JvmStatic
-    fun requestSetting(permissionsResult: PermissionsResult) {
-        // 蓝牙权限 需要定位权限  定位权限需要 读写权限
-        FragmentProxy().requestPermissions(IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
-            .plus(IPermissionsHas.storage), permissionsResult)
-    }
 
 }

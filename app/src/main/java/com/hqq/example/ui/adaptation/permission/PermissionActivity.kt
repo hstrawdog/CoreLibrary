@@ -1,10 +1,11 @@
-package com.hqq.example.ui.adaptation
+package com.hqq.example.ui.adaptation.permission
 
 import android.app.Activity
 import android.content.Intent
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseDataBindingActivity
+import com.hqq.core.ui.base.open
 import com.hqq.core.utils.ToastUtils.showToast
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityPermissionBinding
@@ -36,12 +37,11 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
                 }
             })
         }
-    }
 
-    companion object {
-        fun open(context: Activity) {
-            val starter = Intent(context, PermissionActivity::class.java)
-            context.startActivityForResult(starter, -1)
+        binding.button58.setOnClickListener {
+            open(Permission4FragmentActivity::class.java)
         }
     }
+
+
 }

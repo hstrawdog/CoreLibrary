@@ -2,6 +2,7 @@ package com.hqq.core.permission
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 
 /**
  * @Author : huangqiqiang
@@ -14,18 +15,16 @@ import androidx.appcompat.app.AppCompatActivity
 object PermissionsFragmentFactory {
     private const val TAG_PERMISSIONS_FRAGMENT = "PermissionsFragment"
 
-    fun getPermissionsFragment(currActivity: Activity?): PermissionsFragment? {
+
+    fun getPermissionsFragment(fragmentManager: FragmentManager): PermissionsFragment? {
         var permissionsFragment: PermissionsFragment?
-        if (currActivity is AppCompatActivity) {
-            val fragmentManager = currActivity.supportFragmentManager
-            permissionsFragment = fragmentManager.findFragmentByTag(TAG_PERMISSIONS_FRAGMENT) as PermissionsFragment?
-            if (null == permissionsFragment) {
-                permissionsFragment = PermissionsFragment.Companion.newInstance()
-                fragmentManager.beginTransaction().add(permissionsFragment, TAG_PERMISSIONS_FRAGMENT).commitNow()
-            }
-        } else {
-            throw IllegalStateException("不支持的Activity  Activity需要继承 AppCompatActivity ")
+        permissionsFragment = fragmentManager.findFragmentByTag(TAG_PERMISSIONS_FRAGMENT) as PermissionsFragment?
+        if (null == permissionsFragment) {
+            permissionsFragment = PermissionsFragment.newInstance()
+            fragmentManager.beginTransaction().add(permissionsFragment, TAG_PERMISSIONS_FRAGMENT).commitNow()
         }
         return permissionsFragment
     }
+
+
 }

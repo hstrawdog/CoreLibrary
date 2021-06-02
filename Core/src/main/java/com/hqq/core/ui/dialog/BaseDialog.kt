@@ -33,8 +33,11 @@ import com.hqq.core.widget.LoadingView
  */
 abstract class BaseDialog : DialogFragment(), IDialogFragment {
     var loadingView: LoadingView? = null
+
     var loaded = false
+
     var dialogClickListener: DialogClickListener<*>? = null
+
     var rootView: View? = null
 
     /**

@@ -30,8 +30,6 @@ class PermissionsFragment : Fragment(), IPermissionActions {
         }
     }
 
-
-    private var OPEN_SETTING_CODE = 0x55
     var mPermissionsResult: PermissionsResult? = null
 
     /**
@@ -75,14 +73,11 @@ class PermissionsFragment : Fragment(), IPermissionActions {
                     }
                 }
             }.launch(permissions)
-
-            //            requestPermissions(permissions, CODE)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 0x55) {
-            OPEN_SETTING_CODE++
             // 从设置界面过来 重新再去检测权限
             requestPermissions(mPermissions, mPermissionsResult)
         }

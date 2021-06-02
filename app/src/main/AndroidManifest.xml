@@ -56,6 +56,9 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".ui.adaptation.permission.Permission4FragmentActivity"
+                android:label="Fragment 权限测试" />
+        <activity
                 android:name=".ui.crash.RestartActivity"
                 android:label="重启App" />
         <activity
@@ -271,7 +274,7 @@
                 android:name=".ui.adaptation.DefImgActivity"
                 android:label="默认图显示" />
         <activity
-                android:name=".ui.adaptation.PermissionActivity"
+                android:name=".ui.adaptation.permission.PermissionActivity"
                 android:label="权限测试" />
         <activity
                 android:name=".ui.dialog.BottomSheetActivity"

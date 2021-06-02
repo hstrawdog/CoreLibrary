@@ -12,10 +12,11 @@ import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
+import com.hqq.example.demo.FragmentTestActivity
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
-import com.hqq.example.ui.adaptation.PermissionActivity
+import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.crash.CrashActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
@@ -124,6 +125,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             LogUtils.e("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
             arrayList.add(MainBean("奔溃后启动", CrashActivity::class.java))
+            arrayList.add(MainBean("Fragment 测试", FragmentTestActivity::class.java))
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
             arrayList.add(MainBean("转场动画", TransitionsAnimationActivity::class.java))
             arrayList.add(MainBean("标题/状态栏设置", ToolBarActivity::class.java))

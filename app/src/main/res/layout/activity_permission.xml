@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <LinearLayout
+            android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.adaptation.PermissionActivity">
+        tools:context=".ui.adaptation.permission.PermissionActivity">
 
         <Button
             android:id="@+id/button7"
@@ -29,6 +29,12 @@
             android:text="读写"
             tools:layout_editor_absoluteX="263dp"
             tools:layout_editor_absoluteY="38dp" />
+
+        <Button
+                android:id="@+id/button58"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fragment 权限测试" />
 
     </LinearLayout>
 </layout>
