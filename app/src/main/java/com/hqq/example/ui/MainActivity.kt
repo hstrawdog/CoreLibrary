@@ -124,6 +124,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             super.onCrete()
             LogUtils.e("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
+            arrayList.add(MainBean("文件下载测试", DownLoadActivity::class.java))
             arrayList.add(MainBean("奔溃后启动", CrashActivity::class.java))
             arrayList.add(MainBean("Fragment 测试", FragmentTestActivity::class.java))
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
