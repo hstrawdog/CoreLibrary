@@ -29,24 +29,44 @@ import kotlin.collections.HashMap
  * @Descrive :Created by du on 16/9/4.
  */
 class OkParamsImpl : ParamsCompat {
+
+    /**
+     *  请求key
+     */
     private val keys: MutableList<String?> = ArrayList()
+
+    /**
+     * 请求value
+     */
     private val values: MutableList<Any?> = ArrayList()
+
+    /**
+     *  解码
+     */
     override var decode: String? = ""
+
+    /**
+     *  编码
+     */
     override var encode: String? = ""
-    override var headers: MutableMap<String, String> =HashMap()
+
+    /**
+     *  请求header
+     */
+    override var headers: MutableMap<String, String> = HashMap()
 
 
-    override fun put(key: String?, value: Any?): ParamsCompat? {
+    override fun put(key: String?, value: Any?): ParamsCompat {
         keys.add(key)
         values.add(value)
         return this
     }
 
-    override fun paramGet(): String? {
+    override fun paramGet(): String {
         return lineUp()
     }
 
-    override fun  paramForm(): RequestBody {
+    override fun paramForm(): RequestBody {
         return RequestBody.create("application/x-www-form-urlencoded".toMediaTypeOrNull(), lineUp())
 
     }
@@ -73,7 +93,7 @@ class OkParamsImpl : ParamsCompat {
                 builder.addPart(fileBody)
             } else {
                 builder.addPart(headersOf("Content-Disposition", "form-data; name=\"" + keys[index] + "\""),
-                    RequestBody.create(null, value.toString() + ""))
+                        RequestBody.create(null, value.toString() + ""))
                 stringBuilder.append(keys[index]).append('=').append(encodeString(value.toString() + "")).append('&')
             }
         }

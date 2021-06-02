@@ -16,6 +16,7 @@ package com.hqq.core.net.ok;
  */
 
 public interface OkNetCallback {
+
     void onSuccess(String statusCode, String response);
 
     void onFailure(String statusCode, String errMsg, String response);

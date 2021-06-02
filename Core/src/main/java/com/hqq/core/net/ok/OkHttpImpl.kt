@@ -35,15 +35,16 @@ class OkHttpImpl : HttpCompat {
     val WRITE_TIMEOUT = 60
 
     /**
-     *   创建 OkHttpClient
+     * 创建 OkHttpClient
+     *
      * @return HttpCompat
      */
     override fun create(): HttpCompat {
         mOkHttpClient = OkHttpClient.Builder() //设置读取超时时间
-            .readTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS) //设置写的超时时
-            .writeTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            .connectTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-            .build()
+                .readTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS) //设置写的超时时
+                .writeTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+                .connectTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
+                .build()
         return this
     }
 
@@ -115,7 +116,7 @@ class OkHttpImpl : HttpCompat {
     }
 
     /**
-     *   拼接成URL
+     * 拼接成URL
      * @param url String
      * @param params ParamsCompat?
      * @return Request.Builder
@@ -145,7 +146,7 @@ class OkHttpImpl : HttpCompat {
      * @return Call
      */
     private fun doGet(coroutineContext: CoroutineContext, url: String, params: ParamsCompat,
-            callback: OkNetCallback): Call {
+                      callback: OkNetCallback): Call {
         val request: Request.Builder = getBuilder(url, params)
         val call = mOkHttpClient!!.newCall(request.build())
         call.enqueue(object : Callback {
@@ -170,9 +171,9 @@ class OkHttpImpl : HttpCompat {
      * @return
      */
     private fun doPost(url: String,
-            params: ParamsCompat,
-            callback: OkNetCallback,
-            coroutineContext: CoroutineContext): Call {
+                       params: ParamsCompat,
+                       callback: OkNetCallback,
+                       coroutineContext: CoroutineContext): Call {
         val body = params.paramForm()
         val request: Request.Builder = Request.Builder().url(url).post(body)
         return doRequest(coroutineContext, request, callback, params)
@@ -187,9 +188,9 @@ class OkHttpImpl : HttpCompat {
      * @param paramsCompat
      */
     private fun postHandler(coroutineContext: CoroutineContext,
-            callback: OkNetCallback,
-            response: Response?,
-            paramsCompat: ParamsCompat?) {
+                            callback: OkNetCallback,
+                            response: Response?,
+                            paramsCompat: ParamsCompat?) {
         CoroutineScope(coroutineContext).launch {
             post(callback, response, paramsCompat)
         }
@@ -204,9 +205,9 @@ class OkHttpImpl : HttpCompat {
      * @return
      */
     private fun doRequest(coroutineContext: CoroutineContext,
-            request: Request.Builder,
-            callback: OkNetCallback,
-            params: ParamsCompat): Call {
+                          request: Request.Builder,
+                          callback: OkNetCallback,
+                          params: ParamsCompat): Call {
         val call = mOkHttpClient!!.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
