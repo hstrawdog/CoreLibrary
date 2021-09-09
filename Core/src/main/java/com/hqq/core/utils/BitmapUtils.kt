@@ -185,7 +185,6 @@ object BitmapUtils {
         return bitmap
     }
 
-
     /**
      * 该方式原理主要是：View组件显示的内容可以通过cache机制保存为bitmap
      * @param view View

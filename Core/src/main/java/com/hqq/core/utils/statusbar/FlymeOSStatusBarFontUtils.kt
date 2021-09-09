@@ -9,19 +9,19 @@ import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
- /**
-  * @Author : huangqiqiang
-  * @Package : com.hqq.core.utils.statusbar
-  * @FileName :
-  * @Date  : 2020/9/1 0001  下午 5:20
-  * @Email :  qiqiang213@gmail.com
-  * @Descrive :
-  */
+/**
+ * @Author : huangqiqiang
+ * @Package : com.hqq.core.utils.statusbar
+ * @FileName :
+ * @Date  : 2020/9/1 0001  下午 5:20
+ * @Email :  qiqiang213@gmail.com
+ * @Descrive :
+ */
 object FlymeOSStatusBarFontUtils {
     lateinit var mSetStatusBarColorIcon: Method
-    lateinit var  mSetStatusBarDarkIcon: Method
-    lateinit var  mStatusBarColorFiled: Field
-    var  SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 0
+    lateinit var mSetStatusBarDarkIcon: Method
+    lateinit var mStatusBarColorFiled: Field
+    var SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = 0
 
     /**
      * 判断颜色是否偏黑色

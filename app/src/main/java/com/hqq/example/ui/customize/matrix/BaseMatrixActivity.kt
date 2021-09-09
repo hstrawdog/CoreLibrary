@@ -1,4 +1,4 @@
-package com.hqq.example.ui.matrix
+package com.hqq.example.ui.customize.matrix
 
 import android.app.Activity
 import android.content.Intent
@@ -21,7 +21,7 @@ import com.hqq.example.R
  * @Descrive : 矩阵的简单使用
  * 参考 https://blog.csdn.net/MonaLisaTearr/article/details/80177726
  */
-class MatrixActivity : BaseActivity() {
+class BaseMatrixActivity : BaseActivity() {
     lateinit var mButton41: Button
     lateinit var mButton42: Button
     lateinit var mButton43: Button
@@ -30,7 +30,7 @@ class MatrixActivity : BaseActivity() {
     lateinit var mButton46: Button
     lateinit var mButton47: Button
     override val layoutViewId: Int
-        get() = R.layout.activity_matrix
+        get() = R.layout.activity_base_matrix
     @RequiresApi(api = Build.VERSION_CODES.Q)
     override fun initView() {
         mButton47 = findViewById(R.id.button47)
@@ -124,12 +124,5 @@ class MatrixActivity : BaseActivity() {
             mButton47!!.getMatrix().mapPoints(pts)
             e(pts.toString())
         })
-    }
-
-    companion object {
-        fun open(context: Activity) {
-            val starter = Intent(context, MatrixActivity::class.java)
-            context.startActivityForResult(starter, -1)
-        }
     }
 }

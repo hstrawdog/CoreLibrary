@@ -24,4 +24,10 @@ interface WebLoadListener {
      * @param url String
      */
     fun onPageFinished(url: String?)
+
+    /**
+     *  加载失败
+     */
+    fun  onError(url: String?)
+
 }

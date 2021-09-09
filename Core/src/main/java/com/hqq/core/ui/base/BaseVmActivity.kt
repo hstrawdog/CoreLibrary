@@ -33,9 +33,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
         }
         addViewModel()
         initViews()
-        viewMode.let {
-            it.initData(intent.extras)
-        }
+        viewMode.initData(intent.extras)
     }
 
     /**

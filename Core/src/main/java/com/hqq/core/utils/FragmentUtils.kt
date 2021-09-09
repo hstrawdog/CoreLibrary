@@ -14,21 +14,21 @@ import com.hqq.core.ui.base.BaseFragment
  * @Descrive :
  */
 class FragmentUtils {
-    var supportFragmentManager: FragmentManager ?=null
+    var supportFragmentManager: FragmentManager? = null
 
     var currentFragment: Fragment? = null
 
-    constructor(any: Any){
+    constructor(any: Any) {
 
-        when(any){
-            is FragmentManager->{
-                supportFragmentManager= any
+        when (any) {
+            is FragmentManager -> {
+                supportFragmentManager = any
             }
-            is  BaseActivity ->{
-                supportFragmentManager= any.supportFragmentManager
+            is BaseActivity -> {
+                supportFragmentManager = any.supportFragmentManager
             }
-            is BaseFragment ->{
-                supportFragmentManager= any.childFragmentManager
+            is BaseFragment -> {
+                supportFragmentManager = any.childFragmentManager
             }
         }
 
@@ -50,14 +50,13 @@ class FragmentUtils {
                 supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
             } else {
                 supportFragmentManager!!.beginTransaction().hide(currentFragment!!).add(id, fragment)
-                    .commit()
+                        .commit()
             }
         } else {
             if (currentFragment == null) {
                 supportFragmentManager!!.beginTransaction().show(fragment).commit()
             } else {
-                supportFragmentManager!!.beginTransaction().hide(currentFragment!!).show(fragment)
-                    .commit()
+                supportFragmentManager!!.beginTransaction().hide(currentFragment!!).show(fragment).commit()
             }
         }
         currentFragment = fragment
@@ -71,7 +70,7 @@ class FragmentUtils {
      */
     @Deprecated("")
     fun addFragment(fragment: Fragment, id: Int) {
-        if (!fragment.isAdded && supportFragmentManager !=null) {
+        if (!fragment.isAdded && supportFragmentManager != null) {
             supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
             currentFragment = fragment
         }

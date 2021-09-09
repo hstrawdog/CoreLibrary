@@ -3,6 +3,7 @@ package com.hqq.core.ui.base
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -34,3 +35,4 @@ fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap>) {
     })
 
 }
+

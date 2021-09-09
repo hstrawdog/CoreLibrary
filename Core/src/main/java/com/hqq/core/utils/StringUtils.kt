@@ -21,7 +21,6 @@ object StringUtils {
         return if (number < 10) "0$number" else "" + number
     }
 
-
     /**
      * 复制内容到剪贴板
      *

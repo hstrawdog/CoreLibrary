@@ -21,7 +21,6 @@ class CoreProvider : ContentProvider() {
     /**
      * 默认初始化 CoreConfig
      */
-
     override fun onCreate(): Boolean {
         LogUtils.e4Debug(" CoreProvider  onCreate")
         if (!CoreConfig.get().isInitialized() || RegexUtils.isNull(CoreConfig.get().application)) {
@@ -34,7 +33,7 @@ class CoreProvider : ContentProvider() {
     }
 
     override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?,
-            sortOrder: String?): Cursor? {
+                       sortOrder: String?): Cursor? {
         return null
     }
 

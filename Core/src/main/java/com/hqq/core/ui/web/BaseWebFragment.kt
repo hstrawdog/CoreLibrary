@@ -46,7 +46,7 @@ open class BaseWebFragment : BaseFragment() {
     /**
      *  URL
      */
-    private var url: String? = null
+     var url: String? = null
 
     /**
      *  标题哦
@@ -56,7 +56,7 @@ open class BaseWebFragment : BaseFragment() {
     /**
      *  加载监听
      */
-    private var webLoadListener: WebLoadListener? = null
+     var webLoadListener: WebLoadListener? = null
 
     /**
      * 交互脚本
@@ -211,6 +211,13 @@ open class BaseWebFragment : BaseFragment() {
                 webLoadListener?.onPageFinished(url)
             }
         }
+        override fun onReceivedError(view: WebView, errorCode: Int, description: String?, failingUrl: String?) {
+            super.onReceivedError(view, errorCode, description, failingUrl) // 断网或者网络连接超时
+            if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_CONNECT || errorCode == ERROR_TIMEOUT) {
+                view.loadUrl("about:blank");// 避免出现默认的错误界面
+                webLoadListener?.onError(failingUrl)
+            }
+        }
 
         override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
             super.onReceivedError(view, request, error)
@@ -222,7 +229,7 @@ open class BaseWebFragment : BaseFragment() {
     fun onBackPressed(): Boolean {
         if (isGoBackWebView) {
             webView?.run {
-                return if (canGoBack()) {
+                return if (canGoBack() && visibility== View.VISIBLE ) {
                     goBack()
                     true
                 } else {

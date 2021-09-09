@@ -1,10 +1,14 @@
 package com.hqq.example.ui
 
 import android.content.Intent
+import android.graphics.Matrix
+import android.graphics.Rect
+import android.graphics.RectF
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.viewModelScope
+import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -20,6 +24,7 @@ import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.crash.CrashActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
+import com.hqq.example.ui.customize.matrix.MatrixEventActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.info.BaseInfoActivity
@@ -73,8 +78,30 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            putParcelable("A", ParcelableBean())
 //        })
 
+//        open(WebActivity::class.java)
+
+
+
+        var m = Matrix()
+
+//        var rect= RectF(0f,0f,3000f,4000f)
+//        m.mapRect(rect)
+        m.setScale(3000f/1080f,4000f/1920f,0f,0f)
+
+
+        var rect2= RectF(100f,100f,100f,100f)
+        val result = RectF()
+
+
+        m.mapRect(result,rect2)
+
+        LogUtils.e(""+ result.toString())
+
+
 
     }
+
+
 
 
 //    val mV: MainViewModel by viewModels()

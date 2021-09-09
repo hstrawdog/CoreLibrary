@@ -17,7 +17,7 @@ import java.lang.Exception
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-fun BaseViewModel.launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit) {
+fun BaseViewModel.launch( block: suspend () -> Unit, error: suspend (Throwable) -> Unit) {
     viewModelScope.launch(Dispatchers.IO) {
         try {
             block()

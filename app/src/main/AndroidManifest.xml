@@ -59,6 +59,12 @@
                 android:name=".ui.adaptation.permission.Permission4FragmentActivity"
                 android:label="Fragment 权限测试" />
         <activity
+                android:name=".ui.SeekBarActivity"
+                android:label="SeekBarActivity" />
+        <activity
+                android:name=".ui.customize.matrix.MatrixEventActivity"
+                android:label="手势矩阵" />
+        <activity
                 android:name=".ui.crash.RestartActivity"
                 android:label="重启App" />
         <activity
@@ -108,7 +114,7 @@
                 android:label="ViewModel 测试" />
         <activity android:name=".ui.jetpack.di.dagger.DaggerActivity" />
         <activity
-                android:name=".ui.matrix.MatrixActivity"
+                android:name=".ui.customize.matrix.BaseMatrixActivity"
                 android:label="矩阵相关" />
         <activity
                 android:name=".ui.view.InflateTestActivity"

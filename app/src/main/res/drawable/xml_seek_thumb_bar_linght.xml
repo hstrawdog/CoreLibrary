@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/ic_photo_magnifier" android:state_pressed="true" />
+    <item android:drawable="@mipmap/ic_photo_magnifier" android:state_focused="true" />
+    <item android:drawable="@mipmap/ic_photo_magnifier" android:state_selected="true" />
+    <item>
+
+            <bitmap android:src="@mipmap/ic_photo_magnifier"></bitmap>
+
+    </item>
+</selector>

@@ -8,6 +8,8 @@ import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
+import com.hqq.example.ui.customize.matrix.BaseMatrixActivity
+import com.hqq.example.ui.customize.matrix.MatrixEventActivity
 
 /**
  * @Author : huangqiqiang
@@ -22,11 +24,13 @@ class CustomizeIndexActivity(override val adapter: MainAdapter=MainAdapter()) : 
     override fun initData() {
         adapter.setOnItemClickListener(this)
 
-        adapter!!.addData(MainBean("圆形倒计时", RoundCountdownActivity::class.java))
-        adapter!!.addData(MainBean("贝塞尔曲线鉴定绘制", BezierActivity::class.java))
-        adapter!!.addData(MainBean("进度条/星星", ProgressBarViewBuilderActivity::class.java))
-        adapter!!.addData(MainBean("高逼格的鱼", FishActivity::class.java))
-        adapter!!.addData(MainBean("vie滑动以及回弹", SwipeMenuLayoutActivity::class.java))
+        adapter.addData(MainBean("圆形倒计时", RoundCountdownActivity::class.java))
+        adapter.addData(MainBean("贝塞尔曲线鉴定绘制", BezierActivity::class.java))
+        adapter.addData(MainBean("进度条/星星", ProgressBarViewBuilderActivity::class.java))
+        adapter.addData(MainBean("高逼格的鱼", FishActivity::class.java))
+        adapter.addData(MainBean("vie滑动以及回弹", SwipeMenuLayoutActivity::class.java))
+        adapter.addData(MainBean("矩阵的简单使用", BaseMatrixActivity::class.java))
+        adapter.addData(MainBean("矩阵的手势", MatrixEventActivity::class.java))
 
     }
 

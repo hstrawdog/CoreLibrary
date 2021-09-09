@@ -15,7 +15,7 @@ import java.util.*
  * @Descrive : 缓存 Activity生命周期栈
  */
 class ActivityLifecycle : ActivityLifecycleCallbacks {
-    private val activities: MutableList<Activity>? = ArrayList()
+    private val activities: MutableList<Activity> = ArrayList()
 
     /**
      * 获取APP中activity栈中最上层一个activity
@@ -38,7 +38,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
         }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        activities!!.add(activity)
+        activities.add(activity)
         LogUtils.e("ActivityLifecycle -> onActivityCreated", activity.localClassName)
     }
 
@@ -48,7 +48,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     override fun onActivityStopped(activity: Activity) {}
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
     override fun onActivityDestroyed(activity: Activity) {
-        activities!!.remove(activity)
+        activities.remove(activity)
         LogUtils.e("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
     }
 

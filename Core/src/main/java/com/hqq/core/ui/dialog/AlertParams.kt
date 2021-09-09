@@ -29,7 +29,6 @@ class AlertParams {
      */
     var content: CharSequence = ""
 
-
     /**
      * 中间布局
      */

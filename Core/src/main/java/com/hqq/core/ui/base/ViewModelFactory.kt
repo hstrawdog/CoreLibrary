@@ -17,11 +17,7 @@ internal object ViewModelFactory {
     /**
      * 初始化 BaseViewModel中关联ui的字段
      */
-    fun initBaseViewModel(
-            viewModel: BaseViewModel,
-            lifecycleOwner: LifecycleOwner,
-            loadingView: LoadingView?
-    ) {
+    fun initBaseViewModel(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner, loadingView: LoadingView?) {
         viewModel.loadingView.observe(lifecycleOwner, Observer { aBoolean: Boolean? ->
             if (loadingView != null) {
                 if (aBoolean!!) {
@@ -41,10 +37,7 @@ internal object ViewModelFactory {
      * @param aClass
      * @return
      */
-    fun <K : ViewModel> createViewModel(
-            viewModelStoreOwner: ViewModelStoreOwner,
-            aClass: Class<*>,
-            viewModelK: K?): ViewModel {
+    fun <K : ViewModel> createViewModel(viewModelStoreOwner: ViewModelStoreOwner, aClass: Class<*>, viewModelK: K?): ViewModel {
         var viewModel: ViewModel? = null
         viewModelK?.let {
             viewModel = it
@@ -72,19 +65,14 @@ internal object ViewModelFactory {
      * @param <K>
      * @return
      */
-    fun <K : ViewModel> createViewModel(
-            viewModelStoreOwner: ViewModelStoreOwner,
-            modelClass: Class<K>): ViewModel {
+    fun <K : ViewModel> createViewModel(viewModelStoreOwner: ViewModelStoreOwner, modelClass: Class<K>): ViewModel {
         return ViewModelProvider(viewModelStoreOwner)[modelClass]
     }
 
     /**
      *  打开某个Activity
      */
-    fun initOpenActivity(
-            viewModel: BaseViewModel,
-            lifecycleOwner: LifecycleOwner?,
-            openActivity: IOpenActivity) {
+    fun initOpenActivity(viewModel: BaseViewModel, lifecycleOwner: LifecycleOwner?, openActivity: IOpenActivity) {
         viewModel.openActivityComponentMutableLiveData.observe(
                 lifecycleOwner!!,
                 Observer { openActivityComponent -> openActivity.openActivity(openActivityComponent) })
