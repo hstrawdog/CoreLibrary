@@ -107,6 +107,16 @@ object FileUtils {
     fun getDataBaseDir(fileName: String): String {
         return CoreConfig.applicationContext.getDatabasePath(fileName)?.path + ""
     }
+
+    /**
+     *  获取包下的 指定目录文件夹
+     * @param fileName String
+     * @return File?
+     */
+    fun getPackageDir(fileName: String): File? {
+        return CoreConfig.applicationContext.getDir(fileName, Context.MODE_APPEND)
+    }
+
     //endregion
 
     //region 外部存储

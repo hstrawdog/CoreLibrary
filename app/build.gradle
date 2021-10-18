@@ -118,9 +118,6 @@ dependencies {
 
     debugImplementation Leakcanary.leakcanary
 
-
-
-
     // Hilt dependencies
     implementation Hilt.daggerRuntime
     implementation Hilt.compiler
@@ -131,8 +128,7 @@ dependencies {
     kapt Hilt.compiler
 
     api 'com.amap.api:location:latest.integration'
-
-//    implementation 'skin.support:skin-support:3.1.4'                   // skin-support 基础控件支持
+//    implementation 'skin.support:skin-support:3.1.4'   // skin-support 基础控件支持
     api 'skin.support:skin-support:4.0.4'                   // skin-support
     api 'skin.support:skin-support-appcompat:4.0.4'         // skin-support 基础控件支持
     api 'skin.support:skin-support-design:4.0.4'

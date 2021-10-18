@@ -1,6 +1,8 @@
 package com.hqq.core.ui.base
 
+import android.app.Application
 import androidx.lifecycle.*
+import com.hqq.core.CoreConfig
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.widget.LoadingView
 import java.lang.reflect.ParameterizedType
@@ -68,6 +70,7 @@ internal object ViewModelFactory {
     fun <K : ViewModel> createViewModel(viewModelStoreOwner: ViewModelStoreOwner, modelClass: Class<K>): ViewModel {
         return ViewModelProvider(viewModelStoreOwner)[modelClass]
     }
+
 
     /**
      *  打开某个Activity
