@@ -122,6 +122,26 @@ object BitmapUtils {
         return bitmapCombine(newbm, 5, 5, Color.TRANSPARENT)
     }
 
+
+    /**
+     * 以最小的比例 进行缩放图片
+     * @param bm Bitmap
+     * @param newWidth Int
+     * @param newHeight Int
+     * @return Bitmap
+     */
+    fun zoomImg4minScale(bm: Bitmap, newWidth: Int, newHeight: Int): Bitmap { // 获得图片的宽高
+        val width = bm.width
+        val height = bm.height // 计算缩放比例
+        val scaleWidth = newWidth.toFloat() / width
+        val scaleHeight = newHeight.toFloat() / height // 取得想要缩放的matrix参数
+        var sc = Math.min(scaleWidth, scaleHeight)
+        val matrix = Matrix()
+        matrix.postScale(sc, sc) // 得到新的图片
+        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
+    }
+
+
     /**
      * 获得添加边框了的Bitmap
      *

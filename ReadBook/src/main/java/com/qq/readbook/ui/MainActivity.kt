@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.ui.list.BaseVmListActivity
@@ -94,12 +95,17 @@ class MainActivity : BaseVmListActivity<MainViewModel, ActivityMainBinding>() {
                 }
             }
         }
+
+
+
     }
 
     class MenuAdapter : BaseQuickAdapter<ActivityBean, BaseViewHolder>(R.layout.item_main_menu) {
         override fun convert(holder: BaseViewHolder, item: ActivityBean) {
             holder.setText(R.id.tv_name, item.titile)
         }
+
+
     }
 
 

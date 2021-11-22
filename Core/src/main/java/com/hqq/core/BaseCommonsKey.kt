@@ -6,7 +6,7 @@ package com.hqq.core
  * @FileName: com.core.library.BaseCommonsKey.java
  * @emain: 593979591@qq.com
  * @date: 2018-11-09 11:55
-</描述当前版本功能> */
+ */
 object BaseCommonsKey {
     /**
      * 默认分页大小

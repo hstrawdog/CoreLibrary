@@ -94,11 +94,7 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
                 PermissionsUtils.requestStorage(object : PermissionsResult {
                     override fun onPermissionsResult(status: Boolean) {
                         FileUtils.saveBitmap(bitmap, filePath)
-                        if (isSave2Album) {
-                            // 发送广播 通知相册
-                            MediaStore.Images.Media.insertImage(context!!.contentResolver, filePath, fileName, null)
-                            context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(filePath))))
-                        }
+                        save2Album(filePath)
                         ToastUtils.showToast("保存成功")
                     }
                 })
@@ -111,14 +107,11 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
      *   保存图片到App cache
      */
     fun save2AppCache() {
-        var path = FileUtils.getCacheDir(context!!) + "/" + fileName
+        var path = filePath
         FileUtils.saveBitmap(bitmap, path)
-        if (isSave2Album) {
-            // 发送广播 通知相册
-            MediaStore.Images.Media.insertImage(context!!.contentResolver, path, fileName, null)
-            ToastUtils.showToast("保存成功")
-        }
-        context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, FileUtils.getFile2Uri(path)))
+        save2Album(path)
+        ToastUtils.showToast("保存成功")
+
     }
 
     /**
@@ -126,14 +119,21 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
      *
      */
     fun save2Private() {
-        val path = FileUtils.getExternalFilesDir(context!!) + "/" + fileName
+        val path = filePath
         FileUtils.saveBitmap(bitmap, path)
+        save2Album(path)
+        ToastUtils.showToast("保存成功")
+    }
 
+    /**
+     * 将图片 保存至相册中
+     * @param path String
+     */
+    private fun save2Album(path: String) {
         if (isSave2Album) {
             // 发送广播 通知相册
             MediaStore.Images.Media.insertImage(context!!.contentResolver, path, fileName, null)
-            context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(filePath))))
+            context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(path))))
         }
-        ToastUtils.showToast("保存成功")
     }
 }
