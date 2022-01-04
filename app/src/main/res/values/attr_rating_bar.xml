@@ -4,4 +4,17 @@
         <attr name="is_slide" format="boolean" />
         <attr name="padding_child" format="dimension" />
     </declare-styleable>
+
+
+    <declare-styleable name="CircularProgressView">
+        <attr name="backWidth" format="dimension" />    <!--背景圆环宽度-->
+        <attr name="progWidth" format="dimension" />    <!--进度圆环宽度-->
+        <attr name="backColor" format="color" />        <!--背景圆环颜色-->
+        <attr name="progColor" format="color" />        <!--进度圆环颜色-->
+        <attr name="progStartColor" format="color" />   <!--进度圆环开始颜色-->
+        <attr name="progFirstColor" format="color" />   <!--进度圆环结束颜色-->
+        <attr name="progressNum" format="integer" />       <!--圆环进度-->
+    </declare-styleable>
+
+
 </resources>

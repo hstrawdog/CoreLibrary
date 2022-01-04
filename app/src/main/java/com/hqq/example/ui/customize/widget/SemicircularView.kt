@@ -48,10 +48,10 @@ class SemicircularView : View {
 
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
-        drawOvel(canvas, Color.RED)
+        drawOvl(canvas, Color.RED)
     }
 
-    private fun drawOvel(canvas: Canvas, color: Int) {
+    private fun drawOvl(canvas: Canvas, color: Int) {
         val mXCenter = width / 2.toFloat()
         val mYCenter = height.toFloat()
         val ovl = RectF()
@@ -68,7 +68,7 @@ class SemicircularView : View {
 
         // 背景
         mPaint.color = mBackgroundArcColor
-        canvas.drawArc(ovl, -180f, 180f, false, mPaint)
+        canvas.drawArc(ovl, -180f, -180f, false, mPaint)
         mPaint.color = color
         canvas.drawArc(ovl, -180f, 30f, false, mPaint)
     }

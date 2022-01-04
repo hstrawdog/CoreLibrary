@@ -12,4 +12,14 @@
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/x100" />
 
+
+    <com.hqq.example.ui.customize.widget.CircularProgressView
+            app:progWidth="@dimen/x10"
+            app:backWidth="@dimen/x10"
+            app:backColor="#C8C8C8"
+            app:progColor="#FE694E"
+            app:progressNum="20"
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/x160"/>
+
 </LinearLayout>

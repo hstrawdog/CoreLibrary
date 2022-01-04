@@ -94,7 +94,9 @@ object LogUtils {
 
     @kotlin.jvm.JvmStatic
     fun e4Debug(any: Any?) {
-        e("$TAG debug_log", any)
+        if (CoreConfig.get().isDebug) {
+            e("$TAG debug_log", any)
+        }
     }
 
     /**

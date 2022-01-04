@@ -56,6 +56,9 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".ui.fold.FoldViewActivity"
+                android:label="折叠布局" />
+        <activity
                 android:name=".ui.adaptation.permission.Permission4FragmentActivity"
                 android:label="Fragment 权限测试" />
         <activity

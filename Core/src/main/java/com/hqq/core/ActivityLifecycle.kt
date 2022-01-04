@@ -49,7 +49,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
     override fun onActivityDestroyed(activity: Activity) {
         activities.remove(activity)
-        LogUtils.e("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
+        LogUtils.e  ("ActivityLifecycle -> onActivityDestroyed", activity.localClassName)
     }
 
 }
