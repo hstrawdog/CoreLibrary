@@ -87,6 +87,6 @@ object HttpManager {
     fun getJoke(pageCount: Int, netCallback: NetCallback<Joke>) {
         ApiManager.getJuHeInterface("http://v.juhe.cn/")
                 .getJoke(pageCount, (System.currentTimeMillis() / 1000L).toString() + "", "e2c17c621f374e49ddece7836ff321a9")
-                .enqueue(netCallback!!)
+                .enqueue(netCallback)
     }
 }

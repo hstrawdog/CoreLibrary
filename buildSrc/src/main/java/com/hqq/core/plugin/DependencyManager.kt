@@ -24,37 +24,16 @@ object Versions {
     val paging = "3.0.0-alpha02"
     val kotlin = "1.4.21"
     val work = "2.2.0"
-    val room = "2.2.5"
     val cardview = "1.0.0"
     val recyclerview = "1.0.0"
     val fragment = "1.3.0-alpha06"
-    val anko = "0.10.8"
     val swiperefreshlayout = "1.0.0"
-    val hit = "2.28-alpha"
-    val hitViewModule = "1.0.0-alpha01"
     val appStartup = "1.0.0-alpha01"
-    val material = "1.2.0-alpha06"
     val lifecycle_version = "2.2.0"
     val viewPage2 = "1.0.0"
-    val dataBinding_Compoler = "4.0.1"
 
-    val retrofit = "2.9.0"
-    val okhttpLogging = "4.8.0"
-    val okhttp = "4.2.1"
 
-    val gldie = "4.11.0"
-
-    val gson = "2.8.6"
-
-    val Leakcanary = "2.4"
-
-    val BRVAH = "3.0.4"
-
-    val ultraPtr = "1.0.11"
-
-    val Luban = "1.1.8"
 }
-
 
 /**
  *  Androidx  jetpack
@@ -74,37 +53,55 @@ object AndroidX {
     val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_version}"
     val runTimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
     val viewpager2 = "androidx.viewpager2:viewpager2:${Versions.viewPage2}"
-}
 
-/**
- * Android
- */
-object Android {
-    val meteria = "com.google.android.material:material:${Versions.material}"
-    val activityKtx = "androidx.activity:activity-ktx:${Versions.material}"
-    val dataBindingCompiler = "com.android.databinding:compiler:${Versions.dataBinding_Compoler}"
-}
-
-/**
- *   Fragment
- */
-object Fragment {
+    // fragment
     val runtime = "androidx.fragment:fragment:${Versions.fragment}"
     val runtimeKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+
     // 目测是用于测试的一个库 好像也支持Dagger的注入
     val testing = "androidx.fragment:fragment-testing:${Versions.fragment}"
 }
 
 /**
- *  网络请求
+ *   AndroidX  Compose   meteria
+ *   包含7个子包
+ *   介绍:  https://developer.android.google.cn/topic/libraries/support-library/features#material-design
+ *   详细内容: https://developer.android.google.cn/jetpack/androidx/releases/compose?hl=zh_cn
+ *
  */
-object Retrofit {
-    val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
-    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
-    val mock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
-    val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLogging}"
+object Meteria {
+    var materialVersion = "1.1.0"
+    val meteria = "androidx.compose.material:material:$materialVersion"
+
+    //在 Jetpack Compose 应用中构建动画，丰富用户的体验
+    var animationVersion = "1.0.5"
+    val animation = "androidx.compose.animation:animation:$animationVersion"
+
+    // 借助 Kotlin 编译器插件，转换 @Composable functions（可组合函数）并启用优化功能。
+    var compilerVersion = "1.0.5"
+    val compiler = "androidx.compose.compiler:compiler:$compilerVersion"
+
 }
+
+
+
+
+/**
+ *  Android  Activity
+ * https://developer.android.google.cn/jetpack/androidx/releases/activity#kts
+ */
+object Activity {
+    var activity_version = "1.4.0"
+
+    // java  貌似这个是默认导入的
+    val activity = "androidx.activity:activity:$activity_version"
+
+    //Kotlin 拓展包
+    val activityKtx = "androidx.activity:activity-ktx:$activity_version"
+
+}
+
+
 
 /**
  *  KT 相关
@@ -117,68 +114,113 @@ object Kt {
 }
 
 /**
- * 图片加载
+ *  网络请求
+ *  https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
+ *  https://github.com/square/okhttp/tags
+ *  https://github.com/square/retrofit/tags
+ */
+object Retrofit {
+    val retrofitVsrsion = "2.9.0"
+    val okhttpVsrsion = "4.9.3"
+
+    val okhttp = "com.squareup.okhttp3:okhttp:$okhttpVsrsion"
+
+    // 需要与 okhttp 保持一致
+    val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttpVsrsion"
+
+    val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVsrsion"
+    val converterGson = "com.squareup.retrofit2:converter-gson:$retrofitVsrsion"
+}
+
+/**
+ * 图片加载 Glide
+ * https://github.com/bumptech/glide/tags
  */
 object Glide {
-    val glide = "com.github.bumptech.glide:glide:${Versions.gldie}"
-    val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.gldie}"
+    val gldieVsrsion = "4.12.0"
+
+    val glide = "com.github.bumptech.glide:glide:$gldieVsrsion"
+    val glideCompiler = "com.github.bumptech.glide:compiler:$gldieVsrsion"
 }
 
 /**
  *  注解 依赖注入   dagger
+ *  https://developer.android.google.cn/jetpack/androidx/releases/hilt?hl=zh_cn
  */
 object Hilt {
-    val daggerRuntime = "com.google.dagger:hilt-android:${Versions.hit}"
-    val daggerCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hit}"
-    val viewModule = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hitViewModule}"
-    val compiler = "androidx.hilt:hilt-compiler:${Versions.hitViewModule}"
+    val hiltVersion = "2.28-alpha"
+    val hitViewModule = "1.0.0-alpha01"
+
+    val daggerRuntime = "com.google.dagger:hilt-android:$hiltVersion"
+    val daggerCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
+
+    val viewModule = "androidx.hilt:hilt-lifecycle-viewmodel:$hitViewModule"
+
+    //注解处理器
+    val compiler = "androidx.hilt:hilt-compiler:$hitViewModule"
 }
 
 /**
- *   数据库
+ *   数据库 Room
+ *   https://developer.android.google.cn/jetpack/androidx/releases/room?hl=zh_cn
  */
 object Room {
-    val runtime = "androidx.room:room-runtime:${Versions.room}"
-    val compiler = "androidx.room:room-compiler:${Versions.room}"
+    val room_version = "2.4.1"
+    val runtime = "androidx.room:room-runtime:$room_version"
+
+    //注解处理器
+    val compiler = "androidx.room:room-compiler:$room_version"
+
+    // 分页
+    val paging = "androidx.room:room-paging:$room_version"
 }
 
 /**
- *  JSON
+ *  JSON Gson
+ *  https://github.com/google/gson/tags
  */
 object Gson {
-    val gson = "com.google.code.gson:gson:${Versions.gson}"
+    val gson = "com.google.code.gson:gson:2.8.9"
 }
 
 /**
- *  内存检测
+ *  内存检测 Leakcanary
+ *  https://github.com/square/leakcanary/tags
  */
 object Leakcanary {
-    val leakcanary = "com.squareup.leakcanary:leakcanary-android:${Versions.Leakcanary}"
+    val leakcanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
 }
 
 /**
- *  RC  适配器
+ *  RC  适配器 BaseRecyclerViewAdapterHelper
+ *  https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
 object BaseRecyclerViewAdapterHelper {
-    val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.BRVAH}"
+
+    val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7"
 }
 
 /**
- *   下拉刷新
+ *   下拉刷新  ultra-ptr
+ *   https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh
  */
 object UltraPtr {
-    val ultraPtr = "in.srain.cube:ultra-ptr:${Versions.ultraPtr}"
+
+    val ultraPtr = "in.srain.cube:ultra-ptr:1.0.11"
 }
 
 /**
- *  压缩
+ *  压缩 Luban
+ *  https://github.com/Curzibn/Luban/tree/master
  */
 object Luban {
-    val luban = "top.zibin:Luban:${Versions.Luban}"
+    //  不支持webp png 不压缩
+    val luban = "top.zibin:Luban:1.1.8"
 }
 
 /**
  *  屏幕适配
+ *  https://github.com/huangqiqiang/IDimensCompat
  */
 object DimensCompat {
     val iDimensCompat = "com.github.huangqiqiang:IDimensCompat:1.0.1"
@@ -186,15 +228,17 @@ object DimensCompat {
 
 /**
  *  相册
+ *  https://github.com/huangqiqiang/AlbumApp/tags
  */
 object Album {
-    val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.0.10"
+    val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.1.30"
 }
 
 /**
  *  XML 解析器
+ *  https://github.com/jhy/jsoup
  */
 object Jsoup {
-    val jsoup = "org.jsoup:jsoup:1.13.1"
+    val jsoup = "org.jsoup:jsoup:1.14.1"
 
 }

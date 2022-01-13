@@ -22,6 +22,7 @@ import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.crash.CrashActivity
+import com.hqq.example.ui.customize.ComparedActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.customize.SemicircularActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
@@ -81,7 +82,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        startActivity(Intent(this, SaveBitmapActivity::class.java))
 //        startActivity(Intent(this, FoldViewActivity::class.java))
-        startActivity(Intent(this, SemicircularActivity::class.java))
+//        startActivity(Intent(this, SemicircularActivity::class.java))
+//        startActivity(Intent(this, ComparedActivity::class.java))
 
     }
 

@@ -55,6 +55,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.customize.ComparedActivity" android:label="对比View"/>
+
         <activity
                 android:name=".ui.fold.FoldViewActivity"
                 android:label="折叠布局" />

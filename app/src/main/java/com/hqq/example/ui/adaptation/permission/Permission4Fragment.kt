@@ -17,19 +17,28 @@ import com.hqq.example.databinding.ActivityPermissionBinding
 class Permission4Fragment : BaseViewBindingFragment<ActivityPermissionBinding>() {
     override fun initView() {
         binding.button7.setOnClickListener {
-            PermissionsUtils.requestCamera(object : PermissionsResult {
-                override fun onPermissionsResult(status: Boolean) {
+            PermissionsUtils.requestCamera {
+                if (it)
                     ToastUtils.showToast("拥有摄像头权限")
-                }
-            })
-
+            }
         }
         binding.button8.setOnClickListener {
-            PermissionsUtils.requestStorage(object : PermissionsResult {
-                override fun onPermissionsResult(status: Boolean) {
+            PermissionsUtils.requestStorage {
+                if (it)
                     ToastUtils.showToast("拥有文件读写权限")
-                }
-            })
+            }
+        }
+        binding.button59.setOnClickListener {
+            PermissionsUtils.requestLocation {
+                if (it)
+                    ToastUtils.showToast("拥有定位权限")
+            }
+        }
+        binding.button60.setOnClickListener {
+            PermissionsUtils.requestBluetooth {
+                if (it)
+                    ToastUtils.showToast("拥有定位权限")
+            }
         }
 
     }

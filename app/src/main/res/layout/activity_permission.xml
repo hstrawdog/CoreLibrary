@@ -14,7 +14,7 @@
 
         <Button
             android:id="@+id/button7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onMButton7Clicked"
             android:text="摄像头"
@@ -23,12 +23,23 @@
 
         <Button
             android:id="@+id/button8"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onMButton8Clicked"
             android:text="读写"
             tools:layout_editor_absoluteX="263dp"
             tools:layout_editor_absoluteY="38dp" />
+
+        <Button
+                android:id="@+id/button59"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="定位权限" />
+        <Button
+                android:id="@+id/button60"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="蓝牙权限" />
 
         <Button
                 android:id="@+id/button58"

@@ -18,7 +18,7 @@ abstract class NetCallback<T> : Callback<NetResponseBody<T>> {
         onFail(-999, "网络连接失败,请检网络连接")
     }
 
-    override fun onResponse(call: Call<NetResponseBody<T>>, response: Response<NetResponseBody<T>>) {
+    override fun onResponse(call: Call<NetResponseBody<T>>, response: Response<NetResponseBody<T>>?) {
         if (response != null) {
             if (response.code() == 200) {
                 val responseBody: NetResponseBody<*> = response.body()!!
@@ -44,6 +44,6 @@ abstract class NetCallback<T> : Callback<NetResponseBody<T>> {
      * @param message
      */
     open fun onFail(code: Int, message: String) {
-        showToast(message!!)
+        showToast(message)
     }
 }

@@ -68,8 +68,8 @@ android {
 }
 
 dependencies {
-    api Android.activityKtx
-    api Android.meteria
+    api Activity.activityKtx
+    api Meteria.meteria
 
     api AndroidX.coreKtx
     api AndroidX.viewModelKtx
@@ -82,8 +82,8 @@ dependencies {
     api AndroidX.viewpager2
 
 
-    api Fragment.runtime
-    api Fragment.runtimeKtx
+    api AndroidX.runtime
+    api AndroidX.runtimeKtx
 //    api Fragment.testing
 
     api DimensCompat.iDimensCompat
@@ -96,7 +96,6 @@ dependencies {
 
     //版本要与gradle版本一致
     api Kt.stdlibJdk8
-    kapt Android.dataBindingCompiler
 
     api Gson.gson
     api Retrofit.retrofit

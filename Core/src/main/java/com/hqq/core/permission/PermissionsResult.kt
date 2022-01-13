@@ -8,7 +8,7 @@ package com.hqq.core.permission
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-interface PermissionsResult {
+fun interface PermissionsResult {
     /**
      * 是否拥有权限
      *
