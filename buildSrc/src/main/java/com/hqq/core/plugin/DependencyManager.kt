@@ -16,50 +16,129 @@ object BuildConfig {
 }
 
 
-object Versions {
+/**
+ * 核心包
+ * https://developer.android.google.cn/jetpack/androidx/releases/appcompat
+ * 自动导入
+ *  androidx.activity:activity:1.0.0
+androidx.annotation:annotation:1.1.0
+androidx.appcompat:appcompat:1.2.0
+androidx.appcompat:appcompat-resources:1.2.0
+androidx.arch.core:core-common:2.1.0
+androidx.arch.core:core-runtime:2.0.0
+androidx.collection:collection:1.1.0
+androidx.core:core:1.3.0
+androidx.cursoradapter:cursoradapter:1.0.0
+androidx.customview:customview:1.0.0
+androidx.drawerlayout:drawerlayout:1.0.0
+androidx.fragment:fragment:1.1.0
+androidx.interpolator:interpolator:1.0.0
+androidx.lifecycle:lifecycle-common:2.1.0
+androidx.lifecycle:lifecycle-livedata:2.0.0
+androidx.lifecycle:lifecycle-livedata-core:2.0.0
+androidx.lifecycle:lifecycle-runtime:2.1.0
+androidx.lifecycle:lifecycle-viewmodel:2.1.0
+androidx.loader:loader:1.0.0
+androidx.savedstate:savedstate:1.0.0
+androidx.vectordrawable:vectordrawable:1.1.0
+androidx.vectordrawable:vectordrawable-animated:1.1.0
+androidx.versionedparcelable:versionedparcelable:1.1.0
+androidx.viewpager:viewpager:1.0.0
+ */
+object Appcompat {
+    val appcompat = "androidx.appcompat:appcompat:1.1.0"
 
-    val appcompat = "1.1.0"
-    val coreKtx = "1.3.0"
-    val constraintlayout = "2.0.0-beta3"
-    val paging = "3.0.0-alpha02"
-    val kotlin = "1.4.21"
-    val work = "2.2.0"
-    val cardview = "1.0.0"
-    val recyclerview = "1.0.0"
-    val fragment = "1.3.0-alpha06"
-    val swiperefreshlayout = "1.0.0"
-    val appStartup = "1.0.0-alpha01"
-    val lifecycle_version = "2.2.0"
-    val viewPage2 = "1.0.0"
+    val core_version = "1.3.2"
+    val core = "androidx.core:core:$core_version"
+    val coreKtx = "androidx.core:core-ktx:$core_version"
 
 
 }
 
+
 /**
- *  Androidx  jetpack
+ * Kotlin 拓展包
+ * https://developer.android.google.cn/kotlin/ktx/extensions-list
  */
-object AndroidX {
-    val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
-    val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
-    val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
-    val pagingRuntime = "androidx.paging:paging-runtime:${Versions.paging}"
-    val workRuntime = "androidx.work:work-runtime:${Versions.work}"
-    val workTesting = "androidx.work:work-testing:${Versions.work}"
-    val cardview = "androidx.cardview:cardview:${Versions.cardview}"
-    val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
-    val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swiperefreshlayout}"
-    val appStartup = "androidx.startup:startup-runtime:${Versions.appStartup}"
-    val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle_version}"
-    val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_version}"
-    val runTimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
-    val viewpager2 = "androidx.viewpager2:viewpager2:${Versions.viewPage2}"
+object KTX {
+    //Kotlin 拓展包
+    val activityKtx = "androidx.activity:activity-ktx:1.3.0"
 
-    // fragment
-    val runtime = "androidx.fragment:fragment:${Versions.fragment}"
-    val runtimeKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+    // Kotlin
+    val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0"
+}
 
-    // 目测是用于测试的一个库 好像也支持Dagger的注入
-    val testing = "androidx.fragment:fragment-testing:${Versions.fragment}"
+
+/**
+ * AndroidX 组件
+ *
+ */
+object Components {
+
+    //  CardView
+    // https://developer.android.google.cn/jetpack/androidx/releases/cardview
+    val cardview = "androidx.cardview:cardview:1.0.0"
+
+    // ViewPage2
+    // https://developer.android.google.cn/jetpack/androidx/releases/viewpager2
+    val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
+
+    // constraintLayout
+    // https://developer.android.google.cn/jetpack/androidx/releases/constraintlayout
+    val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.2"
+
+    // https://developer.android.google.cn/jetpack/androidx/releases/recyclerview
+    val recyclerview = "androidx.recyclerview:recyclerview:1.2.1"
+    val recyclerViewSelection = "androidx.recyclerview:recyclerview-selection:1.1.0"
+
+    //https://developer.android.google.cn/jetpack/androidx/releases/swiperefreshlayout
+    val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    //
+    val meteria = "com.google.android.material:material:1.3.0"
+
+}
+
+/**
+ * Lifecycle Ktx
+ * https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
+ */
+object Lifecycle {
+    val lifecycle_version = "2.2.0"
+    val arch_version = "2.1.0"
+
+    // ViewModel
+    val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // ViewModel utilities for Compose
+    val lifecycle_viewModel_compose = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+
+    // LiveData
+    val lifecycleLivedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    // 仅生命周期（没有 ViewModel 或 LiveData）
+    val lifecycleRunTimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    // ViewModel 的已保存状态模块
+    val lifecycle_viewmodel_savedstate = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+
+    // Annotation processor
+    val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    // 或者 - 如果使用 Java8，请使用以下内容而不是生命周期编译器
+    val lifecycle_common_java8 = "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+    // optional - helpers for implementing LifecycleOwner in a Service
+    val lifecycle_service = "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+
+    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+    val lifecycle_process = "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+
+    // optional - ReactiveStreams support for LiveData
+    val lifecycle_reactivestreams_ktx = "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+
+    // optional - Test helpers for LiveData
+    val core_testing = "androidx.arch.core:core-testing:$arch_version"
+
 }
 
 /**
@@ -69,9 +148,8 @@ object AndroidX {
  *   详细内容: https://developer.android.google.cn/jetpack/androidx/releases/compose?hl=zh_cn
  *
  */
-object Meteria {
-    var materialVersion = "1.1.0"
-    val meteria = "androidx.compose.material:material:$materialVersion"
+object ComposeMeteria {
+    val meteria = "androidx.compose.material:material:1.0.5"
 
     //在 Jetpack Compose 应用中构建动画，丰富用户的体验
     var animationVersion = "1.0.5"
@@ -83,34 +161,23 @@ object Meteria {
 
 }
 
-
-
-
 /**
- *  Android  Activity
- * https://developer.android.google.cn/jetpack/androidx/releases/activity#kts
+ * 可在应用启动时简单、高效地初始化组件。
+ * https://developer.android.google.cn/jetpack/androidx/releases/startup
  */
-object Activity {
-    var activity_version = "1.4.0"
-
-    // java  貌似这个是默认导入的
-    val activity = "androidx.activity:activity:$activity_version"
-
-    //Kotlin 拓展包
-    val activityKtx = "androidx.activity:activity-ktx:$activity_version"
-
+object Startup {
+    val appStartup = "androidx.startup:startup-runtime:1.1.0"
 }
-
-
 
 /**
  *  KT 相关
  */
 object Kt {
-    val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
-    val test = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
-    val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    var kotlin = "1.4.21"
+    val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}"
+    val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}"
+    val test = "org.jetbrains.kotlin:kotlin-test-junit:${kotlin}"
+    val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
 }
 
 /**
@@ -165,7 +232,7 @@ object Hilt {
  *   https://developer.android.google.cn/jetpack/androidx/releases/room?hl=zh_cn
  */
 object Room {
-    val room_version = "2.4.1"
+    val room_version = "2.2.5"
     val runtime = "androidx.room:room-runtime:$room_version"
 
     //注解处理器

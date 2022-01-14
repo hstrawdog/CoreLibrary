@@ -16,7 +16,7 @@ import com.hqq.core.permission.PermissionsUtils
  * @param cls Class<*>
  * @param result ActivityResultCallback<ActivityResult>
  */
-fun BaseActivity.open(cls: Class<*>, bundle: Bundle= Bundle(), result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
+fun BaseActivity.open(cls: Class<*>, bundle: Bundle= Bundle(), result: ActivityResultCallback<ActivityResult?> = ActivityResultCallback<ActivityResult?> { }) {
     registerForActivityResult(ActivityResultContracts.StartActivityForResult(), result).launch(Intent(this, cls).apply {
         putExtras(bundle)
     })
@@ -27,7 +27,7 @@ fun BaseActivity.open(cls: Class<*>, bundle: Bundle= Bundle(), result: ActivityR
  * @receiver BaseActivity
  * @param result ActivityResultCallback<Bitmap>
  */
-fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap>) {
+fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap?>) {
     PermissionsUtils.requestCamera(object : PermissionsResult {
         override fun onPermissionsResult(status: Boolean) {
             registerForActivityResult(ActivityResultContracts.TakePicturePreview(), result).launch(null)

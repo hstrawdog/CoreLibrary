@@ -3,6 +3,7 @@ package com.hqq.example.demo.joke;
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.module.BaseLoadMoreModule;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.hqq.example.R;
@@ -25,4 +26,5 @@ public class JokeAdapter extends BaseQuickAdapter<Joke.DataBean, BaseViewHolder>
         helper.setText(R.id.textView19, item.getContent());
         helper.setText(R.id.textView20, item.getUpdatetime());
     }
+
 }

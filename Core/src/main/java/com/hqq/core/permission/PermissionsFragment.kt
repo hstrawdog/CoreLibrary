@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.hqq.core.utils.ToastUtils
@@ -52,10 +53,13 @@ class PermissionsFragment : Fragment(), IPermissionActions {
         if (IPermissionActions.hasPermission(context, *permissions)) {
             mPermissionsResult!!.onPermissionsResult(true)
         } else {
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result: MutableMap<String, Boolean> ->
+
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { }
+
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
                 // 请求结果，返回一个map ，其中 key 为权限名称，value 为是否权限是否赋予
                 var success = true
-                for (mutableEntry in result) {
+                for (mutableEntry in it) {
                     success = success && mutableEntry.value
                 }
                 if (mPermissionsResult != null) {

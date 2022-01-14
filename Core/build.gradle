@@ -37,15 +37,15 @@ android {
         }
 
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     //主要是下面这一段
     android.libraryVariants.all { variant ->
@@ -68,22 +68,27 @@ android {
 }
 
 dependencies {
-    api Activity.activityKtx
-    api Meteria.meteria
 
-    api AndroidX.coreKtx
-    api AndroidX.viewModelKtx
-    api AndroidX.liveDataKtx
-    api AndroidX.runTimeKtx
+    api Appcompat.appcompat
+    api Appcompat.coreKtx
 
-    api AndroidX.constraintlayout
-    api AndroidX.appcompat
-    api AndroidX.recyclerview
-    api AndroidX.viewpager2
+    api KTX.activityKtx
+    api KTX.fragmentKtx
 
 
-    api AndroidX.runtime
-    api AndroidX.runtimeKtx
+    api Components.constraintLayout
+    api Components.recyclerview
+    api Components.viewpager2
+    api Components.meteria
+
+    api Lifecycle.lifecycleViewModelKtx
+    api Lifecycle.lifecycleLivedataKtx
+    api Lifecycle.lifecycleRunTimeKtx
+    api Lifecycle.lifecycleRunTimeKtx
+
+
+
+
 //    api Fragment.testing
 
     api DimensCompat.iDimensCompat
