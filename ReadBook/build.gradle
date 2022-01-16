@@ -92,12 +92,12 @@ dependencies {
 
 
     // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
-    implementation "com.umeng.umsdk:common:9.3.6"
-    implementation "com.umeng.umsdk:asms:1.2.0" // asms包依赖(必选)
+    implementation "com.umeng.umsdk:common:9.4.6"
+    implementation "com.umeng.umsdk:asms:1.4.1" // asms包依赖(必选)
 
 // 下面各SDK根据宿主App是否使用相关业务按需引入。
     implementation "com.umeng.umsdk:abtest:1.0.0" // ABTest功能依赖(可选)
-    implementation "com.umeng.umsdk:apm:1.1.1" // 应用性能监控SDK依赖(可选)
+    implementation "com.umeng.umsdk:apm:1.5.2" // 应用性能监控SDK依赖(可选)
 
 
 }

@@ -48,8 +48,13 @@ android {
             throw new GradleException("Could not read version.properties!")
         }
     }
-    lintOptions {
-        abortOnError false
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
 
     signingConfigs {

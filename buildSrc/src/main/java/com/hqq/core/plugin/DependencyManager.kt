@@ -264,7 +264,7 @@ object Leakcanary {
  */
 object BaseRecyclerViewAdapterHelper {
 
-    val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7"
+    val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
 }
 
 /**
