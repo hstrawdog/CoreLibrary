@@ -11,12 +11,6 @@ project.ext {
                 minSdkVersion rootProject.ext.android.minSdkVersion
                 targetSdkVersion rootProject.ext.android.targetSdkVersion
                 testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-                // 使用java8
-                compileOptions {
-                    sourceCompatibility JavaVersion.VERSION_1_8
-                    targetCompatibility JavaVersion.VERSION_1_8
-                }
-
             }
         }
 

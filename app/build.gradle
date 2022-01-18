@@ -102,8 +102,13 @@ android {
     sourceSets {
         main { res.srcDirs = ['src/main/res', 'src/main/res-main', 'src/main/res-night'] }
     }
-
-
+    compileOptions {
+        sourceCompatibility sourceCompatibility
+        targetCompatibility targetCompatibility
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
