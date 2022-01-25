@@ -47,7 +47,6 @@ androidx.viewpager:viewpager:1.0.0
  */
 object Appcompat {
     val appcompat = "androidx.appcompat:appcompat:1.1.0"
-
     val core_version = "1.3.2"
     val core = "androidx.core:core:$core_version"
     val coreKtx = "androidx.core:core-ktx:$core_version"
@@ -66,6 +65,17 @@ object KTX {
 
     // Kotlin
     val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0"
+}
+
+/**
+ *  KT 相关
+ */
+object Kt {
+    var kotlin = "1.5.31"
+    val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}"
+    val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}"
+    val test = "org.jetbrains.kotlin:kotlin-test-junit:${kotlin}"
+    val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
 }
 
 
@@ -93,6 +103,7 @@ object Components {
 
     //https://developer.android.google.cn/jetpack/androidx/releases/swiperefreshlayout
     val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
     //
     val meteria = "com.google.android.material:material:1.3.0"
 
@@ -148,16 +159,31 @@ object Lifecycle {
  *   详细内容: https://developer.android.google.cn/jetpack/androidx/releases/compose?hl=zh_cn
  *
  */
-object ComposeMeteria {
-    val meteria = "androidx.compose.material:material:1.0.5"
+object Compose {
 
     //在 Jetpack Compose 应用中构建动画，丰富用户的体验
-    var animationVersion = "1.0.5"
-    val animation = "androidx.compose.animation:animation:$animationVersion"
+    val animation = "androidx.compose.animation:animation:1.0.5"
 
     // 借助 Kotlin 编译器插件，转换 @Composable functions（可组合函数）并启用优化功能。
-    var compilerVersion = "1.0.5"
-    val compiler = "androidx.compose.compiler:compiler:$compilerVersion"
+    val compiler = "androidx.compose.compiler:compiler:1.0.5"
+
+    //使用现成可用的构建块编写 Jetpack Compose 应用，并扩展 Foundation 以构建您自己的设计系统元素。
+    val foundation = "androidx.compose.foundation:foundation:1.0.5"
+
+    //使用现成可用的 Material Design 组件构建 Jetpack Compose UI。这是更高层级的 Compose 入口点，旨在提供与 www.material.io 上描述的组件一致的组件
+    val meteria = "androidx.compose.material:material:1.0.5"
+
+    //使用 Material Design 3（下一代 Material Design）组件构建 Jetpack Compose 界面。Material 3 包括更新后的主题和组件，以及动态配色等 Material You 个性化功能，旨在与新的 Android 12 视觉风格和系统界面相得益彰
+    val material3 = "androidx.compose.material3:material3:1.0.0-alpha03"
+
+    // Compose 编程模型和状态管理的基本组件，以及 Compose 编译器插件的目标核心运行时。
+    val runtimeVersion = "1.0.5"
+    val runtime = "androidx.compose.runtime:runtime:$runtimeVersion"
+    val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:$runtimeVersion"
+    val runtimeRxjava2 = "androidx.compose.runtime:runtime-rxjava2:$runtimeVersion"
+
+    //与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入。
+    val ui = "androidx.compose.ui:ui:1.0.5"
 
 }
 
@@ -167,17 +193,6 @@ object ComposeMeteria {
  */
 object Startup {
     val appStartup = "androidx.startup:startup-runtime:1.1.0"
-}
-
-/**
- *  KT 相关
- */
-object Kt {
-    var kotlin = "1.4.21"
-    val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}"
-    val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}"
-    val test = "org.jetbrains.kotlin:kotlin-test-junit:${kotlin}"
-    val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
 }
 
 /**

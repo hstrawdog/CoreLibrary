@@ -68,41 +68,49 @@ android {
 }
 
 dependencies {
+    //版本要与gradle版本一致
+    api Kt.stdlibJdk8
 
+    // Appcompat   包含 core
     api Appcompat.appcompat
     api Appcompat.coreKtx
 
+    //  kotlin拓展包
     api KTX.activityKtx
     api KTX.fragmentKtx
 
-
+    //  androidX 组件
     api Components.constraintLayout
     api Components.recyclerview
     api Components.viewpager2
     api Components.meteria
 
+    // 生命周期
     api Lifecycle.lifecycleViewModelKtx
     api Lifecycle.lifecycleLivedataKtx
     api Lifecycle.lifecycleRunTimeKtx
     api Lifecycle.lifecycleRunTimeKtx
 
-
-
-
-//    api Fragment.testing
-
+    // 屏幕适配
     api DimensCompat.iDimensCompat
+
+    // gson解析
     api Gson.gson
+
+    // 压缩
     api Luban.luban
+
+    // 上拉加载
     api BaseRecyclerViewAdapterHelper.baseRecyclerViewAdapterHelper
+
+    // 下拉刷新
     api UltraPtr.ultraPtr
+
+    // 图片加载
     api Glide.glide
     kapt Glide.glideCompiler
 
-    //版本要与gradle版本一致
-    api Kt.stdlibJdk8
-
-    api Gson.gson
+    // retrofit 请求
     api Retrofit.retrofit
     api Retrofit.converterGson
     api Retrofit.loggingInterceptor

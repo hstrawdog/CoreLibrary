@@ -1,4 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.hqq.core.plugin.*
+
 buildscript {
 
     repositories {
@@ -12,7 +14,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21"
+        // Kotlin 版本，注意：Compose 版本有时候需要要求 Kotlin 到达一定的版本，请同步更新 1.5.31
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$Kt.kotlin")
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
     }
 }
@@ -23,6 +26,7 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
+
         maven { url "https://jitpack.io" }
         google()
         jcenter()
