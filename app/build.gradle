@@ -1,10 +1,13 @@
 import com.hqq.core.plugin.*
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'kotlin-parcelize'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+
+}
 
 android {
     dataBinding {
@@ -108,6 +111,17 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    //groovy
+    configurations.all {
+        resolutionStrategy.force "org.antlr:antlr4-runtime:4.7.1"
+        resolutionStrategy.force "org.antlr:antlr4-tool:4.7.1"
+    }
+    configurations.all {
+        resolutionStrategy {
+            force("org.antlr:antlr4-runtime:4.7.1")
+            force("org.antlr:antlr4-tool:4.7.1")
+        }
     }
 }
 

@@ -16,11 +16,6 @@ import com.hqq.example.R;
   */
 public class SemicircularActivity extends BaseActivity {
 
-    public static void open(Activity context) {
-        Intent starter = new Intent(context, SemicircularActivity.class);
-        context.startActivityForResult(starter,-1);
-    }
-
 
     @Override
     public int getLayoutViewId() {

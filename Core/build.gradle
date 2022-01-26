@@ -116,8 +116,6 @@ dependencies {
     api Retrofit.loggingInterceptor
 
 }
-repositories {
-    mavenCentral()
-}
+
 
 

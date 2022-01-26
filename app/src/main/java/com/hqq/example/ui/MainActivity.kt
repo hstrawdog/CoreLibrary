@@ -37,6 +37,7 @@ import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.skin.SkinAActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
+import com.hqq.example.ui.view.CanvasDrawBitmapActivity
 import com.hqq.example.ui.view.SvgActivity
 import com.hqq.example.ui.web.WebActivity
 import kotlinx.coroutines.launch
@@ -80,10 +81,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            putParcelable("A", ParcelableBean())
 //        })
 
-//        startActivity(Intent(this, SaveBitmapActivity::class.java))
-//        startActivity(Intent(this, FoldViewActivity::class.java))
-//        startActivity(Intent(this, SemicircularActivity::class.java))
-//        startActivity(Intent(this, ComparedActivity::class.java))
+
+        startActivity(Intent(this, ComparedActivity::class.java))
 
     }
 
@@ -99,8 +98,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             } else {
                 val mHomeIntent = Intent(Intent.ACTION_MAIN)
                 mHomeIntent.addCategory(Intent.CATEGORY_HOME)
-                mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
+                mHomeIntent.addFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK
+                            or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                )
                 startActivity(mHomeIntent)
                 // 退出程序
                 System.exit(0)
@@ -157,6 +158,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("换肤测试", SkinAActivity::class.java))
             arrayList.add(MainBean("SVG测试", SvgActivity::class.java))
             arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
+            arrayList.add(MainBean("自定义圆形进度条", SemicircularActivity::class.java))
+            arrayList.add(MainBean("图片保存", SaveBitmapActivity::class.java))
+            arrayList.add(MainBean("折叠布局", FoldViewActivity::class.java))
+            arrayList.add(MainBean("对比效果", ComparedActivity::class.java))
+            arrayList.add(MainBean("DrawBitmap测试", CanvasDrawBitmapActivity::class.java))
             setData(arrayList)
 
         }

@@ -50,13 +50,22 @@ class ComparedView : View {
 
     /**
      * 美化后的图片
+     * 需要与原图大小保持一致
+     * 在上一步进行缩放
      */
     var beautifyBitmap: Bitmap? = null
+
+    /**
+     *  美化后图片的实际大小
+     */
+    var beautifyBitmapHeight=0f
+    var beautifyBitmapWidth=0f
 
     /**
      * 美化前的图片
      */
     var originalBitmap: Bitmap? = null
+
 
     /**
      *  x 移动距离
@@ -83,7 +92,7 @@ class ComparedView : View {
      *  0 识别状态
      *  1  对比状态
      */
-    var status = 0
+    var status = -1
         set(value) {
             field = value
             invalidate()
@@ -92,17 +101,11 @@ class ComparedView : View {
     init {
         mPaint.setAntiAlias(true)
         mPaint.setStyle(Paint.Style.FILL)
-        postDelayed({
-            startRectAnimation()
-
-        }, 2000)
-
     }
 
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
         if (status != -1) {
 
             // 位置线
@@ -114,13 +117,19 @@ class ComparedView : View {
                 drawBitmap(canvas, centerX)
             }
             // 显示扫描
-            if (status == 0) {
-                drawAnimation(canvas)
-            }
+//            if (status == 0) {
+//                drawAnimation(canvas)
+//            }
 
             if (status == 1) {
-                drawMenu(canvas, menuX, menuY)
-                drawCanvasText(centerX, canvas)
+                var top = 0f
+                var bottom = 0f
+                if (originalBitmap != null) {
+                    top = ((height - originalBitmap!!.height).toFloat() / 2f).toFloat()
+                    bottom = (height - originalBitmap!!.height) / 2 + originalBitmap!!.height.toFloat()
+                }
+                drawMenu(canvas, menuX, menuY, top, bottom)
+                drawCanvasText(centerX, canvas, top)
             }
 
         }
@@ -135,13 +144,12 @@ class ComparedView : View {
     private fun drawBitmap(canvas: Canvas, centerX: Int) {
         // 原始图
         if (originalBitmap != null && beautifyBitmap != null) {
-
-            val x1 = (width - originalBitmap!!.width) / 2
+            val x1 = Math.max(0, (width - originalBitmap!!.width) / 2)
             val y1 = (height - originalBitmap!!.height) / 2
 
             canvas.drawBitmap(originalBitmap!!, x1.toFloat(), y1.toFloat(), Paint())
 
-            val l = (width - beautifyBitmap!!.width) / 2
+            val l = Math.max(0, (width - beautifyBitmap!!.width) / 2)
             val r = beautifyBitmap!!.width + l
             val t = (height - beautifyBitmap!!.height) / 2
             val b = beautifyBitmap!!.height + t
@@ -165,9 +173,10 @@ class ComparedView : View {
      */
     private fun drawAnimation(canvas: Canvas) {
         // 扫描动画
-        val shader2 = LinearGradient(width / 2f, pointX.toFloat(), width / 2f, 200f + pointX.toFloat(), Color.BLUE, Color.GREEN, Shader.TileMode.MIRROR)
+        val shader2 =
+            LinearGradient(width / 2f, pointX.toFloat(), width / 2f, 300f + pointX.toFloat(), Color.parseColor("#00FC4848"), Color.parseColor("#FC4848"), Shader.TileMode.MIRROR)
         mPaint.setShader(shader2)
-        val rectFRight = RectF(0f, pointX.toFloat(), width.toFloat(), 200f + pointX.toFloat())
+        val rectFRight = RectF(0f, pointX.toFloat(), width.toFloat(), 300f + pointX.toFloat())
         canvas.drawRect(rectFRight, mPaint)
     }
 
@@ -177,8 +186,8 @@ class ComparedView : View {
      * @param menuX Float
      * @param menuY Int
      */
-    private fun drawMenu(canvas: Canvas, menuX: Float, menuY: Int) {
-        canvas.drawLine((menuX + menuBitmap.width / 2).toFloat(), 0f, (menuX + menuBitmap.width / 2).toFloat(), height.toFloat(), Paint().apply {
+    private fun drawMenu(canvas: Canvas, menuX: Float, menuY: Int, top: Float, bottom: Float) {
+        canvas.drawLine((menuX + menuBitmap.width / 2).toFloat(), top, (menuX + menuBitmap.width / 2).toFloat(), bottom, Paint().apply {
             setColor(Color.parseColor("#F73838"))
             mPaint.setStyle(Paint.Style.FILL)
             strokeWidth = 3f
@@ -192,25 +201,32 @@ class ComparedView : View {
      * @param centerX Int
      * @param canvas Canvas
      */
-    private fun drawCanvasText(centerX: Int, canvas: Canvas) {
+    private fun drawCanvasText(centerX: Int, canvas: Canvas, top: Float) {
+        var x1 = 0
+        if (originalBitmap != null) {
+            x1 = Math.max(0, (width - originalBitmap!!.width) / 2)
+        }
+
+
         //优化后
-        if (centerX > 80) {
-            canvas.drawRect(Rect(0, 0, (0 + 80), 40), Paint().apply {
+        if (centerX > ((width - originalBitmap!!.width) / 2) + 80) {
+            var x = Math.max(x1.toFloat(), 0f)
+
+            canvas.drawRect(Rect(x.toInt(), top.toInt(), (x.toInt() + 80), (top + 40).toInt()), Paint().apply {
                 setColor(Color.parseColor("#80000000"))
                 style = Paint.Style.FILL
             })
-
-            canvas.drawText("优化后", 0f, 25f, TextPaint().apply {
+            canvas.drawText("优化后", x, top + 25f, TextPaint().apply {
                 color = Color.WHITE
                 textSize = 24f
             })
         }
         //优化前
-        canvas.drawRect(Rect(centerX, 0, (centerX + 80), 40), Paint().apply {
+        canvas.drawRect(Rect(centerX, top.toInt(), (centerX + 80), (top + 40).toInt()), Paint().apply {
             setColor(Color.parseColor("#80000000"))
             style = Paint.Style.FILL
         })
-        canvas.drawText("优化前", centerX.toFloat(), 25f, TextPaint().apply {
+        canvas.drawText("优化前", centerX.toFloat(), top + 25f, TextPaint().apply {
             color = Color.WHITE
             textSize = 24f
         })
@@ -218,7 +234,6 @@ class ComparedView : View {
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (status != -1) {
-
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     downX = event.x
@@ -230,6 +245,16 @@ class ComparedView : View {
                     if (isContain) {
 
                         moveX = moveX + event.x - downX
+                        if (originalBitmap != null) {
+                            var margin = (width - originalBitmap!!.width) / 2
+                            if (moveX < -(width / 2 - margin)) {
+                                moveX = -((width / 2 - margin).toFloat())
+                            } else if (moveX > (width / 2 - margin)) {
+                                moveX = ((width / 2 - margin).toFloat())
+                            }
+                        }
+
+
                         invalidate()
                         downX = event.x
                         downY = event.y
@@ -244,7 +269,6 @@ class ComparedView : View {
             }
         }
         return super.onTouchEvent(event)
-
     }
 
     private fun containMenu(downX: Float, downY: Float): Boolean {
@@ -259,23 +283,23 @@ class ComparedView : View {
     /**
      *  开始执行动画
      */
-    private fun startRectAnimation() {
+    fun startRectAnimation() {
 
-        val valueAnimator = ValueAnimator.ofInt(0, height)
-//              整个事件段是5秒
-        //              整个事件段是5秒
-        valueAnimator.duration = 3000
-//              数字均匀变化，也可设置其他的变化方式，先快后慢，先慢后快等......
-        valueAnimator.interpolator = LinearInterpolator()
-        //              监听每次改变时的值
-        valueAnimator.addUpdateListener { animation -> //                      拿到每一次变化的值
-            val value = animation.animatedValue as Int
-            //                      把只设置到按钮上
-            pointX = value
-            invalidate()
-        }
-        valueAnimator.repeatCount = Animation.INFINITE
-        valueAnimator.start()
+//        val valueAnimator = ValueAnimator.ofInt(0, height)
+////              整个事件段是5秒
+//        //              整个事件段是5秒
+//        valueAnimator.duration = 3000
+////              数字均匀变化，也可设置其他的变化方式，先快后慢，先慢后快等......
+//        valueAnimator.interpolator = LinearInterpolator()
+//        //              监听每次改变时的值
+//        valueAnimator.addUpdateListener { animation -> //                      拿到每一次变化的值
+//            val value = animation.animatedValue as Int
+//            //                      把只设置到按钮上
+//            pointX = value
+//            invalidate()
+//        }
+//        valueAnimator.repeatCount = Animation.INFINITE
+//        valueAnimator.start()
 
     }
 
