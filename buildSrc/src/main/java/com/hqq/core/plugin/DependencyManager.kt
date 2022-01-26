@@ -71,7 +71,7 @@ object KTX {
  *  KT 相关
  */
 object Kt {
-    var kotlin = "1.5.31"
+    var kotlin = "1.4.21"
     val stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}"
     val stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin}"
     val test = "org.jetbrains.kotlin:kotlin-test-junit:${kotlin}"
