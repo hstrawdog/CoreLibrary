@@ -1,4 +1,4 @@
-package com.hqq.example.utils;
+package com.hqq.example.ui.shape.utils;
 
 import android.graphics.PointF;
 

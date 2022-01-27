@@ -16,7 +16,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
-import com.hqq.example.utils.BezierUtil;
+import com.hqq.example.ui.shape.utils.BezierUtil;
 
 /**
  * @Author : huangqiqiang

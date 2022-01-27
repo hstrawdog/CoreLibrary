@@ -1,16 +1,15 @@
-package com.hqq.example.utils
+package com.hqq.example.ui.shape.utils
 
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import com.hqq.core.CoreConfig.Companion.applicationContext
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.utils
+ * @Package : com.hqq.example.ui.shape.utils
  * @Date : 17:55
  * @Email : qiqiang213@gmail.com
  * @Describe :

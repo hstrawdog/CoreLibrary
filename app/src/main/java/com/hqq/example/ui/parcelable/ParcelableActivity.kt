@@ -1,4 +1,4 @@
-package com.hqq.example.ui
+package com.hqq.example.ui.parcelable
 
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.utils.log.LogUtils

@@ -1,10 +1,7 @@
 package com.hqq.example.ui
 
 import android.content.Intent
-import android.graphics.Matrix
-import android.graphics.RectF
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.viewModelScope
@@ -26,6 +23,7 @@ import com.hqq.example.ui.customize.ComparedActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.customize.SemicircularActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
+import com.hqq.example.ui.down.load.DownLoadActivity
 import com.hqq.example.ui.exception.ThrowActivity
 import com.hqq.example.ui.file.SaveBitmapActivity
 import com.hqq.example.ui.fold.FoldViewActivity
@@ -33,6 +31,7 @@ import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.info.FilePathActivity
 import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
+import com.hqq.example.ui.parcelable.ParcelableActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.skin.SkinAActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
@@ -162,6 +161,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("图片保存", SaveBitmapActivity::class.java))
             arrayList.add(MainBean("折叠布局", FoldViewActivity::class.java))
             arrayList.add(MainBean("对比效果", ComparedActivity::class.java))
+            arrayList.add(MainBean("Parcelable测试", ParcelableActivity::class.java))
             arrayList.add(MainBean("DrawBitmap测试", CanvasDrawBitmapActivity::class.java))
             setData(arrayList)
 

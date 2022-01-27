@@ -64,9 +64,7 @@
         <activity
                 android:name=".ui.adaptation.permission.Permission4FragmentActivity"
                 android:label="Fragment 权限测试" />
-        <activity
-                android:name=".ui.SeekBarActivity"
-                android:label="SeekBarActivity" />
+
         <activity
                 android:name=".ui.customize.matrix.MatrixEventActivity"
                 android:label="手势矩阵" />
@@ -78,10 +76,10 @@
                 android:label="奔溃捕捉" />
 
         <activity
-                android:name=".ui.ParcelableActivity"
+                android:name=".ui.parcelable.ParcelableActivity"
                 android:label="Parcelable测试" />
         <activity
-                android:name=".ui.DownLoadActivity"
+                android:name=".ui.down.load.DownLoadActivity"
                 android:label="下载测试" />
         <activity
                 android:name=".ui.customize.DiskViewActivity"

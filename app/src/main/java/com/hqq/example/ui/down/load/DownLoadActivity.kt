@@ -1,4 +1,4 @@
-package com.hqq.example.ui
+package com.hqq.example.ui.down.load
 
 import com.hqq.core.net.ok.download.*
 import com.hqq.core.ui.base.BaseActivity

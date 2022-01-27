@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.utils
+ * @Package : com.hqq.example.ui.shape.utils
  * @FileName :   RestartActivity
  * @Date : 2021/5/31 0031  下午 3:22
  * @Email :  qiqiang213@gmail.com

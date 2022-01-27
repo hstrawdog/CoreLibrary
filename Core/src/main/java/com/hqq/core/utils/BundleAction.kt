@@ -7,7 +7,7 @@ import java.util.*
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.utils
+ * @Package : com.hqq.example.ui.shape.utils
  * @FileName :   BundleAction.kt
  * @Date  : 2021/6/1 0001  上午 10:46
  * @Email :  qiqiang213@gmail.com
