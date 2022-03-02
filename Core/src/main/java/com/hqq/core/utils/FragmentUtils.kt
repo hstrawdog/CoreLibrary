@@ -50,7 +50,7 @@ class FragmentUtils {
                 supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
             } else {
                 supportFragmentManager!!.beginTransaction().hide(currentFragment!!).add(id, fragment)
-                        .commit()
+                    .commit()
             }
         } else {
             if (currentFragment == null) {
@@ -73,6 +73,17 @@ class FragmentUtils {
         if (!fragment.isAdded && supportFragmentManager != null) {
             supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
             currentFragment = fragment
+        }
+    }
+
+    /**
+     *  移除 fragment
+     * @param fragment Fragment
+     */
+    fun removeFragment(fragment: Fragment) {
+        supportFragmentManager?.beginTransaction()?.remove(fragment)?.commit()
+        if (fragment == currentFragment) {
+            currentFragment = null;
         }
     }
 }

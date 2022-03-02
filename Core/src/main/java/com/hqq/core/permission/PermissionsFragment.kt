@@ -42,6 +42,29 @@ class PermissionsFragment : Fragment(), IPermissionActions {
         retainInstance = true
     }
 
+
+    val registerForActivityResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        // 请求结果，返回一个map ，其中 key 为权限名称，value 为是否权限是否赋予
+        var success = true
+        for (mutableEntry in it) {
+            success = success && mutableEntry.value
+        }
+        if (mPermissionsResult != null) {
+            if (success) {
+                mPermissionsResult?.onPermissionsResult(true)
+            } else {
+                mPermissionsResult?.onPermissionsResult(false)
+                ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
+                // 打开设置界面
+//                        val intent = Intent()
+//                        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+//                        val uri = Uri.fromParts("package", VersionUtils.getPackageName(context), null)
+//                        intent.data = uri
+//                        startActivityForResult(intent, OPEN_SETTING_CODE)
+            }
+        }
+    }
+
     /**
      * 发现 系统选择 与 厂商权限不一致
      * 取消判断是否拥有权限 直接去申请
@@ -54,29 +77,8 @@ class PermissionsFragment : Fragment(), IPermissionActions {
             mPermissionsResult!!.onPermissionsResult(true)
         } else {
 
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { }
 
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-                // 请求结果，返回一个map ，其中 key 为权限名称，value 为是否权限是否赋予
-                var success = true
-                for (mutableEntry in it) {
-                    success = success && mutableEntry.value
-                }
-                if (mPermissionsResult != null) {
-                    if (success) {
-                        mPermissionsResult?.onPermissionsResult(true)
-                    } else {
-                        mPermissionsResult?.onPermissionsResult(false)
-                        ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
-                        // 打开设置界面
-//                        val intent = Intent()
-//                        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-//                        val uri = Uri.fromParts("package", VersionUtils.getPackageName(context), null)
-//                        intent.data = uri
-//                        startActivityForResult(intent, OPEN_SETTING_CODE)
-                    }
-                }
-            }.launch(permissions)
+            registerForActivityResult.launch(permissions)
         }
     }
 
@@ -86,7 +88,6 @@ class PermissionsFragment : Fragment(), IPermissionActions {
             requestPermissions(mPermissions, mPermissionsResult)
         }
     }
-
 
 
 }

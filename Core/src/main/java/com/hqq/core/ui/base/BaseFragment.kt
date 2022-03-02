@@ -45,6 +45,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      */
     override val bundle: Bundle?
         get() = arguments
+
     /**
      * 布局创建 容器
      */

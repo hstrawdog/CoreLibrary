@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
+import java.lang.Exception
 import java.util.regex.Pattern
 
 /**
@@ -316,6 +317,79 @@ object RegexUtils {
             return stringBuilder.toString()
         }
         return "***"
+    }
+    /**
+     * 判断string是否是空的   过滤null
+     *
+     * @param str
+     * @return
+     */
+    fun checkStringNull(str: String?): Boolean {
+        return if (checkNull(str)) {
+            true
+        } else {
+            "null" == str
+        }
+    }
+
+    fun checkStringNullTip(str: String?, tip: String): Boolean {
+        if (checkNull(str)) {
+            ToastUtils.showToast("请输入$tip")
+            return true
+        }
+        return false
+    }
+    /**
+     * 不为空
+     *
+     * @param str
+     * @return
+     */
+    fun checkStringUnEmpty(str: String?): Boolean {
+        return !RegexUtils.checkStringNull(str)
+    }
+    /**
+     * 非空判断
+     *
+     * @param object
+     * @return
+     */
+    @JvmStatic
+    fun checkNotNull(`object`: Any?): Boolean {
+        return !checkNull(`object`)
+    }
+
+    /**
+     * 集合不为空
+     *
+     * @param object
+     * @return
+     */
+    fun checkArrayUnEmpty(`object`: Any): Boolean {
+        if (`object` is List<*>) {
+            return !checkNull(`object`) && `object`.size > 0
+        } else if (`object` is Map<*, *>) {
+            return `object`.size > 0
+        }
+        return !checkNull(`object`) && (`object` as Array<String?>).size > 0
+    }
+
+    fun checkArrayEmpty(`object`: Any): Boolean {
+        return !checkArrayUnEmpty(`object`)
+    }
+
+
+    fun isZero(string: String?): Boolean {
+        if (RegexUtils.checkStringUnEmpty(string)) {
+            try {
+                if (java.lang.Double.valueOf(string) == 0.0) {
+                    return true
+                }
+            } catch (e: Exception) {
+            }
+            return false
+        }
+        return true
     }
 
     @JvmStatic

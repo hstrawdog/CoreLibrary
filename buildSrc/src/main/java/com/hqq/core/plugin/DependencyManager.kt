@@ -46,10 +46,10 @@ androidx.versionedparcelable:versionedparcelable:1.1.0
 androidx.viewpager:viewpager:1.0.0
  */
 object Appcompat {
-    val appcompat = "androidx.appcompat:appcompat:1.1.0"
     val core_version = "1.3.2"
     val core = "androidx.core:core:$core_version"
     val coreKtx = "androidx.core:core-ktx:$core_version"
+    val appcompat = "androidx.appcompat:appcompat:1.3.1"
 
 
 }

@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.hqq.core.CoreConfig
+import com.hqq.core.utils.BitmapUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.math.BigDecimal
@@ -280,19 +281,19 @@ object FileUtils {
         if (megaByte < 1) {
             val result1 = BigDecimal(java.lang.Double.toString(kiloByte))
             return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
-                    .toPlainString() + "KB"
+                .toPlainString() + "KB"
         }
         val gigaByte = megaByte / 1024
         if (gigaByte < 1) {
             val result2 = BigDecimal(java.lang.Double.toString(megaByte))
             return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
-                    .toPlainString() + "MB"
+                .toPlainString() + "MB"
         }
         val teraBytes = gigaByte / 1024
         if (teraBytes < 1) {
             val result3 = BigDecimal(java.lang.Double.toString(gigaByte))
             return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
-                    .toPlainString() + "GB"
+                .toPlainString() + "GB"
         }
         val result4 = BigDecimal(teraBytes)
         return (result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
@@ -379,7 +380,7 @@ object FileUtils {
     fun saveFile2Download(context: Context, fileName: String, data: String) {
         //使用ContentResolver创建需要操作的文件
         val outputStream =
-                getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
+            getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
         outputStream?.write(data.toByteArray())
         outputStream?.close()
     }
@@ -439,8 +440,10 @@ object FileUtils {
                 selection = MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME + "=?"
                 selectionArgs = arrayOf(dirName)
             }
-            val resultCursor = resolver?.query(downloadUri, null,
-                    selection, selectionArgs, null)
+            val resultCursor = resolver?.query(
+                downloadUri, null,
+                selection, selectionArgs, null
+            )
             if (resultCursor != null) {
                 val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
                 while (resultCursor.moveToNext()) {
@@ -503,8 +506,10 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun saveBitmap2Picture(context: Context = CoreConfig.applicationContext,
-                           bitmap: Bitmap, folderName: String = "", fileName: String) {
+    fun saveBitmap2Picture(
+        context: Context = CoreConfig.applicationContext,
+        bitmap: Bitmap, folderName: String = "", fileName: String
+    ) {
         val values = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
             put(MediaStore.Images.Media.MIME_TYPE, "image/png")
@@ -604,6 +609,9 @@ object FileUtils {
         val myCaptureFile = File(filePath)
         if (!myCaptureFile.exists()) {
             myCaptureFile.createNewFile()
+        } else {
+            myCaptureFile.delete()
+            myCaptureFile.createNewFile()
         }
         val bos = BufferedOutputStream(FileOutputStream(filePath).apply {
             saveBitmap(this, bm)
@@ -665,5 +673,54 @@ object FileUtils {
             e.printStackTrace()
         }
     }
+
+    /**
+     *  复制图片到指定目录上
+     * @param context Context
+     * @param oldPath String  旧的地址
+     * @param newPath String
+     * @return Uri?
+     */
+    @JvmStatic
+    fun copyFile2CustomPath(context: Context, oldPath: String, newPath: String): Uri? {
+        try {
+            val oldFile = File(oldPath)
+            //设置目标文件的信息
+            val values = ContentValues()
+            val options = BitmapUtils.getImageOptions(oldPath)
+            values.put(MediaStore.Images.ImageColumns.DATA, newPath)
+            values.put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/png")
+            //将图片的拍摄时间设置为当前的时间
+            values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, oldFile.name)
+            values.put(MediaStore.Images.ImageColumns.DATE_ADDED, oldFile.name)
+            values.put(MediaStore.Images.ImageColumns.DATE_MODIFIED, oldFile.name)
+            values.put(MediaStore.Images.ImageColumns.DATE_TAKEN, oldFile.name)
+            values.put(MediaStore.Images.ImageColumns.SIZE, oldFile.length())
+            values.put(MediaStore.Images.ImageColumns.WIDTH, options.outHeight)
+            values.put(MediaStore.Images.ImageColumns.HEIGHT, options.outHeight)
+            if (Build.VERSION.SDK.toString().toFloat().toInt() >= 30) {
+                // 持久化的路径 也就是存储的路肩
+                values.put(MediaStore.Images.ImageColumns.RELATIVE_PATH, File(newPath).parentFile.path)
+            }
+            val resolver = context.contentResolver
+            // 获取到url
+            val insertUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+            if (insertUri != null) {
+                val fos = resolver.openOutputStream(insertUri)
+                if (fos != null) {
+                    val fis = FileInputStream(oldFile)
+                    fis.copyTo(fos)
+                    fis.close()
+                    fos.close()
+                    return insertUri
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    //TODO  整理 文件复制  与其他操作
 
 }

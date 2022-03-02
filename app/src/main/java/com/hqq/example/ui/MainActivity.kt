@@ -81,7 +81,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        })
 
 
-        startActivity(Intent(this, ComparedActivity::class.java))
+//        startActivity(Intent(this, ComparedActivity::class.java))
 
     }
 

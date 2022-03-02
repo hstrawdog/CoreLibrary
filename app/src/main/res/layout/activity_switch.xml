@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x100" />
+
+    <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x100"
+            android:thumb="@drawable/switch_white_circle_selector"
+            android:track="@drawable/switch_selector_green" />
+
+
+    <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x100"
+            android:showText="true"
+            android:checked="true"
+            android:textOff="关"
+            android:textOn="开"
+            android:thumbTextPadding="@dimen/x20"
+            android:thumb="@drawable/switch_selector_green2"
+            android:track="@drawable/switch_selector_green3" />
+
+
+</LinearLayout>

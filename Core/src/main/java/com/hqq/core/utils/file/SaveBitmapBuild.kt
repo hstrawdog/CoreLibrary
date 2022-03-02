@@ -10,6 +10,7 @@ import com.hqq.core.CoreConfig
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.utils.ToastUtils
+import com.hqq.core.utils.log.LogUtils
 import java.io.File
 
 /**

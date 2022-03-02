@@ -1,5 +1,6 @@
 package com.hqq.core.utils
 
+import android.R
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
@@ -13,6 +14,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.DRAWING_CACHE_QUALITY_HIGH
 import android.widget.ImageView
+import com.hqq.core.CoreConfig
 import java.io.*
 import java.util.*
 
@@ -27,14 +29,18 @@ import java.util.*
  */
 object BitmapUtils {
 
+    @JvmStatic
     fun generatBitmap(v: View): Bitmap {
-        val bitmap = Bitmap.createBitmap(v.width, v.height,
-                Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(
+            v.width, v.height,
+            Bitmap.Config.ARGB_8888
+        )
         val canvas = Canvas(bitmap)
         v.draw(canvas)
         return bitmap
     }
 
+    @JvmStatic
     fun saveImageToGallery(context: Context, bitmaps: Bitmap) {
         // 首先保存图片
         val appDir = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "dearxy")
@@ -69,8 +75,10 @@ object BitmapUtils {
         }
         // 其次把文件插入到系统图库
         try {
-            MediaStore.Images.Media.insertImage(context.contentResolver,
-                    file.absolutePath, fileName, null)
+            MediaStore.Images.Media.insertImage(
+                context.contentResolver,
+                file.absolutePath, fileName, null
+            )
         } catch (e: FileNotFoundException) {
             ToastUtils.showToast(context, "保存到相册失败！")
             e.printStackTrace()
@@ -88,6 +96,7 @@ object BitmapUtils {
      * @param newHeight
      * @return
      */
+    @JvmStatic
     fun zoomImg(bm: Bitmap, newWidth: Int, newHeight: Int): Bitmap {
         // 获得图片的宽高
         val width = bm.width
@@ -107,6 +116,7 @@ object BitmapUtils {
      * @param newWidth
      * @return
      */
+    @JvmStatic
     fun zoomImg(bm: Bitmap, newWidth: Int): Bitmap? {
         // 获得图片的宽高
         val width = bm.width
@@ -122,7 +132,6 @@ object BitmapUtils {
         return bitmapCombine(newbm, 5, 5, Color.TRANSPARENT)
     }
 
-
     /**
      * 以最小的比例 进行缩放图片
      * @param bm Bitmap
@@ -130,6 +139,7 @@ object BitmapUtils {
      * @param newHeight Int
      * @return Bitmap
      */
+    @JvmStatic
     fun zoomImg4minScale(bm: Bitmap, newWidth: Int, newHeight: Int): Bitmap { // 获得图片的宽高
         val width = bm.width
         val height = bm.height // 计算缩放比例
@@ -141,7 +151,6 @@ object BitmapUtils {
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
     }
 
-
     /**
      * 获得添加边框了的Bitmap
      *
@@ -151,7 +160,8 @@ object BitmapUtils {
      * @param color  边框颜色值
      * @return Bitmap 添加边框了的Bitmap
      */
-    private fun bitmapCombine(bm: Bitmap?, smallW: Int, smallH: Int, color: Int): Bitmap? {
+    @JvmStatic
+    fun bitmapCombine(bm: Bitmap?, smallW: Int, smallH: Int, color: Int): Bitmap? {
         //防止空指针异常
         if (bm == null) {
             return null
@@ -171,8 +181,10 @@ object BitmapUtils {
         canvas.drawRect(Rect(0, 0, newW, newH), p)
 
         // 绘边框
-        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(), (newH - bigH - 2 * smallH)
-                / 2 + smallH.toFloat(), null)
+        canvas.drawBitmap(
+            bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(), (newH - bigH - 2 * smallH)
+                    / 2 + smallH.toFloat(), null
+        )
 
 
 //        canvas.save(Canvas.ALL_SAVE_FLAG);
@@ -182,6 +194,7 @@ object BitmapUtils {
         return newBitmap
     }
 
+    @JvmStatic
     fun zoomDrawable(drawable: Drawable, w: Int, h: Int): Bitmap {
         val width = drawable.intrinsicWidth
         val height = drawable.intrinsicHeight
@@ -190,11 +203,14 @@ object BitmapUtils {
         val scaleWidth = w.toFloat() / width
         val scaleHeight = h.toFloat() / height
         matrix.postScale(scaleWidth, scaleHeight)
-        return Bitmap.createBitmap(oldbmp, 0, 0, width, height,
-                matrix, true)
+        return Bitmap.createBitmap(
+            oldbmp, 0, 0, width, height,
+            matrix, true
+        )
     }
 
-    private fun drawableToBitmap(drawable: Drawable): Bitmap {
+    @JvmStatic
+    fun drawableToBitmap(drawable: Drawable): Bitmap {
         val width = drawable.intrinsicWidth
         val height = drawable.intrinsicHeight
         val config = if (drawable.opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
@@ -210,6 +226,7 @@ object BitmapUtils {
      * @param view View
      * @return Bitmap?
      */
+    @JvmStatic
     fun createBitmapFromView(view: View): Bitmap? {
         var bitmap: Bitmap? = null
         //开启view缓存bitmap
@@ -233,6 +250,7 @@ object BitmapUtils {
      * @param view View
      * @return Bitmap?
      */
+    @JvmStatic
     fun createBitmapFromView2(view: View): Bitmap? {
         //是ImageView直接获取
         if (view is ImageView) {
@@ -276,6 +294,7 @@ object BitmapUtils {
         return base64
     }
 
+    @JvmStatic
     fun ScalePicture(fileName: String?, options: Int): ByteArrayOutputStream {
         var options = options
         var image: Bitmap? = null
@@ -297,6 +316,7 @@ object BitmapUtils {
         return baos
     }
 
+    @JvmStatic
     fun getImageHead(key: String?): String? {
         val stringMap: MutableMap<String, String> = HashMap()
         stringMap["JPEG"] = "data:image/jpeg;base64,"
@@ -305,4 +325,34 @@ object BitmapUtils {
         stringMap["PNG"] = "data:image/png;base64,"
         return stringMap[key]
     }
+
+    /**
+     *  查询图片   Options
+     * @param path String
+     * @return BitmapFactory.Options
+     */
+    @JvmStatic
+    fun getImageOptions(path: String): BitmapFactory.Options {
+        val options: BitmapFactory.Options = BitmapFactory.Options()
+        //设置为true,表示解析Bitmap对象，该对象不占内存
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(path, options)
+        return options
+    }
+
+    /**
+     * 把bitmap画到一个白底的newBitmap上,将newBitmap返回
+     * @param bitmap 要绘制的位图
+     * @return Bitmap
+     */
+    @JvmStatic
+    fun drawableBitmapOnWhiteBg(bitmap: Bitmap): Bitmap {
+        val newBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(newBitmap)
+        canvas.drawColor(CoreConfig.applicationContext.resources.getColor(R.color.white))
+        val paint = Paint()
+        canvas.drawBitmap(bitmap, 0f, 0f, paint) //将原图使用给定的画笔画到画布上
+        return newBitmap
+    }
+
 }

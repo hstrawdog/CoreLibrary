@@ -1,5 +1,6 @@
 package com.hqq.example.ui.file
 
+import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.utils.BitmapUtils
 import com.hqq.core.utils.file.FileUtils
@@ -16,15 +17,27 @@ import com.hqq.example.databinding.ActivitySaveBitmapBinding
 class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() {
     override fun initView() {
         binding.textView28.setOnClickListener {
-            // 保存到默认的文件夹
-            SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle))
-                    .setFileName("aaaa1111.png")
-                    .save2AppCache()
+
+            PermissionsUtils.requestStorage {
+                if (it) {
+
+                    // 保存到默认的文件夹
+                    SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle))
+                        .setFileName("aaaa1111.png")
+                        .save2AppCache()
+                }
+            }
+
         }
 
         binding.textView29.setOnClickListener {
-            // 保存到默认的文件夹
-            SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle)).save2Public()
+            PermissionsUtils.requestStorage {
+                if (it) {
+                    // 保存到默认的文件夹
+                    SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle)).save2Public()
+                }
+            }
+
         }
 
     }

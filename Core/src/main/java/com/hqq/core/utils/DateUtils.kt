@@ -61,7 +61,12 @@ object DateUtils {
             dff.timeZone = TimeZone.getTimeZone("GMT+08")
             return dff.format(Date())
         }
-
+    val nowDate4yyyyMMdd: String
+        get() {
+            val dff = SimpleDateFormat("yyyy-MM-dd")
+            dff.timeZone = TimeZone.getTimeZone("GMT+08")
+            return dff.format(Date())
+        }
 
     /**
      * 根据年份及月份计算每月的天数

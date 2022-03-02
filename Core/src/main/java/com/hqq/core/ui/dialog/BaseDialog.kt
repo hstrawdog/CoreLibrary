@@ -87,6 +87,8 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     /**
      *  动画
+     *   R.style.dialogAnimation_fade_in2fade_out  淡入淡出
+     *   R.style.DialogAnimation_bottom2top  下到上
      */
     override val animation: Int
         get() = R.style.DialogAnimation_bottom2top
