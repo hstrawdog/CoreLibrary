@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.viewModelScope
+import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -19,6 +20,7 @@ import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.crash.CrashActivity
+import com.hqq.example.ui.customize.BrushViewActivity
 import com.hqq.example.ui.customize.ComparedActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.customize.SemicircularActivity
@@ -82,7 +84,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 
 //        startActivity(Intent(this, ComparedActivity::class.java))
-
+    open(BrushViewActivity::class.java)
     }
 
 

@@ -30,17 +30,6 @@ import java.util.*
 object BitmapUtils {
 
     @JvmStatic
-    fun generatBitmap(v: View): Bitmap {
-        val bitmap = Bitmap.createBitmap(
-            v.width, v.height,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        v.draw(canvas)
-        return bitmap
-    }
-
-    @JvmStatic
     fun saveImageToGallery(context: Context, bitmaps: Bitmap) {
         // 首先保存图片
         val appDir = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "dearxy")
@@ -185,7 +174,6 @@ object BitmapUtils {
             bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(), (newH - bigH - 2 * smallH)
                     / 2 + smallH.toFloat(), null
         )
-
 
 //        canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.save()
@@ -354,5 +342,18 @@ object BitmapUtils {
         canvas.drawBitmap(bitmap, 0f, 0f, paint) //将原图使用给定的画笔画到画布上
         return newBitmap
     }
+
+    /**
+     *  将bitmap 转换成 字节数组
+     * @param bitmap Bitmap
+     * @return ByteArray
+     */
+    @JvmStatic
+    fun bitmap2ByteArray(bitmap: Bitmap, format: Bitmap.CompressFormat = Bitmap.CompressFormat.WEBP, quality: Int = 80): ByteArray {
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(format, quality, baos)
+        return baos.toByteArray()
+    }
+
 
 }

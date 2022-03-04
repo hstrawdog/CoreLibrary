@@ -37,6 +37,8 @@
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_path" />
         </provider>
+
+
         <activity-alias
                 android:name=".RoundActivity"
                 android:enabled="false"
@@ -48,6 +50,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+        <activity
+                android:name=".ui.customize.BrushViewActivity"
+                android:label="画笔" />
 
         <activity
                 android:name=".ui.MainActivity"

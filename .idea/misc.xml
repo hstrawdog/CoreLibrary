@@ -8,11 +8,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_bg_fc4848.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_bg_normal.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_bg_white.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_selector_green.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_selector_green2.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_selector_green3.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_white_circle_normal.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_white_circle_selected.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/switch_white_circle_selector.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/drawable/xml_seek_thumb_bar.xml" value="0.33240740740740743" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/layout/activity_brush_view.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/layout/activity_compared.xml" value="0.26851851851851855" />
         <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/layout/activity_flow_fold_view.xml" value="0.26851851851851855" />
         <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/layout/activity_parcelable.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/layout/activity_seek_bar.xml" value="0.33796296296296297" />
         <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/layout/activity_semicircular.xml" value="0.26851851851851855" />
+        <entry key="..\:/AndroidStudioProjects/CoreLibrary/app/src/main/res/layout/activity_switch.xml" value="0.67" />
       </map>
     </option>
   </component>
