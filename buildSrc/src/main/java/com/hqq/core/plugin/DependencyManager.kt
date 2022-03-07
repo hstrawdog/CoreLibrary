@@ -64,7 +64,7 @@ object KTX {
     val activityKtx = "androidx.activity:activity-ktx:1.3.0"
 
     // Kotlin
-    val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0"
+    val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.6"
 }
 
 /**

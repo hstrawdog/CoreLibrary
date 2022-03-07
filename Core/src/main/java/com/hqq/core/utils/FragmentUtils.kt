@@ -19,7 +19,6 @@ class FragmentUtils {
     var currentFragment: Fragment? = null
 
     constructor(any: Any) {
-
         when (any) {
             is FragmentManager -> {
                 supportFragmentManager = any

@@ -2,8 +2,7 @@ package com.hqq.example.ui.file
 
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewBindingActivity
-import com.hqq.core.utils.BitmapUtils
-import com.hqq.core.utils.file.FileUtils
+import com.hqq.core.utils.file.BitmapUtils
 import com.hqq.core.utils.file.SaveBitmapBuild
 import com.hqq.example.databinding.ActivitySaveBitmapBinding
 

@@ -172,14 +172,12 @@ class TextSpannableBuilder {
         return this
     }
 
-    fun build(): Spannable {
-        return mStringBuilder
-    }
 
     /**
      *  点击事件 类
      */
-    class TextClickableSpan(private val mText: CharSequence, private val mColor: Int, private val mOnClickListener: OnClickListener?) : ClickableSpan() {
+    class TextClickableSpan(private val mText: CharSequence, private val mColor: Int, private val mOnClickListener: OnClickListener?) :
+        ClickableSpan() {
         override fun onClick(widget: View) {
             mOnClickListener?.onClick(widget, mText)
         }
@@ -192,6 +190,15 @@ class TextSpannableBuilder {
         }
 
     }
+
+    /**
+     *  构建Spannable
+     * @return Spannable
+     */
+    fun build(): Spannable {
+        return mStringBuilder
+    }
+
 
     /**
      * 点击回调

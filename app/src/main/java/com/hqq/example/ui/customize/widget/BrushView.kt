@@ -180,7 +180,6 @@ class BrushView : View {
         invalidate()
     }
 
-
     interface OnUpListener {
         fun onUp()
     }

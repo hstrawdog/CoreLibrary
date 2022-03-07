@@ -157,6 +157,11 @@ object ScreenUtils {
         return localDisplayMetrics.densityDpi.toFloat()
     }
 
+
+    @kotlin.jvm.JvmStatic
+    fun getStatusBarHeight(): Int {
+        return getStatusBarHeight(CoreConfig.applicationContext)
+    }
     /**
      * 状态栏高度
      *
@@ -180,11 +185,6 @@ object ScreenUtils {
             e1.printStackTrace()
         }
         return statusBarHeight
-    }
-
-    @kotlin.jvm.JvmStatic
-    fun getStatusBarHeight(): Int {
-        return getStatusBarHeight(CoreConfig.applicationContext)
     }
 
     /**

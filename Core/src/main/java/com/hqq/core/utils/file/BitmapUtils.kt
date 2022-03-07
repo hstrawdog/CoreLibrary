@@ -1,4 +1,4 @@
-package com.hqq.core.utils
+package com.hqq.core.utils.file
 
 import android.R
 import android.content.Context
@@ -15,6 +15,7 @@ import android.view.View
 import android.view.View.DRAWING_CACHE_QUALITY_HIGH
 import android.widget.ImageView
 import com.hqq.core.CoreConfig
+import com.hqq.core.utils.ToastUtils
 import java.io.*
 import java.util.*
 

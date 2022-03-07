@@ -84,7 +84,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 
 //        startActivity(Intent(this, ComparedActivity::class.java))
-    open(BrushViewActivity::class.java)
+//    open(BrushViewActivity::class.java)
     }
 
 

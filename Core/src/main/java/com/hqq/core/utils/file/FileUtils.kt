@@ -13,7 +13,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.hqq.core.CoreConfig
-import com.hqq.core.utils.BitmapUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.math.BigDecimal
