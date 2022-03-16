@@ -19,7 +19,6 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
 
             PermissionsUtils.requestStorage {
                 if (it) {
-
                     // 保存到默认的文件夹
                     SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle))
                         .setFileName("aaaa1111.png")

@@ -1,11 +1,14 @@
 package com.hqq.example.ui.customize.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.graphics.values
+import android.graphics.DashPathEffect
+
 
 /**
  * @Author : huangqiqiang
@@ -65,11 +68,64 @@ class BrushView : View {
      */
     var onUpListener: OnUpListener? = null
 
+    /**
+     *  1  画笔
+     *  2 矩形
+     */
+    var model = 1
+
+    /**
+     *  虚线
+     */
+    val mPaintCircle = Paint().apply {
+
+        style = Paint.Style.STROKE
+        isAntiAlias = true
+        setStrokeWidth(3f)
+        color = Color.parseColor("#FF3434")
+        pathEffect = DashPathEffect(floatArrayOf(15f, 4f), 0f)
+    }
+
+    val rectPaint = Paint().apply {
+        //设置颜色
+        setColor(Color.parseColor("#4dF15454"))
+        //设置画笔类型
+        setStyle(Paint.Style.FILL);
+    }
+
+    /**
+     * 按下的点
+     */
+    var downPoint: PointF? = null
+
+    /**
+     *  移动的点 也就是终点
+     */
+    var movePoint: PointF? = null
+
+    @SuppressLint("NewApi")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.drawPath(currentPath, viewPaint)
+        if (model == 1) {
+
+            canvas.drawPath(currentPath, viewPaint)
+        } else {
+
+            if (downPoint != null && movePoint != null) {
+
+                canvas.drawRect(
+                    downPoint!!.x, downPoint!!.y, movePoint!!.x, movePoint!!.y, rectPaint
+                )
+                canvas.drawLine(downPoint!!.x, downPoint!!.y, movePoint!!.x, downPoint!!.y, mPaintCircle)
+                canvas.drawLine(downPoint!!.x, downPoint!!.y, downPoint!!.x, movePoint!!.y, mPaintCircle)
+                canvas.drawLine(downPoint!!.x, movePoint!!.y, movePoint!!.x, movePoint!!.y, mPaintCircle)
+                canvas.drawLine(movePoint!!.x, downPoint!!.y, movePoint!!.x, movePoint!!.y, mPaintCircle)
+            }
+
+        }
 
     }
+
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
 
@@ -84,10 +140,12 @@ class BrushView : View {
                 var f = getRealityPoint(event.x, event.y)
                 realityPath.moveTo(f[0], f[1])
 
-
+                downPoint = PointF(event.x, event.y)
+                movePoint = null
             }
             MotionEvent.ACTION_MOVE -> {
                 touchMove(event.x, event.y)
+                movePoint = PointF(event.x, event.y)
 
             }
             MotionEvent.ACTION_CANCEL -> {
@@ -146,6 +204,8 @@ class BrushView : View {
      *  清除 数据
      */
     fun clean() {
+        downPoint = null
+        movePoint = null
         currentPath = Path()
         realityPath = Path()
         invalidate()
@@ -161,7 +221,23 @@ class BrushView : View {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         canvas.drawColor(Color.BLACK)
-        canvas.drawPath(realityPath, realityPaint)
+
+        if (model == 1) {
+
+            canvas.drawPath(realityPath, realityPaint)
+        } else {
+            if (downPoint != null && movePoint != null) {
+                var f = getRealityPoint(downPoint!!.x, downPoint!!.y)
+                var f2 = getRealityPoint(movePoint!!.x, movePoint!!.y)
+                canvas.drawRect(
+                    f[0], f[1], f2[0], f2[2], realityPaint
+                )
+            }
+
+        }
+
+
+
         return bitmap;
     }
 

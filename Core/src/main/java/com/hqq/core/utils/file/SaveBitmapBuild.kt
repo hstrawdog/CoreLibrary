@@ -52,35 +52,18 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
      * 是否保存到相册中
      */
     var isSave2Album = true
-    fun setIsSave2Album(isSave: Boolean) = apply { this.isSave2Album = isSave }
 
-    var saveModel = 1
-    fun setSaveModel(model: Int) = apply { this.saveModel = model }
 
     /**
      * 文件路径
+     * 默认使用cache  可以直接操作File  避免部分错误
      */
     var filePath: String = ""
         get() {
-            return FileUtils.getExternalPicturesPath() + "/" + fileName
+            return FileUtils.getCodeCacheDir() + "/" + fileName
         }
 
-    /**
-     *  保存图片 区分三种存储
-     */
-    fun save() {
-        when (saveModel) {
-            1 -> {
-                save2Public()
-            }
-            2 -> {
-                save2AppCache()
-            }
-            3 -> {
-                save2Private()
-            }
-        }
-    }
+
 
     /**
      *  默认保存在picture 目录下

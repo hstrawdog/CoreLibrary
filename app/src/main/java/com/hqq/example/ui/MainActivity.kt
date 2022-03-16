@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.viewModelScope
-import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -20,13 +19,13 @@ import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.crash.CrashActivity
-import com.hqq.example.ui.customize.BrushViewActivity
 import com.hqq.example.ui.customize.ComparedActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.customize.SemicircularActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
-import com.hqq.example.ui.down.load.DownLoadActivity
+import com.hqq.example.ui.file.DownLoadActivity
 import com.hqq.example.ui.exception.ThrowActivity
+import com.hqq.example.ui.file.FileIndexActivity
 import com.hqq.example.ui.file.SaveBitmapActivity
 import com.hqq.example.ui.fold.FoldViewActivity
 import com.hqq.example.ui.info.BaseInfoActivity
@@ -137,7 +136,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             super.onCrete()
             LogUtils.e("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
-            arrayList.add(MainBean("文件下载测试", DownLoadActivity::class.java))
+            arrayList.add(MainBean("文件相关", FileIndexActivity::class.java))
             arrayList.add(MainBean("奔溃后启动", CrashActivity::class.java))
             arrayList.add(MainBean("Fragment 测试", FragmentTestActivity::class.java))
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
@@ -160,7 +159,6 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("SVG测试", SvgActivity::class.java))
             arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
             arrayList.add(MainBean("自定义圆形进度条", SemicircularActivity::class.java))
-            arrayList.add(MainBean("图片保存", SaveBitmapActivity::class.java))
             arrayList.add(MainBean("折叠布局", FoldViewActivity::class.java))
             arrayList.add(MainBean("对比效果", ComparedActivity::class.java))
             arrayList.add(MainBean("Parcelable测试", ParcelableActivity::class.java))

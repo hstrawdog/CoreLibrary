@@ -14,8 +14,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class HttpDownloader extends HttpTask {
 
-    static String TAG = HttpDownloader.class.getSimpleName();
-
     HttpClient client;
     Request request;
     DownloadCallback callback;
@@ -156,7 +154,7 @@ public class HttpDownloader extends HttpTask {
                     sum += length;
                     float percent = sum * 100.0f / contentLength;
 
-                    int p = (int) percent / 2;
+                    int p = (int) percent ;
                     if (callback != null) {
                         callback.onProgress(p);
                     }

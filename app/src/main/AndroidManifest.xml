@@ -64,6 +64,10 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+                android:name=".ui.file.FileIndexActivity"
+                android:label="文件相关" />
         <activity
                 android:name=".ui.customize.ComparedActivity"
                 android:label="对比View" />
@@ -89,7 +93,7 @@
                 android:name=".ui.parcelable.ParcelableActivity"
                 android:label="Parcelable测试" />
         <activity
-                android:name=".ui.down.load.DownLoadActivity"
+                android:name=".ui.file.DownLoadActivity"
                 android:label="下载测试" />
         <activity
                 android:name=".ui.customize.DiskViewActivity"

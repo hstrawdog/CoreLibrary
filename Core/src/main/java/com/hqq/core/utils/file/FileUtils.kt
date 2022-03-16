@@ -77,6 +77,11 @@ object FileUtils {
         return context.codeCacheDir.path
     }
 
+    @JvmStatic
+    fun getCodeCacheDir(): String {
+        return getCodeCacheDir(CoreConfig.applicationContext)
+    }
+
     /**
      * @param context
      * @return /data/user/0/com.hqq.core/files

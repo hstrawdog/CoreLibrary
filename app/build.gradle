@@ -1,5 +1,4 @@
 import com.hqq.core.plugin.*
-
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
