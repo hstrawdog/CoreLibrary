@@ -1,5 +1,6 @@
 package com.hqq.example.ui.info
 
+import android.os.Environment
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.utils.file.FileUtils
@@ -29,6 +30,10 @@ class FilePathActivity : BaseActivity() {
                 .addTextPart("\n")
                 .addTextPart(FileUtils.getFilesDir(this))
                 .addTextPart("\n")
+                .addTextPart("\nContext.getPackageDir()  ")
+                .addTextPart("\n")
+                .addTextPart(FileUtils.getPackageDir(""))
+                .addTextPart("\n")
                 .addTextPart("\nContext.getFileStreamPath()  ")
                 .addTextPart("\n")
                 .addTextPart(FileUtils.getFileStreamPath(this))
@@ -49,7 +54,9 @@ class FilePathActivity : BaseActivity() {
                 .addTextPart("\n")
                 .addTextPart(FileUtils.getExternalFilesDir(this, "fileName"))
                 .addTextPart("\n")
-                .addTextPart("\nContext.getSdCardExternalStorageDirectory()  ")
+                .addTextPart("\nContext.getExternalStorageDirectory()  ")
+                .addTextPart("\n")
+                .addTextPart(Environment.getExternalStorageDirectory().absolutePath)
 
                 .build())
     }

@@ -1,35 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
     <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x200"
-        android:gravity="center"
-        android:text="保存View/Bitmap 到指定文件夹中" />
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x200"
+            android:gravity="center"
+            android:text="保存View/Bitmap 到指定文件夹中" />
 
     <TextView
-        android:id="@+id/textView28"
-        style="@style/def_text.28.333"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="保存View" />
+            android:id="@+id/textView28"
+            style="@style/def_text.28.333"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="保存到View到AppCache" />
 
     <TextView
-        android:layout_marginTop="@dimen/x20"
-        android:id="@+id/textView29"
-        style="@style/def_text.28.333"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="保存View" />
+            android:id="@+id/textView30"
+            style="@style/def_text.28.333"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="保存到外部私有目录下 发送至相册 会出现两张照片 " />
+
+    <TextView
+            android:id="@+id/textView29"
+            style="@style/def_text.28.333"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="保存到Picture" />
+
+
+    <TextView
+            android:id="@+id/textView31"
+            style="@style/def_text.28.333"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="File直接保存到Pic" />
 
 
 </LinearLayout>

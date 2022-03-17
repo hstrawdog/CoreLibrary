@@ -16,6 +16,7 @@ import com.hqq.core.CoreConfig
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.math.BigDecimal
+import java.nio.file.Path
 
 
 /**
@@ -63,7 +64,7 @@ object FileUtils {
      * @return /data/user/0/com.hqq.core/cache
      */
     @JvmStatic
-    fun getCacheDir(context: Context): String {
+    fun getCacheDir(context: Context = CoreConfig.applicationContext): String {
         return context.cacheDir.path
     }
 
@@ -77,6 +78,10 @@ object FileUtils {
         return context.codeCacheDir.path
     }
 
+    /**
+     *
+     * @return String /data/user/0/com.hqq.core/code_cache
+     */
     @JvmStatic
     fun getCodeCacheDir(): String {
         return getCodeCacheDir(CoreConfig.applicationContext)
@@ -118,8 +123,8 @@ object FileUtils {
      * @param fileName String
      * @return File?
      */
-    fun getPackageDir(fileName: String): File? {
-        return CoreConfig.applicationContext.getDir(fileName, Context.MODE_APPEND)
+    fun getPackageDir(fileName: String): String {
+        return CoreConfig.applicationContext.getDir(fileName, Context.MODE_APPEND).path
     }
 
     //endregion
@@ -136,14 +141,6 @@ object FileUtils {
         return context.externalCacheDir!!.path
     }
 
-    /**
-     * @param context
-     * @return /storage/emulated/0/Android/data/package/files
-     */
-    @JvmStatic
-    fun getExternalFilesDir(context: Context): String {
-        return context.getExternalFilesDir("")!!.path
-    }
 
     /**
      * @param context
@@ -156,9 +153,10 @@ object FileUtils {
      * DIRECTORY_DCIM
      * DIRECTORY_DOCUMENTS
      * @return /storage/emulated/0/Android/data/package/files/fileName
+     * app 卸载后 目录也会删除掉
      */
     @kotlin.jvm.JvmStatic
-    fun getExternalFilesDir(context: Context, fileName: String?): String {
+    fun getExternalFilesDir(context: Context = CoreConfig.applicationContext, fileName: String =""): String {
         return context.getExternalFilesDir(fileName)!!.path
     }
 
@@ -171,7 +169,7 @@ object FileUtils {
      * /storage/emulated/0/Pictures
      */
     @kotlin.jvm.JvmStatic
-    open fun getExternalPicturesPath(): String {
+    fun getExternalPicturesPath(): String {
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).path
     }
 
@@ -179,8 +177,17 @@ object FileUtils {
      *  下载地址地址
      * @return String
      */
-    open fun getExternalDownloadsPath(): String {
+    fun getExternalDownloadsPath(): String {
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path
+    }
+
+
+    /**
+     *  获取根目录地址
+     * @return String /storage/emulated/0/
+     */
+    fun getStorageDirectory(): String {
+        return Environment.getExternalStorageDirectory().absolutePath
     }
 
     //endregion
@@ -599,13 +606,13 @@ object FileUtils {
 
     //region Bitmap 操作
     /**
-     *  Android  10 一下的 图片存储
+     *  Android  10 以下的 图片存储
      * @param bm Bitmap
      * @param filePath String
      * @throws IOException
      */
     @Throws(IOException::class)
-    fun saveBitmap(bm: Bitmap?, filePath: String = getExternalPicturesPath() + getDefFileName(".png")) {
+    fun saveBitmap(bm: Bitmap?, filePath: String = getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
         if (bm == null) {
             LogUtils.d(" saveBitmap   is  null  ")
             return
