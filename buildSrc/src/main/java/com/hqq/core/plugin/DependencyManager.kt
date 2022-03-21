@@ -9,10 +9,10 @@ package com.hqq.core.plugin
  * @Descrive :
  */
 object BuildConfig {
-    val compileSdkVersion = 30
-    val buildToolsVersion = "30.0.2"
+    val compileSdkVersion = 31
+    val buildToolsVersion = "31.0.0"
     val minSdkVersion = 21
-    val targetSdkVersion = 30
+    val targetSdkVersion = 31
 }
 
 

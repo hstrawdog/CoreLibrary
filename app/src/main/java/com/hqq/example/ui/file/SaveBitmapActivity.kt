@@ -4,6 +4,7 @@ import android.os.Environment
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.utils.file.BitmapUtils
+import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.file.SaveBitmapBuild
 import com.hqq.example.databinding.ActivitySaveBitmapBinding
 import java.io.File
@@ -40,13 +41,12 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                 }
             }
         }
-
         binding.textView29.setOnClickListener {
             PermissionsUtils.requestStorage {
                 if (it) {
                     binding.tvTitle.text = binding.textView29.text
                     // 保存到默认的文件夹
-                    SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle)).save2Public()
+                    SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle)).save2Pictures()
                 }
             }
         }
@@ -56,7 +56,24 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                 if (it) {
                     binding.tvTitle.text = binding.textView31.text
                     // 保存到默认的文件夹
-                    SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle)).save2ExternalPrivate()
+                    SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle))
+                        .apply {
+                            filePath = FileUtils.getStorageDirectory() + File.separator + "HQQ" + File.separator + System.currentTimeMillis() + ".png"
+                        }
+                        .save2Pictures()
+                }
+            }
+        }
+        binding.textView32.setOnClickListener {
+            PermissionsUtils.requestStorage {
+                if (it) {
+                    binding.tvTitle.text = binding.textView32.text
+                    // 保存到默认的文件夹
+                    SaveBitmapBuild(BitmapUtils.createBitmapFromView2(binding.tvTitle))
+                        .apply {
+                            filePath =FileUtils.getExternalPicturesPath()  + File.separator+"A" + File.separator + System.currentTimeMillis() + ".png"
+                        }
+                        .save2Pictures()
                 }
             }
         }

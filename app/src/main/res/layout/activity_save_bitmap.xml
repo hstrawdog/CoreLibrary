@@ -50,7 +50,17 @@
             android:layout_marginTop="@dimen/x20"
             android:background="@color/white"
             android:gravity="center"
-            android:text="File直接保存到Pic" />
+            android:text="保存外部指定目录下 \n
+android:requestLegacyExternalStorage=true " />
 
+    <TextView
+            android:id="@+id/textView32"
+            style="@style/def_text.28.333"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="保存到Picture 的子目录下" />
 
 </LinearLayout>

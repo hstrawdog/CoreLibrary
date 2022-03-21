@@ -7,6 +7,7 @@ import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
@@ -356,5 +357,19 @@ object BitmapUtils {
         return baos.toByteArray()
     }
 
+    /**
+     * 得到bitmap的大小
+     */
+    @JvmStatic
+    fun getBitmapSize(bitmap: Bitmap): Int {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {    //API 19
+            return bitmap.allocationByteCount
+        }
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) { //API 12
+            bitmap.byteCount
+        } else bitmap.rowBytes * bitmap.height
+        // 在低版本中用一行的字节x高度
+        //earlier version
+    }
 
 }

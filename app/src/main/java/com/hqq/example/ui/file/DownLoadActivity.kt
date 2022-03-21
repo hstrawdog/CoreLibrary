@@ -50,10 +50,10 @@ class DownLoadActivity : BaseActivity() {
 
         findViewById<Button>(R.id.button61).setOnClickListener {
 //        val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/D7E41FEA0FD864409B18DC2921D3CEECF309.mp4"
-//        val url = "https://media.w3.org/2010/05/sintel/trailer.mp4"
-//            val url = "https://s186.convertio.me/p/m6uxG_51t9I1HKZbRmnv_A/d4c878bc05c3172944ea60d7cac37bbf/1647409049087.mp4"
+        val url = "https://media.w3.org/2010/05/sintel/trailer.mp4"
+////            val url = "https://s186.convertio.me/p/m6uxG_51t9I1HKZbRmnv_A/d4c878bc05c3172944ea60d7cac37bbf/1647409049087.mp4"
 //            val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/34DE7E9C6F0F7346A38B92CB23EB01571857.mp4"
-            val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/F5CD39FFCB763249766AC4EBC07650D832C2.mp4"
+////            val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/F5CD39FFCB763249766AC4EBC07650D832C2.mp4"
             val path = FileUtils.getCacheDir(this@DownLoadActivity) + "/" + System.currentTimeMillis() + ".mp4"
             File(path)?.delete()
             HttpClient().download(Request().apply {

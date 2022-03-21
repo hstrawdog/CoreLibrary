@@ -20,13 +20,18 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class HttpClient {
 
-    static String TAG = HttpClient.class.getSimpleName();
 
-    //最大同时请求数
+    /**
+     * 最大同时请求数
+     */
     private int maxRequests = 64;
-    //每个IP最多请求数
+    /**
+     * 每个IP最多请求数
+     */
     private int maxRequestsPerHost = 5;
-    // 设置连接主机超时时间
+    /**
+     * 设置连接主机超时时间
+     */
     private int connectTimeout = 60 * 1000;
     /**
      * 设置从主机读取数据超时
@@ -43,9 +48,14 @@ public class HttpClient {
      */
     private final Deque<HttpTask> runningAsyncCalls = new ArrayDeque<>();
 
-    //异步
+    /**
+     * 异步
+     *
+     * @param request  请求信息
+     * @param path     不支持Android 9 以上地址   存放到私有目录在 在复制到对应的目录中去
+     * @param callback
+     */
     public void download(Request request, String path, DownloadCallback callback) {
-        //LogUtil.log(TAG,  "download  url=" + request.url);
         HttpDownloader download = new HttpDownloader(this, request, path, callback);
         if (runningAsyncCalls.size() < maxRequests && runningCallsForHost(download) < maxRequestsPerHost) {
             runningAsyncCalls.add(download);

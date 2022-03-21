@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import com.hqq.core.CoreConfig
+import com.hqq.core.kt.getFileName
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.utils.ToastUtils
@@ -54,7 +55,6 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
      */
     var isSave2Album = true
 
-
     /**
      * 文件路径
      * 默认使用cache  可以直接操作File  避免部分错误
@@ -87,34 +87,20 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
             }
             // 外部公共存储 需要用Uri
             2 -> {
-
+                if (path.isNullOrEmpty()) {
+                    //  9以上 需要用uri 进行存储
+                    path = FileUtils.getExternalPicturesPath() + File.separator + fileName
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    } else {
+                        //  直接访问 pictures 文件目录
+                    }
+                }
             }
         }
 
         return path
     }
 
-    /**
-     *  默认保存在picture 目录下
-     */
-    fun save2Public() {
-        if (bitmap != null && context != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                FileUtils.saveBitmap2Picture(context!!, bitmap!!, fileName = fileName)
-                ToastUtils.showToast("保存成功")
-            } else {
-                //Android 10  一下 需要文件读写权限
-                PermissionsUtils.requestStorage(object : PermissionsResult {
-                    override fun onPermissionsResult(status: Boolean) {
-                        FileUtils.saveBitmap(bitmap, filePath)
-                        send2Album(filePath)
-                        ToastUtils.showToast("保存成功")
-                    }
-                })
-            }
-        }
-
-    }
 
     /**
      *   保存图片到App cache  也就是内部私有
@@ -141,7 +127,32 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
     }
 
     /**
-     * 将图片 保存至相册中
+     *  默认保存在picture 目录下
+     *  android:requestLegacyExternalStorage="true"  才能访问 外部存储空间
+     *  否则都是在Pictures目录下
+     */
+    fun save2Pictures() {
+        if (bitmap != null && context != null) {
+            val path = getFilePath(2)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                FileUtils.saveBitmap2Public(context!!, bitmap!!, path)
+                ToastUtils.showToast("保存成功")
+            } else {
+                //Android 10  一下 需要文件读写权限
+                PermissionsUtils.requestStorage(object : PermissionsResult {
+                    override fun onPermissionsResult(status: Boolean) {
+                        FileUtils.saveBitmap(bitmap, path)
+                        send2Album(filePath)
+                        ToastUtils.showToast("保存成功")
+                    }
+                })
+            }
+        }
+
+    }
+
+    /**
+     * 将图片 通知至相册刷新
      * @param path String
      */
     private fun send2Album(path: String) {

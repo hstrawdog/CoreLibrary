@@ -5,7 +5,6 @@
         <provider
             android:name="com.hqq.core.CoreProvider"
             android:authorities="${applicationId}.core.provider"
-            android:exported="false"
             android:multiprocess="true" />
     </application>
 

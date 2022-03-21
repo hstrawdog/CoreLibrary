@@ -3,6 +3,7 @@ package com.hqq.core.utils.file
 import android.app.ActivityManager
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
 import android.net.Uri
@@ -14,6 +15,9 @@ import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.hqq.core.CoreConfig
 import com.hqq.core.utils.log.LogUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.*
 import java.math.BigDecimal
 import java.nio.file.Path
@@ -156,7 +160,7 @@ object FileUtils {
      * app 卸载后 目录也会删除掉
      */
     @kotlin.jvm.JvmStatic
-    fun getExternalFilesDir(context: Context = CoreConfig.applicationContext, fileName: String =""): String {
+    fun getExternalFilesDir(context: Context = CoreConfig.applicationContext, fileName: String = ""): String {
         return context.getExternalFilesDir(fileName)!!.path
     }
 
@@ -509,31 +513,113 @@ object FileUtils {
         return null
     }
 
+
     /**
-     * 保存图片到 相册与 Pictures
+     * android:requestLegacyExternalStorage="true"  才能保存至指定的目录中
+     *  保存至 外部公有目录 否则都只能在pictures 目录下
      * @param context Context
      * @param bitmap Bitmap
-     * @param folderName String  文件夹名称
+     * @param filePath String
      */
-    @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun saveBitmap2Picture(
-        context: Context = CoreConfig.applicationContext,
-        bitmap: Bitmap, folderName: String = "", fileName: String
-    ) {
-        val values = ContentValues().apply {
-            put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
-            put(MediaStore.Images.Media.MIME_TYPE, "image/png")
-            // 指定文件夹  image 默认是存放  DCIM 与Pictures中
-            put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + folderName)
+    fun saveBitmap2Public(context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String) {
+        if (!File(filePath).parentFile.exists()) {
+            File(filePath).parentFile.mkdirs()
         }
+        val file = File(filePath)
+        val current = System.currentTimeMillis()
+
+        val values = createBitmapValues(
+            file.absolutePath, file.name, "image/jpg", file.parent,
+            current.toString(), current.toString(), current.toString(), BitmapUtils.getBitmapSize(bitmap), bitmap.width, bitmap.height
+        )
+
         context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)?.let { it ->
             context.contentResolver.openOutputStream(it)?.let { it1 ->
                 saveBitmap(it1, bitmap)
             }
         }
-
     }
+
+    /**
+     * 创建 pictures  Values
+     * @param data String 原始地址 / 就版本地址
+     * @param _display_name String 名称
+     * @param mime_type String   类型
+     * @param relative_path String  真实地址
+     * @param date_added String  添加时间
+     * @param date_modified String  修改时间
+     * @param date_taken String token
+     * @param size Int  大小
+     * @param width Int 宽度
+     * @param height Int 高度
+     * @return ContentValues
+     */
+    private fun createBitmapValues(
+        data: String, _display_name: String, mime_type: String, relative_path: String,
+        date_added: String, date_modified: String, date_taken: String, size: Int, width: Int, height: Int
+
+    ): ContentValues {
+        var values = ContentValues().apply {
+            put(MediaStore.Images.ImageColumns.DATA, data)
+            put(MediaStore.Images.ImageColumns.DISPLAY_NAME, _display_name)
+            put(MediaStore.Images.ImageColumns.MIME_TYPE, mime_type)
+            // 指定文件夹  image 默认是存放  DCIM 与Pictures中
+            if (Build.VERSION.SDK.toString().toFloat().toInt() >= 30) {
+                // 持久化的路径 也就是存储的路肩
+                put(MediaStore.Images.ImageColumns.RELATIVE_PATH, relative_path)
+            }
+            put(MediaStore.Images.ImageColumns.DATE_ADDED, date_added)
+            put(MediaStore.Images.ImageColumns.DATE_MODIFIED, date_modified)
+            put(MediaStore.Images.ImageColumns.DATE_TAKEN, date_taken)
+            put(MediaStore.Images.ImageColumns.SIZE, size)
+            put(MediaStore.Images.ImageColumns.WIDTH, width)
+            put(MediaStore.Images.ImageColumns.HEIGHT, height)
+        }
+        return values
+    }
+
+    /**
+     *  复制图片到指定目录上
+     * @param context Context
+     * @param oldPath String  旧的地址
+     * @param newPath String
+     * @return Uri?
+     */
+    @JvmStatic
+    fun copyFile2CustomPath(context: Context, oldPath: String, newPath: String): Uri? {
+
+        val oldFile = File(oldPath)
+        //设置目标文件的信息
+        val options = BitmapUtils.getImageOptions(oldPath)
+
+
+        val values = createBitmapValues(
+            newPath,
+            oldFile.name,
+            "image/png",
+            File(newPath).parentFile.path,
+            oldFile.name,
+            oldFile.name,
+            oldFile.name,
+            oldFile.length().toInt(),
+            options.outHeight,
+            options.outHeight
+        )
+
+
+        context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)?.let { insertUri ->
+            context.contentResolver.openOutputStream(insertUri)?.let { fos ->
+                val fis = FileInputStream(oldFile)
+                fis.copyTo(fos)
+                fis.close()
+                fos.close()
+                return insertUri
+            }
+        }
+        return null
+    }
+
 
     /**
      *  保存图片到Download
@@ -685,52 +771,6 @@ object FileUtils {
         }
     }
 
-    /**
-     *  复制图片到指定目录上
-     * @param context Context
-     * @param oldPath String  旧的地址
-     * @param newPath String
-     * @return Uri?
-     */
-    @JvmStatic
-    fun copyFile2CustomPath(context: Context, oldPath: String, newPath: String): Uri? {
-        try {
-            val oldFile = File(oldPath)
-            //设置目标文件的信息
-            val values = ContentValues()
-            val options = BitmapUtils.getImageOptions(oldPath)
-            values.put(MediaStore.Images.ImageColumns.DATA, newPath)
-            values.put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/png")
-            //将图片的拍摄时间设置为当前的时间
-            values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, oldFile.name)
-            values.put(MediaStore.Images.ImageColumns.DATE_ADDED, oldFile.name)
-            values.put(MediaStore.Images.ImageColumns.DATE_MODIFIED, oldFile.name)
-            values.put(MediaStore.Images.ImageColumns.DATE_TAKEN, oldFile.name)
-            values.put(MediaStore.Images.ImageColumns.SIZE, oldFile.length())
-            values.put(MediaStore.Images.ImageColumns.WIDTH, options.outHeight)
-            values.put(MediaStore.Images.ImageColumns.HEIGHT, options.outHeight)
-            if (Build.VERSION.SDK.toString().toFloat().toInt() >= 30) {
-                // 持久化的路径 也就是存储的路肩
-                values.put(MediaStore.Images.ImageColumns.RELATIVE_PATH, File(newPath).parentFile.path)
-            }
-            val resolver = context.contentResolver
-            // 获取到url
-            val insertUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-            if (insertUri != null) {
-                val fos = resolver.openOutputStream(insertUri)
-                if (fos != null) {
-                    val fis = FileInputStream(oldFile)
-                    fis.copyTo(fos)
-                    fis.close()
-                    fos.close()
-                    return insertUri
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
-    }
 
     //TODO  整理 文件复制  与其他操作
 
