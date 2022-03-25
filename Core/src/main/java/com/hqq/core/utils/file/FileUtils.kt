@@ -390,6 +390,48 @@ object FileUtils {
      * @param fileName String
      * @param data String
      */
+
+
+    /**
+     * 创建 pictures  Values
+     * @param data String 原始地址 / 就版本地址  Q(10)以上没有这个字段
+     * @param _display_name String 名称
+     * @param mime_type String   类型
+     * @param relative_path String  真实地址
+     * @param date_added String  添加时间
+     * @param date_modified String  修改时间
+     * @param date_taken String token
+     * @param size Int  大小
+     * @param width Int 宽度
+     * @param height Int 高度
+     * @return ContentValues
+     */
+    private fun createBitmapValues(
+        data: String, _display_name: String, mime_type: String, relative_path: String,
+        date_added: String, date_modified: String, date_taken: String, size: Int, width: Int, height: Int
+
+    ): ContentValues {
+        var values = ContentValues().apply {
+            if (!isQ()) {
+                put(MediaStore.Images.ImageColumns.DATA, data)
+            }
+            put(MediaStore.Images.ImageColumns.DISPLAY_NAME, _display_name)
+            put(MediaStore.Images.ImageColumns.MIME_TYPE, mime_type)
+            if (isQ()) {
+                // 持久化的路径 也就是存储的路径  指定文件夹  只能存放在 image DCIM/Pictures
+                put(MediaStore.Images.ImageColumns.RELATIVE_PATH, relative_path)
+            }
+            put(MediaStore.Images.ImageColumns.DATE_ADDED, date_added)
+            put(MediaStore.Images.ImageColumns.DATE_MODIFIED, date_modified)
+            put(MediaStore.Images.ImageColumns.DATE_TAKEN, date_taken)
+            put(MediaStore.Images.ImageColumns.SIZE, size)
+            put(MediaStore.Images.ImageColumns.WIDTH, width)
+            put(MediaStore.Images.ImageColumns.HEIGHT, height)
+        }
+        return values
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
     fun saveFile2Download(context: Context, fileName: String, data: String) {
@@ -513,7 +555,6 @@ object FileUtils {
         return null
     }
 
-
     /**
      * android:requestLegacyExternalStorage="true"  才能保存至指定的目录中
      *  保存至 外部公有目录 否则都只能在pictures 目录下
@@ -521,6 +562,7 @@ object FileUtils {
      * @param bitmap Bitmap
      * @param filePath String
      */
+    @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
     fun saveBitmap2Public(context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String) {
         if (!File(filePath).parentFile.exists()) {
@@ -539,44 +581,8 @@ object FileUtils {
                 saveBitmap(it1, bitmap)
             }
         }
-    }
 
-    /**
-     * 创建 pictures  Values
-     * @param data String 原始地址 / 就版本地址
-     * @param _display_name String 名称
-     * @param mime_type String   类型
-     * @param relative_path String  真实地址
-     * @param date_added String  添加时间
-     * @param date_modified String  修改时间
-     * @param date_taken String token
-     * @param size Int  大小
-     * @param width Int 宽度
-     * @param height Int 高度
-     * @return ContentValues
-     */
-    private fun createBitmapValues(
-        data: String, _display_name: String, mime_type: String, relative_path: String,
-        date_added: String, date_modified: String, date_taken: String, size: Int, width: Int, height: Int
 
-    ): ContentValues {
-        var values = ContentValues().apply {
-            put(MediaStore.Images.ImageColumns.DATA, data)
-            put(MediaStore.Images.ImageColumns.DISPLAY_NAME, _display_name)
-            put(MediaStore.Images.ImageColumns.MIME_TYPE, mime_type)
-            // 指定文件夹  image 默认是存放  DCIM 与Pictures中
-            if (Build.VERSION.SDK.toString().toFloat().toInt() >= 30) {
-                // 持久化的路径 也就是存储的路肩
-                put(MediaStore.Images.ImageColumns.RELATIVE_PATH, relative_path)
-            }
-            put(MediaStore.Images.ImageColumns.DATE_ADDED, date_added)
-            put(MediaStore.Images.ImageColumns.DATE_MODIFIED, date_modified)
-            put(MediaStore.Images.ImageColumns.DATE_TAKEN, date_taken)
-            put(MediaStore.Images.ImageColumns.SIZE, size)
-            put(MediaStore.Images.ImageColumns.WIDTH, width)
-            put(MediaStore.Images.ImageColumns.HEIGHT, height)
-        }
-        return values
     }
 
     /**
@@ -586,13 +592,13 @@ object FileUtils {
      * @param newPath String
      * @return Uri?
      */
+    @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
     fun copyFile2CustomPath(context: Context, oldPath: String, newPath: String): Uri? {
 
         val oldFile = File(oldPath)
         //设置目标文件的信息
         val options = BitmapUtils.getImageOptions(oldPath)
-
 
         val values = createBitmapValues(
             newPath,
@@ -606,9 +612,8 @@ object FileUtils {
             options.outHeight,
             options.outHeight
         )
-
-
-        context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)?.let { insertUri ->
+        val collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+        context.contentResolver.insert(collection, values)?.let { insertUri ->
             context.contentResolver.openOutputStream(insertUri)?.let { fos ->
                 val fis = FileInputStream(oldFile)
                 fis.copyTo(fos)
@@ -636,7 +641,100 @@ object FileUtils {
     }
     //endregion
 
-    //region String  读写
+
+    //region Bitmap 操作
+    /**
+     *  Android  10 以下的 图片存储
+     * @param bm Bitmap
+     * @param filePath String
+     * @throws IOException
+     */
+    @Throws(IOException::class)
+    fun saveBitmap(bm: Bitmap?, filePath: String = getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
+        if (bm == null) {
+            LogUtils.d(" saveBitmap   is  null  ")
+            return
+        }
+        val myCaptureFile = File(filePath)
+        if (!myCaptureFile.parentFile.exists()) {
+            myCaptureFile.createNewFile()
+        } else if (myCaptureFile.exists())  {
+            myCaptureFile.delete()
+            myCaptureFile.createNewFile()
+        }
+        val bos = BufferedOutputStream(FileOutputStream(filePath).apply {
+            saveBitmap(this, bm)
+        })
+        bos.flush()
+        bos.close()
+    }
+
+    /**
+     * 保存图片
+     * @param os OutputStream
+     * @param bitmap Bitmap
+     */
+    @JvmStatic
+    fun saveBitmap(os: OutputStream, bitmap: Bitmap) {
+        try {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            os.close()
+        }
+    }
+    //endregion
+
+    //TODO  整理 文件复制  与其他操作
+
+    /**
+     * 获取文件类型
+     * @param path String?
+     * @return String
+     */
+    @JvmStatic
+    fun getMimeType(path: String?): String {
+        var mime = "*/*"
+        path ?: return mime
+        val mmr = MediaMetadataRetriever()
+        try {
+            mmr.setDataSource(path)
+            mime = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE) ?: mime
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            mmr.release()
+        }
+        return mime
+    }
+
+    /**
+     * 公有目录文件复制到私有目录  需要测试
+     * @param fileUri 公有目录文件的uri
+     * @param privatePath 私有目录的路径
+     */
+    @JvmStatic
+    fun copyToPrivateDir(context: Context, fileUri: Uri, privatePath: String) {
+        try {
+            val fis = FileInputStream(context.contentResolver.openFileDescriptor(fileUri, "r")?.fileDescriptor)
+            fis.copyTo(FileOutputStream(privatePath))
+            fis.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     *  10 以上
+     * @return Boolean
+     */
+    fun isQ(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+    }
+
+
+    //region   读写 String
     /**
      *   创建文件
      * @param s String
@@ -690,88 +788,5 @@ object FileUtils {
     }
     //endregion
 
-    //region Bitmap 操作
-    /**
-     *  Android  10 以下的 图片存储
-     * @param bm Bitmap
-     * @param filePath String
-     * @throws IOException
-     */
-    @Throws(IOException::class)
-    fun saveBitmap(bm: Bitmap?, filePath: String = getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
-        if (bm == null) {
-            LogUtils.d(" saveBitmap   is  null  ")
-            return
-        }
-        val myCaptureFile = File(filePath)
-        if (!myCaptureFile.exists()) {
-            myCaptureFile.createNewFile()
-        } else {
-            myCaptureFile.delete()
-            myCaptureFile.createNewFile()
-        }
-        val bos = BufferedOutputStream(FileOutputStream(filePath).apply {
-            saveBitmap(this, bm)
-        })
-        bos.flush()
-        bos.close()
-    }
-
-    /**
-     * 保存图片
-     * @param os OutputStream
-     * @param bitmap Bitmap
-     */
-    @JvmStatic
-    fun saveBitmap(os: OutputStream, bitmap: Bitmap) {
-        try {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            os.close()
-        }
-    }
-    //endregion
-
-    /**
-     * 获取文件类型
-     * @param path String?
-     * @return String
-     */
-    @JvmStatic
-    fun getMimeType(path: String?): String {
-        var mime = "*/*"
-        path ?: return mime
-        val mmr = MediaMetadataRetriever()
-        try {
-            mmr.setDataSource(path)
-            mime = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE) ?: mime
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            mmr.release()
-        }
-        return mime
-    }
-
-    /**
-     * 公有目录文件复制到私有目录  需要测试
-     * @param fileUri 公有目录文件的uri
-     * @param privatePath 私有目录的路径
-     */
-    @JvmStatic
-    fun copyToPrivateDir(context: Context, fileUri: Uri, privatePath: String) {
-        try {
-            val fis = FileInputStream(context.contentResolver.openFileDescriptor(fileUri, "r")?.fileDescriptor)
-            fis.copyTo(FileOutputStream(privatePath))
-            fis.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-
-    //TODO  整理 文件复制  与其他操作
 
 }

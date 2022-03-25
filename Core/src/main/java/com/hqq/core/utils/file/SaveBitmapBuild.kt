@@ -9,11 +9,12 @@ import android.os.Environment
 import android.provider.MediaStore
 import com.hqq.core.CoreConfig
 import com.hqq.core.kt.getFileName
-import com.hqq.core.permission.PermissionsResult
-import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.utils.ToastUtils
+import com.hqq.core.utils.file.FileUtils.copyFile2CustomPath
+import com.hqq.core.utils.file.FileUtils.isQ
 import com.hqq.core.utils.log.LogUtils
 import java.io.File
+
 
 /**
  * @Author : huangqiqiang
@@ -29,6 +30,15 @@ import java.io.File
  * @property context Context?
  * @property fileName String
  * @constructor
+ *    梳理适配流程
+ *     1. 需要保存并通知相册的图片
+ *          ->   Q以上直接保存至相册
+ *          ->   Q一下在区分保存
+ *     2.
+ *
+ *
+ *     总结
+ *          Q以上直接保存至相册目录需要   @Environment.DIRECTORY_PICTURES //   Environment.DIRECTORY_DCIM
  */
 class SaveBitmapBuild(var bitmap: Bitmap?) {
     /**
@@ -91,8 +101,14 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
                     //  9以上 需要用uri 进行存储
                     path = FileUtils.getExternalPicturesPath() + File.separator + fileName
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        //需要 DCIM/xxx/ xxx.jpg
+                        path = Environment.DIRECTORY_PICTURES + File.separator + fileName
                     } else {
                         //  直接访问 pictures 文件目录
+                    }
+                } else {
+                    if (!path.startsWith(Environment.DIRECTORY_PICTURES) || !path.startsWith(Environment.DIRECTORY_DCIM)) {
+                        path = Environment.DIRECTORY_PICTURES + File.separator + fileName
                     }
                 }
             }
@@ -101,16 +117,19 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
         return path
     }
 
-
     /**
      *   保存图片到App cache  也就是内部私有
      */
     fun save2AppCache(): String {
-        var path = getFilePath(0)
-        FileUtils.saveBitmap(bitmap, path)
-        send2Album(path)
-        ToastUtils.showToast("保存成功")
-        return path
+        val path = getFilePath(0)
+        if (isSave2Album && isQ()) {
+            // 直接保存到相册  没必要在保存到私有目录下 多生成一张
+            return save2Pictures()
+        } else {
+            FileUtils.saveBitmap(bitmap, path)
+            send2Album(path)
+            return path
+        }
     }
 
     /**
@@ -119,11 +138,17 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
      *  原有的目录会有一张  相册 Pictures 也会出现一样  互不影响
      */
     fun save2ExternalPrivate(): String {
-        var path = getFilePath(1)
-        FileUtils.saveBitmap(bitmap, path)
-        send2Album(path)
-        ToastUtils.showToast("保存成功")
-        return path
+
+        if (isSave2Album && isQ()) {
+            // 直接保存到相册  没必要在保存到私有目录下 多生成一张
+            return save2Pictures()
+        } else {
+            var path = getFilePath(1)
+            FileUtils.saveBitmap(bitmap, path)
+            send2Album(path)
+            ToastUtils.showToast("保存成功")
+            return path
+        }
     }
 
     /**
@@ -131,7 +156,7 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
      *  android:requestLegacyExternalStorage="true"  才能访问 外部存储空间
      *  否则都是在Pictures目录下
      */
-    fun save2Pictures() {
+    fun save2Pictures(): String {
         if (bitmap != null && context != null) {
             val path = getFilePath(2)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -139,17 +164,15 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
                 ToastUtils.showToast("保存成功")
             } else {
                 //Android 10  一下 需要文件读写权限
-                PermissionsUtils.requestStorage(object : PermissionsResult {
-                    override fun onPermissionsResult(status: Boolean) {
-                        FileUtils.saveBitmap(bitmap, path)
-                        send2Album(filePath)
-                        ToastUtils.showToast("保存成功")
-                    }
-                })
+                FileUtils.saveBitmap(bitmap, path)
+                send2Album(filePath)
+                ToastUtils.showToast("保存成功")
             }
+            return path
         }
-
+        return ""
     }
+
 
     /**
      * 将图片 通知至相册刷新
@@ -158,8 +181,16 @@ class SaveBitmapBuild(var bitmap: Bitmap?) {
     private fun send2Album(path: String) {
         if (isSave2Album) {
             // 发送广播 通知相册
-            MediaStore.Images.Media.insertImage(context!!.contentResolver, path, File(path).name, null)
-            context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(path))))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // 将图片复制到相册中
+                copyFile2CustomPath(CoreConfig.applicationContext, path, FileUtils.getExternalPicturesPath() + File.separator + path.getFileName())
+
+            } else {
+                MediaStore.Images.Media.insertImage(context!!.contentResolver, path, File(path).name, null)
+                context!!.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(path).parentFile)))
+
+            }
+
         }
     }
 }
