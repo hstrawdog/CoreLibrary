@@ -1,15 +1,14 @@
 package com.hqq.core.utils.file
 
 import android.app.ActivityManager
-import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
@@ -145,7 +144,6 @@ object FileUtils {
         return context.externalCacheDir!!.path
     }
 
-
     /**
      * @param context
      * @param fileName DIRECTORY_MUSIC
@@ -184,7 +182,6 @@ object FileUtils {
     fun getExternalDownloadsPath(): String {
         return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path
     }
-
 
     /**
      *  获取根目录地址
@@ -409,7 +406,6 @@ object FileUtils {
     private fun createBitmapValues(
         data: String, _display_name: String, mime_type: String, relative_path: String,
         date_added: String, date_modified: String, date_taken: String, size: Int, width: Int, height: Int
-
     ): ContentValues {
         var values = ContentValues().apply {
             if (!isQ()) {
@@ -533,7 +529,7 @@ object FileUtils {
             values.put(MediaStore.Images.Media.DESCRIPTION, "This is a file.")
             values.put(MediaStore.Files.FileColumns.DISPLAY_NAME, oldFile.name)
             values.put(MediaStore.Files.FileColumns.TITLE, oldFile.name)
-            values.put(MediaStore.Files.FileColumns.MIME_TYPE, getMimeType(oldPath))
+            values.put(MediaStore.Files.FileColumns.MIME_TYPE, oldPath.getMimeType())
             val relativePath = Environment.DIRECTORY_DOWNLOADS + File.separator + targetDirName
             values.put(MediaStore.Images.Media.RELATIVE_PATH, relativePath)
             val downloadUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
@@ -562,7 +558,6 @@ object FileUtils {
      * @param bitmap Bitmap
      * @param filePath String
      */
-    @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
     fun saveBitmap2Public(context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String) {
         if (!File(filePath).parentFile.exists()) {
@@ -583,6 +578,137 @@ object FileUtils {
         }
 
 
+    }
+
+    /**
+     *
+     * @param relativePath String
+     * @param fileName String
+     * @param bitmap Bitmap
+     */
+    fun saveBitmap2Pictures(relativePath: String, fileName: String, bitmap: Bitmap): Uri? {
+        getContentResolverUri(relativePath, fileName)?.let { pair ->
+            pair.first?.let { uri ->
+                CoreConfig.applicationContext.contentResolver.openOutputStream(uri)?.let { outputStream ->
+                    saveBitmap(outputStream, bitmap)
+                    // 更新图片大小
+                    if (!isQ()) {
+                        pair.second?.let { filePath ->
+                            val imageValues = ContentValues()
+                            imageValues.put(MediaStore.Images.Media.SIZE, File(filePath).length())
+                            CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
+                            // 通知媒体库更新
+                            val intent = Intent(@Suppress("DEPRECATION") Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri)
+                            CoreConfig.applicationContext.sendBroadcast(intent)
+                        }
+                    } else {
+                        val imageValues = ContentValues()
+                        // Android Q添加了IS_PENDING状态，为0时其他应用才可见
+                        imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
+                        CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
+                    }
+                }
+                return uri
+            }
+        }
+        return null
+    }
+
+    /**
+     *
+     * @param relativePath String
+     * @param fileName String
+     * @return Uri?
+     */
+    fun getContentResolverUri(relativePath: String, fileName: String): Pair<Uri?, String>? {
+        val ALBUM_DIR = Environment.DIRECTORY_PICTURES
+        // 图片信息
+        val imageValues = ContentValues().apply {
+            val mimeType = fileName.getMimeType()
+            if (mimeType != null) {
+                put(MediaStore.Images.Media.MIME_TYPE, mimeType)
+            }
+            val date = System.currentTimeMillis() / 1000
+            put(MediaStore.Images.Media.DATE_ADDED, date)
+            put(MediaStore.Images.Media.DATE_MODIFIED, date)
+        }
+
+        // 保存的位置
+        val collection: Uri
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val path = if (relativePath != null) "${ALBUM_DIR}/${relativePath}" else ALBUM_DIR
+            imageValues.apply {
+                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+                put(MediaStore.Images.Media.RELATIVE_PATH, path)
+                put(MediaStore.Images.Media.IS_PENDING, 1)
+            }
+            collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            // 高版本不用查重直接插入，会自动重命名
+            return Pair(CoreConfig.applicationContext.contentResolver.insert(collection, imageValues), "")
+        } else {
+            // 老版本
+            val pictures =
+                @Suppress("DEPRECATION") Environment.getExternalStoragePublicDirectory(ALBUM_DIR)
+            val saveDir = if (relativePath != null) File(pictures, relativePath) else pictures
+            if (!saveDir.exists() && !saveDir.mkdirs()) {
+                return null
+            }
+            // 文件路径查重，重复的话在文件名后拼接数字
+            var imageFile = File(saveDir, fileName)
+            val fileNameWithoutExtension = imageFile.nameWithoutExtension
+            val fileExtension = imageFile.extension
+            var queryUri = queryMediaImage28(imageFile.absolutePath)
+            var suffix = 1
+            while (queryUri != null) {
+                val newName = fileNameWithoutExtension + "(${suffix++})." + fileExtension
+                imageFile = File(saveDir, newName)
+                queryUri = queryMediaImage28(imageFile.absolutePath)
+            }
+
+            imageValues.apply {
+                put(MediaStore.Images.Media.DISPLAY_NAME, imageFile.name)
+                // 保存路径
+                val imagePath = imageFile.absolutePath
+                put(@Suppress("DEPRECATION") MediaStore.Images.Media.DATA, imagePath)
+            }
+            collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            // 插入图片信息
+            return Pair(CoreConfig.applicationContext.contentResolver.insert(collection, imageValues), imageFile.path)
+        }
+
+    }
+
+    /**
+     * Android Q以下版本，查询媒体库中当前路径是否存在
+     * @return Uri 返回null时说明不存在，可以进行图片插入逻辑
+     */
+    private fun queryMediaImage28(imagePath: String): Uri? {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return null
+
+        val imageFile = File(imagePath)
+        if (imageFile.canRead() && imageFile.exists()) {
+            // 文件已存在，返回一个file://xxx的uri
+            return Uri.fromFile(imageFile)
+        }
+        // 保存的位置
+        val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+
+        // 查询是否已经存在相同图片
+        val query = CoreConfig.applicationContext.contentResolver.query(
+            collection,
+            arrayOf(MediaStore.Images.Media._ID, @Suppress("DEPRECATION") MediaStore.Images.Media.DATA),
+            "${@Suppress("DEPRECATION") MediaStore.Images.Media.DATA} == ?",
+            arrayOf(imagePath), null
+        )
+        query?.use {
+            while (it.moveToNext()) {
+                val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
+                val id = it.getLong(idColumn)
+                val existsUri = ContentUris.withAppendedId(collection, id)
+                return existsUri
+            }
+        }
+        return null
     }
 
     /**
@@ -655,13 +781,11 @@ object FileUtils {
             LogUtils.d(" saveBitmap   is  null  ")
             return
         }
-        val myCaptureFile = File(filePath)
-        if (!myCaptureFile.parentFile.exists()) {
-            myCaptureFile.createNewFile()
-        } else if (myCaptureFile.exists())  {
-            myCaptureFile.delete()
-            myCaptureFile.createNewFile()
+        val myCaptureFile = File(filePath).parentFile
+        if (!myCaptureFile.exists()) {
+            myCaptureFile.mkdirs()
         }
+
         val bos = BufferedOutputStream(FileOutputStream(filePath).apply {
             saveBitmap(this, bm)
         })
@@ -686,53 +810,8 @@ object FileUtils {
     }
     //endregion
 
+
     //TODO  整理 文件复制  与其他操作
-
-    /**
-     * 获取文件类型
-     * @param path String?
-     * @return String
-     */
-    @JvmStatic
-    fun getMimeType(path: String?): String {
-        var mime = "*/*"
-        path ?: return mime
-        val mmr = MediaMetadataRetriever()
-        try {
-            mmr.setDataSource(path)
-            mime = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE) ?: mime
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            mmr.release()
-        }
-        return mime
-    }
-
-    /**
-     * 公有目录文件复制到私有目录  需要测试
-     * @param fileUri 公有目录文件的uri
-     * @param privatePath 私有目录的路径
-     */
-    @JvmStatic
-    fun copyToPrivateDir(context: Context, fileUri: Uri, privatePath: String) {
-        try {
-            val fis = FileInputStream(context.contentResolver.openFileDescriptor(fileUri, "r")?.fileDescriptor)
-            fis.copyTo(FileOutputStream(privatePath))
-            fis.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    /**
-     *  10 以上
-     * @return Boolean
-     */
-    fun isQ(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
-    }
-
 
     //region   读写 String
     /**
@@ -788,5 +867,45 @@ object FileUtils {
     }
     //endregion
 
+    /**
+     * 公有目录文件复制到私有目录  需要测试
+     * @param fileUri 公有目录文件的uri
+     * @param privatePath 私有目录的路径
+     */
+    @JvmStatic
+    fun copyToPrivateDir(context: Context, fileUri: Uri, privatePath: String) {
+        try {
+            val fis = FileInputStream(context.contentResolver.openFileDescriptor(fileUri, "r")?.fileDescriptor)
+            fis.copyTo(FileOutputStream(privatePath))
+            fis.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     *  10 以上
+     * @return Boolean
+     */
+    fun isQ(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+    }
+
+
+    /**
+     * 获取文件图片 对应的媒体类型
+     * @param path String?
+     * @return String
+     */
+    private fun String.getMimeType(): String? {
+        val fileName = this.toLowerCase()
+        return when {
+            fileName.endsWith(".png") -> "image/png"
+            fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") -> "image/jpeg"
+            fileName.endsWith(".webp") -> "image/webp"
+            fileName.endsWith(".gif") -> "image/gif"
+            else -> null
+        }
+    }
 
 }

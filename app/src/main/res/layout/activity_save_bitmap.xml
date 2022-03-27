@@ -21,36 +21,7 @@
             android:gravity="center"
             android:text="保存到View到App Cache" />
 
-    <TextView
-            android:id="@+id/textView34"
-            style="@style/def_text.28.333"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x80"
-            android:layout_marginTop="@dimen/x20"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="保存到View到App Cache  并发送至相册  \n
-与直接保存至相册是同样的效果" />
 
-    <TextView
-            android:id="@+id/textView30"
-            style="@style/def_text.28.333"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x80"
-            android:layout_marginTop="@dimen/x20"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="保存到外部私有目录下 发送至相册  \n
-与直接保存至相册是同样的效果" />
-    <TextView
-            android:id="@+id/textView35"
-            style="@style/def_text.28.333"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x80"
-            android:layout_marginTop="@dimen/x20"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="保存到外部私有目录下 " />
     <TextView
             android:id="@+id/textView29"
             style="@style/def_text.28.333"
@@ -61,18 +32,6 @@
             android:gravity="center"
             android:text="保存到Picture" />
 
-
-    <TextView
-            android:id="@+id/textView31"
-            style="@style/def_text.28.333"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x80"
-            android:layout_marginTop="@dimen/x20"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="保存外部指定目录下 \n
-android:requestLegacyExternalStorage=true " />
-
     <TextView
             android:id="@+id/textView32"
             style="@style/def_text.28.333"
@@ -82,6 +41,22 @@ android:requestLegacyExternalStorage=true " />
             android:background="@color/white"
             android:gravity="center"
             android:text="保存到Picture 的子目录下" />
+
+
+    <TextView
+            android:id="@+id/textView34"
+            style="@style/def_text.28.333"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="保存到外部指定目录" />
+
+
+
+
+
 
     <TextView
             android:id="@+id/textView33"
