@@ -1,4 +1,4 @@
-package com.hqq.example.ui.exception
+package com.hqq.example.ui.crash
 
 import android.view.View
 import com.hqq.core.ui.base.BaseActivity

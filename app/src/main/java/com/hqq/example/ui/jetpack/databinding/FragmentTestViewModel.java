@@ -1,4 +1,4 @@
-package com.hqq.example.demo;
+package com.hqq.example.ui.jetpack.databinding;
 
 import com.hqq.core.ui.base.BaseViewModel;
 

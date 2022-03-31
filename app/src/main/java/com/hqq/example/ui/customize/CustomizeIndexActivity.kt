@@ -31,6 +31,8 @@ class CustomizeIndexActivity(override val adapter: MainAdapter=MainAdapter()) : 
         adapter.addData(MainBean("vie滑动以及回弹", SwipeMenuLayoutActivity::class.java))
         adapter.addData(MainBean("矩阵的简单使用", BaseMatrixActivity::class.java))
         adapter.addData(MainBean("矩阵的手势", MatrixEventActivity::class.java))
+        adapter.addData(MainBean("对比效果", ComparedActivity::class.java))
+        adapter.addData(MainBean("自定义圆形进度条", SemicircularActivity::class.java))
 
     }
 

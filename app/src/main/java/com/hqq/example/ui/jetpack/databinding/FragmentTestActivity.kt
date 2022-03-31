@@ -1,10 +1,11 @@
-package com.hqq.example.demo
+package com.hqq.example.ui.jetpack.databinding
 
 import androidx.fragment.app.Fragment
 import com.hqq.core.ui.base.BaseVmActivity
 import com.hqq.core.utils.FragmentUtils
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityFragmentTestBinding
+import com.hqq.example.demo.TestFragment
 
 /**
  * @Author : huangqiqiang
