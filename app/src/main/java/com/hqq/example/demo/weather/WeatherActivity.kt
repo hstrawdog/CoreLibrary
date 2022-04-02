@@ -2,7 +2,6 @@ package com.hqq.example.demo.weather
 
 import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.lifecycleScope
 import com.hqq.core.ui.base.BaseVmActivity
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.BR

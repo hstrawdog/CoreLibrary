@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Rect
 import android.view.View
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 import com.hqq.example.ui.customize.widget.GuideView
@@ -29,7 +30,7 @@ class CurtainActivity : BaseActivity() {
             findViewById<View>(R.id.imageView8).getDrawingRect(rect)
             val viewLocation = IntArray(2)
             findViewById<View>(R.id.imageView8).getLocationOnScreen(viewLocation)
-            e("")
+            dInfo("")
             guideView.setTargetView(findViewById(R.id.imageView8))
             guideView.visibility = View.VISIBLE
         }

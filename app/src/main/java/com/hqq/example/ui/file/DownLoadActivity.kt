@@ -35,15 +35,15 @@ class DownLoadActivity : BaseActivity() {
 //        }, FileUtils.getCacheDir(this@DownLoadActivity) + "/a.apk",
 //                object : DownloadCallback {
 //                    override fun onDownloaded() {
-//                        LogUtils.e("onDownloaded")
+//                        LogUtils.dInfo("onDownloaded")
 //                    }
 //
 //                    override fun onProgress(percent: Float) {
-//                        LogUtils.e("onProgress " + percent)
+//                        LogUtils.dInfo("onProgress " + percent)
 //                    }
 //
 //                    override fun onFailure(code: Int, errMsg: String?) {
-//                        LogUtils.e("onFailure")
+//                        LogUtils.dInfo("onFailure")
 //                    }
 //
 //                })

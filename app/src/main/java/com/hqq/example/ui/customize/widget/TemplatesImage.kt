@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 import com.hqq.example.ui.customize.widget.imageedit.DrawableSticker
@@ -53,7 +54,7 @@ class TemplatesImage : View {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         mFrame = width / 8.toFloat()
-        e("onLayout", "" + width)
+        dInfo("onLayout" + width)
     }
 
     var mDrawableSticker: DrawableSticker? = null
@@ -66,7 +67,7 @@ class TemplatesImage : View {
         val dst = FloatArray(8)
         mDrawableSticker!!.matrix
                 .mapPoints(dst, bitmapSize)
-        e(Arrays.toString(dst))
+        dInfo(Arrays.toString(dst))
         val x1 = dst[0]
         val y1 = dst[1]
         val x2 = dst[2]
@@ -96,8 +97,8 @@ class TemplatesImage : View {
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                e("getRight", right)
-                e("ACTION_DOWN -----------" + event.x)
+                dInfo("getRight"+ right)
+                dInfo("ACTION_DOWN -----------" + event.x)
                 mKeyX = event.x
                 mKeyY = event.y
                 if (mDrawableSticker!!.contains(mKeyX, mKeyY)) {
@@ -107,16 +108,16 @@ class TemplatesImage : View {
                 }
             }
             MotionEvent.ACTION_MOVE -> {
-                e("ACTION_MOVE -----------" + event.x)
+                dInfo("ACTION_MOVE -----------" + event.x)
                 distanceX = event.x - mKeyX
                 distanceY = event.y - mKeyY
                 //                mKeyX = event.getX();
 //                mKeyY = event.getY();
                 val xx = (width - mFrame * 2) / width
                 val yy = (height - mFrame * 2) / height
-                e("ACTION_MOVE --------distanceX---$distanceX")
-                e("ACTION_MOVE --------distanceY---$distanceY")
-                e("-------------------     $xx            $yy")
+                dInfo("ACTION_MOVE --------distanceX---$distanceX")
+                dInfo("ACTION_MOVE --------distanceY---$distanceY")
+                dInfo("-------------------     $xx            $yy")
                 if (isTounch) {
                     mDrawableSticker!!.matrix
                             .set(mCurrentMatrix)
@@ -127,14 +128,14 @@ class TemplatesImage : View {
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 isTounch = false
-                e("---------------------------------------------------------------------------------------------------------------------")
-                e("distanceX", distanceX)
+                dInfo("---------------------------------------------------------------------------------------------------------------------")
+                e("distanceX"+ distanceX)
                 e("getRawX -----------" + event.rawX)
-                e("getX", x)
-                e("getLeft", left)
-                e("getRight", right)
-                e("getTranslationX", translationX)
-                e("getScrollX", scrollX)
+                e("getX"+ x)
+                e("getLeft"+ left)
+                e("getRight"+ right)
+                e("getTranslationX"+ translationX)
+                e("getScrollX"+ scrollX)
             }
             else -> {
             }

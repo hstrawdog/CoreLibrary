@@ -33,7 +33,7 @@ class ExportBookSourceActivity : BaseViewBindingActivity<ActivityExportBookSourc
             .disableHtmlEscaping()
             .create()
         val json = gs.toJson(sources)
-        LogUtils.e(json)
+        LogUtils.dInfo(json)
         binding.tvContent.text = json
 
         /**

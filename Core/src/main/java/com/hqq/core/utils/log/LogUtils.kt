@@ -3,6 +3,7 @@ package com.hqq.core.utils.log
 import android.util.Log
 import com.hqq.core.BuildConfig
 import com.hqq.core.CoreConfig
+import java.util.*
 
 /**
  * @Author : huangqiqiang
@@ -20,6 +21,7 @@ object LogUtils {
      * Log 输出标签
      */
     var TAG = BuildConfig.LIBRARY_PACKAGE_NAME
+
 
     @kotlin.jvm.JvmStatic
     fun i(any: Any?) {
@@ -81,7 +83,6 @@ object LogUtils {
         }
     }
 
-
     /**
      * ERROR 类型日志
      *
@@ -95,10 +96,9 @@ object LogUtils {
     @kotlin.jvm.JvmStatic
     fun e4Debug(any: Any?) {
         if (CoreConfig.get().isDebug) {
-            e("$TAG debug_log", any)
+            e("$TAG", any)
         }
     }
-
     /**
      * E 类型错误日志
      */
@@ -121,6 +121,42 @@ object LogUtils {
                 doLog(tag, any, "e")
             }
 
+        }
+    }
+
+
+    /**
+     * E 类型日志
+     */
+    @kotlin.jvm.JvmStatic
+    fun dInfo(any: Any?) {
+        var tag = "Info"
+        if (CoreConfig.get().isDebug) {
+            doLog(tag, "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────", "w")
+            val stackTrace = Throwable().stackTrace
+            if (stackTrace.size > 1) {
+                for (index in 1..(if (stackTrace.size > 5) 5 else stackTrace.size)) {
+                    val targetElement = stackTrace[index]
+                    val head =
+                        "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
+                            getFileName(
+                                targetElement
+                            )
+                        }:${targetElement.getLineNumber()})            "
+                    doLog(tag, "|      $head     ", "w")
+                }
+
+            }
+            doLog(tag, "├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄", "w")
+
+            if (any == null) {
+                e("标签 : 内容为空！")
+            } else {
+                doLog(tag, any, "w")
+            }
+            doLog(tag, "├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄", "w")
+            doLog(tag, "end", "w")
+            doLog(tag, "└────────────────────────────────────────────────────────────────────────────────────────────────────────────────", "w")
         }
     }
 
@@ -185,5 +221,26 @@ object LogUtils {
 
     }
 
+    /**
+     *  获取类名
+     * @param targetElement StackTraceElement
+     * @return String
+     */
+    private fun getFileName(targetElement: StackTraceElement): String {
+        val fileName = targetElement.fileName
+        if (fileName != null) return fileName
+        // If name of file is null, should add
+        // "-keepattributes SourceFile,LineNumberTable" in proguard file.
+        var className = targetElement.className
+        val classNameInfo = className.split("\\.".toRegex()).toTypedArray()
+        if (classNameInfo.size > 0) {
+            className = classNameInfo[classNameInfo.size - 1]
+        }
+        val index = className.indexOf('$')
+        if (index != -1) {
+            className = className.substring(0, index)
+        }
+        return "$className.java"
+    }
 
 }

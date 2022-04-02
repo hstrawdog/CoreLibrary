@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.ColorUtils
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 import java.util.*
@@ -30,7 +31,7 @@ class HSLActivity : BaseActivity() {
         val outHsl = floatArrayOf(0f, 0f, 0f)
         ColorUtils.colorToHSL(Color.parseColor("#ef2b2c"), outHsl)
         (findViewById<View>(R.id.imageView5) as ImageView).setBackgroundColor(Color.parseColor("#ef2b2c"))
-        e("" + outHsl.toString())
+        dInfo("" + outHsl.toString())
         val newHsl = floatArrayOf(15f, outHsl[1] * 1.16f, outHsl[2] * 0.93f)
         (findViewById<View>(R.id.imageView6) as ImageView).setBackgroundColor(computeHSL("#ef2b2c", 15f, 1.16f, 0.93f))
         (findViewById<View>(R.id.imageView7) as ImageView).setBackgroundColor(Color.parseColor("#ff4306"))

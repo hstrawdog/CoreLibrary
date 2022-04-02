@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.viewModelScope
+import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -25,6 +26,7 @@ import com.hqq.example.ui.crash.ThrowIndexActivity
 import com.hqq.example.ui.file.FileIndexActivity
 import com.hqq.example.ui.file.SaveBitmapActivity
 import com.hqq.example.ui.fold.FoldViewActivity
+import com.hqq.example.ui.fragment.ViewPager2FragmentLiveActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
@@ -51,13 +53,13 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
         get() = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        LogUtils.e("MainActivity    onCreate1")
+        LogUtils.dInfo("MainActivity    onCreate1")
         super.onCreate(savedInstanceState)
-        LogUtils.e("MainActivity    onCreate2")
+        LogUtils.dInfo("MainActivity    onCreate2")
     }
 
     override fun initData() {
-        LogUtils.e("MainActivity    initData")
+        LogUtils.dInfo("MainActivity    initData")
 //        loadingView.show()
 //        Handler().postDelayed(3 * 1000) {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
@@ -66,10 +68,12 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        RoomActivity.open(this)
 //        SoftHideKeyboardScrollView.getNavigationBarHeight(this)
 //        SoftHideKeyboardScrollView.checkDeviceHasNavigationBar(this)
-        startActivity(Intent(this, SaveBitmapActivity::class.java))
+//        startActivity(Intent(this, SaveBitmapActivity::class.java))
 //        startActivity(Intent(this, DownLoadActivity::class.java))
 //        open(FilePathActivity::class.java)
 //        open(DataBindingActivity::class.java)
+//
+//        open(ViewPager2FragmentLiveActivity::class.java)
 //        open(WeatherActivity::class.java,Bundle().apply {
 //            putParcelable("A", ParcelableBean())
 //        })
@@ -112,22 +116,22 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     class MainViewModel constructor() : BaseListViewModel() {
         init {
-            LogUtils.e("MainModel init 1  ")
+            LogUtils.dInfo("MainModel init 1  ")
             viewModelScope.launch {
-                LogUtils.e("MainModel init viewModelScope")
+                LogUtils.dInfo("MainModel init viewModelScope")
             }
-            LogUtils.e("MainModel init 2")
+            LogUtils.dInfo("MainModel init 2")
         }
 
         override fun initData(extras: Bundle?) {
             super.initData(extras)
-            LogUtils.e("MainModel initData 1")
+            LogUtils.dInfo("MainModel initData 1")
         }
 
         override fun onCrete() {
-            LogUtils.e("MainModel onCrete 1")
+            LogUtils.dInfo("MainModel onCrete 1")
             super.onCrete()
-            LogUtils.e("MainModel onCrete 2")
+            LogUtils.dInfo("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
             arrayList.add(MainBean("文件相关", FileIndexActivity::class.java))
             arrayList.add(MainBean("异常相关测试", ThrowIndexActivity::class.java))

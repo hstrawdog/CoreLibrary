@@ -2,6 +2,7 @@ package com.hqq.example.ui.crash
 
 import android.view.View
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 
@@ -24,8 +25,8 @@ class ThrowActivity : BaseActivity() {
 
     fun onViewClicked(view: View) {
         when (view.id) {
-            R.id.button11 -> e(Exception("一个异常 "))
-            R.id.button12 -> e(RuntimeException("一个运行异常 "))
+            R.id.button11 -> dInfo(Exception("一个异常 "))
+            R.id.button12 -> dInfo(RuntimeException("一个运行异常 "))
             else -> {
             }
         }

@@ -45,7 +45,7 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
                 }
             }
         }
-        LogUtils.e(item.isNeedRefresh)
+        LogUtils.dInfo(item.isNeedRefresh)
         if (item.topTime.isNullOrEmpty()) {
             holder.setText(R.id.tv_top, "置顶")
         } else {

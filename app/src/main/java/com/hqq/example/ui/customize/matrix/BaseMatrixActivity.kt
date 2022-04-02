@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 
@@ -81,7 +82,7 @@ class BaseMatrixActivity : BaseActivity() {
             val matrix = Matrix()
             val rect = Rect()
             mButton47.getGlobalVisibleRect(rect)
-            e(rect.toString())
+            dInfo(rect.toString())
             val dst = FloatArray(8)
             val src = FloatArray(8)
             val bw = mButton47!!.getWidth()
@@ -122,7 +123,7 @@ class BaseMatrixActivity : BaseActivity() {
             mButton47!!.setAnimationMatrix(matrix)
             val pts = FloatArray(8)
             mButton47!!.getMatrix().mapPoints(pts)
-            e(pts.toString())
+            dInfo(pts.toString())
         })
     }
 }

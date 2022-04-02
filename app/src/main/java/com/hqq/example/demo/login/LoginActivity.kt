@@ -30,11 +30,11 @@ class LoginActivity : BaseVmActivity<LoginViewModel, ActivityLoginBinding>() {
 
         SoftKeyboardListener.setListener(this, object : SoftKeyboardListener.SoftKeyBoardChangeListener {
             override fun onKeyBoardShow(height: Int) {
-                LogUtils.e("onKeyBoardShow  显示 " + height)
+                LogUtils.dInfo("onKeyBoardShow  显示 " + height)
             }
 
             override fun onKeyBoardHide(height: Int) {
-                LogUtils.e("onKeyBoardHide  隐藏" + height)
+                LogUtils.dInfo("onKeyBoardHide  隐藏" + height)
             }
 
         })

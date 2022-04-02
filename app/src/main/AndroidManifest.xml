@@ -59,6 +59,10 @@
             </intent-filter>
         </activity-alias>
 
+
+        <activity
+                android:name=".ui.fragment.ViewPager2FragmentLiveActivity"
+                android:label="Fragment 生命周期" />
         <activity
                 android:name=".ui.crash.ThrowIndexActivity"
                 android:label="异常相关" />

@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
+import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 
 /**
@@ -31,10 +32,10 @@ class SemicircularView : View {
         var widthSpecSize = MeasureSpec.getSize(widthMeasureSpec)
         val heightSpecMode = MeasureSpec.getMode(heightMeasureSpec)
         var heightSpecSize = MeasureSpec.getSize(heightMeasureSpec)
-        e("widthSpecMode      $widthSpecMode")
-        e("widthSpecSize      $widthSpecSize")
-        e("heightSpecMode     $heightSpecMode")
-        e("heightSpecSize     $heightSpecSize")
+        dInfo("widthSpecMode      $widthSpecMode")
+        dInfo("widthSpecSize      $widthSpecSize")
+        dInfo("heightSpecMode     $heightSpecMode")
+        dInfo("heightSpecSize     $heightSpecSize")
         if (widthSpecMode == MeasureSpec.EXACTLY || heightSpecMode == MeasureSpec.EXACTLY) {
             if (widthSpecSize < heightSpecSize) {
                 heightSpecSize = widthSpecSize

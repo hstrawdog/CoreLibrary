@@ -1,4 +1,5 @@
 package com.hqq.example
+
 import android.content.*
 import android.graphics.Bitmap
 import android.net.Uri
@@ -6,6 +7,8 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import com.hqq.core.utils.log.LogUtils
+import com.hqq.core.utils.log.LogUtils.dInfo
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -98,7 +101,7 @@ private fun Uri.outputStream(resolver: ContentResolver): OutputStream? {
     return try {
         resolver.openOutputStream(this)
     } catch (e: FileNotFoundException) {
-        Log.e(TAG, "save: open stream error: $e")
+        LogUtils.dInfo("save: open stream error: $e")
         null
     }
 }

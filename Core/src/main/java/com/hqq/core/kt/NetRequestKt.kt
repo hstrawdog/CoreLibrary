@@ -22,7 +22,7 @@ fun BaseViewModel.launch( block: suspend () -> Unit, error: suspend (Throwable) 
         try {
             block()
         } catch (e: Exception) {
-            LogUtils.e("launch: error ${e.printStackTrace()}" )
+            LogUtils.dInfo("launch: error ${e.printStackTrace()}" )
             error(e)
         }
     }
@@ -33,7 +33,7 @@ fun BaseActivity.launch(block: suspend () -> Unit, error: suspend (Throwable) ->
         try {
             block()
         } catch (e: Exception) {
-            LogUtils.e("launch: error ${e.printStackTrace()}" )
+            LogUtils.dInfo("launch: error ${e.printStackTrace()}" )
             error(e)
         }
     }
@@ -44,7 +44,7 @@ fun BaseFragment.launch(block: suspend () -> Unit, error: suspend (Throwable) ->
         try {
             block()
         } catch (e: Exception) {
-            LogUtils.e("launch: error ${e.printStackTrace()}" )
+            LogUtils.dInfo("launch: error ${e.printStackTrace()}" )
             error(e)
         }
     }

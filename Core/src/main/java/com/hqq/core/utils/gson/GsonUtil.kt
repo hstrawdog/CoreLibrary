@@ -67,7 +67,7 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, clazz)
         } catch (e: JsonSyntaxException) {
-            LogUtils.e("-- fromJson --:  ${e.toString()}")
+            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
     }
@@ -83,7 +83,7 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, type)
         } catch (e: JsonSyntaxException) {
-            LogUtils.e("-- fromJson --:  ${e.toString()}")
+            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
     }
@@ -99,7 +99,7 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, clazz)
         } catch (e: JsonSyntaxException) {
-            LogUtils.e("-- fromJson --:  ${e.toString()}")
+            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
     }
@@ -115,7 +115,7 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, type)
         } catch (e: JsonSyntaxException) {
-            LogUtils.e("-- fromJson --:  ${e.toString()}")
+            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
     }

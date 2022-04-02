@@ -15,15 +15,16 @@ import java.io.IOException;
 
 import static java.lang.Math.round;
 
+import com.hqq.core.utils.log.LogUtils;
+
 /**
  * @author wupanjie
  */
 class StickerUtils {
-  private static final String TAG = "StickerView";
 
   public static String saveImageToGallery(File file, Bitmap bmp) {
     if (bmp == null) {
-      Log.e(TAG, "saveImageToGallery: the bitmap is null");
+      LogUtils.dInfo( "saveImageToGallery: the bitmap is null");
       return "";
     }
     try {
@@ -35,14 +36,14 @@ class StickerUtils {
       e.printStackTrace();
     }
 
-    Log.e(TAG, "saveImageToGallery: the path of bmp is " + file.getAbsolutePath());
+    LogUtils.dInfo("saveImageToGallery: the path of bmp is " + file.getAbsolutePath());
     return file.getAbsolutePath();
   }
 
   // 把文件插入到系统图库
   public static void notifySystemGallery(Context context, File file) {
     if (file == null || !file.exists()) {
-      Log.e(TAG, "notifySystemGallery: the file do not exist.");
+      LogUtils.dInfo( "notifySystemGallery: the file do not exist.");
       return;
     }
 

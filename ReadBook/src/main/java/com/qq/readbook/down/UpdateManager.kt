@@ -63,7 +63,7 @@ object UpdateManager : UpdateInterfaces {
         }
         if (needLoadBookMap.size == 0) {
             // 全部执行完毕
-            LogUtils.e("全部执行完毕")
+            LogUtils.dInfo("全部执行完毕")
         } else {
             executeNextRequest()
         }
@@ -77,10 +77,10 @@ object UpdateManager : UpdateInterfaces {
      */
     override fun executeRequest(book: Book) {
         LoadBookMap.put(book.bookId, book)
-        LogUtils.e("执行请求 " + book.name)
+        LogUtils.dInfo("执行请求 " + book.name)
         CoroutineScope(Dispatchers.IO).launch {
             Thread.sleep(2 * 1000)
-            LogUtils.e("执行完成" + book.name)
+            LogUtils.dInfo("执行完成" + book.name)
             val bookSource = RoomUtils.getBookSourceDao().getSource4Name(book.sourceName)
             if (bookSource != null) {
                 BookDetailRepository.readBookDetail(book, bookSource, object : BookDetailRepository.ILatestChapter {

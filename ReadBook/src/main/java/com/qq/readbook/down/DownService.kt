@@ -71,7 +71,7 @@ class DownService : BaseService() {
                         sendSuccess(true, downChapter, chapter)
                     }
                 } else {
-                    LogUtils.e("Service 解除绑定  停止下载与缓存")
+                    LogUtils.dInfo("Service 解除绑定  停止下载与缓存")
                     break
                 }
             }

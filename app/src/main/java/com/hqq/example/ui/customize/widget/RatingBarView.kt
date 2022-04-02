@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.hqq.core.utils.ResourcesUtils.getColor
+import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
 
@@ -70,7 +71,7 @@ class RatingBarView @JvmOverloads constructor(context: Context, attrs: Attribute
         }
         if (mIsSlide) {
             current = (5 * index / length).toInt()
-            e(" index " + current + "------" + index)
+            dInfo(" index " + current + "------" + index)
             redraw()
         }
         return ev.action != MotionEvent.ACTION_UP || super.dispatchTouchEvent(ev)
