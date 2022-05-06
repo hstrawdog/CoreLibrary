@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
+import com.hqq.core.utils.log.LogUtils
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.ParameterizedType
 
@@ -27,10 +28,13 @@ abstract class BaseViewBindingActivity<T : ViewBinding> : BaseActivity() {
             binding = method.invoke(null, layoutInflater, parent, false) as T
         } catch (e: NoSuchMethodException) {
             e.printStackTrace()
+            LogUtils.dInfo(e)
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
+            LogUtils.dInfo(e)
         } catch (e: InvocationTargetException) {
             e.printStackTrace()
+            LogUtils.dInfo(e)
         }
         return binding?.root
     }

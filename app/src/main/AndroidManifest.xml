@@ -59,7 +59,11 @@
             </intent-filter>
         </activity-alias>
 
+        <activity android:name=".ui.GyroActivity" android:label="陀螺仪"/>
 
+        <activity
+                android:name=".ui.SpinnerActivity"
+                android:label="SpinnerActivity" />
         <activity
                 android:name=".ui.fragment.ViewPager2FragmentLiveActivity"
                 android:label="Fragment 生命周期" />

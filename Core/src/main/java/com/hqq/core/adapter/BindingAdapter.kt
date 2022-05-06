@@ -17,13 +17,14 @@ import com.hqq.core.utils.ResourcesUtils
  * @Describe :
  */
 object BindingAdapter {
-//    @JvmStatic
-//    @BindingAdapter("app:url")
-//    fun setImageViewSrc(imageView: ImageView, src: String?) {
-//        if (!src.isNullOrBlank()) {
-//            ImageLoadUtils.with(src, imageView)
-//        }
-//    }
+
+    @JvmStatic
+    @BindingAdapter("app:url")
+    fun setImageViewSrc(imageView: ImageView, src: String?) {
+        if (!src.isNullOrBlank()) {
+            ImageLoadUtils.with(src, imageView)
+        }
+    }
 
 
     @JvmStatic

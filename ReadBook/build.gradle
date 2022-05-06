@@ -8,9 +8,7 @@ apply plugin: 'kotlin-parcelize'
 android {
     buildFeatures {
         viewBinding = true
-    }
-    dataBinding {
-        enabled = true
+        dataBinding= true
     }
     compileSdkVersion BuildConfig.compileSdkVersion
     buildToolsVersion BuildConfig.buildToolsVersion

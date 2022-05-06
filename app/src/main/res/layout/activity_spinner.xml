@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+
+    <com.hqq.example.widget.BlurBackgroundView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <Spinner
+            android:visibility="gone"
+            style="@style/def_text.30"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginHorizontal="@dimen/x44"
+            android:layout_marginTop="@dimen/x15"
+            android:text="灯箱滤镜"
+            android:lines="1"
+            android:id="@+id/spinner"
+            android:layout_marginBottom="@dimen/x20"
+            android:paddingHorizontal="@dimen/x20"
+            android:textColor="@color/color_333" />
+
+
+</LinearLayout>

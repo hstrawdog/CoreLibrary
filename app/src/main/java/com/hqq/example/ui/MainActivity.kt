@@ -78,7 +78,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            putParcelable("A", ParcelableBean())
 //        })
 
-
+//        open(SpinnerActivity::class.java)
+        open(GyroActivity::class.java)
 //        startActivity(Intent(this, ComparedActivity::class.java))
 //    open(BrushViewActivity::class.java)
     }

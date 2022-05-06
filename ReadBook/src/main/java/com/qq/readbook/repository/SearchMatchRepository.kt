@@ -33,7 +33,7 @@ object SearchMatchRepository {
             object : OkNetCallback {
                 override fun onSuccess(statusCode: String?, response: String?) {
                     val b = GsonUtil.fromJson(response, ZongHeng::class.java)
-                    if (b != null && b.books.isNotEmpty()) {
+                    if (b != null && !b.books.isNullOrEmpty()) {
                         call.onSuccess(b.books)
                     }
                 }
