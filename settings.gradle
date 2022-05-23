@@ -7,8 +7,7 @@ dependencyResolutionManagement {
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url "https://jitpack.io" }
         google()
-        mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+        mavenCentral() // Warning: this repository is going to shut down soon
     }
 }
 
@@ -17,3 +16,4 @@ include ':app', ':Core'
 include ':myapplication'
 include ':opengl'
 include ':ReadBook'
+include ':accessibility'

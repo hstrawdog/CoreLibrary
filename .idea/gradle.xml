@@ -13,13 +13,13 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Core" />
             <option value="$PROJECT_DIR$/ReadBook" />
+            <option value="$PROJECT_DIR$/accessibility" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/myapplication" />
             <option value="$PROJECT_DIR$/opengl" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

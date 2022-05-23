@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.qq.readbook">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.qq.readbook">
     <!-- 用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
@@ -13,54 +13,56 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <application
-        android:name=".App"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.ReadBook">
+            android:name=".App"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:networkSecurityConfig="@xml/network_security_config"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.ReadBook">
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:grantUriPermissions="true">
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"
-                tools:replace="android:resource" />
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"
+                    tools:replace="android:resource" />
         </provider>
 
-        <activity android:name=".ui.MainActivity"  android:exported="false" >
+        <activity
+                android:name=".ui.MainActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.menu.ExportBookSourceActivity"
-            android:label="导出书源" />
+                android:name=".ui.menu.ExportBookSourceActivity"
+                android:label="导出书源" />
         <activity
-            android:name=".ui.menu.CacheManagementActivity"
-            android:label="缓存管理" />
+                android:name=".ui.menu.CacheManagementActivity"
+                android:label="缓存管理" />
         <activity
-            android:name=".ui.menu.ReadSettingActivity"
-            android:label="阅读设置" />
+                android:name=".ui.menu.ReadSettingActivity"
+                android:label="阅读设置" />
         <activity
-            android:name=".ui.source.BookSourceListActivity"
-            android:label="书源列表" />
+                android:name=".ui.source.BookSourceListActivity"
+                android:label="书源列表" />
         <activity
-            android:name=".ui.SearchActivity"
-            android:label="搜索" />
+                android:name=".ui.SearchActivity"
+                android:label="搜索" />
         <activity
-            android:name=".ui.book.BookDetailActivity"
-            android:label="书籍详情" />
+                android:name=".ui.book.BookDetailActivity"
+                android:label="书籍详情" />
         <activity
-            android:name=".ui.book.ReadBookActivity"
-            android:label="阅读" />
+                android:name=".ui.book.ReadBookActivity"
+                android:label="阅读" />
         <activity
-            android:name=".ui.book.SwitchBookSourceActivity"
-            android:label="切换书源" />
+                android:name=".ui.book.SwitchBookSourceActivity"
+                android:label="切换书源" />
 
         <service android:name=".down.DownService" />
 

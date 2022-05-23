@@ -10,7 +10,6 @@ import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
-import com.example.accessibility.TestAccessibilityActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity

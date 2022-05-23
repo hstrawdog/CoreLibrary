@@ -25,8 +25,8 @@ class RoomActivity(override val layoutId: Int = R.layout.activity_room) : BaseDa
     override fun initView() {
         userDao.insertAll(User("名称1", "名称2"))
         studentDao.insertAll(Student("1班级", "15"))
-        var user = userDao.getAll().get(0)
-        var student = studentDao.getAll().get(0)
-        binding?.textView27?.setText(user.lastName + "--" + user.firstName + " " + student.grade + "   " + student.age)
+        val user = userDao.getAll()[0]
+        val student = studentDao.getAll().first()
+        binding.textView27.text = user.lastName + "--" + user.firstName + " " + student.grade + "   " + student.age
     }
 }

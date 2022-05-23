@@ -44,7 +44,7 @@
         </service>
 
         <activity
-                android:name="com.example.accessibility.TestAccessibilityActivity"
+                android:name=".accessibility.TestAccessibilityActivity"
                 android:label="测试无障碍服务" />
 
         <provider

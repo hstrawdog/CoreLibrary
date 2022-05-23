@@ -93,7 +93,7 @@ class TriangleActivity : BaseViewBindingActivity<ActivityTriangleBinding>() {
             gl.glEnableClientState(GL10.GL_COLOR_ARRAY)
 
             //将三角形在z轴上移动
-            gl.glTranslatef(0f, 0.5f, -2.0f)
+            gl.glTranslatef(0f, 0.5f, -2.5f)
 
             // 设置三角形
             gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mTriangleBuffer)
