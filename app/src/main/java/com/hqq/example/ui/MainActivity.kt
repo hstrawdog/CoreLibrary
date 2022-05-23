@@ -10,6 +10,7 @@ import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
+import com.example.accessibility.TestAccessibilityActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
@@ -18,15 +19,11 @@ import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
-import com.hqq.example.ui.crash.CrashActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
-import com.hqq.example.ui.crash.ThrowActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
 import com.hqq.example.ui.file.FileIndexActivity
-import com.hqq.example.ui.file.SaveBitmapActivity
 import com.hqq.example.ui.fold.FoldViewActivity
-import com.hqq.example.ui.fragment.ViewPager2FragmentLiveActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
@@ -79,7 +76,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        })
 
 //        open(SpinnerActivity::class.java)
-        open(GyroActivity::class.java)
+//        open(GyroActivity::class.java)
+        open(com.example.accessibility.TestAccessibilityActivity::class.java)
 //        startActivity(Intent(this, ComparedActivity::class.java))
 //    open(BrushViewActivity::class.java)
     }

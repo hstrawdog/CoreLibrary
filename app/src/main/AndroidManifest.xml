@@ -28,6 +28,25 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+
+
+        <service
+                android:name="com.example.accessibility.TestAccessibilityService"
+                android:label="抓取"
+                android:exported="true"
+                android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                    android:name="android.accessibilityservice"
+                    android:resource="@xml/accessible_service_config_ali" />
+        </service>
+
+        <activity
+                android:name="com.example.accessibility.TestAccessibilityActivity"
+                android:label="测试无障碍服务" />
+
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.fileProvider"
@@ -59,7 +78,9 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name=".ui.GyroActivity" android:label="陀螺仪"/>
+        <activity
+                android:name=".ui.GyroActivity"
+                android:label="陀螺仪" />
 
         <activity
                 android:name=".ui.SpinnerActivity"

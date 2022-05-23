@@ -24,14 +24,12 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
      */
     val activity: Activity
         get() {
-            check(!(null == activities || activities.size == 0)) { "Core 未初始化" }
+            check(!(activities.size == 0)) { "Core 未初始化" }
             // 获取最上面的 Activity
-            if (activities != null) {
-                for (i in activities.indices.reversed()) {
-                    val activity = activities[i]
-                    if (!activity.isFinishing) {
-                        return activity
-                    }
+            for (i in activities.indices.reversed()) {
+                val activity = activities[i]
+                if (!activity.isFinishing) {
+                    return activity
                 }
             }
             throw IllegalStateException("未获取到栈内对象 当前Activity 异常")
@@ -49,7 +47,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
     override fun onActivityDestroyed(activity: Activity) {
         activities.remove(activity)
-        LogUtils.dInfo("ActivityLifecycle -> onActivityDestroyed"+ activity.localClassName)
+        LogUtils.dInfo("ActivityLifecycle -> onActivityDestroyed" + activity.localClassName)
     }
 
 }
