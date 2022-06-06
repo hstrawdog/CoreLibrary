@@ -11,7 +11,6 @@ import com.qq.readbook.room.entity.Chapter
 import com.qq.readbook.utils.MD5Utils
 import org.seimicrawler.xpath.JXDocument
 import org.seimicrawler.xpath.JXNode
-import java.util.*
 
 /**
  * @Author : huangqiqiang

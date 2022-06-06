@@ -212,7 +212,8 @@ open class BaseWebFragment : BaseFragment() {
             }
         }
         override fun onReceivedError(view: WebView, errorCode: Int, description: String?, failingUrl: String?) {
-            super.onReceivedError(view, errorCode, description, failingUrl) // 断网或者网络连接超时
+            super.onReceivedError(view, errorCode, description, failingUrl)
+            // 断网或者网络连接超时
             if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_CONNECT || errorCode == ERROR_TIMEOUT) {
                 view.loadUrl("about:blank");// 避免出现默认的错误界面
                 webLoadListener?.onError(failingUrl)

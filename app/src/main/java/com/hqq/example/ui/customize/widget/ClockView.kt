@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import com.hqq.core.utils.log.LogUtils.dInfo
-import java.util.*
+import java.util.Calendar
 
 /**
  * @Author : huangqiqiang

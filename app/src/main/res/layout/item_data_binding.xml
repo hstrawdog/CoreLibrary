@@ -29,21 +29,23 @@
             android:text='@{(user.name!=null) &amp;&amp; (user.level &lt; 5)? "2222":"3333" }' />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x20"
-            android:background="@color/color_main"
-            android:text="@={user.name ,default=sdfsdf}" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:background="@color/color_main"
+                android:minHeight="48dp"
+                android:text="@={user.name ,default=sdfsdf}" />
 
         <Button
-            android:id="@+id/button38"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{dataBinding::onClickButton}"
-            android:text="@{String.valueOf(user.level)}"
-            core:cornerRadius="@{R.dimen.x10}"
-            core:strokeColor="@{R.color.color_main ,default=0}"
-            core:strokeWidth="@{R.dimen.x10,default=30}" />
+                android:id="@+id/button38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:onClick="@{dataBinding::onClickButton}"
+                android:text="@{String.valueOf(user.level)}"
+                core:cornerRadius="@{R.dimen.x10}"
+                core:strokeColor="@{R.color.color_main ,default=0}"
+                core:strokeWidth="@{R.dimen.x10,default=30}" />
 
         <Button
             android:id="@+id/button39"

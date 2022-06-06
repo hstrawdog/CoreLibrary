@@ -6,4 +6,4 @@
         android:canRetrieveWindowContent="true"
         android:description="@string/app_name"
         android:notificationTimeout="100"
-        android:packageNames="com.box.art" />
+        android:packageNames="com.kuaishou.nebula" />

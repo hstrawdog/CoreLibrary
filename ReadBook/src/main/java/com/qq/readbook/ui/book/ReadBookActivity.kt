@@ -27,7 +27,7 @@ import com.qq.readbook.weight.page.ReadSettingManager
 import com.qq.readbook.weight.page.loader.OnPageChangeListener
 import com.qq.readbook.weight.page.loader.PageLoader
 import kotlinx.coroutines.*
-import java.util.*
+import java.util.Objects
 import kotlin.collections.ArrayList
 
 /**

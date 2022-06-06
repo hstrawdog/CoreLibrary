@@ -19,9 +19,11 @@
             android:src="@mipmap/ic_collection_pre" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_999" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_999"
+                android:hint="@string/app_name"
+                android:minHeight="48dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,16 +40,18 @@
             android:text="文本测试" />
 
         <com.hqq.example.widget.SkinSwitch
-            android:id="@+id/switch_def"
-            android:clickable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/x40"
-            android:layout_marginRight="@dimen/x20"
-            android:textOff=""
-            android:textOn=""
-            android:thumb="@drawable/thumb"
-            android:track="@drawable/track" />
+                android:id="@+id/switch_def"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/x40"
+                android:layout_marginRight="@dimen/x20"
+                android:clickable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:textOff=""
+                android:textOn=""
+                android:thumb="@drawable/thumb"
+                android:track="@drawable/track" />
 
     </LinearLayout>
 

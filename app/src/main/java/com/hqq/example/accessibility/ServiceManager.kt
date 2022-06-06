@@ -52,14 +52,10 @@ object ServiceManager {
         val accessibleIntent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
         context.startActivity(accessibleIntent)
 
-        LogUtils.e("1")
         (context.applicationContext as Application).registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacksAdapter() {
             override fun onActivityResumed(activity: Activity) {
-                LogUtils.e("2")
 
                 if (context::class.java == activity::class.java) {
-                    LogUtils.e("3")
-
                     (context.applicationContext as Application).unregisterActivityLifecycleCallbacks(this)
                     listener(isServiceEnabled(context))
                 }

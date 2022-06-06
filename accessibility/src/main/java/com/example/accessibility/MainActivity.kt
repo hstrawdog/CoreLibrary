@@ -1,11 +1,17 @@
 package com.example.accessibility
 
 import android.content.ComponentName
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Context
+import android.provider.Settings
+import android.text.TextUtils
 import com.example.accessibility.databinding.ActivityMainBinding
+import com.example.accessibility.kuaishou.KuaiShouJob
 import com.hqq.core.ui.base.BaseViewBindingActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.collections.HashSet
 
 class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
     override fun initView() {
@@ -19,7 +25,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         super.onResume()
         if (isFirst) {
             isFirst = false
-            startService()
+            //startService()
         }
 
     }
@@ -28,7 +34,9 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
     private fun startService() {
         ServiceManager.openService(this) {
             // 服务开启
-            kuaiShouJob.start()
+            if (it) {
+                kuaiShouJob.start()
+            }
         }
     }
 }

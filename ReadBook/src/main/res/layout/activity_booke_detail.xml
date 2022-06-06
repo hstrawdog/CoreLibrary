@@ -43,8 +43,7 @@
                         android:layout_marginRight="10dp"
                         android:contentDescription="@null"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/cover_default"
-                        app:url="@{vm.bookLiveData.imgUrl}" />
+                        android:src="@mipmap/cover_default" />
 
                     <TextView
                         android:id="@+id/tvBookListTitle"

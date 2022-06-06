@@ -39,11 +39,12 @@
             android:text="@{vm.liveData.name+ vm.liveData.level}" />
 
         <Button
-            android:id="@+id/button40"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{vm::update}"
-            android:text="@{vm.buttonText}" />
+                android:id="@+id/button40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:onClick="@{vm::update}"
+                android:text="@{vm.buttonText}" />
 
         <TextView
             android:layout_width="match_parent"

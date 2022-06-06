@@ -103,7 +103,7 @@ object MathUtils {
     fun getDoubleString(number: Double, roundingMode: RoundingMode?): String {
         var numberStr = number.toString() + ""
         try {
-            if (number.toLong() * 1000 == (number * 1000) as Long) {
+            if (number.toLong() * 1000 == (number * 1000).toLong()) {
                 //如果是一个整数
                 numberStr = number.toString()
             } else {

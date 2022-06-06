@@ -3,7 +3,6 @@ package com.hqq.core.utils
 import android.os.Bundle
 import android.os.Parcelable
 import java.io.Serializable
-import java.util.*
 
 /**
  * @Author : huangqiqiang

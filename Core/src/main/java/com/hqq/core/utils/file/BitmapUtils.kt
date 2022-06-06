@@ -18,7 +18,6 @@ import android.widget.ImageView
 import com.hqq.core.CoreConfig
 import com.hqq.core.utils.ToastUtils
 import java.io.*
-import java.util.*
 
 
 /**

@@ -8,35 +8,38 @@
 
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tb_tablayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabIndicatorFullWidth="false"
-        app:tabMode="fixed"
-        tools:ignore="MissingConstraints">
+            android:id="@+id/tb_tablayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="fixed"
+            tools:ignore="MissingConstraints">
 
     </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tb_tablayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        tools:ignore="MissingConstraints">
+            android:id="@+id/tb_tablayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            app:tabMode="fixed"
+            tools:ignore="MissingConstraints">
 
     </com.google.android.material.tabs.TabLayout>
 
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tb_tablayout3"
-        android:layout_width="match_parent"
+            android:id="@+id/tb_tablayout3"
+            android:layout_width="match_parent"
 
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/x2"
-        android:background="@color/white"
-        android:paddingBottom="@dimen/x30"
-        app:tabMode="fixed"
-        tools:ignore="MissingConstraints">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x2"
+            android:background="@color/white"
+            android:contentDescription="@string/app_name"
+            android:paddingBottom="@dimen/x30"
+            app:tabMode="fixed"
+            tools:ignore="MissingConstraints">
 
     </com.google.android.material.tabs.TabLayout>
 

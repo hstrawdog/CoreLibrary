@@ -10,7 +10,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.VersionUtils
-import java.util.*
 
 /**
  * @Author : huangqiqiang

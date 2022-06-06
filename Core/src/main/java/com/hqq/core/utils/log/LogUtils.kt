@@ -3,7 +3,6 @@ package com.hqq.core.utils.log
 import android.util.Log
 import com.hqq.core.BuildConfig
 import com.hqq.core.CoreConfig
-import java.util.*
 
 /**
  * @Author : huangqiqiang

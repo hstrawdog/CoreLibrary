@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.example.R
-import java.util.*
 
 /**
  * @Author : huangqiqiang

@@ -11,7 +11,6 @@ import com.qq.readbook.room.entity.Book
 import com.qq.readbook.room.entity.SearchLog
 import org.seimicrawler.xpath.JXDocument
 import java.net.URLEncoder
-import java.util.*
 
 
 /**

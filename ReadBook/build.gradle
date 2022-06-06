@@ -1,30 +1,29 @@
-import com.hqq.core.plugin.*
-
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-parcelize'
-
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
 android {
     buildFeatures {
-        viewBinding = true
-        dataBinding= true
+        viewBinding  true
+        dataBinding  true
     }
-    compileSdkVersion BuildConfig.compileSdkVersion
-    buildToolsVersion BuildConfig.buildToolsVersion
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
 
     defaultConfig {
         applicationId "com.qq.readbook"
-        minSdkVersion BuildConfig.minSdkVersion
-        targetSdkVersion BuildConfig.targetSdkVersion
+        minSdkVersion  21
+        targetSdkVersion 31
         versionCode 3
         versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
-    }
+//    compileOptions {
+//        sourceCompatibility 1.8
+//        targetCompatibility 1.8
+//    }
     signingConfigs {
         debug {
             keyAlias 'androiddebugkey'
@@ -39,10 +38,10 @@ android {
             storePassword 'android'
         }
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
-    }
+//    kotlinOptions {
+//        jvmTarget = JavaVersion.VERSION_1_8.toString()
+//        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+//    }
     lintOptions {
         abortOnError false
     }

@@ -19,7 +19,7 @@ import com.hqq.core.utils.ResourcesUtils
 object BindingAdapter {
 
     @JvmStatic
-    @BindingAdapter("app:url")
+    @BindingAdapter(value = ["url"], requireAll=false)
     fun setImageViewSrc(imageView: ImageView, src: String?) {
         if (!src.isNullOrBlank()) {
             ImageLoadUtils.with(src, imageView)

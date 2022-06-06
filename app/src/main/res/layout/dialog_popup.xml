@@ -8,21 +8,23 @@
 
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tb_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/x40"
-        android:background="@color/white"
-        app:tabMode="fixed"
-        tools:ignore="MissingConstraints">
+            android:id="@+id/tb_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x40"
+            android:background="@color/white"
+            android:contentDescription="@string/app_name"
+            app:tabMode="fixed"
+            tools:ignore="MissingConstraints">
 
     </com.google.android.material.tabs.TabLayout>
 
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:id="@+id/vp_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name">
 
     </androidx.viewpager.widget.ViewPager>
 </LinearLayout>

@@ -10,6 +10,7 @@ import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
+import com.hqq.example.accessibility.TestAccessibilityActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
@@ -76,7 +77,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        open(SpinnerActivity::class.java)
 //        open(GyroActivity::class.java)
-        open(com.example.accessibility.TestAccessibilityActivity::class.java)
+        open(TestAccessibilityActivity::class.java)
 //        startActivity(Intent(this, ComparedActivity::class.java))
 //    open(BrushViewActivity::class.java)
     }

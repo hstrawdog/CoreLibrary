@@ -14,7 +14,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.hqq.core.R
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 /**
  * @Author : huangqiqiang

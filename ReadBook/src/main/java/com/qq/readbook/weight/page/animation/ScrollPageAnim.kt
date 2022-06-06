@@ -6,7 +6,7 @@ import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
-import java.util.*
+import java.util.ArrayDeque
 
 /**
  * Created by zlj

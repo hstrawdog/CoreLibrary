@@ -1,7 +1,6 @@
 package com.hqq.core.utils
 
 import java.io.*
-import java.util.*
 
 /**
  * @version V1.0 <描述当前版本功能>

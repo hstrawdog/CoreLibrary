@@ -10,7 +10,6 @@ import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.utils.RegexUtils
 import com.hqq.core.utils.ScreenUtils
 import java.lang.reflect.Type
-import java.util.*
 
 /**
  * @Author : huangqiqiang

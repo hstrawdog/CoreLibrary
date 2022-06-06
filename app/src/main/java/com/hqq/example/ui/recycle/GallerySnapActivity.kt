@@ -12,7 +12,6 @@ import com.hqq.core.ui.base.BaseDataBindingActivity
 import com.hqq.example.R
 import com.hqq.example.adapter.SnapHelperAdapter
 import com.hqq.example.databinding.ActivityGallerySnapBinding
-import java.util.*
 
 /**
  * @Author : huangqiqiang

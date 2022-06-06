@@ -2,7 +2,11 @@ package com.hqq.core.utils
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.TimeZone
+import java.util.Arrays
+import java.util.Calendar
+import java.util.Date
 
 /**
  * @Author : huangqiqiang
@@ -235,9 +239,9 @@ object DateUtils {
      */
     @JvmStatic
     fun formatTime(leftsecond: Int): String {
-        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()) as Long
-        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()) as Long
-        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Long
+        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()).toLong()
+        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()).toLong()
+        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()).toLong()
         return "剩" + day + "天" + hour + "时" + minute + "分"
     }
 
@@ -247,10 +251,10 @@ object DateUtils {
      */
     @JvmStatic
     fun formatTime2Second(second: Int, type: Int = 1): String {
-        val day: Long = Math.floor(second / (60 * 60 * 24).toDouble()) as Long
-        val hour: Long = Math.floor((second - day * 24 * 60 * 60) / 3600.toDouble()) as Long
-        val minute: Long = Math.floor((second - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()) as Long
-        val second: Long = Math.floor(second - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble()) as Long
+        val day: Long = Math.floor(second / (60 * 60 * 24).toDouble()).toLong()
+        val hour: Long = Math.floor((second - day * 24 * 60 * 60) / 3600.toDouble()).toLong()
+        val minute: Long = Math.floor((second - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()).toLong()
+        val second: Long = Math.floor(second - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble()).toLong()
         val stringBuilder = StringBuilder("剩")
         if (type == 1) {
             if (day > 0) {

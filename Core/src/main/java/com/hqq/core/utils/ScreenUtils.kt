@@ -67,7 +67,7 @@ object ScreenUtils {
      */
     @JvmStatic
     fun dip2px(dpValue: Float): Int {
-        return dip2px(CoreConfig.get().application?.applicationContext!!, dpValue)
+        return dip2px(CoreConfig.get().application.applicationContext!!, dpValue)
     }
 
     /**

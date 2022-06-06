@@ -14,10 +14,11 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edt_text"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x500"
-            android:background="@color/color_main" />
+                android:id="@+id/edt_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x500"
+                android:background="@color/color_main"
+                android:hint="@string/app_name" />
 
         <LinearLayout
             android:id="@+id/ll_login"

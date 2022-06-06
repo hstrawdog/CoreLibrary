@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hqq.example.R
 import com.hqq.example.adapter.SnapHelperAdapter.GalleryViewHoler
-import java.util.*
 
 /**
  * Created by chenzhimao on 17-7-6.

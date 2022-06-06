@@ -3,7 +3,6 @@ package com.hqq.example.demo.news
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.example.demo.net.HttpManager.getNews
 import com.hqq.example.demo.net.NetCallback
-import java.util.*
 
 /**
  * @Author : huangqiqiang
