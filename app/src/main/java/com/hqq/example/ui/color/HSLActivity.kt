@@ -11,6 +11,7 @@ import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.utils.log.LogUtils.dInfo
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
+import java.util.*
 
 /**
  * @version V1.0 <描述当前版本功能>

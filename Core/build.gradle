@@ -16,23 +16,6 @@ android {
         targetSdkVersion 31
         versionName "1.0"
         versionCode 1
-//        def versionPropsFile = file('version.properties')
-//        if (versionPropsFile.canRead()) {
-//            //载入version.properties
-//            Properties versionProps = new Properties()
-//            versionProps.load(new FileInputStream(versionPropsFile))
-//            //从version.properties根据关键字"VERSION_CODE"取Integer
-//            def verCode = versionProps['VERSION_CODE'].toInteger()
-//            //判断build模式，如果是发布模式（':app:assembleRelease'）则自增版本号，并且写回version.properties文件中
-//            def runTasks = gradle.startParameter.taskNames
-//            if ('assemble' in runTasks) {
-//                versionProps['VERSION_CODE'] = (++verCode).toString()
-//                versionProps.store(versionPropsFile.newWriter(), null)
-//            }
-//            versionCode verCode
-//        } else {
-//            throw new GradleException("Could not read version.properties!")
-//        }
 
     }
     buildTypes {
@@ -41,33 +24,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
-//    }
-//    //主要是下面这一段
-//    android.libraryVariants.all { variant ->
-//        variant.outputs.all {
-//            outputFileName = "Core_${variant.buildType.name}_${defaultConfig.versionName}_${defaultConfig.versionCode}" + '.aar'
-//        }
-//    }
-
-//    //自定义aar名称
-//    android.libraryVariants.all { variant ->
-//        variant.outputs.each { output ->
-//            def outputFile = output.outputFile
-//            if (outputFile != null && outputFile.name.endsWith('.aar')) {
-//                def fileName = "自定义.aar"
-//                output.outputFile = new File(outputFile.parent, fileName)
-//            }
-//        }
-//    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
 }
 
 dependencies {
     //版本要与gradle版本一致
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.21"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
 
     // Appcompat   包含 core
     api "androidx.appcompat:appcompat:1.3.1"

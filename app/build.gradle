@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
@@ -71,6 +71,13 @@ android {
     }
     sourceSets {
         main { res.srcDirs = ['src/main/res', 'src/main/res-main', 'src/main/res-night'] }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 //    compileOptions {
 //        sourceCompatibility sourceCompatibility
