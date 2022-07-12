@@ -189,6 +189,8 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     fun findViewById(id: Int): View? {
         return if (rootView == null || id < 0) null else rootView!!.findViewById(id)
 
+
+
     }
 
     // 参考https://juejin.cn/post/6899429993231679501
