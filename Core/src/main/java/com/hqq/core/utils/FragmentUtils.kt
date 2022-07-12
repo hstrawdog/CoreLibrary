@@ -61,6 +61,27 @@ class FragmentUtils {
         currentFragment = fragment
     }
 
+    fun replaceOrShowFragment(fragment: Fragment, id: Int) {
+        if (currentFragment === fragment || supportFragmentManager == null) {
+            return
+        }
+        // 如果当前fragment未被添加，则添加到Fragment管理器中
+        if (!fragment.isAdded) {
+            if (currentFragment == null) {
+                supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
+            } else {
+                supportFragmentManager!!.beginTransaction().replace(id, fragment).commit()
+            }
+        } else {
+            if (currentFragment == null) {
+                supportFragmentManager!!.beginTransaction().show(fragment).commit()
+            } else {
+                supportFragmentManager!!.beginTransaction().replace(id,fragment).commit()
+            }
+        }
+        currentFragment = fragment
+    }
+
     /**
      * 添加 fragment 到 FrameLayout
      *

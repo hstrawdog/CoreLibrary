@@ -32,8 +32,8 @@
 
         <service
                 android:name="com.example.accessibility.TestAccessibilityService"
-                android:label="抓取"
                 android:exported="true"
+                android:label="抓取"
                 android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -43,6 +43,9 @@
                     android:resource="@xml/accessible_service_config_ali" />
         </service>
 
+        <activity
+                android:name=".ui.fragment.TestLiveFragmentActivity"
+                android:label="测试fragment生命周期" />
         <activity
                 android:name=".accessibility.TestAccessibilityActivity"
                 android:label="测试无障碍服务" />

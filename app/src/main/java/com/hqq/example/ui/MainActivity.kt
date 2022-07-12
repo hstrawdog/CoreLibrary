@@ -24,6 +24,7 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
 import com.hqq.example.ui.file.FileIndexActivity
 import com.hqq.example.ui.fold.FoldViewActivity
+import com.hqq.example.ui.fragment.TestLiveFragmentActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
@@ -77,9 +78,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        open(SpinnerActivity::class.java)
 //        open(GyroActivity::class.java)
-        open(TestAccessibilityActivity::class.java)
+//        open(TestAccessibilityActivity::class.java)
 //        startActivity(Intent(this, ComparedActivity::class.java))
 //    open(BrushViewActivity::class.java)
+
+        open(TestLiveFragmentActivity::class.java)
     }
 
 
