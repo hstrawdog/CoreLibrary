@@ -17,7 +17,7 @@ import javax.microedition.khronos.opengles.GL10
  * @Email :  qiqiang213@gmail.com
  * @Describe :
  * https://blog.csdn.net/donkor_/article/details/77837863
- *    绘制一个点
+ * 绘制一个点
  */
 class Part2Activity : BasePartActivity() {
     override fun getRenderer(): GLSurfaceView.Renderer {

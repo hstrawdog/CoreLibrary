@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 rootProject.name = "CoreLibrary"
 include ':app', ':Core'
 include ':myapplication'
-include ':opengl'
+include ':OpenGL'
 include ':ReadBook'

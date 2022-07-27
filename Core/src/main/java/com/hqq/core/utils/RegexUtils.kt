@@ -1,10 +1,6 @@
 package com.hqq.core.utils
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.text.TextUtils
+import com.hqq.core.utils.log.LogUtils
 import java.lang.Exception
 import java.util.regex.Pattern
 
@@ -17,27 +13,7 @@ import java.util.regex.Pattern
  * @Descrive :  验证工具类 包含空判断 正则判断
  */
 object RegexUtils {
-    /**
-     * 检查 null
-     * 支持类型
-     * String
-     * List  有待 验证
-     *
-     * @param object Object
-     * @return boolean
-     */
-    fun isNull(`object`: Any?): Boolean {
-        if (`object` == null) {
-            return true
-        } else if (`object` is String) {
-            return TextUtils.isEmpty(`object` as String?)
-        } else if (`object` is List<*>) {
-            return `object`.isEmpty()
-        } else if (`object` is Array<*>) {
-            return (`object` as Array<String?>).size <= 0
-        }
-        return false
-    }
+
 
     /**
      * 检查 null
@@ -51,8 +27,6 @@ object RegexUtils {
     fun checkNull(`object`: Any?): Boolean {
         if (`object` == null) {
             return true
-        } else if (`object` is String) {
-            return TextUtils.isEmpty(`object` as String?)
         } else if (`object` is List<*>) {
             return `object`.isEmpty()
         } else if (`object` is Array<*>) {
@@ -70,6 +44,13 @@ object RegexUtils {
     fun unNull(`object`: Any?): Boolean {
         return !isNull(`object`)
     }
+
+    fun <T1, T2> ifNotNull(value1: T1?, value2: T2?, bothNotNull: (T1, T2) -> (Unit)) {
+        if (value1 != null && value2 != null) {
+            bothNotNull(value1, value2)
+        }
+    }
+
 
     /**
      * 判断string是否是空的   过滤null
@@ -129,7 +110,7 @@ object RegexUtils {
      * @param activity
      * @return
      */
-    fun checkName(name: String?, activity: Activity?): Boolean {
+    fun checkName(name: String?): Boolean {
         if (isNull(name)) {
             ToastUtils.showToast("请输入姓名")
             return true
@@ -166,7 +147,8 @@ object RegexUtils {
      * @return
      */
     fun checkEmoji(sellerName: String?): Boolean {
-        val checkEmoji = "(?:[\\uD83C\\uDF00-\\uD83D\\uDDFF]|[\\uD83E\\uDD00-\\uD83E\\uDDFF]|[\\uD83D\\uDE00-\\uD83D\\uDE4F]|[\\uD83D\\uDE80-\\uD83D\\uDEFF]|[\\u2600-\\u26FF]\\uFE0F?|[\\u2700-\\u27BF]\\uFE0F?|\\u24C2\\uFE0F?|[\\uD83C\\uDDE6-\\uD83C\\uDDFF]{1,2}|[\\uD83C\\uDD70\\uD83C\\uDD71\\uD83C\\uDD7E\\uD83C\\uDD7F\\uD83C\\uDD8E\\uD83C\\uDD91-\\uD83C\\uDD9A]\\uFE0F?|[\\u0023\\u002A\\u0030-\\u0039]\\uFE0F?\\u20E3|[\\u2194-\\u2199\\u21A9-\\u21AA]\\uFE0F?|[\\u2B05-\\u2B07\\u2B1B\\u2B1C\\u2B50\\u2B55]\\uFE0F?|[\\u2934\\u2935]\\uFE0F?|[\\u3030\\u303D]\\uFE0F?|[\\u3297\\u3299]\\uFE0F?|[\\uD83C\\uDE01\\uD83C\\uDE02\\uD83C\\uDE1A\\uD83C\\uDE2F\\uD83C\\uDE32-\\uD83C\\uDE3A\\uD83C\\uDE50\\uD83C\\uDE51]\\uFE0F?|[\\u203C\\u2049]\\uFE0F?|[\\u25AA\\u25AB\\u25B6\\u25C0\\u25FB-\\u25FE]\\uFE0F?|[\\u00A9\\u00AE]\\uFE0F?|[\\u2122\\u2139]\\uFE0F?|\\uD83C\\uDC04\\uFE0F?|\\uD83C\\uDCCF\\uFE0F?|[\\u231A\\u231B\\u2328\\u23CF\\u23E9-\\u23F3\\u23F8-\\u23FA]\\uFE0F?)"
+        val checkEmoji =
+            "(?:[\\uD83C\\uDF00-\\uD83D\\uDDFF]|[\\uD83E\\uDD00-\\uD83E\\uDDFF]|[\\uD83D\\uDE00-\\uD83D\\uDE4F]|[\\uD83D\\uDE80-\\uD83D\\uDEFF]|[\\u2600-\\u26FF]\\uFE0F?|[\\u2700-\\u27BF]\\uFE0F?|\\u24C2\\uFE0F?|[\\uD83C\\uDDE6-\\uD83C\\uDDFF]{1,2}|[\\uD83C\\uDD70\\uD83C\\uDD71\\uD83C\\uDD7E\\uD83C\\uDD7F\\uD83C\\uDD8E\\uD83C\\uDD91-\\uD83C\\uDD9A]\\uFE0F?|[\\u0023\\u002A\\u0030-\\u0039]\\uFE0F?\\u20E3|[\\u2194-\\u2199\\u21A9-\\u21AA]\\uFE0F?|[\\u2B05-\\u2B07\\u2B1B\\u2B1C\\u2B50\\u2B55]\\uFE0F?|[\\u2934\\u2935]\\uFE0F?|[\\u3030\\u303D]\\uFE0F?|[\\u3297\\u3299]\\uFE0F?|[\\uD83C\\uDE01\\uD83C\\uDE02\\uD83C\\uDE1A\\uD83C\\uDE2F\\uD83C\\uDE32-\\uD83C\\uDE3A\\uD83C\\uDE50\\uD83C\\uDE51]\\uFE0F?|[\\u203C\\u2049]\\uFE0F?|[\\u25AA\\u25AB\\u25B6\\u25C0\\u25FB-\\u25FE]\\uFE0F?|[\\u00A9\\u00AE]\\uFE0F?|[\\u2122\\u2139]\\uFE0F?|\\uD83C\\uDC04\\uFE0F?|\\uD83C\\uDCCF\\uFE0F?|[\\u231A\\u231B\\u2328\\u23CF\\u23E9-\\u23F3\\u23F8-\\u23FA]\\uFE0F?)"
         return Pattern.matches(checkEmoji, sellerName)
     }
 
@@ -290,18 +272,6 @@ object RegexUtils {
         return result
     }
 
-    /**
-     * 检测是否安装支付宝
-     *
-     * @param context
-     * @return
-     */
-    fun isAliPayInstalled(context: Context): Boolean {
-        val uri = Uri.parse("alipays://platformapi/startApp")
-        val intent = Intent(Intent.ACTION_VIEW, uri)
-        val componentName = intent.resolveActivity(context.packageManager)
-        return componentName != null
-    }
 
     /**
      * 格式化数据  ***
@@ -318,6 +288,7 @@ object RegexUtils {
         }
         return "***"
     }
+
     /**
      * 判断string是否是空的   过滤null
      *
@@ -339,6 +310,7 @@ object RegexUtils {
         }
         return false
     }
+
     /**
      * 不为空
      *
@@ -348,6 +320,7 @@ object RegexUtils {
     fun checkStringUnEmpty(str: String?): Boolean {
         return !RegexUtils.checkStringNull(str)
     }
+
     /**
      * 非空判断
      *
@@ -392,10 +365,57 @@ object RegexUtils {
         return true
     }
 
+    /**
+     * 检查 null
+     * 支持类型
+     * String
+     * List  有待 验证
+     *
+     * @param object Object
+     * @return boolean
+     */
+    fun isNull(any: Any?): Boolean {
+
+        if (any == null) {
+            return true
+        } else if (any is String) {
+            return any.isEmpty()
+        } else if (any is List<*>) {
+            return any.isEmpty()
+        } else if (any is Array<*>) {
+            return any.isEmpty()
+        }
+        return false
+    }
+
+
     @JvmStatic
     fun main(args: Array<String>) {
-        println("" + checkBankNum("6227001823770993846"))
-        println("" + checkBankNum("6221386102180111123"))
-        println("" + checkBankNum("6222600260001072321"))
+
+//        println("null: " + isNull(null))
+//
+//        println("String: " + isNull(""))
+//        println("String:123  " + isNull("123"))
+//        var str: String? = null
+//        println("str: " + isNull(str))
+//
+//        ArrayList<String>().isNullOrEmpty()
+//
+//        var list: ArrayList<String>? = null
+//        println("list: " + isNull(list))
+//        println("ArrayList<String>: " + isNull(ArrayList<String>()))
+//        var map: HashMap<String, String>? = null
+//        println("map: " + isNull(map))
+//        println("HashMap<String, String>: " + isNull(HashMap<String, String>()))
+
+
+//        println("" + checkBankNum("6227001823770993846"))
+//        println("" + checkBankNum("6221386102180111123"))
+//        println("" + checkBankNum("6222600260001072321"))
+
+        var list = ArrayList<String>()
+        println(list.indexOf(null))
+
+
     }
 }

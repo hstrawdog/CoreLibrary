@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.viewModelScope
+import com.hqq.core.net.ok.OkHttp
+import com.hqq.core.net.ok.download.HttpClient
 import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
@@ -82,7 +84,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        startActivity(Intent(this, ComparedActivity::class.java))
 //    open(BrushViewActivity::class.java)
 
-        open(TestLiveFragmentActivity::class.java)
+//        open(TestLiveFragmentActivity::class.java)
+
+
+    OkHttp.newHttpCompat()
+
     }
 
 
