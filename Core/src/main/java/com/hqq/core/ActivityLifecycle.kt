@@ -36,7 +36,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         activities.add(activity)
-        LogUtils.dInfo("ActivityLifecycle -> onActivityCreated" + activity.localClassName)
+        LogUtils.i("ActivityLifecycle -> onActivityCreated" + activity.localClassName)
     }
 
     override fun onActivityStarted(activity: Activity) {}

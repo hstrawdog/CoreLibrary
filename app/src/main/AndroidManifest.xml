@@ -18,6 +18,13 @@
             android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
             tools:ignore="ScopedStorage" />
 
+
+
+    <!-- 权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RAISED_THREAD_PRIORITY"/>
     <application
             android:name=".APP"
             android:allowBackup="true"
@@ -28,8 +35,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <receiver android:name=".MessageReceiver"
+                android:exported="true">
 
-
+            <intent-filter android:priority="9999999">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
+            </intent-filter>
+        </receiver>
         <service
                 android:name="com.example.accessibility.TestAccessibilityService"
                 android:exported="true"
@@ -42,6 +54,8 @@
                     android:name="android.accessibilityservice"
                     android:resource="@xml/accessible_service_config_ali" />
         </service>
+
+        <activity android:name=".ui.view.MirrorActivity" android:label="镜像"/>
 
         <activity
                 android:name=".ui.fragment.TestLiveFragmentActivity"
@@ -58,6 +72,7 @@
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_path" />
         </provider>
+
 
         <activity
                 android:name=".ui.MainActivity"

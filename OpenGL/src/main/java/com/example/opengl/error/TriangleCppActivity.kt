@@ -1,9 +1,8 @@
-package com.example.opengl.triangle
+package com.example.opengl.error
 
 import android.opengl.GLSurfaceView
 import com.example.opengl.MyNativeRender
 import com.example.opengl.databinding.ActivityTriangleBinding
-import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10

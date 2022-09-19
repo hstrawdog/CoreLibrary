@@ -36,7 +36,7 @@ android {
 
 dependencies {
     //版本要与gradle版本一致
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
+//    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
 
     // Appcompat   包含 core
     api "androidx.appcompat:appcompat:1.3.1"

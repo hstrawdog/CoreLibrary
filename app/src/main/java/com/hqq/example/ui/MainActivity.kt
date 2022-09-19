@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.hqq.core.net.ok.OkHttp
 import com.hqq.core.net.ok.download.HttpClient
@@ -34,8 +35,11 @@ import com.hqq.example.ui.parcelable.ParcelableActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.CanvasDrawBitmapActivity
+import com.hqq.example.ui.view.MirrorActivity
 import com.hqq.example.ui.web.WebActivity
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import kotlin.coroutines.coroutineContext
 
 /**
  * @Author : huangqiqiang
@@ -85,10 +89,29 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //    open(BrushViewActivity::class.java)
 
 //        open(TestLiveFragmentActivity::class.java)
+//        open(MirrorActivity::class.java)
 
+//    OkHttp.newHttpCompat()
 
-    OkHttp.newHttpCompat()
+        val testFlow = flow<String>() {
+            emit("1213")
+            emit("123")
 
+        }
+        val testFlow2 = flow<String>() {
+            emit("1213")
+            emit("123")
+
+        }
+        combine(testFlow,testFlow2){
+                response1, response2 ->
+        }
+        testFlow.zip(testFlow2){response1, response2 ->
+            Pair(response1,response2)
+        }.onEach {
+            it.first
+            it.second
+        }.launchIn(lifecycleScope).start()
     }
 
 

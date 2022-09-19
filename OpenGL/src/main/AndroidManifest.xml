@@ -3,7 +3,7 @@
         package="com.example.opengl">
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
     <uses-feature
-            android:glEsVersion="0x00020000"
+            android:glEsVersion="0x00030001"
             android:required="true" />
 
     <application
@@ -34,8 +34,9 @@
                 android:name=".triangle.TriangleActivity"
                 android:label="三角形" />
         <activity
-                android:name=".triangle.TriangleCppActivity"
+                android:name=".error.TriangleCppActivity"
                 android:label="三角形" />
+        <activity android:name=".error.Part3Activity" android:label="1213"></activity>
     </application>
 
 </manifest>

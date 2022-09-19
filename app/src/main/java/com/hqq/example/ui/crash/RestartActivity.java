@@ -31,6 +31,7 @@ public final class RestartActivity extends BaseViewBindingActivity<ActivityResta
     public static void start(Context context, Throwable throwable) {
         Intent intent = new Intent(context, RestartActivity.class);
         intent.putExtra("Throwable", throwable);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
