@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.ui.base.IRootView.IFragmentRootView
 import com.hqq.core.utils.BundleAction
@@ -26,6 +30,11 @@ interface OnFragmentVisibilityChangedListener {
  */
 abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener, View.OnAttachStateChangeListener,
     OnFragmentVisibilityChangedListener {
+
+    var activityResult= MutableLiveData<ActivityResult>()
+    var registerForActivity= registerForActivityResult(ActivityResultContracts.StartActivityForResult()
+    ) { result -> activityResult.value = result }
+
     /**
      * 缓存根布局对象
      */

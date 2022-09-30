@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
+import com.hqq.example.databinding.ActivityDataBindingBinding
 
 /**
  * @Author : huangqiqiang
@@ -18,7 +20,7 @@ import com.hqq.example.R
  * @Descrive :
  * LiveData  change 需要在ui前台才会触发 并不能再后台执行
  */
-class LiveDateActivity : BaseActivity() {
+class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, LiveDateActivity::class.java)
@@ -27,17 +29,28 @@ class LiveDateActivity : BaseActivity() {
     }
 
     lateinit var mTextView2: TextView
-    override val layoutViewId: Int
-        get() = R.layout.activity_data_binding
+
 
     override fun initView() {
         mTextView2 = findViewById(R.id.textView2)
         findViewById<View>(R.id.button19).setOnClickListener(View.OnClickListener { view: View? -> onViewClicked(view) })
 
         LiveUser.getInstance(this).observe(this, Observer { user ->
-            e("onChanged        $user")
+            e("onChanged button19        $user")
             mTextView2.setText(user.name + user.level)
         })
+
+
+
+        binding.button191.setOnClickListener {
+
+            LiveUser.getInstance(this).observe(this, Observer { user ->
+                e("onChanged  button191       $user")
+                binding.textView21.setText(user.name + user.level)
+            })
+        }
+
+
     }
 
     fun onViewClicked(view: View?) {

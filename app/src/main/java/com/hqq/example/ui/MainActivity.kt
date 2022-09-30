@@ -27,9 +27,11 @@ import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
 import com.hqq.example.ui.file.FileIndexActivity
 import com.hqq.example.ui.fold.FoldViewActivity
+import com.hqq.example.ui.fragment.FragmentIndexActivity
 import com.hqq.example.ui.fragment.TestLiveFragmentActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
+import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.parcelable.ParcelableActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
@@ -92,6 +94,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(MirrorActivity::class.java)
 
 //    OkHttp.newHttpCompat()
+
+//        open(FragmentIndexActivity::class.java)
+        open(LiveDateActivity::class.java)
 
         val testFlow = flow<String>() {
             emit("1213")
@@ -165,6 +170,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             LogUtils.dInfo("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
             arrayList.add(MainBean("文件相关", FileIndexActivity::class.java))
+            arrayList.add(MainBean("Fragment相关", FragmentIndexActivity::class.java))
             arrayList.add(MainBean("异常相关测试", ThrowIndexActivity::class.java))
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
             arrayList.add(MainBean("转场动画", TransitionsAnimationActivity::class.java))

@@ -3,28 +3,44 @@
 
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        tools:context=".ui.jetpack.livedata.LiveDateActivity">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".ui.jetpack.livedata.LiveDateActivity">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="{user.name}"
-            tools:layout_editor_absoluteX="263dp"
-            tools:layout_editor_absoluteY="131dp" />
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{user.name}"
+                tools:layout_editor_absoluteX="263dp"
+                tools:layout_editor_absoluteY="131dp" />
 
         <Button
-            android:id="@+id/button19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="284dp"
-            tools:layout_editor_absoluteY="426dp" />
+                android:id="@+id/button19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送数据"
+                tools:layout_editor_absoluteX="284dp"
+                tools:layout_editor_absoluteY="426dp" />
+
+        <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{user.name}"
+                tools:layout_editor_absoluteX="263dp"
+                tools:layout_editor_absoluteY="131dp" />
+
+        <Button
+                android:id="@+id/button191"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送数据"
+                tools:layout_editor_absoluteX="284dp"
+                tools:layout_editor_absoluteY="426dp" />
 
 
     </LinearLayout>
