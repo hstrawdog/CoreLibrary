@@ -38,7 +38,47 @@
                 android:id="@+id/button191"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发送数据"
+                android:text="新的监听"
+                tools:layout_editor_absoluteX="284dp"
+                tools:layout_editor_absoluteY="426dp" />
+
+        <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{user.name}"
+                tools:layout_editor_absoluteX="263dp"
+                tools:layout_editor_absoluteY="131dp" />
+
+        <Button
+                android:id="@+id/button22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单利的liveData 发送数据"
+                tools:layout_editor_absoluteX="284dp"
+                tools:layout_editor_absoluteY="426dp" />
+
+        <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{user.name}"
+                tools:layout_editor_absoluteX="263dp"
+                tools:layout_editor_absoluteY="131dp" />
+
+        <Button
+                android:id="@+id/button24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单利的liveData 新的监听"
+                tools:layout_editor_absoluteX="284dp"
+                tools:layout_editor_absoluteY="426dp" />
+
+        <Button
+                android:id="@+id/button25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移除监听"
                 tools:layout_editor_absoluteX="284dp"
                 tools:layout_editor_absoluteY="426dp" />
 

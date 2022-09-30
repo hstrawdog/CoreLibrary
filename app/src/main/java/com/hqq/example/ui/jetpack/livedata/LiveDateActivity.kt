@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.lifecycle.SingleLiveEvent
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.R
@@ -30,10 +30,10 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
 
     lateinit var mTextView2: TextView
 
+    var live = SingleLiveEvent<String>()
 
     override fun initView() {
         mTextView2 = findViewById(R.id.textView2)
-        findViewById<View>(R.id.button19).setOnClickListener(View.OnClickListener { view: View? -> onViewClicked(view) })
 
         LiveUser.getInstance(this).observe(this, Observer { user ->
             e("onChanged button19        $user")
@@ -41,16 +41,31 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
         })
 
 
-
+        binding.button19.setOnClickListener {
+            onViewClicked(it)
+        }
         binding.button191.setOnClickListener {
-
             LiveUser.getInstance(this).observe(this, Observer { user ->
                 e("onChanged  button191       $user")
                 binding.textView21.setText(user.name + user.level)
             })
         }
 
+        live.observe(this) {
+            binding.textView22.text = it;
+        }
+        binding.button22.setOnClickListener {
 
+            live.value = System.currentTimeMillis().toString()
+        }
+        binding.button24.setOnClickListener {
+            live.observe(this) {
+                binding.textView23.text = it;
+            }
+        }
+        binding.button25.setOnClickListener {
+            live.removeObservers(this)
+        }
     }
 
     fun onViewClicked(view: View?) {

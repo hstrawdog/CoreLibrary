@@ -124,6 +124,7 @@
         <entry key="..\:/AndroidStudioProjects/CoreLibrary/opengl/src/main/res/layout/item_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/Administrator/Desktop/CoreLibrary/Core/src/main/res/layout/activity_recycle_view.xml" value="0.1" />
         <entry key="..\:/Users/Administrator/Desktop/CoreLibrary/app/src/main/res/layout/activity_save_bitmap.xml" value="0.37135416666666665" />
+        <entry key="Core/src/main/res/layout/layout_def_toolbar.xml" value="0.34479166666666666" />
         <entry key="OpenGL/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.191" />
         <entry key="OpenGL/src/main/res/layout/activity_create_opengl.xml" value="0.34791666666666665" />
         <entry key="OpenGL/src/main/res/layout/activity_triangle.xml" value="0.34791666666666665" />

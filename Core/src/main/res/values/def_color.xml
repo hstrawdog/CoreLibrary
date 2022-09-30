@@ -11,6 +11,7 @@
     <color name="toolbar_bg_color">@color/white</color>
     <color name="toolbar_text_color">#333333</color>
     <color name="toolbar_line_bg">#eeeeee</color>
+    <color name="toolbar_status_left_image_color">@color/transparent</color>
 
     <!--背景颜色-->
     <color name="bg_color">#f5f5f5</color>

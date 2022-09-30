@@ -119,7 +119,7 @@ interface IToolBar {
          * 默认白色
          */
         @ColorRes
-        var statusBarColor = R.color.white
+        var statusBarColor = R.color.toolbar_status_color
         set(value) {
             field =value
 

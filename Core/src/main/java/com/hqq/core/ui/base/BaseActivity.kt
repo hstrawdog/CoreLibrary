@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hqq.core.R
+import com.hqq.core.lifecycle.SingleLiveEvent
 import com.hqq.core.toolbar.IToolBar
 import com.hqq.core.ui.base.IRootView.IActivityRootView
 import com.hqq.core.utils.BundleAction
@@ -33,7 +34,7 @@ import com.hqq.core.widget.LoadingView
 
 abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener {
 
-    var activityResult= MutableLiveData<ActivityResult>()
+    var activityResult= SingleLiveEvent<ActivityResult>()
     var registerForActivity= registerForActivityResult(ActivityResultContracts.StartActivityForResult(), object :ActivityResultCallback<ActivityResult> {
         override fun onActivityResult(result: ActivityResult) {
             activityResult.value=result
