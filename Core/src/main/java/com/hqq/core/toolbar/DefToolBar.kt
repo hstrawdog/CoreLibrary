@@ -29,7 +29,7 @@ import com.hqq.core.widget.FilterImageView
 class DefToolBar : BaseToolBar() {
 
     override var toolBarBg: ImageView? = null
-    private val mDefTitleColor = R.color.color_333
+    private val mDefTitleColor = R.color.toolbar_text_color
 
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
         val toolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_def_toolbar,
