@@ -4,7 +4,6 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import com.hqq.core.CoreConfig
 import com.hqq.core.R
@@ -42,16 +41,15 @@ abstract class BaseToolBar : IToolBar {
      * 状态栏背景颜色
      */
     @ColorRes
-    protected var defStatusColor = R.color.toolbar_status_color
-
-    @ColorRes
-    protected var mDefToolBarColor = R.color.toolbar_bg_color
+    protected var defStatusColor = CoreConfig.get().defStatusColor
 
     /**
-     * 获取状态 底部的View
-     *
-     * @return
+     * 标题栏 颜色
      */
+    @ColorRes
+    protected var defToolBarColor = CoreConfig.get().defToolBarColor
+
+
     /**
      * 状态栏背景
      */
@@ -87,10 +85,10 @@ abstract class BaseToolBar : IToolBar {
     /**
      * 是否显示状态栏
      */
-    protected var isShowStatusBar = true
+    private var isShowStatusBar = true
 
-    override fun setShowStatusBar(showStatusBar: Boolean): BaseToolBar {
-        isShowStatusBar = showStatusBar
+    override fun setShowStatusBar(isShowStatusBar: Boolean): BaseToolBar {
+        this.isShowStatusBar = isShowStatusBar
         return this
     }
 
@@ -101,15 +99,16 @@ abstract class BaseToolBar : IToolBar {
         this.activity = WeakReference(activity)
         val linearLayout = LinearLayout(activity)
         linearLayout.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayout.orientation = LinearLayout.VERTICAL
         if (isShowStatusBar) {
             initStatusBar(activity)
             val mStatusBarHeight = CoreConfig.get().statusBarHeight
-            linearLayout.addView(statusBar,
-                    LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
+            linearLayout.addView(
+                statusBar,
+                LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
             )
         }
         val toolBar = activity?.let { iniToolBar(it, linearLayout) }
@@ -119,8 +118,8 @@ abstract class BaseToolBar : IToolBar {
         if (isShowLine) {
             viewLine = View(activity)
             viewLine!!.layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ScreenUtils.dip2px(activity, 1f)
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ScreenUtils.dip2px(activity, 1f)
             )
             viewLine!!.setBackgroundResource(R.color.toolbar_line_bg)
             linearLayout.addView(viewLine)
@@ -133,22 +132,22 @@ abstract class BaseToolBar : IToolBar {
     /**
      * 设置 状态栏底部的颜色
      *
-     * @param colorInt
+     * @param statusBarColor
      */
-    override fun setStatusColor(@ColorRes colorInt: Int): BaseToolBar {
-        statusBar?.setBackgroundResource(colorInt)
-        defStatusColor = colorInt
+    override fun setStatusColor(@ColorRes statusBarColor: Int): BaseToolBar {
+        statusBar?.setBackgroundResource(statusBarColor)
+        defStatusColor = statusBarColor
         return this
     }
 
     /**
      * 是否显示 toolBar
      *
-     * @param showBar 是否显示
+     * @param isShowToolBar 是否显示
      * @return this
      */
-    override fun setShowBar(showBar: Boolean): BaseToolBar {
-        isShowBar = showBar
+    override fun setShowBar(isShowToolBar: Boolean): BaseToolBar {
+        isShowBar = isShowToolBar
         return this
     }
 
@@ -175,11 +174,14 @@ abstract class BaseToolBar : IToolBar {
     /**
      * 是否显示分割线
      *
-     * @param isShow isShow
+     * @param isShowLine
      */
-    override fun showLine(isShow: Boolean): IToolBar {
-        viewLine?.visibility = if (isShow) View.VISIBLE else View.GONE
-        isShowLine = isShow
+    override fun showLine(isShowLine: Boolean): IToolBar {
+        viewLine?.visibility = View.GONE
+        if (isShowLine) {
+            viewLine?.visibility = View.VISIBLE
+        }
+        this.isShowLine = isShowLine
         return this
     }
 

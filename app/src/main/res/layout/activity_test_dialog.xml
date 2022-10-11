@@ -82,6 +82,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="三中选择简化后的SelectDialog4" />
+    <Button
+        android:id="@+id/button55"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="只有内容的" />
 
 
 </LinearLayout>

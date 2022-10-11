@@ -46,13 +46,15 @@ class CoreConfig private constructor() {
             }
     }
 
+    //region Net 网络相关
+
     /**
      *  请求默认的地址
      */
     var baseUrl: String = ""
 
     /**
-     * 读取超时
+     * 读取超时 时间
      */
     var readTimeout: Long = 15
 
@@ -65,12 +67,44 @@ class CoreConfig private constructor() {
      * 连接超时
      */
     var connectTimeout: Long = 15
+    //endregion
+    //region 状态栏 相关
+    /**
+     * 状态栏 模式
+     */
+    @ToolBarMode
+    var isStatusMode: Int = ToolBarMode.LIGHT_MODE
+
+    /**
+     *  toolBar 的构建方法 可以重新赋值
+     */
+    var iCreateToolbar: Class<DefToolBar> = DefToolBar::class.java
+
+    /**
+     *  状态栏高度
+     */
+    var statusBarHeight: Int = 0
+
+    /**
+     *  状态栏颜色
+     */
+    var defStatusColor = R.color.toolbar_status_color
+
+    /**
+     *  标题栏背景颜色
+     */
+    var defToolBarColor = R.color.toolbar_bg_color
+
+    /**
+     * 默认标题字体颜色
+     */
+    var defTitleColor = R.color.toolbar_text_color
+    //endregion
 
     /**
      *  Gson 转义对象
      */
     val instanceCreators: Map<Type, InstanceCreator<*>> = HashMap()
-
 
     /**
      * 获取当前的 Activity
@@ -79,6 +113,10 @@ class CoreConfig private constructor() {
      */
     val currActivity: Activity? get() = mActivityLifecycle?.activity
 
+    /**
+     * Activity生命周期管理
+     */
+    private var mActivityLifecycle: ActivityLifecycle? = null
 
     /**
      * Application   主要获取 context
@@ -98,25 +136,9 @@ class CoreConfig private constructor() {
     var defImg = R.drawable.ic_def_img
 
     /**
-     * 状态栏 模式
+     * 是否跳转到设置界面 设置权限
      */
-    @ToolBarMode
-    var isStatusMode: Int = ToolBarMode.Companion.LIGHT_MODE
-
-    /**
-     * Activity生命周期管理
-     */
-    private var mActivityLifecycle: ActivityLifecycle? = null
-
-    /**
-     *  toolBar 的构建方法 可以重新赋值
-     */
-    var iCreateToolbar: Class<DefToolBar> = DefToolBar::class.java
-
-    /**
-     *  状态栏高度
-     */
-    var statusBarHeight: Int = 0
+    var goSettingPermission = true
 
     /**
      * @param application Application

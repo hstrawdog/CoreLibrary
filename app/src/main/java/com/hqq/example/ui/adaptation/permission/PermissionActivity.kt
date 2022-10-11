@@ -23,19 +23,22 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
 
     override fun initView() {
         binding.button7.setOnClickListener {
-            PermissionsUtils.requestCamera(object : PermissionsResult {
-                override fun onPermissionsResult(status: Boolean) {
+            PermissionsUtils.requestCamera { status ->
+                if (status) {
                     showToast("拥有摄像头权限")
+                } else {
+                    showToast("未拥有摄像头权限")
                 }
-            })
-
+            }
         }
         binding.button8.setOnClickListener {
-            PermissionsUtils.requestStorage(object : PermissionsResult {
-                override fun onPermissionsResult(status: Boolean) {
+            PermissionsUtils.requestStorage { status ->
+                if (status) {
                     showToast("拥有文件读写权限")
+                } else {
+                    showToast("未拥有文件读写权限")
                 }
-            })
+            }
         }
 
         binding.button58.setOnClickListener {

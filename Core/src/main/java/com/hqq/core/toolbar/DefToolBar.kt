@@ -14,6 +14,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.utils.ResourcesUtils
 import com.hqq.core.widget.FilterImageView
@@ -29,14 +30,14 @@ import com.hqq.core.widget.FilterImageView
 class DefToolBar : BaseToolBar() {
 
     override var toolBarBg: ImageView? = null
-    private val mDefTitleColor = R.color.toolbar_text_color
+    private val mDefTitleColor = CoreConfig.get().defTitleColor
 
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
         val toolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_def_toolbar,
                 viewGroup, false) as Toolbar
         toolbar.findViewById<View>(R.id.iv_bar_back).setOnClickListener { activity.onBackPressed() }
         toolBarBg = toolbar.findViewById(R.id.iv_toolBar_Bg)
-        toolBarBg?.setBackgroundResource(mDefToolBarColor)
+        toolBarBg?.setBackgroundResource(defToolBarColor)
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).text = activity.title
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).setTextColor(
                 ContextCompat.getColor(toolbar.context, mDefTitleColor)
@@ -112,7 +113,7 @@ class DefToolBar : BaseToolBar() {
 
     override fun setToolBarColor(color: Int) {
         toolBarBg?.setImageResource(color)
-        mDefToolBarColor = color
+        defToolBarColor = color
         if (null != statusBar) {
             statusBar!!.setBackgroundResource(color)
         } else {
@@ -134,7 +135,7 @@ class DefToolBar : BaseToolBar() {
      * @param resid
      */
     fun setToolBarBg(@DrawableRes resid: Int): DefToolBar {
-        mDefToolBarColor = resid
+        defToolBarColor = resid
         if (toolBarBg != null) {
             toolBarBg!!.setImageResource(resid)
         }
@@ -148,7 +149,7 @@ class DefToolBar : BaseToolBar() {
      * @return
      */
     fun setDefToolBarColor(defToolBarColor: Int): DefToolBar {
-        mDefToolBarColor = defToolBarColor
+        this.defToolBarColor = defToolBarColor
         return this
     }
 

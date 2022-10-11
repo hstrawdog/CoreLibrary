@@ -3,6 +3,7 @@ package com.hqq.example.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import androidx.customview.widget.ViewDragHelper
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -96,7 +97,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //    OkHttp.newHttpCompat()
 
 //        open(FragmentIndexActivity::class.java)
-        open(LiveDateActivity::class.java)
+//        open(LiveDateActivity::class.java)
+        open(TestDialogActivity::class.java)
+
 
         val testFlow = flow<String>() {
             emit("1213")

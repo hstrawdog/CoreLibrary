@@ -1,5 +1,6 @@
 package com.hqq.core.permission
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -8,6 +9,8 @@ import android.provider.Settings
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.hqq.core.CoreConfig
+import com.hqq.core.ui.dialog.SelectDialog
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.VersionUtils
 
@@ -53,13 +56,27 @@ class PermissionsFragment : Fragment(), IPermissionActions {
                 mPermissionsResult?.onPermissionsResult(true)
             } else {
                 mPermissionsResult?.onPermissionsResult(false)
-                ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
-                // 打开设置界面
-//                        val intent = Intent()
-//                        intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-//                        val uri = Uri.fromParts("package", VersionUtils.getPackageName(context), null)
-//                        intent.data = uri
-//                        startActivityForResult(intent, OPEN_SETTING_CODE)
+                if (CoreConfig.get().goSettingPermission) {
+                    SelectDialog.Builder()
+                        .setTitle("提示")
+                        .setContent("权限被禁止,会导致功能无法继续执行.\n是否前往设置中开启")
+                        .setPositiveButton("确定") { dialog, which -> // 打开设置界面
+                            val intent = Intent()
+                            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            val uri = Uri.fromParts("package", VersionUtils.getPackageName(context), null)
+                            intent.data = uri
+                            startActivityForResult(intent, 0x55)
+                            dialog.dismiss()
+                        }.setOnCancelListener("取消") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .create()
+                        .show(childFragmentManager)
+                } else {
+                    ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
+                }
+
+
             }
         }
     }

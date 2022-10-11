@@ -28,12 +28,10 @@ class CoreProvider : ContentProvider() {
             LogUtils.e4Debug(" CoreProvider  setApplication")
         }
 
-
         return false
     }
 
-    override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?,
-                       sortOrder: String?): Cursor? {
+    override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
         return null
     }
 

@@ -3,8 +3,6 @@ package com.hqq.example;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 
-import com.hqq.core.CoreConfig;
-import com.hqq.core.annotation.ToolBarMode;
 import com.hqq.example.ui.crash.CrashHandler;
 
 import dagger.hilt.android.HiltAndroidApp;
@@ -49,7 +47,6 @@ public class APP extends Application {
 
         // 本地异常捕捉
         CrashHandler.register(this);
-
     }
 
     public boolean isApkDebugable() {
