@@ -10,8 +10,10 @@ import com.hqq.core.R
  * @Date : 2020/7/30 0030  下午 1:58
  * @Email : qiqiang213@gmail.com
  * @Descrive :
- * 防源码Dialog的构建方式
+ * 仿源码Dialog Builder 构建模式
  * 需要不断补充属性
+ *
+ * 1. 三个按钮的文本都是空的  隐藏底部按钮  ->  如果改成 动态addView 效果会不会更理想
  */
 class AlertParams {
     /**

@@ -26,6 +26,7 @@ import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
+import com.hqq.example.ui.file.DownLoadActivity
 import com.hqq.example.ui.file.FileIndexActivity
 import com.hqq.example.ui.fold.FoldViewActivity
 import com.hqq.example.ui.fragment.FragmentIndexActivity
@@ -98,7 +99,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        open(FragmentIndexActivity::class.java)
 //        open(LiveDateActivity::class.java)
-        open(TestDialogActivity::class.java)
+//        open(TestDialogActivity::class.java)
+//        open(DownLoadActivity::class.java)
+
 
 
         val testFlow = flow<String>() {

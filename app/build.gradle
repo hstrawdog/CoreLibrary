@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
-
 }
 
 android {
@@ -19,7 +18,7 @@ android {
     buildToolsVersion "31.0.0"
     defaultConfig {
         applicationId "com.hqq.core"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 31
         versionName "1.0.0"
         versionCode 1
@@ -79,24 +78,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-//    compileOptions {
-//        sourceCompatibility sourceCompatibility
-//        targetCompatibility targetCompatibility
-//    }
-//    kotlinOptions {
-//        jvmTarget = "1.8"
-//    }
-    //groovy
-//    configurations.all {
-//        resolutionStrategy.force "org.antlr:antlr4-runtime:4.7.1"
-//        resolutionStrategy.force "org.antlr:antlr4-tool:4.7.1"
-//    }
-//    configurations.all {
-//        resolutionStrategy {
-//            force("org.antlr:antlr4-runtime:4.7.1")
-//            force("org.antlr:antlr4-tool:4.7.1")
-//        }
-//    }
 }
 
 dependencies {

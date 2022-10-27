@@ -40,14 +40,29 @@ object PermissionsUtils {
     }
 
     /**
-     *  读取 蓝牙权限
+     *  读取 蓝牙权限 包含定位与读写
      * @param permissionsResult PermissionsResult
      */
     @JvmStatic
     fun requestBluetooth(permissionsResult: PermissionsResult) {
         // 蓝牙权限 需要定位权限  定位权限需要 读写权限
         FragmentProxy().requestPermissions(IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
-                .plus(IPermissionsHas.storage), permissionsResult)
+            .plus(IPermissionsHas.storage), permissionsResult)
+    }
+
+    /**
+     * @see IPermissionsHas
+     *  请求权限
+     * @param permissions Array<out Array<String>>
+     * @param permissionsResult PermissionsResult
+     */
+    fun requestPermissions(vararg permissions: Array<String>, permissionsResult: PermissionsResult) {
+
+        var permission = arrayOf("")
+        for (permission in permissions) {
+            permission.plus(permission)
+        }
+        FragmentProxy().requestPermissions(permission, permissionsResult)
     }
 
 

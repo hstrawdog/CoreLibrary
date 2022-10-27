@@ -12,6 +12,9 @@ import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
 
 
+/**
+ * 支持断点续传
+ */
 public class HttpDownloader extends HttpTask {
 
     HttpClient client;
@@ -107,7 +110,13 @@ public class HttpDownloader extends HttpTask {
             urlConn.setRequestMethod("GET");
             //urlConn设置请求头信息
             //设置请求中的媒体类型信息。
-            //urlConn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
+            for (String header : request.headers) {
+
+            }
+
+            urlConn.setRequestProperty("Content-Type", "application/pdf;charset=utf-8");
+            urlConn.setRequestProperty("sign", "7f7cb58c49faa56b4128bdb318e2837f");
+
             //设置客户端与服务连接类型
             urlConn.addRequestProperty("Connection", "Keep-Alive");
             if (downloadLength > 0) {
@@ -154,7 +163,7 @@ public class HttpDownloader extends HttpTask {
                     sum += length;
                     float percent = sum * 100.0f / contentLength;
 
-                    int p = (int) percent ;
+                    int p = (int) percent;
                     if (callback != null) {
                         callback.onProgress(p);
                     }

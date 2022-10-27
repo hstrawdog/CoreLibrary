@@ -41,7 +41,7 @@ object ImageLoadUtils {
      * @return  RequestOptions
      */
     fun getRequestOptionRound(px: Int = ResourcesUtils.getDimen(R.dimen.x10).toInt(), resourceId: Int = CoreConfig.get().defImg): RequestOptions {
-        return getRequestOption().transform(GlideRoundTransform(px))
+        return getRequestOption(resourceId).transform(GlideRoundTransform(px))
     }
 
     /**

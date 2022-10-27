@@ -23,7 +23,7 @@ interface IPermissionActions {
          * @return
          */
         fun hasPermission(context: Context?, vararg permissions: String?): Boolean {
-            var has = permissions.size > 0
+            var has = permissions.isNotEmpty()
             if (has) {
                 for (permission in permissions) {
                     val pre = context?.checkSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED

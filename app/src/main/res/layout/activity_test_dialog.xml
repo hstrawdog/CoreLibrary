@@ -1,92 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.dialog.TestDialogActivity">
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="无折叠效果"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="38dp" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="带叠效果"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="38dp" />
-
-    <Button
-        android:id="@+id/button18"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="选择dialog" />
+        android:layout_height="match_parent"
+        tools:context=".ui.dialog.TestDialogActivity">
 
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="底部dialog" />
-
-    <Button
-        android:id="@+id/button15"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="全屏的dialog" />
-
-    <Button
-        android:id="@+id/button16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="右边的dialog" />
-
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="左边边的dialog" />
-
-    <Button
-        android:id="@+id/button28"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="简化后的SelectDialog" />
-
-    <Button
-        android:id="@+id/button51"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="简化后的SelectDialog2" />
-
-    <Button
-        android:id="@+id/button52"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="简化后的SelectDialog3" />
-
-    <Button
-        android:id="@+id/button53"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="简化后的SelectDialog4" />
-
-    <Button
-        android:id="@+id/button54"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="三中选择简化后的SelectDialog4" />
-    <Button
-        android:id="@+id/button55"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="只有内容的" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-</LinearLayout>
+        <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="无折叠效果"
+                tools:layout_editor_absoluteX="47dp"
+                tools:layout_editor_absoluteY="38dp" />
+
+        <Button
+                android:id="@+id/button10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="带叠效果"
+                tools:layout_editor_absoluteX="47dp"
+                tools:layout_editor_absoluteY="38dp" />
+
+        <Button
+                android:id="@+id/button18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="选择dialog" />
+
+        <Button
+                android:id="@+id/button14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="底部dialog" />
+
+        <Button
+                android:id="@+id/button15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="全屏的dialog" />
+
+        <Button
+                android:id="@+id/button16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="右边的dialog" />
+
+        <Button
+                android:id="@+id/button17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="左边边的dialog" />
+
+        <Button
+                android:id="@+id/button28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="简化后的SelectDialog" />
+
+        <Button
+                android:id="@+id/button51"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="简化后的SelectDialog2" />
+
+        <Button
+                android:id="@+id/button52"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="简化后的SelectDialog3" />
+
+        <Button
+                android:id="@+id/button53"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="简化后的SelectDialog4" />
+
+        <Button
+                android:id="@+id/button54"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="三中选择简化后的SelectDialog4" />
+
+        <Button
+                android:id="@+id/button65"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="只有内容的与提示" />
+
+        <Button
+                android:id="@+id/button66"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="只有内容" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

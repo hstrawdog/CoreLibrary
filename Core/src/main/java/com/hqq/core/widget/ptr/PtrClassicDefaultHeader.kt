@@ -51,9 +51,7 @@ class PtrClassicDefaultHeader : FrameLayout, PtrUIHandler {
 
     protected fun initViews(attrs: AttributeSet?) {
         val arr = context.obtainStyledAttributes(attrs, `in`.srain.cube.views.ptr.R.styleable.PtrClassicHeader, 0, 0)
-        if (arr != null) {
-            mRotateAniTime = arr.getInt(`in`.srain.cube.views.ptr.R.styleable.PtrClassicHeader_ptr_rotate_ani_time, mRotateAniTime)
-        }
+        mRotateAniTime = arr.getInt(`in`.srain.cube.views.ptr.R.styleable.PtrClassicHeader_ptr_rotate_ani_time, mRotateAniTime)
         buildAnimation()
         val header = LayoutInflater.from(context).inflate(R.layout.cube_ptr_classic_default_header, this)
         mRotateView = header.findViewById(R.id.ptr_classic_header_rotate_view)

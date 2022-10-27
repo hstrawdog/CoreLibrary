@@ -24,25 +24,25 @@ class PermissionsHasImpl : IPermissionsHas {
         var result = true
         if (permissions.isNotEmpty()) {
             for (permission in permissions) {
-                if (Arrays.asList<String>(*IPermissionsHas.calendar).contains(permission)) {
+                if (IPermissionsHas.calendar.contains(permission)) {
                     result = result && hasCalendar(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.camera).contains(permission)) {
+                } else if (IPermissionsHas.camera.contains(permission)) {
                     result = result && hasCamera(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.contacts).contains(permission)) {
+                } else if (IPermissionsHas.contacts.contains(permission)) {
                     result = result && hasContacts(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.location).contains(permission)) {
+                } else if (IPermissionsHas.location.contains(permission)) {
                     result = result && hasLocation(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.microphone).contains(permission)) {
+                } else if (IPermissionsHas.microphone.contains(permission)) {
                     result = result && hasMicrophone(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.phone).contains(permission)) {
+                } else if (IPermissionsHas.phone.contains(permission)) {
                     result = result && hasPhone(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.sensors).contains(permission)) {
+                } else if (IPermissionsHas.sensors.contains(permission)) {
                     result = result && hasSensors(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.sMS).contains(permission)) {
+                } else if (IPermissionsHas.sMS.contains(permission)) {
                     result = result && hasSMS(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.storage).contains(permission)) {
+                } else if (IPermissionsHas.storage.contains(permission)) {
                     result = result && hasStorage(context)
-                } else if (Arrays.asList<String>(*IPermissionsHas.bluetooth).contains(permission)) {
+                } else if (IPermissionsHas.bluetooth.contains(permission)) {
                     result = result && hasBluetooth(context)
                 }
             }

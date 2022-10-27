@@ -133,6 +133,7 @@
         <entry key="OpenGL/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.191" />
         <entry key="app/src/main/res/layout/activity_data_binding.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_def_img.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/activity_download.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_fragment_inex.xml" value="0.34375" />
         <entry key="app/src/main/res/layout/activity_ifragment.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_test_dialog.xml" value="0.34479166666666666" />

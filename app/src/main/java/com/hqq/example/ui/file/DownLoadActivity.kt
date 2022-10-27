@@ -2,19 +2,24 @@ package com.hqq.example.ui.file
 
 import android.content.ContentValues
 import android.content.Context
+import android.net.Uri
 import android.os.Build
+import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
+import android.widget.Button
+import android.widget.TextView
 import com.hqq.core.net.ok.download.*
-import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.ui.base.BaseViewBindingActivity
+import com.hqq.core.utils.DateUtils.nowDate4yyyyMMdd
+import com.hqq.core.utils.encrypt.MD5Utils
 import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.R
-import android.net.Uri
+import com.hqq.example.databinding.ActivityDownloadBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.*
-import java.lang.Exception
-import android.os.ParcelFileDescriptor
-import android.widget.Button
-import android.widget.TextView
 
 
 /**
@@ -24,10 +29,7 @@ import android.widget.TextView
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class DownLoadActivity : BaseActivity() {
-    override val layoutViewId: Int
-        get() = R.layout.activity_download
-
+class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
     override fun initView() {
 
 //        HttpClient().download(Request().apply {
@@ -48,9 +50,43 @@ class DownLoadActivity : BaseActivity() {
 //
 //                })
 
+        binding.button62.setOnClickListener {
+            var pdfUrl = "https://ft.ncpssd.org/pdf/getxwkSky/topicsxwk/pdf/SKY_XJP/JHXK202203023.pdf"
+            val path = FileUtils.getCacheDir(this@DownLoadActivity) + "/" + System.currentTimeMillis() + ".pdf"
+
+//        RequestBody requestBody = RequestBody.create("", MediaType.parse("application/xml"));
+            val sign: String = MD5Utils.encryptStr("L!N45S26y1SGzq9^" + nowDate4yyyyMMdd)
+            HttpClient().download(Request().apply {
+                url(pdfUrl).addHeader("sing", "7f7cb58c49faa56b4128bdb318e2837f")
+                addHeader("Content-Type", "application/xml")
+
+            }, path, object : DownloadCallback {
+                override fun onDownloaded() {
+                    LogUtils.e("onDownloaded")
+
+                }
+
+                override fun onProgress(percent: Float) {
+                    LogUtils.e("onProgress   ${percent}")
+                    CoroutineScope(Dispatchers.Main).launch {
+                        binding.textView30.text = "  $percent  "
+                    }
+
+                }
+
+                override fun onFailure(code: Int, errMsg: String?) {
+                    LogUtils.e("onFailure")
+
+                }
+
+            })
+
+        }
+
+
         findViewById<Button>(R.id.button61).setOnClickListener {
 //        val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/D7E41FEA0FD864409B18DC2921D3CEECF309.mp4"
-        val url = "https://media.w3.org/2010/05/sintel/trailer.mp4"
+            val url = "https://media.w3.org/2010/05/sintel/trailer.mp4"
 ////            val url = "https://s186.convertio.me/p/m6uxG_51t9I1HKZbRmnv_A/d4c878bc05c3172944ea60d7cac37bbf/1647409049087.mp4"
 //            val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/34DE7E9C6F0F7346A38B92CB23EB01571857.mp4"
 ////            val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/F5CD39FFCB763249766AC4EBC07650D832C2.mp4"
@@ -58,25 +94,24 @@ class DownLoadActivity : BaseActivity() {
             File(path)?.delete()
             HttpClient().download(Request().apply {
                 url(url)
-            }, path,
-                object : DownloadCallback {
-                    override fun onDownloaded() {
-                        LogUtils.e("onDownloaded")
-                        videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(activity, File(path))
-                    }
+            }, path, object : DownloadCallback {
+                override fun onDownloaded() {
+                    LogUtils.e("onDownloaded")
+                    videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(activity, File(path))
+                }
 
-                    override fun onProgress(percent: Float) {
-                        LogUtils.e("onProgress " + percent)
-                        findViewById<TextView>(R.id.textView30).setText("当前进度:         " + percent.toString())
-                    }
+                override fun onProgress(percent: Float) {
+                    LogUtils.e("onProgress " + percent)
+                    findViewById<TextView>(R.id.textView30).setText("当前进度:         " + percent.toString())
+                }
 
-                    override fun onFailure(code: Int, errMsg: String?) {
-                        LogUtils.e("onFailure")
-                        findViewById<TextView>(R.id.textView30).setText("失败 : " + code)
+                override fun onFailure(code: Int, errMsg: String?) {
+                    LogUtils.e("onFailure")
+                    findViewById<TextView>(R.id.textView30).setText("失败 : " + code)
 
-                    }
+                }
 
-                })
+            })
         }
 
     }

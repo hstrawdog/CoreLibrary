@@ -58,7 +58,7 @@ object RegexUtils {
      * @param str
      * @return
      */
-    fun stringIsNull(str: String): Boolean {
+    fun stringIsNull(str: String? ): Boolean {
         if (isNull(str)) {
             return true
         } else if ("null" == str) {

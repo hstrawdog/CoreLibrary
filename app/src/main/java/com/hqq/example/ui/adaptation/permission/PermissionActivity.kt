@@ -2,6 +2,7 @@ package com.hqq.example.ui.adaptation.permission
 
 import android.app.Activity
 import android.content.Intent
+import com.hqq.core.permission.IPermissionsHas
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseDataBindingActivity
@@ -44,6 +45,11 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
         binding.button58.setOnClickListener {
             open(Permission4FragmentActivity::class.java)
         }
+
+        PermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage, IPermissionsHas.bluetooth) {
+
+        }
+
     }
 
 

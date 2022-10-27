@@ -18,8 +18,15 @@ import com.hqq.core.utils.ResourcesUtils
  * @FileName :   BaseSelectDialog
  * @Date : 2019/10/31 0031  上午 11:12
  * @Email : qiqiang213@gmail.com
- * @Descrive : 选择弹窗
- *  使用 AlertParams Builder 进行构建
+ * @Descrive :
+ *          选择弹窗
+ * 使用 AlertParams Builder 进行构建
+ *
+ *      标题         左右边距 上边距
+ *  ----------      分割线 无
+ *      内容         上下边距  20   ->   内容正常 填充textView   也适配其他View
+ *  ------------    分割线
+ *  取消 | 中立 | 确定    默认隐藏中立    无内容 隐藏按钮菜单
  */
 class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, DialogInterface.OnKeyListener {
     /**
@@ -76,7 +83,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
      * builder 对象处理
      */
     private fun initAlertParams() {
-        rootView?.let {
+        rootView?.let { it ->
             // 左边按钮 取消
             it.findViewById<TextView>(R.id.tv_cancel)?.let {
                 if (alertParams?.negativeButtonText.isNullOrEmpty()) {
@@ -110,8 +117,9 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                 }
             }
 
-            if (!alertParams?.neutralButtonText.isNullOrEmpty()) {
-                it.findViewById<TextView>(R.id.tv_negative)?.apply {
+            it.findViewById<TextView>(R.id.tv_negative)?.apply {
+                if (!alertParams?.neutralButtonText.isNullOrEmpty()) {
+
                     text = alertParams?.neutralButtonText
                     visibility = View.VISIBLE
                     setOnClickListener {
@@ -119,10 +127,8 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                             alertParams?.neutralButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
                         }
                     }
+                    it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
                 }
-                it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
-
-
             }
 
             // 如果  三个菜单都没文字  隐藏 分割线
@@ -138,6 +144,12 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
             // 提示
             it.findViewById<TextView>(R.id.tv_title)?.apply {
                 alertParams?.let {
+                    if (it.title.isNullOrEmpty()) {
+                        visibility = View.GONE
+                    } else {
+                        visibility = View.VISIBLE
+                    }
+
                     this.text = it.title
                     // 标题大小
                     this.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.titleFontSize)
