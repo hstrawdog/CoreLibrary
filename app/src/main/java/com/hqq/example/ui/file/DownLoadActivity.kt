@@ -8,7 +8,7 @@ import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.widget.Button
 import android.widget.TextView
-import com.hqq.core.net.ok.download.*
+import com.hqq.core.net.download.*
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.utils.DateUtils.nowDate4yyyyMMdd
 import com.hqq.core.utils.encrypt.MD5Utils
@@ -16,9 +16,12 @@ import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityDownloadBinding
+import com.hqq.core.net.DownloadListener
+import com.hqq.core.net.ok.OkHttp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.Call
 import java.io.*
 
 
@@ -30,6 +33,9 @@ import java.io.*
  * @Describe :
  */
 class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
+
+    var okhttpCall: Call? = null
+
     override fun initView() {
 
 //        HttpClient().download(Request().apply {
@@ -59,7 +65,6 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
             HttpClient().download(Request().apply {
                 url(pdfUrl).addHeader("sing", "7f7cb58c49faa56b4128bdb318e2837f")
                 addHeader("Content-Type", "application/xml")
-
             }, path, object : DownloadCallback {
                 override fun onDownloaded() {
                     LogUtils.e("onDownloaded")
@@ -114,6 +119,67 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
             })
         }
 
+
+        okhttp()
+    }
+
+    private fun okhttp() {
+
+        var apkPath =
+            "https://cos.pgyer.com/a23203790be8b427d740bbb60b574c48.apk?sign=6c5f523895347d047b9cdec85ef0306c&t=1668140148&response-content-disposition=attachment%3Bfilename%3D%E7%88%B1%E9%A5%B0%E6%8B%8D_3.3.3.apk"
+        var fileName = "test.apk"
+        var pdfPath = "http://103.247.176.188/Direct2.aspx?id=256965670&sign=8c5d1c425fdad174"
+        binding.button69.setOnClickListener {
+            okhttpCall = OkHttp.newHttpCompat().downloadFile(apkPath, 0, fileName, FileUtils.getCacheDir(), object : DownloadListener {
+                override fun start(max: Long) {
+                    binding.textView30.text = "start   $max"
+                }
+
+                override fun loading(progress: Float) {
+                    binding.textView36.text = "loading    ${progress * 100}"
+
+                }
+
+                override fun complete(filePath: String?) {
+                    binding.textView37.text = "complete     $filePath"
+
+                }
+
+                override fun fail(code: Int, e: java.lang.Exception?) {
+                    binding.textView38.text = "fail $code       ${e.toString()}"
+
+                }
+            })
+        }
+        binding.button70.setOnClickListener {
+            okhttpCall?.cancel()
+        }
+
+        binding.button71.setOnClickListener {
+            val file = File(FileUtils.getCacheDir() + File.separator + fileName)
+
+            okhttpCall = OkHttp.newHttpCompat().downloadFile(apkPath, file.length(), fileName, FileUtils.getCacheDir(), object : DownloadListener {
+                override fun start(max: Long) {
+                    binding.textView30.text = "start %=$max"
+                }
+
+                override fun loading(progress: Float) {
+                    binding.textView36.text = "loading %=${progress * 100}"
+
+                }
+
+                override fun complete(filePath: String?) {
+                    binding.textView37.text = "complete %=$filePath"
+
+                }
+
+                override fun fail(code: Int, e: java.lang.Exception?) {
+                    binding.textView38.text = "fail %=${e.toString()}"
+
+                }
+            })
+
+        }
     }
 
     fun videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(context: Context, destFile: File) {

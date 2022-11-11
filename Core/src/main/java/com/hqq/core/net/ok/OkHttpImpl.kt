@@ -8,15 +8,17 @@
  */
 package com.hqq.core.net.ok
 
-import android.os.Handler
-import android.os.Looper
+import android.text.TextUtils
+import com.hqq.core.CoreConfig
+import com.hqq.core.net.DownloadListener
 import com.hqq.core.net.ok.HttpCompat.ParamsCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainCoroutineDispatcher
 import kotlinx.coroutines.launch
 import okhttp3.*
-import java.io.IOException
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import java.io.*
+import java.net.URLConnection
 import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.CoroutineContext
@@ -31,8 +33,19 @@ import kotlin.coroutines.CoroutineContext
  * @Descrive :
 </描述当前版本功能> */
 class OkHttpImpl : HttpCompat {
-    var mOkHttpClient: OkHttpClient? = null
-    val WRITE_TIMEOUT = 60
+
+
+    val WRITE_TIMEOUT = 60L
+
+    /**
+     * 修改  延迟加载
+     */
+    val mOkHttpClient: OkHttpClient by lazy {
+        OkHttpClient.Builder() //设置读取超时时间
+            .readTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS) //设置写的超时时
+            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS).connectTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS).build()
+    }
+
 
     /**
      * 创建 OkHttpClient
@@ -40,11 +53,7 @@ class OkHttpImpl : HttpCompat {
      * @return HttpCompat
      */
     override fun create(): HttpCompat {
-        mOkHttpClient = OkHttpClient.Builder() //设置读取超时时间
-                .readTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS) //设置写的超时时
-                .writeTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-                .connectTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
-                .build()
+
         return this
     }
 
@@ -70,7 +79,7 @@ class OkHttpImpl : HttpCompat {
     override fun getExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call {
         val request: Request.Builder = getBuilder(url, params)
 
-        val call = mOkHttpClient!!.newCall(request.build())
+        val call = mOkHttpClient.newCall(request.build())
         try {
             val response = call.execute()
             postHandler(Dispatchers.Default, callback, response, params)
@@ -116,6 +125,176 @@ class OkHttpImpl : HttpCompat {
     }
 
     /**
+     *  文件下载
+     * @param url String
+     * @param startsPoint Long
+     * @param fileName String
+     * @param downloadPath String
+     * @param downloadListener DownloadListener
+     * @return Call
+     * @throws IOException
+     */
+    override fun downloadFile(url: String, startsPoint: Long, fileName: String, downloadPath: String, downloadListener: DownloadListener): Call {
+        val request: Request.Builder = Request.Builder().url(url).addHeader("Connection", "close") //这里不设置可能产生EOF错误
+            .header("RANGE", "bytes=$startsPoint-") //断点续传
+
+        var call = mOkHttpClient!!.newCall(request.build())
+
+        try {
+            call.enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    downloadListener.fail(-1, e)
+                }
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    val code = response.code
+                    try {
+                        if (response.isSuccessful) {
+                            var tempStartPoint = startsPoint
+                            val file = File(downloadPath + File.separator + fileName)
+                            val length = response.body!!.contentLength()
+                            if (length == 0L) {
+                                // 说明文件已经下载完，直接跳转安装就好
+                                downloadListener.complete(file.absolutePath)
+                                return
+                            }
+                            if (response.code == 200) {
+                                //说明后台不支持断点续传
+                                tempStartPoint = 0
+                                if (file.exists()) {
+                                    file.delete()
+                                }
+                            }
+                            downloadListener.start(tempStartPoint)
+                            // 保存文件到本地
+                            var `is`: InputStream? = null
+                            var randomAccessFile: RandomAccessFile? = null
+                            var bis: BufferedInputStream? = null
+                            val buff = ByteArray(1024)
+                            var len = 0
+                            try {
+                                `is` = response.body!!.byteStream()
+                                bis = BufferedInputStream(`is`)
+                                // 随机访问文件，可以指定断点续传的起始位置
+                                randomAccessFile = RandomAccessFile(file, "rwd")
+                                randomAccessFile.seek(tempStartPoint)
+                                var fileSize = startsPoint
+                                while (bis.read(buff).also { len = it } != -1) {
+                                    randomAccessFile.write(buff, 0, len)
+                                    fileSize += len
+                                    val fileLength = randomAccessFile.length()
+                                    val index = fileSize.toFloat() / length.toFloat()
+                                    downloadListener.loading(index)
+                                }
+                                // 下载完成
+                                downloadListener.complete(file.absolutePath)
+                            } catch (e: Exception) {
+                                //所有异常都处理
+                                if (CoreConfig.get().isDebug) {
+                                    e.printStackTrace()
+                                }
+                                downloadListener.fail(-1, e)
+                            } finally {
+                                try {
+                                    `is`?.close()
+                                    bis?.close()
+                                    randomAccessFile?.close()
+                                } catch (e: Exception) {
+                                    //所有异常都处理
+                                    if (CoreConfig.get().isDebug) {
+                                        e.printStackTrace()
+                                    }
+                                }
+                            }
+                        } else {
+                            downloadListener.fail(code, null)
+                        }
+                    } catch (e: Exception) {
+                        //所有异常都处理
+                        if (CoreConfig.get().isDebug) {
+                            e.printStackTrace()
+                        }
+                        downloadListener.fail(-1, e)
+                    }
+                }
+            })
+        } catch (e: Exception) {
+            //所有异常都处理
+            if (CoreConfig.get().isDebug) {
+                e.printStackTrace()
+            }
+            downloadListener.fail(-1, e)
+        }
+
+        return call
+    }
+
+    override fun preUpload(url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>): Call {
+        var call: Call? = null
+        var requestBody: RequestBody? = null
+        if (TextUtils.isEmpty(fileKey) || files == null || files.isEmpty()) {
+            requestBody = setRequestBody(bodyParams)
+        } else {
+            val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
+            if (bodyParams != null) {
+                val entries = bodyParams.entries
+                val entryIterator = entries.iterator()
+                while (entryIterator.hasNext()) {
+                    val (key, value) = entryIterator.next()
+                    builder.addFormDataPart(key, value)
+                }
+            }
+            //遍历paths中所有图片绝对路径到builder，并约定key如“upload”作为后台接受多张图片的key
+            for (file in files) {
+                val fileName = file.name
+                val mimeType: String = guessMimeType(fileName)
+
+                builder.addFormDataPart(fileKey, fileName, RequestBody.create(mimeType.toMediaTypeOrNull(), file))
+            }
+            requestBody = builder.build()
+        }
+        val request: Request = Request.Builder().url(url).post(requestBody!!).build()
+        call = mOkHttpClient.newCall(request)
+        return call
+    }
+
+    /**
+     * 获取文件后缀的方法
+     *
+     * @param path
+     * @return
+     */
+    private fun guessMimeType(path: String): String {
+        val fileNameMap = URLConnection.getFileNameMap()
+        var contentType = fileNameMap.getContentTypeFor(path)
+        if (contentType == null) {
+            contentType = "application/octet-stream"
+        }
+        return contentType
+    }
+    /**
+     * post的请求参数，构造RequestBody
+     *
+     * @param bodyParams
+     * @return
+     */
+    private fun setRequestBody(bodyParams: Map<String, String>?): RequestBody? {
+        var body: RequestBody? = null
+        val formEncodingBuilder = FormBody.Builder()
+        if (bodyParams != null) {
+            val entries = bodyParams.entries
+            val entryIterator = entries.iterator()
+            while (entryIterator.hasNext()) {
+                val (key, value) = entryIterator.next()
+                formEncodingBuilder.add(key, value)
+            }
+        }
+        body = formEncodingBuilder.build()
+        return body
+    }
+
+    /**
      * 拼接成URL
      * @param url String
      * @param params ParamsCompat?
@@ -145,10 +324,9 @@ class OkHttpImpl : HttpCompat {
      * @param callback OkNetCallback
      * @return Call
      */
-    private fun doGet(coroutineContext: CoroutineContext, url: String, params: ParamsCompat,
-                      callback: OkNetCallback): Call {
+    private fun doGet(coroutineContext: CoroutineContext, url: String, params: ParamsCompat, callback: OkNetCallback): Call {
         val request: Request.Builder = getBuilder(url, params)
-        val call = mOkHttpClient!!.newCall(request.build())
+        val call = mOkHttpClient.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 postHandler(coroutineContext, callback, null, null)
@@ -170,10 +348,7 @@ class OkHttpImpl : HttpCompat {
      * @param o
      * @return
      */
-    private fun doPost(url: String,
-                       params: ParamsCompat,
-                       callback: OkNetCallback,
-                       coroutineContext: CoroutineContext): Call {
+    private fun doPost(url: String, params: ParamsCompat, callback: OkNetCallback, coroutineContext: CoroutineContext): Call {
         val body = params.paramForm()
         val request: Request.Builder = Request.Builder().url(url).post(body)
         return doRequest(coroutineContext, request, callback, params)
@@ -187,10 +362,7 @@ class OkHttpImpl : HttpCompat {
      * @param response
      * @param paramsCompat
      */
-    private fun postHandler(coroutineContext: CoroutineContext,
-                            callback: OkNetCallback,
-                            response: Response?,
-                            paramsCompat: ParamsCompat?) {
+    private fun postHandler(coroutineContext: CoroutineContext, callback: OkNetCallback, response: Response?, paramsCompat: ParamsCompat?) {
         CoroutineScope(coroutineContext).launch {
             post(callback, response, paramsCompat)
         }
@@ -204,11 +376,8 @@ class OkHttpImpl : HttpCompat {
      * @param params
      * @return
      */
-    private fun doRequest(coroutineContext: CoroutineContext,
-                          request: Request.Builder,
-                          callback: OkNetCallback,
-                          params: ParamsCompat): Call {
-        val call = mOkHttpClient!!.newCall(request.build())
+    private fun doRequest(coroutineContext: CoroutineContext, request: Request.Builder, callback: OkNetCallback, params: ParamsCompat): Call {
+        val call = mOkHttpClient.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 postHandler(coroutineContext, callback, null, null)

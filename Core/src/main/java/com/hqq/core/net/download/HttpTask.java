@@ -1,4 +1,4 @@
-package com.hqq.core.net.ok.download;
+package com.hqq.core.net.download;
 
 public class HttpTask implements Runnable {
 	

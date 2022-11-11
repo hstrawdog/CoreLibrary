@@ -118,7 +118,7 @@ abstract class DividerItemDecoration : ItemDecoration() {
 
     private fun drawChildLeftVertical(child: View, c: Canvas, parent: RecyclerView, @ColorInt color: Int, lineWidthPx: Int, startPaddingPx: Int, endPaddingPx: Int) {
         var topPadding = 0
-        var bottomPadding = 0
+        var bottomPadding: Int
         topPadding = if (startPaddingPx <= 0) {
             //padding<0当作==0处理
             //上下左右默认分割线的两头都出头一个分割线的宽度，避免十字交叉的时候，交叉点是空白
@@ -142,9 +142,8 @@ abstract class DividerItemDecoration : ItemDecoration() {
     }
 
     private fun drawChildRightVertical(child: View, c: Canvas, parent: RecyclerView, @ColorInt color: Int, lineWidthPx: Int, startPaddingPx: Int, endPaddingPx: Int) {
-        var topPadding = 0
         var bottomPadding = 0
-        topPadding = if (startPaddingPx <= 0) {
+        var topPadding: Int = if (startPaddingPx <= 0) {
             //padding<0当作==0处理
             //上下左右默认分割线的两头都出头一个分割线的宽度，避免十字交叉的时候，交叉点是空白
             -lineWidthPx

@@ -32,9 +32,15 @@ interface OnFragmentVisibilityChangedListener {
 abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener, View.OnAttachStateChangeListener,
     OnFragmentVisibilityChangedListener {
 
-    var activityResult= SingleLiveEvent<ActivityResult>()
-    var registerForActivity= registerForActivityResult(ActivityResultContracts.StartActivityForResult()
-    ) { result -> activityResult.value = result }
+    /**
+     *   MutableLiveData 去传递结果
+     */
+    var activityResult = SingleLiveEvent<ActivityResult>()
+
+    /**
+     * 预先 注册
+     */
+    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> activityResult.value = result }
 
     /**
      * 缓存根布局对象
@@ -317,17 +323,12 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      */
     private fun checkVisibility(expected: Boolean) {
         if (expected == visible) return
-        val parentVisible =
-            if (localParentFragment == null) parentActivityVisible
-            else localParentFragment?.isFragmentVisible() ?: false
+        val parentVisible = if (localParentFragment == null) parentActivityVisible
+        else localParentFragment?.isFragmentVisible() ?: false
         val superVisible = super.isVisible()
         val hintVisible = userVisibleHint
         val visible = parentVisible && superVisible && hintVisible
-        info(
-            String.format(
-                "==> checkVisibility = %s  ( parent = %s, super = %s, hint = %s )", visible, parentVisible, superVisible, hintVisible
-            )
-        )
+        info(String.format("==> checkVisibility = %s  ( parent = %s, super = %s, hint = %s )", visible, parentVisible, superVisible, hintVisible))
         if (visible != this.visible) {
             this.visible = visible
             onVisibilityChanged(this.visible)

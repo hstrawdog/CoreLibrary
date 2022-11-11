@@ -16,11 +16,9 @@ import com.hqq.core.permission.PermissionsUtils
  * @param cls Class<*>
  * @param result ActivityResultCallback<ActivityResult>
  */
-fun BaseActivity.open(
-    cls: Class<*>,
-    bundle: Bundle = Bundle(),
-    result: ActivityResultCallback<ActivityResult?> = ActivityResultCallback<ActivityResult?> { }
-) {
+fun BaseActivity.open(cls: Class<*>,
+                      bundle: Bundle = Bundle(),
+                      result: ActivityResultCallback<ActivityResult?> = ActivityResultCallback<ActivityResult?> { }) {
     registerForActivity.launch(Intent(this, cls).apply {
         putExtras(bundle)
     })

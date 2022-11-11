@@ -14,7 +14,9 @@ import com.hqq.core.ui.base.BaseFragment
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-fun BaseFragment.open(cls: Class<*>, bundle: Bundle = Bundle(), result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
+fun BaseFragment.open(cls: Class<*>,
+                      bundle: Bundle = Bundle(),
+                      result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
 //    registerForActivityResult(ActivityResultContracts.StartActivityForResult(), result).launch(Intent(requireContext(), cls).apply {
 //        putExtras(bundle)
 //    })

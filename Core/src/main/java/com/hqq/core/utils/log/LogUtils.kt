@@ -98,6 +98,7 @@ object LogUtils {
             e("$TAG", any)
         }
     }
+
     /**
      * E 类型错误日志
      */
@@ -132,21 +133,6 @@ object LogUtils {
         var tag = "Info"
         if (CoreConfig.get().isDebug) {
             doLog(tag, "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────", "w")
-            val stackTrace = Throwable().stackTrace
-            if (stackTrace.size > 1) {
-                for (index in 1 until (if (stackTrace.size > 5) 5 else stackTrace.size)) {
-                    val targetElement = stackTrace[index]
-                    val head =
-                        "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
-                            getFileName(
-                                targetElement
-                            )
-                        }:${targetElement.getLineNumber()})            "
-                    doLog(tag, "|      $head     ", "w")
-                }
-
-            }
-            doLog(tag, "├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄", "w")
 
             if (any == null) {
                 e("标签 : 内容为空！")
@@ -154,7 +140,17 @@ object LogUtils {
                 doLog(tag, any, "w")
             }
             doLog(tag, "├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄", "w")
-            doLog(tag, "end", "w")
+
+            val stackTrace = Throwable().stackTrace
+            if (stackTrace.size > 1) {
+                for (index in 1 until (if (stackTrace.size > 5) 5 else stackTrace.size)) {
+                    val targetElement = stackTrace[index]
+                    val head = "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
+                        getFileName(targetElement)
+                    }:${targetElement.getLineNumber()})            "
+                    doLog(tag, "|      $head     ", "w")
+                }
+            }
             doLog(tag, "└────────────────────────────────────────────────────────────────────────────────────────────────────────────────", "w")
         }
     }

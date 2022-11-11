@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <Button
             android:id="@+id/button64"
@@ -10,4 +11,17 @@
             android:layout_height="wrap_content"
             android:text="测试open"
             tools:layout_editor_absoluteY="5dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+            android:id="@+id/button67"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="监听生命周期 与延迟 加载  初始化 "
+            tools:layout_editor_absoluteY="56dp" />
+
+    <Button
+            android:id="@+id/button68"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试fragment生命周期" />
+</LinearLayout>

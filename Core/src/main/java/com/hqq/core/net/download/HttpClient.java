@@ -1,4 +1,4 @@
-package com.hqq.core.net.ok.download;
+package com.hqq.core.net.download;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.core.net.ok.download
+ * @Package : com.hqq.core.net.download
  * @FileName :   HttpClient
  * @Date : 2021/3/30 0030  上午 9:43
  * @Email :  qiqiang213@gmail.com

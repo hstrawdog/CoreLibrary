@@ -29,6 +29,7 @@ class TestLiveFragment : BaseFragment() {
 
     override fun initView() {
         textView.setText("$text")
+        LogUtils.d(" TestLiveFragment   onResume         $text ")
     }
 
     override fun onResume() {

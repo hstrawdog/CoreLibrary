@@ -1,4 +1,4 @@
-package com.hqq.core.net.ok.download;
+package com.hqq.core.net.download;
 
 import android.util.Log;
 
@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
-
 
 /**
  * 支持断点续传

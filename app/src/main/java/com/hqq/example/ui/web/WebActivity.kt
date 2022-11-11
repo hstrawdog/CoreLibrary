@@ -37,7 +37,7 @@ class WebActivity : BaseFrameLayoutActivity() {
         val mBaseFragment = BaseWebFragment.instantiate(this, title, url)
 
         findViewById<TextView>(R.id.tv_fail).setOnClickListener {
-            mBaseFragment?.url?.let { it1 -> mBaseFragment.webView?.loadUrl(it1) }
+            mBaseFragment.url?.let { it1 -> mBaseFragment.webView?.loadUrl(it1) }
             findViewById<TextView>(R.id.tv_fail).visibility= View.GONE
             mBaseFragment.webView?.visibility=View.VISIBLE
         }

@@ -1,4 +1,4 @@
-package com.hqq.core.net.ok.download;
+package com.hqq.core.net.download;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;

@@ -16,21 +16,58 @@
             tools:layout_editor_absoluteX="27dp"
             tools:layout_editor_absoluteY="19dp" />
 
+
+    <TextView
+            android:id="@+id/textView36"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+    <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+    <TextView
+            android:id="@+id/textView38"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
     <Button
             android:id="@+id/button61"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="开始下载"
+            android:text="HttpURLConnection 开始下载"
             tools:layout_editor_absoluteX="168dp"
             tools:layout_editor_absoluteY="201dp" />
 
     <Button
             android:id="@+id/button62"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="开始下载pdf"
+            android:text="HttpURLConnection 开始下载pdf"
             tools:layout_editor_absoluteX="168dp"
             tools:layout_editor_absoluteY="201dp" />
+
+    <Button
+            android:id="@+id/button69"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OkHttp 下载 " />
+
+    <Button
+            android:id="@+id/button70"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Okhttp 取消请求" />
+
+    <Button
+            android:id="@+id/button71"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Okhttp 继续下载" />
 
 
 </LinearLayout>

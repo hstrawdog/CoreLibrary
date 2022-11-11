@@ -22,8 +22,6 @@ class ViewPager2FragmentLiveActivity : BaseViewBindingActivity<ActivityViewPager
         binding.viewPager.offscreenPageLimit = 5
 
     }
-
-
     class ViewPageAdapter(ac: BaseActivity) : BaseFragmentAdapter(ac) {
         init {
             for (i in 0..10) {

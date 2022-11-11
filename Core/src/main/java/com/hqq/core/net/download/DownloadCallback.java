@@ -1,5 +1,9 @@
-package com.hqq.core.net.ok.download;
+package com.hqq.core.net.download;
 
+/**
+ *  需要更换成 DownloadListener
+ */
+@Deprecated
 public interface DownloadCallback {
 
 	public void onDownloaded();

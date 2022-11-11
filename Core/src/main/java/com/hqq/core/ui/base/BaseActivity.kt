@@ -33,13 +33,15 @@ import com.hqq.core.widget.LoadingView
  */
 
 abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener {
+    /**
+     *  回调
+     */
+    var activityResult = SingleLiveEvent<ActivityResult>()
 
-    var activityResult= SingleLiveEvent<ActivityResult>()
-    var registerForActivity= registerForActivityResult(ActivityResultContracts.StartActivityForResult(), object :ActivityResultCallback<ActivityResult> {
-        override fun onActivityResult(result: ActivityResult) {
-            activityResult.value=result
-        }
-    } )
+    /**
+     *  页面跳转
+     */
+    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> activityResult.value = result }
 
 
     /**
@@ -55,7 +57,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     }
 
     /**
-     *  强制竖屏
+     * 强制竖屏
      * 正常互联网APP 竖屏比较多
      * 横竖屏情况下不动 生命周期不会有关系
      * 等待测试

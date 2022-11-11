@@ -120,9 +120,9 @@ class BaseMatrixActivity : BaseActivity() {
             dst[6] = (bw * 2).toFloat()
             dst[7] = (bh * 2).toFloat()
             matrix.setPolyToPoly(src, 0, dst, 0, 4)
-            mButton47!!.setAnimationMatrix(matrix)
+            mButton47.animationMatrix = matrix
             val pts = FloatArray(8)
-            mButton47!!.getMatrix().mapPoints(pts)
+            mButton47.matrix.mapPoints(pts)
             dInfo(pts.toString())
         })
     }

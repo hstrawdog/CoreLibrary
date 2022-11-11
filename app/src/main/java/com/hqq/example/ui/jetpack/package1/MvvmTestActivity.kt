@@ -23,18 +23,18 @@ class MvvmTestActivity : BaseVmActivity<UserViewModel,ActivityMvvmBinding, >() {
     override fun addViewModel() {
         e(" MvvmTestActivity   addViewModel 1 ")
         //       mBinding.setVariable(BR.vm, new ViewModelProvider(this).get(UserViewModel.class));
-        binding!!.vm = ViewModelProvider(this).get(UserViewModel::class.java)
-        binding!!.title = "这是一个变量String"
+        binding.vm = ViewModelProvider(this).get(UserViewModel::class.java)
+        binding.title = "这是一个变量String"
         val map = ObservableArrayMap<String, String>()
         map["key1"] = "ObservableArrayMap  value1"
         map["key2"] = "ObservableArrayMap value2"
         map["key3"] = "ObservableArrayMap value3"
         map["key4"] = "ObservableArrayMap value4"
-        binding!!.map = map
+        binding.map = map
         val observableArrayList: ObservableArrayList<String> = ObservableArrayList<String>()
         observableArrayList.add("key1")
         observableArrayList.add("key2")
-        binding!!.setList(observableArrayList)
+        binding.setList(observableArrayList)
         e(" MvvmTestActivity   addViewModel 2 ")
     }
 

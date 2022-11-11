@@ -52,8 +52,7 @@ object VersionUtils {
     fun getPackageName(context: Context?): String? {
         try {
             val packageManager = context!!.packageManager
-            val packageInfo = packageManager.getPackageInfo(
-                    context.packageName, 0)
+            val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
             return packageInfo.packageName
         } catch (e: Exception) {
             e.printStackTrace()
@@ -68,10 +67,11 @@ object VersionUtils {
      * @return
      */
     fun appInstalledOrNot(activity: Activity?, uri: String?): Boolean {
-        val pm = activity!!.packageManager
+        val pm = activity?.packageManager
         try {
-            pm.getPackageInfo(uri!!, PackageManager.GET_ACTIVITIES)
-            return true
+            pm?.getPackageInfo(uri!!, PackageManager.GET_ACTIVITIES)?.let {
+                return true
+            }
         } catch (e: PackageManager.NameNotFoundException) {
         }
         return false

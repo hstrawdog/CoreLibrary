@@ -8,5 +8,5 @@
     <color name="color_ededed">#ededed</color>
 <!--    <color name="toolbar_bg_color">@color/white</color>-->
     <color name="color_text_skin">#999999</color>
-    <color name="toolbar_text_color">@color/color_red</color>
+<!--    <color name="toolbar_text_color">@color/color_red</color>-->
 </resources>

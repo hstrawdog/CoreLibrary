@@ -3,18 +3,14 @@ package com.hqq.example.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.customview.widget.ViewDragHelper
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import com.hqq.core.net.ok.OkHttp
-import com.hqq.core.net.ok.download.HttpClient
 import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
-import com.hqq.example.accessibility.TestAccessibilityActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
@@ -30,20 +26,16 @@ import com.hqq.example.ui.file.DownLoadActivity
 import com.hqq.example.ui.file.FileIndexActivity
 import com.hqq.example.ui.fold.FoldViewActivity
 import com.hqq.example.ui.fragment.FragmentIndexActivity
-import com.hqq.example.ui.fragment.TestLiveFragmentActivity
 import com.hqq.example.ui.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
-import com.hqq.example.ui.jetpack.livedata.LiveDateActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.parcelable.ParcelableActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.view.CanvasDrawBitmapActivity
-import com.hqq.example.ui.view.MirrorActivity
 import com.hqq.example.ui.web.WebActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlin.coroutines.coroutineContext
 
 /**
  * @Author : huangqiqiang
@@ -68,6 +60,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
+
+
+
 //        loadingView.show()
 //        Handler().postDelayed(3 * 1000) {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);

@@ -414,7 +414,7 @@ object RegexUtils {
 //        println("" + checkBankNum("6222600260001072321"))
 
         var list = ArrayList<String>()
-        println(list.indexOf(null))
+//        println(list.indexOf(null))
 
 
     }

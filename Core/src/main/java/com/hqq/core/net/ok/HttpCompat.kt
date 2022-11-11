@@ -1,7 +1,9 @@
 package com.hqq.core.net.ok
 
+import com.hqq.core.net.DownloadListener
 import okhttp3.Call
 import okhttp3.RequestBody
+import java.io.File
 
 /**
  * @Author : huangqiqiang
@@ -70,4 +72,26 @@ interface HttpCompat {
      * @return
      */
     fun postExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call //  其他请求方式
+
+    /**
+     *   文件下载
+     * @param url String 地址
+     * @param startsPoint Long 开始续传的位置   正常文件大小
+     * @param fileName String  文件名称
+     * @param downloadPath String  文件地址
+     * @param downloadListener DownloadListener 回调
+     * @return Call
+     */
+    fun downloadFile(url: String, startsPoint: Long, fileName: String, downloadPath: String, downloadListener: DownloadListener): Call
+
+    /**
+     *  文件上传 接口
+     * @param url String
+     * @param bodyParams Map<String, String>
+     * @param fileKey String
+     * @param files List<File>
+     * @return Call
+     */
+     fun preUpload(url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>): Call
+
 }
