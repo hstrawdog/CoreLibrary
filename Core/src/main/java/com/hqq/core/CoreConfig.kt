@@ -151,7 +151,7 @@ class CoreConfig private constructor() {
         this.application = application
         statusBarHeight = ScreenUtils.getStatusBarHeight4Resources(applicationContext)
         // 监听Activity 的生命周期
-        if (RegexUtils.isNull(mActivityLifecycle)) {
+        if (RegexUtils.checkIsNull(mActivityLifecycle)) {
             mActivityLifecycle = ActivityLifecycle()
             application.registerActivityLifecycleCallbacks(mActivityLifecycle)
         }

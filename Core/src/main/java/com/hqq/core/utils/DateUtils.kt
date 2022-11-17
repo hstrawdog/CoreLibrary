@@ -122,7 +122,7 @@ object DateUtils {
      */
     @JvmStatic
     fun getDayInData(time: String): String {
-        if (RegexUtils.unNull(time)) {
+        if (RegexUtils.checkUnNull(time)) {
             val str = time.split(" ".toRegex()).toTypedArray()
             return if (str.size > 1) {
                 str[1]
@@ -137,7 +137,7 @@ object DateUtils {
      */
     @JvmStatic
     fun format2Second(time: String): Long {
-        if (RegexUtils.isNull(time)) {
+        if (RegexUtils.checkIsNull(time)) {
             return 0
         }
         val str = time.split(":".toRegex()).toTypedArray()
@@ -167,7 +167,7 @@ object DateUtils {
      */
     @JvmStatic
     fun format2Millisecond(time: String): Long {
-        if (RegexUtils.isNull(time)) {
+        if (RegexUtils.checkIsNull(time)) {
             return 0
         }
         val str = time.split(":".toRegex()).toTypedArray()
@@ -278,7 +278,7 @@ object DateUtils {
      */
     @JvmStatic
     fun string2Millisecond(date: String?): Long {
-        if (RegexUtils.isNull(date)) {
+        if (RegexUtils.checkIsNull(date)) {
             return 0L
         }
         try {

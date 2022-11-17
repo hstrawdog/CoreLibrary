@@ -1,6 +1,5 @@
 package com.hqq.core.utils
 
-import com.hqq.core.utils.log.LogUtils
 import java.lang.Exception
 import java.util.regex.Pattern
 
@@ -21,45 +20,60 @@ object RegexUtils {
      * String
      * List  有待 验证
      *
-     * @param object Object
+     * @param any Object
      * @return boolean
      */
-    fun checkNull(`object`: Any?): Boolean {
-        if (`object` == null) {
-            return true
-        } else if (`object` is List<*>) {
-            return `object`.isEmpty()
-        } else if (`object` is Array<*>) {
-            return (`object` as Array<String?>).size <= 0
+    fun checkIsNull(any: Any?): Boolean {
+        return when (any) {
+            null -> {
+                true
+            }
+            is String -> {
+                any.isEmpty()
+            }
+            is List<*> -> {
+                any.isEmpty()
+            }
+            is Array<*> -> {
+                any.isEmpty()
+            }
+            is Map<*, *> -> {
+                any.isEmpty()
+            }
+            else -> false
         }
-        return false
     }
 
     /**
      * 非空判断
-     *
-     * @param object
-     * @return
+     * @param any Any?
+     * @return Boolean
      */
-    fun unNull(`object`: Any?): Boolean {
-        return !isNull(`object`)
+    fun checkUnNull(any: Any?): Boolean {
+        return !checkIsNull(any)
     }
 
+    /**
+     *  两个都不为空
+     * @param value1 T1?
+     * @param value2 T2?
+     * @param bothNotNull Function2<T1, T2, Unit>
+     */
     fun <T1, T2> ifNotNull(value1: T1?, value2: T2?, bothNotNull: (T1, T2) -> (Unit)) {
         if (value1 != null && value2 != null) {
             bothNotNull(value1, value2)
         }
     }
 
-
+    //region String  相关
     /**
      * 判断string是否是空的   过滤null
      *
      * @param str
      * @return
      */
-    fun stringIsNull(str: String? ): Boolean {
-        if (isNull(str)) {
+    fun checkStringIsNull(str: String?): Boolean {
+        if (checkIsNull(str)) {
             return true
         } else if ("null" == str) {
             return true
@@ -68,13 +82,39 @@ object RegexUtils {
     }
 
     /**
+     *  判断String  不为空
+     * @param str String?
+     * @return Boolean
+     */
+    fun checkStringUnEmpty(str: String?): Boolean {
+        return !checkStringIsNull(str)
+    }
+
+
+    /**
+     *  判断String 是否是空的 并给出提示
+     * @param str String?
+     * @param tip String
+     * @return Boolean
+     */
+    fun checkStringIsNullAndShowHint(str: String?, hint: String): Boolean {
+        if (checkIsNull(str)) {
+            ToastUtils.showToast(hint)
+            return true
+        }
+        return false
+    }
+    //endregion判断
+
+
+    /**
      * 判断手机号码
      *
      * @param contactPhone
      * @return
      */
     fun checkPhone(contactPhone: String): Boolean {
-        if (isNull(contactPhone)) {
+        if (checkIsNull(contactPhone)) {
             ToastUtils.showToast("请输入手机号码")
             return true
         } else if (contactPhone.trim { it <= ' ' }.length != 11) {
@@ -84,9 +124,14 @@ object RegexUtils {
         return false
     }
 
+    /**
+     *  判断是否是手机号码
+     * @param phone String
+     * @return Boolean
+     */
     fun isPhone(phone: String): Boolean {
         val regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$"
-        return if (isNull(phone)) {
+        return if (checkIsNull(phone)) {
             ToastUtils.showToast("请输入手机号码")
             false
         } else if (phone.length != 11) {
@@ -111,7 +156,7 @@ object RegexUtils {
      * @return
      */
     fun checkName(name: String?): Boolean {
-        if (isNull(name)) {
+        if (checkIsNull(name)) {
             ToastUtils.showToast("请输入姓名")
             return true
         }
@@ -170,7 +215,7 @@ object RegexUtils {
      * @return
      */
     fun checkBankNum(cardId: String): Boolean {
-        return if (checkNull(cardId)) {
+        return if (checkIsNull(cardId)) {
             false
         } else cardId.matches(Regex("^([0-9]{15}|[0-9]{16}|[0-9]{17}|[0-9]{18}|[0-9]{19})$"))
     }
@@ -212,7 +257,7 @@ object RegexUtils {
      * @return
      */
     fun checkAddress(address: String?): Boolean {
-        if (isNull(address)) {
+        if (checkIsNull(address)) {
             ToastUtils.showToast("收货地址不能为空")
         }
         return false
@@ -250,7 +295,7 @@ object RegexUtils {
      * @return
      */
     fun htmlFormatImg(html: String): String {
-        return if (isNull(html)) {
+        return if (checkIsNull(html)) {
             ""
         } else html.replace("<img", "<img style='max-width:100%;height:auto;'")
     }
@@ -280,75 +325,13 @@ object RegexUtils {
      * @return
      */
     fun format2xxx(userName: String): String {
-        if (unNull(userName)) {
+        if (checkUnNull(userName)) {
             val stringBuilder = StringBuilder(userName.substring(0, 1))
             stringBuilder.append("***")
             stringBuilder.append(userName.substring(userName.length - 1, userName.length))
             return stringBuilder.toString()
         }
         return "***"
-    }
-
-    /**
-     * 判断string是否是空的   过滤null
-     *
-     * @param str
-     * @return
-     */
-    fun checkStringNull(str: String?): Boolean {
-        return if (checkNull(str)) {
-            true
-        } else {
-            "null" == str
-        }
-    }
-
-    fun checkStringNullTip(str: String?, tip: String): Boolean {
-        if (checkNull(str)) {
-            ToastUtils.showToast("请输入$tip")
-            return true
-        }
-        return false
-    }
-
-    /**
-     * 不为空
-     *
-     * @param str
-     * @return
-     */
-    fun checkStringUnEmpty(str: String?): Boolean {
-        return !RegexUtils.checkStringNull(str)
-    }
-
-    /**
-     * 非空判断
-     *
-     * @param object
-     * @return
-     */
-    @JvmStatic
-    fun checkNotNull(`object`: Any?): Boolean {
-        return !checkNull(`object`)
-    }
-
-    /**
-     * 集合不为空
-     *
-     * @param object
-     * @return
-     */
-    fun checkArrayUnEmpty(`object`: Any): Boolean {
-        if (`object` is List<*>) {
-            return !checkNull(`object`) && `object`.size > 0
-        } else if (`object` is Map<*, *>) {
-            return `object`.size > 0
-        }
-        return !checkNull(`object`) && (`object` as Array<String?>).size > 0
-    }
-
-    fun checkArrayEmpty(`object`: Any): Boolean {
-        return !checkArrayUnEmpty(`object`)
     }
 
 
@@ -365,48 +348,25 @@ object RegexUtils {
         return true
     }
 
-    /**
-     * 检查 null
-     * 支持类型
-     * String
-     * List  有待 验证
-     *
-     * @param object Object
-     * @return boolean
-     */
-    fun isNull(any: Any?): Boolean {
-
-        if (any == null) {
-            return true
-        } else if (any is String) {
-            return any.isEmpty()
-        } else if (any is List<*>) {
-            return any.isEmpty()
-        } else if (any is Array<*>) {
-            return any.isEmpty()
-        }
-        return false
-    }
-
 
     @JvmStatic
     fun main(args: Array<String>) {
 
-//        println("null: " + isNull(null))
+//        println("null: " + checkIsNull(null))
 //
-//        println("String: " + isNull(""))
-//        println("String:123  " + isNull("123"))
+//        println("String: " + checkIsNull(""))
+//        println("String:123  " + checkIsNull("123"))
 //        var str: String? = null
-//        println("str: " + isNull(str))
+//        println("str: " + checkIsNull(str))
 //
 //        ArrayList<String>().isNullOrEmpty()
 //
 //        var list: ArrayList<String>? = null
-//        println("list: " + isNull(list))
-//        println("ArrayList<String>: " + isNull(ArrayList<String>()))
+//        println("list: " + checkIsNull(list))
+//        println("ArrayList<String>: " + checkIsNull(ArrayList<String>()))
 //        var map: HashMap<String, String>? = null
-//        println("map: " + isNull(map))
-//        println("HashMap<String, String>: " + isNull(HashMap<String, String>()))
+//        println("map: " + checkIsNull(map))
+//        println("HashMap<String, String>: " + checkIsNull(HashMap<String, String>()))
 
 
 //        println("" + checkBankNum("6227001823770993846"))
@@ -415,6 +375,10 @@ object RegexUtils {
 
         var list = ArrayList<String>()
 //        println(list.indexOf(null))
+
+        var map = HashMap<String, String>()
+
+        println(checkUnNull(map))
 
 
     }

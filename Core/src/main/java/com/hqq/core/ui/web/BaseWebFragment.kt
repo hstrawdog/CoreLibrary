@@ -7,7 +7,6 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
-import android.provider.Contacts.SettingsColumns.KEY
 import android.view.View
 import android.webkit.*
 import android.widget.ProgressBar
@@ -122,7 +121,7 @@ open class BaseWebFragment : BaseFragment() {
     override fun initView() {
         webView = findViewById(R.id.web_view) as WebView?
         progressBar = findViewById(R.id.pb_progressbar) as ProgressBar
-        if (RegexUtils.unNull(progressBarColor)) {
+        if (RegexUtils.checkUnNull(progressBarColor)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 progressBar?.indeterminateTintList = progressBarColor
             }

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.chad.library.adapter.base.module.LoadMoreModule
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.R
 import com.hqq.core.ui.base.RootViewImpl
 import com.hqq.core.utils.RegexUtils
@@ -145,13 +144,13 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         val tvRefresh = emptyView.findViewById<TextView>(R.id.tv_Refresh)
         val tvEmptyMessage = emptyView.findViewById<TextView>(R.id.tv_empty_message)
         val ivEmpty = emptyView.findViewById<ImageView>(R.id.iv_empty)
-        if (RegexUtils.unNull(tvRefresh)) {
+        if (RegexUtils.checkUnNull(tvRefresh)) {
             tvRefresh.visibility = View.GONE
         }
-        if (RegexUtils.unNull(tvEmptyMessage)) {
+        if (RegexUtils.checkUnNull(tvEmptyMessage)) {
             tvEmptyMessage.text = emptyTextMessage
         }
-        if (RegexUtils.unNull(ivEmpty)) {
+        if (RegexUtils.checkUnNull(ivEmpty)) {
             ivEmpty.setImageResource(emptyImage)
         }
     }

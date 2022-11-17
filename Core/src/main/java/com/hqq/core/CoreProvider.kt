@@ -23,7 +23,7 @@ class CoreProvider : ContentProvider() {
      */
     override fun onCreate(): Boolean {
         LogUtils.e4Debug(" CoreProvider  onCreate")
-        if (!CoreConfig.get().isInitialized() || RegexUtils.isNull(CoreConfig.get().application)) {
+        if (!CoreConfig.get().isInitialized() || RegexUtils.checkIsNull(CoreConfig.get().application)) {
             CoreConfig.get().init(context as Application)
             LogUtils.e4Debug(" CoreProvider  setApplication")
         }
