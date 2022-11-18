@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/OpenGL" />
             <option value="$PROJECT_DIR$/ReadBook" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/myapplication" />
           </set>
         </option>
       </GradleProjectSettings>

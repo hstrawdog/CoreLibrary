@@ -250,18 +250,6 @@ object RegexUtils {
         return if (luhmSum % 10 == 0) '0' else (10 - luhmSum % 10 + '0'.toInt()).toChar()
     }
 
-    /**
-     * 收货地址判断
-     *
-     * @param address
-     * @return
-     */
-    fun checkAddress(address: String?): Boolean {
-        if (checkIsNull(address)) {
-            ToastUtils.showToast("收货地址不能为空")
-        }
-        return false
-    }
 
     /**
      * 替换空格 等

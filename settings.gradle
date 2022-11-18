@@ -1,3 +1,16 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
+        mavenCentral()
+        maven { url 'https://repo1.maven.org/maven2/' }
+    }
+
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -13,6 +26,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "CoreLibrary"
 include ':app', ':Core'
-include ':myapplication'
 include ':OpenGL'
 include ':ReadBook'
