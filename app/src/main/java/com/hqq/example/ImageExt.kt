@@ -132,8 +132,7 @@ private fun String.getBitmapFormat(): Bitmap.CompressFormat {
     return when {
         fileName.endsWith(".png") -> Bitmap.CompressFormat.PNG
         fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") -> Bitmap.CompressFormat.JPEG
-        fileName.endsWith(".webp") -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-            Bitmap.CompressFormat.WEBP_LOSSLESS else Bitmap.CompressFormat.WEBP
+        fileName.endsWith(".webp") -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) Bitmap.CompressFormat.WEBP_LOSSLESS else Bitmap.CompressFormat.WEBP
         else -> Bitmap.CompressFormat.PNG
     }
 }
@@ -180,8 +179,7 @@ private fun ContentResolver.insertMediaImage(
         // 高版本不用查重直接插入，会自动重命名
     } else {
         // 老版本
-        val pictures =
-            @Suppress("DEPRECATION") Environment.getExternalStoragePublicDirectory(ALBUM_DIR)
+        val pictures = @Suppress("DEPRECATION") Environment.getExternalStoragePublicDirectory(ALBUM_DIR)
         val saveDir = if (relativePath != null) File(pictures, relativePath) else pictures
 
         if (!saveDir.exists() && !saveDir.mkdirs()) {
@@ -233,12 +231,11 @@ private fun ContentResolver.queryMediaImage28(imagePath: String): Uri? {
     val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 
     // 查询是否已经存在相同图片
-    val query = this.query(
-        collection,
+    val query = this.query(collection,
         arrayOf(MediaStore.Images.Media._ID, @Suppress("DEPRECATION") MediaStore.Images.Media.DATA),
         "${@Suppress("DEPRECATION") MediaStore.Images.Media.DATA} == ?",
-        arrayOf(imagePath), null
-    )
+        arrayOf(imagePath),
+        null)
     query?.use {
         while (it.moveToNext()) {
             val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)

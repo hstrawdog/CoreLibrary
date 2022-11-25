@@ -1,4 +1,4 @@
-package com.hqq.example.ui.info
+package com.hqq.example.ui.system.info
 
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity

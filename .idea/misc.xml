@@ -132,12 +132,19 @@
         <entry key="OpenGL/src/main/res/layout/activity_triangle.xml" value="0.34791666666666665" />
         <entry key="OpenGL/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.191" />
         <entry key="OpenGL/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.191" />
+        <entry key="app/src/main/res-night/drawable/ic_delete_svg.xml" value="0.231" />
         <entry key="app/src/main/res/layout/activity_brush_view.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_data_binding.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/activity_def.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_def_img.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_download.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/activity_flow_fold_view.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_fragment_inex.xml" value="0.34375" />
+        <entry key="app/src/main/res/layout/activity_h_s_l.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_ifragment.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/activity_inflate_test.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/activity_svg.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/layout/activity_switch.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_test_dialog.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/layout/activity_test_live_fragment.xml" value="0.37916666666666665" />
         <entry key="app/src/main/res/layout/fragment_live.xml" value="0.34479166666666666" />

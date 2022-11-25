@@ -23,12 +23,7 @@ import com.hqq.example.dialog.*
  * @Descrive : TODO
  */
 class TestDialogActivity : BaseActivity() {
-    companion object {
-        fun open(context: Activity) {
-            val starter = Intent(context, TestDialogActivity::class.java)
-            context.startActivityForResult(starter, -1)
-        }
-    }
+
 
     override val layoutViewId: Int = R.layout.activity_test_dialog
 

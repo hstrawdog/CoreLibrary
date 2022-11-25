@@ -1,11 +1,11 @@
-package com.hqq.example.ui.fold;
+package com.hqq.example.ui.layout.fold;
 
 import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.ui.fold
+ * @Package : com.hqq.example.ui.layout.fold
  * @Date : 10:33
  * @Email : qiqiang213@gmail.com
  * @Describe :

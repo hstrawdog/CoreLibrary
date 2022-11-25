@@ -1,4 +1,4 @@
-package com.hqq.example.ui.image;
+package com.hqq.example.ui.file.image;
 
 
 import android.app.Activity;
@@ -9,7 +9,7 @@ import com.hqq.example.R;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.ui.image
+ * @Package : com.hqq.example.ui.file.image
  * @FileName :   ImageViewRectangleActivity
  * @Date : 2020/6/30 0030  下午 2:45
  * @Email :  qiqiang213@gmail.com

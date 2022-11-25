@@ -13,8 +13,6 @@ public class TextNum {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
-
-
         System.out.println("-----------111111");
     }
 }

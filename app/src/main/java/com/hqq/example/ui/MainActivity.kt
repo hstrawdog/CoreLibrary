@@ -6,7 +6,6 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -22,11 +21,11 @@ import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
-import com.hqq.example.ui.file.DownLoadActivity
+import com.hqq.example.ui.dialog.DialogIndexActivity
 import com.hqq.example.ui.file.FileIndexActivity
-import com.hqq.example.ui.fold.FoldViewActivity
+import com.hqq.example.ui.layout.fold.FoldViewActivity
 import com.hqq.example.ui.fragment.FragmentIndexActivity
-import com.hqq.example.ui.info.BaseInfoActivity
+import com.hqq.example.ui.system.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.parcelable.ParcelableActivity
@@ -179,7 +178,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("默认图显示", DefImgActivity::class.java))
             arrayList.add(MainBean("RecycleView 相关", RecycleIndexActivity::class.java))
             arrayList.add(MainBean("权限测试", PermissionActivity::class.java))
-            arrayList.add(MainBean("Dialog系列", TestDialogActivity::class.java))
+            arrayList.add(MainBean("Dialog系列", DialogIndexActivity::class.java))
             arrayList.add(MainBean("Shape测试", ShapeTestActivity::class.java))
             arrayList.add(MainBean("自定义系列", CustomizeIndexActivity::class.java))
             arrayList.add(MainBean("设备信息", BaseInfoActivity::class.java))

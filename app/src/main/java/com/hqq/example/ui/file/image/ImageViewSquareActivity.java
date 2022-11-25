@@ -1,4 +1,4 @@
-package com.hqq.example.ui.image;
+package com.hqq.example.ui.file.image;
 
 import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;

@@ -131,7 +131,7 @@
                 android:label="对比View" />
 
         <activity
-                android:name=".ui.fold.FoldViewActivity"
+                android:name=".ui.layout.fold.FoldViewActivity"
                 android:label="折叠布局" />
         <activity
                 android:name=".ui.adaptation.permission.Permission4FragmentActivity"
@@ -211,10 +211,10 @@
                 android:name=".ui.customize.SemicircularActivity"
                 android:label="环形进度条" />
         <activity
-                android:name=".ui.image.ImageViewRectangle2Activity"
+                android:name="com.hqq.example.ui.file.image.ImageViewRectangle2Activity"
                 android:label="scaleType 测试" />
         <activity
-                android:name=".ui.image.ImageViewRectangleActivity"
+                android:name="com.hqq.example.ui.file.image.ImageViewRectangleActivity"
                 android:label="图片 scaleType 测试" />
         <activity
                 android:name=".ui.toast.ToastActivity"
@@ -254,7 +254,7 @@
                 android:name=".ui.customize.TemplatesImageActivity"
                 android:label="图片模板 空" />
         <activity
-                android:name=".ui.image.ImageViewSquareActivity"
+                android:name="com.hqq.example.ui.file.image.ImageViewSquareActivity"
                 android:label="图片测试" />
         <activity
                 android:name=".ui.view.EditTextActivity"
@@ -266,7 +266,7 @@
                 android:name=".ui.ShapeTestActivity"
                 android:label="shape测试" />
         <activity
-                android:name=".ui.info.FilePathActivity"
+                android:name="com.hqq.example.ui.file.FilePathActivity"
                 android:label="文件路径测试" />
         <activity
                 android:name=".ui.customize.WidgetActivity"
@@ -306,7 +306,7 @@
                 android:label="网页测试" />
         <activity android:name=".ui.customize.FishActivity" />
         <activity
-                android:name=".ui.info.BaseInfoActivity"
+                android:name="com.hqq.example.ui.system.info.BaseInfoActivity"
                 android:label="设备信息" />
         <activity
                 android:name=".ui.adaptation.LayoutTestActivity"

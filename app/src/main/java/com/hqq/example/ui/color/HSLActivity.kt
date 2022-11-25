@@ -27,6 +27,7 @@ class HSLActivity : BaseActivity() {
 
     override val layoutViewId: Int
         get() = R.layout.activity_h_s_l
+
     override fun initView() {
         val outHsl = floatArrayOf(0f, 0f, 0f)
         ColorUtils.colorToHSL(Color.parseColor("#ef2b2c"), outHsl)
@@ -47,23 +48,17 @@ class HSLActivity : BaseActivity() {
             """.trimIndent()
     }
 
-    companion object {
-        fun open(context: Context) {
-            val starter = Intent(context, HSLActivity::class.java)
-            context.startActivity(starter)
-        }
 
-        /**
-         *
-         * @param color 颜色值
-         * @param outHsl 输出比例
-         * @return
-         */
-        fun computeHSL(color: String?, vararg outHsl: Float): Int {
-            val hsl = floatArrayOf(0f, 0f, 0f)
-            ColorUtils.colorToHSL(Color.parseColor(color), hsl)
-            val newHsl = floatArrayOf(outHsl[0], hsl[1] * outHsl[1], hsl[2] * outHsl[2])
-            return ColorUtils.HSLToColor(newHsl)
-        }
+    /**
+     *
+     * @param color 颜色值
+     * @param outHsl 输出比例
+     * @return
+     */
+    fun computeHSL(color: String?, vararg outHsl: Float): Int {
+        val hsl = floatArrayOf(0f, 0f, 0f)
+        ColorUtils.colorToHSL(Color.parseColor(color), hsl)
+        val newHsl = floatArrayOf(outHsl[0], hsl[1] * outHsl[1], hsl[2] * outHsl[2])
+        return ColorUtils.HSLToColor(newHsl)
     }
 }

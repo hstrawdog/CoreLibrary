@@ -1,4 +1,4 @@
-package com.hqq.example.ui.info
+package com.hqq.example.ui.file
 
 import android.os.Environment
 import android.widget.TextView
@@ -9,7 +9,7 @@ import com.hqq.example.R
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.ui.info
+ * @Package : com.hqq.example.ui.system.info
  * @FileName :   FilePathActivity
  * @Date : 2019/11/29 0029  上午 10:23
  * @Email :  qiqiang213@gmail.com

@@ -1,10 +1,10 @@
-package com.hqq.example.ui.image;
+package com.hqq.example.ui.file.image;
 
 import com.hqq.core.ui.base.BaseActivity;
 import com.hqq.example.R;
  /**
   * @Author : huangqiqiang
-  * @Package : com.hqq.example.ui.image
+  * @Package : com.hqq.example.ui.file.image
   * @FileName :   ImageViewRectangle2Activity
   * @Date  : 2020/6/30 0030  下午 3:24
   * @Email :  qiqiang213@gmail.com

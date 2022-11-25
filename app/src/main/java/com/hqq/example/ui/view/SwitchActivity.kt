@@ -11,8 +11,7 @@ import com.hqq.example.R
  * @Describe :
  */
 class SwitchActivity : BaseActivity() {
-    override val layoutViewId: Int
-        get() = R.layout.activity_switch
+    override val layoutViewId: Int = R.layout.activity_switch
 
     /**
      * 原生自带的switch

@@ -35,7 +35,6 @@ public static void open(Activity context) {
         LinearLayout linearLayout = findViewById(R.id.ll_rootView);
 
         View viewA=LayoutInflater.from(this).inflate(R.layout.item_inflate_test_a,null,false);
-        linearLayout.addView(viewA);
 
         View viewB=LayoutInflater.from(this).inflate(R.layout.item_inflate_test_b,null,true);
         linearLayout.addView(viewB);

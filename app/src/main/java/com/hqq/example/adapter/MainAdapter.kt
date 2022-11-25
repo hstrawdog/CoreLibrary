@@ -28,7 +28,6 @@ class MainAdapter : BaseQuickAdapter<MainBean<*>, BaseViewHolder>(R.layout.item_
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
         context.startActivity(Intent(context, getItem(position).className))
-
-
     }
+
 }

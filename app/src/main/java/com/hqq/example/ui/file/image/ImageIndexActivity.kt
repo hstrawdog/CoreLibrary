@@ -1,13 +1,12 @@
-package com.hqq.example.ui.image
+package com.hqq.example.ui.file.image
 
 import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
-import com.hqq.example.ui.bar.ToolBarActivity
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example.ui.image
+ * @Package : com.hqq.example.ui.file.image
  * @Date : 17:29
  * @Email : qiqiang213@gmail.com
  * @Describe :
