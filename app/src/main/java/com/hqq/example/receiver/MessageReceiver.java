@@ -1,4 +1,4 @@
-package com.hqq.example;
+package com.hqq.example.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

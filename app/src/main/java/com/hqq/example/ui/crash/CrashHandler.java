@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 
 import com.hqq.core.CoreConfig;
 
-
 /**
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/AndroidProject
