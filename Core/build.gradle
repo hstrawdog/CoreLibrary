@@ -40,7 +40,9 @@ dependencies {
 
     // Appcompat   包含 core
     api "androidx.appcompat:appcompat:1.5.1"
-    api "androidx.core:core-ktx:1.7.0"
+    //  1.7 会导致 低版本  引用错误
+    //  http://events.jianshu.io/p/bc6d3d4a3593
+    api "androidx.core:core-ktx:1.6.0"
 
     //  kotlin拓展包
     api "androidx.activity:activity-ktx:1.5.1"
