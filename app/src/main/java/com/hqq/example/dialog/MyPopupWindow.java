@@ -13,7 +13,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.hqq.core.adapter.BaseFragmentAdapter;
 import com.hqq.example.R;
 import com.hqq.example.ui.tab.layout.TabFragment;
-import com.hqq.example.ui.tab.layout.TabLayoutActivity;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,7 +1,5 @@
 package com.hqq.example.ui.tab.layout
 
-import android.app.Activity
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -20,19 +18,13 @@ import com.hqq.example.R
  */
 class TabLayoutActivity : BaseActivity() {
 
-    companion object {
-        fun open(context: Activity) {
-            context.startActivityForResult(Intent(context, TabLayoutActivity::class.java), -1)
-        }
-    }
+    var mTbTablayout1:TabLayout? = null
+    var mVpPage:ViewPager2? = null
+    var mTbTablayout2:TabLayout? = null
+    var mTbTablayout3:TabLayout? = null
+    var mTbTablayout4:TabLayout? = null
 
-    var mTbTablayout1: TabLayout? = null
-    var mVpPage: ViewPager2? = null
-    var mTbTablayout2: TabLayout? = null
-    var mTbTablayout3: TabLayout? = null
-    var mTbTablayout4: TabLayout? = null
-
-    override val layoutViewId: Int
+    override val layoutViewId:Int
         get() = R.layout.activity_tab_layout
 
     override fun initConfig() {
@@ -57,8 +49,8 @@ class TabLayoutActivity : BaseActivity() {
         adapter.setupWithViewPager(mTbTablayout4!!, mVpPage!!)
     }
 
-    open internal inner class ViewPageAdapter(fragmentActivity: FragmentActivity) : BaseFragmentAdapter(fragmentActivity) {
-        override fun newFragment(position: Int): Fragment {
+    open internal inner class ViewPageAdapter(fragmentActivity:FragmentActivity) : BaseFragmentAdapter(fragmentActivity) {
+        override fun newFragment(position:Int):Fragment {
             return TabFragment()
         }
 

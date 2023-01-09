@@ -1,3 +1,4 @@
+import com.hqq.example.utils.ColorUtil
 import org.junit.Test
 
 /**
@@ -40,6 +41,13 @@ class Test {
             temp(a13, fl, 0, "  $p   $fl ", sum)
 
         }
+
+
+        println(" ${ColorUtil.getRanDomColor()} ")
+        println(" ${ColorUtil.getRanDomColor()} ")
+        println(" ${ColorUtil.getRanDomColor()} ")
+        println(" ${ColorUtil.getRanDomColor()} ")
+
     }
 
 

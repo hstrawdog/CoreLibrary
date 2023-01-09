@@ -47,11 +47,11 @@ import kotlinx.coroutines.flow.*
 
 class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     //  这边是kotlin
-    override val adapter: MainAdapter = MainAdapter()
-    override val bindingViewModelId: Int
+    override val adapter:MainAdapter = MainAdapter()
+    override val bindingViewModelId:Int
         get() = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState:Bundle?) {
         LogUtils.dInfo("MainActivity    onCreate1")
         super.onCreate(savedInstanceState)
         LogUtils.dInfo("MainActivity    onCreate2")
@@ -59,7 +59,6 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
-
 
 
 //        loadingView.show()
@@ -97,7 +96,6 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(DownLoadActivity::class.java)
 
 
-
         val testFlow = flow<String>() {
             emit("1213")
             emit("123")
@@ -108,11 +106,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             emit("123")
 
         }
-        combine(testFlow,testFlow2){
-                response1, response2 ->
+        combine(testFlow, testFlow2) { response1, response2 ->
         }
-        testFlow.zip(testFlow2){response1, response2 ->
-            Pair(response1,response2)
+        testFlow.zip(testFlow2) { response1, response2 ->
+            Pair(response1, response2)
         }.onEach {
             it.first
             it.second
@@ -122,8 +119,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //    val mV: MainViewModel by viewModels()
 
-    private var mExitTime: Long = 0
-    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+    private var mExitTime:Long = 0
+    override fun dispatchKeyEvent(event:KeyEvent):Boolean {
         if (event.keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) {
             if (System.currentTimeMillis() - mExitTime > 2000) {
                 ToastUtils.showToast("再按一次退出程序")
@@ -131,10 +128,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             } else {
                 val mHomeIntent = Intent(Intent.ACTION_MAIN)
                 mHomeIntent.addCategory(Intent.CATEGORY_HOME)
-                mHomeIntent.addFlags(
-                    Intent.FLAG_ACTIVITY_NEW_TASK
-                            or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-                )
+                mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
                 startActivity(mHomeIntent)
                 // 退出程序
                 System.exit(0)
@@ -159,7 +153,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             LogUtils.dInfo("MainModel init 2")
         }
 
-        override fun initData(extras: Bundle?) {
+        override fun initData(extras:Bundle?) {
             super.initData(extras)
             LogUtils.dInfo("MainModel initData 1")
         }
@@ -170,6 +164,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             LogUtils.dInfo("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
             arrayList.add(MainBean("文件相关", FileIndexActivity::class.java))
+            arrayList.add(MainBean("Ui相关", FileIndexActivity::class.java))
             arrayList.add(MainBean("Fragment相关", FragmentIndexActivity::class.java))
             arrayList.add(MainBean("异常相关测试", ThrowIndexActivity::class.java))
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))

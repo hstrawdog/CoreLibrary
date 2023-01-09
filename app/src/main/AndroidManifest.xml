@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        package="com.hqq.example">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hqq.example">
     <!-- 用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
@@ -16,8 +16,8 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
-            android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-            tools:ignore="ScopedStorage" />
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
 
     <!-- 权限 -->
@@ -27,81 +27,82 @@
     <uses-permission android:name="android.permission.RAISED_THREAD_PRIORITY" />
 
     <application
-            android:name=".APP"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:networkSecurityConfig="@xml/network_security_config"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+        android:name=".APP"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
 
         <activity
-                android:name=".ui.customize.ZoomViewActivity"
-                android:label="缩放"
-                android:exported="true">
+            android:name=".ui.customize.ZoomViewActivity"
+            android:exported="true"
+            android:label="缩放">
+
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:label="功能主页">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-                android:name=".ui.MainActivity"
-                android:exported="true"
-                android:label="功能主页">
-        </activity>
 
         <receiver
-                android:name=".receiver.MessageReceiver"
-                android:exported="true">
+            android:name=".receiver.MessageReceiver"
+            android:exported="true">
 
             <intent-filter android:priority="9999999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
             </intent-filter>
         </receiver>
         <service
-                android:name="com.example.accessibility.TestAccessibilityService"
-                android:exported="true"
-                android:label="抓取"
-                android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            android:name="com.example.accessibility.TestAccessibilityService"
+            android:exported="true"
+            android:label="抓取"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
             <meta-data
-                    android:name="android.accessibilityservice"
-                    android:resource="@xml/accessible_service_config_ali" />
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessible_service_config_ali" />
         </service>
 
         <activity
-                android:name=".ui.view.MirrorActivity"
-                android:label="镜像" />
+            android:name=".ui.view.MirrorActivity"
+            android:label="镜像" />
 
         <activity
-                android:name=".ui.fragment.TestLiveFragmentActivity"
-                android:label="测试fragment生命周期" />
+            android:name=".ui.fragment.TestLiveFragmentActivity"
+            android:label="测试fragment生命周期" />
         <activity
-                android:name=".accessibility.TestAccessibilityActivity"
-                android:label="测试无障碍服务" />
+            android:name=".accessibility.TestAccessibilityActivity"
+            android:label="测试无障碍服务" />
 
         <provider
-                android:name="androidx.core.content.FileProvider"
-                android:authorities="${applicationId}.fileProvider"
-                android:grantUriPermissions="true">
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:grantUriPermissions="true">
             <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_path" />
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
         </provider>
 
 
         <activity-alias
-                android:name=".RoundActivity"
-                android:enabled="false"
-                android:exported="true"
-                android:icon="@drawable/dlzs"
-                android:label="功能主页"
-                android:targetActivity=".ui.MainActivity">
+            android:name=".RoundActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dlzs"
+            android:label="功能主页"
+            android:targetActivity=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -109,308 +110,312 @@
         </activity-alias>
 
         <activity
-                android:name=".ui.GyroActivity"
-                android:label="陀螺仪" />
+            android:name=".ui.ViewIndexActivity"
+            android:label="View  相关" />
 
         <activity
-                android:name=".ui.SpinnerActivity"
-                android:label="SpinnerActivity" />
-        <activity
-                android:name=".ui.fragment.ViewPager2FragmentLiveActivity"
-                android:label="Fragment 生命周期" />
-        <activity
-                android:name=".ui.crash.ThrowIndexActivity"
-                android:label="异常相关" />
-        <activity
-                android:name=".ui.jetpack.databinding.BindingIndexActivity"
-                android:label="Binding 相关" />
+            android:name=".ui.GyroActivity"
+            android:label="陀螺仪" />
 
         <activity
-                android:name=".ui.customize.BrushViewActivity"
-                android:label="画笔" />
+            android:name=".ui.SpinnerActivity"
+            android:label="SpinnerActivity" />
         <activity
-                android:name=".ui.fragment.FragmentIndexActivity"
-                android:label="FragmentIndex" />
+            android:name=".ui.fragment.ViewPager2FragmentLiveActivity"
+            android:label="Fragment 生命周期" />
+        <activity
+            android:name=".ui.crash.ThrowIndexActivity"
+            android:label="异常相关" />
+        <activity
+            android:name=".ui.jetpack.databinding.BindingIndexActivity"
+            android:label="Binding 相关" />
 
         <activity
-                android:name=".ui.file.FileIndexActivity"
-                android:label="文件相关" />
+            android:name=".ui.customize.BrushViewActivity"
+            android:label="画笔" />
         <activity
-                android:name=".ui.customize.ComparedActivity"
-                android:label="对比View" />
+            android:name=".ui.fragment.FragmentIndexActivity"
+            android:label="FragmentIndex" />
 
         <activity
-                android:name=".ui.layout.fold.FoldViewActivity"
-                android:label="折叠布局" />
+            android:name=".ui.file.FileIndexActivity"
+            android:label="文件相关" />
         <activity
-                android:name=".ui.adaptation.permission.Permission4FragmentActivity"
-                android:label="Fragment 权限测试" />
+            android:name=".ui.customize.ComparedActivity"
+            android:label="对比View" />
 
         <activity
-                android:name=".ui.customize.matrix.MatrixEventActivity"
-                android:label="手势矩阵" />
+            android:name=".ui.layout.fold.FoldViewActivity"
+            android:label="折叠布局" />
         <activity
-                android:name=".ui.crash.RestartActivity"
-                android:label="重启App" />
-        <activity
-                android:name=".ui.crash.CrashActivity"
-                android:label="奔溃捕捉" />
+            android:name=".ui.adaptation.permission.Permission4FragmentActivity"
+            android:label="Fragment 权限测试" />
 
         <activity
-                android:name=".ui.parcelable.ParcelableActivity"
-                android:label="Parcelable测试" />
+            android:name=".ui.customize.matrix.MatrixEventActivity"
+            android:label="手势矩阵" />
         <activity
-                android:name=".ui.file.DownLoadActivity"
-                android:label="下载测试" />
+            android:name=".ui.crash.RestartActivity"
+            android:label="重启App" />
         <activity
-                android:name=".ui.customize.DiskViewActivity"
-                android:label="时间选择" />
+            android:name=".ui.crash.CrashActivity"
+            android:label="奔溃捕捉" />
+
         <activity
-                android:name=".ui.file.SaveBitmapActivity"
-                android:label="图片保存" />
+            android:name=".ui.parcelable.ParcelableActivity"
+            android:label="Parcelable测试" />
+        <activity
+            android:name=".ui.file.DownLoadActivity"
+            android:label="下载测试" />
+        <activity
+            android:name=".ui.customize.DiskViewActivity"
+            android:label="时间选择" />
+        <activity
+            android:name=".ui.file.SaveBitmapActivity"
+            android:label="图片保存" />
         <activity android:name=".ui.recycle.VmFragmentActivity" />
         <activity android:name=".ui.jetpack.livedata.LiveDataSpanViewActivity" />
         <activity
-                android:name=".ui.jetpack.room.RoomActivity"
-                android:label="Room 数据库" />
+            android:name=".ui.jetpack.room.RoomActivity"
+            android:label="Room 数据库" />
         <activity
-                android:name=".ui.jetpack.di.hilt.HiltActivity"
-                android:label="hilt 测试" />
+            android:name=".ui.jetpack.di.hilt.HiltActivity"
+            android:label="hilt 测试" />
         <activity
-                android:name=".demo.DemoIndexActivity"
-                android:label="Demo首页" />
+            android:name=".demo.DemoIndexActivity"
+            android:label="Demo首页" />
         <activity
-                android:name=".demo.joke.JokeActivity"
-                android:label="笑话大全" />
+            android:name=".demo.joke.JokeActivity"
+            android:label="笑话大全" />
         <activity
-                android:name=".demo.news.NewsActivity"
-                android:label="新闻列表" />
+            android:name=".demo.news.NewsActivity"
+            android:label="新闻列表" />
         <activity
-                android:name=".demo.weather.WeatherActivity"
-                android:label="聚合天气" />
+            android:name=".demo.weather.WeatherActivity"
+            android:label="聚合天气" />
         <activity
-                android:name=".ui.jetpack.databinding.FragmentTestActivity"
-                android:label="Fragment 测试" />
+            android:name=".ui.jetpack.databinding.FragmentTestActivity"
+            android:label="Fragment 测试" />
         <activity
-                android:name=".demo.login.LoginActivity"
-                android:label="模拟登陆" />
+            android:name=".demo.login.LoginActivity"
+            android:label="模拟登陆" />
         <activity
-                android:name=".ui.jetpack.package1.VmTestActivity"
-                android:label="ViewModel 测试" />
+            android:name=".ui.jetpack.package1.VmTestActivity"
+            android:label="ViewModel 测试" />
         <activity android:name=".ui.jetpack.di.dagger.DaggerActivity" />
         <activity
-                android:name=".ui.customize.matrix.BaseMatrixActivity"
-                android:label="矩阵相关" />
+            android:name=".ui.customize.matrix.BaseMatrixActivity"
+            android:label="矩阵相关" />
         <activity
-                android:name=".ui.view.InflateTestActivity"
-                android:label="Inflate对比" />
+            android:name=".ui.view.InflateTestActivity"
+            android:label="Inflate对比" />
         <activity
-                android:name=".ui.jetpack.package1.MvvmTestActivity"
-                android:label="jetpack套餐搭建mvvm" />
+            android:name=".ui.jetpack.package1.MvvmTestActivity"
+            android:label="jetpack套餐搭建mvvm" />
         <activity
-                android:name=".ui.jetpack.viewbinding.ViewBindingActivity"
-                android:label="viewBinding测试" />
+            android:name=".ui.jetpack.viewbinding.ViewBindingActivity"
+            android:label="viewBinding测试" />
         <activity
-                android:name=".ui.jetpack.viewmodel.ViewModelActivity"
-                android:label="ViewModel例子" />
+            android:name=".ui.jetpack.viewmodel.ViewModelActivity"
+            android:label="ViewModel例子" />
         <activity
-                android:name=".ui.jetpack.databinding.DataBindingActivity"
-                android:label="dataBinding测试" />
+            android:name=".ui.jetpack.databinding.DataBindingActivity"
+            android:label="dataBinding测试" />
         <activity
-                android:name=".ui.customize.SemicircularActivity"
-                android:label="环形进度条" />
+            android:name=".ui.customize.SemicircularActivity"
+            android:label="环形进度条" />
         <activity
-                android:name="com.hqq.example.ui.file.image.ImageViewRectangle2Activity"
-                android:label="scaleType 测试" />
+            android:name="com.hqq.example.ui.file.image.ImageViewRectangle2Activity"
+            android:label="scaleType 测试" />
         <activity
-                android:name="com.hqq.example.ui.file.image.ImageViewRectangleActivity"
-                android:label="图片 scaleType 测试" />
+            android:name="com.hqq.example.ui.file.image.ImageViewRectangleActivity"
+            android:label="图片 scaleType 测试" />
         <activity
-                android:name=".ui.toast.ToastActivity"
-                android:label="自定义Toast测试" />
+            android:name=".ui.toast.ToastActivity"
+            android:label="自定义Toast测试" />
         <activity android:name=".ui.customize.CurtainActivity" />
         <activity
-                android:name=".ui.color.HSLActivity"
-                android:label="HSL颜色值计算" />
+            android:name=".ui.color.HSLActivity"
+            android:label="HSL颜色值计算" />
         <activity
-                android:name=".ui.view.SvgActivity"
-                android:label="svg 测试" />
+            android:name=".ui.view.SvgActivity"
+            android:label="svg 测试" />
         <activity
-                android:name=".ui.skin.SkinCActivity"
-                android:label="换肤界面C" />
+            android:name=".ui.skin.SkinCActivity"
+            android:label="换肤界面C" />
         <activity
-                android:name=".ui.skin.SkinBActivity"
-                android:label="换肤界面B" />
+            android:name=".ui.skin.SkinBActivity"
+            android:label="换肤界面B" />
         <activity
-                android:name=".ui.skin.SkinAActivity"
-                android:label="换肤界面A" />
+            android:name=".ui.skin.SkinAActivity"
+            android:label="换肤界面A" />
         <activity
-                android:name=".ui.system.AppIconActivity"
-                android:label="设置App图标" />
+            android:name=".ui.system.AppIconActivity"
+            android:label="设置App图标" />
         <activity
-                android:name=".ui.view.BlackAndWhiteActivity"
-                android:label="黑白化" />
+            android:name=".ui.view.BlackAndWhiteActivity"
+            android:label="黑白化" />
         <activity
-                android:name=".ui.view.TextViewActivity"
-                android:label="TextView 测试" />
+            android:name=".ui.view.TextViewActivity"
+            android:label="TextView 测试" />
         <activity
-                android:name=".ui.animate.ViewAnimateActivity"
-                android:label="隐藏动画" />
+            android:name=".ui.animate.ViewAnimateActivity"
+            android:label="隐藏动画" />
         <activity
-                android:name=".ui.animate.AnimateIndexActivity"
-                android:label="View动画" />
+            android:name=".ui.animate.AnimateIndexActivity"
+            android:label="View动画" />
         <activity
-                android:name=".ui.customize.TemplatesImageActivity"
-                android:label="图片模板 空" />
+            android:name=".ui.customize.TemplatesImageActivity"
+            android:label="图片模板 空" />
         <activity
-                android:name="com.hqq.example.ui.file.image.ImageViewSquareActivity"
-                android:label="图片测试" />
+            android:name="com.hqq.example.ui.file.image.ImageViewSquareActivity"
+            android:label="图片测试" />
         <activity
-                android:name=".ui.view.EditTextActivity"
-                android:label="EditText测试" />
+            android:name=".ui.view.EditTextActivity"
+            android:label="EditText测试" />
         <activity
-                android:name=".ui.recycle.EmptyListActivity"
-                android:label="EmptyList" />
+            android:name=".ui.recycle.EmptyListActivity"
+            android:label="EmptyList" />
         <activity
-                android:name=".ui.ShapeTestActivity"
-                android:label="shape测试" />
+            android:name=".ui.ShapeTestActivity"
+            android:label="shape测试" />
         <activity
-                android:name="com.hqq.example.ui.file.FilePathActivity"
-                android:label="文件路径测试" />
+            android:name="com.hqq.example.ui.file.FilePathActivity"
+            android:label="文件路径测试" />
         <activity
-                android:name=".ui.customize.WidgetActivity"
-                android:label="小部件测试" />
+            android:name=".ui.customize.WidgetActivity"
+            android:label="小部件测试" />
         <activity
-                android:name=".ui.transitions.animation.TransitionsAnimationActivity"
-                android:label="转场动画" />
+            android:name=".ui.transitions.animation.TransitionsAnimationActivity"
+            android:label="转场动画" />
         <activity
-                android:name=".ui.launch.mode.SingleTaskActivity"
-                android:label="栈内"
-                android:launchMode="singleTask" />
+            android:name=".ui.launch.mode.SingleTaskActivity"
+            android:label="栈内"
+            android:launchMode="singleTask" />
         <activity
-                android:name=".ui.launch.mode.SingleTopActivity"
-                android:label="栈顶"
-                android:launchMode="singleTop" />
+            android:name=".ui.launch.mode.SingleTopActivity"
+            android:label="栈顶"
+            android:launchMode="singleTop" />
         <activity
-                android:name=".ui.launch.mode.SingleInstanceActivity"
-                android:label="栈顶"
-                android:launchMode="singleInstance" />
+            android:name=".ui.launch.mode.SingleInstanceActivity"
+            android:label="栈顶"
+            android:launchMode="singleInstance" />
         <activity
-                android:name=".ui.launch.mode.LaunchModeDActivity"
-                android:label="界面4" />
+            android:name=".ui.launch.mode.LaunchModeDActivity"
+            android:label="界面4" />
         <activity
-                android:name=".ui.launch.mode.LaunchModeCActivity"
-                android:label="界面3" />
+            android:name=".ui.launch.mode.LaunchModeCActivity"
+            android:label="界面3" />
         <activity
-                android:name=".ui.launch.mode.LaunchModeBActivity"
-                android:label="界面2" />
+            android:name=".ui.launch.mode.LaunchModeBActivity"
+            android:label="界面2" />
         <activity
-                android:name=".ui.launch.mode.LaunchModeAActivity"
-                android:label="界面1" />
+            android:name=".ui.launch.mode.LaunchModeAActivity"
+            android:label="界面1" />
         <activity
-                android:name=".ui.jetpack.livedata.LiveDateActivity"
-                android:label="liveDate测试" />
+            android:name=".ui.jetpack.livedata.LiveDateActivity"
+            android:label="liveDate测试" />
         <activity
-                android:name=".ui.web.WebActivity"
-                android:label="网页测试" />
+            android:name=".ui.web.WebActivity"
+            android:label="网页测试" />
         <activity android:name=".ui.customize.FishActivity" />
         <activity
-                android:name="com.hqq.example.ui.system.info.BaseInfoActivity"
-                android:label="设备信息" />
+            android:name="com.hqq.example.ui.system.info.BaseInfoActivity"
+            android:label="设备信息" />
         <activity
-                android:name=".ui.adaptation.LayoutTestActivity"
-                android:label="空" />
+            android:name=".ui.adaptation.LayoutTestActivity"
+            android:label="空" />
         <activity
-                android:name=".ui.customize.ProgressBarViewBuilderActivity"
-                android:label="进度条测试" />
+            android:name=".ui.customize.ProgressBarViewBuilderActivity"
+            android:label="进度条测试" />
         <activity
-                android:name=".ui.recycle.GallerySnapActivity"
-                android:label="画廊横向效果" />
+            android:name=".ui.recycle.GallerySnapActivity"
+            android:label="画廊横向效果" />
         <activity
-                android:name=".ui.recycle.RecycleIndexActivity"
-                android:label="RecycleView 相关" />
+            android:name=".ui.recycle.RecycleIndexActivity"
+            android:label="RecycleView 相关" />
         <activity
-                android:name=".ui.recycle.FullPagerSnapActivity"
-                android:label="Recycle多个item 分页" />
+            android:name=".ui.recycle.FullPagerSnapActivity"
+            android:label="Recycle多个item 分页" />
         <activity
-                android:name=".ui.tab.layout.TabLayoutActivity"
-                android:label="tabLayout  测试" />
+            android:name=".ui.tab.layout.TabLayoutActivity"
+            android:label="tabLayout  测试" />
         <activity
-                android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity"
-                android:label="键盘滑动" />
+            android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity"
+            android:label="键盘滑动" />
         <activity
-                android:name=".ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity"
-                android:label="键盘测试" />
+            android:name=".ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity"
+            android:label="键盘测试" />
         <activity
-                android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardActivity"
-                android:label="键盘隐藏" />
+            android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardActivity"
+            android:label="键盘隐藏" />
         <activity
-                android:name=".ui.bar.ToolBarActivity"
-                android:label="标题/状态栏设置" />
+            android:name=".ui.bar.ToolBarActivity"
+            android:label="标题/状态栏设置" />
         <activity android:name=".ui.view.page.IFragmentActivityBuilder" />
         <activity
-                android:name=".ui.recycle.LoadMoreActivity"
-                android:label="加载数据" />
+            android:name=".ui.recycle.LoadMoreActivity"
+            android:label="加载数据" />
         <activity
-                android:name=".ui.adaptation.DefActivity"
-                android:label="默认Activity" />
+            android:name=".ui.adaptation.DefActivity"
+            android:label="默认Activity" />
         <activity
-                android:name=".ui.recycle.ListActivity"
-                android:label="列表数据" />
+            android:name=".ui.recycle.ListActivity"
+            android:label="列表数据" />
         <activity android:name=".ui.bar.SearchBarActivity" />
         <activity
-                android:name=".ui.recycle.BannerActivity"
-                android:label="轮播图测试" />
+            android:name=".ui.recycle.BannerActivity"
+            android:label="轮播图测试" />
         <activity
-                android:name=".ui.adaptation.DefImgActivity"
-                android:label="默认图显示" />
+            android:name=".ui.adaptation.DefImgActivity"
+            android:label="默认图显示" />
         <activity
-                android:name=".ui.adaptation.permission.PermissionActivity"
-                android:label="权限测试" />
+            android:name=".ui.adaptation.permission.PermissionActivity"
+            android:label="权限测试" />
         <activity
-                android:name=".ui.dialog.BottomSheetActivity"
-                android:label="知乎评论列表" />
+            android:name=".ui.dialog.BottomSheetActivity"
+            android:label="知乎评论列表" />
         <activity
-                android:name=".ui.screen.TextViewBuilderSizeActivity"
-                android:label="文字大小" />
+            android:name=".ui.screen.TextViewBuilderSizeActivity"
+            android:label="文字大小" />
         <activity
-                android:name=".ui.screen.DimenActivity"
-                android:label="1像素大小测试" />
+            android:name=".ui.screen.DimenActivity"
+            android:label="1像素大小测试" />
         <activity
-                android:name=".ui.crash.ThrowActivity"
-                android:label="Throw异常测试" />
+            android:name=".ui.crash.ThrowActivity"
+            android:label="Throw异常测试" />
         <activity
-                android:name=".ui.bar.SettingToolBarActivity"
-                android:label="ToolBar 设置" />
+            android:name=".ui.bar.SettingToolBarActivity"
+            android:label="ToolBar 设置" />
         <activity
-                android:name=".ui.dialog.TestDialogActivity"
-                android:label="dialog 测试" />
+            android:name=".ui.dialog.TestDialogActivity"
+            android:label="dialog 测试" />
         <activity
-                android:name=".ui.customize.BezierActivity"
-                android:label="贝塞尔曲线" />
+            android:name=".ui.customize.BezierActivity"
+            android:label="贝塞尔曲线" />
         <activity
-                android:name=".ui.adaptation.AdaptationIndexActivity"
-                android:label="适配相关" />
+            android:name=".ui.adaptation.AdaptationIndexActivity"
+            android:label="适配相关" />
         <activity
-                android:name=".ui.dialog.DialogIndexActivity"
-                android:label="dialog 系列" />
+            android:name=".ui.dialog.DialogIndexActivity"
+            android:label="dialog 系列" />
 
         <activity
-                android:name=".ui.customize.CustomizeIndexActivity"
-                android:label="自定义View" />
+            android:name=".ui.customize.CustomizeIndexActivity"
+            android:label="自定义View" />
         <activity
-                android:name=".ui.customize.SwipeMenuLayoutActivity"
-                android:label="View 的拖动" />
+            android:name=".ui.customize.SwipeMenuLayoutActivity"
+            android:label="View 的拖动" />
         <activity
-                android:name=".ui.customize.RoundCountdownActivity"
-                android:label="圆形倒计时" />
+            android:name=".ui.customize.RoundCountdownActivity"
+            android:label="圆形倒计时" />
 
 
         <service android:name="com.amap.api.location.APSService" />
 
         <meta-data
-                android:name="com.amap.api.v2.apikey"
-                android:value="42b4f553aa37838bc95de449f8ff8116" />
+            android:name="com.amap.api.v2.apikey"
+            android:value="42b4f553aa37838bc95de449f8ff8116" />
     </application>
 
 </manifest>

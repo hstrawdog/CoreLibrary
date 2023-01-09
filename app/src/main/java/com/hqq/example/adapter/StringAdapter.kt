@@ -2,7 +2,10 @@ package com.hqq.example.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.R
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
 /**
  * @Author : huangqiqiang
@@ -16,4 +19,6 @@ class StringAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_ma
     override fun convert(helper: BaseViewHolder, item: String?) {
         helper.setText(R.id.tv_title, item)
     }
+
+
 }
