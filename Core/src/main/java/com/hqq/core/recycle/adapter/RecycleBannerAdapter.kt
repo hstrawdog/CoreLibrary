@@ -66,9 +66,9 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
     override fun getItemCount(): Int {
         return if (isUnlimited) {
-            if (data == null) 0 else if (data.size < 2) data.size else Int.MAX_VALUE
+            if (data.size < 2) data.size else Int.MAX_VALUE
         } else {
-            if (data == null) 0 else data.size
+            data.size
         }
     }
 

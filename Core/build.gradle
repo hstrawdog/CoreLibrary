@@ -3,17 +3,18 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
+import com.hqq.core.plugin.*
 
 android {
     buildFeatures {
         viewBinding true
         dataBinding true
     }
-    compileSdkVersion 32
-    buildToolsVersion "31.0.0"
+    compileSdkVersion BuildVersionConfig.compileSdkVersion
+    buildToolsVersion BuildVersionConfig.buildToolsVersion
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 32
+        minSdkVersion BuildVersionConfig.minSdkVersion
+        targetSdkVersion BuildVersionConfig.targetSdkVersion
         versionName "1.0"
         versionCode 1
 
@@ -39,48 +40,47 @@ dependencies {
 //    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
 
     // Appcompat   包含 core
-    api "androidx.appcompat:appcompat:1.3.1"
-    api "androidx.core:core-ktx:1.3.2"
+    api Appcompat.appcompat
+    api Appcompat.coreKtx
 
     //  kotlin拓展包
-    api "androidx.activity:activity-ktx:1.3.0"
-    api "androidx.fragment:fragment-ktx:1.3.6"
+    api KTX.activityKtx
+    api KTX.fragmentKtx
 
     //  androidX 组件
-    api "androidx.constraintlayout:constraintlayout:2.1.2"
-    api "androidx.recyclerview:recyclerview:1.2.1"
-    api "androidx.viewpager2:viewpager2:1.0.0"
-
-    api "com.google.android.material:material:1.3.0"
+    api Components.constraintLayout
+    api Components.recyclerview
+    api Components.viewpager2
+    api Components.meteria
 
     // 生命周期
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    api "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    api "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    api Lifecycle.lifecycleViewModelKtx
+    api Lifecycle.lifecycleLivedataKtx
+    api Lifecycle.lifecycleRunTimeKtx
 
     // 屏幕适配
-    api "com.github.huangqiqiang:IDimensCompat:1.0.1"
+    api DimensCompat.iDimensCompat
 
     // gson解析
-    api "com.google.code.gson:gson:2.8.9"
+    api Gson.gson
 
     // 压缩
-    api "top.zibin:Luban:1.1.8"
+    api Luban.luban
 
     // 上拉加载
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6"
+    api BaseRecyclerViewAdapterHelper.baseRecyclerViewAdapterHelper
 
     // 下拉刷新
-    api "in.srain.cube:ultra-ptr:1.0.11"
+    api UltraPtr.ultraPtr
 
     // 图片加载
-    api "com.github.bumptech.glide:glide:4.12.0"
-    kapt "com.github.bumptech.glide:compiler:4.12.0"
+    api Glide.glide
+    kapt Glide.glideCompiler
 
     // retrofit 请求
-    api "com.squareup.retrofit2:retrofit:2.9.0"
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
-    api "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    api Retrofit.retrofit
+    api Retrofit.converterGson
+    api Retrofit.loggingInterceptor
 }
 
 
