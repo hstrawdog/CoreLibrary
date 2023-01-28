@@ -114,7 +114,7 @@ object Components {
  * https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
  */
 object Lifecycle {
-    const val lifecycle_version = "2.2.0"
+    const val lifecycle_version = "2.4.0"
     const val arch_version = "2.1.0"
 
     // ViewModel

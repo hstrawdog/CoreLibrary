@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
+import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -18,6 +19,7 @@ import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
+import com.hqq.example.ui.compose.ComposeIndexActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
@@ -96,24 +98,28 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(DownLoadActivity::class.java)
 
 
-        val testFlow = flow<String>() {
-            emit("1213")
-            emit("123")
+//        val testFlow = flow<String>() {
+//            emit("1213")
+//            emit("123")
+//
+//        }
+//        val testFlow2 = flow<String>() {
+//            emit("1213")
+//            emit("123")
+//
+//        }
+//        combine(testFlow, testFlow2) { response1, response2 ->
+//        }
+//        testFlow.zip(testFlow2) { response1, response2 ->
+//            Pair(response1, response2)
+//        }.onEach {
+//            it.first
+//            it.second
+//        }.launchIn(lifecycleScope).start()
 
-        }
-        val testFlow2 = flow<String>() {
-            emit("1213")
-            emit("123")
 
-        }
-        combine(testFlow, testFlow2) { response1, response2 ->
-        }
-        testFlow.zip(testFlow2) { response1, response2 ->
-            Pair(response1, response2)
-        }.onEach {
-            it.first
-            it.second
-        }.launchIn(lifecycleScope).start()
+      open(ComposeIndexActivity::class.java)
+
     }
 
 

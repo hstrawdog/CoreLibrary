@@ -7,8 +7,12 @@ import com.hqq.core.plugin.*
 
 android {
     buildFeatures {
+        //开启 viewBinding 支持
         viewBinding true
+        //开启 dataBinding 支持
         dataBinding true
+        //开启 Compose 支持
+//        compose true
     }
     compileSdkVersion BuildVersionConfig.compileSdkVersion
     buildToolsVersion BuildVersionConfig.buildToolsVersion
@@ -81,6 +85,9 @@ dependencies {
     api Retrofit.retrofit
     api Retrofit.converterGson
     api Retrofit.loggingInterceptor
+
+
+
 }
 
 

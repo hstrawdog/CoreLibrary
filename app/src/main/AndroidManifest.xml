@@ -37,7 +37,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-
+    <activity android:name=".ui.compose.ComposeIndexActivity" android:label="ComposeIndex"/>
         <activity
             android:name=".ui.customize.ZoomViewActivity"
             android:exported="true"
