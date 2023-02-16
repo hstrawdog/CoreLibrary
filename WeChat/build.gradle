@@ -1,0 +1,41 @@
+import com.hqq.core.plugin.*
+
+plugins {
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+
+}
+
+android {
+    namespace = "com.hqq.wechat"
+
+    compileSdkVersion BuildVersionConfig.compileSdkVersion
+    buildToolsVersion BuildVersionConfig.buildToolsVersion
+    defaultConfig {
+        minSdkVersion BuildVersionConfig.minSdkVersion
+        targetSdkVersion BuildVersionConfig.targetSdkVersion
+        versionName "1.0"
+        versionCode 1
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api project(":Core")
+    //微信登录，支付，分享包
+    implementation "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0"
+}
