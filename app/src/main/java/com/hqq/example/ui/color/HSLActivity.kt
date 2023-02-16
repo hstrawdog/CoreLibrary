@@ -44,7 +44,6 @@ class HSLActivity : BaseActivity() {
             C1 #ff4306
             C1 SHL${Arrays.toString(newHsl)}
             C1 SHL${Arrays.toString(outHsl1)}
-
             """.trimIndent()
     }
 

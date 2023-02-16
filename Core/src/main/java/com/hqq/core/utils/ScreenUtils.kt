@@ -2,10 +2,15 @@ package com.hqq.core.utils
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import android.view.Display
+import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import com.hqq.core.CoreConfig
 import java.lang.reflect.Field
+
 
 /**
  * @Author : huangqiqiang
@@ -98,7 +103,7 @@ object ScreenUtils {
      * @param context context
      * @return int
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getScreenWidth(context: Context): Int {
         val localDisplayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
@@ -111,12 +116,44 @@ object ScreenUtils {
      * @param context context
      * @return int 屏幕高度减去 状态栏高度
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getScreenHeight(context: Context): Int {
-        val localDisplayMetrics = DisplayMetrics()
-        (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
-        return localDisplayMetrics.heightPixels - getStatusBarHeight(context)
+        return getAllScreenHeight() - getStatusBarHeight(context)
     }
+
+    /**
+     * 获取屏幕高度
+     */
+    @JvmStatic
+    fun  getAllScreenHeight():Int {
+        return ScreenHeight.getFullActivityHeight(CoreConfig.applicationContext)
+    }
+
+
+    /**
+     * 兼容API获取屏幕信息
+     * @param context
+     * @return
+     */
+    fun getDisplay(context:Context):Display? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            getDisplayApiR(context)
+        } else {
+            getDisplayApiL(context)
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private fun getDisplayApiL(context:Context):Display? {
+        val wm:WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        return wm.getDefaultDisplay()
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    private fun getDisplayApiR(context:Context):Display? {
+        return context.display
+    }
+
 
     /**
      * 获取物理宽度
@@ -124,7 +161,7 @@ object ScreenUtils {
      * @param context
      * @return
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getScreenXDPI(context: Context): Float {
         val localDisplayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
@@ -137,7 +174,7 @@ object ScreenUtils {
      * @param context
      * @return
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getScreenYDPI(context: Context): Float {
         val localDisplayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
@@ -150,7 +187,7 @@ object ScreenUtils {
      * @param context
      * @return
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getScreenDensityDpi(context: Context): Float {
         val localDisplayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
@@ -158,7 +195,7 @@ object ScreenUtils {
     }
 
 
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getStatusBarHeight(): Int {
         return getStatusBarHeight(CoreConfig.applicationContext)
     }
@@ -168,7 +205,7 @@ object ScreenUtils {
      * @param context context
      * @return int
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getStatusBarHeight(context: Context): Int {
         val c: Class<*>
         val obj: Any
@@ -193,7 +230,7 @@ object ScreenUtils {
      * @param context context
      * @return
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getStatusBarHeight4Resources(context: Context?): Int {
         var result = 0
         val resourceId = context!!.resources.getIdentifier("status_bar_height", "dimen", "android")

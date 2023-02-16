@@ -92,6 +92,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':Core')
+    implementation project(':WeChat')
 
     implementation "androidx.room:room-runtime:2.4.0-alpha03"
     kapt 'androidx.room:room-compiler:2.4.0-alpha03'
@@ -146,5 +147,9 @@ dependencies {
 
     // Compose UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
+
+    // 包重复
+    implementation group: 'com.google.guava', name: 'guava', version: '27.0.1-android'
+
 
 }

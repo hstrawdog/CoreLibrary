@@ -2,6 +2,8 @@ package com.hqq.example.ui.system.info
 
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.ScreenHeight
+import com.hqq.core.utils.ScreenUtils.getAllScreenHeight
 import com.hqq.core.utils.file.CacheUtil.getAppCacheSize
 import com.hqq.core.utils.file.CacheUtil.getCacheSize
 import com.hqq.core.utils.file.CacheUtil.getTotalCacheSize
@@ -10,7 +12,7 @@ import com.hqq.core.utils.ScreenUtils.getScreenHeight
 import com.hqq.core.utils.ScreenUtils.getScreenWidth
 import com.hqq.core.utils.ScreenUtils.getScreenXDPI
 import com.hqq.core.utils.ScreenUtils.getScreenYDPI
-import com.hqq.core.utils.ScreenUtils.getStatusBarHeight4Resources
+import com.hqq.core.utils.ScreenUtils.getStatusBarHeight
 import com.hqq.core.utils.TextSpannableBuilder
 import com.hqq.core.utils.VersionUtils.getPackageName
 import com.hqq.core.utils.VersionUtils.getVerName
@@ -47,11 +49,11 @@ class BaseInfoActivity : BaseActivity() {
                 .addTextPart("\n缓存总大小    ")
                 .addTextPart(getTotalCacheSize(this) + "")
                 .addTextPart("\n状态栏高度    ")
-                .addTextPart(getStatusBarHeight4Resources(this).toString() + "px")
+                .addTextPart(getStatusBarHeight(this).toString() + "px")
                 .addTextPart("\n屏幕宽度    ")
                 .addTextPart(getScreenWidth(this).toString() + "px")
                 .addTextPart("\n屏幕高度    ")
-                .addTextPart(getScreenHeight(this).toString() + "px")
+                .addTextPart(getAllScreenHeight().toString() + "px")
                 .addTextPart("\nx密度    ")
                 .addTextPart(getScreenXDPI(this).toString() + "dpi")
                 .addTextPart("\ny密度    ")

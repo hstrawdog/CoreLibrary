@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.ScreenUtils
 
 
 class ComposeIndexActivity : BaseActivity() {

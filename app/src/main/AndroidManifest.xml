@@ -37,7 +37,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-    <activity android:name=".ui.compose.ComposeIndexActivity" android:label="ComposeIndex"/>
+        <activity
+            android:name=".ui.compose.ComposeIndexActivity"
+            android:label="ComposeIndex" />
         <activity
             android:name=".ui.customize.ZoomViewActivity"
             android:exported="true"
@@ -108,6 +110,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+
+        <activity
+            android:name=".ui.file.image.ImageLoadCoilActivity"
+            android:label="Coil图片加载" />
 
         <activity
             android:name=".ui.ViewIndexActivity"

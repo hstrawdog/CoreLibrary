@@ -220,10 +220,29 @@ object Retrofit {
  * https://github.com/bumptech/glide/tags
  */
 object Glide {
-    const val gldieVsrsion = "4.12.0"
+    private const val glideVersion = "4.12.0"
+    const val glide = "com.github.bumptech.glide:glide:$glideVersion"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:$glideVersion"
+}
 
-    const val glide = "com.github.bumptech.glide:glide:$gldieVsrsion"
-    const val glideCompiler = "com.github.bumptech.glide:compiler:$gldieVsrsion"
+/**
+ * CoilKt  图片加载器  Kotlin
+ *  https://github.com/coil-kt/coil/blob/main/README-zh.md
+ */
+object CoilKt {
+    private const val coilVersion = "2.2.2"
+    // 标准加载库
+    const val coilKt = "io.coil-kt:coil:$coilVersion"
+    // compose 适配
+    const val coilCompose = "io.coil-kt:coil-compose:$coilVersion"
+    // 加载gif
+    const val coilGif = "io.coil-kt:coil-gif:$coilVersion"
+    // 加载 svg
+    const val coilSvg = "io.coil-kt:coil-svg:$coilVersion"
+    // 加载 video
+    const val coilVideo = "io.coil-kt:coil-video:$coilVersion"
+
+    const val coilSkyDoves = "com.github.skydoves:landscapist-coil:2.1.2"
 }
 
 /**
@@ -231,8 +250,8 @@ object Glide {
  *  https://developer.android.google.cn/jetpack/androidx/releases/hilt?hl=zh_cn
  */
 object Hilt {
-    const val hiltVersion = "2.28-alpha"
-    const val hitViewModule = "1.0.0-alpha01"
+    private const val hiltVersion = "2.28-alpha"
+    private const val hitViewModule = "1.0.0-alpha01"
 
     const val daggerRuntime = "com.google.dagger:hilt-android:$hiltVersion"
     const val daggerCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
@@ -271,7 +290,7 @@ object Gson {
  *  https://github.com/square/leakcanary/tags
  */
 object Leakcanary {
-     const val leakcanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
+    const val leakcanary = "com.squareup.leakcanary:leakcanary-android:2.8.1"
 }
 
 /**
@@ -288,7 +307,6 @@ object BaseRecyclerViewAdapterHelper {
  *   https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh
  */
 object UltraPtr {
-
     const val ultraPtr = "in.srain.cube:ultra-ptr:1.0.11"
 }
 

@@ -87,5 +87,9 @@ object ImageLoadUtils {
     fun transformCircularHead(url: String?, imageView: ImageView?, @DrawableRes resourceId: Int = R.mipmap.ic_def_head_circular) {
         GlideApp.with(imageView!!).load(url).thumbnail().apply(RequestOptions.circleCropTransform() //不做内存缓存
             .skipMemoryCache(true).dontAnimate().placeholder(resourceId)).into(imageView)
+
     }
+
+
+
 }

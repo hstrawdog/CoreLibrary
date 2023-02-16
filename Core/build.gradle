@@ -81,12 +81,13 @@ dependencies {
     api Glide.glide
     kapt Glide.glideCompiler
 
+    api CoilKt.coilKt
+
+
     // retrofit 请求
     api Retrofit.retrofit
     api Retrofit.converterGson
     api Retrofit.loggingInterceptor
-
-
 
 }
 

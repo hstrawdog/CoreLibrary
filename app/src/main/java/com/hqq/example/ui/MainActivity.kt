@@ -118,7 +118,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        }.launchIn(lifecycleScope).start()
 
 
-      open(ComposeIndexActivity::class.java)
+      open(BaseInfoActivity::class.java)
+//      open(ComposeIndexActivity::class.java)
 
     }
 
