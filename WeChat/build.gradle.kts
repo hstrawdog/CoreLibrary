@@ -1,15 +1,19 @@
+import  com.hqq.core.plugin.*
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+
 }
 
 android {
     namespace = "com.hqq.wechat"
-    compileSdk = 33
+    compileSdk = BuildVersionConfig.compileSdkVersion
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = BuildVersionConfig.minSdkVersion
+        targetSdk = BuildVersionConfig.targetSdkVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -31,9 +35,7 @@ android {
 }
 
 dependencies {
-
-    implementation (project(":Core"))
-
+    api (project(":Core"))
     //微信登录，支付，分享包
     implementation("com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0")
 }

@@ -3,9 +3,8 @@ package com.hqq.wechat;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.tamsiree.rxkit.RxImageTool;
-import com.tamsiree.rxpay.wechat.pay.WechatPayTools;
-import com.tamsiree.rxpay.wechat.share.WechatShareModel;
+import com.hqq.core.utils.file.BitmapUtils;
+import com.hqq.wechat.pay.WechatPayTools;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
@@ -76,7 +75,8 @@ public class WechatShareTools {
 
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
         bitmap.recycle();
-        msg.thumbData = RxImageTool.bitmap2Bytes(thumbBmp, Bitmap.CompressFormat.PNG);
+
+        msg.thumbData =   BitmapUtils.bitmap2ByteArray(thumbBmp,Bitmap.CompressFormat.PNG,100);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = WechatPayTools.getCurrTime();

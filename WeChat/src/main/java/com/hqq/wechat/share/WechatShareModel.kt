@@ -1,4 +1,4 @@
-package com.tamsiree.rxpay.wechat.share
+package com.hqq.wechat.share
 
 /**
  *
