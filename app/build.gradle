@@ -93,6 +93,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':Core')
     implementation project(':WeChat')
+    implementation project(':ALiBaBa')
 
     implementation "androidx.room:room-runtime:2.4.0-alpha03"
     kapt 'androidx.room:room-compiler:2.4.0-alpha03'
