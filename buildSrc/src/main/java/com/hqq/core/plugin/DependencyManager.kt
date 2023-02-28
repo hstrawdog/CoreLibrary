@@ -46,7 +46,7 @@ androidx.versionedparcelable:versionedparcelable:1.1.0
 androidx.viewpager:viewpager:1.0.0
  */
 object Appcompat {
-    const val core_version = "1.3.2"
+    const val core_version = "1.6.1"
     const val core = "androidx.core:core:$core_version"
     const val coreKtx = "androidx.core:core-ktx:$core_version"
     const val appcompat = "androidx.appcompat:appcompat:1.3.1"
@@ -250,16 +250,18 @@ object CoilKt {
  *  https://developer.android.google.cn/jetpack/androidx/releases/hilt?hl=zh_cn
  */
 object Hilt {
-    private const val hiltVersion = "2.28-alpha"
-    private const val hitViewModule = "1.0.0-alpha01"
+    private const val hiltVersion = "2.44"
+    private const val hitViewModule = "1.0.0-alpha03"
 
     const val daggerRuntime = "com.google.dagger:hilt-android:$hiltVersion"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:2.44"
+
     const val daggerCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
-    const val viewModule = "androidx.hilt:hilt-lifecycle-viewmodel:$hitViewModule"
+//    const val viewModule = "androidx.hilt:hilt-lifecycle-viewmodel:$hitViewModule"
 
     //注解处理器
-    const val compiler = "androidx.hilt:hilt-compiler:$hitViewModule"
+//    const val compiler = "androidx.hilt:hilt-compiler:$hitViewModule"
 }
 
 /**

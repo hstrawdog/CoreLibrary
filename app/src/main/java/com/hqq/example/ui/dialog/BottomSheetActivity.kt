@@ -1,7 +1,9 @@
 package com.hqq.example.ui.dialog
 
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.example.R
+import com.hqq.example.databinding.ActivityBottomSheetBinding
 import com.hqq.example.dialog.FoldFullBottomSheet
 import com.hqq.example.dialog.FullBottomSheet
 
@@ -13,17 +15,16 @@ import com.hqq.example.dialog.FullBottomSheet
  * @Email :  qiqiang213@gmail.com
  * @Descrive : TODO
  */
-class BottomSheetActivity : BaseActivity() {
-    override val layoutViewId: Int = R.layout.activity_bottom_sheet
+class BottomSheetActivity : BaseViewBindingActivity<ActivityBottomSheetBinding>() {
 
-    override fun initView() {}
-    fun onViewClicked() {
-        val mFullBottomSheetFragment = FullBottomSheet()
-        mFullBottomSheetFragment.show(supportFragmentManager)
-    }
-
-    fun onViewClicked1() {
-        val mFullBottomSheetFragment = FoldFullBottomSheet()
-        mFullBottomSheetFragment.show(supportFragmentManager)
+    override fun initView() {
+        binding.button9.setOnClickListener {
+            val mFullBottomSheetFragment = FullBottomSheet()
+            mFullBottomSheetFragment.show(supportFragmentManager)
+        }
+        binding.button10.setOnClickListener {
+            val mFullBottomSheetFragment = FoldFullBottomSheet()
+            mFullBottomSheetFragment.show(supportFragmentManager)
+        }
     }
 }

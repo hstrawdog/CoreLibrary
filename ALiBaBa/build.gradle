@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.hqq.alibaba'
-    compileSdk
+    compileSdkVersion BuildVersionConfig.compileSdkVersion
 
     defaultConfig {
         minSdk BuildVersionConfig.minSdkVersion

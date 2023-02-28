@@ -2,8 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
+    id 'com.google.dagger.hilt.android'
+    id 'dagger.hilt.android.plugin'
 }
 
 import com.hqq.core.plugin.*
@@ -17,6 +18,11 @@ android {
         dataBinding true
         compose true
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     compileSdkVersion BuildVersionConfig.compileSdkVersion
     buildToolsVersion BuildVersionConfig.buildToolsVersion
     defaultConfig {
@@ -26,6 +32,7 @@ android {
         versionName "1.0.0"
         versionCode 1
         flavorDimensions "versionCode"
+        multiDexEnabled true
     }
 
 
@@ -84,9 +91,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+
 }
 
 dependencies {
@@ -101,10 +106,10 @@ dependencies {
     debugImplementation Leakcanary.leakcanary
     // Hilt dependencies
     implementation Hilt.daggerRuntime
-    implementation Hilt.compiler
-    implementation Hilt.viewModule
+//    implementation Hilt.compiler
+//    implementation Hilt.viewModule
     kapt Hilt.daggerCompiler
-    kapt Hilt.compiler
+    kapt Hilt.hiltCompiler
 
 
     api 'com.amap.api:location:latest.integration'
@@ -124,8 +129,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-    def compose_version = "1.0.5"
 
+    implementation 'com.android.support:multidex:1.0.3'
 
     // Compose ui 相关的基础支持
     implementation 'androidx.compose.ui:ui:1.0.5'
@@ -153,4 +158,7 @@ dependencies {
     implementation group: 'com.google.guava', name: 'guava', version: '27.0.1-android'
 
 
+}
+kapt {
+    correctErrorTypes true
 }

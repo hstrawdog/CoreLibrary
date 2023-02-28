@@ -4,8 +4,8 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 
 /**
@@ -16,7 +16,7 @@ import javax.inject.Qualifier
  * @Email : qiqiang213@gmail.com
  * @Descrive : 自定义的构建方式  如果没有module  就会自动构建默认 值
  */
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 object AppHiltModel {
 

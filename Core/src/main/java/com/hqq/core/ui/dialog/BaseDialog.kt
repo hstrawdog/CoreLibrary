@@ -4,11 +4,14 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.annotation.ToolBarMode
+import com.hqq.core.lifecycle.SingleLiveEvent
 import com.hqq.core.listenner.DialogClickListener
 import com.hqq.core.ui.base.IRootViewBuildBuild
 import com.hqq.core.ui.base.IRootView.IDialogFragment
@@ -32,6 +35,17 @@ import com.hqq.core.widget.LoadingView
  * --  考虑是否重构 引入Binding框架
  */
 abstract class BaseDialog : DialogFragment(), IDialogFragment {
+    /**
+     *  回调
+     */
+    var activityResult = SingleLiveEvent<ActivityResult>()
+
+    /**
+     *  页面跳转
+     */
+    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> activityResult.value = result }
+
+
     var loadingView: LoadingView? = null
 
     var loaded = false

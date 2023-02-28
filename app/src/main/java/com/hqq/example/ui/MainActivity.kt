@@ -14,6 +14,7 @@ import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
+import com.hqq.example.dialog.DialogOpenActivity
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
@@ -62,7 +63,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
-
+//open(VibrateActivity::class.java)
 //        loadingView.show()
 //        Handler().postDelayed(3 * 1000) {
 //            MyPopupWindow(this).showPopupWindow(iCreateRootView.rootView);
@@ -118,9 +119,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        }.launchIn(lifecycleScope).start()
 
 
-      open(BaseInfoActivity::class.java)
+//      open(BaseInfoActivity::class.java)
 //      open(ComposeIndexActivity::class.java)
 
+
+        DialogOpenActivity().show(supportFragmentManager)
     }
 
 
@@ -191,6 +194,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("Parcelable测试", ParcelableActivity::class.java))
             arrayList.add(MainBean("DrawBitmap测试", CanvasDrawBitmapActivity::class.java))
             arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
+            arrayList.add(MainBean("震动测试", VibrateActivity::class.java))
             setData(arrayList)
 
         }

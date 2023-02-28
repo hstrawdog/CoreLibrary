@@ -1,6 +1,5 @@
 package com.hqq.example.ui.jetpack.di.hilt
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,7 @@ import androidx.lifecycle.ViewModel
  * UserHilt  自动注入
  * ViewModelInject 表示为ViewModel 对象  可以使用 委托 by viewModels() 创建
  */
-class HiltViewModel @ViewModelInject constructor(val userHilt: UserHilt) : ViewModel() {
+class HiltViewModel  constructor(val userHilt: UserHilt) : ViewModel() {
 
     var data = MutableLiveData<UserHilt>()
 

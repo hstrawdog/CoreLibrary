@@ -36,7 +36,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".ui.VibrateActivity"
+            android:label="测试震动" />
         <activity
             android:name=".ui.compose.ComposeIndexActivity"
             android:label="ComposeIndex" />
@@ -46,6 +48,7 @@
             android:label="缩放">
 
         </activity>
+        <activity android:name=".ui.ResultActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/x300"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button73"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打开一个新的Activity"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+    <Button
+        android:id="@+id/button74"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打开一个新的Activity"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+</LinearLayout>
