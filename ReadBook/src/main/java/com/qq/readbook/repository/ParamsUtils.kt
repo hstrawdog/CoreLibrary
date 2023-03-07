@@ -2,6 +2,7 @@ package com.qq.readbook.repository
 
 import com.hqq.core.net.ok.HttpCompat
 import com.hqq.core.net.ok.OkHttp
+import com.hqq.core.net.ok.ParamsCompat
 import com.qq.readbook.bean.book.BookSource
 import org.json.JSONObject
 
@@ -13,9 +14,9 @@ import org.json.JSONObject
  * @Describe :
  */
 object ParamsUtils {
-    fun getParams(source: BookSource): HttpCompat.ParamsCompat {
+    fun getParams(source: BookSource): ParamsCompat {
         val params = OkHttp.newParamsCompat()
-        params.decode = source.decode
+        params.decodeCharset = source.decode
         if (source.requestHeads.isNotEmpty()) {
             val json = JSONObject(source.requestHeads)
             json.keys().let {

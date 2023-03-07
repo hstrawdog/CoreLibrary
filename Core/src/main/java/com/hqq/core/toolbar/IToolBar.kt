@@ -120,10 +120,10 @@ interface IToolBar {
          */
         @ColorRes
         var statusBarColor = R.color.toolbar_status_color
-        set(value) {
-            field =value
+            set(value) {
+                field = value
 
-        }
+            }
 
         /**
          * @param clss 类型

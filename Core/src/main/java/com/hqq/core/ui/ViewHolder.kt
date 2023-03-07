@@ -329,7 +329,9 @@ abstract class ViewHolder protected constructor() : View.OnClickListener {
      * @return The ViewHolder for chaining.
      * Please use [.addOnClickListener] (int)} (adapter.setOnItemChildClickListener(listener))}
      */
-    fun setOnItemClickListener(@IdRes viewId: Int, listener: AdapterView.OnItemClickListener?): ViewHolder {
+    fun setOnItemClickListener(
+        @IdRes viewId: Int, listener: AdapterView.OnItemClickListener?
+    ): ViewHolder {
         val view = getView<AdapterView<*>>(viewId)!!
         view.onItemClickListener = listener
         return this
@@ -342,7 +344,9 @@ abstract class ViewHolder protected constructor() : View.OnClickListener {
      * @param listener The item long click listener;
      * @return The ViewHolder for chaining.
      */
-    fun setOnItemLongClickListener(@IdRes viewId: Int, listener: AdapterView.OnItemLongClickListener?): ViewHolder {
+    fun setOnItemLongClickListener(
+        @IdRes viewId: Int, listener: AdapterView.OnItemLongClickListener?
+    ): ViewHolder {
         val view = getView<AdapterView<*>>(viewId)!!
         view.onItemLongClickListener = listener
         return this
@@ -355,7 +359,9 @@ abstract class ViewHolder protected constructor() : View.OnClickListener {
      * @param listener The item selected click listener;
      * @return The ViewHolder for chaining.
      */
-    fun setOnItemSelectedClickListener(@IdRes viewId: Int, listener: OnItemSelectedListener?): ViewHolder {
+    fun setOnItemSelectedClickListener(
+        @IdRes viewId: Int, listener: OnItemSelectedListener?
+    ): ViewHolder {
         val view = getView<AdapterView<*>>(viewId)!!
         view.onItemSelectedListener = listener
         return this
@@ -368,7 +374,9 @@ abstract class ViewHolder protected constructor() : View.OnClickListener {
      * @param listener The checked change listener of compound button.
      * @return The ViewHolder for chaining.
      */
-    fun setOnCheckedChangeListener(@IdRes viewId: Int, listener: CompoundButton.OnCheckedChangeListener?): ViewHolder {
+    fun setOnCheckedChangeListener(
+        @IdRes viewId: Int, listener: CompoundButton.OnCheckedChangeListener?
+    ): ViewHolder {
         val view = getView<CompoundButton>(viewId)!!
         view.setOnCheckedChangeListener(listener)
         return this

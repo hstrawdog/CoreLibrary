@@ -17,13 +17,13 @@ import java.lang.reflect.ParameterizedType
  * @Describe :
  */
 abstract class BaseBindingDialog<T : ViewBinding> : BaseDialog() {
-    lateinit var binding: T
-    override val layoutId: Int
+    lateinit var binding : T
+    override val layoutId : Int
         get() = 0
 
     override fun initView() {}
     override fun initContentView() {
-        val linearLayout = rootView!!.findViewById<LinearLayout>(R.id.ll_rootView)
+        val linearLayout = rootView !!.findViewById<LinearLayout>(R.id.ll_rootView)
         var view = getBindingView(linearLayout)
         linearLayout.gravity = gravity
         linearLayout.addView(view)
@@ -38,16 +38,16 @@ abstract class BaseBindingDialog<T : ViewBinding> : BaseDialog() {
      * @param parent ViewGroup
      * @return View?
      */
-    private fun getBindingView(parent: ViewGroup): View? {
+    private fun getBindingView(parent : ViewGroup) : View? {
         val tClass = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         try {
-            val method = tClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.javaPrimitiveType)
-            binding = method.invoke(null, layoutInflater, parent, false) as T
-        } catch (e: NoSuchMethodException) {
+            val method = tClass.getMethod("inflate" , LayoutInflater::class.java , ViewGroup::class.java , Boolean::class.javaPrimitiveType)
+            binding = method.invoke(null , layoutInflater , parent , false) as T
+        } catch (e : NoSuchMethodException) {
             e.printStackTrace()
-        } catch (e: IllegalAccessException) {
+        } catch (e : IllegalAccessException) {
             e.printStackTrace()
-        } catch (e: InvocationTargetException) {
+        } catch (e : InvocationTargetException) {
             e.printStackTrace()
         }
         return binding.root

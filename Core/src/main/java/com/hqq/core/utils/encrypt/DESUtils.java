@@ -15,12 +15,12 @@ import javax.crypto.spec.SecretKeySpec;
  * @Author : huangqiqiang
  * @Package : com.hqq.core.utils.encrypt
  * @FileName :   DESUtils
- * @Date  : 2021/3/30 0030  上午 11:34
+ * @Date : 2021/3/30 0030  上午 11:34
  * @Email :  qiqiang213@gmail.com
  * @Describe :
- *   DES，3DES，ASE 对称加密工具类
- *   对称密码算法的加密密钥和解密密钥相同，对于大多数对称密码算法，加解密过程互逆
- *   AES对DES提高了安全性，有限选择AES加密方式
+ * DES，3DES，ASE 对称加密工具类
+ * 对称密码算法的加密密钥和解密密钥相同，对于大多数对称密码算法，加解密过程互逆
+ * AES对DES提高了安全性，有限选择AES加密方式
  */
 public class DESUtils {
 
@@ -30,6 +30,7 @@ public class DESUtils {
 
     /**
      * 生成秘钥
+     *
      * @return
      */
     public static byte[] generateKey() {
@@ -47,6 +48,7 @@ public class DESUtils {
 
     /**
      * 加密
+     *
      * @return
      */
     public static byte[] encrypt(byte[] data, byte[] key) {
@@ -74,6 +76,7 @@ public class DESUtils {
 
     /**
      * 解密
+     *
      * @return
      */
     public static byte[] decrypt(byte[] data, byte[] key) {

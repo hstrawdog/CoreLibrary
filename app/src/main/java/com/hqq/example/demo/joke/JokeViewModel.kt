@@ -1,5 +1,6 @@
 package com.hqq.example.demo.joke
 
+import androidx.lifecycle.LifecycleOwner
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.example.demo.net.HttpManager.getJoke
 import com.hqq.example.demo.net.NetCallback
@@ -13,8 +14,8 @@ import com.hqq.example.demo.net.NetCallback
  * @Descrive :
  */
 class JokeViewModel : BaseListViewModel() {
-    override fun onCrete() {
-        super.onCrete()
+    override fun onCreate(owner: LifecycleOwner) {
+        super.onCreate(owner)
         jokeList
     }
 

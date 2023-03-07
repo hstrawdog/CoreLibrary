@@ -14,18 +14,6 @@ import java.io.File
  * @Descrive :  坚持封装的 OkHttp 请求
  */
 interface HttpCompat {
-    /**
-     * 参数的通用性上还是有些问题
-     */
-    interface ParamsCompat {
-        var decode: String?
-        var encode: String?
-        var headers: MutableMap<String, String>
-        fun put(key: String?, value: Any?): ParamsCompat?
-        fun paramGet(): String?
-        fun paramForm(): RequestBody
-        fun paramMulti(): RequestBody
-    }
 
     /**
      * 请求对象
@@ -82,7 +70,13 @@ interface HttpCompat {
      * @param downloadListener DownloadListener 回调
      * @return Call
      */
-    fun downloadFile(url: String, startsPoint: Long, fileName: String, downloadPath: String, downloadListener: DownloadListener): Call
+    fun downloadFile(
+        url: String,
+        startsPoint: Long,
+        fileName: String,
+        downloadPath: String,
+        downloadListener: DownloadListener
+    ): Call
 
     /**
      *  文件上传 接口
@@ -92,6 +86,8 @@ interface HttpCompat {
      * @param files List<File>
      * @return Call
      */
-     fun preUpload(url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>): Call
+    fun preUpload(
+        url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>
+    ): Call
 
 }

@@ -59,7 +59,9 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
         setStyle(DialogFragment.STYLE_NO_TITLE, transparentBottomSheetStyle)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         if (rootView == null) {
             rootViewBuild = IRootViewBuildBuild(this)
             initConfig()

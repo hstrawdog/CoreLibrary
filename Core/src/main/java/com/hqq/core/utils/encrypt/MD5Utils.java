@@ -12,14 +12,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
- /**
-  * @Author : huangqiqiang
-  * @Package : com.hqq.core.utils.encrypt
-  * @FileName :   MD5Utils
-  * @Date  : 2021/3/30 0030  上午 11:34
-  * @Email :  qiqiang213@gmail.com
-  * @Describe :
-  */
+/**
+ * @Author : huangqiqiang
+ * @Package : com.hqq.core.utils.encrypt
+ * @FileName :   MD5Utils
+ * @Date : 2021/3/30 0030  上午 11:34
+ * @Email :  qiqiang213@gmail.com
+ * @Describe :
+ */
 public class MD5Utils {
 
     private MD5Utils() {
@@ -28,6 +28,7 @@ public class MD5Utils {
 
     /**
      * 字符串加密
+     *
      * @param data 原字符串
      * @return 加密后新字符串
      */
@@ -45,7 +46,7 @@ public class MD5Utils {
 
         StringBuilder sb = new StringBuilder();
         for (byte b : resultBytes) {
-            if(Integer.toHexString(0xFF & b).length() == 1) {
+            if (Integer.toHexString(0xFF & b).length() == 1) {
                 sb.append("0").append(Integer.toHexString(0xFF & b));
             } else {
                 sb.append(Integer.toHexString(0xFF & b));
@@ -57,6 +58,7 @@ public class MD5Utils {
 
     /**
      * 文件加密
+     *
      * @param filePath 文件路径
      * @return 加密后的字符串
      */
@@ -68,13 +70,13 @@ public class MD5Utils {
         StringBuilder sb = new StringBuilder();
         try {
             fis = new FileInputStream(file);
-            MappedByteBuffer byteBuffer = fis.getChannel().map(FileChannel.MapMode.READ_ONLY,0,file.length());
+            MappedByteBuffer byteBuffer = fis.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, file.length());
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             md5.update(byteBuffer);
             byte[] resultBytes = md5.digest();
 
             for (byte b : resultBytes) {
-                if(Integer.toHexString(0xFF & b).length() == 1) {
+                if (Integer.toHexString(0xFF & b).length() == 1) {
                     sb.append("0").append(Integer.toHexString(0xFF & b));
                 } else {
                     sb.append(Integer.toHexString(0xFF & b));
@@ -99,13 +101,14 @@ public class MD5Utils {
 
     /**
      * 多次MD5加密
+     *
      * @param data
      * @param time 重复加密次数
      * @return
      */
     public static String repeatEncrypt(String data, int time) {
 
-        if(TextUtils.isEmpty(data)) {
+        if (TextUtils.isEmpty(data)) {
             return "";
         }
 
@@ -118,20 +121,21 @@ public class MD5Utils {
 
     /**
      * MD5加盐
-     *
+     * <p>
      * 方式：
-     *  1. string + key(盐值) 然后MD5加密
-     *  2. 用string明文的hashcode作为盐，然后MD5加密
-     *  3. 随机生成一串字符串作为盐值，然后MD5加密
-     *
+     * 1. string + key(盐值) 然后MD5加密
+     * 2. 用string明文的hashcode作为盐，然后MD5加密
+     * 3. 随机生成一串字符串作为盐值，然后MD5加密
+     * <p>
      * 该方法采用 string + key
+     *
      * @param data
      * @param salt
      * @return
      */
     public static String encryptSalt(String data, String salt) {
 
-        if(TextUtils.isEmpty(data)) {
+        if (TextUtils.isEmpty(data)) {
             return "";
         }
 
@@ -140,7 +144,7 @@ public class MD5Utils {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             byte[] resultBytes = md5.digest((data + salt).getBytes());
             for (byte b : resultBytes) {
-                if(Integer.toHexString(0xFF & b).length() == 1) {
+                if (Integer.toHexString(0xFF & b).length() == 1) {
                     sb.append("0").append(Integer.toHexString(0xFF & b));
                 } else {
                     sb.append(Integer.toHexString(0xFF & b));

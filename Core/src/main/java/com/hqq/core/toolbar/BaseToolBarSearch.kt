@@ -27,18 +27,23 @@ class BaseToolBarSearch() : BaseToolBar() {
     override var toolBarBg: ImageView? = null
 
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
-        val mToolbar = LayoutInflater.from(activity.baseContext).inflate(R.layout.layout_toolbar_order_search, viewGroup, false) as Toolbar
+        val mToolbar = LayoutInflater.from(activity.baseContext)
+            .inflate(R.layout.layout_toolbar_order_search, viewGroup, false) as Toolbar
         if (activity is AppCompatActivity) {
             activity.setSupportActionBar(mToolbar)
         }
-        mToolbar.findViewById<View>(R.id.iv_bar_back).setOnClickListener { activity.onBackPressed() }
+        mToolbar.findViewById<View>(R.id.iv_bar_back)
+            .setOnClickListener { activity.onBackPressed() }
         iniBase(mToolbar)
         return mToolbar
     }
 
     private fun iniBase(mToolbar: Toolbar) {
-        mToolbar.findViewById<View>(R.id.iv_delete).setOnClickListener { (mToolbar.findViewById<View>(R.id.edt_search) as EditText).setText("") }
-        (mToolbar.findViewById<View>(R.id.edt_search) as EditText).addTextChangedListener(object : TextWatcher {
+        mToolbar.findViewById<View>(R.id.iv_delete).setOnClickListener {
+            (mToolbar.findViewById<View>(R.id.edt_search) as EditText).setText("")
+        }
+        (mToolbar.findViewById<View>(R.id.edt_search) as EditText).addTextChangedListener(object :
+            TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.length > 0) {
@@ -56,6 +61,7 @@ class BaseToolBarSearch() : BaseToolBar() {
     override fun setToolbarTitle(title: CharSequence?) {
 
     }
+
     val deleteView: ImageView
         get() = rootView!!.findViewById(R.id.iv_delete)
 

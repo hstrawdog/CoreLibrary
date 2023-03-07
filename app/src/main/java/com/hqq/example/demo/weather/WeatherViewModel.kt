@@ -1,5 +1,6 @@
 package com.hqq.example.demo.weather
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -37,9 +38,8 @@ class WeatherViewModel : BaseViewModel() {
     var mLocationOption: AMapLocationClientOption? = null
     var option = AMapLocationClientOption()
 
-
-    override fun onCrete() {
-        super.onCrete()
+    override fun onCreate(owner: LifecycleOwner) {
+        super.onCreate(owner)
         e(" -------WeatherViewModel--------- onCrete ------")
 
 //初始化定位

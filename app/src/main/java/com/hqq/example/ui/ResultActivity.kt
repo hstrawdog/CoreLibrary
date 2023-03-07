@@ -20,7 +20,6 @@ class ResultActivity : BaseViewBindingActivity<ActivityResultBinding>() {
 
     override fun initView() {
 
-
         binding.textView39.text = System.identityHashCode(this).toString()
         binding.button75.setOnClickListener {
             setResult(Activity.RESULT_OK, Intent().apply {

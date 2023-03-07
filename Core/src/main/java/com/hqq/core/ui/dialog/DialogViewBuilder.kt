@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import com.hqq.core.lifecycle.BaseLifecycleObserver
 import com.hqq.core.ui.ViewHolder
 import com.hqq.core.ui.base.IRootView.IBaseViewBuilderHolder
@@ -20,7 +22,7 @@ import java.lang.ref.WeakReference
  * @Email : qiqiang213@gmail.com
  * @Descrive : 布局管理  与创建
  */
-abstract class DialogViewBuilder : ViewHolder(), IBaseViewBuilderHolder, BaseLifecycleObserver {
+abstract class DialogViewBuilder : ViewHolder(), IBaseViewBuilderHolder, DefaultLifecycleObserver {
     /**
      *  window 跟布局对象
      */
@@ -39,7 +41,9 @@ abstract class DialogViewBuilder : ViewHolder(), IBaseViewBuilderHolder, BaseLif
      * @param context Context?
      * @param lifecycle Lifecycle
      */
-    override fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle) {
+    override fun createRootView(
+        parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle
+    ) {
         this.parentView = parentView
         this.activity = WeakReference<Activity>(activity)
         convertView = if (layoutViewId <= 0) {
@@ -62,14 +66,10 @@ abstract class DialogViewBuilder : ViewHolder(), IBaseViewBuilderHolder, BaseLif
 
     override fun initConfig() {}
     override fun onClick(view: View) {}
-    override fun onCrete() {}
-    override fun onResume() {}
-    override fun onStop() {}
-    override fun onPause() {}
-    override fun onStart() {}
-    override fun onAny() {}
-    override fun onDestroy() {
+    override fun onDestroy(owner: LifecycleOwner) {
+        super.onDestroy(owner)
         removeFromParent()
+
     }
 
     /**

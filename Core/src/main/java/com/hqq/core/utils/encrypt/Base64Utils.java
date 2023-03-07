@@ -8,14 +8,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
- /**
-  * @Author : huangqiqiang
-  * @Package : com.hqq.core.utils.encrypt
-  * @FileName :   Base64Utils
-  * @Date  : 2021/3/30 0030  上午 11:34
-  * @Email :  qiqiang213@gmail.com
-  * @Describe :
-  */
+/**
+ * @Author : huangqiqiang
+ * @Package : com.hqq.core.utils.encrypt
+ * @FileName :   Base64Utils
+ * @Date : 2021/3/30 0030  上午 11:34
+ * @Email :  qiqiang213@gmail.com
+ * @Describe :
+ */
 public class Base64Utils {
 
     private Base64Utils() {
@@ -24,6 +24,7 @@ public class Base64Utils {
 
     /**
      * 字符串编码
+     *
      * @param data
      * @return
      */
@@ -34,6 +35,7 @@ public class Base64Utils {
 
     /**
      * 字符串解码
+     *
      * @param data
      * @return
      */
@@ -44,6 +46,7 @@ public class Base64Utils {
 
     /**
      * 文件编码
+     *
      * @param filePath
      * @return
      */
@@ -53,7 +56,7 @@ public class Base64Utils {
         File file = new File(filePath);
         try {
             FileInputStream fis = new FileInputStream(file);
-            byte[] buffer = new byte[(int)file.length()];
+            byte[] buffer = new byte[(int) file.length()];
             fis.read(buffer);
             fis.close();
             result = Base64.encodeToString(buffer, Base64.DEFAULT);
@@ -69,6 +72,7 @@ public class Base64Utils {
     /**
      * 文件解码
      * 解码后保存到指定目录，并返回解码后的内容
+     *
      * @param filePath
      * @param data
      * @return

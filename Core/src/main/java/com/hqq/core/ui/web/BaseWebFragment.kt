@@ -45,7 +45,7 @@ open class BaseWebFragment : BaseFragment() {
     /**
      *  URL
      */
-     var url: String? = null
+    var url: String? = null
 
     /**
      *  标题哦
@@ -55,7 +55,7 @@ open class BaseWebFragment : BaseFragment() {
     /**
      *  加载监听
      */
-     var webLoadListener: WebLoadListener? = null
+    var webLoadListener: WebLoadListener? = null
 
     /**
      * 交互脚本
@@ -113,8 +113,10 @@ open class BaseWebFragment : BaseFragment() {
 
     override fun initConfig() {
         super.initConfig()
-        rootViewImpl.iToolBarBuilder.showToolBar = arguments?.getBoolean(getString(R.string.key_showToolBar),true) == true
-        rootViewImpl.iToolBarBuilder.showStatusBar =  arguments?.getBoolean(getString(R.string.key_showstatusBar),true) == true
+        rootViewImpl.iToolBarBuilder.showToolBar =
+            arguments?.getBoolean(getString(R.string.key_showToolBar), true) == true
+        rootViewImpl.iToolBarBuilder.showStatusBar =
+            arguments?.getBoolean(getString(R.string.key_showstatusBar), true) == true
     }
 
     @SuppressLint("JavascriptInterface")
@@ -190,7 +192,9 @@ open class BaseWebFragment : BaseFragment() {
             return super.shouldOverrideUrlLoading(view, request)
         }
 
-        override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
+        override fun shouldInterceptRequest(
+            view: WebView, request: WebResourceRequest
+        ): WebResourceResponse? {
             return super.shouldInterceptRequest(view, request)
             //request.getUrl()
         }
@@ -210,7 +214,10 @@ open class BaseWebFragment : BaseFragment() {
                 webLoadListener?.onPageFinished(url)
             }
         }
-        override fun onReceivedError(view: WebView, errorCode: Int, description: String?, failingUrl: String?) {
+
+        override fun onReceivedError(
+            view: WebView, errorCode: Int, description: String?, failingUrl: String?
+        ) {
             super.onReceivedError(view, errorCode, description, failingUrl)
             // 断网或者网络连接超时
             if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_CONNECT || errorCode == ERROR_TIMEOUT) {
@@ -219,7 +226,9 @@ open class BaseWebFragment : BaseFragment() {
             }
         }
 
-        override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+        override fun onReceivedError(
+            view: WebView, request: WebResourceRequest, error: WebResourceError
+        ) {
             super.onReceivedError(view, request, error)
             progressBar?.visibility = View.GONE
         }
@@ -229,7 +238,7 @@ open class BaseWebFragment : BaseFragment() {
     fun onBackPressed(): Boolean {
         if (isGoBackWebView) {
             webView?.run {
-                return if (canGoBack() && visibility== View.VISIBLE ) {
+                return if (canGoBack() && visibility == View.VISIBLE) {
                     goBack()
                     true
                 } else {
@@ -251,7 +260,14 @@ open class BaseWebFragment : BaseFragment() {
     }
 
     companion object {
-        fun instantiate(context: Context, title: String?, url: String?, scriptInterface: ScriptInterface? = null,showToolBar :Boolean=true ,showstatusBar:Boolean=true): BaseWebFragment {
+        fun instantiate(
+            context: Context,
+            title: String?,
+            url: String?,
+            scriptInterface: ScriptInterface? = null,
+            showToolBar: Boolean = true,
+            showstatusBar: Boolean = true
+        ): BaseWebFragment {
             val baseWebFragment = BaseWebFragment()
             val bundle = Bundle()
             bundle.putString(context.getString(R.string.key_url), url)
@@ -259,7 +275,7 @@ open class BaseWebFragment : BaseFragment() {
             bundle.putBoolean(context.getString(R.string.key_showToolBar), showToolBar)
             bundle.putBoolean(context.getString(R.string.key_showstatusBar), showstatusBar)
             baseWebFragment.arguments = bundle
-            baseWebFragment.scriptInterface=(scriptInterface)
+            baseWebFragment.scriptInterface = (scriptInterface)
             return baseWebFragment
         }
     }

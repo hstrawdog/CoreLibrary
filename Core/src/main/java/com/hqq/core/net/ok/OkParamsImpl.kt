@@ -6,10 +6,7 @@
  */
 package com.hqq.core.net.ok
 
-import com.hqq.core.net.ok.HttpCompat.ParamsCompat
-import okhttp3.Headers
 import okhttp3.Headers.Companion.headersOf
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -43,24 +40,48 @@ class OkParamsImpl : ParamsCompat {
     /**
      *  解码
      */
-    override var decode: String? = ""
+    override var decodeCharset: String? = ""
 
     /**
      *  编码
      */
-    override var encode: String? = ""
+    override var encodeCharset: String? = ""
 
     /**
      *  请求header
      */
     override var headers: MutableMap<String, String> = HashMap()
 
+    @DataFormat
+    override var dataFormat: String = DataFormat.POST
+
+
+    var paramMap = HashMap<Any?, Any?>()
+
 
     override fun put(key: String?, value: Any?): ParamsCompat {
         keys.add(key)
         values.add(value)
+        paramMap.put(key, value)
         return this
     }
+
+    fun put(params: HashMap<String?, Any>) {
+        for (key in params.keys) {
+            keys.add(key)
+            values.add(params.getValue(key))
+            paramMap.put(key, params.getValue(key))
+        }
+    }
+
+    fun put(params: TreeMap<String, String?>) {
+        for (key in params.keys) {
+            keys.add(key)
+            values.add(params.getValue(key))
+            paramMap.put(key, params.getValue(key))
+        }
+    }
+
 
     override fun paramGet(): String {
         return lineUp()
@@ -68,7 +89,6 @@ class OkParamsImpl : ParamsCompat {
 
     override fun paramForm(): RequestBody {
         return RequestBody.create("application/x-www-form-urlencoded".toMediaTypeOrNull(), lineUp())
-
     }
 
     /**
@@ -86,15 +106,18 @@ class OkParamsImpl : ParamsCompat {
         for (index in 0 until length) {
             val value = values[index]
             if (value is File) {
-                val f = value
-                val filename = f.name
-                val fileBody = RequestBody.create(guessMimeType(filename).toMediaTypeOrNull(), f)
+                val filename = value.name
+                val fileBody =
+                    RequestBody.create(guessMimeType(filename).toMediaTypeOrNull(), value)
                 keys[index]?.let { builder.addFormDataPart(it, filename, fileBody) }
                 builder.addPart(fileBody)
             } else {
-                builder.addPart(headersOf("Content-Disposition", "form-data; name=\"" + keys[index] + "\""),
-                    RequestBody.create(null, value.toString() + ""))
-                stringBuilder.append(keys[index]).append('=').append(encodeString(value.toString() + "")).append('&')
+                builder.addPart(
+                    headersOf("Content-Disposition", "form-data; name=\"" + keys[index] + "\""),
+                    RequestBody.create(null, value.toString() + "")
+                )
+                stringBuilder.append(keys[index]).append('=')
+                    .append(encodeString(value.toString() + "")).append('&')
             }
         }
         val len = stringBuilder.length
@@ -104,6 +127,15 @@ class OkParamsImpl : ParamsCompat {
             builder.addPart(params)
         }
         return builder.build()
+    }
+
+    /**
+     *  格式化成XMl
+     */
+    override fun paramXml(): RequestBody {
+        return RequestBody.create(
+            "text/plain; charset=utf-8".toMediaTypeOrNull(), parseString2Xml()
+        )
     }
 
     override fun toString(): String {
@@ -119,25 +151,50 @@ class OkParamsImpl : ParamsCompat {
         val builder = StringBuilder()
         val length = keys.size
         for (index in 0 until length - 1) {
-            builder.append(keys[index]).append('=').append(encodeString(values[index].toString() + "")).append('&')
+            builder.append(keys[index]).append('=')
+                .append(encodeString(values[index].toString() + "")).append('&')
         }
         if (length - 1 >= 0) {
-            builder.append(keys[length - 1]).append('=').append(encodeString(values[length - 1].toString() + ""))
+            builder.append(keys[length - 1]).append('=')
+                .append(encodeString(values[length - 1].toString() + ""))
         }
         return builder.toString()
     }
 
     private fun encodeString(string: String): String {
-        if (encode == null || encode!!.isEmpty()) {
+        if (encodeCharset == null || encodeCharset!!.isEmpty()) {
             return string
         }
         try {
-            return URLEncoder.encode(string, encode)
+            return URLEncoder.encode(string, encodeCharset)
         } catch (e: UnsupportedEncodingException) {
             e.printStackTrace()
         }
         return string
     }
+
+
+    /**
+     * 参数进行XML化
+     *
+     * @param map,sign
+     * @return
+     */
+    fun parseString2Xml(): String {
+        val sb = StringBuffer()
+        sb.append("<xml>")
+        val es: Set<*> = paramMap.entries
+        val iterator = es.iterator()
+        while (iterator.hasNext()) {
+            val (key, value) = iterator.next() as Map.Entry<*, *>
+            val k = key as String
+            val v = value as String
+            sb.append("<$k>$v</$k>")
+        }
+        sb.append("</xml>")
+        return sb.toString()
+    }
+
 
     companion object {
         private fun guessMimeType(path: String): String {

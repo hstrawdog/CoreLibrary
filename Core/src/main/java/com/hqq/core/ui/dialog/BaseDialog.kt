@@ -43,7 +43,10 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      *  页面跳转
      */
-    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> activityResult.value = result }
+    var registerForActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            activityResult.value = result
+        }
 
 
     var loadingView: LoadingView? = null
@@ -123,7 +126,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         setStyle(STYLE_NORMAL, R.style.DefDialogStyle)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         dialog?.window?.setWindowAnimations(animation)
         if (rootView == null) {
             activity?.let {
@@ -172,7 +177,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         super.onActivityCreated(savedInstanceState)
         LogUtils.e4Debug(rootView?.measuredWidth)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(background))
-        dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        dialog?.window?.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT
+        )
         dialog?.window?.setGravity(gravity)
     }
 

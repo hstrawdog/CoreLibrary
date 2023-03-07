@@ -203,16 +203,16 @@ object Startup {
  *  https://github.com/square/retrofit/tags
  */
 object Retrofit {
-    const val retrofitVsrsion = "2.9.0"
-    const val okhttpVsrsion = "4.9.3"
+    private const val retrofitVersion = "2.9.0"
+    private const val okhttpVersion = "4.9.3"
 
-    const val okhttp = "com.squareup.okhttp3:okhttp:$okhttpVsrsion"
+    const val okhttp = "com.squareup.okhttp3:okhttp:$okhttpVersion"
 
     // 需要与 okhttp 保持一致
-    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttpVsrsion"
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
-    const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVsrsion"
-    const val converterGson = "com.squareup.retrofit2:converter-gson:$retrofitVsrsion"
+    const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    const val converterGson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 }
 
 /**
@@ -231,14 +231,19 @@ object Glide {
  */
 object CoilKt {
     private const val coilVersion = "2.2.2"
+
     // 标准加载库
     const val coilKt = "io.coil-kt:coil:$coilVersion"
+
     // compose 适配
     const val coilCompose = "io.coil-kt:coil-compose:$coilVersion"
+
     // 加载gif
     const val coilGif = "io.coil-kt:coil-gif:$coilVersion"
+
     // 加载 svg
     const val coilSvg = "io.coil-kt:coil-svg:$coilVersion"
+
     // 加载 video
     const val coilVideo = "io.coil-kt:coil-video:$coilVersion"
 

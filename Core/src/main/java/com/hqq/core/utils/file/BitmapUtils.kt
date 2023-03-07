@@ -33,7 +33,8 @@ object BitmapUtils {
     @JvmStatic
     fun saveImageToGallery(context: Context, bitmaps: Bitmap) {
         // 首先保存图片
-        val appDir = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "dearxy")
+        val appDir =
+            File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "dearxy")
         if (!appDir.exists()) {
             appDir.mkdir()
         }
@@ -66,8 +67,7 @@ object BitmapUtils {
         // 其次把文件插入到系统图库
         try {
             MediaStore.Images.Media.insertImage(
-                context.contentResolver,
-                file.absolutePath, fileName, null
+                context.contentResolver, file.absolutePath, fileName, null
             )
         } catch (e: FileNotFoundException) {
             ToastUtils.showToast(context, "保存到相册失败！")
@@ -75,7 +75,11 @@ object BitmapUtils {
         }
         ToastUtils.showToast(context, "已保存到手机相册！")
         // 最后通知图库更新
-        context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(appDir.path))))
+        context.sendBroadcast(
+            Intent(
+                Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(appDir.path))
+            )
+        )
     }
 
     /**
@@ -172,8 +176,10 @@ object BitmapUtils {
 
         // 绘边框
         canvas.drawBitmap(
-            bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(), (newH - bigH - 2 * smallH)
-                    / 2 + smallH.toFloat(), null
+            bm,
+            (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(),
+            (newH - bigH - 2 * smallH) / 2 + smallH.toFloat(),
+            null
         )
 
 //        canvas.save(Canvas.ALL_SAVE_FLAG);
@@ -193,8 +199,7 @@ object BitmapUtils {
         val scaleHeight = h.toFloat() / height
         matrix.postScale(scaleWidth, scaleHeight)
         return Bitmap.createBitmap(
-            oldbmp, 0, 0, width, height,
-            matrix, true
+            oldbmp, 0, 0, width, height, matrix, true
         )
     }
 
@@ -202,7 +207,8 @@ object BitmapUtils {
     fun drawableToBitmap(drawable: Drawable): Bitmap {
         val width = drawable.intrinsicWidth
         val height = drawable.intrinsicHeight
-        val config = if (drawable.opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
+        val config =
+            if (drawable.opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
         val bitmap = Bitmap.createBitmap(width, height, config)
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, width, height)
@@ -350,7 +356,11 @@ object BitmapUtils {
      * @return ByteArray
      */
     @JvmStatic
-    fun bitmap2ByteArray(bitmap: Bitmap, format: Bitmap.CompressFormat = Bitmap.CompressFormat.WEBP, quality: Int = 80): ByteArray {
+    fun bitmap2ByteArray(
+        bitmap: Bitmap,
+        format: Bitmap.CompressFormat = Bitmap.CompressFormat.WEBP,
+        quality: Int = 80
+    ): ByteArray {
         val baos = ByteArrayOutputStream()
         bitmap.compress(format, quality, baos)
         return baos.toByteArray()

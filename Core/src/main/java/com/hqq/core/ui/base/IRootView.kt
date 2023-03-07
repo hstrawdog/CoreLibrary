@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import com.hqq.core.lifecycle.BaseLifecycleObserver
@@ -189,7 +190,7 @@ interface IRootView {
     }
 
 
-    interface IBaseViewModel : BaseLifecycleObserver {
+    interface IBaseViewModel : DefaultLifecycleObserver {
         /**
          * ViewModel的onCreate 是最后执行的  比子类的 onCreate 执行还晚
          * Fragment 不一样  Fragment 涉及到延迟加载  需要当界面显示出来后再执行ViewModel 所以需要initData

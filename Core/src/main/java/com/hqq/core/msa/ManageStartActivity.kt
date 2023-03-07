@@ -35,7 +35,7 @@ class ManageStartActivity : IManageStartActivity {
     /**
      * start activity for result deque
      */
-    private lateinit var startActivityResultDeque : LinkedBlockingDeque<StartActivityResult>
+    private lateinit var startActivityResultDeque: LinkedBlockingDeque<StartActivityResult>
 
     /**
      * https://developer.android.google.cn/reference/kotlin/androidx/activity/result/ActivityResultLauncher.html
@@ -67,18 +67,12 @@ class ManageStartActivity : IManageStartActivity {
             is ComponentActivity -> {
                 startActivityResultDeque = bindHostSaveState() ?: LinkedBlockingDeque()
                 msaContext = this
-                activityForResult = registerForActivityResult(
-                        ActivityResultContracts.StartActivityForResult(),
-                        activityResultCallback
-                    )
+                activityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), activityResultCallback)
             }
             is Fragment -> {
                 startActivityResultDeque = bindHostSaveState() ?: LinkedBlockingDeque()
                 msaContext = requireContext()
-                activityForResult = registerForActivityResult(
-                        ActivityResultContracts.StartActivityForResult(),
-                        activityResultCallback
-                    )
+                activityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), activityResultCallback)
             }
             else -> {
                 throw IllegalArgumentException("IManageStartActivity only support `ComponentActivity` and `Fragment`.")
@@ -90,8 +84,8 @@ class ManageStartActivity : IManageStartActivity {
      * save host callback state
      */
     private fun SavedStateRegistryOwner.bindHostSaveState(): LinkedBlockingDeque<StartActivityResult>? {
-       val saveStateKey = savedStateRegistry.consumeRestoredStateForKey(SAVE_STATE_KEY)
-            ?.getString(SAVE_STATE_BUNDLE_KEY) ?: UUID.randomUUID().toString()
+        val saveStateKey = savedStateRegistry.consumeRestoredStateForKey(SAVE_STATE_KEY)?.getString(SAVE_STATE_BUNDLE_KEY)
+                ?: UUID.randomUUID().toString()
 
         savedStateRegistry.registerSavedStateProvider(SAVE_STATE_KEY) {
             Bundle().apply {
@@ -108,8 +102,8 @@ class ManageStartActivity : IManageStartActivity {
     /**
      * check is init
      */
-    private fun checkInit(){
-        if (!::startActivityResultDeque.isInitialized){
+    private fun checkInit() {
+        if (!::startActivityResultDeque.isInitialized) {
             throw IllegalArgumentException("call `initManageStartActivity` required before `onResume`.")
         }
     }
@@ -167,8 +161,7 @@ class ManageStartActivity : IManageStartActivity {
     /**
      * {@inheritDoc}
      */
-    override suspend fun <T : KClass<out Activity>> T.startForResultSync(options: () -> ActivityOptionsCompat?, block: Intent.() -> Unit): Result
-        = startActivityForResultSync(this, options, block)
+    override suspend fun <T : KClass<out Activity>> T.startForResultSync(options: () -> ActivityOptionsCompat?, block: Intent.() -> Unit): Result = startActivityForResultSync(this, options, block)
 
     /**
      * {@inheritDoc}
@@ -182,8 +175,7 @@ class ManageStartActivity : IManageStartActivity {
     /**
      * {@inheritDoc}
      */
-    override suspend fun Intent.startForResultSync(options: () -> ActivityOptionsCompat?): Result
-        = startActivityForResultSync(this, options)
+    override suspend fun Intent.startForResultSync(options: () -> ActivityOptionsCompat?): Result = startActivityForResultSync(this, options)
 
     /**
      * {@inheritDoc}
@@ -212,7 +204,7 @@ class ManageStartActivity : IManageStartActivity {
         runSafeContext {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 startActivity(this@start, options()?.toBundle())
-            }else{
+            } else {
                 startActivity(this@start)
             }
         }

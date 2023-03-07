@@ -99,8 +99,7 @@ abstract class BaseToolBar : IToolBar {
         this.activity = WeakReference(activity)
         val linearLayout = LinearLayout(activity)
         linearLayout.layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         )
         linearLayout.orientation = LinearLayout.VERTICAL
         if (isShowStatusBar) {
@@ -118,8 +117,7 @@ abstract class BaseToolBar : IToolBar {
         if (isShowLine) {
             viewLine = View(activity)
             viewLine!!.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ScreenUtils.dip2px(activity, 1f)
+                ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(activity, 1f)
             )
             viewLine!!.setBackgroundResource(R.color.toolbar_line_bg)
             linearLayout.addView(viewLine)

@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.hqq.core.utils.log.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -66,7 +63,8 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      * 避免 出现 ViewModel onCreate 监听比 Activity Init 方法执行的早出现问题
      * 实际开发要是没有问题的话可以 移除此注释
      */
-    override fun onCrete() {
+    override fun onCreate(owner: LifecycleOwner) {
+        super.onCreate(owner)
         LogUtils.e4Debug(" BaseViewModel           onCrete ")
     }
 
@@ -77,14 +75,6 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     }
-
-    override fun onStart() {}
-    override fun onResume() {}
-    override fun onPause() {}
-    override fun onStop() {}
-    override fun onDestroy() {}
-    override fun onAny() {}
-
 
 
     /**
@@ -108,8 +98,11 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      *
      * @param cls
      */
-    fun startActivity(cls: Class<out Activity?>?, bundle: Bundle? = null,
-                      result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
+    fun startActivity(
+        cls: Class<out Activity?>?,
+        bundle: Bundle? = null,
+        result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }
+    ) {
         openActivityComponentMutableLiveData.value = OpenActivityComponent(cls, bundle, result)
     }
 
@@ -121,10 +114,13 @@ abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
      * 打开Activity的对象零件
      */
     class OpenActivityComponent @JvmOverloads constructor(
-            var activityClass: Class<out Activity?>?,
-            var bundle: Bundle? = null,
-            var result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { },
+        var activityClass: Class<out Activity?>?,
+        var bundle: Bundle? = null,
+        var result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { },
     )
 
-    class GoBackComponent @JvmOverloads constructor(var goBack: Boolean = false, var bundle: Bundle? = null) : LiveData<Boolean>(goBack)
+    class GoBackComponent @JvmOverloads constructor(
+        var goBack: Boolean = false,
+        var bundle: Bundle? = null
+    ) : LiveData<Boolean>(goBack)
 }

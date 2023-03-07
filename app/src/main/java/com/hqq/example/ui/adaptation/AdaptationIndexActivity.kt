@@ -17,7 +17,8 @@ import com.hqq.example.ui.view.SvgActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class AdaptationIndexActivity(override val adapter: MainAdapter= MainAdapter()) : BaseListActivity() {
+class AdaptationIndexActivity(override val adapter: MainAdapter = MainAdapter()) :
+    BaseListActivity() {
     override fun initData() {
         adapter.addData(MainBean("文字适配测试", TextViewBuilderSizeActivity::class.java))
         adapter.addData(MainBean("1像素大小测试", DimenActivity::class.java))

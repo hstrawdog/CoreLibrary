@@ -11,7 +11,6 @@ package com.hqq.core.net.ok
 import android.text.TextUtils
 import com.hqq.core.CoreConfig
 import com.hqq.core.net.DownloadListener
-import com.hqq.core.net.ok.HttpCompat.ParamsCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,7 +42,8 @@ class OkHttpImpl : HttpCompat {
     val mOkHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder() //设置读取超时时间
             .readTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS) //设置写的超时时
-            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS).connectTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS).build()
+            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS).build()
     }
 
 
@@ -113,7 +113,7 @@ class OkHttpImpl : HttpCompat {
     override fun postExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call {
         val body = params.paramForm()
         val request: Request.Builder = Request.Builder().url(url).post(body)
-        val call = mOkHttpClient!!.newCall(request.build())
+        val call = mOkHttpClient.newCall(request.build())
         try {
             val response = call.execute()
             postHandler(Dispatchers.Default, callback, response, params)
@@ -134,11 +134,18 @@ class OkHttpImpl : HttpCompat {
      * @return Call
      * @throws IOException
      */
-    override fun downloadFile(url: String, startsPoint: Long, fileName: String, downloadPath: String, downloadListener: DownloadListener): Call {
-        val request: Request.Builder = Request.Builder().url(url).addHeader("Connection", "close") //这里不设置可能产生EOF错误
-            .header("RANGE", "bytes=$startsPoint-") //断点续传
+    override fun downloadFile(
+        url: String,
+        startsPoint: Long,
+        fileName: String,
+        downloadPath: String,
+        downloadListener: DownloadListener
+    ): Call {
+        val request: Request.Builder =
+            Request.Builder().url(url).addHeader("Connection", "close") //这里不设置可能产生EOF错误
+                .header("RANGE", "bytes=$startsPoint-") //断点续传
 
-        var call = mOkHttpClient!!.newCall(request.build())
+        var call = mOkHttpClient.newCall(request.build())
 
         try {
             call.enqueue(object : Callback {
@@ -230,7 +237,9 @@ class OkHttpImpl : HttpCompat {
         return call
     }
 
-    override fun preUpload(url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>): Call {
+    override fun preUpload(
+        url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>
+    ): Call {
         var call: Call? = null
         var requestBody: RequestBody? = null
         if (TextUtils.isEmpty(fileKey) || files == null || files.isEmpty()) {
@@ -250,7 +259,9 @@ class OkHttpImpl : HttpCompat {
                 val fileName = file.name
                 val mimeType: String = guessMimeType(fileName)
 
-                builder.addFormDataPart(fileKey, fileName, RequestBody.create(mimeType.toMediaTypeOrNull(), file))
+                builder.addFormDataPart(
+                    fileKey, fileName, RequestBody.create(mimeType.toMediaTypeOrNull(), file)
+                )
             }
             requestBody = builder.build()
         }
@@ -273,6 +284,7 @@ class OkHttpImpl : HttpCompat {
         }
         return contentType
     }
+
     /**
      * post的请求参数，构造RequestBody
      *
@@ -324,7 +336,12 @@ class OkHttpImpl : HttpCompat {
      * @param callback OkNetCallback
      * @return Call
      */
-    private fun doGet(coroutineContext: CoroutineContext, url: String, params: ParamsCompat, callback: OkNetCallback): Call {
+    private fun doGet(
+        coroutineContext: CoroutineContext,
+        url: String,
+        params: ParamsCompat,
+        callback: OkNetCallback
+    ): Call {
         val request: Request.Builder = getBuilder(url, params)
         val call = mOkHttpClient.newCall(request.build())
         call.enqueue(object : Callback {
@@ -348,8 +365,18 @@ class OkHttpImpl : HttpCompat {
      * @param o
      * @return
      */
-    private fun doPost(url: String, params: ParamsCompat, callback: OkNetCallback, coroutineContext: CoroutineContext): Call {
-        val body = params.paramForm()
+    private fun doPost(
+        url: String,
+        params: ParamsCompat,
+        callback: OkNetCallback,
+        coroutineContext: CoroutineContext
+    ): Call {
+        val body = if (params.dataFormat == DataFormat.XML) {
+            params.paramXml()
+        } else {
+            params.paramForm()
+        }
+
         val request: Request.Builder = Request.Builder().url(url).post(body)
         return doRequest(coroutineContext, request, callback, params)
     }
@@ -362,7 +389,12 @@ class OkHttpImpl : HttpCompat {
      * @param response
      * @param paramsCompat
      */
-    private fun postHandler(coroutineContext: CoroutineContext, callback: OkNetCallback, response: Response?, paramsCompat: ParamsCompat?) {
+    private fun postHandler(
+        coroutineContext: CoroutineContext,
+        callback: OkNetCallback,
+        response: Response?,
+        paramsCompat: ParamsCompat?
+    ) {
         CoroutineScope(coroutineContext).launch {
             post(callback, response, paramsCompat)
         }
@@ -376,7 +408,12 @@ class OkHttpImpl : HttpCompat {
      * @param params
      * @return
      */
-    private fun doRequest(coroutineContext: CoroutineContext, request: Request.Builder, callback: OkNetCallback, params: ParamsCompat): Call {
+    private fun doRequest(
+        coroutineContext: CoroutineContext,
+        request: Request.Builder,
+        callback: OkNetCallback,
+        params: ParamsCompat
+    ): Call {
         val call = mOkHttpClient.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -424,9 +461,9 @@ class OkHttpImpl : HttpCompat {
         var string = ""
         val body = response.body
         if (body != null) {
-            if (paramsCompat != null && paramsCompat.decode?.isNotEmpty() == true) {
+            if (paramsCompat != null && paramsCompat.decodeCharset?.isNotEmpty() == true) {
                 val bytes = body.bytes()
-                string = String(bytes, Charset.forName(paramsCompat.decode))
+                string = String(bytes, Charset.forName(paramsCompat.decodeCharset))
             } else {
                 string = body.string()
             }

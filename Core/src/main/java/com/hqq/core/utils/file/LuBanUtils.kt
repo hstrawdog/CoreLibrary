@@ -22,20 +22,26 @@ object LuBanUtils {
      * @param size
      * @param onCompressListener
      */
-    fun compression(activity: Activity?, path: String?, size: Int, onCompressListener: com.hqq.core.listenner.OnCompressListener) {
-        Luban.with(activity).load(path).ignoreBy(size).setCompressListener(object : OnCompressListener {
-            override fun onStart() {
-                onCompressListener.onStart()
-            }
+    fun compression(
+        activity: Activity?,
+        path: String?,
+        size: Int,
+        onCompressListener: com.hqq.core.listenner.OnCompressListener
+    ) {
+        Luban.with(activity).load(path).ignoreBy(size)
+            .setCompressListener(object : OnCompressListener {
+                override fun onStart() {
+                    onCompressListener.onStart()
+                }
 
-            override fun onSuccess(file: File) {
-                onCompressListener.onSuccess(file)
-            }
+                override fun onSuccess(file: File) {
+                    onCompressListener.onSuccess(file)
+                }
 
-            override fun onError(e: Throwable) {
-                onCompressListener.onError(e)
-            }
-        }).launch()
+                override fun onError(e: Throwable) {
+                    onCompressListener.onError(e)
+                }
+            }).launch()
     }
 
     /**
@@ -46,19 +52,25 @@ object LuBanUtils {
      * @param size
      * @param onCompressListener
      */
-    fun compression(activity: Activity?, path: List<String>?, size: Int, onCompressListener: com.hqq.core.listenner.OnCompressListener) {
-        Luban.with(activity).load(path).ignoreBy(size).setCompressListener(object : OnCompressListener {
-            override fun onStart() {
-                onCompressListener.onStart()
-            }
+    fun compression(
+        activity: Activity?,
+        path: List<String>?,
+        size: Int,
+        onCompressListener: com.hqq.core.listenner.OnCompressListener
+    ) {
+        Luban.with(activity).load(path).ignoreBy(size)
+            .setCompressListener(object : OnCompressListener {
+                override fun onStart() {
+                    onCompressListener.onStart()
+                }
 
-            override fun onSuccess(file: File) {
-                onCompressListener.onSuccess(file)
-            }
+                override fun onSuccess(file: File) {
+                    onCompressListener.onSuccess(file)
+                }
 
-            override fun onError(e: Throwable) {
-                onCompressListener.onError(e)
-            }
-        }).launch()
+                override fun onError(e: Throwable) {
+                    onCompressListener.onError(e)
+                }
+            }).launch()
     }
 }

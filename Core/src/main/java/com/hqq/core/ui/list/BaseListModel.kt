@@ -60,7 +60,9 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      */
     private val _adapter get() = mBaseListModelView.adapter
 
-    constructor(mBaseListModelView: IBaseListModelView, iRootView: RootViewImpl) : this(mBaseListModelView) {
+    constructor(mBaseListModelView: IBaseListModelView, iRootView: RootViewImpl) : this(
+        mBaseListModelView
+    ) {
         this.context = WeakReference<Context>(iRootView.activity?.get())
         mBaseListModelView.listView = initRecycleView(iRootView.rootView)
     }
@@ -122,8 +124,12 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
                     mBaseListModelView.onRefreshBegin()
                 }
 
-                override fun checkCanDoRefresh(frame: PtrFrameLayout, content: View, header: View): Boolean {
-                    return PtrDefaultHandler.checkContentCanBePulledDown(frame, mBaseListModelView.listView, header)
+                override fun checkCanDoRefresh(
+                    frame: PtrFrameLayout, content: View, header: View
+                ): Boolean {
+                    return PtrDefaultHandler.checkContentCanBePulledDown(
+                        frame, mBaseListModelView.listView, header
+                    )
                 }
             })
 
@@ -203,7 +209,8 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
     private fun createLoadMoreFoodView(): View? {
         if (viewEmptyFoot == null) {
             context?.let {
-                viewEmptyFoot = LayoutInflater.from(it.get()).inflate(R.layout.layout_load_more_empty, null)
+                viewEmptyFoot =
+                    LayoutInflater.from(it.get()).inflate(R.layout.layout_load_more_empty, null)
             }
         }
         return viewEmptyFoot
@@ -321,7 +328,7 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
 
     }
 
-    companion object{
+    companion object {
         /**
          * 创建一个 rootView = recycleView
          *
@@ -331,7 +338,9 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         @JvmOverloads
         fun createRecycleView(context: Context): View {
             val view = RecyclerView(context)
-            view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            view.layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+            )
             view.id = R.id.rc_list
             return view
         }

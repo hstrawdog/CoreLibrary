@@ -28,7 +28,8 @@ import com.hqq.core.utils.ResourcesUtils
  *  ------------    分割线
  *  取消 | 中立 | 确定    默认隐藏中立    无内容 隐藏按钮菜单
  */
-class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, DialogInterface.OnKeyListener {
+class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
+    DialogInterface.OnKeyListener {
     /**
      *  属性对象
      */
@@ -95,7 +96,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                 it.text = alertParams?.negativeButtonText
                 it.setOnClickListener {
                     if (alertParams?.negativeButtonListener != null) {
-                        alertParams?.negativeButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_NEGATIVE)
+                        alertParams?.negativeButtonListener?.onClick(
+                            this@SelectDialog,
+                            DialogInterface.BUTTON_NEGATIVE
+                        )
                     } else {
                         // 没有实现事件回调
                         dismiss()
@@ -112,7 +116,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                 it.text = alertParams?.positiveButtonText
                 it.setOnClickListener {
                     if (alertParams?.positiveButtonListener != null) {
-                        alertParams?.positiveButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                        alertParams?.positiveButtonListener?.onClick(
+                            this@SelectDialog,
+                            DialogInterface.BUTTON_POSITIVE
+                        )
                     }
                 }
             }
@@ -124,7 +131,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                     visibility = View.VISIBLE
                     setOnClickListener {
                         if (alertParams?.neutralButtonListener != null) {
-                            alertParams?.neutralButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                            alertParams?.neutralButtonListener?.onClick(
+                                this@SelectDialog,
+                                DialogInterface.BUTTON_POSITIVE
+                            )
                         }
                     }
                     it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
@@ -165,7 +175,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                 tv.text = it
                 var paddingSize = ResourcesUtils.getDimen(R.dimen.x10).toInt()
                 tv.setPadding(paddingSize, 0, paddingSize, 0)
-                tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                tv.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
                 rootView?.findViewById<LinearLayout>(R.id.ll_content)?.apply {
                     addView(tv)
                     setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt())
@@ -235,7 +248,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param onCancelListener
          * @return
          */
-        fun setOnCancelListener(text: String?, onCancelListener: DialogInterface.OnClickListener? = null): Builder {
+        fun setOnCancelListener(
+            text: String?,
+            onCancelListener: DialogInterface.OnClickListener? = null
+        ): Builder {
             alertParams.negativeButtonListener = onCancelListener
             text?.let {
                 alertParams.negativeButtonText = it
@@ -250,7 +266,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param listener
          * @return
          */
-        fun setPositiveButton(text: CharSequence?, listener: DialogInterface.OnClickListener? = null): Builder {
+        fun setPositiveButton(
+            text: CharSequence?,
+            listener: DialogInterface.OnClickListener? = null
+        ): Builder {
             text?.let {
                 alertParams.positiveButtonText = it
             }
@@ -264,7 +283,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param listener OnClickListener
          * @return Builder?
          */
-        fun setNeutralButton(text: CharSequence, listener: DialogInterface.OnClickListener): Builder {
+        fun setNeutralButton(
+            text: CharSequence,
+            listener: DialogInterface.OnClickListener
+        ): Builder {
             alertParams.neutralButtonText = text
             alertParams.neutralButtonListener = listener
             return this
@@ -278,7 +300,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param text
          * @return
          */
-        fun setTitle(text: CharSequence?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)): Builder {
+        fun setTitle(
+            text: CharSequence?,
+            fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)
+        ): Builder {
             text?.let {
                 alertParams.title = it
             }

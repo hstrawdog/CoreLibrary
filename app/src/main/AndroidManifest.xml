@@ -383,9 +383,6 @@
             android:name=".ui.adaptation.permission.PermissionActivity"
             android:label="权限测试" />
         <activity
-            android:name=".ui.dialog.BottomSheetActivity"
-            android:label="知乎评论列表" />
-        <activity
             android:name=".ui.screen.TextViewBuilderSizeActivity"
             android:label="文字大小" />
         <activity
@@ -406,9 +403,6 @@
         <activity
             android:name=".ui.adaptation.AdaptationIndexActivity"
             android:label="适配相关" />
-        <activity
-            android:name=".ui.dialog.DialogIndexActivity"
-            android:label="dialog 系列" />
 
         <activity
             android:name=".ui.customize.CustomizeIndexActivity"

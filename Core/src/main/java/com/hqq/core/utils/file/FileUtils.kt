@@ -158,7 +158,10 @@ object FileUtils {
      * app 卸载后 目录也会删除掉
      */
     @kotlin.jvm.JvmStatic
-    fun getExternalFilesDir(context: Context = CoreConfig.applicationContext, fileName: String = ""): String {
+    fun getExternalFilesDir(
+        context: Context = CoreConfig.applicationContext,
+        fileName: String = ""
+    ): String {
         return context.getExternalFilesDir(fileName)!!.path
     }
 
@@ -292,24 +295,20 @@ object FileUtils {
         val megaByte = kiloByte / 1024
         if (megaByte < 1) {
             val result1 = BigDecimal(java.lang.Double.toString(kiloByte))
-            return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "KB"
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB"
         }
         val gigaByte = megaByte / 1024
         if (gigaByte < 1) {
             val result2 = BigDecimal(java.lang.Double.toString(megaByte))
-            return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "MB"
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB"
         }
         val teraBytes = gigaByte / 1024
         if (teraBytes < 1) {
             val result3 = BigDecimal(java.lang.Double.toString(gigaByte))
-            return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "GB"
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB"
         }
         val result4 = BigDecimal(teraBytes)
-        return (result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
-                + "TB")
+        return (result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB")
     }
 
     /**
@@ -404,8 +403,16 @@ object FileUtils {
      * @return ContentValues
      */
     private fun createBitmapValues(
-        data: String, _display_name: String, mime_type: String, relative_path: String,
-        date_added: String, date_modified: String, date_taken: String, size: Int, width: Int, height: Int
+        data: String,
+        _display_name: String,
+        mime_type: String,
+        relative_path: String,
+        date_added: String,
+        date_modified: String,
+        date_taken: String,
+        size: Int,
+        width: Int,
+        height: Int
     ): ContentValues {
         var values = ContentValues().apply {
             if (!isQ()) {
@@ -432,8 +439,10 @@ object FileUtils {
     @JvmStatic
     fun saveFile2Download(context: Context, fileName: String, data: String) {
         //使用ContentResolver创建需要操作的文件
-        val outputStream =
-            getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
+        val outputStream = getDownloadInstallUri(
+            fileName,
+            context
+        )?.let { context.contentResolver.openOutputStream(it) }
         outputStream?.write(data.toByteArray())
         outputStream?.close()
     }
@@ -494,11 +503,11 @@ object FileUtils {
                 selectionArgs = arrayOf(dirName)
             }
             val resultCursor = resolver?.query(
-                downloadUri, null,
-                selection, selectionArgs, null
+                downloadUri, null, selection, selectionArgs, null
             )
             if (resultCursor != null) {
-                val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
+                val fileIdIndex =
+                    resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
                 while (resultCursor.moveToNext()) {
                     val fileId = resultCursor.getLong(fileIdIndex)
                     val pathUri = downloadUri.buildUpon().appendPath("$fileId").build()
@@ -559,7 +568,11 @@ object FileUtils {
      * @param filePath String
      */
     @JvmStatic
-    fun saveBitmap2Public(context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String) {
+    fun saveBitmap2Public(
+        context: Context = CoreConfig.applicationContext,
+        bitmap: Bitmap,
+        filePath: String
+    ) {
         if (!File(filePath).parentFile.exists()) {
             File(filePath).parentFile.mkdirs()
         }
@@ -567,15 +580,24 @@ object FileUtils {
         val current = System.currentTimeMillis()
 
         val values = createBitmapValues(
-            file.absolutePath, file.name, "image/jpg", file.parent,
-            current.toString(), current.toString(), current.toString(), BitmapUtils.getBitmapSize(bitmap), bitmap.width, bitmap.height
+            file.absolutePath,
+            file.name,
+            "image/jpg",
+            file.parent,
+            current.toString(),
+            current.toString(),
+            current.toString(),
+            BitmapUtils.getBitmapSize(bitmap),
+            bitmap.width,
+            bitmap.height
         )
 
-        context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)?.let { it ->
-            context.contentResolver.openOutputStream(it)?.let { it1 ->
-                saveBitmap(it1, bitmap)
+        context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+            ?.let { it ->
+                context.contentResolver.openOutputStream(it)?.let { it1 ->
+                    saveBitmap(it1, bitmap)
+                }
             }
-        }
 
 
     }
@@ -589,25 +611,42 @@ object FileUtils {
     fun saveBitmap2Pictures(relativePath: String, fileName: String, bitmap: Bitmap): Uri? {
         getContentResolverUri(relativePath, fileName)?.let { pair ->
             pair.first?.let { uri ->
-                CoreConfig.applicationContext.contentResolver.openOutputStream(uri)?.let { outputStream ->
-                    saveBitmap(outputStream, bitmap)
-                    // 更新图片大小
-                    if (!isQ()) {
-                        pair.second?.let { filePath ->
+                CoreConfig.applicationContext.contentResolver.openOutputStream(uri)
+                    ?.let { outputStream ->
+                        saveBitmap(outputStream, bitmap)
+                        // 更新图片大小
+                        if (!isQ()) {
+                            pair.second?.let { filePath ->
+                                val imageValues = ContentValues()
+                                imageValues.put(
+                                    MediaStore.Images.Media.SIZE,
+                                    File(filePath).length()
+                                )
+                                CoreConfig.applicationContext.contentResolver.update(
+                                    uri,
+                                    imageValues,
+                                    null,
+                                    null
+                                )
+                                // 通知媒体库更新
+                                val intent = Intent(
+                                    @Suppress("DEPRECATION") Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                                    uri
+                                )
+                                CoreConfig.applicationContext.sendBroadcast(intent)
+                            }
+                        } else {
                             val imageValues = ContentValues()
-                            imageValues.put(MediaStore.Images.Media.SIZE, File(filePath).length())
-                            CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
-                            // 通知媒体库更新
-                            val intent = Intent(@Suppress("DEPRECATION") Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri)
-                            CoreConfig.applicationContext.sendBroadcast(intent)
+                            // Android Q添加了IS_PENDING状态，为0时其他应用才可见
+                            imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
+                            CoreConfig.applicationContext.contentResolver.update(
+                                uri,
+                                imageValues,
+                                null,
+                                null
+                            )
                         }
-                    } else {
-                        val imageValues = ContentValues()
-                        // Android Q添加了IS_PENDING状态，为0时其他应用才可见
-                        imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
-                        CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
                     }
-                }
                 return uri
             }
         }
@@ -644,7 +683,12 @@ object FileUtils {
             }
             collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
             // 高版本不用查重直接插入，会自动重命名
-            return Pair(CoreConfig.applicationContext.contentResolver.insert(collection, imageValues), "")
+            return Pair(
+                CoreConfig.applicationContext.contentResolver.insert(
+                    collection,
+                    imageValues
+                ), ""
+            )
         } else {
             // 老版本
             val pictures =
@@ -673,7 +717,12 @@ object FileUtils {
             }
             collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             // 插入图片信息
-            return Pair(CoreConfig.applicationContext.contentResolver.insert(collection, imageValues), imageFile.path)
+            return Pair(
+                CoreConfig.applicationContext.contentResolver.insert(
+                    collection,
+                    imageValues
+                ), imageFile.path
+            )
         }
 
     }
@@ -696,9 +745,13 @@ object FileUtils {
         // 查询是否已经存在相同图片
         val query = CoreConfig.applicationContext.contentResolver.query(
             collection,
-            arrayOf(MediaStore.Images.Media._ID, @Suppress("DEPRECATION") MediaStore.Images.Media.DATA),
+            arrayOf(
+                MediaStore.Images.Media._ID,
+                @Suppress("DEPRECATION") MediaStore.Images.Media.DATA
+            ),
             "${@Suppress("DEPRECATION") MediaStore.Images.Media.DATA} == ?",
-            arrayOf(imagePath), null
+            arrayOf(imagePath),
+            null
         )
         query?.use {
             while (it.moveToNext()) {
@@ -762,7 +815,10 @@ object FileUtils {
     @JvmStatic
     fun saveBitmap2Download(context: Context, fileName: String, bitmap: Bitmap) {
         //使用ContentResolver创建需要操作的文件
-        val os = getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
+        val os = getDownloadInstallUri(
+            fileName,
+            context
+        )?.let { context.contentResolver.openOutputStream(it) }
         os?.let { saveBitmap(it, bitmap) }
     }
     //endregion
@@ -776,7 +832,10 @@ object FileUtils {
      * @throws IOException
      */
     @Throws(IOException::class)
-    fun saveBitmap(bm: Bitmap?, filePath: String = getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
+    fun saveBitmap(
+        bm: Bitmap?,
+        filePath: String = getExternalPicturesPath() + File.separator + getDefFileName(".png")
+    ) {
         if (bm == null) {
             LogUtils.d(" saveBitmap   is  null  ")
             return
@@ -875,7 +934,12 @@ object FileUtils {
     @JvmStatic
     fun copyToPrivateDir(context: Context, fileUri: Uri, privatePath: String) {
         try {
-            val fis = FileInputStream(context.contentResolver.openFileDescriptor(fileUri, "r")?.fileDescriptor)
+            val fis = FileInputStream(
+                context.contentResolver.openFileDescriptor(
+                    fileUri,
+                    "r"
+                )?.fileDescriptor
+            )
             fis.copyTo(FileOutputStream(privatePath))
             fis.close()
         } catch (e: Exception) {

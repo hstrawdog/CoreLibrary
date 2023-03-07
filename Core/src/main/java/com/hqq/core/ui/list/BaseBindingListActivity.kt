@@ -16,8 +16,8 @@ import com.hqq.core.ui.base.BaseDataBindingActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingListActivity<T : ViewDataBinding>
-    : BaseDataBindingActivity<T>(), BaseListModel.IBaseListModelView {
+abstract class BaseBindingListActivity<T : ViewDataBinding> : BaseDataBindingActivity<T>(),
+    BaseListModel.IBaseListModelView {
 
 
     override val layoutId: Int
@@ -30,7 +30,7 @@ abstract class BaseBindingListActivity<T : ViewDataBinding>
     override var pageSize = BaseCommonsKey.PAGE_SIZE
 
     override var listView: RecyclerView? = null
-    override var layoutManager: RecyclerView.LayoutManager= LinearLayoutManager(this)
+    override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
 
 
     /**

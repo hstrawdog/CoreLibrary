@@ -132,26 +132,38 @@ object LogUtils {
     fun dInfo(any: Any?) {
         var tag = "Info"
         if (CoreConfig.get().isDebug) {
-            doLog(tag, "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────", "w")
-
+            doLog(
+                tag,
+                "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────",
+                "w"
+            )
             if (any == null) {
                 e("标签 : 内容为空！")
             } else {
                 doLog(tag, any, "w")
             }
-            doLog(tag, "├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄", "w")
+            doLog(
+                tag,
+                "├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄",
+                "w"
+            )
 
             val stackTrace = Throwable().stackTrace
             if (stackTrace.size > 1) {
                 for (index in 1 until (if (stackTrace.size > 5) 5 else stackTrace.size)) {
                     val targetElement = stackTrace[index]
-                    val head = "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
-                        getFileName(targetElement)
-                    }:${targetElement.getLineNumber()})            "
+                    val head =
+                        "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
+                            getFileName(targetElement)
+                        }:${targetElement.getLineNumber()})            "
                     doLog(tag, "|      $head     ", "w")
                 }
             }
-            doLog(tag, "└────────────────────────────────────────────────────────────────────────────────────────────────────────────────", "w")
+            doLog(
+                tag,
+                "└────────────────────────────────────────────────────────────────────────────────────────────────────────────────",
+                "w"
+            )
         }
     }
 

@@ -1,6 +1,5 @@
 package com.hqq.core.net.ok
 
-import com.hqq.core.net.ok.HttpCompat.ParamsCompat
 
 /**
  * @Author : huangqiqiang
@@ -11,6 +10,7 @@ import com.hqq.core.net.ok.HttpCompat.ParamsCompat
  * @Descrive :
  */
 object OkHttp {
+
     private val mOkHttp: HttpCompat by lazy {
         OkHttpImpl().create()
     }
@@ -29,16 +29,5 @@ object OkHttp {
         return OkParamsImpl()
     }
 
-    /**
-     * key value 对象
-     *
-     * @param key
-     * @param values
-     * @return
-     */
-    fun newParamsCompat(key: String?, values: Any?): ParamsCompat {
-        val paramsCompat = newParamsCompat()
-        paramsCompat.put(key, values)
-        return paramsCompat
-    }
+
 }

@@ -11,9 +11,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ALiBaBa" />
             <option value="$PROJECT_DIR$/Core" />
             <option value="$PROJECT_DIR$/OpenGL" />
             <option value="$PROJECT_DIR$/ReadBook" />
+            <option value="$PROJECT_DIR$/WeChat" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
           </set>

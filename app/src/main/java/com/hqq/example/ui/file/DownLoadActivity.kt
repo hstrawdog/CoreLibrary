@@ -57,8 +57,10 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 //                })
 
         binding.button62.setOnClickListener {
-            var pdfUrl = "https://ft.ncpssd.org/pdf/getxwkSky/topicsxwk/pdf/SKY_XJP/JHXK202203023.pdf"
-            val path = FileUtils.getCacheDir(this@DownLoadActivity) + "/" + System.currentTimeMillis() + ".pdf"
+            var pdfUrl =
+                "https://ft.ncpssd.org/pdf/getxwkSky/topicsxwk/pdf/SKY_XJP/JHXK202203023.pdf"
+            val path =
+                FileUtils.getCacheDir(this@DownLoadActivity) + "/" + System.currentTimeMillis() + ".pdf"
 
 //        RequestBody requestBody = RequestBody.create("", MediaType.parse("application/xml"));
             val sign: String = MD5Utils.encryptStr("L!N45S26y1SGzq9^" + nowDate4yyyyMMdd)
@@ -95,7 +97,8 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 ////            val url = "https://s186.convertio.me/p/m6uxG_51t9I1HKZbRmnv_A/d4c878bc05c3172944ea60d7cac37bbf/1647409049087.mp4"
 //            val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/34DE7E9C6F0F7346A38B92CB23EB01571857.mp4"
 ////            val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/F5CD39FFCB763249766AC4EBC07650D832C2.mp4"
-            val path = FileUtils.getCacheDir(this@DownLoadActivity) + "/" + System.currentTimeMillis() + ".mp4"
+            val path =
+                FileUtils.getCacheDir(this@DownLoadActivity) + "/" + System.currentTimeMillis() + ".mp4"
             File(path)?.delete()
             HttpClient().download(Request().apply {
                 url(url)
@@ -130,26 +133,31 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
         var fileName = "test.apk"
         var pdfPath = "http://103.247.176.188/Direct2.aspx?id=256965670&sign=8c5d1c425fdad174"
         binding.button69.setOnClickListener {
-            okhttpCall = OkHttp.newHttpCompat().downloadFile(apkPath, 0, fileName, FileUtils.getCacheDir(), object : DownloadListener {
-                override fun start(max: Long) {
-                    binding.textView30.text = "start   $max"
-                }
+            okhttpCall = OkHttp.newHttpCompat().downloadFile(
+                apkPath,
+                0,
+                fileName,
+                FileUtils.getCacheDir(),
+                object : DownloadListener {
+                    override fun start(max: Long) {
+                        binding.textView30.text = "start   $max"
+                    }
 
-                override fun loading(progress: Float) {
-                    binding.textView36.text = "loading    ${progress * 100}"
+                    override fun loading(progress: Float) {
+                        binding.textView36.text = "loading    ${progress * 100}"
 
-                }
+                    }
 
-                override fun complete(filePath: String?) {
-                    binding.textView37.text = "complete     $filePath"
+                    override fun complete(filePath: String?) {
+                        binding.textView37.text = "complete     $filePath"
 
-                }
+                    }
 
-                override fun fail(code: Int, e: java.lang.Exception?) {
-                    binding.textView38.text = "fail $code       ${e.toString()}"
+                    override fun fail(code: Int, e: java.lang.Exception?) {
+                        binding.textView38.text = "fail $code       ${e.toString()}"
 
-                }
-            })
+                    }
+                })
         }
         binding.button70.setOnClickListener {
             okhttpCall?.cancel()
@@ -158,26 +166,31 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
         binding.button71.setOnClickListener {
             val file = File(FileUtils.getCacheDir() + File.separator + fileName)
 
-            okhttpCall = OkHttp.newHttpCompat().downloadFile(apkPath, file.length(), fileName, FileUtils.getCacheDir(), object : DownloadListener {
-                override fun start(max: Long) {
-                    binding.textView30.text = "start %=$max"
-                }
+            okhttpCall = OkHttp.newHttpCompat().downloadFile(
+                apkPath,
+                file.length(),
+                fileName,
+                FileUtils.getCacheDir(),
+                object : DownloadListener {
+                    override fun start(max: Long) {
+                        binding.textView30.text = "start %=$max"
+                    }
 
-                override fun loading(progress: Float) {
-                    binding.textView36.text = "loading %=${progress * 100}"
+                    override fun loading(progress: Float) {
+                        binding.textView36.text = "loading %=${progress * 100}"
 
-                }
+                    }
 
-                override fun complete(filePath: String?) {
-                    binding.textView37.text = "complete %=$filePath"
+                    override fun complete(filePath: String?) {
+                        binding.textView37.text = "complete %=$filePath"
 
-                }
+                    }
 
-                override fun fail(code: Int, e: java.lang.Exception?) {
-                    binding.textView38.text = "fail %=${e.toString()}"
+                    override fun fail(code: Int, e: java.lang.Exception?) {
+                        binding.textView38.text = "fail %=${e.toString()}"
 
-                }
-            })
+                    }
+                })
 
         }
     }
@@ -191,7 +204,8 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
             values.put(MediaStore.Video.Media.DISPLAY_NAME, destFile.name)
             values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
             values.put(MediaStore.Video.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
-            val collection = MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            val collection =
+                MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
             context.contentResolver.insert(collection, values)
         } else {
             values.put(MediaStore.Video.Media.TITLE, destFile.name)

@@ -14,7 +14,6 @@ import okhttp3.Response;
  * @Describe : 统计请求耗时
  */
 public class NetworkInterceptorRecord implements Interceptor {
-
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();

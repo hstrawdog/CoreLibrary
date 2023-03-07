@@ -19,7 +19,8 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
  * @Descrive :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
-abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> : BaseVmActivity<K, T>(), IBaseListModelView {
+abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> :
+    BaseVmActivity<K, T>(), IBaseListModelView {
 
     override val layoutId: Int = R.layout.activity_recycle_view
 

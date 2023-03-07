@@ -5,6 +5,7 @@ plugins {
 }
 import com.hqq.core.plugin.*
 
+
 android {
     buildFeatures {
         //开启 viewBinding 支持

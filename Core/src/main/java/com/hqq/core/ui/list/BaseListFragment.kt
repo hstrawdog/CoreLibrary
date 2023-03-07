@@ -17,8 +17,7 @@ import com.hqq.core.ui.list.BaseListModel.IBaseListModelView
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseListFragment :
-        BaseFragment(), IBaseListModelView {
+abstract class BaseListFragment : BaseFragment(), IBaseListModelView {
 
     // Fragment 的用法与 Activity保持一致  注释
 

@@ -17,8 +17,8 @@ import com.hqq.core.ui.base.BaseDataBindingFragment
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingListFragment<T : ViewDataBinding>
-    : BaseDataBindingFragment<T>(), BaseListModel.IBaseListModelView {
+abstract class BaseBindingListFragment<T : ViewDataBinding> : BaseDataBindingFragment<T>(),
+    BaseListModel.IBaseListModelView {
 
 
     override val layoutId: Int
