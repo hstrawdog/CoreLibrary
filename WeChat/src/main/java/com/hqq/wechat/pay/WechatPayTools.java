@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.hqq.core.net.ok.DataFormat;
 import com.hqq.core.net.ok.HttpCompat;
 import com.hqq.core.net.ok.OkHttp;
 import com.hqq.core.net.ok.OkNetCallback;
+import com.hqq.core.net.ok.OkParamsImpl;
 import com.hqq.core.utils.ToastUtils;
 import com.hqq.core.utils.log.LogUtils;
 import com.hqq.wechat.interfaces.OnSuccessAndErrorListener;
@@ -41,7 +43,6 @@ import okhttp3.RequestBody;
 
 
 /**
- *
  * @author Tamsiree
  * @date 2017/4/17
  */
@@ -49,6 +50,7 @@ import okhttp3.RequestBody;
 public class WechatPayTools {
     /**
      * 商户发起生成预付单请求
+     *
      * @param mContext
      * @param appid
      * @param mch_id
@@ -66,7 +68,8 @@ public class WechatPayTools {
         String time_start = getCurrTime();//交易起始时间(订单生成时间非必须)
         String trade_type = "APP";//App支付
         String notify_url = "https://github.com/tamsiree/RxTool";//"http://" + "域名" + "/" + "项目名" + "回调地址.do";//回调函数
-        SortedMap<String, String> params = new TreeMap<String, String>();
+
+        TreeMap<String, String> params = new TreeMap<String, String>();
         params.put("appid", appid);
         params.put("mch_id", mch_id);
         params.put("device_info", "WEB"); //设备号
@@ -78,73 +81,21 @@ public class WechatPayTools {
         params.put("time_start", time_start);
         params.put("trade_type", trade_type);
         params.put("notify_url", notify_url);
-        String sign = "";//签名(该签名本应使用微信商户平台的API证书中的密匙key,但此处使用的是微信公众号的密匙APP_SECRET)
+        String sign = "";
+        //签名(该签名本应使用微信商户平台的API证书中的密匙key,但此处使用的是微信公众号的密匙APP_SECRET)
         sign = getSign(params, wx_private_key);
+        params.put("sign", sign);
         //参数xml化
         String xmlParams = parseString2Xml(params, sign);
+
         //判断返回码
         final String[] jsonStr = {""};
 
+        OkParamsImpl okParams =new OkParamsImpl();
+        okParams.setDataFormat(DataFormat.XML);
+        okParams.put(params);
 
-        OkHttp.INSTANCE.newHttpCompat().post("https://api.mch.weixin.qq.com/pay/unifiedorder", new HttpCompat.ParamsCompat() {
-
-            @NonNull
-            @Override
-            public RequestBody paramMulti() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public RequestBody paramForm() {
-                return   RequestBody.create(MediaType.parse("text/plain; charset=utf-8"), xmlParams);
-            }
-
-            @Nullable
-            @Override
-            public String paramGet() {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public HttpCompat.ParamsCompat put(@Nullable String key, @Nullable Object value) {
-                return null;
-            }
-
-            @Override
-            public void setHeaders(@NonNull Map<String, String> stringStringMap) {
-
-            }
-
-            @NonNull
-            @Override
-            public Map<String, String> getHeaders() {
-                return null;
-            }
-
-            @Override
-            public void setEncode(@Nullable String s) {
-
-            }
-
-            @Nullable
-            @Override
-            public String getEncode() {
-                return null;
-            }
-
-            @Override
-            public void setDecode(@Nullable String s) {
-
-            }
-
-            @Nullable
-            @Override
-            public String getDecode() {
-                return null;
-            }
-        }, new OkNetCallback(){
+        OkHttp.INSTANCE.newHttpCompat().post("https://api.mch.weixin.qq.com/pay/unifiedorder",okParams , new OkNetCallback() {
 
             @Override
             public void onSuccess(String statusCode, String response) {
@@ -176,8 +127,6 @@ public class WechatPayTools {
 
             }
         });
-
-
 
 
         if (!jsonStr[0].contains("FAIL") && jsonStr[0].trim().length() > 0) {//成功
