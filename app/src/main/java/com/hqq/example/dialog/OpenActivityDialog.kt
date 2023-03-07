@@ -13,13 +13,20 @@ import com.hqq.example.ui.ResultActivity
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class DialogOpenActivity : BaseBindingDialog<DialogOpenActivityBinding>() {
+class OpenActivityDialog : BaseBindingDialog<DialogOpenActivityBinding>() {
     override fun initView() {
 
         binding.button73.setOnClickListener {
             open(ResultActivity::class.java) {
                 it?.data?.getStringExtra("data")?.let {
-                    ToastUtils.showToast(it)
+                    ToastUtils.showToast("button73:  " + it)
+                }
+            }
+        }
+        binding.button74.setOnClickListener {
+            open(ResultActivity::class.java) {
+                it?.data?.getStringExtra("data")?.let {
+                    ToastUtils.showToast("button74:  " + it)
                 }
             }
         }
