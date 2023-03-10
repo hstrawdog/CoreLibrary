@@ -25,32 +25,38 @@ object SoftKeyboardUtils {
     /**
      * 滑动 rootView  保证  subView 不被键盘遮挡
      * @param root View  需要滑动的布局
-     * @param subView View  需要不被遮挡的不急
+     * @param subView View  需要不被遮挡的布局
      * @param offset Int  偏移量:正数是底部距离  单位:px
      */
     @JvmStatic
-    fun keepViewNotOverOnScroll(root: View, subView: View, offset: Int = 0) {
-        SoftKeyboardListener.setListener(root.context as Activity, object : SoftKeyBoardChangeListener {
-            override fun onKeyBoardShow(height: Int) {
-                // view 距离底部的距离
-                val bottom = root.height - subView.bottom
-                val scrollHeight = root.height - (root.height - height) - bottom + offset
-                if (scrollHeight > 0) {
-                    root.scrollTo(0, scrollHeight)
+    fun keepViewNotOverOnScroll(root: View, subView: View, offset: Float = 0f) {
+        SoftKeyboardListener.setListener(
+            root.context as Activity,
+            object : SoftKeyBoardChangeListener {
+                override fun onKeyBoardShow(height: Int) {
+                    // view 距离底部的距离
+                    val bottom = root.height - subView.bottom
+                    val scrollHeight =
+                        root.height - (root.height - height) - bottom + offset.toInt()
+                    if (scrollHeight > 0) {
+                        root.scrollTo(0, scrollHeight)
+                    }
                 }
-            }
 
-            override fun onKeyBoardHide(height: Int) {
-                root.scrollTo(0, 0)
-            }
-        })
+                override fun onKeyBoardHide(height: Int) {
+                    root.scrollTo(0, 0)
+                }
+            })
+
+
     }
 
     /**
      * 重绘Activity
-     *
+     *  整个界面绘制    正常 是折叠 EditText
      * @param activity
      */
+    @JvmStatic
     fun softHideKeyboardRedraw(activity: Activity) {
         SoftKeyboardRedraw.assistActivity(activity)
     }
@@ -73,7 +79,9 @@ object SoftKeyboardUtils {
      * @return
      */
     @kotlin.jvm.JvmStatic
-    fun addSoftHideKeyboardListener(activity: Activity, listener: SoftKeyBoardChangeListener?): SoftKeyboardListener {
+    fun addSoftHideKeyboardListener(
+        activity: Activity, listener: SoftKeyBoardChangeListener?
+    ): SoftKeyboardListener {
         return SoftKeyboardListener.setListener(activity, listener)
     }
 
@@ -83,8 +91,8 @@ object SoftKeyboardUtils {
      * @param activity The activity.
      */
     fun showSoftInput(activity: Activity) {
-        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                ?: return
+        val imm =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager ?: return
         var view = activity.currentFocus
         if (view == null) {
             view = View(activity)
@@ -123,8 +131,8 @@ object SoftKeyboardUtils {
      * @param activity
      */
     fun hideSoftInput(activity: Activity) {
-        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                ?: return
+        val imm =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager ?: return
         var view = activity.currentFocus
         if (view == null) {
             view = View(activity)

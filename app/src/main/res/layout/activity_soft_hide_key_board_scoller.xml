@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cl_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/x250"
+        android:src="@drawable/ic_launcher_background" />
 
 
     <LinearLayout
@@ -14,30 +21,86 @@
         android:orientation="vertical">
 
         <EditText
-                android:id="@+id/edt_text"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x500"
-                android:background="@color/color_main"
-                android:hint="@string/app_name" />
+            android:id="@+id/edt_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x200"
+            android:layout_marginHorizontal="@dimen/x40"
+            android:background="@color/color_main"
+            android:hint="@string/app_name" />
+
 
         <LinearLayout
             android:id="@+id/ll_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/x100"
+            android:background="@color/color_line_gray"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_login"
                 style="@style/def_text.30.333"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/x350"
+                android:layout_marginTop="@dimen/x150"
                 android:layout_marginBottom="@dimen/x50"
+                android:background="@color/color_red"
                 android:gravity="center"
-                android:text="登录按钮呢"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:text="登录按钮呢1" />
+
+            <TextView
+                android:id="@+id/tv_login2"
+                style="@style/def_text.30.333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x50"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="登录按钮呢2" />
+
+            <TextView
+                android:id="@+id/tv_login3"
+                style="@style/def_text.30.333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x50"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="登录按钮呢3" />
+
+            <TextView
+                android:id="@+id/tv_login4"
+                style="@style/def_text.30.333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x50"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="登录按钮呢4" />
+
+            <TextView
+                android:id="@+id/tv_login5"
+                style="@style/def_text.30.333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x50"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="登录按钮呢5" />
+
+            <TextView
+                android:id="@+id/tv_login6"
+                style="@style/def_text.30.333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x50"
+                android:background="@color/color_red"
+                android:gravity="center"
+                android:text="登录按钮呢6" />
+
+
         </LinearLayout>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

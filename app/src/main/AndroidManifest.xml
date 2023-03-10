@@ -414,6 +414,9 @@
             android:name=".ui.customize.RoundCountdownActivity"
             android:label="圆形倒计时" />
 
+        <activity
+            android:name=".ui.soft.hide.keyboard.DefSofKeyBoardAndShowActivity"
+            android:label="默认键盘的展示" />
 
         <service android:name="com.amap.api.location.APSService" />
 

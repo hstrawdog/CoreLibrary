@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
 import com.hqq.core.utils.ToastUtils
@@ -29,6 +30,8 @@ import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.parcelable.ParcelableActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
+import com.hqq.example.ui.soft.hide.keyboard.DefSofKeyBoardAndShowActivity
+import com.hqq.example.ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import com.hqq.example.ui.web.WebActivity
 import kotlinx.coroutines.*
@@ -56,6 +59,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
+
+        open(DefSofKeyBoardAndShowActivity::class.java)
     }
 
 

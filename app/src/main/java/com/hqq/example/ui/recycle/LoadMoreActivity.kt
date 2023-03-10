@@ -17,12 +17,12 @@ import com.hqq.example.bean.MainBean
 class LoadMoreActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {
 
     override fun initData() {
-        listModel.fillingData(data as List<Nothing>)
+        listModel.fillingData(data as List<*>)
     }
 
     override fun onLoadMore() {
         Handler().postDelayed({
-            listModel.fillingData(data as List<Nothing>)
+            listModel.fillingData(data as List<*>)
             adapter.loadMoreModule.loadMoreComplete()
         }, 2000)
     }

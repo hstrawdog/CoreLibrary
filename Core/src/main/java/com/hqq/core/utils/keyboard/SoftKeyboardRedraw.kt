@@ -16,7 +16,10 @@ import com.hqq.core.utils.ScreenUtils
  * @Descrive :  解决键盘档住输入框
  * 键盘显示的时候 重新绘制view 解决底部按钮被遮挡的问题
  */
-class SoftKeyboardRedraw private constructor(activity: Activity, content: FrameLayout = activity.findViewById<View>(R.id.content) as FrameLayout) {
+class SoftKeyboardRedraw private constructor(
+    activity: Activity,
+    content: FrameLayout = activity.findViewById<View>(R.id.content) as FrameLayout
+) {
     /**
      * 根布局
      */
@@ -73,7 +76,8 @@ class SoftKeyboardRedraw private constructor(activity: Activity, content: FrameL
             //5､高度差大于屏幕1/4时，说明键盘弹出
             if (heightDifference > usableHeightSansKeyboard / 4) {
                 // 6､键盘弹出了，Activity的xml布局高度应当减去键盘高度
-                mFrameLayoutParams.height = usableHeightSansKeyboard - heightDifference + mStatusBarHeight
+                mFrameLayoutParams.height =
+                    usableHeightSansKeyboard - heightDifference + mStatusBarHeight
             } else {
                 mFrameLayoutParams.height = mContentHeight
             }

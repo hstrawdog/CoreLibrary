@@ -3,6 +3,7 @@ package com.hqq.example.ui.soft.hide.keyboard
 import com.hqq.core.ui.list.BaseListActivity
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
+import com.hqq.example.demo.login.LoginActivity
 
 /**
  * @Author : huangqiqiang
@@ -12,11 +13,14 @@ import com.hqq.example.bean.MainBean
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class SoftHidKeyboardIndexActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {
+class SoftHidKeyboardIndexActivity(override val adapter: MainAdapter = MainAdapter()) :
+    BaseListActivity() {
 
     override fun initData() {
-        var bean = MainBean("底部按钮测试", SoftHideKeyBoardActivity::class.java);
-        adapter.addData(bean)
-        adapter.addData(MainBean("遮挡滑动测试", SoftHideKeyBoardScrollActivity::class.java))
+        adapter.addData(MainBean("键盘遮挡适配 整页滑动", SoftHideKeyBoardActivity::class.java))
+        adapter.addData(MainBean("键盘遮挡适配 部分界面滑动", SoftHideKeyBoardScrollActivity::class.java))
+        adapter.addData(MainBean("键盘适配 部分界面折叠 效果与滑动类似 ", LoginActivity::class.java))
+        adapter.addData(MainBean("键盘常用操作 ", DefSofKeyBoardAndShowActivity::class.java))
+
     }
 }

@@ -6,6 +6,7 @@ import com.hqq.example.bean.MainBean
 import com.hqq.example.ui.screen.DimenActivity
 import com.hqq.example.ui.screen.TextViewBuilderSizeActivity
 import com.hqq.example.ui.skin.SkinAActivity
+import com.hqq.example.ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity
 import com.hqq.example.ui.view.BlackAndWhiteActivity
 import com.hqq.example.ui.view.SvgActivity
 
@@ -20,6 +21,7 @@ import com.hqq.example.ui.view.SvgActivity
 class AdaptationIndexActivity(override val adapter: MainAdapter = MainAdapter()) :
     BaseListActivity() {
     override fun initData() {
+        adapter.addData(MainBean("键盘适配r", SoftHidKeyboardIndexActivity::class.java))
         adapter.addData(MainBean("文字适配测试", TextViewBuilderSizeActivity::class.java))
         adapter.addData(MainBean("1像素大小测试", DimenActivity::class.java))
         adapter.addData(MainBean("换肤测试", SkinAActivity::class.java))
