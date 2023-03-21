@@ -48,6 +48,8 @@ android {
             keyPassword 'android'
             storeFile file('./debug.keystore')
             storePassword 'android'
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
     productFlavors {
@@ -124,11 +126,9 @@ dependencies {
     api 'skin.support:skin-support-constraint-layout:4.0.4'
     // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
-
 
     implementation 'com.android.support:multidex:1.0.3'
 
@@ -157,6 +157,8 @@ dependencies {
     // 包重复
     implementation group: 'com.google.guava', name: 'guava', version: '27.0.1-android'
 
+
+    implementation Work.work
 
 }
 kapt {

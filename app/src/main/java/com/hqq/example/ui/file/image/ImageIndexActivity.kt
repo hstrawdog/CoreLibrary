@@ -12,13 +12,14 @@ import com.hqq.example.bean.MainBean
  * @Describe :
  */
 class ImageIndexActivity : BaseListActivity() {
-    override val adapter: MainAdapter= MainAdapter()
+    override val adapter: MainAdapter = MainAdapter()
 
     override fun initData() {
 
         adapter.addData(MainBean("正方形图片Style", ImageViewSquareActivity::class.java))
         adapter.addData(MainBean("横向矩形图片Style", ImageViewRectangleActivity::class.java))
         adapter.addData(MainBean("纵向矩形图片Style", ImageViewRectangle2Activity::class.java))
+        adapter.addData(MainBean("Coil图片加载", ImageLoadCoilActivity::class.java))
 
     }
 }

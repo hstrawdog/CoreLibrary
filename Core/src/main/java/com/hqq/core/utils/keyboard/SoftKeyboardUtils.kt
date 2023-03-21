@@ -30,8 +30,7 @@ object SoftKeyboardUtils {
      */
     @JvmStatic
     fun keepViewNotOverOnScroll(root: View, subView: View, offset: Float = 0f) {
-        SoftKeyboardListener.setListener(
-            root.context as Activity,
+        SoftKeyboardListener.setListener(root.context as Activity,
             object : SoftKeyBoardChangeListener {
                 override fun onKeyBoardShow(height: Int) {
                     // view 距离底部的距离
@@ -108,6 +107,7 @@ object SoftKeyboardUtils {
      *
      * @param window The Window.
      */
+    @Deprecated("大部分情况下无效`")
     fun showSoftInput(window: Window) {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
     }

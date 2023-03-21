@@ -10,8 +10,18 @@ import com.hqq.core.kt.launch
 import com.hqq.core.permission.PermissionsResult
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewModel
+import com.hqq.core.utils.log.LogUtils
 import com.hqq.core.utils.log.LogUtils.e
 import com.hqq.example.demo.net.HttpManager
+import com.hqq.example.demo.net.NetResponseBody
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.zip
+import kotlinx.coroutines.launch
+import java.util.concurrent.Flow
 
 /**
  * @Author : huangqiqiang
@@ -41,8 +51,9 @@ class WeatherViewModel : BaseViewModel() {
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
         e(" -------WeatherViewModel--------- onCrete ------")
-
-//初始化定位
+        AMapLocationClient.updatePrivacyShow(CoreConfig.applicationContext, true, true)
+        AMapLocationClient.updatePrivacyAgree(CoreConfig.applicationContext, true)
+        //初始化定位
         mLocationClient = AMapLocationClient(CoreConfig.get().application)
         //设置定位回调监听
         mLocationClient!!.setLocationListener(mLocationListener)
@@ -60,22 +71,20 @@ class WeatherViewModel : BaseViewModel() {
         //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
         mLocationOption!!.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
         //获取一次定位结果：
-//该方法默认为false。
+        //该方法默认为false。
         mLocationOption!!.isOnceLocation = true
         //获取最近3s内精度最高的一次定位结果：
-//设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
+        //设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
         mLocationOption!!.isOnceLocationLatest = true
         //设置是否返回地址信息（默认返回地址信息）
         mLocationOption!!.isNeedAddress = true
         //给定位客户端对象设置定位参数
         mLocationClient!!.setLocationOption(mLocationOption)
-        PermissionsUtils.requestLocation(object : PermissionsResult {
-            override fun onPermissionsResult(status: Boolean) {
-                if (status) {
-                    startLocation()
-                }
+        PermissionsUtils.requestLocation { status ->
+            if (status) {
+                startLocation()
             }
-        })
+        }
 
 
     }
@@ -88,6 +97,33 @@ class WeatherViewModel : BaseViewModel() {
         }, {
 
         })
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+
+            flow<NetResponseBody<Weather>> {
+                var ben1 = HttpManager.getWeather2(city.substring(0, city.length - 1)).let {
+                    mWeather.postValue(it.result)
+                    emit(it)
+
+                }
+            }.zip(flow<NetResponseBody<Weather>> {
+                var ben1 = HttpManager.getWeather2(city.substring(0, city.length - 1)).let {
+                    mWeather.postValue(it.result)
+                    emit(it)
+                }
+            }) { i, s ->
+                ArrayList<NetResponseBody<Weather>>().apply {
+                    add(s)
+                    add(i)
+                    LogUtils.e("")
+                }
+            }.collect() {
+                LogUtils.e("")
+            }
+        }
+
 
 //        showLoading(true)
 //        HttpManager.getWeather(city.substring(0, city.length - 1), object : NetCallback<Weather>() {

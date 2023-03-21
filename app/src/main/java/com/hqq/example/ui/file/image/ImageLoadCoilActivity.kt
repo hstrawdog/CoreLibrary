@@ -1,32 +1,22 @@
 package com.hqq.example.ui.file.image
 
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import coil.Coil
 import coil.ImageLoader
-import coil.imageLoader
 import coil.load
 import coil.memory.MemoryCache
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import coil.transform.CircleCropTransformation
-import coil.util.CoilUtils
 import com.hqq.core.CoreConfig
-import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.example.R
 import com.hqq.example.databinding.ActivityImageLoadCoilBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
-import java.io.File
-import java.util.concurrent.Flow
 
 class ImageLoadCoilActivity : BaseViewBindingActivity<ActivityImageLoadCoilBinding>() {
 

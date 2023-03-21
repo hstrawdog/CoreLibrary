@@ -1,6 +1,7 @@
 package com.hqq.example.ui.customize.widget
 
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -56,6 +57,8 @@ class ViewScrollView : View {
     var distanceX = 0f
     var mKeyX = 0f
     var mKeyX1 = 0f
+
+
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -71,8 +74,8 @@ class ViewScrollView : View {
                 if (scrollX < 0) {
                     scrollTo(0, 0)
                 } else {
-                    if (scrollX > width - getScreenWidth(context)) {
-                        scrollTo(width - getScreenWidth(context), 0)
+                    if (scrollX > width - getScreenWidth(context as Activity)) {
+                        scrollTo(width - getScreenWidth(context as Activity), 0)
                     }
                 }
                 mKeyX = event.rawX

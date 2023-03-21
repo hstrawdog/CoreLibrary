@@ -16,14 +16,14 @@ class DefSofKeyBoardAndShowActivity :
 
 
     override fun initView() {
-
-
+//        binding.editTextTextPersonName.requestFocus()
+//        SoftKeyboardUtils.showSoftInput(this)
 
         binding.button77.setOnClickListener {
             SoftKeyboardUtils.hideSoftInput(this)
         }
         binding.button78.setOnClickListener {
-            SoftKeyboardUtils.showSoftInput(binding.editTextTextPersonName,this)
+            SoftKeyboardUtils.showSoftInput(binding.editTextTextPersonName, this)
         }
     }
 }

@@ -118,10 +118,12 @@ object Lifecycle {
     const val arch_version = "2.1.0"
 
     // ViewModel
-    const val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    const val lifecycleViewModelKtx =
+        "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // ViewModel utilities for Compose
-    const val lifecycle_viewModel_compose = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
+    const val lifecycle_viewModel_compose =
+        "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
 
     // LiveData
     const val lifecycleLivedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
@@ -130,13 +132,15 @@ object Lifecycle {
     const val lifecycleRunTimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
     // ViewModel 的已保存状态模块
-    const val lifecycle_viewmodel_savedstate = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    const val lifecycle_viewmodel_savedstate =
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
     // Annotation processor
     const val lifecycle_compiler = "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     // 或者 - 如果使用 Java8，请使用以下内容而不是生命周期编译器
-    const val lifecycle_common_java8 = "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    const val lifecycle_common_java8 =
+        "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     // optional - helpers for implementing LifecycleOwner in a Service
     const val lifecycle_service = "androidx.lifecycle:lifecycle-service:$lifecycle_version"
@@ -145,7 +149,8 @@ object Lifecycle {
     const val lifecycle_process = "androidx.lifecycle:lifecycle-process:$lifecycle_version"
 
     // optional - ReactiveStreams support for LiveData
-    const val lifecycle_reactivestreams_ktx = "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+    const val lifecycle_reactivestreams_ktx =
+        "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
     // optional - Test helpers for LiveData
     const val core_testing = "androidx.arch.core:core-testing:$arch_version"
@@ -306,7 +311,8 @@ object Leakcanary {
  */
 object BaseRecyclerViewAdapterHelper {
 
-    const val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6"
+    const val baseRecyclerViewAdapterHelper =
+        "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6"
 }
 
 /**
@@ -350,3 +356,13 @@ object Jsoup {
     const val jsoup = "org.jsoup:jsoup:1.14.1"
 
 }
+
+/**
+ *  Work
+ *  介绍 https://developer.android.com/guide/background/persistent
+ */
+object Work {
+    const val work = "androidx.work:work-runtime:2.7.1"
+}
+
+

@@ -14,6 +14,8 @@ import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
+import com.hqq.example.demo.weather.WeatherActivity
+import com.hqq.example.dialog.VideoDialog
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
@@ -21,8 +23,10 @@ import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
 import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
+import com.hqq.example.ui.customize.ComparedActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
 import com.hqq.example.ui.file.FileIndexActivity
+import com.hqq.example.ui.flow.FlowActivity
 import com.hqq.example.ui.layout.fold.FoldViewActivity
 import com.hqq.example.ui.fragment.FragmentIndexActivity
 import com.hqq.example.ui.system.info.BaseInfoActivity
@@ -60,7 +64,12 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
-        open(DefSofKeyBoardAndShowActivity::class.java)
+//        open(FlowActivity::class.java)
+//        open(WeatherActivity::class.java)
+
+//        open(ComparedActivity::class.java)
+
+        VideoDialog().show(supportFragmentManager)
     }
 
 

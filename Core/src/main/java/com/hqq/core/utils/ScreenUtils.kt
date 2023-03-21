@@ -104,9 +104,9 @@ object ScreenUtils {
      * @return int
      */
     @JvmStatic
-    fun getScreenWidth(context: Context): Int {
+    fun getScreenWidth(activity: Activity = CoreConfig.get().currActivity!!): Int {
         val localDisplayMetrics = DisplayMetrics()
-        (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
+        activity.windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
         return localDisplayMetrics.widthPixels
     }
 

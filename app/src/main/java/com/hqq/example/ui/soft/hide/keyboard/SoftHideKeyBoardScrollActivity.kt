@@ -19,16 +19,15 @@ import com.hqq.example.R
  * @Descrive : 键盘遮挡 部分界面滑动
  */
 class SoftHideKeyBoardScrollActivity : BaseActivity() {
-    override val layoutViewId: Int  = R.layout.activity_soft_hide_key_board_scoller
+
+    override val layoutViewId: Int = R.layout.activity_soft_hide_key_board_scoller
 
     override fun initView() {
 
-        var offset =-20f
+        val offset = -20f
 
-
-        keepViewNotOverOnScroll(findViewById(R.id.ll_login), findViewById(R.id.tv_login3), - offset)
+        keepViewNotOverOnScroll(findViewById(R.id.ll_login), findViewById(R.id.tv_login3), -offset)
 //        softwareObserverAndTranslation()
     }
-
 
 }

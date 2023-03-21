@@ -2,6 +2,8 @@ package com.hqq.core.permission
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 
@@ -22,11 +24,13 @@ interface IPermissionActions {
          * @param permissions
          * @return
          */
+        @RequiresApi(Build.VERSION_CODES.M)
         fun hasPermission(context: Context?, vararg permissions: String?): Boolean {
             var has = permissions.isNotEmpty()
             if (has) {
                 for (permission in permissions) {
-                    val pre = context?.checkSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
+                    val pre =
+                        context?.checkSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
                     if (context != null) {
                         if (permission != null) {
                             PermissionChecker.checkSelfPermission(context, permission)

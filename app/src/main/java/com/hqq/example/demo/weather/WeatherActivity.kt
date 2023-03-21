@@ -25,9 +25,6 @@ class WeatherActivity : BaseVmActivity<WeatherViewModel,ActivityWeatherBinding>(
 
     override fun initViews() {
         e(" -------WeatherActivity--------- initViews ------")
-
-
-
     }
 
     companion object {
