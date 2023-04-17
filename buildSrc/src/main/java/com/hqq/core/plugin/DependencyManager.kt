@@ -345,7 +345,7 @@ object DimensCompat {
  *  https://github.com/huangqiqiang/AlbumApp/tags
  */
 object Album {
-    const val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.1.30"
+    const val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.1.33"
 }
 
 /**

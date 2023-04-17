@@ -9,4 +9,12 @@
 <!--    <color name="toolbar_bg_color">@color/white</color>-->
     <color name="color_text_skin">#999999</color>
 <!--    <color name="toolbar_text_color">@color/color_red</color>-->
+
+    <color name="color_4D">#4D4D4D</color>
+    <color name="color_FC4848">#FC4848</color>
+    <color name="color_13">#131313</color>
+    <color name="color_fc4848">#FC4848</color>
+    <color name="color_24">#242424</color>
+
+
 </resources>

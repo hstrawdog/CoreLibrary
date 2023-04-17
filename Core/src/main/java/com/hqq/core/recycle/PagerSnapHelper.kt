@@ -18,11 +18,10 @@ import com.hqq.core.utils.log.LogUtils
  * @Email : qiqiang213@gmail.com
  * @Descrive : 多个item组合分页 只支持横向分页滑动
  */
+
 class PagerSnapHelper(
-        /**
-         * 一页大小
-         */
-        private val itemCount: Int) : SnapHelper() {
+    private val itemCount: Int
+) : SnapHelper() {
     /**
      * 当前滑动的距离 判断 左右
      */
@@ -41,25 +40,26 @@ class PagerSnapHelper(
     var mFlung = false
     private var mRecyclerView: RecyclerView? = null
 
-    var mOnScrollListener: RecyclerView.OnScrollListener = object : RecyclerView.OnScrollListener() {
-        private var scrolledByUser = false
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                scrolledByUser = true
+    var mOnScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            private var scrolledByUser = false
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    scrolledByUser = true
+                }
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && scrolledByUser) {
+                    scrolledByUser = false
+                }
             }
-            if (newState == RecyclerView.SCROLL_STATE_IDLE && scrolledByUser) {
-                scrolledByUser = false
-            }
-        }
 
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            mScrolledX += dx
-            if (scrolledByUser) {
-                mCurrentScrolledX += dx
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                mScrolledX += dx
+                if (scrolledByUser) {
+                    mCurrentScrolledX += dx
+                }
             }
         }
-    }
 
     /**
      * 滑动的距离 如果值未0 是更具手指移动
@@ -70,7 +70,9 @@ class PagerSnapHelper(
      * @param targetView
      * @return
      */
-    override fun calculateDistanceToFinalSnap(layoutManager: RecyclerView.LayoutManager, targetView: View): IntArray? {
+    override fun calculateDistanceToFinalSnap(
+        layoutManager: RecyclerView.LayoutManager, targetView: View
+    ): IntArray {
         val out = IntArray(2)
         if (layoutManager.canScrollHorizontally()) {
             out[0] = distanceToStart(targetView, getHorizontalHelper(layoutManager))
@@ -105,9 +107,6 @@ class PagerSnapHelper(
             mFlung = false
             return null
         }
-        if (layoutManager == null) {
-            return null
-        }
         val targetPosition = targetPosition
         if (targetPosition == RecyclerView.NO_POSITION) {
             return null
@@ -129,7 +128,9 @@ class PagerSnapHelper(
      * @param i1
      * @return
      */
-    override fun findTargetSnapPosition(layoutManager: RecyclerView.LayoutManager, i: Int, i1: Int): Int {
+    override fun findTargetSnapPosition(
+        layoutManager: RecyclerView.LayoutManager, i: Int, i1: Int
+    ): Int {
         val targetPosition = targetPosition
         mFlung = targetPosition != RecyclerView.NO_POSITION
         LogUtils.e4Debug("findTargetSnapPosition     $targetPosition           mFlung $mFlung")
@@ -146,9 +147,12 @@ class PagerSnapHelper(
         return if (layoutManager !is ScrollVectorProvider) {
             null
         } else object : LinearSmoothScroller(mRecyclerView!!.context) {
-            override fun onTargetFound(targetView: View, state: RecyclerView.State, action: Action) {
-                val snapDistances = calculateDistanceToFinalSnap(mRecyclerView!!.layoutManager!!, targetView)
-                val dx = snapDistances!![0]
+            override fun onTargetFound(
+                targetView: View, state: RecyclerView.State, action: Action
+            ) {
+                val snapDistances =
+                    calculateDistanceToFinalSnap(mRecyclerView!!.layoutManager!!, targetView)
+                val dx = snapDistances[0]
                 val dy = snapDistances[1]
                 val time = calculateTimeForDeceleration(Math.max(Math.abs(dx), Math.abs(dy)))
                 if (time > 0) {

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.databinding.DataBindingUtil
 import androidx.viewbinding.ViewBinding
 import com.hqq.core.R
 import java.lang.reflect.InvocationTargetException
@@ -33,12 +34,14 @@ abstract class BaseBindingDialog<T : ViewBinding> : BaseDialog() {
         }
     }
 
+
+
     /**
      * 反射构建View
      * @param parent ViewGroup
      * @return View?
      */
-    private fun getBindingView(parent : ViewGroup) : View? {
+   open fun getBindingView(parent : ViewGroup) : View? {
         val tClass = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         try {
             val method = tClass.getMethod("inflate" , LayoutInflater::class.java , ViewGroup::class.java , Boolean::class.javaPrimitiveType)

@@ -17,7 +17,6 @@ import com.hqq.example.databinding.DialogVideoBinding
  */
 class VideoDialog : BaseBindingDialog<DialogVideoBinding>() {
     override fun initView() {
-
         val uri =
             Uri.parse("https://vlogtest.shangwenwan.com/mall/64cf2a3f-b049-4d98-ae68-ec5cbaa8dc64")
         binding.videoView.setVideoURI(uri)
@@ -27,5 +26,4 @@ class VideoDialog : BaseBindingDialog<DialogVideoBinding>() {
         })
         binding.videoView.start()
     }
-
 }

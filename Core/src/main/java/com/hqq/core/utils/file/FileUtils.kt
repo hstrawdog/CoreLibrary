@@ -368,7 +368,7 @@ object FileUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //如果在Android7.0以上,使用FileProvider获取Uri
             try {
-                return FileProvider.getUriForFile(context, context.packageName + ".provider", file)
+                return FileProvider.getUriForFile(context, context.packageName + ".FileProvider", file)
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }

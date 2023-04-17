@@ -325,7 +325,6 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
          */
         fun initData()
 
-
     }
 
     companion object {

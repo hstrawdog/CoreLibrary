@@ -1,11 +1,13 @@
 package com.hqq.example.ui
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.hqq.album.dialog.PhotoDialog
 import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
@@ -15,7 +17,9 @@ import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
 import com.hqq.example.demo.weather.WeatherActivity
+import com.hqq.example.dialog.CropImageDialog
 import com.hqq.example.dialog.VideoDialog
+import com.hqq.example.receiver.KillAppServers
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
 import com.hqq.example.ui.adaptation.DefImgActivity
@@ -33,7 +37,9 @@ import com.hqq.example.ui.system.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.parcelable.ParcelableActivity
+import com.hqq.example.ui.recycle.LoadMoreActivity
 import com.hqq.example.ui.recycle.RecycleIndexActivity
+import com.hqq.example.ui.share.ShareIndexActivity
 import com.hqq.example.ui.soft.hide.keyboard.DefSofKeyBoardAndShowActivity
 import com.hqq.example.ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
@@ -64,12 +70,31 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
+        startService(Intent(this, KillAppServers::class.java))
+
+
+//        CropImageDialog().show(supportFragmentManager)
+
+
+//        PhotoDialog.getSelectPhotoDialog(1) {
+////            binding.cropImageView.imageBitmap = BitmapFactory.decodeFile(it[0].path)
+//        }.apply {
+//            isSendAlbum=false
+//        }.show(supportFragmentManager)
+
+
 //        open(FlowActivity::class.java)
 //        open(WeatherActivity::class.java)
 
 //        open(ComparedActivity::class.java)
 
-        VideoDialog().show(supportFragmentManager)
+//        VideoDialog().show(supportFragmentManager)
+
+
+//        open(LoadMoreActivity::class.java)
+
+        open(ShareIndexActivity::class.java)
+
     }
 
 

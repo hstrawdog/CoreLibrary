@@ -77,6 +77,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+
+        <activity
+            android:name=".ui.share.ShareIndexActivity"
+            android:label="分享"/>
         <activity
             android:name=".ui.VibrateActivity"
             android:label="测试震动" />
@@ -132,14 +137,6 @@
             android:name=".accessibility.TestAccessibilityActivity"
             android:label="测试无障碍服务" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path" />
-        </provider>
 
 
         <activity-alias
@@ -463,6 +460,10 @@
             android:label="默认键盘的展示" />
 
         <service android:name="com.amap.api.location.APSService" />
+
+        <service
+            android:name=".receiver.KillAppServers"
+            android:stopWithTask="false" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"

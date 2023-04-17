@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <com.hqq.example.widget.MyCropImageView
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/x48"
+        custom:layout_constraintBottom_toTopOf="@+id/controll"
+        custom:scv_crop_mode="fit_image"
+        custom:scv_frame_color="@color/colorAccent"
+        custom:scv_guide_color="@color/colorAccent"
+        custom:scv_guide_show_mode="show_always"
+        custom:scv_guide_stroke_weight="1dp"
+        custom:scv_handle_color="@color/colorAccent"
+        custom:scv_handle_show_mode="show_always"
+        custom:scv_handle_size="14dp"
+        custom:scv_min_frame_size="50dp"
+        custom:scv_overlay_color="#AA1C1C1C"
+        custom:scv_touch_padding="8dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x88"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/x35"
+            android:src="@mipmap/ic_false" />
+
+        <TextView
+            android:id="@+id/tv_Proportion"
+            style="@style/def_text.30"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="比例"
+            android:textColor="@color/color_fc4848" />
+
+        <TextView
+            android:id="@+id/tv_size"
+            style="@style/def_text.30"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="尺寸"
+            android:textColor="@color/color_13" />
+
+        <TextView
+            android:id="@+id/tv_rotate"
+            style="@style/def_text.30"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="旋转"
+            android:textColor="@color/color_13" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/x35"
+            android:src="@mipmap/ic_true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        custom:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x140"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/x180">
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_original"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_crop_1_selected"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="原始" />
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_free"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_crop_free"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="自由" />
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_customize"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_customize"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="自定义" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_menu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x100"
+            android:layout_marginBottom="@dimen/x50"
+            android:paddingHorizontal="@dimen/x30">
+
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_1_1"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_1_1"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="1:1" />
+
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_2_3"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_2_3"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="2:3" />
+
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_3_2"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_3_2"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="3:2" />
+
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_4_3"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_4_3"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="4:3" />
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_9_16"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_9_16"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="9:16" />
+
+            <TextView
+                android:id="@+id/tv_adjust_crop_16_9"
+                style="@style/def_text.24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_16_9"
+                android:drawablePadding="@dimen/x10"
+                android:gravity="center"
+                android:text="16:" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
