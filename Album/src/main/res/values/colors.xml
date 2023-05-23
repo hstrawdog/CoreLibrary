@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<resources>
+
+    <color name="white">#ffffff</color>
+
+    <color name="title_text_color">#ff363636</color>
+
+    <color name="gray_dividing">#ffcccccc</color>
+
+    <!--Crop View-->
+    <color name="color_f2">#F2F2F2</color>
+    <color name="black">#000000</color>
+    <color name="grey">#999999</color>
+    <color name="line_color">#EEEEEE</color>
+    <color name="tab_color_true">#FA632D</color>
+    <color name="image_overlay">#20000000</color>
+    <color name="image_overlay2">#80000000</color>
+    <color name="ucrop_color_toolbar_widget">#fff</color>
+    <color name="color_999">#999999</color>
+    <color name="color_333">#333333</color>
+    <color name="color_eee">#eeeeee</color>
+</resources>

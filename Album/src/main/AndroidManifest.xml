@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hqq.album">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <activity
+            android:name="com.hqq.album.activity.AlbumFolderActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name="com.hqq.album.activity.AlbumDirectoryActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name="com.hqq.album.activity.AlbumDetailActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name="com.hqq.album.activity.AlbumPreviewActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name="com.hqq.album.activity.PreviewActivity"
+            android:theme="@style/NoTitle" />
+    </application>
+
+</manifest>

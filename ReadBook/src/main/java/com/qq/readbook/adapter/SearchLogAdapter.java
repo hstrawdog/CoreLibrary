@@ -3,6 +3,7 @@ package com.qq.readbook.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.hqq.core.utils.DateUtils;
+import com.hqq.core.utils.TimeTool;
 import com.qq.readbook.R;
 import com.qq.readbook.room.entity.LocalSearchKey;
 
@@ -24,6 +25,6 @@ public class SearchLogAdapter extends BaseQuickAdapter<LocalSearchKey, BaseViewH
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, LocalSearchKey localSearchKey) {
         baseViewHolder.setText(R.id.tv_key, localSearchKey.getKey());
-        baseViewHolder.setText(R.id.tv_update_time, DateUtils.INSTANCE.formatData(localSearchKey.getSearchTime()));
+        baseViewHolder.setText(R.id.tv_update_time, TimeTool.INSTANCE.formatData(localSearchKey.getSearchTime()));
     }
 }

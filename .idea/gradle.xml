@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ALiBaBa" />
+            <option value="$PROJECT_DIR$/Album" />
             <option value="$PROJECT_DIR$/Core" />
             <option value="$PROJECT_DIR$/OpenGL" />
             <option value="$PROJECT_DIR$/ReadBook" />
@@ -22,6 +23,5 @@
         </option>
       </GradleProjectSettings>
     </option>
-    <option name="offlineMode" value="true" />
   </component>
 </project>

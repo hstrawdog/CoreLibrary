@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.TextView
 import com.hqq.core.net.download.*
 import com.hqq.core.ui.base.BaseViewBindingActivity
-import com.hqq.core.utils.DateUtils.nowDate4yyyyMMdd
 import com.hqq.core.utils.encrypt.MD5Utils
 import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.log.LogUtils
@@ -18,6 +17,7 @@ import com.hqq.example.R
 import com.hqq.example.databinding.ActivityDownloadBinding
 import com.hqq.core.net.DownloadListener
 import com.hqq.core.net.ok.OkHttp
+import com.hqq.core.utils.TimeTool.nowDate4yyyyMMdd
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

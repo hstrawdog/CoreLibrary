@@ -365,4 +365,8 @@ object Work {
     const val work = "androidx.work:work-runtime:2.7.1"
 }
 
+// -------------  图片预览效果  缩放等 -------------
+object  PhotoView{
+    const val library = "com.bm.photoview:library:1.4.1"
 
+}

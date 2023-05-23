@@ -42,7 +42,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                         fileName = FileUtils.getDefFileName(".png")
                     )
                         ?.let {
-                            path = it
+                            path = it.path.toString()
                             binding.textView40.setText("$path")
                             ImageLoadUtils.with(path, binding.imageView15)
                         }
@@ -59,7 +59,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                         "a",
                         fileName = FileUtils.getDefFileName(".png")
                     )?.let {
-                        path = it
+                        path = it?.path.toString()
                         binding.textView40.setText("$path")
                         ImageLoadUtils.with(path, binding.imageView15)
                     }

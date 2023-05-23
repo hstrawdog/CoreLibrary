@@ -8,6 +8,7 @@ import android.widget.SeekBar
 import androidx.lifecycle.observe
 import com.hqq.core.ui.base.BaseVmActivity
 import com.hqq.core.utils.DateUtils
+import com.hqq.core.utils.TimeTool
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.BR
@@ -357,7 +358,7 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
         taskBuilder?.onDownloadListener = null
         unbindService(service)
         intent.getParcelableExtra<Book>(Keys.BOOK)?.apply {
-            lastRead = DateUtils.nowDate
+            lastRead = TimeTool.nowDate
             RoomUtils.getBookDao().update(this)
 
         }

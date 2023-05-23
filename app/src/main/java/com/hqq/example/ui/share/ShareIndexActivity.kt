@@ -1,11 +1,12 @@
 package com.hqq.example.ui.share
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.StrictMode
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.utils.file.BitmapUtils
@@ -64,12 +65,27 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                         FileUtils.getDefFileName(".png")
                     )
                     LogUtils.e("$path")
-                    shareImg(File(path))
+                    shareImg(File(filePathByUri(activity,path)))
                 }
             }
         }
 
     }
+
+    fun filePathByUri(context: Context?, uri: Uri?): String? {
+        var imagePath: String? = null
+        if (context != null && uri != null) {
+            val proj = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = context.contentResolver.query(uri, proj, null, null, null)
+            if (cursor!!.moveToFirst()) {
+                val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                imagePath = cursor.getString(column_index)
+            }
+            cursor.close()
+        }
+        return imagePath
+    }
+
 
     /**
      * 分享图片

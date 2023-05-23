@@ -62,12 +62,11 @@ object SaveBitmapUtils {
      *  保存至公有目录上  Q 以上有指定目录 需要 通过  MediaStore 进行保存
      *  Q 一下key直接使用文件读写进行保存
      */
-    fun saveBitmap2Pictures(bitmap: Bitmap?, relativePath: String = "", fileName: String): String? {
+    fun saveBitmap2Pictures(bitmap: Bitmap?, relativePath: String = "", fileName: String): Uri? {
         if (bitmap == null) {
             return null
         }
-        var uri = FileUtils.saveBitmap2Pictures(relativePath, fileName, bitmap)
-        return uri?.path
+        return  FileUtils.saveBitmap2Pictures(relativePath, fileName, bitmap)
     }
 
     /**
@@ -106,10 +105,7 @@ object SaveBitmapUtils {
                 )
             )
             return path
-
         }
-
-
     }
 
 }

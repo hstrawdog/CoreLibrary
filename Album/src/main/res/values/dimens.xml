@@ -1,0 +1,12 @@
+<!--
+  ~ Create on 2016-11-18 上午10:18
+  ~ FileName: dimens.xml
+  ~ Author: huang qiqiang
+  ~ Contact:
+  -->
+<resources>
+    <!-- Title -->
+    <dimen name="header_bar_height">@dimen/x88</dimen>
+    <dimen name="margin_text">8dp</dimen>
+
+</resources>

@@ -101,6 +101,7 @@ dependencies {
     implementation project(':Core')
     implementation project(':WeChat')
     implementation project(':ALiBaBa')
+    implementation project(':Album')
 
     implementation "androidx.room:room-runtime:2.4.0-alpha03"
     kapt 'androidx.room:room-compiler:2.4.0-alpha03'
@@ -112,7 +113,6 @@ dependencies {
 //    implementation Hilt.viewModule
     kapt Hilt.daggerCompiler
     kapt Hilt.hiltCompiler
-    implementation Album.iHAlbum
 
 
     api 'com.amap.api:location:latest.integration'

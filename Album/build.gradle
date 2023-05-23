@@ -1,0 +1,34 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+import com.hqq.core.plugin.*
+
+
+android {
+    compileSdkVersion BuildVersionConfig.compileSdkVersion
+    buildToolsVersion BuildVersionConfig.buildToolsVersion
+    defaultConfig {
+        minSdkVersion BuildVersionConfig.minSdkVersion
+        targetSdkVersion BuildVersionConfig.targetSdkVersion
+        versionName "1.0"
+        versionCode 1
+
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api PhotoView.library
+    api Luban.luban
+    api Appcompat.appcompat
+    api Components.recyclerview
+    api Components.constraintLayout
+    api Glide.glide
+    api DimensCompat.iDimensCompat
+
+    api 'com.davemorrissey.labs:subsampling-scale-image-view:3.9.0'
+}
