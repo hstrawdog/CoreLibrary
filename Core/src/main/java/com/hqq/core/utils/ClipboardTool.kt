@@ -5,13 +5,34 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.hqq.core.CoreConfig
+
 
 /**
- *
- * @author tamsiree
- * @date 2016/12/21
+ * @Author : huangqiqiang
+ * @Package : com.hqq.core.utils
+ * @FileName :   ClipboardTool.kt
+ * @Date  : 2023/5/24  10:26
+ * @Email :  qiqiang213@gmail.com
+ * @Describe : 剪切板操作
  */
 object ClipboardTool {
+    /**
+     * 复制内容到剪贴板
+     *
+     * @param content
+     * @param context
+     */
+    @JvmOverloads
+    fun copyContentToClipboard(content: String?, context: Context = CoreConfig.applicationContext) {
+        //获取剪贴板管理器：
+        val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        // 创建普通字符型ClipData
+        val mClipData = ClipData.newPlainText("Label", content)
+        // 将ClipData内容放到系统剪贴板里。
+        cm.setPrimaryClip(mClipData)
+    }
+
     /**
      * 复制文本到剪贴板
      *

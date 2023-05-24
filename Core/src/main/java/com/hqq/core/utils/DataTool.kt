@@ -18,40 +18,7 @@ import java.util.*
  * 数据处理相关
  */
 object DataTool {
-    enum class MemoryUnit {
-        BYTE, KB, MB, GB
-    }
 
-    enum class TimeUnit {
-        MSEC, SEC, MIN, HOUR, DAY
-    }
-    /**
-     * Byte与Byte的倍数
-     */
-    const val BYTE = 1
-
-    /**
-     * KB与Byte的倍数
-     */
-    const val KB = 1024
-
-    /**
-     * MB与Byte的倍数
-     */
-    const val MB = 1048576
-
-    /**
-     * GB与Byte的倍数
-     */
-    const val GB = 1073741824
-
-
-    /**
-     * A String for a space character.
-     *
-     * @since 3.2
-     */
-    const val SPACE = " "
 
     /**
      * outputStream转inputStream
@@ -84,6 +51,14 @@ object DataTool {
     @JvmStatic
     fun isNullString(str: String?): Boolean {
         return str == null || str.length == 0 || "null" == str
+    }
+
+    /**
+     * 月日时分秒，0-9前补0
+     */
+    @JvmStatic
+    fun fillZero(number: Int): String {
+        return if (number < 10) "0$number" else "" + number
     }
 
     /**
@@ -128,7 +103,7 @@ object DataTool {
 
     @JvmStatic
     fun isContainSpace(value: String): Boolean {
-        return value.contains(SPACE)
+        return value.contains(BaseCommonUtils.SPACE)
     }
 
     /**
@@ -261,10 +236,9 @@ object DataTool {
             return "银行卡号有误"
         }
         var card = ""
-        card = cardNo.substring(0, 4) + SPACE + cardNo.substring(4, 8) + SPACE + cardNo.substring(
-            8,
-            12
-        ) + SPACE
+        card = cardNo.substring(0, 4) + BaseCommonUtils.SPACE + cardNo.substring(4, 8) +BaseCommonUtils.SPACE + cardNo.substring(
+            8, 12
+        ) + BaseCommonUtils.SPACE
         card += cardNo.substring(cardNo.length - 4)
         return card
     }
@@ -755,15 +729,15 @@ object DataTool {
      * @return 以unit为单位的size
      */
     @JvmStatic
-    fun byte2Size(byteNum: Long, unit: MemoryUnit?): Double {
+    fun byte2Size(byteNum: Long, unit: BaseCommonUtils.MemoryUnit?): Double {
         return if (byteNum < 0) {
             (-1).toDouble()
         } else when (unit) {
-            MemoryUnit.BYTE -> byteNum.toDouble() / BYTE
-            MemoryUnit.KB -> byteNum.toDouble() / KB
-            MemoryUnit.MB -> byteNum.toDouble() / MB
-            MemoryUnit.GB -> byteNum.toDouble() / GB
-            else -> byteNum.toDouble() / BYTE
+            BaseCommonUtils.MemoryUnit.BYTE -> byteNum.toDouble() / BaseCommonUtils.BYTE
+            BaseCommonUtils.MemoryUnit.KB -> byteNum.toDouble() / BaseCommonUtils.KB
+            BaseCommonUtils.MemoryUnit.MB -> byteNum.toDouble() / BaseCommonUtils.MB
+            BaseCommonUtils.MemoryUnit.GB -> byteNum.toDouble() / BaseCommonUtils.GB
+            else -> byteNum.toDouble() / BaseCommonUtils.BYTE
         }
     }
 
@@ -780,15 +754,15 @@ object DataTool {
      * @return 字节数
      */
     @JvmStatic
-    fun size2Byte(size: Long, unit: MemoryUnit?): Long {
+    fun size2Byte(size: Long, unit: BaseCommonUtils.MemoryUnit?): Long {
         return if (size < 0) {
             -1
         } else when (unit) {
-            MemoryUnit.BYTE -> size * BYTE
-            MemoryUnit.KB -> size * KB
-            MemoryUnit.MB -> size * MB
-            MemoryUnit.GB -> size * GB
-            else -> size * BYTE
+            BaseCommonUtils.MemoryUnit.BYTE -> size * BaseCommonUtils.BYTE
+            BaseCommonUtils.MemoryUnit.KB -> size * BaseCommonUtils.KB
+            BaseCommonUtils.MemoryUnit.MB -> size * BaseCommonUtils.MB
+            BaseCommonUtils.MemoryUnit.GB -> size * BaseCommonUtils.GB
+            else -> size * BaseCommonUtils.BYTE
         }
     }
 
@@ -804,14 +778,14 @@ object DataTool {
     fun byte2FitSize(byteNum: Long): String {
         return if (byteNum < 0) {
             "shouldn't be less than zero!"
-        } else if (byteNum < KB) {
+        } else if (byteNum < BaseCommonUtils.KB) {
             String.format(Locale.getDefault(), "%.3fB", byteNum.toDouble())
-        } else if (byteNum < MB) {
-            String.format(Locale.getDefault(), "%.3fKB", byteNum.toDouble() / KB)
-        } else if (byteNum < GB) {
-            String.format(Locale.getDefault(), "%.3fMB", byteNum.toDouble() / MB)
+        } else if (byteNum < BaseCommonUtils.MB) {
+            String.format(Locale.getDefault(), "%.3fKB", byteNum.toDouble() / BaseCommonUtils.KB)
+        } else if (byteNum < BaseCommonUtils.GB) {
+            String.format(Locale.getDefault(), "%.3fMB", byteNum.toDouble() / BaseCommonUtils.MB)
         } else {
-            String.format(Locale.getDefault(), "%.3fGB", byteNum.toDouble() / GB)
+            String.format(Locale.getDefault(), "%.3fGB", byteNum.toDouble() / BaseCommonUtils.GB)
         }
     }
 
@@ -827,9 +801,9 @@ object DataTool {
             null
         } else try {
             val os = ByteArrayOutputStream()
-            val b = ByteArray(KB)
+            val b = ByteArray(BaseCommonUtils.KB)
             var len: Int
-            while (`is`.read(b, 0, KB).also { len = it } != -1) {
+            while (`is`.read(b, 0, BaseCommonUtils.KB).also { len = it } != -1) {
                 os.write(b, 0, len)
             }
             os

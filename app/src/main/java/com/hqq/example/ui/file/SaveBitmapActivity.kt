@@ -4,7 +4,7 @@ import android.os.Build
 import com.hqq.core.glide.ImageLoadUtils
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewBindingActivity
-import com.hqq.core.utils.file.BitmapUtils
+import com.hqq.core.utils.image.BitmapUtils
 import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.file.SaveBitmapUtils
 import com.hqq.example.databinding.ActivitySaveBitmapBinding

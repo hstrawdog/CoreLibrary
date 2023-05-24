@@ -29,6 +29,7 @@ import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
 import com.hqq.example.ui.customize.ComparedActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
+import com.hqq.example.ui.file.DownLoadActivity
 import com.hqq.example.ui.file.FileIndexActivity
 import com.hqq.example.ui.flow.FlowActivity
 import com.hqq.example.ui.layout.fold.FoldViewActivity
@@ -70,9 +71,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
-        startService(Intent(this, KillAppServers::class.java))
+//        startService(Intent(this, KillAppServers::class.java))
 
-
+        open(DownLoadActivity::class.java)
 //        CropImageDialog().show(supportFragmentManager)
 
 
@@ -93,7 +94,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        open(LoadMoreActivity::class.java)
 
-        open(AlbumIndexActivity::class.java)
+//        open(AlbumIndexActivity::class.java)
 //        open(ShareIndexActivity::class.java)
 
     }

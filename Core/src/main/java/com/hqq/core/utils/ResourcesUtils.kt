@@ -141,7 +141,8 @@ object ResourcesUtils {
      */
     @JvmStatic
     fun getDimen2dp(@DimenRes resId: Int): Float {
-        return ScreenUtils.px2dip(CoreConfig.get().application, resources!!.getDimension(resId)).toFloat()
+        return ScreenUtils.px2dip(CoreConfig.get().application, resources!!.getDimension(resId))
+            .toFloat()
     }
 
 

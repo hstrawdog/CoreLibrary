@@ -14,7 +14,6 @@ import com.hqq.core.R
 import com.hqq.core.listenner.ScriptInterface
 import com.hqq.core.listenner.WebLoadListener
 import com.hqq.core.ui.base.BaseFragment
-import com.hqq.core.utils.BundleUtils
 import com.hqq.core.utils.RegexUtils
 import com.hqq.core.utils.VersionUtils
 
@@ -138,8 +137,8 @@ open class BaseWebFragment : BaseFragment() {
         if (scriptInterface != null) {
             webView?.addJavascriptInterface(requireActivity(), "android")
         }
-        url = BundleUtils.getString(this, getString(R.string.key_url))
-        title = BundleUtils.getString(this, getString(R.string.key_title))
+        url = getString(getString(R.string.key_url))
+        title =   getString(getString(R.string.key_title))
         requireActivity().title = title
         iToolBar?.setToolbarTitle(title)
         url?.let {

@@ -1,4 +1,4 @@
-package com.hqq.core.utils
+package com.hqq.core.utils.image
 
 import android.content.Context
 import android.content.res.Resources
@@ -12,6 +12,8 @@ import android.view.WindowManager
 import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.utils.RxTool
+import com.hqq.core.utils.TLog
 import com.hqq.core.utils.file.FileTool.closeIO
 import com.hqq.core.utils.file.FileTool.createOrExistsFile
 import com.hqq.core.utils.file.FileTool.getFileByPath

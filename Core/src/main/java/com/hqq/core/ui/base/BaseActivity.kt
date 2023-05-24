@@ -32,7 +32,8 @@ import com.hqq.core.widget.LoadingView
  * 3. 初始化 LoadingView
  */
 
-abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener {
+abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction,
+    View.OnClickListener {
     /**
      *  回调
      */
@@ -41,7 +42,10 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     /**
      *  页面跳转
      */
-    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> activityResult.value = result }
+    var registerForActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            activityResult.value = result
+        }
 
 
     /**
@@ -68,7 +72,9 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
      * 根布局创建
      */
     private val iCreateRootView: IRootViewBuildBuild by lazy {
-        IRootViewBuildBuild(this, showStatus = true, showToolBar = true, isAlwaysPortrait = isAlwaysPortrait)
+        IRootViewBuildBuild(
+            this, showStatus = true, showToolBar = true, isAlwaysPortrait = isAlwaysPortrait
+        )
     }
 
 
@@ -107,7 +113,6 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
         setContentView(iCreateRootView.buildContentView(this))
         initView()
         LogUtils.e4Debug(" BaseActivity    onCreate 2")
-
     }
 
     /**
@@ -161,8 +166,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
 
     /**
      * 初始化  rootView
-     * 默认 不采用
-     *
+     * 默认  不实现
      * @return
      */
     override fun getLayoutView(parent: ViewGroup): View? {

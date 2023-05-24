@@ -9,7 +9,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseViewBindingActivity
-import com.hqq.core.utils.file.BitmapUtils
+import com.hqq.core.utils.image.BitmapUtils
 import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.file.SaveBitmapUtils
 import com.hqq.core.utils.log.LogUtils

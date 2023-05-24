@@ -3,7 +3,7 @@ package com.hqq.wechat.share;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.hqq.core.utils.file.BitmapUtils;
+import com.hqq.core.utils.image.BitmapUtils;
 import com.hqq.wechat.WechatShareModel;
 import com.hqq.wechat.pay.WechatPayTools;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;

@@ -46,7 +46,8 @@ object AnimationTool {
      */
     @JvmStatic
     fun animationColorGradient(beforeColor: Int, afterColor: Int, listener: OnDoIntListener) {
-        val valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), beforeColor, afterColor).setDuration(3000)
+        val valueAnimator =
+            ValueAnimator.ofObject(ArgbEvaluator(), beforeColor, afterColor).setDuration(3000)
         valueAnimator.addUpdateListener { animation -> //                textView.setTextColor((Integer) animation.getAnimatedValue());
             listener.doSomething((animation.animatedValue as Int))
         }
@@ -67,15 +68,19 @@ object AnimationTool {
         var visToInvis: ObjectAnimator? = null
         if (beforeView.visibility == View.GONE) {
             // 局部layout可达到字体翻转 背景不翻转
-            invisToVis = ObjectAnimator.ofFloat(beforeView,
-                    "rotationY", -90f, 0f)
-            visToInvis = ObjectAnimator.ofFloat(afterView,
-                    "rotationY", 0f, 90f)
+            invisToVis = ObjectAnimator.ofFloat(
+                beforeView, "rotationY", -90f, 0f
+            )
+            visToInvis = ObjectAnimator.ofFloat(
+                afterView, "rotationY", 0f, 90f
+            )
         } else if (afterView.visibility == View.GONE) {
-            invisToVis = ObjectAnimator.ofFloat(afterView,
-                    "rotationY", -90f, 0f)
-            visToInvis = ObjectAnimator.ofFloat(beforeView,
-                    "rotationY", 0f, 90f)
+            invisToVis = ObjectAnimator.ofFloat(
+                afterView, "rotationY", -90f, 0f
+            )
+            visToInvis = ObjectAnimator.ofFloat(
+                beforeView, "rotationY", 0f, 90f
+            )
         }
         visToInvis!!.duration = 250 // 翻转速度
         visToInvis.interpolator = accelerator // 在动画开始的地方速率改变比较慢，然后开始加速
@@ -134,7 +139,8 @@ object AnimationTool {
         val mAnimatorSet = AnimatorSet()
         val mAnimatorScaleX = ObjectAnimator.ofFloat(view, "scaleX", scale, 1.0f)
         val mAnimatorScaleY = ObjectAnimator.ofFloat(view, "scaleY", scale, 1.0f)
-        val mAnimatorTranslateY = ObjectAnimator.ofFloat(view, "translationY", view.translationY, 0f)
+        val mAnimatorTranslateY =
+            ObjectAnimator.ofFloat(view, "translationY", view.translationY, 0f)
         mAnimatorSet.play(mAnimatorTranslateY).with(mAnimatorScaleX)
         mAnimatorSet.play(mAnimatorScaleX).with(mAnimatorScaleY)
         mAnimatorSet.duration = 300
@@ -167,21 +173,27 @@ object AnimationTool {
     fun popup(view: View, duration: Long): ObjectAnimator {
         view.alpha = 0f
         view.visibility = View.VISIBLE
-        val popup = ObjectAnimator.ofPropertyValuesHolder(view,
-                PropertyValuesHolder.ofFloat("alpha", 0f, 1f),
-                PropertyValuesHolder.ofFloat("scaleX", 0f, 1f),
-                PropertyValuesHolder.ofFloat("scaleY", 0f, 1f))
+        val popup = ObjectAnimator.ofPropertyValuesHolder(
+            view,
+            PropertyValuesHolder.ofFloat("alpha", 0f, 1f),
+            PropertyValuesHolder.ofFloat("scaleX", 0f, 1f),
+            PropertyValuesHolder.ofFloat("scaleY", 0f, 1f)
+        )
         popup.duration = duration
         popup.interpolator = OvershootInterpolator()
         return popup
     }
 
     @JvmStatic
-    fun popout(view: View, duration: Long, animatorListenerAdapter: AnimatorListenerAdapter?): ObjectAnimator {
-        val popout = ObjectAnimator.ofPropertyValuesHolder(view,
-                PropertyValuesHolder.ofFloat("alpha", 1f, 0f),
-                PropertyValuesHolder.ofFloat("scaleX", 1f, 0f),
-                PropertyValuesHolder.ofFloat("scaleY", 1f, 0f))
+    fun popout(
+        view: View, duration: Long, animatorListenerAdapter: AnimatorListenerAdapter?
+    ): ObjectAnimator {
+        val popout = ObjectAnimator.ofPropertyValuesHolder(
+            view,
+            PropertyValuesHolder.ofFloat("alpha", 1f, 0f),
+            PropertyValuesHolder.ofFloat("scaleX", 1f, 0f),
+            PropertyValuesHolder.ofFloat("scaleY", 1f, 0f)
+        )
         popout.duration = duration
         popout.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
@@ -195,12 +207,17 @@ object AnimationTool {
     }
 
     @JvmStatic
-    fun initRotateAnimation(duration: Long,
-                            fromAngle: Int, toAngle: Int,
-                            isFillAfter: Boolean, repeatCount: Int): RotateAnimation {
-        val mLoadingRotateAnimation = RotateAnimation(fromAngle.toFloat(), toAngle.toFloat(),
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f)
+    fun initRotateAnimation(
+        duration: Long, fromAngle: Int, toAngle: Int, isFillAfter: Boolean, repeatCount: Int
+    ): RotateAnimation {
+        val mLoadingRotateAnimation = RotateAnimation(
+            fromAngle.toFloat(),
+            toAngle.toFloat(),
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
+        )
         val lirInterpolator = LinearInterpolator()
         mLoadingRotateAnimation.interpolator = lirInterpolator
         mLoadingRotateAnimation.duration = duration
@@ -211,17 +228,23 @@ object AnimationTool {
     }
 
     @JvmStatic
-    fun initRotateAnimation(isClockWise: Boolean, duration: Long,
-                            isFillAfter: Boolean, repeatCount: Int): RotateAnimation {
+    fun initRotateAnimation(
+        isClockWise: Boolean, duration: Long, isFillAfter: Boolean, repeatCount: Int
+    ): RotateAnimation {
         val endAngle: Int
         endAngle = if (isClockWise) {
             360
         } else {
             -360
         }
-        val mLoadingRotateAnimation = RotateAnimation(0f, endAngle.toFloat(),
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f)
+        val mLoadingRotateAnimation = RotateAnimation(
+            0f,
+            endAngle.toFloat(),
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
+        )
         val lirInterpolator = LinearInterpolator()
         mLoadingRotateAnimation.interpolator = lirInterpolator
         mLoadingRotateAnimation.duration = duration
@@ -232,8 +255,9 @@ object AnimationTool {
     }
 
     @JvmStatic
-    fun initAnimationDrawable(context: Context, drawableIds: IntArray,
-                              durationTime: Int, isOneShot: Boolean): AnimationDrawable {
+    fun initAnimationDrawable(
+        context: Context, drawableIds: IntArray, durationTime: Int, isOneShot: Boolean
+    ): AnimationDrawable {
         val mAnimationDrawable = AnimationDrawable()
         for (i in drawableIds.indices) {
             val id = drawableIds[i]
@@ -244,8 +268,9 @@ object AnimationTool {
     }
 
     @JvmStatic
-    fun initAlphaAnimtion(context: Context?, fromAlpha: Float, toAlpha: Float,
-                          duration: Long): Animation {
+    fun initAlphaAnimtion(
+        context: Context?, fromAlpha: Float, toAlpha: Float, duration: Long
+    ): Animation {
         val alphaAnimation: Animation = AlphaAnimation(fromAlpha, toAlpha)
         alphaAnimation.duration = duration
         return alphaAnimation
@@ -264,23 +289,34 @@ object AnimationTool {
         var oldTransitionDrawable: TransitionDrawable? = null
         if (oldDrawable is TransitionDrawable) {
             oldTransitionDrawable = oldDrawable
-            oldBitmapDrawable = oldTransitionDrawable.findDrawableByLayerId(oldTransitionDrawable.getId(1))
+            oldBitmapDrawable =
+                oldTransitionDrawable.findDrawableByLayerId(oldTransitionDrawable.getId(1))
         } else if (oldDrawable is BitmapDrawable) {
             oldBitmapDrawable = oldDrawable
         } else {
             oldBitmapDrawable = ColorDrawable(-0x3d3d3e)
         }
         if (oldTransitionDrawable == null) {
-            oldTransitionDrawable = TransitionDrawable(arrayOf(oldBitmapDrawable, BitmapDrawable(
-                RxTool.getContext().resources, bitmap)))
+            oldTransitionDrawable = TransitionDrawable(
+                arrayOf(
+                    oldBitmapDrawable, BitmapDrawable(
+                        RxTool.getContext().resources, bitmap
+                    )
+                )
+            )
             oldTransitionDrawable.setId(0, 0)
             oldTransitionDrawable.setId(1, 1)
             oldTransitionDrawable.isCrossFadeEnabled = true
             view.setImageDrawable(oldTransitionDrawable)
         } else {
-            oldTransitionDrawable.setDrawableByLayerId(oldTransitionDrawable.getId(0), oldBitmapDrawable)
-            oldTransitionDrawable.setDrawableByLayerId(oldTransitionDrawable.getId(1), BitmapDrawable(
-                RxTool.getContext().resources, bitmap))
+            oldTransitionDrawable.setDrawableByLayerId(
+                oldTransitionDrawable.getId(0), oldBitmapDrawable
+            )
+            oldTransitionDrawable.setDrawableByLayerId(
+                oldTransitionDrawable.getId(1), BitmapDrawable(
+                    RxTool.getContext().resources, bitmap
+                )
+            )
         }
         oldTransitionDrawable.startTransition(1000)
     }

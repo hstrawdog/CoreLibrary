@@ -1,4 +1,4 @@
-package com.hqq.core.utils.file
+package com.hqq.core.utils.image
 
 import android.R
 import android.content.Context

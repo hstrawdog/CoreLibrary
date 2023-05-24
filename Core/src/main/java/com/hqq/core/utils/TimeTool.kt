@@ -96,6 +96,10 @@ object TimeTool {
     </pre> *
      */
 
+    /**
+     * 时间戳格式转换
+     */
+    val dayNames = arrayOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
 
     //Date格式 常用
     const val DATE_FORMAT_DETACH = "yyyy-MM-dd HH:mm:ss"
@@ -108,15 +112,7 @@ object TimeTool {
 
 
     val DEFAULT_SDF = SimpleDateFormat(DATE_FORMAT_DETACH, Locale.getDefault())
-    /**
-     * 将时间戳转为时间字符串
-     *
-     * 格式为用户自定义
-     *
-     * @param milliseconds 毫秒时间戳
-     * @param format       时间格式
-     * @return 时间字符串
-     */
+
     /**
      * 将时间戳转为时间字符串
      *
@@ -125,20 +121,11 @@ object TimeTool {
      * @param milliseconds 毫秒时间戳
      * @return 时间字符串
      */
-    @JvmOverloads
     @JvmStatic
     fun milliseconds2String(milliseconds: Long, format: SimpleDateFormat = DEFAULT_SDF): String {
         return format.format(Date(milliseconds))
     }
-    /**
-     * 将时间字符串转为时间戳
-     *
-     * 格式为用户自定义
-     *
-     * @param time   时间字符串
-     * @param format 时间格式
-     * @return 毫秒时间戳
-     */
+
     /**
      * 将时间字符串转为时间戳
      *
@@ -147,7 +134,6 @@ object TimeTool {
      * @param time 时间字符串
      * @return 毫秒时间戳
      */
-    @JvmOverloads
     @JvmStatic
     fun string2Milliseconds(time: String?, format: SimpleDateFormat = DEFAULT_SDF): Long {
         try {
@@ -157,15 +143,7 @@ object TimeTool {
         }
         return -1
     }
-    /**
-     * 将时间字符串转为Date类型
-     *
-     * 格式为用户自定义
-     *
-     * @param time   时间字符串
-     * @param format 时间格式
-     * @return Date类型
-     */
+
     /**
      * 将时间字符串转为Date类型
      *
@@ -174,20 +152,11 @@ object TimeTool {
      * @param time 时间字符串
      * @return Date类型
      */
-    @JvmOverloads
     @JvmStatic
     fun string2Date(time: String?, format: SimpleDateFormat = DEFAULT_SDF): Date {
         return Date(string2Milliseconds(time, format))
     }
-    /**
-     * 将Date类型转为时间字符串
-     *
-     * 格式为用户自定义
-     *
-     * @param time   Date类型时间
-     * @param format 时间格式
-     * @return 时间字符串
-     */
+
     /**
      * 将Date类型转为时间字符串
      *
@@ -196,7 +165,6 @@ object TimeTool {
      * @param time Date类型时间
      * @return 时间字符串
      */
-    @JvmOverloads
     @JvmStatic
     fun date2String(time: Date?, format: SimpleDateFormat = DEFAULT_SDF): String {
         return format.format(time)
@@ -509,7 +477,6 @@ object TimeTool {
      * @return
      */
     @JvmStatic
-    @SuppressLint("SimpleDateFormat")
     fun getCurrentDateTime(format: String?): String {
         return simpleDateFormat(format, Date())
     }
@@ -522,7 +489,6 @@ object TimeTool {
      * @param format 日期格式 yyyy-MM-dd HH:mm:ss
      * @return
      */
-    @SuppressLint("SimpleDateFormat")
     @JvmStatic
     fun getDate(times: String?, format: String?): String {
         return simpleDateFormat(format, Date(stringToInt(times!!) * 1000L))
@@ -599,7 +565,6 @@ object TimeTool {
      * @return dayForWeek 判断结果
      * @Exception 发生异常<br></br>
      */
-    @Throws(Exception::class)
     @JvmStatic
     fun stringForWeek(strDate: String?): Int {
         val format = SimpleDateFormat("yyyy-MM-dd")
@@ -619,7 +584,6 @@ object TimeTool {
      * @return dayForWeek 判断结果
      * @Exception 发生异常<br></br>
      */
-    @Throws(Exception::class)
     @JvmStatic
     fun stringForWeek(strDate: String?, simpleDateFormat: SimpleDateFormat): Int {
         val c = Calendar.getInstance()
@@ -633,10 +597,6 @@ object TimeTool {
 
     private val SDF_THREAD_LOCAL = ThreadLocal<SimpleDateFormat>()
 
-    /**
-     * 时间戳格式转换
-     */
-    private val dayNames = arrayOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
 
     val defaultFormat: SimpleDateFormat
         get() {
@@ -889,7 +849,6 @@ object TimeTool {
         }
         return 0L
     }
-
 
     @JvmStatic
     fun dateConvert(timeSamp: Long, flag: Int): String {

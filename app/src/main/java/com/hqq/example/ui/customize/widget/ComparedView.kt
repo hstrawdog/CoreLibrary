@@ -11,7 +11,7 @@ import android.view.ViewTreeObserver
 import androidx.core.graphics.toRect
 import androidx.core.graphics.values
 import com.hqq.core.utils.ScreenUtils
-import com.hqq.core.utils.file.BitmapUtils
+import com.hqq.core.utils.image.BitmapUtils
 import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.R
 

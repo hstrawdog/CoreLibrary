@@ -15,6 +15,43 @@ import android.view.View
  *
  */
 object BaseCommonUtils {
+
+    enum class MemoryUnit {
+        BYTE, KB, MB, GB
+    }
+
+    enum class TimeUnit {
+        MSEC, SEC, MIN, HOUR, DAY
+    }
+    /**
+     * Byte与Byte的倍数
+     */
+    const val BYTE = 1
+
+    /**
+     * KB与Byte的倍数
+     */
+    const val KB = 1024
+
+    /**
+     * MB与Byte的倍数
+     */
+    const val MB = 1048576
+
+    /**
+     * GB与Byte的倍数
+     */
+    const val GB = 1073741824
+
+    /**
+     * A String for a space character.
+     *
+     * @since 3.2
+     */
+    const val SPACE = " "
+
+
+
     /**
      * 黑白化的一种解决方案
      * https://mp.weixin.qq.com/s/8fTWLYaPhi0to47EUmFd7A

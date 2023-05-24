@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.hqq.core.CoreConfig
+import com.hqq.core.utils.image.BitmapUtils
 import com.hqq.core.utils.log.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

@@ -90,7 +90,6 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
         }
 
-
         findViewById<Button>(R.id.button61).setOnClickListener {
 //        val url = "https://works-asp.obs.cn-north-1.myhuaweicloud.com/videos/D7E41FEA0FD864409B18DC2921D3CEECF309.mp4"
             val url = "https://media.w3.org/2010/05/sintel/trailer.mp4"
@@ -121,13 +120,6 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
             })
         }
-
-
-        okhttp()
-    }
-
-    private fun okhttp() {
-
         var apkPath =
             "https://cos.pgyer.com/a23203790be8b427d740bbb60b574c48.apk?sign=6c5f523895347d047b9cdec85ef0306c&t=1668140148&response-content-disposition=attachment%3Bfilename%3D%E7%88%B1%E9%A5%B0%E6%8B%8D_3.3.3.apk"
         var fileName = "test.apk"
@@ -162,10 +154,8 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
         binding.button70.setOnClickListener {
             okhttpCall?.cancel()
         }
-
         binding.button71.setOnClickListener {
             val file = File(FileUtils.getCacheDir() + File.separator + fileName)
-
             okhttpCall = OkHttp.newHttpCompat().downloadFile(
                 apkPath,
                 file.length(),
@@ -194,6 +184,8 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
         }
     }
+
+
 
     fun videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(context: Context, destFile: File) {
         val values = ContentValues()

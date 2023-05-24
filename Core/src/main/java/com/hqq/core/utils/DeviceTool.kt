@@ -6,11 +6,8 @@ import android.app.Activity
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Build
@@ -18,9 +15,7 @@ import android.os.SystemClock
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.text.TextUtils
-import android.util.DisplayMetrics
 import android.util.Xml
-import android.view.Surface
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import com.hqq.core.utils.DataTool.isNullString
@@ -37,53 +32,6 @@ import java.util.*
  * @date 2016/1/24
  */
 object DeviceTool {
-    /**
-     * 得到屏幕的高
-     *
-     * @param context 实体
-     * @return 设备屏幕的高度
-     */
-    @JvmStatic
-    fun getScreenHeight(context: Context): Int {
-        val wm = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager)
-        return wm.defaultDisplay.height
-    }
-
-    /**
-     * 得到屏幕的宽
-     *
-     * @param context 实体
-     * @return 设备屏幕的宽度
-     */
-    @JvmStatic
-    fun getScreenWidth(context: Context): Int {
-        val wm = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager)
-        return wm.defaultDisplay.width
-    }
-
-    /**
-     * 得到设备屏幕的宽度
-     */
-    @JvmStatic
-    fun getScreenWidths(context: Context): Int {
-        return context.resources.displayMetrics.widthPixels
-    }
-
-    /**
-     * 得到设备屏幕的高度
-     */
-    @JvmStatic
-    fun getScreenHeights(context: Context): Int {
-        return context.resources.displayMetrics.heightPixels
-    }
-
-    /**
-     * 得到设备的密度
-     */
-    @JvmStatic
-    fun getScreenDensity(context: Context): Float {
-        return context.resources.displayMetrics.density
-    }
 
     /**
      * 获取手机唯一标识序列号
@@ -143,7 +91,10 @@ object DeviceTool {
         val id: String
         //android.telephony.TelephonyManager
         val mTelephony = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ToastUtils.showToast("请先获取读取手机设备权限")
             return null
         }
@@ -151,7 +102,9 @@ object DeviceTool {
             mTelephony.deviceId
         } else {
             //android.provider.Settings;
-            Settings.Secure.getString(context.applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
+            Settings.Secure.getString(
+                context.applicationContext.contentResolver, Settings.Secure.ANDROID_ID
+            )
         }
         return id
     }
@@ -165,7 +118,10 @@ object DeviceTool {
     @JvmStatic
     fun getDeviceSoftwareVersion(context: Context): String? {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ToastUtils.showToast("请先获取读取手机设备权限")
             return null
         }
@@ -182,7 +138,14 @@ object DeviceTool {
     @JvmStatic
     fun getLine1Number(context: Context): String? {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_SMS
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_NUMBERS
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ToastUtils.showToast("请先获取读取手机设备权限")
             return null
         }
@@ -296,7 +259,10 @@ object DeviceTool {
     @JvmStatic
     fun getSimSerialNumber(context: Context): String? {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ToastUtils.showToast("请先获取读取手机设备信息权限")
             return null
         }
@@ -325,7 +291,10 @@ object DeviceTool {
     @JvmStatic
     fun getSubscriberId(context: Context): String? {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ToastUtils.showToast("请先获取读取手机设备信息权限")
             return null
         }
@@ -341,7 +310,10 @@ object DeviceTool {
     @JvmStatic
     fun getVoiceMailNumber(context: Context): String? {
         val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ToastUtils.showToast("请先获取读取手机设备信息权限")
             return null
         }
@@ -354,7 +326,6 @@ object DeviceTool {
      * @param context
      * @return
      */
-    @SuppressLint("HardwareIds")
     @JvmStatic
     fun getAndroidId(context: Context): String {
         return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
@@ -391,7 +362,6 @@ object DeviceTool {
      */
     @JvmStatic
     val serialNumber: String?
-        @SuppressLint("PrivateApi", "HardwareIds")
         get() {
             var serial: String? = null
             try {
@@ -468,7 +438,10 @@ object DeviceTool {
             }
         } else {
             val pm = context.packageManager
-            if (pm.checkPermission(permission, context.packageName) == PackageManager.PERMISSION_GRANTED) {
+            if (pm.checkPermission(
+                    permission, context.packageName
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 result = true
             }
         }
@@ -485,8 +458,7 @@ object DeviceTool {
     fun getDeviceInfo(context: Context): String? {
         try {
             val json = JSONObject()
-            val tm = context
-                    .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             var device_id: String? = null
             if (checkPermission(context, Manifest.permission.READ_PHONE_STATE)) {
                 device_id = getDeviceIdIMEI(context)
@@ -526,8 +498,9 @@ object DeviceTool {
                 device_id = mac
             }
             if (TextUtils.isEmpty(device_id)) {
-                device_id = Settings.Secure.getString(context.contentResolver,
-                        Settings.Secure.ANDROID_ID)
+                device_id = Settings.Secure.getString(
+                    context.contentResolver, Settings.Secure.ANDROID_ID
+                )
             }
             json.put("device_id", device_id)
             return json.toString()
@@ -651,12 +624,14 @@ object DeviceTool {
     @SuppressLint("MissingPermission")
     @JvmStatic
     fun getPhoneStatus(context: Context): String? {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ToastUtils.showToast("请先获取读取手机设备信息权限")
             return null
         }
-        val tm = context
-                .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         var str = ""
         str += """
             DeviceId(IMEI) = ${getDeviceIdIMEI(context)}
@@ -746,7 +721,10 @@ object DeviceTool {
             // 调用系统的拨号服务实现电话拨打功能
             // 封装一个拨打电话的intent，并且将电话号码包装成一个Uri对象传入
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber1"))
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(
+                    context, Manifest.permission.CALL_PHONE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 return
             }
             context.startActivity(intent) // 内部类
@@ -792,8 +770,9 @@ object DeviceTool {
         val date_uri = Uri.parse("content://com.android.contacts/data")
         // 4.查询操作,先查询raw_contacts,查询contact_id
         // projection : 查询的字段
-        val cursor = resolver.query(raw_uri, arrayOf("contact_id"),
-                null, null, null)
+        val cursor = resolver.query(
+            raw_uri, arrayOf("contact_id"), null, null, null
+        )
         // 5.解析cursor
         while (cursor!!.moveToNext()) {
             // 6.获取查询的数据
@@ -807,8 +786,11 @@ object DeviceTool {
                 // selectionArgs :查询条件的参数
                 // sortOrder : 排序
                 // 空指针: 1.null.方法 2.参数为null
-                val c = resolver.query(date_uri, arrayOf("data1",
-                        "mimetype"), "raw_contact_id=?", arrayOf(contact_id), null)
+                val c = resolver.query(
+                    date_uri, arrayOf(
+                        "data1", "mimetype"
+                    ), "raw_contact_id=?", arrayOf(contact_id), null
+                )
                 val map = HashMap<String, String>()
                 // 8.解析c
                 while (c!!.moveToNext()) {
@@ -889,7 +871,8 @@ object DeviceTool {
         // selection : 查询的条件
         // selectionArgs : 查询条件的参数
         // sortOrder : 排序
-        val cursor = resolver.query(uri, arrayOf("address", "date", "type", "body"), null, null, null)
+        val cursor =
+            resolver.query(uri, arrayOf("address", "date", "type", "body"), null, null, null)
         // 设置最大进度
         val count = cursor!!.count //获取短信的个数
         // 2.备份短信
@@ -940,130 +923,8 @@ object DeviceTool {
         }
     }
 
-    /**
-     * 设置屏幕为横屏
-     *
-     * 还有一种就是在Activity中加属性android:screenOrientation="landscape"
-     *
-     * 不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次
-     *
-     * 设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次
-     *
-     * 设置Activity的android:configChanges="orientation|keyboardHidden|screenSize"（4.0以上必须带最后一个参数）时
-     * 切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法
-     *
-     * @param activity activity
-     */
-    @SuppressLint("SourceLockedOrientationActivity")
-    @JvmStatic
-    fun setLandscape(activity: Activity) {
-        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-    }
 
-    /**
-     * 设置屏幕为竖屏
-     *
-     * @param activity activity
-     */
-    @SuppressLint("SourceLockedOrientationActivity")
-    @JvmStatic
-    fun setPortrait(activity: Activity) {
-        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    }
 
-    /**
-     * 判断是否横屏
-     *
-     * @param context 上下文
-     * @return `true`: 是<br></br>`false`: 否
-     */
-    @JvmStatic
-    fun isLandscape(context: Context): Boolean {
-        return context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-    }
-
-    /**
-     * 判断是否竖屏
-     *
-     * @param context 上下文
-     * @return `true`: 是<br></br>`false`: 否
-     */
-    @JvmStatic
-    fun isPortrait(context: Context): Boolean {
-        return context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-    }
-
-    /**
-     * 获取屏幕旋转角度
-     *
-     * @param activity activity
-     * @return 屏幕旋转角度
-     */
-    @JvmStatic
-    fun getScreenRotation(activity: Activity): Int {
-        return when (activity.windowManager.defaultDisplay.rotation) {
-            Surface.ROTATION_0 -> 0
-            Surface.ROTATION_90 -> 90
-            Surface.ROTATION_180 -> 180
-            Surface.ROTATION_270 -> 270
-            else -> 0
-        }
-    }
-
-    /**
-     * 获取当前屏幕截图，包含状态栏
-     *
-     * @param activity activity
-     * @return Bitmap
-     */
-    @JvmStatic
-    fun captureWithStatusBar(activity: Activity): Bitmap {
-        val view = activity.window.decorView
-        view.isDrawingCacheEnabled = true
-        view.buildDrawingCache()
-        val bmp = view.drawingCache
-        val width = getScreenWidth(activity)
-        val height = getScreenHeight(activity)
-        val ret = Bitmap.createBitmap(bmp, 0, 0, width, height)
-        view.destroyDrawingCache()
-        return ret
-    }
-
-    /**
-     * 获取当前屏幕截图，不包含状态栏
-     *
-     * 需要用到上面获取状态栏高度getStatusBarHeight的方法
-     *
-     * @param activity activity
-     * @return Bitmap
-     */
-    @JvmStatic
-    fun captureWithoutStatusBar(activity: Activity): Bitmap {
-        val view = activity.window.decorView
-        view.isDrawingCacheEnabled = true
-        view.buildDrawingCache()
-        val bmp = view.drawingCache
-        val statusBarHeight = ScreenUtils.getStatusBarHeight(activity)
-        val width = getScreenWidth(activity)
-        val height = getScreenHeight(activity)
-        val ret = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height - statusBarHeight)
-        view.destroyDrawingCache()
-        return ret
-    }
-
-    /**
-     * 获取DisplayMetrics对象
-     *
-     * @param context 应用程序上下文
-     * @return
-     */
-    @JvmStatic
-    fun getDisplayMetrics(context: Context): DisplayMetrics {
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return displayMetrics
-    }
 
     /**
      * 判断是否锁屏
@@ -1073,8 +934,7 @@ object DeviceTool {
      */
     @JvmStatic
     fun isScreenLock(context: Context): Boolean {
-        val km = context
-                .getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        val km = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
         return km.inKeyguardRestrictedInputMode()
     }
 
