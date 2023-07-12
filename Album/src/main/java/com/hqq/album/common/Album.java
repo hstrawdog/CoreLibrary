@@ -1,11 +1,8 @@
 package com.hqq.album.common;
 
 import android.app.Activity;
-import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
-
-import com.hqq.album.activity.AlbumDirectoryActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -47,9 +44,7 @@ public class Album {
     }
 
     public FunctionOptions choose(int valueTypeImage) {
-        return FunctionOptions.getInstance()
-                .setAlbum(this)
-                .setAlbumType(valueTypeImage);
+        return FunctionOptions.getInstance().setAlbum(this).setAlbumType(valueTypeImage);
     }
 
     public Activity getActivity() {

@@ -109,7 +109,7 @@ public class AppManager {
             if (null != activityStack.get(i)) {
                 Activity activity = activityStack.get(i);
                 if (isCallBack) {
-                    if (activity instanceof AlbumDirectoryActivity ||  activity instanceof AlbumFolderActivity) {
+                    if (activity instanceof AlbumDirectoryActivity || activity instanceof AlbumFolderActivity) {
                         Intent intent = new Intent();
                         intent.putParcelableArrayListExtra("data", SelectOptions.getInstance().getSelectLocalMedia());
                         activity.setResult(Activity.RESULT_OK, intent);

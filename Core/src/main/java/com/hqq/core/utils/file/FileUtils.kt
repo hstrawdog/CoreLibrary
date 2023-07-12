@@ -7,6 +7,7 @@ import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -159,12 +160,9 @@ object FileUtils {
      * app 卸载后 目录也会删除掉
      */
     @kotlin.jvm.JvmStatic
-    fun getExternalFilesDir(
-        context: Context = CoreConfig.applicationContext, fileName: String = ""
-    ): String {
+    fun getExternalFilesDir(context: Context = CoreConfig.applicationContext, fileName: String = ""): String {
         return context.getExternalFilesDir(fileName)!!.path
     }
-
 
     //endregion
 
@@ -343,7 +341,6 @@ object FileUtils {
         return activityManager.memoryClass
     }
 
-
     //endregion
 
     //region File 2 Uri
@@ -368,9 +365,7 @@ object FileUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //如果在Android7.0以上,使用FileProvider获取Uri
             try {
-                return FileProvider.getUriForFile(
-                    context, context.packageName + ".FileProvider", file
-                )
+                return FileProvider.getUriForFile(context, context.packageName + ".FileProvider", file)
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }
@@ -389,7 +384,6 @@ object FileUtils {
      * @param data String
      */
 
-
     /**
      * 创建 pictures  Values
      * @param data String 原始地址 / 就版本地址  Q(10)以上没有这个字段
@@ -404,18 +398,7 @@ object FileUtils {
      * @param height Int 高度
      * @return ContentValues
      */
-    private fun createBitmapValues(
-        data: String,
-        _display_name: String,
-        mime_type: String,
-        relative_path: String,
-        date_added: String,
-        date_modified: String,
-        date_taken: String,
-        size: Int,
-        width: Int,
-        height: Int
-    ): ContentValues {
+    private fun createBitmapValues(data: String, _display_name: String, mime_type: String, relative_path: String, date_added: String, date_modified: String, date_taken: String, size: Int, width: Int, height: Int): ContentValues {
         var values = ContentValues().apply {
             if (!isQ()) {
                 put(MediaStore.Images.ImageColumns.DATA, data)
@@ -436,14 +419,12 @@ object FileUtils {
         return values
     }
 
-
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
     fun saveFile2Download(context: Context, fileName: String, data: String) {
         //使用ContentResolver创建需要操作的文件
-        val outputStream = getDownloadInstallUri(
-            fileName, context
-        )?.let { context.contentResolver.openOutputStream(it) }
+        val outputStream =
+            getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
         outputStream?.write(data.toByteArray())
         outputStream?.close()
     }
@@ -503,9 +484,7 @@ object FileUtils {
                 selection = MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME + "=?"
                 selectionArgs = arrayOf(dirName)
             }
-            val resultCursor = resolver?.query(
-                downloadUri, null, selection, selectionArgs, null
-            )
+            val resultCursor = resolver?.query(downloadUri, null, selection, selectionArgs, null)
             if (resultCursor != null) {
                 val fileIdIndex =
                     resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
@@ -569,27 +548,15 @@ object FileUtils {
      * @param filePath String
      */
     @JvmStatic
-    fun saveBitmap2Public(
-        context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String
-    ) {
+    fun saveBitmap2Public(context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String) {
         if (!File(filePath).parentFile.exists()) {
             File(filePath).parentFile.mkdirs()
         }
         val file = File(filePath)
         val current = System.currentTimeMillis()
 
-        val values = createBitmapValues(
-            file.absolutePath,
-            file.name,
-            "image/jpg",
-            file.parent,
-            current.toString(),
-            current.toString(),
-            current.toString(),
-            BitmapUtils.getBitmapSize(bitmap),
-            bitmap.width,
-            bitmap.height
-        )
+        val values =
+            createBitmapValues(file.absolutePath, file.name, "image/jpg", file.parent, current.toString(), current.toString(), current.toString(), BitmapUtils.getBitmapSize(bitmap), bitmap.width, bitmap.height)
 
         context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             ?.let { it ->
@@ -615,24 +582,17 @@ object FileUtils {
                     // 更新图片大小
                     if (!isQ()) {
                         val imageValues = ContentValues()
-                        imageValues.put(
-                            MediaStore.Images.Media.SIZE, bitmap.byteCount
-                        )
-                        CoreConfig.applicationContext.contentResolver.update(
-                            uri, imageValues, null, null
-                        )
+                        imageValues.put(MediaStore.Images.Media.SIZE, bitmap.byteCount)
+                        CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
                         // 通知媒体库更新
-                        val intent = Intent(
-                            @Suppress("DEPRECATION") Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri
-                        )
+                        val intent =
+                            Intent(@Suppress("DEPRECATION") Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri)
                         CoreConfig.applicationContext.sendBroadcast(intent)
                     } else {
                         val imageValues = ContentValues()
                         // Android Q添加了IS_PENDING状态，为0时其他应用才可见
                         imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
-                        CoreConfig.applicationContext.contentResolver.update(
-                            uri, imageValues, null, null
-                        )
+                        CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
                     }
                     return uri
                 }
@@ -670,9 +630,7 @@ object FileUtils {
             }
             collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
             // 高版本不用查重直接插入，会自动重命名
-            var uri = CoreConfig.applicationContext.contentResolver.insert(
-                collection, imageValues
-            )
+            var uri = CoreConfig.applicationContext.contentResolver.insert(collection, imageValues)
             return uri
         } else {
             // 老版本
@@ -702,9 +660,7 @@ object FileUtils {
             }
             collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             // 插入图片信息
-            var uri = CoreConfig.applicationContext.contentResolver.insert(
-                collection, imageValues
-            )
+            var uri = CoreConfig.applicationContext.contentResolver.insert(collection, imageValues)
             return uri
         }
 
@@ -726,15 +682,8 @@ object FileUtils {
         val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 
         // 查询是否已经存在相同图片
-        val query = CoreConfig.applicationContext.contentResolver.query(
-            collection,
-            arrayOf(
-                MediaStore.Images.Media._ID, @Suppress("DEPRECATION") MediaStore.Images.Media.DATA
-            ),
-            "${@Suppress("DEPRECATION") MediaStore.Images.Media.DATA} == ?",
-            arrayOf(imagePath),
-            null
-        )
+        val query =
+            CoreConfig.applicationContext.contentResolver.query(collection, arrayOf(MediaStore.Images.Media._ID, @Suppress("DEPRECATION") MediaStore.Images.Media.DATA), "${@Suppress("DEPRECATION") MediaStore.Images.Media.DATA} == ?", arrayOf(imagePath), null)
         query?.use {
             while (it.moveToNext()) {
                 val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
@@ -761,18 +710,9 @@ object FileUtils {
         //设置目标文件的信息
         val options = BitmapUtils.getImageOptions(oldPath)
 
-        val values = createBitmapValues(
-            newPath,
-            oldFile.name,
-            "image/png",
-            File(newPath).parentFile.path,
-            oldFile.name,
-            oldFile.name,
-            oldFile.name,
-            oldFile.length().toInt(),
-            options.outHeight,
-            options.outHeight
-        )
+        val values =
+            createBitmapValues(newPath, oldFile.name, "image/png", File(newPath).parentFile.path, oldFile.name, oldFile.name, oldFile.name, oldFile.length()
+                .toInt(), options.outHeight, options.outHeight)
         val collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
         context.contentResolver.insert(collection, values)?.let { insertUri ->
             context.contentResolver.openOutputStream(insertUri)?.let { fos ->
@@ -786,7 +726,6 @@ object FileUtils {
         return null
     }
 
-
     /**
      *  保存图片到Download
      * @param context Context
@@ -797,13 +736,11 @@ object FileUtils {
     @JvmStatic
     fun saveBitmap2Download(context: Context, fileName: String, bitmap: Bitmap) {
         //使用ContentResolver创建需要操作的文件
-        val os = getDownloadInstallUri(
-            fileName, context
-        )?.let { context.contentResolver.openOutputStream(it) }
+        val os =
+            getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
         os?.let { saveBitmap(it, bitmap) }
     }
     //endregion
-
 
     //region Bitmap 操作
     /**
@@ -813,10 +750,7 @@ object FileUtils {
      * @throws IOException
      */
     @Throws(IOException::class)
-    fun saveBitmap(
-        bm: Bitmap?,
-        filePath: String = getExternalPicturesPath() + File.separator + getDefFileName(".png")
-    ) {
+    fun saveBitmap(bm: Bitmap?, filePath: String = getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
         if (bm == null) {
             LogUtils.d(" saveBitmap   is  null  ")
             return
@@ -849,7 +783,6 @@ object FileUtils {
         }
     }
     //endregion
-
 
     //TODO  整理 文件复制  与其他操作
 
@@ -915,11 +848,8 @@ object FileUtils {
     @JvmStatic
     fun copyToPrivateDir(context: Context, fileUri: Uri, privatePath: String) {
         try {
-            val fis = FileInputStream(
-                context.contentResolver.openFileDescriptor(
-                    fileUri, "r"
-                )?.fileDescriptor
-            )
+            val fis =
+                FileInputStream(context.contentResolver.openFileDescriptor(fileUri, "r")?.fileDescriptor)
             fis.copyTo(FileOutputStream(privatePath))
             fis.close()
         } catch (e: Exception) {
@@ -935,7 +865,6 @@ object FileUtils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
 
-
     /**
      * 获取文件图片 对应的媒体类型
      * @param path String?
@@ -949,6 +878,58 @@ object FileUtils {
             fileName.endsWith(".webp") -> "image/webp"
             fileName.endsWith(".gif") -> "image/gif"
             else -> null
+        }
+    }
+
+    /**
+     *  保存视频到相册
+     * @param context Context
+     * @param destFile File  全地址
+     */
+    fun videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(context: Context, destFile: File) {
+        val values = ContentValues()
+        val uriSavedVideo: Uri?
+        uriSavedVideo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            values.put(MediaStore.Video.Media.RELATIVE_PATH, "Movies")
+            values.put(MediaStore.Video.Media.TITLE, destFile.name)
+            values.put(MediaStore.Video.Media.DISPLAY_NAME, destFile.name)
+            values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+            values.put(MediaStore.Video.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+            val collection =
+                MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            context.contentResolver.insert(collection, values)
+        } else {
+            values.put(MediaStore.Video.Media.TITLE, destFile.name)
+            values.put(MediaStore.Video.Media.DISPLAY_NAME, destFile.name)
+            values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+            values.put(MediaStore.Video.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+            values.put(MediaStore.Video.Media.DATA, destFile.absolutePath)
+            context.contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            values.put(MediaStore.Video.Media.DATE_TAKEN, System.currentTimeMillis())
+            values.put(MediaStore.Video.Media.IS_PENDING, 1)
+        }
+        val pfd: ParcelFileDescriptor?
+        try {
+            pfd = context.contentResolver.openFileDescriptor(uriSavedVideo!!, "w")
+            val out = FileOutputStream(pfd!!.fileDescriptor)
+            val inputStream = FileInputStream(destFile)
+            val buf = ByteArray(8192)
+            var len: Int
+            while (inputStream.read(buf).also { len = it } > 0) {
+                out.write(buf, 0, len)
+            }
+            out.close()
+            inputStream.close()
+            pfd.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            values.clear()
+            values.put(MediaStore.Video.Media.IS_PENDING, 0)
+            context.contentResolver.update(uriSavedVideo!!, values, null, null)
         }
     }
 

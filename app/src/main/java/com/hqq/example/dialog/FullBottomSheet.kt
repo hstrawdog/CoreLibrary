@@ -18,8 +18,8 @@ import com.hqq.example.adapter.StringAdapter
 class FullBottomSheet : BaseBottomDialog() {
     var mStringAdapter = StringAdapter()
 
-    override val layoutViewId: Int
-        get() = R.layout.dialog_bottom_sheet
+    override val layoutViewId: Int = R.layout.dialog_bottom_sheet
+
     override fun initView() {
         val recyclerView: RecyclerView = rootView!!.findViewById(R.id.rc_list)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -29,6 +29,6 @@ class FullBottomSheet : BaseBottomDialog() {
         recyclerView.adapter = mStringAdapter
     }
 
-    override val height: Int
-        get() = ResourcesUtils.getDimen( R.dimen.x750).toInt()
+    override val height: Int = ResourcesUtils.getDimen(R.dimen.x750).toInt()
+
 }

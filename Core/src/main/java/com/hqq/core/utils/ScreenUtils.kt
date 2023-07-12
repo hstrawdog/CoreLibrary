@@ -152,7 +152,6 @@ object ScreenUtils {
         return ret
     }
 
-
     /**
      * 得到屏幕的宽
      *
@@ -297,7 +296,6 @@ object ScreenUtils {
         return ScreenHeight.getFullActivityHeight(CoreConfig.applicationContext)
     }
 
-
     /**
      * 兼容API获取屏幕信息
      * @param context
@@ -321,7 +319,6 @@ object ScreenUtils {
     private fun getDisplayApiR(context: Context): Display? {
         return context.display
     }
-
 
     /**
      * 获取物理宽度
@@ -361,7 +358,6 @@ object ScreenUtils {
         (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
         return localDisplayMetrics.densityDpi.toFloat()
     }
-
 
     @JvmStatic
     fun getStatusBarHeight(): Int {
@@ -407,5 +403,16 @@ object ScreenUtils {
             result = context.resources.getDimensionPixelSize(resourceId)
         }
         return result
+    }
+
+    /**
+     * 底部导航栏的高度
+     * @param context Context
+     * @return Int
+     */
+    fun getNavigationBarHeight(context: Context): Int {
+        val resources = context.resources
+        val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        return if (resourceId != 0) resources.getDimensionPixelSize(resourceId) else 0
     }
 }

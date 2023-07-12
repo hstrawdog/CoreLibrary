@@ -85,7 +85,8 @@ object AppTool {
         if (!FileTool.isFileExists(file)) return false
         val command = "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm install $filePath"
         val commandResult = ShellTool.execCmd(command, !isSystemApp(context), true)
-        return commandResult.successMsg != null && commandResult.successMsg!!.toLowerCase(Locale.ROOT).contains("success")
+        return commandResult.successMsg != null && commandResult.successMsg!!.toLowerCase(Locale.ROOT)
+            .contains("success")
     }
 
     /**
@@ -156,9 +157,11 @@ object AppTool {
     @JvmStatic
     fun uninstallAppSilent(context: Context, packageName: String, isKeepData: Boolean): Boolean {
         if (DataTool.isNullString(packageName)) return false
-        val command = "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm uninstall " + (if (isKeepData) "-k " else "") + packageName
+        val command =
+            "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm uninstall " + (if (isKeepData) "-k " else "") + packageName
         val commandResult = ShellTool.execCmd(command, !isSystemApp(context), true)
-        return commandResult.successMsg != null && commandResult.successMsg!!.toLowerCase().contains("success")
+        return commandResult.successMsg != null && commandResult.successMsg!!.toLowerCase()
+            .contains("success")
     }
 
     /**
@@ -473,7 +476,8 @@ object AppTool {
     @JvmStatic
     fun getAppSignatureSHA1(context: Context, packageName: String): String? {
         val signature = getAppSignature(context, packageName) ?: return null
-        return EncryptTool.encryptSHA1ToString(signature[0].toByteArray()).replace("(?<=[0-9A-F]{2})[0-9A-F]{2}".toRegex(), ":$0")
+        return EncryptTool.encryptSHA1ToString(signature[0].toByteArray())
+            .replace("(?<=[0-9A-F]{2})[0-9A-F]{2}".toRegex(), ":$0")
     }
 
     /**
@@ -564,7 +568,7 @@ object AppTool {
      * @return AppInfo类
      */
     @JvmStatic
-    private fun getBean(pm: PackageManager, pi: PackageInfo):AppInfo {
+    private fun getBean(pm: PackageManager, pi: PackageInfo): AppInfo {
         val ai = pi.applicationInfo
         val name = ai.loadLabel(pm).toString()
         val icon = ai.loadIcon(pm)
@@ -661,8 +665,7 @@ object AppTool {
     /**
      * 封装App信息的Bean类
      */
-    class AppInfo(name: String?, icon: Drawable?, packageName: String?, packagePath: String?,
-                  versionName: String?, versionCode: Int, isSD: Boolean, isUser: Boolean) {
+    class AppInfo(name: String?, icon: Drawable?, packageName: String?, packagePath: String?, versionName: String?, versionCode: Int, isSD: Boolean, isUser: Boolean) {
         var name: String? = null
         var icon: Drawable? = null
         var packageName: String? = null

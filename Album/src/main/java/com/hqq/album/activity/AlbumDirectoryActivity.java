@@ -85,9 +85,7 @@ public class AlbumDirectoryActivity extends BaseActivity implements AlbumDirecto
     @Override
     public void onItemClick(String folderName, List<LocalMedia> images) {
         SelectOptions.getInstance().setFolderLocalMedia(images);
-        startActivity(new Intent(this, AlbumDetailActivity.class)
-                .putExtra(FunctionKey.KEY_FOLDER_NAME, folderName)
-        );
+        startActivity(new Intent(this, AlbumDetailActivity.class).putExtra(FunctionKey.KEY_FOLDER_NAME, folderName));
     }
 
     @Override
@@ -198,8 +196,7 @@ public class AlbumDirectoryActivity extends BaseActivity implements AlbumDirecto
         }
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(
-                this, LinearLayoutManager.HORIZONTAL, AlbumUtils.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.line_color)));
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, AlbumUtils.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.line_color)));
         mRecyclerView.setLayoutManager(manager);
         mAdapter = new AlbumDirectoryAdapter(this);
         mAdapter.bindFolderData(mFolderList);

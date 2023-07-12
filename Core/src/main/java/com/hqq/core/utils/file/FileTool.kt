@@ -757,20 +757,16 @@ object FileTool {
                 if (line.length > 0 && line.startsWith("http://")) {
                     //replce 这行的内容
 //                    RxLogTool.d("ts替换", line + "  replce  " + pathList.get(num).getAbsolutePath());
-                    buf.append(
-                        """
+                    buf.append("""
     file:${pathList[num].absolutePath}
 
-    """.trimIndent()
-                    )
+    """.trimIndent())
                     num++
                 } else {
-                    buf.append(
-                        """
+                    buf.append("""
     $line
 
-    """.trimIndent()
-                    )
+    """.trimIndent())
                 }
             }
             `in`!!.close()
@@ -1110,9 +1106,7 @@ object FileTool {
         return if (!createOrExistsDir(destFile.parentFile)) {
             false
         } else try {
-            (writeFileFromIS(destFile, FileInputStream(srcFile), false) && !(isMove && !deleteFile(
-                srcFile
-            )))
+            (writeFileFromIS(destFile, FileInputStream(srcFile), false) && !(isMove && !deleteFile(srcFile)))
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
             false
@@ -1359,9 +1353,7 @@ object FileTool {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(
-        dirPath: String?, suffix: String, isRecursive: Boolean
-    ): List<File>? {
+    fun listFilesInDirWithFilter(dirPath: String?, suffix: String, isRecursive: Boolean): List<File>? {
         return listFilesInDirWithFilter(getFileByPath(dirPath), suffix, isRecursive)
     }
 
@@ -1443,9 +1435,7 @@ object FileTool {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(
-        dirPath: String?, filter: FilenameFilter, isRecursive: Boolean
-    ): List<File>? {
+    fun listFilesInDirWithFilter(dirPath: String?, filter: FilenameFilter, isRecursive: Boolean): List<File>? {
         return listFilesInDirWithFilter(getFileByPath(dirPath), filter, isRecursive)
     }
 
@@ -1458,9 +1448,7 @@ object FileTool {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(
-        dir: File?, filter: FilenameFilter, isRecursive: Boolean
-    ): List<File>? {
+    fun listFilesInDirWithFilter(dir: File?, filter: FilenameFilter, isRecursive: Boolean): List<File>? {
         if (isRecursive) {
             return listFilesInDirWithFilter(dir, filter)
         }
@@ -2087,13 +2075,8 @@ object FileTool {
     @JvmStatic
     fun getImageContentUri(context: Context?, imageFile: File?): Uri? {
         val filePath = imageFile?.absolutePath
-        val cursor = context?.contentResolver?.query(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            arrayOf(MediaStore.Images.Media._ID),
-            MediaStore.Images.Media.DATA + "=? ",
-            arrayOf(filePath),
-            null
-        )
+        val cursor =
+            context?.contentResolver?.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, arrayOf(MediaStore.Images.Media._ID), MediaStore.Images.Media.DATA + "=? ", arrayOf(filePath), null)
         return if (cursor != null && cursor.moveToFirst()) {
             val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
             val baseUri = Uri.parse("content://media/external/images/media")
@@ -2102,9 +2085,7 @@ object FileTool {
             if (imageFile!!.exists()) {
                 val values = ContentValues()
                 values.put(MediaStore.Images.Media.DATA, filePath)
-                context!!.contentResolver.insert(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values
-                )
+                context!!.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             } else {
                 null
             }
@@ -2140,9 +2121,8 @@ object FileTool {
                 }
             } else if (isDownloadsDocument(uri)) {
                 val id = DocumentsContract.getDocumentId(uri)
-                val contentUri = ContentUris.withAppendedId(
-                    Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
-                )
+                val contentUri =
+                    ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
                 return getDataColumn(context, contentUri, null, null)
             } else if (isMediaDocument(uri)) {
                 val docId = DocumentsContract.getDocumentId(uri)
@@ -2157,9 +2137,7 @@ object FileTool {
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
                 }
                 val selection = "_id=?"
-                val selectionArgs = arrayOf(
-                    split[1]
-                )
+                val selectionArgs = arrayOf(split[1])
                 return getDataColumn(context, contentUri, selection, selectionArgs)
             }
         } else if ("content".equals(uri.scheme, ignoreCase = true)) {
@@ -2210,9 +2188,7 @@ object FileTool {
     }
 
     @JvmStatic
-    fun getDataColumn(
-        context: Context, uri: Uri?, selection: String?, selectionArgs: Array<String>?
-    ): String? {
+    fun getDataColumn(context: Context, uri: Uri?, selection: String?, selectionArgs: Array<String>?): String? {
         var cursor: Cursor? = null
         val column = MediaStore.Images.Media.DATA
         val projection = arrayOf(column)

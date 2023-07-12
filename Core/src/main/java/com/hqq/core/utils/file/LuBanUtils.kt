@@ -22,12 +22,7 @@ object LuBanUtils {
      * @param size
      * @param onCompressListener
      */
-    fun compression(
-        activity: Activity?,
-        path: String?,
-        size: Int,
-        onCompressListener: com.hqq.core.listenner.OnCompressListener
-    ) {
+    fun compression(activity: Activity?, path: String?, size: Int, onCompressListener: com.hqq.core.listenner.OnCompressListener) {
         Luban.with(activity).load(path).ignoreBy(size)
             .setCompressListener(object : OnCompressListener {
                 override fun onStart() {
@@ -52,12 +47,7 @@ object LuBanUtils {
      * @param size
      * @param onCompressListener
      */
-    fun compression(
-        activity: Activity?,
-        path: List<String>?,
-        size: Int,
-        onCompressListener: com.hqq.core.listenner.OnCompressListener
-    ) {
+    fun compression(activity: Activity?, path: List<String>?, size: Int, onCompressListener: com.hqq.core.listenner.OnCompressListener) {
         Luban.with(activity).load(path).ignoreBy(size)
             .setCompressListener(object : OnCompressListener {
                 override fun onStart() {

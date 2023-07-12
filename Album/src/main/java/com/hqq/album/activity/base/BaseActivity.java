@@ -57,13 +57,14 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //设置无标题
+        //垂直显示
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         mContext = this;
         isDestroy = false;
-        //设置无标题
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //垂直显示
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // 添加Activity到堆栈
         AppManager.getAppManager().addActivity(this);
     }

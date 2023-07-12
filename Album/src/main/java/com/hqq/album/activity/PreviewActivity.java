@@ -17,6 +17,8 @@
 
 package com.hqq.album.activity;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -220,22 +222,24 @@ public class PreviewActivity extends BaseActivity implements View.OnClickListene
             viewHolder.progressBar.setVisibility(View.VISIBLE);
             viewHolder.photoDraweeView.setVisibility(View.VISIBLE);
             viewHolder.progressBar.setVisibility(View.GONE);
-            Glide.with(context)
-                    .asBitmap()
-                    .load(localMedia)
-                    .into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            // 创建一个新的Bitmap
-                            Bitmap bitmap = Bitmap.createBitmap(resource);
-                            viewHolder.photoDraweeView.setImage(ImageSource.bitmap(bitmap));
-                            viewHolder.progressBar.setVisibility(View.GONE);
+            Glide.with(context).asBitmap().load(localMedia).into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    // 创建一个新的Bitmap
+                    Bitmap bitmap = Bitmap.createBitmap(resource);
+                    viewHolder.photoDraweeView.setImage(ImageSource.bitmap(bitmap));
+                    viewHolder.progressBar.setVisibility(View.GONE);
+                }
 
-
-                        }
-
-                    })
-            ;
+            });
+            viewHolder.photoDraweeView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    // 在此处执行长按事件的逻辑
+                    Toast.makeText(context, "123123", LENGTH_LONG);
+                    return true; //返回 true 表示事件已经被处理
+                }
+            });
 
         }
 

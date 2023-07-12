@@ -21,9 +21,11 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
      *
      * @return
      */
-    val activity: Activity
+    val activity: Activity?
         get() {
-            check(!(activities.size == 0)) { "Core 未初始化" }
+            check(!(activities.size == 0)) {
+                LogUtils.e("activities 0 或者 Core 未初始化")
+            }
             // 获取最上面的 Activity
             for (i in activities.indices.reversed()) {
                 val activity = activities[i]
@@ -31,7 +33,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
                     return activity
                 }
             }
-            throw IllegalStateException("未获取到栈内对象 当前Activity 异常")
+            return null
         }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {

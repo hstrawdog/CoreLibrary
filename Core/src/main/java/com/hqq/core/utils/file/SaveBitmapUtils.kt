@@ -44,14 +44,11 @@ object SaveBitmapUtils {
         var path = FileUtils.getCacheDir() + File.separator + FileUtils.getDefFileName(".png")
         if (relativePath.isNotNull()) {
             path =
-                FileUtils.getCacheDir() + File.separator + relativePath + File.separator + FileUtils.getDefFileName(
-                    ".png"
-                )
+                FileUtils.getCacheDir() + File.separator + relativePath + File.separator + FileUtils.getDefFileName(".png")
         }
         FileUtils.saveBitmap(bitmap, path)
         return path
     }
-
 
     /**
      * @see  android.os.Environment.DIRECTORY_PICTURES
@@ -66,7 +63,7 @@ object SaveBitmapUtils {
         if (bitmap == null) {
             return null
         }
-        return  FileUtils.saveBitmap2Pictures(relativePath, fileName, bitmap)
+        return FileUtils.saveBitmap2Pictures(relativePath, fileName, bitmap)
     }
 
     /**
@@ -76,9 +73,7 @@ object SaveBitmapUtils {
      * @param bitmap Bitmap
      * @param path String
      */
-    fun saveBitmap2ExternalPrivate(
-        bitmap: Bitmap?, relativePath: String = "", fileName: String
-    ): String {
+    fun saveBitmap2ExternalPrivate(bitmap: Bitmap?, relativePath: String = "", fileName: String): String {
 
         if (bitmap == null) {
             return ""
@@ -96,14 +91,8 @@ object SaveBitmapUtils {
                 FileUtils.getStorageDirectory() + File.separator + relativePath + File.separator + fileName
             FileUtils.saveBitmap(bitmap, path)
             // 发送至相册
-            MediaStore.Images.Media.insertImage(
-                CoreConfig.applicationContext.contentResolver, path, File(path).name, null
-            )
-            CoreConfig.applicationContext.sendBroadcast(
-                Intent(
-                    Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(path).parentFile)
-                )
-            )
+            MediaStore.Images.Media.insertImage(CoreConfig.applicationContext.contentResolver, path, File(path).name, null)
+            CoreConfig.applicationContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(path).parentFile)))
             return path
         }
     }

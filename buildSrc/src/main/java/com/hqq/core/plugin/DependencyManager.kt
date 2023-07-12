@@ -15,7 +15,6 @@ object BuildVersionConfig {
     const val targetSdkVersion = 31
 }
 
-
 /**
  * 核心包
  * https://developer.android.google.cn/jetpack/androidx/releases/appcompat
@@ -54,7 +53,6 @@ object Appcompat {
 
 }
 
-
 /**
  * Kotlin 拓展包
  * https://developer.android.google.cn/kotlin/ktx/extensions-list
@@ -77,7 +75,6 @@ object Kt {
     const val test = "org.jetbrains.kotlin:kotlin-test-junit:${kotlin}"
     const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}"
 }
-
 
 /**
  * AndroidX 组件
@@ -358,15 +355,61 @@ object Jsoup {
 }
 
 /**
- *  Work
- *  介绍 https://developer.android.com/guide/background/persistent
+ *  Work  任务管理
+ *   https://developer.android.com/guide/background/persistent
  */
 object Work {
-    const val work = "androidx.work:work-runtime:2.7.1"
+    const val work_version = "2.8.0"
+
+    // 核心  正常 使用这个就可以
+    const val work = "androidx.work:work-runtime:$work_version"
+
+    // Kotlin + coroutines
+    const val work_ktx = "androidx.work:work-runtime-ktx:$work_version"
+
+    // optional - RxJava2 support
+    const val work_rxjava2 = "androidx.work:work-rxjava2:$work_version"
+
+    // optional - GCMNetworkManager support
+    const val work_gcm = "androidx.work:work-gcm:$work_version"
+
+    // optional - Test helpers androidTestImplementation(
+    const val work_testing = "androidx.work:work-testing:$work_version"
+
+    // optional - Multiprocess support
+    const val work_multiprocess = "androidx.work:work-multiprocess:$work_version"
+
+}
+
+/**
+ *  dataStore  SharedPreferences升级方案
+ *  https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn
+ *
+ */
+object DataStore {
+    //  DataStore  核心
+    const val core = "androidx.datastore:datastore-core:1.0.0"
+
+    // preferences DataStore  支持
+    const val preferences = "androidx.datastore:datastore-preferences:1.0.0"
+
+    // optional - RxJava2 support
+    const val preferences_rxjava = "androidx.datastore:datastore-preferences-rxjava2:1.0.0"
+
+    // optional - RxJava3 support
+    const val preferences_rxjava3 = "androidx.datastore:datastore-preferences-rxjava3:1.0.0"
+
+    // datastore  DataStore  支持
+    const val datastore = "androidx.datastore:datastore:1.0.0"
+
+    // optional - RxJava2 support
+    const val datastore_rxjava2 = "androidx.datastore:datastore-rxjava2:1.0.0"
+
+    // optional - RxJava3 support
+    const val datastore_rxjava3 = "androidx.datastore:datastore-rxjava3:1.0.0"
 }
 
 // -------------  图片预览效果  缩放等 -------------
-object  PhotoView{
+object PhotoView {
     const val library = "com.bm.photoview:library:1.4.1"
-
 }

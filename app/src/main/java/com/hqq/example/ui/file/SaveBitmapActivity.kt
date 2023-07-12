@@ -37,10 +37,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
             PermissionsUtils.requestStorage {
                 if (it) {
                     binding.tvTitle.text = binding.textView29.text
-                    SaveBitmapUtils.saveBitmap2Pictures(
-                        BitmapUtils.createBitmapFromView2(binding.tvTitle),
-                        fileName = FileUtils.getDefFileName(".png")
-                    )
+                    SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), fileName = FileUtils.getDefFileName(".png"))
                         ?.let {
                             path = it.path.toString()
                             binding.textView40.setText("$path")
@@ -54,15 +51,12 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
             PermissionsUtils.requestStorage {
                 if (it) {
                     binding.tvTitle.text = binding.textView32.text
-                    SaveBitmapUtils.saveBitmap2Pictures(
-                        BitmapUtils.createBitmapFromView2(binding.tvTitle),
-                        "a",
-                        fileName = FileUtils.getDefFileName(".png")
-                    )?.let {
-                        path = it?.path.toString()
-                        binding.textView40.setText("$path")
-                        ImageLoadUtils.with(path, binding.imageView15)
-                    }
+                    SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), "a", fileName = FileUtils.getDefFileName(".png"))
+                        ?.let {
+                            path = it.path.toString()
+                            binding.textView40.setText("$path")
+                            ImageLoadUtils.with(path, binding.imageView15)
+                        }
 
                 }
             }
@@ -73,11 +67,8 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                 if (it) {
                     binding.tvTitle.text = binding.textView34.text
                     // 保存到默认的文件夹
-                    path = SaveBitmapUtils.saveBitmap2ExternalPrivate(
-                        BitmapUtils.createBitmapFromView2(binding.tvTitle),
-                        "a",
-                        fileName = FileUtils.getDefFileName(".png")
-                    )
+                    path =
+                        SaveBitmapUtils.saveBitmap2ExternalPrivate(BitmapUtils.createBitmapFromView2(binding.tvTitle), "a", fileName = FileUtils.getDefFileName(".png"))
                     binding.textView40.setText("$path")
                     ImageLoadUtils.with(path, binding.imageView15)
                 }

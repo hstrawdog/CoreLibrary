@@ -15,7 +15,6 @@ import com.hqq.example.ui.ResultActivity
  */
 class OpenActivityDialog : BaseBindingDialog<DialogOpenActivityBinding>() {
     override fun initView() {
-
         binding.button73.setOnClickListener {
             open(ResultActivity::class.java) {
                 it?.data?.getStringExtra("data")?.let {

@@ -3,10 +3,11 @@ package com.hqq.album.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hqq.album.Adapter.AlbumDetailAdapter;
 import com.hqq.album.AppManager;
@@ -87,15 +88,12 @@ public class AlbumDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onChange(List<LocalMedia> selectImages) {
-        mTvFinish.setText("完成(" + selectImages.size() + "/" +  FunctionOptions.getInstance().getMaxSelectNum() + ")");
+        mTvFinish.setText("完成(" + selectImages.size() + "/" + FunctionOptions.getInstance().getMaxSelectNum() + ")");
     }
 
     @Override
     public void onPictureClick(LocalMedia media, int position) {
-        startActivityForResult(new Intent(this, AlbumPreviewActivity.class)
-                        .putExtra(FunctionKey.KEY_POSITION, position + 1)
-                        .putExtra(FunctionKey.KEY_FOLDER_NAME, getIntent().getStringExtra(FunctionKey.KEY_FOLDER_NAME))
-                , CODE_CLOSE);
+        startActivityForResult(new Intent(this, AlbumPreviewActivity.class).putExtra(FunctionKey.KEY_POSITION, position + 1).putExtra(FunctionKey.KEY_FOLDER_NAME, getIntent().getStringExtra(FunctionKey.KEY_FOLDER_NAME)), CODE_CLOSE);
     }
 
     @Override

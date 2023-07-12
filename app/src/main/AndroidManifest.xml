@@ -63,7 +63,7 @@
     <!-- 权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS"   />
+    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RAISED_THREAD_PRIORITY" />
 
 
@@ -78,11 +78,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.AlbumIndexActivity" android:label="相册首页"/>
+        <activity
+            android:name=".ui.AlbumIndexActivity"
+            android:label="相册首页" />
 
         <activity
             android:name=".ui.share.ShareIndexActivity"
-            android:label="分享"/>
+            android:label="分享" />
         <activity
             android:name=".ui.VibrateActivity"
             android:label="测试震动" />
@@ -138,7 +140,9 @@
             android:name=".accessibility.TestAccessibilityActivity"
             android:label="测试无障碍服务" />
 
-
+        <activity
+            android:name=".ui.dialog.PopupWindowIndexActivity"
+            android:label="pop弹窗" />
 
         <activity-alias
             android:name=".RoundActivity"

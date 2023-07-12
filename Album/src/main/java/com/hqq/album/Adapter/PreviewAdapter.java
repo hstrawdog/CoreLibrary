@@ -14,11 +14,13 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -74,7 +76,7 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
     private void initData(final Context context, final PreviewAdapter.ViewHolder viewHolder, LocalMedia localMedia) {
         switch (localMedia.getLocalMediaType()) {
             case LocalMediaType.VALUE_TYPE_IMAGE:
-                    String url =getPathFromUri(mContext, localMedia.getUri());
+                String url = getPathFromUri(mContext, localMedia.getUri());
                 int degree = AlbumFileUtils.readPictureDegree(url);
                 //旋转图片
                 if (degree > 0) {
@@ -83,7 +85,14 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
                 } else {
                     viewHolder.photoDraweeView.setImage(ImageSource.uri(localMedia.getUri()));
                 }
+                viewHolder.photoDraweeView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+//                        Toast.makeText(context,"111",1).show();
 
+                        return true;
+                    }
+                });
 
                 break;
             case LocalMediaType.VALUE_TYPE_VIDEO:
@@ -109,18 +118,18 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
             //video:A1283522
             String[] splits = docId.split(":");
             String type = null, id = null;
-            if(splits.length == 2) {
+            if (splits.length == 2) {
                 type = splits[0];
                 id = splits[1];
             }
             switch (uri.getAuthority()) {
                 case "com.android.externalstorage.documents":
-                    if("primary".equals(type)) {
+                    if ("primary".equals(type)) {
                         path = Environment.getExternalStorageDirectory() + File.separator + id;
                     }
                     break;
                 case "com.android.providers.downloads.documents":
-                    if("raw".equals(type)) {
+                    if ("raw".equals(type)) {
                         path = id;
                     } else {
                         Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
@@ -143,9 +152,9 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
                             externalUri = MediaStore.Files.getContentUri("external");
                             break;
                     }
-                    if(externalUri != null) {
+                    if (externalUri != null) {
                         String selection = "_id=?";
-                        String[] selectionArgs = new String[]{ id };
+                        String[] selectionArgs = new String[]{id};
                         path = getMediaPathFromUri(context, externalUri, selection, selectionArgs);
                     }
                     break;
@@ -165,17 +174,17 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
         String authroity = uri.getAuthority();
         path = uri.getPath();
         String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        if(!path.startsWith(sdPath)) {
+        if (!path.startsWith(sdPath)) {
             int sepIndex = path.indexOf(File.separator, 1);
-            if(sepIndex == -1) path = null;
+            if (sepIndex == -1) path = null;
             else {
-                path =  path.substring(sepIndex);
+                path = path.substring(sepIndex);
             }
         }
 
-        if(path == null || !new File(path).exists()) {
+        if (path == null || !new File(path).exists()) {
             ContentResolver resolver = context.getContentResolver();
-            String[] projection = new String[]{ MediaStore.MediaColumns.DATA };
+            String[] projection = new String[]{MediaStore.MediaColumns.DATA};
             Cursor cursor = resolver.query(uri, projection, selection, selectionArgs, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
@@ -194,8 +203,6 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
         }
         return path;
     }
-
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

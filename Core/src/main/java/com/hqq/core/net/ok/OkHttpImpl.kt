@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.*
 import java.net.URLConnection
 import java.nio.charset.Charset
@@ -33,7 +34,6 @@ import kotlin.coroutines.CoroutineContext
 </描述当前版本功能> */
 class OkHttpImpl : HttpCompat {
 
-
     val WRITE_TIMEOUT = 60L
 
     /**
@@ -45,7 +45,6 @@ class OkHttpImpl : HttpCompat {
             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS).build()
     }
-
 
     /**
      * 创建 OkHttpClient
@@ -78,7 +77,6 @@ class OkHttpImpl : HttpCompat {
      */
     override fun getExecute(url: String, params: ParamsCompat, callback: OkNetCallback): Call {
         val request: Request.Builder = getBuilder(url, params)
-
         val call = mOkHttpClient.newCall(request.build())
         try {
             val response = call.execute()
@@ -134,18 +132,12 @@ class OkHttpImpl : HttpCompat {
      * @return Call
      * @throws IOException
      */
-    override fun downloadFile(
-        url: String,
-        startsPoint: Long,
-        fileName: String,
-        downloadPath: String,
-        downloadListener: DownloadListener
-    ): Call {
+    override fun downloadFile(url: String, startsPoint: Long, fileName: String, downloadPath: String, downloadListener: DownloadListener): Call {
         val request: Request.Builder =
             Request.Builder().url(url).addHeader("Connection", "close") //这里不设置可能产生EOF错误
                 .header("RANGE", "bytes=$startsPoint-") //断点续传
 
-        var call = mOkHttpClient.newCall(request.build())
+        val call = mOkHttpClient.newCall(request.build())
 
         try {
             call.enqueue(object : Callback {
@@ -179,7 +171,7 @@ class OkHttpImpl : HttpCompat {
                             var randomAccessFile: RandomAccessFile? = null
                             var bis: BufferedInputStream? = null
                             val buff = ByteArray(1024)
-                            var len = 0
+                            var len: Int
                             try {
                                 `is` = response.body!!.byteStream()
                                 bis = BufferedInputStream(`is`)
@@ -190,7 +182,6 @@ class OkHttpImpl : HttpCompat {
                                 while (bis.read(buff).also { len = it } != -1) {
                                     randomAccessFile.write(buff, 0, len)
                                     fileSize += len
-                                    val fileLength = randomAccessFile.length()
                                     val index = fileSize.toFloat() / length.toFloat()
                                     downloadListener.loading(index)
                                 }
@@ -237,35 +228,29 @@ class OkHttpImpl : HttpCompat {
         return call
     }
 
-    override fun preUpload(
-        url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>
-    ): Call {
-        var call: Call? = null
-        var requestBody: RequestBody? = null
-        if (TextUtils.isEmpty(fileKey) || files == null || files.isEmpty()) {
+    override fun preUpload(url: String, bodyParams: Map<String, String>, fileKey: String, files: List<File>): Call {
+        val call: Call?
+        val requestBody: RequestBody?
+        if (TextUtils.isEmpty(fileKey) || files.isEmpty()) {
             requestBody = setRequestBody(bodyParams)
         } else {
             val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-            if (bodyParams != null) {
-                val entries = bodyParams.entries
-                val entryIterator = entries.iterator()
-                while (entryIterator.hasNext()) {
-                    val (key, value) = entryIterator.next()
-                    builder.addFormDataPart(key, value)
-                }
+            val entries = bodyParams.entries
+            val entryIterator = entries.iterator()
+            while (entryIterator.hasNext()) {
+                val (key, value) = entryIterator.next()
+                builder.addFormDataPart(key, value)
             }
             //遍历paths中所有图片绝对路径到builder，并约定key如“upload”作为后台接受多张图片的key
             for (file in files) {
                 val fileName = file.name
                 val mimeType: String = guessMimeType(fileName)
 
-                builder.addFormDataPart(
-                    fileKey, fileName, RequestBody.create(mimeType.toMediaTypeOrNull(), file)
-                )
+                builder.addFormDataPart(fileKey, fileName, file.asRequestBody(mimeType.toMediaTypeOrNull()))
             }
             requestBody = builder.build()
         }
-        val request: Request = Request.Builder().url(url).post(requestBody!!).build()
+        val request: Request = Request.Builder().url(url).post(requestBody).build()
         call = mOkHttpClient.newCall(request)
         return call
     }
@@ -291,8 +276,8 @@ class OkHttpImpl : HttpCompat {
      * @param bodyParams
      * @return
      */
-    private fun setRequestBody(bodyParams: Map<String, String>?): RequestBody? {
-        var body: RequestBody? = null
+    private fun setRequestBody(bodyParams: Map<String, String>?): RequestBody {
+        val body: RequestBody?
         val formEncodingBuilder = FormBody.Builder()
         if (bodyParams != null) {
             val entries = bodyParams.entries
@@ -336,12 +321,7 @@ class OkHttpImpl : HttpCompat {
      * @param callback OkNetCallback
      * @return Call
      */
-    private fun doGet(
-        coroutineContext: CoroutineContext,
-        url: String,
-        params: ParamsCompat,
-        callback: OkNetCallback
-    ): Call {
+    private fun doGet(coroutineContext: CoroutineContext, url: String, params: ParamsCompat, callback: OkNetCallback): Call {
         val request: Request.Builder = getBuilder(url, params)
         val call = mOkHttpClient.newCall(request.build())
         call.enqueue(object : Callback {
@@ -365,12 +345,7 @@ class OkHttpImpl : HttpCompat {
      * @param o
      * @return
      */
-    private fun doPost(
-        url: String,
-        params: ParamsCompat,
-        callback: OkNetCallback,
-        coroutineContext: CoroutineContext
-    ): Call {
+    private fun doPost(url: String, params: ParamsCompat, callback: OkNetCallback, coroutineContext: CoroutineContext): Call {
         val body = if (params.dataFormat == DataFormat.XML) {
             params.paramXml()
         } else {
@@ -389,12 +364,7 @@ class OkHttpImpl : HttpCompat {
      * @param response
      * @param paramsCompat
      */
-    private fun postHandler(
-        coroutineContext: CoroutineContext,
-        callback: OkNetCallback,
-        response: Response?,
-        paramsCompat: ParamsCompat?
-    ) {
+    private fun postHandler(coroutineContext: CoroutineContext, callback: OkNetCallback, response: Response?, paramsCompat: ParamsCompat?) {
         CoroutineScope(coroutineContext).launch {
             post(callback, response, paramsCompat)
         }
@@ -408,12 +378,7 @@ class OkHttpImpl : HttpCompat {
      * @param params
      * @return
      */
-    private fun doRequest(
-        coroutineContext: CoroutineContext,
-        request: Request.Builder,
-        callback: OkNetCallback,
-        params: ParamsCompat
-    ): Call {
+    private fun doRequest(coroutineContext: CoroutineContext, request: Request.Builder, callback: OkNetCallback, params: ParamsCompat): Call {
         val call = mOkHttpClient.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {

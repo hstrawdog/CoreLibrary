@@ -73,7 +73,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        startService(Intent(this, KillAppServers::class.java))
 
-        open(DownLoadActivity::class.java)
+//        open(DownLoadActivity::class.java)
 //        CropImageDialog().show(supportFragmentManager)
 
 
@@ -145,6 +145,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
             arrayList.add(MainBean("转场动画", TransitionsAnimationActivity::class.java))
             arrayList.add(MainBean("标题/状态栏设置", ToolBarActivity::class.java))
+            arrayList.add(MainBean("相册", AlbumIndexActivity::class.java))
             arrayList.add(MainBean("权限测试", PermissionActivity::class.java))
             arrayList.add(MainBean("Dialog系列", TestDialogActivity::class.java))
             arrayList.add(MainBean("Shape测试", ShapeTestActivity::class.java))

@@ -2,20 +2,17 @@ package com.hqq.album.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hqq.album.Adapter.PreviewAdapter;
 import com.hqq.album.AppManager;
@@ -24,9 +21,9 @@ import com.hqq.album.activity.base.BaseActivity;
 import com.hqq.album.common.FunctionKey;
 import com.hqq.album.common.FunctionOptions;
 import com.hqq.album.common.SelectOptions;
+import com.hqq.album.customize.FilterImageView;
 import com.hqq.album.dialog.OptAnimationLoader;
 import com.hqq.album.entity.LocalMedia;
-import com.hqq.album.customize.FilterImageView;
 
 import java.util.List;
 
@@ -39,7 +36,6 @@ import java.util.List;
  * @Descrive :
  */
 public class AlbumPreviewActivity extends BaseActivity implements View.OnClickListener {
-
 
     private RecyclerView mRcAlbumList;
     private ConstraintLayout mAlbumTitleBar;

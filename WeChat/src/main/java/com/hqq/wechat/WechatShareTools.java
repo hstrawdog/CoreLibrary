@@ -76,7 +76,7 @@ public class WechatShareTools {
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
         bitmap.recycle();
 
-        msg.thumbData =   BitmapUtils.bitmap2ByteArray(thumbBmp,Bitmap.CompressFormat.PNG,100);
+        msg.thumbData = BitmapUtils.bitmap2ByteArray(thumbBmp, Bitmap.CompressFormat.PNG, 100);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = WechatPayTools.getCurrTime();
@@ -199,8 +199,8 @@ public class WechatShareTools {
             case Favorites:
                 req.scene = SendMessageToWX.Req.WXSceneFavorite;
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
 
         if (iwxapi != null) {
@@ -211,8 +211,6 @@ public class WechatShareTools {
     }
 
     public enum SharePlace {
-        Friend,
-        Zone,
-        Favorites
+        Friend, Zone, Favorites
     }
 }

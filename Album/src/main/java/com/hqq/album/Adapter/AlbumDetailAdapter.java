@@ -2,8 +2,10 @@ package com.hqq.album.Adapter;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +27,14 @@ import com.hqq.album.utils.LoadUtils;
 import java.util.ArrayList;
 import java.util.List;
 
- /**
-  * @Author : huangqiqiang
-  * @Package : com.hqq.album.Adapter
-  * @FileName :   AlbumDetailAdapter
-  * @Date  : 2017/5/7 0001  上午 11:08
-  * @Email :  qiqiang213@gmail.com
-  * @Descrive :
-  */
+/**
+ * @Author : huangqiqiang
+ * @Package : com.hqq.album.Adapter
+ * @FileName :   AlbumDetailAdapter
+ * @Date : 2017/5/7 0001  上午 11:08
+ * @Email :  qiqiang213@gmail.com
+ * @Descrive :
+ */
 public class AlbumDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<LocalMedia> images = new ArrayList<>();
@@ -83,8 +85,7 @@ public class AlbumDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         long hours = (mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
         long minutes = (mss % (1000 * 60 * 60)) / (1000 * 60);
         long seconds = (mss % (1000 * 60)) / 1000;
-        return hours + ":" + minutes + " "
-                + seconds + "";
+        return hours + ":" + minutes + " " + seconds + "";
     }
 
     /**

@@ -43,8 +43,6 @@ import java.util.List;
 public class AlbumFolderActivity extends BaseActivity implements AlbumDetailAdapter.OnPhotoSelectChangedListener, View.OnClickListener, AlbumDirectoryAdapter.OnItemClickListener {
     List<LocalMediaFolder> mFolderList = new ArrayList<>();
     private AlbumDirectoryAdapter mAdapter;
-
-
     private static final int CODE_CLOSE = 0x9910;
     private RecyclerView mRecyclerView;
     TextView mTvFinish;
@@ -103,8 +101,7 @@ public class AlbumFolderActivity extends BaseActivity implements AlbumDetailAdap
             mAdapter = new AlbumDirectoryAdapter(this);
             mAdapter.bindFolderData(mFolderList);
             mRecyclerView.removeItemDecorationAt(0);
-            mRecyclerView.addItemDecoration(new RecycleViewDivider(
-                    this, LinearLayoutManager.HORIZONTAL, AlbumUtils.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.line_color)));
+            mRecyclerView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, AlbumUtils.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.line_color)));
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.setOnItemClickListener(this);
@@ -189,10 +186,7 @@ public class AlbumFolderActivity extends BaseActivity implements AlbumDetailAdap
 
     @Override
     public void onPictureClick(LocalMedia media, int position) {
-        startActivityForResult(new Intent(this, AlbumPreviewActivity.class)
-                        .putExtra(FunctionKey.KEY_POSITION, position + 1)
-                        .putExtra(FunctionKey.KEY_FOLDER_NAME, mFolderName)
-                , CODE_CLOSE);
+        startActivityForResult(new Intent(this, AlbumPreviewActivity.class).putExtra(FunctionKey.KEY_POSITION, position + 1).putExtra(FunctionKey.KEY_FOLDER_NAME, mFolderName), CODE_CLOSE);
     }
 
     @Override

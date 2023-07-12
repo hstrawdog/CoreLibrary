@@ -14,9 +14,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 /**
@@ -35,7 +37,6 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
     /**
      * 分割线高度，默认为1px
      */
-
     private int mDividerHeight = 2;
     /**
      * 列表的方向：LinearLayoutManager.VERTICAL或LinearLayoutManager.HORIZONTAL
@@ -113,7 +114,7 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
         final int left = parent.getPaddingLeft();
         final int right = parent.getMeasuredWidth() - parent.getPaddingRight();
         final int childSize = parent.getChildCount();
-        for (int i = 0; i < childSize- getFoodNum(); i++) {
+        for (int i = 0; i < childSize - getFoodNum(); i++) {
             final View child = parent.getChildAt(i);
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
             final int top = child.getBottom() + layoutParams.bottomMargin;

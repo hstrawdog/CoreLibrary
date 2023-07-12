@@ -48,7 +48,6 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             activityResult.value = result
         }
 
-
     var loadingView: LoadingView? = null
 
     var loaded = false
@@ -56,6 +55,10 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     var dialogClickListener: DialogClickListener<*>? = null
 
     var rootView: View? = null
+
+    protected abstract val layoutId: Int
+
+    override val layoutViewId: Int = R.layout.dialog_new
 
     /**
      * 布局创建
@@ -110,12 +113,12 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     override val animation: Int
         get() = R.style.DialogAnimation_bottom2top
 
-
     /**
      * 状态栏模式
      */
     @ToolBarMode
     var statusBarMode: Int = CoreConfig.get().isStatusMode
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //        //代码设置 无标题 无边框
@@ -123,12 +126,11 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 //            setStyle(DialogFragment.STYLE_NORMAL, R.style.MyDialog);
 //        } else {
 //        }
+        //  设置主题
         setStyle(STYLE_NORMAL, R.style.DefDialogStyle)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.window?.setWindowAnimations(animation)
         if (rootView == null) {
             activity?.let {
@@ -177,9 +179,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         super.onActivityCreated(savedInstanceState)
         LogUtils.e4Debug(rootView?.measuredWidth)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(background))
-        dialog?.window?.setLayout(
-            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT
-        )
+        dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         dialog?.window?.setGravity(gravity)
     }
 
@@ -198,15 +198,19 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         return null
     }
 
-    protected abstract val layoutId: Int
-
-    override val layoutViewId: Int
-        get() = R.layout.dialog_new
-
     override fun show(manager: FragmentManager) {
         val ft = manager.beginTransaction()
         val prev = manager.findFragmentByTag(javaClass.simpleName)
         if (prev != null) {
+            if (prev is BaseDialog) {
+                try {
+                    if (prev.dialog?.isShowing == true) {
+                        prev.dismiss()
+                    }
+                } catch (e: Exception) {
+                    LogUtils.e(e.toString())
+                }
+            }
             ft.remove(prev)
         }
         ft.add(this, javaClass.simpleName)
