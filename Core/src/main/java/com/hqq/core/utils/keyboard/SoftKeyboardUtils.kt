@@ -9,7 +9,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import com.hqq.core.utils.keyboard.SoftKeyboardListener.SoftKeyBoardChangeListener
-import com.hqq.core.utils.TLog
+import com.hqq.core.utils.log.LogUtils
+import com.hqq.core.utils.log.TLog
 
 /**
  * 键盘 开启/关闭
@@ -193,7 +194,7 @@ object SoftKeyboardUtils {
      */
     @JvmStatic
     fun clickBlankArea2HideSoftInput0() {
-        TLog.i("tips", "U should copy the following code.")/*
+        LogUtils.i("tips", "U should copy the following code.")/*
         @Override
         public boolean onTouchEvent (MotionEvent event){
             if (null != this.getCurrentFocus()) {
@@ -216,7 +217,7 @@ object SoftKeyboardUtils {
      */
     @JvmStatic
     fun clickBlankArea2HideSoftInput1() {
-        TLog.i("tips", "U should copy the following code.")/*
+        LogUtils.i("tips", "U should copy the following code.")/*
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {
             if (ev.getAction() == MotionEvent.ACTION_DOWN) {

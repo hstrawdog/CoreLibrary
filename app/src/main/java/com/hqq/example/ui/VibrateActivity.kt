@@ -4,15 +4,19 @@ import com.hqq.core.ui.base.BaseViewBindingActivity
 import com.hqq.core.utils.VibrateTool
 import com.hqq.example.databinding.ActivityVibrateBinding
 
-/**
- * 震动相关类
- */
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.hqq.example.ui
+  * @FileName :   VibrateActivity.kt
+  * @Date  : 2023/7/18  14:22
+  * @Email :  qiqiang213@gmail.com
+  * @Describe : 震动相关类
+  */
 class VibrateActivity : BaseViewBindingActivity<ActivityVibrateBinding>() {
 
     override fun initView() {
         binding.button72.setOnClickListener {
             VibrateTool.vibrateOnce(this, 200 )
         }
-
     }
 }

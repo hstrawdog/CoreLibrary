@@ -78,6 +78,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+
+        <activity
+            android:name=".ui.LogUtilsActivity"
+            android:label="Log" />
+
         <activity
             android:name=".ui.AlbumIndexActivity"
             android:label="相册首页" />

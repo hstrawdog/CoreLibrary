@@ -1,8 +1,8 @@
 package com.hqq.core.utils
 
-import android.annotation.SuppressLint
 import com.hqq.core.utils.DataTool.isNullString
 import com.hqq.core.utils.DataTool.stringToInt
+import com.hqq.core.utils.log.LogUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -13,36 +13,6 @@ import java.util.*
  * 时间相关工具类
  */
 object TimeTool {
-
-    enum class TimeUnit {
-        MSEC, SEC, MIN, HOUR, DAY
-    }
-    /******************** 时间相关常量  */
-    /**
-     * 秒与毫秒的倍数
-     */
-    const val SEC = 1000
-
-    /**
-     * 分与毫秒的倍数
-     */
-    const val MIN = 60000
-
-    /**
-     * 时与毫秒的倍数
-     */
-    const val HOUR = 3600000
-
-    /**
-     * 天与毫秒的倍数
-     */
-    const val DAY = 86400000
-
-    /**
-     * 毫秒与毫秒的倍数
-     */
-    const val MSEC = 1
-
     /**
      *
      * 在工具类中经常使用到工具类的格式化描述，这个主要是一个日期的操作类，所以日志格式主要使用 SimpleDateFormat的定义格式.
@@ -96,6 +66,35 @@ object TimeTool {
     </pre> *
      */
 
+    enum class TimeUnit {
+        MSEC, SEC, MIN, HOUR, DAY
+    }
+    /******************** 时间相关常量  */
+    /**
+     * 秒与毫秒的倍数
+     */
+    const val SEC = 1000
+
+    /**
+     * 分与毫秒的倍数
+     */
+    const val MIN = 60000
+
+    /**
+     * 时与毫秒的倍数
+     */
+    const val HOUR = 3600000
+
+    /**
+     * 天与毫秒的倍数
+     */
+    const val DAY = 86400000
+
+    /**
+     * 毫秒与毫秒的倍数
+     */
+    const val MSEC = 1
+
     /**
      * 时间戳格式转换
      */
@@ -110,8 +109,66 @@ object TimeTool {
     //时间格式 分钟：秒钟 一般用于视频时间显示
     const val DATE_FORMAT_MM_SS = "mm:ss"
 
-
     val DEFAULT_SDF = SimpleDateFormat(DATE_FORMAT_DETACH, Locale.getDefault())
+
+    /**
+     * 获取当前时间
+     *
+     * @return 毫秒时间戳
+     */
+    val curTimeMills: Long
+        get() = System.currentTimeMillis()
+
+    /**
+     * 获取当前时间
+     *
+     * 格式为yyyy-MM-dd HH:mm:ss
+     *
+     * @return 时间字符串
+     */
+    @JvmStatic
+    val curTimeString: String
+        get() = date2String(Date())
+
+    /**
+     * 获取当前时间
+     *
+     * Date类型
+     *
+     * @return Date类型时间
+     */
+    val curTimeDate: Date
+        get() = Date()
+    private val SDF_THREAD_LOCAL = ThreadLocal<SimpleDateFormat>()
+
+    val defaultFormat: SimpleDateFormat
+        get() {
+            var simpleDateFormat = SDF_THREAD_LOCAL.get()
+            if (simpleDateFormat == null) {
+                simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                SDF_THREAD_LOCAL.set(simpleDateFormat)
+            }
+            return simpleDateFormat
+        }
+
+    /**
+     * 获取当前东八区的时间
+     *
+     * @return
+     */
+    val nowDate: String
+        get() {
+            val dff = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            dff.timeZone = TimeZone.getTimeZone("GMT+08")
+            return dff.format(Date())
+        }
+
+    val nowDate4yyyyMMdd: String
+        get() {
+            val dff = SimpleDateFormat("yyyy-MM-dd")
+            dff.timeZone = TimeZone.getTimeZone("GMT+08")
+            return dff.format(Date())
+        }
 
     /**
      * 将时间戳转为时间字符串
@@ -258,14 +315,8 @@ object TimeTool {
      * @return unit时间戳
      */
     @JvmStatic
-    fun getIntervalTime(
-        time0: String?, time1: String?, unit: TimeUnit?, format: SimpleDateFormat
-    ): Long {
-        return Math.abs(
-            milliseconds2Unit(
-                string2Milliseconds(time0, format) - string2Milliseconds(time1, format), unit
-            )
-        )
+    fun getIntervalTime(time0: String?, time1: String?, unit: TimeUnit?, format: SimpleDateFormat): Long {
+        return Math.abs(milliseconds2Unit(string2Milliseconds(time0, format) - string2Milliseconds(time1, format), unit))
     }
 
     /**
@@ -286,31 +337,8 @@ object TimeTool {
      */
     @JvmStatic
     fun getIntervalTime(time1: Date, time2: Date, unit: TimeUnit?): Long {
-        return Math.abs(
-            milliseconds2Unit(
-                date2Milliseconds(time2) - date2Milliseconds(time1), unit
-            )
-        )
+        return Math.abs(milliseconds2Unit(date2Milliseconds(time2) - date2Milliseconds(time1), unit))
     }
-
-    /**
-     * 获取当前时间
-     *
-     * @return 毫秒时间戳
-     */
-    val curTimeMills: Long
-        get() = System.currentTimeMillis()
-
-    /**
-     * 获取当前时间
-     *
-     * 格式为yyyy-MM-dd HH:mm:ss
-     *
-     * @return 时间字符串
-     */
-    @JvmStatic
-    val curTimeString: String
-        get() = date2String(Date())
 
     /**
      * 获取当前时间
@@ -324,16 +352,6 @@ object TimeTool {
     fun getCurTimeString(format: SimpleDateFormat): String {
         return date2String(Date(), format)
     }
-
-    /**
-     * 获取当前时间
-     *
-     * Date类型
-     *
-     * @return Date类型时间
-     */
-    val curTimeDate: Date
-        get() = Date()
 
     /**
      * 获取与当前时间的差（单位：unit）
@@ -372,9 +390,7 @@ object TimeTool {
      * @return unit时间戳
      */
     @JvmStatic
-    fun getIntervalByNow(
-        time: String?, unit: TimeUnit?, format: SimpleDateFormat
-    ): Long {
+    fun getIntervalByNow(time: String?, unit: TimeUnit?, format: SimpleDateFormat): Long {
         return getIntervalTime(curTimeString, time, unit, format)
     }
 
@@ -434,7 +450,8 @@ object TimeTool {
      */
     @JvmStatic
     fun Date2Timestamp(mDate: Date?): String {
-        return mDate!!.time.toString().substring(0, 10)
+        return mDate!!.time.toString()
+            .substring(0, 10)
     }
 
     /**
@@ -501,7 +518,7 @@ object TimeTool {
      * @return
      */
     @JvmStatic
-    fun getYestoryDate(format: String?): String {
+    fun getYesterdayDate(format: String?): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DATE, -1)
         return simpleDateFormat(format, calendar.time)
@@ -538,7 +555,7 @@ object TimeTool {
             date = sdf.parse(time)
             val l = date.time
             times = l
-            TLog.d("时间戳", times.toString() + "")
+            LogUtils.d("时间戳", times.toString() + "")
         } catch (e: ParseException) {
             e.printStackTrace()
         }
@@ -595,37 +612,6 @@ object TimeTool {
         }
     }
 
-    private val SDF_THREAD_LOCAL = ThreadLocal<SimpleDateFormat>()
-
-
-    val defaultFormat: SimpleDateFormat
-        get() {
-            var simpleDateFormat = SDF_THREAD_LOCAL.get()
-            if (simpleDateFormat == null) {
-                simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                SDF_THREAD_LOCAL.set(simpleDateFormat)
-            }
-            return simpleDateFormat
-        }
-
-    /**
-     * 获取当前东八区的时间
-     *
-     * @return
-     */
-    val nowDate: String
-        get() {
-            val dff = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            dff.timeZone = TimeZone.getTimeZone("GMT+08")
-            return dff.format(Date())
-        }
-    val nowDate4yyyyMMdd: String
-        get() {
-            val dff = SimpleDateFormat("yyyy-MM-dd")
-            dff.timeZone = TimeZone.getTimeZone("GMT+08")
-            return dff.format(Date())
-        }
-
     /**
      * 根据年份及月份计算每月的天数
      */
@@ -664,9 +650,15 @@ object TimeTool {
     fun formatTurnSecond(time: String): Long {
         val index1 = time.indexOf(":")
         val index2 = time.indexOf(":", index1 + 1)
-        val hh = time.substring(0, index1).toInt().toLong()
-        val mi = time.substring(index1 + 1, index2).toInt().toLong()
-        val ss = time.substring(index2 + 1).toInt().toLong()
+        val hh = time.substring(0, index1)
+            .toInt()
+            .toLong()
+        val mi = time.substring(index1 + 1, index2)
+            .toInt()
+            .toLong()
+        val ss = time.substring(index2 + 1)
+            .toInt()
+            .toLong()
         return hh * 60 * 60 + mi * 60 + ss
     }
 
@@ -677,7 +669,8 @@ object TimeTool {
     @JvmStatic
     fun getDayInData(time: String): String {
         if (RegexUtils.checkUnNull(time)) {
-            val str = time.split(" ".toRegex()).toTypedArray()
+            val str = time.split(" ".toRegex())
+                .toTypedArray()
             return if (str.size > 1) {
                 str[1]
             } else ""
@@ -694,7 +687,8 @@ object TimeTool {
         if (RegexUtils.checkIsNull(time)) {
             return 0
         }
-        val str = time.split(":".toRegex()).toTypedArray()
+        val str = time.split(":".toRegex())
+            .toTypedArray()
         var hh: Long = 0
         var mi: Long = 0
         var ss: Long = 0
@@ -702,16 +696,23 @@ object TimeTool {
             0 -> {
             }
 
-            1 -> hh = str[0].toInt().toLong()
+            1 -> hh = str[0].toInt()
+                .toLong()
+
             2 -> {
-                hh = str[0].toInt().toLong()
-                mi = str[1].toInt().toLong()
+                hh = str[0].toInt()
+                    .toLong()
+                mi = str[1].toInt()
+                    .toLong()
             }
 
             else -> {
-                hh = str[0].toInt().toLong()
-                mi = str[1].toInt().toLong()
-                ss = str[2].toInt().toLong()
+                hh = str[0].toInt()
+                    .toLong()
+                mi = str[1].toInt()
+                    .toLong()
+                ss = str[2].toInt()
+                    .toLong()
             }
         }
         return hh * 60 * 60 + mi * 60 + ss
@@ -726,7 +727,8 @@ object TimeTool {
         if (RegexUtils.checkIsNull(time)) {
             return 0
         }
-        val str = time.split(":".toRegex()).toTypedArray()
+        val str = time.split(":".toRegex())
+            .toTypedArray()
         var hh: Long = 0
         var mi: Long = 0
         var ss: Long = 0
@@ -735,23 +737,34 @@ object TimeTool {
             0 -> {
             }
 
-            1 -> hh = str[0].toInt().toLong()
+            1 -> hh = str[0].toInt()
+                .toLong()
+
             2 -> {
-                hh = str[0].toInt().toLong()
-                mi = str[1].toInt().toLong()
+                hh = str[0].toInt()
+                    .toLong()
+                mi = str[1].toInt()
+                    .toLong()
             }
 
             3 -> {
-                hh = str[0].toInt().toLong()
-                mi = str[1].toInt().toLong()
-                ss = str[2].toInt().toLong()
+                hh = str[0].toInt()
+                    .toLong()
+                mi = str[1].toInt()
+                    .toLong()
+                ss = str[2].toInt()
+                    .toLong()
             }
 
             else -> {
-                hh = str[0].toInt().toLong()
-                mi = str[1].toInt().toLong()
-                ss = str[2].toInt().toLong()
-                mm = str[3].toInt().toLong()
+                hh = str[0].toInt()
+                    .toLong()
+                mi = str[1].toInt()
+                    .toLong()
+                ss = str[2].toInt()
+                    .toLong()
+                mm = str[3].toInt()
+                    .toLong()
             }
         }
         return (hh * 60 * 60 + mi * 60 + ss) * 1000 + mm
@@ -796,10 +809,12 @@ object TimeTool {
      */
     @JvmStatic
     fun formatTime(leftsecond: Int): String {
-        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble()).toLong()
-        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble()).toLong()
-        val minute: Long =
-            Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()).toLong()
+        val day: Long = Math.floor(leftsecond / (60 * 60 * 24).toDouble())
+            .toLong()
+        val hour: Long = Math.floor((leftsecond - day * 24 * 60 * 60) / 3600.toDouble())
+            .toLong()
+        val minute: Long = Math.floor((leftsecond - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble())
+            .toLong()
         return "剩" + day + "天" + hour + "时" + minute + "分"
     }
 
@@ -809,13 +824,14 @@ object TimeTool {
      */
     @JvmStatic
     fun formatTime2Second(second: Int, type: Int = 1): String {
-        val day: Long = Math.floor(second / (60 * 60 * 24).toDouble()).toLong()
-        val hour: Long = Math.floor((second - day * 24 * 60 * 60) / 3600.toDouble()).toLong()
-        val minute: Long =
-            Math.floor((second - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble()).toLong()
-        val second: Long =
-            Math.floor(second - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble())
-                .toLong()
+        val day: Long = Math.floor(second / (60 * 60 * 24).toDouble())
+            .toLong()
+        val hour: Long = Math.floor((second - day * 24 * 60 * 60) / 3600.toDouble())
+            .toLong()
+        val minute: Long = Math.floor((second - day * 24 * 60 * 60 - hour * 3600) / 60.toDouble())
+            .toLong()
+        val second: Long = Math.floor(second - day * 24 * 60 * 60 - hour * 3600 - (minute * 60).toDouble())
+            .toLong()
         val stringBuilder = StringBuilder("剩")
         if (type == 1) {
             if (day > 0) {
@@ -919,7 +935,6 @@ object TimeTool {
         return format.format(Date(time))
     }
 
-
     /**
      *  格式化时间
      * @param data String
@@ -946,7 +961,43 @@ object TimeTool {
         } else {
             return SimpleDateFormat("MM-dd", Locale.getDefault()).format(dateOld)
         }
+    }
 
+    /**
+     * date2比date1多的天数
+     * @param date1 小的日期
+     * @param date2 大的日期
+     * @return 当天 返回 0
+     */
+    fun differentDays(date1: Date, date2: Date): Int {
+        val cal1: Calendar = Calendar.getInstance()
+        cal1.time = date1
+        val cal2: Calendar = Calendar.getInstance()
+        cal2.time = date2
+
+        val day1: Int = cal1.get(Calendar.DAY_OF_YEAR)
+        val day2: Int = cal2.get(Calendar.DAY_OF_YEAR)
+
+        val year1: Int = cal1.get(Calendar.YEAR)
+        val year2: Int = cal2.get(Calendar.YEAR)
+        return if (year1 != year2) {
+            // 不同年
+            var timeDistance = 0
+            for (i in year1 until year2) {
+                timeDistance += if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0) {
+                    //闰年
+                    366
+                } else {
+                    //不是闰年
+                    365
+                }
+            }
+            timeDistance + (day2 - day1)
+        } else {
+            //同一年
+            println("判断day2 - day1 : " + (day2 - day1))
+            day2 - day1
+        }
     }
 
     @JvmStatic

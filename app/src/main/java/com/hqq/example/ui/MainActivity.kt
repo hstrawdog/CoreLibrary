@@ -1,13 +1,11 @@
 package com.hqq.example.ui
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
-import com.hqq.album.dialog.PhotoDialog
 import com.hqq.core.ui.base.open
 import com.hqq.core.ui.list.BaseListViewModel
 import com.hqq.core.ui.list.BaseVmListActivity
@@ -16,36 +14,21 @@ import com.hqq.core.utils.log.LogUtils
 import com.hqq.example.adapter.MainAdapter
 import com.hqq.example.bean.MainBean
 import com.hqq.example.demo.DemoIndexActivity
-import com.hqq.example.demo.weather.WeatherActivity
-import com.hqq.example.dialog.CropImageDialog
-import com.hqq.example.dialog.VideoDialog
-import com.hqq.example.receiver.KillAppServers
 import com.hqq.example.ui.MainActivity.MainViewModel
 import com.hqq.example.ui.adaptation.AdaptationIndexActivity
-import com.hqq.example.ui.adaptation.DefImgActivity
 import com.hqq.example.ui.adaptation.permission.PermissionActivity
 import com.hqq.example.ui.bar.ToolBarActivity
-import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.crash.ThrowIndexActivity
-import com.hqq.example.ui.customize.ComparedActivity
+import com.hqq.example.ui.customize.CustomizeIndexActivity
 import com.hqq.example.ui.dialog.TestDialogActivity
-import com.hqq.example.ui.file.DownLoadActivity
 import com.hqq.example.ui.file.FileIndexActivity
-import com.hqq.example.ui.flow.FlowActivity
-import com.hqq.example.ui.layout.fold.FoldViewActivity
 import com.hqq.example.ui.fragment.FragmentIndexActivity
-import com.hqq.example.ui.system.info.BaseInfoActivity
 import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.parcelable.ParcelableActivity
-import com.hqq.example.ui.recycle.LoadMoreActivity
-import com.hqq.example.ui.recycle.RecycleIndexActivity
-import com.hqq.example.ui.share.ShareIndexActivity
-import com.hqq.example.ui.soft.hide.keyboard.DefSofKeyBoardAndShowActivity
-import com.hqq.example.ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity
+import com.hqq.example.ui.system.info.BaseInfoActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
-import com.hqq.example.ui.web.WebActivity
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
 /**
  * @Author : huangqiqiang
@@ -76,13 +59,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(DownLoadActivity::class.java)
 //        CropImageDialog().show(supportFragmentManager)
 
-
 //        PhotoDialog.getSelectPhotoDialog(1) {
 ////            binding.cropImageView.imageBitmap = BitmapFactory.decodeFile(it[0].path)
 //        }.apply {
 //            isSendAlbum=false
 //        }.show(supportFragmentManager)
-
 
 //        open(FlowActivity::class.java)
 //        open(WeatherActivity::class.java)
@@ -91,12 +72,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        VideoDialog().show(supportFragmentManager)
 
-
 //        open(LoadMoreActivity::class.java)
 
 //        open(AlbumIndexActivity::class.java)
 //        open(ShareIndexActivity::class.java)
-
+        open(LogUtilsActivity::class.java)
     }
 
 
@@ -156,6 +136,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("Parcelable测试", ParcelableActivity::class.java))
             arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
             arrayList.add(MainBean("震动测试", VibrateActivity::class.java))
+            arrayList.add(MainBean("Log", LogUtilsActivity::class.java))
             setData(arrayList)
         }
     }

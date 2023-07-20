@@ -3,8 +3,6 @@ package com.hqq.core.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.CountDownTimer
-import android.os.Handler
-import android.os.HandlerThread
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
@@ -12,7 +10,7 @@ import android.text.TextWatcher
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.TextView
-import com.hqq.core.utils.VibrateTool.vibrateOnce
+import com.hqq.core.utils.log.TLog
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.regex.Pattern
@@ -69,8 +67,6 @@ object RxTool {
         return RxTool
     }
 
-
-
     /**
      * 倒计时
      *
@@ -96,7 +92,6 @@ object RxTool {
         timer.start()
     }
 
-
     //---------------------------------------------MD5加密-------------------------------------------
     /**
      * 生成MD5加密32位字符串
@@ -111,7 +106,8 @@ object RxTool {
             mDigest.update(MStr.toByteArray())
             bytesToHexString(mDigest.digest())
         } catch (e: NoSuchAlgorithmException) {
-            MStr.hashCode().toString()
+            MStr.hashCode()
+                .toString()
         }
     }
 
@@ -206,7 +202,8 @@ object RxTool {
         val regEx = "[^0-9\u4E00-\u9FA5]" //正则表达式
         val p = Pattern.compile(regEx)
         val m = p.matcher(str)
-        return m.replaceAll("").trim { it <= ' ' }
+        return m.replaceAll("")
+            .trim { it <= ' ' }
     }
 
     @JvmStatic
@@ -224,9 +221,13 @@ object RxTool {
             if (".".contentEquals(source) && dest.toString().length == 0) {
                 return@InputFilter "0."
             }
-            if (dest.toString().contains(".")) {
-                val index = dest.toString().indexOf(".")
-                val mlength = dest.toString().substring(index).length
+            if (dest.toString()
+                    .contains(".")
+            ) {
+                val index = dest.toString()
+                    .indexOf(".")
+                val mlength = dest.toString()
+                    .substring(index).length
                 if (mlength == finalCount) {
                     return@InputFilter ""
                 }
@@ -291,31 +292,6 @@ object RxTool {
         editText.setText(s.toString())
     }
 
-    /**
-     * 获取
-     * @return
-     */
-    val backgroundHandler: Handler
-        get() {
-            val thread = HandlerThread("background")
-            thread.start()
-            return Handler(thread.looper)
-        }
-    const val FAST_CLICK_TIME = 100
-    const val VIBRATE_TIME = 100
 
-    @JvmStatic
-    fun initFastClickAndVibrate(mContext: Context?, onRxSimple: OnDoListener) {
-        if (isFastClick(FAST_CLICK_TIME)) {
-            ToastUtils.showToast("请不要重复点击")
-            return
-        } else {
-            vibrateOnce(mContext!!, VIBRATE_TIME)
-            onRxSimple.doSomething()
-        }
-    }
-    interface OnDoListener {
-        fun doSomething()
-    }
 
 }

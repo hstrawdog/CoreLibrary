@@ -18,6 +18,8 @@ import com.hqq.core.utils.file.FileTool.isDownloadsDocument
 import com.hqq.core.utils.file.FileTool.isExternalStorageDocument
 import com.hqq.core.utils.file.FileTool.isGooglePhotosUri
 import com.hqq.core.utils.file.FileTool.isMediaDocument
+import com.hqq.core.utils.log.LogUtils
+import com.hqq.core.utils.log.TLog
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -170,7 +172,7 @@ object PhotoTool {
                 imageFilePath[0] = context.contentResolver.insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, values)
             }
         }
-        TLog.i("", "生成的照片输出路径：" + imageFilePath[0].toString())
+        LogUtils.i("", "生成的照片输出路径：" + imageFilePath[0].toString())
         return imageFilePath[0]
     }
 

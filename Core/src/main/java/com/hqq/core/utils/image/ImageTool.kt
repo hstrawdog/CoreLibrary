@@ -13,10 +13,11 @@ import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.hqq.core.utils.DataTool.isNullString
 import com.hqq.core.utils.RxTool
-import com.hqq.core.utils.TLog
+import com.hqq.core.utils.log.TLog
 import com.hqq.core.utils.file.FileTool.closeIO
 import com.hqq.core.utils.file.FileTool.createOrExistsFile
 import com.hqq.core.utils.file.FileTool.getFileByPath
+import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
@@ -1541,7 +1542,7 @@ object ImageTool {
         matrix.postScale(scaleWidth, scaleHeight)
         val bitmap = Bitmap.createBitmap(bgimage, 0, 0, width.toInt(),
                 height.toInt(), matrix, true)
-        TLog.e("tag", (bitmap.height + bitmap.width).toString() + "d")
+        LogUtils.e("tag", (bitmap.height + bitmap.width).toString() + "d")
         return bitmap
     }
 
@@ -1620,7 +1621,7 @@ object ImageTool {
                 val bu = outputStream.toByteArray()
                 return BitmapFactory.decodeByteArray(bu, 0, bu.size)
             } else {
-                TLog.d("网络连接失败----" + httpURLConnection.responseCode)
+                LogUtils.d("网络连接失败----" + httpURLConnection.responseCode)
             }
         } catch (e: Exception) {
 

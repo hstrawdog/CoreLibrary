@@ -34,9 +34,10 @@ import androidx.core.content.FileProvider
 import com.hqq.core.utils.DataTool.byte2FitSize
 import com.hqq.core.utils.DataTool.inputStream2Bytes
 import com.hqq.core.utils.DataTool.isNullString
-import com.hqq.core.utils.TLog
+import com.hqq.core.utils.log.TLog
 import com.hqq.core.utils.PhotoTool
 import com.hqq.core.utils.encrypt.EncryptTool.encryptMD5File2String
+import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
@@ -722,7 +723,7 @@ object FileTool {
                 }
                 fc.close()
             }
-            TLog.d(TAG, "拼接完成")
+            LogUtils.d(TAG, "拼接完成")
         } catch (ioe: IOException) {
             ioe.printStackTrace()
         } finally {
@@ -771,7 +772,7 @@ object FileTool {
             }
             `in`!!.close()
             write(file!!.absolutePath, buf.toString())
-            TLog.d("ts替换", "ts替换完成")
+            LogUtils.d("ts替换", "ts替换完成")
         } catch (e1: FileNotFoundException) {
             e1.printStackTrace()
         } catch (e1: IOException) {
@@ -2259,9 +2260,9 @@ object FileTool {
             output.flush()
             output.close()
             input.close()
-            TLog.i("TAG", "mv success!")
+            LogUtils.i("TAG", "mv success!")
         } catch (var8: IOException) {
-            TLog.e("TAG", var8.toString())
+            LogUtils.e("TAG", var8.toString())
         }
     }
 }

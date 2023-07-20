@@ -4,11 +4,9 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.ui.list.BaseVmListActivity
-import com.hqq.core.utils.DateUtils
 import com.hqq.core.utils.TimeTool
 import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.BR

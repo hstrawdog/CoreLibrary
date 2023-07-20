@@ -2,6 +2,7 @@ package com.hqq.example.ui.system.info
 
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.DeviceTool
 import com.hqq.core.utils.ScreenHeight
 import com.hqq.core.utils.ScreenUtils.getAllScreenHeight
 import com.hqq.core.utils.file.CacheUtil.getAppCacheSize
@@ -35,31 +36,35 @@ class BaseInfoActivity : BaseActivity() {
 
     override fun initView() {
         mTvInfo = findViewById(R.id.tv_info)
-        mTvInfo.setText(TextSpannableBuilder()
-                .addTextPart("包名    ")
-                .addTextPart(getPackageName(this))
-                .addTextPart("\n版本    ")
-                .addTextPart(getVerName(this))
-                .addTextPart("\n版本号    ")
-                .addTextPart(getVersionCode(this).toString() + "")
-                .addTextPart("\n系统分配大小    ")
-                .addTextPart(getAppCacheSize(this).toString() + "M")
-                .addTextPart("\nGlide缓存大小    ")
-                .addTextPart(getCacheSize(this) + "")
-                .addTextPart("\n缓存总大小    ")
-                .addTextPart(getTotalCacheSize(this) + "")
-                .addTextPart("\n状态栏高度    ")
-                .addTextPart(getStatusBarHeight(this).toString() + "px")
-                .addTextPart("\n屏幕宽度    ")
-                .addTextPart(getScreenWidth(this).toString() + "px")
-                .addTextPart("\n屏幕高度    ")
-                .addTextPart(getAllScreenHeight().toString() + "px")
-                .addTextPart("\nx密度    ")
-                .addTextPart(getScreenXDPI(this).toString() + "dpi")
-                .addTextPart("\ny密度    ")
-                .addTextPart(getScreenYDPI(this).toString() + "dpi")
-                .addTextPart("\n屏幕密度    ")
-                .addTextPart(getScreenDensityDpi(this).toString() + "dpi")
-                .build())
+        mTvInfo.setText(TextSpannableBuilder().addTextPart("包名    ")
+            .addTextPart(getPackageName(this))
+            .addTextPart("\n版本    ")
+            .addTextPart(getVerName(this))
+            .addTextPart("\n版本号    ")
+            .addTextPart(getVersionCode(this).toString() + "")
+            .addTextPart("\n系统分配大小    ")
+            .addTextPart(getAppCacheSize(this).toString() + "M")
+            .addTextPart("\nGlide缓存大小    ")
+            .addTextPart(getCacheSize(this) + "")
+            .addTextPart("\n缓存总大小    ")
+            .addTextPart(getTotalCacheSize(this) + "")
+            .addTextPart("\n手机类型    ")
+            .addTextPart(DeviceTool.getPhoneType(this).toString())
+            .addTextPart("\n设备厂商    ")
+            .addTextPart(DeviceTool.buildMANUFACTURER)
+
+            .addTextPart("\n状态栏高度    ")
+            .addTextPart(getStatusBarHeight(this).toString() + "px")
+            .addTextPart("\n屏幕宽度    ")
+            .addTextPart(getScreenWidth(this).toString() + "px")
+            .addTextPart("\n屏幕高度    ")
+            .addTextPart(getAllScreenHeight().toString() + "px")
+            .addTextPart("\nx密度    ")
+            .addTextPart(getScreenXDPI(this).toString() + "dpi")
+            .addTextPart("\ny密度    ")
+            .addTextPart(getScreenYDPI(this).toString() + "dpi")
+            .addTextPart("\n屏幕密度    ")
+            .addTextPart(getScreenDensityDpi(this).toString() + "dpi")
+            .build())
     }
 }

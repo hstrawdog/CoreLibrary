@@ -10,8 +10,9 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.hqq.core.utils.TLog
+import com.hqq.core.utils.log.TLog
 import com.hqq.core.utils.ToastUtils
+import com.hqq.core.utils.log.LogUtils
 import java.io.IOException
 import java.text.DecimalFormat
 import java.util.*
@@ -501,9 +502,9 @@ object LocationTool {
                 mListener!!.onStatusChanged(provider, status, extras)
             }
             when (status) {
-                LocationProvider.AVAILABLE -> TLog.d("onStatusChanged", "当前GPS状态为可见状态")
-                LocationProvider.OUT_OF_SERVICE -> TLog.d("onStatusChanged", "当前GPS状态为服务区外状态")
-                LocationProvider.TEMPORARILY_UNAVAILABLE -> TLog.d("onStatusChanged", "当前GPS状态为暂停服务状态")
+                LocationProvider.AVAILABLE -> LogUtils.d("onStatusChanged", "当前GPS状态为可见状态")
+                LocationProvider.OUT_OF_SERVICE -> LogUtils.d("onStatusChanged", "当前GPS状态为服务区外状态")
+                LocationProvider.TEMPORARILY_UNAVAILABLE -> LogUtils.d("onStatusChanged", "当前GPS状态为暂停服务状态")
                 else -> {
                 }
             }

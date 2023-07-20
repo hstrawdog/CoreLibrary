@@ -19,6 +19,8 @@ import android.util.Xml
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.utils.log.LogUtils
+import com.hqq.core.utils.log.TLog
 import org.json.JSONObject
 import java.io.*
 import java.net.NetworkInterface
@@ -45,7 +47,7 @@ object DeviceTool {
             val phoneName = Build.MODEL
             //品牌 例如：samsung
             val manuFacturer = Build.MANUFACTURER
-            TLog.d("详细序列号", "$manuFacturer-$phoneName-$serialNumber")
+            LogUtils.d("详细序列号", "$manuFacturer-$phoneName-$serialNumber")
             return "$manuFacturer-$phoneName-$serialNumber"
         }
 
@@ -522,7 +524,7 @@ object DeviceTool {
             val entry = ite.next() as Map.Entry<*, *>
             val key = entry.key!!
             val value = entry.value!!
-            TLog.d("MSG_AUTH_COMPLETE", "$key： $value")
+            LogUtils.d("MSG_AUTH_COMPLETE", "$key： $value")
         }
     }
 
@@ -582,7 +584,7 @@ object DeviceTool {
                 buf.append(String.format("%02X", b))
             }
             macAddress = buf.toString()
-            TLog.d("mac", "interfaceName=" + networkInterface.name + ", mac=" + macAddress)
+            LogUtils.d("mac", "interfaceName=" + networkInterface.name + ", mac=" + macAddress)
             macAddress = macAddress.replace(":", "")
             return macAddress
         }
@@ -824,7 +826,7 @@ object DeviceTool {
      */
     @JvmStatic
     fun getContantNum(context: Activity) {
-        TLog.i("tips", "U should copy the following code.")
+        LogUtils.i("tips", "U should copy the following code.")
         val intent = Intent()
         intent.action = "android.intent.action.PICK"
         intent.type = "vnd.android.cursor.dir/phone_v2"

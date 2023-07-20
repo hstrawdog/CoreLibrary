@@ -11,6 +11,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.Settings
 import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.utils.log.LogUtils
+import com.hqq.core.utils.log.TLog
 import java.util.*
 
 /**
@@ -50,7 +52,7 @@ object ProcessTool {
                         context.startActivity(intent)
                     }
                     if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
-                        TLog.d("getForegroundApp", "没有打开\"有权查看使用权限的应用\"选项")
+                        LogUtils.d("getForegroundApp", "没有打开\"有权查看使用权限的应用\"选项")
                         return null
                     }
                     val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
@@ -69,7 +71,7 @@ object ProcessTool {
                     e.printStackTrace()
                 }
             } else {
-                TLog.d("getForegroundApp", "无\"有权查看使用权限的应用\"选项")
+                LogUtils.d("getForegroundApp", "无\"有权查看使用权限的应用\"选项")
             }
         }
         return null

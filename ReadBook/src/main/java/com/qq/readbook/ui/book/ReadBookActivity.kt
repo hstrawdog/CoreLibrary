@@ -1,13 +1,17 @@
 package com.qq.readbook.ui.book
 
 import android.app.Activity
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.ServiceConnection
 import android.os.IBinder
 import android.view.View
 import android.widget.SeekBar
 import androidx.lifecycle.observe
 import com.hqq.core.ui.base.BaseVmActivity
-import com.hqq.core.utils.DateUtils
 import com.hqq.core.utils.TimeTool
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
@@ -27,9 +31,10 @@ import com.qq.readbook.weight.page.PageView
 import com.qq.readbook.weight.page.ReadSettingManager
 import com.qq.readbook.weight.page.loader.OnPageChangeListener
 import com.qq.readbook.weight.page.loader.PageLoader
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.Objects
-import kotlin.collections.ArrayList
 
 /**
  * @Author : huangqiqiang

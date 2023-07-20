@@ -14,6 +14,8 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import com.hqq.core.utils.encrypt.EncryptTool
 import com.hqq.core.utils.file.FileTool
+import com.hqq.core.utils.log.LogUtils
+import com.hqq.core.utils.log.TLog
 import java.io.File
 import java.util.*
 
@@ -177,7 +179,7 @@ object AppTool {
                 return true
             }
             if (result.errorMsg != null) {
-                TLog.d("isAppRoot", result.errorMsg)
+                LogUtils.d("isAppRoot", result.errorMsg)
             }
             return false
         }

@@ -1,8 +1,10 @@
-package com.hqq.core.utils
+package com.hqq.core.utils.log
 
 import android.content.Context
 import android.util.Log
 import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.utils.RxTool
+import com.hqq.core.utils.TimeTool
 import com.hqq.core.utils.file.FileTool
 import com.hqq.core.utils.file.FileTool.rootPath
 import java.io.*
@@ -53,75 +55,6 @@ object TLog {
         LOG_CRASH_FILE = switch
     }
 
-    /****************************
-     * Warn
-     */
-    @JvmStatic
-    fun w(msg: Any): File {
-        return w(LOG_TAG, msg)
-    }
-
-    @JvmOverloads
-    @JvmStatic
-    fun w(tag: String, msg: Any, tr: Throwable? = null): File {
-        return log(tag, msg.toString(), tr, 'w')
-    }
-
-    /***************************
-     * Error
-     */
-    @JvmStatic
-    fun e(msg: Any): File {
-        return e(LOG_TAG, msg)
-    }
-
-    @JvmOverloads
-    @JvmStatic
-    fun e(tag: String, msg: Any, tr: Throwable? = null): File {
-        return log(tag, msg.toString(), tr, 'e')
-    }
-
-    /***************************
-     * Debug
-     */
-    @JvmStatic
-    fun d(msg: Any): File {
-        return d(LOG_TAG, msg)
-    }
-
-    @JvmOverloads
-    @JvmStatic
-    fun d(tag: String, msg: Any?, tr: Throwable? = null): File {
-        return log(tag, msg.toString(), tr, 'd')
-    }
-
-    /****************************
-     * Info
-     */
-    @JvmStatic
-    fun i(msg: Any): File {
-        return i(LOG_TAG, msg)
-    }
-
-    @JvmOverloads
-    @JvmStatic
-    fun i(tag: String, msg: Any, tr: Throwable? = null): File {
-        return log(tag, msg.toString(), tr, 'i')
-    }
-
-    /**************************
-     * Verbose
-     */
-    @JvmStatic
-    fun v(msg: Any): File {
-        return v(LOG_TAG, msg)
-    }
-
-    @JvmOverloads
-    @JvmStatic
-    fun v(tag: String, msg: Any, tr: Throwable? = null): File {
-        return log(tag, msg.toString(), tr, 'v')
-    }
 
     /**
      * 根据tag, msg和等级，输出日志

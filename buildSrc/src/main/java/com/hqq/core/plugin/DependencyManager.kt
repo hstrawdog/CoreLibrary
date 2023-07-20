@@ -359,7 +359,8 @@ object Jsoup {
  *   https://developer.android.com/guide/background/persistent
  */
 object Work {
-    const val work_version = "2.8.0"
+//    const val work_version = "2.8.0"
+    const val work_version = "2.7.1"
 
     // 核心  正常 使用这个就可以
     const val work = "androidx.work:work-runtime:$work_version"
