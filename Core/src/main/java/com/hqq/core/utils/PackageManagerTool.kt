@@ -7,6 +7,10 @@ import java.util.*
 /**
  * @author tamsiree
  * @date 2018/5/2 15:00:00
+ *
+ *      <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />
+ *
+ *       貌似 12 以上需要 添加权限
  */
 object PackageManagerTool {
     @JvmStatic

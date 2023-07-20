@@ -6,11 +6,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 
-/**
- *
- * @author Tamsiree
- * @date 2017/3/15
- */
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.hqq.core.utils
+  * @FileName :   BroadcastTool.kt
+  * @Date  : 2023/7/20  14:11
+  * @Email :  qiqiang213@gmail.com
+  * @Describe :
+  */
 object BroadcastTool {
     /**
      * 注册监听网络状态的广播

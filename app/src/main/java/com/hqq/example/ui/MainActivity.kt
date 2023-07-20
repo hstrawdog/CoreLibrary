@@ -27,6 +27,7 @@ import com.hqq.example.ui.jetpack.databinding.BindingIndexActivity
 import com.hqq.example.ui.launch.mode.SingleInstanceActivity
 import com.hqq.example.ui.parcelable.ParcelableActivity
 import com.hqq.example.ui.system.info.BaseInfoActivity
+import com.hqq.example.ui.system.info.NetInfoActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
 import kotlinx.coroutines.launch
 
@@ -76,7 +77,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        open(AlbumIndexActivity::class.java)
 //        open(ShareIndexActivity::class.java)
-        open(LogUtilsActivity::class.java)
+//        open(LogUtilsActivity::class.java)
+//        open(BaseInfoActivity::class.java)
     }
 
 
@@ -131,6 +133,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("Shape测试", ShapeTestActivity::class.java))
             arrayList.add(MainBean("自定义系列", CustomizeIndexActivity::class.java))
             arrayList.add(MainBean("设备信息", BaseInfoActivity::class.java))
+            arrayList.add(MainBean("网络信息", NetInfoActivity::class.java))
             arrayList.add(MainBean("适配相关", AdaptationIndexActivity::class.java))
             arrayList.add(MainBean("Binding 相关", BindingIndexActivity::class.java))
             arrayList.add(MainBean("Parcelable测试", ParcelableActivity::class.java))

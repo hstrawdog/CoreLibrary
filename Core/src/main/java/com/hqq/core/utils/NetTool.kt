@@ -86,33 +86,37 @@ object NetTool {
             when (ni.type) {
                 ConnectivityManager.TYPE_WIFI -> {
                     netType = NETWORK_WIFI
-                   ToastUtils.showToast("切换到wifi环境下")
+                    ToastUtils.showToast("切换到wifi环境下")
                 }
+
                 ConnectivityManager.TYPE_MOBILE -> when (ni.subtype) {
                     NETWORK_TYPE_GSM, TelephonyManager.NETWORK_TYPE_GPRS, TelephonyManager.NETWORK_TYPE_CDMA, TelephonyManager.NETWORK_TYPE_EDGE, TelephonyManager.NETWORK_TYPE_1xRTT, TelephonyManager.NETWORK_TYPE_IDEN -> {
                         netType = NETWORK_2G
                         ToastUtils.showToast("切换到2G环境下")
                     }
+
                     TelephonyManager.NETWORK_TYPE_EVDO_A, TelephonyManager.NETWORK_TYPE_UMTS, TelephonyManager.NETWORK_TYPE_EVDO_0, TelephonyManager.NETWORK_TYPE_HSDPA, TelephonyManager.NETWORK_TYPE_HSUPA, TelephonyManager.NETWORK_TYPE_HSPA, TelephonyManager.NETWORK_TYPE_EVDO_B, TelephonyManager.NETWORK_TYPE_EHRPD, TelephonyManager.NETWORK_TYPE_HSPAP, NETWORK_TYPE_TD_SCDMA -> {
                         netType = NETWORK_3G
                         ToastUtils.showToast("切换到3G环境下")
                     }
+
                     TelephonyManager.NETWORK_TYPE_LTE, NETWORK_TYPE_IWLAN -> {
                         netType = NETWORK_4G
                         ToastUtils.showToast("切换到4G环境下")
                     }
+
                     else -> {
                         val subtypeName = ni.subtypeName
-                        netType = if (subtypeName.equals("TD-SCDMA", ignoreCase = true)
-                                || subtypeName.equals("WCDMA", ignoreCase = true)
-                                || subtypeName.equals("CDMA2000", ignoreCase = true)) {
-                            NETWORK_3G
-                        } else {
-                            NETWORK_UNKNOWN
-                        }
+                        netType =
+                            if (subtypeName.equals("TD-SCDMA", ignoreCase = true) || subtypeName.equals("WCDMA", ignoreCase = true) || subtypeName.equals("CDMA2000", ignoreCase = true)) {
+                                NETWORK_3G
+                            } else {
+                                NETWORK_UNKNOWN
+                            }
                         ToastUtils.showToast("未知网络")
                     }
                 }
+
                 else -> {
                     netType = 5
                     ToastUtils.showToast("未知网络")
@@ -204,17 +208,20 @@ object NetTool {
      * 不要在主线程使用，会阻塞线程
      */
     @JvmStatic
-    fun ping(): Boolean {
+    fun ping(ip: String = "www.baidu.com"): Boolean {
+        // ping 的地址，可以换成任何一种可靠的外网
         var result: String? = null
         try {
-            val ip = "www.baidu.com" // ping 的地址，可以换成任何一种可靠的外网
-            val p = Runtime.getRuntime().exec("ping -c 3 -w 100 $ip") // ping网址3次
+            val p = Runtime.getRuntime()
+                .exec("ping -c 3 -w 100 $ip") // ping网址3次
             // 读取ping的内容，可以不加
             val input = p.inputStream
             val `in` = BufferedReader(InputStreamReader(input))
             val stringBuffer = StringBuffer()
             var content: String? = ""
-            while (`in`.readLine().also { content = it } != null) {
+            while (`in`.readLine()
+                    .also { content = it } != null
+            ) {
                 stringBuffer.append(content)
             }
             //            TLogd("------ping-----", "result content : " + stringBuffer.toString());
@@ -237,56 +244,17 @@ object NetTool {
     }
 
     /**
-     * ping IP
-     * 不要在主线程使用，会阻塞线程
-     */
-    @JvmStatic
-    fun ping(ip: String): Boolean {
-        var result: String? = null
-        try {
-            // ping网址3次
-            val p = Runtime.getRuntime().exec("ping -c 3 -w 100 $ip")
-            // 读取ping的内容，可以不加
-            val input = p.inputStream
-            val `in` = BufferedReader(InputStreamReader(input))
-            val stringBuffer = StringBuffer()
-            var content: String? = ""
-            while (`in`.readLine().also { content = it } != null) {
-                stringBuffer.append(content)
-            }
-            //TLogd("------ping-----", "result content : " + stringBuffer.toString());
-            // ping的状态
-            val status = p.waitFor()
-            if (status == 0) {
-                result = "success"
-                return true
-            } else {
-                result = "failed"
-            }
-        } catch (e: IOException) {
-            result = "IOException"
-        } catch (e: InterruptedException) {
-            result = "InterruptedException"
-        } finally {
-            //TLogd("----result---", "result = " + result);
-        }
-        return false
-    }
-
-    /**
      * 判断WIFI是否打开
      */
     @JvmStatic
     fun isWifiEnabled(context: Context): Boolean {
         val mgrConn = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val mgrTel = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
 
             return false
         }
-    return    ((mgrConn.activeNetworkInfo != null
-                && mgrConn.activeNetworkInfo!!.state == NetworkInfo.State.CONNECTED)
-                || mgrTel.networkType == TelephonyManager.NETWORK_TYPE_UMTS)
+        return ((mgrConn.activeNetworkInfo != null && mgrConn.activeNetworkInfo!!.state == NetworkInfo.State.CONNECTED) || mgrTel.networkType == TelephonyManager.NETWORK_TYPE_UMTS)
     }
 
     /**
@@ -308,8 +276,7 @@ object NetTool {
      */
     @JvmStatic
     fun isWifiConnected(context: Context): Boolean {
-        val cm = context
-                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm != null && cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.type == ConnectivityManager.TYPE_WIFI
     }
 
@@ -320,8 +287,7 @@ object NetTool {
     fun is3rd(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkINfo = cm.activeNetworkInfo
-        return (networkINfo != null
-                && networkINfo.type == ConnectivityManager.TYPE_MOBILE)
+        return (networkINfo != null && networkINfo.type == ConnectivityManager.TYPE_MOBILE)
     }
 
     /**
@@ -334,21 +300,7 @@ object NetTool {
     fun is4G(context: Context): Boolean {
         val info = getActiveNetworkInfo(context)
         return info != null && info.isAvailable && info.subtype == TelephonyManager.NETWORK_TYPE_LTE
-    }
-
-    /**
-     * GPS是否打开
-     *
-     * @param context
-     * @return
-     */
-    @JvmStatic
-    fun isGpsEnabled(context: Context): Boolean {
-        val lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val accessibleProviders = lm.getProviders(true)
-        return accessibleProviders != null && accessibleProviders.size > 0
-    }
-    /*
+    }/*
      * 下面列举几个可直接跳到联网设置的意图,供大家学习
      *
      *      startActivity(new Intent(android.provider.Settings.ACTION_APN_SETTINGS));
@@ -359,6 +311,7 @@ object NetTool {
      *      startActivity(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS));
      *      startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
      */
+
     /**
      * 打开网络设置界面
      *
@@ -381,7 +334,7 @@ object NetTool {
      * @param context 上下文
      * @return NetworkInfo
      */
-    private fun getActiveNetworkInfo(context: Context): NetworkInfo {
+    fun getActiveNetworkInfo(context: Context): NetworkInfo {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo!!
     }
@@ -396,8 +349,7 @@ object NetTool {
      */
     @JvmStatic
     fun getNetworkOperatorName(context: Context): String? {
-        val tm = context
-                .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         return tm.networkOperatorName
     }
 
@@ -410,13 +362,12 @@ object NetTool {
      *  * [TelephonyManager.PHONE_TYPE_NONE] : 0 手机制式未知
      *  * [TelephonyManager.PHONE_TYPE_GSM] : 1 手机制式为GSM，移动和联通
      *  * [TelephonyManager.PHONE_TYPE_CDMA] : 2 手机制式为CDMA，电信
-     *  * [TelephonyManager.PHONE_TYPE_SIP] : 3
+     *  * [TelephonyManager.PHONE_TYPE_SIP] : 3  SIP
      *
      */
     @JvmStatic
     fun getPhoneType(context: Context): Int {
-        val tm = context
-                .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         return tm.phoneType
     }
 }

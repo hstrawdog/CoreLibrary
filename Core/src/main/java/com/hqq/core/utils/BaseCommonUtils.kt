@@ -23,6 +23,7 @@ object BaseCommonUtils {
     enum class TimeUnit {
         MSEC, SEC, MIN, HOUR, DAY
     }
+
     /**
      * Byte与Byte的倍数
      */
@@ -49,8 +50,6 @@ object BaseCommonUtils {
      * @since 3.2
      */
     const val SPACE = " "
-
-
 
     /**
      * 黑白化的一种解决方案

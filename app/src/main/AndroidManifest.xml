@@ -82,6 +82,9 @@
         <activity
             android:name=".ui.LogUtilsActivity"
             android:label="Log" />
+        <activity
+            android:name=".ui.system.info.NetInfoActivity"
+            android:label="网络信息" />
 
         <activity
             android:name=".ui.AlbumIndexActivity"

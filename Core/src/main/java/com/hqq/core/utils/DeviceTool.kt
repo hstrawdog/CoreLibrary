@@ -178,17 +178,7 @@ object DeviceTool {
         return tm.networkOperator
     }
 
-    /**
-     * 获取(当前已注册的用户)的名字
-     *
-     * @param context
-     * @return
-     */
-    @JvmStatic
-    fun getNetworkOperatorName(context: Context): String {
-        val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        return tm.networkOperatorName
-    }
+
 
     /**
      * 获取当前使用的网络类型

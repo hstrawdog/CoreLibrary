@@ -15,10 +15,14 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-/**
- * RenderScript图片高斯模糊
- * Created by Tamsiree on 9/2/16.
- */
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.hqq.core.utils
+  * @FileName :   BlurTool.kt
+  * @Date  : 2023/7/20  14:11
+  * @Email :  qiqiang213@gmail.com
+  * @Describe :   图片高斯模糊
+  */
 object BlurTool {
     /**
      * 建议模糊度(在0.0到25.0之间)
@@ -101,8 +105,7 @@ object BlurTool {
         var scaleBitmap = Bitmap.createScaledBitmap(src, scaleWidth, scaleHeight, true)
         val paint = Paint(Paint.FILTER_BITMAP_FLAG or Paint.ANTI_ALIAS_FLAG)
         val canvas = Canvas()
-        val filter = PorterDuffColorFilter(
-                Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP)
+        val filter = PorterDuffColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP)
         paint.colorFilter = filter
         canvas.scale(scale, scale)
         canvas.drawBitmap(scaleBitmap!!, 0f, 0f, paint)
@@ -138,7 +141,8 @@ object BlurTool {
         try {
             rs = RenderScript.create(RxTool.getContext())
             rs.messageHandler = RSMessageHandler()
-            val input = Allocation.createFromBitmap(rs, src, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT)
+            val input =
+                Allocation.createFromBitmap(rs, src, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT)
             val output = Allocation.createTyped(rs, input.type)
             val blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs))
             if (mRadius > 25) {

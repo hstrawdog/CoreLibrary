@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Bitmap
+import android.graphics.Point
 import android.os.Build
 import android.util.DisplayMetrics
 import android.util.TypedValue
@@ -26,6 +27,16 @@ import java.lang.reflect.Field
  * @Descrive :屏幕相关 单位换算  dp px 转换 状态栏高度
  */
 object ScreenUtils {
+    /**
+     *  是否检查过 是否是全屏膜
+     */
+    var mHasCheckAllScreen = false
+
+    /**
+     *  是否是全面屏
+     */
+    var mIsAllScreenDevice = false
+
     /**
      * 设置屏幕为横屏
      *
@@ -218,7 +229,8 @@ object ScreenUtils {
      */
     @JvmStatic
     fun sp2px(context: Context, spValue: Int): Float {
-        val fontScale: Float = context.getResources().getDisplayMetrics().scaledDensity
+        val fontScale: Float = context.getResources()
+            .getDisplayMetrics().scaledDensity
         return ((spValue * fontScale + 0.5f)).toFloat()
     }
 
@@ -293,7 +305,79 @@ object ScreenUtils {
      */
     @JvmStatic
     fun getAllScreenHeight(): Int {
-        return ScreenHeight.getFullActivityHeight(CoreConfig.applicationContext)
+        return getFullActivityHeight(CoreConfig.applicationContext)
+    }
+
+    /***
+     * 获取屏幕的高度，全面屏和非全面屏
+     * @param context
+     * @return
+     */
+    fun getFullActivityHeight(context: Context): Int {
+        return if (!isAllScreenDevice(context)) {
+            getScreenHeights(context)
+        } else getScreenRealHeight(context)
+    }
+
+    /**
+     * 屏幕 真实高度   貌似是包含导航栏的高度
+     * @param context
+     * @return
+     */
+    fun getScreenRealHeight(context: Context): Int {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return getScreenHeights(context!!)
+        }
+        val mRealSizes = arrayOfNulls<Point>(2)
+        val PORTRAIT = 0
+        val LANDSCAPE = 1
+        var orientation = context!!.resources.configuration.orientation
+        orientation = if (orientation == Configuration.ORIENTATION_PORTRAIT) PORTRAIT else LANDSCAPE
+        if (mRealSizes[orientation] == null) {
+            val windowManager = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager)
+            val display = windowManager.defaultDisplay
+            val point = Point()
+            display.getRealSize(point)
+            mRealSizes[orientation] = point
+        }
+        return mRealSizes[orientation]?.y ?: 0
+    }
+
+    /**
+     * 获取当前手机是否是全面屏
+     *
+     * @param context
+     * @return true  全面屏
+     */
+    fun isAllScreenDevice(context: Context): Boolean {
+        if (mHasCheckAllScreen) {
+            return mIsAllScreenDevice
+        }
+        mHasCheckAllScreen = true
+        mIsAllScreenDevice = false
+        // 低于 API 21的，都不会是全面屏。。。
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return false
+        }
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        if (windowManager != null) {
+            val display = windowManager.defaultDisplay
+            val point = Point()
+            display.getRealSize(point)
+            val width: Float
+            val height: Float
+            if (point.x < point.y) {
+                width = point.x.toFloat()
+                height = point.y.toFloat()
+            } else {
+                width = point.y.toFloat()
+                height = point.x.toFloat()
+            }
+            if (height / width >= 1.97f) {
+                mIsAllScreenDevice = true
+            }
+        }
+        return mIsAllScreenDevice
     }
 
     /**
@@ -381,7 +465,8 @@ object ScreenUtils {
             c = Class.forName("com.android.internal.R\$dimen")
             obj = c.newInstance()
             field = c.getField("status_bar_height")
-            x = field[obj].toString().toInt()
+            x = field[obj].toString()
+                .toInt()
             statusBarHeight = context.resources.getDimensionPixelSize(x)
         } catch (e1: Exception) {
             e1.printStackTrace()
