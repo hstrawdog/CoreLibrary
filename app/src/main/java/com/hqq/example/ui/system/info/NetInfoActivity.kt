@@ -14,7 +14,7 @@ import com.hqq.core.utils.NetTool.isNetworkAvailable
 import com.hqq.core.utils.NetTool.isWifiConnected
 import com.hqq.core.utils.NetTool.isWifiEnabled
 import com.hqq.core.utils.NetTool.ping
-import com.hqq.core.utils.TextSpannableBuilder
+import com.hqq.core.utils.text.TextSpannableBuilder
 import com.hqq.example.databinding.ActivityNetInfoBinding
 
 /**

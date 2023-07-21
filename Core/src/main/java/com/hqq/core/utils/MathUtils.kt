@@ -22,9 +22,11 @@ object MathUtils {
      */
     fun double2int(`object`: Any): String {
         if (`object` is Double) {
-            return BigDecimal(`object`).setScale(0, BigDecimal.ROUND_HALF_UP).toString()
+            return BigDecimal(`object`).setScale(0, BigDecimal.ROUND_HALF_UP)
+                .toString()
         } else if (`object` is String) {
-            return BigDecimal(`object`).setScale(0, BigDecimal.ROUND_HALF_UP).toString()
+            return BigDecimal(`object`).setScale(0, BigDecimal.ROUND_HALF_UP)
+                .toString()
         }
         return `object`.toString()
     }
@@ -38,7 +40,7 @@ object MathUtils {
      */
     fun formatDecimals(number: Double, roundingMode: RoundingMode?): String {
         val numberStr: String
-        if (number.toLong() * 1000 == (number * 1000) as Long) {
+        if (number.toLong() * 1000 == (number * 1000).toLong()) {
             //如果是一个整数
             numberStr = number.toString()
         } else {
@@ -127,4 +129,5 @@ object MathUtils {
 //        System.out.println("args = [" + formatDecimals("0.001") + "]");
         println("args = [" + formatDecimals("0.110") + "]")
     }
+
 }

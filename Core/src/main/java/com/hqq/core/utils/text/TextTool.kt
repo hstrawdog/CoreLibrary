@@ -1,4 +1,4 @@
-package com.hqq.core.utils
+package com.hqq.core.utils.text
 
 import android.graphics.Bitmap
 import android.graphics.BlurMaskFilter
@@ -13,6 +13,7 @@ import android.text.style.*
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import com.hqq.core.utils.RxTool
 
 /**
  * @author tamsiree

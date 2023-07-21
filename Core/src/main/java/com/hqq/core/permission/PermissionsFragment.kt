@@ -1,18 +1,15 @@
 package com.hqq.core.permission
 
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.hqq.core.CoreConfig
 import com.hqq.core.ui.dialog.SelectDialog
+import com.hqq.core.utils.AppTool
 import com.hqq.core.utils.ToastUtils
-import com.hqq.core.utils.VersionUtils
 
 /**
  * @Author : huangqiqiang
@@ -63,7 +60,7 @@ class PermissionsFragment : Fragment(), IPermissionActions {
                         .setPositiveButton("确定") { dialog, which -> // 打开设置界面
                             val intent = Intent()
                             intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                            val uri = Uri.fromParts("package", VersionUtils.getPackageName(context), null)
+                            val uri = Uri.fromParts("package", AppTool.getPackageName(context), null)
                             intent.data = uri
                             startActivityForResult(intent, 0x55)
                             dialog.dismiss()

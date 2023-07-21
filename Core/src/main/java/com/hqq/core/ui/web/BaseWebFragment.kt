@@ -14,8 +14,8 @@ import com.hqq.core.R
 import com.hqq.core.listenner.ScriptInterface
 import com.hqq.core.listenner.WebLoadListener
 import com.hqq.core.ui.base.BaseFragment
+import com.hqq.core.utils.AppTool
 import com.hqq.core.utils.RegexUtils
-import com.hqq.core.utils.VersionUtils
 
 /**
  * @Author : huangqiqiang
@@ -182,7 +182,7 @@ open class BaseWebFragment : BaseFragment() {
             if (URLUtil.isNetworkUrl(request.url.toString())) {
                 return false
             }
-            if (VersionUtils.appInstalledOrNot(activity, request.url.toString())) {
+            if (AppTool.appInstalledOrNot(activity, request.url.toString())) {
                 val intent = Intent(Intent.ACTION_VIEW, request.url)
                 startActivity(intent)
             } else {

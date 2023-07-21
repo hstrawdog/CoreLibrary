@@ -1,4 +1,4 @@
-package com.hqq.core.utils
+package com.hqq.core.utils.text
 
 import com.hqq.core.utils.DataTool.isNullString
 import java.text.ParseException

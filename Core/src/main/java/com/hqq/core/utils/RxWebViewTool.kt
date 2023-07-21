@@ -24,9 +24,10 @@ object RxWebViewTool {
         fun shouldOverrideUrlLoading()
         fun onPageFinished()
     }
+
     @SuppressLint("SetJavaScriptEnabled")
     @JvmStatic
-    fun initWebView(context: Activity, webBase: WebView, onWebViewLoad:OnWebViewLoad) {
+    fun initWebView(context: Activity, webBase: WebView, onWebViewLoad: OnWebViewLoad) {
         val webSettings = webBase.settings
         webSettings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK //加载缓存否则网络
         webSettings.loadsImagesAutomatically = true  //图片自动缩放 打开
@@ -39,7 +40,6 @@ object RxWebViewTool {
         /*     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }*/
-
 
         // setMediaPlaybackRequiresUserGesture(boolean require) //是否需要用户手势来播放Media，默认true
         // 设置支持javascript脚本
@@ -115,7 +115,6 @@ object RxWebViewTool {
 
                 // Otherwise allow the OS to handle things like tel, mailto, etc.
 
-
                 // Otherwise allow the OS to handle things like tel, mailto, etc.
                 try {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -136,6 +135,6 @@ object RxWebViewTool {
 
     @JvmStatic
     fun loadData(webView: WebView, content: String) {
-        webView.loadDataWithBaseURL(null, content,"text/html", "UTF-8", null) //这种写法可以正确解码
+        webView.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null) //这种写法可以正确解码
     }
 }

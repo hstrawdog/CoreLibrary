@@ -2,6 +2,7 @@ package com.hqq.example.ui.system.info
 
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.utils.AppTool
 import com.hqq.core.utils.DeviceTool
 import com.hqq.core.utils.ScreenUtils.getAllScreenHeight
 import com.hqq.core.utils.ScreenUtils.getNavigationBarHeight
@@ -15,10 +16,8 @@ import com.hqq.core.utils.ScreenUtils.getScreenXDPI
 import com.hqq.core.utils.ScreenUtils.getScreenYDPI
 import com.hqq.core.utils.ScreenUtils.getStatusBarHeight
 import com.hqq.core.utils.ScreenUtils.isAllScreenDevice
-import com.hqq.core.utils.TextSpannableBuilder
-import com.hqq.core.utils.VersionUtils.getPackageName
-import com.hqq.core.utils.VersionUtils.getVerName
-import com.hqq.core.utils.VersionUtils.getVersionCode
+import com.hqq.core.utils.text.TextSpannableBuilder
+
 import com.hqq.example.R
 
 /**
@@ -38,11 +37,11 @@ class BaseInfoActivity : BaseActivity() {
     override fun initView() {
         mTvInfo = findViewById(R.id.tv_info)
         mTvInfo.setText(TextSpannableBuilder().addTextPart("包名    ")
-            .addTextPart(getPackageName(this))
+            .addTextPart(AppTool.getPackageName(this))
             .addTextPart("\n版本    ")
-            .addTextPart(getVerName(this))
+            .addTextPart(AppTool.getVerName(activity))
             .addTextPart("\n版本号    ")
-            .addTextPart(getVersionCode(this).toString() + "")
+            .addTextPart(AppTool.getVersionCode(this).toString() + "")
             .addTextPart("\n系统分配大小    ")
             .addTextPart(getAppCacheSize(this).toString() + "M")
             .addTextPart("\nGlide缓存大小    ")

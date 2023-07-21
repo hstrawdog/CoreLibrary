@@ -1,34 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.hqq.example.ui.view.TextViewActivity">
-
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:lines="2"
-        android:text="123123123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x20"
-        android:background="@color/color_999"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:text="123123123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312312312123123123123121231231231231212312312"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView10"
@@ -37,11 +14,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x20"
         android:ellipsize="end"
-        android:maxLines="2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
         tools:text="121231231231231231231231231231231231231231231231231231231231231231231233121231231231231231231231231231231231231231231231231231231231231231231233" />
 
+    <Button
+        android:id="@+id/button89"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加文字" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/button90"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加文字带颜色" />
+
+    <Button
+        android:id="@+id/button91"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button92"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+
+</LinearLayout>

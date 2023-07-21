@@ -29,6 +29,7 @@ import com.hqq.example.ui.parcelable.ParcelableActivity
 import com.hqq.example.ui.system.info.BaseInfoActivity
 import com.hqq.example.ui.system.info.NetInfoActivity
 import com.hqq.example.ui.transitions.animation.TransitionsAnimationActivity
+import com.hqq.example.ui.view.TextViewActivity
 import kotlinx.coroutines.launch
 
 /**
@@ -78,7 +79,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(AlbumIndexActivity::class.java)
 //        open(ShareIndexActivity::class.java)
 //        open(LogUtilsActivity::class.java)
-//        open(BaseInfoActivity::class.java)
+        open(TextViewActivity::class.java)
+
+
     }
 
 
