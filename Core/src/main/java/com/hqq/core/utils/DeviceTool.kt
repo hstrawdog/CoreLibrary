@@ -18,9 +18,9 @@ import android.text.TextUtils
 import android.util.Xml
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
-import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.CoreConfig
+import com.hqq.core.utils.DataUtils.isNullString
 import com.hqq.core.utils.log.LogUtils
-import com.hqq.core.utils.log.TLog
 import org.json.JSONObject
 import java.io.*
 import java.net.NetworkInterface
@@ -367,7 +367,7 @@ object DeviceTool {
         }
 
     val appPackageName: String
-        get() = RxTool.getContext().packageName
+        get() = CoreConfig.applicationContext.packageName
 
     /**
      * 获取App版本名称

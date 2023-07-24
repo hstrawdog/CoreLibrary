@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x20"
         android:ellipsize="end"
+        android:textColorHighlight="#00000000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:text="121231231231231231231231231231231231231231231231231231231231231231231233121231231231231231231231231231231231231231231231231231231231231231231233" />
@@ -22,6 +23,7 @@
         android:id="@+id/button89"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x30"
         android:text="添加文字" />
 
     <Button
@@ -34,13 +36,13 @@
         android:id="@+id/button91"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="添加文字带颜色大小背景点击" />
 
     <Button
         android:id="@+id/button92"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="添加文字带颜色大小点击" />
 
 
 </LinearLayout>

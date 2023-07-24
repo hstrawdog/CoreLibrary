@@ -13,6 +13,7 @@ import android.text.style.*
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import com.hqq.core.CoreConfig
 import com.hqq.core.utils.RxTool
 
 /**
@@ -477,7 +478,7 @@ object TextTool {
             }
             if (imageIsBitmap || imageIsDrawable || imageIsUri || imageIsResourceId) {
                 if (imageIsBitmap) {
-                    mBuilder.setSpan(ImageSpan(RxTool.getContext(), bitmap!!), start, end, flag)
+                    mBuilder.setSpan(ImageSpan(CoreConfig.applicationContext, bitmap!!), start, end, flag)
                     bitmap = null
                     imageIsBitmap = false
                 } else if (imageIsDrawable) {
@@ -485,11 +486,11 @@ object TextTool {
                     drawable = null
                     imageIsDrawable = false
                 } else if (imageIsUri) {
-                    mBuilder.setSpan(ImageSpan(RxTool.getContext(), uri!!), start, end, flag)
+                    mBuilder.setSpan(ImageSpan(CoreConfig.applicationContext, uri!!), start, end, flag)
                     uri = null
                     imageIsUri = false
                 } else {
-                    mBuilder.setSpan(ImageSpan(RxTool.getContext(), resourceId), start, end, flag)
+                    mBuilder.setSpan(ImageSpan(CoreConfig.applicationContext, resourceId), start, end, flag)
                     resourceId = 0
                     imageIsResourceId = false
                 }

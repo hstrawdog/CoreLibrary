@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import com.hqq.core.utils.keyboard.SoftKeyboardListener.SoftKeyBoardChangeListener
 import com.hqq.core.utils.log.LogUtils
-import com.hqq.core.utils.log.TLog
 
 /**
  * 键盘 开启/关闭

@@ -11,9 +11,8 @@ import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
-import com.hqq.core.utils.DataTool.isNullString
-import com.hqq.core.utils.RxTool
-import com.hqq.core.utils.log.TLog
+import com.hqq.core.CoreConfig
+import com.hqq.core.utils.DataUtils.isNullString
 import com.hqq.core.utils.file.FileTool.closeIO
 import com.hqq.core.utils.file.FileTool.createOrExistsFile
 import com.hqq.core.utils.file.FileTool.getFileByPath
@@ -54,7 +53,7 @@ object ImageTool {
      */
     @JvmStatic
     fun dp2px(dpValue: Float): Int {
-        return dp2px(RxTool.getContext(), dpValue)
+        return dp2px(CoreConfig.applicationContext, dpValue)
     }
 
     @JvmStatic
@@ -82,7 +81,7 @@ object ImageTool {
      */
     @JvmStatic
     fun px2dp(pxValue: Float): Int {
-        return px2dp(RxTool.getContext(), pxValue)
+        return px2dp(CoreConfig.applicationContext, pxValue)
     }
 
     @JvmStatic
@@ -99,7 +98,7 @@ object ImageTool {
      */
     @JvmStatic
     fun sp2px(spValue: Float): Int {
-        val fontScale = RxTool.getContext().resources.displayMetrics.scaledDensity
+        val fontScale = CoreConfig.applicationContext.resources.displayMetrics.scaledDensity
         return (spValue * fontScale + 0.5f).toInt()
     }
 
@@ -111,7 +110,7 @@ object ImageTool {
      */
     @JvmStatic
     fun px2sp(pxValue: Float): Int {
-        val fontScale = RxTool.getContext().resources.displayMetrics.scaledDensity
+        val fontScale = CoreConfig.applicationContext.resources.displayMetrics.scaledDensity
         return (pxValue / fontScale + 0.5f).toInt()
     }
 
@@ -511,7 +510,7 @@ object ImageTool {
      */
     @JvmStatic
     fun getBitmap(resId: Int): Bitmap? {
-        val `is` = RxTool.getContext().resources.openRawResource(resId)
+        val `is` = CoreConfig.applicationContext.resources.openRawResource(resId)
         return BitmapFactory.decodeStream(`is`)
     }
 
@@ -527,7 +526,7 @@ object ImageTool {
     fun getBitmap(resId: Int, maxWidth: Int, maxHeight: Int): Bitmap? {
         val options = BitmapFactory.Options()
         options.inJustDecodeBounds = true
-        val `is` = RxTool.getContext().resources.openRawResource(resId)
+        val `is` = CoreConfig.applicationContext.resources.openRawResource(resId)
         BitmapFactory.decodeStream(`is`, null, options)
         options.inSampleSize = calculateInSampleSize(options, maxWidth, maxHeight)
         options.inJustDecodeBounds = false

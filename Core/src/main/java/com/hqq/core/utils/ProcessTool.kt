@@ -10,9 +10,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.Settings
-import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.utils.DataUtils.isNullString
 import com.hqq.core.utils.log.LogUtils
-import com.hqq.core.utils.log.TLog
 import java.util.*
 
 /**

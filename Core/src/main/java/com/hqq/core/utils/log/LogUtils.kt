@@ -1,8 +1,21 @@
 package com.hqq.core.utils.log
 
+import android.content.Context
 import android.util.Log
 import com.hqq.core.BuildConfig
 import com.hqq.core.CoreConfig
+import com.hqq.core.utils.RxTool
+import com.hqq.core.utils.TimeTool
+import com.hqq.core.utils.file.FileTool
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileOutputStream
+import java.io.FileWriter
+import java.io.IOException
+import java.io.PrintStream
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 
 /**
  * @Author : huangqiqiang
@@ -13,6 +26,7 @@ import com.hqq.core.CoreConfig
  * @Descrive :    logcat 打印的长度  4*1024  这边用的 4*1000
  */
 object LogUtils {
+
     //规定每段显示的长度
     private const val LOG_MAX_LENGTH = 2000
 
@@ -230,7 +244,7 @@ object LogUtils {
     }
 
     /**
-     *  获取类名
+     *  获取类文件名
      * @param targetElement StackTraceElement
      * @return String
      */
@@ -251,5 +265,110 @@ object LogUtils {
         }
         return "$className.java"
     }
+
+    //region  将日子 写入文件中
+    private val LOG_FORMAT = SimpleDateFormat("yyyy年MM月dd日_HH点mm分ss秒") // 日志的输出格式
+    private val FILE_SUFFIX = SimpleDateFormat("HH点mm分ss秒") // 日志文件格式
+    private val FILE_DIR = SimpleDateFormat("yyyy年MM月dd日") // 日志文件格式
+    private var LOG_FILE_PATH // 日志文件保存路径
+            : String? = null
+    private var LOG_FILE_NAME // 日志文件保存名称
+            : String? = null
+    private const val LOG_SAVE_DAYS = 7 // sd卡中日志文件的最多保存天数
+
+    @JvmStatic
+    fun init(context: Context) { // 在Application中初始化
+        LOG_FILE_PATH = FileTool.rootPath!!.path + File.separator + context.packageName + File.separator + "Log"
+        LOG_FILE_NAME = "TLog_"
+    }
+
+    /**
+     * 打开日志文件并写入日志
+     *
+     * @return
+     */
+    @Synchronized
+    private fun log2File(mylogtype: String, tag: String, text: String): File {
+        val nowtime = Date()
+        val date = FILE_SUFFIX.format(nowtime)
+        val dateLogContent = """
+            Date:${LOG_FORMAT.format(nowtime)}
+            LogType:$mylogtype
+            Tag:$tag
+            Content:
+            $text
+            """.trimIndent() // 日志输出格式
+        val path = LOG_FILE_PATH + File.separator + FILE_DIR.format(nowtime)
+        val destDir = File(path)
+        if (!destDir.exists()) {
+            destDir.mkdirs()
+        }
+        val file = File(path, "${LOG_FILE_NAME}$date.txt")
+        try {
+            if (!file.exists()) {
+                file.createNewFile()
+            }
+            val filerWriter = FileWriter(file, true)
+            val bufWriter = BufferedWriter(filerWriter)
+            bufWriter.write(dateLogContent)
+            bufWriter.newLine()
+            bufWriter.close()
+            filerWriter.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return file
+    }
+
+    /**
+     * 删除指定的日志文件
+     */
+    @JvmStatic
+    fun delAllLogFile() { // 删除日志文件
+//        String needDelFiel = FILE_SUFFIX.format(getDateBefore());
+        FileTool.deleteDir(LOG_FILE_PATH)
+    }
+
+    /**
+     * 得到LOG_SAVE_DAYS天前的日期
+     *
+     * @return
+     */
+    private val dateBefore: Date
+        private get() {
+            val nowtime = Date()
+            val now = Calendar.getInstance()
+            now.time = nowtime
+            now[Calendar.DATE] = now[Calendar.DATE] - LOG_SAVE_DAYS
+            return now.time
+        }
+
+    @JvmStatic
+    fun saveLogFile(message: String) {
+        val fileDir = File(FileTool.rootPath.toString() + File.separator + CoreConfig.applicationContext.packageName)
+        if (!fileDir.exists()) {
+            fileDir.mkdirs()
+        }
+        val file = File(fileDir, TimeTool.getCurrentDateTime("yyyyMMdd") + ".txt")
+        try {
+            if (file.exists()) {
+                val ps = PrintStream(FileOutputStream(file, true))
+                ps.append("""
+    ${TimeTool.getCurrentDateTime("\n\n\nyyyy-MM-dd HH:mm:ss")}
+    $message
+    """.trimIndent()) // 往文件里写入字符串
+            } else {
+                val ps = PrintStream(FileOutputStream(file))
+                file.createNewFile()
+                ps.println("""
+    ${TimeTool.getCurrentDateTime("yyyy-MM-dd HH:mm:ss")}
+    $message
+    """.trimIndent()) // 往文件里写入字符串
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+    //endregion
 
 }

@@ -16,7 +16,7 @@ import com.hqq.core.CoreConfig
  * @Email :  qiqiang213@gmail.com
  * @Describe : 剪切板操作
  */
-object ClipboardTool {
+object ClipboardUtils {
     /**
      * 复制内容到剪贴板
      *

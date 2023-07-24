@@ -34,15 +34,47 @@ class TextViewActivity : BaseViewBindingActivity<ActivityTextViewBinding>() {
             _textSpannable.addTextPart("添加文字")
             binding.textView10.text = _textSpannable.build()
         }
+
         binding.button90.setOnClickListener {
             _textSpannable.addTextPart("添加文字颜色", ResourcesUtils.getColor(R.color.color_main))
-
             binding.textView10.text = _textSpannable.build()
         }
+
         binding.button91.setOnClickListener {
-            binding.button91.setMovementMethod(LinkMovementMethod.getInstance());
-            _textSpannable.addTextPart("添加文字颜色大小", ResourcesUtils.getColor(R.color.color_red), 1.2f, BackgroundColorSpan(ResourcesUtils.getColor(R.color.color_red)))
+            _textSpannable.addTextPart("添加文字颜色大小", ResourcesUtils.getColor(R.color.color_red), 1.2f, BackgroundColorSpan(ResourcesUtils.getColor(R.color.color_main)), object :
+                TextSpannableBuilder.OnClickListener {
+                override fun onClick(widget: View?, clickedText: CharSequence?) {
+                    ToastUtils.showToast("12312312")
+                }
+
+            })
+            binding.button91.highlightColor = ResourcesUtils.getColor(R.color.color_757575)
+//            _textSpannable.addTextClick("123", ResourcesUtils.getColor(R.color.black),object  :
+//                TextSpannableBuilder.OnClickListener{
+//                override fun onClick(widget: View?, clickedText: CharSequence?) {
+//                    ToastUtils.showToast("12312312")
+//                }
+//            }
+//            )
             binding.textView10.text = _textSpannable.build()
+            binding.textView10.setMovementMethod(LinkMovementMethod.getInstance())
+        }
+
+
+
+        binding.button92.setOnClickListener {
+
+            _textSpannable.addTextPart("添加文字颜色大小", ResourcesUtils.getColor(R.color.color_red), 1.2f, null, object :
+                TextSpannableBuilder.OnClickListener {
+                override fun onClick(widget: View?, clickedText: CharSequence?) {
+                    ToastUtils.showToast("12312312")
+                }
+            })
+//            binding.button91.highlightColor = ResourcesUtils.getColor(R.color.color_757575)
+            binding.textView10.setHighlightColor(ResourcesUtils.getColor(R.color.transparent))
+            binding.textView10.text = _textSpannable.build()
+            binding.textView10.setMovementMethod(LinkMovementMethod.getInstance())
+
         }
 
     }

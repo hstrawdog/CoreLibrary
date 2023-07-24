@@ -5,7 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
-import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.utils.DataUtils.isNullString
 import com.hqq.core.utils.image.ImageTool.save
 import java.io.File
 import java.io.IOException

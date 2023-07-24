@@ -1,7 +1,7 @@
 package com.hqq.core.utils.encrypt
 
-import com.hqq.core.utils.DataTool.bytes2HexString
-import com.hqq.core.utils.DataTool.hexString2Bytes
+import com.hqq.core.utils.DataUtils.bytes2HexString
+import com.hqq.core.utils.DataUtils.hexString2Bytes
 import com.hqq.core.utils.encrypt.EncodeTool.base64Decode
 import com.hqq.core.utils.encrypt.EncodeTool.base64Encode
 import com.hqq.core.utils.file.FileTool

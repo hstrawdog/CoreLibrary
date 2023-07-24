@@ -1,6 +1,6 @@
 package com.hqq.core.utils.text
 
-import com.hqq.core.utils.DataTool.isNullString
+import com.hqq.core.utils.DataUtils.isNullString
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

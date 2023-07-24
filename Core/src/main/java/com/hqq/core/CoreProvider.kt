@@ -5,7 +5,7 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
-import com.hqq.core.utils.RegexUtils
+import com.hqq.core.utils.DataUtils
 import com.hqq.core.utils.log.LogUtils
 
 /**
@@ -23,7 +23,7 @@ class CoreProvider : ContentProvider() {
      */
     override fun onCreate(): Boolean {
         LogUtils.e4Debug(" CoreProvider  onCreate")
-        if (!CoreConfig.get().isInitialized() || RegexUtils.checkIsNull(CoreConfig.get().application)) {
+        if (!CoreConfig.get().isInitialized() || DataUtils.checkIsNull(CoreConfig.get().application)) {
             CoreConfig.get().init(context as Application)
             LogUtils.e4Debug(" CoreProvider  setApplication")
         }

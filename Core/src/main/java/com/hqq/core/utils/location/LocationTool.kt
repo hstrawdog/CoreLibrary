@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.hqq.core.utils.log.TLog
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.IOException

@@ -3,9 +3,8 @@ package com.qq.readbook.ui.source
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.ui.list.BaseListActivity
-import com.hqq.core.utils.ClipboardTool
+import com.hqq.core.utils.ClipboardUtils
 import com.hqq.core.utils.gson.GsonUtil
-import com.hqq.core.utils.StringUtils
 import com.hqq.core.utils.ToastUtils
 import com.qq.readbook.R
 import com.qq.readbook.bean.book.BookSource
@@ -26,7 +25,7 @@ internal class BookSourceListActivity : BaseListActivity() {
         setOnItemClickListener { adapter, view, position ->
 
             var json = GsonUtil.toJsonString(getItem(position))
-            ClipboardTool.copyContentToClipboard(json)
+            ClipboardUtils.copyContentToClipboard(json)
             ToastUtils.showToast("源复制到剪切板")
         }
 

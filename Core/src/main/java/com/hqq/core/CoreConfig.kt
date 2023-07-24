@@ -7,7 +7,7 @@ import android.content.pm.ApplicationInfo
 import com.google.gson.InstanceCreator
 import com.hqq.core.annotation.ToolBarMode
 import com.hqq.core.toolbar.DefToolBar
-import com.hqq.core.utils.RegexUtils
+import com.hqq.core.utils.DataUtils
 import com.hqq.core.utils.ScreenUtils
 import java.lang.reflect.Type
 
@@ -151,7 +151,7 @@ class CoreConfig private constructor() {
         this.application = application
         statusBarHeight = ScreenUtils.getStatusBarHeight4Resources(applicationContext)
         // 监听Activity 的生命周期
-        if (RegexUtils.checkIsNull(mActivityLifecycle)) {
+        if (DataUtils.checkIsNull(mActivityLifecycle)) {
             mActivityLifecycle = ActivityLifecycle()
             application.registerActivityLifecycleCallbacks(mActivityLifecycle)
         }

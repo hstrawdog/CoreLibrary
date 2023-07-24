@@ -31,10 +31,9 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Base64
 import androidx.core.content.FileProvider
-import com.hqq.core.utils.DataTool.byte2FitSize
-import com.hqq.core.utils.DataTool.inputStream2Bytes
-import com.hqq.core.utils.DataTool.isNullString
-import com.hqq.core.utils.log.TLog
+import com.hqq.core.utils.DataUtils.byte2FitSize
+import com.hqq.core.utils.DataUtils.inputStream2Bytes
+import com.hqq.core.utils.DataUtils.isNullString
 import com.hqq.core.utils.PhotoTool
 import com.hqq.core.utils.encrypt.EncryptTool.encryptMD5File2String
 import com.hqq.core.utils.log.LogUtils

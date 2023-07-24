@@ -15,7 +15,6 @@ import android.net.Uri
 import com.hqq.core.utils.encrypt.EncryptTool
 import com.hqq.core.utils.file.FileTool
 import com.hqq.core.utils.log.LogUtils
-import com.hqq.core.utils.log.TLog
 import java.io.File
 import java.util.*
 
@@ -178,7 +177,7 @@ object AppTool {
      */
     @JvmStatic
     fun isSystemApp(context: Context, packageName: String): Boolean {
-        return if (DataTool.isNullString(packageName)) false else try {
+        return if (DataUtils.isNullString(packageName)) false else try {
             val pm = context.packageManager
             val ai = pm.getApplicationInfo(packageName, 0)
             ai.flags and ApplicationInfo.FLAG_SYSTEM != 0
@@ -196,7 +195,7 @@ object AppTool {
      */
     @JvmStatic
     fun uninstallApp(context: Context, packageName: String) {
-        if (DataTool.isNullString(packageName)) return
+        if (DataUtils.isNullString(packageName)) return
         context.startActivity(IntentTool.getUninstallAppIntent(packageName))
     }
 
@@ -209,7 +208,7 @@ object AppTool {
      */
     @JvmStatic
     fun uninstallApp(activity: Activity, packageName: String, requestCode: Int) {
-        if (DataTool.isNullString(packageName)) return
+        if (DataUtils.isNullString(packageName)) return
         activity.startActivityForResult(IntentTool.getUninstallAppIntent(packageName), requestCode)
     }
 
@@ -225,7 +224,7 @@ object AppTool {
      */
     @JvmStatic
     fun uninstallAppSilent(context: Context, packageName: String, isKeepData: Boolean): Boolean {
-        if (DataTool.isNullString(packageName)) return false
+        if (DataUtils.isNullString(packageName)) return false
         val command =
             "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm uninstall " + (if (isKeepData) "-k " else "") + packageName
         val commandResult = ShellTool.execCmd(command, !isSystemApp(context), true)
@@ -259,7 +258,7 @@ object AppTool {
      */
     @JvmStatic
     fun launchApp(context: Context, packageName: String) {
-        if (DataTool.isNullString(packageName)) return
+        if (DataUtils.isNullString(packageName)) return
         context.startActivity(IntentTool.getLaunchAppIntent(context, packageName))
     }
 
@@ -272,7 +271,7 @@ object AppTool {
      */
     @JvmStatic
     fun launchApp(activity: Activity, packageName: String, requestCode: Int) {
-        if (DataTool.isNullString(packageName)) return
+        if (DataUtils.isNullString(packageName)) return
         activity.startActivityForResult(IntentTool.getLaunchAppIntent(activity, packageName), requestCode)
     }
 
@@ -305,7 +304,7 @@ object AppTool {
      */
     @JvmStatic
     fun getAppDetailsSettings(context: Context, packageName: String?) {
-        if (DataTool.isNullString(packageName)) return
+        if (DataUtils.isNullString(packageName)) return
         context.startActivity(IntentTool.getAppDetailsSettingsIntent(packageName))
     }
 
@@ -329,7 +328,7 @@ object AppTool {
      */
     @JvmStatic
     fun getAppName(context: Context, packageName: String): String? {
-        return if (DataTool.isNullString(packageName)) null else try {
+        return if (DataUtils.isNullString(packageName)) null else try {
             val pm = context.packageManager
             val pi = pm.getPackageInfo(packageName, 0)
             pi?.applicationInfo?.loadLabel(pm)?.toString()
@@ -359,7 +358,7 @@ object AppTool {
      */
     @JvmStatic
     fun getAppIcon(context: Context, packageName: String): Drawable? {
-        return if (DataTool.isNullString(packageName)) null else try {
+        return if (DataUtils.isNullString(packageName)) null else try {
             val pm = context.packageManager
             val pi = pm.getPackageInfo(packageName, 0)
             pi?.applicationInfo?.loadIcon(pm)
@@ -389,7 +388,7 @@ object AppTool {
      */
     @JvmStatic
     fun getAppPath(context: Context, packageName: String): String? {
-        return if (DataTool.isNullString(packageName)) null else try {
+        return if (DataUtils.isNullString(packageName)) null else try {
             val pm = context.packageManager
             val pi = pm.getPackageInfo(packageName, 0)
             pi?.applicationInfo?.sourceDir
@@ -419,7 +418,7 @@ object AppTool {
      */
     @JvmStatic
     fun getAppVersionName(context: Context, packageName: String): String? {
-        return if (DataTool.isNullString(packageName)) null else try {
+        return if (DataUtils.isNullString(packageName)) null else try {
             val pm = context.packageManager
             val pi = pm.getPackageInfo(packageName, 0)
             pi?.versionName
@@ -449,7 +448,7 @@ object AppTool {
      */
     @JvmStatic
     fun getAppVersionCode(context: Context, packageName: String): Int {
-        return if (DataTool.isNullString(packageName)) -1 else try {
+        return if (DataUtils.isNullString(packageName)) -1 else try {
             val pm = context.packageManager
             val pi = pm.getPackageInfo(packageName, 0)
             pi?.versionCode ?: -1
@@ -479,7 +478,7 @@ object AppTool {
      */
     @JvmStatic
     fun isAppDebug(context: Context, packageName: String): Boolean {
-        return if (DataTool.isNullString(packageName)) false else try {
+        return if (DataUtils.isNullString(packageName)) false else try {
             val pm = context.packageManager
             val ai = pm.getApplicationInfo(packageName, 0)
             ai != null && ai.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
@@ -510,7 +509,7 @@ object AppTool {
     @JvmStatic
     @SuppressLint("PackageManagerGetSignatures")
     fun getAppSignature(context: Context, packageName: String): Array<Signature>? {
-        return if (DataTool.isNullString(packageName)) null else try {
+        return if (DataUtils.isNullString(packageName)) null else try {
             val pm = context.packageManager
             val pi = pm.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
             pi?.signatures
@@ -580,7 +579,7 @@ object AppTool {
      */
     @JvmStatic
     fun isAppForeground(context: Context, packageName: String): Boolean {
-        return !DataTool.isNullString(packageName) && packageName == ProcessTool.getForegroundProcessName(context)
+        return !DataUtils.isNullString(packageName) && packageName == ProcessTool.getForegroundProcessName(context)
     }
     //----------------------------------------------------------------------------------------------------------------
     /**
@@ -592,7 +591,7 @@ object AppTool {
      */
     @JvmStatic
     fun isInstallApp(context: Context, packageName: String): Boolean {
-        return !DataTool.isNullString(packageName) && IntentTool.getLaunchAppIntent(context, packageName) != null
+        return !DataUtils.isNullString(packageName) && IntentTool.getLaunchAppIntent(context, packageName) != null
     }
 
     /**

@@ -15,7 +15,7 @@ import com.hqq.core.listenner.ScriptInterface
 import com.hqq.core.listenner.WebLoadListener
 import com.hqq.core.ui.base.BaseFragment
 import com.hqq.core.utils.AppTool
-import com.hqq.core.utils.RegexUtils
+import com.hqq.core.utils.DataUtils
 
 /**
  * @Author : huangqiqiang
@@ -122,7 +122,7 @@ open class BaseWebFragment : BaseFragment() {
     override fun initView() {
         webView = findViewById(R.id.web_view) as WebView?
         progressBar = findViewById(R.id.pb_progressbar) as ProgressBar
-        if (RegexUtils.checkUnNull(progressBarColor)) {
+        if (DataUtils.checkUnNull(progressBarColor)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 progressBar?.indeterminateTintList = progressBarColor
             }

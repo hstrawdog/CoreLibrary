@@ -7,6 +7,7 @@ import android.graphics.drawable.*
 import android.view.View
 import android.view.animation.*
 import android.widget.ImageView
+import com.hqq.core.CoreConfig
 
 /**
  * @Author : huangqiqiang
@@ -266,16 +267,17 @@ object AnimationTool {
         } else {
             oldBitmapDrawable = ColorDrawable(-0x3d3d3e)
         }
+
         if (oldTransitionDrawable == null) {
             oldTransitionDrawable =
-                TransitionDrawable(arrayOf(oldBitmapDrawable, BitmapDrawable(RxTool.getContext().resources, bitmap)))
+                TransitionDrawable(arrayOf(oldBitmapDrawable, BitmapDrawable(CoreConfig.applicationContext.resources, bitmap)))
             oldTransitionDrawable.setId(0, 0)
             oldTransitionDrawable.setId(1, 1)
             oldTransitionDrawable.isCrossFadeEnabled = true
             view.setImageDrawable(oldTransitionDrawable)
         } else {
             oldTransitionDrawable.setDrawableByLayerId(oldTransitionDrawable.getId(0), oldBitmapDrawable)
-            oldTransitionDrawable.setDrawableByLayerId(oldTransitionDrawable.getId(1), BitmapDrawable(RxTool.getContext().resources, bitmap))
+            oldTransitionDrawable.setDrawableByLayerId(oldTransitionDrawable.getId(1), BitmapDrawable(CoreConfig.applicationContext.resources, bitmap))
         }
         oldTransitionDrawable.startTransition(1000)
     }

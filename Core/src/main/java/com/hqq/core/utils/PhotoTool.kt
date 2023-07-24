@@ -21,7 +21,6 @@ import com.hqq.core.utils.file.FileTool.isExternalStorageDocument
 import com.hqq.core.utils.file.FileTool.isGooglePhotosUri
 import com.hqq.core.utils.file.FileTool.isMediaDocument
 import com.hqq.core.utils.log.LogUtils
-import com.hqq.core.utils.log.TLog
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*

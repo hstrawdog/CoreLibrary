@@ -10,6 +10,7 @@ import android.renderscript.RenderScript
 import android.renderscript.RenderScript.RSMessageHandler
 import android.renderscript.ScriptIntrinsicBlur
 import android.widget.ImageView
+import com.hqq.core.CoreConfig
 import com.hqq.core.utils.image.ImageTool.isEmptyBitmap
 import kotlin.math.abs
 import kotlin.math.max
@@ -139,7 +140,7 @@ object BlurTool {
         if (isEmptyBitmap(src)) return null
         var rs: RenderScript? = null
         try {
-            rs = RenderScript.create(RxTool.getContext())
+            rs = RenderScript.create(CoreConfig.applicationContext)
             rs.messageHandler = RSMessageHandler()
             val input =
                 Allocation.createFromBitmap(rs, src, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT)

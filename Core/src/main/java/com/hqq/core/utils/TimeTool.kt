@@ -1,7 +1,7 @@
 package com.hqq.core.utils
 
-import com.hqq.core.utils.DataTool.isNullString
-import com.hqq.core.utils.DataTool.stringToInt
+import com.hqq.core.utils.DataUtils.isNullString
+import com.hqq.core.utils.DataUtils.stringToInt
 import com.hqq.core.utils.log.LogUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -668,7 +668,7 @@ object TimeTool {
      */
     @JvmStatic
     fun getDayInData(time: String): String {
-        if (RegexUtils.checkUnNull(time)) {
+        if (DataUtils.checkUnNull(time)) {
             val str = time.split(" ".toRegex())
                 .toTypedArray()
             return if (str.size > 1) {
@@ -684,7 +684,7 @@ object TimeTool {
      */
     @JvmStatic
     fun format2Second(time: String): Long {
-        if (RegexUtils.checkIsNull(time)) {
+        if (DataUtils.checkIsNull(time)) {
             return 0
         }
         val str = time.split(":".toRegex())
@@ -724,7 +724,7 @@ object TimeTool {
      */
     @JvmStatic
     fun format2Millisecond(time: String): Long {
-        if (RegexUtils.checkIsNull(time)) {
+        if (DataUtils.checkIsNull(time)) {
             return 0
         }
         val str = time.split(":".toRegex())
@@ -855,7 +855,7 @@ object TimeTool {
      */
     @JvmStatic
     fun string2Millisecond(date: String?): Long {
-        if (RegexUtils.checkIsNull(date)) {
+        if (DataUtils.checkIsNull(date)) {
             return 0L
         }
         try {

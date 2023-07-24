@@ -16,7 +16,7 @@ import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.hqq.core.R
 import com.hqq.core.ui.base.RootViewImpl
-import com.hqq.core.utils.RegexUtils
+import com.hqq.core.utils.DataUtils
 import com.hqq.core.utils.ResourcesUtils
 import com.hqq.core.widget.CusPtrClassicFrameLayout
 import java.lang.ref.WeakReference
@@ -150,13 +150,13 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
         val tvRefresh = emptyView.findViewById<TextView>(R.id.tv_Refresh)
         val tvEmptyMessage = emptyView.findViewById<TextView>(R.id.tv_empty_message)
         val ivEmpty = emptyView.findViewById<ImageView>(R.id.iv_empty)
-        if (RegexUtils.checkUnNull(tvRefresh)) {
+        if (DataUtils.checkUnNull(tvRefresh)) {
             tvRefresh.visibility = View.GONE
         }
-        if (RegexUtils.checkUnNull(tvEmptyMessage)) {
+        if (DataUtils.checkUnNull(tvEmptyMessage)) {
             tvEmptyMessage.text = emptyTextMessage
         }
-        if (RegexUtils.checkUnNull(ivEmpty)) {
+        if (DataUtils.checkUnNull(ivEmpty)) {
             ivEmpty.setImageResource(emptyImage)
         }
     }

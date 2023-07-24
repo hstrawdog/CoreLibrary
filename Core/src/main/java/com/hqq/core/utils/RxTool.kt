@@ -10,7 +10,7 @@ import android.text.TextWatcher
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.TextView
-import com.hqq.core.utils.log.TLog
+import com.hqq.core.utils.log.LogUtils
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.regex.Pattern
@@ -19,53 +19,8 @@ import java.util.regex.PatternSyntaxException
 
 object RxTool {
 
-    @SuppressLint("StaticFieldLeak")
-    private var context: Context? = null
     private var lastClickTime: Long = 0
 
-    /**
-     * 初始化工具类
-     *
-     * @param context 上下文
-     */
-    @JvmStatic
-    fun init(context: Context): RxTool {
-        RxTool.context = context.applicationContext
-        //        TCrashTool.init(context);
-        TLog.init(context)
-        return RxTool
-    }
-
-    /**
-     * 在某种获取不到 Context 的情况下，即可以使用才方法获取 Context
-     *
-     *
-     * 获取ApplicationContext
-     *
-     * @return ApplicationContext
-     */
-    @JvmStatic
-    fun getContext(): Context {
-        if (context != null) {
-            return context as Context
-        }
-        throw NullPointerException("请先调用init()方法")
-    }
-
-    fun debugLog(switch: Boolean): RxTool {
-        TLog.switchLog(switch)
-        return RxTool
-    }
-
-    fun debugLogFile(switch: Boolean): RxTool {
-        TLog.switch2File(switch)
-        return RxTool
-    }
-
-    fun crashLogFile(switch: Boolean): RxTool {
-        TLog.switchCrashFile(switch)
-        return RxTool
-    }
 
     /**
      * 倒计时
