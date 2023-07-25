@@ -1,3 +1,5 @@
+import com.hqq.core.plugin.BuildVersionConfig
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -9,13 +11,13 @@ android {
         viewBinding  true
         dataBinding  true
     }
-    compileSdkVersion 32
-    buildToolsVersion "31.0.0"
+    compileSdkVersion BuildVersionConfig.compileSdkVersion
+    buildToolsVersion BuildVersionConfig.buildToolsVersion
 
     defaultConfig {
         applicationId "com.qq.readbook"
-        minSdkVersion  21
-        targetSdkVersion 31
+        minSdkVersion BuildVersionConfig.minSdkVersion
+        targetSdkVersion BuildVersionConfig.targetSdkVersion
         versionCode 3
         versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

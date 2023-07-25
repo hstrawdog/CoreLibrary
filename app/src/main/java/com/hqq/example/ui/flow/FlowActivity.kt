@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
  */
 class FlowActivity : BaseViewBindingActivity<ActivityFlowBinding>() {
 
-
     var _list = ArrayList<String>().apply {
         add("1")
         add("2")
@@ -36,13 +35,14 @@ class FlowActivity : BaseViewBindingActivity<ActivityFlowBinding>() {
     override fun initView() {
         binding.button79.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                _list.asFlow().zip(_list2.asFlow()) { i, s ->
-                    " $i $s"
-                }.collect() {
-                    LogUtils.e("     FlowActivity   collect        ${it}        ")
-                }
+                _list.asFlow()
+                    .zip(_list2.asFlow()) { i, s ->
+                        " $i $s"
+                    }
+                    .collect() {
+                        LogUtils.e("     FlowActivity   collect        ${it}        ")
+                    }
             }
-
         }
     }
 

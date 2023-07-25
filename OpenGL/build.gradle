@@ -1,3 +1,5 @@
+import com.hqq.core.plugin.BuildVersionConfig
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -8,13 +10,15 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    compileSdkVersion BuildVersionConfig.compileSdkVersion
+    buildToolsVersion BuildVersionConfig.buildToolsVersion
     defaultConfig {
+        minSdkVersion BuildVersionConfig.minSdkVersion
+        targetSdkVersion BuildVersionConfig.targetSdkVersion
         applicationId "com.example.opengl"
-        minSdk 21
-        targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
