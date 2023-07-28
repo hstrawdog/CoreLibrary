@@ -46,7 +46,6 @@
             tools:text="1/1" />
 
         <LinearLayout
-            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/ll_check"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/x88"
@@ -54,7 +53,8 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/tv_check"
@@ -76,6 +76,7 @@
         android:gravity="right"
         android:orientation="horizontal"
         android:padding="10dp">
+
         <TextView
             android:id="@+id/album_finish"
             android:layout_width="wrap_content"

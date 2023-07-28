@@ -41,14 +41,6 @@ open class RootViewImpl {
     var activity: WeakReference<Activity>? = null
 
     /**
-     * 标题栏类型
-     */
-    var iCreateToolbar: IToolBar? = null
-        get() {
-            return field ?: CoreConfig.get().iCreateToolbar.newInstance()
-        }
-
-    /**
      * 布局类型
      */
     @LayoutModel
@@ -103,9 +95,11 @@ open class RootViewImpl {
             LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT -> {
                 createLayoutView(iActivityBuilder)
             }
+
             LayoutModel.LAYOUT_MODE_FRAME_LAYOUT -> {
                 createFrameLayoutView(iActivityBuilder)
             }
+
             else -> {
                 null
             }
@@ -172,7 +166,7 @@ open class RootViewImpl {
             }
         }
         if (iToolBarBuilder.showToolBar || iToolBarBuilder.showStatusBar) {
-            iToolBar = iToolBarBuilder.create(iCreateToolbar)
+            iToolBar = iToolBarBuilder.create()
             layout.addView(iToolBar?.rootView)
         }
     }

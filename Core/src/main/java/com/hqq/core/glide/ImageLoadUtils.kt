@@ -1,12 +1,19 @@
 package com.hqq.core.glide
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import com.hqq.core.utils.ResourcesUtils
@@ -91,5 +98,69 @@ object ImageLoadUtils {
     }
 
 
+    /**
+     * Glide获取网络图片，带容错机制error时开始一个新的请求
+     * @param context Context?
+     * @param uri String?
+     * @param callback GlideLoadBitmapCallback
+     */
+    @JvmStatic
+    fun getBitmapByFail(context: Context?, uri: String?, callback: GlideLoadBitmapCallback) {
+        Glide.with(context!!)
+            .asBitmap()
+            .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL))
+            .load(uri)
+            .error(Glide.with(context!!)
+                .asBitmap()
+                .load(uri))
+            .into(object : SimpleTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    callback.getBitmapCallback(resource)
+                }
 
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    callback.onLoadFailed()
+                }
+            })
+    }
+
+    /**
+     * 获取图片bitmap数据
+     * @param context Context?
+     * @param uri String?
+     * @param width Int
+     * @param height Int
+     * @param callback GlideLoadBitmapCallback
+     */
+    @JvmStatic
+    fun getBitmap(context: Context?,
+                  uri: String?,
+                  width: Int = -1,
+                  height: Int = -1,
+                  callback: GlideLoadBitmapCallback) {
+        Glide.with(context!!)
+            .asBitmap()
+            .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .override(width, height))
+            .load(uri)
+            .into(object : SimpleTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    callback.getBitmapCallback(resource)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    callback.onLoadFailed()
+                }
+            })
+    }
+
+    interface GlideLoadBitmapCallback {
+        fun getBitmapCallback(bitmap: Bitmap)
+        fun onLoadFailed()
+    }
 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
+import com.hqq.core.CoreConfig
 import com.hqq.core.R
 import java.lang.ref.WeakReference
 
@@ -101,6 +102,18 @@ interface IToolBar {
 
 
     open class Builder {
+
+        /**
+         * 标题栏类型
+         */
+        var iCreateToolbar: IToolBar? = null
+            get() {
+                if (field ==null){
+                    field = CoreConfig.get().iCreateToolbar.newInstance()
+                }
+                return field
+            }
+
         var activity: WeakReference<Activity>? = null
 
         /**
@@ -129,7 +142,7 @@ interface IToolBar {
          * @param clss 类型
          * @return
          */
-        fun create(iCreateToolbar: IToolBar?): IToolBar? {
+        fun create(): IToolBar? {
             iCreateToolbar?.run {
                 setShowStatusBar(showStatusBar)
                 setShowBar(showToolBar)

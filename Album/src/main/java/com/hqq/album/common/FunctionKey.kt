@@ -5,8 +5,7 @@
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
-
-package com.hqq.album.common;
+package com.hqq.album.common
 
 /**
  * 在此写用途
@@ -16,31 +15,22 @@ package com.hqq.album.common;
  * @FileName: cn.huangqiqiang.halbum.common.FunctionKey.java
  * @author: 黄其强
  * @date: 2017-05-04 20:15
- */
-public class FunctionKey {
+</描述当前版本功能> */
+object FunctionKey {
     /**
      * 请求拍照
      */
-    public final static int REQUEST_CODE_REQUEST_CAMERA = 0x99;
-    /**
-     * 申请文件权限
-     */
-    public static final int REQUEST_CODE_READ_EXTERNAL_STORAGE = 0x01;
-    /**
-     * 申请拍照权限
-     */
-    public static final int REQUEST_CODE_CAMERA = 0x02;
+    const val REQUEST_CODE_REQUEST_CAMERA = 0x99
+
     /**
      * 文件夹
      */
-    public static final String KEY_FOLDER_NAME = "folderName";
+    const val KEY_FOLDER_NAME = "folderName"
+
     /**
      * position
      */
-    public static final String KEY_POSITION = "position";
-    /**
-     * data
-     */
-    public static final String KEY_DATA = "data";
+    const val KEY_POSITION = "position"
+
 
 }

@@ -76,10 +76,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 //        open(LoadMoreActivity::class.java)
 
-//        open(AlbumIndexActivity::class.java)
+        open(AlbumIndexActivity::class.java)
 //        open(ShareIndexActivity::class.java)
 //        open(LogUtilsActivity::class.java)
-        open(TextViewActivity::class.java)
+//        open(TextViewActivity::class.java)
 
 
     }

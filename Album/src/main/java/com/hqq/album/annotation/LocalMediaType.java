@@ -10,7 +10,7 @@ import androidx.annotation.IntDef;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-@IntDef({LocalMediaType.VALUE_TYPE_IMAGE, LocalMediaType.VALUE_TYPE_VIDEO})
+@IntDef({LocalMediaType.VALUE_TYPE_IMAGE, LocalMediaType.VALUE_TYPE_VIDEO ,LocalMediaType.VALUE_URL_IMAGE })
 public @interface LocalMediaType {
     /**
      * 图片类型
@@ -20,4 +20,6 @@ public @interface LocalMediaType {
      * 视频类型
      */
     int VALUE_TYPE_VIDEO = 2;
+
+    int VALUE_URL_IMAGE = 3;
 }
