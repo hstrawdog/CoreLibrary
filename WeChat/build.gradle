@@ -1,11 +1,9 @@
-import com.hqq.core.plugin.*
-
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
+import com.hqq.core.plugin.*
 
 android {
     namespace = "com.hqq.wechat"
