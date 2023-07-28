@@ -1,9 +1,11 @@
 package com.hqq.album.common
 
+
 import android.content.Intent
 import com.hqq.album.activity.AlbumDirectoryActivity
 import com.hqq.album.activity.AlbumFolderActivity
 import com.hqq.album.annotation.LocalMediaType
+import com.hqq.core.CoreConfig
 
 /**
  * @version V1.0 <描述当前版本功能>
@@ -14,10 +16,21 @@ import com.hqq.album.annotation.LocalMediaType
  * @date: 2017-05-07 22:19
 </描述当前版本功能> */
 class FunctionOptions {
+    companion object {}
+
     /**
      * 缓存的单利对象
      */
     var mAlbum: Album? = null
+
+    /**
+     *
+     * @param valueTypeImage Int
+     * @return FunctionOptions
+     */
+    fun choose(valueTypeImage: Int): FunctionOptions {
+        return setAlbumType(valueTypeImage)
+    }
 
     /**
      * 多选最大可选数量
@@ -110,20 +123,13 @@ class FunctionOptions {
     }
 
     /**
-     * 数据将回调给调用的 activity 或者Fragment
      *
-     * @param requestCode
+     * @param context Context
      */
-    fun forResult(requestCode: Int) {
-        val activity = mAlbum!!.activity
+    fun forResult(call: AlbumPhotoCallBack?) {
         SelectOptions.instance.reset()
-        val intent = Intent(activity, AlbumDirectoryActivity::class.java)
-        val fragment = mAlbum!!.fragment
-        if (fragment != null) {
-            fragment.startActivityForResult(intent, requestCode)
-        } else {
-            activity!!.startActivityForResult(intent, requestCode)
-        }
+        SelectOptions.instance.call = call
+        CoreConfig.get().currActivity?.let { AlbumDirectoryActivity.open(it) }
     }
 
     /**
@@ -131,21 +137,10 @@ class FunctionOptions {
      *
      * @param requestCode
      */
-    fun forFolderResult(requestCode: Int) {
-        val activity = mAlbum!!.activity
+    fun forFolderResult(call: AlbumPhotoCallBack?) {
         SelectOptions.instance.reset()
-        val intent = Intent(activity, AlbumFolderActivity::class.java)
-        val fragment = mAlbum!!.fragment
-        if (fragment != null) {
-            fragment.startActivityForResult(intent, requestCode)
-        } else {
-            activity!!.startActivityForResult(intent, requestCode)
-        }
+        SelectOptions.instance.call = call
+        CoreConfig.get().currActivity?.let { AlbumFolderActivity.open(it) }
     }
 
-
-    companion object {
-        val instance = FunctionOptions()
-
-    }
 }

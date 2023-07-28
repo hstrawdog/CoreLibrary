@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.hqq.album.R
 import com.hqq.album.annotation.LocalMediaType
-import com.hqq.album.common.Album.Companion.from
+import com.hqq.album.common.Album
+import com.hqq.album.common.FunctionOptions
+import com.hqq.album.common.AlbumPhotoCallBack
 import com.hqq.album.entity.LocalMedia
 import com.hqq.core.ui.dialog.BaseDialog
 
@@ -20,10 +22,28 @@ import com.hqq.core.ui.dialog.BaseDialog
  * @Email :
  */
 class PhotoDialog : BaseDialog(), View.OnClickListener {
+    companion object {
+        /**
+         * 通过回调
+         *
+         * @param maxSelectSize
+         * @param photoDialogClick
+         * @return
+         */
+
+        @JvmStatic
+        fun getSelectPhotoDialog( maxSelectSize: Int = 9, photoDialogClick: AlbumPhotoCallBack?): PhotoDialog {
+            val photoDialog = PhotoDialog()
+            photoDialog.setSelectSize(maxSelectSize)
+            photoDialog.setPhotoDialogCallBack(photoDialogClick)
+            return photoDialog
+        }
+    }
+
     /**
      * PhotoDialogCallBack 是空的时候 会直接回到给Activity
      */
-    var mPhotoDialogCallBack: PhotoDialogCallBack? = null
+    var mPhotoDialogCallBack: AlbumPhotoCallBack? = null
 
     /**
      * 最大选择1
@@ -31,7 +51,7 @@ class PhotoDialog : BaseDialog(), View.OnClickListener {
     var mSelectSize = 1
     var isSupportGif = false
     var isSendAlbum = true
-    fun setPhotoDialogCallBack(photoDialogCallBack: PhotoDialogCallBack?): PhotoDialog {
+    fun setPhotoDialogCallBack(photoDialogCallBack: AlbumPhotoCallBack?): PhotoDialog {
         mPhotoDialogCallBack = photoDialogCallBack
         return this
     }
@@ -58,20 +78,20 @@ class PhotoDialog : BaseDialog(), View.OnClickListener {
 
     override fun onClick(view: View) {
         if (view.id == R.id.btn_taking_pictures) {
-            from(this@PhotoDialog).choose(LocalMediaType.VALUE_TYPE_IMAGE)
+            Album.from(LocalMediaType.VALUE_TYPE_IMAGE)
                 .setStartUpCamera(true)
                 .setMaxSelectNum(mSelectSize)
                 .setSupportGif(isSupportGif)
                 .setIsSendAlbum(isSendAlbum)
-                .forResult(0x1)
+                .forResult(mPhotoDialogCallBack)
             if (mPhotoDialogCallBack == null) {
                 dismiss()
             }
         } else if (view.id == R.id.tv_album) {
-            from(this@PhotoDialog).choose(LocalMediaType.VALUE_TYPE_IMAGE)
+            Album.from(LocalMediaType.VALUE_TYPE_IMAGE)
                 .setMaxSelectNum(mSelectSize)
                 .setSupportGif(isSupportGif)
-                .forResult(0x1)
+                .forResult(mPhotoDialogCallBack)
             if (mPhotoDialogCallBack == null) {
                 dismiss()
             }
@@ -81,45 +101,4 @@ class PhotoDialog : BaseDialog(), View.OnClickListener {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            val list = data!!.getParcelableArrayListExtra<LocalMedia>("data")
-            if (mPhotoDialogCallBack != null) {
-                mPhotoDialogCallBack!!.onSelectLocalMedia(list)
-            }
-            dismiss()
-        }
-    }
-
-    interface PhotoDialogCallBack {
-        fun onSelectLocalMedia(arrayList: ArrayList<LocalMedia>?)
-    }
-
-    companion object {
-        /**
-         * 简单入口
-         *
-         * @return
-         */
-        @JvmStatic
-        val selectPhotoDialog: PhotoDialog
-            get() = PhotoDialog()
-
-        /**
-         * 通过回调
-         *
-         * @param maxSelectSize
-         * @param photoDialogClick
-         * @return
-         */
-
-        @JvmStatic
-        fun getSelectPhotoDialog(maxSelectSize: Int, photoDialogClick: PhotoDialogCallBack?): PhotoDialog {
-            val photoDialog = selectPhotoDialog
-            photoDialog.setSelectSize(maxSelectSize)
-            photoDialog.setPhotoDialogCallBack(photoDialogClick)
-            return photoDialog
-        }
-    }
 }

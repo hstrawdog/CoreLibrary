@@ -72,18 +72,16 @@ class AppManager private constructor() {
      */
     @JvmOverloads
     fun finishAllActivity(isCallBack: Boolean = false) {
+        if (isCallBack) {
+            SelectOptions.instance.call?.onSelectLocalMedia(SelectOptions.instance.selectLocalMedia)
+        }
+
         var i = 0
         val size = activityStack.size
         while (i < size) {
             if (null != activityStack[i]) {
                 var activity = activityStack[i]
-                if (isCallBack) {
-                    if (activity is AlbumDirectoryActivity || activity is AlbumFolderActivity) {
-                        val intent = Intent()
-                        intent.putParcelableArrayListExtra("data", SelectOptions.instance.selectLocalMedia)
-                        activity.setResult(Activity.RESULT_OK, intent)
-                    }
-                }
+
                 activity?.finish()
             }
             i++

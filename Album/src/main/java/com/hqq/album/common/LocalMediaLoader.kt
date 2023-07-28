@@ -159,9 +159,9 @@ class LocalMediaLoader(private val activity: FragmentActivity, @LocalMediaType l
         val imageFile = File(path)
         val folderFile = imageFile.parentFile
         var name = folderFile.name
-        if (FunctionOptions.instance.chooseFolder != null && !FunctionOptions.instance.chooseFolder.isEmpty()) {
-            if (path.contains(FunctionOptions.instance.chooseFolder)) {
-                name = FunctionOptions.instance.chooseFolder
+        if (Album.functionOptions.chooseFolder != null && !Album.functionOptions.chooseFolder.isEmpty()) {
+            if (path.contains(Album.functionOptions.chooseFolder)) {
+                name = Album.functionOptions.chooseFolder
             }
         }
         for (folder in imageFolders) {

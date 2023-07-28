@@ -12,36 +12,15 @@ import java.lang.ref.WeakReference
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class Album private constructor(activity: Activity?, fragment: Fragment? = null) {
-    private val mContext: WeakReference<Activity?>
-    private val mFragment: WeakReference<Fragment?>?
-
-    private constructor(fragment: Fragment) : this(fragment.activity, fragment) {}
-
-    init {
-        mContext = WeakReference(activity)
-        mFragment = WeakReference(fragment)
-    }
-
-    fun choose(valueTypeImage: Int): FunctionOptions {
-        return FunctionOptions.instance.setAlbum(this)
-            .setAlbumType(valueTypeImage)
-    }
-
-    val activity: Activity?
-        get() = mContext.get()
-    val fragment: Fragment?
-        get() = mFragment?.get()
+class Album private constructor() {
 
     companion object {
-        @JvmStatic
-        fun from(activity: Activity?): Album {
-            return Album(activity)
-        }
+        val functionOptions = FunctionOptions()
 
         @JvmStatic
-        fun from(fragment: Fragment): Album {
-            return Album(fragment.activity, fragment)
+        fun from(valueTypeImage: Int): FunctionOptions {
+            return functionOptions.choose(valueTypeImage)
         }
     }
+
 }

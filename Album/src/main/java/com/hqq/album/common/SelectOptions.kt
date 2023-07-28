@@ -19,15 +19,18 @@ class SelectOptions {
     /**
      * 文件夹缓存内容
      */
-     var mFolderLocalMedia: ArrayList<LocalMedia> = ArrayList()
+    var mFolderLocalMedia: ArrayList<LocalMedia> = ArrayList()
 
-
+    /**
+     *  回调
+     */
+    var call: AlbumPhotoCallBack? = null
 
     fun reset() {
+        call = null
         mFolderLocalMedia.clear()
         selectLocalMedia.clear()
     }
-
 
     companion object {
         val instance = SelectOptions()

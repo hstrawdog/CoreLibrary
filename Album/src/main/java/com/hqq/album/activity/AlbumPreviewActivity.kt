@@ -13,6 +13,7 @@ import com.hqq.album.AppManager
 import com.hqq.album.R
 import com.hqq.album.annotation.LocalMediaType.VALUE_TYPE_IMAGE
 import com.hqq.album.annotation.LocalMediaType.VALUE_URL_IMAGE
+import com.hqq.album.common.Album
 import com.hqq.album.common.FunctionKey
 import com.hqq.album.common.FunctionOptions
 import com.hqq.album.common.SelectOptions
@@ -166,12 +167,12 @@ class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(),
                     }
                 }
             } else {
-                if (SelectOptions.instance.selectLocalMedia.size < FunctionOptions.instance.maxSelectNum) {
+                if (SelectOptions.instance.selectLocalMedia.size < Album.functionOptions.maxSelectNum) {
                     SelectOptions.instance.selectLocalMedia.add(mLocalMediaList!![mPosition])
                     binding.tvCheck.isSelected = true
                     binding.tvCheck.startAnimation(activity.let { OptAnimationLoader.loadAnimation(it, R.anim.modal_in) })
                 } else {
-                    Toast.makeText(activity, activity?.getString(R.string.picture_message_max_num, FunctionOptions.instance.maxSelectNum.toString() + ""), Toast.LENGTH_LONG)
+                    Toast.makeText(activity, activity?.getString(R.string.picture_message_max_num, Album.functionOptions.maxSelectNum.toString() + ""), Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -183,7 +184,7 @@ class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(),
         if (SelectOptions.instance.selectLocalMedia.size > 0) {
             binding.albumFinish.visibility = View.VISIBLE
             binding.albumFinish.text =
-                "完成(" + SelectOptions.instance.selectLocalMedia.size + "/" + FunctionOptions.instance.maxSelectNum + ")"
+                "完成(" + SelectOptions.instance.selectLocalMedia.size + "/" + Album.functionOptions.maxSelectNum + ")"
         } else {
             binding.albumFinish.visibility = View.GONE
         }

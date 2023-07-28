@@ -9,14 +9,13 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.hqq.album.activity.AlbumPreviewActivity
 import com.hqq.album.annotation.LocalMediaType
-import com.hqq.album.common.Album.Companion.from
+import com.hqq.album.common.Album
+import com.hqq.album.common.AlbumPhotoCallBack
+import com.hqq.album.common.FunctionOptions
 import com.hqq.album.dialog.PhotoDialog.Companion.getSelectPhotoDialog
-import com.hqq.album.dialog.PhotoDialog.Companion.selectPhotoDialog
-import com.hqq.album.dialog.PhotoDialog.PhotoDialogCallBack
 import com.hqq.album.entity.LocalMedia
 import com.hqq.album.utils.AlbumFileUtils.getFile2Uri
 import com.hqq.core.ui.base.BaseActivity
@@ -36,6 +35,27 @@ class AlbumIndexActivity : BaseActivity() {
     override val layoutViewId: Int
         get() = R.layout.activity_album_index
 
+    var call = object : AlbumPhotoCallBack {
+        override fun onSelectLocalMedia(arrayList: ArrayList<LocalMedia>?) {
+            val list = arrayList
+            Log.e("---------------------", "onActivityResult: ")
+            val stringBuilder = StringBuilder()
+            if (list != null) {
+                for (localMedia in list) {
+                    stringBuilder.append("${localMedia.path}".trimIndent())
+                    val imageView = findViewById<ImageView>(R.id.imageView)
+                    tv_file!!.text = File(localMedia.path).name
+                    Glide.with(imageView)
+                        .load(getFile2Uri(activity, localMedia.path))
+                        .into(imageView)
+                }
+            }
+            mTvInfo!!.text = stringBuilder.toString()
+        }
+
+    }
+
+
     override fun initView() {
         mTvInfo = findViewById(R.id.tv_info)
         tv_file = findViewById(R.id.tv_file)
@@ -51,25 +71,6 @@ class AlbumIndexActivity : BaseActivity() {
         findViewById<View>(R.id.button5).setOnClickListener { view: View -> httpsTest(view) }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            val list = data!!.getParcelableArrayListExtra<LocalMedia>("data")
-            Log.e("---------------------", "onActivityResult: ")
-            val stringBuilder = StringBuilder()
-            if (list != null) {
-                for (localMedia in list) {
-                    stringBuilder.append("${ localMedia.path }".trimIndent())
-                    val imageView = findViewById<ImageView>(R.id.imageView)
-                    tv_file!!.text = File(localMedia.path).name
-                    Glide.with(imageView)
-                        .load(getFile2Uri(this, localMedia.path))
-                        .into(imageView)
-                }
-            }
-            mTvInfo!!.text = stringBuilder.toString()
-        }
-    }
 
     /**
      * 打开相册 带摄像头
@@ -77,9 +78,9 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     private fun openCameraAndAlbum(view: View) {
-        from(activity).choose(LocalMediaType.VALUE_TYPE_IMAGE)
+        Album.from(LocalMediaType.VALUE_TYPE_IMAGE)
             .setDisplayCamera(true)
-            .forResult(0x1)
+            .forResult(call)
     }
 
     /**
@@ -88,8 +89,10 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     private fun openAlbum(view: View) {
-        from(activity).choose(LocalMediaType.VALUE_TYPE_IMAGE)
-            .forResult(0x1)
+
+        Album.from(LocalMediaType.VALUE_TYPE_IMAGE)
+            .forResult(call)
+
     }
 
     /**
@@ -98,9 +101,9 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     private fun openFolderAlbum(view: View) {
-        from(activity).choose(LocalMediaType.VALUE_TYPE_IMAGE)
+        Album.from(LocalMediaType.VALUE_TYPE_IMAGE)
             .setChooseFolder("爱饰拍")
-            .forFolderResult(0x1)
+            .forFolderResult(call)
     }
 
     /**
@@ -109,9 +112,9 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     private fun openCamera(view: View) {
-        from(activity).choose(LocalMediaType.VALUE_TYPE_IMAGE)
+        Album.from(LocalMediaType.VALUE_TYPE_IMAGE)
             .setStartUpCamera(true)
-            .forResult(0x1)
+            .forResult(call)
     }
 
     /**
@@ -120,14 +123,7 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     private fun openPhotoSelectDialog(view: View) {
-        getSelectPhotoDialog(1, object : PhotoDialogCallBack {
-            override fun onSelectLocalMedia(arrayList: ArrayList<LocalMedia>?) {
-                if (arrayList != null && arrayList.size > 0) {
-                    Toast.makeText(activity, arrayList[0].path, Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        }).show(supportFragmentManager)
+        getSelectPhotoDialog(photoDialogClick = call).show(supportFragmentManager)
     }
 
     /**
@@ -136,7 +132,7 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     private fun openPhotoSelectDialog4Activity(view: View) {
-        selectPhotoDialog.show(supportFragmentManager)
+        getSelectPhotoDialog(1, call).show(supportFragmentManager)
     }
 
     /**
@@ -145,8 +141,8 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     fun openVideoAlbum(view: View?) {
-        from(activity).choose(LocalMediaType.VALUE_TYPE_VIDEO)
-            .forResult(0x1)
+        Album.from(LocalMediaType.VALUE_TYPE_VIDEO)
+            .forResult(call)
     }
 
     /**

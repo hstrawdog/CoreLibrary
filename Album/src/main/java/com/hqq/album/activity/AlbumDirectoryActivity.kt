@@ -8,6 +8,8 @@
 package com.hqq.album.activity
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -29,6 +31,7 @@ import com.hqq.album.Adapter.AlbumDirectoryAdapter
 import com.hqq.album.AppManager
 import com.hqq.album.R
 import com.hqq.album.annotation.LocalMediaType
+import com.hqq.album.common.Album
 import com.hqq.album.common.FunctionKey
 import com.hqq.album.common.FunctionOptions
 import com.hqq.album.common.LocalMediaLoader
@@ -44,6 +47,7 @@ import com.hqq.core.CoreConfig
 import com.hqq.core.permission.IPermissionsHas
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseActivity
+import com.hqq.core.ui.base.open
 import com.hqq.core.utils.ToastUtils
 import com.hqq.core.utils.file.FileUtils
 import java.io.File
@@ -59,7 +63,15 @@ import java.io.File
  * @Descrive :
  * @Email :  593979591@qq.com
  */
-class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumDirectoryAdapter.OnItemClickListener, View.OnClickListener {
+class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumDirectoryAdapter.OnItemClickListener,
+    View.OnClickListener {
+    companion object {
+        fun open(context: Context) {
+            context.startActivity(Intent(context, AlbumDirectoryActivity::class.java))
+        }
+    }
+
+
     var mLocalAlbumCamera: FilterImageView? = null
     var mRecyclerView: RecyclerView? = null
     var mFolderList: ArrayList<LocalMediaFolder>? = ArrayList()
@@ -67,7 +79,6 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
     var mIvProgressBar: ImageView? = null
     var mTvProgress: TextView? = null
     private var cameraPath: String? = null
-
 
 
     override fun initConfig() {
@@ -101,7 +112,7 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
 //                //旋转图片
 //                Bitmap bitmap = AlbumFileUtils.rotateBitmap(degree, BitmapFactory.decodeFile(cameraPath));
 //                AlbumFileUtils.saveBitmap(cameraPath, bitmap);
-                if (FunctionOptions.instance.isSendAlbum) {
+                if (Album.functionOptions.isSendAlbum) {
                     sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)))
                 }
                 // takePhotoSuccess = true;
@@ -110,11 +121,11 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
                 media.path = cameraPath
                 media.localMediaType = LocalMediaType.VALUE_TYPE_IMAGE
                 SelectOptions.instance.selectLocalMedia.add(media)
-               AppManager.appManager?.finishAllActivityAndCallBack()
+                AppManager.appManager?.finishAllActivityAndCallBack()
             }
         } else if (requestCode == FunctionKey.REQUEST_CODE_REQUEST_CAMERA && resultCode != RESULT_OK) {
             // 这边是直接打开相册的 那返回的话 直接到上个界面
-            if (FunctionOptions.instance.isStartUpCamera) {
+            if (Album.functionOptions.isStartUpCamera) {
                 AppManager.appManager?.finishAllActivity()
             }
         }
@@ -146,7 +157,7 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         findViewById<View>(R.id.album_back).setOnClickListener(this)
 
         // 判断是否显示相机
-        if (FunctionOptions.instance.isDisplayCamera) {
+        if (Album.functionOptions.isDisplayCamera) {
             mLocalAlbumCamera = findViewById(R.id.loacal_album_camera)
             mLocalAlbumCamera?.setOnClickListener(this)
             mLocalAlbumCamera?.setVisibility(View.VISIBLE)
@@ -177,13 +188,13 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
 
     private fun initData() {
         // 判断是否直接打开相机
-        if (FunctionOptions.instance.isStartUpCamera) {
+        if (Album.functionOptions.isStartUpCamera) {
             startUpCamera()
             return
         }
         // 否则再去 读取内存中的数据
         val localMediaLoader =
-            LocalMediaLoader(this, FunctionOptions.instance.albumType, FunctionOptions.instance.isSupportGif)
+            LocalMediaLoader(this, Album.functionOptions.albumType, Album.functionOptions.isSupportGif)
         localMediaLoader.loadAllImage(object : LocalMediaLoader.LocalMediaLoadListener {
             override fun loadComplete(folders: List<LocalMediaFolder>?) {
                 if (folders != null) {

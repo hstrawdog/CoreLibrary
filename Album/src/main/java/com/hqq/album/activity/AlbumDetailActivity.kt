@@ -10,6 +10,7 @@ import com.hqq.album.Adapter.AlbumDetailAdapter
 import com.hqq.album.Adapter.AlbumDetailAdapter.OnPhotoSelectChangedListener
 import com.hqq.album.AppManager
 import com.hqq.album.R
+import com.hqq.album.common.Album
 import com.hqq.album.common.FunctionKey
 import com.hqq.album.common.FunctionOptions
 import com.hqq.album.common.SelectOptions
@@ -37,7 +38,7 @@ class AlbumDetailActivity : BaseAlbumActivity<ActivityAlbumDetailBinding>(), Vie
         val list = SelectOptions.instance.mFolderLocalMedia
         mAlbumDetailAdapter!!.bindImagesData(list)
         mTvFinish!!.text =
-            "完成(" + SelectOptions.instance.selectLocalMedia.size + "/" + FunctionOptions.instance.maxSelectNum + ")"
+            "完成(" + SelectOptions.instance.selectLocalMedia.size + "/" + Album.functionOptions.maxSelectNum + ")"
     }
 
     override fun initConfig() {
@@ -51,7 +52,7 @@ class AlbumDetailActivity : BaseAlbumActivity<ActivityAlbumDetailBinding>(), Vie
         mRecyclerView!!.setHasFixedSize(true)
         mRecyclerView!!.addItemDecoration(GridSpacingItemDecoration(4, AlbumUtils.dip2px(this, 2f), false))
         mRecyclerView!!.layoutManager = GridLayoutManager(this, 4)
-        mAlbumDetailAdapter = AlbumDetailAdapter(FunctionOptions.instance.maxSelectNum)
+        mAlbumDetailAdapter = AlbumDetailAdapter(Album.functionOptions.maxSelectNum)
         mRecyclerView!!.adapter = mAlbumDetailAdapter
         mAlbumDetailAdapter!!.setOnPhotoSelectChangedListener(this)
         findViewById<View>(R.id.album_back).setOnClickListener(this)
@@ -75,7 +76,7 @@ class AlbumDetailActivity : BaseAlbumActivity<ActivityAlbumDetailBinding>(), Vie
     }
 
     override fun onChange(selectImages: List<LocalMedia>?) {
-        mTvFinish!!.text = "完成(" + selectImages?.size + "/" + FunctionOptions.instance.maxSelectNum + ")"
+        mTvFinish!!.text = "完成(" + selectImages?.size + "/" + Album.functionOptions.maxSelectNum + ")"
     }
 
     override fun onPictureClick(media: LocalMedia?, position: Int) {

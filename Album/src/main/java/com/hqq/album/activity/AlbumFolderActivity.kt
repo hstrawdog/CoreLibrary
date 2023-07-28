@@ -1,5 +1,6 @@
 package com.hqq.album.activity
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
@@ -15,6 +16,7 @@ import com.hqq.album.Adapter.AlbumDetailAdapter.OnPhotoSelectChangedListener
 import com.hqq.album.Adapter.AlbumDirectoryAdapter
 import com.hqq.album.AppManager
 import com.hqq.album.R
+import com.hqq.album.common.Album
 import com.hqq.album.common.FunctionKey
 import com.hqq.album.common.FunctionOptions
 import com.hqq.album.common.LocalMediaLoader
@@ -36,11 +38,16 @@ import com.hqq.core.utils.ToastUtils
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnPhotoSelectChangedListener, View.OnClickListener,
-    AlbumDirectoryAdapter.OnItemClickListener {
+class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnPhotoSelectChangedListener,
+    View.OnClickListener, AlbumDirectoryAdapter.OnItemClickListener {
+
+
 
     companion object {
         private const val CODE_CLOSE = 0x9910
+        fun open(context: Context) {
+            context.startActivity(Intent(context, AlbumFolderActivity::class.java))
+        }
     }
 
 
@@ -66,12 +73,12 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
         mTvTile = findViewById<View>(R.id.album_title) as TextView
         findViewById<View>(R.id.album_back).setOnClickListener(this)
         findViewById<View>(R.id.ll_title).setOnClickListener(this)
-        mFolderName = FunctionOptions.instance.chooseFolder
+        mFolderName = Album.functionOptions.chooseFolder
         initViews()
         mRecyclerView!!.setHasFixedSize(true)
         mRecyclerView!!.addItemDecoration(GridSpacingItemDecoration(4, AlbumUtils.dip2px(this, 2f), false))
         mRecyclerView!!.layoutManager = GridLayoutManager(this, 4)
-        mAlbumDetailAdapter = AlbumDetailAdapter(FunctionOptions.instance.maxSelectNum)
+        mAlbumDetailAdapter = AlbumDetailAdapter(Album.functionOptions.maxSelectNum)
         mRecyclerView!!.adapter = mAlbumDetailAdapter
         mAlbumDetailAdapter!!.setOnPhotoSelectChangedListener(this)
     }
@@ -79,7 +86,7 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
     override fun onResume() {
         super.onResume()
         mTvFinish!!.text =
-            "完成(" + SelectOptions.instance.selectLocalMedia.size + "/" + FunctionOptions.instance.maxSelectNum + ")"
+            "完成(" + SelectOptions.instance.selectLocalMedia.size + "/" + Album.functionOptions.maxSelectNum + ")"
     }
 
     override fun onClick(view: View) {
@@ -121,7 +128,7 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
 
     private fun initData() {
         val localMediaLoader =
-            LocalMediaLoader(this, FunctionOptions.instance.albumType, FunctionOptions.instance.isSupportGif)
+            LocalMediaLoader(this, Album.functionOptions.albumType, Album.functionOptions.isSupportGif)
         localMediaLoader.loadAllImage(object : LocalMediaLoader.LocalMediaLoadListener {
             override fun loadComplete(folders: List<LocalMediaFolder>?) {
                 if (folders != null) {
@@ -153,7 +160,7 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
 
     override fun onTakePhoto() {}
     override fun onChange(selectImages: List<LocalMedia>?) {
-        mTvFinish!!.text = "完成(" + selectImages?.size + "/" + FunctionOptions.instance.maxSelectNum + ")"
+        mTvFinish!!.text = "完成(" + selectImages?.size + "/" + Album.functionOptions.maxSelectNum + ")"
     }
 
     override fun onPictureClick(media: LocalMedia?, position: Int) {
