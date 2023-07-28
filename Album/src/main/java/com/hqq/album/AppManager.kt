@@ -61,9 +61,7 @@ class AppManager private constructor() {
 //		//应用即将全部关闭，清理缓存
         var activity = activity
         if (activity != null) {
-            activityStack!!.remove(activity)
-            activity.finish()
-            activity = null
+            activityStack?.remove(activity)
         }
     }
 

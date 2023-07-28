@@ -34,15 +34,18 @@ import com.hqq.album.common.FunctionOptions
 import com.hqq.album.common.LocalMediaLoader
 import com.hqq.album.common.SelectOptions
 import com.hqq.album.customize.FilterImageView
+import com.hqq.album.databinding.ActivityAlbumBinding
 import com.hqq.album.decoration.RecycleViewDivider
 import com.hqq.album.entity.LocalMedia
 import com.hqq.album.entity.LocalMediaFolder
 import com.hqq.album.utils.AlbumFileUtils
 import com.hqq.album.utils.AlbumUtils
+import com.hqq.core.CoreConfig
 import com.hqq.core.permission.IPermissionsHas
 import com.hqq.core.permission.PermissionsUtils
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.utils.ToastUtils
+import com.hqq.core.utils.file.FileUtils
 import java.io.File
 
 /**
@@ -56,7 +59,7 @@ import java.io.File
  * @Descrive :
  * @Email :  593979591@qq.com
  */
-class AlbumDirectoryActivity : BaseActivity(), AlbumDirectoryAdapter.OnItemClickListener, View.OnClickListener {
+class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumDirectoryAdapter.OnItemClickListener, View.OnClickListener {
     var mLocalAlbumCamera: FilterImageView? = null
     var mRecyclerView: RecyclerView? = null
     var mFolderList: ArrayList<LocalMediaFolder>? = ArrayList()
@@ -65,10 +68,15 @@ class AlbumDirectoryActivity : BaseActivity(), AlbumDirectoryAdapter.OnItemClick
     var mTvProgress: TextView? = null
     private var cameraPath: String? = null
 
-    override val layoutViewId: Int = R.layout.activity_album
+
+
+    override fun initConfig() {
+        super.initConfig()
+        rootViewImpl.iToolBarBuilder.showToolBar = false
+        rootViewImpl.iToolBarBuilder.showLine = false
+    }
 
     override fun initView() {
-
         initViews()
     }
 
@@ -102,7 +110,7 @@ class AlbumDirectoryActivity : BaseActivity(), AlbumDirectoryAdapter.OnItemClick
                 media.path = cameraPath
                 media.localMediaType = LocalMediaType.VALUE_TYPE_IMAGE
                 SelectOptions.instance.selectLocalMedia.add(media)
-                AppManager.appManager?.finishAllActivityAndCallBack()
+               AppManager.appManager?.finishAllActivityAndCallBack()
             }
         } else if (requestCode == FunctionKey.REQUEST_CODE_REQUEST_CAMERA && resultCode != RESULT_OK) {
             // 这边是直接打开相册的 那返回的话 直接到上个界面
@@ -119,16 +127,14 @@ class AlbumDirectoryActivity : BaseActivity(), AlbumDirectoryAdapter.OnItemClick
 
     private fun startUpCamera() {
         // 启动相机拍照,先判断手机是否有拍照权限
+        PermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage) {
+            if (it) {
+                startOpenCamera()
+            } else {
+                mTvProgress!!.text = "哎呀!没有获取到权限,\n请在系统设置中开启权限"
 
-        PermissionsUtils.requestPermissions(IPermissionsHas.camera,IPermissionsHas.storage ){
-                if (it){
-                    startOpenCamera()
-                }else{
-                    mTvProgress!!.text = "哎呀!没有获取到权限,\n请在系统设置中开启权限"
-
-                }
+            }
         }
-
 
 
     }
@@ -159,10 +165,10 @@ class AlbumDirectoryActivity : BaseActivity(), AlbumDirectoryAdapter.OnItemClick
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
 
-        PermissionsUtils.requestStorage(){
-            if (it){
+        PermissionsUtils.requestStorage() {
+            if (it) {
                 initData()
-            }else{
+            } else {
                 mTvProgress!!.text = "哎呀!没有获取到权限,\n请在系统设置中开启权限"
 
             }
@@ -200,14 +206,12 @@ class AlbumDirectoryActivity : BaseActivity(), AlbumDirectoryAdapter.OnItemClick
         if (cameraIntent.resolveActivity(packageManager) != null) {
             val cameraFile = AlbumFileUtils.createCameraFile(this, 1)
             cameraPath = cameraFile?.absolutePath
-            val imageUri: Uri
-            val authority = "$packageName.provider"
-            imageUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                //通过FileProvider创建一个content类型的Uri
-                FileProvider.getUriForFile(this, authority, cameraFile!!)
-            } else {
-                Uri.fromFile(cameraFile)
-            }
+//             imageUri: Uri ?
+//           CoreConfig.get().application.packageName
+//            val authority = "$packageName.FileProvider"
+            var imageUri = FileUtils.getFile2Uri(cameraPath)
+
+
             cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             startActivityForResult(cameraIntent, FunctionKey.REQUEST_CODE_REQUEST_CAMERA)

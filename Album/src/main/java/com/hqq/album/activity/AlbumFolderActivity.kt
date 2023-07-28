@@ -19,6 +19,7 @@ import com.hqq.album.common.FunctionKey
 import com.hqq.album.common.FunctionOptions
 import com.hqq.album.common.LocalMediaLoader
 import com.hqq.album.common.SelectOptions
+import com.hqq.album.databinding.ActivityAlbumFolderBinding
 import com.hqq.album.decoration.GridSpacingItemDecoration
 import com.hqq.album.decoration.RecycleViewDivider
 import com.hqq.album.entity.LocalMedia
@@ -35,7 +36,7 @@ import com.hqq.core.utils.ToastUtils
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class AlbumFolderActivity : BaseActivity(), OnPhotoSelectChangedListener, View.OnClickListener,
+class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnPhotoSelectChangedListener, View.OnClickListener,
     AlbumDirectoryAdapter.OnItemClickListener {
 
     companion object {
@@ -51,10 +52,10 @@ class AlbumFolderActivity : BaseActivity(), OnPhotoSelectChangedListener, View.O
     var mTvTile: TextView? = null
     var mSelectPosition = 0
     var mFolderName: String? = null
-    override val layoutViewId: Int = R.layout.activity_album_folder
     override fun initConfig() {
         super.initConfig()
         rootViewImpl.iToolBarBuilder.showToolBar = false
+        rootViewImpl.iToolBarBuilder.showLine = false
 
     }
 

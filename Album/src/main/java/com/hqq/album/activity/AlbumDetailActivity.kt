@@ -13,6 +13,7 @@ import com.hqq.album.R
 import com.hqq.album.common.FunctionKey
 import com.hqq.album.common.FunctionOptions
 import com.hqq.album.common.SelectOptions
+import com.hqq.album.databinding.ActivityAlbumDetailBinding
 import com.hqq.album.decoration.GridSpacingItemDecoration
 import com.hqq.album.entity.LocalMedia
 import com.hqq.album.utils.AlbumUtils
@@ -26,7 +27,7 @@ import com.hqq.core.ui.base.BaseActivity
  * @Descrive :
  * @Email :
  */
-class AlbumDetailActivity : BaseActivity(), View.OnClickListener, OnPhotoSelectChangedListener {
+class AlbumDetailActivity : BaseAlbumActivity<ActivityAlbumDetailBinding>(), View.OnClickListener, OnPhotoSelectChangedListener {
     private var mRecyclerView: RecyclerView? = null
     var mTvFinish: TextView? = null
     var mTvTile: TextView? = null
@@ -39,10 +40,10 @@ class AlbumDetailActivity : BaseActivity(), View.OnClickListener, OnPhotoSelectC
             "完成(" + SelectOptions.instance.selectLocalMedia.size + "/" + FunctionOptions.instance.maxSelectNum + ")"
     }
 
-    override val layoutViewId: Int = R.layout.activity_album_detail
     override fun initConfig() {
         super.initConfig()
         rootViewImpl.iToolBarBuilder.showToolBar = false
+        rootViewImpl.iToolBarBuilder.showLine = false
     }
 
     override fun initView() {

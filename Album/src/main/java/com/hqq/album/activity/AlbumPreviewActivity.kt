@@ -36,10 +36,9 @@ import com.hqq.core.utils.file.SaveBitmapUtils
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-class AlbumPreviewActivity : BaseViewBindingActivity<ActivityAlbumPreviewV2Binding>(), View.OnClickListener {
+class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(), View.OnClickListener {
     companion object {
         /**
-         *
          * @param activity BaseActivity
          * @param list ArrayList<String>  url 访问的预览
          */
@@ -66,7 +65,12 @@ class AlbumPreviewActivity : BaseViewBindingActivity<ActivityAlbumPreviewV2Bindi
      *  是否 可以勾选
      */
     var _isShowSelect = true
+
+    /**
+     *  是否可以保存图片
+     */
     var _isSavaBitmap = false
+
     override fun initConfig() {
         super.initConfig()
         rootViewImpl.iToolBarBuilder.showLine = false
@@ -86,35 +90,7 @@ class AlbumPreviewActivity : BaseViewBindingActivity<ActivityAlbumPreviewV2Bindi
         mPosition = currPosition - 1
         mLocalMediaList = SelectOptions.instance.mFolderLocalMedia
         mPreviewAdapter.setNewInstance(mLocalMediaList?.toMutableList())
-
-        if (_isSavaBitmap) {
-            mPreviewAdapter.call = {
-                SelectDialog.Builder()
-                    .setContent("是否保存图片")
-                    .setPositiveButton("确定", object : DialogInterface.OnClickListener {
-                        override fun onClick(dialog: DialogInterface?, which: Int) {
-                            ImageLoadUtils.getBitmapByFail(activity, it.path, object :
-                                ImageLoadUtils.GlideLoadBitmapCallback {
-                                override fun getBitmapCallback(bitmap: Bitmap) {
-                                    SaveBitmapUtils.saveBitmap2Pictures(bitmap, "", FileUtils.getDefFileName(".png"))
-                                    ToastUtils.showToast("保存成功")
-                                }
-
-                                override fun onLoadFailed() {
-                                }
-
-                            })
-                            dialog?.dismiss()
-                        }
-                    })
-                    .create()
-                    .show(supportFragmentManager)
-
-            }
-        }
-
-
-
+        initSaveBitmap()
 
 
 
@@ -141,14 +117,36 @@ class AlbumPreviewActivity : BaseViewBindingActivity<ActivityAlbumPreviewV2Bindi
                     }
                 }
             }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-            }
         })
         binding.rcAlbumList.scrollToPosition(mPosition)
         updateSelectMenu()
 
+    }
+
+    private fun initSaveBitmap() {
+        if (_isSavaBitmap) {
+            mPreviewAdapter.call = {
+                SelectDialog.Builder()
+                    .setContent("是否保存图片")
+                    .setPositiveButton("确定", object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            ImageLoadUtils.getBitmapByFail(activity, it.path, object :
+                                ImageLoadUtils.GlideLoadBitmapCallback {
+                                override fun getBitmapCallback(bitmap: Bitmap) {
+                                    SaveBitmapUtils.saveBitmap2Pictures(bitmap, "", FileUtils.getDefFileName(".png"))
+                                    ToastUtils.showToast("保存成功")
+                                }
+
+                                override fun onLoadFailed() {
+                                }
+                            })
+                            dialog?.dismiss()
+                        }
+                    })
+                    .create()
+                    .show(supportFragmentManager)
+            }
+        }
     }
 
     override fun onClick(v: View) {

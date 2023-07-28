@@ -32,8 +32,7 @@ import com.hqq.core.widget.LoadingView
  * 3. 初始化 LoadingView
  */
 
-abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction,
-    View.OnClickListener {
+abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener {
     /**
      *  回调
      */
@@ -42,11 +41,9 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     /**
      *  页面跳转
      */
-    var registerForActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            activityResult.value = result
-        }
-
+    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        activityResult.value = result
+    }
 
     /**
      * 当前对象
@@ -72,11 +69,8 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
      * 根布局创建
      */
     private val iCreateRootView: IRootViewBuildBuild by lazy {
-        IRootViewBuildBuild(
-            this, showStatus = true, showToolBar = true, isAlwaysPortrait = isAlwaysPortrait
-        )
+        IRootViewBuildBuild(this, showStatus = true, showToolBar = true, isAlwaysPortrait = isAlwaysPortrait)
     }
-
 
     /**
      *  根布局
@@ -121,7 +115,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            onResult(requestCode, resultCode, data!!)
+            onResult(requestCode, resultCode, data)
         }
     }
 
