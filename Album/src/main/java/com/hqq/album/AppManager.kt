@@ -36,6 +36,8 @@ import java.util.Stack
  * @date: 2016/11/18  9:34
 </描述当前版本功能> */
 class AppManager private constructor() {
+    var activityStack: Stack<Activity> = Stack()
+
     /**
      * 添加Activity到堆栈
      */
@@ -43,14 +45,14 @@ class AppManager private constructor() {
         if (activityStack == null) {
             activityStack = Stack()
         }
-        activityStack!!.add(activity)
+        activityStack.add(activity)
     }
 
     /**
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     fun finishActivity() {
-        val activity = activityStack!!.lastElement()
+        val activity = activityStack.lastElement()
         finishActivity(activity)
     }
 
@@ -61,7 +63,7 @@ class AppManager private constructor() {
 //		//应用即将全部关闭，清理缓存
         var activity = activity
         if (activity != null) {
-            activityStack?.remove(activity)
+            activityStack.remove(activity)
         }
     }
 
@@ -71,10 +73,10 @@ class AppManager private constructor() {
     @JvmOverloads
     fun finishAllActivity(isCallBack: Boolean = false) {
         var i = 0
-        val size = activityStack!!.size
+        val size = activityStack.size
         while (i < size) {
-            if (null != activityStack!![i]) {
-                var activity = activityStack!![i]
+            if (null != activityStack[i]) {
+                var activity = activityStack[i]
                 if (isCallBack) {
                     if (activity is AlbumDirectoryActivity || activity is AlbumFolderActivity) {
                         val intent = Intent()
@@ -86,7 +88,7 @@ class AppManager private constructor() {
             }
             i++
         }
-        activityStack!!.clear()
+        activityStack.clear()
     }
 
     fun finishAllActivityAndCallBack() {
@@ -94,7 +96,6 @@ class AppManager private constructor() {
     }
 
     companion object {
-        private var activityStack: Stack<Activity?>? = null
         private var instance: AppManager? = null
 
         /**

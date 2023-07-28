@@ -64,7 +64,7 @@ class AlbumDetailActivity : BaseAlbumActivity<ActivityAlbumDetailBinding>(), Vie
     override fun onClick(view: View) {
         val i = view.id
         if (i == R.id.album_back) {
-            AppManager.appManager?.finishActivity()
+            onBackPressed()
         }
         if (i == R.id.album_finish) {
             AppManager.appManager?.finishAllActivityAndCallBack()

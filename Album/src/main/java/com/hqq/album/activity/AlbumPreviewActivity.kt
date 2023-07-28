@@ -152,7 +152,7 @@ class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(),
     override fun onClick(v: View) {
         val i = v.id
         if (i == R.id.album_back) {
-            AppManager.appManager?.finishActivity()
+            onBackPressed()
         } else if (i == R.id.album_finish) {
             setResult(RESULT_OK)
             AppManager.appManager?.finishAllActivityAndCallBack()
@@ -169,7 +169,7 @@ class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(),
                 if (SelectOptions.instance.selectLocalMedia.size < FunctionOptions.instance.maxSelectNum) {
                     SelectOptions.instance.selectLocalMedia.add(mLocalMediaList!![mPosition])
                     binding.tvCheck.isSelected = true
-                    binding.tvCheck.startAnimation(activity?.let { OptAnimationLoader.loadAnimation(it, R.anim.modal_in) })
+                    binding.tvCheck.startAnimation(activity.let { OptAnimationLoader.loadAnimation(it, R.anim.modal_in) })
                 } else {
                     Toast.makeText(activity, activity?.getString(R.string.picture_message_max_num, FunctionOptions.instance.maxSelectNum.toString() + ""), Toast.LENGTH_LONG)
                         .show()

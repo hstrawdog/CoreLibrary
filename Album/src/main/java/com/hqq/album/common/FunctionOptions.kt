@@ -116,8 +116,7 @@ class FunctionOptions {
      */
     fun forResult(requestCode: Int) {
         val activity = mAlbum!!.activity
-        SelectOptions.instance
-            .reset()
+        SelectOptions.instance.reset()
         val intent = Intent(activity, AlbumDirectoryActivity::class.java)
         val fragment = mAlbum!!.fragment
         if (fragment != null) {
@@ -134,8 +133,7 @@ class FunctionOptions {
      */
     fun forFolderResult(requestCode: Int) {
         val activity = mAlbum!!.activity
-        SelectOptions.instance
-            .reset()
+        SelectOptions.instance.reset()
         val intent = Intent(activity, AlbumFolderActivity::class.java)
         val fragment = mAlbum!!.fragment
         if (fragment != null) {
@@ -146,8 +144,7 @@ class FunctionOptions {
     }
 
 
-
-    companion object{
+    companion object {
         val instance = FunctionOptions()
 
     }

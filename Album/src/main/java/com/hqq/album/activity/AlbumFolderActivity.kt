@@ -92,7 +92,7 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
                 mRecyclerView!!.adapter = mAlbumDetailAdapter
                 return
             }
-            AppManager.appManager?.finishActivity()
+            onBackPressed()
         } else if (i == R.id.album_finish) {
             AppManager.appManager?.finishAllActivityAndCallBack()
         } else if (i == R.id.ll_title) {
