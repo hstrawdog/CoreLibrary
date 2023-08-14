@@ -8,7 +8,7 @@
     android:clickable="true"
     android:orientation="vertical">
 
-    <com.qq.readbook.weight.swipe.EasySwipeMenuLayout
+    <com.easy.readbook.weight.swipe.EasySwipeMenuLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -85,7 +85,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.qq.readbook.weight.ActivityIndicatorView
+                <com.easy.readbook.weight.ActivityIndicatorView
                     android:id="@+id/pb_bar"
                     style="@android:style/Widget.ProgressBar.Small"
                     android:layout_width="@dimen/x80"
@@ -141,5 +141,5 @@
 
 
         </LinearLayout>
-    </com.qq.readbook.weight.swipe.EasySwipeMenuLayout>
+    </com.easy.readbook.weight.swipe.EasySwipeMenuLayout>
 </LinearLayout>

@@ -38,7 +38,7 @@
                 android:layout_gravity="center" />
 
 
-        <com.hqq.core.widget.FilterImageView
+        <com.easy.core.widget.FilterImageView
                 android:id="@+id/iv_bar_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

@@ -1,9 +1,9 @@
-import com.hqq.example.utils.ColorUtil
+import com.easy.example.utils.ColorUtil
 import org.junit.Test
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.example
+ * @Package : com.easy.example
  * @FileName :   Test
  * @Date : 2020/8/27 0027  上午 9:31
  * @Email : qiqiang213@gmail.com
@@ -43,10 +43,10 @@ class Test {
         }
 
 
-        println(" ${ColorUtil.getRanDomColor()} ")
-        println(" ${ColorUtil.getRanDomColor()} ")
-        println(" ${ColorUtil.getRanDomColor()} ")
-        println(" ${ColorUtil.getRanDomColor()} ")
+        println(" ${com.easy.example.utils.ColorUtil.getRanDomColor()} ")
+        println(" ${com.easy.example.utils.ColorUtil.getRanDomColor()} ")
+        println(" ${com.easy.example.utils.ColorUtil.getRanDomColor()} ")
+        println(" ${com.easy.example.utils.ColorUtil.getRanDomColor()} ")
 
     }
 

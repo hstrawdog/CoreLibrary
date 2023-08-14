@@ -1,4 +1,4 @@
-import com.hqq.core.utils.TimeUtils
+import com.easy.core.utils.TimeUtils
 import java.text.SimpleDateFormat
 import java.util.Date
 

@@ -7,13 +7,13 @@
     android:layout_height="match_parent">
 
 
-    <com.hqq.example.ui.customize.widget.BezierView
+    <com.easy.example.ui.customize.widget.BezierView
         android:id="@+id/view_bezier"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 
-<!--    <com.hqq.example.ui.customize.widget.GuideView-->
+<!--    <com.easy.example.ui.customize.widget.GuideView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"/>-->
 

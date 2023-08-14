@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hqq.example.ui.customize.SemicircularActivity">
+    tools:context="com.easy.example.com.easy.example.ui.customize.SemicircularActivity">
 
 
-    <com.hqq.example.ui.customize.widget.SemicircularView
+    <com.easy.example.ui.customize.widget.SemicircularView
         android:padding="@dimen/x20"
         android:layout_width="@dimen/x100"
         android:layout_height="@dimen/x100" />
 
 
-    <com.hqq.example.ui.customize.widget.CircularProgressView
+    <com.easy.example.ui.customize.widget.CircularProgressView
             app:progWidth="@dimen/x10"
             app:backWidth="@dimen/x10"
             app:backColor="#C8C8C8"

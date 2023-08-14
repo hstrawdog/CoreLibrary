@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hqq.example.ui.customize.CurtainActivity">
+    tools:context="com.easy.example.ui.customize.CurtainActivity">
 
 
     <LinearLayout
@@ -43,7 +43,7 @@
     </LinearLayout>
 
 
-    <com.hqq.example.ui.customize.widget.GuideView
+    <com.easy.example.ui.customize.widget.GuideView
         android:visibility="gone"
         android:id="@+id/gv_view"
         android:layout_width="match_parent"

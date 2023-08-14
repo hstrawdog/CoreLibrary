@@ -6,7 +6,7 @@
         <data>
             <variable
                 name="vm"
-                type="com.hqq.example.ui.jetpack.package1.UserViewModel" />
+                type="com.easy.example.ui.jetpack.package1.UserViewModel" />
 
     </data>
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@color/color_main"
         android:orientation="vertical"
-        tools:context="com.hqq.example.ui.jetpack.viewbinding.ViewBindingActivity">
+        tools:context="com.easy.example.com.easy.example.ui.jetpack.viewbinding.ViewBindingActivity">
 
         <TextView
             android:id="@+id/textView17"

@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.hqq.example.demo.login.LoginViewModel" />
+            type="com.easy.example.demo.login.LoginViewModel" />
 
     </data>
 
@@ -15,7 +15,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.hqq.example.demo.login.LoginActivity">
+        tools:context="com.easy.example.demo.login.LoginActivity">
 
 
         <EditText

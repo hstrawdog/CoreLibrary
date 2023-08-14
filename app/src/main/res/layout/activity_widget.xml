@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.hqq.example.ui.customize.WidgetActivity">
+    tools:context="com.easy.example.com.easy.example.ui.customize.WidgetActivity">
 
 
-    <com.hqq.example.ui.customize.widget.ClockView
+    <com.easy.example.ui.customize.widget.ClockView
         android:layout_width="@dimen/x500"
         android:layout_height="@dimen/x500"
         android:background="@color/white" />

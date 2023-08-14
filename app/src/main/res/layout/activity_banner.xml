@@ -7,12 +7,12 @@
     android:orientation="vertical"
     tools:context=".ui.recycle.BannerActivity">
 
-    <com.hqq.core.recycle.RecycleViewBanner
+    <com.easy.core.recycle.RecycleViewBanner
         android:id="@+id/rc_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x330" />
 
-    <com.hqq.core.recycle.RecycleViewBanner
+    <com.easy.core.recycle.RecycleViewBanner
         android:id="@+id/rc_banner2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x330" />

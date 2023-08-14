@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="com.hqq.example.demo.weather.WeatherViewModel" />
+            type="com.easy.example.demo.weather.WeatherViewModel" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="@dimen/x20"
-        tools:context="com.hqq.example.demo.weather.WeatherActivity">
+        tools:context="com.easy.example.demo.weather.WeatherActivity">
 
 
         <TextView

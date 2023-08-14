@@ -5,7 +5,7 @@ import android.os.Build
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityWindowInfo
-import com.hqq.core.utils.log.LogUtils
+import com.easy.core.utils.log.LogUtils
 import org.json.JSONArray
 import org.json.JSONObject
 

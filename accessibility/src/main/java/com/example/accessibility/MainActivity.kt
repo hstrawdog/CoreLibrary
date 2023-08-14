@@ -6,7 +6,7 @@ import android.provider.Settings
 import android.text.TextUtils
 import com.example.accessibility.databinding.ActivityMainBinding
 import com.example.accessibility.kuaishou.KuaiShouJob
-import com.hqq.core.ui.base.BaseViewBindingActivity
+import com.easy.core.ui.base.BaseViewBindingActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

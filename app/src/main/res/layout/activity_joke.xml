@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.hqq.example.demo.joke.JokeActivity">
+        tools:context="com.easy.example.demo.joke.JokeActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@id/rc_list"

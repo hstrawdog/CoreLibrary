@@ -2,7 +2,7 @@ package com.example.opengl.triangle
 
 import android.opengl.GLSurfaceView
 import com.example.opengl.databinding.ActivityTriangleBinding
-import com.hqq.core.ui.base.BaseViewBindingActivity
+import com.easy.core.ui.base.BaseViewBindingActivity
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

@@ -1,7 +1,7 @@
 package com.example.accessibility.kuaishou
 
 import com.example.accessibility.App
-import com.hqq.core.CoreConfig
+import com.easy.core.CoreConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -1,9 +1,8 @@
 package com.example.opengl
 
 import com.example.opengl.error.Part3Activity
-import com.example.opengl.error.TriangleCppActivity
-import com.hqq.core.ui.base.open
-import com.hqq.core.ui.list.BaseListActivity
+import com.easy.core.ui.base.open
+import com.easy.core.ui.list.BaseListActivity
 
 class MainActivity : BaseListActivity() {
     override val adapter: MainAdapter = MainAdapter()

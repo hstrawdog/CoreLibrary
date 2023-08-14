@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
-import com.hqq.core.utils.log.LogUtils
+import com.easy.core.utils.log.LogUtils
 
 /**
  * Created by StoneHui on 2019-11-28.

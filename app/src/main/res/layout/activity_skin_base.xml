@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.example.ui.skin.SkinAActivity">
+    tools:context="com.easy.example.ui.skin.SkinAActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:drawableTop="@mipmap/ic_collection_pre"
             android:text="文本测试" />
 
-        <com.hqq.example.widget.SkinSwitch
+        <com.easy.example.widget.SkinSwitch
                 android:id="@+id/switch_def"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

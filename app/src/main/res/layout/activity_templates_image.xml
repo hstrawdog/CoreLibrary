@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.example.ui.customize.TemplatesImageActivity">
+    tools:context="com.easy.example.com.easy.example.ui.customize.TemplatesImageActivity">
 
-    <com.hqq.example.ui.customize.widget.TemplatesImage
+    <com.easy.example.ui.customize.widget.TemplatesImage
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

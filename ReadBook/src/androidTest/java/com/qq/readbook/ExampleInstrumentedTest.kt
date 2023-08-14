@@ -6,8 +6,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
-import com.hqq.core.utils.gson.GsonUtil
-import com.hqq.core.utils.log.LogUtils
+import com.easy.core.utils.gson.GsonUtil
+import com.easy.core.utils.log.LogUtils
 import com.qq.readbook.bean.book.BookSource
 import com.qq.readbook.bean.RuleChapterBean
 import com.qq.readbook.bean.RuleSearchBean

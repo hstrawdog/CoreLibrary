@@ -18,7 +18,7 @@
         tools:context=".ui.book.ReadBookActivity">
 
 
-        <com.qq.readbook.weight.page.PageView
+        <com.easy.readbook.weight.page.PageView
             android:id="@+id/pageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
 
-            <com.hqq.core.widget.FilterImageView
+            <com.easy.core.widget.FilterImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:onClick="@{vm::onBack}"

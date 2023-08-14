@@ -6,15 +6,15 @@
 
     <data>
 
-        <import type="com.hqq.example.R" />
+        <import type="com.easy.example.R" />
 
         <variable
             name="user"
-            type="com.hqq.example.ui.jetpack.livedata.User" />
+            type="com.easy.example.ui.jetpack.livedata.User" />
 
         <variable
             name="dataBinding"
-            type="com.hqq.example.ui.jetpack.databinding.DataBanding" />
+            type="com.easy.example.ui.jetpack.databinding.DataBanding" />
     </data>
 
     <LinearLayout

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hqq.example.ui.customize.RoundCountdownActivity">
+    tools:context="com.easy.example.com.easy.example.ui.customize.RoundCountdownActivity">
 
 
-    <com.hqq.example.ui.customize.widget.RoundCountdownView
+    <com.easy.example.ui.customize.widget.RoundCountdownView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

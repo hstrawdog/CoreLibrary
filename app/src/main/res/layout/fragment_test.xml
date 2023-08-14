@@ -7,11 +7,11 @@
 
         <import type="androidx.databinding.ObservableArrayList" />
 
-        <import type="com.hqq.example.ui.jetpack.package1.MvvmTestActivity.Fields" />
+        <import type="com.easy.example.ui.jetpack.package1.MvvmTestActivity.Fields" />
 
         <variable
             name="vm"
-            type="com.hqq.example.ui.jetpack.package1.UserViewModel" />
+            type="com.easy.example.ui.jetpack.package1.UserViewModel" />
 
         <variable
             name="title"
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.hqq.example.ui.jetpack.package1.MvvmTestActivity">
+        tools:context="com.easy.example.ui.jetpack.package1.MvvmTestActivity">
 
         <TextView
             android:id="@+id/textView16"

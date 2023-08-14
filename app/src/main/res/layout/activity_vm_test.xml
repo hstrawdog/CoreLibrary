@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.hqq.example.ui.jetpack.package1.VmTestActivity">
+        tools:context="com.easy.example.ui.jetpack.package1.VmTestActivity">
 
         <Button
             android:id="@+id/button49"

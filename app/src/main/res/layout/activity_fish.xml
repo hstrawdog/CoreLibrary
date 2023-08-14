@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.customize.FishActivity">
 
-<com.hqq.example.widget.FishDrawableView
+<com.easy.example.widget.FishDrawableView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"></com.hqq.example.widget.FishDrawableView>
+    android:layout_height="match_parent"></com.easy.example.widget.FishDrawableView>
 
 </RelativeLayout>

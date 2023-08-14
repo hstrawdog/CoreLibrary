@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hqq.example">
+    package="com.easy.example">
     <!-- 用于进行网络定位 -->
     <!--允许获得精确的GPS定位-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /><!--允许获得粗略的基站网络定位-->
@@ -100,7 +100,7 @@
             android:name=".ui.compose.ComposeIndexActivity"
             android:label="ComposeIndex" />
         <activity
-            android:name=".ui.customize.ZoomViewActivity"
+            android:name="com.easy.example.ui.customize.ZoomViewActivity"
             android:exported="true"
             android:label="缩放">
 
@@ -289,10 +289,10 @@
             android:name=".ui.customize.SemicircularActivity"
             android:label="环形进度条" />
         <activity
-            android:name="com.hqq.example.ui.file.image.ImageViewRectangle2Activity"
+            android:name=".ui.file.image.ImageViewRectangle2Activity"
             android:label="scaleType 测试" />
         <activity
-            android:name="com.hqq.example.ui.file.image.ImageViewRectangleActivity"
+            android:name=".ui.file.image.ImageViewRectangleActivity"
             android:label="图片 scaleType 测试" />
         <activity
             android:name=".ui.toast.ToastActivity"
@@ -332,7 +332,7 @@
             android:name=".ui.customize.TemplatesImageActivity"
             android:label="图片模板 空" />
         <activity
-            android:name="com.hqq.example.ui.file.image.ImageViewSquareActivity"
+            android:name=".ui.file.image.ImageViewSquareActivity"
             android:label="图片测试" />
         <activity
             android:name=".ui.view.EditTextActivity"
@@ -344,7 +344,7 @@
             android:name=".ui.ShapeTestActivity"
             android:label="shape测试" />
         <activity
-            android:name="com.hqq.example.ui.file.FilePathActivity"
+            android:name=".ui.file.FilePathActivity"
             android:label="文件路径测试" />
         <activity
             android:name=".ui.customize.WidgetActivity"
@@ -384,7 +384,7 @@
             android:label="网页测试" />
         <activity android:name=".ui.customize.FishActivity" />
         <activity
-            android:name="com.hqq.example.ui.system.info.BaseInfoActivity"
+            android:name=".ui.system.info.BaseInfoActivity"
             android:label="设备信息" />
         <activity
             android:name=".ui.adaptation.LayoutTestActivity"

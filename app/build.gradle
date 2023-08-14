@@ -7,7 +7,13 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-import com.hqq.core.plugin.*
+
+import com.easy.core.plugin.BuildVersionConfig
+import com.easy.core.plugin.Components
+import com.easy.core.plugin.Hilt
+import com.easy.core.plugin.Leakcanary
+import com.easy.core.plugin.Work
+import com.easy.core.plugin.*
 
 android {
     dataBinding {
@@ -26,7 +32,7 @@ android {
     compileSdkVersion BuildVersionConfig.compileSdkVersion
     buildToolsVersion BuildVersionConfig.buildToolsVersion
     defaultConfig {
-        applicationId "com.hqq.core"
+        applicationId "com.easy.core"
         minSdkVersion BuildVersionConfig.minSdkVersion
         targetSdkVersion BuildVersionConfig.targetSdkVersion
         versionName "1.0.0"

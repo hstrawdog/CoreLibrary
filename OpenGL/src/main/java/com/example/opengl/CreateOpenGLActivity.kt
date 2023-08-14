@@ -3,8 +3,8 @@ package com.example.opengl
 import android.opengl.GLSurfaceView
 import android.opengl.GLU
 import com.example.opengl.databinding.ActivityCreateOpenglBinding
-import com.hqq.core.ui.base.BaseViewBindingActivity
-import com.hqq.core.utils.log.LogUtils
+import com.easy.core.ui.base.BaseViewBindingActivity
+import com.easy.core.utils.log.LogUtils
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.iblibrary.bean
+ * @Package : com.easy.iblibrary.bean
  * @FileName :   MainBean
  * @Date : 2018/11/22 0022  下午 7:45
  * @Descrive :

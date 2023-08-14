@@ -7,7 +7,7 @@
     android:background="@color/black"
     android:orientation="vertical">
 
-    <com.hqq.example.widget.MyCropImageView
+    <com.easy.example.widget.MyCropImageView
         android:id="@+id/cropImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

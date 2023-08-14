@@ -2,7 +2,7 @@ package com.example.opengl.part
 
 import android.opengl.GLSurfaceView
 import android.view.View
-import com.hqq.core.ui.base.BaseActivity
+import com.easy.core.ui.base.BaseActivity
 import android.view.ViewGroup
 
 /**

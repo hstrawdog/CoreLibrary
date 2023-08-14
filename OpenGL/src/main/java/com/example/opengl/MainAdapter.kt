@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * @Author : huangqiqiang
- * @Package : com.hqq.iblibrary.adapter
+ * @Package : com.easy.iblibrary.adapter
  * @FileName :   MainAdapter
  * @Date : 2018/11/22 0022  下午 7:45
  * @Descrive :

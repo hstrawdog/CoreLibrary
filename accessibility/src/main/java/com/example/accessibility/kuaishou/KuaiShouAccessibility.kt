@@ -3,7 +3,7 @@ package com.example.accessibility.kuaishou
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import com.example.accessibility.AccessibilityInterface
-import com.hqq.core.utils.log.LogUtils
+import com.easy.core.utils.log.LogUtils
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject

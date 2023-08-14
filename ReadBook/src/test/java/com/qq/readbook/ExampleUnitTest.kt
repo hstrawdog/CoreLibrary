@@ -3,7 +3,7 @@ package com.qq.readbook
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import com.hqq.core.utils.gson.GsonUtil
+import com.easy.core.utils.gson.GsonUtil
 import com.qq.readbook.bean.book.BookSource
 import com.qq.readbook.bean.RuleSearchBean
 import com.qq.readbook.repository.read.JsoupUtils

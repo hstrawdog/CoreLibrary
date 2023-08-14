@@ -1,4 +1,4 @@
-import com.hqq.core.plugin.BuildVersionConfig
+import com.easy.core.plugin.BuildVersionConfig
 
 plugins {
     id 'com.android.application'

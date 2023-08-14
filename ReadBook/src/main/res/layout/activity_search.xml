@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x88">
 
-                <com.hqq.core.widget.FilterImageView
+                <com.easy.core.widget.FilterImageView
                     android:id="@+id/iv_bar_back"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -109,7 +109,7 @@
         <View style="@style/line_vertical" />
 
 
-        <com.qq.readbook.weight.flowlayout.TagFlowLayout
+        <com.easy.readbook.weight.flowlayout.TagFlowLayout
             android:id="@+id/fl_books"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

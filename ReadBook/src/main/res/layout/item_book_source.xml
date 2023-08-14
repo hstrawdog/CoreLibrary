@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_status"
         tools:text="123" />
 
-    <com.qq.readbook.weight.ActivityIndicatorView
+    <com.easy.readbook.weight.ActivityIndicatorView
         android:id="@+id/pb_bar"
         style="@android:style/Widget.ProgressBar.Small"
         android:layout_width="@dimen/x80"

@@ -23,7 +23,7 @@
                 android:layout_margin="3dp" />
 
 
-            <com.hqq.core.recycle.gallery.RecyclerCoverFlow
+            <com.easy.core.recycle.gallery.RecyclerCoverFlow
                 android:id="@+id/rcf_view"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x250" />

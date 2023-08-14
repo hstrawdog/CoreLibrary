@@ -3,10 +3,12 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
-import com.hqq.core.plugin.*
+
+import com.easy.core.plugin.BuildVersionConfig
+import com.easy.core.plugin.*
 
 android {
-    namespace = "com.hqq.wechat"
+    namespace = "com.easy.wechat"
 
     compileSdkVersion BuildVersionConfig.compileSdkVersion
     buildToolsVersion BuildVersionConfig.buildToolsVersion

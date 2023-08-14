@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.album.activity.AlbumDetailActivity">
+    tools:context="com.easy.album.activity.AlbumDetailActivity">
 
     <RelativeLayout
         android:id="@+id/album_title_bar"
@@ -14,7 +14,7 @@
         android:background="#ffffff"
         android:gravity="top">
 
-        <com.hqq.album.customize.FilterImageView
+        <com.easy.album.customize.FilterImageView
             android:id="@+id/album_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

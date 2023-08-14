@@ -6,7 +6,7 @@
 
 
 
-    <com.hqq.example.widget.BlurBackgroundView
+    <com.easy.example.widget.BlurBackgroundView
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

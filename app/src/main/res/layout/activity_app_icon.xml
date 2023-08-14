@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hqq.example.ui.system.AppIconActivity">
+    tools:context="com.easy.example.com.easy.example.ui.system.AppIconActivity">
 
     <Button
         android:id="@+id/button30"
