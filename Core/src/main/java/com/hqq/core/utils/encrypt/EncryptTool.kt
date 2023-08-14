@@ -4,7 +4,6 @@ import com.hqq.core.utils.DataUtils.bytes2HexString
 import com.hqq.core.utils.DataUtils.hexString2Bytes
 import com.hqq.core.utils.encrypt.EncodeTool.base64Decode
 import com.hqq.core.utils.encrypt.EncodeTool.base64Encode
-import com.hqq.core.utils.file.FileTool
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException

@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import com.hqq.core.utils.DataUtils.isNullString
-import com.hqq.core.utils.image.ImageTool.save
+import com.hqq.core.utils.image.ImageUtils.save
 import java.io.File
 import java.io.IOException
 
@@ -16,7 +16,7 @@ import java.io.IOException
  * @date 2016/1/24
  * 相机相关工具类
  */
-object PictureTool {
+object PictureUtils {
     /**
      * 获取打开照程序界面的Intent
      */

@@ -22,7 +22,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.hqq.core.utils.DateUtils;
 import com.hqq.core.utils.ScreenUtils;
-import com.hqq.core.utils.TimeTool;
+import com.hqq.core.utils.TimeUtils;
 import com.qq.readbook.R;
 import com.qq.readbook.room.entity.Book;
 import com.qq.readbook.room.entity.Chapter;
@@ -924,7 +924,7 @@ public abstract class PageLoader {
         //绘制当前时间
         //底部的字显示的位置Y
         float y = mDisplayHeight - mTipPaint.getFontMetrics().bottom - tipMarginHeight;
-        String time = TimeTool.INSTANCE.formatData2All(System.currentTimeMillis(), "HH:mm");
+        String time = TimeUtils.INSTANCE.formatData2All(System.currentTimeMillis(), "HH:mm");
         float x = outFrameLeft - mTipPaint.measureText(time) - ScreenUtils.dip2px(4);
         canvas.drawText(time, x, y, mTipPaint);
     }

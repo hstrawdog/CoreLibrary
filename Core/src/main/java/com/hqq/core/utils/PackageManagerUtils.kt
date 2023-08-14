@@ -12,7 +12,7 @@ import java.util.*
  *
  *       貌似 12 以上需要 添加权限
  */
-object PackageManagerTool {
+object PackageManagerUtils {
     @JvmStatic
     fun initPackageManager(mContext: Context): List<PackageInfo> {
         val mPackageManager = mContext.packageManager

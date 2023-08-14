@@ -69,7 +69,8 @@ object SoftKeyboardUtils {
      * @param activity
      * @param frameLayout
      */
-    fun softHideKeyboardRedraw(activity: Activity, frameLayout: FrameLayout) {
+    @JvmStatic
+    private fun computeUsableHeight(activity :Activity, frameLayout: FrameLayout) {
         SoftKeyboardRedraw.assistActivity(activity, frameLayout)
     }
 
@@ -92,6 +93,7 @@ object SoftKeyboardUtils {
      *
      * @param activity The activity.
      */
+    @JvmStatic
     fun showSoftInput(activity: Activity) {
         val imm =
             activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager ?: return
@@ -111,6 +113,7 @@ object SoftKeyboardUtils {
      * @param window The Window.
      */
     @Deprecated("大部分情况下无效`")
+    @JvmStatic
     fun showSoftInput(window: Window) {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
     }
@@ -120,6 +123,7 @@ object SoftKeyboardUtils {
      *
      * @param view The view.
      */
+    @JvmStatic
     fun showSoftInput(view: View, context: Context) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         view.isFocusable = true
@@ -134,6 +138,7 @@ object SoftKeyboardUtils {
      *
      * @param view The view.
      */
+    @JvmStatic
     fun hideSoftInput(view: View) {
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)

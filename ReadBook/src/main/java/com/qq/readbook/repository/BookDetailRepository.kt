@@ -2,8 +2,7 @@ package com.qq.readbook.repository
 
 import com.hqq.core.net.ok.OkHttp
 import com.hqq.core.net.ok.OkNetCallback
-import com.hqq.core.utils.DateUtils
-import com.hqq.core.utils.TimeTool
+import com.hqq.core.utils.TimeUtils
 import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.bean.book.BookSource
 import com.qq.readbook.room.entity.Book
@@ -27,7 +26,7 @@ object BookDetailRepository {
             OkHttp.newHttpCompat().getExecute(book.bookDetailUrl, ParamsUtils.getParams(readSource), object : OkNetCallback {
                 override fun onSuccess(statusCode: String, response: String) {
                     val b = JsoupUtils.getBookDetail(response, book, readSource)
-                    b.refreshTime = TimeTool.nowDate
+                    b.refreshTime = TimeUtils.nowDate
                     // 更新书籍
                     RoomUtils.getBookDao().update(b)
                     CoroutineScope(Dispatchers.Main).launch {

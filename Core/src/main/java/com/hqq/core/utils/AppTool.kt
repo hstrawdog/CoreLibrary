@@ -13,7 +13,6 @@ import android.content.pm.Signature
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import com.hqq.core.utils.encrypt.EncryptTool
-import com.hqq.core.utils.file.FileTool
 import com.hqq.core.utils.log.LogUtils
 import java.io.File
 import java.util.*
@@ -98,7 +97,7 @@ object AppTool {
      */
     @JvmStatic
     fun installApp(context: Context, filePath: String?) {
-        context.startActivity(IntentTool.getInstallAppIntent(context, filePath))
+        context.startActivity(IntentUtils.getInstallAppIntent(context, filePath))
     }
 
     /**
@@ -122,7 +121,7 @@ object AppTool {
      */
     @JvmStatic
     fun installApp(activity: Activity, filePath: String?, requestCode: Int) {
-        activity.startActivityForResult(IntentTool.getInstallAppIntent(activity, filePath), requestCode)
+        activity.startActivityForResult(IntentUtils.getInstallAppIntent(activity, filePath), requestCode)
     }
 
     /**
@@ -152,7 +151,7 @@ object AppTool {
         val file = FileTool.getFileByPath(filePath)
         if (!FileTool.isFileExists(file)) return false
         val command = "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm install $filePath"
-        val commandResult = ShellTool.execCmd(command, !isSystemApp(context), true)
+        val commandResult = ShellUtils.execCmd(command, !isSystemApp(context), true)
         return commandResult.successMsg != null && commandResult.successMsg!!.toLowerCase(Locale.ROOT)
             .contains("success")
     }
@@ -196,7 +195,7 @@ object AppTool {
     @JvmStatic
     fun uninstallApp(context: Context, packageName: String) {
         if (DataUtils.isNullString(packageName)) return
-        context.startActivity(IntentTool.getUninstallAppIntent(packageName))
+        context.startActivity(IntentUtils.getUninstallAppIntent(packageName))
     }
 
     /**
@@ -209,7 +208,7 @@ object AppTool {
     @JvmStatic
     fun uninstallApp(activity: Activity, packageName: String, requestCode: Int) {
         if (DataUtils.isNullString(packageName)) return
-        activity.startActivityForResult(IntentTool.getUninstallAppIntent(packageName), requestCode)
+        activity.startActivityForResult(IntentUtils.getUninstallAppIntent(packageName), requestCode)
     }
 
     /**
@@ -227,7 +226,7 @@ object AppTool {
         if (DataUtils.isNullString(packageName)) return false
         val command =
             "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm uninstall " + (if (isKeepData) "-k " else "") + packageName
-        val commandResult = ShellTool.execCmd(command, !isSystemApp(context), true)
+        val commandResult = ShellUtils.execCmd(command, !isSystemApp(context), true)
         return commandResult.successMsg != null && commandResult.successMsg!!.toLowerCase()
             .contains("success")
     }
@@ -240,7 +239,7 @@ object AppTool {
     @JvmStatic
     val isAppRoot: Boolean
         get() {
-            val result = ShellTool.execCmd("echo root", true)
+            val result = ShellUtils.execCmd("echo root", true)
             if (result.result == 0) {
                 return true
             }
@@ -259,7 +258,7 @@ object AppTool {
     @JvmStatic
     fun launchApp(context: Context, packageName: String) {
         if (DataUtils.isNullString(packageName)) return
-        context.startActivity(IntentTool.getLaunchAppIntent(context, packageName))
+        context.startActivity(IntentUtils.getLaunchAppIntent(context, packageName))
     }
 
     /**
@@ -272,7 +271,7 @@ object AppTool {
     @JvmStatic
     fun launchApp(activity: Activity, packageName: String, requestCode: Int) {
         if (DataUtils.isNullString(packageName)) return
-        activity.startActivityForResult(IntentTool.getLaunchAppIntent(activity, packageName), requestCode)
+        activity.startActivityForResult(IntentUtils.getLaunchAppIntent(activity, packageName), requestCode)
     }
 
     /**
@@ -305,7 +304,7 @@ object AppTool {
     @JvmStatic
     fun getAppDetailsSettings(context: Context, packageName: String?) {
         if (DataUtils.isNullString(packageName)) return
-        context.startActivity(IntentTool.getAppDetailsSettingsIntent(packageName))
+        context.startActivity(IntentUtils.getAppDetailsSettingsIntent(packageName))
     }
 
     /**
@@ -579,7 +578,7 @@ object AppTool {
      */
     @JvmStatic
     fun isAppForeground(context: Context, packageName: String): Boolean {
-        return !DataUtils.isNullString(packageName) && packageName == ProcessTool.getForegroundProcessName(context)
+        return !DataUtils.isNullString(packageName) && packageName == ProcessUtils.getForegroundProcessName(context)
     }
     //----------------------------------------------------------------------------------------------------------------
     /**
@@ -591,7 +590,7 @@ object AppTool {
      */
     @JvmStatic
     fun isInstallApp(context: Context, packageName: String): Boolean {
-        return !DataUtils.isNullString(packageName) && IntentTool.getLaunchAppIntent(context, packageName) != null
+        return !DataUtils.isNullString(packageName) && IntentUtils.getLaunchAppIntent(context, packageName) != null
     }
 
     /**

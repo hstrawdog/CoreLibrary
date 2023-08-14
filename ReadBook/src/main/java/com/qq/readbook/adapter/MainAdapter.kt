@@ -4,8 +4,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.glide.ImageLoadUtils
-import com.hqq.core.utils.DateUtils
-import com.hqq.core.utils.TimeTool
+import com.hqq.core.utils.TimeUtils
 import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.R
 import com.qq.readbook.down.UpdateManager
@@ -52,7 +51,7 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
         } else {
             holder.setText(R.id.tv_top, "取消置顶")
         }
-        if ((System.currentTimeMillis() - TimeTool.string2Millisecond(item.refreshTime)) > (1 * 60 * 1000)) {
+        if ((System.currentTimeMillis() - TimeUtils.string2Millisecond(item.refreshTime)) > (1 * 60 * 1000)) {
             if (item.isNeedRefresh) {
                 LogUtils.e4Debug("添加刷新: " + item.name)
                 holder.setGone(R.id.pb_bar, false)
@@ -74,7 +73,7 @@ class MainAdapter : BaseQuickAdapter<Book, BaseViewHolder>(R.layout.item_book_ma
     private fun formatData(updateDate: String): String {
 
         try {
-            return TimeTool.dateConvert(TimeTool.defaultFormat.parse(updateDate).time / 1000, 0)+"前更新"
+            return TimeUtils.dateConvert(TimeUtils.defaultFormat.parse(updateDate).time / 1000, 0)+"前更新"
         } catch (e: ParseException) {
             LogUtils.e4Debug("格式不正确 $updateDate")
         }

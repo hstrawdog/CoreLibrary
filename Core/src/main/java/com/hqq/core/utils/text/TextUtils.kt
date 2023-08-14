@@ -14,13 +14,12 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import com.hqq.core.CoreConfig
-import com.hqq.core.utils.RxTool
 
 /**
  * @author tamsiree
  * @date 2016/12/23
  */
-object TextTool {
+object TextUtils {
     /**
      * 获取建造者
      *

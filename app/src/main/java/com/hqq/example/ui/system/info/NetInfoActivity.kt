@@ -1,19 +1,19 @@
 package com.hqq.example.ui.system.info
 
 import com.hqq.core.ui.base.BaseViewBindingActivity
-import com.hqq.core.utils.NetTool
-import com.hqq.core.utils.NetTool.getActiveNetworkInfo
-import com.hqq.core.utils.NetTool.getNetWorkType
-import com.hqq.core.utils.NetTool.getNetWorkTypeName
-import com.hqq.core.utils.NetTool.getNetworkOperatorName
-import com.hqq.core.utils.NetTool.is3rd
-import com.hqq.core.utils.NetTool.is4G
-import com.hqq.core.utils.NetTool.isAvailable
-import com.hqq.core.utils.NetTool.isConnected
-import com.hqq.core.utils.NetTool.isNetworkAvailable
-import com.hqq.core.utils.NetTool.isWifiConnected
-import com.hqq.core.utils.NetTool.isWifiEnabled
-import com.hqq.core.utils.NetTool.ping
+import com.hqq.core.utils.NetUtils
+import com.hqq.core.utils.NetUtils.getActiveNetworkInfo
+import com.hqq.core.utils.NetUtils.getNetWorkType
+import com.hqq.core.utils.NetUtils.getNetWorkTypeName
+import com.hqq.core.utils.NetUtils.getNetworkOperatorName
+import com.hqq.core.utils.NetUtils.is3rd
+import com.hqq.core.utils.NetUtils.is4G
+import com.hqq.core.utils.NetUtils.isAvailable
+import com.hqq.core.utils.NetUtils.isConnected
+import com.hqq.core.utils.NetUtils.isNetworkAvailable
+import com.hqq.core.utils.NetUtils.isWifiConnected
+import com.hqq.core.utils.NetUtils.isWifiEnabled
+import com.hqq.core.utils.NetUtils.ping
 import com.hqq.core.utils.text.TextSpannableBuilder
 import com.hqq.example.databinding.ActivityNetInfoBinding
 
@@ -28,7 +28,7 @@ class NetInfoActivity : BaseViewBindingActivity<ActivityNetInfoBinding>() {
 
     override fun initView() {
 
-        var phoneType = when (NetTool.getPhoneType(activity)) {
+        var phoneType = when (NetUtils.getPhoneType(activity)) {
             0 -> "手机制式未知"
             1 -> "手机制式为GSM，移动和联通"
             2 -> "手机制式为CDMA，电信"

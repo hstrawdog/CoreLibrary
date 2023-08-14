@@ -1,12 +1,11 @@
-import com.hqq.core.utils.TimeTool
+import com.hqq.core.utils.TimeUtils
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 
 
 
 fun main() {
-    println(TimeTool.differentDays(SimpleDateFormat("yyyy-MM-dd").parse("2022-7-18"), Date()))
+    println(TimeUtils.differentDays(SimpleDateFormat("yyyy-MM-dd").parse("2022-7-18"), Date()))
 
 //    GlobalScope.launch { // 在后台启动一个新协程，并继续执行之后的代码
 //        delay(1000L) // 非阻塞式地延迟一秒

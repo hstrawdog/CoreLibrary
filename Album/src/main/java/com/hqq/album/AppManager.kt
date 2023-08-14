@@ -23,9 +23,6 @@
 package com.hqq.album
 
 import android.app.Activity
-import android.content.Intent
-import com.hqq.album.activity.AlbumDirectoryActivity
-import com.hqq.album.activity.AlbumFolderActivity
 import com.hqq.album.common.SelectOptions
 import java.util.Stack
 
@@ -36,6 +33,22 @@ import java.util.Stack
  * @date: 2016/11/18  9:34
 </描述当前版本功能> */
 class AppManager private constructor() {
+    companion object {
+        private var instance: AppManager? = null
+        /**
+         * 单一实例
+         */
+        @get:Synchronized
+        val appManager: AppManager?
+            get() {
+                if (instance == null) {
+                    synchronized(AppManager::class.java) { instance = AppManager() }
+                }
+                return instance
+            }
+    }
+
+
     var activityStack: Stack<Activity> = Stack()
 
     /**
@@ -46,14 +59,6 @@ class AppManager private constructor() {
             activityStack = Stack()
         }
         activityStack.add(activity)
-    }
-
-    /**
-     * 结束当前Activity（堆栈中最后一个压入的）
-     */
-    fun finishActivity() {
-        val activity = activityStack.lastElement()
-        finishActivity(activity)
     }
 
     /**
@@ -72,19 +77,13 @@ class AppManager private constructor() {
      */
     @JvmOverloads
     fun finishAllActivity(isCallBack: Boolean = false) {
+        // 回调数据
         if (isCallBack) {
             SelectOptions.instance.call?.onSelectLocalMedia(SelectOptions.instance.selectLocalMedia)
         }
-
-        var i = 0
-        val size = activityStack.size
-        while (i < size) {
-            if (null != activityStack[i]) {
-                var activity = activityStack[i]
-
-                activity?.finish()
-            }
-            i++
+        // 关闭所有activity
+        for (activity in activityStack) {
+            activity?.finish()
         }
         activityStack.clear()
     }
@@ -93,19 +92,4 @@ class AppManager private constructor() {
         finishAllActivity(true)
     }
 
-    companion object {
-        private var instance: AppManager? = null
-
-        /**
-         * 单一实例
-         */
-        @get:Synchronized
-        val appManager: AppManager?
-            get() {
-                if (instance == null) {
-                    synchronized(AppManager::class.java) { instance = AppManager() }
-                }
-                return instance
-            }
-    }
 }

@@ -33,7 +33,7 @@ import java.util.*
  * @author tamsiree
  * @date 2016/1/24
  */
-object DeviceTool {
+object DeviceUtils {
 
     /**
      * 获取手机唯一标识序列号

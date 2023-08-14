@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.hqq.core.toolbar.DefToolBar
 import com.hqq.core.ui.list.BaseVmListActivity
-import com.hqq.core.utils.TimeTool
+import com.hqq.core.utils.TimeUtils
 import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.BR
 import com.qq.readbook.R
@@ -48,7 +48,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ActivityMainBinding>() {
                     val book = getItem(position)
                     if (book.topTime.isNullOrEmpty()) {
                         // 置顶
-                        book.topTime = TimeTool.nowDate
+                        book.topTime = TimeUtils.nowDate
                     } else {
                         // 取消置顶
                         book.topTime = null

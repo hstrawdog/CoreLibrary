@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.lifecycle.observe
 import com.hqq.core.ui.dialog.SelectDialog
 import com.hqq.core.ui.list.BaseVmListActivity
-import com.hqq.core.utils.DateUtils
-import com.hqq.core.utils.TimeTool
+import com.hqq.core.utils.TimeUtils
 import com.hqq.core.utils.keyboard.SoftKeyboardUtils
 import com.hqq.core.utils.log.LogUtils
 import com.qq.readbook.BR
@@ -104,7 +103,7 @@ class SearchActivity : BaseVmListActivity<SearchViewModel, ActivitySearchBinding
                 mKey = getItem(position).key
                 binding.edtSearch.setText(getItem(position).key)
                 binding.edtSearch.setSelection(getItem(position).key.length)
-                getItem(position).searchTime = TimeTool.nowDate
+                getItem(position).searchTime = TimeUtils.nowDate
                 RoomUtils.getLocalSearchKeyDao().update(getItem(position))
                 onSearch()
             }

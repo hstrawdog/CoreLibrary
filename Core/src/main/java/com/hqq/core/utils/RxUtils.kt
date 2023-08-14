@@ -10,14 +10,13 @@ import android.text.TextWatcher
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.TextView
-import com.hqq.core.utils.log.LogUtils
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException
 
 
-object RxTool {
+object RxUtils {
 
     private var lastClickTime: Long = 0
 

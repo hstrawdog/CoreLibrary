@@ -17,7 +17,7 @@ import com.hqq.core.CoreConfig
  * @Email :  qiqiang213@gmail.com
  * @Describe :  动画辅助类
  */
-object AnimationTool {
+object AnimationUtils {
     @JvmStatic
     fun start(animator: Animator?) {
         if (animator != null && !animator.isStarted) {

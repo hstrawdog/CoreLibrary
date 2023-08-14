@@ -20,6 +20,7 @@ object ShapeBuilder {
      * @param radius    图形圆角半径
      * @return 圆角矩形
      */
+    @JvmStatic
     fun drawRoundRect(@ColorRes fillColor: Int, @DimenRes radius: Int): GradientDrawable? {
         return BaseShapeBuilder()
                 .setRectangle()
@@ -37,6 +38,7 @@ object ShapeBuilder {
      * @param strokeColor 边框的颜色
      * @return 圆角矩形
      */
+    @JvmStatic
     fun drawRoundRect(fillColor: Int, radius: Int, strokeWidth: Int, strokeColor: Int): GradientDrawable? {
         return BaseShapeBuilder()
                 .setRectangle()
@@ -55,6 +57,7 @@ object ShapeBuilder {
      * @param strokeColor 边框的颜色
      * @return 圆角矩形
      */
+    @JvmStatic
     fun drawRoundRect(fillColor: Int, radii: FloatArray?, strokeWidth: Int, strokeColor: Int): GradientDrawable? {
         return BaseShapeBuilder()
                 .setRectangle()
@@ -73,6 +76,7 @@ object ShapeBuilder {
      * @param strokeColor 边框的颜色
      * @return 圆形
      */
+    @JvmStatic
     fun drawCircle(fillColor: Int, size: Int, strokeWidth: Int, strokeColor: Int): GradientDrawable? {
         return BaseShapeBuilder()
                 .setOval()

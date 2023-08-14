@@ -13,9 +13,6 @@ import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.hqq.core.CoreConfig
 import com.hqq.core.utils.DataUtils.isNullString
-import com.hqq.core.utils.file.FileTool.closeIO
-import com.hqq.core.utils.file.FileTool.createOrExistsFile
-import com.hqq.core.utils.file.FileTool.getFileByPath
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.net.HttpURLConnection
@@ -28,7 +25,7 @@ import kotlin.jvm.Throws
  * @date 2016/1/24
  * 图像工具类
  */
-object ImageTool {
+object ImageUtils {
     /**
      * dip转px
      *

@@ -1,24 +1,11 @@
 package com.hqq.album.Adapter
 
-import android.content.ContentResolver
-import android.content.ContentUris
-import android.content.ContentValues
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
-import android.os.Environment
-import android.provider.DocumentsContract
-import android.provider.MediaStore
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.MediaController
 import android.widget.ProgressBar
-import android.widget.Toast
 import android.widget.VideoView
-import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.davemorrissey.labs.subscaleview.ImageSource
@@ -27,15 +14,7 @@ import com.hqq.album.R
 import com.hqq.album.annotation.LocalMediaType
 import com.hqq.album.entity.LocalMedia
 import com.hqq.album.utils.AlbumFileUtils
-import com.hqq.album.utils.LoadUtils
 import com.hqq.core.glide.ImageLoadUtils
-import com.hqq.core.ui.dialog.SelectDialog
-import com.hqq.core.utils.ToastUtils
-import com.hqq.core.utils.file.FileTool.getPathFromUri
-import com.hqq.core.utils.file.FileUtils
-import com.hqq.core.utils.file.SaveBitmapUtils
-import com.hqq.core.utils.image.BitmapUtils
-import java.io.File
 
 /**
  * @Author : huangqiqiang

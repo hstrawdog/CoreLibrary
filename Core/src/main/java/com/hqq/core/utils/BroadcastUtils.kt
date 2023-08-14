@@ -14,7 +14,7 @@ import android.net.ConnectivityManager
   * @Email :  qiqiang213@gmail.com
   * @Describe :
   */
-object BroadcastTool {
+object BroadcastUtils {
     /**
      * 注册监听网络状态的广播
      * @param context
@@ -35,7 +35,7 @@ object BroadcastTool {
      */
     class BroadcastReceiverNetWork : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            NetTool.getNetWorkType(context)
+            NetUtils.getNetWorkType(context)
         }
     }
 }

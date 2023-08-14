@@ -18,7 +18,7 @@ import java.util.*
  * @author tamsiree
  * @date 2016/12/21
  */
-object ProcessTool {
+object ProcessUtils {
     /**
      * 获取前台线程包名
      *

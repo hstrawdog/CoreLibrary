@@ -22,7 +22,7 @@ import kotlin.math.floor
  * @date 2016/11/13
  * @desc 定位相关工具类
  */
-object LocationTool {
+object LocationUtils {
     //圆周率
     const val pi = 3.1415926535897932384626
 
@@ -372,6 +372,7 @@ object LocationTool {
      * @param lat 纬度
      * @return  GPS信息
      */
+    @JvmStatic
     private fun transform(lon: Double, lat: Double): Gps {
         if (outOfChina(lon, lat)) {
             return Gps(lon, lat)
@@ -396,6 +397,7 @@ object LocationTool {
      * @param y y坐标
      * @return  纬度
      */
+    @JvmStatic
     private fun transformLat(x: Double, y: Double): Double {
         var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x))
         ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0
@@ -411,6 +413,7 @@ object LocationTool {
      * @param y  y坐标
      * @return 经度
      */
+    @JvmStatic
     private fun transformLon(x: Double, y: Double): Double {
         var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + (0.1
                 * Math.sqrt(Math.abs(x)))

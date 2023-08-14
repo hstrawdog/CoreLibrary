@@ -1,6 +1,5 @@
 package com.hqq.core.utils.text
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BlurMaskFilter
 import android.graphics.BlurMaskFilter.Blur
@@ -29,12 +28,8 @@ import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
 import android.view.View
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 import com.hqq.core.CoreConfig
 import com.hqq.core.utils.ResourcesUtils
-import com.hqq.core.utils.ResourcesUtils.getResources
-import com.hqq.core.utils.RxTool
 import android.text.style.SuperscriptSpan as SuperscriptSpan1
 
 /**

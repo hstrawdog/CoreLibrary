@@ -11,7 +11,7 @@ import android.os.Vibrator
  * androidManifest.xml中加入 以下权限
  * <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
  */
-object VibrateTool {
+object VibrateUtils {
     private var vibrator: Vibrator? = null
 
     /**

@@ -11,7 +11,7 @@ import java.io.InputStreamReader
  * @date 2016/1/24
  * Shell相关工具类
  */
-object ShellTool {
+object ShellUtils {
     const val COMMAND_SU = "su"
     const val COMMAND_SH = "sh"
     const val COMMAND_EXIT = "exit\n"

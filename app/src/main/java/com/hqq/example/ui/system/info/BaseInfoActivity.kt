@@ -3,7 +3,7 @@ package com.hqq.example.ui.system.info
 import android.widget.TextView
 import com.hqq.core.ui.base.BaseActivity
 import com.hqq.core.utils.AppTool
-import com.hqq.core.utils.DeviceTool
+import com.hqq.core.utils.DeviceUtils
 import com.hqq.core.utils.ScreenUtils.getAllScreenHeight
 import com.hqq.core.utils.ScreenUtils.getNavigationBarHeight
 import com.hqq.core.utils.file.CacheUtil.getAppCacheSize
@@ -49,10 +49,10 @@ class BaseInfoActivity : BaseActivity() {
             .addTextPart("\n缓存总大小    ")
             .addTextPart(getTotalCacheSize(this) + "")
             .addTextPart("\n手机类型    ")
-            .addTextPart(DeviceTool.getPhoneType(this)
+            .addTextPart(DeviceUtils.getPhoneType(this)
                 .toString())
             .addTextPart("\n设备厂商    ")
-            .addTextPart(DeviceTool.buildMANUFACTURER)
+            .addTextPart(DeviceUtils.buildMANUFACTURER)
 
             .addTextPart("\n状态栏高度    ")
             .addTextPart(getStatusBarHeight(this).toString() + "px")

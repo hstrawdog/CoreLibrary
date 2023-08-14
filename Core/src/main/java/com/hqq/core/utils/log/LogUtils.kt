@@ -4,9 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.hqq.core.BuildConfig
 import com.hqq.core.CoreConfig
-import com.hqq.core.utils.RxTool
-import com.hqq.core.utils.TimeTool
-import com.hqq.core.utils.file.FileTool
+import com.hqq.core.utils.TimeUtils
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileOutputStream
@@ -248,6 +246,7 @@ object LogUtils {
      * @param targetElement StackTraceElement
      * @return String
      */
+    @JvmStatic
     private fun getFileName(targetElement: StackTraceElement): String {
         val fileName = targetElement.fileName
         if (fileName != null) return fileName
@@ -267,13 +266,19 @@ object LogUtils {
     }
 
     //region  将日子 写入文件中
+    @JvmStatic
     private val LOG_FORMAT = SimpleDateFormat("yyyy年MM月dd日_HH点mm分ss秒") // 日志的输出格式
+    @JvmStatic
     private val FILE_SUFFIX = SimpleDateFormat("HH点mm分ss秒") // 日志文件格式
+    @JvmStatic
     private val FILE_DIR = SimpleDateFormat("yyyy年MM月dd日") // 日志文件格式
+    @JvmStatic
     private var LOG_FILE_PATH // 日志文件保存路径
             : String? = null
+    @JvmStatic
     private var LOG_FILE_NAME // 日志文件保存名称
             : String? = null
+
     private const val LOG_SAVE_DAYS = 7 // sd卡中日志文件的最多保存天数
 
     @JvmStatic
@@ -334,6 +339,7 @@ object LogUtils {
      *
      * @return
      */
+    @JvmStatic
     private val dateBefore: Date
         private get() {
             val nowtime = Date()
@@ -349,19 +355,19 @@ object LogUtils {
         if (!fileDir.exists()) {
             fileDir.mkdirs()
         }
-        val file = File(fileDir, TimeTool.getCurrentDateTime("yyyyMMdd") + ".txt")
+        val file = File(fileDir, TimeUtils.getCurrentDateTime("yyyyMMdd") + ".txt")
         try {
             if (file.exists()) {
                 val ps = PrintStream(FileOutputStream(file, true))
                 ps.append("""
-    ${TimeTool.getCurrentDateTime("\n\n\nyyyy-MM-dd HH:mm:ss")}
+    ${TimeUtils.getCurrentDateTime("\n\n\nyyyy-MM-dd HH:mm:ss")}
     $message
     """.trimIndent()) // 往文件里写入字符串
             } else {
                 val ps = PrintStream(FileOutputStream(file))
                 file.createNewFile()
                 ps.println("""
-    ${TimeTool.getCurrentDateTime("yyyy-MM-dd HH:mm:ss")}
+    ${TimeUtils.getCurrentDateTime("yyyy-MM-dd HH:mm:ss")}
     $message
     """.trimIndent()) // 往文件里写入字符串
             }

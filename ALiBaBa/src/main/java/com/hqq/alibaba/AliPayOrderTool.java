@@ -1,7 +1,7 @@
 package com.hqq.alibaba;
 
 
-import com.hqq.core.utils.TimeTool;
+import com.hqq.core.utils.TimeUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -84,7 +84,7 @@ public class AliPayOrderTool {
 
         keyValues.put("sign_type", rsa2 ? "RSA2" : "RSA");
 
-        keyValues.put("timestamp", TimeTool.INSTANCE.getNowDate());
+        keyValues.put("timestamp", TimeUtils.INSTANCE.getNowDate());
 
         keyValues.put("version", "1.0");
 

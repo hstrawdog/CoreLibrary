@@ -15,11 +15,6 @@ import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.hqq.core.utils.file.FileTool.getDataColumn
-import com.hqq.core.utils.file.FileTool.isDownloadsDocument
-import com.hqq.core.utils.file.FileTool.isExternalStorageDocument
-import com.hqq.core.utils.file.FileTool.isGooglePhotosUri
-import com.hqq.core.utils.file.FileTool.isMediaDocument
 import com.hqq.core.utils.log.LogUtils
 import java.io.File
 import java.text.SimpleDateFormat
@@ -30,7 +25,7 @@ import java.util.*
  * @author tamsiree
  * @date 2016/1/24
  */
-object PhotoTool {
+object PhotoUtils {
     const val GET_IMAGE_BY_CAMERA = 5001
     const val GET_IMAGE_FROM_PHONE = 5002
     const val CROP_IMAGE = 5003

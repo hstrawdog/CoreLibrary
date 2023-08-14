@@ -1,5 +1,6 @@
 package com.hqq.core.utils.text
 
+import android.text.TextUtils
 import com.hqq.core.utils.DataUtils.isNullString
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -10,7 +11,7 @@ import java.util.regex.Pattern
  * @author Tamsiree
  * @date 2017/3/15
  */
-object RegTool {
+object RegUtils {
 
     /******************** 正则相关常量  */ //--------------------------------------------正则表达式-----------------------------------------
     /**
@@ -61,7 +62,8 @@ object RegTool {
     /**
      * 正则：身份证号码15或18位 包含以x结尾
      */
-    const val REGEX_IDCARD = "(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$|^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|x|X)$)"
+    const val REGEX_IDCARD =
+        "(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$|^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|x|X)$)"
 
     /**
      * 正则：邮箱
@@ -86,7 +88,8 @@ object RegTool {
     /**
      * 正则：yyyy-MM-dd格式的日期校验，已考虑平闰年
      */
-    const val REGEX_DATE = "^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$"
+    const val REGEX_DATE =
+        "^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$"
 
     /**
      * 正则：IP地址
@@ -144,9 +147,11 @@ object RegTool {
     @JvmStatic
     fun validateIdCard(idCard: String?): Boolean {
         // 15位和18位身份证号码的正则表达式
-        val regIdCard = "^(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)$"
+        val regIdCard =
+            "^(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)$"
         val p = Pattern.compile(regIdCard)
-        return p.matcher(idCard).matches()
+        return p.matcher(idCard)
+            .matches()
     }
     //=========================================正则表达式=============================================
     /**
@@ -235,10 +240,8 @@ object RegTool {
     @JvmStatic
     fun IDCardValidate(IDStr: String): String {
         var errorInfo = "" // 记录错误信息
-        val ValCodeArr = arrayOf("1", "0", "x", "9", "8", "7", "6", "5", "4",
-                "3", "2")
-        val Wi = arrayOf("7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7",
-                "9", "10", "5", "8", "4", "2")
+        val ValCodeArr = arrayOf("1", "0", "x", "9", "8", "7", "6", "5", "4", "3", "2")
+        val Wi = arrayOf("7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7", "9", "10", "5", "8", "4", "2")
         var Ai = ""
         // ================ 号码的长度 15位或18位 ================
         if (IDStr.length != 15 && IDStr.length != 18) {
@@ -270,9 +273,7 @@ object RegTool {
         val gc = GregorianCalendar()
         val s = SimpleDateFormat("yyyy-MM-dd")
         try {
-            if (gc[Calendar.YEAR] - strYear.toInt() > 150
-                    || gc.time.time - s.parse(
-                            "$strYear-$strMonth-$strDay").time < 0) {
+            if (gc[Calendar.YEAR] - strYear.toInt() > 150 || gc.time.time - s.parse("$strYear-$strMonth-$strDay").time < 0) {
                 errorInfo = "身份证生日不在有效范围。"
                 return errorInfo
             }
@@ -302,8 +303,8 @@ object RegTool {
         // ================ 判断最后一位的值 ================
         var TotalmulAiWi = 0
         for (i in 0..16) {
-            TotalmulAiWi = (TotalmulAiWi
-                    + Ai[i].toString().toInt() * Wi[i].toInt())
+            TotalmulAiWi = (TotalmulAiWi + Ai[i].toString()
+                .toInt() * Wi[i].toInt())
         }
         val modValue = TotalmulAiWi % 11
         val strVerifyCode = ValCodeArr[modValue]
@@ -325,6 +326,7 @@ object RegTool {
      *
      * @return Hashtable 对象
      */
+    @JvmStatic
     private fun GetAreaCode(): Hashtable<String, String> {
         val hashtable = Hashtable<String, String>()
         hashtable["11"] = "北京"
@@ -535,5 +537,33 @@ object RegTool {
     fun checkPostcode(postcode: String?): Boolean {
         val regex = "[1-9]\\d{5}"
         return Pattern.matches(regex, postcode)
+    }
+
+    @JvmStatic
+    fun checkNotNull(any: Any): Boolean {
+        return checkNull(any)
+    }
+
+    @JvmStatic
+    fun checkNull(any: Any?): Boolean {
+        return when (any) {
+            null -> {
+                true
+            }
+
+            is String -> {
+                TextUtils.isEmpty(any as String?)
+            }
+
+            is List<*> -> {
+                any.isEmpty()
+            }
+
+            is Array<*> -> {
+                any.size <= 0
+            }
+
+            else -> false
+        }
     }
 }

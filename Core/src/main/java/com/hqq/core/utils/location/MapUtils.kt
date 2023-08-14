@@ -3,15 +3,15 @@ package com.hqq.core.utils.location
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.hqq.core.utils.PackageManagerTool
-import com.hqq.core.utils.location.LocationTool.GCJ02ToBD09
-import com.hqq.core.utils.location.LocationTool.GPS84ToGCJ02
+import com.hqq.core.utils.PackageManagerUtils
+import com.hqq.core.utils.location.LocationUtils.GCJ02ToBD09
+import com.hqq.core.utils.location.LocationUtils.GPS84ToGCJ02
 
 /**
  * @author tamsiree
  * @date 2018/5/2 14:59:00
  */
-object MapTool {
+object MapUtils {
 
 
     //高德地图APP 包名
@@ -43,10 +43,10 @@ object MapTool {
     @JvmStatic
     fun openMap(mContext: Context, gpsFrom: Gps, gpsTo: Gps, storeName: String) {
         //检测设备是否安装高德地图APP
-        if (PackageManagerTool.haveExistPackageName(mContext, GAODE_PACKAGE_NAME)) {
+        if (PackageManagerUtils.haveExistPackageName(mContext, GAODE_PACKAGE_NAME)) {
             openGaodeMapToGuide(mContext, gpsFrom, gpsTo, storeName)
             //检测设备是否安装百度地图APP
-        } else if (PackageManagerTool.haveExistPackageName(mContext, BAIDU_PACKAGE_NAME)) {
+        } else if (PackageManagerUtils.haveExistPackageName(mContext, BAIDU_PACKAGE_NAME)) {
             openBaiduMapToGuide(mContext, gpsTo, storeName)
             //检测都未安装时，跳转网页版高德地图
         } else {

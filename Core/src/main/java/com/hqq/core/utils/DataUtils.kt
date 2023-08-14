@@ -4,7 +4,6 @@ import android.util.SparseArray
 import android.util.SparseBooleanArray
 import android.util.SparseIntArray
 import android.util.SparseLongArray
-import com.hqq.core.utils.file.FileTool
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.lang.Exception

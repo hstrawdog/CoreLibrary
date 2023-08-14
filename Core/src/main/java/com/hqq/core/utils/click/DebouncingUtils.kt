@@ -23,6 +23,7 @@ object DebouncingUtils {
      * @param view The view.
      * @return `true`: yes<br></br>`false`: no
      */
+    @JvmStatic
     fun isValid(view: View): Boolean {
         return isValid(view, DEBOUNCING_DEFAULT_VALUE)
     }
@@ -34,6 +35,7 @@ object DebouncingUtils {
      * @param duration The duration.
      * @return `true`: yes<br></br>`false`: no
      */
+    @JvmStatic
     fun isValid(view: View, duration: Long): Boolean {
         return isValid(view.hashCode().toString(), duration)
     }
@@ -45,6 +47,8 @@ object DebouncingUtils {
      * @param duration The duration.
      * @return `true`: yes<br></br>`false`: no
      */
+    @JvmStatic
+
     fun isValid(key: String, duration: Long): Boolean {
         require(!TextUtils.isEmpty(key)) { "The key is null." }
         require(duration >= 0) { "The duration is less than 0." }
@@ -62,6 +66,7 @@ object DebouncingUtils {
      *
      * @param curTime Long
      */
+    @JvmStatic
     private fun clearIfNecessary(curTime: Long) {
         if (KEY_MILLIS_MAP.size < CACHE_SIZE) return
         val it: MutableIterator<Map.Entry<String, Long>> = KEY_MILLIS_MAP.entries.iterator()

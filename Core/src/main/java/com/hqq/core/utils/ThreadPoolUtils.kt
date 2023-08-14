@@ -8,7 +8,7 @@ import java.util.concurrent.*
  * @date 2016/1/24
  * 线程池相关工具类
  */
-class ThreadPoolTool(type: Type?, corePoolSize: Int) {
+class ThreadPoolUtils(type: Type?, corePoolSize: Int) {
     private var exec: ExecutorService? = null
     private val scheduleExec: ScheduledExecutorService
 

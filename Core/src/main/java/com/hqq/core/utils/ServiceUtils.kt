@@ -7,7 +7,7 @@ import android.content.Context
  * @author tamsiree
  * @date 2016/9/24
  */
-object ServiceTool {
+object ServiceUtils {
     /**
      * 获取服务是否开启
      *

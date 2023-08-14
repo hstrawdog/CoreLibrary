@@ -1,7 +1,7 @@
 package com.hqq.example.ui
 
 import com.hqq.core.ui.base.BaseViewBindingActivity
-import com.hqq.core.utils.VibrateTool
+import com.hqq.core.utils.VibrateUtils
 import com.hqq.example.databinding.ActivityVibrateBinding
 
  /**
@@ -16,7 +16,7 @@ class VibrateActivity : BaseViewBindingActivity<ActivityVibrateBinding>() {
 
     override fun initView() {
         binding.button72.setOnClickListener {
-            VibrateTool.vibrateOnce(this, 200 )
+            VibrateUtils.vibrateOnce(this, 200 )
         }
     }
 }

@@ -2,7 +2,7 @@ package com.qq.readbook.weight.page.loader;
 
 
 import com.hqq.core.utils.DateUtils;
-import com.hqq.core.utils.TimeTool;
+import com.hqq.core.utils.TimeUtils;
 import com.qq.readbook.room.entity.Book;
 import com.qq.readbook.room.entity.BookContent;
 import com.qq.readbook.room.entity.Chapter;
@@ -218,7 +218,7 @@ public class NetPageLoader extends PageLoader {
         if (mCollBook != null && isChapterListPrepare) {
             //表示当前CollBook已经阅读
             mCollBook.setUpdate(false);
-            mCollBook.setLastRead(TimeTool.INSTANCE.getNowDate());
+            mCollBook.setLastRead(TimeUtils.INSTANCE.getNowDate());
             //更新阅读时间
             RoomUtils.INSTANCE.getBookDao().update(mCollBook);
         }

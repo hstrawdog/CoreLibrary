@@ -40,6 +40,7 @@ object SaveBitmapUtils {
      * @param path String  FileUtils.getCacheDir()
      * 如果需要通知相册  请直接保存至相册目录下
      */
+    @JvmStatic
     fun saveBitmap2AppCache(bitmap: Bitmap?, relativePath: String = "", fileName: String): String {
         var path = FileUtils.getCacheDir() + File.separator + FileUtils.getDefFileName(".png")
         if (relativePath.isNotNull()) {
@@ -59,6 +60,7 @@ object SaveBitmapUtils {
      *  保存至公有目录上  Q 以上有指定目录 需要 通过  MediaStore 进行保存
      *  Q 一下key直接使用文件读写进行保存
      */
+    @JvmStatic
     fun saveBitmap2Pictures(bitmap: Bitmap?, relativePath: String = "", fileName: String): Uri? {
         if (bitmap == null) {
             return null
@@ -73,6 +75,7 @@ object SaveBitmapUtils {
      * @param bitmap Bitmap
      * @param path String
      */
+    @JvmStatic
     fun saveBitmap2ExternalPrivate(bitmap: Bitmap?, relativePath: String = "", fileName: String): String {
 
         if (bitmap == null) {

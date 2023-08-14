@@ -3,8 +3,7 @@ package com.qq.readbook.ui
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.hqq.core.ui.list.BaseListViewModel
-import com.hqq.core.utils.DateUtils
-import com.hqq.core.utils.TimeTool
+import com.hqq.core.utils.TimeUtils
 import com.hqq.core.utils.ToastUtils
 import com.qq.readbook.bean.book.BookSource
 import com.qq.readbook.repository.SearchBookRepository
@@ -59,11 +58,11 @@ class SearchViewModel : BaseListViewModel() {
         if (log == null) {
             log = LocalSearchKey().apply {
                 this.key = key
-                this.searchTime = TimeTool.nowDate
+                this.searchTime = TimeUtils.nowDate
             }
             RoomUtils.getLocalSearchKeyDao().insertAll(log)
         } else {
-            log.searchTime = TimeTool.nowDate
+            log.searchTime = TimeUtils.nowDate
             RoomUtils.getLocalSearchKeyDao().update(log)
         }
         CoroutineScope(Dispatchers.Main).launch {

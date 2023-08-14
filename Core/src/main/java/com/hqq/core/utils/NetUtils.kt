@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
@@ -19,7 +18,7 @@ import java.io.InputStreamReader
  * @author tamsiree
  * @date 2016/1/29
  */
-object NetTool {
+object NetUtils {
     /**
      * no network
      */

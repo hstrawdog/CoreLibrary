@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import com.hqq.core.utils.file.FileTool.getUriForFile
 import java.io.File
 
 /**
@@ -14,7 +13,7 @@ import java.io.File
  * @author tamsiree
  * @date 2016/1/24
  */
-object IntentTool {
+object IntentUtils {
     /**
      * 获取安装App(支持7.0)的意图
      *

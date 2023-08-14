@@ -24,7 +24,7 @@ object CacheUtil {
      * @param context
      * @return
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getTotalCacheSize(context: Context): String {
         var cacheSize: Long = 0
         try {
@@ -43,6 +43,7 @@ object CacheUtil {
      *
      * @param context
      */
+    @JvmStatic
     fun clearAllCache(context: Context) {
         deleteDir(context.cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
@@ -56,6 +57,7 @@ object CacheUtil {
      * @param dir
      * @return
      */
+    @JvmStatic
     private fun deleteDir(dir: File?): Boolean {
         if (dir != null && dir.isDirectory) {
             val children = dir.list()
@@ -76,6 +78,7 @@ object CacheUtil {
      * @param file
      * @return
      */
+    @JvmStatic
     fun getFolderSize(file: File?): Long {
         var size: Long = 0
         try {
@@ -100,6 +103,7 @@ object CacheUtil {
      * @param size
      * @return
      */
+    @JvmStatic
     fun getFormatSize(size: Double): String {
         val kiloByte = size / 1024
         if (kiloByte < 1) {
@@ -130,7 +134,7 @@ object CacheUtil {
      *
      * @return CacheSize
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getCacheSize(context: Context): String {
         try {
             return getFormatSize(getFolderSize(File(context.cacheDir.toString() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR)).toDouble())
@@ -146,7 +150,7 @@ object CacheUtil {
      * @param context
      * @return
      */
-    @kotlin.jvm.JvmStatic
+    @JvmStatic
     fun getAppCacheSize(context: Context): Int {
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         return activityManager.memoryClass

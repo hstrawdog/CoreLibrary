@@ -11,7 +11,7 @@ import android.renderscript.RenderScript.RSMessageHandler
 import android.renderscript.ScriptIntrinsicBlur
 import android.widget.ImageView
 import com.hqq.core.CoreConfig
-import com.hqq.core.utils.image.ImageTool.isEmptyBitmap
+import com.hqq.core.utils.image.ImageUtils.isEmptyBitmap
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -24,7 +24,7 @@ import kotlin.math.min
   * @Email :  qiqiang213@gmail.com
   * @Describe :   图片高斯模糊
   */
-object BlurTool {
+object BlurUtils {
     /**
      * 建议模糊度(在0.0到25.0之间)
      */
