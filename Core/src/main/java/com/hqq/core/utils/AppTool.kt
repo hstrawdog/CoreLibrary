@@ -13,6 +13,7 @@ import android.content.pm.Signature
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import com.hqq.core.utils.encrypt.EncryptTool
+import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.File
 import java.util.*
@@ -108,7 +109,7 @@ object AppTool {
      */
     @JvmStatic
     fun installApp(context: Context, file: File) {
-        if (!FileTool.isFileExists(file)) return
+        if (!FileUtils.isFileExists(file)) return
         installApp(context, file.absolutePath)
     }
 
@@ -133,7 +134,7 @@ object AppTool {
      */
     @JvmStatic
     fun installApp(activity: Activity, file: File, requestCode: Int) {
-        if (!FileTool.isFileExists(file)) return
+        if (!FileUtils.isFileExists(file)) return
         installApp(activity, file.absolutePath, requestCode)
     }
 
@@ -148,8 +149,8 @@ object AppTool {
      */
     @JvmStatic
     fun installAppSilent(context: Context, filePath: String): Boolean {
-        val file = FileTool.getFileByPath(filePath)
-        if (!FileTool.isFileExists(file)) return false
+        val file = FileUtils.getFileByPath(filePath)
+        if (!FileUtils.isFileExists(file)) return false
         val command = "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm install $filePath"
         val commandResult = ShellUtils.execCmd(command, !isSystemApp(context), true)
         return commandResult.successMsg != null && commandResult.successMsg!!.toLowerCase(Locale.ROOT)
@@ -718,13 +719,13 @@ object AppTool {
      */
     @JvmStatic
     fun cleanAppData(context: Context, vararg dirs: File?): Boolean {
-        var isSuccess = FileTool.cleanInternalCache(context)
-        isSuccess = isSuccess and FileTool.cleanInternalDbs(context)
-        isSuccess = isSuccess and FileTool.cleanInternalSP(context)
-        isSuccess = isSuccess and FileTool.cleanInternalFiles(context)
-        isSuccess = isSuccess and FileTool.cleanExternalCache(context)
+        var isSuccess = FileUtils.cleanInternalCache(context)
+        isSuccess = isSuccess and FileUtils.cleanInternalDbs(context)
+        isSuccess = isSuccess and FileUtils.cleanInternalSP(context)
+        isSuccess = isSuccess and FileUtils.cleanInternalFiles(context)
+        isSuccess = isSuccess and FileUtils.cleanExternalCache(context)
         for (dir in dirs) {
-            isSuccess = isSuccess and FileTool.cleanCustomCache(dir)
+            isSuccess = isSuccess and FileUtils.cleanCustomCache(dir)
         }
         return isSuccess
     }

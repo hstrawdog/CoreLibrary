@@ -4,6 +4,7 @@ import android.util.SparseArray
 import android.util.SparseBooleanArray
 import android.util.SparseIntArray
 import android.util.SparseLongArray
+import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.lang.Exception
@@ -814,7 +815,7 @@ object DataUtils {
             e.printStackTrace()
             null
         } finally {
-            FileTool.closeIO(`is`)
+            FileUtils.closeIO(`is`)
         }
     }
 
@@ -870,7 +871,7 @@ object DataUtils {
             e.printStackTrace()
             null
         } finally {
-            FileTool.closeIO(os)
+            FileUtils.closeIO(os)
         }
     }
 

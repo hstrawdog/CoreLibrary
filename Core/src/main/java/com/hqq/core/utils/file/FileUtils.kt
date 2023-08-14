@@ -245,31 +245,10 @@ object FileUtils {
     fun clearAllCache(context: Context) {
         deleteDir(context.cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            deleteDir(context.externalCacheDir)
+            context.externalCacheDir?.let { deleteDir(it) }
         }
     }
 
-    /**
-     * 删除文件夹
-     *
-     * @param dir
-     * @return
-     */
-    @JvmStatic
-    private fun deleteDir(dir: File?): Boolean {
-        if (dir != null && dir.isDirectory) {
-            val children = dir.list()
-            if (children != null) {
-                for (i in children.indices) {
-                    val success = deleteDir(File(dir, children[i]))
-                    if (!success) {
-                        return false
-                    }
-                }
-            }
-        }
-        return dir!!.delete()
-    }
 
     /**
      * 获取文件夹大小
@@ -2138,8 +2117,8 @@ object FileUtils {
      * @return `true`: 删除成功<br></br>`false`: 删除失败
      */
     @JvmStatic
-    fun deleteDir(dirPath: String?): Boolean {
-        return deleteDir(getFileByPath(dirPath))
+    fun deleteDir(dirPath: String): Boolean? {
+        return getFileByPath(dirPath)?.let { deleteDir(it) }
     }
 
     /**

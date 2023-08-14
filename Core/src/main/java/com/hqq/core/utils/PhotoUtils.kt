@@ -15,6 +15,7 @@ import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.File
 import java.text.SimpleDateFormat
@@ -218,18 +219,18 @@ object PhotoUtils {
             return null
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(context, imageUri)) {
-            if (isExternalStorageDocument(imageUri)) {
+            if (FileUtils.isExternalStorageDocument(imageUri)) {
                 val docId = DocumentsContract.getDocumentId(imageUri)
                 val split = docId.split(":").toTypedArray()
                 val type = split[0]
                 if ("primary".equals(type, ignoreCase = true)) {
                     return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
                 }
-            } else if (isDownloadsDocument(imageUri)) {
+            } else if (FileUtils.isDownloadsDocument(imageUri)) {
                 val id = DocumentsContract.getDocumentId(imageUri)
                 val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
-                return getDataColumn(context, contentUri, null, null)
-            } else if (isMediaDocument(imageUri)) {
+                return FileUtils.getDataColumn(context, contentUri, null, null)
+            } else if (FileUtils.isMediaDocument(imageUri)) {
                 val docId = DocumentsContract.getDocumentId(imageUri)
                 val split = docId.split(":").toTypedArray()
                 val type = split[0]
@@ -243,14 +244,14 @@ object PhotoUtils {
                 }
                 val selection = MediaStore.Images.Media._ID + "=?"
                 val selectionArgs = arrayOf(split[1])
-                return getDataColumn(context, contentUri, selection, selectionArgs)
+                return FileUtils.getDataColumn(context, contentUri, selection, selectionArgs)
             }
         } // MediaStore (and general)
         else if ("content".equals(imageUri.scheme, ignoreCase = true)) {
             // Return the remote address
-            return if (isGooglePhotosUri(imageUri)) {
+            return if (FileUtils.isGooglePhotosUri(imageUri)) {
                 imageUri.lastPathSegment
-            } else getDataColumn(context, imageUri, null, null)
+            } else FileUtils.getDataColumn(context, imageUri, null, null)
         } else if ("file".equals(imageUri.scheme, ignoreCase = true)) {
             return imageUri.path
         }

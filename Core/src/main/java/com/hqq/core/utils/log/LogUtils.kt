@@ -5,6 +5,7 @@ import android.util.Log
 import com.hqq.core.BuildConfig
 import com.hqq.core.CoreConfig
 import com.hqq.core.utils.TimeUtils
+import com.hqq.core.utils.file.FileUtils
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileOutputStream
@@ -283,7 +284,7 @@ object LogUtils {
 
     @JvmStatic
     fun init(context: Context) { // 在Application中初始化
-        LOG_FILE_PATH = FileTool.rootPath!!.path + File.separator + context.packageName + File.separator + "Log"
+        LOG_FILE_PATH = FileUtils.rootPath!!.path + File.separator + context.packageName + File.separator + "Log"
         LOG_FILE_NAME = "TLog_"
     }
 
@@ -331,7 +332,7 @@ object LogUtils {
     @JvmStatic
     fun delAllLogFile() { // 删除日志文件
 //        String needDelFiel = FILE_SUFFIX.format(getDateBefore());
-        FileTool.deleteDir(LOG_FILE_PATH)
+        LOG_FILE_PATH?.let { FileUtils.deleteDir(it) }
     }
 
     /**
@@ -351,7 +352,7 @@ object LogUtils {
 
     @JvmStatic
     fun saveLogFile(message: String) {
-        val fileDir = File(FileTool.rootPath.toString() + File.separator + CoreConfig.applicationContext.packageName)
+        val fileDir = File(FileUtils.rootPath.toString() + File.separator + CoreConfig.applicationContext.packageName)
         if (!fileDir.exists()) {
             fileDir.mkdirs()
         }

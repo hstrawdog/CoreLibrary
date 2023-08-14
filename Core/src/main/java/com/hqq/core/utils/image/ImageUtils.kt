@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.hqq.core.CoreConfig
 import com.hqq.core.utils.DataUtils.isNullString
+import com.hqq.core.utils.file.FileUtils
 import com.hqq.core.utils.log.LogUtils
 import java.io.*
 import java.net.HttpURLConnection
@@ -388,7 +389,7 @@ object ImageUtils {
             e.printStackTrace()
             null
         } finally {
-            closeIO(`is`)
+            FileUtils.closeIO(`is`)
         }
     }
 
@@ -418,7 +419,7 @@ object ImageUtils {
             e.printStackTrace()
             null
         } finally {
-            closeIO(`is`)
+            FileUtils.closeIO(`is`)
         }
     }
 
@@ -1171,7 +1172,7 @@ object ImageUtils {
      */
     @JvmStatic
     fun save(src: Bitmap, filePath: String?, format: CompressFormat?): Boolean {
-        return save(src, getFileByPath(filePath), format, false)
+        return save(src, FileUtils.getFileByPath(filePath), format, false)
     }
 
     /**
@@ -1185,7 +1186,7 @@ object ImageUtils {
      */
     @JvmStatic
     fun save(src: Bitmap, filePath: String?, format: CompressFormat?, recycle: Boolean): Boolean {
-        return save(src, getFileByPath(filePath), format, recycle)
+        return save(src, FileUtils.getFileByPath(filePath), format, recycle)
     }
     /**
      * 保存图片
@@ -1207,7 +1208,7 @@ object ImageUtils {
     @JvmOverloads
     @JvmStatic
     fun save(src: Bitmap, file: File?, format: CompressFormat?, recycle: Boolean = false): Boolean {
-        if (isEmptyBitmap(src) || !createOrExistsFile(file)) {
+        if (isEmptyBitmap(src) || !FileUtils.createOrExistsFile(file)) {
             return false
         }
         println(src.width.toString() + ", " + src.height)
@@ -1222,7 +1223,7 @@ object ImageUtils {
         } catch (e: IOException) {
             e.printStackTrace()
         } finally {
-            closeIO(os)
+            FileUtils. closeIO(os)
         }
         return ret
     }
@@ -1260,7 +1261,7 @@ object ImageUtils {
      */
     @JvmStatic
     fun getImageType(filePath: String?): String? {
-        return getImageType(getFileByPath(filePath))
+        return getImageType(FileUtils.getFileByPath(filePath))
     }
 
     /**
@@ -1280,7 +1281,7 @@ object ImageUtils {
             e.printStackTrace()
             null
         } finally {
-            closeIO(`is`)
+            FileUtils.closeIO(`is`)
         }
     }
 

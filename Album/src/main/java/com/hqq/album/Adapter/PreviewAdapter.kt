@@ -15,6 +15,7 @@ import com.hqq.album.annotation.LocalMediaType
 import com.hqq.album.entity.LocalMedia
 import com.hqq.album.utils.AlbumFileUtils
 import com.hqq.core.glide.ImageLoadUtils
+import com.hqq.core.utils.file.FileUtils
 
 /**
  * @Author : huangqiqiang
@@ -32,7 +33,7 @@ class PreviewAdapter : BaseQuickAdapter<LocalMedia, BaseViewHolder>(R.layout.fra
     override fun convert(viewHolder: BaseViewHolder, localMedia: LocalMedia) {
         when (localMedia.localMediaType) {
             LocalMediaType.VALUE_TYPE_IMAGE -> {
-                val url = getPathFromUri(context, localMedia.uri)
+                val url = FileUtils.getPathFromUri(context, localMedia.uri)
                 val degree = AlbumFileUtils.readPictureDegree(url)
                 //旋转图片
                 if (degree > 0) {

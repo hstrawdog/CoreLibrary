@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import com.hqq.core.utils.file.FileUtils
 import java.io.File
 
 /**
@@ -29,7 +30,7 @@ object IntentUtils {
             return null
         }
         val intent = Intent(Intent.ACTION_VIEW)
-        val contentUri = getUriForFile(context!!, apkfile)
+        val contentUri = FileUtils.getUriForFile(context!!, apkfile)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)

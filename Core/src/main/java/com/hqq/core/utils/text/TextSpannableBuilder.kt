@@ -7,6 +7,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.text.*
+import android.text.TextUtils
 import android.text.style.AlignmentSpan
 import android.text.style.BackgroundColorSpan
 import android.text.style.BulletSpan
@@ -94,7 +95,7 @@ class TextSpannableBuilder {
      * @param listener OnClickListener?
      */
     fun addTextClick(text: CharSequence, @ColorInt color: Int, listener: OnClickListener? = null) {
-        if (!TextUtils.isEmpty(text)) {
+        if (!android.text.TextUtils.isEmpty(text)) {
             val start = mStringBuilder.length
             val end = start + text.length
             listener?.let {
