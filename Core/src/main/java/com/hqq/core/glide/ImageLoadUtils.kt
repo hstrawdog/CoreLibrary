@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -38,7 +39,9 @@ object ImageLoadUtils {
     fun getRequestOption(resourceId: Int = CoreConfig.get().defImg): RequestOptions {
         return RequestOptions().format(DecodeFormat.PREFER_RGB_565) //缓存SOURC和RESULT
             .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
-            .skipMemoryCache(false).dontAnimate().placeholder(resourceId)//缓存SOURC和RESULT
+            .skipMemoryCache(false)
+            .dontAnimate()
+            .placeholder(resourceId)//缓存SOURC和RESULT
     }
 
     /**
@@ -47,7 +50,8 @@ object ImageLoadUtils {
      * @param px
      * @return  RequestOptions
      */
-    fun getRequestOptionRound(px: Int = ResourcesUtils.getDimen(R.dimen.x10).toInt(), resourceId: Int = CoreConfig.get().defImg): RequestOptions {
+    fun getRequestOptionRound(px: Int = ResourcesUtils.getDimen(R.dimen.x10)
+        .toInt(), resourceId: Int = CoreConfig.get().defImg): RequestOptions {
         return getRequestOption(resourceId).transform(GlideRoundTransform(px))
     }
 
@@ -58,7 +62,10 @@ object ImageLoadUtils {
      * @param imageView
      */
     fun withFillet(url: String?, imageView: ImageView) {
-        GlideApp.with(imageView).load(url).apply(getRequestOptionRound()).into(imageView)
+        GlideApp.with(imageView)
+            .load(url)
+            .apply(getRequestOptionRound())
+            .into(imageView)
     }
 
     /**
@@ -69,10 +76,13 @@ object ImageLoadUtils {
      * @param width     宽
      * @param height    高
      */
-    fun with(url: Any, imageView: ImageView, width: Int = -1, height: Int = -1) {
-        GlideApp.with(imageView).load(url).apply(getRequestOption().override(width, height)).into(imageView)
+    fun with(url: Any, imageView: ImageView, priority: Priority = Priority.NORMAL, width: Int = -1, height: Int = -1) {
+        GlideApp.with(imageView)
+            .load(url)
+            .priority(priority)
+            .apply(getRequestOption().override(width, height))
+            .into(imageView)
     }
-
 
     /**
      * @param url
@@ -81,9 +91,11 @@ object ImageLoadUtils {
      * @param  resourceId   R.mipmap.ic_def_head
      */
     fun withFillet2PX(url: String?, imageView: ImageView?, radius: Int, resourceId: Int = CoreConfig.get().defImg) {
-        GlideApp.with(imageView!!).load(url).apply(getRequestOptionRound(radius, resourceId)).into(imageView)
+        GlideApp.with(imageView!!)
+            .load(url)
+            .apply(getRequestOptionRound(radius, resourceId))
+            .into(imageView)
     }
-
 
     /**
      * 圆形
@@ -91,12 +103,18 @@ object ImageLoadUtils {
      * @param imageView 控件
      * @param resourceId 默认图 头像
      */
-    fun transformCircularHead(url: String?, imageView: ImageView?, @DrawableRes resourceId: Int = R.mipmap.ic_def_head_circular) {
-        GlideApp.with(imageView!!).load(url).thumbnail().apply(RequestOptions.circleCropTransform() //不做内存缓存
-            .skipMemoryCache(true).dontAnimate().placeholder(resourceId)).into(imageView)
+    fun transformCircularHead(url: String?, imageView: ImageView?,
+                              @DrawableRes resourceId: Int = R.mipmap.ic_def_head_circular) {
+        GlideApp.with(imageView!!)
+            .load(url)
+            .thumbnail()
+            .apply(RequestOptions.circleCropTransform() //不做内存缓存
+                .skipMemoryCache(true)
+                .dontAnimate()
+                .placeholder(resourceId))
+            .into(imageView)
 
     }
-
 
     /**
      * Glide获取网络图片，带容错机制error时开始一个新的请求
@@ -136,10 +154,7 @@ object ImageLoadUtils {
      * @param callback GlideLoadBitmapCallback
      */
     @JvmStatic
-    fun getBitmap(context: Context?,
-                  uri: String?,
-                  width: Int = -1,
-                  height: Int = -1,
+    fun getBitmap(context: Context?, uri: String?, width: Int = -1, height: Int = -1,
                   callback: GlideLoadBitmapCallback) {
         Glide.with(context!!)
             .asBitmap()
