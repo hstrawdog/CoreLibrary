@@ -11,7 +11,9 @@ import com.easy.example.R
  * @Describe : 图片灰度
  */
 class ImageGrayscaleActivity : BaseActivity() {
-    override val layoutViewId: Int = R.layout.activity_image_grayscale
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_image_grayscale
+    }
 
     override fun initView() {}
 }

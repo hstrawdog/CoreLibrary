@@ -28,14 +28,15 @@ abstract class BaseListFragment : BaseFragment(), IBaseListModelView {
 
     override var pageCount = 1
 
-    override val layoutViewId: Int = 0;
-
+    override fun getLayoutViewId(): Int {
+        return  0
+    }
     override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
 
     override lateinit var listModel: BaseListModel
 
     override fun getLayoutView(group: ViewGroup): View? {
-        return if (layoutViewId <= 0) {
+        return if (getLayoutViewId() <= 0) {
             context?.let {
                 BaseListModel.createRecycleView(it)
             }

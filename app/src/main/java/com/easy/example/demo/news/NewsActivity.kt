@@ -18,8 +18,8 @@ import com.easy.example.ui.web.WebActivity
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class NewsActivity(override val adapter: com.easy.example.demo.news.NewsAdapter = com.easy.example.demo.news.NewsAdapter())
-    : BaseVmListActivity<NewsViewModel, ActivityNewsBinding>(), OnItemClickListener {
+class NewsActivity(override val adapter: NewsAdapter = NewsAdapter()) :
+    BaseVmListActivity<NewsViewModel, ActivityNewsBinding>(), OnItemClickListener {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, NewsActivity::class.java)
@@ -27,15 +27,17 @@ class NewsActivity(override val adapter: com.easy.example.demo.news.NewsAdapter 
         }
     }
 
-    override val layoutId: Int
-        get() = R.layout.activity_news
-    override val bindingViewModelId: Int
-        get() = 0
-
+    override fun getLayoutId(): Int {
+        return R.layout.activity_news
+    }
 
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
         WebActivity.open(activity!!, this.adapter!!.getItem(position)!!.url, this.adapter!!.getItem(position)!!.title)
+    }
+
+    override fun bindingViewModelId(): Int {
+        return 0
     }
 
 

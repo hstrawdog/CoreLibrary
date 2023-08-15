@@ -23,7 +23,9 @@ import com.easy.example.dialog.*
  */
 class TestDialogActivity : BaseActivity() {
 
-    override val layoutViewId: Int = R.layout.activity_test_dialog
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_test_dialog
+    }
 
     override fun initView() {
         findViewById<View>(R.id.button9).setOnClickListener(this)
@@ -60,21 +62,30 @@ class TestDialogActivity : BaseActivity() {
             R.id.button15 -> FullDialog.showDialog(supportFragmentManager)
             R.id.button16 -> RightDialog.showDialog(supportFragmentManager)
             R.id.button17 -> LeftDialog.showDialog(supportFragmentManager)
-            R.id.button28 -> SelectDialog.Builder().setBaseViewBuilderHolder(ViewBuilderA())
-                .create().show(supportFragmentManager)
+            R.id.button28 -> SelectDialog.Builder()
+                .setBaseViewBuilderHolder(ViewBuilderA())
+                .create()
+                .show(supportFragmentManager)
 
             R.id.button51 -> SelectDialog.Builder()
                 .setBaseViewBuilderHolder(object : DialogViewBuilder() {
-                    override val layoutViewId: Int
-                        get() = R.layout.view_holder_a
+
+                    override fun getLayoutViewId(): Int {
+                        return R.layout.view_holder_a
+                    }
 
                     override fun initView() {}
                     override fun onClick(view: View) {}
-                }).create().show(supportFragmentManager)
+                })
+                .create()
+                .show(supportFragmentManager)
 
-            R.id.button52 -> SelectDialog.Builder().setTitle("标题")
+            R.id.button52 -> SelectDialog.Builder()
+                .setTitle("标题")
                 .setBaseViewBuilderHolder(object : DialogViewBuilder() {
-                    override val layoutViewId: Int = -1
+                    override fun getLayoutViewId(): Int {
+                        return -1
+                    }
 
                     override fun getLayoutView(viewGroup: ViewGroup): View? {
                         val textView = TextView(this@TestDialogActivity)
@@ -87,29 +98,43 @@ class TestDialogActivity : BaseActivity() {
 
                     override fun initView() {}
                     override fun onClick(view: View) {}
-                }).create().show(supportFragmentManager)
+                })
+                .create()
+                .show(supportFragmentManager)
 
-            R.id.button53 -> SelectDialog.Builder().setTitle("标题").setContent("我是内容")
+            R.id.button53 -> SelectDialog.Builder()
+                .setTitle("标题")
+                .setContent("我是内容")
                 .setPositiveButton("确定2") { dialog, which -> ToastUtils.showToast("确定2") }
                 .setOnCancelListener("取消1") { dialog, which -> ToastUtils.showToast("取消1") }
-                .create().show(supportFragmentManager)
+                .create()
+                .show(supportFragmentManager)
 
-            R.id.button54 -> SelectDialog.Builder().setTitle("标题").setContent("我是内容")
+            R.id.button54 -> SelectDialog.Builder()
+                .setTitle("标题")
+                .setContent("我是内容")
                 .setPositiveButton("确定2") { dialog, which -> ToastUtils.showToast("确定2") }
                 .setNeutralButton("中立") { dialog, which -> ToastUtils.showToast("中立") }
                 .setOnCancelListener("取消1") { dialog, which -> ToastUtils.showToast("取消1") }
-                .create().show(supportFragmentManager)
-
-            R.id.button65 -> SelectDialog.Builder().setTitle("标题").setContent("我是内容")
-                .setPositiveButton("") { dialog, which -> ToastUtils.showToast("确定2") }
-                .setNeutralButton("") { dialog, which -> ToastUtils.showToast("中立") }
-                .setOnCancelListener("") { dialog, which -> ToastUtils.showToast("取消1") }.create()
+                .create()
                 .show(supportFragmentManager)
 
-            R.id.button66 -> SelectDialog.Builder().setTitle("").setContent("我是内容")
+            R.id.button65 -> SelectDialog.Builder()
+                .setTitle("标题")
+                .setContent("我是内容")
                 .setPositiveButton("") { dialog, which -> ToastUtils.showToast("确定2") }
                 .setNeutralButton("") { dialog, which -> ToastUtils.showToast("中立") }
-                .setOnCancelListener("") { dialog, which -> ToastUtils.showToast("取消1") }.create()
+                .setOnCancelListener("") { dialog, which -> ToastUtils.showToast("取消1") }
+                .create()
+                .show(supportFragmentManager)
+
+            R.id.button66 -> SelectDialog.Builder()
+                .setTitle("")
+                .setContent("我是内容")
+                .setPositiveButton("") { dialog, which -> ToastUtils.showToast("确定2") }
+                .setNeutralButton("") { dialog, which -> ToastUtils.showToast("中立") }
+                .setOnCancelListener("") { dialog, which -> ToastUtils.showToast("取消1") }
+                .create()
                 .show(supportFragmentManager)
 
             R.id.button67 -> {
@@ -124,10 +149,13 @@ class TestDialogActivity : BaseActivity() {
         }
     }
 
+
     open class ViewBuilderA : DialogViewBuilder() {
         override fun initView() {}
         override fun onClick(v: View) {}
-        override val layoutViewId: Int = R.layout.view_holder_a
+        override fun getLayoutViewId(): Int {
+            return R.layout.view_holder_a
+        }
     }
 
 

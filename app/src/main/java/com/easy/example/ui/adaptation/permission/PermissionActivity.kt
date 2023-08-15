@@ -17,7 +17,9 @@ import com.easy.example.databinding.ActivityPermissionBinding
  * @Descrive : TODO
  */
 class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() {
-    override val layoutId: Int = R.layout.activity_permission
+    override fun getLayoutId(): Int {
+        return R.layout.activity_permission
+    }
 
     override fun initView() {
         binding.button7.setOnClickListener {

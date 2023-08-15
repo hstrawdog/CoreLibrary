@@ -29,7 +29,9 @@ class DataBindingActivity : BaseActivity() {
     }
 
 
-    override val layoutViewId: Int = R.layout.activity_dagger_a
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_dagger_a
+    }
 
     override fun initView() {
         val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(layoutInflater, R.layout.item_data_binding, null, false)

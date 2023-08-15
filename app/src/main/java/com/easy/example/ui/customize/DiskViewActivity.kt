@@ -3,6 +3,7 @@ package com.easy.example.ui.customize
 import android.app.Activity
 import android.content.Intent
 import com.easy.core.ui.base.BaseActivity
+import com.easy.example.R
 
 /**
  * @Author : huangqiqiang
@@ -18,7 +19,9 @@ class DiskViewActivity : BaseActivity() {
         }
     }
 
-    override val layoutViewId: Int = com.easy.example.R.layout.activity_disk_view
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_disk_view
+    }
 
     override fun initView() {}
 }

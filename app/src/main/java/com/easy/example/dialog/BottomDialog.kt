@@ -21,9 +21,14 @@ class BottomDialog : BaseDialog() {
         }
     }
 
-    override val layoutId: Int = R.layout.dialog_bottom_sheet
 
-    override val gravity: Int = Gravity.BOTTOM
+    override fun getGravity(): Int {
+        return Gravity.BOTTOM
+
+    }
+    override fun getDialogLayoutId(): Int {
+        return R.layout.dialog_bottom_sheet
+    }
 
     override fun initView() {}
 

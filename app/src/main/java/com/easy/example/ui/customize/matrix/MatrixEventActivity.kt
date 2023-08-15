@@ -11,7 +11,9 @@ import com.easy.example.R
  * @Describe :
  */
 class MatrixEventActivity : BaseActivity() {
-    override val layoutViewId: Int= R.layout.activity_event_matrix
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_event_matrix
+    }
 
     override fun initView() {
 

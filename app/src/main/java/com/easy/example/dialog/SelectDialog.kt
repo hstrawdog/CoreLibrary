@@ -21,11 +21,19 @@ class SelectDialog : BaseDialog() {
         }
     }
 
-    override val layoutId: Int = R.layout.dialog_select
 
-    override val gravity: Int = Gravity.CENTER
+    override fun getGravity(): Int {
+        return Gravity.CENTER
+    }
 
-    override val animation: Int = R.style.dialogAnimation_fade_in2fade_out
+    override fun getAnimation(): Int {
+        return  R.style.dialogAnimation_fade_in2fade_out
+    }
+
+
+    override fun getDialogLayoutId(): Int {
+        return R.layout.dialog_select
+    }
 
     override fun initView() {}
 

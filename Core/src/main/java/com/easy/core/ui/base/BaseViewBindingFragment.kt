@@ -16,14 +16,18 @@ import java.lang.reflect.ParameterizedType
  */
 
 abstract class BaseViewBindingFragment<T : ViewBinding> : BaseFragment() {
-    override val layoutViewId: Int
-        get() = 0
+
+
+    override fun getLayoutViewId(): Int {
+        return 0
+    }
 
     lateinit var binding: T
     override fun getLayoutView(parent: ViewGroup): View? {
         val tClass = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
         try {
-            val method = tClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.javaPrimitiveType)
+            val method =
+                tClass.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.javaPrimitiveType)
             binding = method.invoke(null, layoutInflater, parent, false) as T
         } catch (e: NoSuchMethodException) {
             e.printStackTrace()

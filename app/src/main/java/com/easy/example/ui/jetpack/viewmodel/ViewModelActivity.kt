@@ -22,8 +22,10 @@ import com.easy.example.ui.jetpack.livedata.User
  */
 class ViewModelActivity : BaseActivity() {
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_view_model
+
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_view_model
+    }
 
     override fun initView() {
         val userViewModel = ViewModelProvider(this).get(com.easy.example.ui.jetpack.viewmodel.UserViewModel::class.java)

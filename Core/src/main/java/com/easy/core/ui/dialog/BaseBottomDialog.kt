@@ -38,7 +38,9 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
      */
     lateinit var rootViewBuild: IRootViewBuildBuild
 
-    override val height: Int = CoordinatorLayout.LayoutParams.MATCH_PARENT
+    override fun getDialogHeight(): Int {
+        return CoordinatorLayout.LayoutParams.MATCH_PARENT
+    }
     override fun initConfig() {}
     override fun show(manager: FragmentManager) {
         val ft = manager.beginTransaction()
@@ -50,6 +52,9 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
         ft.commitAllowingStateLoss()
     }
 
+    override fun getDialogWeight(): Int {
+        return  CoordinatorLayout.LayoutParams.WRAP_CONTENT
+    }
     override fun getLayoutView(parent: ViewGroup): View? {
         return null
     }
@@ -86,7 +91,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDi
         val bottomSheet = dialog!!.delegate.findViewById<FrameLayout>(R.id.design_bottom_sheet)
         if (bottomSheet != null) {
             val layoutParams = bottomSheet.layoutParams as CoordinatorLayout.LayoutParams
-            layoutParams.height = height
+            layoutParams.height = getDialogHeight()
             behavior = BottomSheetBehavior.from(bottomSheet)
             // 初始为展开状态
             behavior!!.state = BottomSheetBehavior.STATE_EXPANDED

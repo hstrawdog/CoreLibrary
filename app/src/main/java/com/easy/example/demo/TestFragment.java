@@ -16,7 +16,7 @@ import com.easy.example.ui.jetpack.package1.UserViewModel;
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-public class TestFragment extends BaseVmFragment<UserViewModel,FragmentTestBinding> {
+public class TestFragment extends BaseVmFragment<UserViewModel, FragmentTestBinding> {
     public static TestFragment newInstance() {
         Bundle args = new Bundle();
         TestFragment fragment = new TestFragment();
@@ -35,8 +35,9 @@ public class TestFragment extends BaseVmFragment<UserViewModel,FragmentTestBindi
 
     }
 
+
     @Override
-    public int getBindingViewModelId() {
+    public int bindingViewModelId() {
         return BR.vm;
     }
 }

@@ -16,8 +16,6 @@ import com.easy.example.widget.BaseToolBarSearch
  */
 class SearchBarActivity : BaseActivity() {
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_search_bar
 
     override fun initConfig() {
         super.initConfig()
@@ -25,6 +23,10 @@ class SearchBarActivity : BaseActivity() {
         rootViewImpl.iToolBarBuilder.iCreateToolbar = BaseToolBarSearch()
 
 
+    }
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_search_bar
     }
 
     override fun initView() {}

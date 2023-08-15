@@ -9,7 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RoomActivity(override val layoutId: Int = R.layout.activity_room) : BaseDataBindingActivity<ActivityRoomBinding>() {
+class RoomActivity() : BaseDataBindingActivity<ActivityRoomBinding>() {
     companion object {
         fun open(context: Activity) {
             context.startActivityForResult(Intent(context, RoomActivity::class.java), -1)
@@ -28,5 +28,9 @@ class RoomActivity(override val layoutId: Int = R.layout.activity_room) : BaseDa
         val user = userDao.getAll()[0]
         val student = studentDao.getAll().first()
         binding.textView27.text = user.lastName + "--" + user.firstName + " " + student.grade + "   " + student.age
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_room
     }
 }

@@ -43,8 +43,9 @@ import kotlinx.coroutines.launch
 class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     //  这边是kotlin
     override val adapter: MainAdapter = MainAdapter()
-    override val bindingViewModelId: Int
-        get() = 0
+    override fun bindingViewModelId(): Int {
+        return 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         LogUtils.dInfo("MainActivity    onCreate1")
@@ -102,6 +103,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
         }
         return super.dispatchKeyEvent(event)
     }
+
 
     class MainViewModel : BaseListViewModel() {
         init {

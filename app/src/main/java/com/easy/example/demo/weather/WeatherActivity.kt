@@ -17,11 +17,13 @@ import com.easy.example.databinding.ActivityWeatherBinding
  * @Descrive :
  */
 class WeatherActivity : BaseVmActivity<WeatherViewModel, ActivityWeatherBinding>() {
-    override val layoutId: Int
-        get() = R.layout.activity_weather
+    override fun getLayoutId(): Int {
+        return R.layout.activity_weather
+    }
 
-    override val bindingViewModelId: Int
-        get() = BR.vm
+    override fun bindingViewModelId(): Int {
+        return BR.vm
+    }
 
     override fun initViews() {
         e(" -------WeatherActivity--------- initViews ------")

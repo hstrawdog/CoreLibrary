@@ -46,18 +46,25 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
     /**
      *  布局ID
      */
-    override val layoutId: Int = R.layout.dialog_base_select_dialog
+    override fun getDialogLayoutId(): Int {
+     return R.layout.dialog_base_select_dialog
+
+    }
 
     /**
      *  动画
      */
-    override val animation: Int = R.style.dialogAnimation_fade_in2fade_out
+    override fun getAnimation(): Int {
+        return R.style.dialogAnimation_fade_in2fade_out
+
+    }
 
     /**
      *  宽度
      */
-    override val weight: Int = WindowManager.LayoutParams.MATCH_PARENT
-
+    override fun getDialogWeight(): Int {
+        return WindowManager.LayoutParams.MATCH_PARENT
+    }
     override val isDismissBackground: Boolean
         get() {
             alertParams?.let {

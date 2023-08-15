@@ -43,10 +43,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      *  页面跳转
      */
-    var registerForActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            activityResult.value = result
-        }
+    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        activityResult.value = result
+    }
 
     var loadingView: LoadingView? = null
 
@@ -56,9 +55,13 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     var rootView: View? = null
 
-    protected abstract val layoutId: Int
 
-    override val layoutViewId: Int = R.layout.dialog_new
+    abstract fun getDialogLayoutId(): Int
+
+    override fun getLayoutViewId(): Int {
+        return R.layout.dialog_new
+
+    }
 
     /**
      * 布局创建
@@ -84,34 +87,39 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      * 背景颜色
      */
-    override val background: Int
-        get() = 0x00000000
+    override fun getBackground(): Int {
+        return 0x00000000
+    }
 
     /**
      *方向
      */
-    override val gravity: Int
-        get() = Gravity.CENTER
+    override fun getGravity(): Int {
+        return Gravity.CENTER
+    }
 
     /**
      *  宽
      */
-    override val weight: Int
-        get() = WindowManager.LayoutParams.WRAP_CONTENT
+    override fun getDialogWeight(): Int {
+        return WindowManager.LayoutParams.WRAP_CONTENT
+    }
 
     /**
      *  高
      */
-    override val height: Int
-        get() = WindowManager.LayoutParams.WRAP_CONTENT
+    override fun getDialogHeight(): Int {
+        return WindowManager.LayoutParams.WRAP_CONTENT
+    }
 
     /**
      *  动画
      *   R.style.dialogAnimation_fade_in2fade_out  淡入淡出
      *   R.style.DialogAnimation_bottom2top  下到上
      */
-    override val animation: Int
-        get() = R.style.DialogAnimation_bottom2top
+    override fun getAnimation(): Int {
+        return R.style.DialogAnimation_bottom2top
+    }
 
     /**
      * 状态栏模式
@@ -131,7 +139,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog?.window?.setWindowAnimations(animation)
+        dialog?.window?.setWindowAnimations(getAnimation())
         if (rootView == null) {
             activity?.let {
                 loadingView = LoadingView(it)
@@ -166,8 +174,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      */
     open fun initContentView() {
         val linearLayout = rootView!!.findViewById<LinearLayout>(R.id.ll_rootView)
-        val view = LayoutInflater.from(context).inflate(layoutId, linearLayout, false)
-        linearLayout.gravity = gravity
+        val view = LayoutInflater.from(context)
+            .inflate(getDialogLayoutId(), linearLayout, false)
+        linearLayout.gravity = getGravity()
         linearLayout.addView(view)
         view.setOnClickListener { }
         if (isDismissBackground) {
@@ -178,9 +187,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         LogUtils.e4Debug(rootView?.measuredWidth)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(background))
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(getBackground()))
         dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-        dialog?.window?.setGravity(gravity)
+        dialog?.window?.setGravity(getGravity())
     }
 
     override fun onStart() {

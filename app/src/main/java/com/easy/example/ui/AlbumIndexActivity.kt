@@ -30,9 +30,10 @@ import java.io.File
 class AlbumIndexActivity : BaseActivity() {
     var mTvInfo: TextView? = null
     var tv_file: TextView? = null
-    override val layoutViewId: Int
-        get() = R.layout.activity_album_index
 
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_album_index
+    }
     var call = object : AlbumPhotoCallBack {
         override fun onSelectLocalMedia(arrayList: ArrayList<com.easy.album.entity.LocalMedia>?) {
             val list = arrayList

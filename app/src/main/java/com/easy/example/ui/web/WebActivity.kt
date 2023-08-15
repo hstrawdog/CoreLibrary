@@ -21,8 +21,9 @@ import com.easy.example.R
 class WebActivity : BaseFrameLayoutActivity() {
 
 
-    override val layoutViewId: Int= R.layout.activity_web
-
+    override fun getLayoutViewId(): Int {
+return R.layout.activity_web
+    }
     override fun initConfig() {
         super.initConfig()
         rootViewImpl.iToolBarBuilder.showStatusBar = false
@@ -69,6 +70,8 @@ class WebActivity : BaseFrameLayoutActivity() {
             }
         }
     }
+
+
 
     companion object {
         const val URL = "URL"

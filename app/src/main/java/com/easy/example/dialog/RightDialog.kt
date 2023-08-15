@@ -22,7 +22,9 @@ class RightDialog : BaseDialog() {
         }
     }
 
-    override val layoutId: Int = R.layout.dialog_right
+    override fun getDialogLayoutId(): Int {
+        return  R.layout.dialog_right
+    }
 
     override fun initConfig() {
         super.initConfig()
@@ -33,8 +35,13 @@ class RightDialog : BaseDialog() {
 //        StatusBarManager.setStatusBarModel(getDialog().getWindow(), true);
     }
 
-    override val gravity: Int = Gravity.RIGHT
-    override val animation: Int = R.anim.dialog_right_left
+    override fun getGravity(): Int {
+        return Gravity.RIGHT
+    }
+
+    override fun getAnimation(): Int {
+        return R.anim.dialog_right_left
+    }
 
 
 }

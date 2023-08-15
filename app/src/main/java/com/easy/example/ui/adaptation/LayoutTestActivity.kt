@@ -12,8 +12,10 @@ import com.easy.example.R
  * @Descrive :
  */
 class LayoutTestActivity : BaseActivity() {
-    override val layoutViewId: Int
-        get() = R.layout.activity_layout_test
+
+    override fun getLayoutViewId(): Int {
+        return    R.layout.activity_layout_test
+    }
 
     override fun initView() {}
 }

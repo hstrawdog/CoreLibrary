@@ -20,9 +20,10 @@ abstract class BaseBindingListActivity<T : ViewDataBinding> : BaseDataBindingAct
     BaseListModel.IBaseListModelView {
 
 
-    override val layoutId: Int
-        get() = R.layout.activity_recycle_view
 
+    override fun getLayoutId(): Int {
+        return  R.layout.activity_recycle_view
+    }
     /**
      *  分页下标
      */

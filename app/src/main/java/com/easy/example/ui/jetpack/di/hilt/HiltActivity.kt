@@ -27,8 +27,12 @@ import javax.inject.Inject
  *
  */
 @AndroidEntryPoint
-class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
+class HiltActivity()
     : BaseDataBindingActivity<ActivityHiltBinding>() {
+
+    override fun getLayoutId(): Int {
+return  R.layout.activity_hilt
+    }
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, HiltActivity::class.java)
@@ -87,6 +91,8 @@ class HiltActivity(override val layoutId: Int = R.layout.activity_hilt)
         binding.textView25.setText(analyticsService.analyticsMethods() + "-- ")
         binding.textView26.setText(analyticsService2.analyticsMethods() + "-- ")
     }
+
+
 
 
 }

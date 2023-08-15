@@ -15,7 +15,6 @@ import com.easy.core.ui.base.BaseActivity
 
 
 class ComposeIndexActivity : BaseActivity() {
-    override val layoutViewId:Int = 0
 
 
     override fun getLayoutView(parent:ViewGroup):View {
@@ -24,6 +23,10 @@ class ComposeIndexActivity : BaseActivity() {
                 HelloView()
             }
         }
+    }
+
+    override fun getLayoutViewId(): Int {
+        return  0
     }
 
     override fun initView() {

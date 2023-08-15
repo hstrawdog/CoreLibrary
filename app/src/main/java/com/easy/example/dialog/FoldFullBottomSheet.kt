@@ -17,9 +17,14 @@ import com.easy.example.adapter.StringAdapter
 class FoldFullBottomSheet : BaseBottomDialog() {
     var mStringAdapter = StringAdapter()
 
-    override val layoutViewId: Int
-        get() = R.layout.dialog_bottom_sheet
 
+    override fun getDialogWeight(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLayoutViewId(): Int {
+      return R.layout.dialog_bottom_sheet
+    }
     override fun initView() {
         val recyclerView: RecyclerView = rootView!!.findViewById(R.id.rc_list)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -31,4 +36,6 @@ class FoldFullBottomSheet : BaseBottomDialog() {
 
     override val transparentBottomSheetStyle: Int
         get() = R.style.TransparentBottomSheetStyle_behavior
+
+
 }

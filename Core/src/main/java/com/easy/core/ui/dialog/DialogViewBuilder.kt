@@ -45,10 +45,10 @@ abstract class DialogViewBuilder : ViewHolder(), IBaseViewBuilderHolder, Default
     ) {
         this.parentView = parentView
         this.activity = WeakReference<Activity>(activity)
-        convertView = if (layoutViewId <= 0) {
+        convertView = if (getLayoutViewId() <= 0) {
             getLayoutView(this.parentView!!)
         } else {
-            LayoutInflater.from(context).inflate(layoutViewId, this.parentView, false)
+            LayoutInflater.from(context).inflate(getLayoutViewId(), this.parentView, false)
         }
         lifecycle.addObserver(this)
         initView()

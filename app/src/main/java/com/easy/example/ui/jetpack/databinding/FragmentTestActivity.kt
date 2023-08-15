@@ -15,17 +15,21 @@ import com.easy.example.demo.TestFragment
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class FragmentTestActivity : BaseVmActivity<com.easy.example.ui.jetpack.databinding.FragmentTestViewModel, ActivityFragmentTestBinding>() {
+class FragmentTestActivity : BaseVmActivity<FragmentTestViewModel, ActivityFragmentTestBinding>() {
 
-    override val layoutId: Int
-        get() = R.layout.activity_fragment_test
+    override fun getLayoutId(): Int {
+        return   R.layout.activity_fragment_test
+    }
+
+    override fun bindingViewModelId(): Int {
+        return 0
+    }
+
 
     override fun initViews() {
         val fragment: Fragment = com.easy.example.demo.TestFragment.newInstance()
         FragmentUtils(supportFragmentManager).addOrShowFragment(fragment, R.id.fl_layout)
     }
 
-    override val bindingViewModelId: Int
-        get() = 0
 
 }

@@ -12,8 +12,11 @@ import com.easy.example.R
  * @Email :  qiqiang213@gmail.com
  */
 class DefActivity : BaseActivity() {
-    override val layoutViewId: Int
-        get() = R.layout.activity_def
+
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_def
+    }
 
     override fun initView() {}
 }

@@ -143,8 +143,8 @@ open class RootViewImpl {
      *  获取根布局  也就是Activity中绑定的View
      */
     private fun getLayoutView(iActivityBuilder: IRootView, layout: ViewGroup): View? {
-        return if (iActivityBuilder.layoutViewId > 0) {
-            activity?.get()?.layoutInflater?.inflate(iActivityBuilder.layoutViewId, layout, false)
+        return if (iActivityBuilder.getLayoutViewId() > 0) {
+            activity?.get()?.layoutInflater?.inflate(iActivityBuilder.getLayoutViewId(), layout, false)
         } else {
             iActivityBuilder.getLayoutView(layout)
         }

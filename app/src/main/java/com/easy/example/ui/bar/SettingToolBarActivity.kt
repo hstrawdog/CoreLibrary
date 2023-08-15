@@ -15,8 +15,10 @@ import com.easy.example.R
  */
 class SettingToolBarActivity : BaseActivity() {
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_setting_tool_bar
+
+    override fun getLayoutViewId(): Int {
+        return   R.layout.activity_setting_tool_bar
+    }
 
     override fun initView() {
         iToolBar?.setToolBarColor(R.color.color_main)

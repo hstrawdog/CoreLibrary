@@ -22,8 +22,9 @@ abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : 
 
     override var listView: RecyclerView? = null
 
-    override val layoutId: Int = R.layout.activity_recycle_view
-
+    override fun getLayoutId(): Int {
+        return R.layout.activity_recycle_view
+    }
     override val pageCount: Int get() = viewMode.pageCount
 
     override val pageSize: Int get() = viewMode.pageSize

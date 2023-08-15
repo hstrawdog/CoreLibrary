@@ -24,13 +24,14 @@ abstract class BaseDataBindingFragment<T : ViewDataBinding> : BaseFragment(), IB
     /**
      *  布局ID
      */
-    override val layoutViewId: Int = 0
-
+    override fun getLayoutViewId(): Int {
+        return 0
+    }
     /**
      *  重写
      */
     override fun getLayoutView(parent: ViewGroup): View {
-        binding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false).apply {
+        binding = DataBindingUtil.inflate<T>(layoutInflater, getLayoutId(), parent, false).apply {
             lifecycleOwner = this@BaseDataBindingFragment
         }
         return binding.root

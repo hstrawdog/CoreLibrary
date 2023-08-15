@@ -19,11 +19,11 @@ import com.easy.example.R
  */
 class ToolBarActivity : BaseActivity() {
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_tool_bar
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_tool_bar
+    }
 
     override fun initView() {
-
 
         iToolBar?.let {
             (iToolBar as DefToolBar).addRightTextView("分享", View.OnClickListener { showToast(activity, "点击分享") })
@@ -47,6 +47,7 @@ class ToolBarActivity : BaseActivity() {
         when (view.id) {
             R.id.tv_bar_right -> {
             }
+
             R.id.button5 -> iToolBar?.setStatusColor(R.color.color_77400a)
             R.id.button4 -> iToolBar?.toolBarBg?.setImageResource(R.color.white)
             R.id.button7 -> iToolBar?.toolBarBg?.setImageResource(R.color.color_000)
@@ -61,6 +62,7 @@ class ToolBarActivity : BaseActivity() {
             }
         }
     }
+
 
     companion object {
         fun open(context: Activity) {

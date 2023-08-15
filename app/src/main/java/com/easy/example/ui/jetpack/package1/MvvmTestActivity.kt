@@ -38,11 +38,15 @@ class MvvmTestActivity : BaseVmActivity<UserViewModel, ActivityMvvmBinding, >() 
         e(" MvvmTestActivity   addViewModel 2 ")
     }
 
-    override val bindingViewModelId: Int
-        get() = 0
+    override fun getLayoutId(): Int {
+        return   R.layout.activity_mvvm
+    }
 
-    override val layoutId: Int
-        get() = R.layout.activity_mvvm
+    override fun bindingViewModelId(): Int {
+     return  0
+    }
+
+
 
     override fun initViews() {
         binding?.vm?.liveData?.observeForever { }

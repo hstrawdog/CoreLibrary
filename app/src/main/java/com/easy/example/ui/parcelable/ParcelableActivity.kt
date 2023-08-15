@@ -13,8 +13,10 @@ import com.easy.example.bean.ParcelableBean
  * @Describe :
  */
 class ParcelableActivity : BaseActivity() {
-    override val layoutViewId: Int
-        get() = R.layout.activity_parcelable
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_parcelable
+    }
 
     override fun initView() {
         val bean = intent.getParcelableExtra<ParcelableBean>("A")

@@ -19,10 +19,13 @@ import com.easy.example.databinding.ActivityVmTestBinding
 class VmTestActivity : BaseVmActivity<BaseViewModel, ActivityVmTestBinding, >() {
 
 
-    override val bindingViewModelId: Int
-        get() = 0
-    override val layoutId: Int
-        get() = R.layout.activity_vm_test
+    override fun getLayoutId(): Int {
+        return R.layout.activity_vm_test
+    }
+
+    override fun bindingViewModelId(): Int {
+     return  0
+    }
 
     override fun initViews() {
         binding.button49.setOnClickListener { viewMode.showLoading(true) }

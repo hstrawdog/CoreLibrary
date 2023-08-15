@@ -16,10 +16,13 @@ import com.easy.example.databinding.ActivityJokeBinding
  */
 class JokeActivity(override val adapter: com.easy.example.demo.joke.JokeAdapter = com.easy.example.demo.joke.JokeAdapter())
     : BaseVmListActivity<JokeViewModel, ActivityJokeBinding>() {
-    override val layoutId: Int
-        get() = R.layout.activity_joke
-    override val bindingViewModelId: Int = 0
 
+    override fun getLayoutId(): Int {
+        return  R.layout.activity_joke
+    }
+    override fun bindingViewModelId(): Int {
+        return  0
+    }
     override fun initData() {
         adapter.loadMoreModule.setOnLoadMoreListener(this)
     }

@@ -14,7 +14,9 @@ import com.easy.example.R
  */
 class SoftHideKeyBoardScrollActivity : BaseActivity() {
 
-    override val layoutViewId: Int = R.layout.activity_soft_hide_key_board_scoller
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_soft_hide_key_board_scoller
+    }
 
     override fun initView() {
 

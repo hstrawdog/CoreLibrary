@@ -22,13 +22,14 @@ abstract class BaseDataBindingActivity<T : ViewDataBinding> : BaseActivity(), IB
      * 禁止 子类继承使用 保证走的都是getLayoutView方法
      * @return
      */
-    final override val layoutViewId: Int = 0
-
+    override fun getLayoutViewId(): Int {
+        return  0
+    }
     /**
      * 绑定Binding
      */
     override fun getLayoutView(parent: ViewGroup): View {
-        binding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false)
+        binding = DataBindingUtil.inflate<T>(layoutInflater, getLayoutId(), parent, false)
         binding.lifecycleOwner = this
         return binding.root
     }

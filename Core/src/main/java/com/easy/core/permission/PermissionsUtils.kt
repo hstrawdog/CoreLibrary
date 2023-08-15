@@ -30,6 +30,16 @@ object PermissionsUtils {
     }
 
     /**
+     * 摄像头和读写文件的权限
+     *
+     * @param permissionsResult
+     */
+    @JvmStatic
+    fun requestCameraAndStorage(permissionsResult: PermissionsResult?) {
+        FragmentProxy().requestPermissions(IPermissionsHas.phone.plus(IPermissionsHas.storage), permissionsResult)
+    }
+
+    /**
      * 定位权限
      *
      * @param permissionsResult
@@ -50,14 +60,12 @@ object PermissionsUtils {
             .plus(IPermissionsHas.storage), permissionsResult)
     }
 
-    /**
+    /** 请求权限
      * @see IPermissionsHas
-     *  请求权限
      * @param permissions Array<out Array<String>>
      * @param permissionsResult PermissionsResult
      */
     fun requestPermissions(vararg permissions: Array<String>, permissionsResult: PermissionsResult) {
-
         var permission = arrayOf("")
         for (permission in permissions) {
             permission.plus(permission)

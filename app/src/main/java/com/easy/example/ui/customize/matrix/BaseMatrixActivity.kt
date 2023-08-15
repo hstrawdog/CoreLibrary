@@ -27,8 +27,12 @@ class BaseMatrixActivity : BaseActivity() {
     lateinit var mButton45: Button
     lateinit var mButton46: Button
     lateinit var mButton47: Button
-    override val layoutViewId: Int
-        get() = R.layout.activity_base_matrix
+
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_base_matrix
+
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     override fun initView() {
         mButton47 = findViewById(R.id.button47)

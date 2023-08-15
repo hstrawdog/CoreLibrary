@@ -18,10 +18,10 @@ import com.easy.example.ui.customize.widget.GuideView
  * @Descrive :
  */
 class CurtainActivity : BaseActivity() {
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_curtain
+    }
 
-
-    override val layoutViewId: Int
-        get() =  R.layout.activity_curtain
     override fun initView() {
         val guideView = findViewById<GuideView>(R.id.gv_view)
         findViewById<View>(R.id.textView11).setOnClickListener {

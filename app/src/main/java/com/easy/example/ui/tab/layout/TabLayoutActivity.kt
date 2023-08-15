@@ -24,12 +24,14 @@ class TabLayoutActivity : BaseActivity() {
     var mTbTablayout3:TabLayout? = null
     var mTbTablayout4:TabLayout? = null
 
-    override val layoutViewId:Int
-        get() = R.layout.activity_tab_layout
 
     override fun initConfig() {
         super.initConfig()
         iToolBar?.setStatusColor(R.color.color_main)
+    }
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_tab_layout
     }
 
     override fun initView() {

@@ -21,7 +21,13 @@ import com.easy.example.databinding.ActivityGallerySnapBinding
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class GallerySnapActivity(override val layoutId: Int = R.layout.activity_gallery_snap) : BaseDataBindingActivity<ActivityGallerySnapBinding>() {
+class GallerySnapActivity( ) : BaseDataBindingActivity<ActivityGallerySnapBinding>() {
+
+    override fun getLayoutId(): Int {
+return R.layout.activity_gallery_snap
+    }
+
+
     var mRecyclerview: RecyclerView? = null
     var mData: ArrayList<String>? = null
     var mLayoutManager: LinearLayoutManager? = null
@@ -45,6 +51,8 @@ class GallerySnapActivity(override val layoutId: Int = R.layout.activity_gallery
         binding.rcList.adapter = SnapHelperAdapter(this, mData!!)
         PagerSnapHelper().attachToRecyclerView(binding.rcList)
     }
+
+
 
     private fun initData() {
         mData = ArrayList()

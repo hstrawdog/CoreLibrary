@@ -18,8 +18,9 @@ import com.easy.example.R
 class SoftHideKeyBoardActivity : BaseActivity() {
 
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_soft_hide_key_board
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_soft_hide_key_board
+    }
 
     /**
      *  布局中 存在一个  layout_weight  填充高度

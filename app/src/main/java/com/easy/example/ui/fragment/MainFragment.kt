@@ -19,9 +19,15 @@ import kotlin.collections.ArrayList
  * @Descrive :
  * @Email :  qiqiang213@gmail.com
  */
-class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
-                   override val isLazyLoad: Boolean = true,//只有界面显示的时候才会加载
-                   override val adapter: MainAdapter = MainAdapter()) : BaseListFragment() {
+class MainFragment(override val adapter: MainAdapter = MainAdapter()) : BaseListFragment() {
+
+    override fun getLayoutViewId(): Int {
+        return R.layout.fragment_i
+    }
+
+    override fun isLazyLoad(): Boolean {
+        return true
+    }
 
     companion object {
         @JvmStatic
@@ -79,7 +85,6 @@ class MainFragment(override val layoutViewId: Int = R.layout.fragment_i,
         list.add(com.easy.example.bean.MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
         listModel.fillingData(list as ArrayList<*>)
     }
-
 
 
 }

@@ -20,8 +20,10 @@ import com.easy.example.R
  */
 class ToastActivity : BaseActivity() {
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_toast
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_toast
+    }
 
     override fun initView() {
         findViewById<View>(R.id.button35).setOnClickListener { v: View? -> onClickButton(v) }

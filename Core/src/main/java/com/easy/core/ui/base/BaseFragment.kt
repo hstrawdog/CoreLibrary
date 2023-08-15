@@ -27,8 +27,8 @@ interface OnFragmentVisibilityChangedListener {
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener, View.OnAttachStateChangeListener,
-    OnFragmentVisibilityChangedListener {
+abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener,
+    View.OnAttachStateChangeListener, OnFragmentVisibilityChangedListener {
 
     /**
      *   MutableLiveData 去传递结果
@@ -38,7 +38,9 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * 预先 注册
      */
-    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> activityResult.value = result }
+    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        activityResult.value = result
+    }
 
     /**
      * 缓存根布局对象
@@ -84,7 +86,9 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      *  是否延迟加载
      */
-    override val isLazyLoad: Boolean = false
+    override fun isLazyLoad(): Boolean {
+        return false
+    }
 
     /**
      * 标题栏
@@ -140,10 +144,10 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
         view.addOnAttachStateChangeListener(this)
         if (!isCreate && rootView != null) {
             isCreate = true
-            if (!isLazyLoad) {
+            if (!isLazyLoad()) {
                 initView()
                 LogUtils.d("onViewCreated initBasic   false  " + javaClass.simpleName + this.toString())
-            } else if (isLazyLoad && visible) {
+            } else if (isLazyLoad() && visible) {
                 lazyInitEnd = true
                 LogUtils.d("onViewCreated initBasic   True " + javaClass.simpleName + this.toString())
                 initView()
@@ -207,7 +211,6 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
 
     // 参考https://juejin.cn/post/6899429993231679501
     /******************************** Fragment 可进性   *********************************/
-
 
     /**
      * ParentActivity是否可见
@@ -274,11 +277,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     protected fun onActivityVisibilityChanged(visible: Boolean) {
         parentActivityVisible = visible
         checkVisibility(visible)
-        if (isLazyLoad && isCreate && !lazyInitEnd && visible) {
+        if (isLazyLoad() && isCreate && !lazyInitEnd && visible) {
             initView()
             lazyInitEnd = true
             LogUtils.dInfo("setUserVisibleHint  initBasic " + javaClass.simpleName + this.toString())
-        } else if (isLazyLoad && isCreate && lazyInitEnd && !visible) {
+        } else if (isLazyLoad() && isCreate && lazyInitEnd && !visible) {
             onFragmentHit()
         }
     }

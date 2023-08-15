@@ -15,8 +15,11 @@ import com.easy.example.R
  */
 class ThrowActivity : BaseActivity() {
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_throw
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_throw
+    }
+
     override fun initView() {
         findViewById<View>(R.id.button11).setOnClickListener { view: View -> onViewClicked(view) }
         findViewById<View>(R.id.button12).setOnClickListener { view: View -> onViewClicked(view) }

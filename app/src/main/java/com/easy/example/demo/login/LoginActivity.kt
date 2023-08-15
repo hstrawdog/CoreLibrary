@@ -19,9 +19,14 @@ import com.easy.example.databinding.ActivityLoginBinding
  */
 class LoginActivity : BaseVmActivity<LoginViewModel, ActivityLoginBinding>() {
 
-    override val bindingViewModelId: Int = 0
 
-    override val layoutId: Int = R.layout.activity_login
+    override fun getLayoutId(): Int {
+       return R.layout.activity_login
+    }
+
+    override fun bindingViewModelId(): Int {
+       return  0
+    }
 
     override fun initViews() {
 

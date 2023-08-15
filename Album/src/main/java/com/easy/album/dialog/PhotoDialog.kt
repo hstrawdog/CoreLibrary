@@ -57,12 +57,20 @@ class PhotoDialog : BaseDialog(), View.OnClickListener {
     }
 
 
-    override val gravity: Int = Gravity.BOTTOM
 
-    override val weight: Int = ViewGroup.LayoutParams.MATCH_PARENT
+    override fun getGravity(): Int {
+        return  Gravity.BOTTOM
 
-    override val layoutId: Int = R.layout.dialog_photo
+    }
+    override fun getDialogWeight(): Int {
+        return ViewGroup.LayoutParams.MATCH_PARENT
 
+    }
+
+    override fun getDialogLayoutId(): Int {
+      return  R.layout.dialog_photo
+
+    }
     override fun initView() {
         rootView?.findViewById<View>(R.id.btn_taking_pictures)
             ?.setOnClickListener(this)

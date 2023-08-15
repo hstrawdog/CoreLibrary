@@ -16,9 +16,10 @@ import java.lang.reflect.ParameterizedType
  * @Descrive :
  */
 abstract class BaseViewBindingActivity<T : ViewBinding> : BaseActivity() {
-    override val layoutViewId: Int
-        get() = 0
 
+    override fun getLayoutViewId(): Int {
+        return 0
+    }
     lateinit var binding: T
 
     override fun getLayoutView(parent: ViewGroup): View? {

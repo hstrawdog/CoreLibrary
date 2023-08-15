@@ -11,7 +11,9 @@ import com.easy.example.R
  * @Describe :
  */
 class SwitchActivity : BaseActivity() {
-    override val layoutViewId: Int = R.layout.activity_switch
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_switch
+    }
 
     /**
      * 原生自带的switch

@@ -21,9 +21,16 @@ class LeftDialog : BaseDialog() {
         }
     }
 
-    override val layoutId: Int = R.layout.dialog_right
-    override val gravity: Int = Gravity.LEFT
-    override val animation: Int = R.anim.dialog_left_right
+    override fun getGravity(): Int {
+        return Gravity.LEFT
+    }
+
+    override fun getAnimation(): Int {
+        return  R.anim.dialog_left_right
+    }
+    override fun getDialogLayoutId(): Int {
+        return   R.layout.dialog_right
+    }
 
     override fun initView() {}
 

@@ -33,8 +33,9 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
     /**
      *  正常List 默认使用 自带的ListView  如果页面包含其他内容 则使用 LayoutViewId
      */
-    override val layoutViewId: Int = 0;
-
+    override fun getLayoutViewId(): Int {
+        return 0
+    }
     /**
      *  RecycleView Manager
      */
@@ -52,7 +53,7 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
      * @return
      */
     override fun getLayoutView(group: ViewGroup): View? {
-        return if (layoutViewId <= 0) {
+        return if (getLayoutViewId() <= 0) {
             BaseListModel.createRecycleView(this)
         } else {
             null

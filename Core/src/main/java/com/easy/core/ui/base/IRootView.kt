@@ -26,7 +26,7 @@ interface IRootView {
      *
      * @return
      */
-    val layoutViewId: Int
+    fun getLayoutViewId(): Int
 
     /**
      * 设置跟布局
@@ -76,7 +76,7 @@ interface IRootView {
          *
          * @return boolean
          */
-        val isLazyLoad: Boolean
+        fun isLazyLoad(): Boolean
     }
 
     interface IBaseDialogFragment : IRootView {
@@ -92,7 +92,14 @@ interface IRootView {
          *
          * @return int
          */
-        val height: Int
+        fun getDialogHeight(): Int
+
+        /**
+         * dialog  宽度
+         *
+         * @return int
+         */
+        fun getDialogWeight(): Int
     }
 
     interface IDialogFragment : IBaseDialogFragment {
@@ -101,28 +108,21 @@ interface IRootView {
          *
          * @return int
          */
-        val background: Int
+        fun getBackground(): Int
 
         /**
          * dialog gravity 模式
          *
          * @return int
          */
-        val gravity: Int
-
-        /**
-         * dialog  宽度
-         *
-         * @return int
-         */
-        val weight: Int
+        fun getGravity(): Int
 
         /**
          * dialog 动画
          *
          * @return int
          */
-        val animation: Int
+        fun getAnimation(): Int
     }
 
     interface IBaseViewBuilderHolder : IRootView {
@@ -134,12 +134,7 @@ interface IRootView {
          * @param context
          * @param lifecycle
          */
-        fun createRootView(
-                parentView: ViewGroup?,
-                activity: Activity?,
-                context: Context?,
-                lifecycle: Lifecycle
-        )
+        fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle)
     }
 
     /**
@@ -152,7 +147,7 @@ interface IRootView {
          *
          * @return
          */
-        val layoutId: Int
+        fun getLayoutId(): Int
     }
 
     /**
@@ -175,7 +170,7 @@ interface IRootView {
          * 正常情况下一个界面(Activity  xml) 对应一个viewModel
          * @return
          */
-        val bindingViewModelId: Int
+        fun bindingViewModelId(): Int
 
         /**
          * 添加ViewModel 与布局使用的对象

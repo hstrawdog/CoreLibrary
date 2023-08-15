@@ -21,9 +21,12 @@ import com.easy.example.adapter.FullPagerSnapAdapter
 class FullPagerSnapActivity : BaseActivity() {
     var mRcList: RecyclerView? = null
 
-    override val layoutViewId: Int
-        get() = R.layout.activity_full_pager_snap
+
     var mFullPagerSnapAdapter: FullPagerSnapAdapter? = null
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_full_pager_snap
+    }
+
     override fun initView() {
         mRcList = findViewById(R.id.rc_list)
         mRcList?.setLayoutManager(GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false))

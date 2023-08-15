@@ -13,8 +13,10 @@ import com.easy.example.databinding.FragmentLiveBinding
  * @Describe :
  */
 class LiveFragment : BaseViewBindingFragment<FragmentLiveBinding>() {
-    override val isLazyLoad: Boolean
-        get() = true
+
+    override fun isLazyLoad(): Boolean {
+        return true
+    }
     override fun initView() {
         binding.textView31.text = arguments?.get("position").toString()
         LogUtils.e("----------------initView    ${arguments?.get("position").toString()}--------------------------------------" )

@@ -15,10 +15,12 @@ import com.easy.core.ui.base.ViewModelFactory
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-abstract class BaseVmDialog< K : BaseViewModel,T : ViewDataBinding> : BaseBindingDialog<T>(),
-    IRootView.IBaseViewModelActivity , IRootView.IBanding {
+abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindingDialog<T>(),
+    IRootView.IBaseViewModelActivity, IRootView.IBanding {
     lateinit var viewMode: K
-    override val layoutId: Int = -1
+    override fun getLayoutId(): Int {
+        return  -1
+    }
     override fun initView() {
         viewMode = getViewModel()
         viewMode.let {
@@ -31,9 +33,10 @@ abstract class BaseVmDialog< K : BaseViewModel,T : ViewDataBinding> : BaseBindin
     }
 
     override fun getBindingView(parent: ViewGroup): View? {
-        binding = DataBindingUtil.inflate<T>(layoutInflater, layoutId, parent, false).apply {
-            lifecycleOwner = this@BaseVmDialog
-        }
+        binding = DataBindingUtil.inflate<T>(layoutInflater, getDialogLayoutId(), parent, false)
+            .apply {
+                lifecycleOwner = this@BaseVmDialog
+            }
         return binding.root
     }
 
@@ -57,8 +60,8 @@ abstract class BaseVmDialog< K : BaseViewModel,T : ViewDataBinding> : BaseBindin
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
-        if (bindingViewModelId != 0) {
-            binding.setVariable(bindingViewModelId, viewMode)
+        if (bindingViewModelId() != 0) {
+            binding.setVariable(bindingViewModelId(), viewMode)
         }
     }
 }

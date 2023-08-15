@@ -64,8 +64,9 @@ open class BaseWebFragment : BaseFragment() {
     /**
      *  布局Id
      */
-    override val layoutViewId: Int = R.layout.fragment_web
-
+    override fun getLayoutViewId(): Int {
+        return  R.layout.fragment_web
+    }
     /**
      *  标题栏
      */

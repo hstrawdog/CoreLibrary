@@ -31,8 +31,10 @@ import com.easy.example.R
 </描述当前版本功能> */
 class BaseInfoActivity : BaseActivity() {
     lateinit var mTvInfo: TextView
-    override val layoutViewId: Int
-        get() = R.layout.activity_base_info
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_base_info
+    }
 
     override fun initView() {
         mTvInfo = findViewById(R.id.tv_info)

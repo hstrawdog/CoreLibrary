@@ -52,8 +52,8 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
-        if (bindingViewModelId != 0) {
-            binding.setVariable(bindingViewModelId, viewMode)
+        if (bindingViewModelId() != 0) {
+            binding.setVariable(bindingViewModelId(), viewMode)
         }
     }
 

@@ -18,10 +18,14 @@ import com.easy.example.ui.tab.layout.TabFragment
  * @Descrive :
  */
 class FullDialog : BaseDialog() {
-    override val layoutId: Int = R.layout.dialog_full
+    override fun getDialogLayoutId(): Int {
+        return  R.layout.dialog_full
+    }
 
     override fun initConfig() {}
-    override val animation: Int = R.anim.fade_in
+    override fun getAnimation(): Int {
+        return  R.anim.fade_in
+    }
 
     override fun initView() {
         val mVpPage = rootView!!.findViewById<ViewPager2>(R.id.vp_page)

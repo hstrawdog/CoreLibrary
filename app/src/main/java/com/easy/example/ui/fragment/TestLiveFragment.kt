@@ -14,14 +14,16 @@ import com.easy.core.utils.log.LogUtils
  * @Describe :
  */
 class TestLiveFragment : BaseFragment() {
-    override val layoutViewId: Int = 0
+    override fun getLayoutViewId(): Int {
+        return 0
+    }
     val textView: TextView by lazy {
         TextView(activity)
     }
     val text = System.currentTimeMillis()
-
-    override val isLazyLoad: Boolean
-        get() = true
+    override fun isLazyLoad(): Boolean {
+        return true
+    }
 
     override fun getLayoutView(parent: ViewGroup): View {
         return textView
@@ -41,6 +43,8 @@ class TestLiveFragment : BaseFragment() {
         super.onPause()
         LogUtils.d(" TestLiveFragment   onPause         $text ")
     }
+
+
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)

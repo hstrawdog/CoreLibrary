@@ -18,14 +18,15 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseBindingDialog<T : ViewBinding> : BaseDialog() {
     lateinit var binding : T
-    override val layoutId : Int
-        get() = 0
 
+    override fun getDialogLayoutId(): Int {
+        return 0
+    }
     override fun initView() {}
     override fun initContentView() {
         val linearLayout = rootView !!.findViewById<LinearLayout>(R.id.ll_rootView)
         var view = getBindingView(linearLayout)
-        linearLayout.gravity = gravity
+        linearLayout.gravity = getGravity()
         linearLayout.addView(view)
         view?.setOnClickListener { }
         if (isDismissBackground) {

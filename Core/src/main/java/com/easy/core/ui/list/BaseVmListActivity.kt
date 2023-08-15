@@ -21,8 +21,9 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
 abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> :
     BaseVmActivity<K, T>(), IBaseListModelView {
 
-    override val layoutId: Int = R.layout.activity_recycle_view
-
+    override fun getLayoutId(): Int {
+        return  R.layout.activity_recycle_view
+    }
     override val pageCount: Int
         get() = viewMode.pageCount
 

@@ -19,7 +19,9 @@ import com.easy.example.R
  */
 class ListActivity(override val adapter: ListAdapter = ListAdapter()) : BaseListActivity() {
 
-    override val layoutViewId: Int = R.layout.activity_list;
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_list;
+    }
 
     override fun initData() {
         listView?.addItemDecoration(HeaderItemDecoration(listView!!, object : StickyHeaderInterface {
