@@ -80,6 +80,10 @@
 
 
         <activity
+            android:name=".ui.recycle.BindingRecycleActivity"
+            android:label="BindingRecycleActivity" />
+
+        <activity
             android:name=".ui.LogUtilsActivity"
             android:label="Log" />
         <activity

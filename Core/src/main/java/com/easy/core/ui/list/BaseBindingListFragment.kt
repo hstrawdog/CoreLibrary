@@ -4,10 +4,12 @@ import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.easy.core.BaseCommonsKey
 import com.easy.core.R
 import com.easy.core.ui.base.BaseDataBindingFragment
+import com.easy.core.ui.base.BaseViewBindingFragment
 
 /**
  * @Author : huangqiqiang
@@ -17,14 +19,14 @@ import com.easy.core.ui.base.BaseDataBindingFragment
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingListFragment<T : ViewDataBinding> : BaseDataBindingFragment<T>(),
+abstract class BaseBindingListFragment<T : ViewBinding> : BaseViewBindingFragment<T>(),
     BaseListModel.IBaseListModelView {
 
 
 
-    override fun getLayoutId(): Int {
-        return  R.layout.activity_recycle_view
-    }
+//    override fun getLayoutId(): Int {
+//        return  R.layout.activity_recycle_view
+//    }
     /**
      *  分页下标
      */

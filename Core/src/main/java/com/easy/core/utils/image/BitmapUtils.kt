@@ -380,5 +380,12 @@ object BitmapUtils {
         // 在低版本中用一行的字节x高度
         //earlier version
     }
-
+    /**
+     *  webp 格式
+     * @param bitmap Bitmap
+     * @return ByteArray
+     */
+    fun bitmap2ByteArray4WeB(bitmap: Bitmap): ByteArray {
+        return bitmap2ByteArray(bitmap, Bitmap.CompressFormat.WEBP)
+    }
 }

@@ -4,9 +4,11 @@ import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.easy.core.BaseCommonsKey
 import com.easy.core.R
 import com.easy.core.ui.base.BaseDataBindingActivity
+import com.easy.core.ui.base.BaseViewBindingActivity
 
 /**
  * @Author : huangqiqiang
@@ -16,14 +18,14 @@ import com.easy.core.ui.base.BaseDataBindingActivity
  * @Email : qiqiang213@gmail.com
  * @Descrive :
  */
-abstract class BaseBindingListActivity<T : ViewDataBinding> : BaseDataBindingActivity<T>(),
+abstract class BaseBindingListActivity<T : ViewBinding> : BaseViewBindingActivity<T>(),
     BaseListModel.IBaseListModelView {
 
 
 
-    override fun getLayoutId(): Int {
-        return  R.layout.activity_recycle_view
-    }
+//    override fun getLayoutId(): Int {
+//        return  R.layout.activity_recycle_view
+//    }
     /**
      *  分页下标
      */
@@ -33,6 +35,7 @@ abstract class BaseBindingListActivity<T : ViewDataBinding> : BaseDataBindingAct
     override var listView: RecyclerView? = null
     override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
 
+    override lateinit var listModel: BaseListModel
 
     /**
      * 初始化  基础数据
