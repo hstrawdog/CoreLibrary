@@ -33,12 +33,12 @@ object BitmapUtils {
     @JvmStatic
     fun saveImageToGallery(context: Context, bitmaps: Bitmap) {
         // 首先保存图片
-        val appDir =
-            File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "dearxy")
+        val appDir = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "dearxy")
         if (!appDir.exists()) {
             appDir.mkdir()
         }
-        val fileName = System.currentTimeMillis().toString() + ".jpg"
+        val fileName = System.currentTimeMillis()
+            .toString() + ".jpg"
         val file = File(appDir, fileName)
         Log.e("test_sign", "图片全路径localFile = " + appDir.absolutePath + fileName)
         var fos: FileOutputStream? = null
@@ -66,20 +66,14 @@ object BitmapUtils {
         }
         // 其次把文件插入到系统图库
         try {
-            MediaStore.Images.Media.insertImage(
-                context.contentResolver, file.absolutePath, fileName, null
-            )
+            MediaStore.Images.Media.insertImage(context.contentResolver, file.absolutePath, fileName, null)
         } catch (e: FileNotFoundException) {
             ToastUtils.showToast(context, "保存到相册失败！")
             e.printStackTrace()
         }
         ToastUtils.showToast(context, "已保存到手机相册！")
         // 最后通知图库更新
-        context.sendBroadcast(
-            Intent(
-                Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(appDir.path))
-            )
-        )
+        context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(appDir.path))))
     }
 
     /**
@@ -175,12 +169,7 @@ object BitmapUtils {
         canvas.drawRect(Rect(0, 0, newW, newH), p)
 
         // 绘边框
-        canvas.drawBitmap(
-            bm,
-            (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(),
-            (newH - bigH - 2 * smallH) / 2 + smallH.toFloat(),
-            null
-        )
+        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(), (newH - bigH - 2 * smallH) / 2 + smallH.toFloat(), null)
 
 //        canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.save()
@@ -198,17 +187,14 @@ object BitmapUtils {
         val scaleWidth = w.toFloat() / width
         val scaleHeight = h.toFloat() / height
         matrix.postScale(scaleWidth, scaleHeight)
-        return Bitmap.createBitmap(
-            oldbmp, 0, 0, width, height, matrix, true
-        )
+        return Bitmap.createBitmap(oldbmp, 0, 0, width, height, matrix, true)
     }
 
     @JvmStatic
     fun drawableToBitmap(drawable: Drawable): Bitmap {
         val width = drawable.intrinsicWidth
         val height = drawable.intrinsicHeight
-        val config =
-            if (drawable.opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
+        val config = if (drawable.opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
         val bitmap = Bitmap.createBitmap(width, height, config)
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, width, height)
@@ -356,11 +342,8 @@ object BitmapUtils {
      * @return ByteArray
      */
     @JvmStatic
-    fun bitmap2ByteArray(
-        bitmap: Bitmap,
-        format: Bitmap.CompressFormat = Bitmap.CompressFormat.WEBP,
-        quality: Int = 80
-    ): ByteArray {
+    fun bitmap2ByteArray(bitmap: Bitmap, format: Bitmap.CompressFormat = Bitmap.CompressFormat.WEBP,
+                         quality: Int = 80): ByteArray {
         val baos = ByteArrayOutputStream()
         bitmap.compress(format, quality, baos)
         return baos.toByteArray()
@@ -380,12 +363,69 @@ object BitmapUtils {
         // 在低版本中用一行的字节x高度
         //earlier version
     }
+
     /**
      *  webp 格式
      * @param bitmap Bitmap
      * @return ByteArray
      */
+    @JvmStatic
     fun bitmap2ByteArray4WeB(bitmap: Bitmap): ByteArray {
         return bitmap2ByteArray(bitmap, Bitmap.CompressFormat.WEBP)
     }
+
+    /**
+     *  旋转图片
+     * @param bitmap Bitmap?
+     * @param rotate Int
+     * @return Bitmap?
+     */
+    @JvmStatic
+    fun rotateBitmap(bitmap: Bitmap, rotate: Int): Bitmap {
+
+        val w = bitmap.width
+        val h = bitmap.height
+        val mtx = Matrix()
+        mtx.postRotate(rotate.toFloat())
+        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true)
+    }
+
+    /**
+     *  最小比例 缩放
+     * @param bm Bitmap
+     * @param newWidth Int
+     * @param newHeight Int
+     * @return Bitmap
+     */
+    fun zoomImg4Min(bm: Bitmap, newWidth: Int, newHeight: Int): Bitmap { // 获得图片的宽高
+        val width = bm.width
+        val height = bm.height // 计算缩放比例
+        val scaleWidth = newWidth.toFloat() / width
+        val scaleHeight = newHeight.toFloat() / height // 取得想要缩放的matrix参数
+        var sc = Math.min(scaleWidth, scaleHeight)
+        val matrix = Matrix()
+        matrix.postScale(sc, sc) // 得到新的图片
+        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
+    }
+
+    /**
+     * 超过过最大值 等比压缩
+     * @param bm Bitmap
+     * @param max Int
+     * @return Bitmap
+     */
+    fun zoomImg4Max(bm: Bitmap, max: Int): Bitmap {
+        val width = bm.width
+        val height = bm.height // 计算缩放比例
+        val size = Math.max(width, height)
+        if (size <= max) {
+            return bm
+        }
+        var scal = max / size.toFloat()
+        val matrix = Matrix()
+        matrix.postScale(scal, scal) // 得到新的图片
+        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
+
+    }
+
 }

@@ -51,5 +51,13 @@ class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.L
     fun setTipMsg(msg: Int) {
         tvMsg?.setText(msg)
     } //    public void start() {
+    /**
+     * 设置显示的提示标题
+     * @param title String
+     */
+    fun setShowTitle(title: String) {
+        mMsg = title
+        tvMsg?.text = title
+    }
 
 }
