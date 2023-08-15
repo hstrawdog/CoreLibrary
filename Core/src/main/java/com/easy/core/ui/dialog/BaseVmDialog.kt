@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.easy.core.ui.base.BaseViewModel
+import com.easy.core.ui.base.IBanding
+import com.easy.core.ui.base.IBaseViewModelActivity
 import com.easy.core.ui.base.IRootView
 import com.easy.core.ui.base.ViewModelFactory
 
@@ -15,8 +17,8 @@ import com.easy.core.ui.base.ViewModelFactory
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindingDialog<T>(),
-    IRootView.IBaseViewModelActivity, IRootView.IBanding {
+abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindingDialog<T>(), IBaseViewModelActivity,
+    IBanding {
     lateinit var viewMode: K
     override fun getLayoutId(): Int {
         return  -1

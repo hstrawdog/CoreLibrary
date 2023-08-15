@@ -47,160 +47,160 @@ interface IRootView {
      * 子类必须实现super.initView
      */
     fun initView()
+}
 
-    interface IActivityRootView : IRootView {
-        /**
-         * 进入动画
-         */
-        fun initAnimEnter()
-
-        /**
-         * 结束动画
-         */
-        fun initAnimExit()
-
-        /**
-         * 判断后的 onActivityResult
-         *
-         * @param requestCode
-         * @param resultCode
-         * @param data
-         */
-        fun onResult(requestCode: Int, resultCode: Int, data: Intent?)
-    }
-
-    interface IFragmentRootView : IRootView {
-        /**
-         * 是否延迟加载
-         * 延迟加载 需要当Fragment加载到View中并显示出来才会去执行 initBasic
-         *
-         * @return boolean
-         */
-        fun isLazyLoad(): Boolean
-    }
-
-    interface IBaseDialogFragment : IRootView {
-        /**
-         * 显示dialog
-         *
-         * @param manager void
-         */
-        fun show(manager: FragmentManager)
-
-        /**
-         * dialog 高度
-         *
-         * @return int
-         */
-        fun getDialogHeight(): Int
-
-        /**
-         * dialog  宽度
-         *
-         * @return int
-         */
-        fun getDialogWeight(): Int
-    }
-
-    interface IDialogFragment : IBaseDialogFragment {
-        /**
-         * dialog 的背景颜色
-         *
-         * @return int
-         */
-        fun getBackground(): Int
-
-        /**
-         * dialog gravity 模式
-         *
-         * @return int
-         */
-        fun getGravity(): Int
-
-        /**
-         * dialog 动画
-         *
-         * @return int
-         */
-        fun getAnimation(): Int
-    }
-
-    interface IBaseViewBuilderHolder : IRootView {
-        /**
-         * 构建更布局
-         *
-         * @param parentView
-         * @param activity
-         * @param context
-         * @param lifecycle
-         */
-        fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle)
-    }
+interface IActivityRootView : IRootView {
+    /**
+     * 进入动画
+     */
+    fun initAnimEnter()
 
     /**
-     * dataBinding Activity 使用
+     * 结束动画
      */
-    interface IBanding {
-        /**
-         * 通过布局id 生成对应的 banding类
-         * 只是单独使用ViewBanding的话直接用banding生成的对应类就可以
-         *
-         * @return
-         */
-        fun getLayoutId(): Int
-    }
+    fun initAnimExit()
 
     /**
-     * 同上  多了一个ViewModel要banding
+     * 判断后的 onActivityResult
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
      */
-    interface IBaseViewModelActivity : IBanding {
+    fun onResult(requestCode: Int, resultCode: Int, data: Intent?)
+}
 
-        /**
-         * 独立出ViewModel的初始化
-         * 默认使用 ViewModelProviders 创建
-         * 当有Hilt时 可以重写此方法
-         * 搭配 @ViewModelInject  与by viewModes() 构建 注入参数
-         *
-         */
-        fun getViewModel(): ViewModel
+interface IFragmentRootView : IRootView {
+    /**
+     * 是否延迟加载
+     * 延迟加载 需要当Fragment加载到View中并显示出来才会去执行 initBasic
+     *
+     * @return boolean
+     */
+    fun isLazyLoad(): Boolean
+}
 
-        /**
-         * 绑定ViewModel id
-         * 用于xml 中viewModel 对象的绑定
-         * 正常情况下一个界面(Activity  xml) 对应一个viewModel
-         * @return
-         */
-        fun bindingViewModelId(): Int
+interface IBaseDialogFragment : IRootView {
+    /**
+     * 显示dialog
+     *
+     * @param manager void
+     */
+    fun show(manager: FragmentManager)
 
-        /**
-         * 添加ViewModel 与布局使用的对象
-         */
-        fun addViewModel()
+    /**
+     * dialog 高度
+     *
+     * @return int
+     */
+    fun getDialogHeight(): Int
 
-        /**
-         * 初始化View的要实现的默认值 正常应该通过ViewModel驱动到xml 或者Activity中
-         */
-        fun initViews()
-    }
+    /**
+     * dialog  宽度
+     *
+     * @return int
+     */
+    fun getDialogWeight(): Int
+}
+
+interface IDialogFragment : IBaseDialogFragment {
+    /**
+     * dialog 的背景颜色
+     *
+     * @return int
+     */
+    fun getBackground(): Int
+
+    /**
+     * dialog gravity 模式
+     *
+     * @return int
+     */
+    fun getGravity(): Int
+
+    /**
+     * dialog 动画
+     *
+     * @return int
+     */
+    fun getAnimation(): Int
+}
+
+interface IBaseViewBuilderHolder : IRootView {
+    /**
+     * 构建更布局
+     *
+     * @param parentView
+     * @param activity
+     * @param context
+     * @param lifecycle
+     */
+    fun createRootView(parentView: ViewGroup?, activity: Activity?, context: Context?, lifecycle: Lifecycle)
+}
+
+/**
+ * dataBinding Activity 使用
+ */
+interface IBanding {
+    /**
+     * 通过布局id 生成对应的 banding类
+     * 只是单独使用ViewBanding的话直接用banding生成的对应类就可以
+     *
+     * @return
+     */
+    fun getLayoutId(): Int
+}
+
+/**
+ * 同上  多了一个ViewModel要banding
+ */
+interface IBaseViewModelActivity : IBanding {
+
+    /**
+     * 独立出ViewModel的初始化
+     * 默认使用 ViewModelProviders 创建
+     * 当有Hilt时 可以重写此方法
+     * 搭配 @ViewModelInject  与by viewModes() 构建 注入参数
+     *
+     */
+    fun getViewModel(): ViewModel
+
+    /**
+     * 绑定ViewModel id
+     * 用于xml 中viewModel 对象的绑定
+     * 正常情况下一个界面(Activity  xml) 对应一个viewModel
+     * @return
+     */
+    fun bindingViewModelId(): Int
+
+    /**
+     * 添加ViewModel 与布局使用的对象
+     */
+    fun addViewModel()
+
+    /**
+     * 初始化View的要实现的默认值 正常应该通过ViewModel驱动到xml 或者Activity中
+     */
+    fun initViews()
+}
 
 
-    interface IBaseViewModel : DefaultLifecycleObserver {
-        /**
-         * ViewModel的onCreate 是最后执行的  比子类的 onCreate 执行还晚
-         * Fragment 不一样  Fragment 涉及到延迟加载  需要当界面显示出来后再执行ViewModel 所以需要initData
-         * 共享界面数据到ViewModel中
-         */
-        fun initData(extras: Bundle?)
+interface IBaseViewModel : DefaultLifecycleObserver {
+    /**
+     * ViewModel的onCreate 是最后执行的  比子类的 onCreate 执行还晚
+     * Fragment 不一样  Fragment 涉及到延迟加载  需要当界面显示出来后再执行ViewModel 所以需要initData
+     * 共享界面数据到ViewModel中
+     */
+    fun initData(extras: Bundle?)
 
-        /**
-         *  传递数据
-         * @param requestCode Int
-         * @param resultCode Int
-         * @param data Intent?
-         */
-        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-
-    }
-
+    /**
+     *  传递数据
+     * @param requestCode Int
+     * @param resultCode Int
+     * @param data Intent?
+     */
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
 
 }
+
+

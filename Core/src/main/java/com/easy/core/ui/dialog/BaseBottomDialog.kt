@@ -12,8 +12,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.easy.core.R
+import com.easy.core.ui.base.IBaseDialogFragment
 import com.easy.core.ui.base.IRootViewBuildBuild
-import com.easy.core.ui.base.IRootView
 import com.easy.core.utils.log.LogUtils
 
 /**
@@ -27,7 +27,7 @@ import com.easy.core.utils.log.LogUtils
  * 宽度是全屏
  * 高度自定义
  */
-abstract class BaseBottomDialog : BottomSheetDialogFragment(), IRootView.IBaseDialogFragment {
+abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBaseDialogFragment {
     var rootView: View? = null
     var loaded = false
     var behavior: BottomSheetBehavior<FrameLayout>? = null

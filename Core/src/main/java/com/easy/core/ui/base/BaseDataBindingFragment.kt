@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.easy.core.ui.base.IRootView.IBanding
+import com.easy.core.ui.base.IBanding
 
 /**
  * @Author : huangqiqiang

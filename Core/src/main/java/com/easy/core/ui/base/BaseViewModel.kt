@@ -23,7 +23,7 @@ import com.easy.core.utils.log.LogUtils
  * 2.  实现lifeCycle接口  -> 问题 viewModel的lifeCycle中onCreate的方法的执行顺序是否与init中绑定有关系呢
  * ViewModel 中的 OnCreate 为什么是在BaseActivity的InitView 之后
  */
-abstract class BaseViewModel : ViewModel(), IRootView.IBaseViewModel {
+abstract class BaseViewModel : ViewModel(), IBaseViewModel {
     /**
      * 是否显示Loading
      */

@@ -10,7 +10,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.easy.core.ui.ViewHolder
-import com.easy.core.ui.base.IRootView.IBaseViewBuilderHolder
+import com.easy.core.ui.base.IBaseViewBuilderHolder
 import java.lang.ref.WeakReference
 
 /**

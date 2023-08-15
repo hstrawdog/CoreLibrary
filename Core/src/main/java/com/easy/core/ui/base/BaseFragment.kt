@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.easy.core.lifecycle.SingleLiveEvent
 import com.easy.core.toolbar.IToolBar
-import com.easy.core.ui.base.IRootView.IFragmentRootView
+import com.easy.core.ui.base.IFragmentRootView
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView

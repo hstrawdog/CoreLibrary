@@ -23,6 +23,7 @@ abstract class BaseBindingDialog<T : ViewBinding> : BaseDialog() {
         return 0
     }
     override fun initView() {}
+
     override fun initContentView() {
         val linearLayout = rootView !!.findViewById<LinearLayout>(R.id.ll_rootView)
         var view = getBindingView(linearLayout)

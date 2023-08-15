@@ -13,8 +13,8 @@ import com.easy.core.R
 import com.easy.core.annotation.ToolBarMode
 import com.easy.core.lifecycle.SingleLiveEvent
 import com.easy.core.listenner.DialogClickListener
+import com.easy.core.ui.base.IDialogFragment
 import com.easy.core.ui.base.IRootViewBuildBuild
-import com.easy.core.ui.base.IRootView.IDialogFragment
 import com.easy.core.ui.base.RootViewImpl
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.utils.statusbar.StatusBarManager

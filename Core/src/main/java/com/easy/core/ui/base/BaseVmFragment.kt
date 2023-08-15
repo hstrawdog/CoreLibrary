@@ -3,7 +3,7 @@ package com.easy.core.ui.base
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
-import com.easy.core.ui.base.IRootView.IBaseViewModelActivity
+import com.easy.core.ui.base.IBaseViewModelActivity
 import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
 
 /**
