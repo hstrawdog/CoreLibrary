@@ -90,7 +90,7 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
         }
 
         var apkPath =
-            "https://36dc9d746160f66738522d22ba9bf5ff.dlied1.cdntips.net/imtt2.dd.qq.com/sjy.00009/sjy.00004/16891/apk/EE6A5A2A1334E9234F7D9112DBA33A2D.apk?mkey=648c38e1da0524f3&f=24c5&fsname=com.sww.asp_5.4.9_89.apk&cip=218.5.2.6&proto=https"
+            "https://36dc9d746160f66738522d22ba9bf5ff.dlied1.cdntips.net/imtt2.dd.easy.com/sjy.00009/sjy.00004/16891/apk/EE6A5A2A1334E9234F7D9112DBA33A2D.apk?mkey=648c38e1da0524f3&f=24c5&fsname=com.sww.asp_5.4.9_89.apk&cip=218.5.2.6&proto=https"
         var fileName = "test.apk"
         binding.button69.setOnClickListener {
             okhttpCall?.cancel()

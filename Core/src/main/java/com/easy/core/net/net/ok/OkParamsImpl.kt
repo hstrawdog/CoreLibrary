@@ -19,7 +19,7 @@ import kotlin.collections.HashMap
 
 /**
  * @Author : huangqiqiang
- * @Package : com.qq.readbook.net.ok
+ * @Package : com.easy.readbook.net.ok
  * @FileName :   OKParamsImpl
  * @Date : 2020/12/9 0009  下午 5:15
  * @Email :  qiqiang213@gmail.com

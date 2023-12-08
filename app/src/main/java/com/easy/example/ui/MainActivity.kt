@@ -6,6 +6,8 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.easy.core.permission.IPermissionsHas
+import com.easy.core.permission.PermissionsUtils
 import com.easy.core.ui.base.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
@@ -16,8 +18,10 @@ import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity
+import com.easy.example.ui.adaptation.DefImgActivity
 import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
+import com.easy.example.ui.camera.Camera2Activity
 import com.easy.example.ui.crash.ThrowIndexActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity
 import com.easy.example.ui.dialog.TestDialogActivity
@@ -26,9 +30,12 @@ import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
+import com.easy.example.ui.recycle.BannerActivity
 import com.easy.example.ui.recycle.BindingRecycleActivity
+import com.easy.example.ui.recycle.RecycleIndexActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
+import com.easy.example.ui.tab.layout.TabLayoutActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity
 import kotlinx.coroutines.launch
 
@@ -81,7 +88,17 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(ShareIndexActivity::class.java)
 //        open(LogUtilsActivity::class.java)
 //        open(TextViewActivity::class.java)
-open(BindingRecycleActivity::class.java)
+//open(BindingRecycleActivity::class.java)
+//        PermissionsUtils.requestPermissions(IPermissionsHas.camera,IPermissionsHas.microphone){
+//            if (it){
+//                open(Camera2Activity::class.java)
+//            }
+//        }
+
+
+//        open(DefImgActivity::class.java)
+//        open(BannerActivity::class.java)
+        open(TabLayoutActivity::class.java)
 
     }
 

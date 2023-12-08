@@ -12,22 +12,22 @@ import android.content.Context
  */
 object SharedPreferencesUtil {
     @Synchronized
-    fun putObject(context: Context, key: String?, `object`: Any) {
+    fun putObject(context: Context, key: String?, any: Any) {
         //PreferenceManager.getDefaultSharedPreferences(context);
         val sp = context.applicationContext.getSharedPreferences("preferences", Context.MODE_PRIVATE or Context.MODE_MULTI_PROCESS)
         val editor = sp.edit()
-        if (`object` is Boolean) {
-            editor.putBoolean(key, `object`)
-        } else if (`object` is Float) {
-            editor.putFloat(key, `object`)
-        } else if (`object` is Int) {
-            editor.putInt(key, `object`)
-        } else if (`object` is Long) {
-            editor.putLong(key, `object`)
-        } else if (`object` is String) {
-            editor.putString(key, `object`)
+        if (any is Boolean) {
+            editor.putBoolean(key, any)
+        } else if (any is Float) {
+            editor.putFloat(key, any)
+        } else if (any is Int) {
+            editor.putInt(key, any)
+        } else if (any is Long) {
+            editor.putLong(key, any)
+        } else if (any is String) {
+            editor.putString(key, any)
         } else {
-            editor.putString(key, `object`.toString())
+            editor.putString(key, any.toString())
         }
         editor.apply()
     }

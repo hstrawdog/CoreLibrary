@@ -26,7 +26,7 @@ class FragmentProxy : IPermissionActions {
                 PermissionsFragmentFactory.getPermissionsFragment((CoreConfig.get().currActivity as AppCompatActivity).supportFragmentManager)
             mPermissionsFragment!!.requestPermissions(permissions, listener)
         } else {
-            listener!!.onPermissionsResult(true)
+            listener?.onPermissionsResult(true)
         }
     }
 

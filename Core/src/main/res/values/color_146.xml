@@ -9,7 +9,7 @@
     <color name="lemonchiffon">#FFFACD</color> <!--柠檬绸色 -->
     <color name="cornsilk">#FFF8DC</color> <!--米绸色 -->
     <color name="seashell">#FFF5EE</color> <!--海贝色 -->
-    <color name="lavenderblush">#FFF0F5</color> <!--淡紫红 -->
+    <color name="lavenderblush">#000000</color> <!--淡紫红 -->
     <color name="papayawhip">#FFEFD5</color> <!--番木色 -->
     <color name="blanchedalmond">#FFEBCD</color> <!--白杏色 -->
     <color name="mistyrose">#FFE4E1</color> <!--浅玫瑰色 -->

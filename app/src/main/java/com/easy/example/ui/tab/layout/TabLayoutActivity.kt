@@ -6,7 +6,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.easy.core.adapter.BaseFragmentAdapter
 import com.easy.core.ui.base.BaseActivity
+import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.example.R
+import com.easy.example.databinding.ActivityTabLayoutBinding
 
 /**
  * @Author : huangqiqiang
@@ -16,7 +18,7 @@ import com.easy.example.R
  * @Email :  qiqiang213@gmail.com
  * @Descrive :
  */
-class TabLayoutActivity : BaseActivity() {
+class TabLayoutActivity : BaseViewBindingActivity<ActivityTabLayoutBinding>() {
 
     var mTbTablayout1:TabLayout? = null
     var mVpPage:ViewPager2? = null
@@ -30,9 +32,6 @@ class TabLayoutActivity : BaseActivity() {
         iToolBar?.setStatusColor(R.color.color_main)
     }
 
-    override fun getLayoutViewId(): Int {
-        return  R.layout.activity_tab_layout
-    }
 
     override fun initView() {
         mTbTablayout4 = findViewById(R.id.tb_tablayout4)
@@ -49,6 +48,7 @@ class TabLayoutActivity : BaseActivity() {
         adapter.setupWithViewPager(mTbTablayout2!!, mVpPage!!)
         adapter.setupWithViewPager(mTbTablayout3!!, mVpPage!!)
         adapter.setupWithViewPager(mTbTablayout4!!, mVpPage!!)
+        adapter.setupWithViewPager(binding.tbTablayout5, mVpPage!!)
     }
 
     open internal inner class ViewPageAdapter(fragmentActivity:FragmentActivity) : BaseFragmentAdapter(fragmentActivity) {

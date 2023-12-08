@@ -6,7 +6,7 @@ import java.io.File
 
 /**
  * @Author : huangqiqiang
- * @Package : com.qq.readbook.net.ok
+ * @Package : com.easy.readbook.net.ok
  * @FileName :   HttpCompat
  * @Date : 2016/12/14 15:40.
  * @Email :  qiqiang213@gmail.com

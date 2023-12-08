@@ -21,7 +21,6 @@ import com.easy.example.adapter.FullPagerSnapAdapter
 class FullPagerSnapActivity : BaseActivity() {
     var mRcList: RecyclerView? = null
 
-
     var mFullPagerSnapAdapter: FullPagerSnapAdapter? = null
     override fun getLayoutViewId(): Int {
         return R.layout.activity_full_pager_snap

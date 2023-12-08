@@ -1000,6 +1000,22 @@ object TimeUtils {
         }
     }
 
+    /**
+     * 获取当天的YYYY-MM-dd 00:00:00 时间点的毫秒级时间戳
+     *
+     * @return
+     */
+    @JvmStatic
+    fun getCurrentTime4Millis1s(): Long {
+        val cal = Calendar.getInstance()
+        cal[Calendar.HOUR_OF_DAY] = 0 //控制时
+        cal[Calendar.MINUTE] = 0 //控制分
+        cal[Calendar.SECOND] = 0 //控制秒
+        return cal.timeInMillis
+    }
+
+
+
     @JvmStatic
     fun main(args: Array<String>) {
         println(formatData2All(1616743088821, "yyyy-MM-dd HH:mm:ss"))

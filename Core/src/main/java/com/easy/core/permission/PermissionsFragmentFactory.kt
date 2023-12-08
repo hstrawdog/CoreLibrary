@@ -12,14 +12,14 @@ import androidx.fragment.app.FragmentManager
  */
 object PermissionsFragmentFactory {
     private const val TAG_PERMISSIONS_FRAGMENT = "PermissionsFragment"
-
-
     fun getPermissionsFragment(fragmentManager: FragmentManager): PermissionsFragment? {
         var permissionsFragment: PermissionsFragment?
         permissionsFragment = fragmentManager.findFragmentByTag(TAG_PERMISSIONS_FRAGMENT) as PermissionsFragment?
         if (null == permissionsFragment) {
             permissionsFragment = PermissionsFragment.newInstance()
-            fragmentManager.beginTransaction().add(permissionsFragment, TAG_PERMISSIONS_FRAGMENT).commitNow()
+            fragmentManager.beginTransaction()
+                .add(permissionsFragment, TAG_PERMISSIONS_FRAGMENT)
+                .commitNow()
         }
         return permissionsFragment
     }

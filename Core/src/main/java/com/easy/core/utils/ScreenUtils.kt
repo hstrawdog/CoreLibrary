@@ -72,7 +72,8 @@ object ScreenUtils {
      * 判断是否横屏
      *
      * @param context 上下文
-     * @return `true`: 是<br></br>`false`: 否
+     * @return  true  是   false  否
+     * 当 Activity 在 manifest 中使用 android:screenOrientation=”portrait” 锁定竖屏，此时即使你将手机横置，页面仍然停留在 “portrait” 状态，因此方案一获取到的也同样是 “portrait”，但其实此时手机是横向的
      */
     @JvmStatic
     fun isLandscape(context: Context): Boolean {

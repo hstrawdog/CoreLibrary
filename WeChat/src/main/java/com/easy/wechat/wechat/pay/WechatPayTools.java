@@ -88,7 +88,7 @@ public class WechatPayTools {
         okParams.setDataFormat(DataFormat.XML);
         okParams.put(params);
 
-        OkHttp.INSTANCE.newHttpCompat().post("https://api.mch.weixin.qq.com/pay/unifiedorder",okParams , new OkNetCallback() {
+        OkHttp.INSTANCE.newHttpCompat().post("https://api.mch.weixin.easy.com/pay/unifiedorder",okParams , new OkNetCallback() {
 
             @Override
             public void onSuccess(String statusCode, String response) {

@@ -20,8 +20,8 @@ import com.easy.core.utils.log.LogUtils
  * 1. 　动态添加 生成根布局  支持LineLayout 与FarmLayout
  * 2. 　根据条件　判断添加状态栏标题栏以及设置状态栏模式
  */
-class IRootViewBuildBuild(context: Any, showStatus: Boolean, showToolBar: Boolean, private var isAlwaysPortrait: Boolean = true) :
-    IRootViewBuild {
+class IRootViewBuildBuild(context: Any, showStatus: Boolean, showToolBar: Boolean,
+                          private var isAlwaysPortrait: Boolean = true) : IRootViewBuild {
     /**
      * 当前activity
      */
@@ -43,13 +43,16 @@ class IRootViewBuildBuild(context: Any, showStatus: Boolean, showToolBar: Boolea
                 //只有在Activity的情况下才会去设置状态栏的颜色  其他的情况默认采用 activity的颜色
                 rootViewImpl.immersiveStatusBar = true
             }
+
             is DialogFragment -> {
                 activity = context.activity
                 rootViewImpl.bgColor = R.color.transparent
             }
+
             is Fragment -> {
-                activity =context.activity
+                activity = context.activity
             }
+
             else -> {
                 LogUtils.e4Debug(Exception("不支持的类" + context.javaClass.name))
             }
@@ -76,6 +79,11 @@ class IRootViewBuildBuild(context: Any, showStatus: Boolean, showToolBar: Boolea
         }
         //强制竖屏
         if (isAlwaysPortrait) {
+            //SCREEN_ORIENTATION_LANDSCAPE   横屏设
+            //SCREEN_ORIENTATION_PORTRAIT   竖屏设置
+            //SCREEN_ORIENTATION_UNSPECIFIED   默认设置
+            // 避免 Activity 重启
+            //             android:configChanges="keyboardHidden|orientation|screenSize"
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
     }

@@ -10,7 +10,7 @@ import androidx.lifecycle.LifecycleRegistry
 
 /**
  * @Author : huangqiqiang
- * @Package : com.qq.readbook
+ * @Package : com.easy.readbook
  * @Date : 下午 1:25
  * @Email : qiqiang213@gmail.com
  * @Describe :

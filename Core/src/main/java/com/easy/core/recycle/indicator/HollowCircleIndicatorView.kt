@@ -21,6 +21,7 @@ class HollowCircleIndicatorView : CircleIndicatorView {
      * 边框 默认 3px
      */
     var mStrokeWidth = 3
+
     override fun init() {
         super.init()
         mPaintPageFill.strokeWidth = mStrokeWidth.toFloat()

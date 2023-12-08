@@ -17,7 +17,6 @@ class BannerActivity : BaseActivity() {
     var mRcBanner2: RecycleViewBanner? = null
 
 
-
     override fun getLayoutViewId(): Int {
         return R.layout.activity_banner
     }

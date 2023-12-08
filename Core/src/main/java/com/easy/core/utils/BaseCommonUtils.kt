@@ -53,8 +53,8 @@ object BaseCommonUtils {
 
     /**
      * 黑白化的一种解决方案
-     * https://mp.weixin.qq.com/s/8fTWLYaPhi0to47EUmFd7A
-     * https://mp.weixin.qq.com/s/EioJ8ogsCxQEFm44mKFiOQ
+     * https://mp.weixin.easy.com/s/8fTWLYaPhi0to47EUmFd7A
+     * https://mp.weixin.easy.com/s/EioJ8ogsCxQEFm44mKFiOQ
      *
      * @param activity
      */

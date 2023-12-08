@@ -10,7 +10,7 @@ import com.easy.core.glide.ImageLoadUtils
 
 /**
  * @Author : huangqiqiang
- * @Package : com.qq.readbook.utils
+ * @Package : com.easy.readbook.utils
  * @Date : 上午 9:49
  * @Email : qiqiang213@gmail.com
  * @Describe :

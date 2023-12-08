@@ -5,7 +5,7 @@ import com.google.gson.FieldAttributes
 
 /**
  * @Author : huangqiqiang
- * @Package : com.qq.readbook.bean.book
+ * @Package : com.easy.readbook.bean.book
  * @Date : 下午 5:55
  * @Email : qiqiang213@gmail.com
  * @Describe :  注解忽略字段

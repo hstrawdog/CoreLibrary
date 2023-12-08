@@ -397,6 +397,8 @@ object BitmapUtils {
      * @param newHeight Int
      * @return Bitmap
      */
+    @JvmStatic
+
     fun zoomImg4Min(bm: Bitmap, newWidth: Int, newHeight: Int): Bitmap { // 获得图片的宽高
         val width = bm.width
         val height = bm.height // 计算缩放比例
@@ -414,6 +416,8 @@ object BitmapUtils {
      * @param max Int
      * @return Bitmap
      */
+    @JvmStatic
+
     fun zoomImg4Max(bm: Bitmap, max: Int): Bitmap {
         val width = bm.width
         val height = bm.height // 计算缩放比例
@@ -428,4 +432,20 @@ object BitmapUtils {
 
     }
 
+    /**
+     *  绘制背景
+     * @param color Int
+     * @param orginBitmap Bitmap
+     * @return Bitmap
+     */
+    @JvmStatic
+    fun drawBg4Bitmap(color: Int, orginBitmap: Bitmap): Bitmap {
+        val paint = Paint()
+        paint.color = color
+        val bitmap = Bitmap.createBitmap(orginBitmap.width, orginBitmap.height, orginBitmap.config)
+        val canvas = Canvas(bitmap)
+        canvas.drawRect(0f, 0f, orginBitmap.width.toFloat(), orginBitmap.height.toFloat(), paint)
+        canvas.drawBitmap(orginBitmap, 0f, 0f, paint)
+        return bitmap
+    }
 }
