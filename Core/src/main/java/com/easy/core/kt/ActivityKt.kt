@@ -34,7 +34,7 @@ fun BaseActivity.open(cls: Class<*>,
  * @param result ActivityResultCallback<Bitmap>
  */
 fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap?>) {
-    PermissionsUtils.requestCamera(object : PermissionsResult {
+    PermissionsUtils.requestCamera(  object : PermissionsResult {
         override fun onPermissionsResult(status: Boolean) {
             registerForActivityResult(ActivityResultContracts.TakePicturePreview(), result).launch(null)
         }

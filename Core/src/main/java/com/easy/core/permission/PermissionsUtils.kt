@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.easy.core.CoreConfig
 import com.easy.core.permission.dialog.HuaWeiTipDialog
 
-
 /**
  * @Author : huangqiqiang
  * @Package : com.core.library.permission
@@ -35,13 +34,14 @@ object PermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestStorage(isNeedShowTip: Boolean = false, permissionsResult: PermissionsResult?) {
+    fun requestStorage(permissionsResult: PermissionsResult?, isNeedShowTip: Boolean = false,
+                       tipText: String = "文件读写权限使用说明：保存照片使用") {
         if (isNeedShowTip && Build.BRAND.equals("HUAWEI")) {
             if (!IPermissionActions.hasPermission(CoreConfig.applicationContext, *IPermissionsHas.storage)) {
                 CoreConfig.get().currActivity?.let {
                     var supportFragmentManager = (it as AppCompatActivity).supportFragmentManager
                     HuaWeiTipDialog().apply {
-                        tipText = "文件读写权限使用说明：保存照片使用"
+                        this.tipText = tipText
                         call = {
                             FragmentProxy().requestPermissions(IPermissionsHas.storage, permissionsResult)
                         }
@@ -63,14 +63,15 @@ object PermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestCamera(isNeedShowTip: Boolean = false, permissionsResult: PermissionsResult?) {
+    fun requestCamera(permissionsResult: PermissionsResult?, isNeedShowTip: Boolean = false,
+                      tipText: String = "相机权限使用说明：拍照时使用") {
         if (isNeedShowTip && Build.BRAND.equals("HUAWEI")) {
             if (!IPermissionActions.hasPermission(CoreConfig.applicationContext, *IPermissionsHas.camera)) {
                 CoreConfig.get().currActivity?.let {
                     var supportFragmentManager = (it as AppCompatActivity).supportFragmentManager
 
                     HuaWeiTipDialog().apply {
-                        tipText = "相机权限使用说明：拍照时使用"
+                        this.tipText = tipText
                         call = {
                             FragmentProxy().requestPermissions(IPermissionsHas.camera, permissionsResult)
 
@@ -95,7 +96,8 @@ object PermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestLocal(isNeedShowTip: Boolean = false, permissionsResult: PermissionsResult?) {
+    fun requestLocal(permissionsResult: PermissionsResult?, isNeedShowTip: Boolean = false,
+                     tipText: String = "定位权限说明：当前位置信息使用") {
 
         if (isNeedShowTip && Build.BRAND.equals("HUAWEI")) {
             if (!IPermissionActions.hasPermission(CoreConfig.applicationContext, *IPermissionsHas.location)) {
@@ -103,7 +105,7 @@ object PermissionsUtils {
                     var supportFragmentManager = (it as AppCompatActivity).supportFragmentManager
 
                     HuaWeiTipDialog().apply {
-                        tipText = "定位权限说明：当前位置信息使用"
+                        this.tipText = tipText
                         call = {
                             FragmentProxy().requestPermissions(IPermissionsHas.location, permissionsResult)
                         }
@@ -126,14 +128,15 @@ object PermissionsUtils {
      * @param permissionsResult PermissionsResult?
      */
     @JvmStatic
-    fun requestCameraAndStorage(isNeedShowTip: Boolean = false, permissionsResult: PermissionsResult?) {
+    fun requestCameraAndStorage(permissionsResult: PermissionsResult?, isNeedShowTip: Boolean = false,
+                                tipText: String = "相机权限使用说明：拍照时使用\n" + "文件读写权限使用说明：保存照片使用") {
         if (isNeedShowTip && Build.BRAND.equals("HUAWEI")) {
             if (!IPermissionActions.hasPermission(CoreConfig.applicationContext, *IPermissionsHas.camera.plus(IPermissionsHas.storage))) {
                 CoreConfig.get().currActivity?.let {
                     var supportFragmentManager = (it as AppCompatActivity).supportFragmentManager
 
                     HuaWeiTipDialog().apply {
-                        tipText = "相机权限使用说明：拍照时使用\n" + "文件读写权限使用说明：保存照片使用"
+                        this.tipText = tipText
                         call = {
                             FragmentProxy().requestPermissions(IPermissionsHas.camera.plus(IPermissionsHas.storage), permissionsResult)
                         }
@@ -149,5 +152,39 @@ object PermissionsUtils {
 
     }
 
+    /**
+     *  读取 蓝牙权限 包含定位与读写
+     * @param permissionsResult PermissionsResult
+     * 相机 以及文件读写
+     * @param isNeedShowTip Boolean
+     * @param permissionsResult PermissionsResult?
+     */
+    @JvmStatic
+    fun requestBluetooth(permissionsResult: PermissionsResult, isNeedShowTip: Boolean = false, tipText: String = "") {
+        // 蓝牙权限 需要定位权限  定位权限需要 读写权限
+        var permissions = IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
+            .plus(IPermissionsHas.storage)
+
+        if (isNeedShowTip && Build.BRAND.equals("HUAWEI")) {
+            if (!IPermissionActions.hasPermission(CoreConfig.applicationContext, *permissions)) {
+                CoreConfig.get().currActivity?.let {
+                    var supportFragmentManager = (it as AppCompatActivity).supportFragmentManager
+
+                    HuaWeiTipDialog().apply {
+                        this.tipText = tipText
+                        call = {
+                            FragmentProxy().requestPermissions(permissions, permissionsResult)
+                        }
+                    }
+                        .show(supportFragmentManager)
+                }
+            } else {
+                permissionsResult?.onPermissionsResult(true)
+            }
+        } else {
+            FragmentProxy().requestPermissions(permissions, permissionsResult)
+        }
+
+    }
 
 }

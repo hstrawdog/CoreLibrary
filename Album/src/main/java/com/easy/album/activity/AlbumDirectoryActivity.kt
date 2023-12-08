@@ -35,6 +35,7 @@ import com.easy.album.entity.LocalMediaFolder
 import com.easy.album.utils.AlbumFileUtils
 import com.easy.album.utils.AlbumUtils
 import com.easy.core.permission.IPermissionsHas
+import com.easy.core.permission.PermissionsResult
 import com.easy.core.permission.PermissionsUtils
 import com.easy.core.utils.file.FileUtils
 import java.io.File
@@ -163,14 +164,17 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
 
-        PermissionsUtils.requestStorage() {
-            if (it) {
-                initData()
-            } else {
-                mTvProgress!!.text = "哎呀!没有获取到权限,\n请在系统设置中开启权限"
+        PermissionsUtils.requestStorage(object  : PermissionsResult{
+            override fun onPermissionsResult(status: Boolean) {
+                if (status) {
+                    initData()
+                } else {
+                    mTvProgress!!.text = "哎呀!没有获取到权限,\n请在系统设置中开启权限"
 
+                }
             }
-        }
+
+        })
     }
 
     private fun initData() {

@@ -22,7 +22,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
 
     override fun initView() {
         binding.textView28.setOnClickListener {
-            PermissionsUtils.requestStorage {
+            PermissionsUtils.requestStorage({
                 if (it) {
                     path =
                         SaveBitmapUtils.saveBitmap2AppCache(BitmapUtils.createBitmapFromView2(binding.tvTitle), "", FileUtils.getDefFileName(".png"))
@@ -30,11 +30,11 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                     ImageLoadUtils.with(path, binding.imageView15)
 
                 }
-            }
+            })
         }
         //保存在相册
         binding.textView29.setOnClickListener {
-            PermissionsUtils.requestStorage {
+            PermissionsUtils.requestStorage({
                 if (it) {
                     binding.tvTitle.text = binding.textView29.text
                     SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), fileName = FileUtils.getDefFileName(".png"))
@@ -44,11 +44,11 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                             ImageLoadUtils.with(path, binding.imageView15)
                         }
                 }
-            }
+            })
         }
         // 保存在相册 指定目录中
         binding.textView32.setOnClickListener {
-            PermissionsUtils.requestStorage {
+            PermissionsUtils.requestStorage({
                 if (it) {
                     binding.tvTitle.text = binding.textView32.text
                     SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), "a", fileName = FileUtils.getDefFileName(".png"))
@@ -59,11 +59,11 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                         }
 
                 }
-            }
+            })
         }
 
         binding.textView34.setOnClickListener {
-            PermissionsUtils.requestStorage {
+            PermissionsUtils.requestStorage({
                 if (it) {
                     binding.tvTitle.text = binding.textView34.text
                     // 保存到默认的文件夹
@@ -72,17 +72,18 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                     binding.textView40.setText("$path")
                     ImageLoadUtils.with(path, binding.imageView15)
                 }
-            }
+            })
         }
 
 
 
         binding.textView33.setOnClickListener {
-            FileUtils.getFile2Uri(path)?.let { it1 ->
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    FileUtils.deleteFile(this, it1)
+            FileUtils.getFile2Uri(path)
+                ?.let { it1 ->
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        FileUtils.deleteFile(this, it1)
+                    }
                 }
-            }
         }
 
 

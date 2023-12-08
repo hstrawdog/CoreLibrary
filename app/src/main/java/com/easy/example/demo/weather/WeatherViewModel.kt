@@ -76,20 +76,21 @@ class WeatherViewModel : BaseViewModel() {
         mLocationOption!!.isNeedAddress = true
         //给定位客户端对象设置定位参数
         mLocationClient!!.setLocationOption(mLocationOption)
-        PermissionsUtils.requestLocation { status ->
+        PermissionsUtils.requestLocal({ status ->
             if (status) {
                 startLocation()
             }
-        }
+        })
 
 
     }
 
     private fun getWeather(city: String) {
         launch({
-            HttpManager.getWeather2(city.substring(0, city.length - 1)).let {
-                mWeather.postValue(it.result)
-            }
+            HttpManager.getWeather2(city.substring(0, city.length - 1))
+                .let {
+                    mWeather.postValue(it.result)
+                }
         }, {
 
         })
@@ -97,29 +98,30 @@ class WeatherViewModel : BaseViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
 
-
             flow<NetResponseBody<com.easy.example.demo.weather.Weather>> {
-                var ben1 = HttpManager.getWeather2(city.substring(0, city.length - 1)).let {
-                    mWeather.postValue(it.result)
-                    emit(it)
+                var ben1 = HttpManager.getWeather2(city.substring(0, city.length - 1))
+                    .let {
+                        mWeather.postValue(it.result)
+                        emit(it)
 
-                }
+                    }
             }.zip(flow<NetResponseBody<com.easy.example.demo.weather.Weather>> {
-                var ben1 = HttpManager.getWeather2(city.substring(0, city.length - 1)).let {
-                    mWeather.postValue(it.result)
-                    emit(it)
-                }
+                var ben1 = HttpManager.getWeather2(city.substring(0, city.length - 1))
+                    .let {
+                        mWeather.postValue(it.result)
+                        emit(it)
+                    }
             }) { i, s ->
                 ArrayList<NetResponseBody<com.easy.example.demo.weather.Weather>>().apply {
                     add(s)
                     add(i)
                     LogUtils.e("")
                 }
-            }.collect() {
-                LogUtils.e("")
             }
+                .collect() {
+                    LogUtils.e("")
+                }
         }
-
 
 //        showLoading(true)
 //        HttpManager.getWeather(city.substring(0, city.length - 1), object : NetCallback<Weather>() {

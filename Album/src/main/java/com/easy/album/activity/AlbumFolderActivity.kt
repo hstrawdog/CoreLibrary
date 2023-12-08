@@ -23,6 +23,7 @@ import com.easy.album.decoration.RecycleViewDivider
 import com.easy.album.entity.LocalMedia
 import com.easy.album.entity.LocalMediaFolder
 import com.easy.album.utils.AlbumUtils
+import com.easy.core.permission.PermissionsResult
 import com.easy.core.permission.PermissionsUtils
 import com.easy.core.utils.ToastUtils
 
@@ -35,8 +36,6 @@ import com.easy.core.utils.ToastUtils
  */
 class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnPhotoSelectChangedListener,
     View.OnClickListener, AlbumDirectoryAdapter.OnItemClickListener {
-
-
 
     companion object {
         private const val CODE_CLOSE = 0x9910
@@ -73,8 +72,7 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
         mRecyclerView!!.setHasFixedSize(true)
         mRecyclerView!!.addItemDecoration(GridSpacingItemDecoration(4, AlbumUtils.dip2px(this, 2f), false))
         mRecyclerView!!.layoutManager = GridLayoutManager(this, 4)
-        mAlbumDetailAdapter =
-            com.easy.album.Adapter.AlbumDetailAdapter(Album.functionOptions.maxSelectNum)
+        mAlbumDetailAdapter = com.easy.album.Adapter.AlbumDetailAdapter(Album.functionOptions.maxSelectNum)
         mRecyclerView!!.adapter = mAlbumDetailAdapter
         mAlbumDetailAdapter!!.setOnPhotoSelectChangedListener(this)
     }
@@ -113,13 +111,13 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
     private fun initViews() {
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
-        PermissionsUtils.requestStorage() {
-            if (it) {
+        PermissionsUtils.requestStorage({ status ->
+            if (status) {
                 initData()
             } else {
                 ToastUtils.showToast("读取内存卡权限已被拒绝,请在系统设置中开启权限")
             }
-        }
+        })
     }
 
     private fun initData() {

@@ -31,7 +31,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
         builder.detectFileUriExposure()
 
         binding.button80.setOnClickListener {
-            PermissionsUtils.requestStorage {
+            PermissionsUtils.requestStorage ({
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2AppCache(
                         BitmapUtils.createBitmapFromView2(binding.button80),
@@ -41,10 +41,10 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                     LogUtils.e("$path")
                     shareImg(File(path))
                 }
-            }
+            })
         }
         binding.button81.setOnClickListener {
-            PermissionsUtils.requestStorage {
+            PermissionsUtils.requestStorage ({
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2ExternalPrivate(
                         BitmapUtils.createBitmapFromView2(binding.button81),
@@ -54,10 +54,10 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                     LogUtils.e("$path")
                     shareImg(File(path))
                 }
-            }
+            })
         }
         binding.button82.setOnClickListener {
-            PermissionsUtils.requestStorage {
+            PermissionsUtils.requestStorage( {
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2Pictures(
                         BitmapUtils.createBitmapFromView2(binding.button82),
@@ -67,7 +67,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                     LogUtils.e("$path")
                     shareImg(File(filePathByUri(activity,path)))
                 }
-            }
+            })
         }
 
     }
