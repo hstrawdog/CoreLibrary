@@ -1,11 +1,19 @@
 package com.easy.readbook.weight.page.animation
 
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Matrix
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.PointF
+import android.graphics.Region
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.view.View
-import com.easy.readbook.weight.page.animation.PageAnimation
 import kotlin.math.atan2
 import kotlin.math.hypot
 
@@ -153,6 +161,8 @@ class SimulationPageAnim(w: Int, h: Int, view: View, listener: OnPageChangeListe
             Direction.NEXT -> if (mScreenWidth / 2 > mStartX) {
                 calcCornerXY(mScreenWidth - mStartX, mStartY)
             }
+
+            else -> {}
         }
     }
 
