@@ -35,17 +35,19 @@ class APP : Application() {
             .addInflater(SkinConstraintViewInflater()) // CardView v7 控件换肤初始化[可选]
             .addInflater(SkinCardViewInflater()) // 关闭状态栏换肤，默认打开[可选]
             .setSkinStatusBarColorEnable(false) // 关闭windowBackground换肤，默认打开[可选]
-            .setSkinWindowBackgroundEnable(false).loadSkin()
+            .setSkinWindowBackgroundEnable(false)
+            .loadSkin()
 
         // 本地异常捕捉
         com.easy.example.ui.crash.CrashHandler.register(this)
         // 定时任务    最小间隔 15 分钟
-        val periodicWork =
-            PeriodicWorkRequest.Builder(com.easy.example.TestWord::class.java, 15, TimeUnit.MINUTES).build()
+        val periodicWork = PeriodicWorkRequest.Builder(com.easy.example.TestWord::class.java, 15, TimeUnit.MINUTES)
+            .build()
         WorkManager.getInstance()
             .enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork)
         //  取消任务
-        WorkManager.getInstance().cancelAllWork()
+        WorkManager.getInstance()
+            .cancelAllWork()
 
     }
 

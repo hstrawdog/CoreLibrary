@@ -32,8 +32,9 @@ class AlbumIndexActivity : BaseActivity() {
     var tv_file: TextView? = null
 
     override fun getLayoutViewId(): Int {
-        return  R.layout.activity_album_index
+        return R.layout.activity_album_index
     }
+
     var call = object : AlbumPhotoCallBack {
         override fun onSelectLocalMedia(arrayList: ArrayList<com.easy.album.entity.LocalMedia>?) {
             val list = arrayList
@@ -69,7 +70,6 @@ class AlbumIndexActivity : BaseActivity() {
         findViewById<View>(R.id.button5).setOnClickListener { view: View -> httpsTest(view) }
         findViewById<View>(R.id.button5).setOnClickListener { view: View -> httpsTest(view) }
     }
-
 
     /**
      * 打开相册 带摄像头

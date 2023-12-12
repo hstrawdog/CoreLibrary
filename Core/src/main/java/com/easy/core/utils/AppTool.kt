@@ -18,6 +18,7 @@ import com.easy.core.utils.log.LogUtils
 import java.io.File
 import java.util.*
 
+
 /**
  * @author tamsiree
  * @date 2016/1/24
@@ -80,15 +81,14 @@ object AppTool {
     fun appInstalledOrNot(activity: Activity?, uri: String?): Boolean {
         val pm = activity?.packageManager
         try {
-            pm?.getPackageInfo(uri!!, PackageManager.GET_ACTIVITIES)?.let {
-                return true
-            }
+            pm?.getPackageInfo(uri!!, PackageManager.GET_ACTIVITIES)
+                ?.let {
+                    return true
+                }
         } catch (e: PackageManager.NameNotFoundException) {
         }
         return false
     }
-
-
 
     /**
      * 安装App(支持7.0)
@@ -331,7 +331,8 @@ object AppTool {
         return if (DataUtils.isNullString(packageName)) null else try {
             val pm = context.packageManager
             val pi = pm.getPackageInfo(packageName, 0)
-            pi?.applicationInfo?.loadLabel(pm)?.toString()
+            pi?.applicationInfo?.loadLabel(pm)
+                ?.toString()
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             null
@@ -638,7 +639,8 @@ object AppTool {
     @JvmStatic
     private fun getBean(pm: PackageManager, pi: PackageInfo): AppInfo {
         val ai = pi.applicationInfo
-        val name = ai.loadLabel(pm).toString()
+        val name = ai.loadLabel(pm)
+            .toString()
         val icon = ai.loadIcon(pm)
         val packageName = pi.packageName
         val packagePath = ai.sourceDir
@@ -733,7 +735,8 @@ object AppTool {
     /**
      * 封装App信息的Bean类
      */
-    class AppInfo(name: String?, icon: Drawable?, packageName: String?, packagePath: String?, versionName: String?, versionCode: Int, isSD: Boolean, isUser: Boolean) {
+    class AppInfo(name: String?, icon: Drawable?, packageName: String?, packagePath: String?, versionName: String?,
+                  versionCode: Int, isSD: Boolean, isUser: Boolean) {
         var name: String? = null
         var icon: Drawable? = null
         var packageName: String? = null
@@ -776,4 +779,41 @@ object AppTool {
             this.isUser = isUser
         }
     }
+
+    /**
+     * 检测是否安装支付宝
+     *
+     * @param context
+     * @return
+     */
+    fun isAliPayInstalled(context: Context): Boolean {
+        val uri = Uri.parse("alipays://platformapi/startApp")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        val componentName = intent.resolveActivity(context.packageManager)
+        return componentName != null
+    }
+
+    /**
+     * 检测是否安装微信
+     *
+     * @param context
+     * @return
+     */
+    fun isWeixinAvilible(context: Context): Boolean {
+        // 获取packagemanager
+        val packageManager = context.packageManager
+        // 获取所有已安装程序的包信息
+        val pinfo = packageManager.getInstalledPackages(0)
+        if (pinfo != null) {
+            for (i in pinfo.indices) {
+                val pn = pinfo[i].packageName
+                if (pn == "com.tencent.mm") {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+
 }
