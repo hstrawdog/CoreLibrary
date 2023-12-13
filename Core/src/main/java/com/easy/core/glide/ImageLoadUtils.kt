@@ -35,6 +35,7 @@ object ImageLoadUtils {
      *
      * @return
      */
+    @JvmStatic
     fun getRequestOption(resourceId: Int = CoreConfig.get().defImg): RequestOptions {
         return RequestOptions().format(DecodeFormat.PREFER_RGB_565) //缓存SOURC和RESULT
             .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
@@ -49,6 +50,7 @@ object ImageLoadUtils {
      * @param px
      * @return  RequestOptions
      */
+    @JvmStatic
     fun getRequestOptionRound(px: Int = ResourcesUtils.getDimen(R.dimen.x10)
         .toInt(), resourceId: Int = CoreConfig.get().defImg): RequestOptions {
         return getRequestOption(resourceId).transform(GlideRoundTransform(px))
@@ -60,6 +62,7 @@ object ImageLoadUtils {
      * @param url
      * @param imageView
      */
+    @JvmStatic
     fun withFillet(url: String?, imageView: ImageView) {
         GlideApp.with(imageView)
             .load(url)
@@ -75,6 +78,8 @@ object ImageLoadUtils {
      * @param width     宽
      * @param height    高
      */
+    @JvmStatic
+
     fun with(url: Any, imageView: ImageView, priority: Priority = Priority.NORMAL, width: Int = -1, height: Int = -1) {
         GlideApp.with(imageView)
             .load(url)
@@ -89,6 +94,8 @@ object ImageLoadUtils {
      * @param radius    圆角  单位 px
      * @param  resourceId   R.mipmap.ic_def_head
      */
+    @JvmStatic
+
     fun withFillet2PX(url: String?, imageView: ImageView?, radius: Int, resourceId: Int = CoreConfig.get().defImg) {
         GlideApp.with(imageView!!)
             .load(url)
@@ -102,6 +109,7 @@ object ImageLoadUtils {
      * @param imageView 控件
      * @param resourceId 默认图 头像
      */
+    @JvmStatic
     fun transformCircularHead(url: String?, imageView: ImageView?,
                               @DrawableRes resourceId: Int = R.mipmap.ic_def_head_circular) {
         GlideApp.with(imageView!!)
