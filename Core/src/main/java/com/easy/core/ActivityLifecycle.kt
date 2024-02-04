@@ -15,6 +15,7 @@ import com.easy.core.utils.log.LogUtils
  */
 class ActivityLifecycle : ActivityLifecycleCallbacks {
     private val activities: MutableList<Activity> = ArrayList()
+        get
 
     /**
      * 获取APP中activity栈中最上层一个activity

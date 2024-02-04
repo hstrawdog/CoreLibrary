@@ -1170,11 +1170,11 @@ object DataUtils {
      * @param contactPhone
      * @return
      */
-    fun checkPhone(contactPhone: String): Boolean {
+    fun checkPhone(contactPhone: String?): Boolean {
         if (checkIsNull(contactPhone)) {
             ToastUtils.showToast("请输入手机号码")
             return true
-        } else if (contactPhone.trim { it <= ' ' }.length != 11) {
+        } else if (contactPhone?.trim { it <= ' ' }?.length != 11) {
             ToastUtils.showToast("请输入正确的手机号码")
             return true
         }

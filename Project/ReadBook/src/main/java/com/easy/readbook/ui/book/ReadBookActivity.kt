@@ -52,10 +52,13 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
             )
         }
     }
+    override fun getLayoutId(): Int {
+    return  R.layout.activity_read_book
+    }
 
-    override val layoutId: Int = R.layout.activity_read_book
-
-    override val bindingViewModelId: Int = BR.vm
+    override fun bindingViewModelId(): Int {
+      return BR.vm
+    }
 
     /**
      *  阅读加载器
@@ -357,6 +360,8 @@ class ReadBookActivity : BaseVmActivity<ReadBookViewModel, ActivityReadBookBindi
         super.onPause()
         pageLoader?.saveRecord()
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

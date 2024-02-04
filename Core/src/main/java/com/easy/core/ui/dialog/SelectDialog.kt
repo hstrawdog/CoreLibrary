@@ -121,6 +121,9 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
                     it.visibility = View.VISIBLE
                 }
                 it.text = alertParams?.positiveButtonText
+                alertParams?.positiveButtonColor.apply {
+                    it.setTextColor(ResourcesUtils.getColor(this!!))
+                }
                 it.setOnClickListener {
                     if (alertParams?.positiveButtonListener != null) {
                         alertParams?.positiveButtonListener?.onClick(
@@ -274,12 +277,29 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
          * @return
          */
         fun setPositiveButton(
-            text: CharSequence?,
+            text: CharSequence = "确定",
             listener: DialogInterface.OnClickListener? = null
         ): Builder {
             text?.let {
                 alertParams.positiveButtonText = it
             }
+            alertParams.positiveButtonListener = listener
+            return this
+        }
+        /**
+         * 确定按钮
+         *
+         * @param text
+         * @param listener
+         * @return
+         */
+        fun setPositiveButton(
+            text: CharSequence = "确定",
+            color: Int = R.color.color_000,
+            listener: DialogInterface.OnClickListener? = null,
+        ): Builder {
+            alertParams.positiveButtonText = text
+            alertParams.positiveButtonColor = color
             alertParams.positiveButtonListener = listener
             return this
         }

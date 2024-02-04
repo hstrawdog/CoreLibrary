@@ -93,8 +93,13 @@ android {
             }
     }
     sourceSets {
-        main { res.srcDirs = ['src/main/res', 'src/main/res-main', 'src/main/res-night'] }
+        main { res.srcDirs = ['src/main/res', 'src/main/res-main', 'src/main/res-night']
+            assets {
+                srcDirs 'src/main/assets'
+            }
+        }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

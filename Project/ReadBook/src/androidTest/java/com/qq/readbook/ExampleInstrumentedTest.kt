@@ -156,8 +156,6 @@ class ExampleInstrumentedTest {
 
     private fun readHtml(appContext: Context, fileName: String): String {
         val inputStream: InputStream = appContext.getAssets().open(fileName)
-
-
         val lenght: Int = inputStream.available()
         val buffer = ByteArray(lenght)
         inputStream.read(buffer)

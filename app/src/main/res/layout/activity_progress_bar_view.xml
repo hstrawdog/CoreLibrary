@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.customize.ProgressBarViewActivity">
+    tools:context=".ui.customize.ProgressBarViewBuilderActivity">
 
 
     <com.easy.example.ui.customize.widget.ProgressBarView
@@ -26,10 +26,14 @@
         app:padding_child="@dimen/x30" />
 
 
-
     <com.easy.example.ui.customize.widget.BargainProgressBarView
-        android:background="@color/color_999"
         android:layout_width="@dimen/x500"
-        android:layout_height="@dimen/x50" />
+        android:layout_height="@dimen/x50"
+        android:background="@color/color_999" />
+
+    <com.easy.example.ui.customize.widget.VideoProgressBarView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:layout_margin="@dimen/x100" />
 
 </LinearLayout>

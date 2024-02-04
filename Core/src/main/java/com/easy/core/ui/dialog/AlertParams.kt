@@ -50,7 +50,10 @@ class AlertParams {
      * 确定按钮
      */
     var positiveButtonText: CharSequence = "确定"
-
+    /**
+     *  确定按钮颜色
+     */
+    var positiveButtonColor: Int = R.color.color_000
     /**
      * 确定按钮监听
      */

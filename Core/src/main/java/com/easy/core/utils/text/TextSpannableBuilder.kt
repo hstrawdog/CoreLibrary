@@ -1,5 +1,6 @@
 package com.easy.core.utils.text
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BlurMaskFilter
 import android.graphics.BlurMaskFilter.Blur
@@ -29,6 +30,8 @@ import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
 import android.view.View
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import com.easy.core.CoreConfig
 import com.easy.core.utils.ResourcesUtils
 import android.text.style.SuperscriptSpan as SuperscriptSpan1
@@ -46,64 +49,6 @@ class TextSpannableBuilder {
      * 缓存的集合
      */
     private val mStringBuilder = SpannableStringBuilder()
-
-    /**
-     * 添加文本
-     *
-     * @param text
-     * @return
-     */
-    fun addTextPart(text: CharSequence?): TextSpannableBuilder {
-        mStringBuilder.append(text)
-        return this
-    }
-
-    /**
-     * 添加文本
-     * @param text CharSequence  文字
-     * @param color Int  颜色
-     * @param proportion Float 大小 倍数
-     * @param characterStyle CharacterStyle?  字符样式
-     * @param listener OnClickListener?  点击事件  点击后带背景颜色  需要设置 setHighlightColor(ResourcesUtils.getColor(R.color.transparent))  点击焦点 setMovementMethod(LinkMovementMethod.getInstance())
-     * @return TextSpannableBuilder
-     */
-    fun addTextPart(text: CharSequence, @ColorInt color: Int, proportion: Float = 0f,
-                    characterStyle: CharacterStyle? = null, listener: OnClickListener? = null): TextSpannableBuilder {
-        if (!TextUtils.isEmpty(text)) {
-            val start = mStringBuilder.length
-            val end = start + text.length
-            mStringBuilder.append(text)
-            addPartTextColor(color, start, end)
-            if (proportion != 0f) {
-                addPartTextSize(proportion, start, end)
-            }
-
-            characterStyle?.let {
-                mStringBuilder.setSpan(it, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-            listener?.let {
-                mStringBuilder.setSpan(TextClickableSpan(text, color, it), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-        }
-        return this
-    }
-
-    /**
-     *  添加点击事件
-     * @param text CharSequence
-     * @param color Int
-     * @param listener OnClickListener?
-     */
-    fun addTextClick(text: CharSequence, @ColorInt color: Int, listener: OnClickListener? = null) {
-        if (!android.text.TextUtils.isEmpty(text)) {
-            val start = mStringBuilder.length
-            val end = start + text.length
-            listener?.let {
-                mStringBuilder.append(text)
-                mStringBuilder.setSpan(TextClickableSpan(text, color, it), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-        }
-    }
 
     /**
      * 添加文本颜色
@@ -128,130 +73,149 @@ class TextSpannableBuilder {
     }
 
     /**
+     * 添加文本
+     *
+     * @param text
+     * @return
+     */
+    fun addTextPart(text: CharSequence?): TextSpannableBuilder {
+        mStringBuilder.append(text)
+        return this
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param context context
+     * @param colorId 颜色值
+     * @param text    内容
+     * @return
+     */
+    fun addTextPart(context: Context?, @ColorRes colorId: Int, text: CharSequence): TextSpannableBuilder {
+        return addTextPart(ContextCompat.getColor(context!!, colorId), text)
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param color
+     * @param text
+     * @return
+     */
+    fun addTextPart(@ColorInt color: Int, text: CharSequence): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            addPartTextColor(color, start, end)
+        }
+        return this
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @param context
+     * @param colorId
+     * @param listener
+     * @return
+     */
+    fun addTextPart(text: CharSequence, context: Context?, colorId: Int, listener: OnClickListener?): TextSpannableBuilder {
+        return addTextPart(text, ContextCompat.getColor(context!!, colorId), listener)
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param context
+     * @param colorId
+     * @param proportion
+     * @param text
+     * @return
+     */
+    fun addTextPartColorAndSize(context: Context?, @ColorRes colorId: Int, proportion: Float, text: CharSequence): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            addPartTextColor(ContextCompat.getColor(context!!, colorId), start, end)
+            addPartTextSize(proportion, start, end)
+        }
+        return this
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param proportion 文字大小
+     * @param text       内容
+     * @return
+     */
+    fun addTextSizeSpan(proportion: Float, text: CharSequence): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            addPartTextSize(proportion, start, end)
+        }
+        return this
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @param characterStyle
+     * @return
+     */
+    fun addTextPart(text: CharSequence, characterStyle: CharacterStyle?): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            mStringBuilder.setSpan(characterStyle, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return this
+    }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @param color
+     * @param listener
+     * @return
+     */
+    fun addTextPart(text: CharSequence, color: Int, listener: OnClickListener?): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            mStringBuilder.setSpan(TextClickableSpan(text, color, listener), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return this
+    }
+
+    fun build(): Spannable {
+        return mStringBuilder
+    }
+
+    /**
      *  点击事件 类
      */
-    class TextClickableSpan(private val mText: CharSequence, val mColor: Int,
-                            private val mOnClickListener: OnClickListener?) : ClickableSpan() {
+    class TextClickableSpan(private val mText: CharSequence, private val mColor: Int, private val mOnClickListener: OnClickListener?) : ClickableSpan() {
         override fun onClick(widget: View) {
             mOnClickListener?.onClick(widget, mText)
         }
 
         override fun updateDrawState(ds: TextPaint) {
-            super.updateDrawState(ds);
-//            if (mColor != 0) {
-//                ds.color = mColor
-//            }
-            ds.setColor(ResourcesUtils.getColor(android.R.color.holo_red_dark));
-            ds.setUnderlineText(false);
-            ds.clearShadowLayer();
+            //super.updateDrawState(ds);
+            if (mColor != 0) {
+                ds.color = mColor
+            }
         }
 
-    }
-
-    //region   span
-    fun getForegroundColorSpan(@ColorInt color: Int): ForegroundColorSpan {
-        return ForegroundColorSpan(color)
-    }
-
-    fun getBackgroundColorSpan(@ColorInt color: Int): BackgroundColorSpan {
-        return BackgroundColorSpan(color)
-    }
-
-    fun getLeadingMarginSpan(first: Int, rest: Int): LeadingMarginSpan.Standard {
-        return LeadingMarginSpan.Standard(first, rest)
-    }
-
-
-    fun getQuoteSpan(@ColorInt color: Int): QuoteSpan {
-
-        return QuoteSpan(color)
-    }
-
-
-    fun getBulletSpan(gapWidth: Int, @ColorInt bulletColor: Int): BulletSpan {
-        return BulletSpan(gapWidth, bulletColor)
-    }
-
-
-    fun getRelativeSizeSpan(proportion: Float): RelativeSizeSpan {
-        return RelativeSizeSpan(proportion)
-    }
-
-    fun getScaleXSpan(xProportion: Float): ScaleXSpan {
-        return ScaleXSpan(xProportion)
-    }
-
-    fun getStrikethroughSpan(): StrikethroughSpan {
-        return StrikethroughSpan()
-    }
-
-    fun getUnderlineSpan(): UnderlineSpan {
-        return UnderlineSpan()
-    }
-
-    fun getSuperscriptSpan(): SuperscriptSpan {
-        return SuperscriptSpan1();
-    }
-
-    fun getSubscriptSpan(): SubscriptSpan {
-        return SubscriptSpan()
-    }
-
-    fun getStyleSpan4BOLD(): StyleSpan {
-        return StyleSpan(Typeface.BOLD)
-    }
-
-    fun getStyleSpan4ITALIC(): StyleSpan {
-        return StyleSpan(Typeface.ITALIC)
-    }
-
-    fun getStyleSpan4BOLD_ITALIC(): StyleSpan {
-        return StyleSpan(Typeface.BOLD_ITALIC)
-    }
-
-    fun getTypefaceSpan(fontFamily: String): TypefaceSpan {
-        return TypefaceSpan(fontFamily)
-    }
-
-    fun getAlignmentSpan(align: Layout.Alignment): AlignmentSpan.Standard {
-        return AlignmentSpan.Standard(align!!)
-    }
-
-
-    fun getImageSpan(bitmap: Bitmap): ImageSpan {
-        return ImageSpan(CoreConfig.applicationContext, bitmap!!)
-    }
-
-    fun getImageSpan(drawable: Drawable): ImageSpan {
-        return ImageSpan(drawable!!)
-    }
-
-    fun getImageSpan(uri: Uri): ImageSpan {
-        return ImageSpan(CoreConfig.applicationContext, uri!!)
-    }
-
-
-    fun getImageSpan(resourceId: Int): ImageSpan {
-        return ImageSpan(CoreConfig.applicationContext, resourceId)
-    }
-
-    fun getURLSpan(url: String): URLSpan {
-        return URLSpan(url)
-    }
-
-
-    fun getMaskFilterSpan(radius: Float, style: Blur): MaskFilterSpan {
-        return MaskFilterSpan(BlurMaskFilter(radius, style))
-    }
-
-    //endregion
-
-    /**
-     *  构建Spannable
-     * @return Spannable
-     */
-    fun build(): Spannable {
-        return mStringBuilder
     }
 
     /**
@@ -266,6 +230,4 @@ class TextSpannableBuilder {
          */
         fun onClick(widget: View?, clickedText: CharSequence?)
     }
-
-
 }

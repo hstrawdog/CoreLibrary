@@ -26,7 +26,10 @@ import kotlinx.coroutines.launch
  * @Describe :
  */
 class SwitchBookSourceActivity : BaseListActivity() {
-    override val layoutViewId: Int = R.layout.activity_switch_booke_source
+
+    override fun getLayoutViewId(): Int {
+        return  R.layout.activity_switch_booke_source
+    }
 
     companion object {
         fun open(context: Activity, book: com.easy.readbook.room.entity.Book?) {

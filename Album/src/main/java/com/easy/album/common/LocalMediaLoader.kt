@@ -44,7 +44,8 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
     }
 
     fun loadAllImage(imageLoadListener: LocalMediaLoadListener) {
-        activity.supportLoaderManager.initLoader(mLocalMediaType, null, object :
+
+        LoaderManager.getInstance(activity).initLoader(mLocalMediaType, null, object :
             LoaderManager.LoaderCallbacks<Cursor?> {
             override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor?> {
                 var cursorLoader: CursorLoader? = null
@@ -188,5 +189,6 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
             arrayOf(MediaStore.Images.Media.DATA, MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATE_ADDED, MediaStore.Images.Media._ID, MediaStore.Images.Media.SIZE)
         private val VIDEO_PROJECTION =
             arrayOf(MediaStore.Video.Media.DATA, MediaStore.Video.Media.DISPLAY_NAME, MediaStore.Video.Media.DATE_ADDED, MediaStore.Video.Media._ID, MediaStore.Video.Media.DURATION)
+
     }
 }

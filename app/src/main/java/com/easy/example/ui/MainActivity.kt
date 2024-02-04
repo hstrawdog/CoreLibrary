@@ -22,13 +22,17 @@ import com.easy.example.ui.adaptation.DefImgActivity
 import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.camera.Camera2Activity
+import com.easy.example.ui.compose.ComposeIndexActivity
 import com.easy.example.ui.crash.ThrowIndexActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity
+import com.easy.example.ui.customize.ProgressBarViewBuilderActivity
 import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.FileIndexActivity
 import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
+import com.easy.example.ui.media.SeparationVideoActivity
+import com.easy.example.ui.media.VideoViewActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
 import com.easy.example.ui.recycle.BannerActivity
 import com.easy.example.ui.recycle.BindingRecycleActivity
@@ -64,6 +68,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
+
+        open(ComposeIndexActivity::class.java)
+
 //        startService(Intent(this, KillAppServers::class.java))
 
 //        open(DownLoadActivity::class.java)
@@ -94,11 +101,17 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //                open(Camera2Activity::class.java)
 //            }
 //        }
-
+        PermissionsUtils.requestStorage({
+            if (it) {
+//                open(ProgressBarViewBuilderActivity::class.java)
+//                open(VideoViewActivity::class.java)
+//                open(SeparationVideoActivity::class.java)
+            }
+        })
 
 //        open(DefImgActivity::class.java)
 //        open(BannerActivity::class.java)
-        open(TabLayoutActivity::class.java)
+//        open(TabLayoutActivity::class.java)
 
     }
 
