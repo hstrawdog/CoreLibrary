@@ -1,4 +1,4 @@
-package com.rongji.core.utils
+package com.easy.core.utils
 
 import android.os.Build
 

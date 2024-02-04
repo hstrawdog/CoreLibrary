@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import com.easy.core.CoreConfig
 import com.easy.core.permission.dialog.HuaWeiTipDialog
-import com.rongji.core.utils.BaseSystemUtil
+import com.easy.core.utils.BaseSystemUtil
 
 /**
  * @Author : huangqiqiang

@@ -6,7 +6,6 @@ import androidx.appcompat.widget.AppCompatImageView
 
 /**
  * @Author : huangqiqiang
- * @Package : com.rongji.shangwenwan.weight
  * @FileName :   SquareImageView
  * @Date : 2018/7/26 0026  下午 5:41
  * @Descrive : TODO

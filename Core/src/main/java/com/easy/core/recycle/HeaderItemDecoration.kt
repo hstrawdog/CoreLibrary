@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 
 /**
  * @Author : huangqiqiang
- * @Package : com.shangwenwan.sww.activity.store.index
  * @FileName :   HeaderItemDecoration
  * @Date : 2019/12/11 0011  下午 3:46
  * @Email : qiqiang213@gmail.com

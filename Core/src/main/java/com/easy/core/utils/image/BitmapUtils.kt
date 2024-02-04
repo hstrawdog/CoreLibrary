@@ -448,4 +448,25 @@ object BitmapUtils {
         canvas.drawBitmap(orginBitmap, 0f, 0f, paint)
         return bitmap
     }
+    /**
+     * 超过过最大值 等比压缩
+     * @param bm Bitmap
+     * @param max Int
+     * @return Bitmap
+     */
+    fun zoomImg3(bm: Bitmap, max: Int): Bitmap {
+        val width = bm.width
+        val height = bm.height // 计算缩放比例
+        val size = Math.max(width, height)
+        if (size <= max) {
+            return bm
+        }
+        var scal = max / size.toFloat()
+        val matrix = Matrix()
+        matrix.postScale(scal, scal) // 得到新的图片
+
+        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
+
+    }
+
 }

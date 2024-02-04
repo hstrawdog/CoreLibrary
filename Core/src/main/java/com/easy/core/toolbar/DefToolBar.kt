@@ -318,4 +318,13 @@ class DefToolBar : BaseToolBar() {
         (rootView?.findViewById<View>(R.id.ll_right) as LinearLayout).addView(view)
         return view
     }
+
+    /**
+     * 右边布局
+     * @return LinearLayout
+     */
+    fun getRightView(): LinearLayout {
+        return (rootView?.findViewById<View>(R.id.ll_right) as LinearLayout)
+    }
+
 }

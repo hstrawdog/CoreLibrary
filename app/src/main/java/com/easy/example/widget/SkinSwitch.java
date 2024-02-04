@@ -18,7 +18,6 @@ import static skin.support.widget.SkinCompatHelper.INVALID_ID;
  * @version V1.0 <描述当前版本功能>
  * 在此写用途
  * @author: huangqiqiang
- * @FileName: com.shangwenwan.sww.weight.SkinSwitch.java
  * @emain: 593979591@qq.com
  * @date: 2020-04-23 16:31
  */
