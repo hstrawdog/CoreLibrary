@@ -117,7 +117,7 @@ class CoreConfig private constructor() {
     /**
      * Activity生命周期管理
      */
-    private var mActivityLifecycle: ActivityLifecycle? = null
+    var mActivityLifecycle: ActivityLifecycle? = null
 
     /**
      * Application   主要获取 context

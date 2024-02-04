@@ -181,6 +181,37 @@ object ImageLoadUtils {
             })
     }
 
+
+    /**
+     * Glide获取网络图片，带容错机制error时开始一个新的请求
+     * @param context Context?
+     * @param uri String?
+     * @param callback GlideLoadBitmapCallback
+     */
+    @JvmStatic
+    fun getBitmapByFailover(context: Context?, uri: String?, callback: GlideLoadBitmapCallback) {
+        Glide.with(context!!)
+            .asBitmap()
+            .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL))
+            .load(uri)
+            .error(Glide.with(context!!)
+                .asBitmap()
+                .load(uri))
+            .into(object : SimpleTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    callback.getBitmapCallback(resource)
+                }
+
+                override fun onLoadFailed(errorDrawable: Drawable?) {
+                    super.onLoadFailed(errorDrawable)
+                    callback.onLoadFailed()
+                }
+            })
+    }
+
+
     interface GlideLoadBitmapCallback {
         fun getBitmapCallback(bitmap: Bitmap)
         fun onLoadFailed()

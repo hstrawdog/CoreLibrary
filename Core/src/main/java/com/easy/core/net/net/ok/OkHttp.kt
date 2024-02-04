@@ -16,6 +16,7 @@ object OkHttp {
     }
 
     @Synchronized
+    @JvmStatic
     fun newHttpCompat(): HttpCompat {
         return mOkHttp
     }

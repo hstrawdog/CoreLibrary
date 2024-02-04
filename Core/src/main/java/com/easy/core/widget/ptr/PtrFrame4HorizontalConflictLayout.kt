@@ -12,7 +12,7 @@ import java.lang.Math.abs
  * @Email : qiqiang213@gmail.com
  * @Describe : 处理  横向冲突问题  但效果并不是非常完美
  */
-class PtrFrameLayout : PtrClassicFrameLayout {
+class PtrFrame4HorizontalConflictLayout : PtrClassicFrameLayout {
     constructor(context: Context?) : super(context) {}
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
     constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {}
