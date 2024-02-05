@@ -1038,7 +1038,23 @@ object TimeUtils {
             dff.timeZone = TimeZone.getTimeZone("GMT+08")
             return dff.format(Date())
         }
-
+    /**
+     * 功能描述 秒转时分秒
+     * @author qinda
+     * @date 2020/10/29
+     * @param sumSecond 总秒数
+     * @return java.lang.String 返回 “ 01:01:01 ” 格式的时间
+     */
+    fun sumSecondToTime(sumSecond: Int): String {
+        if (sumSecond <= 0) {
+            return "00:00"
+        }
+        val m = sumSecond / 60
+        val s = sumSecond - m * 60
+        var time = "%02d:%02d"
+        time = String.format(time, m, s)
+        return time
+    }
 
     @JvmStatic
     fun main(args: Array<String>) {
