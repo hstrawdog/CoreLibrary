@@ -448,6 +448,7 @@ object BitmapUtils {
         canvas.drawBitmap(orginBitmap, 0f, 0f, paint)
         return bitmap
     }
+
     /**
      * 超过过最大值 等比压缩
      * @param bm Bitmap
@@ -466,6 +467,34 @@ object BitmapUtils {
         matrix.postScale(scal, scal) // 得到新的图片
 
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
+
+    }
+
+    /**
+     * 镜像水平翻转
+     * @param imageBitmap Bitmap
+     * @return Bitmap
+     */
+    fun rotateLevel(imageBitmap: Bitmap): Bitmap {
+        val width = imageBitmap.width
+        val height = imageBitmap.height
+        val m = Matrix()
+        m.postScale(-1f, 1f) //镜像水平翻转
+        return Bitmap.createBitmap(imageBitmap, 0, 0, width, height, m, true)
+
+    }
+
+    /**
+     * 
+     * @param imageBitmap Bitmap
+     * @return Bitmap
+     */
+    fun rotateVertical(imageBitmap: Bitmap): Bitmap {
+        val width = imageBitmap.width
+        val height = imageBitmap.height
+        val m = Matrix()
+        m.postScale(1f, -1f) //镜像水平翻转
+        return Bitmap.createBitmap(imageBitmap, 0, 0, width, height, m, true)
 
     }
 

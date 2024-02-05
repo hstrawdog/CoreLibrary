@@ -1014,6 +1014,17 @@ object TimeUtils {
         return cal.timeInMillis
     }
 
+    /**
+     * 获取今天开始时间
+     */
+    @JvmStatic
+    fun getCurrentBeginDate3(): Date {
+        val cal = Calendar.getInstance()
+        cal[Calendar.HOUR_OF_DAY] = 0 //控制时
+        cal[Calendar.MINUTE] = 0 //控制分
+        cal[Calendar.SECOND] = 0 //控制秒
+        return cal.time;
+    }
 
 
     @JvmStatic

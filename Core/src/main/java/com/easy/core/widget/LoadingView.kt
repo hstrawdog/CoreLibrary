@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import  com.easy.core.R
+import com.easy.core.utils.ResourcesUtils
 
 /**
  * @Author : huangqiqiang
@@ -18,6 +19,8 @@ import  com.easy.core.R
  */
 class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.LoadingDialogStyle) : Dialog(mContext, themeResId) {
     private var tvMsg: TextView? = null
+    private var loadingWidth = ResourcesUtils.getDimen(R.dimen.x200).toInt()
+
     override fun dismiss() {
         if (this == null) {
             return
@@ -29,6 +32,9 @@ class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.L
 
     constructor(context: Context, msg: String) : this(context, R.style.LoadingDialogStyle) {
         mMsg = msg
+    }
+    constructor(context: Context, msg: String, width: Int) : this(context, msg) {
+        loadingWidth = width;
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
