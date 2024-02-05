@@ -1,3 +1,7 @@
+/*
+pluginManagement 脚本块,用于配置Gradle插件的Maven仓库,配置的是构建过程中,使用的仓库 ;
+pluginManagement 脚本块中的 repositories 配置 , 对应之前的 buildscript 中的 repositories 配置 ;
+*/
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -5,6 +9,8 @@ pluginManagement {
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url "https://jitpack.io" }
+
         google()
         mavenCentral()
         maven { url 'https://repo1.maven.org/maven2/' }
@@ -12,8 +18,17 @@ pluginManagement {
 
 }
 
+/*
+dependencyResolutionManagement 脚本块,用于配置依赖的Maven仓库 ,配置的是工程或模块下的依赖使用的仓库 ;
+在 dependencyResolutionManagement 脚本块中定义
+repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS) 代码的含义是 解析依赖时 , 只能使用本脚本块中的 Maven 仓库 , 不能使用 Module 子项目中的依赖 ;
+repositoriesMode 模式有两种 :
+RepositoriesMode.PREFER_PROJECT : 解析依赖库时 , 优先使用本地仓库 , 本地仓库没有该依赖 , 则使用远程仓库 ;
+RepositoriesMode.FAIL_ON_PROJECT_REPOS : 解析依赖库时 , 强行使用远程仓库 , 不管本地仓库有没有该依赖库 ;
+dependencyResolutionManagement 脚本块中的 repositories 配置 , 对应之前的 allprojects 中的 repositories 配置 ;
+*/
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
         // 添加阿里云 maven 地址
         maven { url 'https://maven.aliyun.com/repository/central' }

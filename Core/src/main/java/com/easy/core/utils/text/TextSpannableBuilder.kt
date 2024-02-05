@@ -86,13 +86,18 @@ class TextSpannableBuilder {
     /**
      * 添加文本
      *
-     * @param context context
-     * @param colorId 颜色值
-     * @param text    内容
+     * @param text
+     * @param characterStyle
      * @return
      */
-    fun addTextPart(context: Context?, @ColorRes colorId: Int, text: CharSequence): TextSpannableBuilder {
-        return addTextPart(ContextCompat.getColor(context!!, colorId), text)
+    fun addTextPart(text: CharSequence, characterStyle: CharacterStyle?): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            mStringBuilder.setSpan(characterStyle, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return this
     }
 
     /**
@@ -102,7 +107,7 @@ class TextSpannableBuilder {
      * @param text
      * @return
      */
-    fun addTextPart(@ColorInt color: Int, text: CharSequence): TextSpannableBuilder {
+    fun addTextPart(text: CharSequence, @ColorInt color: Int): TextSpannableBuilder {
         if (!TextUtils.isEmpty(text)) {
             val start = mStringBuilder.length
             val end = start + text.length
@@ -111,6 +116,18 @@ class TextSpannableBuilder {
         }
         return this
     }
+
+//    /**
+//     * 添加文本
+//     *
+//     * @param context context
+//     * @param colorId 颜色值
+//     * @param text    内容
+//     * @return
+//     */
+//    fun addTextPart(context: Context?, @ColorRes colorId: Int, text: CharSequence): TextSpannableBuilder {
+//        return addTextPart(ContextCompat.getColor(context!!, colorId), text)
+//    }
 
     /**
      * 添加文本
@@ -121,9 +138,60 @@ class TextSpannableBuilder {
      * @param listener
      * @return
      */
-    fun addTextPart(text: CharSequence, context: Context?, colorId: Int, listener: OnClickListener?): TextSpannableBuilder {
+    fun addTextPart(text: CharSequence, context: Context?, colorId: Int,
+                    listener: OnClickListener?): TextSpannableBuilder {
         return addTextPart(text, ContextCompat.getColor(context!!, colorId), listener)
     }
+
+    /**
+     * 添加文本
+     *
+     * @param text
+     * @param color
+     * @param listener
+     * @return
+     */
+    fun addTextPart(text: CharSequence, color: Int, listener: OnClickListener?): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            mStringBuilder.setSpan(TextClickableSpan(text, color, listener), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        return this
+    }
+
+
+    /**
+     * 添加文本
+     * @param text CharSequence  文字
+     * @param color Int  颜色
+     * @param proportion Float 大小 倍数
+     * @param characterStyle CharacterStyle?  字符样式
+     * @param listener OnClickListener?  点击事件  点击后带背景颜色  需要设置 setHighlightColor(ResourcesUtils.getColor(R.color.transparent))  点击焦点 setMovementMethod(LinkMovementMethod.getInstance())
+     * @return TextSpannableBuilder
+     */
+    fun addTextPart(text: CharSequence, @ColorInt color: Int, proportion: Float = 0f,
+                    characterStyle: CharacterStyle? = null, listener: OnClickListener? = null): TextSpannableBuilder {
+        if (!TextUtils.isEmpty(text)) {
+            val start = mStringBuilder.length
+            val end = start + text.length
+            mStringBuilder.append(text)
+            addPartTextColor(color, start, end)
+            if (proportion != 0f) {
+                addPartTextSize(proportion, start, end)
+            }
+
+            characterStyle?.let {
+                mStringBuilder.setSpan(it, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            listener?.let {
+                mStringBuilder.setSpan(TextClickableSpan(text, color, it), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+        }
+        return this
+    }
+
 
     /**
      * 添加文本
@@ -134,7 +202,8 @@ class TextSpannableBuilder {
      * @param text
      * @return
      */
-    fun addTextPartColorAndSize(context: Context?, @ColorRes colorId: Int, proportion: Float, text: CharSequence): TextSpannableBuilder {
+    fun addTextPartColorAndSize(context: Context?, @ColorRes colorId: Int, proportion: Float,
+                                text: CharSequence): TextSpannableBuilder {
         if (!TextUtils.isEmpty(text)) {
             val start = mStringBuilder.length
             val end = start + text.length
@@ -162,41 +231,6 @@ class TextSpannableBuilder {
         return this
     }
 
-    /**
-     * 添加文本
-     *
-     * @param text
-     * @param characterStyle
-     * @return
-     */
-    fun addTextPart(text: CharSequence, characterStyle: CharacterStyle?): TextSpannableBuilder {
-        if (!TextUtils.isEmpty(text)) {
-            val start = mStringBuilder.length
-            val end = start + text.length
-            mStringBuilder.append(text)
-            mStringBuilder.setSpan(characterStyle, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
-        return this
-    }
-
-    /**
-     * 添加文本
-     *
-     * @param text
-     * @param color
-     * @param listener
-     * @return
-     */
-    fun addTextPart(text: CharSequence, color: Int, listener: OnClickListener?): TextSpannableBuilder {
-        if (!TextUtils.isEmpty(text)) {
-            val start = mStringBuilder.length
-            val end = start + text.length
-            mStringBuilder.append(text)
-            mStringBuilder.setSpan(TextClickableSpan(text, color, listener), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
-        return this
-    }
-
     fun build(): Spannable {
         return mStringBuilder
     }
@@ -204,7 +238,8 @@ class TextSpannableBuilder {
     /**
      *  点击事件 类
      */
-    class TextClickableSpan(private val mText: CharSequence, private val mColor: Int, private val mOnClickListener: OnClickListener?) : ClickableSpan() {
+    class TextClickableSpan(private val mText: CharSequence, private val mColor: Int,
+                            private val mOnClickListener: OnClickListener?) : ClickableSpan() {
         override fun onClick(widget: View) {
             mOnClickListener?.onClick(widget, mText)
         }
