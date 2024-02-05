@@ -1026,6 +1026,19 @@ object TimeUtils {
         return cal.time;
     }
 
+    val nowDate4yyyy: String
+        get() {
+            val dff = SimpleDateFormat("yyyy")
+            dff.timeZone = TimeZone.getTimeZone("GMT+08")
+            return dff.format(Date())
+        }
+    val nowDate4Moon: String
+        get() {
+            val dff = SimpleDateFormat("MM")
+            dff.timeZone = TimeZone.getTimeZone("GMT+08")
+            return dff.format(Date())
+        }
+
 
     @JvmStatic
     fun main(args: Array<String>) {

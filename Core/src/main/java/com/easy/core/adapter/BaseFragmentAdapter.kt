@@ -71,8 +71,17 @@ abstract class BaseFragmentAdapter : FragmentStateAdapter {
     /**
      *  获取标题
      */
-    open fun getItemTitle(position: Int): String {
+    fun getItemTitle(position: Int): String {
         return stringSparseArray.get(position)
+    }
+
+    /**
+     *  FragmentStateAdapter  f是必须的
+     * @param position Int
+     * @return Fragment?
+     */
+    fun getFragment(position: Int): Fragment? {
+        return fragmentManager?.findFragmentByTag("f" + getItemId(position))
     }
 
     /**
