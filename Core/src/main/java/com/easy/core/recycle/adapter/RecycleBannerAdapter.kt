@@ -28,7 +28,7 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
     /**
      * 点击事件
      */
-    private var onRvBannerClickListener: RecycleViewBannerClickListener<*>? = null
+    private var onRvBannerClickListener: RecycleViewBannerClickListener? = null
 
     /**
      *  改变事件     重新绑定数据源地址与标题
@@ -44,9 +44,12 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
      *  是否开始无限循环
      */
     var isUnlimited = true
+    /**
+     *  默认居中裁剪
+     */
+    var scaleType = ImageView.ScaleType.CENTER_CROP
 
-
-    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>) {
+    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener) {
         this.onRvBannerClickListener = onRvBannerClickListener
     }
 
@@ -80,6 +83,7 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         val img = holder.itemView.findViewById<ImageView>(R.id.iv_banner)
         val tv = holder.itemView.findViewById<TextView>(R.id.tv_code_banner)
         val item = data[position % data.size]
+        img.scaleType = scaleType
         if (item is String) {
             tv.visibility = View.GONE
             ImageLoadUtils.with(item as String, img)

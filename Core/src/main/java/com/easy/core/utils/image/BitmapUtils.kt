@@ -497,5 +497,63 @@ object BitmapUtils {
         return Bitmap.createBitmap(imageBitmap, 0, 0, width, height, m, true)
 
     }
+    /**
+     * 镜像图片
+     * @param srcBitmap
+     * @return
+     */
+    @JvmStatic
+    fun convertBitmap(srcBitmap: Bitmap): Bitmap {
+        val width = srcBitmap.width
+        val height = srcBitmap.height
+        val newb = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888) // 创建一个新的和SRC长度宽度一样的位图
+        val cv = Canvas(newb)
+        val m = Matrix()
+        m.postScale(-1f, 1f) //镜像水平翻转
+        val new2 = Bitmap.createBitmap(srcBitmap, 0, 0, width, height, m, true)
+
+        // 右边图片
+        cv.drawBitmap(new2, Rect(0, 0, width, height), Rect(0, 0, width, height), null)
+        return newb
+    }
+
+
+    /**
+     * @param srcBitmap 原图
+     * @param offsetX   0-100
+     * @param offsetY   0-100
+     * @return
+     */
+    @JvmStatic
+    fun convertBitmap(srcBitmap: Bitmap, offsetX: Int, offsetY: Int): Bitmap {
+        val width = srcBitmap.width
+        val height = srcBitmap.height
+        val newb = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888) // 创建一个新的和SRC长度宽度一样的位图
+        val cv = Canvas(newb)
+        val m = Matrix()
+        m.postScale(-1f, 1f) //镜像水平翻转
+        val new2 = Bitmap.createBitmap(srcBitmap, 0, 0, width, height, m, true)
+        val xSize = width / 4
+        val ySize = height / 4
+        val OffsetY = (ySize * ((offsetY - 50.0) / 50.0)).toInt()
+        val OffsetX = (xSize * ((offsetX - 50.0) / 50.0)).toInt()
+//        LogUtils.e(" OffsetX :     $OffsetX       xSize:   $xSize  ")
+//        LogUtils.e(" OffsetY :     $OffsetY       offsetY:   $offsetY  ")
+        // 左边图片
+        cv.drawBitmap(
+            srcBitmap,
+            Rect(xSize + OffsetX, 0, xSize + width / 2 + OffsetX, height),
+            Rect(0, 0, width / 2, height),
+            null
+        )
+        // 右边图片
+        cv.drawBitmap(
+            new2,
+            Rect(xSize - OffsetX, 0, xSize + width / 2 - OffsetX, height),
+            Rect(width / 2, OffsetY, width, height + OffsetY),
+            null
+        )
+        return newb
+    }
 
 }

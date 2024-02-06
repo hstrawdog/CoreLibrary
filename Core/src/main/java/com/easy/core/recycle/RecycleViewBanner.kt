@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -70,6 +71,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否自动轮播
      */
     private var isAutoPlaying = true
+    var recycleViewBannerCurrentListener: RecycleViewBannerCurrentListener? = null
 
     /**
      * 是否无限轮播
@@ -154,7 +156,12 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         a.recycle()
         return margin
     }
-
+    /**
+     *  设置图片显示样式
+     */
+    fun setImageScaleType( scaleType : ImageView.ScaleType ) {
+        mAdapter?.scaleType=scaleType
+    }
     /**
      * 便于在xml中编辑时观察，运行时不执行
      */
@@ -282,6 +289,9 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
             currentIndex = 0
             mAdapter!!.notifyDataSetChanged()
         }
+        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex % mData!!.size)
+
+
     }
 
     fun <T : RecycleBannerAdapter<Any>> setAdapter(adapter: T) {
@@ -333,6 +343,8 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         if (isShowIndicator) {
             mLinearLayout!!.setCurrentItem(currentIndex % mData!!.size)
         }
+        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex % mData!!.size)
+
     }
 
     /**
@@ -362,7 +374,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         this.currentIndex = currentIndex
     }
 
-    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener<*>) {
+    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener) {
         mAdapter!!.setOnRvBannerClickListener(onRvBannerClickListener)
     }
 
@@ -370,7 +382,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         mAdapter!!.setRecycleViewBannerChangeListener(recycleViewBannerChangeListener)
     }
 
-    interface RecycleViewBannerClickListener<T> {
+    interface RecycleViewBannerClickListener {
         /**
          * @param t
          */
@@ -389,6 +401,13 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
          * @return
          */
         fun getTitle(t: Any): String
+    }
+
+    /**
+     *  当前选项
+     */
+    interface RecycleViewBannerCurrentListener {
+        fun onCurrentPosition(position: Int)
     }
 
     init {

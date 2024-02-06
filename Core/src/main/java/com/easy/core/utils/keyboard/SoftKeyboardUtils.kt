@@ -2,6 +2,7 @@ package com.easy.core.utils.keyboard
 
 import android.app.Activity
 import android.content.Context
+import android.view.MotionEvent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -257,6 +258,55 @@ object SoftKeyboardUtils {
         }
         */
     }
+
+    /**
+     *  点击 控件之外隐藏键盘
+     * @param event MotionEvent
+     * @param view View?
+     */
+    fun hideKeyboardForLineaLayout(event: MotionEvent, view: View?) {
+        if (view != null) {
+            val location = intArrayOf(0, 0)
+            view.getLocationInWindow(location)
+            val left = location[0]
+            val top = location[1]
+            val right = left + view.getWidth()
+            val bootom = top + view.getHeight() // 判断焦点位置坐标是否在控件内，如果位置在控件外则隐藏键盘
+            if (event.rawX < left || event.rawX > right || event.y < top || event.rawY > bootom) { // 隐藏键盘
+                hideSoftInput(view)
+            }
+        }
+    }
+
+    /**
+     *  多个View 判断
+     * @param event MotionEvent
+     * @param activity Activity
+     * @param views Array<out View>
+     */
+    fun hideKeyboardForLineaLayout3(event: MotionEvent, activity: Activity, vararg views: View) {
+        if (views != null) {
+            var hid = true
+            for (view in views) {
+                val location = intArrayOf(0, 0)
+                view.getLocationInWindow(location)
+                val left = location[0]
+                val top = location[1]
+                val right = left + view.getWidth()
+                val bootom = top + view.getHeight() // 判断焦点位置坐标是否在控件内，如果位置在控件外则隐藏键盘
+                if (event.rawX <= left || event.rawX >= right || event.y <= top || event.rawY >= bootom) { // 隐藏键盘
+
+                } else {
+                    hid = false
+                }
+            }
+            if (hid) {
+                hideSoftInput(activity)
+            }
+
+        }
+    }
+
 
     /**
      * 动态显示软键盘

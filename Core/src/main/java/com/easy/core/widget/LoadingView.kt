@@ -17,22 +17,28 @@ import com.easy.core.utils.ResourcesUtils
  * @Email :  qiqiang213@gmail.com
  * @Descrive : loadingView
  */
-class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.LoadingDialogStyle) : Dialog(mContext, themeResId) {
+class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.LoadingDialogStyle) :
+    Dialog(mContext, themeResId) {
     private var tvMsg: TextView? = null
-    private var loadingWidth = ResourcesUtils.getDimen(R.dimen.x200).toInt()
+    private var loadingWidth = ResourcesUtils.getDimen(R.dimen.x200)
+        .toInt()
 
+    var dialogDismiss: DialogDismiss? = null
     override fun dismiss() {
         if (this == null) {
             return
         }
+        dialogDismiss?.onDialogDismiss()
         super.dismiss()
     }
+
 
     var mMsg = "正在加载中"
 
     constructor(context: Context, msg: String) : this(context, R.style.LoadingDialogStyle) {
         mMsg = msg
     }
+
     constructor(context: Context, msg: String, width: Int) : this(context, msg) {
         loadingWidth = width;
     }
@@ -57,6 +63,7 @@ class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.L
     fun setTipMsg(msg: Int) {
         tvMsg?.setText(msg)
     } //    public void start() {
+
     /**
      * 设置显示的提示标题
      * @param title String
@@ -66,4 +73,7 @@ class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.L
         tvMsg?.text = title
     }
 
+    interface DialogDismiss {
+        fun onDialogDismiss()
+    }
 }

@@ -14,6 +14,7 @@ import java.math.RoundingMode
 import java.nio.charset.Charset
 import java.text.DecimalFormat
 import java.util.*
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 /**
@@ -1511,8 +1512,28 @@ object DataUtils {
         }
         return numberStr
     }
-
-
+    fun isNumericzidai(str: String?): Boolean {
+        val reg = "-?[0-9]+(\\.[0-9]+)?"
+        val pattern: Pattern = Pattern.compile(reg)
+        val matcher: Matcher = pattern.matcher(str)
+        return if (matcher.find()) {
+            true
+        } else {
+            false
+        }
+    }
+    /**
+     * 格式化小数点
+     * 对1以下数据不进行修改
+     * 1以上取消小数点后
+     */
+    fun formatDecimal(o : Double):String {
+        return if (o < 1) {
+            o.toString()
+        } else {
+            DecimalFormat("#").format(o)
+        }
+    }
 
 
     @JvmStatic

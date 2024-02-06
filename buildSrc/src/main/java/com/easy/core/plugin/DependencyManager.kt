@@ -49,8 +49,6 @@ object Appcompat {
     const val core = "androidx.core:core:$core_version"
     const val coreKtx = "androidx.core:core-ktx:$core_version"
     const val appcompat = "androidx.appcompat:appcompat:1.3.1"
-
-
 }
 
 /**
@@ -311,9 +309,9 @@ object Leakcanary {
  *  https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
 object BaseRecyclerViewAdapterHelper {
+    const val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6"
 
 //    const val baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.14"
-    const val baseRecyclerViewAdapterHelper = "io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14"
 }
 
 /**
@@ -348,6 +346,7 @@ object DimensCompat {
 object Album {
     const val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.1.33"
 }
+
 
 /**
  *  XML 解析器

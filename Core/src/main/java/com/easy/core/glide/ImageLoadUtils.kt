@@ -210,6 +210,23 @@ object ImageLoadUtils {
                 }
             })
     }
+    /**
+     * 加载圆形图
+     *
+     * @param url
+     * @param imageView
+     */
+    @JvmStatic
+    fun transformHead(url: String?, imageView: ImageView?) {
+        imageView?.let {
+            GlideApp.with(it
+            )
+                .load(url)
+                .apply(RequestOptions.circleCropTransform()
+                    .placeholder(R.mipmap.ic_user_img_avatar))
+                .into(imageView)
+        }
+    }
 
 
     interface GlideLoadBitmapCallback {

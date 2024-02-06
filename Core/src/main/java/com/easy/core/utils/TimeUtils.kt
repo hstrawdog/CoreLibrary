@@ -1038,6 +1038,7 @@ object TimeUtils {
             dff.timeZone = TimeZone.getTimeZone("GMT+08")
             return dff.format(Date())
         }
+
     /**
      * 功能描述 秒转时分秒
      * @author qinda
@@ -1054,6 +1055,26 @@ object TimeUtils {
         var time = "%02d:%02d"
         time = String.format(time, m, s)
         return time
+    }
+
+    /**
+     * 通过年份与月份获取该月份的最后一天
+     */
+    fun getLastDayOfMonth(year: Int, month: Int): String {
+        var calendar = Calendar.getInstance()
+        // 设置年份
+        calendar.set(Calendar.YEAR, year)
+        // 设置月份
+        calendar.set(Calendar.MONDAY, month)
+
+        // 获取当前月最小值
+        var lastDay = calendar.getMinimum(Calendar.DAY_OF_MONTH)
+
+        // 设置日历中的月份
+        calendar.set(Calendar.DAY_OF_MONTH, lastDay - 1)
+
+        var simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        return simpleDateFormat.format(calendar.time)
     }
 
     @JvmStatic
