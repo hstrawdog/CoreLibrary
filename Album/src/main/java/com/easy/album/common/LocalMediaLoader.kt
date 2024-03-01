@@ -10,6 +10,7 @@ package com.easy.album.common
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.text.TextUtils
 import androidx.fragment.app.FragmentActivity
@@ -52,6 +53,7 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
                 var select: Array<String>? = null
                 var condition = ""
                 if (isGif) {
+
                     select = arrayOf("image/jpeg", "image/png", "image/gif")
                     condition =
                         (MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=?" + " or " + MediaStore.Images.Media.MIME_TYPE + "=?")

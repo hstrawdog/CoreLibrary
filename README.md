@@ -8,11 +8,24 @@ tools层：与某些业务有关，通用性只限于某几个业务类之间；
 manager层：通用业务处理层，它有如下特征，对第三方平台封装的层，预处理返回结果及转化异常信息； 对 Service 层通用能力的下沉，如缓存方案、中间件通用处理；与 DAO 层交互，对多个 DAO 的组合复用。
 
 
-
 service层：业务处理层，在大系统中，该层比较复杂，故可抽取出通用处理层（manager层），并且一个service层可以对应多个manager层，但小系统的话，往往没必要抽取出manager层，一个service层足够了。
 
 
 helper层：辅助类层，一般是一些功能辅助，如SqlHelper封装数据库连接操作提供数据库操作对象，ConfigHelper帮助创建配置信息用于模块初始化构建，其实作用与工具类很像，但没有工具类通用性好。
+
+
+打包 aar  
+
+./gradlew Core:assembleRelease
+
+
+
+
+
+使用aar 将[build.gradle](Core%2Fbuild.gradle) 使用的依赖复制过去 
+
+
+
 
 
 

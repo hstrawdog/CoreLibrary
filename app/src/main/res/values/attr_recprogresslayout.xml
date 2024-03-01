@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RecProgressLayout">
+        <attr name="rpl_progress_width" format="dimension" />
+        <attr name="rpl_progress_color" format="color|reference" />
+        <attr name="rpl_progress_bg_color" format="color|reference" />
+        <attr name="rpl_start_point" format="enum">
+            <enum name="left_top" value="0" />
+            <enum name="right_top" value="1" />
+            <enum name="right_bottom" value="2" />
+            <enum name="left_bottom" value="3" />
+        </attr>
+        <attr name="rpl_orientation" format="enum">
+            <enum name="clockwise" value="0" />
+            <enum name="anti_clockwise" value="1" />
+        </attr>
+        <attr name="rpl_text_color" format="color|reference" />
+        <attr name="rpl_text_size" format="dimension" />
+        <attr name="rpl_current_progress" format="integer" />
+
+    </declare-styleable>
+</resources>

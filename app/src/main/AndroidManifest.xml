@@ -81,7 +81,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.media.VideoViewActivity"/>
+        <activity android:name=".ui.media.VideoViewActivity" />
         <activity
             android:name=".ui.media.SeparationVideoActivity"
             android:label="提取视频" />
@@ -92,6 +92,10 @@
         <activity
             android:name=".ui.recycle.BindingRecycleActivity"
             android:label="BindingRecycleActivity" />
+
+        <activity
+            android:name=".ui.customize.RecProgressActivity"
+            android:label="正方形进度" />
 
         <activity
             android:name=".ui.LogUtilsActivity"

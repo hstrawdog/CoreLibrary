@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.easy.core.widget.RecProgressLayout
+        android:id="@+id/rec_layout2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rpl_current_progress="0"
+        app:rpl_orientation="clockwise"
+        app:rpl_progress_bg_color="@color/color_2b"
+        app:rpl_progress_color="@color/color_09f"
+        app:rpl_progress_width="@dimen/x20"
+        app:rpl_start_point="left_top">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/x20"
+            android:layout_below="@+id/p"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_def_pic" />
+    </com.easy.core.widget.RecProgressLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

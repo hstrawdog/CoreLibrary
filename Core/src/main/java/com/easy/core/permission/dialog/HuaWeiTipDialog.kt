@@ -1,5 +1,7 @@
 package com.easy.core.permission.dialog
 
+import android.view.Gravity
+import android.view.WindowManager
 import com.easy.core.R
 import com.easy.core.databinding.DialogHuaweiTipBinding
 import com.easy.core.ui.dialog.BaseBindingDialog
@@ -15,7 +17,16 @@ import com.easy.core.ui.dialog.BaseDialog
 class HuaWeiTipDialog : BaseBindingDialog<DialogHuaweiTipBinding>() {
 
     var call: (() -> Unit)? = null
+
     var tipText = ""
+
+    override fun getDialogWeight(): Int {
+        return WindowManager.LayoutParams.MATCH_PARENT
+    }
+
+    override fun getGravity(): Int {
+        return Gravity.BOTTOM
+    }
 
     override fun initView() {
         binding.tvTip.text = tipText

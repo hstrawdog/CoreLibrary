@@ -26,6 +26,7 @@ import com.easy.example.ui.compose.ComposeIndexActivity
 import com.easy.example.ui.crash.ThrowIndexActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity
 import com.easy.example.ui.customize.ProgressBarViewBuilderActivity
+import com.easy.example.ui.customize.RecProgressActivity
 import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.FileIndexActivity
 import com.easy.example.ui.fragment.FragmentIndexActivity
@@ -69,7 +70,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
         LogUtils.dInfo("MainActivity    initData")
 
 
-        open(ComposeIndexActivity::class.java)
+        open(RecProgressActivity::class.java)
+//        open(ComposeIndexActivity::class.java)
 
 //        startService(Intent(this, KillAppServers::class.java))
 

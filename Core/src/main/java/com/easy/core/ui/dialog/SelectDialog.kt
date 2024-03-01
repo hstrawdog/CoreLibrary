@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.fragment.app.FragmentManager
 import com.easy.core.R
 import com.easy.core.utils.ResourcesUtils
 
@@ -28,8 +29,7 @@ import com.easy.core.utils.ResourcesUtils
  *  ------------    分割线
  *  取消 | 中立 | 确定    默认隐藏中立    无内容 隐藏按钮菜单
  */
-class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
-    DialogInterface.OnKeyListener {
+class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, DialogInterface.OnKeyListener {
     /**
      *  属性对象
      */
@@ -47,7 +47,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
      *  布局ID
      */
     override fun getDialogLayoutId(): Int {
-     return R.layout.dialog_base_select_dialog
+        return R.layout.dialog_base_select_dialog
 
     }
 
@@ -65,6 +65,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
     override fun getDialogWeight(): Int {
         return WindowManager.LayoutParams.MATCH_PARENT
     }
+
     override val isDismissBackground: Boolean
         get() {
             alertParams?.let {
@@ -93,63 +94,57 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
     private fun initAlertParams() {
         rootView?.let { it ->
             // 左边按钮 取消
-            it.findViewById<TextView>(R.id.tv_cancel)?.let {
-                if (alertParams?.negativeButtonText.isNullOrEmpty()) {
-                    it.visibility = View.GONE
-                } else {
-                    it.visibility = View.VISIBLE
-                }
-
-                it.text = alertParams?.negativeButtonText
-                it.setOnClickListener {
-                    if (alertParams?.negativeButtonListener != null) {
-                        alertParams?.negativeButtonListener?.onClick(
-                            this@SelectDialog,
-                            DialogInterface.BUTTON_NEGATIVE
-                        )
+            it.findViewById<TextView>(R.id.tv_cancel)
+                ?.let {
+                    if (alertParams?.negativeButtonText.isNullOrEmpty()) {
+                        it.visibility = View.GONE
                     } else {
-                        // 没有实现事件回调
-                        dismiss()
+                        it.visibility = View.VISIBLE
                     }
-                }
-            }
-            // 右边按钮 确认
-            it.findViewById<TextView>(R.id.tv_determine)?.let {
-                if (alertParams?.positiveButtonText.isNullOrEmpty()) {
-                    it.visibility = View.GONE
-                } else {
-                    it.visibility = View.VISIBLE
-                }
-                it.text = alertParams?.positiveButtonText
-                alertParams?.positiveButtonColor.apply {
-                    it.setTextColor(ResourcesUtils.getColor(this!!))
-                }
-                it.setOnClickListener {
-                    if (alertParams?.positiveButtonListener != null) {
-                        alertParams?.positiveButtonListener?.onClick(
-                            this@SelectDialog,
-                            DialogInterface.BUTTON_POSITIVE
-                        )
-                    }
-                }
-            }
 
-            it.findViewById<TextView>(R.id.tv_negative)?.apply {
-                if (!alertParams?.neutralButtonText.isNullOrEmpty()) {
-
-                    text = alertParams?.neutralButtonText
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        if (alertParams?.neutralButtonListener != null) {
-                            alertParams?.neutralButtonListener?.onClick(
-                                this@SelectDialog,
-                                DialogInterface.BUTTON_POSITIVE
-                            )
+                    it.text = alertParams?.negativeButtonText
+                    it.setOnClickListener {
+                        if (alertParams?.negativeButtonListener != null) {
+                            alertParams?.negativeButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_NEGATIVE)
+                        } else {
+                            // 没有实现事件回调
+                            dismiss()
                         }
                     }
-                    it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
                 }
-            }
+            // 右边按钮 确认
+            it.findViewById<TextView>(R.id.tv_determine)
+                ?.let {
+                    if (alertParams?.positiveButtonText.isNullOrEmpty()) {
+                        it.visibility = View.GONE
+                    } else {
+                        it.visibility = View.VISIBLE
+                    }
+                    it.text = alertParams?.positiveButtonText
+                    alertParams?.positiveButtonColor.apply {
+                        it.setTextColor(ResourcesUtils.getColor(this!!))
+                    }
+                    it.setOnClickListener {
+                        if (alertParams?.positiveButtonListener != null) {
+                            alertParams?.positiveButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                        }
+                    }
+                }
+
+            it.findViewById<TextView>(R.id.tv_negative)
+                ?.apply {
+                    if (!alertParams?.neutralButtonText.isNullOrEmpty()) {
+
+                        text = alertParams?.neutralButtonText
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            if (alertParams?.neutralButtonListener != null) {
+                                alertParams?.neutralButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                            }
+                        }
+                        it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
+                    }
+                }
 
             // 如果  三个菜单都没文字  隐藏 分割线
             if (alertParams?.positiveButtonText.isNullOrEmpty() && alertParams?.neutralButtonText.isNullOrEmpty() && alertParams?.negativeButtonText.isNullOrEmpty()) {
@@ -162,19 +157,20 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
             }
 
             // 提示
-            it.findViewById<TextView>(R.id.tv_title)?.apply {
-                alertParams?.let {
-                    if (it.title.isNullOrEmpty()) {
-                        visibility = View.GONE
-                    } else {
-                        visibility = View.VISIBLE
-                    }
+            it.findViewById<TextView>(R.id.tv_title)
+                ?.apply {
+                    alertParams?.let {
+                        if (it.title.isNullOrEmpty()) {
+                            visibility = View.GONE
+                        } else {
+                            visibility = View.VISIBLE
+                        }
 
-                    this.text = it.title
-                    // 标题大小
-                    this.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.titleFontSize)
+                        this.text = it.title
+                        // 标题大小
+                        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.titleFontSize)
+                    }
                 }
-            }
 
         }
         // 内容
@@ -183,16 +179,17 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
                 var tv = TextView(activity)
                 tv.gravity = Gravity.CENTER
                 tv.text = it
-                var paddingSize = ResourcesUtils.getDimen(R.dimen.x10).toInt()
+                var paddingSize = ResourcesUtils.getDimen(R.dimen.x10)
+                    .toInt()
                 tv.setPadding(paddingSize, 0, paddingSize, 0)
-                tv.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
-                rootView?.findViewById<LinearLayout>(R.id.ll_content)?.apply {
-                    addView(tv)
-                    setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt())
-                }
+                tv.layoutParams =
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                rootView?.findViewById<LinearLayout>(R.id.ll_content)
+                    ?.apply {
+                        addView(tv)
+                        setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20)
+                            .toInt())
+                    }
             }
         }
         if (alertParams?.shieldReturn == true) {
@@ -240,6 +237,18 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
         }
 
         /**
+         *  构建 并展示出来
+         * @param fragmentManager FragmentManager
+         * @return SelectDialog<*>
+         */
+        fun create(fragmentManager : FragmentManager): SelectDialog<*> {
+            val baseSelectDialog: SelectDialog<*> = SelectDialog<DialogViewBuilder>()
+            baseSelectDialog.alertParams = alertParams
+            baseSelectDialog.show(fragmentManager)
+            return baseSelectDialog
+        }
+
+        /**
          * 设置中间布局  采用ViewHolder  方式构建
          *
          * @param dialogViewBuilder
@@ -258,10 +267,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
          * @param onCancelListener
          * @return
          */
-        fun setOnCancelListener(
-            text: String?,
-            onCancelListener: DialogInterface.OnClickListener? = null
-        ): Builder {
+        fun setOnCancelListener(text: String?, onCancelListener: DialogInterface.OnClickListener? = null): Builder {
             alertParams.negativeButtonListener = onCancelListener
             text?.let {
                 alertParams.negativeButtonText = it
@@ -276,16 +282,14 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
          * @param listener
          * @return
          */
-        fun setPositiveButton(
-            text: CharSequence = "确定",
-            listener: DialogInterface.OnClickListener? = null
-        ): Builder {
+        fun setPositiveButton(text: CharSequence = "确定", listener: DialogInterface.OnClickListener? = null): Builder {
             text?.let {
                 alertParams.positiveButtonText = it
             }
             alertParams.positiveButtonListener = listener
             return this
         }
+
         /**
          * 确定按钮
          *
@@ -310,16 +314,12 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
          * @param listener OnClickListener
          * @return Builder?
          */
-        fun setNeutralButton(
-            text: CharSequence,
-            listener: DialogInterface.OnClickListener
-        ): Builder {
+        fun setNeutralButton(text: CharSequence, listener: DialogInterface.OnClickListener): Builder {
             alertParams.neutralButtonText = text
             alertParams.neutralButtonListener = listener
             return this
         }
         //endregion
-
 
         /**
          * 设置标题
@@ -327,10 +327,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface,
          * @param text
          * @return
          */
-        fun setTitle(
-            text: CharSequence?,
-            fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)
-        ): Builder {
+        fun setTitle(text: CharSequence?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)): Builder {
             text?.let {
                 alertParams.title = it
             }
