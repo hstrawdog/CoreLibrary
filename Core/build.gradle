@@ -39,10 +39,7 @@ android {
 }
 
 
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from android.sourceSets.main.java.srcDirs
-}
+
 dependencies {
     //版本要与gradle版本一致
 //    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
