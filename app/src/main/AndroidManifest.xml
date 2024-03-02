@@ -4,6 +4,13 @@
     package="com.easy.example">
     <!-- 用于进行网络定位 -->
     <!--允许获得精确的GPS定位-->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /><!--允许获得粗略的基站网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /><!-- 兼容10.0系统，允许App在后台获得位置信息 -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />  <!--  获取网络定位  -->
@@ -55,7 +62,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于申请调用A-GPS模块 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />

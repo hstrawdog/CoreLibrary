@@ -20,6 +20,8 @@ android {
     defaultConfig {
         minSdkVersion BuildVersionConfig.minSdkVersion
         targetSdkVersion BuildVersionConfig.targetSdkVersion
+        versionName "1.0"
+        versionCode 1
 
     }
     buildTypes {
@@ -37,8 +39,6 @@ android {
     }
 
 }
-
-
 
 dependencies {
     //版本要与gradle版本一致
