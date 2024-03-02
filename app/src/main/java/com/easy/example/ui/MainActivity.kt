@@ -92,11 +92,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            }
 //        }
         PermissionsUtils.requestStorage({
-            if (it) {
+//            if (it) {
 //                open(ProgressBarViewBuilderActivity::class.java)
 //                open(VideoViewActivity::class.java)
 //                open(SeparationVideoActivity::class.java)
-            }
+//            }
         })
 
 //        open(DefImgActivity::class.java)
