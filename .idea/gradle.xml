@@ -4,17 +4,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT">
-            <builds>
-              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
-                <projects>
-                  <project path="$PROJECT_DIR$/buildSrc" />
-                </projects>
-              </build>
-            </builds>
-          </compositeBuild>
-        </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="11" />
         <option name="modules">
@@ -23,9 +12,6 @@
             <option value="$PROJECT_DIR$/ALiBaBa" />
             <option value="$PROJECT_DIR$/Album" />
             <option value="$PROJECT_DIR$/Core" />
-            <option value="$PROJECT_DIR$/Project" />
-            <option value="$PROJECT_DIR$/Project/OpenGL" />
-            <option value="$PROJECT_DIR$/Project/ReadBook" />
             <option value="$PROJECT_DIR$/WeChat" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />

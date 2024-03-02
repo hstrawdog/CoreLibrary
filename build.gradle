@@ -2,7 +2,7 @@ buildscript {
     ext.kotlin_version = '1.7.0'
     dependencies {
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.android.tools.build:gradle:7.4.2'
     }
     repositories {
@@ -19,3 +19,6 @@ plugins {
 }
 
 
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

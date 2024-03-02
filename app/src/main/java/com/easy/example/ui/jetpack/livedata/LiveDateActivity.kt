@@ -1,4 +1,5 @@
-package com.easy.example.ui.jetpack.livedata
+// LintOptions: ignoreWarnings=true
+ package com.easy.example.ui.jetpack.livedata
 
 import android.app.Activity
 import android.content.Intent
@@ -35,20 +36,22 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
     override fun initView() {
         mTextView2 = findViewById(R.id.textView2)
 
-        com.easy.example.ui.jetpack.livedata.LiveUser.getInstance(this).observe(this, Observer { user ->
-            e("onChanged button19        $user")
-            mTextView2.setText(user.name + user.level)
-        })
+        LiveUser.getInstance(this)
+            .observe(this, Observer { user ->
+                e("onChanged button19        $user")
+                mTextView2.setText(user.name + user.level)
+            })
 
 
         binding.button19.setOnClickListener {
             onViewClicked(it)
         }
         binding.button191.setOnClickListener {
-            com.easy.example.ui.jetpack.livedata.LiveUser.getInstance(this).observe(this, Observer { user ->
-                e("onChanged  button191       $user")
-                binding.textView21.setText(user.name + user.level)
-            })
+            com.easy.example.ui.jetpack.livedata.LiveUser.getInstance(this)
+                .observe(this, Observer { user ->
+                    e("onChanged  button191       $user")
+                    binding.textView21.setText(user.name + user.level)
+                })
         }
 
         live.observe(this) {
@@ -56,7 +59,8 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
         }
         binding.button22.setOnClickListener {
 
-            live.value = System.currentTimeMillis().toString()
+            live.value = System.currentTimeMillis()
+                .toString()
         }
         binding.button24.setOnClickListener {
             live.observe(this) {
@@ -69,12 +73,12 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
     }
 
     fun onViewClicked(view: View?) {
-        var user = com.easy.example.ui.jetpack.livedata.LiveUser.getInstance(this).value
+        var user = LiveUser.getInstance(this).value
         if (null == user) {
-            user = com.easy.example.ui.jetpack.livedata.User.newInstance()
+            user = User.newInstance()
         }
         user!!.level = user.level + 2
-        com.easy.example.ui.jetpack.livedata.LiveUser.getInstance(this).value = user
+        LiveUser.getInstance(this).value = user
     }
 
 

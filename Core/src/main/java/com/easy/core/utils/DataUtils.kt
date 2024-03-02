@@ -415,7 +415,7 @@ object DataUtils {
         if (isNullString(s) || !Character.isLowerCase(s[0])) {
             return s
         }
-        return ((s[0].toInt() - 32) as Char).toString() + s.substring(1)
+        return ((s[0].toInt() - 32).toChar()).toString() + s.substring(1)
     }
 
     /**
@@ -429,7 +429,7 @@ object DataUtils {
         if (isNullString(s) || !Character.isUpperCase(s[0])) {
             return s
         }
-        return ((s[0].toInt() + 32) as Char).toString() + s.substring(1)
+        return ((s[0].code + 32) as Char).toString() + s.substring(1)
     }
 
     /**

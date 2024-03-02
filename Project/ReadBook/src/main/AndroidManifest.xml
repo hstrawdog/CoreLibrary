@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadBook">
         <provider
+            android:exported="true"
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:grantUriPermissions="true"
@@ -33,6 +34,7 @@
         </provider>
 
         <activity
+
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -40,32 +42,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+          <activity android:exported="true"
             android:name=".ui.menu.ExportBookSourceActivity"
             android:label="导出书源" />
-        <activity
+          <activity android:exported="true"
             android:name=".ui.menu.CacheManagementActivity"
             android:label="缓存管理" />
-        <activity
+          <activity android:exported="true"
             android:name=".ui.menu.ReadSettingActivity"
             android:label="阅读设置" />
-        <activity
+          <activity android:exported="true"
             android:name=".ui.source.BookSourceListActivity"
             android:label="书源列表" />
-        <activity
+          <activity android:exported="true"
             android:name=".ui.SearchActivity"
             android:label="搜索" />
-        <activity
+          <activity android:exported="true"
             android:name=".ui.book.BookDetailActivity"
             android:label="书籍详情" />
-        <activity
+          <activity android:exported="true"
             android:name=".ui.book.ReadBookActivity"
             android:label="阅读" />
-        <activity
+          <activity android:exported="true"
             android:name=".ui.book.SwitchBookSourceActivity"
             android:label="切换书源" />
 
-        <service android:name=".down.DownService" />
+        <service  android:name=".down.DownService" />
 
     </application>
 

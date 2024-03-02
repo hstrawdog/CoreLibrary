@@ -84,7 +84,8 @@ object AlbumFileUtils {
         val cursor =
             context.contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, arrayOf(MediaStore.Images.Media._ID), MediaStore.Images.Media.DATA + "=? ", arrayOf(path), null)
         return if (cursor != null && cursor.moveToFirst()) {
-            val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
+            var index = cursor.getColumnIndex(MediaStore.MediaColumns._ID)
+            val id = cursor.getInt(index)
             val baseUri = Uri.parse("content://media/external/images/media")
             Uri.withAppendedPath(baseUri, "" + id)
         } else {
