@@ -1,8 +1,6 @@
 package com.easy.example.ui.customize
 
-import com.easy.core.ui.base.BaseActivity
 import com.easy.core.ui.base.BaseViewBindingActivity
-import com.easy.example.R
 import com.easy.example.databinding.ActivityRecProgressBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

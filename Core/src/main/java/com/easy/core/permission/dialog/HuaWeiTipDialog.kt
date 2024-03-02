@@ -2,10 +2,8 @@ package com.easy.core.permission.dialog
 
 import android.view.Gravity
 import android.view.WindowManager
-import com.easy.core.R
 import com.easy.core.databinding.DialogHuaweiTipBinding
 import com.easy.core.ui.dialog.BaseBindingDialog
-import com.easy.core.ui.dialog.BaseDialog
 
 /**
  * @Author : huangqiqiang

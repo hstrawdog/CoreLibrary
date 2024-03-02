@@ -10,7 +10,6 @@ package com.easy.album.common
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.text.TextUtils
 import androidx.fragment.app.FragmentActivity
@@ -19,7 +18,6 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import com.easy.album.R
 import com.easy.album.annotation.LocalMediaType
-import com.easy.album.entity.LocalMedia
 import com.easy.album.entity.LocalMediaFolder
 import java.io.File
 import java.util.Collections
@@ -32,12 +30,12 @@ import java.util.Collections
  * @author: 黄其强
  * @date: 2017-05-04 20:14
 </描述当前版本功能> */
-class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.annotation.LocalMediaType localMediaType: Int, isGif: Boolean) {
+class LocalMediaLoader(private val activity: FragmentActivity, @LocalMediaType localMediaType: Int, isGif: Boolean) {
     var isGif: Boolean
     var index = 0
 
-    @com.easy.album.annotation.LocalMediaType
-    private var mLocalMediaType = com.easy.album.annotation.LocalMediaType.VALUE_TYPE_IMAGE
+    @LocalMediaType
+    private var mLocalMediaType = LocalMediaType.VALUE_TYPE_IMAGE
 
     init {
         mLocalMediaType = localMediaType
@@ -62,10 +60,10 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
                     condition =
                         (MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=?")
                 }
-                if (id == com.easy.album.annotation.LocalMediaType.VALUE_TYPE_IMAGE) {
+                if (id == LocalMediaType.VALUE_TYPE_IMAGE) {
                     cursorLoader =
                         CursorLoader(activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, condition, select, IMAGE_PROJECTION[2] + " DESC")
-                } else if (id == com.easy.album.annotation.LocalMediaType.VALUE_TYPE_VIDEO) {
+                } else if (id == LocalMediaType.VALUE_TYPE_VIDEO) {
                     cursorLoader =
                         CursorLoader(activity, MediaStore.Video.Media.EXTERNAL_CONTENT_URI, VIDEO_PROJECTION, null, null, VIDEO_PROJECTION[2] + " DESC")
                 }
@@ -92,7 +90,7 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
                                 //                                Uri uri = AlbumFileUtils.getFile2Uri(activity, path);
                                 var uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + id)
                                 var duration = 0
-                                if (mLocalMediaType == com.easy.album.annotation.LocalMediaType.VALUE_TYPE_VIDEO) {
+                                if (mLocalMediaType == LocalMediaType.VALUE_TYPE_VIDEO) {
                                     duration = data.getInt(data.getColumnIndexOrThrow(VIDEO_PROJECTION[4]))
                                     uri = Uri.withAppendedPath(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "" + id)
                                 } else {
@@ -122,8 +120,8 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
                                 imageFolders.add(0, allImageFolder)
                                 var title = ""
                                 when (mLocalMediaType) {
-                                    com.easy.album.annotation.LocalMediaType.VALUE_TYPE_VIDEO -> title = activity.getString(R.string.lately_video)
-                                    com.easy.album.annotation.LocalMediaType.VALUE_TYPE_IMAGE -> title = activity.getString(R.string.lately_image)
+                                    LocalMediaType.VALUE_TYPE_VIDEO -> title = activity.getString(R.string.lately_video)
+                                    LocalMediaType.VALUE_TYPE_IMAGE -> title = activity.getString(R.string.lately_image)
                                     else -> {}
                                 }
                                 allImageFolder.firstImagePath = allImages[0].path
@@ -150,9 +148,6 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
     private fun sortFolder(imageFolders: List<LocalMediaFolder>) {
         // 文件夹按图片数量排序
         Collections.sort(imageFolders, java.util.Comparator { lhs, rhs ->
-            if (lhs.images == null || rhs.images == null) {
-                return@Comparator 0
-            }
             val lsize = lhs.imageNum
             val rsize = rhs.imageNum
             if (lsize == rsize) 0 else if (lsize < rsize) 1 else -1
@@ -162,8 +157,8 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
     private fun getImageFolder(path: String, uri: Uri, imageFolders: MutableList<LocalMediaFolder>): LocalMediaFolder {
         val imageFile = File(path)
         val folderFile = imageFile.parentFile
-        var name = folderFile.name
-        if (Album.functionOptions.chooseFolder != null && !Album.functionOptions.chooseFolder.isEmpty()) {
+        var name = folderFile?.name
+        if (!Album.functionOptions.chooseFolder.isEmpty()) {
             if (path.contains(Album.functionOptions.chooseFolder)) {
                 name = Album.functionOptions.chooseFolder
             }
@@ -175,7 +170,9 @@ class LocalMediaLoader(private val activity: FragmentActivity, @com.easy.album.a
         }
         val newFolder = LocalMediaFolder()
         newFolder.name = name
-        newFolder.path = folderFile.absolutePath
+        if (folderFile != null) {
+            newFolder.path = folderFile.absolutePath
+        }
         newFolder.firstImagePath = path
         newFolder.firstImageUri = uri
         imageFolders.add(newFolder)
