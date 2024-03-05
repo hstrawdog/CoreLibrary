@@ -6,7 +6,7 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
-import com.easy.core.permission.PermissionsUtils
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
@@ -21,8 +21,8 @@ import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.crash.ThrowIndexActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity
-import com.easy.example.ui.customize.RecProgressActivity
 import com.easy.example.ui.dialog.TestDialogActivity
+import com.easy.example.ui.file.DownLoadActivity
 import com.easy.example.ui.file.FileIndexActivity
 import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity
@@ -58,7 +58,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
         LogUtils.dInfo("MainActivity    initData")
 
 
-        open(RecProgressActivity::class.java)
+        open(DownLoadActivity::class.java)
+//        open(RecProgressActivity::class.java)
 //        open(ComposeIndexActivity::class.java)
 
 //        startService(Intent(this, KillAppServers::class.java))
@@ -91,7 +92,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //                open(Camera2Activity::class.java)
 //            }
 //        }
-        PermissionsUtils.requestStorage({
+        SysPermissionsUtils.requestStorage({
 //            if (it) {
 //                open(ProgressBarViewBuilderActivity::class.java)
 //                open(VideoViewActivity::class.java)

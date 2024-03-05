@@ -72,7 +72,6 @@ object SaveBitmapUtils {
      */
     @JvmStatic
     fun saveBitmap2ExternalPrivate(bitmap: Bitmap?, relativePath: String = "", fileName: String): String {
-
         if (bitmap == null) {
             return ""
         }
@@ -85,8 +84,11 @@ object SaveBitmapUtils {
             FileUtils.saveBitmap(bitmap, path)
             return path
         } else {
-            val path =
+            val path = if (relativePath.isNotNull()) {
                 FileUtils.getStorageDirectory() + File.separator + relativePath + File.separator + fileName
+            } else {
+                FileUtils.getStorageDirectory() + File.separator + fileName
+            }
             FileUtils.saveBitmap(bitmap, path)
             // 发送至相册
             MediaStore.Images.Media.insertImage(CoreConfig.applicationContext.contentResolver, path, File(path).name, null)

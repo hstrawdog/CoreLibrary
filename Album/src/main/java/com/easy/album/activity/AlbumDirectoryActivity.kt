@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easy.album.Adapter.AlbumDirectoryAdapter
 import com.easy.album.AppManager
 import com.easy.album.R
-import com.easy.album.annotation.LocalMediaType
 import com.easy.album.common.Album
 import com.easy.album.common.FunctionKey
 import com.easy.album.common.LocalMediaLoader
@@ -30,13 +29,12 @@ import com.easy.album.common.SelectOptions
 import com.easy.album.customize.FilterImageView
 import com.easy.album.databinding.ActivityAlbumBinding
 import com.easy.album.decoration.RecycleViewDivider
-import com.easy.album.entity.LocalMedia
 import com.easy.album.entity.LocalMediaFolder
 import com.easy.album.utils.AlbumFileUtils
 import com.easy.album.utils.AlbumUtils
 import com.easy.core.permission.IPermissionsHas
 import com.easy.core.permission.PermissionsResult
-import com.easy.core.permission.PermissionsUtils
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.utils.file.FileUtils
 import java.io.File
 
@@ -126,7 +124,7 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
 
     private fun startUpCamera() {
         // 启动相机拍照,先判断手机是否有拍照权限
-        PermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage) {
+        SysPermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage) {
             if (it) {
                 startOpenCamera()
             } else {
@@ -164,7 +162,7 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
 
-        PermissionsUtils.requestStorage(object  : PermissionsResult{
+        SysPermissionsUtils.requestStorage(object  : PermissionsResult{
             override fun onPermissionsResult(status: Boolean) {
                 if (status) {
                     initData()

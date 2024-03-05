@@ -7,8 +7,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.easy.core.permission.PermissionsResult
-import com.easy.core.permission.PermissionsUtils
-import com.easy.core.ui.base.BaseActivity
+import com.easy.core.permission.SysPermissionsUtils
 
 /**
  *  打开指定的界面
@@ -34,7 +33,7 @@ fun BaseActivity.open(cls: Class<*>,
  * @param result ActivityResultCallback<Bitmap>
  */
 fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap?>) {
-    PermissionsUtils.requestCamera(  object : PermissionsResult {
+    SysPermissionsUtils.requestCamera(  object : PermissionsResult {
         override fun onPermissionsResult(status: Boolean) {
             registerForActivityResult(ActivityResultContracts.TakePicturePreview(), result).launch(null)
         }

@@ -2,7 +2,26 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="DimensCompat">
+        <State />
+      </entry>
       <entry key="app">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_Fold_API_29.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-04T07:33:26.249562Z" />
+        </State>
+      </entry>
+      <entry key="dimenscompat">
         <State />
       </entry>
     </value>

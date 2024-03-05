@@ -1,5 +1,6 @@
 package com.easy.example.ui.file
 
+import android.os.Build
 import android.widget.Button
 import android.widget.TextView
 import com.easy.core.ui.base.BaseViewBindingActivity
@@ -27,7 +28,6 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
     override fun initView() {
 
-
         findViewById<Button>(R.id.button61).setOnClickListener {
             val url = "https://media.w3.org/2010/05/sintel/trailer.mp4"
             val path = FileUtils.getCacheDir(this@DownLoadActivity) + "/"
@@ -39,15 +39,13 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
                     override fun loading(progress: Float) {
                         LogUtils.e("onProgress " + progress)
-                        findViewById<TextView>(R.id.textView30).setText(
-                            "当前进度:         " + (progress * 100).toString())
+                        findViewById<TextView>(R.id.textView30).setText("当前进度:         " + (progress * 100).toString())
                     }
 
                     override fun complete(filePath: String?) {
                         LogUtils.e("complete")
                         findViewById<TextView>(R.id.textView30).setText("下载完成 :  ${filePath}")
-                        videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(activity,
-                            File(path + "/trailer.mp4"))
+                        videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(activity, File(path + "/trailer.mp4"))
 
                     }
 
@@ -71,13 +69,18 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
                     override fun loading(progress: Float) {
                         LogUtils.e("onProgress " + progress)
-                        findViewById<TextView>(R.id.textView36).setText(
-                            "当前进度:         " + (progress * 100).toString())
+                        findViewById<TextView>(R.id.textView36).setText("当前进度:         " + (progress * 100).toString())
                     }
 
                     override fun complete(filePath: String?) {
                         LogUtils.e("complete")
                         findViewById<TextView>(R.id.textView36).setText("下载完成 :  ${filePath}")
+                        filePath?.let { it1 ->
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                FileUtils.copyFileToDownloadDir(activity, it1, null)
+                            } else {
+                            }
+                        }
 
                     }
 
@@ -90,29 +93,31 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
         }
 
         var apkPath =
-            "https://36dc9d746160f66738522d22ba9bf5ff.dlied1.cdntips.net/imtt2.dd.easy.com/sjy.00009/sjy.00004/16891/apk/EE6A5A2A1334E9234F7D9112DBA33A2D.apk?mkey=648c38e1da0524f3&f=24c5&fsname=com.sww.asp_5.4.9_89.apk&cip=218.5.2.6&proto=https"
+            "https://978b5bbe091e5b4cd0ca40c281b27ab8.dlied1.cdntips.net/imtt2.dd.qq.com/sjy.00009/sjy.00004/16891/apk/C0A06F33B61D42BEAD581A78B7A3316C.apk?mkey=lego_ztc&f=00&sche_type=7&fsname=com.sww.aspcommon_1.0.0.apk&cip=36.251.40.32&proto=https"
         var fileName = "test.apk"
         binding.button69.setOnClickListener {
             okhttpCall?.cancel()
             okhttpCall = OkHttp.newHttpCompat()
-                .downloadFile(apkPath, 0, fileName, FileUtils.getCacheDir(),
-                    object : DownloadListener {
-                        override fun start(max: Long) {
-                            binding.textView37.text = "start   $max"
-                        }
+                .downloadFile(apkPath, 0, fileName, FileUtils.getCacheDir(), object : DownloadListener {
+                    override fun start(max: Long) {
+                        binding.textView37.text = "start   $max"
+                    }
 
-                        override fun loading(progress: Float) {
-                            binding.textView37.text = "loading    ${progress * 100}"
-                        }
+                    override fun loading(progress: Float) {
+                        binding.textView37.text = "loading    ${progress * 100}"
+                    }
 
-                        override fun complete(filePath: String?) {
-                            binding.textView37.text = "complete     $filePath"
-                        }
+                    override fun complete(filePath: String?) {
+                        binding.textView37.text = "complete     $filePath"
+                        // 下载完成之后 复制到指定目录中
 
-                        override fun fail(code: Int, e: java.lang.Exception?) {
-                            binding.textView37.text = "fail $code       ${e.toString()}"
-                        }
-                    })
+
+                    }
+
+                    override fun fail(code: Int, e: java.lang.Exception?) {
+                        binding.textView37.text = "fail $code       ${e.toString()}"
+                    }
+                })
         }
         binding.button70.setOnClickListener {
             binding.textView37.text = "取消下载"
@@ -123,30 +128,32 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
             val file = File(FileUtils.getCacheDir() + File.separator + fileName)
             okhttpCall?.cancel()
             okhttpCall = OkHttp.newHttpCompat()
-                .downloadFile(apkPath, file.length(), fileName, FileUtils.getCacheDir(),
-                    object : DownloadListener {
-                        override fun start(max: Long) {
-                            binding.textView37.text = "start %=$max"
-                        }
+                .downloadFile(apkPath, file.length(), fileName, FileUtils.getCacheDir(), object : DownloadListener {
+                    override fun start(max: Long) {
+                        binding.textView37.text = "start %=$max"
+                    }
 
-                        override fun loading(progress: Float) {
-                            binding.textView37.text = "loading %=${progress * 100}"
+                    override fun loading(progress: Float) {
+                        binding.textView37.text = "loading %=${progress * 100}"
 
-                        }
+                    }
 
-                        override fun complete(filePath: String?) {
-                            binding.textView37.text = "complete %=$filePath"
+                    override fun complete(filePath: String?) {
+                        binding.textView37.text = "complete %=$filePath"
 
-                        }
+                    }
 
-                        override fun fail(code: Int, e: java.lang.Exception?) {
-                            binding.textView37.text = "fail %=${e.toString()}"
+                    override fun fail(code: Int, e: java.lang.Exception?) {
+                        binding.textView37.text = "fail %=${e.toString()}"
 
-                        }
-                    })
+                    }
+                })
 
         }
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        okhttpCall?.cancel()
+    }
 }

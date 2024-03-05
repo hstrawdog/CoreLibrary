@@ -249,7 +249,6 @@ object FileUtils {
         }
     }
 
-
     /**
      * 获取文件夹大小
      * @param file
@@ -515,7 +514,7 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun copyFileToDownloadDir(context: Context, oldPath: String, targetDirName: String): Uri? {
+    fun copyFileToDownloadDir(context: Context, oldPath: String, targetDirName: String?): Uri? {
         try {
             val oldFile = File(oldPath)
             //设置目标文件的信息
@@ -524,7 +523,11 @@ object FileUtils {
             values.put(MediaStore.Files.FileColumns.DISPLAY_NAME, oldFile.name)
             values.put(MediaStore.Files.FileColumns.TITLE, oldFile.name)
             values.put(MediaStore.Files.FileColumns.MIME_TYPE, oldPath.getMimeType())
-            val relativePath = Environment.DIRECTORY_DOWNLOADS + File.separator + targetDirName
+            val relativePath = if (targetDirName.isNullOrEmpty()) {
+                Environment.DIRECTORY_DOWNLOADS
+            } else {
+                Environment.DIRECTORY_DOWNLOADS + File.separator + targetDirName
+            }
             values.put(MediaStore.Images.Media.RELATIVE_PATH, relativePath)
             val downloadUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
             val resolver = context.contentResolver
@@ -947,7 +950,6 @@ object FileUtils {
 
 //    ----------------------------------------------------------
 
-
     /**
      * KB与Byte的倍数
      */
@@ -998,7 +1000,9 @@ object FileUtils {
             var tempString: String? = null
             var line = 1
             // 一次读入一行，直到读入null为文件结束
-            while (reader.readLine().also { tempString = it } != null) {
+            while (reader.readLine()
+                    .also { tempString = it } != null
+            ) {
                 // 显示行号
                 println("line?????????????????????????????????? $line: $tempString")
                 val content = tempString
@@ -1301,7 +1305,9 @@ object FileUtils {
             val out = FileOutputStream(destFile)
             val bytes = ByteArray(1024)
             var c: Int
-            while (`in`.read(bytes).also { c = it } != -1) {
+            while (`in`.read(bytes)
+                    .also { c = it } != -1
+            ) {
                 out.write(bytes, 0, c)
             }
             `in`.close()
@@ -1337,7 +1343,9 @@ object FileUtils {
                     val output = FileOutputStream(newPath + "/" + temp.name)
                     val b = ByteArray(1024 * 5)
                     var len: Int
-                    while (input.read(b).also { len = it } != -1) {
+                    while (input.read(b)
+                            .also { len = it } != -1
+                    ) {
                         output.write(b, 0, len)
                     }
                     output.flush()
@@ -1492,7 +1500,9 @@ object FileUtils {
         try {
             val data = ByteArray(1024)
             var len: Int
-            while (from.read(data).also { len = it } > -1) {
+            while (from.read(data)
+                    .also { len = it } > -1
+            ) {
                 fos.write(data, 0, len)
                 totalBytes += len.toLong()
             }
@@ -1512,7 +1522,9 @@ object FileUtils {
             val outputStream: OutputStream = FileOutputStream(File(filePath), false)
             var len: Int
             val buffer = ByteArray(1024)
-            while (inputStream.read(buffer).also { len = it } != -1) {
+            while (inputStream.read(buffer)
+                    .also { len = it } != -1
+            ) {
                 outputStream.write(buffer, 0, len)
             }
             outputStream.flush()
@@ -1654,7 +1666,9 @@ object FileUtils {
             }
             val reader = BufferedReader(InputStreamReader(`in`))
             var line = ""
-            while (reader.readLine().also { line = it } != null) {
+            while (reader.readLine()
+                    .also { line = it } != null
+            ) {
                 if (line.length > 0 && line.startsWith("http://")) {
                     //replce 这行的内容
 //                    RxLogTool.d("ts替换", line + "  replce  " + pathList.get(num).getAbsolutePath());
@@ -1727,7 +1741,10 @@ object FileUtils {
             if (!subFile[iFileLength].isDirectory) {
                 val filename = subFile[iFileLength].name
                 // 判断是否为suffix结尾
-                if (filename.trim { it <= ' ' }.toLowerCase().endsWith(suffix!!)) {
+                if (filename.trim { it <= ' ' }
+                        .toLowerCase()
+                        .endsWith(suffix!!)
+                ) {
                     vecFile.add(filename)
                 }
             }
@@ -2279,7 +2296,9 @@ object FileUtils {
         val list: MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
-            if (file.name.toUpperCase().endsWith(suffix.toUpperCase())) {
+            if (file.name.toUpperCase()
+                    .endsWith(suffix.toUpperCase())
+            ) {
                 list.add(file)
             }
         }
@@ -2317,7 +2336,9 @@ object FileUtils {
         val list: MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
-            if (file.name.toUpperCase().endsWith(suffix.toUpperCase())) {
+            if (file.name.toUpperCase()
+                    .endsWith(suffix.toUpperCase())
+            ) {
                 list.add(file)
             }
             if (file.isDirectory) {
@@ -2474,7 +2495,9 @@ object FileUtils {
             os = BufferedOutputStream(FileOutputStream(file, append))
             val data = ByteArray(KB)
             var len: Int
-            while (`is`.read(data, 0, KB).also { len = it } != -1) {
+            while (`is`.read(data, 0, KB)
+                    .also { len = it } != -1
+            ) {
                 os.write(data, 0, len)
             }
             true
@@ -2589,7 +2612,9 @@ object FileUtils {
             } else {
                 BufferedReader(InputStreamReader(FileInputStream(file), charsetName))
             }
-            while (reader.readLine().also { line = it } != null) {
+            while (reader.readLine()
+                    .also { line = it } != null
+            ) {
                 if (curLine > end) {
                     break
                 }
@@ -2640,11 +2665,15 @@ object FileUtils {
                 BufferedReader(InputStreamReader(FileInputStream(file), charsetName))
             }
             var line: String?
-            while (reader.readLine().also { line = it } != null) {
-                sb.append(line).append("\r\n") // windows系统换行为\r\n，Linux为\n
+            while (reader.readLine()
+                    .also { line = it } != null
+            ) {
+                sb.append(line)
+                    .append("\r\n") // windows系统换行为\r\n，Linux为\n
             }
             // 要去除最后的换行符
-            sb.delete(sb.length - 2, sb.length).toString()
+            sb.delete(sb.length - 2, sb.length)
+                .toString()
         } catch (e: IOException) {
             e.printStackTrace()
             null
@@ -2744,7 +2773,9 @@ object FileUtils {
             `is` = BufferedInputStream(FileInputStream(file))
             val buffer = ByteArray(KB)
             var readChars: Int
-            while (`is`.read(buffer, 0, KB).also { readChars = it } != -1) {
+            while (`is`.read(buffer, 0, KB)
+                    .also { readChars = it } != -1
+            ) {
                 for (i in 0 until readChars) {
                     if (buffer[i].equals('\n')) {
                         ++count
@@ -3015,10 +3046,12 @@ object FileUtils {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 val docId = DocumentsContract.getDocumentId(uri)
-                val split = docId.split(":").toTypedArray()
+                val split = docId.split(":")
+                    .toTypedArray()
                 val type = split[0]
                 if ("primary".equals(type, ignoreCase = true)) {
-                    return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+                    return Environment.getExternalStorageDirectory()
+                        .toString() + "/" + split[1]
                 }
             } else if (isDownloadsDocument(uri)) {
                 val id = DocumentsContract.getDocumentId(uri)
@@ -3027,7 +3060,8 @@ object FileUtils {
                 return getDataColumn(context, contentUri, null, null)
             } else if (isMediaDocument(uri)) {
                 val docId = DocumentsContract.getDocumentId(uri)
-                val split = docId.split(":").toTypedArray()
+                val split = docId.split(":")
+                    .toTypedArray()
                 val type = split[0]
                 var contentUri: Uri? = null
                 if ("image" == type) {
@@ -3094,8 +3128,7 @@ object FileUtils {
         val column = MediaStore.Images.Media.DATA
         val projection = arrayOf(column)
         try {
-            cursor =
-                context.contentResolver.query(uri!!, projection, selection, selectionArgs, null)
+            cursor = context.contentResolver.query(uri!!, projection, selection, selectionArgs, null)
             if (cursor != null && cursor.moveToFirst()) {
                 val index = cursor.getColumnIndexOrThrow(column)
                 return cursor.getString(index)
@@ -3135,7 +3168,9 @@ object FileUtils {
             fis = FileInputStream(filePath)
             val buffer = ByteArray(1024 * 100)
             var count = 0
-            while (fis.read(buffer).also { count = it } != -1) {
+            while (fis.read(buffer)
+                    .also { count = it } != -1
+            ) {
                 bos.write(buffer, 0, count)
             }
             fis.close()
@@ -3154,7 +3189,9 @@ object FileUtils {
             val input = FileInputStream(File(filePath))
             val output = FileOutputStream(path + File.separator + exportDBName)
             var length: Int
-            while (input.read(buffer).also { length = it } > 0) {
+            while (input.read(buffer)
+                    .also { length = it } > 0
+            ) {
                 output.write(buffer, 0, length)
             }
             output.flush()

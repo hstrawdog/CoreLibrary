@@ -7,7 +7,7 @@ import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.easy.core.CoreConfig
 import com.easy.core.kt.launch
-import com.easy.core.permission.PermissionsUtils
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseViewModel
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.utils.log.LogUtils.e
@@ -76,7 +76,7 @@ class WeatherViewModel : BaseViewModel() {
         mLocationOption!!.isNeedAddress = true
         //给定位客户端对象设置定位参数
         mLocationClient!!.setLocationOption(mLocationOption)
-        PermissionsUtils.requestLocal({ status ->
+        SysPermissionsUtils.requestLocal({ status ->
             if (status) {
                 startLocation()
             }

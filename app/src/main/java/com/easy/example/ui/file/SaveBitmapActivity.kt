@@ -2,7 +2,7 @@ package com.easy.example.ui.file
 
 import android.os.Build
 import com.easy.core.glide.ImageLoadUtils
-import com.easy.core.permission.PermissionsUtils
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.file.FileUtils
@@ -22,7 +22,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
 
     override fun initView() {
         binding.textView28.setOnClickListener {
-            PermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage({
                 if (it) {
                     path =
                         SaveBitmapUtils.saveBitmap2AppCache(BitmapUtils.createBitmapFromView2(binding.tvTitle), "", FileUtils.getDefFileName(".png"))
@@ -34,7 +34,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
         //保存在相册
         binding.textView29.setOnClickListener {
-            PermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage({
                 if (it) {
                     binding.tvTitle.text = binding.textView29.text
                     SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), fileName = FileUtils.getDefFileName(".png"))
@@ -48,10 +48,10 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
         // 保存在相册 指定目录中
         binding.textView32.setOnClickListener {
-            PermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage({
                 if (it) {
                     binding.tvTitle.text = binding.textView32.text
-                    SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), "a", fileName = FileUtils.getDefFileName(".png"))
+                    SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), "subdirectory", fileName = FileUtils.getDefFileName(".png"))
                         ?.let {
                             path = it.path.toString()
                             binding.textView40.setText("$path")
@@ -63,7 +63,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
 
         binding.textView34.setOnClickListener {
-            PermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage({
                 if (it) {
                     binding.tvTitle.text = binding.textView34.text
                     // 保存到默认的文件夹

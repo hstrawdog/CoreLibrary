@@ -7,7 +7,7 @@ import android.os.StrictMode
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.Toast
-import com.easy.core.permission.PermissionsUtils
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.file.FileUtils
@@ -31,7 +31,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
         builder.detectFileUriExposure()
 
         binding.button80.setOnClickListener {
-            PermissionsUtils.requestStorage ({
+            SysPermissionsUtils.requestStorage ({
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2AppCache(
                         BitmapUtils.createBitmapFromView2(binding.button80),
@@ -44,7 +44,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
             })
         }
         binding.button81.setOnClickListener {
-            PermissionsUtils.requestStorage ({
+            SysPermissionsUtils.requestStorage ({
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2ExternalPrivate(
                         BitmapUtils.createBitmapFromView2(binding.button81),
@@ -57,7 +57,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
             })
         }
         binding.button82.setOnClickListener {
-            PermissionsUtils.requestStorage( {
+            SysPermissionsUtils.requestStorage( {
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2Pictures(
                         BitmapUtils.createBitmapFromView2(binding.button82),

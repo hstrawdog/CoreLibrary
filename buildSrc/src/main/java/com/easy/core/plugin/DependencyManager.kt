@@ -336,7 +336,7 @@ object Luban {
  *  https://github.com/huangqiqiang/IDimensCompat
  */
 object DimensCompat {
-    const val iDimensCompat = "com.github.huangqiqiang:IDimensCompat:1.0.1"
+    const val iDimensCompat = "com.github.hstrawdog:IDimensCompat:1.0.1"
 }
 
 /**
@@ -344,7 +344,7 @@ object DimensCompat {
  *  https://github.com/huangqiqiang/AlbumApp/tags
  */
 object Album {
-    const val iHAlbum = "com.github.huangqiqiang:AlbumApp:1.1.33"
+    const val iHAlbum = "com.github.hstrawdog:AlbumApp:1.1.33"
 }
 
 

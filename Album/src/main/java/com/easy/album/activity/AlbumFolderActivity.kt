@@ -20,11 +20,9 @@ import com.easy.album.common.SelectOptions
 import com.easy.album.databinding.ActivityAlbumFolderBinding
 import com.easy.album.decoration.GridSpacingItemDecoration
 import com.easy.album.decoration.RecycleViewDivider
-import com.easy.album.entity.LocalMedia
 import com.easy.album.entity.LocalMediaFolder
 import com.easy.album.utils.AlbumUtils
-import com.easy.core.permission.PermissionsResult
-import com.easy.core.permission.PermissionsUtils
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.utils.ToastUtils
 
 /**
@@ -111,7 +109,7 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
     private fun initViews() {
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
-        PermissionsUtils.requestStorage({ status ->
+        SysPermissionsUtils.requestStorage({ status ->
             if (status) {
                 initData()
             } else {

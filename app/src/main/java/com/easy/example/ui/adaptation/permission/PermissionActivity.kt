@@ -1,7 +1,7 @@
 package com.easy.example.ui.adaptation.permission
 
 import com.easy.core.permission.IPermissionsHas
-import com.easy.core.permission.PermissionsUtils
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseDataBindingActivity
 import com.easy.core.ui.base.open
 import com.easy.core.utils.ToastUtils.showToast
@@ -23,7 +23,7 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
 
     override fun initView() {
         binding.button7.setOnClickListener {
-            PermissionsUtils.requestCamera({ status ->
+            SysPermissionsUtils.requestCamera({ status ->
                 if (status) {
                     showToast("拥有摄像头权限")
                 } else {
@@ -32,7 +32,7 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
             })
         }
         binding.button8.setOnClickListener {
-            PermissionsUtils.requestStorage({ status ->
+            SysPermissionsUtils.requestStorage({ status ->
                 if (status) {
                     showToast("拥有文件读写权限")
                 } else {
@@ -45,7 +45,7 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
             open(Permission4FragmentActivity::class.java)
         }
 
-        PermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage, IPermissionsHas.bluetooth) {
+        SysPermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage, IPermissionsHas.bluetooth) {
 
         }
 
