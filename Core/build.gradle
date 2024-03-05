@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.library'
+    alias(libs.plugins.androidLibrary)
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'maven-publish'
@@ -16,8 +16,8 @@ android {
         //开启 Compose 支持
 //        compose true
     }
-    compileSdkVersion BuildVersionConfig.compileSdkVersion
-    buildToolsVersion BuildVersionConfig.buildToolsVersion
+    compileSdk BuildVersionConfig.compileSdkVersion
+//    buildToolsVersion BuildVersionConfig.buildToolsVersion
     defaultConfig {
         minSdkVersion BuildVersionConfig.minSdkVersion
         targetSdkVersion BuildVersionConfig.targetSdkVersion
@@ -47,6 +47,7 @@ android {
 dependencies {
     //版本要与gradle版本一致
 //    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
+    api project(':DimensCompat')
 
     // Appcompat   包含 core
     api Appcompat.appcompat
@@ -68,7 +69,7 @@ dependencies {
     api Lifecycle.lifecycleRunTimeKtx
 
     // 屏幕适配
-    api DimensCompat.iDimensCompat
+//    api DimensCompat.iDimensCompat
 
     // gson解析
     api Gson.gson
