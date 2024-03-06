@@ -2,8 +2,7 @@ import com.easy.core.plugin.BuildVersionConfig
 
 plugins {
     id 'com.android.application'
-        alias(libs.plugins.jetbrainsKotlinAndroid)
-
+    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
 }

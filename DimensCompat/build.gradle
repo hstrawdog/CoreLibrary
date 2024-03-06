@@ -2,7 +2,8 @@ import com.easy.core.plugin.BuildVersionConfig
 
 plugins {
     alias(libs.plugins.androidLibrary)
-
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
     id 'maven-publish'
 }
 
@@ -43,7 +44,7 @@ afterEvaluate {
             //发布release版本
             release(MavenPublication) {
                 // Applies the component for the release build variant.
-//                from components.release
+              from components.release
                 //groupId通常是自己的gitee或者GitHub的账户地址
                 groupId = group
                 //artifactId通常是指待发布项目的名称，也就是别名
