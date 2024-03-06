@@ -1,3 +1,5 @@
+import com.easy.core.plugin.BuildVersionConfig
+
 plugins {
     alias(libs.plugins.androidLibrary)
 
@@ -6,9 +8,10 @@ plugins {
 
 android {
     compileSdk 31
+    namespace 'com.easy.dimenscompat'
 
     defaultConfig {
-        minSdk 24
+        minSdk BuildVersionConfig.minSdkVersion
         targetSdk 31
         versionCode 1
         versionName "1.0"
