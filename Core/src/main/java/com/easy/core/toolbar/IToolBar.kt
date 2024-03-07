@@ -114,7 +114,6 @@ interface IToolBar {
                 return field
             }
 
-        var activity: WeakReference<Activity>? = null
 
         /**
          * 是否显示 状态栏 背景
@@ -126,6 +125,9 @@ interface IToolBar {
          */
         var showToolBar = true
 
+        /**
+         *  是否显示底部很小
+         */
         var showLine = true
 
         /**
@@ -148,7 +150,8 @@ interface IToolBar {
                 setShowBar(showToolBar)
                 showLine(showLine)
                 setStatusColor(statusBarColor)
-                createToolBar(activity?.get())
+//                setToolBarColor()
+                createToolBar(CoreConfig.get().currActivity)
             }
             return iCreateToolbar
         }

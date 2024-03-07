@@ -137,6 +137,21 @@ class CoreConfig private constructor() {
     var defImg = R.drawable.ic_def_img
 
     /**
+     *  默认配置使用  菊花加载
+     */
+    var defLoadingImage = R.mipmap.ic_loading
+
+    /**
+     *    git加载动画
+     */
+    var gifLoading = ""
+
+    /**
+     *  是否显示gif
+     */
+    var isShowGif = false
+
+    /**
      * 是否跳转到设置界面 设置权限
      */
     var goSettingPermission = true

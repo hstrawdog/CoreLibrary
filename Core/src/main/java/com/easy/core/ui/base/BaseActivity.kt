@@ -95,14 +95,14 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
      *  初始化
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        LogUtils.e4Debug(" BaseActivity    onCreate 1")
+        LogUtils.e4Debug(" ${this}     onCreate  start")
         initAnimEnter()
         super.onCreate(savedInstanceState)
         activity = this
         initConfig()
         setContentView(iCreateRootView.buildContentView(this))
         initView()
-        LogUtils.e4Debug(" BaseActivity    onCreate 2")
+        LogUtils.e4Debug(" ${this}     onCreate end")
     }
 
     /**

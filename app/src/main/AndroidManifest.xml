@@ -440,6 +440,10 @@
         <activity
             android:name=".ui.bar.ToolBarActivity"
             android:label="标题/状态栏设置" />
+        <activity
+            android:name=".ui.bar.DefToolBarActivity"
+            android:label="标题/状态栏设置" />
+
         <activity android:name=".ui.view.page.IFragmentActivityBuilder" />
         <activity
             android:name=".ui.recycle.LoadMoreActivity"

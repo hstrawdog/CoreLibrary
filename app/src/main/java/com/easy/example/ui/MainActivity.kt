@@ -18,6 +18,7 @@ import com.easy.example.demo.DemoIndexActivity
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity
 import com.easy.example.ui.adaptation.permission.PermissionActivity
+import com.easy.example.ui.bar.DefToolBarActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.crash.ThrowIndexActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity
@@ -57,8 +58,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
+        open(DefToolBarActivity::class.java)
+//        loadingView.show()
 
-        open(DownLoadActivity::class.java)
+//        open(DownLoadActivity::class.java)
 //        open(RecProgressActivity::class.java)
 //        open(ComposeIndexActivity::class.java)
 

@@ -178,7 +178,6 @@ open class RootViewImpl {
      */
     fun setActivity(activity: Activity) {
         this.activity = WeakReference(activity)
-        iToolBarBuilder.activity = this.activity
     }
 
 

@@ -1,0 +1,11 @@
+<!-- res/drawable/loading_spinner.xml -->
+<rotate
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@mipmap/ic_loading"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:fromDegrees="0"
+    android:toDegrees="360"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:repeatCount="infinite"
+    android:duration="1000" />

@@ -133,9 +133,9 @@ class DefToolBar : BaseToolBar() {
     /**
      * 设置背景颜色 需要在view创建完成
      *
-     * @param resid
+     * @param resid   正常 应该传入 颜色资源 id
      */
-    fun setToolBarBg(@DrawableRes resid: Int): DefToolBar {
+    fun setToolBarBg( resid: Int): DefToolBar {
         defToolBarColor = resid
         if (toolBarBg != null) {
             toolBarBg!!.setImageResource(resid)
