@@ -59,7 +59,7 @@ interface IToolBar {
     fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View
 
     /**
-     * bar 的颜色
+     * 整个bar 的颜色
      *
      * @param colorId 颜色id
      */

@@ -1,6 +1,7 @@
 package com.easy.core.toolbar
 
 import android.app.Activity
+import android.graphics.Color
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -29,8 +30,13 @@ import com.easy.core.widget.FilterImageView
  */
 class DefToolBar : BaseToolBar() {
 
+    /**
+     *  标题栏 背景
+     */
     override var toolBarBg: ImageView? = null
+
     private val mDefTitleColor = CoreConfig.get().defTitleColor
+
 
     override fun iniToolBar(activity: Activity, viewGroup: ViewGroup?): View {
         val toolbar = LayoutInflater.from(activity.baseContext).inflate(
@@ -38,7 +44,7 @@ class DefToolBar : BaseToolBar() {
         ) as Toolbar
         toolbar.findViewById<View>(R.id.iv_bar_back).setOnClickListener { activity.onBackPressed() }
         toolBarBg = toolbar.findViewById(R.id.iv_toolBar_Bg)
-        toolBarBg?.setBackgroundResource(defToolBarColor)
+        toolBarBg?.setImageResource(defToolBarColor)
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).text = activity.title
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).setTextColor(
             ContextCompat.getColor(toolbar.context, mDefTitleColor)
@@ -112,16 +118,12 @@ class DefToolBar : BaseToolBar() {
         }
     }
 
-    override fun setToolBarColor(color: Int) {
-        toolBarBg?.setImageResource(color)
-        defToolBarColor = color
-        if (null != statusBar) {
-            statusBar!!.setBackgroundResource(color)
-        } else {
-            defStatusColor = color
-        }
-    }
 
+
+    /**
+     *   设置 标题
+     * @param title CharSequence?
+     */
     override fun setToolbarTitle(title: CharSequence?) {
         title?.let {
             toolbarTitle?.text = title
@@ -129,7 +131,17 @@ class DefToolBar : BaseToolBar() {
 
     }
 
+    /**
+     *  配置 整个 bar的颜色
+     * @param color Int
+     */
+    override fun setToolBarColor(color: Int) {
+        // 设置  顶部
+        setStatusColor(color)
+        // 标题栏
+        setToolBarBg(color)
 
+    }
     /**
      * 设置背景颜色 需要在view创建完成
      *
@@ -157,11 +169,11 @@ class DefToolBar : BaseToolBar() {
     /**
      * 设置标题颜色
      *
-     * @param defTitleColor
+     * @param titleColor
      * @return
      */
-    fun setDefTitleColor(defTitleColor: Int): DefToolBar {
-        toolbarTitle!!.setTextColor(ContextCompat.getColor(toolbarTitle!!.context, defTitleColor))
+    fun setDefTitleColor(titleColor: Int): DefToolBar {
+        toolbarTitle!!.setTextColor(ContextCompat.getColor(toolbarTitle!!.context, titleColor))
         return this
     }
 

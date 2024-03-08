@@ -21,22 +21,23 @@ class DefToolBarActivity : BaseActivity() {
     override fun initConfig() {
         super.initConfig()
 
-        CoreConfig.get().defToolBarColor=R.color.red
+//        CoreConfig.get().defToolBarColor=R.color.red
 
-        rootViewImpl.apply {
-            layoutMode = LayoutModel.LAYOUT_MODE_FRAME_LAYOUT
-            iToolBarBuilder.apply {
-                statusBarColor = R.color.transparent
-                showLine = false
-            }
-        }
+//        rootViewImpl.apply {
+//            layoutMode = LayoutModel.LAYOUT_MODE_FRAME_LAYOUT
+//            iToolBarBuilder.apply {
+//                showLine = false
+//            }
+//        }
 
     }
 
 
     override fun initView() {
 
-        (iToolBar as DefToolBar)?.setToolBarBg(R.color.transparent)
+//        (iToolBar as DefToolBar).setStatusColor(R.color.red)
+//        (iToolBar as DefToolBar).setToolBarBg(R.color.transparent)
+        (iToolBar as DefToolBar).setToolBarColor(R.color.transparent)
 
     }
 }

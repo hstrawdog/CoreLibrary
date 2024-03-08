@@ -41,19 +41,20 @@ abstract class BaseToolBar : IToolBar {
      * 状态栏背景颜色
      */
     @ColorRes
-    protected var defStatusColor = CoreConfig.get().defStatusColor
+//    protected var defStatusColor = CoreConfig.get().defStatusColor
+    protected var defStatusColor = R.color.red
 
     /**
      * 标题栏 颜色
      */
     @ColorRes
-    protected var defToolBarColor = CoreConfig.get().defToolBarColor
-
+//    protected var defToolBarColor = CoreConfig.get().defToolBarColor
+    protected var defToolBarColor = R.color.red
 
     /**
-     * 状态栏背景
+     *  顶部状态背景颜色  需要使用  setBackgroundResource    否者 会出现遮罩问题(华为 mate 50 )
      */
-    var statusBar: View? = null
+    var statusBarBgView: View? = null
         protected set
 
     /**
@@ -98,17 +99,13 @@ abstract class BaseToolBar : IToolBar {
     override fun createToolBar(activity: Activity?): BaseToolBar {
         this.activity = WeakReference(activity)
         val linearLayout = LinearLayout(activity)
-        linearLayout.layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        linearLayout.layoutParams =
+            LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         linearLayout.orientation = LinearLayout.VERTICAL
         if (isShowStatusBar) {
             initStatusBar(activity)
             val mStatusBarHeight = CoreConfig.get().statusBarHeight
-            linearLayout.addView(
-                statusBar,
-                LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight)
-            )
+            linearLayout.addView(statusBarBgView, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mStatusBarHeight))
         }
         val toolBar = activity?.let { iniToolBar(it, linearLayout) }
         if (isShowBar) {
@@ -116,9 +113,8 @@ abstract class BaseToolBar : IToolBar {
         }
         if (isShowLine) {
             viewLine = View(activity)
-            viewLine!!.layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(activity, 1f)
-            )
+            viewLine!!.layoutParams =
+                LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(activity, 1f))
             viewLine!!.setBackgroundResource(R.color.toolbar_line_bg)
             linearLayout.addView(viewLine)
         }
@@ -133,7 +129,7 @@ abstract class BaseToolBar : IToolBar {
      * @param statusBarColor
      */
     override fun setStatusColor(@ColorRes statusBarColor: Int): BaseToolBar {
-        statusBar?.setBackgroundResource(statusBarColor)
+        statusBarBgView?.setBackgroundResource(statusBarColor)
         defStatusColor = statusBarColor
         return this
     }
@@ -155,7 +151,7 @@ abstract class BaseToolBar : IToolBar {
      * @param alpha 0 -1
      */
     open fun initScroll(alpha: Float) {
-        statusBar?.alpha = alpha
+        statusBarBgView?.alpha = alpha
         viewLine?.alpha = alpha
     }
 
@@ -165,8 +161,8 @@ abstract class BaseToolBar : IToolBar {
      * @param activity
      */
     fun initStatusBar(activity: Activity?) {
-        statusBar = View(activity)
-        statusBar?.setBackgroundResource(defStatusColor)
+        statusBarBgView = View(activity)
+        statusBarBgView?.setBackgroundResource(defStatusColor)
     }
 
     /**
