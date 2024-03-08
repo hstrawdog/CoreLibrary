@@ -41,15 +41,13 @@ abstract class BaseToolBar : IToolBar {
      * 状态栏背景颜色
      */
     @ColorRes
-//    protected var defStatusColor = CoreConfig.get().defStatusColor
-    protected var defStatusColor = R.color.red
+    protected var defStatusColor = CoreConfig.get().defStatusColor
 
     /**
      * 标题栏 颜色
      */
     @ColorRes
-//    protected var defToolBarColor = CoreConfig.get().defToolBarColor
-    protected var defToolBarColor = R.color.red
+    protected var defToolBarColor = CoreConfig.get().defToolBarColor
 
     /**
      *  顶部状态背景颜色  需要使用  setBackgroundResource    否者 会出现遮罩问题(华为 mate 50 )

@@ -28,7 +28,7 @@ class PhotoDialog : BaseDialog(), View.OnClickListener {
          */
 
         @JvmStatic
-        fun getSelectPhotoDialog( maxSelectSize: Int = 9, photoDialogClick: AlbumPhotoCallBack?): PhotoDialog {
+        fun getSelectPhotoDialog(maxSelectSize: Int = 9, photoDialogClick: AlbumPhotoCallBack?): PhotoDialog {
             val photoDialog = PhotoDialog()
             photoDialog.setSelectSize(maxSelectSize)
             photoDialog.setPhotoDialogCallBack(photoDialogClick)
@@ -57,20 +57,21 @@ class PhotoDialog : BaseDialog(), View.OnClickListener {
     }
 
 
-
     override fun getGravity(): Int {
-        return  Gravity.BOTTOM
+        return Gravity.BOTTOM
 
     }
+
     override fun getDialogWeight(): Int {
         return ViewGroup.LayoutParams.MATCH_PARENT
 
     }
 
     override fun getDialogLayoutId(): Int {
-      return  R.layout.dialog_photo
+        return R.layout.dialog_photo
 
     }
+
     override fun initView() {
         rootView?.findViewById<View>(R.id.btn_taking_pictures)
             ?.setOnClickListener(this)
@@ -88,20 +89,14 @@ class PhotoDialog : BaseDialog(), View.OnClickListener {
                 .setSupportGif(isSupportGif)
                 .setIsSendAlbum(isSendAlbum)
                 .forResult(mPhotoDialogCallBack)
-            if (mPhotoDialogCallBack == null) {
-                dismiss()
-            }
         } else if (view.id == R.id.tv_album) {
             Album.from(com.easy.album.annotation.LocalMediaType.VALUE_TYPE_IMAGE)
                 .setMaxSelectNum(mSelectSize)
                 .setSupportGif(isSupportGif)
                 .forResult(mPhotoDialogCallBack)
-            if (mPhotoDialogCallBack == null) {
-                dismiss()
-            }
-        } else if (view.id == R.id.btn_cancel) {
-            dismiss()
         }
+        dismiss()
+
     }
 
 

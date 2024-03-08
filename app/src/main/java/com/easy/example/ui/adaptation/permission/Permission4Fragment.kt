@@ -47,4 +47,5 @@ class Permission4Fragment : BaseViewBindingFragment<ActivityPermissionBinding>()
         }
 
     }
+
 }
