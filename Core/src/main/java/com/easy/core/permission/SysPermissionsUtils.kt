@@ -22,11 +22,11 @@ object SysPermissionsUtils {
      * @param permissionsResult PermissionsResult
      */
     fun requestPermissions(vararg permissions: Array<String>, permissionsResult: PermissionsResult) {
-        var permission = arrayOf("")
+        var permissionArray = emptyArray<String>()
         for (permission in permissions) {
-            permission.plus(permission)
+            permissionArray=    permissionArray.plus(permission)
         }
-        FragmentProxy().requestPermissions(permission, permissionsResult)
+        FragmentProxy().requestPermissions(permissionArray, permissionsResult)
     }
 
     /**

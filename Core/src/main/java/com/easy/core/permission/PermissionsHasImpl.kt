@@ -8,7 +8,7 @@ import android.content.Context
  * @FileName :   PermissionsHasImpl
  * @Date : 2018/11/22 0022  上午 9:57
  * @Email :  qiqiang213@gmail.com
- * @Descrive : 判断是否拥有权限
+ * @Descrive : 统一的 判断是否拥有权限
  */
 class PermissionsHasImpl : IPermissionsHas {
     /**

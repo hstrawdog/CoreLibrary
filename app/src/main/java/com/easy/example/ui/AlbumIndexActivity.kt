@@ -111,7 +111,7 @@ class AlbumIndexActivity : BaseActivity() {
      * @param view
      */
     private fun openCamera(view: View) {
-        Album.from(com.easy.album.annotation.LocalMediaType.VALUE_TYPE_IMAGE)
+        Album.from(LocalMediaType.VALUE_TYPE_IMAGE)
             .setStartUpCamera(true)
             .forResult(call)
     }

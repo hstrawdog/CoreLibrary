@@ -58,7 +58,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
-        open(DefToolBarActivity::class.java)
+        open(AlbumIndexActivity::class.java)
+//        open(DefToolBarActivity::class.java)
 //        loadingView.show()
 
 //        open(DownLoadActivity::class.java)

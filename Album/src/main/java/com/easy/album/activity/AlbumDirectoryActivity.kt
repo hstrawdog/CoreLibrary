@@ -35,6 +35,7 @@ import com.easy.album.utils.AlbumUtils
 import com.easy.core.permission.IPermissionsHas
 import com.easy.core.permission.PermissionsResult
 import com.easy.core.permission.SysPermissionsUtils
+import com.easy.core.utils.ToastUtils
 import com.easy.core.utils.file.FileUtils
 import java.io.File
 
@@ -162,7 +163,7 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
 
-        SysPermissionsUtils.requestStorage(object  : PermissionsResult{
+        SysPermissionsUtils.requestStorage(object : PermissionsResult {
             override fun onPermissionsResult(status: Boolean) {
                 if (status) {
                     initData()
@@ -210,11 +211,11 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
 //           CoreConfig.get().application.packageName
 //            val authority = "$packageName.FileProvider"
             var imageUri = FileUtils.getFile2Uri(cameraPath)
-
-
             cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             startActivityForResult(cameraIntent, FunctionKey.REQUEST_CODE_REQUEST_CAMERA)
+        } else {
+            ToastUtils.showToast("没有可用的相机应用")
         }
     }
 
@@ -224,3 +225,5 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         startActivity(Intent(this, AlbumDetailActivity::class.java).putExtra(FunctionKey.KEY_FOLDER_NAME, folderName))
     }
 }
+
+

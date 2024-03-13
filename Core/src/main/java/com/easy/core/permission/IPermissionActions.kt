@@ -24,18 +24,24 @@ interface IPermissionActions {
          * @param permissions
          * @return
          */
-        @RequiresApi(Build.VERSION_CODES.M)
         fun hasPermission(context: Context?, vararg permissions: String?): Boolean {
             var has = permissions.isNotEmpty()
             if (has) {
                 for (permission in permissions) {
-                    val pre =
+                    var pre =
                         context?.checkSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
                     if (context != null) {
                         if (permission != null) {
-                            PermissionChecker.checkSelfPermission(context, permission)
-                            ContextCompat.checkSelfPermission(context, permission)
-                            context.checkSelfPermission(permission)
+                            if (ContextCompat.checkSelfPermission(context,permission)
+                                != PackageManager.PERMISSION_GRANTED){
+                                pre=false
+                            }else{
+                                pre= true
+                            }
+
+//                            PermissionChecker.checkSelfPermission(context, permission)
+//                            ContextCompat.checkSelfPermission(context, permission)
+//                            context.checkSelfPermission(permission)
                         }
                     }
                     has = has && pre

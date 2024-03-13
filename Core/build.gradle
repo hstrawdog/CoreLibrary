@@ -49,54 +49,76 @@ dependencies {
 //    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
     api project(':DimensCompat')
 
+//    api CoilKt.coilKt
+    api libs.coilKt
+
     // Appcompat   包含 core
-    api Appcompat.appcompat
-    api Appcompat.coreKtx
+//    api Appcompat.appcompat
+//    api Appcompat.coreKtx
+    api libs.appcompat.core
+    api libs.appcompat.coreKtx
 
     //  kotlin拓展包
-    api KTX.activityKtx
-    api KTX.fragmentKtx
+//    api KTX.activityKtx
+//    api KTX.fragmentKtx
+    api libs.activityKtx
+    api libs.fragmentKtx
 
     //  androidX 组件
-    api Components.constraintLayout
-    api Components.recyclerview
-    api Components.viewpager2
-    api Components.meteria
+//    api Components.constraintLayout
+//    api Components.recyclerview
+//    api Components.viewpager2
+//    api Components.meteria
+
+    api libs.constraintLayout
+    api libs.recyclerview
+    api libs.viewpager2
+    api libs.meteria
 
     // 生命周期
-    api Lifecycle.lifecycleViewModelKtx
-    api Lifecycle.lifecycleLivedataKtx
-    api Lifecycle.lifecycleRunTimeKtx
+//    api Lifecycle.lifecycleViewModelKtx
+//    api Lifecycle.lifecycleLivedataKtx
+//    api Lifecycle.lifecycleRunTimeKtx
+    api libs.lifecycleViewModelKtx
+    api libs.lifecycleLivedataKtx
+    api libs.lifecycleRunTimeKtx
+
 
     // 屏幕适配
 //    api DimensCompat.iDimensCompat
 
     // gson解析
-    api Gson.gson
+    api libs.gson
 
     // 压缩
-    api Luban.luban
-
+//    api Luban.luban
+    api libs.luban
     // 上拉加载
-    api BaseRecyclerViewAdapterHelper.baseRecyclerViewAdapterHelper
+//    api BaseRecyclerViewAdapterHelper.baseRecyclerViewAdapterHelper
+    api libs.baseRecyclerViewAdapterHelper
 
     // 下拉刷新
-    api UltraPtr.ultraPtr
-
+//    api UltraPtr.ultraPtr
+    api libs.ultraPtr
     // 图片加载
-    api Glide.glide
-    kapt Glide.glideCompiler
+//    api Glide.glide
+//    kapt Glide.glideCompiler
 
-    api CoilKt.coilKt
+    api libs.glide
+//    小型项目或者对性能要求不高的项目并不需要迁移至 ksp
+    kapt libs.glideCompiler
 
 
     // retrofit 请求
-    api Retrofit.retrofit
-    api Retrofit.converterGson
-    api Retrofit.loggingInterceptor
+    api libs.retrofit
+    api libs.converterGson
+    api libs.loggingInterceptor
+
+//    api Retrofit.retrofit
+//    api Retrofit.converterGson
+//    api Retrofit.loggingInterceptor
 
 }
-
 
 
 afterEvaluate {

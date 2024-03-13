@@ -25,9 +25,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':Core')
-    api PhotoView.library
-    api SubsamplingScaleImageView.core
 
+//    api PhotoView.library
+    api   libs.photoview.library
+
+//    api SubsamplingScaleImageView.core
+    api libs.subsamplingscaleimageview.core
 }
 
 afterEvaluate {

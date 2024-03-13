@@ -1,4 +1,3 @@
-
 [versions]
 jitpack = "1.3.34"
 agp = "7.0.2"
@@ -13,23 +12,410 @@ composeBom = "2023.08.00"
 appcompat = "1.6.1"
 material = "1.11.0"
 
+
+compileSdkVersion = "31"
+buildToolsVersion = "31.0.0"
+minSdkVersion = "23"
+targetSdkVersion = "31"
+runtimeVersion = "1.0.1"
+
+#网络请求
+retrofitVersion = "2.9.0"
+okhttpVersion = "4.9.3"
+ultraPtrVersion = "1.0.11"
+
+baseRecyclerViewAdapterHelperVersion = "3.0.14"
+
+lubanVersion = "1.1.8"
+
+glide_version = "4.12.0"
+
+
+arch_version = "2.1.0"
+activityKtx_version = "1.3.0"
+fragmentKtx_version = "1.3.6"
+
+appcompat_core_version = "1.6.1"
+appcompat_appcompat_version = "1.3.1"
+
+androidx_cardview_version = "1.0.0"
+androidx_viewpager2_version = "1.0.0"
+androidx_recyclerViewSelection_version = "1.0.0"
+androidx_swiperefreshlayout_version = "1.0.0"
+androidx_meteria_version = "1.3.0"
+androidx_recyclerview_version = "1.2.1"
+androidx_constraintLayout_version = "2.1.2"
+
+
+
+gson_version = "2.8.9"
+
+coil_version_version = "2.2.2"
+
+
+
+
+core_version = "1.6.1"
+work_version = "2.7.1"
+room_version = "2.2.5"
+hiltVersion = "2.44"
+hitViewModule = "1.0.0-alpha03"
+lifecycle_version = "2.4.0"
+datastore_version = "1.0.0"
+components_cardview_version = "1.0.0"
+components_viewpager2_version = "1.0.0"
+components_constraintlayout_version = "2.1.2"
+components_recyclerview_version = "1.2.1"
+components_recyclerviewselection_version = "1.1.0"
+components_swiperefreshlayout_version = "1.0.0"
+components_meteria_version = "1.3.0"
+compose_ui_version = "1.0.1"
+startup_version = "1.1.0"
+photoview_version = "1.4.1"
+subsamplingscaleimageview_version = "3.10.0"
+jsoup_jsoup_version = "1.14.1"
+jleakcanary_version = "2.8.1"
+
+
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+#KTX
+#Kotlin 拓展包
+activityKtx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx_version" }
+# Kotlin
+fragmentKtx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx_version" }
+
+
+# ViewModel
+lifecycleViewModelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle_version" }
+
+# ViewModel utilities for Compose
+lifecycle_viewModel_compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle_version" }
+
+# LiveData
+lifecycleLivedataKtx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle_version" }
+
+# 仅生命周期（没有 ViewModel 或 LiveData）
+lifecycleRunTimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle_version" }
+
+# ViewModel 的已保存状态模块
+lifecycle_viewmodel_savedstate = { group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "lifecycle_version" }
+
+# Annotation processor
+lifecycle_compiler = { group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "lifecycle_version" }
+
+# 或者 - 如果使用 Java8，请使用以下内容而不是生命周期编译器
+lifecycle_common_java8 = { group = "androidx.lifecycle", name = "lifecycle-common-java8", version.ref = "lifecycle_version" }
+
+# optional - helpers for implementing LifecycleOwner in a Service
+lifecycle_service = { group = "androidx.lifecycle", name = "lifecycle-service", version.ref = "lifecycle_version" }
+
+# optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+lifecycle_process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "lifecycle_version" }
+
+# optional - ReactiveStreams support for LiveData
+
+lifecycle_reactivestreams_ktx = { group = "androidx.lifecycle", name = "lifecycle-reactivestreams-ktx", version.ref = "arch_version" }
+
+# optional - Test helpers for LiveData
+core_testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "arch_version" }
+
+
+
+# 图片压缩
+# Luban  https://github.com/Curzibn/Luban/tree/master
+luban = { group = "top.zibin", name = "Luban", version.ref = "lubanVersion" }
+
+# 图片加载  glide
+#https://github.com/bumptech/glide/tags
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide_version" }
+glideCompiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide_version" }
+
+# CoilKt
+#https://github.com/coil-kt/coil/blob/main/README-zh.md
+# 标准加载库
+coilKt = { group = "io.coil-kt", name = "coil", version.ref = "coil_version_version" }
+# compose 适配
+coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil_version_version" }
+# 加载gif
+coilGif = { group = "io.coil-kt", name = "coil-gif", version.ref = "coil_version_version" }
+# 加载 svg
+coilSvg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil_version_version" }
+# 加载 video
+#coilVideo = { group = "io.coil-kt", name = "coil-video", version.ref = "coil_version_version" }
+#coilSkyDoves = { group = "com.github.skydoves", name = "landscapist-coil", version.ref = "2.1.2" }
+
+
+
+# Appcompat
+appcompat_core = { group = "androidx.core", name = "core", version.ref = "appcompat_core_version" }
+appcompat_coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "appcompat_core_version" }
+appcompat_appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat_appcompat_version" }
+
+#AndroidX 组件
+#Components
+
+#  CardView
+# https://developer.android.google.cn/jetpack/androidx/releases/cardview
+cardview = { group = "androidx.cardview", name = "cardview", version.ref = "androidx_cardview_version" }
+
+# ViewPage2
+# https://developer.android.google.cn/jetpack/androidx/releases/viewpager2
+viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "androidx_viewpager2_version" }
+
+# constraintLayout
+# https://developer.android.google.cn/jetpack/androidx/releases/constraintlayout
+constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx_constraintLayout_version" }
+
+# https://developer.android.google.cn/jetpack/androidx/releases/recyclerview
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "androidx_recyclerview_version" }
+recyclerViewSelection = { group = "androidx.recyclerview", name = "recyclerview-selection", version.ref = "androidx_recyclerViewSelection_version" }
+
+#https://developer.android.google.cn/jetpack/androidx/releases/swiperefreshlayout
+swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "androidx_swiperefreshlayout_version" }
+
+#
+meteria = { group = "com.google.android.material", name = "material", version.ref = "androidx_meteria_version" }
+
+
+
+
+#  JSON Gson
+#  https://github.com/google/gson/tags
+
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson_version" }
+
+
+
+
+
+# 下拉刷新
+# https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh
+ultraPtr = { group = "in.srain.cube", name = "ultra-ptr", version.ref = "ultraPtrVersion" }
+# 上拉加载
+# https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+baseRecyclerViewAdapterHelper = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version.ref = "baseRecyclerViewAdapterHelperVersion" }
+
+
+#  网络请求
+#  https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
+#  https://github.com/square/okhttp/tags
+#  https://github.com/square/retrofit/tags
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
+# 需要与 okhttp 保持一致
+loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+
+
+# 核心包
+# https://developer.android.google.cn/jetpack/androidx/releases/appcompat
+# 自动导入
+#  androidx.activity:activity:1.0.0
+#androidx.annotation:annotation:1.1.0
+#androidx.appcompat:appcompat:1.2.0
+#androidx.appcompat:appcompat-resources:1.2.0
+#androidx.arch.core:core-common:2.1.0
+#androidx.arch.core:core-runtime:2.0.0
+#androidx.collection:collection:1.1.0
+#androidx.core:core:1.3.0
+#androidx.cursoradapter:cursoradapter:1.0.0
+#androidx.customview:customview:1.0.0
+#androidx.drawerlayout:drawerlayout:1.0.0
+#androidx.fragment:fragment:1.1.0
+#androidx.interpolator:interpolator:1.0.0
+#androidx.lifecycle:lifecycle-common:2.1.0
+#androidx.lifecycle:lifecycle-livedata:2.0.0
+#androidx.lifecycle:lifecycle-livedata-core:2.0.0
+#androidx.lifecycle:lifecycle-runtime:2.1.0
+#androidx.lifecycle:lifecycle-viewmodel:2.1.0
+#androidx.loader:loader:1.0.0
+#androidx.savedstate:savedstate:1.0.0
+#androidx.vectordrawable:vectordrawable:1.1.0
+#androidx.vectordrawable:vectordrawable-animated:1.1.0
+#androidx.versionedparcelable:versionedparcelable:1.1.0
+#androidx.viewpager:viewpager:1.0.0
+
+#object Appcompat {
+core = { group = "androidx.core", name = "core", version.ref = "core_version" }
+coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "core_version" }
+#appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "1.3.1" }
+
+
+# Kotlin 拓展包
+# https://developer.android.google.cn/kotlin/ktx/extensions-list
+
+#object KTX {
+#Kotlin 拓展包
+#activityKtx = { group = "androidx.activity", name = "activity-ktx", version.ref = "1.3.0" }
+# Kotlin
+#fragmentKtx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "1.3.6" }
+
+
+#  KT 相关
+#object Kt {
+
+stdlibJdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" }
+stdlibJdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+test = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
+plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
+
+
+# Lifecycle Ktx
+# https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
+#object Lifecycle {
+
+
+#   AndroidX  Compose   meteria
+#   包含7个子包
+#   介绍:  https://developer.android.google.cn/topic/libraries/support-library/features#material-design
+#   详细内容: https://developer.android.google.cn/jetpack/androidx/releases/compose?hl=zh_cn
+#    火狐 版本 对应1.0.1  gradle:7.0.4       gradle-7.0.2-bin.zip
+#object Compose {
+
+#在 Jetpack Compose 应用中构建动画，丰富用户的体验
+#animation = { group = "androidx.compose.animation", name = "animation", version.ref = "1.0.1" }
+
+# 借助 Kotlin 编译器插件，转换 @Composable functions（可组合函数）并启用优化功能。
+#compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "1.0.1" }
+
+#使用现成可用的构建块编写 Jetpack Compose 应用，并扩展 Foundation 以构建您自己的设计系统元素。
+#foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "1.0.1" }
+
+#使用现成可用的 Material Design 组件构建 Jetpack Compose UI。这是更高层级的 Compose 入口点，旨在提供与 www.material.io 上描述的组件一致的组件
+#meteria = { group = "androidx.compose.material", name = "material", version.ref = "1.0.1" }
+
+#使用 Material Design 3（下一代 Material Design）组件构建 Jetpack Compose 界面。Material 3 包括更新后的主题和组件，以及动态配色等 Material You 个性化功能，旨在与新的 Android 12 视觉风格和系统界面相得益彰
+#material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "1.0.0-alpha03" }
+
+# Compose 编程模型和状态管理的基本组件，以及 Compose 编译器插件的目标核心运行时。
+
+runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtimeVersion" }
+runtimeLivedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeVersion" }
+runtimeRxjava2 = { group = "androidx.compose.runtime", name = "runtime-rxjava2", version.ref = "runtimeVersion" }
+
+#与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入。
+ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose_ui_version" }
+
+
+
+
+
+# 可在应用启动时简单、高效地初始化组件。
+# https://developer.android.google.cn/jetpack/androidx/releases/startup
+#object Startup {
+appStartup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup_version" }
+
+
+
+
+# -------------  图片预览效果  缩放等 -------------
+#object PhotoView {
+photoview_library = { group = "com.bm.photoview", name = "library", version.ref = "photoview_version" }
+
+
+#object SubsamplingScaleImageView {
+subsamplingscaleimageview_core = { group = "com.davemorrissey.labs", name = "subsampling-scale-image-view", version.ref = "subsamplingscaleimageview_version" }
+
+
+
+#  注解 依赖注入   dagger
+#  https://developer.android.google.cn/jetpack/androidx/releases/hilt?hl=zh_cn
+#object Hilt {
+
+daggerRuntime = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
+hiltCompiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltVersion" }
+
+daggerCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
+
+# viewModule  = { group = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "hitViewModule"
+
+#注解处理器
+# compiler  = { group = "androidx.hilt:hilt-compiler", version.ref = "hitViewModule"
+
+
+#   数据库 Room
+#   https://developer.android.google.cn/jetpack/androidx/releases/room?hl=zh_cn
+#object Room {
+
+room_runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
+
+#注解处理器
+room_compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
+
+# 分页
+room_paging = { group = "androidx.room", name = "room-paging", version.ref = "room_version" }
+
+
+
+#  内存检测 Leakcanary
+#  https://github.com/square/leakcanary/tags
+#object Leakcanary {
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "jleakcanary_version" }
+
+
+
+
+#  XML 解析器
+#  https://github.com/jhy/jsoup
+#object Jsoup {
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup_jsoup_version" }
+
+
+#  Work  任务管理
+#   https://developer.android.com/guide/background/persistent
+#object Work {
+# work_version  = { group = "2.8.0"
+
+# 核心  正常 使用这个就可以
+work = { group = "androidx.work", name = "work-runtime", version.ref = "work_version" }
+
+# Kotlin + coroutines
+work_ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work_version" }
+
+# optional - RxJava2 support
+work_rxjava2 = { group = "androidx.work", name = "work-rxjava2", version.ref = "work_version" }
+
+# optional - GCMNetworkManager support
+work_gcm = { group = "androidx.work", name = "work-gcm", version.ref = "work_version" }
+
+# optional - Test helpers androidTestImplementation(
+work_testing = { group = "androidx.work", name = "work-testing", version.ref = "work_version" }
+
+# optional - Multiprocess support
+work_multiprocess = { group = "androidx.work", name = "work-multiprocess", version.ref = "work_version" }
+
+
+
+
+#  dataStore  SharedPreferences升级方案
+#  https://developer.android.com/topic/libraries/architecture/datastore?hl=zh-cn
+
+#object DataStore {
+#  DataStore  核心
+datastore_core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastore_version" }
+
+# preferences DataStore  支持
+datastore_preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore_version" }
+
+# optional - RxJava2 support
+datastore_preferences_rxjava = { group = "androidx.datastore", name = "datastore-preferences-rxjava2", version.ref = "datastore_version" }
+
+# optional - RxJava3 support
+datastore_preferences_rxjava3 = { group = "androidx.datastore", name = "datastore-preferences-rxjava3", version.ref = "datastore_version" }
+
+# datastore  DataStore  支持
+datastore_datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore_version" }
+
+# optional - RxJava2 support
+datastore_datastore_rxjava2 = { group = "androidx.datastore", name = "datastore-rxjava2", version.ref = "datastore_version" }
+# optional - RxJava3 support
+datastore_datastore_rxjava3 = { group = "androidx.datastore", name = "datastore-rxjava3", version.ref = "datastore_version" }
+
+
+
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

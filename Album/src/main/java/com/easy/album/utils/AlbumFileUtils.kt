@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
+import com.easy.core.CoreConfig
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -31,7 +32,7 @@ object AlbumFileUtils {
     const val POST_VIDEO = ".mp4"
     const val APP_NAME = "ImageSelector"
     fun createCameraFile(context: Context, type: Int): File? {
-        return createMediaFile(context, context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!.path, type)
+        return createMediaFile(context, CoreConfig.applicationContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!.path, type)
     }
 
     private fun createMediaFile(context: Context, parentPath: String, type: Int): File? {

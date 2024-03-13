@@ -89,6 +89,7 @@ open class BaseWebFragment : BaseFragment() {
     var webChromeClient: WebChromeClient = object : WebChromeClient() {
         override fun onReceivedTitle(view: WebView, title: String?) {
             super.onReceivedTitle(view, title)
+
             title?.let {
                 if (this@BaseWebFragment.title.isNullOrEmpty()) {
                     iToolBar?.setToolbarTitle(this@BaseWebFragment.title)
@@ -96,6 +97,13 @@ open class BaseWebFragment : BaseFragment() {
             }
         }
 
+        override fun onConsoleMessage(cm: ConsoleMessage?): Boolean {
+            LogUtils.d("WebViewConsole", cm?.message() + " -- From line "
+                    + cm?.lineNumber() + " of "
+                    + cm?.sourceId() );
+            return super.onConsoleMessage(cm)
+
+        }
         override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
             super.onShowCustomView(view, callback)
 
