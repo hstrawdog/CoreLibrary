@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
  * @FileName :   HiltViewModel
  * @Date : 2020/8/13 0013  下午 2:37
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * UserHilt  自动注入
  * ViewModelInject 表示为ViewModel 对象  可以使用 委托 by viewModels() 创建
  */

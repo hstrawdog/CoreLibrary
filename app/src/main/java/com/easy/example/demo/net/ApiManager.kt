@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
  * @FileName :   ApiManager
  * @Date : 2020/7/28 0028  下午 4:36
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object ApiManager {
     var mWangAndroidInterface: WangAndroidInterface? = null

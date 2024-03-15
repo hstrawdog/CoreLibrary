@@ -8,7 +8,7 @@ import com.easy.core.ui.base.BaseActivity;
   * @FileName :   ProgressBarViewBuilderActivity
   * @Date  : 2019/6/25 0025  下午 8:26
   * @Email :  qiqiang213@gmail.com
-  * @Descrive :
+  * @Describe :
   */
 public class ProgressBarViewBuilderActivity extends BaseActivity {
 

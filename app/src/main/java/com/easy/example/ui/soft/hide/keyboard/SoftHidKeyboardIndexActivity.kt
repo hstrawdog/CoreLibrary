@@ -11,7 +11,7 @@ import com.easy.example.demo.login.LoginActivity
  * @FileName :   SoftHidKeyboardIndexActivity
  * @Date  : 2019/6/4 0004  上午 11:40
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class SoftHidKeyboardIndexActivity(override val adapter: MainAdapter = MainAdapter()) :
     BaseListActivity() {

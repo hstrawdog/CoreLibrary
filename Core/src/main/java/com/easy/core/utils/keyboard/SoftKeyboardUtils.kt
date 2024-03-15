@@ -20,7 +20,7 @@ import com.easy.core.utils.log.LogUtils
  * @FileName :   SoftHideKeyboardUtils
  * @Date : 2018/9/26 0026  下午 6:20
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/src/main/java/com/blankj/utilcode/util/KeyboardUtils.java
  */
 object SoftKeyboardUtils {

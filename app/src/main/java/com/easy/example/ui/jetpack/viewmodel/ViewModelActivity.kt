@@ -17,7 +17,7 @@ import com.easy.example.ui.jetpack.livedata.User
  * @FileName :   ViewModelActivity
  * @Date : 2020/7/21 0021  上午 9:52
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 正常 ViewModel 搭配LiveData 使用
  */
 class ViewModelActivity : BaseActivity() {

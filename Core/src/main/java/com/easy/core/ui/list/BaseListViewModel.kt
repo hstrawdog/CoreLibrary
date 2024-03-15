@@ -11,7 +11,7 @@ import com.easy.core.ui.base.BaseViewModel
  * @FileName :   BaseListModel
  * @Date : 2020/7/29 0029  上午 10:28
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseListViewModel : BaseViewModel() {
     /**

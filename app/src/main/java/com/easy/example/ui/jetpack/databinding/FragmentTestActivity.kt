@@ -13,7 +13,7 @@ import com.easy.example.demo.TestFragment
  * @FileName :   FragmentTestActivity
  * @Date : 2020/7/28 0028  下午 5:51
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class FragmentTestActivity : BaseVmActivity<FragmentTestViewModel, ActivityFragmentTestBinding>() {
 

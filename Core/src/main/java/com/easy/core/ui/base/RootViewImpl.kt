@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference
  * @FileName :   CreateRootViewModel
  * @Date : 2019/7/17 0017  下午 5:53
  * @Email : qiqiang213@gmail.com
- * @Descrive : 根布局的创建
+ * @Describe : 根布局的创建
  * 目的
  * 1.创建根布局
  * 2.创建标题栏

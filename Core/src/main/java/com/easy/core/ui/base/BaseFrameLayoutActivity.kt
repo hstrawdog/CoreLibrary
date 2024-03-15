@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
  * @FileName :   BaseFrameLayoutActivity
  * @Date : 2018/9/18 0018  下午 2:08
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseFrameLayoutActivity : BaseActivity() {
     var currentFragment: Fragment? = null

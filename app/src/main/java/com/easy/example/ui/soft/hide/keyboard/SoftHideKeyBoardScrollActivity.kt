@@ -10,7 +10,7 @@ import com.easy.example.R
  * @FileName :   SoftHideKeyBoardScrollActivity
  * @Date : 2019/6/4 0004  上午 11:43
  * @Email :  qiqiang213@gmail.com
- * @Descrive : 键盘遮挡 部分界面滑动
+ * @Describe : 键盘遮挡 部分界面滑动
  */
 class SoftHideKeyBoardScrollActivity : BaseActivity() {
 

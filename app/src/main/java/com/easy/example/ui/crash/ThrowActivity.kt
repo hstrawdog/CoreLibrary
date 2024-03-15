@@ -11,7 +11,7 @@ import com.easy.example.R
  * @FileName :   ThrowActivity
  * @Date : 2019/5/22 0022
  * @Email :  qiqiang213@gmail.com
- * @Descrive :异常
+ * @Describe :异常
  */
 class ThrowActivity : BaseActivity() {
 

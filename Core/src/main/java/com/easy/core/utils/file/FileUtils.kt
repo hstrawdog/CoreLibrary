@@ -21,7 +21,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.easy.core.CoreConfig
-import com.easy.core.utils.DataUtils
+import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.PhotoUtils
 import com.easy.core.utils.encrypt.EncryptTool
 import com.easy.core.utils.image.BitmapUtils
@@ -44,8 +44,8 @@ import java.util.Vector
  * @Package : com.easy.core.utils
  * @Date : 上午 9:33
  * @Email : qiqiang213@gmail.com
- * @Describe : A
- *
+ * @Describe :
+ *      拆分文件操作   图片  与其他文件如 视频  pdf 等
  */
 object FileUtils {
     //region 文件名
@@ -1743,8 +1743,7 @@ object FileUtils {
                 // 判断是否为suffix结尾
                 if (filename.trim { it <= ' ' }
                         .toLowerCase()
-                        .endsWith(suffix!!)
-                ) {
+                        .endsWith(suffix!!)) {
                     vecFile.add(filename)
                 }
             }
@@ -2027,6 +2026,7 @@ object FileUtils {
             (writeFileFromIS(destFile, FileInputStream(srcFile), false) && !(isMove && !deleteFile(srcFile)))
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
+            LogUtils.e4Debug(e)
             false
         }
     }

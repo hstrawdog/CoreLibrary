@@ -13,7 +13,7 @@ import java.math.BigDecimal
  * @FileName :   CacheUtil
  * @Date : 2018/1/23  14:24
  * @Email :  qiqiang213@gmail.com
- * @Descrive : Describe
+ * @Describe :  缓存 操作
  */
 object CacheUtil {
     const val NULL = "0k"
@@ -113,20 +113,24 @@ object CacheUtil {
         val megaByte = kiloByte / 1024
         if (megaByte < 1) {
             val result1 = BigDecimal(java.lang.Double.toString(kiloByte))
-            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB"
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
+                .toPlainString() + "KB"
         }
         val gigaByte = megaByte / 1024
         if (gigaByte < 1) {
             val result2 = BigDecimal(java.lang.Double.toString(megaByte))
-            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB"
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
+                .toPlainString() + "MB"
         }
         val teraBytes = gigaByte / 1024
         if (teraBytes < 1) {
             val result3 = BigDecimal(java.lang.Double.toString(gigaByte))
-            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB"
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
+                .toPlainString() + "GB"
         }
         val result4 = BigDecimal(teraBytes)
-        return (result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB")
+        return (result4.setScale(2, BigDecimal.ROUND_HALF_UP)
+            .toPlainString() + "TB")
     }
 
     /**

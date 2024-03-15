@@ -16,7 +16,7 @@ import com.easy.core.utils.log.LogUtils.e
  * @FileName :   Semicircular
  * @Date : 2020/7/6 0006  上午 11:02
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class SemicircularView : View {
     private var radius = 100f

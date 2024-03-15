@@ -25,7 +25,7 @@ import com.easy.core.widget.FilterImageView
  * @Package : com.core.library.toolbar
  * @FileName :   BaseDefToolBarImpl
  * @Date : 2018/11/15 0015  下午 7:27
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 class DefToolBar : BaseToolBar() {

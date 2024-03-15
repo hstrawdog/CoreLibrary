@@ -11,7 +11,7 @@ import java.io.File
  * @FileName :   LuBanUttils
  * @Date : 2019/2/21 0021  下午 2:30
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object LuBanUtils {
     /**

@@ -1,4 +1,4 @@
-package com.easy.core.kt
+package com.easy.core.utils.data
 
 import java.io.File
 

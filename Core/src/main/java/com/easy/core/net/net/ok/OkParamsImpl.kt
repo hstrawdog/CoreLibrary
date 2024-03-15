@@ -23,7 +23,7 @@ import kotlin.collections.HashMap
  * @FileName :   OKParamsImpl
  * @Date : 2020/12/9 0009  下午 5:15
  * @Email :  qiqiang213@gmail.com
- * @Descrive :Created by du on 16/9/4.
+ * @Describe :Created by du on 16/9/4.
  */
 class OkParamsImpl : ParamsCompat {
 

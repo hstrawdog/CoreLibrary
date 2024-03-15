@@ -13,7 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.easy.core.CoreConfig
 import com.easy.core.R
-import com.easy.core.kt.isNotNull
+import com.easy.core.utils.data.isNotNull
 import com.easy.core.utils.ResourcesUtils
 
 
@@ -23,7 +23,7 @@ import com.easy.core.utils.ResourcesUtils
  * @FileName :   LoadingView
  * @Date  : 2017-02-11 22:02
  * @Email :  qiqiang213@gmail.com
- * @Descrive : loadingView
+ * @Describe : loadingView
  */
 class LoadingView constructor(var mContext: Context, themeResId: Int = R.style.LoadingDialogStyle) :
     Dialog(mContext, themeResId) {

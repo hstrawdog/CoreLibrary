@@ -16,7 +16,7 @@ import com.easy.core.ui.base.BaseViewBindingActivity
  * @FileName :   BaseBindingListActivity
  * @Date  : 2020/8/27 0027  上午 10:48
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseBindingListActivity<T : ViewBinding> : BaseViewBindingActivity<T>(),
     BaseListModel.IBaseListModelView {

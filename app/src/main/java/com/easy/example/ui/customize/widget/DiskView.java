@@ -15,7 +15,7 @@ import com.easy.core.utils.ScreenUtils;
  * @Package : com.easy.example.ui.customize.widget
  * @Date : 上午 11:20
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class DiskView extends View {
     public DiskView(Context context) {

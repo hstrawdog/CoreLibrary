@@ -14,7 +14,7 @@ import com.easy.example.ui.jetpack.package1.UserViewModel;
  * @FileName :   TestFtamgent
  * @Date : 2020/7/28 0028  下午 6:01
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class TestFragment extends BaseVmFragment<UserViewModel, FragmentTestBinding> {
     public static TestFragment newInstance() {

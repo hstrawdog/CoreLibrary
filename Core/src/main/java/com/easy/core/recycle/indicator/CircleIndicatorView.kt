@@ -12,7 +12,7 @@ import androidx.annotation.ColorInt
  * @Package : com.qi.core.banner.indicator
  * @FileName :   CircleIndicatorImpl
  * @Date : 2019/1/3 0003  下午 7:40
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 open class CircleIndicatorView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr),

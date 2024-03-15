@@ -1,7 +1,8 @@
 package com.easy.core.utils
 
-import com.easy.core.utils.DataUtils.isNullString
-import com.easy.core.utils.DataUtils.stringToInt
+import com.easy.core.utils.data.DataUtils
+import com.easy.core.utils.data.DataUtils.isNullString
+import com.easy.core.utils.data.DataUtils.stringToInt
 import com.easy.core.utils.log.LogUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat

@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable;
  * @FileName :   DrawableSticker
  * @Date : 2020/1/15 0015  上午 11:51
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class DrawableSticker extends  Sticker {
     private Drawable drawable;

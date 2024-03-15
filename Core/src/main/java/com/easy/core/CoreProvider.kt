@@ -5,7 +5,7 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
-import com.easy.core.utils.DataUtils
+import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.log.LogUtils
 
 /**
@@ -14,7 +14,7 @@ import com.easy.core.utils.log.LogUtils
  * @FileName :   CoreInitProvider
  * @Date : 2019/6/6 0006  上午 9:54
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 利用 Provider监听 初始化
  */
 class CoreProvider : ContentProvider() {

@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * @Package : com.easy.example.dialog
  * @Date : 下午 3:52
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class MyPopupWindow extends PopupWindow {
     private View contentView;

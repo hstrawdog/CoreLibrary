@@ -12,7 +12,7 @@ import com.easy.core.ui.base.BaseActivity;
  * @FileName :   FishActivity
  * @Date : 2019/7/18 0018  下午 5:08
  * @Email :  qiqiang213@gmail.com
- * @Descrive : https://www.jianshu.com/p/3dd3d1524851
+ * @Describe : https://www.jianshu.com/p/3dd3d1524851
  */
 public class FishActivity extends BaseActivity {
 

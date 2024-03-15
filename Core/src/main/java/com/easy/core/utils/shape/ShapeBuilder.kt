@@ -10,7 +10,7 @@ import androidx.annotation.DimenRes
  * @FileName :   ShapeBuilder
  * @Date : 2019/12/6 0006  下午 4:59
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object ShapeBuilder {
     /**

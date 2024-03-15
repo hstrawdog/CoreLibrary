@@ -19,7 +19,7 @@ import com.easy.example.ui.jetpack.package1.UserViewModel;
  * @FileName :   ViewBindingActivity
  * @Date : 2020/7/21 0021  下午 1:57
  * @Email :  qiqiang213@gmail.com
- * @Descrive : 视图绑定在 Android Studio 3.6 Canary 11 及更高版本中可用。
+ * @Describe : 视图绑定在 Android Studio 3.6 Canary 11 及更高版本中可用。
  * 新版官方文档 https://developer.android.com/topic/libraries/view-binding
  * 旧版官方文档 https://www.jb51.net/article/182708.htm
  * 错误解决 https://www.it610.com/article/1281824114532696064.htm

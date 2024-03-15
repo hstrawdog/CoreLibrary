@@ -15,7 +15,7 @@ import com.easy.example.R;
  * @FileName :   BlackAndWhiteActivity
  * @Date : 2020/4/7  上午11:35
  * @Email : qiqiang213@gmail.com
- * @Descrive :  黑白化
+ * @Describe :  黑白化
  */
 public class BlackAndWhiteActivity extends BaseActivity {
     public static void open(Context context) {

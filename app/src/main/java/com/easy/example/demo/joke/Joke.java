@@ -8,7 +8,7 @@ import java.util.List;
  * @FileName :   Joke
  * @Date : 2020/8/5 0005  下午 2:28
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class Joke {
 

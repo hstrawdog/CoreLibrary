@@ -8,7 +8,7 @@ import androidx.room.*
  * @FileName :   Student
  * @Date  : 2020/8/18 0018  上午 11:14
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 @Entity
 data class Student(val grade: String,

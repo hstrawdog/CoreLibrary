@@ -16,7 +16,7 @@ import com.easy.example.adapter.FullPagerSnapAdapter
  * @FileName :   FullPagerSnapActivity
  * @Date : 2019/6/18 0018  上午 9:50
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class FullPagerSnapActivity : BaseActivity() {
     var mRcList: RecyclerView? = null

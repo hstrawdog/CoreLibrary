@@ -10,7 +10,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
  * @FileName :   SoftHideKeyboardListener
  * @Date : 2018/6/21 0021  下午 2:23
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 监听键盘弹出收起
  *  来源 https://blog.csdn.net/u011181222/article/details/52043001
  */

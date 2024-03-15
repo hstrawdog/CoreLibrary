@@ -15,7 +15,7 @@ import com.easy.example.R;
   * @FileName :   InflateTestActivity
   * @Date  : 2020/7/22 0022  下午 5:25
   * @Email :  qiqiang213@gmail.com
-  * @Descrive :
+  * @Describe :
   */
 
 public class InflateTestActivity extends BaseActivity {

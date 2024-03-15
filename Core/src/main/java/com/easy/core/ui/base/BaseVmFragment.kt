@@ -12,7 +12,7 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
  * @FileName :   BaseFragment
  * @Date : 2020/7/28 0028  下午 5:36
  * @Email : qiqiang213@gmail.com
- * @Descrive :  同理Activity
+ * @Describe :  同理Activity
  */
 abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseDataBindingFragment<T>(), IBaseViewModelActivity,
     IOpenActivity {

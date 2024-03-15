@@ -11,7 +11,7 @@ import  com.easy.core.R
  * @FileName :   DividerBuilder
  * @Date : 2018/7/5 0005  下午 5:16
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class DividerBuilder {
     private var leftSideLine: SideLine? = null

@@ -9,7 +9,7 @@ import androidx.annotation.IntDef
  * @FileName :   LayoutModel
  * @Date : 2019/1/17 0017  下午 1:43
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 @IntDef(LayoutModel.LAYOUT_MODE_LINEAR_LAYOUT, LayoutModel.LAYOUT_MODE_FRAME_LAYOUT)
 annotation class LayoutModel {

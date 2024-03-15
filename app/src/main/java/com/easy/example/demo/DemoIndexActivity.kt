@@ -14,7 +14,7 @@ import com.easy.example.demo.weather.WeatherActivity
  * @FileName :   DemoIndexActivity
  * @Date : 2020/8/11 0011  上午 11:31
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class DemoIndexActivity() : BaseListActivity() {
     override val adapter: MainAdapter = MainAdapter()

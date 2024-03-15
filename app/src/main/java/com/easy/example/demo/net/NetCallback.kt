@@ -11,7 +11,7 @@ import retrofit2.Response
  * @FileName :   NetCallback
  * @Date : 2020/8/4 0004  下午 4:41
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class NetCallback<T> : Callback<NetResponseBody<T>> {
     override fun onFailure(call: Call<NetResponseBody<T>>, t: Throwable) {

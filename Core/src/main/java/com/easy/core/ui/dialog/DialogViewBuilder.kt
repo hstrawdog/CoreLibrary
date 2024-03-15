@@ -19,7 +19,7 @@ import java.lang.ref.WeakReference
  * @FileName :   BaseViewBuilderHolder
  * @Date : 2019/10/31 0031  下午 1:23
  * @Email : qiqiang213@gmail.com
- * @Descrive : 布局管理  与创建
+ * @Describe : 布局管理  与创建
  */
 abstract class DialogViewBuilder : ViewHolder(), IBaseViewBuilderHolder, DefaultLifecycleObserver {
     /**

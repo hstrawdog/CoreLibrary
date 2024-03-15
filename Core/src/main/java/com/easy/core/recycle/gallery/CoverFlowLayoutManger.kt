@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView.Recycler
  * @FileName :   CoverFlowLayoutManger
  * @Date : 2019/6/22 0022  下午 4:01
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * https://github.com/ChenLittlePing/RecyclerCoverFlow
  */
 class CoverFlowLayoutManger(isFlat: Boolean, isGreyItem: Boolean,

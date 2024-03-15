@@ -11,7 +11,7 @@ import com.easy.example.widget.BaseToolBarSearch
  * @Package : com.easy.iblibrary.ui.activity
  * @FileName :   SearchBarActivity
  * @Date : 2018/12/14 0014
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :  qiqiang213@gmail.com
  */
 class SearchBarActivity : BaseActivity() {

@@ -11,7 +11,7 @@ import com.easy.example.ui.jetpack.livedata.User;
  * @FileName :   UserViewModel
  * @Date : 2020/7/21 0021  上午 9:52
  * @Email : qiqiang213@gmail.com
- * @Descrive :  搭配 LiveData 使用
+ * @Describe :  搭配 LiveData 使用
  */
 public class UserViewModel extends ViewModel {
 

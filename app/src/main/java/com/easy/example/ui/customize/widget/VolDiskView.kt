@@ -14,7 +14,7 @@ import android.view.View
  * @Package : com.easy.example.ui.customize.widget
  * @Date  : 下午 4:27
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class VolDiskView : View {
 

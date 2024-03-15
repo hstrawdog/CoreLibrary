@@ -20,7 +20,7 @@ import com.easy.core.utils.log.LogUtils.e
  * @FileName :   ScrollView
  * @Date : 2019/12/20 0020  下午 4:17
  * @Email : qiqiang213@gmail.com
- * @Descrive : 测试view 的内容滑动 以及边界判断
+ * @Describe : 测试view 的内容滑动 以及边界判断
  */
 class ViewScrollView : View {
     constructor(context: Context?) : super(context) {

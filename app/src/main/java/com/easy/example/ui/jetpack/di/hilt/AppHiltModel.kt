@@ -14,7 +14,7 @@ import javax.inject.Qualifier
  * @FileName :   UserHiltModel
  * @Date : 2020/8/13 0013  上午 10:41
  * @Email : qiqiang213@gmail.com
- * @Descrive : 自定义的构建方式  如果没有module  就会自动构建默认 值
+ * @Describe : 自定义的构建方式  如果没有module  就会自动构建默认 值
  */
 @InstallIn(SingletonComponent::class)
 @Module

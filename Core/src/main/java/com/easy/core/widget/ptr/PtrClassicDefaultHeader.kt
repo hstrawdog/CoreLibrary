@@ -22,7 +22,7 @@ import java.util.Date
  * @FileName :   PtrClassicDefaultHeader
  * @Date  : 2019/2/14 0014
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class PtrClassicDefaultHeader : FrameLayout, PtrUIHandler {
     private var mRotateAniTime = 150

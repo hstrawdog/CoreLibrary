@@ -8,7 +8,7 @@ import com.easy.example.ui.jetpack.livedata.User;
  * @FileName :   UserDataRepository
  * @Date : 2020/7/21 0021  下午 4:19
  * @Email : qiqiang213@gmail.com
- * @Descrive :  数据源
+ * @Describe :  数据源
  */
 class UserDataRepository {
 

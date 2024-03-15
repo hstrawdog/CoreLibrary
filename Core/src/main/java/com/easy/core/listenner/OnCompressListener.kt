@@ -8,7 +8,7 @@ import java.io.File
  * @FileName :   OnCompressListener
  * @Date : 2019/2/21 0021  下午 2:37
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface OnCompressListener {
     /**

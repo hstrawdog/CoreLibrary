@@ -8,7 +8,7 @@ import com.google.gson.InstanceCreator
 import com.easy.core.R
 import com.easy.core.annotation.ToolBarMode
 import com.easy.core.toolbar.DefToolBar
-import com.easy.core.utils.DataUtils
+import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.ScreenUtils
 import java.lang.reflect.Type
 
@@ -18,7 +18,7 @@ import java.lang.reflect.Type
  * @FileName :   CoreBuildConfig
  * @Date : 2018/11/23 0023  下午 2:16
  * @Email :  qiqiang213@gmail.com
- * @Descrive :  配置文件
+ * @Describe :  配置文件
  */
 class CoreConfig private constructor() {
     /**

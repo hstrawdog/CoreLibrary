@@ -12,7 +12,7 @@ import java.security.MessageDigest
  * @Package : com.core.library.glide
  * @FileName :   GlideRoundTransform
  * @Date : 2018/11/26 0026  下午 3:14
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 class GlideRoundTransform(dp: Int) : BitmapTransformation() {

@@ -10,7 +10,7 @@ import com.easy.core.CoreConfig
  * @FileName :   FragmentProxy
  * @Date : 2019/6/6 0006  上午 11:02
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 代理类
  */
 class FragmentProxy : IPermissionActions {

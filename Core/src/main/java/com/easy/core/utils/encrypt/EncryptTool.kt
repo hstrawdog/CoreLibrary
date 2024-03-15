@@ -1,7 +1,7 @@
 package com.easy.core.utils.encrypt
 
-import com.easy.core.utils.DataUtils.bytes2HexString
-import  com.easy.core.utils.DataUtils.hexString2Bytes
+import com.easy.core.utils.data.DataUtils.bytes2HexString
+import  com.easy.core.utils.data.DataUtils.hexString2Bytes
 import  com.easy.core.utils.encrypt.EncodeTool.base64Decode
 import  com.easy.core.utils.encrypt.EncodeTool.base64Encode
 import  com.easy.core.utils.file.FileUtils

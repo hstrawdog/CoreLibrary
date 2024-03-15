@@ -17,7 +17,7 @@ import com.easy.example.ui.customize.matrix.MatrixEventActivity
  * @FileName :   CustomizeIndexActivity
  * @Date : 2019/6/25 0025  下午 8:37
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class CustomizeIndexActivity(override val adapter: MainAdapter=MainAdapter()) : BaseListActivity(), OnItemClickListener {
 

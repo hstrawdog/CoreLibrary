@@ -13,7 +13,7 @@ import retrofit2.http.Query
  * @FileName :   JuHeInterface
  * @Date : 2020/8/4 0004  下午 3:06
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface JuHeInterface {
     @GET("simpleWeather/query")

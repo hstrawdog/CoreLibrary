@@ -14,7 +14,7 @@ import java.lang.reflect.Type
  * @FileName :   GsonUtil
  * @Date : 2019/1/3 0003  上午 10:30
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object GsonUtil {
     /**

@@ -12,7 +12,7 @@ import com.easy.example.R;
  * @FileName :   EditTextActivity
  * @Date : 2020/1/8 0008  上午 11:33
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class EditTextActivity extends BaseActivity {
     public static void open(Activity context) {

@@ -1,9 +1,11 @@
-package com.easy.core.utils
+package com.easy.core.utils.data
 
 import android.util.SparseArray
 import android.util.SparseBooleanArray
 import android.util.SparseIntArray
 import android.util.SparseLongArray
+import com.easy.core.utils.BaseCommonUtils
+import com.easy.core.utils.ToastUtils
 import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.log.LogUtils
 import java.io.*
@@ -241,7 +243,7 @@ object DataUtils {
             return "银行卡号有误"
         }
         var card = ""
-        card = cardNo.substring(0, 4) + BaseCommonUtils.SPACE + cardNo.substring(4, 8) +BaseCommonUtils.SPACE + cardNo.substring(
+        card = cardNo.substring(0, 4) + BaseCommonUtils.SPACE + cardNo.substring(4, 8) + BaseCommonUtils.SPACE + cardNo.substring(
             8, 12
         ) + BaseCommonUtils.SPACE
         card += cardNo.substring(cardNo.length - 4)

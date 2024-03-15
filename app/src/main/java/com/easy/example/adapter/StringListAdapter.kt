@@ -10,7 +10,7 @@ import com.easy.example.R
  * @FileName :   StringListAdapter
  * @Date : 2019/10/28 0028  下午 1:42
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class StringListAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_main) {
     override fun convert(helper: BaseViewHolder, item: String) {

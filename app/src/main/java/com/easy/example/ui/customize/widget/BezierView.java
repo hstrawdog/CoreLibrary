@@ -24,7 +24,7 @@ import com.easy.example.ui.shape.utils.BezierUtil;
  * @FileName :   BezierView
  * @Date : 2019/5/24 0024  下午 5:27
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class BezierView extends View {
     public BezierView(Context context) {

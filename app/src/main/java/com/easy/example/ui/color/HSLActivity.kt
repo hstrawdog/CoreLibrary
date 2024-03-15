@@ -17,7 +17,7 @@ import java.util.*
  * @FileName :   HSLActivity
  * @Date : 2020/4/29  下午3:48
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
 </描述当前版本功能> */
 class HSLActivity : BaseActivity() {
 

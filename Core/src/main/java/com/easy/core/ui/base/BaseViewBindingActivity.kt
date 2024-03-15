@@ -13,7 +13,7 @@ import java.lang.reflect.ParameterizedType
  * @Package : com.easy.example.ui.recycle
  * @Date : 下午 3:18
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseViewBindingActivity<T : ViewBinding> : BaseActivity() {
 

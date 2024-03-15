@@ -12,7 +12,7 @@ import com.easy.example.ui.jetpack.livedata.User
  * @FileName :   UserModel
  * @Date : 2020/7/21 0021  下午 3:56
  * @Email : qiqiang213@gmail.com
- * @Descrive : ViewModel
+ * @Describe : ViewModel
  */
 class UserViewModel : BaseViewModel() {
     var liveData = MutableLiveData<com.easy.example.ui.jetpack.livedata.User>()

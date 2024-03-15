@@ -16,7 +16,7 @@ import kotlin.collections.ArrayList
  * @Package : com.easy.iblibrary.ui.activity.fragment
  * @FileName :   MainFragment
  * @Date : 2018/11/23 0023  上午 9:41
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 class MainFragment(override val adapter: MainAdapter = MainAdapter()) : BaseListFragment() {

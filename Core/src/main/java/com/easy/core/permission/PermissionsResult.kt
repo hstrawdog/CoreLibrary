@@ -5,7 +5,7 @@ package com.easy.core.permission
  * @Package : com.core.library.permission
  * @FileName :   onPermissionsResult
  * @Date : 2018/11/22 0022  上午 11:53
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 fun interface PermissionsResult {

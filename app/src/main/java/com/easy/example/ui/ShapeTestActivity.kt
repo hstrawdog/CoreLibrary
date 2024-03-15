@@ -14,7 +14,7 @@ import com.easy.example.R
  * @FileName :   ShapeTestActivity
  * @Date : 2019/12/6 0006  下午 3:51
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class ShapeTestActivity : BaseActivity() {
     var mTextView3: TextView? = null

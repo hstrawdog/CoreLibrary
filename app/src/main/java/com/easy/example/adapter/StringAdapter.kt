@@ -13,7 +13,7 @@ import kotlinx.coroutines.runBlocking
  * @FileName :   StringAdapter
  * @Date : 2019/4/29 0029  下午 2:23
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class StringAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_main) {
     override fun convert(helper: BaseViewHolder, item: String?) {

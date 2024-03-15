@@ -13,7 +13,7 @@ import javax.inject.Singleton
  * @FileName :   User
  * @Date  : 2020/8/14 0014  下午 5:02
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 @Entity
 data class User(

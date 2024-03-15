@@ -18,7 +18,7 @@ import com.easy.core.CoreConfig
  * @FileName :   ResourcesUtils
  * @Date : 2018/12/14 0014  上午 11:18
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 资源辅助类
  */
 object ResourcesUtils {

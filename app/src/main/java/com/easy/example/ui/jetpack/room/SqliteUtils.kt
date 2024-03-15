@@ -19,7 +19,7 @@ import javax.inject.Singleton
  * @FileName :   SqliteUtils
  * @Date  : 2020/8/18 0018  上午 11:16
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 参考
  * https://www.jianshu.com/p/3e358eb9ac43
  */

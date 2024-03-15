@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
  * @FileName :   TagView
  * @Date : 2020/1/17 0017  上午 10:12
  * @Email :  qiqiang213@gmail.com
- * @Descrive :Created by zhy on 15/9/10.
+ * @Describe :Created by zhy on 15/9/10.
  */
 public class TagView extends FrameLayout implements Checkable {
     private boolean isChecked;

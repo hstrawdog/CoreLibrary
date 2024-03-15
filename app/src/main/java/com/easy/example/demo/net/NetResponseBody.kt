@@ -6,7 +6,7 @@ package com.easy.example.demo.net
  * @FileName :   NetResponseBody
  * @Date : 2020/8/5 0005  下午 2:46
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class NetResponseBody<T> {
     /**

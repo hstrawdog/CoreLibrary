@@ -11,7 +11,7 @@ import java.lang.reflect.ParameterizedType
  * @FileName :   ViewModelFactory
  * @Date : 2020/7/30 0030  上午 11:04
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 internal object ViewModelFactory {
     /**

@@ -13,7 +13,7 @@ import com.easy.core.utils.ScreenUtils
  * @FileName :   SoftHideKeyboardRedraw
  * @Date : 2018/12/21 0021
  * @Email :  qiqiang213@gmail.com
- * @Descrive :  解决键盘档住输入框
+ * @Describe :  解决键盘档住输入框
  * 键盘显示的时候 重新绘制view 解决底部按钮被遮挡的问题
  */
 class SoftKeyboardRedraw private constructor(

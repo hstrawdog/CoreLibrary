@@ -8,7 +8,7 @@ import android.graphics.PointF;
  * @FileName :   BezierUtil
  * @Date : 2019/5/25 0025  下午 2:09
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class BezierUtil {
 

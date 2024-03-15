@@ -8,7 +8,7 @@ import com.easy.example.R
  * @Package : com.easy.iblibrary.ui.activity
  * @FileName :   DefActivity
  * @Date  : 2018/12/14 0014
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :  qiqiang213@gmail.com
  */
 class DefActivity : BaseActivity() {

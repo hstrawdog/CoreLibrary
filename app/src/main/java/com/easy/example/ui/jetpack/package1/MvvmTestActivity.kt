@@ -17,7 +17,7 @@ import com.easy.example.databinding.ActivityMvvmBinding
  * @FileName :   Package1Activity
  * @Date : 2020/7/21 0021  下午 3:53
  * @Email :  qiqiang213@gmail.com
- * @Descrive : ViewBinding + ViewModel + liveData
+ * @Describe : ViewBinding + ViewModel + liveData
  */
 class MvvmTestActivity : BaseVmActivity<UserViewModel, ActivityMvvmBinding, >() {
     override fun addViewModel() {

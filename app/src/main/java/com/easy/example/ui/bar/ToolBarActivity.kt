@@ -14,7 +14,7 @@ import com.easy.example.R
  * @Package : com.easy.iblibrary.ui.activity
  * @FileName :   ToolBarActivity
  * @Date : 2018/11/22 0022
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :  qiqiang213@gmail.com
  */
 class ToolBarActivity : BaseActivity() {

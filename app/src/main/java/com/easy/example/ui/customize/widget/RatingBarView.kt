@@ -17,7 +17,7 @@ import com.easy.example.R
  * @FileName :   RatingBarView
  * @Date : 2019/6/24 0024  下午 4:34
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class RatingBarView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

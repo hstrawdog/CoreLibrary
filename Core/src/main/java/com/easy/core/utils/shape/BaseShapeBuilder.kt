@@ -12,7 +12,7 @@ import com.easy.core.utils.ResourcesUtils
  * @FileName :   BaseShapeBuilder
  * @Date : 2019/12/6 0006  下午 2:32
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class BaseShapeBuilder {
     var mGradientDrawable: GradientDrawable

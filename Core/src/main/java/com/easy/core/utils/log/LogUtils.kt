@@ -22,7 +22,7 @@ import java.util.Date
  * @FileName :   LogUtils
  * @Date : 2019/3/13 0013
  * @Email :  qiqiang213@gmail.com
- * @Descrive :    logcat 打印的长度  4*1024  这边用的 4*1000
+ * @Describe :    logcat 打印的长度  4*1024  这边用的 4*1000
  */
 object LogUtils {
 

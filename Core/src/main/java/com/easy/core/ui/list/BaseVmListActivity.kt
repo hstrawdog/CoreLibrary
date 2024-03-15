@@ -15,7 +15,7 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
  * @FileName :   BaseListActivity
  * @Date : 2020/7/29 0029  上午 9:54
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
 abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> :

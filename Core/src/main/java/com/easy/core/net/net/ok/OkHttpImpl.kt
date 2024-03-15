@@ -30,7 +30,7 @@ import kotlin.coroutines.CoroutineContext
  * @FileName :   OkHttpImpl
  * @Date : 2016/12/14  下午15:54
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
 </描述当前版本功能> */
 class OkHttpImpl : HttpCompat {
 

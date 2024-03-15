@@ -26,7 +26,7 @@ import com.easy.album.utils.LoadUtils
  * @FileName :   AlbumDetailAdapter
  * @Date : 2017/5/7 0001  上午 11:08
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class AlbumDetailAdapter(private val maxSelectNum: Int) :
     BaseQuickAdapter<com.easy.album.entity.LocalMedia, BaseViewHolder>((R.layout.picture_image_grid_item)) {

@@ -9,7 +9,7 @@ import com.easy.example.R;
  * @FileName :   SwipeMenuLayoutActivity
  * @Date : 2019/12/19 0019  下午 5:23
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class SwipeMenuLayoutActivity extends BaseActivity {
 

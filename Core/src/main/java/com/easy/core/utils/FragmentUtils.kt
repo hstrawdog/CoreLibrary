@@ -10,7 +10,7 @@ import com.easy.core.ui.base.BaseFragment
  * @Package : com.easy.core.utils
  * @Date : 下午 2:11
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class FragmentUtils {
     var supportFragmentManager: FragmentManager? = null

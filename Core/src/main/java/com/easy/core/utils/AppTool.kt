@@ -12,6 +12,7 @@ import android.content.pm.PackageManager
 import android.content.pm.Signature
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.encrypt.EncryptTool
 import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.log.LogUtils

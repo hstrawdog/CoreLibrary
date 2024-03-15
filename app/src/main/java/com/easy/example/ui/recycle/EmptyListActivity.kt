@@ -9,7 +9,7 @@ import com.easy.example.adapter.MainAdapter
  * @FileName :   EmptyListActivity
  * @Date : 2019/12/30 0030  下午 8:40
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class EmptyListActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {
 

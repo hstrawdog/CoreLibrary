@@ -6,6 +6,6 @@ package com.easy.core.listenner
  * @FileName :   ScriptInterface
  * @Date : 2020/1/9 0009  上午 11:09
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface ScriptInterface

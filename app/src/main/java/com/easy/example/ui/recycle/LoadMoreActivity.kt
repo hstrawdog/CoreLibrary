@@ -11,7 +11,7 @@ import com.easy.example.bean.MainBean
  * @Package : com.easy.iblibrary.ui.activity
  * @FileName :   LoadMoreActivity
  * @Date : 2018/11/23 0023
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :  qiqiang213@gmail.com
  */
 class LoadMoreActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {

@@ -1,7 +1,7 @@
 package com.easy.core.utils.text
 
 import android.text.TextUtils
-import com.easy.core.utils.DataUtils.isNullString
+import com.easy.core.utils.data.DataUtils.isNullString
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

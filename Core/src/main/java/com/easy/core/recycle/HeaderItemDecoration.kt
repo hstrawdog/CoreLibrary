@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
  * @FileName :   HeaderItemDecoration
  * @Date : 2019/12/11 0011  下午 3:46
  * @Email : qiqiang213@gmail.com
- * @Descrive : 悬停的解决方案
+ * @Describe : 悬停的解决方案
  * https://stackoverflow.com/questions/32949971/how-can-i-make-sticky-headers-in-recyclerview-without-external-lib?answertab=votes#tab-top
  */
 class HeaderItemDecoration(recyclerView: RecyclerView, private val mListener: StickyHeaderInterface) : ItemDecoration() {

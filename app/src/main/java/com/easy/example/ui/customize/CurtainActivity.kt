@@ -15,7 +15,7 @@ import com.easy.example.ui.customize.widget.GuideView
  * @FileName :   CurtainActivity
  * @Date : 2020/5/12 0012  下午 3:22
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class CurtainActivity : BaseActivity() {
     override fun getLayoutViewId(): Int {

@@ -11,7 +11,7 @@ import com.easy.example.BR;
  * @FileName :   User
  * @Date : 2019/10/22 0022  下午 1:41
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class User  extends BaseObservable  {
     private String name;

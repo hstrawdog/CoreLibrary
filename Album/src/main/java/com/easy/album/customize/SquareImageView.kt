@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
  * @Author : huangqiqiang
  * @FileName :   SquareImageView
  * @Date : 2018/7/26 0026  下午 5:41
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :
  * 宽度为准的 正方形ImageView
  */

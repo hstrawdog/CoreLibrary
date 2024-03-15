@@ -9,7 +9,7 @@ import com.easy.core.R
  * @FileName :   AlertParams
  * @Date : 2020/7/30 0030  下午 1:58
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 仿源码Dialog Builder 构建模式
  * 需要不断补充属性
  *

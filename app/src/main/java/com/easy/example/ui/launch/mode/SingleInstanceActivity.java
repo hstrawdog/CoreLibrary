@@ -9,7 +9,7 @@ import android.content.Intent;
  * @FileName :   SingleInstanceActivity
  * @Date : 2019/10/25 0025  上午 9:45
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class SingleInstanceActivity extends LaunchActivity {
 

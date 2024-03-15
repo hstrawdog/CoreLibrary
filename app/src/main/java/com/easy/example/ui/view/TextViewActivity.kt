@@ -16,7 +16,7 @@ import com.easy.example.databinding.ActivityTextViewBinding
  * @FileName :   TextViewActivity
  * @Date : 2020/6/9 0009  下午 3:34
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class TextViewActivity : BaseViewBindingActivity<ActivityTextViewBinding>() {
 

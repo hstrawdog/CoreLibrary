@@ -17,7 +17,7 @@ import com.easy.core.ui.base.BaseViewBindingFragment
  * @FileName :   BaseBindingListFragment
  * @Date : 2020/8/27 0027  上午 10:54
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseBindingListFragment<T : ViewBinding> : BaseViewBindingFragment<T>(),
     BaseListModel.IBaseListModelView {

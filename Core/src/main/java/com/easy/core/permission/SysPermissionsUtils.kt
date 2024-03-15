@@ -12,7 +12,7 @@ import com.easy.core.utils.BaseSystemUtil
  * @FileName :   PermissionsUtils
  * @Date : 2018/11/22 0022  上午 10:47
  * @Email :  qiqiang213@gmail.com
- * @Descrive :   PermissionsFragment   需要用 工厂或者代理来生成
+ * @Describe :   PermissionsFragment   需要用 工厂或者代理来生成
  */
 object SysPermissionsUtils {
 
@@ -385,7 +385,7 @@ object SysPermissionsUtils {
                 permissionsResult?.onPermissionsResult(true)
             }
         } else {
-            FragmentProxy().requestPermissions(IPermissionsHas.cameraAndStorageAndSystem, permissionsResult)
+            FragmentProxy().requestPermissions(plus, permissionsResult)
         }
     }
 

@@ -10,7 +10,7 @@ import com.easy.example.R
  * @FileName :   BannerActivity
  * @Date : 2018/12/20 0020
  * @Email :  qiqiang213@gmail.com
- * @Descrive : TODO
+ * @Describe : TODO
  */
 class BannerActivity : BaseActivity() {
     var mRcBanner: RecycleViewBanner? = null

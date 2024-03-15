@@ -23,7 +23,7 @@ import com.easy.core.utils.file.FileUtils
  * @FileName :   PreviewAdapter
  * @Date : 2020/1/16 0016  上午 11:42
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class PreviewAdapter : BaseQuickAdapter<com.easy.album.entity.LocalMedia, BaseViewHolder>(R.layout.fragment_album_preview) {
 

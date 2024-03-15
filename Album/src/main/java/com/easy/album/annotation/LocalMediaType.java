@@ -8,7 +8,7 @@ import androidx.annotation.IntDef;
  * @FileName :   LocalMediaType
  * @Date : 2019/12/2 0002  下午 1:23
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 @IntDef({LocalMediaType.VALUE_TYPE_IMAGE, LocalMediaType.VALUE_TYPE_VIDEO, LocalMediaType.VALUE_URL_IMAGE})
 public @interface LocalMediaType {

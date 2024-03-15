@@ -24,7 +24,7 @@ import androidx.annotation.StringRes
  * @FileName :   ViewHolderUtils
  * @Date : 2018/6/13 0013  上午 9:44
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 与旧版本 BRVAH是一样的  方便 HeadView 的一些操作
  */
 class ViewHolderUtils(view: View, onItemChildClick: View.OnClickListener) {

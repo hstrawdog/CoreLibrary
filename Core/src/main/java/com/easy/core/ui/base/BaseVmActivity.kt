@@ -13,7 +13,7 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
  * @FileName :   BaseActivity
  * @Date : 2020/7/22 0022  下午 3:37
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * T 泛型 正常使用布局生成的 ViewBanding
  * DataBindingUtil 放回的对象支持DataBinding 与 ViewBanding
  * BaseViewModel 驱动 ui显示 Toast以及Loading

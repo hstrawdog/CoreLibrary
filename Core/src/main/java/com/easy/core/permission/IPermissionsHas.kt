@@ -9,7 +9,7 @@ import android.content.Context
  * @FileName :   IPermissionsHas
  * @Date : 2018/11/22 0022  上午 9:53
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface IPermissionsHas {
     /**

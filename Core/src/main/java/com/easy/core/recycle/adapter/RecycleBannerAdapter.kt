@@ -17,7 +17,7 @@ import com.easy.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
  * @FileName :   BaseBannerAdapter
  * @Date : 2018/6/15 0015  下午 5:26
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     /**

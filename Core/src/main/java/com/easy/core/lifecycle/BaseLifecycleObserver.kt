@@ -10,7 +10,7 @@ import androidx.lifecycle.OnLifecycleEvent
  * @FileName :   BaseLifecycleObserver
  * @Date : 2019/1/5 0005  下午 6:00
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface BaseLifecycleObserver : LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

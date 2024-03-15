@@ -14,7 +14,7 @@ import com.easy.example.databinding.ActivityVmTestBinding
  * @FileName :   VmTestActivity
  * @Date : 2020/7/27  下午11:03
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
 </描述当前版本功能> */
 class VmTestActivity : BaseVmActivity<BaseViewModel, ActivityVmTestBinding, >() {
 

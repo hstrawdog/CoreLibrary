@@ -18,7 +18,7 @@ import java.util.*
  * @FileName :   TemplatesImage
  * @Date : 2020/1/10 0010  下午 1:35
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class TemplatesImage : View {
     constructor(context: Context?) : super(context) {

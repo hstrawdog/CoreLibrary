@@ -9,7 +9,7 @@ import com.easy.example.R;
  * @FileName :   TextViewBuilderSizeActivity
  * @Date : 2019/5/14 0014
  * @Email :  qiqiang213@gmail.com
- * @Descrive : TODO
+ * @Describe : TODO
  */
 public class TextViewBuilderSizeActivity extends BaseActivity {
 

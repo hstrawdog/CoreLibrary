@@ -11,7 +11,7 @@ import com.easy.example.R;
   * @FileName :   SvgActivity
   * @Date  : 2020/7/9 0009  下午 3:36
   * @Email :  qiqiang213@gmail.com
-  * @Descrive :
+  * @Describe :
   */
 public class SvgActivity extends BaseActivity {
 

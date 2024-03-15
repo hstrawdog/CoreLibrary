@@ -24,7 +24,7 @@ import java.lang.reflect.Field
  * @FileName :   ScreenUtils
  * @Date : 2018/6/20 0020  下午 5:56
  * @Email :  593979591@qq.com
- * @Descrive :屏幕相关 单位换算  dp px 转换 状态栏高度
+ * @Describe :屏幕相关 单位换算  dp px 转换 状态栏高度
  */
 object ScreenUtils {
     /**

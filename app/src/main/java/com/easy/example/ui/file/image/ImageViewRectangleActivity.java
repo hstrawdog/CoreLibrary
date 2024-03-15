@@ -13,7 +13,7 @@ import com.easy.example.R;
  * @FileName :   ImageViewRectangleActivity
  * @Date : 2020/6/30 0030  下午 2:45
  * @Email :  qiqiang213@gmail.com
- * @Descrive : 长方形控件 正方形图片测试
+ * @Describe : 长方形控件 正方形图片测试
  */
 public class ImageViewRectangleActivity extends BaseActivity {
 

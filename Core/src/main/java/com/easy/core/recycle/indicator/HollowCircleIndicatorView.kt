@@ -10,7 +10,7 @@ import android.util.AttributeSet
  * @FileName :   HollowCircleIndicatorImpl
  * @Date  : 2019/4/23 0023
  * @Email :  qiqiang213@gmail.com
- * @Descrive : TODO
+ * @Describe : TODO
  */
 class HollowCircleIndicatorView : CircleIndicatorView {
     constructor(context: Context?) : super(context) {}

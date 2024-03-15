@@ -24,7 +24,7 @@ import com.easy.core.utils.ResourcesUtils
  * @FileName :   ImageLoadUtils
  * @Date : 2018/2/9  9:23
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 目的 只是为了更方便的替换Glide以及维护图片的加载
  * 参考 http://blog.csdn.net/hexingen/article/details/72578066
  * 参考 http://blog.csdn.net/wyb112233/article/details/52337392

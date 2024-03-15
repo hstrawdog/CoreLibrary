@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
  * @FileName :   DividerItemDecoration
  * @Date : 2018/7/5 0005  下午 5:11
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * https://juejin.im/post/5940a020a0bb9f006b734228
  * 使用这个 在rc 一直滑动的时候 会不断的去创建对象
  */

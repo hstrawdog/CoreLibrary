@@ -14,7 +14,7 @@ import android.view.View;
  * @FileName :   SubscriptView
  * @Date : 2019/7/26 0026  下午 3:01
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class SubscriptView extends View {
     public SubscriptView(Context context) {

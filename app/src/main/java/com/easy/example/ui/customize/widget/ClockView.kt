@@ -15,7 +15,7 @@ import java.util.Calendar
  * @FileName :   ClockView
  * @Date : 2019/11/15 0015  下午 4:42
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class ClockView : View {
     constructor(context: Context?) : super(context) {}

@@ -13,7 +13,7 @@ import com.easy.example.R;
  * @FileName :   NewsAdapter
  * @Date : 2020/8/5 0005  上午 10:37
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class NewsAdapter extends BaseQuickAdapter<News.DataBean, BaseViewHolder> implements LoadMoreModule {
     public NewsAdapter() {

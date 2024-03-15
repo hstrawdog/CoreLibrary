@@ -19,7 +19,7 @@ import com.easy.core.widget.ptr.PtrClassicFrameLayout
  * @FileName :   CusPtrClassicFrameLayout
  * @Date : 2018/12/21 0021
  * @Email :  qiqiang213@gmail.com
- * @Descrive :  解决下拉 左右滑动冲突
+ * @Describe :  解决下拉 左右滑动冲突
  * https://github.com/LiuTaw/PullToRefresh-AdBannerDemo
  */
 class CusPtrClassicFrameLayout : PtrClassicFrameLayout {

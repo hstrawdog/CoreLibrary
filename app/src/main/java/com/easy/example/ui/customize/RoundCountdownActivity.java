@@ -9,7 +9,7 @@ import com.easy.example.R;
  * @FileName :   RoundCountdownActivity
  * @Date : 2019/12/24 0024  下午 5:07
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class RoundCountdownActivity extends BaseActivity {
     @Override

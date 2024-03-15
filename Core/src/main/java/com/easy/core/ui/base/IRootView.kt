@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModel
  * @FileName :   ICreateRootViewBuilder
  * @Date : 2019/5/17 0017  下午 4:58
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * - 目的 进行接口隔离
  */
 interface IRootView {

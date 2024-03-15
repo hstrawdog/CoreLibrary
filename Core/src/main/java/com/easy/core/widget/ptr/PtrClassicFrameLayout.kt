@@ -9,7 +9,7 @@ import android.util.AttributeSet
   * @FileName :   PtrClassicFrameLayout.kt
   * @Date  : 2020/9/1 0001  下午 5:25
   * @Email :  qiqiang213@gmail.com
-  * @Descrive :
+  * @Describe :
   */
 open class PtrClassicFrameLayout : PtrFrameLayout {
     var header: PtrClassicDefaultHeader? = null

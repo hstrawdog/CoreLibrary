@@ -16,7 +16,7 @@ import com.easy.example.R
  * @FileName :   WebActivity
  * @Date : 2019/8/5 0005  下午 7:52
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class WebActivity : BaseFrameLayoutActivity() {
 

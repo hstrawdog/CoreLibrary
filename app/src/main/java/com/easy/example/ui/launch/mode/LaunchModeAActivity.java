@@ -9,7 +9,7 @@ import android.content.Intent;
  * @FileName :   LaunchModeAActivity
  * @Date : 2019/10/25 0025  上午 9:43
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class LaunchModeAActivity extends LaunchActivity {
 

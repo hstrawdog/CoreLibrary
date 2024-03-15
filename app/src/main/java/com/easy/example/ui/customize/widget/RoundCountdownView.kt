@@ -21,7 +21,7 @@ import com.easy.example.R
  * @FileName :   RoundCountdownView
  * @Date : 2019/12/24 0024  下午 5:06
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class RoundCountdownView : View {
     /**

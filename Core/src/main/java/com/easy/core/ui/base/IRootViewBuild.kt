@@ -8,7 +8,7 @@ import android.view.View
  * @FileName :   IRootViewBuilder
  * @Date : 2019/5/24 0024  上午 10:20
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface IRootViewBuild {
 

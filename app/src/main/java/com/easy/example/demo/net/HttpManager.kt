@@ -17,7 +17,7 @@ import java.net.URLEncoder
  * @FileName :   Repository
  * @Date : 2020/7/28 0028  下午 4:21
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object HttpManager {
     /**

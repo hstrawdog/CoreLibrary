@@ -10,7 +10,7 @@ import java.io.File
  * @FileName :   HttpCompat
  * @Date : 2016/12/14 15:40.
  * @Email :  qiqiang213@gmail.com
- * @Descrive :  坚持封装的 OkHttp 请求
+ * @Describe :  坚持封装的 OkHttp 请求
  */
 interface HttpCompat {
 

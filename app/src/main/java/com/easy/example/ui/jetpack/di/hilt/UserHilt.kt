@@ -8,7 +8,7 @@ import javax.inject.Inject
  * @FileName :   User
  * @Date : 2020/8/13 0013  上午 10:18
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class UserHilt {
 

@@ -7,7 +7,7 @@ import org.junit.Test
  * @FileName :   Test
  * @Date : 2020/8/27 0027  上午 9:31
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class Test {
 

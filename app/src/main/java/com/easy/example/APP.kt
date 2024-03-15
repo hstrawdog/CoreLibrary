@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * @Package : com.easy.iblibrary
  * @FileName :   APP
  * @Date : 2018/11/23 0023  下午 2:21
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 @HiltAndroidApp

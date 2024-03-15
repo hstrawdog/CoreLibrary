@@ -26,7 +26,7 @@ import java.io.*
  * @FileName :   BitmapUtils
  * @Date : 2018/6/25 0025  上午 11:35
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object BitmapUtils {
 

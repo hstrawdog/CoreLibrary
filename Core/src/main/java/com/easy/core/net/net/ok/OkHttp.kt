@@ -7,7 +7,7 @@ package com.easy.core.net.net.ok
  * @FileName :   OkHttp
  * @Date : 2016/12/14 15:51
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object OkHttp {
 

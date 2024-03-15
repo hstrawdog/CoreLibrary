@@ -16,7 +16,7 @@ import com.easy.example.ui.view.SvgActivity
  * @FileName :   AdaptationIndexActivity
  * @Date : 2020/1/2 0002  上午 9:35
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class AdaptationIndexActivity(override val adapter: MainAdapter = MainAdapter()) :
     BaseListActivity() {

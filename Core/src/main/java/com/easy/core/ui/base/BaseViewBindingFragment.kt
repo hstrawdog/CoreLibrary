@@ -12,7 +12,7 @@ import java.lang.reflect.ParameterizedType
  * @Package : com.easy.core.ui.base
  * @Date  : 下午 4:35
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 
 abstract class BaseViewBindingFragment<T : ViewBinding> : BaseFragment() {

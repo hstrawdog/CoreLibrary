@@ -17,7 +17,7 @@ import com.easy.core.listenner.ScriptInterface
 import com.easy.core.listenner.WebLoadListener
 import com.easy.core.ui.base.BaseFragment
 import com.easy.core.utils.AppTool
-import com.easy.core.utils.DataUtils
+import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.log.LogUtils
 
 /**
@@ -26,7 +26,7 @@ import com.easy.core.utils.log.LogUtils
  * @FileName :   BaseWebFragment
  * @Date : 2019/3/4 0004  下午 4:22
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 open class BaseWebFragment : BaseFragment() {
     /**

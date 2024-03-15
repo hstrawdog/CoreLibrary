@@ -11,7 +11,7 @@ import com.easy.example.demo.net.NetCallback
  * @FileName :   JokeViewModel
  * @Date : 2020/8/5 0005  下午 2:29
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class JokeViewModel : BaseListViewModel() {
     override fun onCreate(owner: LifecycleOwner) {

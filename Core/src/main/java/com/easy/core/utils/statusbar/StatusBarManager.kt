@@ -13,7 +13,7 @@ import android.view.WindowManager
  * @FileName :   StatusBarManager
  * @Date : 2018/5/24 0024  下午 3:09
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * https://www.jianshu.com/p/7d8df51347ff
  * https://blog.csdn.net/qq_36230279/article/details/80664863
  */

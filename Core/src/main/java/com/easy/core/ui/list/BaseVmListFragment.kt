@@ -15,7 +15,7 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
  * @FileName :   BaseListFragment
  * @Date : 2020/7/29 0029  下午 2:29
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : BaseVmFragment<K, T>(),
     IBaseListModelView {

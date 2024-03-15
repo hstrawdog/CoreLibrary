@@ -15,7 +15,7 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
  * @Package : com.core.library
  * @FileName :   BaseListActivity
  * @Date : 2018/11/5 0005  下午 4:23
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 abstract class BaseListActivity : BaseActivity(), IBaseListModelView {

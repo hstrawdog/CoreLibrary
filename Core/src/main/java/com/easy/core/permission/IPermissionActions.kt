@@ -13,7 +13,7 @@ import androidx.core.content.PermissionChecker
  * @FileName :   IPermissionActions
  * @Date : 2019/6/6 0006  上午 11:04
  * @Email : qiqiang213@gmail.com
- * @Descrive : 代理关键接口
+ * @Describe : 代理关键接口
  */
 interface IPermissionActions {
     companion object {

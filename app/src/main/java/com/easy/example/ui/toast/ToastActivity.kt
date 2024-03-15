@@ -16,7 +16,7 @@ import com.easy.example.R
  * @FileName :   ToastActivity
  * @Date : 2020/6/23 0023  下午 1:57
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class ToastActivity : BaseActivity() {
 

@@ -6,7 +6,7 @@ package com.easy.core.plugin
  * @FileName :   DependencyManager
  * @Date  : 2020/8/11 0011  下午 2:12
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object BuildVersionConfig {
     const val compileSdkVersion = 31

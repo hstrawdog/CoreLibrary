@@ -11,7 +11,7 @@ import com.easy.core.ui.base.BaseFragment
  * @FileName :   TabFragment
  * @Date : 2019/6/10 0010  上午 10:07
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class TabFragment : BaseFragment() {
 

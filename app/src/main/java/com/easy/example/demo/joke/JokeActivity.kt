@@ -12,7 +12,7 @@ import com.easy.example.databinding.ActivityJokeBinding
  * @FileName :   JokeActivity
  * @Date : 2020/8/5 0005  下午 2:18
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class JokeActivity(override val adapter: com.easy.example.demo.joke.JokeAdapter = com.easy.example.demo.joke.JokeAdapter())
     : BaseVmListActivity<JokeViewModel, ActivityJokeBinding>() {

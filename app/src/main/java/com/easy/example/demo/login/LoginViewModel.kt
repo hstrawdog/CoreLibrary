@@ -12,7 +12,7 @@ import com.easy.example.demo.net.HttpManager.login
  * @FileName :   LoginModel
  * @Date : 2020/7/28 0028  下午 3:53
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class LoginViewModel : BaseViewModel() {
     var mPhone: MutableLiveData<String> = MediatorLiveData()

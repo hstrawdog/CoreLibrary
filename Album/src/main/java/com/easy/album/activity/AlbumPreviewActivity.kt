@@ -32,7 +32,7 @@ import com.easy.core.utils.file.SaveBitmapUtils
  * @FileName :   AlbumPreviewV2Activity
  * @Date : 2019/9/16 0016  下午 8:42
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(), View.OnClickListener {
     companion object {

@@ -42,7 +42,7 @@ import android.text.style.SuperscriptSpan as SuperscriptSpan1
  * @FileName :   TextSpannableBuilder
  * @Date : 2018/12/19 0019  下午 4:55
  * @Email :  qiqiang213@gmail.com
- * @Descrive : String 工具类 点击事件等待完善
+ * @Describe : String 工具类 点击事件等待完善
  */
 class TextSpannableBuilder {
     /**

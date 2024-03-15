@@ -14,7 +14,7 @@ import com.easy.example.databinding.ActivityPermissionBinding
  * @FileName :   PermissionActivity
  * @Date : 2019/4/22 0022
  * @Email :  qiqiang213@gmail.com
- * @Descrive : TODO
+ * @Describe : TODO
  */
 class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() {
     override fun getLayoutId(): Int {

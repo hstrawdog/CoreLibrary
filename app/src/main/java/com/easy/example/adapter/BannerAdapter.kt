@@ -12,7 +12,7 @@ import com.easy.example.R
  * @Package : com.easy.coreapp.adapter
  * @FileName :   BannerAdapter
  * @Date : 2018/12/20 0020  下午 3:32
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 class BannerAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_banner_adapter) {

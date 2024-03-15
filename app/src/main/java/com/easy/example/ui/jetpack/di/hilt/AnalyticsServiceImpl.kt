@@ -8,7 +8,7 @@ import javax.inject.Inject
  * @FileName :   AnalyticsServiceImpl
  * @Date : 2020/8/13 0013  下午 4:19
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class AnalyticsServiceImpl @Inject internal constructor() : AnalyticsService {
     override fun analyticsMethods(): String {

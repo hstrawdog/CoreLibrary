@@ -12,7 +12,7 @@ import javax.inject.Qualifier
  * @FileName :   AppHiltBindModel
  * @Date : 2020/8/14 0014  上午 11:03
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 @Module
 @InstallIn(ActivityComponent::class)

@@ -10,7 +10,7 @@ import com.easy.core.utils.log.LogUtils.e
  * @FileName :   ViewBanding
  * @Date : 2020/7/21 0021  下午 3:03
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class DataBanding {
     fun onClickButton(v: View?) {

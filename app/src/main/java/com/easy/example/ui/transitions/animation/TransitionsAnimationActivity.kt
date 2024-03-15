@@ -17,7 +17,7 @@ import com.easy.example.adapter.StringListAdapter
  * @FileName :   TransitionsAnimationActivity
  * @Date : 2019/10/28 0028  下午 1:38
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class TransitionsAnimationActivity : BaseListActivity(), OnItemClickListener {
     override val adapter: StringListAdapter = StringListAdapter()

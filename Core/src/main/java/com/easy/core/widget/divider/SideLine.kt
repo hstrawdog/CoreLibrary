@@ -8,7 +8,7 @@ import androidx.annotation.ColorInt
  * @FileName :   SideLine
  * @Date : 2018/7/5 0005  下午 5:14
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class SideLine(isHave: Boolean, @ColorInt color: Int, widthDp: Float, startPaddingDp: Float, endPaddingDp: Float) {
     var isHave = false

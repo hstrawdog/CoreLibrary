@@ -22,7 +22,7 @@ import com.easy.album.utils.AlbumUtils
  * @Package : cn.easy.halbum.activity
  * @FileName :   AlbumDetailActivity
  * @Date : 2018/10/8 0008
- * @Descrive :
+ * @Describe :
  * @Email :
  */
 class AlbumDetailActivity : BaseAlbumActivity<ActivityAlbumDetailBinding>(), View.OnClickListener, OnPhotoSelectChangedListener {

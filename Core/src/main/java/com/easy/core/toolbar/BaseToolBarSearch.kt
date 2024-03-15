@@ -18,7 +18,7 @@ import  com.easy.core.R
  * @Package : com..sellercenter.toolsbar
  * @FileName :   BaseToolBarSearch
  * @Date : 2018/11/27 0027  下午 1:14
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 class BaseToolBarSearch() : BaseToolBar() {

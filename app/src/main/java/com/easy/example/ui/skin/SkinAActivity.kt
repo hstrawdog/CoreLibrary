@@ -14,7 +14,7 @@ import com.easy.example.R
  * @FileName :   SkinAActivity
  * @Date : 2020/4/10  上午10:02
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
 </描述当前版本功能> */
 class SkinAActivity : com.easy.example.ui.skin.BaseSkinActivity() {
     override fun initView() {

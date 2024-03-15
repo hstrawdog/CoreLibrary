@@ -8,7 +8,7 @@ import java.util.List;
  * @FileName :   Weather
  * @Date : 2020/8/4 0004  下午 4:40
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class Weather {
     /**

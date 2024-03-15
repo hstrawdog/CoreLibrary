@@ -17,7 +17,7 @@ import com.easy.example.ui.jetpack.livedata.User
  * @FileName :   DaggerAActivity
  * @Date : 2020/7/15 0015  下午 4:18
  * @Email :  qiqiang213@gmail.com
- * @Descrive : dataBinding  双向绑定 需要实现BaseObservable 进行观察 以及通知回调
+ * @Describe : dataBinding  双向绑定 需要实现BaseObservable 进行观察 以及通知回调
  * 注意 setVariable
  */
 class DataBindingActivity : BaseActivity() {

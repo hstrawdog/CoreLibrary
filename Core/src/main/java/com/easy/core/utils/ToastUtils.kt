@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
  * @Package : com.core.library.utils
  * @FileName :   ToastUtils
  * @Date : 2018/12/14 0014
- * @Descrive : 输出工具类
+ * @Describe : 输出工具类
  * @Email :  qiqiang213@gmail.com
  */
 object ToastUtils {

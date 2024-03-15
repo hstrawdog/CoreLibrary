@@ -8,7 +8,7 @@ import android.graphics.Bitmap
  * @FileName :   WebLoadListener
  * @Date : 2019/3/22 0022  上午 11:47
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface WebLoadListener {
     /**

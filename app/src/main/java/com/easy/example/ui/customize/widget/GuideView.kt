@@ -14,7 +14,7 @@ import com.easy.example.R
  * @FileName :   GuideView
  * @Date : 2020/5/12 0012  下午 2:01
  * @Email : qiqiang213@gmail.com
- * @Descrive : 引导页
+ * @Describe : 引导页
  */
 class GuideView : View {
     /**

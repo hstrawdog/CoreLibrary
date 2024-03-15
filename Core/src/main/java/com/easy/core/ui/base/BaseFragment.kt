@@ -25,7 +25,7 @@ interface OnFragmentVisibilityChangedListener {
  * @FileName :   BaseFragment
  * @Date : 2018/5/28 0028  下午 2:14
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener,
     View.OnAttachStateChangeListener, OnFragmentVisibilityChangedListener {

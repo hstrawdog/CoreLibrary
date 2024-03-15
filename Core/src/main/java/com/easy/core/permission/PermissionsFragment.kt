@@ -17,7 +17,7 @@ import com.easy.core.utils.ToastUtils
  * @FileName :   PermissionsFragment
  * @Date : 2018/11/22 0022  上午 10:41
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class PermissionsFragment : Fragment(), IPermissionActions {
 

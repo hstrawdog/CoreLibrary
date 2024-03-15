@@ -19,7 +19,7 @@ import com.easy.example.databinding.ActivityGallerySnapBinding
  * @FileName :   GallerySnapActivity
  * @Date : 2019/6/18 0018  下午 6:37
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class GallerySnapActivity( ) : BaseDataBindingActivity<ActivityGallerySnapBinding>() {
 

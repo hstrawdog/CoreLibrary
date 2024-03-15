@@ -9,7 +9,7 @@ import com.easy.example.R;
  * @FileName :   WidgetActivity
  * @Date : 2019/11/15 0015  下午 4:41
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class WidgetActivity extends BaseActivity {
 

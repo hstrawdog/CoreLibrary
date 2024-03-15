@@ -16,7 +16,7 @@ import com.easy.example.ui.web.WebActivity
  * @FileName :   NewsActivity
  * @Date : 2020/8/5 0005  上午 10:34
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class NewsActivity(override val adapter: NewsAdapter = NewsAdapter()) :
     BaseVmListActivity<NewsViewModel, ActivityNewsBinding>(), OnItemClickListener {

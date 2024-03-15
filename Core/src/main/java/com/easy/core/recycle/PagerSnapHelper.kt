@@ -16,7 +16,7 @@ import  com.easy.core.utils.log.LogUtils
  * @FileName :   PagerSnapHelper
  * @Date : 2019/6/18 0018  上午 10:16
  * @Email : qiqiang213@gmail.com
- * @Descrive : 多个item组合分页 只支持横向分页滑动
+ * @Describe : 多个item组合分页 只支持横向分页滑动
  */
 
 class PagerSnapHelper(

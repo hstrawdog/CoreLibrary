@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @FileName :   BindBean
  * @Date : 2020/8/14 0014  上午 11:00
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 
 class BindBean @Inject constructor(@ApplicationContext val context: Context, val server: AnalyticsService) {

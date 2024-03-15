@@ -5,7 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
-import com.easy.core.utils.DataUtils.isNullString
+import com.easy.core.utils.data.DataUtils.isNullString
 import com.easy.core.utils.image.ImageUtils.save
 import java.io.File
 import java.io.IOException

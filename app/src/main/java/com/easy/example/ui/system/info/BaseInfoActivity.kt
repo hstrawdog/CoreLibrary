@@ -32,7 +32,7 @@ import com.easy.example.databinding.ActivityBaseInfoBinding
  * @Package : com.easy.core.app.ui.activity
  * @FileName :   BaseInfoActivity
  * @Date : 2019-07-02  21:51
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :
 </描述当前版本功能> */
 class BaseInfoActivity : BaseViewBindingActivity<ActivityBaseInfoBinding>() {

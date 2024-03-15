@@ -15,7 +15,7 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
  * @FileName :   BaseListFragment
  * @Date : 2018/11/23 0023  上午 11:47
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseListFragment : BaseFragment(), IBaseListModelView {
 

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
  * @FileName :   Sticker
  * @Date : 2020/1/15 0015  上午 10:09
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public abstract  class Sticker {
     protected Matrix matrix;

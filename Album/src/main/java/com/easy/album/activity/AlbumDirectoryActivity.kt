@@ -47,7 +47,7 @@ import java.io.File
  * @Package : cn.easy.halbum.activity
  * @FileName :   AlbumDirectoryActivity
  * @Date : 2018/6/8 0008  下午 3:14
- * @Descrive :
+ * @Describe :
  * @Email :  593979591@qq.com
  */
 class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumDirectoryAdapter.OnItemClickListener,

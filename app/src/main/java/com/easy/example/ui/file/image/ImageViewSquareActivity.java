@@ -9,7 +9,7 @@ import com.easy.example.R;
  * @FileName :   ImageViewActivity
  * @Date : 2020/1/8 0008  下午 3:54
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class ImageViewSquareActivity extends BaseActivity {
 

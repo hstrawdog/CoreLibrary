@@ -22,7 +22,7 @@ import com.easy.core.widget.LoadingView
  * @FileName :   BaseActivity
  * @Date : 2018/2/9  10:01
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 1. 生成根布局与ToolBar 与Manifest中的label 添加页面标题
  * 2. 默认强制竖屏
  * 3. 初始化 LoadingView

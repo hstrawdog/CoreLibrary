@@ -12,7 +12,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.easy.core.CoreConfig
-import com.easy.core.utils.DataUtils.isNullString
+import com.easy.core.utils.data.DataUtils.isNullString
 import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.log.LogUtils
 import java.io.*

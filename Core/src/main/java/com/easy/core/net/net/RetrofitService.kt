@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
  * @Package : com.easy.core.net
  * @Date  : 下午 1:23
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object RetrofitService {
 

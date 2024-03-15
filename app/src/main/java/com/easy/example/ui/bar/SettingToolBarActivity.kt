@@ -11,7 +11,7 @@ import com.easy.example.R
  * @FileName :   SettingToolBarActivity
  * @Date : 2019/5/22 0022
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class SettingToolBarActivity : BaseActivity() {
 

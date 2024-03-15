@@ -11,7 +11,7 @@ import com.easy.example.ui.view.page.IFragmentActivityBuilder
  * @FileName :   RecycleIndexActivity
  * @Date : 2019/6/18 0018  下午 2:16
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class RecycleIndexActivity : BaseListActivity() {
     override fun initData() {

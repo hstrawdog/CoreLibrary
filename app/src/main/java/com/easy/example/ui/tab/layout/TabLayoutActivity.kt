@@ -16,7 +16,7 @@ import com.easy.example.databinding.ActivityTabLayoutBinding
  * @FileName :   TabLayoutActivity
  * @Date : 2019/6/6 0006  下午 6:00
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class TabLayoutActivity : BaseViewBindingActivity<ActivityTabLayoutBinding>() {
 

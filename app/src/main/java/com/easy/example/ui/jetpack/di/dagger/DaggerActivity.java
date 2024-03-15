@@ -8,7 +8,7 @@ import com.easy.example.R;
   * @FileName :   DaggerActivity
   * @Date  : 2020/7/23 0023  下午 4:03
   * @Email :  qiqiang213@gmail.com
-  * @Descrive :
+  * @Describe :
   */
 public class DaggerActivity extends BaseActivity {
 

@@ -13,7 +13,7 @@ import com.easy.example.R
  * @FileName :   SoftHideKeyBoardActivity
  * @Date : 2019/6/4 0004
  * @Email :  qiqiang213@gmail.com
- * @Descrive :  键盘折叠  整个页面滑动
+ * @Describe :  键盘折叠  整个页面滑动
  */
 class SoftHideKeyBoardActivity : BaseActivity() {
 

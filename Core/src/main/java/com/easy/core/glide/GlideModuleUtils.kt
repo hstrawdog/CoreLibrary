@@ -13,7 +13,7 @@ import com.bumptech.glide.module.AppGlideModule
  * @Package : com.core.library.glide
  * @FileName :   GlideModuleUtils
  * @Date : 2018/10/19 0019  下午 4:45
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 @GlideModule

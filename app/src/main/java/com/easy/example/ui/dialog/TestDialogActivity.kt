@@ -19,7 +19,7 @@ import com.easy.example.dialog.*
  * @FileName :   TestDialogActivity
  * @Date : 2019/5/24 0024
  * @Email :  qiqiang213@gmail.com
- * @Descrive : TODO
+ * @Describe : TODO
  */
 class TestDialogActivity : BaseActivity() {
 

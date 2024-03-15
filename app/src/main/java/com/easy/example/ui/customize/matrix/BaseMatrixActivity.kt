@@ -16,7 +16,7 @@ import com.easy.example.R
  * @FileName :   MatrixActivity
  * @Date : 2020/7/23 0023  上午 9:52
  * @Email :  qiqiang213@gmail.com
- * @Descrive : 矩阵的简单使用
+ * @Describe : 矩阵的简单使用
  * 参考 https://blog.csdn.net/MonaLisaTearr/article/details/80177726
  */
 class BaseMatrixActivity : BaseActivity() {

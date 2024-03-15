@@ -8,7 +8,7 @@ import com.easy.example.R;
   * @FileName :   ImageViewRectangle2Activity
   * @Date  : 2020/6/30 0030  下午 3:24
   * @Email :  qiqiang213@gmail.com
-  * @Descrive :
+  * @Describe :
   */
 public class ImageViewRectangle2Activity extends BaseActivity {
 

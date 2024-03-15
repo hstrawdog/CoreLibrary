@@ -13,7 +13,7 @@ import com.easy.example.adapter.StringAdapter
  * @FileName :   FullBottomSheet
  * @Date : 2019/4/29 0029  下午 2:06
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class FullBottomSheet : BaseBottomDialog() {
     var mStringAdapter = StringAdapter()

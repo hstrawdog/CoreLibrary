@@ -12,7 +12,7 @@ import com.easy.example.R;
  * @FileName :   LaunchActivity
  * @Date : 2019/10/25 0025  下午 5:20
  * @Email : qiqiang213@gmail.com
- * @Descrive : 启动模式
+ * @Describe : 启动模式
  */
 public class LaunchActivity extends BaseActivity {
 

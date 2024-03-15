@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.SmoothScroller.ScrollVectorProv
  * @FileName :   GallerySnapHelper
  * @Date : 2019/6/22 0022  下午 3:53
  * @Email :  qiqiang213@gmail.com
- * @Descrive :  类似谷歌商店的效果
+ * @Describe :  类似谷歌商店的效果
  */
 class GallerySnapHelper : SnapHelper() {
     private var mHorizontalHelper: OrientationHelper? = null

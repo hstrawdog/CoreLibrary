@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
  * @FileName :   WeatherViewModel
  * @Date : 2020/8/4 0004  下午 3:10
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class WeatherViewModel : BaseViewModel() {
 

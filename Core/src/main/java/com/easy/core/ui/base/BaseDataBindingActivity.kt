@@ -12,7 +12,7 @@ import com.easy.core.ui.base.IBanding
  * @FileName :   BaseBindingActivity
  * @Date : 2020/7/30 0030  上午 10:41
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class BaseDataBindingActivity<T : ViewDataBinding> : BaseActivity(), IBanding {
 

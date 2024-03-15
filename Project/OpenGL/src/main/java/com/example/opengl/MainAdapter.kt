@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  * @Package : com.easy.iblibrary.adapter
  * @FileName :   MainAdapter
  * @Date : 2018/11/22 0022  下午 7:45
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 class MainAdapter : BaseQuickAdapter<MainBean<*>, BaseViewHolder>(R.layout.item_main), LoadMoreModule, OnItemClickListener {

@@ -19,7 +19,7 @@ import com.easy.core.utils.ResourcesUtils
  * @FileName :   BaseSelectDialog
  * @Date : 2019/10/31 0031  上午 11:12
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  *          选择弹窗
  * 使用 AlertParams Builder 进行构建
  *

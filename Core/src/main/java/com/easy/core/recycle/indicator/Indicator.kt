@@ -6,7 +6,7 @@ package com.easy.core.recycle.indicator
  * @FileName :   Indicator
  * @Date : 2019/1/5 0005
  * @Email :  qiqiang213@gmail.com
- * @Descrive :  指示器接口  Indicator
+ * @Describe :  指示器接口  Indicator
  */
 interface Indicator {
     /**

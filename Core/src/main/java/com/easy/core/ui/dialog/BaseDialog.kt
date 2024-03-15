@@ -26,7 +26,7 @@ import com.easy.core.widget.LoadingView
  * @FileName :   BaseDialog
  * @Date : 2018/6/19 0019  上午 11:33
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * - 默认 背景是透明的 状态栏亮色模式
  * - 在高度全屏的情况下 进行状态栏模式设置
  * - 宽度需要在代码上写死

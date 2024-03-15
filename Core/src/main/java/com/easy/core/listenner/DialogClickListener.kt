@@ -5,7 +5,7 @@ package com.easy.core.listenner
  * @Package : com.core..dialog
  * @FileName :   DialogClickListener
  * @Date : 2018/7/5 0005  下午 1:58
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :  qiqiang213@gmail.com
  */
 interface DialogClickListener<T> {

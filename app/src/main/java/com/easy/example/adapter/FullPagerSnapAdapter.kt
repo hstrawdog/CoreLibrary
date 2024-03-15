@@ -11,7 +11,7 @@ import com.easy.example.R
  * @FileName :   FullPagerSnapAdapter
  * @Date : 2019/6/18 0018  上午 9:53
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class FullPagerSnapAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_full_pager_snap) {
     private var mScreenWidth = 0

@@ -10,7 +10,7 @@ import com.easy.example.ui.fragment.MainFragment
  * @Package : com.easy.iblibrary.ui.activity.fragment
  * @FileName :   IFragmentAdapter
  * @Date : 2018/11/23 0023  上午 9:40
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 class IFragmentAdapter : BaseFragmentAdapter {

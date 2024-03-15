@@ -24,7 +24,7 @@ import androidx.annotation.StringRes
  * @FileName :   ViewHolder
  * @Date : 2019/11/5 0005  上午 11:25
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 abstract class ViewHolder protected constructor() : View.OnClickListener {
     /**

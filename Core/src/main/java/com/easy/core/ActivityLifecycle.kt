@@ -11,7 +11,7 @@ import com.easy.core.utils.log.LogUtils
  * @FileName :   ActivityLifecycle
  * @Date : 2019/6/6 0006  上午 10:20
  * @Email : qiqiang213@gmail.com
- * @Descrive : 缓存 Activity生命周期栈
+ * @Describe : 缓存 Activity生命周期栈
  */
 class ActivityLifecycle : ActivityLifecycleCallbacks {
     val activities: MutableList<Activity> = ArrayList()

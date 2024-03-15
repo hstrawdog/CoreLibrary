@@ -19,7 +19,7 @@ import android.util.Xml
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import com.easy.core.CoreConfig
-import com.easy.core.utils.DataUtils.isNullString
+import com.easy.core.utils.data.DataUtils.isNullString
 import com.easy.core.utils.log.LogUtils
 import org.json.JSONObject
 import java.io.*

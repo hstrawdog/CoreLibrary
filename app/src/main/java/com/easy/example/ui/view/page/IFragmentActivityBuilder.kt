@@ -10,7 +10,7 @@ import com.easy.example.adapter.IFragmentAdapter
  * @Package : com.easy.iblibrary.ui.activity
  * @FileName :   IFragmentActivityBuilder
  * @Date : 2018/11/23 0023
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :  qiqiang213@gmail.com
  */
 class IFragmentActivityBuilder : BaseActivity() {

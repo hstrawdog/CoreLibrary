@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
  * @Package : com.easy.iblibrary
  * @FileName :   MainActivity
  * @Date : 2018/11/22 0022
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :  qiqiang213@gmail.com
  */
 

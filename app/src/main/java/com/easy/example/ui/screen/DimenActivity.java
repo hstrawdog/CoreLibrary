@@ -8,7 +8,7 @@ import com.easy.example.R;
   * @FileName :   DimenActivity
   * @Date  : 2019/5/16 0016
   * @Email :  qiqiang213@gmail.com
-  * @Descrive : TODO
+  * @Describe : TODO
   */
 public class DimenActivity extends BaseActivity {
 

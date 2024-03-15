@@ -11,7 +11,7 @@ import com.easy.example.demo.net.NetCallback
  * @FileName :   NewViewModel
  * @Date : 2020/8/5 0005  上午 10:36
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class NewsViewModel : BaseListViewModel() {
     override fun onCreate(owner: LifecycleOwner) {

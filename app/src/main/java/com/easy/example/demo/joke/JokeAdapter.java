@@ -14,7 +14,7 @@ import com.easy.example.R;
  * @FileName :   JokeAdapter
  * @Date : 2020/8/5 0005  下午 2:29
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class JokeAdapter extends BaseQuickAdapter<Joke.DataBean, BaseViewHolder> implements LoadMoreModule {
     public JokeAdapter() {

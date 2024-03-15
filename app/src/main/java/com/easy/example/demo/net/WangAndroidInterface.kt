@@ -11,7 +11,7 @@ import retrofit2.http.POST
  * @FileName :   WangAndroidInterface
  * @Date : 2020/7/28 0028  下午 4:37
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface WangAndroidInterface {
     @POST("user/login")

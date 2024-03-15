@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
  * @FileName :   LiveUser
  * @Date : 2019/10/23 0023  下午 2:35
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class LiveUser extends MutableLiveData<User> {
 

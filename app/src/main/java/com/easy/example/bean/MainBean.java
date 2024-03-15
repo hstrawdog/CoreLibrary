@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @Package : com.easy.iblibrary.bean
  * @FileName :   MainBean
  * @Date : 2018/11/22 0022  下午 7:45
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
 public class MainBean<T extends AppCompatActivity> {

@@ -14,7 +14,7 @@ import com.easy.core.ui.dialog.BaseDialog
  * @Package :
  * @FileName :   PhotoDialog
  * @Date : 2018/7/4 0004  上午 9:24
- * @Descrive : TODO
+ * @Describe : TODO
  * @Email :
  */
 class PhotoDialog : BaseDialog(), View.OnClickListener {

@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @FileName :   HiltActivity
  * @Date : 2020/8/14 0014  下午 3:40
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 包含Hilt内容
  * 1.默认注入
  * 2.搭配Jetpack 中 ViewModel 的使用

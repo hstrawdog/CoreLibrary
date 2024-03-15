@@ -10,7 +10,7 @@ import java.lang.ref.WeakReference
  * @FileName :   Album
  * @Date : 2020/6/30 0030  上午 10:13
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class Album private constructor() {
 

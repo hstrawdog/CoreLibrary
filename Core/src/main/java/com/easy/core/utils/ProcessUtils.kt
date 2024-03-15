@@ -10,7 +10,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.Settings
-import com.easy.core.utils.DataUtils.isNullString
+import com.easy.core.utils.data.DataUtils.isNullString
 import com.easy.core.utils.log.LogUtils
 import java.util.*
 

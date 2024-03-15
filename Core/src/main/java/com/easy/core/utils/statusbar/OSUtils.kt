@@ -9,7 +9,7 @@ import android.text.TextUtils
  * @FileName :   OSUtils
  * @Date : 2019/6/4 0004  下午 5:14
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object OSUtils {
     private const val KEY_MIUI_VERSION_NAME = "ro.miui.ui.version.name"

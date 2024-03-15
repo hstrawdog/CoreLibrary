@@ -15,7 +15,7 @@ import com.easy.example.ui.tab.layout.TabFragment
  * @FileName :   FullDialog
  * @Date : 2019/5/24 0024  上午 9:14
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class FullDialog : BaseDialog() {
     override fun getDialogLayoutId(): Int {

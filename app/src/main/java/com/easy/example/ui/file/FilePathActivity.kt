@@ -13,7 +13,7 @@ import com.easy.example.R
  * @FileName :   FilePathActivity
  * @Date : 2019/11/29 0029  上午 10:23
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class FilePathActivity : BaseActivity() {
     lateinit var mTvInfo: TextView

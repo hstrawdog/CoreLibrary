@@ -14,7 +14,7 @@ import com.easy.core.utils.log.LogUtils
  * @FileName :   BaseViewModel
  * @Date : 2020/7/27 0027  下午 2:39
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * 1.  基本VM  包含 Toast LoadingView  以及不建议使用的OpenActivity
  * ViewModel 对象存在的时间范围是获取 ViewModel 时传递给 ViewModelProvider 的 Lifecycle。ViewModel 将一直留在内存中，
  * 直到限定其存在时间范围的 Lifecycle 永久消失：对于 Activity，是在 Activity 完成时；而对于 Fragment，是在 Fragment 分离时。

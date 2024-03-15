@@ -14,7 +14,7 @@ import com.easy.example.databinding.ActivityWeatherBinding
  * @FileName :   WeatherActivity
  * @Date : 2020/8/4 0004  下午 3:10
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class WeatherActivity : BaseVmActivity<WeatherViewModel, ActivityWeatherBinding>() {
     override fun getLayoutId(): Int {

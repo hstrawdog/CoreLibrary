@@ -10,7 +10,7 @@ import com.easy.example.R
  * @Package : com.easy.example.ui.customize
  * @Date : 上午 11:15
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class DiskViewActivity : BaseActivity() {
     companion object {

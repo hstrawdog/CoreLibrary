@@ -15,7 +15,7 @@ import java.lang.reflect.Method
  * @FileName :
  * @Date  : 2020/9/1 0001  下午 5:20
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object FlymeOSStatusBarFontUtils {
     lateinit var mSetStatusBarColorIcon: Method

@@ -15,7 +15,7 @@ import java.lang.ref.WeakReference
  * @Package : com.core.library.toolbar
  * @FileName :   BaseToolBar
  * @Date : 2018/11/15 0015  下午 7:26
- * @Descrive :
+ * @Describe :
  * @Email :  qiqiang213@gmail.com
  * -  第一层 背景    toolBar
  * -    第二层 状态栏  statusBar

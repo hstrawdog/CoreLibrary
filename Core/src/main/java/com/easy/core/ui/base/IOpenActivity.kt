@@ -8,7 +8,7 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
  * @FileName :   IOpenActivity
  * @Date : 2020/7/31 0031  下午 3:57
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 interface IOpenActivity {
     /**

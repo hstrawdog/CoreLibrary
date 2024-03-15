@@ -16,7 +16,7 @@ import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.easy.core.R
 import com.easy.core.ui.base.RootViewImpl
-import com.easy.core.utils.DataUtils
+import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.ResourcesUtils
 import com.easy.core.widget.CusPtrClassicFrameLayout
 import java.lang.ref.WeakReference
@@ -27,7 +27,7 @@ import java.lang.ref.WeakReference
  * @FileName :   BaseListModel
  * @Date : 2019/5/5 0005  上午 10:41
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  *
  * ---  这边不应该这样设计  应该当已 recycleView  adapter  为一组对象  这样扩充拓展性
  * 当一个页面出现两个列表加载的时候 就不会被局限

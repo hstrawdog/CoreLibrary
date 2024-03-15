@@ -18,7 +18,7 @@ import com.easy.example.databinding.ActivityDataBindingBinding
  * @FileName :   DataBindingActivity
  * @Date : 2019/10/22 0022  下午 1:37
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  * LiveData  change 需要在ui前台才会触发 并不能再后台执行
  */
 class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {

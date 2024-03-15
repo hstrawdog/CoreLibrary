@@ -15,7 +15,7 @@ import com.easy.example.databinding.ActivityLoginBinding
  * @FileName :   LoginActivity
  * @Date  : 2020/7/28 0028  下午 4:06
  * @Email :  qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class LoginActivity : BaseVmActivity<LoginViewModel, ActivityLoginBinding>() {
 

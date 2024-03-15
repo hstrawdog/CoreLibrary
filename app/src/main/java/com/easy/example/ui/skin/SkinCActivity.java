@@ -10,7 +10,7 @@ import android.content.Intent;
  * @FileName :   SkinCActivity
  * @Date : 2020/4/10  上午10:02
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 public class SkinCActivity extends BaseSkinActivity {
     public static void open(Context context) {

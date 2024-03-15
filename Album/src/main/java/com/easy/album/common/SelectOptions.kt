@@ -8,7 +8,7 @@ import com.easy.album.entity.LocalMedia
  * @FileName :   SelectOptions
  * @Date : 2020/7/1 0001  上午 9:39
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 class SelectOptions {
     /**

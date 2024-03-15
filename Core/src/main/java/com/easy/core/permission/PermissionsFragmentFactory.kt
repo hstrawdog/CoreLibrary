@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
  * @FileName :   PermissionsFragmentFactory
  * @Date : 2019/6/6 0006  上午 10:45
  * @Email : qiqiang213@gmail.com
- * @Descrive :  工厂 用于生产 PermissionsFragment
+ * @Describe :  工厂 用于生产 PermissionsFragment
  */
 object PermissionsFragmentFactory {
     private const val TAG_PERMISSIONS_FRAGMENT = "PermissionsFragment"

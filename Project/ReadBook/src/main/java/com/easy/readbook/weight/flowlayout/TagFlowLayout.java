@@ -21,7 +21,7 @@ import java.util.Set;
  * @Author : huangqiqiang
  * @FileName :   TagFlowLayout
  * @Date : 2018/7/16 0016  下午 1:43
- * @Descrive : Created by zhy on 15/9/10.
+ * @Describe : Created by zhy on 15/9/10.
  * @Email :  593979591@qq.com
  */
 

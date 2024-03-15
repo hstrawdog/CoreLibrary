@@ -15,7 +15,7 @@ import com.easy.album.annotation.LocalMediaType
  * @FileName :   LoadUtils
  * @Date : 2020/1/16 0016  上午 10:56
  * @Email : qiqiang213@gmail.com
- * @Descrive :
+ * @Describe :
  */
 object LoadUtils {
     /**
