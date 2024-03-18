@@ -22,7 +22,7 @@ import androidx.core.content.FileProvider
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.easy.core.CoreConfig
 import com.easy.core.utils.data.DataUtils
-import com.easy.core.utils.PhotoUtils
+import com.easy.core.utils.file.PhotoUtils
 import com.easy.core.utils.encrypt.EncryptTool
 import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.log.LogUtils

@@ -14,7 +14,7 @@ import com.easy.core.ui.dialog.BaseBindingDialog
  */
 class HuaWeiTipDialog : BaseBindingDialog<DialogHuaweiTipBinding>() {
 
-    var call: (() -> Unit)? = null
+    var call: ((isDefine: Boolean) -> Unit)? = null
 
     var tipText = ""
 
@@ -29,10 +29,11 @@ class HuaWeiTipDialog : BaseBindingDialog<DialogHuaweiTipBinding>() {
     override fun initView() {
         binding.tvTip.text = tipText
         binding.tvCancel.setOnClickListener {
+            call?.invoke(false)
             dismiss()
         }
         binding.tvSure.setOnClickListener {
-            call?.invoke()
+            call?.invoke(true)
             dismiss()
         }
     }

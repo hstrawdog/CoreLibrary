@@ -6,6 +6,9 @@ import java.util.Date
 
 fun main() {
 
+
+    print( "".isNullOrEmpty())
+
     print(6%6)
 
 //    println(TimeUtils.differentDays(SimpleDateFormat("yyyy-MM-dd").parse("2022-7-18"), Date()))

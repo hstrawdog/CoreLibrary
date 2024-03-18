@@ -22,6 +22,9 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
     }
 
     override fun initView() {
+        SysPermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage, IPermissionsHas.bluetooth) {
+
+        }
         binding.button7.setOnClickListener {
             SysPermissionsUtils.requestCamera({ status ->
                 if (status) {
@@ -45,9 +48,7 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
             open(Permission4FragmentActivity::class.java)
         }
 
-        SysPermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage, IPermissionsHas.bluetooth) {
 
-        }
 
     }
 

@@ -198,19 +198,6 @@ object DataUtils {
         return animalYear[year % 12]
     }
 
-    /**
-     * 隐藏手机中间4位号码
-     * 130****0000
-     *
-     * @param mobile_phone 手机号码
-     * @return 130****0000
-     */
-    @JvmStatic
-    fun hideMobilePhone4(mobile_phone: String): String {
-        return if (mobile_phone.length != 11) {
-            "手机号码不正确"
-        } else mobile_phone.substring(0, 3) + "****" + mobile_phone.substring(7, 11)
-    }
 
     /**
      * 格式化银行卡 加*
@@ -220,7 +207,7 @@ object DataUtils {
      * @return 3749 **** **** 330
      */
     @JvmStatic
-    fun formatCardx(cardNo: String): String {
+    fun formatCardX(cardNo: String): String {
         if (cardNo.length < 8) {
             return "银行卡号有误"
         }
@@ -1213,6 +1200,19 @@ object DataUtils {
             }
             !isMatch
         }
+    }
+    /**
+     * 隐藏手机中间4位号码
+     * 130****0000
+     *
+     * @param phone 手机号码
+     * @return 130****0000
+     */
+    @JvmStatic
+    fun hideMobilePhone4(phone: String): String {
+        return if (phone.length != 11) {
+            "手机号码不正确"
+        } else phone.substring(0, 3) + "****" + phone.substring(7, 11)
     }
 
     /**

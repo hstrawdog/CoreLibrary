@@ -38,40 +38,38 @@ object ProcessUtils {
                 }
             }
         }
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            val packageManager = context.packageManager
-            val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            val list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-            println(list)
-            if (list.size > 0) { // 有"有权查看使用权限的应用"选项
-                try {
-                    val info = packageManager.getApplicationInfo(context.packageName, 0)
-                    val aom = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
-                    if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
-                        context.startActivity(intent)
-                    }
-                    if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
-                        LogUtils.d("getForegroundApp", "没有打开\"有权查看使用权限的应用\"选项")
-                        return null
-                    }
-                    val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-                    val endTime = System.currentTimeMillis()
-                    val beginTime = endTime - 86400000 * 7
-                    val usageStatses = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, beginTime, endTime)
-                    if (usageStatses == null || usageStatses.isEmpty()) return null
-                    var recentStats: UsageStats? = null
-                    for (usageStats in usageStatses) {
-                        if (recentStats == null || usageStats.lastTimeUsed > recentStats.lastTimeUsed) {
-                            recentStats = usageStats
-                        }
-                    }
-                    return recentStats?.packageName
-                } catch (e: PackageManager.NameNotFoundException) {
-                    e.printStackTrace()
+        val packageManager = context.packageManager
+        val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+        val list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        println(list)
+        if (list.size > 0) { // 有"有权查看使用权限的应用"选项
+            try {
+                val info = packageManager.getApplicationInfo(context.packageName, 0)
+                val aom = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+                if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
+                    context.startActivity(intent)
                 }
-            } else {
-                LogUtils.d("getForegroundApp", "无\"有权查看使用权限的应用\"选项")
+                if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
+                    LogUtils.d("getForegroundApp", "没有打开\"有权查看使用权限的应用\"选项")
+                    return null
+                }
+                val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+                val endTime = System.currentTimeMillis()
+                val beginTime = endTime - 86400000 * 7
+                val usageStatses = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, beginTime, endTime)
+                if (usageStatses == null || usageStatses.isEmpty()) return null
+                var recentStats: UsageStats? = null
+                for (usageStats in usageStatses) {
+                    if (recentStats == null || usageStats.lastTimeUsed > recentStats.lastTimeUsed) {
+                        recentStats = usageStats
+                    }
+                }
+                return recentStats?.packageName
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
             }
+        } else {
+            LogUtils.d("getForegroundApp", "无\"有权查看使用权限的应用\"选项")
         }
         return null
     }

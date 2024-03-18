@@ -1,4 +1,4 @@
-package com.easy.core.utils
+package com.easy.core.utils.file
 
 import android.Manifest
 import android.annotation.TargetApi
@@ -15,6 +15,7 @@ import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.easy.core.utils.ToastUtils
 import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.log.LogUtils
 import java.io.File

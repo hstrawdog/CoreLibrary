@@ -1,4 +1,4 @@
-package com.easy.core.utils
+package com.easy.core.utils.file
 
 import android.app.Activity
 import android.content.Intent
@@ -143,7 +143,7 @@ object PictureUtils {
      * @return bitmap
      */
     @JvmStatic
-    fun getChoosedImage(context: Activity, data: Intent?): Bitmap? {
+    fun getChooseImage(context: Activity, data: Intent?): Bitmap? {
         if (data == null) return null
         var bm: Bitmap? = null
         val cr = context.contentResolver
@@ -164,7 +164,7 @@ object PictureUtils {
      * @return
      */
     @JvmStatic
-    fun getChoosedImagePath(context: Activity, data: Intent?): String? {
+    fun getChooseImagePath(context: Activity, data: Intent?): String? {
         if (data == null) return null
         var path = ""
         val resolver = context.contentResolver

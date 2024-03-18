@@ -19,7 +19,7 @@ import com.easy.core.utils.ToastUtils
  * @Email :  qiqiang213@gmail.com
  * @Describe :
  */
-class PermissionsFragment : Fragment(), IPermissionActions {
+class PermissionsFragment : Fragment() {
 
     companion object {
         fun newInstance(): PermissionsFragment {
@@ -64,7 +64,8 @@ class PermissionsFragment : Fragment(), IPermissionActions {
                             intent.data = uri
                             startActivityForResult(intent, 0x55)
                             dialog.dismiss()
-                        }.setOnCancelListener("取消") { dialog, which ->
+                        }
+                        .setOnCancelListener("取消") { dialog, which ->
                             dialog.dismiss()
                         }
                         .create()
@@ -79,21 +80,21 @@ class PermissionsFragment : Fragment(), IPermissionActions {
     }
 
     /**
-     * 发现 系统选择 与 厂商权限不一致
-     * 取消判断是否拥有权限 直接去申请
-     * @param
+     *   上一个动作 已经 有权限判断
+     *   这边 直接进行权限申请 避免多余动作
+     * @param permissions Array<String>
+     * @param listener PermissionsResult?
      */
-    override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
+    fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
         mPermissions = permissions
         mPermissionsResult = listener
-        if (IPermissionActions.hasPermission(context, *permissions)) {
-            mPermissionsResult!!.onPermissionsResult(true)
-        } else {
-
-
-            registerForActivityResult.launch(permissions)
-        }
+//        if (IPermissionActions.hasPermission(context, *permissions)) {
+//            mPermissionsResult!!.onPermissionsResult(true)
+//        } else {
+        registerForActivityResult.launch(permissions)
+//        }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 0x55) {

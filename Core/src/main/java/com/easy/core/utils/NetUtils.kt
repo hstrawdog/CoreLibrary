@@ -14,10 +14,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-/**
- * @author tamsiree
- * @date 2016/1/29
- */
+
 object NetUtils {
     /**
      * no network

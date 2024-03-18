@@ -157,6 +157,12 @@ class CoreConfig private constructor() {
     var goSettingPermission = true
 
     /**
+     *  是否显示华为权限提示
+     */
+    var  isShowPermissionTip =false
+
+
+    /**
      * @param application Application
      * @param isDebug     是否 开启log日志
      */
