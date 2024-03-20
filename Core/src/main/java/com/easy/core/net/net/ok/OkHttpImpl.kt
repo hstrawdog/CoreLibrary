@@ -11,6 +11,7 @@ package com.easy.core.net.net.ok
 import android.text.TextUtils
 import com.easy.core.CoreConfig
 import com.easy.core.net.net.DownloadListener
+import com.easy.core.utils.log.LogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,6 +84,8 @@ class OkHttpImpl : HttpCompat {
             postHandler(Dispatchers.Default, callback, response, params)
         } catch (e: IOException) {
             e.printStackTrace()
+            LogUtils.e(e.toString())
+
             postHandler(Dispatchers.Default, callback, null, null)
         }
         return call
@@ -117,6 +120,8 @@ class OkHttpImpl : HttpCompat {
             postHandler(Dispatchers.Default, callback, response, params)
         } catch (e: IOException) {
             e.printStackTrace()
+            LogUtils.e(e.toString())
+
             postHandler(Dispatchers.Default, callback, null, null)
         }
         return call
@@ -191,6 +196,8 @@ class OkHttpImpl : HttpCompat {
                                 //所有异常都处理
                                 if (CoreConfig.get().isDebug) {
                                     e.printStackTrace()
+                                    LogUtils.e(e.toString())
+
                                 }
                                 downloadListener.fail(-1, e)
                             } finally {
@@ -202,6 +209,8 @@ class OkHttpImpl : HttpCompat {
                                     //所有异常都处理
                                     if (CoreConfig.get().isDebug) {
                                         e.printStackTrace()
+                                        LogUtils.e(e.toString())
+
                                     }
                                 }
                             }
@@ -212,6 +221,7 @@ class OkHttpImpl : HttpCompat {
                         //所有异常都处理
                         if (CoreConfig.get().isDebug) {
                             e.printStackTrace()
+                            LogUtils.e(e.toString())
                         }
                         downloadListener.fail(-1, e)
                     }
@@ -221,6 +231,8 @@ class OkHttpImpl : HttpCompat {
             //所有异常都处理
             if (CoreConfig.get().isDebug) {
                 e.printStackTrace()
+                LogUtils.e(e.toString())
+
             }
             downloadListener.fail(-1, e)
         }
@@ -408,6 +420,8 @@ class OkHttpImpl : HttpCompat {
                 callback.onSuccess(code.toString() + "", string)
             } catch (e: IOException) {
                 e.printStackTrace()
+                LogUtils.e(e.toString())
+
             }
         } else {
             callback.onFailure("0", "网络连接失败,请检查网络", "")
