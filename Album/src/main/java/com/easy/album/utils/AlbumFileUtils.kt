@@ -112,7 +112,7 @@ object AlbumFileUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //如果在Android7.0以上,使用FileProvider获取Uri
             try {
-                return FileProvider.getUriForFile(context, context.packageName + ".provider", tempFile)
+                return FileProvider.getUriForFile(context, context.packageName + ".FileProvider", tempFile)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
