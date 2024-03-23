@@ -37,10 +37,10 @@ object SaveBitmapUtils {
      */
     @JvmStatic
     fun saveBitmap2AppCache(bitmap: Bitmap?, relativePath: String = "", fileName: String): String {
-        var path = FileUtils.getCacheDir() + File.separator + FileUtils.getDefFileName(".png")
+        var path = FilePathTools.getCacheDir() + File.separator + FileUtils.getDefFileName(".png")
         if (relativePath.isNotNull()) {
             path =
-                FileUtils.getCacheDir() + File.separator + relativePath + File.separator + FileUtils.getDefFileName(".png")
+                FilePathTools.getCacheDir() + File.separator + relativePath + File.separator + FileUtils.getDefFileName(".png")
         }
         FileUtils.saveBitmap(bitmap, path)
         return path
@@ -77,17 +77,17 @@ object SaveBitmapUtils {
         }
         if (isQ()) {
             val path = if (relativePath.isNotNull()) {
-                FileUtils.getExternalFilesDir() + File.separator + relativePath + File.separator + fileName
+                FilePathTools.getExternalFilesDir() + File.separator + relativePath + File.separator + fileName
             } else {
-                FileUtils.getExternalFilesDir() + File.separator + fileName
+                FilePathTools.getExternalFilesDir() + File.separator + fileName
             }
             FileUtils.saveBitmap(bitmap, path)
             return path
         } else {
             val path = if (relativePath.isNotNull()) {
-                FileUtils.getStorageDirectory() + File.separator + relativePath + File.separator + fileName
+                FilePathTools.getStorageDirectory() + File.separator + relativePath + File.separator + fileName
             } else {
-                FileUtils.getStorageDirectory() + File.separator + fileName
+                FilePathTools.getStorageDirectory() + File.separator + fileName
             }
             FileUtils.saveBitmap(bitmap, path)
             // 发送至相册

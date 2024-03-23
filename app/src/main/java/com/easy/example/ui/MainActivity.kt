@@ -25,6 +25,7 @@ import com.easy.example.ui.customize.CustomizeIndexActivity
 import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.DownLoadActivity
 import com.easy.example.ui.file.FileIndexActivity
+import com.easy.example.ui.file.FilePathActivity
 import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
@@ -58,7 +59,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
 
-        open(AlbumIndexActivity::class.java)
+//        open(AlbumIndexActivity::class.java)
+        open(FilePathActivity::class.java)
 //        open(DefToolBarActivity::class.java)
 //        loadingView.show()
 

@@ -10,6 +10,7 @@ import com.easy.example.R
 import com.easy.example.databinding.ActivityDownloadBinding
 import com.easy.core.net.net.DownloadListener
 import com.easy.core.net.net.ok.OkHttp
+import com.easy.core.utils.file.FilePathTools
 import com.easy.core.utils.file.FileUtils.videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ
 import okhttp3.Call
 import java.io.*
@@ -30,7 +31,7 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
         findViewById<Button>(R.id.button61).setOnClickListener {
             val url = "https://media.w3.org/2010/05/sintel/trailer.mp4"
-            val path = FileUtils.getCacheDir(this@DownLoadActivity) + "/"
+            val path = FilePathTools.getCacheDir(this@DownLoadActivity) + "/"
             OkHttp.newHttpCompat()
                 .downloadFile(url, 0, "trailer.mp4", path, object : DownloadListener {
                     override fun start(max: Long) {
@@ -60,7 +61,7 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
 
         binding.button62.setOnClickListener {
             var pdfPath = "http://103.247.176.188/Direct2.aspx?id=256965670&sign=8c5d1c425fdad174"
-            val path = FileUtils.getCacheDir(this@DownLoadActivity) + "/"
+            val path = FilePathTools.getCacheDir(this@DownLoadActivity) + "/"
             OkHttp.newHttpCompat()
                 .downloadFile(pdfPath, 0, "trailer.pdf", path, object : DownloadListener {
                     override fun start(max: Long) {
@@ -98,7 +99,7 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
         binding.button69.setOnClickListener {
             okhttpCall?.cancel()
             okhttpCall = OkHttp.newHttpCompat()
-                .downloadFile(apkPath, 0, fileName, FileUtils.getCacheDir(), object : DownloadListener {
+                .downloadFile(apkPath, 0, fileName, FilePathTools.getCacheDir(), object : DownloadListener {
                     override fun start(max: Long) {
                         binding.textView37.text = "start   $max"
                     }
@@ -125,10 +126,10 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
             okhttpCall?.cancel()
         }
         binding.button71.setOnClickListener {
-            val file = File(FileUtils.getCacheDir() + File.separator + fileName)
+            val file = File(FilePathTools.getCacheDir() + File.separator + fileName)
             okhttpCall?.cancel()
             okhttpCall = OkHttp.newHttpCompat()
-                .downloadFile(apkPath, file.length(), fileName, FileUtils.getCacheDir(), object : DownloadListener {
+                .downloadFile(apkPath, file.length(), fileName, FilePathTools.getCacheDir(), object : DownloadListener {
                     override fun start(max: Long) {
                         binding.textView37.text = "start %=$max"
                     }
