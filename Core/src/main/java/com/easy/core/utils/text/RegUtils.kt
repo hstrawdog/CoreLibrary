@@ -540,7 +540,7 @@ object RegUtils {
     }
 
     @JvmStatic
-    fun checkNotNull(any: Any): Boolean {
+    fun checkNotNull(any: Any?): Boolean {
         return checkNull(any)
     }
 
