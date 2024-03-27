@@ -2848,7 +2848,7 @@ object FileUtils {
     fun getUriForFile(mContext: Context, file: File?): Uri? {
         var fileUri: Uri? = null
         fileUri = if (Build.VERSION.SDK_INT >= 24) {
-            FileProvider.getUriForFile(mContext, mContext.packageName + ".fileprovider", file!!)
+            FileProvider.getUriForFile(mContext, mContext.packageName + ".FileProvider", file!!)
         } else {
             Uri.fromFile(file)
         }
