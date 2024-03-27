@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'maven-publish'
 }
-import com.easy.core.plugin.*
+
 
 
 android {
@@ -16,11 +16,11 @@ android {
         //开启 Compose 支持
 //        compose true
     }
-    compileSdk BuildVersionConfig.compileSdkVersion
-//    buildToolsVersion BuildVersionConfig.buildToolsVersion
+    compileSdk 31
+//    buildToolsVersion "31.0.0"
     defaultConfig {
-        minSdkVersion BuildVersionConfig.minSdkVersion
-        targetSdkVersion BuildVersionConfig.targetSdkVersion
+        minSdkVersion 23
+        targetSdkVersion 31
         versionName "1.0"
         versionCode 1
 

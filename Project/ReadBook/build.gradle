@@ -11,13 +11,13 @@ android {
         viewBinding  true
         dataBinding  true
     }
-    compileSdkVersion BuildVersionConfig.compileSdkVersion
-    buildToolsVersion BuildVersionConfig.buildToolsVersion
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
 
     defaultConfig {
         applicationId "com.easy.readbook"
-        minSdkVersion BuildVersionConfig.minSdkVersion
-        targetSdkVersion BuildVersionConfig.targetSdkVersion
+        minSdkVersion 23
+        targetSdkVersion 31
         versionCode 3
         versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

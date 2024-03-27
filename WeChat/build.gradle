@@ -5,16 +5,16 @@ plugins {
     id 'maven-publish'
 }
 
-import com.easy.core.plugin.*
+
 
 android {
     namespace = "com.easy.wechat"
 
-    compileSdkVersion BuildVersionConfig.compileSdkVersion
-    buildToolsVersion BuildVersionConfig.buildToolsVersion
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
     defaultConfig {
-        minSdkVersion BuildVersionConfig.minSdkVersion
-        targetSdkVersion BuildVersionConfig.targetSdkVersion
+        minSdkVersion 23
+        targetSdkVersion 31
     }
     buildTypes {
         release {
