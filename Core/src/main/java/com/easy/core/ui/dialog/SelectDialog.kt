@@ -147,7 +147,11 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                 }
 
             // 如果  三个菜单都没文字  隐藏 分割线
-            if (alertParams?.positiveButtonText.isNullOrEmpty() && alertParams?.neutralButtonText.isNullOrEmpty() && alertParams?.negativeButtonText.isNullOrEmpty()) {
+            if (alertParams?.negativeButtonText.isNullOrEmpty()) {
+                //取消没有字隐藏第一个分割线
+                it.findViewById<View>(R.id.view_line_cancel).visibility = View.GONE
+            } else if (alertParams?.positiveButtonText.isNullOrEmpty() && alertParams?.neutralButtonText.isNullOrEmpty() && alertParams?.negativeButtonText.isNullOrEmpty()) {
+                //  横向分割线 与 底部 按钮
                 it.findViewById<View>(R.id.view_menu_line).visibility = View.GONE
                 it.findViewById<View>(R.id.ll_menu).visibility = View.GONE
             } else {
@@ -241,7 +245,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param fragmentManager FragmentManager
          * @return SelectDialog<*>
          */
-        fun create(fragmentManager : FragmentManager): SelectDialog<*> {
+        fun create(fragmentManager: FragmentManager): SelectDialog<*> {
             val baseSelectDialog: SelectDialog<*> = SelectDialog<DialogViewBuilder>()
             baseSelectDialog.alertParams = alertParams
             baseSelectDialog.show(fragmentManager)

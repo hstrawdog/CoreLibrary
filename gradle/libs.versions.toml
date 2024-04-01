@@ -24,7 +24,7 @@ retrofitVersion = "2.9.0"
 okhttpVersion = "4.9.3"
 ultraPtrVersion = "1.0.11"
 
-baseRecyclerViewAdapterHelperVersion = "3.0.14"
+baseRecyclerViewAdapterHelperVersion = "3.0.4"
 
 lubanVersion = "1.1.8"
 
