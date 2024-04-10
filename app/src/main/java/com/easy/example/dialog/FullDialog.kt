@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.easy.core.adapter.BaseFragmentAdapter
+import com.easy.core.permission.PermissionsResult
+import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.dialog.BaseDialog
 import com.easy.example.R
 import com.easy.example.ui.tab.layout.TabFragment
@@ -33,6 +35,12 @@ class FullDialog : BaseDialog() {
         val adapter = ViewPageAdapter(this)
         mVpPage.adapter = adapter
         adapter.setupWithViewPager(mTbTablayout1, mVpPage)
+
+
+
+
+
+
     }
 
     internal class ViewPageAdapter(fragment: Fragment) : BaseFragmentAdapter(fragment) {

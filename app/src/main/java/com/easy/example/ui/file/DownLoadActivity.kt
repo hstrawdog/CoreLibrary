@@ -78,7 +78,7 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
                         findViewById<TextView>(R.id.textView36).setText("下载完成 :  ${filePath}")
                         filePath?.let { it1 ->
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                FileUtils.copyFileToDownloadDir(activity, it1, null)
+                                FileUtils.copyFileToDownloadDir(activity, it1, null,"")
                             } else {
                             }
                         }

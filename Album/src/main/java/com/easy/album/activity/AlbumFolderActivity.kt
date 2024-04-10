@@ -109,7 +109,7 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
     private fun initViews() {
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
-        SysPermissionsUtils.requestStorage({ status ->
+        SysPermissionsUtils.requestStorage(supportFragmentManager,{ status ->
             if (status) {
                 initData()
             } else {

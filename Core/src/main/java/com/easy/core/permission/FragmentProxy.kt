@@ -2,6 +2,7 @@ package com.easy.core.permission
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.easy.core.CoreConfig
 import com.easy.core.permission.dialog.HuaWeiTipDialog
 import com.easy.core.utils.BaseSystemUtil
@@ -22,8 +23,9 @@ class FragmentProxy : IPermissionActions {
      * @param permissions Array<String>
      * @param listener PermissionsResult?
      */
-    override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
-        requestPermissions(permissions, listener, false, "")
+    override fun requestPermissions(fragmentManager: FragmentManager, permissions: Array<String>,
+                                    listener: PermissionsResult?) {
+        requestPermissions(fragmentManager, permissions, listener, false, "")
     }
 
     /**
@@ -32,8 +34,9 @@ class FragmentProxy : IPermissionActions {
      * @param listener PermissionsResult?
      * @param tipString String   提示框显示的 提示
      */
-    override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?, tipString: String) {
-        doRequestPermissions(permissions, listener, tipString, true)
+    override fun requestPermissions(fragmentManager: FragmentManager, permissions: Array<String>,
+                                    listener: PermissionsResult?, tipString: String) {
+        doRequestPermissions(fragmentManager, permissions, listener, tipString, true)
 
     }
 
@@ -43,9 +46,9 @@ class FragmentProxy : IPermissionActions {
      * @param listener PermissionsResult?
      * @param isShowTip Boolean   华为系 是否显示 提示
      */
-    override fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?, isShowTip: Boolean,
-                                    tipString: String) {
-        doRequestPermissions(permissions, listener, tipString, isShowTip)
+    override fun requestPermissions(fragmentManager: FragmentManager, permissions: Array<String>,
+                                    listener: PermissionsResult?, isShowTip: Boolean, tipString: String) {
+        doRequestPermissions(fragmentManager, permissions, listener, tipString, isShowTip)
     }
 
     /**
@@ -54,12 +57,13 @@ class FragmentProxy : IPermissionActions {
      * @param listener PermissionsResult?
      * @param isShowTip Boolean   是否显示 华为系 提示  默认 不显示
      */
-    private fun doRequestPermissions(permissions: Array<String>, listener: PermissionsResult?, tipText: String = "",
+    private fun doRequestPermissions(fragmentManager: FragmentManager, permissions: Array<String>,
+                                     listener: PermissionsResult?, tipText: String = "",
                                      isShowTip: Boolean = CoreConfig.get().isShowPermissionTip) {
         // PermissionsHasImpl 判断
         if (!PermissionsHasImpl().hasPermission(CoreConfig.get().application, *permissions)) {
             val mPermissionsFragment =
-                PermissionsFragmentFactory.getPermissionsFragment((CoreConfig.get().currActivity as AppCompatActivity).supportFragmentManager)
+                PermissionsFragmentFactory.getPermissionsFragment(fragmentManager)
 
             if (BaseSystemUtil.isHuaWeiSeriesDevice() && isShowTip && tipText.isNotNull()) {
                 showHuaWeiSeriesDevice(tipText) {

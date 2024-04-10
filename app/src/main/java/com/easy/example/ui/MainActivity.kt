@@ -1,20 +1,27 @@
 package com.easy.example.ui
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.KeyEvent
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.easy.core.permission.PermissionsResult
 import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
+import com.easy.core.utils.file.FilePathTools
+import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity
+import com.easy.example.dialog.FullDialog
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity
 import com.easy.example.ui.adaptation.permission.PermissionActivity
@@ -33,6 +40,7 @@ import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity
 import kotlinx.coroutines.launch
+import java.io.File
 
 /**
  * @Author : huangqiqiang
@@ -58,9 +66,59 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
+//        FullDialog.showDialog(supportFragmentManager)
+        //data/data/com.easy.core/cache/256965670.pdf
+
+//        SysPermissionsUtils.requestStorage(object : PermissionsResult {
+//            override fun onPermissionsResult(status: Boolean) {
+//
+//                if (status) {
+//
+//                    var oldFilePath = "data/data/com.easy.core/cache/256965670.pdf"
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                        FileUtils.copyFileToDownloadDir(activity, oldFilePath, "core", "256965670.pdf")
+//                    }
+//
+////                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+////                    }
+//                    var downLoadPath =
+//                        FilePathTools.getExternalDownloadsPath() + File.separator + "core" + File.separator + "256965670.pdf"
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+////            var fileUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI.buildUpon()
+////                .appendPath(downLoadPath)
+////                .build()
+//                        ///sdcard/Download/ncpss/甘肃清水方言歇后语中的比喻探析.pdf
+////                        var f = FileUtils.findUri4FileName(activity, "ncpss", "甘肃清水方言歇后语中的比喻探析.pdf")
+//
+//                        var ff = FileUtils.findDownloadsUri4Description(activity, "core", "256965670.pdf")
+//
+////                        var fileUri = FileUtils.findDownloadFile(activity, "core", "256965670.pdf")
+////
+////
+////                        fileUri?.let { FileUtils.copyToPrivateDir(activity, it[0], FilePathTools.getCacheDir() + File.separator + "111.pdf") }
+//
+//
+//                        if (ff.size > 0) {
+//                            LogUtils.e("${ff[0]}")
+//                        }
+//                    FileUtils.listFiles(activity,"core")
+//
+//                    } else {
+//                    }
+//
+//
+//                }
+//
+//            }
+//
+//        })
+
+
+
 
 //        open(AlbumIndexActivity::class.java)
-        open(FilePathActivity::class.java)
+//        open(FilePathActivity::class.java)
 //        open(DefToolBarActivity::class.java)
 //        loadingView.show()
 
@@ -98,7 +156,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //                open(Camera2Activity::class.java)
 //            }
 //        }
-        SysPermissionsUtils.requestStorage({
+        SysPermissionsUtils.requestStorage(supportFragmentManager,{
 //            if (it) {
 //                open(ProgressBarViewBuilderActivity::class.java)
 //                open(VideoViewActivity::class.java)
@@ -109,6 +167,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(DefImgActivity::class.java)
 //        open(BannerActivity::class.java)
 //        open(TabLayoutActivity::class.java)
+
+
+
 
     }
 

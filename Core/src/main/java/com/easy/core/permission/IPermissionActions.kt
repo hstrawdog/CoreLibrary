@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
+import androidx.fragment.app.FragmentManager
 import com.easy.core.CoreConfig
 
 /**
@@ -85,7 +86,7 @@ interface IPermissionActions {
      * @param permissions 权限组
      * @param listener    回调
      */
-    fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?)
+    fun requestPermissions(fragmentManager: FragmentManager, permissions: Array<String>, listener: PermissionsResult?)
 
     /**
      *
@@ -93,6 +94,6 @@ interface IPermissionActions {
      * @param listener PermissionsResult?
      * @param isShowTip Boolean   是否 需要显示 提示
      */
-    fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?, isShowTip: Boolean,tipString: String)
-    fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?,tipString: String)
+    fun requestPermissions(fragmentManager: FragmentManager, permissions: Array<String>, listener: PermissionsResult?, isShowTip: Boolean, tipString: String)
+    fun requestPermissions(fragmentManager: FragmentManager, permissions: Array<String>, listener: PermissionsResult?,tipString: String)
 }

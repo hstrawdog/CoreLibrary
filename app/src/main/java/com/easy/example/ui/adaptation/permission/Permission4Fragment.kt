@@ -16,7 +16,7 @@ import com.easy.example.databinding.ActivityPermissionBinding
 class Permission4Fragment : BaseViewBindingFragment<ActivityPermissionBinding>() {
     override fun initView() {
         binding.button7.setOnClickListener {
-            SysPermissionsUtils.requestCamera(object : PermissionsResult {
+            SysPermissionsUtils.requestCamera(childFragmentManager,object : PermissionsResult {
                 override fun onPermissionsResult(status: Boolean) {
                     if (status) ToastUtils.showToast("拥有摄像头权限")
                 }
@@ -24,7 +24,7 @@ class Permission4Fragment : BaseViewBindingFragment<ActivityPermissionBinding>()
             })
         }
         binding.button8.setOnClickListener {
-            SysPermissionsUtils.requestStorage(object : PermissionsResult {
+            SysPermissionsUtils.requestStorage(childFragmentManager,object : PermissionsResult {
                 override fun onPermissionsResult(status: Boolean) {
                     if (status) ToastUtils.showToast("拥有文件读写权限")
                 }
@@ -33,12 +33,12 @@ class Permission4Fragment : BaseViewBindingFragment<ActivityPermissionBinding>()
 
         }
         binding.button59.setOnClickListener {
-            SysPermissionsUtils.requestLocal({
+            SysPermissionsUtils.requestLocal(childFragmentManager,{
                 if (it) ToastUtils.showToast("拥有定位权限")
             })
         }
         binding.button60.setOnClickListener {
-            SysPermissionsUtils.requestBluetooth(object : PermissionsResult {
+            SysPermissionsUtils.requestBluetooth(childFragmentManager,object : PermissionsResult {
                 override fun onPermissionsResult(status: Boolean) {
                     if (status) ToastUtils.showToast("拥有定位权限")
                 }

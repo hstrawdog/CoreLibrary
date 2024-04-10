@@ -10,18 +10,17 @@ import com.easy.core.CoreConfig
  * @Date : 00:58
  * @Email : qiqiang213@gmail.com
  * @Describe :
+ *   * Android 10 区分存储 / 沙箱存储
+ * 1. 内部存储package下cache  database  等
+ * 2. 外部公共存储 Download  登录
+ * 3. 外部私有存储 Android/data/package
  */
-object FilePathTools{
-    /**
-     * Android 10 区分存储
-     * 1. 内部存储package下cache  database  等
-     * 2. 外部公共存储 Download  登录
-     * 3. 外部私有存储 Android/data/package
-     */
-    //region  内部私有存储 /data/user
+object FilePathTools {
+
+    //region  内部私有存储 /data/user/0/
     /**
      * @param context
-     * @return /data/user/0/ com.easy.core/cache
+     * @return /data/user/0/com.easy.core/cache
      */
     @JvmStatic
     fun getCacheDir(context: Context = CoreConfig.applicationContext): String {
@@ -71,7 +70,8 @@ object FilePathTools{
     /**
      *
      * 内部存储下的私有目录
-     * @return String
+     * @param fileName
+     * @return String /data/user/0/com.easy.core/databases/$fileName
      */
     @JvmStatic
     fun getDataBaseDir(fileName: String): String {
@@ -81,7 +81,7 @@ object FilePathTools{
     /**
      *  获取包下的 指定目录文件夹
      * @param fileName String
-     * @return File?
+     * @return File? /data/user/0/com.easy.core/app_
      */
     fun getPackageDir(fileName: String): String {
         return CoreConfig.applicationContext.getDir(fileName, Context.MODE_APPEND).path
@@ -150,6 +150,5 @@ object FilePathTools{
     }
 
     //endregion
-
 
 }

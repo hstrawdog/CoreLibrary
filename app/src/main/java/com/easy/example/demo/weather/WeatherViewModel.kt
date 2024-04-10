@@ -1,5 +1,6 @@
 package com.easy.example.demo.weather
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.amap.api.location.AMapLocationClient
@@ -76,7 +77,7 @@ class WeatherViewModel : BaseViewModel() {
         mLocationOption!!.isNeedAddress = true
         //给定位客户端对象设置定位参数
         mLocationClient!!.setLocationOption(mLocationOption)
-        SysPermissionsUtils.requestLocal({ status ->
+        SysPermissionsUtils.requestLocal((CoreConfig.get().currActivity as AppCompatActivity) .supportFragmentManager,{ status ->
             if (status) {
                 startLocation()
             }

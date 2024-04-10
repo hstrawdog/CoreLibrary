@@ -22,11 +22,11 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
     }
 
     override fun initView() {
-        SysPermissionsUtils.requestPermissions(IPermissionsHas.camera, IPermissionsHas.storage, IPermissionsHas.bluetooth) {
+        SysPermissionsUtils.requestPermissions(supportFragmentManager,IPermissionsHas.camera, IPermissionsHas.storage, IPermissionsHas.bluetooth) {
 
         }
         binding.button7.setOnClickListener {
-            SysPermissionsUtils.requestCamera({ status ->
+            SysPermissionsUtils.requestCamera(supportFragmentManager,{ status ->
                 if (status) {
                     showToast("拥有摄像头权限")
                 } else {
@@ -35,7 +35,7 @@ class PermissionActivity : BaseDataBindingActivity<ActivityPermissionBinding>() 
             })
         }
         binding.button8.setOnClickListener {
-            SysPermissionsUtils.requestStorage({ status ->
+            SysPermissionsUtils.requestStorage(supportFragmentManager,{ status ->
                 if (status) {
                     showToast("拥有文件读写权限")
                 } else {

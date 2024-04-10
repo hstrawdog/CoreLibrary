@@ -31,7 +31,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
         builder.detectFileUriExposure()
 
         binding.button80.setOnClickListener {
-            SysPermissionsUtils.requestStorage ({
+            SysPermissionsUtils.requestStorage (supportFragmentManager,{
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2AppCache(
                         BitmapUtils.createBitmapFromView2(binding.button80),
@@ -44,7 +44,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
             })
         }
         binding.button81.setOnClickListener {
-            SysPermissionsUtils.requestStorage ({
+            SysPermissionsUtils.requestStorage (supportFragmentManager,{
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2ExternalPrivate(
                         BitmapUtils.createBitmapFromView2(binding.button81),
@@ -57,7 +57,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
             })
         }
         binding.button82.setOnClickListener {
-            SysPermissionsUtils.requestStorage( {
+            SysPermissionsUtils.requestStorage( supportFragmentManager,{
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2Pictures(
                         BitmapUtils.createBitmapFromView2(binding.button82),

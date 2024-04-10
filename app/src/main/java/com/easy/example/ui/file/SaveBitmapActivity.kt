@@ -22,7 +22,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
 
     override fun initView() {
         binding.textView28.setOnClickListener {
-            SysPermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage(supportFragmentManager,{
                 if (it) {
                     path =
                         SaveBitmapUtils.saveBitmap2AppCache(BitmapUtils.createBitmapFromView2(binding.tvTitle), "", FileUtils.getDefFileName(".png"))
@@ -34,7 +34,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
         //保存在相册
         binding.textView29.setOnClickListener {
-            SysPermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage(supportFragmentManager,{
                 if (it) {
                     binding.tvTitle.text = binding.textView29.text
                     SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), fileName = FileUtils.getDefFileName(".png"))
@@ -48,7 +48,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
         // 保存在相册 指定目录中
         binding.textView32.setOnClickListener {
-            SysPermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage(supportFragmentManager,{
                 if (it) {
                     binding.tvTitle.text = binding.textView32.text
                     SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), "subdirectory", fileName = FileUtils.getDefFileName(".png"))
@@ -63,7 +63,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
 
         binding.textView34.setOnClickListener {
-            SysPermissionsUtils.requestStorage({
+            SysPermissionsUtils.requestStorage(supportFragmentManager,{
                 if (it) {
                     binding.tvTitle.text = binding.textView34.text
                     // 保存到默认的文件夹

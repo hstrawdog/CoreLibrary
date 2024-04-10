@@ -27,17 +27,17 @@ fun BaseActivity.open(cls: Class<*>,
     }
 }
 
-/**
- *  拍照并预览
- * @receiver BaseActivity
- * @param result ActivityResultCallback<Bitmap>
- */
-fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap?>) {
-    SysPermissionsUtils.requestCamera(  object : PermissionsResult {
-        override fun onPermissionsResult(status: Boolean) {
-            registerForActivityResult(ActivityResultContracts.TakePicturePreview(), result).launch(null)
-        }
-    })
-
-}
+///**
+// *  拍照并预览
+// * @receiver BaseActivity
+// * @param result ActivityResultCallback<Bitmap>
+// */
+//fun BaseActivity.takePicturePreview(result: ActivityResultCallback<Bitmap?>) {
+//    SysPermissionsUtils.requestCamera(  object : PermissionsResult {
+//        override fun onPermissionsResult(status: Boolean) {
+//            registerForActivityResult(ActivityResultContracts.TakePicturePreview(), result).launch(null)
+//        }
+//    })
+//
+//}
 

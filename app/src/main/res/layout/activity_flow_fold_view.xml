@@ -33,7 +33,6 @@
                     app:layout_collapseMode="pin"
                     app:title="Hello World" >
 
-
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -35,6 +35,7 @@ import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
+import java.util.Arrays
 import java.util.Collections
 import java.util.Vector
 
@@ -71,7 +72,6 @@ object FileUtils {
         return defFileName + suffix
     }
     //endregion
-
 
     //region Cache 相关
 
@@ -315,7 +315,7 @@ object FileUtils {
         return insertUri
     }
 
-     /**
+    /**
      * 删除公有目录的文件。(自己应用创建的文件才有权限删除)
      */
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -373,12 +373,12 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun copyFileToDownloadDir(context: Context, oldPath: String, targetDirName: String?): Uri? {
+    fun copyFileToDownloadDir(context: Context, oldPath: String, targetDirName: String?, description: String?): Uri? {
         try {
             val oldFile = File(oldPath)
             //设置目标文件的信息
             val values = ContentValues()
-            values.put(MediaStore.Images.Media.DESCRIPTION, "This is a file.")
+            values.put(MediaStore.Images.Media.DESCRIPTION, description)
             values.put(MediaStore.Files.FileColumns.DISPLAY_NAME, oldFile.name)
             values.put(MediaStore.Files.FileColumns.TITLE, oldFile.name)
             values.put(MediaStore.Files.FileColumns.MIME_TYPE, oldPath.getMimeType())
@@ -573,7 +573,7 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun copyFile2CustomPath(context: Context, oldPath: String, newPath: String): Uri? {
+    fun copyBitmap2CustomPath(context: Context, oldPath: String, newPath: String): Uri? {
 
         val oldFile = File(oldPath)
         //设置目标文件的信息
@@ -725,6 +725,86 @@ object FileUtils {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    /**
+     * 查询 下载目录中的文件
+     * 只能查询 APP安装后存储后的文件
+     * @param context Context
+     * @param dirName String?  子文件夹
+     * @param fileName String 文件名称
+     * @return List<Uri>
+     */
+    @RequiresApi(Build.VERSION_CODES.Q)
+    fun findDownloadFile(context: Context, dirName: String?, fileName: String): List<Uri> {
+        val resultList = ArrayList<Uri>()
+        try {
+            val resolver = context.contentResolver
+            val downloadUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
+            var selection: String? = null
+            var selectionArgs: Array<String>? = null
+            if (dirName != null && dirName.isNotEmpty()) {
+                selection =
+                    MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME + " = ? AND " + MediaStore.Downloads.DISPLAY_NAME + " = ? "
+                selectionArgs = arrayOf(dirName, fileName)
+            }
+            val resultCursor = resolver?.query(downloadUri, null, selection, selectionArgs, null)
+            if (resultCursor != null) {
+                val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
+                while (resultCursor.moveToNext()) {
+                    val fileId = resultCursor.getLong(fileIdIndex)
+                    val pathUri = downloadUri.buildUpon()
+                        .appendPath("$fileId")
+                        .build()
+                    resultList.add(pathUri)
+                }
+                resultCursor.close()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return resultList
+    }
+
+    /**
+     *  通过描述 字段 查询 下载目录中的文件
+     * @param context Context
+     * @param dirName String?  子目录
+     * @param description String  描述字段
+     * @return ArrayList<Uri>
+     */
+    fun findDownloadsUri4Description(context: Context, dirName: String?, description: String): ArrayList<Uri> {
+        val resultList = ArrayList<Uri>()
+        try {
+            val resolver = context.contentResolver
+            val downloadUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
+            var selection: String? = null
+
+            var selectionArgs = mutableListOf<String>()
+            if (dirName != null && dirName.isNotEmpty()) {
+                selection = MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME + " = ? AND "
+//                selectionArgs = arrayOf(dirName, fileName)
+                selectionArgs.add(dirName)
+            }
+            selection = selection + MediaStore.Images.Media.DESCRIPTION + " = ? "
+            selectionArgs.add(description)
+
+            val resultCursor = resolver?.query(downloadUri, null, selection, selectionArgs.toTypedArray(), null)
+            if (resultCursor != null) {
+                val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
+                while (resultCursor.moveToNext()) {
+                    val fileId = resultCursor.getLong(fileIdIndex)
+                    val pathUri = downloadUri.buildUpon()
+                        .appendPath("$fileId")
+                        .build()
+                    resultList.add(pathUri)
+                }
+                resultCursor.close()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return resultList
     }
 
     /**
