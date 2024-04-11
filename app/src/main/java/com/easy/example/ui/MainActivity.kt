@@ -165,13 +165,13 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //                open(Camera2Activity::class.java)
 //            }
 //        }
-        SysPermissionsUtils.requestStorage(supportFragmentManager,{
+//        SysPermissionsUtils.requestStorage(supportFragmentManager,{
 //            if (it) {
 //                open(ProgressBarViewBuilderActivity::class.java)
 //                open(VideoViewActivity::class.java)
 //                open(SeparationVideoActivity::class.java)
 //            }
-        })
+//        })
 
 //        open(DefImgActivity::class.java)
 //        open(BannerActivity::class.java)
