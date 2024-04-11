@@ -128,12 +128,6 @@ dependencies {
 
 }
 
-//打包源码
-task sourcesJar(type: Jar) {
-    from project.sourceSets
-    archiveClassifier = 'sources'
-}
-
 
 afterEvaluate {
     publishing {
@@ -144,15 +138,18 @@ afterEvaluate {
             //发布release版本
             release(MavenPublication) {
                 // Applies the component for the release build variant.
-                from components.release
+//                from components.release
                 //groupId通常是自己的gitee或者GitHub的账户地址
                 groupId = group
                 //artifactId通常是指待发布项目的名称，也就是别名
                 artifactId = 'Core'
                 // 主要是这一行
-                artifact sourcesJar
+//                artifact sourcesJar
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
                 version = version
+                afterEvaluate {
+                    from components.release
+                }
             }
         }
     }
