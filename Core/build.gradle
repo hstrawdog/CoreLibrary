@@ -121,6 +121,13 @@ dependencies {
 
 }
 
+//打包源码
+task sourcesJar(type: Jar) {
+    from project.sourceSets
+    archiveClassifier = 'sources'
+}
+
+
 afterEvaluate {
     publishing {
         publications {
@@ -135,6 +142,8 @@ afterEvaluate {
                 groupId = group
                 //artifactId通常是指待发布项目的名称，也就是别名
                 artifactId = 'Core'
+                // 主要是这一行
+                artifact sourcesJar
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
                 version = version
             }
