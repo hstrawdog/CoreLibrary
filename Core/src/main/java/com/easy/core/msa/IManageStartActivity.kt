@@ -1,9 +1,11 @@
-package com.itxca.msa
+package com.easy.core.msa
 
 import android.app.Activity
 import android.content.Intent
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.LifecycleOwner
+import com.easy.core.msa.Result
+import com.easy.core.msa.StartActivityResult
 import kotlin.reflect.KClass
 
 /**

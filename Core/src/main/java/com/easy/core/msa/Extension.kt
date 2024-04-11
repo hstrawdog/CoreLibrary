@@ -1,4 +1,7 @@
-package com.itxca.msa
+package com.easy.core.msa
+
+import com.easy.core.msa.IManageStartActivity
+import com.easy.core.msa.ManageStartActivity
 
 /**
  *

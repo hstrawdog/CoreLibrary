@@ -72,21 +72,7 @@ object SysPermissionsUtils {
 
     }
 
-    /**
-     *  读取 蓝牙权限 包含定位与读写
-     * @param permissionsResult PermissionsResult
-     * 相机 以及文件读写
-     * @param isNeedShowTip Boolean
-     * @param permissionsResult PermissionsResult?
-     */
-    @JvmStatic
-    fun requestBluetooth(fragmentManager: FragmentManager,permissionsResult: PermissionsResult, isNeedShowTip: Boolean = false, tipText: String = "") {
-        // 蓝牙权限 需要定位权限  定位权限需要 读写权限
-        var permissions = IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
-            .plus(IPermissionsHas.storage)
-        requestPermissions(fragmentManager,permissions, tipText, permissionsResult)
 
-    }
 
     /**
      * 读写文件的权限
@@ -143,7 +129,21 @@ object SysPermissionsUtils {
         FragmentProxy().requestPermissions(fragmentManager,IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
             .plus(IPermissionsHas.storage), permissionsResult)
     }
+    /**
+     *  读取 蓝牙权限 包含定位与读写
+     * @param permissionsResult PermissionsResult
+     * 相机 以及文件读写
+     * @param isNeedShowTip Boolean
+     * @param permissionsResult PermissionsResult?
+     */
+    @JvmStatic
+    fun requestBluetooth(fragmentManager: FragmentManager,permissionsResult: PermissionsResult, tipText: String = "") {
+        // 蓝牙权限 需要定位权限  定位权限需要 读写权限
+        var permissions = IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
+            .plus(IPermissionsHas.storage)
+        requestPermissions(fragmentManager,permissions, tipText, permissionsResult)
 
+    }
     @JvmStatic
     fun requestCameraAndStorage(fragmentManager: FragmentManager,permissionsResult: PermissionsResult?) {
         requestPermissions(fragmentManager,IPermissionsHas.cameraAndStorage, "相机权限使用说明：拍照时使用\n" + "文件读写权限使用说明：保存照片使用", permissionsResult)

@@ -1,4 +1,4 @@
-package com.itxca.msa
+package com.easy.core.msa
 
 import android.content.Intent
 import androidx.annotation.Keep

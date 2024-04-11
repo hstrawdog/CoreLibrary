@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'maven-publish'
 }
+apply from: rootProject.file("gradle/maven-publish.gradle")
 
 
 
@@ -119,7 +120,6 @@ dependencies {
 //    api Retrofit.loggingInterceptor
 
 }
-
 
 afterEvaluate {
     publishing {
