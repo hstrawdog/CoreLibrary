@@ -172,7 +172,7 @@ interface IPermissionsHas {
 
         /**
          * 位置权限
-         *
+         *    ACCESS_BACKGROUND_LOCATION   后台权限  华为手机 不会显示同意框
          * @return
          */
         val location: Array<String>
@@ -180,7 +180,7 @@ interface IPermissionsHas {
                 Manifest.permission.ACCESS_COARSE_LOCATION,  //(通过GPS芯片接收卫星的定位信息，定位精度达10米以内)
                 Manifest.permission.ACCESS_FINE_LOCATION,  // 允许程序访问额外的定位提供者指令
                 Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+//                Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
 
         //(录制声音通过手机或耳机的麦克)

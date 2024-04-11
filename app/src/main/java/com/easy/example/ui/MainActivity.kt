@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.KeyEvent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
@@ -66,6 +67,14 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
+        SysPermissionsUtils.requestBluetooth(supportFragmentManager) { status ->
+            if (status) {
+
+            }
+        }
+
+
+
 //        FullDialog.showDialog(supportFragmentManager)
         //data/data/com.easy.core/cache/256965670.pdf
 
