@@ -1,16 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.easy.core">
 
-    <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION"
-        android:maxSdkVersion="22" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-    <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
-    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application>
         <provider
