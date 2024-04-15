@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'maven-publish'
 }
-apply from: rootProject.file("gradle/maven-publish.gradle")
+//apply from: rootProject.file("gradle/maven-publish.gradle")
 
 android {
     compileSdk 31
