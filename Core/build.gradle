@@ -7,7 +7,6 @@ plugins {
 //apply from: rootProject.file("gradle/maven-publish.gradle")
 
 
-
 android {
     buildFeatures {
         //开启 viewBinding 支持
@@ -102,8 +101,16 @@ dependencies {
 task androidSourcesJar(type: Jar) {
 //    classifier = 'sources'
     archiveClassifier.set("sources")
-    from (android.sourceSets.main.java.sourceFiles, android.sourceSets.main.kotlin.sourceFiles)
+//    from(android.sourceSets.main.java.sourceFiles, android.sourceSets.main.kotlin.sourceFiles)
 //    from android.sourceSets.main.java.srcDirs
+    if (project.hasProperty(" kotlin")) {
+        from android.sourceSets.main.java.getSrcDirs()
+    } else if (project.hasProperty("android")) {
+        from android.sourceSets.main.java.sourceFiles
+    } else {
+        println project
+        from sourceSets.main.allSource
+    }
 }
 
 artifacts {
