@@ -18,8 +18,7 @@
     <!--允许访问网络，必选权限-->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--允许获取精确位置，精准定位必选-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
     <!--允许获取粗略位置，粗略定位必选-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -74,12 +73,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION"
-        android:maxSdkVersion="22" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS" />
