@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.easy.alibaba'
-    compileSdkVersion 31
+    compileSdk 31
 
     defaultConfig {
         minSdk 23

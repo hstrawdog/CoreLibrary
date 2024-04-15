@@ -18,7 +18,6 @@ android {
 //        compose true
     }
     compileSdk 31
-//    buildToolsVersion "31.0.0"
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 31
@@ -106,9 +105,9 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-//artifacts {
-//    archives androidSourcesJar
-//}
+artifacts {
+    archives androidSourcesJar
+}
 
 
 afterEvaluate {
