@@ -19,6 +19,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 31
     }
+    namespace 'com.easy.album'
 
 
 }
