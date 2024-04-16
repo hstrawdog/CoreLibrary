@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'maven-publish'
+    id 'kotlin-android'
 }
 //apply from: rootProject.file("gradle/maven-publish.gradle")
 
@@ -99,8 +100,8 @@ dependencies {
 }
 //将源码打包  为了保证引入的aar  包可以查看源码
 task androidSourcesJar(type: Jar) {
-    archiveClassifier.set("sources")
     from(android.sourceSets.main.java.sourceFiles, android.sourceSets.main.kotlin.sourceFiles)
+    archiveClassifier.set("sources")
 }
 
 task sourcesJar(type: Jar) {
@@ -118,12 +119,10 @@ task sourcesJar(type: Jar) {
 }
 
 
-
-
+//包含文档和源码的aar
 artifacts {
     archives androidSourcesJar
 }
-
 
 afterEvaluate {
     publishing {
@@ -141,6 +140,7 @@ afterEvaluate {
                 //artifactId通常是指待发布项目的名称，也就是别名
                 artifactId = 'Core'
                 // 主要是这一行
+                // 2.将源码打包到aar中
 //                artifact androidSourcesJar
                 artifact(androidSourcesJar)
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName

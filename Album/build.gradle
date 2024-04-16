@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'maven-publish'
+    id 'kotlin-android'
 
 }
 //apply from: rootProject.file("gradle/maven-publish.gradle")
