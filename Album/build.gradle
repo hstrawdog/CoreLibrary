@@ -20,11 +20,11 @@ android {
         targetSdkVersion 31
     }
     namespace 'com.easy.album'
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
+//    publishing {
+//        singleVariant("release") {
+//            withSourcesJar()
+//        }
+//    }
 
 }
 
@@ -35,17 +35,17 @@ dependencies {
     api libs.subsamplingscaleimageview.core
 }
 
-//task sourcesJar(type: Jar) {
-//    if (project.hasProperty("kotlin")) {
-//        from android.sourceSets.main.java.getSrcDirs()
-//    } else if (project.hasProperty("android")) {
-//        from android.sourceSets.main.java.sourceFiles
-//    } else {
-//        println project
-//        from sourceSets.main.allSource
-//    }
-//    archiveClassifier.set("sources")
-//}
+task sourcesJar(type: Jar) {
+    if (project.hasProperty("kotlin")) {
+        from android.sourceSets.main.java.getSrcDirs()
+    } else if (project.hasProperty("android")) {
+        from android.sourceSets.main.java.sourceFiles
+    } else {
+        println project
+        from sourceSets.main.allSource
+    }
+    archiveClassifier.set("sources")
+}
 
 
 
@@ -63,6 +63,8 @@ afterEvaluate {
                 groupId = group
                 //artifactId通常是指待发布项目的名称，也就是别名
                 artifactId = 'Album'
+                artifact(sourcesJar)
+
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
                 version = version
             }
