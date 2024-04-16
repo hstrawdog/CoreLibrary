@@ -104,25 +104,7 @@ task androidSourcesJar(type: Jar) {
     archiveClassifier.set("sources")
 }
 
-task sourcesJar(type: Jar) {
-    if (project.hasProperty("kotlin")) {
-        from android.sourceSets.main.java.getSrcDirs()
-    } else if (project.hasProperty("android")) {
-        from android.sourceSets.main.java.sourceFiles
-    } else {
-        println project
-        from sourceSets.main.allSource
 
-    }
-    archiveClassifier.set("sources")
-
-}
-
-
-//包含文档和源码的aar
-artifacts {
-    archives androidSourcesJar
-}
 
 afterEvaluate {
     publishing {
