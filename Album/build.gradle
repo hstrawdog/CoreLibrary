@@ -9,7 +9,6 @@ plugins {
 //apply from: rootProject.file("gradle/maven-publish.gradle")
 
 
-
 android {
     buildFeatures {
         viewBinding true
@@ -21,20 +20,34 @@ android {
         targetSdkVersion 31
     }
     namespace 'com.easy.album'
-
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':Core')
-
-//    api PhotoView.library
-    api   libs.photoview.library
-
-//    api SubsamplingScaleImageView.core
+    api libs.photoview.library
     api libs.subsamplingscaleimageview.core
 }
+
+//task sourcesJar(type: Jar) {
+//    if (project.hasProperty("kotlin")) {
+//        from android.sourceSets.main.java.getSrcDirs()
+//    } else if (project.hasProperty("android")) {
+//        from android.sourceSets.main.java.sourceFiles
+//    } else {
+//        println project
+//        from sourceSets.main.allSource
+//    }
+//    archiveClassifier.set("sources")
+//}
+
+
 
 afterEvaluate {
     publishing {
@@ -52,6 +65,12 @@ afterEvaluate {
                 artifactId = 'Album'
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
                 version = version
+            }
+        }
+        repositories {
+            maven {
+                name = "BuildFolder"
+                url = "${project.buildDir}/repository"
             }
         }
     }
