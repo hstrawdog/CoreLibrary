@@ -135,17 +135,19 @@ afterEvaluate {
             release(MavenPublication) {
                 // Applies the component for the release build variant.
                 from components.release
+//                from components.findByName("release")
                 //groupId通常是自己的gitee或者GitHub的账户地址
                 groupId = group
                 //artifactId通常是指待发布项目的名称，也就是别名
                 artifactId = 'Core'
                 // 主要是这一行
 //                artifact androidSourcesJar
+                artifact(androidSourcesJar)
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
                 version = version
-                afterEvaluate {
-                    from components.release
-                }
+//                afterEvaluate {
+//                    from components.release
+//                }
             }
         }
     }
