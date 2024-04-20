@@ -52,8 +52,9 @@ android {
 
 dependencies {
     // 屏幕适配
-    api project(':DimensCompat')
+//    api project(':DimensCompat')
     api libs.coilKt
+    api libs.i.dimens.compat
 
     // Appcompat   包含 core
     api libs.appcompat.core
@@ -99,11 +100,11 @@ dependencies {
 
 }
 //将源码打包  为了保证引入的aar  包可以查看源码
-//task androidSourcesJar(type: Jar) {
-//    from(android.sourceSets.main.java.sourceFiles, android.sourceSets.main.kotlin.sourceFiles)
-//    archiveClassifier.set("sources")
-//}
-//
+task sourcesJar(type: Jar) {
+    from(android.sourceSets.main.java.sourceFiles, android.sourceSets.main.kotlin.sourceFiles)
+    archiveClassifier.set("sources")
+}
+
 
 
 afterEvaluate {
