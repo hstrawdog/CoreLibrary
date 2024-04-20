@@ -110,10 +110,10 @@ dependencies {
     implementation project(':Core')
 //    implementation project(':WeChat')
 //    implementation project(':ALiBaBa')
-    implementation project(':Album')
+//    implementation project(':Album')
 
 //    implementation 'com.github.hstrawdog.CoreLibrary:ALiBaBa:1.3.14'
-//    implementation 'com.github.hstrawdog.CoreLibrary:Album:1.3.14'
+    implementation 'com.github.hstrawdog.CoreLibrary:Album:1.3.53'
 //    implementation 'com.github.hstrawdog.CoreLibrary:WeChat:1.3.14'
 
     implementation "androidx.room:room-runtime:2.4.0-alpha03"
