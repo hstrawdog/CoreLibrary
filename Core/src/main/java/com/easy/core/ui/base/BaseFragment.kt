@@ -145,8 +145,8 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
         if (!isCreate && rootView != null) {
             isCreate = true
             if (!isLazyLoad()) {
-                initView()
                 LogUtils.d("onViewCreated initBasic   false  " + javaClass.simpleName + this.toString())
+                initView()
             } else if (isLazyLoad() && visible) {
                 lazyInitEnd = true
                 LogUtils.d("onViewCreated initBasic   True " + javaClass.simpleName + this.toString())
@@ -278,9 +278,9 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
         parentActivityVisible = visible
         checkVisibility(visible)
         if (isLazyLoad() && isCreate && !lazyInitEnd && visible) {
+            LogUtils.dInfo("setUserVisibleHint  initBasic " + javaClass.simpleName + this.toString())
             initView()
             lazyInitEnd = true
-            LogUtils.dInfo("setUserVisibleHint  initBasic " + javaClass.simpleName + this.toString())
         } else if (isLazyLoad() && isCreate && lazyInitEnd && !visible) {
             onFragmentHit()
         }
