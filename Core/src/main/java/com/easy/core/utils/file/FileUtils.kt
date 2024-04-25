@@ -50,21 +50,19 @@ import java.util.Vector
  */
 object FileUtils {
     //region 文件名
-
     /**
-     * 随机名称
      *
-     * @return
+     * @return 以时间毫秒为名称的名称 但位添加后缀
      */
     @JvmStatic
     val defFileName: String
         get() = System.currentTimeMillis()
-            .toString() + ""
+            .toString()
 
     /**
      * 带后缀的文件名称
      *
-     * @param suffix
+     * @param suffix  ".png" 之类的
      * @return
      */
     @JvmStatic

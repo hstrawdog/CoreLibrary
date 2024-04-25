@@ -177,6 +177,25 @@ object LogUtils {
     }
 
     /**
+     * 以 类名 为 tag
+     * @param any Any?
+     */
+    fun de(any: Any?) {
+        val stackTrace = Throwable().stackTrace
+        if (stackTrace.size > 1) {
+            for (index in 1 until (if (stackTrace.size > 5) 5 else stackTrace.size)) {
+                val targetElement = stackTrace[index]
+                val head =
+                    "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
+                        getFileName(targetElement)
+                    }:${targetElement.getLineNumber()})            "
+                e(targetElement.getClassName(), any)
+            }
+
+        }
+    }
+
+    /**
      *  判断日志是否超过长度
      */
     @JvmStatic
@@ -269,13 +288,17 @@ object LogUtils {
     //region  将日子 写入文件中
     @JvmStatic
     private val LOG_FORMAT = SimpleDateFormat("yyyy年MM月dd日_HH点mm分ss秒") // 日志的输出格式
+
     @JvmStatic
     private val FILE_SUFFIX = SimpleDateFormat("HH点mm分ss秒") // 日志文件格式
+
     @JvmStatic
     private val FILE_DIR = SimpleDateFormat("yyyy年MM月dd日") // 日志文件格式
+
     @JvmStatic
     private var LOG_FILE_PATH // 日志文件保存路径
             : String? = null
+
     @JvmStatic
     private var LOG_FILE_NAME // 日志文件保存名称
             : String? = null

@@ -6,6 +6,8 @@ import android.net.Uri
 import android.provider.MediaStore
 import com.easy.core.CoreConfig
 import com.easy.core.utils.data.isNotNull
+import com.easy.core.utils.file.FileUtils.defFileName
+import com.easy.core.utils.file.FileUtils.getDefFileName
 import com.easy.core.utils.file.FileUtils.isQ
 import java.io.File
 
@@ -37,7 +39,7 @@ object SaveBitmapUtils {
      */
     @JvmStatic
     fun saveBitmap2AppCache(bitmap: Bitmap?, relativePath: String = "",
-                            fileName: String = FileUtils.getDefFileName(".png")): String {
+                            fileName: String = getDefFileName(".png")): String {
         val path = if (relativePath.isNotNull()) {
             FilePathTools.getCacheDir() + File.separator + relativePath + File.separator + fileName
         } else {
@@ -57,7 +59,8 @@ object SaveBitmapUtils {
      *  Q 一下key直接使用文件读写进行保存
      */
     @JvmStatic
-    fun saveBitmap2Pictures(bitmap: Bitmap?, relativePath: String = "", fileName: String): Uri? {
+    fun saveBitmap2Pictures(bitmap: Bitmap?, relativePath: String = "",
+                            fileName: String = getDefFileName(".png")): Uri? {
         if (bitmap == null) {
             return null
         }
