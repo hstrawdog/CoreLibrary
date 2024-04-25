@@ -36,7 +36,7 @@ object SaveBitmapUtils {
      * 如果需要通知相册  请直接保存至相册目录下
      */
     @JvmStatic
-    fun saveBitmap2AppCache(bitmap: Bitmap?, relativePath: String = "", fileName: String): String {
+    fun saveBitmap2AppCache(bitmap: Bitmap?, relativePath: String = ""): String {
         var path = FilePathTools.getCacheDir() + File.separator + FileUtils.getDefFileName(".png")
         if (relativePath.isNotNull()) {
             path =
