@@ -75,7 +75,7 @@ object SaveBitmapUtils {
      * @param path String
      */
     @JvmStatic
-    fun saveBitmap2ExternalPrivate(bitmap: Bitmap?, relativePath: String = "", fileName: String): String {
+    fun saveBitmap2ExternalPrivate(bitmap: Bitmap?, relativePath: String = "", fileName: String= getDefFileName(".png")): String {
         if (bitmap == null) {
             return ""
         }

@@ -11,7 +11,6 @@ import android.renderscript.RenderScript.RSMessageHandler
 import android.renderscript.ScriptIntrinsicBlur
 import android.widget.ImageView
 import com.easy.core.CoreConfig
-import com.easy.core.utils.image.ImageUtils.isEmptyBitmap
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min

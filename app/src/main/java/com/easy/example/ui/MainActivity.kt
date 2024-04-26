@@ -1,39 +1,27 @@
 package com.easy.example.ui
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.KeyEvent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
-import com.easy.core.permission.PermissionsResult
 import com.easy.core.permission.SysPermissionsUtils
-import com.easy.core.ui.base.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
-import com.easy.core.utils.file.FilePathTools
-import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity
-import com.easy.example.dialog.FullDialog
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity
 import com.easy.example.ui.adaptation.permission.PermissionActivity
-import com.easy.example.ui.bar.DefToolBarActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.crash.ThrowIndexActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity
 import com.easy.example.ui.dialog.TestDialogActivity
-import com.easy.example.ui.file.DownLoadActivity
 import com.easy.example.ui.file.FileIndexActivity
-import com.easy.example.ui.file.FilePathActivity
 import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
@@ -41,7 +29,6 @@ import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity
 import kotlinx.coroutines.launch
-import java.io.File
 
 /**
  * @Author : huangqiqiang
@@ -67,12 +54,13 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
-        SysPermissionsUtils.requestBluetooth(supportFragmentManager) { status ->
-            if (status) {
+//        SysPermissionsUtils.requestBluetooth(supportFragmentManager) { status ->
+//            if (status) {
+//            }
+//        }
 
-            }
-        }
 
+        LogUtils.de("111111111111111111111111")
 
 
 //        FullDialog.showDialog(supportFragmentManager)

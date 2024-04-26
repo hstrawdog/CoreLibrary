@@ -49,6 +49,14 @@ import java.util.Vector
  *      拆分文件操作   图片  与其他文件如 视频  pdf 等
  */
 object FileUtils {
+    /**
+     * KB与Byte的倍数
+     */
+    const val KB = 1024
+    const val BUFSIZE = 1024 * 8
+
+    const val TAG = "RxFileTool"// 取得sdcard文件路径
+
     //region 文件名
     /**
      *
@@ -68,6 +76,23 @@ object FileUtils {
     @JvmStatic
     fun getDefFileName(suffix: String): String {
         return defFileName + suffix
+    }
+
+    /**
+     * 获取文件图片 对应的媒体类型
+     * @param path String?
+     * @return String
+     */
+    @JvmStatic
+    private fun String.getMimeType(): String? {
+        val fileName = this.toLowerCase()
+        return when {
+            fileName.endsWith(".png") -> "image/png"
+            fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") -> "image/jpeg"
+            fileName.endsWith(".webp") -> "image/webp"
+            fileName.endsWith(".gif") -> "image/gif"
+            else -> null
+        }
     }
     //endregion
 
@@ -116,12 +141,14 @@ object FileUtils {
         var size: Long = 0
         try {
             val fileList = file!!.listFiles()
-            for (i in fileList.indices) {
-                // 如果下面还有文件
-                size = if (fileList[i].isDirectory) {
-                    size + getFolderSize(fileList[i])
-                } else {
-                    size + fileList[i].length()
+            if (fileList != null) {
+                for (i in fileList.indices) {
+                    // 如果下面还有文件
+                    size = if (fileList[i].isDirectory) {
+                        size + getFolderSize(fileList[i])
+                    } else {
+                        size + fileList[i].length()
+                    }
                 }
             }
         } catch (e: Exception) {
@@ -219,14 +246,15 @@ object FileUtils {
     @JvmStatic
     fun getFile2Uri(file: File): Uri? {
         val context = CoreConfig.applicationContext
+        //如果在Android7.0以上,使用FileProvider获取Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            //如果在Android7.0以上,使用FileProvider获取Uri
             try {
                 return FileProvider.getUriForFile(context, context.packageName + ".FileProvider", file)
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }
-        } else {    //否则使用Uri.fromFile(file)方法获取Uri
+        } else {
+            //否则使用Uri.fromFile(file)方法获取Uri
             return Uri.fromFile(file)
         }
         return null
@@ -234,13 +262,6 @@ object FileUtils {
     //endregion
 
     //region Android Q   10以上文件操作
-    /**
-     *  保存数据到 download 中
-     * @param context Context
-     * @param fileName String
-     * @param data String
-     */
-
     /**
      * 创建 pictures  Values
      * @param data String 原始地址 / 就版本地址  Q(10)以上没有这个字段
@@ -415,7 +436,7 @@ object FileUtils {
     @JvmStatic
     fun saveBitmap2Public(context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String) {
         if (!File(filePath).parentFile.exists()) {
-            File(filePath).parentFile.mkdirs()
+            File(filePath).parentFile?.mkdirs()
         }
         val file = File(filePath)
         val current = System.currentTimeMillis()
@@ -489,7 +510,7 @@ object FileUtils {
         // 保存的位置
         val collection: Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val path = if (relativePath != null) "${ALBUM_DIR}/${relativePath}" else ALBUM_DIR
+            val path = "${ALBUM_DIR}/${relativePath}"
             imageValues.apply {
                 put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
                 put(MediaStore.Images.Media.RELATIVE_PATH, path)
@@ -502,7 +523,7 @@ object FileUtils {
         } else {
             // 老版本
             val pictures = @Suppress("DEPRECATION") Environment.getExternalStoragePublicDirectory(ALBUM_DIR)
-            val saveDir = if (relativePath != null) File(pictures, relativePath) else pictures
+            val saveDir = File(pictures, relativePath)
             if (!saveDir.exists() && !saveDir.mkdirs()) {
                 return null
             }
@@ -815,23 +836,6 @@ object FileUtils {
     }
 
     /**
-     * 获取文件图片 对应的媒体类型
-     * @param path String?
-     * @return String
-     */
-    @JvmStatic
-    private fun String.getMimeType(): String? {
-        val fileName = this.toLowerCase()
-        return when {
-            fileName.endsWith(".png") -> "image/png"
-            fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") -> "image/jpeg"
-            fileName.endsWith(".webp") -> "image/webp"
-            fileName.endsWith(".gif") -> "image/gif"
-            else -> null
-        }
-    }
-
-    /**
      *  保存视频到相册
      * @param context Context
      * @param destFile File  全地址
@@ -886,14 +890,6 @@ object FileUtils {
     }
 
 //    ----------------------------------------------------------
-
-    /**
-     * KB与Byte的倍数
-     */
-    const val KB = 1024
-
-    const val BUFSIZE = 1024 * 8
-    private const val TAG = "RxFileTool"// 取得sdcard文件路径
 
     /**
      * 传入文件名以及字符串, 将字符串信息保存到文件中
@@ -1572,7 +1568,7 @@ object FileUtils {
                 }
                 fc.close()
             }
-            LogUtils.d(TAG, "拼接完成")
+            LogUtils.d("拼接完成")
         } catch (ioe: IOException) {
             ioe.printStackTrace()
         } finally {
@@ -1687,7 +1683,7 @@ object FileUtils {
         }
         return vecFile
     }
-    //----------------------------------------------------------------------------------------------
+
     /**
      * 根据文件路径获取文件
      *
@@ -1698,7 +1694,7 @@ object FileUtils {
     fun getFileByPath(filePath: String?): File? {
         return if (DataUtils.isNullString(filePath)) null else File(filePath)
     }
-    //==============================================================================================
+
     /**
      * 判断文件是否存在
      *
@@ -3077,7 +3073,7 @@ object FileUtils {
     }
 
     /**
-     * 安静关闭IO
+     * 关闭IO
      *
      * @param closeables closeable
      */
@@ -3134,7 +3130,7 @@ object FileUtils {
             output.flush()
             output.close()
             input.close()
-            LogUtils.i("TAG", "mv success!")
+            LogUtils.i("mv success!")
         } catch (var8: IOException) {
             LogUtils.e("TAG", var8.toString())
         }

@@ -6,17 +6,18 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import com.easy.core.utils.data.DataUtils.isNullString
-import com.easy.core.utils.image.ImageUtils.save
 import java.io.File
 import java.io.IOException
 
 /**
- *
- * @author tamsiree
- * @date 2016/1/24
- * 相机相关工具类
+ * @Author : huangqiqiang
+ * @Package : com.easy.core.utils.file
+ * @FileName :   SysPictureIntentUtils.kt
+ * @Date  : 2024/4/26  02:03
+ * @Email :  qiqiang213@gmail.com
+ * @Describe : 系统图片处理  Intent
  */
-object PictureUtils {
+object SysPictureIntentUtils {
     /**
      * 获取打开照程序界面的Intent
      */
@@ -35,8 +36,7 @@ object PictureUtils {
      * 获取[跳转至相册选择界面,并跳转至裁剪界面，默认可缩放裁剪区域]的Intent
      */
     @JvmStatic
-    fun getImagePickerIntent(outputX: Int, outputY: Int, fromFileURI: Uri?,
-                             saveFileURI: Uri?): Intent {
+    fun getImagePickerIntent(outputX: Int, outputY: Int, fromFileURI: Uri?, saveFileURI: Uri?): Intent {
         return getImagePickerIntent(1, 1, outputX, outputY, true, fromFileURI, saveFileURI)
     }
 
@@ -93,8 +93,7 @@ object PictureUtils {
      * 获取[跳转至裁剪界面,默认可缩放]的Intent
      */
     @JvmStatic
-    fun getCropImageIntent(outputX: Int, outputY: Int, fromFileURI: Uri?,
-                           saveFileURI: Uri?): Intent {
+    fun getCropImageIntent(outputX: Int, outputY: Int, fromFileURI: Uri?, saveFileURI: Uri?): Intent {
         return getCropImageIntent(1, 1, outputX, outputY, true, fromFileURI, saveFileURI)
     }
 
@@ -111,8 +110,8 @@ object PictureUtils {
      * 获取[跳转至裁剪界面]的Intent
      */
     @JvmStatic
-    fun getCropImageIntent(aspectX: Int, aspectY: Int, outputX: Int, outputY: Int, canScale: Boolean,
-                           fromFileURI: Uri?, saveFileURI: Uri?): Intent {
+    fun getCropImageIntent(aspectX: Int, aspectY: Int, outputX: Int, outputY: Int, canScale: Boolean, fromFileURI: Uri?,
+                           saveFileURI: Uri?): Intent {
         val intent = Intent("com.android.camera.action.CROP")
         intent.setDataAndType(fromFileURI, "image/*")
         intent.putExtra("crop", "true")

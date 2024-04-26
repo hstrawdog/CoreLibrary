@@ -278,6 +278,26 @@ object ScreenUtils {
     }
 
     /**
+     * px转sp
+     *
+     * @param pxValue px值
+     * @return sp值
+     */
+    @JvmStatic
+    fun px2sp(pxValue: Float): Int {
+        val fontScale = CoreConfig.applicationContext.resources.displayMetrics.scaledDensity
+        return (pxValue / fontScale + 0.5f).toInt()
+    }
+    /**
+     *  px转dp
+     * @param pxValue Float
+     * @return Int
+     */
+    fun px2dip(pxValue: Float): Int {
+        return px2dip(CoreConfig.applicationContext, pxValue)
+    }
+
+    /**
      * 屏幕宽度
      *
      * @param context context

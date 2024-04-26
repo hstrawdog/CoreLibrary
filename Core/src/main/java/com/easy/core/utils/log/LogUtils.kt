@@ -1,5 +1,4 @@
 package com.easy.core.utils.log
-
 import android.content.Context
 import android.util.Log
 import com.easy.core.BuildConfig
@@ -183,15 +182,10 @@ object LogUtils {
     fun de(any: Any?) {
         val stackTrace = Throwable().stackTrace
         if (stackTrace.size > 1) {
-            for (index in 1 until (if (stackTrace.size > 5) 5 else stackTrace.size)) {
-                val targetElement = stackTrace[index]
-                val head =
-                    "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
-                        getFileName(targetElement)
-                    }:${targetElement.getLineNumber()})            "
-                e(targetElement.getClassName(), any)
-            }
-
+            val targetElement = stackTrace[0]
+            e(targetElement.fileName, any)
+        } else {
+            e(any)
         }
     }
 
