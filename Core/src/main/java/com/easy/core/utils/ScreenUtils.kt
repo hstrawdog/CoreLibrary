@@ -463,7 +463,23 @@ object ScreenUtils {
         (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
         return localDisplayMetrics.densityDpi.toFloat()
     }
-
+    /**
+     * 获得屏幕的分辨率
+     *
+     * @param context
+     * @return
+     */
+    @JvmStatic
+    fun getScreenResolution(context: Context): IntArray {
+        val scrennResolution = IntArray(2)
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val dm = DisplayMetrics()
+        val display = wm.defaultDisplay
+        display.getMetrics(dm)
+        scrennResolution[0] = dm.widthPixels
+        scrennResolution[1] = dm.heightPixels
+        return scrennResolution
+    }
     @JvmStatic
     fun getStatusBarHeight(): Int {
         return getStatusBarHeight(CoreConfig.applicationContext)

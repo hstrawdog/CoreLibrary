@@ -12,6 +12,7 @@ import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.file.SaveBitmapUtils
+import com.easy.core.utils.image.BitmapCreateUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.example.databinding.ActivityShareIndexBinding
 import java.io.File
@@ -34,7 +35,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
             SysPermissionsUtils.requestStorage (supportFragmentManager,{
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2AppCache(
-                        BitmapUtils.createBitmapFromView2(binding.button80),
+                        BitmapCreateUtils.createBitmapFromView2(binding.button80),
                         "",
                         FileUtils.getDefFileName(".png")
                     )
@@ -47,7 +48,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
             SysPermissionsUtils.requestStorage (supportFragmentManager,{
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2ExternalPrivate(
-                        BitmapUtils.createBitmapFromView2(binding.button81),
+                        BitmapCreateUtils.createBitmapFromView2(binding.button81),
                         "",
                         FileUtils.getDefFileName(".png")
                     )
@@ -60,7 +61,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
             SysPermissionsUtils.requestStorage( supportFragmentManager,{
                 if (it) {
                     var path = SaveBitmapUtils.saveBitmap2Pictures(
-                        BitmapUtils.createBitmapFromView2(binding.button82),
+                        BitmapCreateUtils.createBitmapFromView2(binding.button82),
                         "",
                         FileUtils.getDefFileName(".png")
                     )

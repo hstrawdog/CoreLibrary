@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import com.easy.core.utils.data.DataUtils.isNullString
+import com.easy.core.utils.image.BitmapUtils.save
 import java.io.File
 import java.io.IOException
 

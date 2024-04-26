@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.drawable.Drawable
+import com.easy.core.utils.log.LogUtils
 import java.io.BufferedInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileInputStream
@@ -111,6 +112,42 @@ object BitmapOperateUtils {
         bm.recycle()
         return BitmapUtils.bitmapCombine(newbm, 5, 5, Color.TRANSPARENT)
     }
+
+    @JvmStatic
+    fun zoomImage(bgimage: Bitmap, newWidth: Double, newHeight: Double): Bitmap {
+        // 获取到bitmap的宽
+        val width = bgimage.width.toFloat()
+        val height = bgimage.height.toFloat()
+        //
+        val matrix = Matrix()
+        // 设置尺寸
+        val scaleWidth = newWidth.toFloat() / width
+        val scaleHeight = newHeight.toFloat() / height
+        matrix.postScale(scaleWidth, scaleHeight)
+        val bitmap = Bitmap.createBitmap(bgimage, 0, 0, width.toInt(), height.toInt(), matrix, true)
+        LogUtils.e("tag", (bitmap.height + bitmap.width).toString() + "d")
+        return bitmap
+    }
+
+    /**
+     * Resize the bitmap
+     *
+     * @param bitmap 图片引用
+     * @param width  宽度
+     * @param height 高度
+     * @return 缩放之后的图片引用
+     */
+    @JvmStatic
+    fun zoomBitmap(bitmap: Bitmap, width: Int, height: Int): Bitmap {
+        val w = bitmap.width
+        val h = bitmap.height
+        val matrix = Matrix()
+        val scaleWidth = width.toFloat() / w
+        val scaleHeight = height.toFloat() / h
+        matrix.postScale(scaleWidth, scaleHeight)
+        return Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true)
+    }
+
 
     /**
      * 以最小的比例 进行缩放图片

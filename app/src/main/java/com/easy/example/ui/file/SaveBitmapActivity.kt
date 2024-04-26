@@ -1,5 +1,6 @@
 package com.easy.example.ui.file
 
+import android.graphics.Bitmap
 import android.os.Build
 import com.easy.core.glide.ImageLoadUtils
 import com.easy.core.permission.SysPermissionsUtils
@@ -7,6 +8,7 @@ import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.file.SaveBitmapUtils
+import com.easy.core.utils.image.BitmapCreateUtils
 import com.easy.example.databinding.ActivitySaveBitmapBinding
 
 /**
@@ -25,7 +27,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
             SysPermissionsUtils.requestStorage(supportFragmentManager,{
                 if (it) {
                     path =
-                        SaveBitmapUtils.saveBitmap2AppCache(BitmapUtils.createBitmapFromView2(binding.tvTitle), "", FileUtils.getDefFileName(".png"))
+                        SaveBitmapUtils.saveBitmap2AppCache(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), "", FileUtils.getDefFileName(".png"))
                     binding.textView40.setText("$path")
                     ImageLoadUtils.with(path, binding.imageView15)
 
@@ -37,7 +39,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
             SysPermissionsUtils.requestStorage(supportFragmentManager,{
                 if (it) {
                     binding.tvTitle.text = binding.textView29.text
-                    SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), fileName = FileUtils.getDefFileName(".png"))
+                    SaveBitmapUtils.saveBitmap2Pictures(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), fileName = FileUtils.getDefFileName(".png"))
                         ?.let {
                             path = it.path.toString()
                             binding.textView40.setText("$path")
@@ -51,7 +53,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
             SysPermissionsUtils.requestStorage(supportFragmentManager,{
                 if (it) {
                     binding.tvTitle.text = binding.textView32.text
-                    SaveBitmapUtils.saveBitmap2Pictures(BitmapUtils.createBitmapFromView2(binding.tvTitle), "subdirectory", fileName = FileUtils.getDefFileName(".png"))
+                    SaveBitmapUtils.saveBitmap2Pictures(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), "subdirectory", fileName = FileUtils.getDefFileName(".png"))
                         ?.let {
                             path = it.path.toString()
                             binding.textView40.setText("$path")
@@ -68,7 +70,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
                     binding.tvTitle.text = binding.textView34.text
                     // 保存到默认的文件夹
                     path =
-                        SaveBitmapUtils.saveBitmap2ExternalPrivate(BitmapUtils.createBitmapFromView2(binding.tvTitle), "a", fileName = FileUtils.getDefFileName(".png"))
+                        SaveBitmapUtils.saveBitmap2ExternalPrivate(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), "a", fileName = FileUtils.getDefFileName(".png"))
                     binding.textView40.setText("$path")
                     ImageLoadUtils.with(path, binding.imageView15)
                 }

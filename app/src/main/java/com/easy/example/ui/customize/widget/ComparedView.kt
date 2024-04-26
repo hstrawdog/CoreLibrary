@@ -11,6 +11,7 @@ import android.view.ViewTreeObserver
 import androidx.core.graphics.toRect
 import androidx.core.graphics.values
 import com.easy.core.utils.ScreenUtils
+import com.easy.core.utils.image.BitmapOperateUtils
 import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.example.R
@@ -123,10 +124,10 @@ class ComparedView : View, View.OnTouchListener {
 
     init {
         status = 1
-        originalBitmap = BitmapUtils.zoomImg(
+        originalBitmap = BitmapOperateUtils.zoomImg(
             BitmapFactory.decodeResource(resources, R.mipmap.a1), ScreenUtils.getScreenWidth()
         )
-        beautifyBitmap = BitmapUtils.zoomImg(
+        beautifyBitmap = BitmapOperateUtils.zoomImg(
             BitmapFactory.decodeResource(resources, R.mipmap.a2), ScreenUtils.getScreenWidth()
         )
     }
