@@ -49,6 +49,7 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
      */
     var scaleType = ImageView.ScaleType.CENTER_CROP
 
+
     fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener) {
         this.onRvBannerClickListener = onRvBannerClickListener
     }
@@ -99,6 +100,7 @@ class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>(
                 tv.visibility = View.GONE
             }
         }
+
         holder.itemView.setOnClickListener {
             if (onRvBannerClickListener != null) {
                 onRvBannerClickListener!!.onBannerClick(position % (data.size))

@@ -60,7 +60,7 @@ object FileUtils {
     //region 文件名
     /**
      *
-     * @return 以时间毫秒为名称的名称 但位添加后缀
+     * @return 以时间毫秒为名称的名称 但未添加后缀
      */
     @JvmStatic
     val defFileName: String
@@ -70,11 +70,11 @@ object FileUtils {
     /**
      * 带后缀的文件名称
      *
-     * @param suffix  ".png" 之类的
+     * @param suffix  ".png" 之类的  默认使用  png
      * @return
      */
     @JvmStatic
-    fun getDefFileName(suffix: String): String {
+    fun getDefFileName(suffix: String =  ".png"): String {
         return defFileName + suffix
     }
 

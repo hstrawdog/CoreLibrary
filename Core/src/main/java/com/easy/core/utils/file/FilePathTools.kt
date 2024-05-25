@@ -33,7 +33,7 @@ object FilePathTools {
      * @return String /data/user/0/ com.easy.core/cache
      */
     @JvmStatic
-    fun getCodeCacheDir(context: Context): String {
+    fun getCodeCacheDir(context: Context = CoreConfig.applicationContext): String {
         return context.codeCacheDir.path
     }
 
@@ -51,7 +51,7 @@ object FilePathTools {
      * @return /data/user/0/ com.easy.core/files
      */
     @JvmStatic
-    fun getFilesDir(context: Context): String {
+    fun getFilesDir(context: Context = CoreConfig.applicationContext): String {
         return context.filesDir.path
     }
 
@@ -63,7 +63,7 @@ object FilePathTools {
      * @return /data/data/package/files/fileName
      */
     @JvmStatic
-    fun getFileStreamPath(context: Context, fileName: String = ""): String {
+    fun getFileStreamPath(context: Context = CoreConfig.applicationContext, fileName: String = ""): String {
         return context.getFileStreamPath(fileName).path
     }
 
@@ -97,7 +97,7 @@ object FilePathTools {
      * @return
      */
     @JvmStatic
-    fun getExternalCacheDir(context: Context): String {
+    fun getExternalCacheDir(context: Context = CoreConfig.applicationContext): String {
         return context.externalCacheDir!!.path
     }
 
