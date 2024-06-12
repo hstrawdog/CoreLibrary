@@ -288,6 +288,7 @@ object ScreenUtils {
         val fontScale = CoreConfig.applicationContext.resources.displayMetrics.scaledDensity
         return (pxValue / fontScale + 0.5f).toInt()
     }
+
     /**
      *  px转dp
      * @param pxValue Float
@@ -463,6 +464,7 @@ object ScreenUtils {
         (context as Activity).windowManager.defaultDisplay.getMetrics(localDisplayMetrics)
         return localDisplayMetrics.densityDpi.toFloat()
     }
+
     /**
      * 获得屏幕的分辨率
      *
@@ -480,6 +482,7 @@ object ScreenUtils {
         scrennResolution[1] = dm.heightPixels
         return scrennResolution
     }
+
     @JvmStatic
     fun getStatusBarHeight(): Int {
         return getStatusBarHeight(CoreConfig.applicationContext)
@@ -490,6 +493,7 @@ object ScreenUtils {
      *
      * @param context context
      * @return int
+     *  华为 p50 获取到的高度是0
      */
     @JvmStatic
     fun getStatusBarHeight(context: Context): Int {
@@ -525,6 +529,19 @@ object ScreenUtils {
             result = context.resources.getDimensionPixelSize(resourceId)
         }
         return result
+    }
+
+    /**
+     * 获取状态栏高度
+     * @return Int
+     */
+    fun getStatusBarHeight4new(): Int {
+        var height = getStatusBarHeight4Resources(CoreConfig.applicationContext)
+        if (height <= 0) {
+            return getStatusBarHeight()
+
+        }
+        return height
     }
 
     /**

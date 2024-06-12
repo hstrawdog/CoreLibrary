@@ -89,7 +89,6 @@ object LogUtils {
             val stackTrace = Throwable().stackTrace
             if (stackTrace.size > 1) {
                 for (index in 1 until Math.min(10, stackTrace.size)) {
-
                     val targetElement = stackTrace[index]
                     val head =
                         "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
