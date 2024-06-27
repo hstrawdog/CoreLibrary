@@ -207,9 +207,6 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         if (cameraIntent.resolveActivity(packageManager) != null) {
             val cameraFile = AlbumFileUtils.createCameraFile(this, 1)
             cameraPath = cameraFile?.absolutePath
-//             imageUri: Uri ?
-//           CoreConfig.get().application.packageName
-//            val authority = "$packageName.FileProvider"
             var imageUri = FileUtils.getFile2Uri(cameraPath)
             cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)

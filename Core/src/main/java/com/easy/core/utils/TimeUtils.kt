@@ -1081,6 +1081,8 @@ object TimeUtils {
     @JvmStatic
     fun main(args: Array<String>) {
         println(formatData2All(1616743088821, "yyyy-MM-dd HH:mm:ss"))
+        println(SimpleDateFormat("yyyy").parse("2024").time)
+
     }
 
 }

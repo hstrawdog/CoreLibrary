@@ -29,6 +29,7 @@ import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 /**
  * @Author : huangqiqiang
@@ -61,6 +62,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 
         LogUtils.de("111111111111111111111111")
+
 
 
 //        FullDialog.showDialog(supportFragmentManager)

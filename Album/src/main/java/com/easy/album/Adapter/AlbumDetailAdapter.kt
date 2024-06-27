@@ -29,16 +29,16 @@ import com.easy.album.utils.LoadUtils
  * @Describe :
  */
 class AlbumDetailAdapter(private val maxSelectNum: Int) :
-    BaseQuickAdapter<com.easy.album.entity.LocalMedia, BaseViewHolder>((R.layout.picture_image_grid_item)) {
-    private var selectImages: MutableList<com.easy.album.entity.LocalMedia> = ArrayList()
+    BaseQuickAdapter<LocalMedia, BaseViewHolder>((R.layout.picture_image_grid_item)) {
+    private var selectImages: MutableList<LocalMedia> = ArrayList()
     private var imageSelectChangedListener: com.easy.album.Adapter.AlbumDetailAdapter.OnPhotoSelectChangedListener? = null
-    fun bindImagesData(images: List<com.easy.album.entity.LocalMedia>) {
+    fun bindImagesData(images: List<LocalMedia>) {
         setNewInstance(images.toMutableList())
         selectImages = SelectOptions.instance.selectLocalMedia
     }
 
 
-    override fun convert(baseViewHolder: BaseViewHolder, localMedia: com.easy.album.entity.LocalMedia) {
+    override fun convert(baseViewHolder: BaseViewHolder, localMedia: LocalMedia) {
         localMedia.position = baseViewHolder.position
         selectImage(baseViewHolder, isSelected(localMedia), false)
         LoadUtils.loadLocalMediaPath(localMedia.localMediaType, localMedia.uri, baseViewHolder.getView(R.id.iv_picture))
@@ -58,7 +58,7 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
      * @param contentHolder
      * @param localMedia
      */
-    private fun bindClick(position: Int, contentHolder: BaseViewHolder, localMedia: com.easy.album.entity.LocalMedia) {
+    private fun bindClick(position: Int, contentHolder: BaseViewHolder, localMedia: LocalMedia) {
         contentHolder.getView<ImageView>(R.id.check)
             .setOnClickListener {
                 if (!AlbumUtils.isFastDoubleClick(200)) {
@@ -76,7 +76,7 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
         }
     }
 
-    fun isSelected(image: com.easy.album.entity.LocalMedia): Boolean {
+    fun isSelected(image: LocalMedia): Boolean {
         for (media in selectImages) {
             if (media.path == image.path) {
                 return true
@@ -115,7 +115,7 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
      * @param contentHolder
      * @param image
      */
-    private fun changeCheckboxState(contentHolder: BaseViewHolder, image: com.easy.album.entity.LocalMedia) {
+    private fun changeCheckboxState(contentHolder: BaseViewHolder, image: LocalMedia) {
         val isChecked = contentHolder.getView<ImageView>(R.id.check).isSelected
         if (selectImages.size >= maxSelectNum && !isChecked) {
             Toast.makeText(context, context.getString(R.string.picture_message_max_num, maxSelectNum.toString() + ""), Toast.LENGTH_LONG)
@@ -156,8 +156,8 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
 
     interface OnPhotoSelectChangedListener {
         fun onTakePhoto()
-        fun onChange(selectImages: List<com.easy.album.entity.LocalMedia>?)
-        fun onPictureClick(media: com.easy.album.entity.LocalMedia?, position: Int)
+        fun onChange(selectImages: List<LocalMedia>?)
+        fun onPictureClick(media: LocalMedia?, position: Int)
     }
 
     fun setOnPhotoSelectChangedListener(imageSelectChangedListener: com.easy.album.Adapter.AlbumDetailAdapter.OnPhotoSelectChangedListener?) {

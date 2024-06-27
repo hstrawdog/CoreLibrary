@@ -26,6 +26,7 @@ import com.easy.core.utils.file.PhotoUtils
 import com.easy.core.utils.encrypt.EncryptTool
 import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.log.LogUtils
+import com.easy.core.utils.log.LogUtils.e
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -74,7 +75,7 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getDefFileName(suffix: String =  ".png"): String {
+    fun getDefFileName(suffix: String = ".png"): String {
         return defFileName + suffix
     }
 
@@ -345,6 +346,30 @@ object FileUtils {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    /**
+     * 根据 删除图片
+     * @param contentResolver ContentResolver
+     * @param uri Uri?
+     * @return Boolean
+     */
+    fun deleteImageByUri(contentResolver: ContentResolver, uri: Uri?): Boolean {
+        try {
+            // 检查 URI 是否是有效的
+            if (uri != null && "content" == uri.scheme) {
+                // 从 URI 中解析 ID
+                val id = ContentUris.parseId(uri)
+                // 构建图片的 URI
+                val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                // 执行删除操作
+                val rowsDeleted = contentResolver.delete(imageUri, null, null)
+                return rowsDeleted > 0
+            }
+        } catch (e: java.lang.Exception) {
+            e("ImageUtils Error deleting image", e)
+        }
+        return false
     }
 
     /**
