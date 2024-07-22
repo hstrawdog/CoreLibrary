@@ -10,7 +10,7 @@ import android.util.AttributeSet
  * @FileName :   HollowCircleIndicatorImpl
  * @Date  : 2019/4/23 0023
  * @Email :  qiqiang213@gmail.com
- * @Describe : TODO
+ * @Describe : 非当前下标是空心的圆
  */
 class HollowCircleIndicatorView : CircleIndicatorView {
     constructor(context: Context?) : super(context) {}
@@ -25,6 +25,7 @@ class HollowCircleIndicatorView : CircleIndicatorView {
     override fun init() {
         super.init()
         mPaintPageFill.strokeWidth = mStrokeWidth.toFloat()
+        // 设置画笔是空心
         mPaintPageFill.style = Paint.Style.STROKE
     }
 

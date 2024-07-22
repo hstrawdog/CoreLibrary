@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.easy.core.permission.SysPermissionsUtils
+import com.easy.core.ui.base.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
@@ -25,6 +26,7 @@ import com.easy.example.ui.file.FileIndexActivity
 import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
+import com.easy.example.ui.recycle.BannerActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity
@@ -60,10 +62,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            }
 //        }
 
-
+        open(BannerActivity::class.java)
         LogUtils.de("111111111111111111111111")
-
-
 
 //        FullDialog.showDialog(supportFragmentManager)
         //data/data/com.easy.core/cache/256965670.pdf
@@ -112,9 +112,6 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            }
 //
 //        })
-
-
-
 
 //        open(AlbumIndexActivity::class.java)
 //        open(FilePathActivity::class.java)
@@ -166,8 +163,6 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(DefImgActivity::class.java)
 //        open(BannerActivity::class.java)
 //        open(TabLayoutActivity::class.java)
-
-
 
 
     }

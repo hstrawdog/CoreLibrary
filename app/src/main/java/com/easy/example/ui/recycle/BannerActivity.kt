@@ -30,7 +30,6 @@ class BannerActivity : BaseActivity() {
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
         list.add("http://pic2.sc.chinaz.com/files/pic/webjs1/201903/jiaoben6644.jpg")
-
         mRcBanner?.setRvBannerData(list)
         val list2: MutableList<Any> = ArrayList()
         list2.add(R.mipmap.ic_banner2)

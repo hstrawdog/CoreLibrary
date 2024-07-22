@@ -148,7 +148,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
-            LogUtils.e4Debug("onCreateView " + javaClass.simpleName + this.toString())
+            LogUtils.e4Debug("onCreateView     ${this} " )
         }
         return rootView
     }

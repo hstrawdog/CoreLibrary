@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import  com.easy.core.R
 import com.easy.core.recycle.adapter.RecycleBannerAdapter
 import com.easy.core.recycle.indicator.CircleIndicatorView
+import com.easy.core.recycle.indicator.HollowCircleIndicatorView
+import com.easy.core.recycle.indicator.IndicatorView
+import com.easy.core.recycle.indicator.RectangleIndicatorView
 import  com.easy.core.utils.ScreenUtils
 
 /**
@@ -31,8 +34,10 @@ import  com.easy.core.utils.ScreenUtils
  * 待完成
  * 1.多种指示器配置
  * 2. 考虑再次封装 adapter  不应该绑定在这边 需要解耦
+ * 3. 不能与BRVAH 搭配使用
  */
-class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
+                                                  defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
     /**
      * 轮播间隔时间
      */
@@ -55,7 +60,8 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      */
     var recyclerView: RecyclerView? = null
         private set
-    private var mLinearLayout: CircleIndicatorView? = null
+    private var mLinearLayout: IndicatorView? = null
+
     private var startX = 0
     private var startY = 0
     private var currentIndex = 0
@@ -78,7 +84,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      */
     private var mIsUnlimited = true
     private var mData: ArrayList<Any> = ArrayList()
-    var mLinearLayoutManager: LinearLayoutManager? = null
     private var mAdapter: RecycleBannerAdapter<Any>? = null
     private val playTask: Runnable = object : Runnable {
         override fun run() {
@@ -94,10 +99,8 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
     private fun init(context: Context, attrs: AttributeSet?) {
         val margin = initAttributeSet(context, attrs)
         initRecycleView()
-        addView(recyclerView, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT))
-        val linearLayoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
+        addView(recyclerView, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        val linearLayoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         linearLayoutParams.gravity = Gravity.BOTTOM
         linearLayoutParams.setMargins(margin, margin, margin, margin)
         addView(mLinearLayout, linearLayoutParams)
@@ -106,7 +109,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
 
     private fun initRecycleView() {
         // 直接使用卡片布局 貌似 也是可以的
-        recyclerView!!.layoutManager = mLinearLayoutManager
+        recyclerView!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
         PagerSnapHelper().attachToRecyclerView(recyclerView)
 
@@ -145,23 +148,53 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         isShowIndicator = a.getBoolean(R.styleable.BannerLayout_rvb_showIndicator, true)
         isShowTip = a.getBoolean(R.styleable.BannerLayout_rvb_isShowTip, true)
         isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_rvb_autoPlaying, true)
-        val margin = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8f))
+        val margin =
+            a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8f))
         if (recyclerView == null) {
             recyclerView = RecyclerView(context)
-            mLinearLayout = CircleIndicatorView(context)
+
+            val type = a.getInt(R.styleable.BannerLayout_rvb_tip_type, 0)
+
+
+            when (type) {
+                1 -> {
+                    // 空心圆
+                    mLinearLayout = HollowCircleIndicatorView(context)
+
+                }
+
+                2 -> {
+                    //  长方形
+                    mLinearLayout = RectangleIndicatorView(context)
+
+
+                }
+
+                else -> {
+                    // 标准 实心圆
+                    mLinearLayout = CircleIndicatorView(context)
+
+                }
+
+            }
+
+
+
             mAdapter = RecycleBannerAdapter<Any>()
-            mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
         }
         initIndicator(a)
         a.recycle()
         return margin
     }
+
     /**
      *  设置图片显示样式
      */
-    fun setImageScaleType( scaleType : ImageView.ScaleType ) {
-        mAdapter?.scaleType=scaleType
+    fun setImageScaleType(scaleType: ImageView.ScaleType) {
+        mAdapter?.scaleType = scaleType
     }
+
     /**
      * 便于在xml中编辑时观察，运行时不执行
      */
@@ -182,6 +215,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
                 startY = ev.y.toInt()
                 parent.requestDisallowInterceptTouchEvent(true)
             }
+
             MotionEvent.ACTION_MOVE -> {
                 val moveX = ev.x.toInt()
                 val moveY = ev.y.toInt()
@@ -193,10 +227,12 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
                     setPlaying(false)
                 }
             }
+
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> if (!isPlaying) {
                 isTouched = true
                 setPlaying(true)
             }
+
             else -> {
             }
         }
@@ -236,7 +272,9 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         mLinearLayout!!.setDefColor(usd)
         val radius = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorRadius, 0)
         if (radius > 0) {
-            mLinearLayout!!.setDefRadius(radius)
+            if (mLinearLayout is CircleIndicatorView) {
+                (mLinearLayout as CircleIndicatorView).setDefRadius(radius)
+            }
         }
         val g = a.getInt(R.styleable.BannerLayout_rvb_indicatorGravity, 3)
         mLinearLayout!!.setModel(g)

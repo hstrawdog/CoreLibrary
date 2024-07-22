@@ -14,6 +14,8 @@
 
     <com.easy.core.recycle.RecycleViewBanner
         android:id="@+id/rc_banner2"
+        app:rvb_indicatorGravity="left"
+        app:rvb_tip_type="rectangle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x330" />
 
