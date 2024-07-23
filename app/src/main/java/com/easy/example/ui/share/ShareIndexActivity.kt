@@ -9,7 +9,6 @@ import android.text.TextUtils
 import android.widget.Toast
 import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseViewBindingActivity
-import com.easy.core.utils.image.BitmapUtils
 import com.easy.core.utils.file.FileUtils
 import com.easy.core.utils.file.SaveBitmapUtils
 import com.easy.core.utils.image.BitmapCreateUtils
@@ -66,14 +65,20 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                         FileUtils.getDefFileName(".png")
                     )
                     LogUtils.e("$path")
-                    shareImg(File(filePathByUri(activity,path)))
+                    shareImg(File(queryFilePathByUri(activity,path)))
                 }
             })
         }
 
     }
 
-    fun filePathByUri(context: Context?, uri: Uri?): String? {
+    /**
+     *  根据uri 查询图片地址
+     * @param context Context?
+     * @param uri Uri?
+     * @return String?
+     */
+    fun queryFilePathByUri(context: Context?, uri: Uri?): String? {
         var imagePath: String? = null
         if (context != null && uri != null) {
             val proj = arrayOf(MediaStore.Images.Media.DATA)

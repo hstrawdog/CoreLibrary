@@ -15,6 +15,9 @@ import com.easy.core.utils.log.LogUtils
  * @Date : 01:22
  * @Email : qiqiang213@gmail.com
  * @Describe :
+ *  矩形指示器
+ *  TODO  需要实现 选中比其他的大
+ *
  */
 class RectangleIndicatorView : IndicatorView {
     constructor(context: Context?) : super(context)
@@ -51,13 +54,11 @@ class RectangleIndicatorView : IndicatorView {
     var spacing = _indicatorWidth / 2
 
 
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 //        mColumn = 10
 //        canvas.drawColor(ResourcesUtils.getColor(R.color.yellow))
-//
-////        var maxWidth = mColumn * _indicatorWidth + (mColumn - 1) * _indicatorWidth / 2
+//       var maxWidth = mColumn * _indicatorWidth + (mColumn - 1) * _indicatorWidth / 2
 //        mPaintFill.setColor(ResourcesUtils.getColor(R.color.red))
 //        mPaintPageFill.setColor(ResourcesUtils.getColor(R.color.blue))
 
@@ -66,23 +67,23 @@ class RectangleIndicatorView : IndicatorView {
         for (i in 0 until mColumn) {
             var left = i * _indicatorWidth + spacing * i
             var right = left + _indicatorWidth
-//            mModel =1
             when (mModel) {
                 0 -> {
-                     left = i * _indicatorWidth + spacing * i
-                     right = left + _indicatorWidth
+                    left = i * _indicatorWidth + spacing * i
+                    right = left + _indicatorWidth
                 }
-                1->{
-                    var lef = (width - mColumn * (_indicatorWidth + spacing))/2
 
-                    left = i * (_indicatorWidth + spacing) +lef
+                1 -> {
+                    var lef = (width - mColumn * (_indicatorWidth + spacing)) / 2
+
+                    left = i * (_indicatorWidth + spacing) + lef
                     right = left + _indicatorWidth
                 }
 
                 2 -> {
                     var lef = width - mColumn * (_indicatorWidth + spacing)
 
-                    left = i * (_indicatorWidth + spacing) +lef
+                    left = i * (_indicatorWidth + spacing) + lef
                     right = left + _indicatorWidth
 
                 }
@@ -90,7 +91,7 @@ class RectangleIndicatorView : IndicatorView {
             }
 
             var rectF = RectF(left, height, right, height + paintHeight)
-            LogUtils.e(rectF)
+//            LogUtils.e(rectF)
             if (i == mCurrItem) {
                 canvas.drawRoundRect(rectF, cornerSize, cornerSize, mPaintFill)
             } else {
