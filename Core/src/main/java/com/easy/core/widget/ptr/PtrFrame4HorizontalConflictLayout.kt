@@ -11,13 +11,18 @@ import java.lang.Math.abs
  * @Date : 下午 3:42
  * @Email : qiqiang213@gmail.com
  * @Describe : 处理  横向冲突问题  但效果并不是非常完美
+ *   解决的是 父布局 横向滑动的Fragment  与下拉刷新的拦截问题
+ *
  */
 class PtrFrame4HorizontalConflictLayout : PtrClassicFrameLayout {
     constructor(context: Context?) : super(context) {}
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
     constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {}
 
-    var  maxX=110
+    /**
+     * 横向控制移动的最大坐标
+     */
+    var maxX = 110
 
     var startX = 0  //手指碰到屏幕时的 X坐标
     var startY = 0 //手机碰到屏幕时的 Y坐标
@@ -30,6 +35,7 @@ class PtrFrame4HorizontalConflictLayout : PtrClassicFrameLayout {
                 //
                 parent.requestDisallowInterceptTouchEvent(true)
             }
+
             MotionEvent.ACTION_MOVE -> {
                 //抬起手后得到的坐标，
                 val endX = ev.x.toInt()
@@ -52,6 +58,7 @@ class PtrFrame4HorizontalConflictLayout : PtrClassicFrameLayout {
                     parent.requestDisallowInterceptTouchEvent(true)
                 }
             }
+
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> parent.requestDisallowInterceptTouchEvent(false)
         }
         return super.dispatchTouchEvent(ev)
