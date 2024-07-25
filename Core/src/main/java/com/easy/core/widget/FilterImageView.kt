@@ -4,8 +4,7 @@
  * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
  * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
-/*
+ *//*
  * Create on 2016-11-18 上午10:20
  * FileName: FilterImageView.java
  * Author: huang qiqiang
@@ -37,12 +36,14 @@ class FilterImageView : ImageView {
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN ->                 //在按下事件中设置滤镜
                 setFilter()
+
             MotionEvent.ACTION_UP -> {
                 //由于捕获了Touch事件，需要手动触发Click事件
                 performClick()
                 //在CANCEL和UP事件中清除滤镜
                 removeFilter()
             }
+
             MotionEvent.ACTION_CANCEL -> removeFilter()
             else -> {
             }

@@ -58,6 +58,12 @@ abstract class IndicatorView : View, Indicator {
      */
     var mCurrItem = 0
 
+    /**
+     *  选中的指示点  横向放大倍数
+     *   0  :  一样大
+     */
+    var _selectSpeed = 0.5f
+
 
 
     override fun setCurrentItem(item: Int) {

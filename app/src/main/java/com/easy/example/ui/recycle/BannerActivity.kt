@@ -34,6 +34,12 @@ class BannerActivity : BaseActivity() {
         val list2: MutableList<Any> = ArrayList()
         list2.add(R.mipmap.ic_banner2)
         list2.add(R.mipmap.ic_banner2)
+        list2.add(R.mipmap.ic_banner2)
+        list2.add(R.mipmap.ic_banner2)
+        list2.add(R.mipmap.ic_banner2)
+        list2.add(R.mipmap.ic_banner2)
+        list2.add(R.mipmap.ic_banner2)
+        list2.add(R.mipmap.ic_banner2)
         mRcBanner2?.setRvBannerData(list2)
     }
 }

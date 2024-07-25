@@ -22,6 +22,7 @@
             <enum name="right" value="2" />
         </attr>
         <attr name="rvb_autoPlaying" format="boolean" />
+        <attr name="rvb_selectSpeed" format="float" />
     </declare-styleable>
 
 </resources>

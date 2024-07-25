@@ -77,6 +77,11 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否自动轮播
      */
     private var isAutoPlaying = true
+
+    /**
+     * 倍数
+     */
+    private var selectSpeed = 0f
     var recycleViewBannerCurrentListener: RecycleViewBannerCurrentListener? = null
 
     /**
@@ -154,8 +159,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
             recyclerView = RecyclerView(context)
 
             val type = a.getInt(R.styleable.BannerLayout_rvb_tip_type, 0)
-
-
             when (type) {
                 1 -> {
                     // 空心圆
@@ -166,8 +169,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
                 2 -> {
                     //  长方形
                     mLinearLayout = RectangleIndicatorView(context)
-
-
                 }
 
                 else -> {
@@ -183,6 +184,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
             mAdapter = RecycleBannerAdapter<Any>()
 
         }
+        // 初始化 指示器 中的内容
         initIndicator(a)
         a.recycle()
         return margin
@@ -266,6 +268,11 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * @param a TypedArray
      */
     private fun initIndicator(a: TypedArray) {
+
+        selectSpeed = a.getFloat(R.styleable.BannerLayout_rvb_selectSpeed, 0f)
+        // 圆形目前 不支持
+        mLinearLayout?._selectSpeed = selectSpeed
+
         val sd = a.getColor(R.styleable.BannerLayout_rvb_indicatorSelectedColor, -0x78a7d2)
         mLinearLayout!!.setSelectColor(sd)
         val usd = a.getColor(R.styleable.BannerLayout_rvb_indicatorUnselectedColor, -0x1)
