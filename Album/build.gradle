@@ -32,7 +32,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api project(':Core')
+    implementation 'com.github.hstrawdog.CoreLibrary:Album:1.3.100'
+
     api libs.photoview.library
     api libs.subsamplingscaleimageview.core
 }

@@ -45,9 +45,4 @@ dependencyResolutionManagement {
 rootProject.name = "CoreLibrary"
 include ':app'
 include ':Core'
-//include ':Project:OpenGL'
-//include ':Project:ReadBook'
-include ':WeChat'
-include ':ALiBaBa'
-include ':Album'
-//include ':DimensCompat'
+//include ':Album'

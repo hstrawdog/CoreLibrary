@@ -31,7 +31,6 @@ object BindingAdapter {
     fun setFilletBackground(view: View, colorId: Int, strokeWidthId: Int, cornerRadiusId: Int) {
         val shap = GradientDrawable()
 //        shap.setColor(ResourcesUtils.getColor(id))\
-
         var color = Color.RED
         if (colorId != 0 && colorId > 0) {
             color = ResourcesUtils.getColor(colorId)
