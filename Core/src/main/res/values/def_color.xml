@@ -70,4 +70,22 @@
     <color name="color_f44c28">#F44C28</color>
     <color name="color_444">#444444</color>
     <color name="color_c6c4c4">#c6c4c4</color>
+
+
+
+
+    <color name="title_text_color">#ff363636</color>
+
+
+    <!--Crop View-->
+    <color name="color_f2">#F2F2F2</color>
+    <color name="black">#000000</color>
+    <color name="grey">#999999</color>
+    <color name="line_color">#EEEEEE</color>
+    <color name="tab_color_true">#FA632D</color>
+    <color name="image_overlay">#20000000</color>
+    <color name="image_overlay2">#80000000</color>
+    <color name="ucrop_color_toolbar_widget">#fff</color>
+    <color name="color_eee">#eeeeee</color>
+
 </resources>

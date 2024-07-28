@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.easy.core.album.activity.AlbumDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/album_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/header_bar_height"
+        android:background="#ffffff"
+        android:gravity="top">
+
+        <com.easy.core.album.customize.FilterImageView
+            android:id="@+id/album_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/x15"
+            android:paddingRight="@dimen/x26"
+            android:src="@mipmap/ic_back_gray"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginVertical="@dimen/x15"
+            android:background="@drawable/sp_eee"
+            android:paddingHorizontal="@dimen/x40">
+
+            <TextView
+                android:id="@+id/album_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:maxLength="12"
+                android:paddingVertical="@dimen/x10"
+                android:singleLine="true"
+                android:textColor="@color/title_text_color"
+                android:textSize="@dimen/x28"
+                tools:text="123" />
+
+            <ImageView
+                android:layout_width="@dimen/x35"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x10"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_down"
+                app:tint="@color/title_text_color" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/album_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/sp_blue"
+            android:gravity="center"
+            android:minWidth="50dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dp"
+            android:text="完成"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/x28" />
+
+    </RelativeLayout>
+
+    <View style="@style/dividing_line_style" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+
+
+</LinearLayout>

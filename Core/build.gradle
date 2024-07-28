@@ -97,6 +97,8 @@ dependencies {
     api libs.converterGson
     api libs.loggingInterceptor
 
+    api libs.photoview.library
+    api libs.subsamplingscaleimageview.core
 
 }
 //将源码打包  为了保证引入的aar  包可以查看源码

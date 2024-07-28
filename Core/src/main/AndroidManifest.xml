@@ -15,5 +15,19 @@
             android:name="com.easy.core.CoreProvider"
             android:authorities="${applicationId}.core.provider"
             android:multiprocess="true" />
+
+        <activity
+            android:name=".album.activity.AlbumFolderActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".album.activity.AlbumDirectoryActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".album.activity.AlbumDetailActivity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".album.activity.AlbumPreviewActivity"
+            android:theme="@style/NoTitle" />
+
     </application>
 </manifest>

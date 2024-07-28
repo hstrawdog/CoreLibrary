@@ -20,7 +20,7 @@ import java.lang.reflect.Field
 
 /**
  * @Author : huangqiqiang
- * @Package : com.easy.album.utils
+ * @Package : com.easy.core.album.utils
  * @FileName :   ScreenUtils
  * @Date : 2018/6/20 0020  下午 5:56
  * @Email :  593979591@qq.com
