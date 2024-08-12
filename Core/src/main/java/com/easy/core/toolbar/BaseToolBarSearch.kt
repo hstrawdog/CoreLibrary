@@ -38,12 +38,31 @@ class BaseToolBarSearch() : BaseToolBar() {
     }
 
     private fun iniBase(mToolbar: Toolbar) {
-        mToolbar.findViewById<View>(R.id.iv_delete).setOnClickListener {
-            (mToolbar.findViewById<View>(R.id.edt_search) as EditText).setText("")
-        }
-        (mToolbar.findViewById<View>(R.id.edt_search) as EditText).addTextChangedListener(object :
-            TextWatcher {
+        mToolbar.findViewById<View>(R.id.iv_delete)
+            .setOnClickListener {
+                (mToolbar.findViewById<View>(R.id.edt_search) as EditText).setText("")
+            }
+        (mToolbar.findViewById<View>(R.id.edt_search) as EditText).addTextChangedListener(object : TextWatcher {
+            /**
+             *  文本改变之前调用，传入了四个参数：
+             * @param s CharSequence 文本改变之前的内容
+             * @param start Int 文本开始改变时的起点位置，从0开始计算
+             * @param count Int 要被改变的文本字数，即将要被替代的选中文本字数
+             * @param after Int 改变后添加的文本字数，即替代选中文本后的文本字数
+             * 该方法调用是在文本没有被改变，但将要被改变的时候调用，把四个参数组成一句话就是：
+             * 在当前文本s中，从start位置开始之后的count个字符（即将）要被after个字符替换掉
+             */
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            /**
+             * 是在当文本改变时被调用，同样传入了四个参数：
+             * @param s CharSequence 文本改变之后的内容
+             * @param start Int 文本开始改变时的起点位置，从0开始计算
+             * @param before Int  要被改变的文本字数，即已经被替代的选中文本字数
+             * @param count Int  改变后添加的文本字数，即替代选中文本后的文本字数
+             * 该方法调用是在文本被改变时，改变的结果已经可以显示时调用，把四个参数组成一句话就是：
+             * 在当前文本s中，从start位置开始之后的before个字符（已经）被count个字符替换掉了
+             */
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.length > 0) {
                     mToolbar.findViewById<View>(R.id.iv_delete).visibility = View.VISIBLE
@@ -52,6 +71,10 @@ class BaseToolBarSearch() : BaseToolBar() {
                 }
             }
 
+            /**
+             * 该方法是在执行完beforeTextChanged、onTextChanged两个方法后才会被调用，此时的文本s为最终显示给用户看到的文本。我们可以再对该文本进行下一步处理，比如把文本s显示在UI界面上
+             * @param s Editable 改变后的最终文本
+             */
             override fun afterTextChanged(s: Editable) {}
         })
     }

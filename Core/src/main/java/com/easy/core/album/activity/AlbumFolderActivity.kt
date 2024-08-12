@@ -17,8 +17,8 @@ import com.easy.core.album.common.FunctionKey
 import com.easy.core.album.common.LocalMediaLoader
 import com.easy.core.album.common.SelectOptions
 import com.easy.core.databinding.ActivityAlbumFolderBinding
-import com.easy.album.decoration.GridSpacingItemDecoration
-import com.easy.album.decoration.RecycleViewDivider
+import com.easy.core.album.decoration.GridSpacingItemDecoration
+import com.easy.core.album.decoration.RecycleViewDivider
 import com.easy.core.R
 import com.easy.core.album.entity.LocalMedia
 import com.easy.core.album.entity.LocalMediaFolder
@@ -99,7 +99,8 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
             mAdapter = AlbumDirectoryAdapter()
             mAdapter!!.bindFolderData(mFolderList as ArrayList<LocalMediaFolder>)
             mRecyclerView!!.removeItemDecorationAt(0)
-            mRecyclerView!!.addItemDecoration(RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, AlbumUtils.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.line_color)))
+            mRecyclerView!!.addItemDecoration(
+                RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, AlbumUtils.dip2px(this, 0.5f), ContextCompat.getColor(this, R.color.line_color)))
             mRecyclerView!!.layoutManager = LinearLayoutManager(this)
             mRecyclerView!!.adapter = mAdapter
             mAdapter!!.setOnItemClickListener(this)

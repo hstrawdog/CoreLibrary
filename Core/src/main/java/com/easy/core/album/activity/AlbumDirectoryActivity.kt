@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.easy.album.decoration.RecycleViewDivider
+import com.easy.core.album.decoration.RecycleViewDivider
 import com.easy.core.album.Adapter.AlbumDirectoryAdapter
 import com.easy.core.album.AppManager
 import com.easy.core.R
@@ -31,7 +31,6 @@ import com.easy.core.album.customize.FilterImageView
 import com.easy.core.album.entity.LocalMediaFolder
 import com.easy.core.album.utils.AlbumFileUtils
 import com.easy.core.album.utils.AlbumUtils
-import com.easy.core.album.activity.AlbumDetailActivity
 import com.easy.core.album.annotation.LocalMediaType
 import com.easy.core.album.entity.LocalMedia
 import com.easy.core.databinding.ActivityAlbumBinding

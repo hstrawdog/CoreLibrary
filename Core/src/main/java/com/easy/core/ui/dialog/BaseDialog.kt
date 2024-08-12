@@ -148,7 +148,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
-            LogUtils.e4Debug("onCreateView     ${this} " )
+            LogUtils.e4Mark("onCreateView     ${this} " )
         }
         return rootView
     }
@@ -165,7 +165,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
                 StatusBarManager.transparencyBar(dialog?.window)
             }
             loaded = true
-            LogUtils.e4Debug(rootView!!.width)
+            LogUtils.e4Mark(rootView!!.width)
         }
     }
 
@@ -186,7 +186,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtils.e4Debug(rootView?.measuredWidth)
+        LogUtils.e4Mark(rootView?.measuredWidth)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(getBackground()))
         dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         dialog?.window?.setGravity(getGravity())

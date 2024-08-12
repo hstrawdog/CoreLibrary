@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.easy.core.album.Adapter.AlbumDetailAdapter
 import com.easy.core.album.AppManager
-import com.easy.album.decoration.GridSpacingItemDecoration
+import com.easy.core.album.decoration.GridSpacingItemDecoration
 import com.easy.core.R
 import com.easy.core.album.common.Album
 import com.easy.core.album.common.FunctionKey

@@ -3,6 +3,8 @@ package com.easy.core.utils
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.annotation.ColorRes
@@ -69,7 +71,18 @@ object ResourcesUtils {
     fun getColor(context: Context, @ColorRes resId: Int): Int {
         return ContextCompat.getColor(context, resId)
     }
-
+    @JvmStatic
+    fun getColor(context: Context, resName: String): Int {
+        val resources = context.resources
+        if (resName.startsWith("#")) {
+            return Color.parseColor(resName)
+        }
+        val id = resources.getIdentifier(resName, "color", context.packageName)
+        if (id == 0) {
+            return -1
+        }
+        return ContextCompat.getColor(context, id)
+    }
     /**
      * 同上
      *
@@ -104,6 +117,24 @@ object ResourcesUtils {
     @JvmStatic
     fun getDrawable(context: Context, @DrawableRes resId: Int): Drawable? {
         return ContextCompat.getDrawable(context, resId)
+    }
+    @JvmStatic
+    fun getDrawable(context: Context, resName: String): Drawable? {
+        val resources = context.resources
+        if (resName.startsWith("#")) {
+            return ColorDrawable(Color.parseColor(resName))
+        }
+        var id = resources.getIdentifier(resName, "drawable", context.packageName)
+        if (id == 0) {
+            id = resources.getIdentifier(resName, "mipmap", context.packageName)
+        }
+        if (id == 0) {
+            id = resources.getIdentifier(resName, "color", context.packageName)
+        }
+        if (id == 0) {
+            return null
+        }
+        return ContextCompat.getDrawable(context, id)
     }
 
     /**

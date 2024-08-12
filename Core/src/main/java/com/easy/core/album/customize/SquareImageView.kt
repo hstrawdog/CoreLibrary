@@ -1,4 +1,4 @@
-package com.easy.album.customize
+package com.easy.core.album.customize
 
 import android.content.Context
 import android.util.AttributeSet

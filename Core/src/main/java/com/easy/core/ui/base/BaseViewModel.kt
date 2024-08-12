@@ -50,7 +50,7 @@ abstract class BaseViewModel : ViewModel(), IBaseViewModel {
     var goBack = MutableLiveData<GoBackComponent>()
 
     init {
-        LogUtils.e4Debug(" BaseViewModel  init " + javaClass.name)
+        LogUtils.e4Mark(" BaseViewModel  init " + javaClass.name)
     }
 
     /**
@@ -61,12 +61,12 @@ abstract class BaseViewModel : ViewModel(), IBaseViewModel {
      */
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        LogUtils.e4Debug(" BaseViewModel           onCrete ")
+        LogUtils.e4Mark(" BaseViewModel           onCrete ")
     }
 
     override fun initData(extras: Bundle?) {
         bundle = extras
-        LogUtils.e4Debug(" BaseViewModel           initData ")
+        LogUtils.e4Mark(" BaseViewModel           initData ")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

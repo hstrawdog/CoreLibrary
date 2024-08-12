@@ -75,8 +75,8 @@ photoview_version = "1.4.1"
 subsamplingscaleimageview_version = "3.10.0"
 jsoup_jsoup_version = "1.14.1"
 jleakcanary_version = "2.8.1"
-idimenscompat_version="1.0.3"
-
+idimenscompat_version = "1.0.3"
+unpeek_livedata_version = "7.8.0"
 
 [libraries]
 
@@ -305,20 +305,19 @@ ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose_ui_ver
 
 # 可在应用启动时简单、高效地初始化组件。
 # https://developer.android.google.cn/jetpack/androidx/releases/startup
-#object Startup {
 appStartup = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup_version" }
 
 
 
 
 # -------------  图片预览效果  缩放等 -------------
-#object PhotoView {
 photoview_library = { group = "com.bm.photoview", name = "library", version.ref = "photoview_version" }
 
 
-#object SubsamplingScaleImageView {
 subsamplingscaleimageview_core = { group = "com.davemorrissey.labs", name = "subsampling-scale-image-view", version.ref = "subsamplingscaleimageview_version" }
 
+
+unpeek_livedata = { group = "com.github.KunMinX", name = "UnPeek-LiveData", version.ref = "unpeek_livedata_version" }
 
 
 #  注解 依赖注入   dagger
@@ -416,7 +415,7 @@ datastore_datastore_rxjava2 = { group = "androidx.datastore", name = "datastore-
 datastore_datastore_rxjava3 = { group = "androidx.datastore", name = "datastore-rxjava3", version.ref = "datastore_version" }
 
 
-i_dimens_compat ={ group ="com.github.hstrawdog" ,name ="IDimensCompat", version.ref="idimenscompat_version"}
+i_dimens_compat = { group = "com.github.hstrawdog", name = "IDimensCompat", version.ref = "idimenscompat_version" }
 
 
 [plugins]

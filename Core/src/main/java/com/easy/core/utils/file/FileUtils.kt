@@ -1984,7 +1984,7 @@ object FileUtils {
             (writeFileFromIS(destFile, FileInputStream(srcFile), false) && !(isMove && !deleteFile(srcFile)))
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
-            LogUtils.e4Debug(e)
+            LogUtils.e4Mark(e)
             false
         }
     }

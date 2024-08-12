@@ -100,14 +100,9 @@ dependencies {
     api libs.photoview.library
     api libs.subsamplingscaleimageview.core
 
+    //解决数据倒灌问题
+    api libs.unpeek.livedata
 }
-//将源码打包  为了保证引入的aar  包可以查看源码
-//task androidSourcesJar(type: Jar) {
-//    from(android.sourceSets.main.java.sourceFiles, android.sourceSets.main.kotlin.sourceFiles)
-//    archiveClassifier.set("sources")
-//}
-//
-
 
 afterEvaluate {
     publishing {
@@ -128,7 +123,7 @@ afterEvaluate {
 //                artifact androidSourcesJar
 //                artifact(androidSourcesJar)
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
-                version =  '1.3.100'
+                version = '1.3.100'
 //                afterEvaluate {
 //                    from components.release
 //                }

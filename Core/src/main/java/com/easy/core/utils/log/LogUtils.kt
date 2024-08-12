@@ -101,8 +101,12 @@ object LogUtils {
         }
     }
 
+    /**
+     *   打一个日志标记
+     * @param any Any?
+     */
     @JvmStatic
-    fun e4Debug(any: Any?) {
+    fun e4Mark(any: Any?) {
         if (CoreConfig.get().isDebug) {
             e("$TAG", any)
         }

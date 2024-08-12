@@ -1,4 +1,4 @@
-package com.easy.core.lifecycle
+package com.easy.core.service
 
 
 import android.app.Service

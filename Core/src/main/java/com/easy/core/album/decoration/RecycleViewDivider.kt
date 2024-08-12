@@ -5,7 +5,7 @@
  * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
-package com.easy.album.decoration
+package com.easy.core.album.decoration
 
 import android.R
 import android.content.Context

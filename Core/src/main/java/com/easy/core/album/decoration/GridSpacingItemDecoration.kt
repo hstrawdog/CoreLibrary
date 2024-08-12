@@ -1,4 +1,4 @@
-package com.easy.album.decoration
+package com.easy.core.album.decoration
 
 import android.graphics.Rect
 import android.view.View
