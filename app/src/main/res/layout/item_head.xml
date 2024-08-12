@@ -6,7 +6,7 @@
         android:layout_height="@dimen/x220">
 
         <ImageView
-                android:src="@drawable/ic_def"
+                android:src="@drawable/ic_def_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 </LinearLayout>
