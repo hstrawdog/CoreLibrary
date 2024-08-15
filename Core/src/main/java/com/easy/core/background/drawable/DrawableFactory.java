@@ -56,10 +56,6 @@ public class DrawableFactory {
         return (StateListDrawable) new PressDrawableCreator(drawable, typedArray, pressTa).create();
     }
 
-    //获取AnimationDrawable属性的drawable
-    public static AnimationDrawable getAnimationDrawable(TypedArray animTa) throws Exception {
-        return (AnimationDrawable) new AnimationDrawableCreator(animTa).create();
-    }
 
     public static StateListDrawable getMultiSelectorDrawable(Context context, TypedArray selectorTa, TypedArray typedArray) {
         return (StateListDrawable) new MultiSelectorDrawableCreator(context, selectorTa, typedArray).create();

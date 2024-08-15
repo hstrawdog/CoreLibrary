@@ -62,7 +62,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            }
 //        }
 
-        open(BannerActivity::class.java)
+        open(BackgroundActivity::class.java)
+//        open(BannerActivity::class.java)
         LogUtils.de("111111111111111111111111")
 
 //        FullDialog.showDialog(supportFragmentManager)

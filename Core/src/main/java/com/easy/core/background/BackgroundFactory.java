@@ -1,7 +1,5 @@
 package com.easy.core.background;
 
-import com.easy.core.R;
-
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -12,60 +10,35 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.InflateException;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.collection.ArrayMap;
 
-
+import com.easy.core.R;
 import com.easy.core.background.drawable.DrawableFactory;
 import com.easy.core.background.drawable.TextViewFactory;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 public class BackgroundFactory  {
-
-    private static final Class<?>[] sConstructorSignature = new Class[]{Context.class, AttributeSet.class};
-    private static final Object[] mConstructorArgs = new Object[2];
-    private static final Map<String, Constructor<? extends View>> sConstructorMap = new ArrayMap<>();
-    private static final HashMap<String, HashMap<String, Method>> methodMap = new HashMap<>();
-
-
-
-    @Nullable
-    public static View setViewBackground(Context context, AttributeSet attrs, View view) {
-        return setViewBackground(null, context, attrs, view);
-    }
 
     /**
      * 根据属性设置图片背景
      *
-     * @param name    view的名字
      * @param context 上下文
      * @param attrs   bl属性
      * @param view    view
      * @return view
      */
     @Nullable
-    private static View setViewBackground(String name, Context context, AttributeSet attrs, View view) {
+    public static View setViewBackground( Context context, AttributeSet attrs, View view) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.background);
         TypedArray pressTa = context.obtainStyledAttributes(attrs, R.styleable.background_press);
         TypedArray selectorTa = context.obtainStyledAttributes(attrs, R.styleable.background_selector);
         TypedArray textTa = context.obtainStyledAttributes(attrs, R.styleable.text_selector);
         TypedArray buttonTa = context.obtainStyledAttributes(attrs, R.styleable.background_button_drawable);
         TypedArray otherTa = context.obtainStyledAttributes(attrs, R.styleable.bl_other);
-        TypedArray animTa = context.obtainStyledAttributes(attrs, R.styleable.bl_anim);
         TypedArray multiSelTa = context.obtainStyledAttributes(attrs, R.styleable.background_multi_selector);
         TypedArray multiTextTa = context.obtainStyledAttributes(attrs, R.styleable.background_multi_selector_text);
         TypedArray textViewTa = context.obtainStyledAttributes(attrs, R.styleable.bl_text);
@@ -75,14 +48,8 @@ public class BackgroundFactory  {
         }
 
         try {
-            if (typedArray.getIndexCount() == 0 && selectorTa.getIndexCount() == 0 && pressTa.getIndexCount() == 0 && textTa.getIndexCount() == 0 && buttonTa.getIndexCount() == 0 && animTa.getIndexCount() == 0 && multiSelTa.getIndexCount() == 0 && multiTextTa.getIndexCount() == 0 && textViewTa.getIndexCount() == 0 && otherTa.getIndexCount() == 0) {
+            if (typedArray.getIndexCount() == 0 && selectorTa.getIndexCount() == 0 && pressTa.getIndexCount() == 0 && textTa.getIndexCount() == 0 && buttonTa.getIndexCount() == 0  && multiSelTa.getIndexCount() == 0 && multiTextTa.getIndexCount() == 0 && textViewTa.getIndexCount() == 0 && otherTa.getIndexCount() == 0) {
                 return view;
-            }
-            if (view == null) {
-                view = createViewFromTag(context, name, attrs);
-            }
-            if (view == null) {
-                return null;
             }
             //R.styleable.background_selector 和 R.styleable.background_multi_selector的属性不能同时使用
             if (selectorTa.getIndexCount() > 0 && multiSelTa.getIndexCount() > 0) {
@@ -122,12 +89,6 @@ public class BackgroundFactory  {
                         setDrawable(drawable, view, otherTa, typedArray);
                     }
                 }
-            } else if (animTa.getIndexCount() > 0) {
-                AnimationDrawable animationDrawable = DrawableFactory.getAnimationDrawable(animTa);
-                setBackground(animationDrawable, view, typedArray);
-                if (animTa.getBoolean(R.styleable.bl_anim_bl_anim_auto_start, false)) {
-                    animationDrawable.start();
-                }
             }
 
             if (view instanceof TextView && textTa.getIndexCount() > 0) {
@@ -157,28 +118,6 @@ public class BackgroundFactory  {
                 }
             }
 
-            if (otherTa.hasValue(R.styleable.bl_other_bl_function)) {
-                String methodName = otherTa.getString(R.styleable.bl_other_bl_function);
-                if (!TextUtils.isEmpty(methodName)) {
-                    final Context currentContext = view.getContext();
-                    final Class parentClass = currentContext.getClass();
-                    final Method method = getMethod(parentClass, methodName);
-                    if (method != null) {
-                        view.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                try {
-                                    method.invoke(currentContext);
-                                } catch (IllegalAccessException e) {
-                                    e.printStackTrace();
-                                } catch (InvocationTargetException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                    }
-                }
-            }
 
             return view;
         } catch (Exception e) {
@@ -191,7 +130,6 @@ public class BackgroundFactory  {
             textTa.recycle();
             buttonTa.recycle();
             otherTa.recycle();
-            animTa.recycle();
             multiSelTa.recycle();
             multiTextTa.recycle();
             textViewTa.recycle();
@@ -200,49 +138,6 @@ public class BackgroundFactory  {
             }
         }
     }
-
-    private static Method getMethod(Class clazz, String methodName) {
-        Method method = null;
-        HashMap<String, Method> methodHashMap = methodMap.get(clazz.getCanonicalName());
-        if (methodHashMap != null) {
-            method = methodMap.get(clazz.getCanonicalName()).get(methodName);
-        } else {
-            methodHashMap = new HashMap<>();
-            methodMap.put(clazz.getCanonicalName(), methodHashMap);
-        }
-        if (method == null) {
-            method = findMethod(clazz, methodName);
-            if (method != null) {
-                methodHashMap.put(methodName, method);
-            }
-        }
-        return method;
-    }
-
-
-    private static Method findMethod(Class clazz, String methodName) {
-        Method method;
-        try {
-            method = clazz.getMethod(methodName);
-        } catch (NoSuchMethodException e) {
-            method = findDeclaredMethod(clazz, methodName);
-        }
-        return method;
-    }
-
-    private static Method findDeclaredMethod(Class clazz, String methodName) {
-        Method method = null;
-        try {
-            method = clazz.getDeclaredMethod(methodName);
-            method.setAccessible(true);
-        } catch (NoSuchMethodException e) {
-            if (clazz.getSuperclass() != null) {
-                method = findDeclaredMethod(clazz.getSuperclass(), methodName);
-            }
-        }
-        return method;
-    }
-
 
     private static void setDrawable(Drawable drawable, View view, TypedArray otherTa, TypedArray typedArray) {
 
@@ -310,58 +205,6 @@ public class BackgroundFactory  {
         return (flag & status) == status;
     }
 
-
-    private static View createViewFromTag(Context context, String name, AttributeSet attrs) {
-        if (TextUtils.isEmpty(name)) {
-            return null;
-        }
-        if (name.equals("view")) {
-            name = attrs.getAttributeValue(null, "class");
-        }
-        try {
-            mConstructorArgs[0] = context;
-            mConstructorArgs[1] = attrs;
-
-            if (-1 == name.indexOf('.')) {
-                View view = null;
-                if ("View".equals(name)) {
-                    view = createView(context, name, "android.view.");
-                }
-                if (view == null) {
-                    view = createView(context, name, "android.widget.");
-                }
-                if (view == null) {
-                    view = createView(context, name, "android.webkit.");
-                }
-                return view;
-            } else {
-                return createView(context, name, null);
-            }
-        } catch (Exception e) {
-            Log.w("BackgroundLibrary", "cannot create 【" + name + "】 : ");
-            return null;
-        } finally {
-            mConstructorArgs[0] = null;
-            mConstructorArgs[1] = null;
-        }
-    }
-
-    private static View createView(Context context, String name, String prefix) throws InflateException {
-        Constructor<? extends View> constructor = sConstructorMap.get(name);
-        try {
-            if (constructor == null) {
-                Class<? extends View> clazz = context.getClassLoader().loadClass(prefix != null ? (prefix + name) : name).asSubclass(View.class);
-
-                constructor = clazz.getConstructor(sConstructorSignature);
-                sConstructorMap.put(name, constructor);
-            }
-            constructor.setAccessible(true);
-            return constructor.newInstance(mConstructorArgs);
-        } catch (Exception e) {
-            Log.w("BackgroundLibrary", "cannot create 【" + name + "】 : ");
-            return null;
-        }
-    }
 
 
     private static boolean hasGradientState(TypedArray typedArray) {

@@ -106,6 +106,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+
+        <activity android:name=".ui.BackgroundActivity" android:label="背景"/>
+
         <activity android:name=".ui.media.VideoViewActivity" />
         <activity
             android:name=".ui.media.SeparationVideoActivity"

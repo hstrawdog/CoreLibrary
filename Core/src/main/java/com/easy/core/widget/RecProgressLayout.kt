@@ -1,12 +1,4 @@
 package com.easy.core.widget
-
-/**
- * @Author : huangqiqiang
- * @Package : com.easy.example.ui.customize.view
- * @Date  : 18:29
- * @Email : qiqiang213@gmail.com
- * @Describe :
- */
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
@@ -16,21 +8,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.easy.core.R
 
-/**
- *
- * @property progressWidth Float
- * @property progressColor Int
- * @property progressBgColor Int
- * @property startPoint Int
- * @property orientation Int
- * @property textColor Int
- * @property textSize Float
- * @property currentProgress Int
- * @property progressBgPaint Paint
- * @property progressPaint Paint
- * @property textView TextView?
- * @constructor
- */
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.easy.core.widget
+  * @FileName :   RecProgressLayout.kt
+  * @Date  : 2024/8/14  17:46
+  * @Email :  qiqiang213@gmail.com
+  * @Describe : 顶部带进度条的图片加载
+  */
 class RecProgressLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 //) : RelativeLayout(context, attrs, defStyleAttr) {
 ) : CardView(context, attrs, defStyleAttr) {
