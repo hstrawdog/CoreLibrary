@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentManager
 import com.easy.core.R
 import com.easy.core.utils.ResourcesUtils
@@ -105,7 +106,8 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                     it.text = alertParams?.negativeButtonText
                     it.setOnClickListener {
                         if (alertParams?.negativeButtonListener != null) {
-                            alertParams?.negativeButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_NEGATIVE)
+                            alertParams?.negativeButtonListener?.onClick(this@SelectDialog,
+                                DialogInterface.BUTTON_NEGATIVE)
                         } else {
                             // 没有实现事件回调
                             dismiss()
@@ -126,7 +128,8 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                     }
                     it.setOnClickListener {
                         if (alertParams?.positiveButtonListener != null) {
-                            alertParams?.positiveButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                            alertParams?.positiveButtonListener?.onClick(this@SelectDialog,
+                                DialogInterface.BUTTON_POSITIVE)
                         }
                     }
                 }
@@ -139,7 +142,8 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                         visibility = View.VISIBLE
                         setOnClickListener {
                             if (alertParams?.neutralButtonListener != null) {
-                                alertParams?.neutralButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
+                                alertParams?.neutralButtonListener?.onClick(this@SelectDialog,
+                                    DialogInterface.BUTTON_POSITIVE)
                             }
                         }
                         it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
@@ -186,8 +190,8 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
                 var paddingSize = ResourcesUtils.getDimen(R.dimen.x10)
                     .toInt()
                 tv.setPadding(paddingSize, 0, paddingSize, 0)
-                tv.layoutParams =
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT)
                 rootView?.findViewById<LinearLayout>(R.id.ll_content)
                     ?.apply {
                         addView(tv)
@@ -253,6 +257,18 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
         }
 
         /**
+         *  构建 并展示出来
+         * @param fragmentManager FragmentManager
+         * @return SelectDialog<*>
+         */
+        fun show(fragmentManager: FragmentManager): SelectDialog<*> {
+            val baseSelectDialog: SelectDialog<*> = SelectDialog<DialogViewBuilder>()
+            baseSelectDialog.alertParams = alertParams
+            baseSelectDialog.show(fragmentManager)
+            return baseSelectDialog
+        }
+
+        /**
          * 设置中间布局  采用ViewHolder  方式构建
          *
          * @param dialogViewBuilder
@@ -302,9 +318,9 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @return
          */
         fun setPositiveButton(
-            text: CharSequence = "确定",
-            color: Int = R.color.color_000,
-            listener: DialogInterface.OnClickListener? = null,
+                text: CharSequence = "确定",
+                color: Int = R.color.color_000,
+                listener: DialogInterface.OnClickListener? = null,
         ): Builder {
             alertParams.positiveButtonText = text
             alertParams.positiveButtonColor = color
@@ -339,6 +355,14 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
             return this
         }
 
+        fun setTitle(@StringRes text: Int?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)): Builder {
+            text?.let {
+                alertParams.title = ResourcesUtils.getString(it)
+            }
+            alertParams.titleFontSize = fontSize
+            return this
+        }
+
         /**
          *  中间的提示
          */
@@ -348,7 +372,12 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
             }
             return this
         }
-
+        fun setContent(@StringRes text: Int?): Builder {
+            text?.let {
+                alertParams.content = ResourcesUtils.getString(it)
+            }
+            return this
+        }
         //region 分割线
         /**
          *  分割线
