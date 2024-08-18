@@ -24,9 +24,9 @@ class LoginActivity : BaseVmActivity<LoginViewModel, ActivityLoginBinding>() {
        return R.layout.activity_login
     }
 
-    override fun bindingViewModelId(): Int {
-       return  0
-    }
+//    override fun bindingViewModelId(): Int {
+//       return  0
+//    }
 
     override fun initViews() {
 

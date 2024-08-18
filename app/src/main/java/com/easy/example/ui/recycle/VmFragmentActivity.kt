@@ -36,10 +36,10 @@ VmFragmentActivity : BaseViewBindingActivity<ActivityVmFragmentBinding>() {
                 return fragment
             }
         }
-
-        override fun bindingViewModelId(): Int {
-            return   -1
-        }
+//
+//        override fun bindingViewModelId(): Int {
+//            return   -1
+//        }
         override val adapter: MainAdapter = MainAdapter()
         override fun initData() {
 

@@ -21,9 +21,9 @@ class WeatherActivity : BaseVmActivity<WeatherViewModel, ActivityWeatherBinding>
         return R.layout.activity_weather
     }
 
-    override fun bindingViewModelId(): Int {
-        return BR.vm
-    }
+//    override fun bindingViewModelId(): Int {
+//        return BR.vm
+//    }
 
     override fun initViews() {
         e(" -------WeatherActivity--------- initViews ------")

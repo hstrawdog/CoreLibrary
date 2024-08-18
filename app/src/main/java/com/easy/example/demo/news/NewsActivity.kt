@@ -36,9 +36,9 @@ class NewsActivity(override val adapter: NewsAdapter = NewsAdapter()) :
         WebActivity.open(activity!!, this.adapter!!.getItem(position)!!.url, this.adapter!!.getItem(position)!!.title)
     }
 
-    override fun bindingViewModelId(): Int {
-        return 0
-    }
+//    override fun bindingViewModelId(): Int {
+//        return 0
+//    }
 
 
     override fun initData() {

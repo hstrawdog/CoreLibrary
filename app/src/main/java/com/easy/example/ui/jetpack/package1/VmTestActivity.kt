@@ -23,9 +23,9 @@ class VmTestActivity : BaseVmActivity<BaseViewModel, ActivityVmTestBinding, >() 
         return R.layout.activity_vm_test
     }
 
-    override fun bindingViewModelId(): Int {
-     return  0
-    }
+//    override fun bindingViewModelId(): Int {
+//     return  0
+//    }
 
     override fun initViews() {
         binding.button49.setOnClickListener { viewMode.showLoading(true) }

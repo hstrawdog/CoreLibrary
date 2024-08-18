@@ -45,9 +45,9 @@ import java.text.SimpleDateFormat
 class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     //  这边是kotlin
     override val adapter: MainAdapter = MainAdapter()
-    override fun bindingViewModelId(): Int {
-        return 0
-    }
+//    override fun bindingViewModelId(): Int {
+//        return 0
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         LogUtils.dInfo("MainActivity    onCreate1")

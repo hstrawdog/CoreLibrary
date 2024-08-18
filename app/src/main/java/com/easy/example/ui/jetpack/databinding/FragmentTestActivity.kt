@@ -21,9 +21,9 @@ class FragmentTestActivity : BaseVmActivity<FragmentTestViewModel, ActivityFragm
         return   R.layout.activity_fragment_test
     }
 
-    override fun bindingViewModelId(): Int {
-        return 0
-    }
+//    override fun bindingViewModelId(): Int {
+//        return 0
+//    }
 
 
     override fun initViews() {

@@ -36,8 +36,8 @@ public class TestFragment extends BaseVmFragment<UserViewModel, FragmentTestBind
     }
 
 
-    @Override
-    public int bindingViewModelId() {
-        return BR.vm;
-    }
+//    @Override
+//    public int bindingViewModelId() {
+//        return BR.vm;
+//    }
 }

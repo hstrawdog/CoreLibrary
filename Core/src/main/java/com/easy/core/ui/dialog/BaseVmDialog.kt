@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.easy.core.BR
 import com.easy.core.ui.base.BaseViewModel
 import com.easy.core.ui.base.IBanding
 import com.easy.core.ui.base.IBaseViewModelActivity
@@ -62,8 +63,10 @@ abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindin
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
-        if (bindingViewModelId() != 0) {
-            binding.setVariable(bindingViewModelId(), viewMode)
-        }
+//        if (bindingViewModelId() != 0) {
+//            binding.setVariable(bindingViewModelId(), viewMode)
+//        }
+        binding.setVariable(BR.vm, viewMode)
+
     }
 }

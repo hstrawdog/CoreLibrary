@@ -42,9 +42,9 @@ class MvvmTestActivity : BaseVmActivity<UserViewModel, ActivityMvvmBinding, >() 
         return   R.layout.activity_mvvm
     }
 
-    override fun bindingViewModelId(): Int {
-     return  0
-    }
+//    override fun bindingViewModelId(): Int {
+//     return  0
+//    }
 
 
 

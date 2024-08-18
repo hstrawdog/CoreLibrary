@@ -20,9 +20,9 @@ class JokeActivity(override val adapter: com.easy.example.demo.joke.JokeAdapter 
     override fun getLayoutId(): Int {
         return  R.layout.activity_joke
     }
-    override fun bindingViewModelId(): Int {
-        return  0
-    }
+//    override fun bindingViewModelId(): Int {
+//        return  0
+//    }
     override fun initData() {
         adapter.loadMoreModule.setOnLoadMoreListener(this)
     }

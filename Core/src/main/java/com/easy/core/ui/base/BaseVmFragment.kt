@@ -3,6 +3,7 @@ package com.easy.core.ui.base
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
+import com.easy.core.BR
 import com.easy.core.ui.base.IBaseViewModelActivity
 import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
 
@@ -52,9 +53,11 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
      * 如果需要添加多个VM  重写此方法
      */
     override fun addViewModel() {
-        if (bindingViewModelId() != 0) {
-            binding.setVariable(bindingViewModelId(), viewMode)
-        }
+//        if (bindingViewModelId() != 0) {
+//            binding.setVariable(bindingViewModelId(), viewMode)
+//        }
+        binding.setVariable(BR.vm, viewMode)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

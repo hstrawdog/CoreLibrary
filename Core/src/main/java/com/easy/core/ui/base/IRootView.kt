@@ -171,7 +171,8 @@ interface IBaseViewModelActivity : IBanding {
      * 正常情况下一个界面(Activity  xml) 对应一个viewModel
      * @return
      */
-    fun bindingViewModelId(): Int
+
+//    fun bindingViewModelId(): Int
 
     /**
      * 添加ViewModel 与布局使用的对象
