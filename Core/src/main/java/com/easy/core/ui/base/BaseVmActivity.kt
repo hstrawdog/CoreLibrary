@@ -24,7 +24,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     lateinit var viewModel: K
 
     override fun initView() {
-        viewModel = getViewModel()
+        viewModel = createViewModel()
         viewModel.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
@@ -43,7 +43,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      * 需要测试 反射构建与Hilt 注入是否有差别
      * @return K
      */
-    override fun getViewModel(): K {
+    override fun createViewModel(): K {
         return if (this::viewModel.isInitialized) {
             ViewModelFactory.createViewModel(this, javaClass, viewModel) as K
         } else {

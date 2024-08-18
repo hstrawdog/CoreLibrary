@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
 import com.easy.core.BR
-import com.easy.core.ui.base.IBaseViewModelActivity
 import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
 
 /**
@@ -29,7 +28,7 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
      *  创建ViewModel
      */
     private fun initViewModel() {
-        viewMode = getViewModel() as K
+        viewMode = createViewModel() as K
         viewMode.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
@@ -40,7 +39,7 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
     /**
      *  创建ViewModel
      */
-    override fun getViewModel(): K {
+    override fun createViewModel(): K {
         return if (this::viewMode.isInitialized) {
             ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
         } else {

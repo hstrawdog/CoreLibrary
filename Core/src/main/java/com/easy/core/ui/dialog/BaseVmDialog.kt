@@ -8,7 +8,6 @@ import com.easy.core.BR
 import com.easy.core.ui.base.BaseViewModel
 import com.easy.core.ui.base.IBanding
 import com.easy.core.ui.base.IBaseViewModelActivity
-import com.easy.core.ui.base.IRootView
 import com.easy.core.ui.base.ViewModelFactory
 
 /**
@@ -25,7 +24,7 @@ abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindin
         return  -1
     }
     override fun initView() {
-        viewMode = getViewModel()
+        viewMode = createViewModel()
         viewMode.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
@@ -50,7 +49,7 @@ abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindin
      * 需要测试 反射构建与Hilt 注入是否有差别
      * @return K
      */
-    override fun getViewModel(): K {
+    override fun createViewModel(): K {
         return if (this::viewMode.isInitialized) {
             ViewModelFactory.createViewModel(requireActivity(), javaClass, viewMode) as K
         } else {
