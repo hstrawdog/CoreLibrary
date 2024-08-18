@@ -28,7 +28,7 @@ class VmTestActivity : BaseVmActivity<BaseViewModel, ActivityVmTestBinding, >() 
 //    }
 
     override fun initViews() {
-        binding.button49.setOnClickListener { viewMode.showLoading(true) }
+        binding.button49.setOnClickListener { viewModel.showLoading(true) }
     }
 
     companion object {

@@ -21,11 +21,11 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
-    lateinit var viewMode: K
+    lateinit var viewModel: K
 
     override fun initView() {
-        viewMode = getViewModel()
-        viewMode.let {
+        viewModel = getViewModel()
+        viewModel.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
             ViewModelFactory.initOpenActivity(it, this, this)
@@ -33,7 +33,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
         }
         addViewModel()
         initViews()
-        viewMode.initData(intent.extras)
+        viewModel.initData(intent.extras)
     }
 
     /**
@@ -44,8 +44,8 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      * @return K
      */
     override fun getViewModel(): K {
-        return if (this::viewMode.isInitialized) {
-            ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
+        return if (this::viewModel.isInitialized) {
+            ViewModelFactory.createViewModel(this, javaClass, viewModel) as K
         } else {
             ViewModelFactory.createViewModel(this, javaClass, null) as K
         }
@@ -56,7 +56,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      */
     override fun onDestroy() {
         super.onDestroy()
-        lifecycle.removeObserver(viewMode)
+        lifecycle.removeObserver(viewModel)
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     override fun addViewModel() {
 //        if (bindingViewModelId() != 0) {
 //        }
-        binding.setVariable(BR.vm, viewMode)
+        binding.setVariable(BR.vm, viewModel)
 
     }
 
@@ -78,7 +78,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        viewMode.onActivityResult(requestCode, resultCode, data)
+        viewModel.onActivityResult(requestCode, resultCode, data)
     }
 
     /**

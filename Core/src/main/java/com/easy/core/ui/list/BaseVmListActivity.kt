@@ -25,9 +25,9 @@ abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> :
         return  R.layout.activity_recycle_view
     }
     override val pageCount: Int
-        get() = viewMode.pageCount
+        get() = viewModel.pageCount
 
-    override val pageSize: Int get() = viewMode.pageSize
+    override val pageSize: Int get() = viewModel.pageSize
 
     override var listView: RecyclerView? = null
 
@@ -38,29 +38,29 @@ abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> :
     override fun initViews() {
         layoutManager = LinearLayoutManager(activity)
         listModel = BaseListModel(this, rootViewImpl)
-        LiveEventObserver.bind(viewMode.data, this) { arrayList ->
+        LiveEventObserver.bind(viewModel.data, this) { arrayList ->
             listModel.fillingData(arrayList)
         }
-        LiveEventObserver.bind(viewMode.requestAdapterError, this) { arrayList ->
+        LiveEventObserver.bind(viewModel.requestAdapterError, this) { arrayList ->
             listModel.loadMoreError()
         }
         initData()
     }
 
     override fun addPageCount() {
-        viewMode.pageCount = viewMode.pageCount + 1
+        viewModel.pageCount = viewModel.pageCount + 1
     }
 
     override fun onRefreshBegin() {
         if (adapter is LoadMoreModule) {
-            viewMode.pageCount = 1
+            viewModel.pageCount = 1
             adapter.loadMoreModule.loadMoreComplete()
-            viewMode.onLoadMore()
+            viewModel.onLoadMore()
         }
     }
 
     override fun onLoadMore() {
-        viewMode.onLoadMore()
+        viewModel.onLoadMore()
     }
 
 
