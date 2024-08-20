@@ -38,7 +38,7 @@ object  BaseSystemUtil {
      * 华为系列
      * @return Boolean
      */
-     fun isHuaWeiSeriesDevice() = (isHuaweiDevice() || isHonorDevice())
+     fun isHuaWeiSeriesDevice() = (isHuaweiDevice() || isHonorDevice() ||  isVivoDevice())
 
 
 }
