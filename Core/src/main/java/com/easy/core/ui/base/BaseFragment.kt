@@ -306,7 +306,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
         checkVisibility(hidden)
     }
 
-    override fun onViewAttachedToWindow(v: View?) {
+    override fun onViewAttachedToWindow(v: View) {
         info("onViewAttachedToWindow")
         checkVisibility(true)
     }
