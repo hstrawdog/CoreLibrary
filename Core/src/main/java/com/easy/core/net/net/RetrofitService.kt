@@ -29,7 +29,7 @@ object RetrofitService {
             writeTimeout(CoreConfig.get().writeTimeout, TimeUnit.SECONDS)
             //读取超时
             readTimeout(CoreConfig.get().readTimeout, TimeUnit.SECONDS)
-            if (BuildConfig.DEBUG) {
+            if (CoreConfig.get().isDebug) {
                 //打印拦截器
                 addInterceptor(HttpLoggingInterceptor().apply {
                     setLevel(HttpLoggingInterceptor.Level.BODY)
