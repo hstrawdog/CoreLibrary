@@ -6,6 +6,7 @@
     android:layout_marginLeft="@dimen/x95"
     android:layout_marginRight="@dimen/x95"
     android:background="@drawable/sp_white_20"
+    android:paddingTop="@dimen/x20"
     android:orientation="vertical">
 
 
@@ -15,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x20"
-        android:layout_marginTop="@dimen/x40"
+        android:layout_marginTop="@dimen/x20"
+        android:layout_marginBottom="@dimen/x20"
         android:layout_marginRight="@dimen/x20"
         android:gravity="center"
         android:text="提示" />

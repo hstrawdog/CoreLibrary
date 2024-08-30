@@ -115,6 +115,12 @@
             tools:layout_editor_absoluteX="47dp"
             tools:layout_editor_absoluteY="38dp" />
 
+        <Button
+            android:id="@+id/button95"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="只有一个确认按钮的 确认提示 " />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

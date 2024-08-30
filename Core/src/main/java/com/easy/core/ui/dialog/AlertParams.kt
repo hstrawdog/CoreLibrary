@@ -71,7 +71,7 @@ class AlertParams {
 
 
     /**
-     * 分割线
+     * 是否显示 按钮与内容的 横向 分割线
      */
     var showDividingLine: Boolean = true
 

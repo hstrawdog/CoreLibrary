@@ -44,6 +44,7 @@ class TestDialogActivity : BaseActivity() {
         findViewById<View>(R.id.button66).setOnClickListener(this)
         findViewById<View>(R.id.button67).setOnClickListener(this)
         findViewById<View>(R.id.button68).setOnClickListener(this)
+        findViewById<View>(R.id.button95).setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -145,6 +146,17 @@ class TestDialogActivity : BaseActivity() {
             R.id.button68 -> {
                 val mFullBottomSheetFragment = FoldFullBottomSheet()
                 mFullBottomSheetFragment.show(supportFragmentManager)
+            }
+            R.id.button95 -> {
+
+
+                SelectDialog.Builder()
+                    .setTitle("我是标题")
+                    .setContent("我是内容")
+                    .setDividingLine(false)
+                    .setOnCancelListener("") { dialog, which -> ToastUtils.showToast("取消1") }
+                    .create()
+                    .show(supportFragmentManager)
             }
         }
     }
