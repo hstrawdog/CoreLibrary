@@ -40,11 +40,12 @@ object NetUtils {
      * "4G" networks
      */
     const val NETWORK_4G = 4
+    const val NETWORK_5G = 5
 
     /**
      * unknown network
      */
-    const val NETWORK_UNKNOWN = 5
+    const val NETWORK_UNKNOWN = 6
     private const val NETWORK_TYPE_GSM = 16
     private const val NETWORK_TYPE_TD_SCDMA = 17
     private const val NETWORK_TYPE_IWLAN = 18
@@ -70,7 +71,8 @@ object NetUtils {
      * @link #NETWORK_2G      =  2; 切换到2G环境下
      * @link #NETWORK_3G      =  3; 切换到3G环境下
      * @link #NETWORK_4G      =  4; 切换到4G环境下
-     * @link #NETWORK_UNKNOWN =  5; 未知网络
+     * @link #NETWORK_5G      =  5; 切换到4G环境下
+     * @link #NETWORK_UNKNOWN =  6; 未知网络
      */
     @JvmStatic
     fun getNetWorkType(context: Context): Int {
@@ -101,14 +103,20 @@ object NetUtils {
                         ToastUtils.showToast("切换到4G环境下")
                     }
 
+                    TelephonyManager.NETWORK_TYPE_NR -> {
+                        netType = NETWORK_5G
+                        ToastUtils.showToast("切换到5G环境下")
+                    }
+
                     else -> {
                         val subtypeName = ni.subtypeName
-                        netType =
-                            if (subtypeName.equals("TD-SCDMA", ignoreCase = true) || subtypeName.equals("WCDMA", ignoreCase = true) || subtypeName.equals("CDMA2000", ignoreCase = true)) {
-                                NETWORK_3G
-                            } else {
-                                NETWORK_UNKNOWN
-                            }
+                        netType = if (subtypeName.equals("TD-SCDMA", ignoreCase = true) || subtypeName.equals("WCDMA",
+                                ignoreCase = true) || subtypeName.equals("CDMA2000", ignoreCase = true)
+                        ) {
+                            NETWORK_3G
+                        } else {
+                            NETWORK_UNKNOWN
+                        }
                         ToastUtils.showToast("未知网络")
                     }
                 }
@@ -246,7 +254,9 @@ object NetUtils {
     fun isWifiEnabled(context: Context): Boolean {
         val mgrConn = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val mgrTel = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED
+        ) {
 
             return false
         }
