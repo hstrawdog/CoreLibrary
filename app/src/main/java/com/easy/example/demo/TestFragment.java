@@ -32,7 +32,6 @@ public class TestFragment extends BaseVmFragment<UserViewModel, FragmentTestBind
 
     @Override
     public void initViews() {
-
     }
 
 

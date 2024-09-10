@@ -22,6 +22,7 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
 abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
     lateinit var viewModel: K
+        get
 
     override fun initView() {
         viewModel = createViewModel()

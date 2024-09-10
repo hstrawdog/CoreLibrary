@@ -17,6 +17,7 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
 abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseDataBindingFragment<T>(), IBaseViewModelActivity,
     IOpenActivity {
     protected lateinit var viewModel: K
+        get
     override fun initView() {
         initViewModel()
         addViewModel()

@@ -19,10 +19,13 @@ import com.easy.core.ui.base.ViewModelFactory
  */
 abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindingDialog<T>(), IBaseViewModelActivity,
     IBanding {
-    lateinit var viewModel: K
+    protected lateinit var viewModel: K
+        get
+
     override fun getLayoutId(): Int {
-        return  -1
+        return -1
     }
+
     override fun initView() {
         viewModel = createViewModel()
         viewModel.let {
