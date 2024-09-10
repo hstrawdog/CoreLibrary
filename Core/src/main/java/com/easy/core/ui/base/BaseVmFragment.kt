@@ -16,36 +16,31 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseDataBindingFragment<T>(), IBaseViewModelActivity,
     IOpenActivity {
-    protected lateinit var viewModel: K
-        get
+    val viewModel: K by lazy {
+        createViewModel().apply {
+            lifecycle.addObserver(this)
+            ViewModelFactory.initBaseViewModel(this, this@BaseVmFragment, this@BaseVmFragment.loadingView)
+            ViewModelFactory.initOpenActivity(this, this@BaseVmFragment, this@BaseVmFragment)
+        }
+    }
     override fun initView() {
-        initViewModel()
         addViewModel()
         initViews()
         viewModel.initData(arguments)
     }
 
-    /**
-     *  创建ViewModel
-     */
-    private fun initViewModel() {
-        viewModel = createViewModel() as K
-        viewModel.let {
-            lifecycle.addObserver(it)
-            ViewModelFactory.initBaseViewModel(it, this, loadingView)
-            ViewModelFactory.initOpenActivity(it, this, this)
-        }
-    }
 
     /**
      *  创建ViewModel
      */
     override fun createViewModel(): K {
-        return if (this::viewModel.isInitialized) {
-            ViewModelFactory.createViewModel(this, javaClass, viewModel) as K
-        } else {
-            ViewModelFactory.createViewModel(this, javaClass, null) as K
-        }
+//        return if (this::viewModel.isInitialized) {
+//            ViewModelFactory.createViewModel(this, javaClass, viewModel) as K
+//        } else {
+//            ViewModelFactory.createViewModel(this, javaClass, null) as K
+//        }
+
+        return ViewModelFactory.createViewModel(this, javaClass, null) as K
     }
 
     /**

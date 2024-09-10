@@ -19,19 +19,19 @@ import com.easy.core.ui.base.ViewModelFactory
  */
 abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindingDialog<T>(), IBaseViewModelActivity,
     IBanding {
-    protected lateinit var viewModel: K
-        get
+    val viewModel: K by lazy {
+        createViewModel().apply {
+            lifecycle.addObserver(this)
+            ViewModelFactory.initBaseViewModel(this, this@BaseVmDialog, this@BaseVmDialog.loadingView)
+        }
+    }
 
     override fun getLayoutId(): Int {
         return -1
     }
 
     override fun initView() {
-        viewModel = createViewModel()
-        viewModel.let {
-            lifecycle.addObserver(it)
-            ViewModelFactory.initBaseViewModel(it, this, loadingView)
-        }
+
         addViewModel()
         initViews()
         viewModel.initData(null)
@@ -53,11 +53,13 @@ abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindin
      * @return K
      */
     override fun createViewModel(): K {
-        return if (this::viewModel.isInitialized) {
-            ViewModelFactory.createViewModel(requireActivity(), javaClass, viewModel) as K
-        } else {
-            ViewModelFactory.createViewModel(requireActivity(), javaClass, null) as K
-        }
+//        return if (this::viewModel.isInitialized) {
+//            ViewModelFactory.createViewModel(requireActivity(), javaClass, viewModel) as K
+//        } else {
+//            ViewModelFactory.createViewModel(requireActivity(), javaClass, null) as K
+//        }
+
+        return ViewModelFactory.createViewModel(requireActivity(), javaClass, null) as K
     }
 
     /**

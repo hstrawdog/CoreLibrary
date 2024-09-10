@@ -21,17 +21,16 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     : BaseDataBindingActivity<T>(), IBaseViewModelActivity, IOpenActivity, IFinishActivity {
-    lateinit var viewModel: K
-        get
+     val viewModel: K by lazy {
+         createViewModel().apply {
+             lifecycle.addObserver(this)
+             ViewModelFactory.initBaseViewModel(this, this@BaseVmActivity, this@BaseVmActivity.loadingView)
+             ViewModelFactory.initOpenActivity(this, this@BaseVmActivity, this@BaseVmActivity)
+             ViewModelFactory.initGoBack(this, this@BaseVmActivity, this@BaseVmActivity)
+         }
+     }
 
     override fun initView() {
-        viewModel = createViewModel()
-        viewModel.let {
-            lifecycle.addObserver(it)
-            ViewModelFactory.initBaseViewModel(it, this, loadingView)
-            ViewModelFactory.initOpenActivity(it, this, this)
-            ViewModelFactory.initGoBack(it, this, this)
-        }
         addViewModel()
         initViews()
         viewModel.initData(intent.extras)
@@ -45,11 +44,12 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      * @return K
      */
     override fun createViewModel(): K {
-        return if (this::viewModel.isInitialized) {
-            ViewModelFactory.createViewModel(this, javaClass, viewModel) as K
-        } else {
-            ViewModelFactory.createViewModel(this, javaClass, null) as K
-        }
+//        return if (this::viewModel.isInitialized) {
+//            ViewModelFactory.createViewModel(this, javaClass, viewModel) as K
+//        } else {
+//            ViewModelFactory.createViewModel(this, javaClass, null) as K
+//        }
+        return  ViewModelFactory.createViewModel(this, javaClass, null) as K
     }
 
     /**
