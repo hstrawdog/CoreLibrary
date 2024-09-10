@@ -34,6 +34,11 @@
  - MVVM  继承 BaseVm
 
 
+# LiveData  使用 MutableResult
+解决 数据倒灌问题 参考 https://github.com/KunMinX/UnPeek-LiveData
+
+
+
 
 # 工具  utils
  - ImageLoadUtils  图片请求框架  类中使用的是Glide

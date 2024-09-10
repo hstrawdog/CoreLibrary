@@ -13,13 +13,29 @@
         tools:context=".MainActivity"
         tools:ignore="MissingPrefix,HardcodedText">
 
-        <TextView
+        <com.easy.core.background.view.BLButton
+            android:id="@+id/btn_like2"
             android:layout_width="wrap_content"
-            android:text="dasdasdads"
-            app:bl_text_gradient_orientation="horizontal"
-            app:bl_text_gradient_startColor="@color/colorAccent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:text="未点赞"
+            app:bl_corners_topRadius="15dp"
+            app:bl_solid_color="@color/colorAccent"
+            app:bl_position="left"
+            app:bl_selected_drawable="@drawable/circle_like_pressed"
+            app:bl_selected_textColor="#fbdc4a"
+            app:bl_unSelected_drawable="@drawable/circle_like_normal"
+            app:bl_unSelected_textColor="@android:color/black" />
+
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="文件颜色渐变"
             app:bl_text_gradient_endColor="@android:color/holo_green_dark"
-            android:layout_height="wrap_content"/>
+            app:bl_text_gradient_orientation="horizontal"
+            app:bl_text_gradient_startColor="@color/colorAccent" />
 
         <com.easy.core.background.view.BLTextView
             android:layout_width="match_parent"
@@ -79,7 +95,7 @@
             app:bl_stroke_width="2dp" />
 
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:id="@+id/cobbAngle"
             android:layout_width="180dp"
             android:layout_height="36dp"
@@ -133,7 +149,7 @@
             app:bl_unEnabled_drawable="#9DD1F6"
             app:bl_unPressed_drawable="#1B82D1" />
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:layout_width="180dp"
             android:layout_height="36dp"
             android:layout_marginTop="15dp"
@@ -149,7 +165,7 @@
             app:bl_unPressed_solid_color="#E9967A"
             app:bl_unPressed_stroke_color="#98FB98" />
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="直接添加自定义属性，设置背景shape："
@@ -173,7 +189,7 @@
             app:bl_gradient_startColor="#63B8FF"
             app:bl_shape="rectangle" />
 
-        <Button
+        <com.easy.core.background.view.BLButton
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -189,7 +205,7 @@
             app:bl_gradient_startColor="#CD5B45"
             app:bl_shape="rectangle" />
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:layout_width="130dp"
             android:layout_height="36dp"
             android:layout_marginTop="5dp"
@@ -204,7 +220,7 @@
             app:bl_stroke_dashWidth="10dp"
             app:bl_stroke_width="2dp" />
 
-        <Button
+        <com.easy.core.background.view.BLButton
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -218,7 +234,7 @@
             app:bl_shape="rectangle"
             app:bl_unpressed_color="#7CFC00" />
 
-        <View
+        <com.easy.core.background.view.BLView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -230,37 +246,7 @@
             app:bl_stroke_width="2dp" />
 
 
-        <!--<com.easy.core.background.view.BLRadioGroup-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:orientation="horizontal">-->
-        <!--<com.easy.core.background.view.BLRadioButton-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:text="按钮1"-->
-        <!--android:button="@null"-->
-        <!--android:checked="true"-->
-        <!--app:bl_checked_solid_color="#61c375"-->
-        <!--app:bl_checked_stroke_color="@android:color/white"-->
-        <!--app:bl_unChecked_solid_color="@android:color/white"-->
-        <!--app:bl_unChecked_stroke_color="#98fb98"-->
-        <!--app:bl_corners_radius="10dp"-->
-        <!--app:bl_stroke_width="1dp" />-->
-        <!--<com.easy.core.background.view.BLRadioButton-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:text="按钮1"-->
-        <!--android:button="@null"-->
-        <!--app:bl_corners_radius="10dp"-->
-        <!--app:bl_checked_solid_color="#61c375"-->
-        <!--app:bl_checked_stroke_color="@android:color/white"-->
-        <!--app:bl_unChecked_solid_color="@android:color/white"-->
-        <!--app:bl_unChecked_stroke_color="#98fb98"-->
-        <!--app:bl_stroke_width="1dp" />-->
-        <!--</com.easy.core.background.view.BLRadioGroup>-->
-
-        <Button
+        <com.easy.core.background.view.BLButton
             android:id="@+id/btn1"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -279,7 +265,7 @@
             app:bl_stroke_width="2dp"
             app:bl_unPressed_stroke_color="@android:color/holo_red_dark" />
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -287,7 +273,7 @@
             android:textSize="15sp" />
 
 
-        <Button
+        <com.easy.core.background.view.BLButton
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -304,7 +290,7 @@
             app:bl_stroke_width="2dp"
             app:bl_unPressed_drawable="#7CFC00" />
 
-        <Button
+        <com.easy.core.background.view.BLButton
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -314,7 +300,7 @@
             app:bl_pressed_textColor="#919DAF"
             app:bl_unPressed_textColor="@android:color/holo_red_dark" />
 
-        <Button
+        <com.easy.core.background.view.BLButton
             android:id="@+id/btn_setEnable"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -340,12 +326,12 @@
             app:bl_multi_text_selector2="-state_pressed,-state_enabled,#ff000000"
             app:bl_multi_text_selector3="-state_pressed,state_enabled,#DDA0DD" />
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="下面是通过代码设置背景：" />
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:id="@+id/tvTest1"
             android:layout_width="130dp"
             android:layout_height="36dp"
@@ -353,7 +339,7 @@
             android:text="点击文字变色"
             android:textSize="20sp" />
 
-        <Button
+        <com.easy.core.background.view.BLButton
             android:id="@+id/btnTest2"
             android:layout_width="130dp"
             android:layout_height="36dp"
@@ -364,7 +350,7 @@
             android:textColor="#4F94CD"
             android:textSize="20sp" />
 
-        <Button
+        <com.easy.core.background.view.BLButton
             android:id="@+id/btnTest3"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -376,19 +362,375 @@
             android:textSize="20sp" />
 
 
-        <TextView
+        <com.easy.core.background.view.BLTextView
             android:id="@+id/tvTest4"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="5dp" />
 
-        <FrameLayout
+        <com.easy.core.background.view.BLFrameLayout
             android:id="@+id/fl_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp">
 
-        </FrameLayout>
+        </com.easy.core.background.view.BLFrameLayout>
+
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dasdasdads"
+            app:bl_text_gradient_endColor="@android:color/holo_green_dark"
+            app:bl_text_gradient_orientation="horizontal"
+            app:bl_text_gradient_startColor="@color/colorAccent" />
+
+
+        <com.easy.core.background.view.BLButton
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击事件支持渐变"
+            android:textColor="@android:color/white"
+            app:bl_corners_radius="4dp"
+            app:bl_pressed_gradient_centerColor="@android:color/holo_green_dark"
+            app:bl_pressed_gradient_endColor="@android:color/holo_red_dark"
+            app:bl_pressed_gradient_startColor="@android:color/black"
+            app:bl_unPressed_gradient_centerColor="@android:color/darker_gray"
+            app:bl_unPressed_gradient_endColor="@android:color/holo_blue_light"
+            app:bl_unPressed_gradient_startColor="@android:color/white" />
+
+
+        <com.easy.core.background.view.BLFlow
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="20.0dp"
+            app:bl_corners_radius="4dp"
+            app:bl_padding_bottom="5dp"
+            app:bl_padding_left="15dp"
+            app:bl_padding_right="5dp"
+            app:bl_padding_top="15dp"
+            app:bl_solid_color="#E3B666"
+            app:bl_stroke_color="#8c6822"
+            app:bl_stroke_dashGap="5dp"
+            app:bl_stroke_dashWidth="10dp"
+            app:bl_stroke_width="2dp"
+            app:constraint_referenced_ids="tv1,tv2,tv3,tv4,tv5"
+            app:flow_horizontalGap="20.0dp"
+            app:flow_verticalGap="20.0dp"
+            app:flow_wrapMode="aligned"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.easy.core.background.view.BLTextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <com.easy.core.background.view.BLTextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <com.easy.core.background.view.BLTextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <com.easy.core.background.view.BLTextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <com.easy.core.background.view.BLTextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+
+        <com.easy.core.background.view.BLButton
+            android:id="@+id/btn_login"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textColor="@android:color/white"
+            app:bl_corners_radius="4dp"
+            app:bl_pressed_solid_color="@color/colorAccent"
+            app:bl_unPressed_solid_color="@color/colorPrimaryDark" />
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:gravity="center"
+            android:text="指定只显示左右下方的边框"
+            android:textSize="20sp"
+            app:bl_solid_color="@android:color/white"
+            app:bl_stroke_color="@android:color/black"
+            app:bl_stroke_position="left|bottom|right"
+            app:bl_stroke_width="1dp" />
+
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="指定只显示左右下方的边框22222"
+            android:textSize="20sp"
+            app:bl_pressed_stroke_color="@android:color/holo_red_dark"
+            app:bl_stroke_position="left|bottom|right"
+            app:bl_stroke_width="1dp"
+            app:bl_unPressed_stroke_color="@android:color/black" />
+
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="虚线圆角边框以及填充"
+            android:textColor="#8c6822"
+            android:textSize="20sp"
+            app:bl_corners_radius="4dp"
+            app:bl_padding_bottom="5dp"
+            app:bl_padding_left="15dp"
+            app:bl_padding_right="5dp"
+            app:bl_padding_top="15dp"
+            app:bl_solid_color="#E3B666"
+            app:bl_stroke_color="#8c6822"
+            app:bl_stroke_dashGap="5dp"
+            app:bl_stroke_dashWidth="10dp"
+            app:bl_stroke_width="2dp" />
+
+
+        <com.easy.core.background.view.BLEditText
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/test_sel1"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="一条属性多个状态（原生写法）"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <com.easy.core.background.view.BLButton
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="一条属性多个状态（非原生写法）"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:bl_corners_radius="3dp"
+            app:bl_multi_selector1="-state_enabled,#9DD1F6"
+            app:bl_multi_selector2="state_pressed,#9DD1F6"
+            app:bl_multi_selector3="-state_pressed,#1B82D1"
+            app:bl_shape="rectangle"
+            app:bl_stroke_width="1dp" />
+
+        <com.easy.core.background.view.BLButton
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:enabled="true"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="一条属性多个状态（非原生写法2）"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:bl_corners_radius="3dp"
+            app:bl_pressed_drawable="#9DD1F6"
+            app:bl_shape="rectangle"
+            app:bl_stroke_width="1dp"
+            app:bl_unEnabled_drawable="#9DD1F6"
+            app:bl_unPressed_drawable="#1B82D1" />
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="点击边框变色"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:bl_pressed_solid_color="#FFDEAD"
+            app:bl_pressed_stroke_color="#C6E2FF"
+            app:bl_stroke_width="1dp"
+            app:bl_unPressed_solid_color="#E9967A"
+            app:bl_unPressed_stroke_color="#98FB98" />
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="直接添加自定义属性，设置背景shape："
+            android:textSize="15sp" />
+
+        <com.easy.core.background.view.BLButton
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="确认"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:bl_corners_radius="20dp"
+            app:bl_gradient_angle="0"
+            app:bl_gradient_centerColor="#CD4F39"
+            app:bl_gradient_endColor="#CD2626"
+            app:bl_gradient_startColor="#CD5B45"
+            app:bl_shape="rectangle" />
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#8c6822"
+            android:textSize="20sp"
+            app:bl_corners_radius="4dp"
+            app:bl_solid_color="#E3B666"
+            app:bl_stroke_color="#8c6822"
+            app:bl_stroke_dashGap="5dp"
+            app:bl_stroke_dashWidth="10dp"
+            app:bl_stroke_width="2dp" />
+
+        <com.easy.core.background.view.BLButton
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="有点击反馈的按钮"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:bl_corners_radius="20dp"
+            app:bl_pressed_color="#7CCD7C"
+            app:bl_shape="rectangle"
+            app:bl_unpressed_color="#7CFC00" />
+
+        <com.easy.core.background.view.BLView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            app:bl_shape="oval"
+            app:bl_solid_color="#E3B666"
+            app:bl_stroke_color="#8c6822"
+            app:bl_stroke_dashGap="5dp"
+            app:bl_stroke_dashWidth="10dp"
+            app:bl_stroke_width="2dp" />
+
+        <com.easy.core.background.view.BLRadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.easy.core.background.view.BLRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="按钮1"
+                app:bl_checked_button_drawable="@mipmap/rg_select"
+                app:bl_corners_radius="10dp"
+                app:bl_unChecked_button_drawable="@mipmap/rg_unselect" />
+
+            <com.easy.core.background.view.BLRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="按钮2"
+                app:bl_checked_button_drawable="@mipmap/rg_select"
+                app:bl_corners_radius="10dp"
+                app:bl_unChecked_button_drawable="@mipmap/rg_unselect" />
+        </com.easy.core.background.view.BLRadioGroup>
+
+        <com.easy.core.background.view.BLRadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.easy.core.background.view.BLRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:text="按钮1"
+                android:textSize="15sp"
+                app:bl_checked_drawable="@drawable/shape_gender_green"
+                app:bl_unChecked_drawable="@drawable/shape_gender_red" />
+
+            <com.easy.core.background.view.BLRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:button="@null"
+                android:text="按钮2"
+                android:textSize="15sp"
+                app:bl_checked_drawable="@drawable/shape_gender_green"
+                app:bl_unChecked_drawable="@drawable/shape_gender_red" />
+        </com.easy.core.background.view.BLRadioGroup>
+
+
+        <com.easy.core.background.view.BLCheckBox
+            android:id="@+id/cb_like_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dasdas"
+            app:bl_checked_button_drawable="@mipmap/rg_select"
+            app:bl_unChecked_button_drawable="@mipmap/rg_unselect" />
+
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="selector 用法："
+            android:textSize="15sp"
+            app:bl_checked_solid_color="@color/colorAccent" />
+
+        <com.easy.core.background.view.BLTextView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            app:bl_pressed_drawable="@drawable/circle_like_pressed"
+            app:bl_unPressed_drawable="@drawable/circle_like_normal" />
+
+
+        <com.easy.core.background.view.BLButton
+            android:id="@+id/btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:text="点赞+1"
+            app:bl_position="left"
+            app:bl_pressed_drawable="@drawable/circle_like_pressed"
+            app:bl_pressed_textColor="@color/red"
+            app:bl_unPressed_drawable="@drawable/circle_like_normal"
+            app:bl_unPressed_textColor="@color/color_333" />
+
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

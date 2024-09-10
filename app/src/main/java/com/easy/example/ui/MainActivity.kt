@@ -62,6 +62,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            }
 //        }
 
+//        open(BackgroundActivity::class.java)
         open(TestDialogActivity::class.java)
 //        open(BannerActivity::class.java)
         LogUtils.de("111111111111111111111111")

@@ -88,7 +88,19 @@ public class BackgroundActivity extends BaseActivity {
 //        }else {
 //            tvTest4.setBackgroundDrawable(drawable4);
 //        }
-
+        final Button btnLike2 = findViewById(R.id.btn_like2);
+        btnLike2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btnLike2.isSelected()){
+                    btnLike2.setText("未点赞");
+                }else {
+                    btnLike2.setText("已点赞");
+                }
+                btnLike2.setSelected(!btnLike2.isSelected());
+                findViewById(R.id.btn_like).setSelected(!btnLike2.isSelected());
+            }
+        });
 
         final Button btnEnable = findViewById(R.id.btn_setEnable);
         final TextView tvMulti = findViewById(R.id.tv_multi);

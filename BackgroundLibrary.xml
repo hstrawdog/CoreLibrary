@@ -587,12 +587,6 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="bl_function" value="app:bl_function=&quot;$value$&quot;" description="点击事件的方法名" toReformat="true" toShortenFQNames="true">
-    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="XML" value="true" />
-    </context>
-  </template>
   <template name="bl_padding_left" value="app:bl_padding_left=&quot;$value$&quot;" description="paddingLeft属性" toReformat="true" toShortenFQNames="true">
     <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
     <context>

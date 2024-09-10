@@ -16,20 +16,20 @@ import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
  */
 abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseDataBindingFragment<T>(), IBaseViewModelActivity,
     IOpenActivity {
-    protected lateinit var viewMode: K
+    protected lateinit var viewModel: K
     override fun initView() {
         initViewModel()
         addViewModel()
         initViews()
-        viewMode.initData(arguments)
+        viewModel.initData(arguments)
     }
 
     /**
      *  创建ViewModel
      */
     private fun initViewModel() {
-        viewMode = createViewModel() as K
-        viewMode.let {
+        viewModel = createViewModel() as K
+        viewModel.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
             ViewModelFactory.initOpenActivity(it, this, this)
@@ -40,8 +40,8 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
      *  创建ViewModel
      */
     override fun createViewModel(): K {
-        return if (this::viewMode.isInitialized) {
-            ViewModelFactory.createViewModel(this, javaClass, viewMode) as K
+        return if (this::viewModel.isInitialized) {
+            ViewModelFactory.createViewModel(this, javaClass, viewModel) as K
         } else {
             ViewModelFactory.createViewModel(this, javaClass, null) as K
         }
@@ -55,13 +55,13 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
 //        if (bindingViewModelId() != 0) {
 //            binding.setVariable(bindingViewModelId(), viewMode)
 //        }
-        binding.setVariable(BR.vm, viewMode)
+        binding.setVariable(BR.vm, viewModel)
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        viewMode.onActivityResult(requestCode, resultCode, data)
+        viewModel.onActivityResult(requestCode, resultCode, data)
     }
 
     /**

@@ -7,6 +7,15 @@ import androidx.annotation.AttrRes;
 
 import com.easy.core.R;
 
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.easy.core.background.drawable
+  * @FileName :   ColorStateCreator
+  * @Date  : 2024/9/7  01:15
+  * @Email :  qiqiang213@gmail.com
+  * @Describe : ColorStateList  不同状态下颜色的工具，比如在按钮被按下或获得焦点时。它允许你为不同的状态（例如按下、获得焦点、禁用等）设置不同的颜色，使得 UI 元素能够根据用户的操作动态变化。
+  */
+
 public class ColorStateCreator implements ICreateColorState{
 
     private TypedArray textTa;

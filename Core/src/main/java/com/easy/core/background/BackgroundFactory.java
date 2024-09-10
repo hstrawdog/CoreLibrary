@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 
 import com.easy.core.R;
 import com.easy.core.background.drawable.DrawableFactory;
-import com.easy.core.background.drawable.TextViewFactory;
+import com.easy.core.background.drawable.TextViewGradientColor;
 
 public class BackgroundFactory  {
 
@@ -42,10 +42,7 @@ public class BackgroundFactory  {
         TypedArray multiSelTa = context.obtainStyledAttributes(attrs, R.styleable.background_multi_selector);
         TypedArray multiTextTa = context.obtainStyledAttributes(attrs, R.styleable.background_multi_selector_text);
         TypedArray textViewTa = context.obtainStyledAttributes(attrs, R.styleable.bl_text);
-        TypedArray selectorPre21Ta = null;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            selectorPre21Ta = context.obtainStyledAttributes(attrs, R.styleable.background_selector_pre_21);
-        }
+
 
         try {
             if (typedArray.getIndexCount() == 0 && selectorTa.getIndexCount() == 0 && pressTa.getIndexCount() == 0 && textTa.getIndexCount() == 0 && buttonTa.getIndexCount() == 0  && multiSelTa.getIndexCount() == 0 && multiTextTa.getIndexCount() == 0 && textViewTa.getIndexCount() == 0 && otherTa.getIndexCount() == 0) {
@@ -77,10 +74,7 @@ public class BackgroundFactory  {
                 stateListDrawable = DrawableFactory.getMultiSelectorDrawable(context, multiSelTa, typedArray);
                 setBackground(stateListDrawable, view, typedArray);
             } else if (typedArray.getIndexCount() > 0) {
-                if (selectorPre21Ta != null && selectorPre21Ta.getIndexCount() > 0) {
-                    stateListDrawable = DrawableFactory.getSelectorPre21Drawable(typedArray);
-                    setDrawable(stateListDrawable, view, otherTa, typedArray);
-                } else {
+
                     if (hasGradientState(typedArray)) {
                         stateListDrawable = DrawableFactory.getStateGradientDrawable(typedArray);
                         setDrawable(stateListDrawable, view, otherTa, typedArray);
@@ -88,7 +82,6 @@ public class BackgroundFactory  {
                         drawable = DrawableFactory.getDrawable(typedArray);
                         setDrawable(drawable, view, otherTa, typedArray);
                     }
-                }
             }
 
             if (view instanceof TextView && textTa.getIndexCount() > 0) {
@@ -96,7 +89,7 @@ public class BackgroundFactory  {
             } else if (view instanceof TextView && multiTextTa.getIndexCount() > 0) {
                 ((TextView) view).setTextColor(DrawableFactory.getMultiTextColorSelectorColorCreator(context, multiTextTa));
             } else if (view instanceof TextView && textViewTa.getIndexCount() > 0) {
-                TextViewFactory.setTextGradientColor(context, attrs, (TextView) view);
+                new TextViewGradientColor().invoke(context, attrs, (TextView) view);
             }
 
 
@@ -133,9 +126,7 @@ public class BackgroundFactory  {
             multiSelTa.recycle();
             multiTextTa.recycle();
             textViewTa.recycle();
-            if (selectorPre21Ta != null) {
-                selectorPre21Ta.recycle();
-            }
+
         }
     }
 

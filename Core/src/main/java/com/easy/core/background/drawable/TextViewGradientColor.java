@@ -13,6 +13,7 @@ import com.easy.core.R;
  * Author: xiaoqi
  * Date: 2022/8/17 3:14 下午
  * Description:
+ * 文字渐变
  */
 public class TextViewGradientColor implements ITextViewOperator{
     private int endColor = -1;

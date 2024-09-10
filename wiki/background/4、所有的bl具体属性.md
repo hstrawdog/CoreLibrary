@@ -43,7 +43,6 @@
 |bl_stroke_dashGap|dimension|
 |bl_position|left、right、top、bottom 设置drawable位于view的指定位置|
 |bl_stroke_position|left、right、top、bottom 指定某个方向的边框进行显示|
-|bl_function|增加默认点击事件，参数为方法名，支持父类方法，暂时只支持无参方法|
 |bl_checkable_gradient_angle|integer|
 |bl_checkable_gradient_centerX|float|
 |bl_checkable_gradient_centerY|float|

@@ -16,7 +16,14 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-
+ /**
+  * @Author : huangqiqiang
+  * @Package : com.easy.core.background.drawable
+  * @FileName :   GradientDrawableCreator
+  * @Date  : 2024/9/7  01:13
+  * @Email :  qiqiang213@gmail.com
+  * @Describe : 创建渐变色、圆角矩形、圆形、椭圆形等各种形状的 drawable。
+  */
 public class GradientDrawableCreator implements ICreateDrawable {
 
     private TypedArray typedArray;

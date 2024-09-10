@@ -35,19 +35,10 @@ public class DrawableFactory {
         return (StateListDrawable) new SelectorDrawableCreator(typedArray, selectorTa).create();
     }
 
-    //针对sdk21以前获取selector属性的drawable
-    public static StateListDrawable getSelectorPre21Drawable(TypedArray typedArray) throws Exception {
-        return new SelectorPre21DrawableCreator(typedArray).create();
-    }
 
     //获取button 属性的drawable
     public static StateListDrawable getButtonDrawable(TypedArray typedArray, TypedArray buttonTa) throws Exception {
         return (StateListDrawable) new ButtonDrawableCreator(typedArray, buttonTa).create();
-    }
-
-    //获取text selector属性关于text的color
-    public static ColorStateList getTextSelectorColor(TypedArray textTa) {
-        return new ColorStateCreator(textTa).create();
     }
 
     //适配早期版本的属性
@@ -56,9 +47,13 @@ public class DrawableFactory {
         return (StateListDrawable) new PressDrawableCreator(drawable, typedArray, pressTa).create();
     }
 
-
     public static StateListDrawable getMultiSelectorDrawable(Context context, TypedArray selectorTa, TypedArray typedArray) {
         return (StateListDrawable) new MultiSelectorDrawableCreator(context, selectorTa, typedArray).create();
+    }
+
+    //获取text selector属性关于text的color
+    public static ColorStateList getTextSelectorColor(TypedArray textTa) {
+        return new ColorStateCreator(textTa).create();
     }
 
     public static ColorStateList getMultiTextColorSelectorColorCreator(Context context, TypedArray selectorTa) {

@@ -19,19 +19,19 @@ import com.easy.core.ui.base.ViewModelFactory
  */
 abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindingDialog<T>(), IBaseViewModelActivity,
     IBanding {
-    lateinit var viewMode: K
+    lateinit var viewModel: K
     override fun getLayoutId(): Int {
         return  -1
     }
     override fun initView() {
-        viewMode = createViewModel()
-        viewMode.let {
+        viewModel = createViewModel()
+        viewModel.let {
             lifecycle.addObserver(it)
             ViewModelFactory.initBaseViewModel(it, this, loadingView)
         }
         addViewModel()
         initViews()
-        viewMode.initData(null)
+        viewModel.initData(null)
     }
 
     override fun getBindingView(parent: ViewGroup): View? {
@@ -50,8 +50,8 @@ abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindin
      * @return K
      */
     override fun createViewModel(): K {
-        return if (this::viewMode.isInitialized) {
-            ViewModelFactory.createViewModel(requireActivity(), javaClass, viewMode) as K
+        return if (this::viewModel.isInitialized) {
+            ViewModelFactory.createViewModel(requireActivity(), javaClass, viewModel) as K
         } else {
             ViewModelFactory.createViewModel(requireActivity(), javaClass, null) as K
         }
@@ -65,7 +65,7 @@ abstract class BaseVmDialog<K : BaseViewModel, T : ViewDataBinding> : BaseBindin
 //        if (bindingViewModelId() != 0) {
 //            binding.setVariable(bindingViewModelId(), viewMode)
 //        }
-        binding.setVariable(BR.vm, viewMode)
+        binding.setVariable(BR.vm, viewModel)
 
     }
 }
