@@ -32,7 +32,7 @@ class FullPagerSnapActivity : BaseActivity() {
         mFullPagerSnapAdapter = FullPagerSnapAdapter()
         mRcList?.setAdapter(mFullPagerSnapAdapter)
         for (i in 0..34) {
-            mFullPagerSnapAdapter!!.addData("item $i")
+            mFullPagerSnapAdapter!!.add("item $i")
         }
         PagerSnapHelper(6).attachToRecyclerView(mRcList)
         mRcList?.addItemDecoration(object : DividerItemDecoration() {

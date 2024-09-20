@@ -16,15 +16,16 @@ import com.easy.example.demo.weather.WeatherActivity
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class DemoIndexActivity() : BaseListActivity() {
+class DemoIndexActivity2() : BaseListActivity() {
     override val adapter: MainAdapter = MainAdapter()
 
 
+
     override fun initData() {
-        adapter.addData(com.easy.example.bean.MainBean("聚合天气", WeatherActivity::class.java))
-        adapter.addData(com.easy.example.bean.MainBean("热点新闻", NewsActivity::class.java))
-        adapter.addData(com.easy.example.bean.MainBean("热门笑话", JokeActivity::class.java))
-        adapter.addData(com.easy.example.bean.MainBean("模拟登录", LoginActivity::class.java))
+        adapter.add(MainBean("聚合天气", WeatherActivity::class.java))
+        adapter.add(MainBean("热点新闻", NewsActivity::class.java))
+        adapter.add(MainBean("热门笑话", JokeActivity::class.java))
+        adapter.add(MainBean("模拟登录", LoginActivity::class.java))
     }
 
 

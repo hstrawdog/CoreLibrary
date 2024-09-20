@@ -24,7 +24,7 @@ retrofitVersion = "2.9.0"
 okhttpVersion = "4.9.3"
 ultraPtrVersion = "1.0.11"
 
-baseRecyclerViewAdapterHelperVersion = "3.0.4"
+baseRecyclerViewAdapterHelperVersion = "4.1.1"
 
 lubanVersion = "1.1.8"
 
@@ -74,7 +74,7 @@ startup_version = "1.1.0"
 photoview_version = "1.4.1"
 subsamplingscaleimageview_version = "3.10.0"
 jsoup_jsoup_version = "1.14.1"
-jleakcanary_version = "2.8.1"
+jleakcanary_version = "2.14"
 idimenscompat_version = "1.0.3"
 unpeek_livedata_version = "7.8.0"
 
@@ -195,7 +195,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson_vers
 ultraPtr = { group = "in.srain.cube", name = "ultra-ptr", version.ref = "ultraPtrVersion" }
 # 上拉加载
 # https://github.com/CymChad/BaseRecyclerViewAdapterHelper
-baseRecyclerViewAdapterHelper = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version.ref = "baseRecyclerViewAdapterHelperVersion" }
+baseRecyclerViewAdapterHelper = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version.ref = "baseRecyclerViewAdapterHelperVersion" }
 
 
 #  网络请求
@@ -297,7 +297,7 @@ runtimeLivedata = { group = "androidx.compose.runtime", name = "runtime-livedata
 runtimeRxjava2 = { group = "androidx.compose.runtime", name = "runtime-rxjava2", version.ref = "runtimeVersion" }
 
 #与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入。
-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose_ui_version" }
+composeUi = { group = "androidx.compose.ui", name = "ui", version.ref = "compose_ui_version" }
 
 
 
@@ -416,7 +416,6 @@ datastore_datastore_rxjava3 = { group = "androidx.datastore", name = "datastore-
 
 
 i_dimens_compat = { group = "com.github.hstrawdog", name = "IDimensCompat", version.ref = "idimenscompat_version" }
-
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

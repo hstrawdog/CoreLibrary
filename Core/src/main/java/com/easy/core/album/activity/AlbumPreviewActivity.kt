@@ -87,7 +87,7 @@ class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(),
         var currPosition = intent.getIntExtra(FunctionKey.KEY_POSITION, 1)
         mPosition = currPosition - 1
         mLocalMediaList = SelectOptions.instance.mFolderLocalMedia
-        mPreviewAdapter.setNewInstance(mLocalMediaList?.toMutableList())
+        mPreviewAdapter.submitList(mLocalMediaList?.toMutableList())
         initSaveBitmap()
 
 

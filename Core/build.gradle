@@ -82,7 +82,9 @@ dependencies {
     // 压缩
     api libs.luban
     // 上拉加载
-    api libs.baseRecyclerViewAdapterHelper
+    api (libs.baseRecyclerViewAdapterHelper){
+        exclude group: 'androidx.recyclerview', module: 'recyclerview'
+    }
 
     // 下拉刷新
     api libs.ultraPtr

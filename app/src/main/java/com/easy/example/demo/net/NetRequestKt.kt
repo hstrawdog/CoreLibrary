@@ -1,4 +1,4 @@
-package com.easy.core.kt
+package com.easy.example.demo.net
 
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -17,10 +17,10 @@ import java.lang.Exception
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-fun BaseViewModel.launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit) {
+    fun<T> BaseViewModel.launch(block: suspend () -> NetResponseBody<T>, error: suspend (Throwable) -> Unit) {
     viewModelScope.launch(Dispatchers.IO) {
         try {
-            block()
+            responseData( block())
         } catch (e: Exception) {
             LogUtils.dInfo("launch: error ${e.printStackTrace()}" )
             error(e)
@@ -28,10 +28,15 @@ fun BaseViewModel.launch(block: suspend () -> Unit, error: suspend (Throwable) -
     }
 }
 
+fun <T>responseData(block: NetResponseBody<T>) {
+
+}
+
+
 fun BaseActivity.launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit) {
     lifecycleScope.launch(Dispatchers.IO) {
         try {
-            block()
+          var  bean=   block()
         } catch (e: Exception) {
             LogUtils.dInfo("launch: error ${e.printStackTrace()}" )
             error(e)

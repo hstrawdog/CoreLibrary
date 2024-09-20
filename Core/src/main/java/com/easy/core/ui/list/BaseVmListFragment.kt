@@ -3,7 +3,7 @@ package com.easy.core.ui.list
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.module.LoadMoreModule
+import com.chad.library.adapter4.loadState.LoadState
 import com.easy.core.R
 import com.easy.core.lifecycle.LiveEventObserver
 import com.easy.core.ui.base.BaseVmFragment
@@ -21,7 +21,10 @@ abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : 
     IBaseListModelView {
 
     override var listView: RecyclerView? = null
-
+    /**
+     *  是否允许加载更多
+     */
+    override var isLoadMore: Boolean = true
     override fun getLayoutId(): Int {
         return R.layout.activity_recycle_view
     }
@@ -36,7 +39,7 @@ abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : 
     override fun initViews() {
         listModel = BaseListModel(this, rootViewImpl)
         LiveEventObserver.bind(viewModel.data, this) { arrayList ->
-            listModel.fillingData(arrayList)
+            listModel.fillingData(arrayList as ArrayList<Nothing>)
         }
         LiveEventObserver.bind(viewModel.requestAdapterError, this) { arrayList ->
             listModel.loadMoreError()
@@ -49,17 +52,21 @@ abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : 
     }
 
     override fun onRefreshBegin() {
-        if (adapter is LoadMoreModule) {
             viewModel.setPageCount(1)
-            adapter.loadMoreModule.loadMoreComplete()
-            viewModel.onLoadMore()
-        }
+        listModel.helper?.leadingLoadState= LoadState.NotLoading(true)
+
+        viewModel.onLoadMore()
     }
 
     override fun onLoadMore() {
         viewModel.onLoadMore()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+
+    }
 }
 
 

@@ -5,7 +5,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.chad.library.adapter.base.module.LoadMoreModule
+import com.chad.library.adapter4.loadState.LoadState
 import com.easy.core.BaseCommonsKey
 import com.easy.core.R
 import com.easy.core.ui.base.BaseDataBindingFragment
@@ -22,7 +22,10 @@ import com.easy.core.ui.base.BaseViewBindingFragment
 abstract class BaseBindingListFragment<T : ViewBinding> : BaseViewBindingFragment<T>(),
     BaseListModel.IBaseListModelView {
 
-
+    /**
+     *  是否允许加载更多
+     */
+    override var isLoadMore: Boolean = true
 
 //    override fun getLayoutId(): Int {
 //        return  R.layout.activity_recycle_view
@@ -57,11 +60,9 @@ abstract class BaseBindingListFragment<T : ViewBinding> : BaseViewBindingFragmen
      *  下拉刷新 开始从第一页 获取数据
      */
     override fun onRefreshBegin() {
-        if (adapter is LoadMoreModule) {
             pageCount = 1
-            adapter.loadMoreModule.loadMoreComplete()
+            listModel?.helper?.leadingLoadState =  LoadState.NotLoading(true)
             onLoadMore()
-        }
     }
 
     /**
@@ -70,6 +71,8 @@ abstract class BaseBindingListFragment<T : ViewBinding> : BaseViewBindingFragmen
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
+
+
     }
 
     /**

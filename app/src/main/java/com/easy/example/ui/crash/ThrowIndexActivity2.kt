@@ -11,11 +11,11 @@ import com.easy.example.bean.MainBean
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class ThrowIndexActivity : BaseListActivity() {
+class ThrowIndexActivity2 : BaseListActivity() {
     override val adapter: MainAdapter = MainAdapter()
 
     override fun initData() {
-        adapter.addData(com.easy.example.bean.MainBean("奔溃后启动", CrashActivity::class.java))
-        adapter.addData(com.easy.example.bean.MainBean("Throw异常测试重启App", ThrowActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("奔溃后启动", CrashActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("Throw异常测试重启App", ThrowActivity::class.java))
     }
 }

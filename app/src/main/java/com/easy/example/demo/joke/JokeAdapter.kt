@@ -1,12 +1,11 @@
-package com.easy.example.demo.joke;
+package com.easy.example.demo.joke
 
-import androidx.annotation.NonNull;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.module.BaseLoadMoreModule;
-import com.chad.library.adapter.base.module.LoadMoreModule;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.easy.example.R;
+import android.content.Context
+import android.view.ViewGroup
+import com.chad.library.adapter4.BaseQuickAdapter
+import com.chad.library.adapter4.QuickAdapterHelper
+import com.chad.library.adapter4.viewholder.QuickViewHolder
+import com.easy.example.R
 
 /**
  * @Author : huangqiqiang
@@ -16,15 +15,16 @@ import com.easy.example.R;
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-public class JokeAdapter extends BaseQuickAdapter<Joke.DataBean, BaseViewHolder> implements LoadMoreModule {
-    public JokeAdapter() {
-        super(R.layout.item_joke);
+class JokeAdapter : BaseQuickAdapter<Joke.DataBean, QuickViewHolder>() {
+
+
+    override fun onCreateViewHolder(context: Context, viewGroup: ViewGroup, i: Int): QuickViewHolder {
+        return QuickViewHolder(R.layout.item_joke, viewGroup)
     }
 
-    @Override
-    protected void convert(@NonNull BaseViewHolder helper, Joke.DataBean item) {
-        helper.setText(R.id.textView19, item.getContent());
-        helper.setText(R.id.textView20, item.getUpdatetime());
-    }
 
+    override fun onBindViewHolder(helper: QuickViewHolder, i: Int, item: Joke.DataBean?) {
+        helper.setText(R.id.textView19, item!!.content)
+        helper.setText(R.id.textView20, item!!.updatetime)
+    }
 }

@@ -161,7 +161,6 @@ class TestDialogActivity : BaseActivity() {
         }
     }
 
-
     open class ViewBuilderA : DialogViewBuilder() {
         override fun initView() {}
         override fun onClick(v: View) {}

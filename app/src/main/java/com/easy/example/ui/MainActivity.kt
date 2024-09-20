@@ -6,7 +6,6 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
-import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
@@ -14,24 +13,23 @@ import com.easy.core.utils.ToastUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
-import com.easy.example.demo.DemoIndexActivity
+import com.easy.example.demo.DemoIndexActivity2
 import com.easy.example.ui.MainActivity.MainViewModel
-import com.easy.example.ui.adaptation.AdaptationIndexActivity
+import com.easy.example.ui.adaptation.AdaptationIndexActivity2
 import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
-import com.easy.example.ui.crash.ThrowIndexActivity
-import com.easy.example.ui.customize.CustomizeIndexActivity
+import com.easy.example.ui.crash.ThrowIndexActivity2
+import com.easy.example.ui.customize.CustomizeIndexActivity2
 import com.easy.example.ui.dialog.TestDialogActivity
-import com.easy.example.ui.file.FileIndexActivity
+import com.easy.example.ui.file.FileIndexActivity2
 import com.easy.example.ui.fragment.FragmentIndexActivity
-import com.easy.example.ui.jetpack.databinding.BindingIndexActivity
+import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
 import com.easy.example.ui.parcelable.ParcelableActivity
-import com.easy.example.ui.recycle.BannerActivity
+import com.easy.example.ui.recycle.LoadMoreActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
-import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity
+import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity2
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 
 /**
  * @Author : huangqiqiang
@@ -49,6 +47,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        return 0
 //    }
 
+    override var isLoadMore: Boolean =false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         LogUtils.dInfo("MainActivity    onCreate1")
         super.onCreate(savedInstanceState)
@@ -63,7 +63,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        }
 
 //        open(BackgroundActivity::class.java)
-        open(TestDialogActivity::class.java)
+        open(LoadMoreActivity::class.java)
+//        open(TestDialogActivity::class.java)
 //        open(BannerActivity::class.java)
         LogUtils.de("111111111111111111111111")
 
@@ -209,24 +210,24 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             super.onCreate(owner)
             LogUtils.dInfo("MainModel onCrete 2")
             val arrayList = mutableListOf<MainBean<*>>()
-            arrayList.add(MainBean("文件相关", FileIndexActivity::class.java))
-            arrayList.add(MainBean("Ui相关", ViewIndexActivity::class.java))
+            arrayList.add(MainBean("文件相关", FileIndexActivity2::class.java))
+            arrayList.add(MainBean("Ui相关", ViewIndexActivity2::class.java))
             arrayList.add(MainBean("Fragment相关", FragmentIndexActivity::class.java))
-            arrayList.add(MainBean("异常相关测试", ThrowIndexActivity::class.java))
+            arrayList.add(MainBean("异常相关测试", ThrowIndexActivity2::class.java))
             arrayList.add(MainBean("启动模式", com.easy.example.ui.launch.mode.SingleInstanceActivity::class.java))
-            arrayList.add(MainBean("转场动画", TransitionsAnimationActivity::class.java))
+            arrayList.add(MainBean("转场动画", TransitionsAnimationActivity2::class.java))
             arrayList.add(MainBean("标题/状态栏设置", ToolBarActivity::class.java))
             arrayList.add(MainBean("相册", AlbumIndexActivity::class.java))
             arrayList.add(MainBean("权限测试", PermissionActivity::class.java))
             arrayList.add(MainBean("Dialog系列", TestDialogActivity::class.java))
             arrayList.add(MainBean("Shape测试", ShapeTestActivity::class.java))
-            arrayList.add(MainBean("自定义系列", CustomizeIndexActivity::class.java))
+            arrayList.add(MainBean("自定义系列", CustomizeIndexActivity2::class.java))
             arrayList.add(MainBean("设备信息", BaseInfoActivity::class.java))
             arrayList.add(MainBean("网络信息", NetInfoActivity::class.java))
-            arrayList.add(MainBean("适配相关", AdaptationIndexActivity::class.java))
-            arrayList.add(MainBean("Binding 相关", BindingIndexActivity::class.java))
+            arrayList.add(MainBean("适配相关", AdaptationIndexActivity2::class.java))
+            arrayList.add(MainBean("Binding 相关", BindingIndexActivity2::class.java))
             arrayList.add(MainBean("Parcelable测试", ParcelableActivity::class.java))
-            arrayList.add(MainBean("demo测试", DemoIndexActivity::class.java))
+            arrayList.add(MainBean("demo测试", DemoIndexActivity2::class.java))
             arrayList.add(MainBean("震动测试", VibrateActivity::class.java))
             arrayList.add(MainBean("Log", LogUtilsActivity::class.java))
             setData(arrayList)

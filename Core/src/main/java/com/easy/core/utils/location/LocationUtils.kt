@@ -1,6 +1,7 @@
 package com.easy.core.utils.location
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -89,6 +90,7 @@ object LocationUtils {
      * @param listener    位置刷新的回调接口
      * @return `true`: 初始化成功<br></br>`false`: 初始化失败
      */
+    @SuppressLint("MissingPermission")
     @JvmStatic
     fun registerLocation(context: Context, minTime: Long, minDistance: Long, listener: OnLocationChangeListener?): Boolean {
         if (listener == null) {
@@ -168,12 +170,12 @@ object LocationUtils {
      * @return [Address]
      */
     @JvmStatic
-    fun getAddress(context: Context?, latitude: Double, longitude: Double): Address? {
+    fun getAddress(context: Context, latitude: Double, longitude: Double): Address? {
         val geocoder = Geocoder(context, Locale.getDefault())
         try {
             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-            if (addresses.size > 0) {
-                return addresses[0]
+            if ((addresses?.size?:0) > 0) {
+                return addresses?.get(0)
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -190,7 +192,7 @@ object LocationUtils {
      * @return 所在国家
      */
     @JvmStatic
-    fun getCountryName(context: Context?, latitude: Double, longitude: Double): String {
+    fun getCountryName(context: Context, latitude: Double, longitude: Double): String {
         val address = getAddress(context, latitude, longitude)
         return if (address == null) "unknown" else address.countryName
     }
@@ -204,7 +206,7 @@ object LocationUtils {
      * @return 所在地
      */
     @JvmStatic
-    fun getLocality(context: Context?, latitude: Double, longitude: Double): String {
+    fun getLocality(context: Context, latitude: Double, longitude: Double): String {
         val address = getAddress(context, latitude, longitude)
         return if (address == null) "unknown" else address.locality
     }
@@ -218,7 +220,7 @@ object LocationUtils {
      * @return 所在街道
      */
     @JvmStatic
-    fun getStreet(context: Context?, latitude: Double, longitude: Double): String {
+    fun getStreet(context: Context, latitude: Double, longitude: Double): String {
         val address = getAddress(context, latitude, longitude)
         return if (address == null) "unknown" else address.getAddressLine(0)
     }

@@ -1,9 +1,10 @@
 package com.easy.example.ui.recycle
 
+import android.content.Context
 import android.view.View
-import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.entity.MultiItemEntity
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import android.view.ViewGroup
+import com.chad.library.adapter4.BaseMultiItemAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.core.recycle.HeaderItemDecoration
 import com.easy.core.recycle.HeaderItemDecoration.StickyHeaderInterface
 import com.easy.core.ui.list.BaseListActivity
@@ -42,64 +43,83 @@ class ListActivity(override val adapter: ListAdapter = ListAdapter()) : BaseList
             }
         }))
 
-        adapter.addData(ListBean(1))
-        adapter.addData(ListBean(1))
-        adapter.addData(ListBean(1))
-        adapter.addData(ListBean(1))
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
-        adapter.addData(ListBean())
+        adapter.add(ListBean(1))
+        adapter.add(ListBean(1))
+        adapter.add(ListBean(1))
+        adapter.add(ListBean(1))
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
+        adapter.add(ListBean())
 
     }
 
-    class ListBean(itemType1: Int = 0) : MultiItemEntity {
-        override var itemType: Int = itemType1
+    class ListBean(itemType1: Int = 0) {
+        var itemType: Int = itemType1
 
     }
 
 
-    class ListAdapter : BaseMultiItemQuickAdapter<ListBean, BaseViewHolder> {
+    class ListAdapter : BaseMultiItemAdapter<ListBean> {
         constructor() {
-            addItemType(0, R.layout.item_main)
-            addItemType(1, R.layout.item_head)
+            addItemType(0, object : OnMultiItemAdapterListener<ListBean, QuickViewHolder> { // 类型 1
+                override fun onCreate(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+                    // 创建 viewholder
+                    return QuickViewHolder(R.layout.item_main, parent)
+                }
+
+                override fun onBind(holder: QuickViewHolder, position: Int, item: ListBean?) {
+                    // 绑定 item 数据
+                }
+            }).addItemType(1, object : OnMultiItemAdapterListener<ListBean, QuickViewHolder> { // 类型 1
+                override fun onCreate(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+                    // 创建 viewholder
+                    return QuickViewHolder(R.layout.item_head, parent)
+                }
+
+                override fun onBind(holder: QuickViewHolder, position: Int, item: ListBean?) {
+                    // 绑定 item 数据
+                }
+            })
+                .onItemViewType { position, list ->
+                    list[position].itemType
+                }
+
+
         }
 
-        override fun convert(holder: BaseViewHolder, item: ListBean) {
-
-        }
 
     }
 

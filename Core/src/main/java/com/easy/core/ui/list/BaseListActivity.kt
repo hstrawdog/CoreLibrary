@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.module.LoadMoreModule
+import com.chad.library.adapter4.loadState.LoadState
 import com.easy.core.BaseCommonsKey
 import com.easy.core.ui.base.BaseActivity
 import com.easy.core.ui.list.BaseListModel.IBaseListModelView
@@ -31,11 +31,18 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
     override var pageCount = 1
 
     /**
+     *  是否允许加载更多
+     */
+    override var isLoadMore: Boolean = true
+
+
+    /**
      *  正常List 默认使用 自带的ListView  如果页面包含其他内容 则使用 LayoutViewId
      */
     override fun getLayoutViewId(): Int {
         return 0
     }
+
     /**
      *  RecycleView Manager
      */
@@ -81,12 +88,11 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
      *  下拉刷新 开始从第一页 获取数据
      */
     override fun onRefreshBegin() {
-        if (adapter is LoadMoreModule) {
 
-            pageCount = 1
-            adapter.loadMoreModule.loadMoreComplete()
-            onLoadMore()
-        }
+        pageCount = 1
+//            adapter.loadMoreModule.loadMoreComplete()
+        listModel?.helper?.leadingLoadState = LoadState.NotLoading(true)
+        onLoadMore()
     }
 
     /**
@@ -101,6 +107,7 @@ abstract class BaseListActivity : BaseActivity(), IBaseListModelView {
      *  加载更多数据
      */
     override fun onLoadMore() {
+
     }
 
 

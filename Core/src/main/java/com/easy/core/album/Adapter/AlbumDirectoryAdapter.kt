@@ -8,16 +8,12 @@
 package com.easy.core.album.Adapter
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter4.BaseSingleItemAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.core.R
-import com.easy.core.album.entity.LocalMedia
 import com.easy.core.album.entity.LocalMediaFolder
 import com.easy.core.album.utils.LoadUtils
 
@@ -29,29 +25,39 @@ import com.easy.core.album.utils.LoadUtils
  * @author: 黄其强
  * @date: 2017-05-05 16:10
 </描述当前版本功能> */
-class AlbumDirectoryAdapter : BaseQuickAdapter<LocalMediaFolder, BaseViewHolder>(R.layout.picture_album_folder_item) {
+class AlbumDirectoryAdapter : BaseSingleItemAdapter<LocalMediaFolder, QuickViewHolder>() {
 
     fun bindFolderData(folders: ArrayList<LocalMediaFolder>) {
-        setNewInstance(folders)
+        submitList(folders)
     }
 
-    override fun convert(holder: BaseViewHolder, folder: LocalMediaFolder) {
-        val name = folder.name
-        val imageNum = folder.imageNum
-        if (folder.isChecked) {
-            holder.getView<TextView>(R.id.tv_img_num).visibility = View.VISIBLE
-            holder.getView<TextView>(R.id.tv_img_num).text = folder.checkedNum.toString() + ""
-        } else {
-            holder.getView<TextView>(R.id.tv_img_num).visibility = View.INVISIBLE
-        }
-        LoadUtils.loadLocalMediaPath(folder.type, folder.firstImageUri, holder.getView(R.id.first_image))
-        holder.getView<TextView>(R.id.image_num).text = "($imageNum)"
-        holder.getView<TextView>(R.id.tv_folder_name).text = name
-        holder.itemView.setOnClickListener {
-            if (onItemClickListener != null) {
-                notifyDataSetChanged()
+
+    override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+        return QuickViewHolder(R.layout.picture_album_folder_item, parent)
+    }
+
+
+    override fun onBindViewHolder(holder: QuickViewHolder, folder: LocalMediaFolder?) {
+
+        folder?.let {
+
+            val name = folder.name
+            val imageNum = folder.imageNum
+            if (folder.isChecked) {
+                holder.getView<TextView>(R.id.tv_img_num).visibility = View.VISIBLE
+                holder.getView<TextView>(R.id.tv_img_num).text = folder.checkedNum.toString() + ""
+            } else {
+                holder.getView<TextView>(R.id.tv_img_num).visibility = View.INVISIBLE
             }
-            onItemClickListener!!.onItemClick(folder.name, folder.images)
+            LoadUtils.loadLocalMediaPath(folder.type, folder.firstImageUri, holder.getView(R.id.first_image))
+            holder.getView<TextView>(R.id.image_num).text = "($imageNum)"
+            holder.getView<TextView>(R.id.tv_folder_name).text = name
+            holder.itemView.setOnClickListener {
+                if (onItemClickListener != null) {
+                    notifyDataSetChanged()
+                }
+                onItemClickListener!!.onItemClick(folder.name, folder.images)
+            }
         }
     }
 
@@ -64,4 +70,6 @@ class AlbumDirectoryAdapter : BaseQuickAdapter<LocalMediaFolder, BaseViewHolder>
     interface OnItemClickListener {
         fun onItemClick(folderName: String?, images: List<com.easy.core.album.entity.LocalMedia?>?)
     }
+
+
 }

@@ -1,11 +1,11 @@
 package com.easy.example.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.chad.library.adapter.base.module.LoadMoreModule
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import android.view.ViewGroup
+import com.chad.library.adapter4.BaseQuickAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.example.R
 import com.easy.example.bean.MainBean
 
@@ -17,17 +17,28 @@ import com.easy.example.bean.MainBean
  * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
-class MainAdapter : BaseQuickAdapter<com.easy.example.bean.MainBean<*>, BaseViewHolder>(R.layout.item_main), LoadMoreModule, OnItemClickListener {
+class MainAdapter : BaseQuickAdapter<MainBean<*>, QuickViewHolder>(),
+    BaseQuickAdapter.OnItemClickListener<MainBean<*>> {
+
     init {
+
         setOnItemClickListener(this)
+
     }
 
-    override fun convert(helper: BaseViewHolder, item: com.easy.example.bean.MainBean<*>) {
-        helper.setText(R.id.tv_title, item.title)
+    override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+
+        return QuickViewHolder(R.layout.item_main,parent)
     }
 
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-        context.startActivity(Intent(context, getItem(position).className))
+    override fun onBindViewHolder(helper: QuickViewHolder, position: Int, item: MainBean<*>?) {
+        helper.setText(R.id.tv_title, item?.title)
     }
+
+    override fun onClick(adapter: BaseQuickAdapter<MainBean<*>, *>, view: View, position: Int) {
+        context.startActivity(Intent(context, getItem(position)?.className))
+    }
+
+
 
 }

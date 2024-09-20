@@ -3,15 +3,13 @@ package com.easy.core.album.Adapter
 import android.content.Context
 import android.graphics.PorterDuff
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter4.BaseQuickAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.core.R
 import com.easy.core.album.annotation.LocalMediaType
 import com.easy.core.album.common.SelectOptions
@@ -28,27 +26,37 @@ import com.easy.core.album.utils.LoadUtils
  * @Email :  qiqiang213@gmail.com
  * @Describe :
  */
-class AlbumDetailAdapter(private val maxSelectNum: Int) :
-    BaseQuickAdapter<LocalMedia, BaseViewHolder>((R.layout.picture_image_grid_item)) {
+class AlbumDetailAdapter(private val maxSelectNum: Int) : BaseQuickAdapter<LocalMedia, QuickViewHolder>() {
     private var selectImages: MutableList<LocalMedia> = ArrayList()
-    private var imageSelectChangedListener: com.easy.core.album.Adapter.AlbumDetailAdapter.OnPhotoSelectChangedListener? = null
+    private var imageSelectChangedListener: OnPhotoSelectChangedListener? =
+        null
+
     fun bindImagesData(images: List<LocalMedia>) {
-        setNewInstance(images.toMutableList())
+        submitList(images.toMutableList())
         selectImages = SelectOptions.instance.selectLocalMedia
     }
 
 
-    override fun convert(baseViewHolder: BaseViewHolder, localMedia: LocalMedia) {
-        localMedia.position = baseViewHolder.position
-        selectImage(baseViewHolder, isSelected(localMedia), false)
-        LoadUtils.loadLocalMediaPath(localMedia.localMediaType, localMedia.uri, baseViewHolder.getView(R.id.iv_picture))
-        if (localMedia.localMediaType == LocalMediaType.VALUE_TYPE_VIDEO) {
-            baseViewHolder.getView<View>(R.id.rl_duration).visibility = View.VISIBLE
-            baseViewHolder.getView<TextView>(R.id.tv_duration).text = "时长: " + formatDuring(localMedia.duration)
-        } else {
-            baseViewHolder.getView<View>(R.id.rl_duration).visibility = View.GONE
+    override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+
+        return QuickViewHolder(R.layout.picture_image_grid_item, parent)
+    }
+
+    override fun onBindViewHolder(baseViewHolder: QuickViewHolder, position: Int, localMedia: LocalMedia?) {
+
+        localMedia?.let {
+            localMedia?.position = baseViewHolder.position
+            selectImage(baseViewHolder, isSelected(localMedia), false)
+            LoadUtils.loadLocalMediaPath(localMedia.localMediaType, localMedia.uri,
+                baseViewHolder.getView(R.id.iv_picture))
+            if (localMedia.localMediaType == LocalMediaType.VALUE_TYPE_VIDEO) {
+                baseViewHolder.getView<View>(R.id.rl_duration).visibility = View.VISIBLE
+                baseViewHolder.getView<TextView>(R.id.tv_duration).text = "时长: " + formatDuring(localMedia.duration)
+            } else {
+                baseViewHolder.getView<View>(R.id.rl_duration).visibility = View.GONE
+            }
+            bindClick(baseViewHolder.position, baseViewHolder, localMedia)
         }
-        bindClick(baseViewHolder.position, baseViewHolder, localMedia)
     }
 
     /**
@@ -58,7 +66,7 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
      * @param contentHolder
      * @param localMedia
      */
-    private fun bindClick(position: Int, contentHolder: BaseViewHolder, localMedia: LocalMedia) {
+    private fun bindClick(position: Int, contentHolder: QuickViewHolder, localMedia: LocalMedia) {
         contentHolder.getView<ImageView>(R.id.check)
             .setOnClickListener {
                 if (!AlbumUtils.isFastDoubleClick(200)) {
@@ -92,7 +100,7 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
      * @param isChecked
      * @param isAnim
      */
-    fun selectImage(holder: BaseViewHolder, isChecked: Boolean, isAnim: Boolean) {
+    fun selectImage(holder: QuickViewHolder, isChecked: Boolean, isAnim: Boolean) {
 
         holder.getView<ImageView>(R.id.check).isSelected = isChecked
         if (isChecked) {
@@ -115,10 +123,11 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
      * @param contentHolder
      * @param image
      */
-    private fun changeCheckboxState(contentHolder: BaseViewHolder, image: LocalMedia) {
+    private fun changeCheckboxState(contentHolder: QuickViewHolder, image: LocalMedia) {
         val isChecked = contentHolder.getView<ImageView>(R.id.check).isSelected
         if (selectImages.size >= maxSelectNum && !isChecked) {
-            Toast.makeText(context, context.getString(R.string.picture_message_max_num, maxSelectNum.toString() + ""), Toast.LENGTH_LONG)
+            Toast.makeText(context, context.getString(R.string.picture_message_max_num, maxSelectNum.toString() + ""),
+                Toast.LENGTH_LONG)
                 .show()
             return
         }
@@ -172,4 +181,6 @@ class AlbumDetailAdapter(private val maxSelectNum: Int) :
             return "$hours:$minutes $seconds"
         }
     }
+
+
 }

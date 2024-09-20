@@ -1,13 +1,11 @@
 package com.easy.example.ui.recycle
 
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.easy.core.ui.base.BaseActivity
+
 import com.easy.core.ui.list.BaseBindingListActivity
-import com.easy.example.R
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.databinding.ActivityBindingRecycleBinding
-import com.easy.example.ui.file.FileIndexActivity
+import com.easy.example.ui.file.FileIndexActivity2
 
 /**
  * @Author : huangqiqiang
@@ -24,21 +22,21 @@ class BindingRecycleActivity : BaseBindingListActivity<ActivityBindingRecycleBin
     override fun initData() {
 
 
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
-        adapter.addData(MainBean("文件相关", FileIndexActivity::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
+        adapter.add(MainBean("文件相关", FileIndexActivity2::class.java))
 
     }
 }

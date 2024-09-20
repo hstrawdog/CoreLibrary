@@ -1,11 +1,11 @@
-package com.easy.example.demo.news;
+package com.easy.example.demo.news
 
-import androidx.annotation.NonNull;
+import android.content.Context
+import android.view.ViewGroup
+import com.chad.library.adapter4.BaseQuickAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
+import com.easy.example.R
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.module.LoadMoreModule;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.easy.example.R;
 
 /**
  * @Author : huangqiqiang
@@ -15,13 +15,14 @@ import com.easy.example.R;
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-public class NewsAdapter extends BaseQuickAdapter<News.DataBean, BaseViewHolder> implements LoadMoreModule {
-    public NewsAdapter() {
-        super(R.layout.item_news);
+class NewsAdapter : BaseQuickAdapter<News.DataBean, QuickViewHolder>() {
+
+    override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: News.DataBean?) {
+        holder.setText(R.id.textView18, item?.title)
+
     }
 
-    @Override
-    protected void convert(@NonNull BaseViewHolder helper, News.DataBean item) {
-        helper.setText(R.id.textView18, item.getTitle());
+    override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+        return QuickViewHolder(R.layout.item_news, parent)
     }
 }

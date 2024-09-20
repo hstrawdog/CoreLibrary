@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import com.easy.core.ui.list.BaseListFragment
 import com.easy.example.R
 import com.easy.example.adapter.MainAdapter
-import com.easy.example.bean.MainBean
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.view.page.IFragmentActivityBuilder
 import kotlin.collections.ArrayList
@@ -83,7 +82,7 @@ class MainFragment(override val adapter: MainAdapter = MainAdapter()) : BaseList
         list.add(com.easy.example.bean.MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
         list.add(com.easy.example.bean.MainBean("ItoolBar 控制 ", ToolBarActivity::class.java))
         list.add(com.easy.example.bean.MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
-        listModel.fillingData(list as ArrayList<*>)
+        listModel.fillingData(list as   ArrayList<Nothing> )
     }
 
 

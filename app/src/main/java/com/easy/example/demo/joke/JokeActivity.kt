@@ -24,7 +24,7 @@ class JokeActivity(override val adapter: com.easy.example.demo.joke.JokeAdapter 
 //        return  0
 //    }
     override fun initData() {
-        adapter.loadMoreModule.setOnLoadMoreListener(this)
+//        adapter.loadMoreModule.setOnLoadMoreListener(this)
     }
 
 

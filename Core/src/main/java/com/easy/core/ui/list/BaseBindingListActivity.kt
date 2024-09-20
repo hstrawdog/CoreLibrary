@@ -5,6 +5,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.chad.library.adapter4.loadState.LoadState
 import com.easy.core.BaseCommonsKey
 import com.easy.core.R
 import com.easy.core.ui.base.BaseDataBindingActivity
@@ -31,6 +32,10 @@ abstract class BaseBindingListActivity<T : ViewBinding> : BaseViewBindingActivit
      */
     override var pageCount = 1
     override var pageSize = BaseCommonsKey.PAGE_SIZE
+    /**
+     *  是否允许加载更多
+     */
+    override var isLoadMore: Boolean = true
 
     override var listView: RecyclerView? = null
     override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
@@ -58,7 +63,7 @@ abstract class BaseBindingListActivity<T : ViewBinding> : BaseViewBindingActivit
      */
     override fun onRefreshBegin() {
         pageCount = 1
-        adapter?.loadMoreModule?.loadMoreComplete()
+        listModel.helper?.leadingLoadState= LoadState.NotLoading(true)
         onLoadMore()
     }
 
@@ -68,6 +73,7 @@ abstract class BaseBindingListActivity<T : ViewBinding> : BaseViewBindingActivit
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
+
     }
 
     /**

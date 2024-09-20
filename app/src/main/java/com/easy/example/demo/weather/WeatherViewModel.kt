@@ -7,7 +7,7 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.easy.core.CoreConfig
-import com.easy.core.kt.launch
+import com.easy.example.demo.net.launch
 import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseViewModel
 import com.easy.core.utils.log.LogUtils
@@ -89,9 +89,6 @@ class WeatherViewModel : BaseViewModel() {
     private fun getWeather(city: String) {
         launch({
             HttpManager.getWeather2(city.substring(0, city.length - 1))
-                .let {
-                    mWeather.postValue(it.result)
-                }
         }, {
 
         })

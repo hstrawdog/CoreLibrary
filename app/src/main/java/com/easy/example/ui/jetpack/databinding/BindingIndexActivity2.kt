@@ -12,12 +12,12 @@ import com.easy.example.ui.jetpack.livedata.LiveDateActivity
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class BindingIndexActivity : BaseListActivity() {
+class BindingIndexActivity2 : BaseListActivity() {
     override val adapter: MainAdapter = MainAdapter()
 
     override fun initData() {
-        adapter.addData(com.easy.example.bean.MainBean("Fragment 测试 viewModel", FragmentTestActivity::class.java))
-        adapter.addData(com.easy.example.bean.MainBean("DateBinding测试", LiveDateActivity::class.java))
-        adapter.addData(com.easy.example.bean.MainBean("dataBinding测试", DataBindingActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("Fragment 测试 viewModel", FragmentTestActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("DateBinding测试", LiveDateActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("dataBinding测试", DataBindingActivity::class.java))
     }
 }

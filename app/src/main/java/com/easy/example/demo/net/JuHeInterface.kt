@@ -1,7 +1,5 @@
 package com.easy.example.demo.net
 
-import com.easy.example.demo.joke.Joke
-import com.easy.example.demo.news.News
 import com.easy.example.demo.weather.Weather
 import retrofit2.Call
 import retrofit2.http.GET
@@ -17,10 +15,10 @@ import retrofit2.http.Query
  */
 interface JuHeInterface {
     @GET("simpleWeather/query")
-    fun getWeather(@Query(value = "city", encoded = true) username: String?, @Query("key") password: String?): Call<NetResponseBody<com.easy.example.demo.weather.Weather>>
+    fun getWeather(@Query(value = "city", encoded = true) username: String?, @Query("key") password: String?): Call<NetResponseBody<Weather>>
 
     @GET("simpleWeather/query")
-    suspend fun getWeather2(@Query(value = "city", encoded = true) username: String?, @Query("key") password: String?): NetResponseBody<com.easy.example.demo.weather.Weather>
+    suspend fun getWeather2(@Query(value = "city", encoded = true) username: String?, @Query("key") password: String?): NetResponseBody<Weather>
 
     @GET("toutiao/index")
     fun getNews(@Query("type") s: String?, @Query("key") key: String): Call<NetResponseBody<com.easy.example.demo.news.News>>

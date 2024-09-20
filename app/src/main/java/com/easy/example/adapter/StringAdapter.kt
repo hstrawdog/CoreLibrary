@@ -1,11 +1,10 @@
 package com.easy.example.adapter
 
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.easy.core.utils.log.LogUtils
+import android.content.Context
+import android.view.ViewGroup
+import com.chad.library.adapter4.BaseQuickAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.example.R
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 
 /**
  * @Author : huangqiqiang
@@ -15,9 +14,16 @@ import kotlinx.coroutines.runBlocking
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class StringAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_main) {
-    override fun convert(helper: BaseViewHolder, item: String?) {
+class StringAdapter : BaseQuickAdapter<String, QuickViewHolder>() {
+
+
+    override fun onBindViewHolder(helper: QuickViewHolder, position: Int, item: String?) {
         helper.setText(R.id.tv_title, item)
+
+    }
+
+    override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+        return QuickViewHolder(R.layout.item_main, parent)
     }
 
 

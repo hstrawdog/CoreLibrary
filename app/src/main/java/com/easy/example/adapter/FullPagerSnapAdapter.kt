@@ -1,8 +1,10 @@
 package com.easy.example.adapter
 
+import android.content.Context
+import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter4.BaseQuickAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.example.R
 
 /**
@@ -13,11 +15,19 @@ import com.easy.example.R
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class FullPagerSnapAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.item_full_pager_snap) {
+class FullPagerSnapAdapter : BaseQuickAdapter<String, QuickViewHolder>() {
     private var mScreenWidth = 0
     var itemCountPerRowOrColumn = 3
     var mIntegers: MutableList<Int>
-    override fun convert(helper: BaseViewHolder, item: String?) {
+
+    init {
+        mIntegers = ArrayList()
+        mIntegers.add(R.color.colorPrimaryDark)
+        mIntegers.add(R.color.colorPrimary)
+        mIntegers.add(R.color.colorAccent)
+    }
+
+    override fun onBindViewHolder(helper: QuickViewHolder, position: Int, item: String?) {
         mScreenWidth = context.resources.displayMetrics.widthPixels
         val layoutParams = helper.itemView.layoutParams as GridLayoutManager.LayoutParams
         layoutParams.width = mScreenWidth / itemCountPerRowOrColumn
@@ -27,10 +37,8 @@ class FullPagerSnapAdapter : BaseQuickAdapter<String?, BaseViewHolder>(R.layout.
         helper.setText(R.id.tv_item, item)
     }
 
-    init {
-        mIntegers = ArrayList()
-        mIntegers.add(R.color.colorPrimaryDark)
-        mIntegers.add(R.color.colorPrimary)
-        mIntegers.add(R.color.colorAccent)
+
+    override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+        return QuickViewHolder(R.layout.item_full_pager_snap, parent)
     }
 }

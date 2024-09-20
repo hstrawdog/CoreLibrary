@@ -11,13 +11,13 @@ import com.easy.example.bean.MainBean
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class FileIndexActivity : BaseListActivity() {
+class FileIndexActivity2 : BaseListActivity() {
     override val adapter: MainAdapter = MainAdapter()
 
     override fun initData() {
-        adapter.addData(MainBean("图片保存", SaveBitmapActivity::class.java))
-        adapter.addData(MainBean("文件下载测试", DownLoadActivity::class.java))
-        adapter.addData(MainBean("文件路径信息", FilePathActivity::class.java))
+        adapter.add(MainBean("图片保存", SaveBitmapActivity::class.java))
+        adapter.add(MainBean("文件下载测试", DownLoadActivity::class.java))
+        adapter.add(MainBean("文件路径信息", FilePathActivity::class.java))
 
     }
 }

@@ -11,8 +11,8 @@ import com.easy.example.adapter.MainAdapter
  * @Email :  qiqiang213@gmail.com
  * @Describe :
  */
-class EmptyListActivity(override val adapter: MainAdapter = MainAdapter()) : BaseListActivity() {
-
+class EmptyListActivity : BaseListActivity() {
+    override val adapter: MainAdapter = MainAdapter()
     override fun initData() {
         listModel.fillingData(ArrayList<String>() as ArrayList<Nothing>)
     }

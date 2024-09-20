@@ -3,8 +3,7 @@ package com.easy.example.demo.news
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemClickListener
+import com.chad.library.adapter4.BaseQuickAdapter
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.example.R
 import com.easy.example.databinding.ActivityNewsBinding
@@ -19,7 +18,7 @@ import com.easy.example.ui.web.WebActivity
  * @Describe :
  */
 class NewsActivity(override val adapter: NewsAdapter = NewsAdapter()) :
-    BaseVmListActivity<NewsViewModel, ActivityNewsBinding>(), OnItemClickListener {
+    BaseVmListActivity<NewsViewModel, ActivityNewsBinding>(), BaseQuickAdapter.OnItemClickListener<News.DataBean> {
     companion object {
         fun open(context: Activity) {
             val starter = Intent(context, NewsActivity::class.java)
@@ -32,16 +31,13 @@ class NewsActivity(override val adapter: NewsAdapter = NewsAdapter()) :
     }
 
 
-    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-        WebActivity.open(activity!!, this.adapter!!.getItem(position)!!.url, this.adapter!!.getItem(position)!!.title)
-    }
-
-//    override fun bindingViewModelId(): Int {
-//        return 0
-//    }
 
 
     override fun initData() {
         adapter.setOnItemClickListener(this)
+    }
+
+    override fun onClick(adapter: BaseQuickAdapter<News.DataBean, *>, view: View, position: Int) {
+        WebActivity.open(activity!!, this.adapter!!.getItem(position)!!.url, this.adapter!!.getItem(position)!!.title)
     }
 }

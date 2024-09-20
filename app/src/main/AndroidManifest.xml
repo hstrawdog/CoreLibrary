@@ -221,7 +221,7 @@
             android:label="FlowActivity" />
 
         <activity
-            android:name=".ui.ViewIndexActivity"
+            android:name=".ui.ViewIndexActivity2"
             android:label="View  相关" />
 
         <activity
@@ -235,10 +235,10 @@
             android:name=".ui.fragment.ViewPager2FragmentLiveActivity"
             android:label="Fragment 生命周期" />
         <activity
-            android:name=".ui.crash.ThrowIndexActivity"
+            android:name=".ui.crash.ThrowIndexActivity2"
             android:label="异常相关" />
         <activity
-            android:name=".ui.jetpack.databinding.BindingIndexActivity"
+            android:name=".ui.jetpack.databinding.BindingIndexActivity2"
             android:label="Binding 相关" />
 
         <activity
@@ -249,7 +249,7 @@
             android:label="FragmentIndex" />
 
         <activity
-            android:name=".ui.file.FileIndexActivity"
+            android:name=".ui.file.FileIndexActivity2"
             android:label="文件相关" />
         <activity
             android:name=".ui.customize.ComparedActivity"
@@ -293,7 +293,7 @@
             android:name=".ui.jetpack.di.hilt.HiltActivity"
             android:label="hilt 测试" />
         <activity
-            android:name=".demo.DemoIndexActivity"
+            android:name=".demo.DemoIndexActivity2"
             android:label="Demo首页" />
         <activity
             android:name=".demo.joke.JokeActivity"
@@ -373,7 +373,7 @@
             android:name=".ui.animate.ViewAnimateActivity"
             android:label="隐藏动画" />
         <activity
-            android:name=".ui.animate.AnimateIndexActivity"
+            android:name=".ui.animate.AnimateIndexActivity2"
             android:label="View动画" />
         <activity
             android:name=".ui.customize.TemplatesImageActivity"
@@ -397,7 +397,7 @@
             android:name=".ui.customize.WidgetActivity"
             android:label="小部件测试" />
         <activity
-            android:name=".ui.transitions.animation.TransitionsAnimationActivity"
+            android:name=".ui.transitions.animation.TransitionsAnimationActivity2"
             android:label="转场动画" />
         <activity
             android:name=".ui.launch.mode.SingleTaskActivity"
@@ -455,7 +455,7 @@
             android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardScrollActivity"
             android:label="键盘滑动" />
         <activity
-            android:name=".ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity"
+            android:name=".ui.soft.hide.keyboard.SoftHidKeyboardIndexActivity2"
             android:label="键盘测试" />
         <activity
             android:name=".ui.soft.hide.keyboard.SoftHideKeyBoardActivity"
@@ -506,11 +506,11 @@
             android:name=".ui.customize.BezierActivity"
             android:label="贝塞尔曲线" />
         <activity
-            android:name=".ui.adaptation.AdaptationIndexActivity"
+            android:name=".ui.adaptation.AdaptationIndexActivity2"
             android:label="适配相关" />
 
         <activity
-            android:name=".ui.customize.CustomizeIndexActivity"
+            android:name=".ui.customize.CustomizeIndexActivity2"
             android:label="自定义View" />
         <activity
             android:name=".ui.customize.SwipeMenuLayoutActivity"

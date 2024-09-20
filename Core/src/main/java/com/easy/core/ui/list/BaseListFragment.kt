@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.module.LoadMoreModule
+import com.chad.library.adapter4.loadState.LoadState
 import com.easy.core.BaseCommonsKey
 import com.easy.core.ui.base.BaseFragment
 import com.easy.core.ui.list.BaseListModel.IBaseListModelView
@@ -20,8 +20,10 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
 abstract class BaseListFragment : BaseFragment(), IBaseListModelView {
 
     // Fragment 的用法与 Activity保持一致  注释
-
-
+    /**
+     *  是否允许加载更多
+     */
+    override var isLoadMore: Boolean = true
     override var listView: RecyclerView? = null
 
     override var pageSize = BaseCommonsKey.PAGE_SIZE
@@ -29,8 +31,9 @@ abstract class BaseListFragment : BaseFragment(), IBaseListModelView {
     override var pageCount = 1
 
     override fun getLayoutViewId(): Int {
-        return  0
+        return 0
     }
+
     override var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(activity)
 
     override lateinit var listModel: BaseListModel
@@ -45,22 +48,21 @@ abstract class BaseListFragment : BaseFragment(), IBaseListModelView {
         }
     }
 
+
     override fun initView() {
         listModel = BaseListModel(this, rootViewImpl)
         initData()
     }
+
 
     override fun addPageCount() {
         pageCount += 1
     }
 
     override fun onRefreshBegin() {
-        if (adapter is LoadMoreModule) {
-
-            pageCount = 1
-            adapter.loadMoreModule.loadMoreComplete()
-            onLoadMore()
-        }
+        pageCount = 1
+        listModel.helper?.trailingLoadState = LoadState.NotLoading(true)
+        onLoadMore()
     }
 
     override fun onLoadMore() {

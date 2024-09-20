@@ -15,8 +15,6 @@ import com.easy.example.adapter.IFragmentAdapter
  */
 class IFragmentActivityBuilder : BaseActivity() {
     lateinit var mVpPage: ViewPager2
-
-
     override fun getLayoutViewId(): Int {
         return R.layout.activity_ifragment
 

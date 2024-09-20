@@ -43,13 +43,12 @@ VmFragmentActivity : BaseViewBindingActivity<ActivityVmFragmentBinding>() {
         override val adapter: MainAdapter = MainAdapter()
         override fun initData() {
 
-            adapter.loadMoreModule.isEnableLoadMore = false;
-            adapter.loadMoreModule.setOnLoadMoreListener(this)
+
 
             var tv = TextView(activity)
             tv.setText("1111111111111111111111111111111111111111111")
 
-            adapter.addHeaderView(tv)
+//            adapter.addHeaderView(tv)
 
 
         }
