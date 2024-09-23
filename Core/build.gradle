@@ -1,11 +1,9 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'maven-publish'
-//    id 'kotlin-android'
 }
-//apply from: rootProject.file("gradle/maven-publish.gradle")
 
 
 android {
@@ -18,10 +16,9 @@ android {
         //开启 Compose 支持
 //        compose true
     }
-    compileSdk 31
+    compileSdk 33
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 31
 
     }
     buildTypes {
@@ -54,6 +51,7 @@ dependencies {
     // 屏幕适配
 //    api project(':DimensCompat')
     api libs.coilKt
+
     api libs.i.dimens.compat
 
     // Appcompat   包含 core

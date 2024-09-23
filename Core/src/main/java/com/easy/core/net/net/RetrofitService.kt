@@ -1,7 +1,6 @@
 package com.easy.core.net.net
 
 import com.google.gson.GsonBuilder
-import com.easy.core.BuildConfig
 import com.easy.core.CoreConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

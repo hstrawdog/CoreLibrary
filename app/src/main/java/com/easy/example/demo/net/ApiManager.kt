@@ -1,12 +1,6 @@
 package com.easy.example.demo.net
 
 import com.easy.core.net.net.RetrofitService
-import com.easy.example.BuildConfig
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 /**
  * @Author : huangqiqiang

@@ -4,11 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Camera
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Rect
-import androidx.compose.ui.graphics.Paint
 import com.easy.core.glide.ImageLoadUtils
 import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.ResourcesUtils

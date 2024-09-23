@@ -24,6 +24,7 @@ import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.FileIndexActivity2
 import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
+import com.easy.example.ui.launch.mode.SingleInstanceActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
 import com.easy.example.ui.recycle.LoadMoreActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
@@ -214,7 +215,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
             arrayList.add(MainBean("Ui相关", ViewIndexActivity2::class.java))
             arrayList.add(MainBean("Fragment相关", FragmentIndexActivity::class.java))
             arrayList.add(MainBean("异常相关测试", ThrowIndexActivity2::class.java))
-            arrayList.add(MainBean("启动模式", com.easy.example.ui.launch.mode.SingleInstanceActivity::class.java))
+            arrayList.add(MainBean("启动模式", SingleInstanceActivity::class.java))
             arrayList.add(MainBean("转场动画", TransitionsAnimationActivity2::class.java))
             arrayList.add(MainBean("标题/状态栏设置", ToolBarActivity::class.java))
             arrayList.add(MainBean("相册", AlbumIndexActivity::class.java))
