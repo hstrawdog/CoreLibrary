@@ -9,8 +9,6 @@ plugins {
 }
 
 
-
-
 android {
     dataBinding {
         enabled = true
@@ -18,7 +16,6 @@ android {
     buildFeatures {
         viewBinding true
         dataBinding true
-        compose true
     }
 
     kotlinOptions {
@@ -26,7 +23,6 @@ android {
     }
 
     compileSdk 33
-    buildToolsVersion "31.0.0"
     defaultConfig {
         applicationId "com.easy.core"
         minSdkVersion 23
