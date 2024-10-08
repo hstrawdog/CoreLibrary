@@ -1,5 +1,4 @@
 plugins {
-    id 'org.jetbrains.kotlin.plugin.compose'
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
@@ -103,16 +102,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':Core')
-//    implementation project(':WeChat')
-//    implementation project(':ALiBaBa')
-//    implementation project(':Album')
-//    implementation ('com.github.hstrawdog:Album:1.0.3'){
-//        exclude group: 'com.easy', module: 'core'
-//    }
 
-//    implementation 'com.github.hstrawdog.CoreLibrary:ALiBaBa:1.3.14'
-//    implementation 'com.github.hstrawdog.CoreLibrary:Album:1.3.14'
-//    implementation 'com.github.hstrawdog.CoreLibrary:WeChat:1.3.14'
 
     implementation "androidx.room:room-runtime:2.4.0-alpha03"
     api libs.constraintLayout
@@ -124,8 +114,6 @@ dependencies {
     // Hilt dependencies
     implementation libs.daggerRuntime
 
-//    implementation Hilt.compiler
-//    implementation Hilt.viewModule
     kapt libs.daggerCompiler
     kapt libs.hiltCompiler
 
@@ -149,27 +137,27 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
-//    // Compose ui 相关的基础支持
-//    implementation 'androidx.compose.ui:ui:1.0.5'
-//    // Compose ui 预览 支持预览，类似 XML 的预览模式，并支持 点击、滑动等 XML 不支持的交互操作
-//    implementation 'androidx.compose.ui:ui-tooling:1.0.5'
-//    // Compose 基于 ui 层封装的更实用的组件库比如 Scroll、Box 等
-//    implementation 'androidx.compose.foundation:foundation:1.0.5'
-//    // Compose Material Design
-//    implementation 'androidx.compose.material:material:1.0.5'
-//    // Compose Material design icons
-//    implementation 'androidx.compose.material:material-icons-core:1.0.5'
-//    implementation 'androidx.compose.material:material-icons-extended:1.0.5'
-//    // 将 Activity 支持 Compose
-//    implementation 'androidx.activity:activity-compose:1.3.1'
-//    // Compose ViewModels 存储数据
-//    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
-//    // Compose 其他集成
-//    implementation 'androidx.compose.runtime:runtime-livedata:1.0.5'
-//    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.5'
-//
-//    // Compose UI Tests
-//    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
+    // Compose ui 相关的基础支持
+    implementation 'androidx.compose.ui:ui:1.0.5'
+    // Compose ui 预览 支持预览，类似 XML 的预览模式，并支持 点击、滑动等 XML 不支持的交互操作
+    implementation 'androidx.compose.ui:ui-tooling:1.0.5'
+    // Compose 基于 ui 层封装的更实用的组件库比如 Scroll、Box 等
+    implementation 'androidx.compose.foundation:foundation:1.0.5'
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.0.5'
+    // Compose Material design icons
+    implementation 'androidx.compose.material:material-icons-core:1.0.5'
+    implementation 'androidx.compose.material:material-icons-extended:1.0.5'
+    // 将 Activity 支持 Compose
+    implementation 'androidx.activity:activity-compose:1.3.1'
+    // Compose ViewModels 存储数据
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
+    // Compose 其他集成
+    implementation 'androidx.compose.runtime:runtime-livedata:1.0.5'
+    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.5'
+
+    // Compose UI Tests
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
 //
 //    // 包重复
     implementation group: 'com.google.guava', name: 'guava', version: '27.0.1-android'

@@ -1,10 +1,8 @@
-package com.easy.example.ui.launch.mode;
+package com.easy.example.ui.launch.mode
 
-import android.view.View;
-
-import com.easy.core.ui.base.BaseActivity;
-import com.easy.example.R;
-
+import android.view.View
+import com.easy.core.ui.base.BaseActivity
+import com.easy.example.R
 
 /**
  * @Author : huangqiqiang
@@ -14,48 +12,31 @@ import com.easy.example.R;
  * @Email : qiqiang213@gmail.com
  * @Describe : 启动模式
  */
-public class LaunchActivity extends BaseActivity {
-
-    @Override
-    public int getLayoutViewId() {
-        return R.layout.activity_launch_mode_a;
+open class LaunchActivity : BaseActivity() {
+    override fun getLayoutViewId(): Int {
+        return R.layout.activity_launch_mode_a
     }
 
-    @Override
-    public void initView() {
-        findViewById(R.id.button20).setOnClickListener(this::onViewClicked);
-        findViewById(R.id.button21).setOnClickListener(this::onViewClicked);
-        findViewById(R.id.button22).setOnClickListener(this::onViewClicked);
-        findViewById(R.id.button23).setOnClickListener(this::onViewClicked);
-        findViewById(R.id.button24).setOnClickListener(this::onViewClicked);
-        findViewById(R.id.button26).setOnClickListener(this::onViewClicked);
-        findViewById(R.id.button27).setOnClickListener(this::onViewClicked);
+    override fun initView() {
+        findViewById<View>(R.id.button20).setOnClickListener { view: View -> this.onViewClicked(view) }
+        findViewById<View>(R.id.button21).setOnClickListener { view: View -> this.onViewClicked(view) }
+        findViewById<View>(R.id.button22).setOnClickListener { view: View -> this.onViewClicked(view) }
+        findViewById<View>(R.id.button23).setOnClickListener { view: View -> this.onViewClicked(view) }
+        findViewById<View>(R.id.button24).setOnClickListener { view: View -> this.onViewClicked(view) }
+        findViewById<View>(R.id.button26).setOnClickListener { view: View -> this.onViewClicked(view) }
+        findViewById<View>(R.id.button27).setOnClickListener { view: View -> this.onViewClicked(view) }
     }
 
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.button20:
-                LaunchModeAActivity.open(this);
-                break;
-            case R.id.button21:
-                LaunchModeBActivity.open(this);
-                break;
-            case R.id.button22:
-                LaunchModeCActivity.open(this);
-                break;
-            case R.id.button23:
-                LaunchModeDActivity.open(this);
-                break;
-            case R.id.button24:
-                SingleInstanceActivity.open(this);
-                break;
-            case R.id.button26:
-                SingleTaskActivity.open(this);
-                break;
-            case R.id.button27:
-                SingleTopActivity.open(this);
-                break;
-            default:
+    fun onViewClicked(view: View) {
+        when (view.id) {
+            R.id.button20 -> LaunchModeAActivity.open(this)
+            R.id.button21 -> LaunchModeBActivity.open(this)
+            R.id.button22 -> LaunchModeCActivity.open(this)
+            R.id.button23 -> LaunchModeDActivity.open(this)
+            R.id.button24 -> SingleInstanceActivity.open(this)
+            R.id.button26 -> SingleTaskActivity.open(this)
+            R.id.button27 -> SingleTopActivity.open(this)
+            else -> {}
         }
     }
 }
