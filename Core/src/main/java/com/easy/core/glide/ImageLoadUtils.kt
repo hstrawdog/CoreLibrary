@@ -51,7 +51,7 @@ object ImageLoadUtils {
      * @return  RequestOptions
      */
     @JvmStatic
-    fun getRequestOptionRound(px: Int = ResourcesUtils.getDimen(R.dimen.x10)
+    fun getRequestOptionRound(px: Int = ResourcesUtils.getDimen(com.hqq.dimenscompat.R.dimen.x10)
         .toInt(), resourceId: Int = CoreConfig.get().defImg): RequestOptions {
         return getRequestOption(resourceId).transform(GlideRoundTransform(px))
     }

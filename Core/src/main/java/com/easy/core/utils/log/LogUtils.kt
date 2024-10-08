@@ -2,7 +2,6 @@ package com.easy.core.utils.log
 
 import android.content.Context
 import android.util.Log
-import com.easy.core.BuildConfig
 import com.easy.core.CoreConfig
 import com.easy.core.utils.TimeUtils
 import com.easy.core.utils.file.FileUtils
@@ -32,7 +31,7 @@ object LogUtils {
     /**
      * Log 输出标签
      */
-    var TAG = BuildConfig.LIBRARY_PACKAGE_NAME
+    var TAG ="com.easy.core"
 
     @JvmStatic
     fun v(any: Any?) {

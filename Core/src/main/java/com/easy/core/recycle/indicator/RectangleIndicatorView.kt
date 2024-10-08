@@ -2,13 +2,10 @@ package com.easy.core.recycle.indicator
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
-import com.easy.core.BuildConfig
 import com.easy.core.R
 import com.easy.core.utils.ResourcesUtils
-import com.easy.core.utils.log.LogUtils
 
 /**
  * @Author : huangqiqiang
@@ -59,11 +56,6 @@ class RectangleIndicatorView : IndicatorView {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        if (BuildConfig.DEBUG) {
-            canvas.drawColor(ResourcesUtils.getColor(R.color.yellow))
-            mPaintFill.setColor(ResourcesUtils.getColor(R.color.red))
-            mPaintPageFill.setColor(ResourcesUtils.getColor(R.color.blue))
-        }
 
         var height = (height - paintHeight) / 2
         for (i in 0 until mColumn) {

@@ -1,7 +1,6 @@
 package com.easy.core.toolbar
 
 import android.app.Activity
-import android.graphics.Color
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -49,6 +48,7 @@ class DefToolBar : BaseToolBar() {
         (toolbar.findViewById<View>(R.id.tv_bar_title) as TextView).setTextColor(
             ContextCompat.getColor(toolbar.context, mDefTitleColor)
         )
+        R.string.key_url
         return toolbar
     }
 

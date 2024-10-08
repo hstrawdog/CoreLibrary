@@ -42,7 +42,5 @@ abstract class BaseService : Service(), LifecycleOwner {
         super.onDestroy()
     }
 
-    override fun getLifecycle(): Lifecycle {
-        return mLifecycleRegistry
-    }
+
 }
