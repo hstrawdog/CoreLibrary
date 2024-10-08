@@ -20,4 +20,10 @@
         <attr name="rpl_current_progress" format="integer" />
 
     </declare-styleable>
+
+    <declare-styleable name="MyCustomView">
+        <attr name="customColor" format="color" />
+        <attr name="customSize" format="dimension" />
+    </declare-styleable>
+
 </resources>

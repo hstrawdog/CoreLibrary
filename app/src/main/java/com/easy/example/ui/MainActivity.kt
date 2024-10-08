@@ -19,6 +19,7 @@ import com.easy.example.ui.adaptation.AdaptationIndexActivity2
 import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.crash.ThrowIndexActivity2
+import com.easy.example.ui.customize.CustomRadioActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity2
 import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.FileIndexActivity2
@@ -62,8 +63,10 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            }
 //        }
 
+        open(CustomRadioActivity::class.java)
+
 //        open(BackgroundActivity::class.java)
-        open(LoadMoreActivity::class.java)
+//        open(LoadMoreActivity::class.java)
 //        open(TestDialogActivity::class.java)
 //        open(BannerActivity::class.java)
         LogUtils.de("111111111111111111111111")

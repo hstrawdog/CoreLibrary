@@ -107,6 +107,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <activity android:name=".ui.customize.CustomRadioActivity"/>
+
 
         <activity android:name=".ui.BackgroundActivity" android:label="背景"/>
 
