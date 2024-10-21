@@ -15,6 +15,7 @@ import com.easy.core.ui.base.IActivityRootView
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
+import com.kunminx.architecture.domain.message.MutableResult
 
 /**
  * @Author : huangqiqiang
@@ -32,7 +33,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     /**
      *  回调
      */
-    var activityResult = SingleLiveEvent<ActivityResult>()
+    var activityResult = MutableResult<ActivityResult>()
 
     /**
      *  页面跳转

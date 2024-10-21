@@ -14,6 +14,7 @@ import com.easy.core.ui.base.IFragmentRootView
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
+import com.kunminx.architecture.domain.message.MutableResult
 
 interface OnFragmentVisibilityChangedListener {
     fun onFragmentVisibilityChanged(visible: Boolean)
@@ -33,7 +34,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      *   MutableLiveData 去传递结果
      */
-    var activityResult = SingleLiveEvent<ActivityResult>()
+    var activityResult = MutableResult<ActivityResult>()
 
     /**
      * 预先 注册
