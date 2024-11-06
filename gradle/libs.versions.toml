@@ -22,7 +22,7 @@ okhttpVersion = "4.9.3"
 ultraPtrVersion = "1.0.11"
 
 baseRecyclerViewAdapterHelperVersion = "4.1.4"
-
+baseRecyclerViewAdapterHelperVersion3 = "3.0.4"
 lubanVersion = "1.1.8"
 
 glide_version = "4.12.0"
@@ -188,6 +188,8 @@ ultraPtr = { group = "in.srain.cube", name = "ultra-ptr", version.ref = "ultraPt
 # 上拉加载
 # https://github.com/CymChad/BaseRecyclerViewAdapterHelper
 baseRecyclerViewAdapterHelper = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper4", version.ref = "baseRecyclerViewAdapterHelperVersion" }
+
+baseRecyclerViewAdapterHelper3 = { group = "io.github.cymchad", name = "BaseRecyclerViewAdapterHelper", version.ref = "baseRecyclerViewAdapterHelperVersion3" }
 
 
 #  网络请求

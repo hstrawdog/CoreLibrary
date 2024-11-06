@@ -84,6 +84,11 @@ dependencies {
         exclude group: 'androidx.recyclerview', module: 'recyclerview'
     }
 
+    // 适配旧版本项目   过度使用
+    api (libs.baseRecyclerViewAdapterHelper3){
+        exclude group: 'androidx.recyclerview', module: 'recyclerview'
+    }
+
     // 下拉刷新
     api libs.ultraPtr
     // 图片加载
