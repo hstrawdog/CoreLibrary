@@ -63,11 +63,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            if (status) {
 //            }
 //        }
-
-        open(CustomRadioActivity::class.java)
+        open(ResultActivity::class.java)
 
 //        open(BackgroundActivity::class.java)
-//        open(LoadMoreActivity::class.java)
 //        open(TestDialogActivity::class.java)
 //        open(BannerActivity::class.java)
         LogUtils.de("111111111111111111111111")
