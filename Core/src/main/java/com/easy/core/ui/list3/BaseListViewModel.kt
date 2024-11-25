@@ -13,6 +13,7 @@ import com.easy.core.ui.base.BaseViewModel
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
+@Deprecated("已废弃")
 abstract class BaseListViewModel : BaseViewModel() {
     /**
      *   数据集

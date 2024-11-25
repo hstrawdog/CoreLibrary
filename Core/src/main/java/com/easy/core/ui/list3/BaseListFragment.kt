@@ -17,6 +17,7 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
  * @Email :  qiqiang213@gmail.com
  * @Describe :
  */
+@Deprecated("已废弃")
 abstract class BaseListFragment : BaseFragment(), BaseListModel3.IBaseListModelView3 {
 
     // Fragment 的用法与 Activity保持一致  注释

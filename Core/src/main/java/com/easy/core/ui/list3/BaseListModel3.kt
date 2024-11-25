@@ -35,6 +35,7 @@ import java.lang.ref.WeakReference
  * 1. 点击事件的绑定交给Activity 来操作  adapter的点击事件绑定有两种 在多种布局的的情况下 点击事件写在adapter中可能会更合适一些
  *
  */
+@Deprecated("已废弃")
 class BaseListModel3(var mBaseListModelView: IBaseListModelView3) {
 
     var context: WeakReference<Context>? = null
@@ -265,6 +266,7 @@ class BaseListModel3(var mBaseListModelView: IBaseListModelView3) {
      * m->v 的接口
      * k  adapter
      */
+    @Deprecated("已废弃")
     interface IBaseListModelView3 : OnLoadMoreListener {
         /**
          * List列表模型
@@ -326,7 +328,7 @@ class BaseListModel3(var mBaseListModelView: IBaseListModelView3) {
         fun initData()
 
     }
-
+    @Deprecated("已废弃")
     companion object {
         /**
          * 创建一个 rootView = recycleView
@@ -352,6 +354,7 @@ class BaseListModel3(var mBaseListModelView: IBaseListModelView3) {
      * m->v 的接口
      * k  adapter
      */
+    @Deprecated("已废弃")
     interface IBaseListModelVie3 : OnLoadMoreListener {
         /**
          * List列表模型

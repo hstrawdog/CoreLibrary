@@ -17,6 +17,7 @@ import com.easy.core.ui.base.BaseActivity
  * @Describe :
  * @Email :  qiqiang213@gmail.com
  */
+@Deprecated("已废弃")
 abstract class BaseListActivity : BaseActivity(), BaseListModel3.IBaseListModelView3 {
 
     /**

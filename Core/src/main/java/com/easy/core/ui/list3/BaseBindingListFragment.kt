@@ -16,6 +16,7 @@ import com.easy.core.ui.base.BaseViewBindingFragment
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
+@Deprecated("已废弃")
 abstract class BaseBindingListFragment<T : ViewBinding> : BaseViewBindingFragment<T>(),
     BaseListModel3.IBaseListModelView3 {
 

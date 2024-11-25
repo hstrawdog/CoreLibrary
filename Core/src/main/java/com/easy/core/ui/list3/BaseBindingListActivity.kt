@@ -15,6 +15,7 @@ import com.easy.core.ui.base.BaseViewBindingActivity
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
+@Deprecated("已废弃")
 abstract class BaseBindingListActivity<T : ViewBinding> : BaseViewBindingActivity<T>(),
     BaseListModel3.IBaseListModelView3 {
 

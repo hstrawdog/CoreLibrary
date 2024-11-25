@@ -17,6 +17,7 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
+@Deprecated("已废弃")
 abstract class BaseVmListFragment<K : BaseListViewModel, T : ViewDataBinding> : BaseVmFragment<K, T>(),
     BaseListModel3.IBaseListModelView3 {
 

@@ -18,6 +18,7 @@ import com.easy.core.ui.list.BaseListModel.IBaseListModelView
  * @Describe :
  * BaseListViewModel  包含 pageSize  PageCount 以及驱动列表的 mData
  */
+@Deprecated("已废弃")
 abstract class BaseVmListActivity<K : BaseListViewModel, T : ViewDataBinding> :
     BaseVmActivity<K, T>(), BaseListModel3.IBaseListModelView3 {
 
