@@ -13,11 +13,11 @@ import androidx.annotation.IntDef;
 @IntDef({LocalMediaType.VALUE_TYPE_IMAGE, LocalMediaType.VALUE_TYPE_VIDEO, LocalMediaType.VALUE_URL_IMAGE})
 public @interface LocalMediaType {
     /**
-     * 图片类型
+     *  本地图片类型
      */
     int VALUE_TYPE_IMAGE = 1;
     /**
-     * 视频类型
+     * 本地视频类型
      */
     int VALUE_TYPE_VIDEO = 2;
     /**

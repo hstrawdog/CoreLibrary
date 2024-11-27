@@ -10,7 +10,7 @@ import com.easy.core.album.entity.LocalMedia
  * @Describe :
  */
 interface AlbumPhotoCallBack {
-    fun onSelectLocalMedia(arrayList: ArrayList<LocalMedia>?)
+    fun onSelectLocalMedia(arrayList: ArrayList<LocalMedia>)
 
 
 }

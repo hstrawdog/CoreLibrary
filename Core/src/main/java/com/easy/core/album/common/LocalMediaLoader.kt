@@ -94,6 +94,10 @@ class LocalMediaLoader(private val activity: FragmentActivity, @LocalMediaType l
                                     duration = data.getInt(data.getColumnIndexOrThrow(VIDEO_PROJECTION[4]))
                                     uri = Uri.withAppendedPath(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "" + id)
                                 } else {
+
+
+
+
                                     val size = data.getInt(data.getColumnIndexOrThrow(IMAGE_PROJECTION[4]))
                                     //是否大于10K
                                     if (size < 1024 * 10) {
@@ -102,6 +106,11 @@ class LocalMediaLoader(private val activity: FragmentActivity, @LocalMediaType l
                                 }
                                 val image =
                                     com.easy.core.album.entity.LocalMedia(path, dateTime, duration.toLong(), mLocalMediaType)
+
+                                val dateTaken = data.getLong(data.getColumnIndexOrThrow(IMAGE_PROJECTION[5]))
+
+                                image.dateTaken=dateTaken
+
                                 image.uri = uri
                                 val folder = getImageFolder(path, uri, imageFolders)
                                 folder.images.add(image)
@@ -185,7 +194,7 @@ class LocalMediaLoader(private val activity: FragmentActivity, @LocalMediaType l
 
     companion object {
         private val IMAGE_PROJECTION =
-            arrayOf(MediaStore.Images.Media.DATA, MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATE_ADDED, MediaStore.Images.Media._ID, MediaStore.Images.Media.SIZE)
+            arrayOf(MediaStore.Images.Media.DATA, MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATE_ADDED, MediaStore.Images.Media._ID, MediaStore.Images.Media.SIZE,MediaStore.Images.Media.DATE_TAKEN)
         private val VIDEO_PROJECTION =
             arrayOf(MediaStore.Video.Media.DATA, MediaStore.Video.Media.DISPLAY_NAME, MediaStore.Video.Media.DATE_ADDED, MediaStore.Video.Media._ID, MediaStore.Video.Media.DURATION)
 

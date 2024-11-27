@@ -14,12 +14,12 @@ class SelectOptions {
     /**
      * 选择后的数据
      */
-    var selectLocalMedia = ArrayList<com.easy.core.album.entity.LocalMedia>()
+    var selectLocalMedia = ArrayList<LocalMedia>()
 
     /**
      * 文件夹缓存内容
      */
-    var mFolderLocalMedia: ArrayList<com.easy.core.album.entity.LocalMedia> = ArrayList()
+    var mFolderLocalMedia: ArrayList<LocalMedia> = ArrayList()
 
     /**
      *  回调

@@ -487,6 +487,26 @@ object TimeUtils {
         val date = string2Date(format, datess)
         return Date2Timestamp(date)
     }
+
+
+    /**
+     *
+     * @param timestamp Long  时间戳
+     * @param format String    日期格式
+     * @return String    String  日期
+     */
+    fun   formatLong2String(timestamp :Long, format :String ="yyyy-MM-dd HH:mm:ss" ): String {
+
+        // 创建 Date 对象
+        val date: Date = Date(timestamp)
+        // 创建 SimpleDateFormat 对象
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        sdf.timeZone = TimeZone.getDefault() // 设置时区
+        // 格式化日期
+        val formattedDate = sdf.format(date)
+        return  formattedDate
+    }
+
     //===========================================字符串转换成时间戳====================================
     /**
      * 获取当前日期时间 / 得到今天的日期
@@ -1077,6 +1097,9 @@ object TimeUtils {
         var simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
         return simpleDateFormat.format(calendar.time)
     }
+
+
+
 
     @JvmStatic
     fun main(args: Array<String>) {

@@ -35,7 +35,7 @@ class AlbumIndexActivity : BaseActivity() {
     }
 
     var call = object : AlbumPhotoCallBack {
-        override fun onSelectLocalMedia(arrayList: ArrayList<com.easy.core.album.entity.LocalMedia>?) {
+        override fun onSelectLocalMedia(arrayList: ArrayList<com.easy.core.album.entity.LocalMedia>) {
             val list = arrayList
             Log.e("---------------------", "onActivityResult: ")
             val stringBuilder = StringBuilder()

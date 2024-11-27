@@ -40,7 +40,7 @@ class PreviewAdapter : BaseQuickAdapter<LocalMedia, QuickViewHolder>() {
         localMedia?.let {
             when (localMedia.localMediaType) {
                 LocalMediaType.VALUE_TYPE_IMAGE -> {
-                    val url = FileUtils.getPathFromUri(context, localMedia.uri)
+                    val url = localMedia.uri?.let { it1 -> FileUtils.getPathFromUri(context, it1) }
                     val degree = AlbumFileUtils.readPictureDegree(url)
                     //旋转图片
                     if (degree > 0) {
@@ -48,8 +48,11 @@ class PreviewAdapter : BaseQuickAdapter<LocalMedia, QuickViewHolder>() {
                         viewHolder.getView<SubsamplingScaleImageView>(R.id.image_item)
                             .setImage(ImageSource.bitmap(bitmap))
                     } else {
-                        viewHolder.getView<SubsamplingScaleImageView>(R.id.image_item)
-                            .setImage(ImageSource.uri(localMedia.uri))
+                        localMedia.uri?.let { it1 -> ImageSource.uri(it1) }
+                            ?.let { it2 ->
+                                viewHolder.getView<SubsamplingScaleImageView>(R.id.image_item)
+                                    .setImage(it2)
+                            }
                     }
 //                viewHolder.getView<SubsamplingScaleImageView>(R.id.image_item)
 //                    .setOnTouchListener { v, event -> //                        Toast.makeText(context,"111",1).show();
