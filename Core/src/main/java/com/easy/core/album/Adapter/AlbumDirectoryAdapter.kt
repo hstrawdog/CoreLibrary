@@ -11,7 +11,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.chad.library.adapter4.BaseSingleItemAdapter
+import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.core.R
 import com.easy.core.album.entity.LocalMediaFolder
@@ -25,19 +25,20 @@ import com.easy.core.album.utils.LoadUtils
  * @author: 黄其强
  * @date: 2017-05-05 16:10
 </描述当前版本功能> */
-class AlbumDirectoryAdapter : BaseSingleItemAdapter<LocalMediaFolder, QuickViewHolder>() {
+class AlbumDirectoryAdapter : BaseQuickAdapter<LocalMediaFolder, QuickViewHolder>() {
 
     fun bindFolderData(folders: ArrayList<LocalMediaFolder>) {
         submitList(folders)
     }
 
 
+
+
     override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
         return QuickViewHolder(R.layout.picture_album_folder_item, parent)
     }
 
-
-    override fun onBindViewHolder(holder: QuickViewHolder, folder: LocalMediaFolder?) {
+    override fun onBindViewHolder(holder: QuickViewHolder, position: Int, folder: LocalMediaFolder?) {
 
         folder?.let {
 

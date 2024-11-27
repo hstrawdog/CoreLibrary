@@ -119,7 +119,8 @@ object BitmapUtils {
         canvas.drawRect(Rect(0, 0, newW, newH), p)
 
         // 绘边框
-        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(), (newH - bigH - 2 * smallH) / 2 + smallH.toFloat(), null)
+        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(),
+            (newH - bigH - 2 * smallH) / 2 + smallH.toFloat(), null)
 
 //        canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.save()
@@ -301,9 +302,11 @@ object BitmapUtils {
 //        LogUtils.e(" OffsetX :     $OffsetX       xSize:   $xSize  ")
 //        LogUtils.e(" OffsetY :     $OffsetY       offsetY:   $offsetY  ")
         // 左边图片
-        cv.drawBitmap(srcBitmap, Rect(xSize + OffsetX, 0, xSize + width / 2 + OffsetX, height), Rect(0, 0, width / 2, height), null)
+        cv.drawBitmap(srcBitmap, Rect(xSize + OffsetX, 0, xSize + width / 2 + OffsetX, height),
+            Rect(0, 0, width / 2, height), null)
         // 右边图片
-        cv.drawBitmap(new2, Rect(xSize - OffsetX, 0, xSize + width / 2 - OffsetX, height), Rect(width / 2, OffsetY, width, height + OffsetY), null)
+        cv.drawBitmap(new2, Rect(xSize - OffsetX, 0, xSize + width / 2 - OffsetX, height),
+            Rect(width / 2, OffsetY, width, height + OffsetY), null)
         return newb
     }
 
@@ -522,7 +525,7 @@ object BitmapUtils {
      * @param maxHeight 最大高度
      * @return 采样大小
      */
-     fun calculateInSampleSize(options: BitmapFactory.Options, maxWidth: Int, maxHeight: Int): Int {
+    fun calculateInSampleSize(options: BitmapFactory.Options, maxWidth: Int, maxHeight: Int): Int {
         if (maxWidth == 0 || maxHeight == 0) {
             return 1
         }
@@ -545,7 +548,7 @@ object BitmapUtils {
      * @param reqHeight
      * @return
      */
-     fun calculateInSampleSize2(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
+    fun calculateInSampleSize2(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
         var reqWidth = reqWidth
         var reqHeight = reqHeight
         val height = options.outHeight
@@ -569,7 +572,6 @@ object BitmapUtils {
             inSampleSize
         }
     }
-
 
     /**
      * 获取图片旋转角度
@@ -732,8 +734,8 @@ object BitmapUtils {
         canvas.drawBitmap(reflectionBitmap, 0f, srcHeight + REFLECTION_GAP.toFloat(), null)
         val paint = Paint()
         paint.isAntiAlias = true
-        val shader =
-            LinearGradient(0f, srcHeight * 1f, 0f, ret.height + REFLECTION_GAP * 1f, 0x70FFFFFF, 0x00FFFFFF, Shader.TileMode.MIRROR)
+        val shader = LinearGradient(0f, srcHeight * 1f, 0f, ret.height + REFLECTION_GAP * 1f, 0x70FFFFFF, 0x00FFFFFF,
+            Shader.TileMode.MIRROR)
         paint.shader = shader
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
         canvas.save()
@@ -974,7 +976,8 @@ object BitmapUtils {
     @JvmStatic
     fun isImage(filePath: String): Boolean {
         val path = filePath.toUpperCase()
-        return (path.endsWith(".PNG") || path.endsWith(".JPG") || path.endsWith(".JPEG") || path.endsWith(".BMP") || path.endsWith(".GIF"))
+        return (path.endsWith(".PNG") || path.endsWith(".JPG") || path.endsWith(".JPEG") || path.endsWith(
+            ".BMP") || path.endsWith(".GIF"))
     }
 
     /**

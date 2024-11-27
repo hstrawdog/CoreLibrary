@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.MediaController
 import android.widget.ProgressBar
 import android.widget.VideoView
-import com.chad.library.adapter4.BaseSingleItemAdapter
+import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
@@ -27,16 +27,16 @@ import com.easy.core.utils.file.FileUtils
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class PreviewAdapter : BaseSingleItemAdapter<LocalMedia, QuickViewHolder>() {
+class PreviewAdapter : BaseQuickAdapter<LocalMedia, QuickViewHolder>() {
 
     var call: ((position: LocalMedia) -> Unit?)? = null
+
 
 
     override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
         return QuickViewHolder(R.layout.fragment_album_preview, parent)
     }
-
-    override fun onBindViewHolder(viewHolder: QuickViewHolder, localMedia: LocalMedia?) {
+    override fun onBindViewHolder(viewHolder: QuickViewHolder, position: Int, localMedia: LocalMedia?) {
         localMedia?.let {
             when (localMedia.localMediaType) {
                 LocalMediaType.VALUE_TYPE_IMAGE -> {
