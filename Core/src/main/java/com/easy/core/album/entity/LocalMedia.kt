@@ -18,7 +18,7 @@ import com.easy.core.album.annotation.LocalMediaType
  * @author: 黄其强
  * @date: 2017-05-04 20:17
 </描述当前版本功能> */
-class LocalMedia {
+open class LocalMedia {
     /**
      * 物理地址
      */
