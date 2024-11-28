@@ -500,7 +500,7 @@ object TimeUtils {
         // 创建 Date 对象
         val date: Date = Date(timestamp)
         // 创建 SimpleDateFormat 对象
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val sdf = SimpleDateFormat(format)
         sdf.timeZone = TimeZone.getDefault() // 设置时区
         // 格式化日期
         val formattedDate = sdf.format(date)
