@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import com.easy.core.CoreConfig;
+import com.easy.example.ui.KillerActivity;
 
 /**
  *    author : Android 轮子哥
@@ -59,7 +61,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
 //            CrashDetailActivity.start(mApplication, throwable);
             RestartActivity.start(mApplication,throwable);
         } else {
-            restart(mApplication);
+            restart();
         }
 
         // 不去触发系统的崩溃处理（com.android.internal.os.RuntimeInit$KillApplicationHandler）
@@ -71,7 +73,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(10);
     }
-    public static void restart(Context context) {
+    public static void restart() {
 //        Intent intent;
 //        intent = new Intent(context, MainActivity.class);
 //        if (!(context instanceof Activity)) {
@@ -79,9 +81,14 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
 //        }
 //        context.startActivity(intent);
 
-        Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
-        LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(LaunchIntent);
+
+        KillerActivity.Companion.launch((FragmentActivity) CoreConfig.Companion.get().getCurrActivity());
+
+
+
+//        Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+//        LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        context.startActivity(LaunchIntent);
     }
 
 

@@ -377,19 +377,19 @@ object LogUtils {
         if (!fileDir.exists()) {
             fileDir.mkdirs()
         }
-        val file = File(fileDir, TimeUtils.getCurrentDateTime("yyyyMMdd") + ".txt")
+        val file = File(fileDir, TimeUtils.formatDate("yyyyMMdd") + ".txt")
         try {
             if (file.exists()) {
                 val ps = PrintStream(FileOutputStream(file, true))
                 ps.append("""
-    ${TimeUtils.getCurrentDateTime("\n\n\nyyyy-MM-dd HH:mm:ss")}
+    ${TimeUtils.formatDate("\n\n\nyyyy-MM-dd HH:mm:ss")}
     $message
     """.trimIndent()) // 往文件里写入字符串
             } else {
                 val ps = PrintStream(FileOutputStream(file))
                 file.createNewFile()
                 ps.println("""
-    ${TimeUtils.getCurrentDateTime("yyyy-MM-dd HH:mm:ss")}
+    ${TimeUtils.formatDate("yyyy-MM-dd HH:mm:ss")}
     $message
     """.trimIndent()) // 往文件里写入字符串
             }

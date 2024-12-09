@@ -39,12 +39,13 @@ class APP : Application() {
             .loadSkin()
 
         // 本地异常捕捉
-        com.easy.example.ui.crash.CrashHandler.register(this)
+        CrashHandler.register(this)
+
         // 定时任务    最小间隔 15 分钟
-        val periodicWork = PeriodicWorkRequest.Builder(com.easy.example.TestWord::class.java, 15, TimeUnit.MINUTES)
-            .build()
         WorkManager.getInstance()
-            .enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork)
+            .enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE,
+                PeriodicWorkRequest.Builder(TestWord::class.java, 15, TimeUnit.MINUTES)
+                    .build())
         //  取消任务
         WorkManager.getInstance()
             .cancelAllWork()

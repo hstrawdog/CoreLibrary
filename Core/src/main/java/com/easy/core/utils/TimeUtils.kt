@@ -110,37 +110,8 @@ object TimeUtils {
     //时间格式 分钟：秒钟 一般用于视频时间显示
     const val DATE_FORMAT_MM_SS = "mm:ss"
 
-    val DEFAULT_SDF = SimpleDateFormat(DATE_FORMAT_DETACH, Locale.getDefault())
-
-    /**
-     * 获取当前时间
-     *
-     * @return 毫秒时间戳
-     */
-    val curTimeMills: Long
-        get() = System.currentTimeMillis()
-
-    /**
-     * 获取当前时间
-     *
-     * 格式为yyyy-MM-dd HH:mm:ss
-     *
-     * @return 时间字符串
-     */
-    @JvmStatic
-    val curTimeString: String
-        get() = date2String(Date())
-
-    /**
-     * 获取当前时间
-     *
-     * Date类型
-     *
-     * @return Date类型时间
-     */
-    val curTimeDate: Date
-        get() = Date()
     private val SDF_THREAD_LOCAL = ThreadLocal<SimpleDateFormat>()
+    val DEFAULT_SDF = SimpleDateFormat(DATE_FORMAT_DETACH, Locale.getDefault())
 
     val defaultFormat: SimpleDateFormat
         get() {
@@ -152,6 +123,26 @@ object TimeUtils {
             return simpleDateFormat
         }
 
+
+
+    /**
+     * 获取当前时间
+     *
+     * Date类型
+     *
+     * @return Date类型时间
+     */
+    val curTimeDate: Date
+        get() = Date()
+
+    /**
+     * 获取当前时间
+     *
+     * @return 毫秒时间戳
+     */
+    val curTimeMills: Long
+        get() = System.currentTimeMillis()
+
     /**
      * 获取当前东八区的时间
      *
@@ -159,17 +150,38 @@ object TimeUtils {
      */
     val nowDate: String
         get() {
-            val dff = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            dff.timeZone = TimeZone.getTimeZone("GMT+08")
-            return dff.format(Date())
+            return formatDate("yyyy-MM-dd HH:mm:ss")
         }
 
     val nowDate4yyyyMMdd: String
         get() {
-            val dff = SimpleDateFormat("yyyy-MM-dd")
-            dff.timeZone = TimeZone.getTimeZone("GMT+08")
-            return dff.format(Date())
+            return formatDate("yyyy-MM-dd")
         }
+    val nowDate4yyyy: String
+        get() {
+            return formatDate("yyyy")
+
+        }
+    val nowDate4Moon: String
+        get() {
+            return formatDate("MM")
+        }
+
+    /**
+     *   格式化 日期
+     * @param pattern String
+     * @param date Date
+     * @return String
+     */
+    fun formatDate(pattern: String, timeZoneId: String = "GMT+08", date: Date = Date()): String {
+        val dff = SimpleDateFormat(pattern)
+        dff.timeZone = TimeZone.getTimeZone(timeZoneId)
+        return dff.format(date)
+    }
+
+
+
+
 
     /**
      * 将时间戳转为时间字符串
@@ -317,7 +329,8 @@ object TimeUtils {
      */
     @JvmStatic
     fun getIntervalTime(time0: String?, time1: String?, unit: TimeUnit?, format: SimpleDateFormat): Long {
-        return Math.abs(milliseconds2Unit(string2Milliseconds(time0, format) - string2Milliseconds(time1, format), unit))
+        return Math.abs(
+            milliseconds2Unit(string2Milliseconds(time0, format) - string2Milliseconds(time1, format), unit))
     }
 
     /**
@@ -350,8 +363,8 @@ object TimeUtils {
      * @return 时间字符串
      */
     @JvmStatic
-    fun getCurTimeString(format: SimpleDateFormat): String {
-        return date2String(Date(), format)
+    fun getCurTimeString(format: String): String {
+        return  formatDate( format)
     }
 
     /**
@@ -392,7 +405,7 @@ object TimeUtils {
      */
     @JvmStatic
     fun getIntervalByNow(time: String?, unit: TimeUnit?, format: SimpleDateFormat): Long {
-        return getIntervalTime(curTimeString, time, unit, format)
+        return getIntervalTime(nowDate, time, unit, format)
     }
 
     /**
@@ -488,14 +501,13 @@ object TimeUtils {
         return Date2Timestamp(date)
     }
 
-
     /**
      *
      * @param timestamp Long  时间戳
      * @param format String    日期格式
      * @return String    String  日期
      */
-    fun   formatLong2String(timestamp :Long, format :String ="yyyy-MM-dd HH:mm:ss" ): String {
+    fun formatLong2String(timestamp: Long, format: String = "yyyy-MM-dd HH:mm:ss"): String {
 
         // 创建 Date 对象
         val date: Date = Date(timestamp)
@@ -504,20 +516,10 @@ object TimeUtils {
         sdf.timeZone = TimeZone.getDefault() // 设置时区
         // 格式化日期
         val formattedDate = sdf.format(date)
-        return  formattedDate
+        return formattedDate
     }
 
     //===========================================字符串转换成时间戳====================================
-    /**
-     * 获取当前日期时间 / 得到今天的日期
-     * str yyyy-MM-dd HH:mm:ss 之类的
-     *
-     * @return
-     */
-    @JvmStatic
-    fun getCurrentDateTime(format: String?): String {
-        return simpleDateFormat(format, Date())
-    }
 
     /**
      * 时间戳  转换成 指定格式的日期
@@ -1047,19 +1049,6 @@ object TimeUtils {
         return cal.time;
     }
 
-    val nowDate4yyyy: String
-        get() {
-            val dff = SimpleDateFormat("yyyy")
-            dff.timeZone = TimeZone.getTimeZone("GMT+08")
-            return dff.format(Date())
-        }
-    val nowDate4Moon: String
-        get() {
-            val dff = SimpleDateFormat("MM")
-            dff.timeZone = TimeZone.getTimeZone("GMT+08")
-            return dff.format(Date())
-        }
-
     /**
      * 功能描述 秒转时分秒
      * @author qinda
@@ -1097,9 +1086,6 @@ object TimeUtils {
         var simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
         return simpleDateFormat.format(calendar.time)
     }
-
-
-
 
     @JvmStatic
     fun main(args: Array<String>) {

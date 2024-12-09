@@ -107,6 +107,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+
+
+        <activity
+            android:name=".ui.KillerActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:process=":killer" />
+
+
+
+
         <activity android:name=".ui.customize.CustomRadioActivity"/>
 
 
