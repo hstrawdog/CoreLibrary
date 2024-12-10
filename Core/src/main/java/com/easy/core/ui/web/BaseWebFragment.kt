@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -68,7 +69,7 @@ open class BaseWebFragment : BaseFragment() {
      *  布局Id
      */
     override fun getLayoutViewId(): Int {
-        return  R.layout.fragment_web
+        return R.layout.fragment_web
     }
 
     /**
@@ -98,12 +99,11 @@ open class BaseWebFragment : BaseFragment() {
         }
 
         override fun onConsoleMessage(cm: ConsoleMessage?): Boolean {
-            LogUtils.d("WebViewConsole", cm?.message() + " -- From line "
-                    + cm?.lineNumber() + " of "
-                    + cm?.sourceId() );
+            LogUtils.d("WebViewConsole", cm?.message() + " -- From line " + cm?.lineNumber() + " of " + cm?.sourceId());
             return super.onConsoleMessage(cm)
 
         }
+
         override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
             super.onShowCustomView(view, callback)
 
@@ -130,9 +130,11 @@ open class BaseWebFragment : BaseFragment() {
 
     override fun initConfig() {
         super.initConfig()
-        rootViewImpl.iToolBarBuilder.showToolBar = arguments?.getBoolean(getString(R.string.key_showToolBar), true) == true
+        rootViewImpl.iToolBarBuilder.showToolBar =
+            arguments?.getBoolean(getString(R.string.key_showToolBar), true) == true
         rootViewImpl.iToolBarBuilder.showLine = arguments?.getBoolean(getString(R.string.key_showToolBar), true) == true
-        rootViewImpl.iToolBarBuilder.showStatusBar = arguments?.getBoolean(getString(R.string.key_showstatusBar), true) == true
+        rootViewImpl.iToolBarBuilder.showStatusBar =
+            arguments?.getBoolean(getString(R.string.key_showstatusBar), true) == true
     }
 
     @SuppressLint("JavascriptInterface")
@@ -162,7 +164,7 @@ open class BaseWebFragment : BaseFragment() {
             webView?.addJavascriptInterface(it, "android")
         }
         url = getString(getString(R.string.key_url))
-        title =   getString(getString(R.string.key_title))
+        title = getString(getString(R.string.key_title))
 
         requireActivity().title = title
         iToolBar?.setToolbarTitle(title)
@@ -174,28 +176,50 @@ open class BaseWebFragment : BaseFragment() {
     private fun initWebViewSettings() {
         val settings = webView?.settings
         settings?.run {
-            setUserAgentString(userAgentString + "" + requireActivity().packageName)
-            javaScriptEnabled = true
-            javaScriptCanOpenWindowsAutomatically = true
-            allowFileAccess = true
+
+            // 白色背景
+            webView?.setBackgroundColor(Color.TRANSPARENT)
+            webView?.setBackgroundResource(R.color.white)
+
+            webView?.overScrollMode = View.OVER_SCROLL_NEVER
+            webView?.isNestedScrollingEnabled = false // 默认支持嵌套滑动
+
+            // 设置自适应屏幕，两者合用
             useWideViewPort = true
             loadWithOverviewMode = true
-            builtInZoomControls = true
+            // 是否支持缩放，默认为true
+            setSupportZoom(false)
+            // 是否使用内置的缩放控件
+            builtInZoomControls = false
+            // 是否显示原生的缩放控件
+            displayZoomControls = false
+            // 设置文本缩放 默认 100
+            textZoom = 100
+            // 是否保存密码
+            savePassword = false
+            // 是否可以访问文件
+            allowFileAccess = true
+            // 是否支持通过js打开新窗口
+            javaScriptCanOpenWindowsAutomatically = true
+            //启用或禁用 JavaScript 的执行
+            javaScriptEnabled = true
+            // 是否支持自动加载图片
+            loadsImagesAutomatically = true
+            blockNetworkImage = false
+            // 设置编码格式
+            defaultTextEncodingName = "utf-8"
+            layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+            // 是否启用 DOM storage API
             domStorageEnabled = true
+            // 是否启用 database storage API 功能
+            databaseEnabled = true
+            // 配置当安全源试图从不安全源加载资源时WebView的行为
+            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+
+            // 设置缓存模式
             cacheMode = WebSettings.LOAD_NO_CACHE
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                displayZoomControls = false
-            } // MIXED_CONTENT_ALWAYS_ALLOW：允许从任何来源加载内容，即使起源是不安全的；
-            // MIXED_CONTENT_NEVER_ALLOW：不允许Https加载Http的内容，即不允许从安全的起源去加载一个不安全的资源；
-            // MIXED_CONTENT_COMPATIBILITY_MODE：当涉及到混合式内容时，WebView 会尝试去兼容最新Web浏览器的风格。
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-            }
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) { //提高渲染优先级
-                setRenderPriority(WebSettings.RenderPriority.HIGH)
-                savePassword = false
-                pluginState = WebSettings.PluginState.ON
-            }
+            setUserAgentString(userAgentString + "" + requireActivity().packageName)
+
         }
     }
 
@@ -312,12 +336,8 @@ open class BaseWebFragment : BaseFragment() {
     }
 
     companion object {
-        fun instantiate(context: Context,
-                        title: String?,
-                        url: String?,
-                        scriptInterface: ScriptInterface? = null,
-                        showToolBar: Boolean = true,
-                        showstatusBar: Boolean = true): BaseWebFragment {
+        fun instantiate(context: Context, title: String?, url: String?, scriptInterface: ScriptInterface? = null,
+                        showToolBar: Boolean = true, showstatusBar: Boolean = true): BaseWebFragment {
             val baseWebFragment = BaseWebFragment()
             val bundle = Bundle()
             bundle.putString(context.getString(R.string.key_url), url)
