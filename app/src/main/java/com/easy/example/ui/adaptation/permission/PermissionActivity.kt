@@ -3,7 +3,7 @@ package com.easy.example.ui.adaptation.permission
 import com.easy.core.permission.IPermissionsHas
 import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseDataBindingActivity
-import com.easy.core.ui.base.open
+import com.easy.core.kt.open
 import com.easy.core.utils.ToastUtils.showToast
 import com.easy.example.R
 import com.easy.example.databinding.ActivityPermissionBinding

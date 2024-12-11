@@ -6,11 +6,11 @@ import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import com.easy.core.lifecycle.SingleLiveEvent
 import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.log.LogUtils.e
 import com.easy.example.R
 import com.easy.example.databinding.ActivityDataBindingBinding
+import com.kunminx.architecture.domain.message.MutableResult
 
 /**
  * @Author : huangqiqiang
@@ -31,7 +31,7 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
 
     lateinit var mTextView2: TextView
 
-    var live = SingleLiveEvent<String>()
+    var live = MutableResult<String>()
 
     override fun initView() {
         mTextView2 = findViewById(R.id.textView2)

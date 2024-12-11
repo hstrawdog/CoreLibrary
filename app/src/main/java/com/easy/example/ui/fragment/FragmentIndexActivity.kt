@@ -1,7 +1,7 @@
 package com.easy.example.ui.fragment
 
 import com.easy.core.ui.base.BaseViewBindingActivity
-import com.easy.core.ui.base.open
+import com.easy.core.kt.open
 import com.easy.example.databinding.ActivityFragmentInexBinding
 
 /**

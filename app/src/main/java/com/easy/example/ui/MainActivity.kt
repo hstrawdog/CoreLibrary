@@ -6,7 +6,7 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
-import com.easy.core.ui.base.open
+import com.easy.core.kt.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
@@ -19,7 +19,6 @@ import com.easy.example.ui.adaptation.AdaptationIndexActivity2
 import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.crash.ThrowIndexActivity2
-import com.easy.example.ui.customize.CustomRadioActivity
 import com.easy.example.ui.customize.CustomizeIndexActivity2
 import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.FileIndexActivity2
@@ -27,7 +26,6 @@ import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
-import com.easy.example.ui.recycle.LoadMoreActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity2

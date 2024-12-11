@@ -9,9 +9,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.easy.core.R
-import com.easy.core.lifecycle.SingleLiveEvent
 import com.easy.core.toolbar.IToolBar
-import com.easy.core.ui.base.IActivityRootView
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView

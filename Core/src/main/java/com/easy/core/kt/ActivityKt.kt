@@ -1,13 +1,10 @@
-package com.easy.core.ui.base
+package com.easy.core.kt
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts
-import com.easy.core.permission.PermissionsResult
-import com.easy.core.permission.SysPermissionsUtils
+import com.easy.core.ui.base.BaseActivity
 
 /**
  *  打开指定的界面
@@ -15,16 +12,18 @@ import com.easy.core.permission.SysPermissionsUtils
  * @param cls Class<*>
  * @param result ActivityResultCallback<ActivityResult>
  */
-fun BaseActivity.open(cls: Class<*>,
-                      bundle: Bundle = Bundle(),
+fun BaseActivity.open(cls: Class<*>, bundle: Bundle = Bundle(),
                       result: ActivityResultCallback<ActivityResult?> = ActivityResultCallback<ActivityResult?> { }) {
-    registerForActivity.launch(Intent(this, cls).apply {
-        putExtras(bundle)
-    })
+
     activityResult.observe(this) {
         result.onActivityResult(it)
         activityResult.removeObservers(this)
     }
+
+    registerForActivity.launch(Intent(this, cls).apply {
+        putExtras(bundle)
+    })
+
 }
 
 ///**

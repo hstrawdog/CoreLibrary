@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager
 import com.easy.core.CoreConfig
 import com.easy.core.R
 import com.easy.core.annotation.ToolBarMode
-import com.easy.core.lifecycle.SingleLiveEvent
 import com.easy.core.listenner.DialogClickListener
 import com.easy.core.ui.base.IDialogFragment
 import com.easy.core.ui.base.IRootViewBuildBuild
@@ -19,6 +18,7 @@ import com.easy.core.ui.base.RootViewImpl
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.utils.statusbar.StatusBarManager
 import com.easy.core.widget.LoadingView
+import com.kunminx.architecture.domain.message.MutableResult
 
 /**
  * @Author : huangqiqiang
@@ -38,7 +38,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      *  回调
      */
-    var activityResult = SingleLiveEvent<ActivityResult>()
+    var activityResult = MutableResult<ActivityResult>()
 
     /**
      *  页面跳转

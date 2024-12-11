@@ -18,11 +18,12 @@ fun BaseDialog.open(
     bundle:Bundle = Bundle(),
     result:ActivityResultCallback<ActivityResult?> = ActivityResultCallback<ActivityResult?> { },
 ) {
-    registerForActivity.launch(Intent(activity, cls).apply {
-        putExtras(bundle)
-    })
+
     activityResult.observe(this) {
         result.onActivityResult(it)
         activityResult.removeObservers(this)
     }
+    registerForActivity.launch(Intent(activity, cls).apply {
+        putExtras(bundle)
+    })
 }

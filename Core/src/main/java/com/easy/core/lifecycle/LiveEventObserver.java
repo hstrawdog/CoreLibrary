@@ -16,8 +16,6 @@ import java.util.List;
 /**
  * LiveData 用作事件传递时的观察者
  * 保证所有事件不丢失，保存非激活状态的事件，并能够在激活状态回调，且没有内存泄漏
- *
- *
  * @author funnywolf
  * @since 2019-05-18
  */

@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.easy.core.ui.dialog.DialogViewBuilder
 import com.easy.core.ui.base.BaseActivity
-import com.easy.core.ui.base.open
+import com.easy.core.kt.open
 import com.easy.core.ui.dialog.SelectDialog
 import com.easy.core.utils.ToastUtils
 import com.easy.example.R

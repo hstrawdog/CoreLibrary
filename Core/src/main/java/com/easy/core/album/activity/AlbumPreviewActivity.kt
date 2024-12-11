@@ -20,7 +20,7 @@ import com.easy.core.album.dialog.OptAnimationLoader
 import com.easy.core.album.entity.LocalMedia
 import com.easy.core.glide.ImageLoadUtils
 import com.easy.core.ui.base.BaseActivity
-import com.easy.core.ui.base.open
+import com.easy.core.kt.open
 import com.easy.core.ui.dialog.SelectDialog
 import com.easy.core.utils.ToastUtils
 import com.easy.core.utils.file.FileUtils

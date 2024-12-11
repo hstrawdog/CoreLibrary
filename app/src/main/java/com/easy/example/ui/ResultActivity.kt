@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import com.easy.core.kt.open
 import com.easy.core.ui.base.BaseViewBindingActivity
-import com.easy.core.ui.base.open
 import com.easy.core.utils.ToastUtils
 import com.easy.example.databinding.ActivityResultBinding
 
