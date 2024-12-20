@@ -9,7 +9,7 @@ import android.os.Build
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-object  BaseSystemUtil {
+object BaseSystemUtil {
 
     //是否是荣耀设备
     fun isHonorDevice() = Build.MANUFACTURER.equals("HONOR", ignoreCase = true)
@@ -38,7 +38,12 @@ object  BaseSystemUtil {
      * 华为系列
      * @return Boolean
      */
-     fun isHuaWeiSeriesDevice() = (isHuaweiDevice() || isHonorDevice() ||  isVivoDevice())
+    fun isHuaWeiSeriesDevice() = (isHuaweiDevice() || isHonorDevice() || isVivoDevice())
 
+    /**
+     *  需要显示 隐私提示的 设备
+     * @return Boolean
+     */
+    fun isPermissionPromptDevice() = (isHuaweiDevice() || isHonorDevice() || isVivoDevice() || isXiaomiDevice())
 
 }

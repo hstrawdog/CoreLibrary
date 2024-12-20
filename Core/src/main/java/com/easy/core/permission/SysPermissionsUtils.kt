@@ -196,7 +196,7 @@ object SysPermissionsUtils {
      */
     fun requestPermissions(fragmentManager: FragmentManager, plus: Array<String>, tipText: String,
                            isNeedShowTip: Boolean = false, permissionsResult: PermissionsResult?) {
-        if (BaseSystemUtil.isHuaWeiSeriesDevice() && isNeedShowTip) {
+        if (BaseSystemUtil.isPermissionPromptDevice() && isNeedShowTip) {
             if (!IPermissionActions.hasPermission(CoreConfig.applicationContext, *plus)) {
                 CoreConfig.get().currActivity?.let {
                     var supportFragmentManager = (it as AppCompatActivity).supportFragmentManager

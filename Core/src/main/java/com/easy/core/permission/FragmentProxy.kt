@@ -64,7 +64,7 @@ class FragmentProxy : IPermissionActions {
         if (!PermissionsHasImpl().hasPermission(CoreConfig.get().application, *permissions)) {
             val mPermissionsFragment =
                 PermissionsFragmentFactory.getPermissionsFragment(fragmentManager)
-            if (BaseSystemUtil.isHuaWeiSeriesDevice() && isShowTip && tipText.isNotNull()) {
+            if (BaseSystemUtil.isPermissionPromptDevice() && isShowTip && tipText.isNotNull()) {
                 showHuaWeiSeriesDevice(tipText) {
                     if (it) {
                         // 核心  申请权限
