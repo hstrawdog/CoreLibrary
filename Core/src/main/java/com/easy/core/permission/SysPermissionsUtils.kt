@@ -152,15 +152,6 @@ object SysPermissionsUtils {
 
     }
 
-    /**
-     * 申请权限
-     * @param call Function0<Unit>
-     */
-    @JvmStatic
-    fun requestCameraAndStorageAndPhone(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?) {
-        requestPermissions(fragmentManager, IPermissionsHas.cameraAndStorageAndSystem, "相机权限使用说明：拍照时使用\n" + "文件读写权限使用说明：保存照片使用\n" + "手机状态权限说明：照片信息读取使用", permissionsResult)
-    }
-
     /** 请求权限
      * @see IPermissionsHas
      * @param permissions Array<out Array<String>>

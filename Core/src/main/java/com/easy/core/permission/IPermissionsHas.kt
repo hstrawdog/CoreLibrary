@@ -255,14 +255,6 @@ interface IPermissionsHas {
         val localAround: Array<String>
             get() = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
 
-        /**
-         * 摄像头和读写存储权限
-         */
-        val cameraAndStorageAndSystem: Array<String>
-            get() = arrayOf(Manifest.permission.CAMERA,
-                //(允许程序读取外部存储，如SD卡读文件)
-                Manifest.permission.READ_EXTERNAL_STORAGE,  //(允许程序写入外部存储，如SD卡上写文件)
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
 
         /**
          * 摄像头和读写存储权限
