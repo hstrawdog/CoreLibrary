@@ -29,7 +29,7 @@ object SysPermissionsUtils {
      */
     @JvmStatic
     fun requestStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                       isNeedShowTip: Boolean = false, tipText: String = "文件读写权限使用说明：保存照片使用") {
+                       isNeedShowTip: Boolean = false, tipText: String = "文件读写权限说明：保存照片使用") {
         requestPermissions(fragmentManager, IPermissionsHas.storage, tipText, permissionsResult)
 
     }
@@ -41,7 +41,7 @@ object SysPermissionsUtils {
      */
     @JvmStatic
     fun requestCamera(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                      isNeedShowTip: Boolean = false, tipText: String = "相机权限使用说明：拍照时使用") {
+                      isNeedShowTip: Boolean = false, tipText: String = "相机权限说明：拍照时使用") {
         requestPermissions(fragmentManager, IPermissionsHas.camera, tipText, permissionsResult)
 
 
@@ -68,7 +68,7 @@ object SysPermissionsUtils {
     @JvmStatic
     fun requestCameraAndStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
                                 isNeedShowTip: Boolean = false,
-                                tipText: String = "相机权限使用说明：拍照时使用\n" + "文件读写权限使用说明：保存照片使用") {
+                                tipText: String = "相机权限说明：拍照时使用\n" + "文件读写权限说明：保存照片使用") {
         requestPermissions(fragmentManager, IPermissionsHas.camera.plus(IPermissionsHas.storage), tipText, permissionsResult)
 
     }
@@ -80,7 +80,7 @@ object SysPermissionsUtils {
      */
     @JvmStatic
     fun requestStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                       tipText: String = "文件读写权限使用说明：保存照片使用") {
+                       tipText: String = "文件读写权限说明：保存照片使用") {
         requestPermissions(fragmentManager, IPermissionsHas.storage, tipText, permissionsResult)
 
     }
@@ -93,7 +93,7 @@ object SysPermissionsUtils {
     @JvmStatic
     fun requestCamera(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?) {
 
-        requestPermissions(fragmentManager, IPermissionsHas.camera, "相机权限使用说明：拍照时使用", permissionsResult)
+        requestPermissions(fragmentManager, IPermissionsHas.camera, "相机权限说明：拍照时使用", permissionsResult)
 
     }
 
@@ -148,7 +148,7 @@ object SysPermissionsUtils {
 
     @JvmStatic
     fun requestCameraAndStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?) {
-        requestPermissions(fragmentManager, IPermissionsHas.cameraAndStorage, "相机权限使用说明：拍照时使用\n" + "文件读写权限使用说明：保存照片使用", permissionsResult)
+        requestPermissions(fragmentManager, IPermissionsHas.cameraAndStorage, "相机权限说明：拍照时使用\n" + "文件读写权限说明：保存照片使用", permissionsResult)
 
     }
 

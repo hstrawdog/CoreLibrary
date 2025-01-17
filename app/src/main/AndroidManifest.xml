@@ -18,7 +18,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 
-
     <!--允许获取粗略位置，粗略定位必选-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -99,14 +98,13 @@
     <application
         android:name=".APP"
         android:allowBackup="true"
-        android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
 
 
         <activity
@@ -116,12 +114,12 @@
             android:process=":killer" />
 
 
+        <activity android:name=".ui.customize.CustomRadioActivity" />
 
 
-        <activity android:name=".ui.customize.CustomRadioActivity"/>
-
-
-        <activity android:name=".ui.BackgroundActivity" android:label="背景"/>
+        <activity
+            android:name=".ui.BackgroundActivity"
+            android:label="背景" />
 
         <activity android:name=".ui.media.VideoViewActivity" />
         <activity
@@ -181,7 +179,7 @@
             android:exported="true">
 
             <intent-filter android:priority="9999999">
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"></action>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
         <service
@@ -490,9 +488,15 @@
         <activity
             android:name=".ui.recycle.ListActivity"
             android:label="列表数据" />
+        <activity
+            android:name=".ui.recycle.ListV2ActivityView"
+            android:label="列表数据" />
         <activity android:name=".ui.bar.SearchBarActivity" />
         <activity
             android:name=".ui.recycle.BannerActivity"
+            android:label="轮播图测试" />
+        <activity
+            android:name=".ui.recycle.NewBannerActivity"
             android:label="轮播图测试" />
         <activity
             android:name=".ui.adaptation.DefImgActivity"

@@ -22,6 +22,7 @@ class RecycleIndexActivity : BaseListActivity() {
         adapter.add(MainBean("加载数据", LoadMoreActivity::class.java))
         adapter.add(MainBean("fragment 加载", IFragmentActivityBuilder::class.java))
         adapter.add(MainBean("Activity 悬停加载", ListActivity::class.java))
+        adapter.add(MainBean("Activity 悬停加载", ListActivity::class.java))
     }
 
     override var adapter = MainAdapter()

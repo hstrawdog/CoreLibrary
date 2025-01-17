@@ -9,11 +9,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import  com.easy.core.R
+import com.easy.core.recycle.adapter.NewRecycleBannerAdapter
 import com.easy.core.recycle.adapter.RecycleBannerAdapter
 import com.easy.core.recycle.indicator.CircleIndicatorView
 import com.easy.core.recycle.indicator.HollowCircleIndicatorView
@@ -36,8 +36,9 @@ import  com.easy.core.utils.ScreenUtils
  * 2. 考虑再次封装 adapter  不应该绑定在这边 需要解耦
  * 3. 不能与BRVAH 搭配使用
  */
-class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
-                                                  defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
+                                                     defStyleAttr: Int = 0) :
+    FrameLayout(context, attrs, defStyleAttr) {
     /**
      * 轮播间隔时间
      */
@@ -47,11 +48,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否显示指示器
      */
     private var isShowIndicator = false
-
-    /**
-     * 是否显示标题
-     */
-    private var isShowTip = false
 
     /**
      * 获取RecyclerView实例，便于满足自定义[RecyclerView.ItemAnimator]或者[RecyclerView.Adapter]的需求
@@ -88,18 +84,16 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 是否无限轮播
      */
     private var mIsUnlimited = true
-    private var mData: ArrayList<Any> = ArrayList()
-    private var mAdapter: RecycleBannerAdapter<Any>? = null
+    private var mAdapter: NewRecycleBannerAdapter<*, *>? = null
     private val playTask: Runnable = object : Runnable {
         override fun run() {
+
             recyclerView!!.smoothScrollToPosition(++currentIndex)
-            switchIndicator()
+            switchIndicator(currentIndex % (mAdapter?.items?.size ?: 0))
             mHandlers.postDelayed(this, mInterval.toLong())
         }
     }
 
-    val data: List<*>?
-        get() = mData
 
     private fun init(context: Context, attrs: AttributeSet?) {
         val margin = initAttributeSet(context, attrs)
@@ -109,7 +103,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         linearLayoutParams.gravity = Gravity.BOTTOM
         linearLayoutParams.setMargins(margin, margin, margin, margin)
         addView(mLinearLayout, linearLayoutParams)
-        initEditMode()
     }
 
     private fun initRecycleView() {
@@ -117,11 +110,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         recyclerView!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
         PagerSnapHelper().attachToRecyclerView(recyclerView)
-
-        mAdapter?.data = mData
-        mAdapter?.isShowTip = isShowTip;
-
-        recyclerView!!.adapter = mAdapter
         recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -132,7 +120,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
                         currentIndex = last
                         if (isTouched) {
                             isTouched = false
-                            switchIndicator()
+                            switchIndicator(currentIndex % (mAdapter?.items?.size ?: 0))
                         }
                     }
                 }
@@ -151,38 +139,26 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         val a = context.obtainStyledAttributes(attrs, R.styleable.BannerLayout)
         mInterval = a.getInt(R.styleable.BannerLayout_rvb_interval, 3000)
         isShowIndicator = a.getBoolean(R.styleable.BannerLayout_rvb_showIndicator, true)
-        isShowTip = a.getBoolean(R.styleable.BannerLayout_rvb_isShowTip, true)
         isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_rvb_autoPlaying, true)
         val margin =
             a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8f))
         if (recyclerView == null) {
             recyclerView = RecyclerView(context)
-
             val type = a.getInt(R.styleable.BannerLayout_rvb_tip_type, 0)
             when (type) {
                 1 -> {
                     // 空心圆
                     mLinearLayout = HollowCircleIndicatorView(context)
-
                 }
-
                 2 -> {
                     //  长方形
                     mLinearLayout = RectangleIndicatorView(context)
                 }
-
                 else -> {
                     // 标准 实心圆
                     mLinearLayout = CircleIndicatorView(context)
-
                 }
-
             }
-
-
-
-            mAdapter = RecycleBannerAdapter<Any>()
-
         }
         // 初始化 指示器 中的内容
         initIndicator(a)
@@ -190,24 +166,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         return margin
     }
 
-    /**
-     *  设置图片显示样式
-     */
-    fun setImageScaleType(scaleType: ImageView.ScaleType) {
-        mAdapter?.scaleType = scaleType
-    }
-
-    /**
-     * 便于在xml中编辑时观察，运行时不执行
-     */
-    private fun initEditMode() {
-        if (isInEditMode) {
-            for (i in 0..2) {
-                mData!!.add("")
-            }
-            createIndicators()
-        }
-    }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         //手动触摸的时候，停止自动播放，根据手势变换
@@ -305,42 +263,35 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         }
     }
 
-    /**
-     * 设置轮播数据集
-     *
-     * @param data Banner对象列表
-     */
-    fun setRvBannerData(data: MutableList<Any>) {
-        setPlaying(false)
-        // 避免空指针
-        if (mData == null) {
-            mData = ArrayList()
-        }
-        mData!!.clear()
-        mData!!.addAll(data)
-        if (mData!!.size > 1) {
+
+    fun setAdapter(adapter: NewRecycleBannerAdapter<*, *>) {
+        mAdapter = adapter
+        recyclerView?.adapter = mAdapter
+
+        mLinearLayout?.setPageColumn(adapter.items.size)
+        mLinearLayout?.invalidate()
+        var size = adapter.items.size
+        if (size > 1) {
             currentIndex = if (mIsUnlimited) {
-                mData!!.size * 100
+                size * 100
             } else {
                 0
             }
-            mAdapter!!.notifyDataSetChanged()
+            mAdapter?.notifyDataSetChanged()
             recyclerView!!.scrollToPosition(currentIndex)
             if (isShowIndicator) {
-                createIndicators()
+                mLinearLayout?.visibility = View.VISIBLE
+            } else {
+                mLinearLayout?.visibility = View.GONE
+
             }
+
             setPlaying(true)
         } else {
             currentIndex = 0
             mAdapter!!.notifyDataSetChanged()
         }
-        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex % mData!!.size)
 
-
-    }
-
-    fun <T : RecycleBannerAdapter<Any>> setAdapter(adapter: T) {
-        mAdapter = adapter
     }
 
     /**
@@ -348,7 +299,7 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      * 使用AppCompatImageView的好处是在Fragment中也使用Compat相关属性
      */
     private fun createIndicators() {
-        mLinearLayout!!.setPageColumn(mData!!.size)
+        mLinearLayout!!.setPageColumn(0)
     }
 
     /**
@@ -381,14 +332,11 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
     /**
      * 改变导航指示器
      */
-    private fun switchIndicator() {
-        if (mData == null || mData!!.size == 0) {
-            return
-        }
+    private fun switchIndicator(currentIndex: Int) {
         if (isShowIndicator) {
-            mLinearLayout!!.setCurrentItem(currentIndex % mData!!.size)
+            mLinearLayout!!.setCurrentItem(currentIndex)
         }
-        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex % mData!!.size)
+        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex)
 
     }
 
@@ -399,7 +347,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
      */
     fun setUnlimited(unlimited: Boolean) {
         mIsUnlimited = unlimited
-        mAdapter?.isUnlimited = unlimited
     }
 
     /**
@@ -417,38 +364,6 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
 
     fun setCurrentIndex(currentIndex: Int) {
         this.currentIndex = currentIndex
-    }
-
-    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener) {
-        mAdapter!!.setOnRvBannerClickListener(onRvBannerClickListener)
-    }
-
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>) {
-        mAdapter!!.setRecycleViewBannerChangeListener(recycleViewBannerChangeListener)
-    }
-
-
-
-
-    interface RecycleViewBannerClickListener {
-        /**
-         * @param t
-         */
-        fun onBannerClick(t: Int)
-    }
-
-    interface RecycleViewBannerChangeListener<Any> {
-        /**
-         * @param t
-         * @return
-         */
-        fun getUrl(t: Any): String
-
-        /**
-         * @param t
-         * @return
-         */
-        fun getTitle(t: Any): String
     }
 
     /**

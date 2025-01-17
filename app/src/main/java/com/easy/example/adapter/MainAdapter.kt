@@ -25,7 +25,6 @@ class MainAdapter : BaseQuickAdapter<MainBean<*>, QuickViewHolder>(),
         setOnItemClickListener(this)
 
     }
-
     override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
 
         return QuickViewHolder(R.layout.item_main,parent)
