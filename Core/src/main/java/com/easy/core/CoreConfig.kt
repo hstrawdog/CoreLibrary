@@ -137,6 +137,11 @@ class CoreConfig private constructor() {
     var defImg = R.drawable.ic_def_img
 
     /**
+     *  加载失败图片
+     */
+    var defErrorImg = R.drawable.ic_def_img
+
+    /**
      *  默认配置使用  菊花加载
      */
     var defLoadingImage = R.mipmap.ic_loading

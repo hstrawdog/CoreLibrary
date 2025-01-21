@@ -10,6 +10,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
@@ -36,11 +37,12 @@ object ImageLoadUtils {
      * @return
      */
     @JvmStatic
-    fun getRequestOption(resourceId: Int = CoreConfig.get().defImg): RequestOptions {
+    fun getRequestOption(resourceId: Int = CoreConfig.get().defImg,  errorId :Int =CoreConfig.get().defErrorImg): RequestOptions {
         return RequestOptions().format(DecodeFormat.PREFER_RGB_565) //缓存SOURC和RESULT
             .diskCacheStrategy(DiskCacheStrategy.ALL) //不做内存缓存
             .skipMemoryCache(false)
             .dontAnimate()
+            .error(errorId)
             .placeholder(resourceId)//缓存SOURC和RESULT
     }
 
@@ -140,7 +142,7 @@ object ImageLoadUtils {
             .error(Glide.with(context!!)
                 .asBitmap()
                 .load(uri))
-            .into(object : SimpleTarget<Bitmap>() {
+            .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     callback.getBitmapCallback(resource)
                 }
@@ -148,6 +150,10 @@ object ImageLoadUtils {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
                     callback.onLoadFailed()
+                }
+
+                override fun onLoadCleared(placeholder:Drawable?) {
+                    // 清理资源
                 }
             })
     }
@@ -169,7 +175,7 @@ object ImageLoadUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .override(width, height))
             .load(uri)
-            .into(object : SimpleTarget<Bitmap>() {
+            .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     callback.getBitmapCallback(resource)
                 }
@@ -177,6 +183,10 @@ object ImageLoadUtils {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
                     callback.onLoadFailed()
+                }
+
+                override fun onLoadCleared(placeholder:Drawable?) {
+                    // 清理资源
                 }
             })
     }
@@ -199,7 +209,7 @@ object ImageLoadUtils {
             .error(Glide.with(context!!)
                 .asBitmap()
                 .load(uri))
-            .into(object : SimpleTarget<Bitmap>() {
+            .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     callback.getBitmapCallback(resource)
                 }
@@ -207,6 +217,10 @@ object ImageLoadUtils {
                 override fun onLoadFailed(errorDrawable: Drawable?) {
                     super.onLoadFailed(errorDrawable)
                     callback.onLoadFailed()
+                }
+
+                override fun onLoadCleared(placeholder:Drawable?) {
+                    // 清理资源
                 }
             })
     }

@@ -4,7 +4,9 @@ pluginManagement 脚本块中的 repositories 配置 , 对应之前的 buildscri
 */
 pluginManagement {
     repositories {
-        gradlePluginPortal()
+        maven {
+            url 'https://mirrors.aliyun.com/maven/repository/central/'
+        }
         // 添加阿里云 maven 地址
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/public' }
@@ -13,6 +15,8 @@ pluginManagement {
         google()
         mavenCentral()
         maven { url 'https://repo1.maven.org/maven2/' }
+        gradlePluginPortal()
+
     }
 
 }
@@ -30,7 +34,9 @@ dependencyResolutionManagement {
 //    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        gradlePluginPortal()
+        maven {
+            url 'https://mirrors.aliyun.com/maven/repository/central/'
+        }
         // 添加阿里云 maven 地址
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/public' }
@@ -38,6 +44,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral() // Warning: this repository is going to shut down soon
         maven { url "https://jitpack.io" }
+        gradlePluginPortal()
 
     }
 }
