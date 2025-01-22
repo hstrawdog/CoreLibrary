@@ -16,6 +16,7 @@ import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity2
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity2
+import com.easy.example.ui.adaptation.DefImgActivity
 import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.crash.ThrowIndexActivity2
@@ -71,6 +72,9 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        open(TestDialogActivity::class.java)
 //        open(BannerActivity::class.java)
         LogUtils.de("111111111111111111111111")
+
+
+        open(DefImgActivity::class.java)
 
 //        FullDialog.showDialog(supportFragmentManager)
         //data/data/com.easy.core/cache/256965670.pdf

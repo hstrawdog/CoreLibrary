@@ -7,9 +7,11 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Rect
+import com.easy.core.CoreConfig
 import com.easy.core.glide.ImageLoadUtils
 import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.ResourcesUtils
+import com.easy.example.APP
 import com.easy.example.R
 import com.easy.example.databinding.ActivityDefImgBinding
 
@@ -29,11 +31,19 @@ class DefImgActivity : BaseViewBindingActivity<ActivityDefImgBinding>() {
     }
 
     override fun initView() {
+
+        CoreConfig.get().defErrorImg
+
         ImageLoadUtils.with("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png", binding.ivGif)
         ImageLoadUtils.withFillet("https://img.jbzj.com/file_images/article/202010/2020101810184374.png", binding.imageView11)
         ImageLoadUtils.withFillet2PX("https://img.jbzj.com/file_images/article/202010/2020101810184374.png", binding.imageView12, 100)
         ImageLoadUtils.withFillet2PX("https://img.jbzj.com/file_images/article/202010/2020101810184374.png", binding.imageView13, com.easy.core.R.mipmap.ic_def_head)
         ImageLoadUtils.transformCircularHead("https://img.jbzj.com/file_images/article/202010/2020101810184374.png", binding.imageView14)
+
+
+
+        ImageLoadUtils.with("http://39.155.212.90:19001/image/get/topicsxwk/cover/978-7-5073-4880-40001.jpg", binding.ivGif)
+
 
 
         binding.imageView20.setImageBitmap(onDef("01234567890123456789", "字字字字字字字字字字字字字字字字"))
