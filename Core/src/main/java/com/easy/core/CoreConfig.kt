@@ -132,7 +132,7 @@ class CoreConfig private constructor() {
     var isDebug = true
 
     /**
-     * 默认图
+     * 默认图  加载中的图片
      */
     var defImg = R.drawable.ic_def_img
 
