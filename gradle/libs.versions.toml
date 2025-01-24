@@ -54,7 +54,7 @@ coil_version_version = "2.2.2"
 
 core_version = "1.6.1"
 work_version = "2.7.1"
-room_version = "2.2.5"
+room_version = "2.4.0-alpha03"
 hiltVersion = "2.51.1"
 hitViewModule = "1.0.0-alpha03"
 lifecycle_version = "2.4.0"

@@ -1,4 +1,4 @@
-package com.easy.example.utils;
+package com.easy.core.utils;
 
 import android.graphics.Color;
 

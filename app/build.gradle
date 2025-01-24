@@ -20,10 +20,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
+    namespace 'com.easy.example'
     compileSdk 33
     defaultConfig {
-        applicationId "com.easy.core"
+        applicationId "com.easy.example"
         minSdkVersion 23
         targetSdkVersion 33
         versionName "1.0.0"
@@ -95,7 +95,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    namespace 'com.easy.example'
 
 }
 
@@ -104,10 +103,11 @@ dependencies {
     implementation project(':Core')
 
 
-    implementation "androidx.room:room-runtime:2.4.0-alpha03"
     api libs.constraintLayout
 
-    kapt 'androidx.room:room-compiler:2.4.0-alpha03'
+    kapt libs.room.compiler
+    implementation libs.room.runtime
+
 
     debugImplementation libs.leakcanary
 

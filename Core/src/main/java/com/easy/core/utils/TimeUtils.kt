@@ -150,6 +150,7 @@ object TimeUtils {
      */
     val nowDate: String
         get() {
+
             return formatDate("yyyy-MM-dd HH:mm:ss")
         }
 

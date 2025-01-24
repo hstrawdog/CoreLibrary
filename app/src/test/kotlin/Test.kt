@@ -1,4 +1,3 @@
-import com.easy.example.utils.ColorUtil
 import org.junit.Test
 
 /**
