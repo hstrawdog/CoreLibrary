@@ -10,12 +10,11 @@ import android.content.Context
  * @Describe :
  */
 interface IListModelView {
-
-
-
+    /**
+     *  避开上下文的缓存
+     * @return Context
+     */
     fun getContext(): Context
-
-
 
     /**
      * 开始下拉刷新

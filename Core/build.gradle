@@ -19,7 +19,6 @@ android {
     compileSdk 33
     defaultConfig {
         minSdkVersion 23
-
     }
     buildTypes {
         release {

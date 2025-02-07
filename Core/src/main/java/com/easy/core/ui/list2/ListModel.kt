@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
@@ -16,6 +18,9 @@ import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
 import com.easy.core.CoreConfig
 import com.easy.core.R
+import com.easy.core.lifecycle.BaseLifecycleEventObserver
+import com.easy.core.ui.base.BaseActivity
+import com.easy.core.ui.base.BaseFragment
 import com.easy.core.ui.base.RootViewImpl
 import com.easy.core.utils.ResourcesUtils
 import com.easy.core.utils.data.DataUtils
@@ -23,6 +28,9 @@ import com.easy.core.widget.CusPtrClassicFrameLayout
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
 import `in`.srain.cube.views.ptr.PtrHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * @Author : huangqiqiang
@@ -38,37 +46,63 @@ import `in`.srain.cube.views.ptr.PtrHandler
  * 1. 点击事件的绑定交给Activity 来操作  adapter的点击事件绑定有两种 在多种布局的的情况下 点击事件写在adapter中可能会更合适一些
  *
  */
-class ListModel<T : Any>() {
+abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
 
-    constructor( iRootView: RootViewImpl,baseListModelView: IListModelView) : this() {
-        mBaseListModelView = baseListModelView
-        layoutManager = LinearLayoutManager(mBaseListModelView.getContext())
-        recycleView = initRecycleView(iRootView.rootView)
+    private constructor()
+
+    constructor(activity:BaseActivity) : this() {
+        context = activity
+        init(activity.lifecycle, activity.rootViewImpl)
     }
 
-    lateinit var mBaseListModelView: IListModelView
+    constructor(fragment:BaseFragment) : this() {
+        context = fragment.requireContext()
+        init(fragment.lifecycle, fragment.rootViewImpl)
+    }
 
+    private fun init(lifecycle:Lifecycle, rootViewImpl:RootViewImpl) {
+        lifecycle.coroutineScope.launch {
+            withContext(Dispatchers.Main) {
+                lifecycle.addObserver(this@ListModel)
+            }
+        }
+        layoutManager = LinearLayoutManager(context)
+        recycleView = initRecycleView(rootViewImpl.rootView)
+    }
+
+    /**
+     * 布局类型
+     *
+     * @return
+     */
+    open var layoutManager:RecyclerView.LayoutManager? = null
+
+    /**
+     *  上下文
+     */
+    var context:Context? = null
 
     /**
      * 获取adapter
      *
      * @return
      */
-    var adapter: BaseQuickAdapter<T, *>  ?=null
+    abstract var adapter:BaseQuickAdapter<T, *>
+
     /**
      *  是否  开启 加载更多
      */
-    var isLoadMore: Boolean = false
+    var isLoadMore:Boolean = true
 
     /**
      * 下拉刷新对象
      */
-    var ptrPullDown: CusPtrClassicFrameLayout? = null
+    var ptrPullDown:CusPtrClassicFrameLayout? = null
 
     /**
      * 分页 管理对象
      */
-    var helper: QuickAdapterHelper? = null
+    var helper:QuickAdapterHelper? = null
 
     /**
      *  空布局 layout Id
@@ -78,36 +112,36 @@ class ListModel<T : Any>() {
     /**
      * 应该要可以全局配置的 配置在xml中 可以替换
      */
-    var emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
+    var emptyTextMessage:CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
 
-    var emptyImage: Int = R.mipmap.ic_empty_def
+    /**
+     *  空布局图片
+     */
+    var emptyImage:Int = R.mipmap.ic_empty_def
 
-    var recycleView: RecyclerView? = null
+    /**
+     *  列表
+     */
+    var recycleView:RecyclerView? = null
 
     /**
      * 分页下标
      *
      * @return
-     */
-    var pageCount: Int = 1
+     */Æ
+    var pageCount:Int = 1
 
     /**
      * 分页大小
      *
      * @return
      */
-    var pageSize: Int = 10
+    var pageSize:Int = 10
 
-    /**
-     * 布局类型
-     *
-     * @return
-     */
-    lateinit var layoutManager: RecyclerView.LayoutManager
-    fun createRecycleView(context: Context): RecyclerView {
+
+    fun createRecycleView(context:Context):RecyclerView {
         val view = RecyclerView(context)
-        view.layoutParams =
-            LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         view.id = R.id.rc_list
         return view
     }
@@ -117,10 +151,10 @@ class ListModel<T : Any>() {
      * @param view View?
      * @return RecyclerView?
      */
-    fun initRecycleView(view: View?): RecyclerView {
+    fun initRecycleView(view:View?):RecyclerView {
         var listView = checkRecycleView(recycleView, view)
         if (listView == null) {
-            listView = createRecycleView(mBaseListModelView.getContext())
+            listView = createRecycleView(context!!)
         }
 
         listView.overScrollMode = View.OVER_SCROLL_NEVER
@@ -136,13 +170,12 @@ class ListModel<T : Any>() {
      *
      * @param view
      */
-    private fun initPtrPullDown(view: View?) {
+    private fun initPtrPullDown(view:View?) {
         if (ptrPullDown == null) {
-            view?.findViewById<CusPtrClassicFrameLayout>(R.id.ptr_pull_down)
-                ?.let {
-                    ptrPullDown = it
-                    initPull()
-                }
+            view?.findViewById<CusPtrClassicFrameLayout>(R.id.ptr_pull_down)?.let {
+                ptrPullDown = it
+                initPull()
+            }
         }
     }
 
@@ -155,11 +188,11 @@ class ListModel<T : Any>() {
             it.isKeepHeaderWhenRefresh = true
             it.setLastUpdateTimeRelateObject(this)
             it.setPtrHandler(object : PtrHandler {
-                override fun onRefreshBegin(frame: PtrFrameLayout?) {
-                    mBaseListModelView.onRefreshBegin()
+                override fun onRefreshBegin(frame:PtrFrameLayout?) {
+                    onRefreshBegin()
                 }
 
-                override fun checkCanDoRefresh(frame: PtrFrameLayout, content: View, header: View): Boolean {
+                override fun checkCanDoRefresh(frame:PtrFrameLayout, content:View, header:View):Boolean {
                     return PtrDefaultHandler.checkContentCanBePulledDown(frame, recycleView, header)
                 }
             })
@@ -172,19 +205,18 @@ class ListModel<T : Any>() {
 
     fun build() {
         adapter?.isStateViewEnable = true
+        recycleView?.layoutManager = layoutManager
         if (isLoadMore) {
             helper = adapter?.let {
-                QuickAdapterHelper.Builder(it)
-                    .setTrailingLoadStateAdapter(object : TrailingLoadStateAdapter.OnTrailingListener {
-                        override fun onFailRetry() {
-                            mBaseListModelView.onLoadMore()
-                        }
+                QuickAdapterHelper.Builder(it).setTrailingLoadStateAdapter(object : TrailingLoadStateAdapter.OnTrailingListener {
+                    override fun onFailRetry() {
+                        onFailRetry()
+                    }
 
-                        override fun onLoad() {
-                            mBaseListModelView.onLoadMore()
-                        }
-                    })
-                    .build()
+                    override fun onLoad() {
+                        onLoadMore()
+                    }
+                }).build()
             }
             recycleView?.adapter = helper?.adapter
         } else {
@@ -199,7 +231,7 @@ class ListModel<T : Any>() {
      *
      * @param emptyView
      */
-    private fun initEmptyView(emptyView: View?) {
+    private fun initEmptyView(emptyView:View?) {
         if (emptyView == null) {
             return
         }
@@ -223,7 +255,7 @@ class ListModel<T : Any>() {
      *
      * @param data
      */
-    fun fillingData(data: List<T>) {
+    fun fillingData(data:List<T>) {
         if (pageCount == 1) {
             adapter?.submitList(data)
         } else {
@@ -232,14 +264,11 @@ class ListModel<T : Any>() {
         when {
             // 没有头部的时候才可以加这个
             adapter?.itemCount == 0 -> {
-
                 CoreConfig.get().currActivity?.let {
-                    var emptyView = LayoutInflater.from(it)
-                        .inflate(layoutEmptyView, null)
-                    adapter?.stateView = emptyView
+                    var emptyView = LayoutInflater.from(it).inflate(layoutEmptyView, null)
                     initEmptyView(emptyView)
+                    adapter?.stateView = emptyView
                 }
-
             }
 
             else -> {
@@ -251,7 +280,6 @@ class ListModel<T : Any>() {
 //                    mBaseListModelView.addPageCount()
                     //  设置状态为未加载，并且还有分页数据
                     helper?.trailingLoadState = LoadState.NotLoading(false)
-
                 }
             }
         }
@@ -273,10 +301,43 @@ class ListModel<T : Any>() {
      * @param view
      * @return
      */
-    private fun checkRecycleView(recyclerView: RecyclerView?, view: View?): RecyclerView? {
+    private fun checkRecycleView(recyclerView:RecyclerView?, view:View?):RecyclerView? {
         recyclerView?.let {
             return@let
         }
         return view?.findViewById(R.id.rc_list)
+    }
+
+    /**
+     *  加载失败
+     */
+    fun onFailRetry() {
+        loadData()
+    }
+
+    /**
+     * 开始下拉刷新
+     */
+    fun onRefreshBegin() {
+        pageCount = 1
+        loadData()
+    }
+
+    /**
+     *  加载更多
+     */
+    fun onLoadMore() {
+        pageCount++
+        loadData()
+
+    }
+
+    abstract fun loadData()
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        context = null
+
     }
 }

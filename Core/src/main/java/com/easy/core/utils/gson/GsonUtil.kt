@@ -20,9 +20,7 @@ object GsonUtil {
     /**
      * 如果不设置serializeNulls,序列化时默认忽略NULL
      * */
-    private val GSON = GsonBuilder()
-        .serializeNulls()
-        .create()
+    private val GSON = GsonBuilder().serializeNulls().create()
 
     /**
      *
@@ -30,7 +28,7 @@ object GsonUtil {
      * @return String
      */
     @JvmStatic
-    fun toJsonString(o: Any?): String {
+    fun toJsonString(o:Any?):String {
         return GSON.toJson(o)
     }
 
@@ -41,7 +39,7 @@ object GsonUtil {
      * @return String
      */
     @JvmStatic
-    fun toJsonString(o: Any?, type: Type?): String {
+    fun toJsonString(o:Any?, type:Type?):String {
         return GSON.toJson(o, type)
     }
 
@@ -52,7 +50,7 @@ object GsonUtil {
      * @return String
      */
     @JvmStatic
-    fun fromJson(o: JsonReader, type: Type?): String {
+    fun fromJson(o:JsonReader, type:Type?):String {
         return GSON.fromJson(o, type)
     }
 
@@ -63,10 +61,10 @@ object GsonUtil {
      * @return T?
      */
     @JvmStatic
-    fun <T> fromJson(json: String?, clazz: Class<T>?): T? {
+    fun <T> fromJson(json:String?, clazz:Class<T>?):T? {
         return try {
             GSON.fromJson(json, clazz)
-        } catch (e: JsonSyntaxException) {
+        } catch (e:JsonSyntaxException) {
             LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
@@ -79,10 +77,10 @@ object GsonUtil {
      * @return T?
      */
     @JvmStatic
-    fun <T> fromJson(json: String?, type: Type?): T? {
+    fun <T> fromJson(json:String?, type:Type?):T? {
         return try {
             GSON.fromJson(json, type)
-        } catch (e: JsonSyntaxException) {
+        } catch (e:JsonSyntaxException) {
             LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
@@ -95,10 +93,10 @@ object GsonUtil {
      * @return T?
      */
     @JvmStatic
-    fun <T> fromJson(json: JsonElement?, clazz: Class<T>?): T? {
+    fun <T> fromJson(json:JsonElement?, clazz:Class<T>?):T? {
         return try {
             GSON.fromJson(json, clazz)
-        } catch (e: JsonSyntaxException) {
+        } catch (e:JsonSyntaxException) {
             LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
@@ -111,10 +109,10 @@ object GsonUtil {
      * @return T?
      */
     @JvmStatic
-    fun <T> fromJson(json: JsonElement?, type: Type?): T? {
+    fun <T> fromJson(json:JsonElement?, type:Type?):T? {
         return try {
             GSON.fromJson(json, type)
-        } catch (e: JsonSyntaxException) {
+        } catch (e:JsonSyntaxException) {
             LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
             null
         }
@@ -126,7 +124,7 @@ object GsonUtil {
      * @return JsonElement
      */
     @JvmStatic
-    fun toJsonTree(o: Any?): JsonElement {
+    fun toJsonTree(o:Any?):JsonElement {
         return GSON.toJsonTree(o)
     }
 
@@ -137,7 +135,7 @@ object GsonUtil {
      * @return JsonElement
      */
     @JvmStatic
-    fun toJsonTree(o: Any?, type: Type?): JsonElement {
+    fun toJsonTree(o:Any?, type:Type?):JsonElement {
         return GSON.toJsonTree(o, type)
     }
 
@@ -149,7 +147,16 @@ object GsonUtil {
      * @return
      */
     @JvmStatic
-    fun getValue(json: String?, key: String?): JsonElement {
-        return JsonParser.parseString(json).asJsonObject[key]
+    fun getValue(json:String?, key:String?):JsonElement? {
+        if (json.isNullOrEmpty() || key.isNullOrEmpty()) {
+            LogUtils.e("$json   与  $key  ")
+            return  null
+        } else if (json.contains(key)) {
+            return JsonParser.parseString(json).asJsonObject[key]
+        } else {
+            LogUtils.e("$json    不存在 $key")
+            return null
+        }
+
     }
 }
