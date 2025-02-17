@@ -128,7 +128,7 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
      * 分页下标
      *
      * @return
-     */Æ
+     */
     var pageCount:Int = 1
 
     /**
