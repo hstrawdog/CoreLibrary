@@ -27,8 +27,6 @@ import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
-import com.easy.example.ui.recycle.ListV2ActivityView
-import com.easy.example.ui.recycle.NewBannerActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity2

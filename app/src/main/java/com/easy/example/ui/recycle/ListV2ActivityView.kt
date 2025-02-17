@@ -7,7 +7,6 @@ import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.easy.core.ui.base.BaseActivity
 import com.easy.core.ui.list2.ListModel
-import com.easy.core.ui.list2.IListModelView
 import com.easy.example.R
 import com.easy.example.bean.ClassA
 import kotlinx.coroutines.CoroutineScope
@@ -27,11 +26,11 @@ import kotlinx.coroutines.withContext
 class ListV2ActivityView : BaseActivity() {
 
     class ListAdapter : BaseQuickAdapter<ClassA, QuickViewHolder>() {
-        override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: ClassA?) {
+        override fun onBindViewHolder(holder:QuickViewHolder, position:Int, item:ClassA?) {
 
         }
 
-        override fun onCreateViewHolder(context: Context, parent: ViewGroup, viewType: Int): QuickViewHolder {
+        override fun onCreateViewHolder(context:Context, parent:ViewGroup, viewType:Int):QuickViewHolder {
 
             return QuickViewHolder(R.layout.item_main, parent)
         }
@@ -39,25 +38,13 @@ class ListV2ActivityView : BaseActivity() {
     }
 
 
-    val listModel: ListModel<ClassA> by lazy {
-        ListModel<ClassA>(rootViewImpl, object : IListModelView {
-            override fun getContext(): Context {
-                return this@ListV2ActivityView
+    val listModel by lazy {
+        object : ListModel<ClassA>(this) {
+            override var adapter:BaseQuickAdapter<ClassA, *> = ListAdapter()
+            override fun loadData() {
+                TODO("Not yet implemented")
             }
 
-            override fun onRefreshBegin() {
-                listModel.pageCount = 1
-                getData()
-            }
-
-            override fun onLoadMore() {
-                listModel.pageCount++
-                getData()
-            }
-
-        }).apply {
-            isLoadMore = true
-            adapter = ListAdapter()
         }
 
     }
@@ -65,9 +52,7 @@ class ListV2ActivityView : BaseActivity() {
 
     fun getData() {
         CoroutineScope(Dispatchers.IO).launch {
-
             delay(2000)
-
             withContext(Dispatchers.Main) {
                 var list = ArrayList<ClassA>()
 
@@ -82,12 +67,12 @@ class ListV2ActivityView : BaseActivity() {
 
     }
 
-    override fun getLayoutView(parent: ViewGroup): View? {
+    override fun getLayoutView(parent:ViewGroup):View? {
         return listModel.recycleView
     }
 
 
-    override fun getLayoutViewId(): Int {
+    override fun getLayoutViewId():Int {
         return 0
     }
 

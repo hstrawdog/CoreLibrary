@@ -19,11 +19,13 @@ import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
 import com.easy.core.CoreConfig
 import com.easy.core.R
 import com.easy.core.lifecycle.BaseLifecycleEventObserver
+import com.easy.core.lifecycle.BaseLifecycleObserver
 import com.easy.core.ui.base.BaseActivity
 import com.easy.core.ui.base.BaseFragment
 import com.easy.core.ui.base.RootViewImpl
 import com.easy.core.utils.ResourcesUtils
 import com.easy.core.utils.data.DataUtils
+import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.CusPtrClassicFrameLayout
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
@@ -46,28 +48,34 @@ import kotlinx.coroutines.withContext
  * 1. 点击事件的绑定交给Activity 来操作  adapter的点击事件绑定有两种 在多种布局的的情况下 点击事件写在adapter中可能会更合适一些
  *
  */
-abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
+abstract class ListModel<T : Any> : BaseLifecycleObserver {
 
     private constructor()
 
-    constructor(activity:BaseActivity) : this() {
+    constructor(activity: BaseActivity) : this() {
+        LogUtils.e("listModel   constructor    BaseActivity11111")
+
         context = activity
-        init(activity.lifecycle, activity.rootViewImpl)
-    }
-
-    constructor(fragment:BaseFragment) : this() {
-        context = fragment.requireContext()
-        init(fragment.lifecycle, fragment.rootViewImpl)
-    }
-
-    private fun init(lifecycle:Lifecycle, rootViewImpl:RootViewImpl) {
-        lifecycle.coroutineScope.launch {
+        recycleView = initRecycleView(activity.rootViewImpl.rootView)
+        activity.lifecycle.coroutineScope.launch {
             withContext(Dispatchers.Main) {
-                lifecycle.addObserver(this@ListModel)
+                activity.lifecycle.addObserver(this@ListModel)
             }
         }
-        layoutManager = LinearLayoutManager(context)
-        recycleView = initRecycleView(rootViewImpl.rootView)
+        LogUtils.e("listModel   constructor    BaseActivity2222")
+
+    }
+
+    constructor(fragment: BaseFragment) : this() {
+
+        LogUtils.e("listModel   constructor    BaseFragment")
+        context = fragment.context
+        recycleView = initRecycleView(fragment.rootViewImpl.rootView)
+        fragment.lifecycle.coroutineScope.launch {
+            withContext(Dispatchers.Main) {
+                fragment.lifecycle.addObserver(this@ListModel)
+            }
+        }
     }
 
     /**
@@ -75,34 +83,34 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
      *
      * @return
      */
-    open var layoutManager:RecyclerView.LayoutManager? = null
+    open var layoutManager: RecyclerView.LayoutManager? = null
 
     /**
      *  上下文
      */
-    var context:Context? = null
+    var context: Context? = null
 
     /**
      * 获取adapter
      *
      * @return
      */
-    abstract var adapter:BaseQuickAdapter<T, *>
+    abstract var adapter: BaseQuickAdapter<T, *>
 
     /**
      *  是否  开启 加载更多
      */
-    var isLoadMore:Boolean = true
+    var isLoadMore: Boolean = true
 
     /**
      * 下拉刷新对象
      */
-    var ptrPullDown:CusPtrClassicFrameLayout? = null
+    var ptrPullDown: CusPtrClassicFrameLayout? = null
 
     /**
      * 分页 管理对象
      */
-    var helper:QuickAdapterHelper? = null
+    var helper: QuickAdapterHelper? = null
 
     /**
      *  空布局 layout Id
@@ -112,36 +120,37 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
     /**
      * 应该要可以全局配置的 配置在xml中 可以替换
      */
-    var emptyTextMessage:CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
+    var emptyTextMessage: CharSequence = ResourcesUtils.getString(R.string.def_empty_message)
 
     /**
      *  空布局图片
      */
-    var emptyImage:Int = R.mipmap.ic_empty_def
+    var emptyImage: Int = R.mipmap.ic_empty_def
 
     /**
      *  列表
      */
-    var recycleView:RecyclerView? = null
+    var recycleView: RecyclerView? = null
 
     /**
      * 分页下标
      *
      * @return
      */
-    var pageCount:Int = 1
+    var pageCount: Int = 1
 
     /**
      * 分页大小
      *
      * @return
      */
-    var pageSize:Int = 10
+    var pageSize: Int = 10
 
 
-    fun createRecycleView(context:Context):RecyclerView {
+    fun createRecycleView(context: Context): RecyclerView {
         val view = RecyclerView(context)
-        view.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        view.layoutParams =
+            LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         view.id = R.id.rc_list
         return view
     }
@@ -151,14 +160,13 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
      * @param view View?
      * @return RecyclerView?
      */
-    fun initRecycleView(view:View?):RecyclerView {
+    fun initRecycleView(view: View?): RecyclerView {
         var listView = checkRecycleView(recycleView, view)
         if (listView == null) {
             listView = createRecycleView(context!!)
         }
 
         listView.overScrollMode = View.OVER_SCROLL_NEVER
-        listView.layoutManager = layoutManager
 
 
         initPtrPullDown(view)
@@ -170,12 +178,13 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
      *
      * @param view
      */
-    private fun initPtrPullDown(view:View?) {
+    private fun initPtrPullDown(view: View?) {
         if (ptrPullDown == null) {
-            view?.findViewById<CusPtrClassicFrameLayout>(R.id.ptr_pull_down)?.let {
-                ptrPullDown = it
-                initPull()
-            }
+            view?.findViewById<CusPtrClassicFrameLayout>(R.id.ptr_pull_down)
+                ?.let {
+                    ptrPullDown = it
+                    initPull()
+                }
         }
     }
 
@@ -188,39 +197,49 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
             it.isKeepHeaderWhenRefresh = true
             it.setLastUpdateTimeRelateObject(this)
             it.setPtrHandler(object : PtrHandler {
-                override fun onRefreshBegin(frame:PtrFrameLayout?) {
+                override fun onRefreshBegin(frame: PtrFrameLayout?) {
                     onRefreshBegin()
                 }
 
-                override fun checkCanDoRefresh(frame:PtrFrameLayout, content:View, header:View):Boolean {
+                override fun checkCanDoRefresh(frame: PtrFrameLayout, content: View, header: View): Boolean {
                     return PtrDefaultHandler.checkContentCanBePulledDown(frame, recycleView, header)
                 }
             })
+
         }
+
+
     }
 
 
+    var isBuild = false
+
     fun build() {
-        adapter?.isStateViewEnable = true
+        if (adapter == null) {
+            throw IllegalStateException("adapter 未初始化")
+        }
+        adapter.isStateViewEnable = true
         recycleView?.layoutManager = layoutManager
         if (isLoadMore) {
             helper = adapter?.let {
-                QuickAdapterHelper.Builder(it).setTrailingLoadStateAdapter(object : TrailingLoadStateAdapter.OnTrailingListener {
-                    override fun onFailRetry() {
-                        onFailRetry()
-                    }
+                QuickAdapterHelper.Builder(it)
+                    .setTrailingLoadStateAdapter(object : TrailingLoadStateAdapter.OnTrailingListener {
+                        override fun onFailRetry() {
+                            onFailRetry()
+                        }
 
-                    override fun onLoad() {
-                        onLoadMore()
-                    }
-                }).build()
+                        override fun onLoad() {
+                            onLoadMore()
+                        }
+                    })
+                    .build()
             }
             recycleView?.adapter = helper?.adapter
         } else {
             recycleView?.adapter = adapter
 
         }
-
+        isBuild = true
     }
 
     /**
@@ -228,7 +247,7 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
      *
      * @param emptyView
      */
-    private fun initEmptyView(emptyView:View?) {
+    private fun initEmptyView(emptyView: View?) {
         if (emptyView == null) {
             return
         }
@@ -252,7 +271,12 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
      *
      * @param data
      */
-    fun fillingData(data:List<T>) {
+    fun fillingData(data: List<T>) {
+        if (isBuild == false) {
+            build()
+        }
+
+
         if (pageCount == 1) {
             adapter?.submitList(data)
         } else {
@@ -262,7 +286,8 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
             // 没有头部的时候才可以加这个
             adapter?.itemCount == 0 -> {
                 CoreConfig.get().currActivity?.let {
-                    var emptyView = LayoutInflater.from(it).inflate(layoutEmptyView, null)
+                    var emptyView = LayoutInflater.from(it)
+                        .inflate(layoutEmptyView, null)
                     initEmptyView(emptyView)
                     adapter?.stateView = emptyView
                 }
@@ -298,11 +323,40 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
      * @param view
      * @return
      */
-    private fun checkRecycleView(recyclerView:RecyclerView?, view:View?):RecyclerView? {
+    private fun checkRecycleView(recyclerView: RecyclerView?, view: View?): RecyclerView? {
         recyclerView?.let {
             return@let
         }
-        return view?.findViewById(R.id.rc_list)
+        return view?.findViewById<RecyclerView>(R.id.rc_list)
+    }
+
+    override fun onAny() {
+
+    }
+
+
+    override fun onCrete() {
+        LogUtils.e(" ListModel  onCrete")
+        // 日志 上看去是是在 Activity 之后执行的
+
+    }
+
+    override fun onDestroy() {
+        context = null
+        recycleView = null
+
+    }
+
+    override fun onPause() {
+    }
+
+    override fun onResume() {
+    }
+
+    override fun onStart() {
+    }
+
+    override fun onStop() {
     }
 
     /**
@@ -330,11 +384,4 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
     }
 
     abstract fun loadData()
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        context = null
-
-    }
 }
