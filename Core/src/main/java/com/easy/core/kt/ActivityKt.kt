@@ -12,18 +12,14 @@ import com.easy.core.ui.base.BaseActivity
  * @param cls Class<*>
  * @param result ActivityResultCallback<ActivityResult>
  */
-fun BaseActivity.open(cls: Class<*>, bundle: Bundle = Bundle(),
-                      result: ActivityResultCallback<ActivityResult?> = ActivityResultCallback<ActivityResult?> { }) {
-
+fun BaseActivity.open(cls:Class<*>, bundle:Bundle = Bundle(), result:ActivityResultCallback<ActivityResult?> = ActivityResultCallback<ActivityResult?> { }) {
+    registerForActivity.launch(Intent(this, cls).apply {
+        putExtras(bundle)
+    })
     activityResult.observe(this) {
         result.onActivityResult(it)
         activityResult.removeObservers(this)
     }
-
-    registerForActivity.launch(Intent(this, cls).apply {
-        putExtras(bundle)
-    })
-
 }
 
 ///**

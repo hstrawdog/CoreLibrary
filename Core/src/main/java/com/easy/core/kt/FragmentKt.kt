@@ -16,14 +16,11 @@ import com.easy.core.ui.base.BaseFragment
 fun BaseFragment.open(cls: Class<*>,
                       bundle: Bundle = Bundle(),
                       result: ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
-
+    registerForActivity.launch(Intent(requireContext(), cls).apply {
+        putExtras(bundle)
+    })
     activityResult.observe(this) {
         result.onActivityResult(it)
         activityResult.removeObservers(this)
     }
-
-    registerForActivity.launch(Intent(requireContext(), cls).apply {
-        putExtras(bundle)
-    })
-
 }
