@@ -196,10 +196,7 @@ abstract class ListModel<T : Any> : BaseLifecycleEventObserver {
                     return PtrDefaultHandler.checkContentCanBePulledDown(frame, recycleView, header)
                 }
             })
-
         }
-
-
     }
 
 
