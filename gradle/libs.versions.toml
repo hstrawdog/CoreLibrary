@@ -283,7 +283,7 @@ photoview_library = { group = "com.bm.photoview", name = "library", version.ref 
 subsamplingscaleimageview_core = { group = "com.davemorrissey.labs", name = "subsampling-scale-image-view", version.ref = "subsamplingscaleimageview_version" }
 
 
-unpeek_livedata = { group = "com.github.KunMinX", name = "UnPeek-LiveData", version.ref = "unpeek_livedata_version" }
+ unpeek_livedata = { group = "com.github.KunMinX", name = "UnPeek-LiveData", version.ref = "unpeek_livedata_version" }
 
 
 #  注解 依赖注入   dagger

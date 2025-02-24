@@ -105,7 +105,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+    <activity android:name=".ui.marquee.MarqueeActivity" android:label="跑马灯"/>
+    <activity android:name=".ui.marquee.demo.MainMarqueeActivity" android:label="跑马灯"/>
 
         <activity
             android:name=".ui.KillerActivity"

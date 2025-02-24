@@ -91,6 +91,7 @@ object ImageLoadUtils {
     }
 
     /**
+     * 默认 应该是是用这个带圆角的
      * @param url
      * @param imageView
      * @param radius    圆角  单位 px
@@ -98,7 +99,7 @@ object ImageLoadUtils {
      */
     @JvmStatic
 
-    fun withFillet2PX(url: String?, imageView: ImageView?, radius: Int, resourceId: Int = CoreConfig.get().defImg) {
+    fun withFillet2PX(url: Any?, imageView: ImageView?, radius: Int, resourceId: Int = CoreConfig.get().defImg) {
         GlideApp.with(imageView!!)
             .load(url)
             .apply(getRequestOptionRound(radius, resourceId))

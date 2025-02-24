@@ -26,6 +26,8 @@ import com.easy.example.ui.file.FileIndexActivity2
 import com.easy.example.ui.fragment.FragmentIndexActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
+import com.easy.example.ui.marquee.MarqueeActivity
+import com.easy.example.ui.marquee.demo.MainMarqueeActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
@@ -73,6 +75,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 
         open(DefImgActivity::class.java)
+        open(MarqueeActivity::class.java)
+        open(MainMarqueeActivity::class.java)
 
 //        FullDialog.showDialog(supportFragmentManager)
         //data/data/com.easy.core/cache/256965670.pdf
