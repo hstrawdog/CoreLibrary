@@ -1,5 +1,6 @@
 package com.easy.core.ui.dialog
 
+import android.content.DialogInterface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
@@ -47,18 +48,23 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         activityResult.value = result
     }
 
-    var loadingView: LoadingView? = null
+    var loadingView:LoadingView? = null
 
     var loaded = false
 
-    var dialogClickListener: DialogClickListener<*>? = null
+    var dialogClickListener:DialogClickListener<*>? = null
 
-    var rootView: View? = null
+    var rootView:View? = null
+
+    /**
+     *  是否执行了Dismiss  动作
+     */
+    var isDismiss = false
 
 
-    abstract fun getDialogLayoutId(): Int
+    abstract fun getDialogLayoutId():Int
 
-    override fun getLayoutViewId(): Int {
+    override fun getLayoutViewId():Int {
         return R.layout.dialog_new
 
     }
@@ -66,14 +72,14 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      * 布局创建
      */
-    protected val rootViewBuild: IRootViewBuildBuild by lazy {
+    protected val rootViewBuild:IRootViewBuildBuild by lazy {
         IRootViewBuildBuild(this)
     }
 
     /**
      *  根布局
      */
-    val rootViewImpl: RootViewImpl
+    val rootViewImpl:RootViewImpl
         get() {
             return rootViewBuild.rootViewImpl
         }
@@ -81,34 +87,34 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      *  是否点击空白关闭dialog
      */
-    open val isDismissBackground: Boolean
+    open val isDismissBackground:Boolean
         get() = true
 
     /**
      * 背景颜色
      */
-    override fun getBackground(): Int {
+    override fun getBackground():Int {
         return 0x00000000
     }
 
     /**
      *方向
      */
-    override fun getGravity(): Int {
+    override fun getGravity():Int {
         return Gravity.CENTER
     }
 
     /**
      *  宽
      */
-    override fun getDialogWeight(): Int {
+    override fun getDialogWeight():Int {
         return WindowManager.LayoutParams.WRAP_CONTENT
     }
 
     /**
      *  高
      */
-    override fun getDialogHeight(): Int {
+    override fun getDialogHeight():Int {
         return WindowManager.LayoutParams.WRAP_CONTENT
     }
 
@@ -117,7 +123,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      *   R.style.dialogAnimation_fade_in2fade_out  淡入淡出
      *   R.style.DialogAnimation_bottom2top  下到上
      */
-    override fun getAnimation(): Int {
+    override fun getAnimation():Int {
         return R.style.DialogAnimation_bottom2top
     }
 
@@ -125,9 +131,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      * 状态栏模式
      */
     @ToolBarMode
-    var statusBarMode: Int = CoreConfig.get().isStatusMode
+    var statusBarMode:Int = CoreConfig.get().isStatusMode
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         //        //代码设置 无标题 无边框
 //        if (setWeight() == WindowManager.LayoutParams.WRAP_CONTENT) {
@@ -138,7 +144,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         setStyle(STYLE_NORMAL, R.style.DefDialogStyle)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater:LayoutInflater, container:ViewGroup?, savedInstanceState:Bundle?):View? {
         dialog?.window?.setWindowAnimations(getAnimation())
         if (rootView == null) {
             activity?.let {
@@ -148,12 +154,12 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
-            LogUtils.e4Mark("onCreateView     ${this} " )
+            LogUtils.e4Mark("onCreateView     ${this} ")
         }
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view:View, savedInstanceState:Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!loaded && rootView != null) {
             if (statusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
@@ -174,8 +180,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      */
     open fun initContentView() {
         val linearLayout = rootView!!.findViewById<LinearLayout>(R.id.ll_rootView)
-        val view = LayoutInflater.from(context)
-            .inflate(getDialogLayoutId(), linearLayout, false)
+        val view = LayoutInflater.from(context).inflate(getDialogLayoutId(), linearLayout, false)
         linearLayout.gravity = getGravity()
         linearLayout.addView(view)
         view.setOnClickListener { }
@@ -184,7 +189,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState:Bundle?) {
         super.onActivityCreated(savedInstanceState)
         LogUtils.e4Mark(rootView?.measuredWidth)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(getBackground()))
@@ -203,11 +208,11 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         rootView = null
     }
 
-    override fun getLayoutView(parent: ViewGroup): View? {
+    override fun getLayoutView(parent:ViewGroup):View? {
         return null
     }
 
-    override fun show(manager: FragmentManager) {
+    override fun show(manager:FragmentManager) {
         val ft = manager.beginTransaction()
         val prev = manager.findFragmentByTag(javaClass.simpleName)
         if (prev != null) {
@@ -216,7 +221,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
                     if (prev.dialog?.isShowing == true) {
                         prev.dismiss()
                     }
-                } catch (e: Exception) {
+                } catch (e:Exception) {
                     LogUtils.e(e.toString())
                 }
             }
@@ -224,6 +229,20 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         }
         ft.add(this, javaClass.simpleName)
         ft.commitAllowingStateLoss()
+        isDismiss = false
+    }
+
+    override fun dismiss() {
+        if (isDismiss || !isAdded) {
+
+            LogUtils.e("${this}   is ${isDismiss}    or  ${!isAdded}")
+            // 避免重复 执行
+            return
+        }
+        isDismiss = true
+        super.dismiss()
+
+
     }
 
     /**
@@ -231,8 +250,10 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
      */
     override fun initConfig() {}
 
-    fun setDialogClickListener(dialogClickListener: DialogClickListener<*>?): BaseDialog {
+    fun setDialogClickListener(dialogClickListener:DialogClickListener<*>?):BaseDialog {
         this.dialogClickListener = dialogClickListener
         return this
     }
+
+
 }
