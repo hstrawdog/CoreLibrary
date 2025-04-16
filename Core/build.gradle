@@ -38,7 +38,6 @@ android {
     }
     publishing {
         singleVariant("release") {
-            // if you don't want sources/javadoc, remove these lines
             withSourcesJar()
             withJavadocJar()
         }
@@ -52,7 +51,6 @@ dependencies {
     api libs.coilKt
 
     api libs.i.dimens.compat
-
     // Appcompat   包含 core
     api libs.appcompat.core
     api libs.appcompat.coreKtx
@@ -60,7 +58,6 @@ dependencies {
     //  kotlin拓展包
     api libs.activityKtx
     api libs.fragmentKtx
-
     //  androidX 组件
     api libs.constraintLayout
     api libs.recyclerview
@@ -72,10 +69,8 @@ dependencies {
     api libs.lifecycleLivedataKtx
     api libs.lifecycleRunTimeKtx
 
-
     // gson解析
     api libs.gson
-
     // 压缩
     api libs.luban
     // 上拉加载

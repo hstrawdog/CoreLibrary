@@ -7,7 +7,41 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+//读取文件
+def versionPropertiesFile = rootProject.file("version.properties")
+def versionProps = new Properties()
+if (versionPropertiesFile.exists()) {
+    versionProps.load(new FileInputStream(versionPropertiesFile))
+} else {
+    versionProps.setProperty("versionCode", "1")
+    versionProps.setProperty("versionName", "1.0.0")
+}
+//更新版本号以及版本名称
+task updateVersion {
+    doLast {
+        def versionCode = versionProps['versionCode'].toInteger() + 1
+        def versionName = incrementVersionName(versionProps['versionName'])
+        versionProps.setProperty("versionCode", versionCode.toString())
+        versionProps.setProperty("versionName", versionName)
+        versionProps.store(new FileOutputStream(versionPropertiesFile), null)
+    }
+}
 
+// 曾加 版本号
+def incrementVersionName(String versionName) {
+    def parts = versionName.split("\\.")
+    def minor = parts[1].toInteger()
+    def patch = parts[2].toInteger() + 1
+    return "${parts[0]}.${minor}.${patch}"
+}
+// 让 updateVersion 在 assemble 任务前执行   finalizedBy 是任务后
+tasks.whenTaskAdded { task ->
+    if (task.name == 'assemblePatElfAlpha' || task.name == 'assemblePatElfRelease') {
+        task.finalizedBy updateVersion
+    }
+}
+
+//  Android 配置信息
 android {
     dataBinding {
         enabled = true
@@ -84,7 +118,8 @@ android {
             }
     }
     sourceSets {
-        main { res.srcDirs = ['src/main/res', 'src/main/res-main', 'src/main/res-night']
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res-main', 'src/main/res-night']
             assets {
                 srcDirs 'src/main/assets'
             }
@@ -116,7 +151,6 @@ dependencies {
 
     kapt libs.daggerCompiler
     kapt libs.hiltCompiler
-
 
 
     api 'com.amap.api:location:latest.integration'

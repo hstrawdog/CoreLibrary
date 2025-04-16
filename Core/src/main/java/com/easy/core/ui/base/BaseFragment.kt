@@ -1,21 +1,26 @@
 package com.easy.core.ui.base
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.easy.core.R
+import com.easy.core.kt.open
 import com.easy.core.toolbar.IToolBar
 import com.easy.core.utils.BundleAction
+import com.easy.core.utils.ResourcesUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
 import com.kunminx.architecture.domain.message.MutableResult
 
 interface OnFragmentVisibilityChangedListener {
-    fun onFragmentVisibilityChanged(visible: Boolean)
+    fun onFragmentVisibilityChanged(visible:Boolean)
 }
 
 /**
@@ -26,30 +31,31 @@ interface OnFragmentVisibilityChangedListener {
  * @Email :  qiqiang213@gmail.com
  * @Describe :
  */
-abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener,
-    View.OnAttachStateChangeListener, OnFragmentVisibilityChangedListener {
+abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener, View.OnAttachStateChangeListener, OnFragmentVisibilityChangedListener {
 
     /**
      *   MutableLiveData 去传递结果
      */
-    var activityResult = MutableResult<ActivityResult>()
+    var activityResult:ActivityResultCallback<ActivityResult>? = null
+
 
     /**
      * 预先 注册
      */
     var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        activityResult.value = result
+        activityResult?.onActivityResult(result)
     }
+
 
     /**
      * 缓存根布局对象
      */
-    protected var rootView: View? = null
+    protected var rootView:View? = null
 
     /**
      * LoadingDialog
      */
-    var loadingView: LoadingView? = null
+    var loadingView:LoadingView? = null
 
     /**
      * fragment 是否创建
@@ -64,20 +70,20 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * bundle 集合
      */
-    override val bundle: Bundle?
+    override val bundle:Bundle?
         get() = arguments
 
     /**
      * 布局创建 容器
      */
-    private val rootViewBuild: IRootViewBuildBuild by lazy {
+    private val rootViewBuild:IRootViewBuildBuild by lazy {
         IRootViewBuildBuild(this)
     }
 
     /**
      *  根布局
      */
-    val rootViewImpl: RootViewImpl
+    val rootViewImpl:RootViewImpl
         get() {
             return rootViewBuild.rootViewImpl
         }
@@ -85,7 +91,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      *  是否延迟加载
      */
-    override fun isLazyLoad(): Boolean {
+    override fun isLazyLoad():Boolean {
         return false
     }
 
@@ -93,7 +99,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      * 标题栏
      * get  类似代理 每次从 rootViewBuild.iRootViewImp 获取对象
      */
-    val iToolBar: IToolBar?
+    val iToolBar:IToolBar?
         get() {
             return rootViewImpl.iToolBar
         }
@@ -106,7 +112,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      * @param savedInstanceState Bundle
      * @return View
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater:LayoutInflater, container:ViewGroup?, savedInstanceState:Bundle?):View? {
         if (rootView == null) {
             activity?.let {
                 loadingView = LoadingView(it)
@@ -124,7 +130,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      * Tab切换时会回调此方法。对于没有Tab的页面，[Fragment.getUserVisibleHint]默认为true。
      * @param isVisibleToUser
      */
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+    override fun setUserVisibleHint(isVisibleToUser:Boolean) {
         info("setUserVisibleHint = $isVisibleToUser")
         super.setUserVisibleHint(isVisibleToUser)
         checkVisibility(isVisibleToUser)
@@ -137,7 +143,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      * @param view
      * @param savedInstanceState
      */
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view:View, savedInstanceState:Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 处理直接 replace 的 case
         view.addOnAttachStateChangeListener(this)
@@ -180,20 +186,23 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      *   初始化配置
      */
     override fun initConfig() {
-
+//        rootViewImpl.iToolBarBuilder.showToolBar = true
+//        rootViewImpl.iToolBarBuilder.showStatusBar = true
+//        rootViewImpl.iToolBarBuilder.showLine = false
+//        rootViewImpl.iToolBarBuilder.statusBarColor = ResourcesUtils.getColor(R.color.wheat)
     }
 
     /**
      * 关联主界面 **只有在使用自定义View时使用**
      */
-    override fun getLayoutView(parent: ViewGroup): View? {
+    override fun getLayoutView(parent:ViewGroup):View? {
         return null
     }
 
     /**
      *  重写点击接口
      */
-    override fun onClick(v: View) {
+    override fun onClick(v:View) {
 
     }
 
@@ -203,7 +212,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     private fun onFragmentHit() {}
 
     /******************************** 衍生方法   *********************************/
-    fun findViewById(id: Int): View? {
+    fun findViewById(id:Int):View? {
         return if (rootView == null || id < 0) null else rootView!!.findViewById(id)
 
     }
@@ -221,24 +230,24 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      */
     private var visible = false
 
-    private var localParentFragment: BaseFragment? = null
+    private var localParentFragment:BaseFragment? = null
 
     private val listeners = ArrayList<OnFragmentVisibilityChangedListener>()
 
-    fun addOnVisibilityChangedListener(listener: OnFragmentVisibilityChangedListener?) {
+    fun addOnVisibilityChangedListener(listener:OnFragmentVisibilityChangedListener?) {
         listener?.apply {
             listeners.add(this)
         }
     }
 
-    fun removeOnVisibilityChangedListener(listener: OnFragmentVisibilityChangedListener?) {
+    fun removeOnVisibilityChangedListener(listener:OnFragmentVisibilityChangedListener?) {
         listener?.apply {
             listeners.remove(this)
         }
 
     }
 
-    override fun onAttach(context: Context) {
+    override fun onAttach(context:Context) {
         info("onAttach")
         super.onAttach(context)
         val parentFragment = parentFragment
@@ -273,7 +282,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * ParentActivity可见性改变
      */
-    protected fun onActivityVisibilityChanged(visible: Boolean) {
+    protected fun onActivityVisibilityChanged(visible:Boolean) {
         parentActivityVisible = visible
         checkVisibility(visible)
         if (isLazyLoad() && isCreate && !lazyInitEnd && visible) {
@@ -288,11 +297,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * ParentFragment可见性改变
      */
-    override fun onFragmentVisibilityChanged(visible: Boolean) {
+    override fun onFragmentVisibilityChanged(visible:Boolean) {
         checkVisibility(visible)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState:Bundle?) {
         info("onCreate")
         super.onCreate(savedInstanceState)
     }
@@ -300,17 +309,17 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * 调用 fragment add hide 的时候回调用这个方法
      */
-    override fun onHiddenChanged(hidden: Boolean) {
+    override fun onHiddenChanged(hidden:Boolean) {
         super.onHiddenChanged(hidden)
         checkVisibility(hidden)
     }
 
-    override fun onViewAttachedToWindow(v: View) {
+    override fun onViewAttachedToWindow(v:View) {
         info("onViewAttachedToWindow")
         checkVisibility(true)
     }
 
-    override fun onViewDetachedFromWindow(v: View) {
+    override fun onViewDetachedFromWindow(v:View) {
         info("onViewDetachedFromWindow")
         v.removeOnAttachStateChangeListener(this)
         checkVisibility(false)
@@ -321,7 +330,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      *
      * @param expected 可见性期望的值。只有当前值和expected不同，才需要做判断
      */
-    private fun checkVisibility(expected: Boolean) {
+    private fun checkVisibility(expected:Boolean) {
         if (expected == visible) return
         val parentVisible = if (localParentFragment == null) parentActivityVisible
         else localParentFragment?.isFragmentVisible() ?: false
@@ -338,7 +347,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * 可见性改变
      */
-    private fun onVisibilityChanged(visible: Boolean) {
+    private fun onVisibilityChanged(visible:Boolean) {
         info("==> onVisibilityChanged = $visible")
         listeners.forEach {
             it.onFragmentVisibilityChanged(visible)
@@ -348,11 +357,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * 是否可见（Activity处于前台、Tab被选中、Fragment被添加、Fragment没有隐藏、Fragment.View已经Attach）
      */
-    fun isFragmentVisible(): Boolean {
+    fun isFragmentVisible():Boolean {
         return visible
     }
 
-    private fun info(s: String) {
+    private fun info(s:String) {
         LogUtils.d("${this.javaClass.simpleName} ; $s ; this is $this")
     }
 

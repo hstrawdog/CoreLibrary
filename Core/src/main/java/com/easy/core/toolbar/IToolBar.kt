@@ -126,7 +126,7 @@ interface IToolBar {
         var showToolBar = true
 
         /**
-         *  是否显示底部很小
+         *  是否显示底部 横线
          */
         var showLine = true
 

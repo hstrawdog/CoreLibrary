@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.easy.core.R
@@ -31,13 +32,13 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     /**
      *  回调
      */
-    var activityResult = MutableResult<ActivityResult>()
+    var activityResult:ActivityResultCallback<ActivityResult>? = null
 
     /**
      *  页面跳转
      */
     var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        activityResult.value = result
+        activityResult?.onActivityResult( result)
     }
 
     /**
