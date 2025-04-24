@@ -20,7 +20,7 @@ object RetrofitService {
     /**
      *  okHttp  请求对象
      */
-    private val okHttp: OkHttpClient
+    private val okHttp:OkHttpClient
         get() = OkHttpClient().newBuilder().apply {
             //连接超时
             connectTimeout(CoreConfig.get().connectTimeout, TimeUnit.SECONDS)
@@ -33,6 +33,12 @@ object RetrofitService {
                 addInterceptor(HttpLoggingInterceptor().apply {
                     setLevel(HttpLoggingInterceptor.Level.BODY)
                 })
+
+                // 添加配置的拦截器
+                CoreConfig.get().interceptorList.forEach {
+                    addInterceptor(it)
+                }
+
             }
         }.build()
 
@@ -40,27 +46,23 @@ object RetrofitService {
      *  Gson 对象
      */
     private val gson
-        get() = GsonBuilder()
-                .apply {
-                    setPrettyPrinting()
-                    // 动态注册 Gson转义
-                    for (entry in CoreConfig.get().instanceCreators.keys) {
-                        registerTypeAdapter(entry, CoreConfig.get().instanceCreators[entry])
-                    }
+        get() = GsonBuilder().apply {
+                setPrettyPrinting()
+                // 动态注册 Gson转义
+                for (entry in CoreConfig.get().instanceCreators.keys) {
+                    registerTypeAdapter(entry, CoreConfig.get().instanceCreators[entry])
                 }
-                .create()
+            }.create()
 
     /**
      * Retrofit 构建器
      */
-    private val retrofitBuilder = Retrofit.Builder()
-            .client(okHttp)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+    private val retrofitBuilder = Retrofit.Builder().client(okHttp).addConverterFactory(GsonConverterFactory.create(gson))
 
     /**
      *  创建 Retrofit 对象
      */
-    fun <S> createService(baseUrl: String = CoreConfig.get().baseUrl, serviceClass: Class<S>): S {
+    fun <S> createService(baseUrl:String = CoreConfig.get().baseUrl, serviceClass:Class<S>):S {
         return retrofitBuilder.baseUrl(baseUrl).build().create(serviceClass)
 
     }
