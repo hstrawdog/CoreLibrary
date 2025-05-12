@@ -15,72 +15,72 @@ import java.io.Serializable
 interface BundleAction {
     val bundle: Bundle?
 
-    fun getInt(name: String?): Int {
-        return getInt(name, 0)
+    fun getBundleInt(name: String?): Int {
+        return getBundleInt(name, 0)
     }
 
-    fun getInt(name: String?, defaultValue: Int): Int {
+    fun getBundleInt(name: String?, defaultValue: Int): Int {
         val bundle = bundle ?: return defaultValue
         return bundle.getInt(name, defaultValue)
     }
 
-    fun getLong(name: String?): Long {
-        return getLong(name, 0)
+    fun getBundleLong(name: String?): Long {
+        return getBundleLong(name, 0)
     }
 
-    fun getLong(name: String?, defaultValue: Int): Long {
+    fun getBundleLong(name: String?, defaultValue: Int): Long {
         val bundle = bundle ?: return defaultValue.toLong()
         return bundle.getLong(name, defaultValue.toLong())
     }
 
-    fun getFloat(name: String?): Float {
-        return getFloat(name, 0)
+    fun getBundleFloat(name: String?): Float {
+        return getBundleFloat(name, 0)
     }
 
-    fun getFloat(name: String?, defaultValue: Int): Float {
+    fun getBundleFloat(name: String?, defaultValue: Int): Float {
         val bundle = bundle ?: return defaultValue.toFloat()
         return bundle.getFloat(name, defaultValue.toFloat())
     }
 
-    fun getDouble(name: String?): Double {
-        return getDouble(name, 0)
+    fun getBundleDouble(name: String?): Double {
+        return getBundleDouble(name, 0)
     }
 
-    fun getDouble(name: String?, defaultValue: Int): Double {
+    fun getBundleDouble(name: String?, defaultValue: Int): Double {
         val bundle = bundle ?: return defaultValue.toDouble()
         return bundle.getDouble(name, defaultValue.toDouble())
     }
 
-    fun getBoolean(name: String?): Boolean {
-        return getBoolean(name, false)
+    fun getBundleBoolean(name: String?): Boolean {
+        return getBundleBoolean(name, false)
     }
 
-    fun getBoolean(name: String?, defaultValue: Boolean): Boolean {
+    fun getBundleBoolean(name: String?, defaultValue: Boolean): Boolean {
         val bundle = bundle ?: return defaultValue
         return bundle.getBoolean(name, defaultValue)
     }
 
-    fun getString(name: String?): String? {
+    fun getBundleString(name: String?): String? {
         val bundle = bundle ?: return null
         return bundle.getString(name)
     }
 
-    fun <P : Parcelable?> getParcelable(name: String?): P? {
+    fun <P : Parcelable?> getBundleParcelable(name: String?): P? {
         val bundle = bundle ?: return null
         return bundle.getParcelable(name)
     }
 
-    fun <S : Serializable?> getSerializable(name: String?): S? {
+    fun <S : Serializable?> getBundleSerializable(name: String?): S? {
         val bundle = bundle ?: return null
         return bundle.getSerializable(name) as S?
     }
 
-    fun getStringArrayList(name: String?): ArrayList<String?>? {
+    fun getBundleStringArrayList(name: String?): ArrayList<String?>? {
         val bundle = bundle ?: return null
         return bundle.getStringArrayList(name)
     }
 
-    fun getIntegerArrayList(name: String?): ArrayList<Int?>? {
+    fun getBundleIntegerArrayList(name: String?): ArrayList<Int?>? {
         val bundle = bundle ?: return null
         return bundle.getIntegerArrayList(name)
     }
