@@ -76,8 +76,8 @@ class AlbumPreviewActivity : BaseAlbumActivity<ActivityAlbumPreviewV2Binding>(),
     }
 
     override fun initView() {
-        _isShowSelect = getBoolean("isShowSelect", true)
-        _isSavaBitmap = getBoolean("isSavaBitmap", false)
+        _isShowSelect = getBundleBoolean("isShowSelect", true)
+        _isSavaBitmap = getBundleBoolean("isSavaBitmap", false)
         if (_isShowSelect) {
             binding.llCheck.visibility = View.VISIBLE
         } else {

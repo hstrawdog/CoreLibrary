@@ -6,107 +6,82 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import  com.easy.core.R
+import com.easy.core.R
 import com.easy.core.glide.ImageLoadUtils
-import com.easy.core.recycle.RecycleViewBanner.RecycleViewBannerChangeListener
-import com.easy.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
+import com.easy.core.recycle.RecycleViewBannerChangeListener
+import com.easy.core.recycle.RecycleViewBannerClickListener
 
 /**
- * @Author : huangqiqiang
- * @Package : com.core.library.banner
- * @FileName :   BaseBannerAdapter
- * @Date : 2018/6/15 0015  下午 5:26
- * @Email :  qiqiang213@gmail.com
- * @Describe :
+ * 无限循环 Banner Adapter
  */
-class RecycleBannerAdapter<Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    /**
-     *   数据源对象
-     */
-    var data = ArrayList<Any>()
+class RecycleBannerAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    /**
-     * 点击事件
-     */
-    private var onRvBannerClickListener: RecycleViewBannerClickListener? = null
+    var data:List<T> = emptyList()
+    var isUnlimited:Boolean = true
+    var isShowTip:Boolean = false
+    var scaleType:ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP
 
-    /**
-     *  改变事件     重新绑定数据源地址与标题
-     */
-    private var mRecycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>? = null
+    private var bannerClickListener:RecycleViewBannerClickListener? = null
+    private var bannerChangeListener:RecycleViewBannerChangeListener<T>? = null
 
-    /**
-     *  是否显示标题/提示
-     */
-    var isShowTip = false
-
-    /**
-     *  是否开始无限循环
-     */
-    var isUnlimited = true
-    /**
-     *  默认居中裁剪
-     */
-    var scaleType = ImageView.ScaleType.CENTER_CROP
-
-
-    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener) {
-        this.onRvBannerClickListener = onRvBannerClickListener
+    fun setOnRvBannerClickListener(listener:RecycleViewBannerClickListener) {
+        this.bannerClickListener = listener
     }
 
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>?): RecycleBannerAdapter<Any> {
-        mRecycleViewBannerChangeListener = recycleViewBannerChangeListener
-        return this
+    fun setRecycleViewBannerChangeListener(listener:RecycleViewBannerChangeListener<T>?) {
+        this.bannerChangeListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = onCreateView(parent)
+    override fun onCreateViewHolder(parent:ViewGroup, viewType:Int):RecyclerView.ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_banner, parent, false)
         return object : RecyclerView.ViewHolder(view) {}
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        onBindView(holder, position)
-    }
+    override fun onBindViewHolder(holder:RecyclerView.ViewHolder, position:Int) {
+        val realPosition = getRealPosition(position)
+        val item = data.getOrNull(realPosition) ?: return
 
-    override fun getItemCount(): Int {
-        return if (isUnlimited) {
-            if (data.size < 2) data.size else Int.MAX_VALUE
-        } else {
-            data.size
-        }
-    }
+        val imageView = holder.itemView.findViewById<ImageView>(R.id.iv_banner)
+        val textView = holder.itemView.findViewById<TextView>(R.id.tv_code_banner)
 
-    private fun onCreateView(parent: ViewGroup): View {
-        return LayoutInflater.from(parent.context).inflate(R.layout.item_banner, parent, false)
-    }
+        imageView.scaleType = scaleType
 
-    private fun onBindView(holder: RecyclerView.ViewHolder, position: Int) {
-        val img = holder.itemView.findViewById<ImageView>(R.id.iv_banner)
-        val tv = holder.itemView.findViewById<TextView>(R.id.tv_code_banner)
-        val item = data[position % data.size]
-        img.scaleType = scaleType
-        if (item is String) {
-            tv.visibility = View.GONE
-            ImageLoadUtils.with(item as String, img)
-        } else if (item is Int) {
-            tv.visibility = View.GONE
-            ImageLoadUtils.with(item as Int, img)
-        } else if (null != mRecycleViewBannerChangeListener) {
-            ImageLoadUtils.with(mRecycleViewBannerChangeListener!!.getUrl(item), img)
-            if (isShowTip) {
-                tv.text = mRecycleViewBannerChangeListener!!.getTitle(item)
-                tv.visibility = View.VISIBLE
-            } else {
-                tv.visibility = View.GONE
+        when (item) {
+            is String -> {
+                textView.visibility = View.GONE
+                ImageLoadUtils.with(item, imageView)
+            }
+
+            is Int -> {
+                textView.visibility = View.GONE
+                ImageLoadUtils.with(item, imageView)
+            }
+
+            else -> {
+                val url = bannerChangeListener?.getUrl(item)
+                val title = bannerChangeListener?.getTitle(item)
+                if (!url.isNullOrEmpty()) {
+                    ImageLoadUtils.with(url, imageView)
+                }
+                if (isShowTip && !title.isNullOrEmpty()) {
+                    textView.text = title
+                    textView.visibility = View.VISIBLE
+                } else {
+                    textView.visibility = View.GONE
+                }
             }
         }
 
         holder.itemView.setOnClickListener {
-            if (onRvBannerClickListener != null) {
-                onRvBannerClickListener!!.onBannerClick(position % (data.size))
-            }
+            bannerClickListener?.onBannerClick(realPosition)
         }
     }
 
+    override fun getItemCount():Int {
+        return if (isUnlimited && data.size > 1) Int.MAX_VALUE else data.size
+    }
 
+    private fun getRealPosition(position:Int):Int {
+        return if (data.isEmpty()) 0 else position % data.size
+    }
 }

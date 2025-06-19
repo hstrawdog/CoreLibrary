@@ -13,229 +13,138 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import  com.easy.core.R
+import com.easy.core.R
 import com.easy.core.recycle.adapter.RecycleBannerAdapter
 import com.easy.core.recycle.indicator.CircleIndicatorView
 import com.easy.core.recycle.indicator.HollowCircleIndicatorView
 import com.easy.core.recycle.indicator.IndicatorView
 import com.easy.core.recycle.indicator.RectangleIndicatorView
-import  com.easy.core.utils.ScreenUtils
+import com.easy.core.utils.ScreenUtils
 
-/**
- * https://github.com/loonggg/RecyclerViewBanner
- * https://github.com/renjianan/RecyclerBanner
- *
- * @Author : huangqiqiang
- * @Package : com.core.library.banner
- * @FileName :   RecyclerViewBanner
- * @Date : 2018/8/6 0006  下午 4:09
- * @Email :  593979591@qq.com
- * @Describe :
- * 待完成
- * 1.多种指示器配置
- * 2. 考虑再次封装 adapter  不应该绑定在这边 需要解耦
- * 3. 不能与BRVAH 搭配使用
- */
-class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
-                                                  defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
-    /**
-     * 轮播间隔时间
-     */
-    private var mInterval = 0
+class RecycleViewBanner @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+                                                 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    /**
-     * 是否显示指示器
-     */
-    private var isShowIndicator = false
+    private var mInterval = 3000
+    private var isShowIndicator = true
+    private var isShowTip = true
+    private var isAutoPlaying = true
+    private var mIsUnlimited = true
+    private var selectSpeed = 0f
 
-    /**
-     * 是否显示标题
-     */
-    private var isShowTip = false
-
-    /**
-     * 获取RecyclerView实例，便于满足自定义[RecyclerView.ItemAnimator]或者[RecyclerView.Adapter]的需求
-     *
-     * @return RecyclerView实例
-     */
-    var recyclerView: RecyclerView? = null
-        private set
-    private var mLinearLayout: IndicatorView? = null
-
-    private var startX = 0
-    private var startY = 0
+    private var recyclerView: RecyclerView = RecyclerView(context)
+    private var indicatorView: IndicatorView? = null
     private var currentIndex = 0
-
-    /**
-     * 是否正在轮播
-     */
     private var isPlaying = false
-    var mHandlers = Handler()
     private var isTouched = false
 
-    /**
-     * 是否自动轮播
-     */
-    private var isAutoPlaying = true
+    private val mData = ArrayList<Any>()
+    private var mAdapter: RecycleBannerAdapter<Any>? = null
+    private val mHandlers = Handler()
 
-    /**
-     * 倍数
-     */
-    private var selectSpeed = 0f
     var recycleViewBannerCurrentListener: RecycleViewBannerCurrentListener? = null
 
-    /**
-     * 是否无限轮播
-     */
-    private var mIsUnlimited = true
-    private var mData: ArrayList<Any> = ArrayList()
-    private var mAdapter: RecycleBannerAdapter<Any>? = null
-    private val playTask: Runnable = object : Runnable {
+    private val playTask = object : Runnable {
         override fun run() {
-            recyclerView!!.smoothScrollToPosition(++currentIndex)
+            recyclerView.smoothScrollToPosition(++currentIndex)
             switchIndicator()
             mHandlers.postDelayed(this, mInterval.toLong())
         }
     }
 
-    val data: List<*>?
-        get() = mData
-
-    private fun init(context: Context, attrs: AttributeSet?) {
+    init {
         val margin = initAttributeSet(context, attrs)
         initRecycleView()
         addView(recyclerView, LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-        val linearLayoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        linearLayoutParams.gravity = Gravity.BOTTOM
-        linearLayoutParams.setMargins(margin, margin, margin, margin)
-        addView(mLinearLayout, linearLayoutParams)
-        initEditMode()
-    }
-
-    private fun initRecycleView() {
-        // 直接使用卡片布局 貌似 也是可以的
-        recyclerView!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        // new ScalableCardHelper().attachToRecyclerView(mRecyclerView);
-        PagerSnapHelper().attachToRecyclerView(recyclerView)
-
-        mAdapter?.data = mData
-        mAdapter?.isShowTip = isShowTip;
-
-        recyclerView!!.adapter = mAdapter
-        recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val first = (recyclerView.layoutManager as LinearLayoutManager?)!!.findFirstVisibleItemPosition()
-                    val last = (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastVisibleItemPosition()
-                    if (first == last && currentIndex != last) {
-                        currentIndex = last
-                        if (isTouched) {
-                            isTouched = false
-                            switchIndicator()
-                        }
-                    }
-                }
+        indicatorView?.let {
+            val params = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                gravity = Gravity.BOTTOM
+                setMargins(margin, margin, margin, margin)
             }
-        })
+            addView(it, params)
+        }
+        if (isInEditMode) initEditMode()
     }
 
-    /**
-     * 初始化属性
-     *
-     * @param context
-     * @param attrs
-     * @return
-     */
     private fun initAttributeSet(context: Context, attrs: AttributeSet?): Int {
         val a = context.obtainStyledAttributes(attrs, R.styleable.BannerLayout)
         mInterval = a.getInt(R.styleable.BannerLayout_rvb_interval, 3000)
         isShowIndicator = a.getBoolean(R.styleable.BannerLayout_rvb_showIndicator, true)
         isShowTip = a.getBoolean(R.styleable.BannerLayout_rvb_isShowTip, true)
         isAutoPlaying = a.getBoolean(R.styleable.BannerLayout_rvb_autoPlaying, true)
-        val margin =
-            a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorMargin, ScreenUtils.dip2px(getContext(), 8f))
-        if (recyclerView == null) {
-            recyclerView = RecyclerView(context)
+        mIsUnlimited = true
 
-            val type = a.getInt(R.styleable.BannerLayout_rvb_tip_type, 0)
-            when (type) {
-                1 -> {
-                    // 空心圆
-                    mLinearLayout = HollowCircleIndicatorView(context)
+        val margin = a.getDimensionPixelSize(
+            R.styleable.BannerLayout_rvb_indicatorMargin,
+            ScreenUtils.dip2px(context, 8f)
+                                            )
 
-                }
-
-                2 -> {
-                    //  长方形
-                    mLinearLayout = RectangleIndicatorView(context)
-                }
-
-                else -> {
-                    // 标准 实心圆
-                    mLinearLayout = CircleIndicatorView(context)
-
-                }
-
-            }
-
-
-
-            mAdapter = RecycleBannerAdapter<Any>()
-
+        indicatorView = when (a.getInt(R.styleable.BannerLayout_rvb_tip_type, 0)) {
+            1 -> HollowCircleIndicatorView(context)
+            2 -> RectangleIndicatorView(context)
+            else -> CircleIndicatorView(context)
         }
-        // 初始化 指示器 中的内容
-        initIndicator(a)
+
+        initIndicatorStyle(a)
+
+        mAdapter = RecycleBannerAdapter()
+        mAdapter?.isUnlimited = mIsUnlimited
+        mAdapter?.isShowTip = isShowTip
+
         a.recycle()
         return margin
     }
 
-    /**
-     *  设置图片显示样式
-     */
-    fun setImageScaleType(scaleType: ImageView.ScaleType) {
-        mAdapter?.scaleType = scaleType
+    private fun initIndicatorStyle(a: TypedArray) {
+        selectSpeed = a.getFloat(R.styleable.BannerLayout_rvb_selectSpeed, 0f)
+        indicatorView?._selectSpeed = selectSpeed
+        indicatorView?.setSelectColor(a.getColor(R.styleable.BannerLayout_rvb_indicatorSelectedColor, -0x78a7d2))
+        indicatorView?.setDefColor(a.getColor(R.styleable.BannerLayout_rvb_indicatorUnselectedColor, -0x1))
+        val radius = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorRadius, 0)
+        if (radius > 0 && indicatorView is CircleIndicatorView) {
+            (indicatorView as CircleIndicatorView).setDefRadius(radius)
+        }
+        indicatorView?.setModel(a.getInt(R.styleable.BannerLayout_rvb_indicatorGravity, 3))
     }
 
-    /**
-     * 便于在xml中编辑时观察，运行时不执行
-     */
-    private fun initEditMode() {
-        if (isInEditMode) {
-            for (i in 0..2) {
-                mData!!.add("")
+    private fun initRecycleView() {
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        PagerSnapHelper().attachToRecyclerView(recyclerView)
+        recyclerView.adapter = mAdapter
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val first = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    currentIndex = first
+                    if (isTouched) {
+                        isTouched = false
+                        switchIndicator()
+                    }
+                }
             }
-            createIndicators()
-        }
+        })
+    }
+
+    private fun initEditMode() {
+        repeat(3) { mData.add("") }
+        createIndicators()
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        //手动触摸的时候，停止自动播放，根据手势变换
         when (ev.action) {
             MotionEvent.ACTION_DOWN -> {
-                startX = ev.x.toInt()
-                startY = ev.y.toInt()
                 parent.requestDisallowInterceptTouchEvent(true)
             }
-
             MotionEvent.ACTION_MOVE -> {
-                val moveX = ev.x.toInt()
-                val moveY = ev.y.toInt()
-                val disX = moveX - startX
-                val disY = moveY - startY
-                val hasMoved = 2 * Math.abs(disX) > Math.abs(disY)
-                parent.requestDisallowInterceptTouchEvent(hasMoved)
-                if (hasMoved) {
-                    setPlaying(false)
+                setPlaying(false)
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                if (!isPlaying) {
+                    isTouched = true
+                    setPlaying(true)
                 }
-            }
-
-            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> if (!isPlaying) {
-                isTouched = true
-                setPlaying(true)
-            }
-
-            else -> {
             }
         }
         return super.dispatchTouchEvent(ev)
@@ -252,50 +161,17 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
     }
 
     override fun onWindowVisibilityChanged(visibility: Int) {
-        if (visibility == View.GONE || visibility == View.INVISIBLE) {
-            // 停止轮播
+        if (visibility != View.VISIBLE) {
             setPlaying(false)
-        } else if (visibility == View.VISIBLE) {
-            // 开始轮播
+        } else {
             setPlaying(true)
         }
         super.onWindowVisibilityChanged(visibility)
     }
 
-    /**
-     * 配置 指示器 内容
-     *
-     * @param a TypedArray
-     */
-    private fun initIndicator(a: TypedArray) {
-
-        selectSpeed = a.getFloat(R.styleable.BannerLayout_rvb_selectSpeed, 0f)
-        // 圆形目前 不支持
-        mLinearLayout?._selectSpeed = selectSpeed
-
-        val sd = a.getColor(R.styleable.BannerLayout_rvb_indicatorSelectedColor, -0x78a7d2)
-        mLinearLayout!!.setSelectColor(sd)
-        val usd = a.getColor(R.styleable.BannerLayout_rvb_indicatorUnselectedColor, -0x1)
-        mLinearLayout!!.setDefColor(usd)
-        val radius = a.getDimensionPixelSize(R.styleable.BannerLayout_rvb_indicatorRadius, 0)
-        if (radius > 0) {
-            if (mLinearLayout is CircleIndicatorView) {
-                (mLinearLayout as CircleIndicatorView).setDefRadius(radius)
-            }
-        }
-        val g = a.getInt(R.styleable.BannerLayout_rvb_indicatorGravity, 3)
-        mLinearLayout!!.setModel(g)
-    }
-
-    /**
-     * 设置是否自动播放（上锁）
-     *
-     * @param playing 开始播放
-     */
-    @Synchronized
     private fun setPlaying(playing: Boolean) {
         if (isAutoPlaying) {
-            if (!isPlaying && playing && mAdapter != null && mAdapter!!.itemCount > 2) {
+            if (!isPlaying && playing && mAdapter?.itemCount ?: 0 > 1) {
                 mHandlers.postDelayed(playTask, mInterval.toLong())
                 isPlaying = true
             } else if (isPlaying && !playing) {
@@ -305,160 +181,71 @@ class RecycleViewBanner @JvmOverloads constructor(context: Context, attrs: Attri
         }
     }
 
-    /**
-     * 设置轮播数据集
-     *
-     * @param data Banner对象列表
-     */
     fun setRvBannerData(data: MutableList<Any>) {
         setPlaying(false)
-        // 避免空指针
-        if (mData == null) {
-            mData = ArrayList()
+        mData.clear()
+        mData.addAll(data)
+        mAdapter?.data = mData
+        currentIndex = if (mIsUnlimited && mData.size > 1) Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2 % mData.size) else 0
+        recyclerView.scrollToPosition(currentIndex)
+        if (isShowIndicator && mData.size > 1) {
+            createIndicators()
         }
-        mData!!.clear()
-        mData!!.addAll(data)
-        if (mData!!.size > 1) {
-            currentIndex = if (mIsUnlimited) {
-                mData!!.size * 100
-            } else {
-                0
-            }
-            mAdapter!!.notifyDataSetChanged()
-            recyclerView!!.scrollToPosition(currentIndex)
-            if (isShowIndicator) {
-                createIndicators()
-            }
-            setPlaying(true)
-        } else {
-            currentIndex = 0
-            mAdapter!!.notifyDataSetChanged()
-        }
-        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex % mData!!.size)
-
-
+        if (mData.size > 1) setPlaying(true)
+        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex % mData.size)
     }
 
-    fun <T : RecycleBannerAdapter<Any>> setAdapter(adapter: T) {
-        mAdapter = adapter
-    }
-
-    /**
-     * 指示器整体由数据列表容量数量的AppCompatImageView均匀分布在一个横向的LinearLayout中构成
-     * 使用AppCompatImageView的好处是在Fragment中也使用Compat相关属性
-     */
     private fun createIndicators() {
-        mLinearLayout!!.setPageColumn(mData!!.size)
+        indicatorView?.setPageColumn(mData.size)
     }
 
-    /**
-     * 设置是否禁止滚动播放
-     *
-     * @param isAutoPlaying true  是自动滚动播放,false 是禁止自动滚动
-     */
-    fun setRvAutoPlaying(isAutoPlaying: Boolean) {
-        this.isAutoPlaying = isAutoPlaying
+    private fun switchIndicator() {
+        if (mData.isEmpty()) return
+        val pos = currentIndex % mData.size
+        indicatorView?.setCurrentItem(pos)
+        recycleViewBannerCurrentListener?.onCurrentPosition(pos)
     }
 
-    /**
-     * 设置是否显示指示器导航点
-     *
-     * @param show 显示
-     */
+    fun setImageScaleType(scaleType: ImageView.ScaleType) {
+        mAdapter?.scaleType = scaleType
+    }
+
+    fun setRvAutoPlaying(autoPlay: Boolean) {
+        isAutoPlaying = autoPlay
+    }
+
     fun isShowIndicator(show: Boolean) {
         isShowIndicator = show
     }
 
-    /**
-     * 设置轮播间隔时间
-     *
-     * @param millisecond 时间毫秒
-     */
     fun setIndicatorInterval(millisecond: Int) {
         mInterval = millisecond
     }
 
-    /**
-     * 改变导航指示器
-     */
-    private fun switchIndicator() {
-        if (mData == null || mData!!.size == 0) {
-            return
-        }
-        if (isShowIndicator) {
-            mLinearLayout!!.setCurrentItem(currentIndex % mData!!.size)
-        }
-        recycleViewBannerCurrentListener?.onCurrentPosition(currentIndex % mData!!.size)
-
-    }
-
-    /**
-     * 是否 无限轮播
-     *
-     * @param unlimited boolean
-     */
     fun setUnlimited(unlimited: Boolean) {
         mIsUnlimited = unlimited
         mAdapter?.isUnlimited = unlimited
     }
 
-    /**
-     * 滑动到指定位置
-     *
-     * @param position int
-     */
     fun smoothScrollToPosition(position: Int) {
-        recyclerView!!.smoothScrollToPosition(position)
+        recyclerView.smoothScrollToPosition(position)
     }
 
     fun scrollToPosition(position: Int) {
-        recyclerView!!.scrollToPosition(position)
+        recyclerView.scrollToPosition(position)
     }
 
-    fun setCurrentIndex(currentIndex: Int) {
-        this.currentIndex = currentIndex
+    fun setCurrentIndex(index: Int) {
+        currentIndex = index
     }
 
-    fun setOnRvBannerClickListener(onRvBannerClickListener: RecycleViewBannerClickListener) {
-        mAdapter!!.setOnRvBannerClickListener(onRvBannerClickListener)
+    fun setOnRvBannerClickListener(listener: RecycleViewBannerClickListener) {
+        mAdapter?.setOnRvBannerClickListener(listener)
     }
 
-    fun setRecycleViewBannerChangeListener(recycleViewBannerChangeListener: RecycleViewBannerChangeListener<Any>) {
-        mAdapter!!.setRecycleViewBannerChangeListener(recycleViewBannerChangeListener)
+    fun setRecycleViewBannerChangeListener(listener: RecycleViewBannerChangeListener<Any>) {
+        mAdapter?.setRecycleViewBannerChangeListener(listener)
     }
 
 
-
-
-    interface RecycleViewBannerClickListener {
-        /**
-         * @param t
-         */
-        fun onBannerClick(t: Int)
-    }
-
-    interface RecycleViewBannerChangeListener<Any> {
-        /**
-         * @param t
-         * @return
-         */
-        fun getUrl(t: Any): String
-
-        /**
-         * @param t
-         * @return
-         */
-        fun getTitle(t: Any): String
-    }
-
-    /**
-     *  当前选项
-     */
-    interface RecycleViewBannerCurrentListener {
-        fun onCurrentPosition(position: Int)
-    }
-
-    init {
-        init(context, attrs)
-    }
 }

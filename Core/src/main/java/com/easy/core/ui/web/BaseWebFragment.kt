@@ -163,8 +163,8 @@ open class BaseWebFragment : BaseFragment() {
         scriptInterface?.let {
             webView?.addJavascriptInterface(it, "android")
         }
-        url = getString(getString(R.string.key_url))
-        title = getString(getString(R.string.key_title))
+        url = getBundleString(getString(R.string.key_url))
+        title = getBundleString(getString(R.string.key_title))
 
         requireActivity().title = title
         iToolBar?.setToolbarTitle(title)

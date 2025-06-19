@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
 import  com.easy.core.R
 import com.easy.core.glide.ImageLoadUtils
-import com.easy.core.recycle.RecycleViewBanner.RecycleViewBannerChangeListener
-import com.easy.core.recycle.RecycleViewBanner.RecycleViewBannerClickListener
 
 /**
  * @Author : huangqiqiang
