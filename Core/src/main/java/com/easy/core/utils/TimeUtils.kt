@@ -1,5 +1,8 @@
 package com.easy.core.utils
 
+import android.content.Context
+import android.text.format.Time
+import com.easy.core.CoreConfig
 import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.data.DataUtils.isNullString
 import com.easy.core.utils.data.DataUtils.stringToInt
@@ -1087,6 +1090,55 @@ object TimeUtils {
         var simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
         return simpleDateFormat.format(calendar.time)
     }
+
+    fun time2MMDDText(j:Long):String {
+        val simpleDateFormat:SimpleDateFormat = SimpleDateFormat()
+        val calendar:Calendar = Calendar.getInstance()
+        calendar.set(calendar.get(1), calendar.get(2), calendar.get(5), 0, 0, 0)
+        calendar.set(14, 0)
+        val timeInMillis:Long = j - calendar.getTimeInMillis()
+        if (timeInMillis > 0) {
+            simpleDateFormat.applyPattern("HH:mm")
+            return simpleDateFormat.format(j)
+        }
+        if (timeInMillis > -86400000) {
+            return "昨天"
+        }
+        if (timeInMillis > -518400000) {
+            val calendar2:Calendar = Calendar.getInstance()
+            calendar2.setTimeInMillis(j)
+            return getWeekDay(CoreConfig.applicationContext, calendar2)
+        }
+        if (getIsSameYear(j)) {
+            simpleDateFormat.applyPattern("M月d日 aHH:mm")
+            return simpleDateFormat.format(j)
+        }
+        simpleDateFormat.applyPattern("yyyy年M月d日")
+        return simpleDateFormat.format(j)
+    }
+
+    private fun getIsSameYear(j:Long):Boolean {
+        val time:Time = Time("GTM+8")
+        time.set(j)
+        val i:Int = time.year
+        time.set(System.currentTimeMillis())
+        return i == time.year
+    }
+
+    fun getWeekDay(context:Context, calendar:Calendar):String {
+        return when (calendar[7]) {
+            1 -> "周日"
+            2 -> "周一"
+            3 -> "周二"
+            4 -> "周三"
+            5 -> "周四"
+            6 -> "周五"
+            7 -> "周六"
+            else -> ""
+        }
+    }
+
+
 
     @JvmStatic
     fun main(args: Array<String>) {

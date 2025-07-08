@@ -7,6 +7,7 @@ import android.app.ActivityManager
 import android.content.*
 import android.database.Cursor
 import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
@@ -64,9 +65,8 @@ object FileUtils {
      * @return 以时间毫秒为名称的名称 但未添加后缀
      */
     @JvmStatic
-    val defFileName: String
-        get() = System.currentTimeMillis()
-            .toString()
+    val defFileName:String
+        get() = System.currentTimeMillis().toString()
 
     /**
      * 带后缀的文件名称
@@ -75,8 +75,13 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getDefFileName(suffix: String = ".png"): String {
+    fun getDefFileName(suffix:String = ".png"):String {
         return defFileName + suffix
+    }
+
+    @JvmStatic
+    fun getDefFileName(fileName:String=defFileName ,  compressFormat:CompressFormat = CompressFormat.PNG):String {
+        return "$fileName.${compressFormat.name.lowercase()}"
     }
 
     /**
@@ -85,7 +90,7 @@ object FileUtils {
      * @return String
      */
     @JvmStatic
-    private fun String.getMimeType(): String? {
+    private fun String.getMimeType():String? {
         val fileName = this.toLowerCase()
         return when {
             fileName.endsWith(".png") -> "image/png"
@@ -106,14 +111,14 @@ object FileUtils {
      * @return
      */
     @kotlin.jvm.JvmStatic
-    fun getTotalCacheSize(context: Context): String {
-        var cacheSize: Long = 0
+    fun getTotalCacheSize(context:Context):String {
+        var cacheSize:Long = 0
         try {
             cacheSize = getFolderSize(context.cacheDir)
             if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
                 cacheSize += getFolderSize(context.externalCacheDir)
             }
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         return getFormatSize(cacheSize.toDouble())
@@ -125,7 +130,7 @@ object FileUtils {
      * @param context
      */
     @JvmStatic
-    fun clearAllCache(context: Context) {
+    fun clearAllCache(context:Context) {
         deleteDir(context.cacheDir)
         if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             context.externalCacheDir?.let { deleteDir(it) }
@@ -138,8 +143,8 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getFolderSize(file: File?): Long {
-        var size: Long = 0
+    fun getFolderSize(file:File?):Long {
+        var size:Long = 0
         try {
             val fileList = file!!.listFiles()
             if (fileList != null) {
@@ -152,7 +157,7 @@ object FileUtils {
                     }
                 }
             }
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         return size
@@ -165,7 +170,7 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getFormatSize(size: Double): String {
+    fun getFormatSize(size:Double):String {
         val kiloByte = size / 1024
         if (kiloByte < 1) {
 //            return size + "Byte";
@@ -174,24 +179,20 @@ object FileUtils {
         val megaByte = kiloByte / 1024
         if (megaByte < 1) {
             val result1 = BigDecimal(java.lang.Double.toString(kiloByte))
-            return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "KB"
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB"
         }
         val gigaByte = megaByte / 1024
         if (gigaByte < 1) {
             val result2 = BigDecimal(java.lang.Double.toString(megaByte))
-            return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "MB"
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB"
         }
         val teraBytes = gigaByte / 1024
         if (teraBytes < 1) {
             val result3 = BigDecimal(java.lang.Double.toString(gigaByte))
-            return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
-                .toPlainString() + "GB"
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB"
         }
         val result4 = BigDecimal(teraBytes)
-        return (result4.setScale(2, BigDecimal.ROUND_HALF_UP)
-            .toPlainString() + "TB")
+        return (result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB")
     }
 
     /**
@@ -200,17 +201,17 @@ object FileUtils {
      * @return CacheSize
      */
     @kotlin.jvm.JvmStatic
-    fun getCacheSize(context: Context): String {
+    fun getCacheSize(context:Context):String {
         try {
             return getFormatSize(getFolderSize(File(context.cacheDir.toString() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR)).toDouble())
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         return ""
     }
 
     @JvmStatic
-    fun getFileDatabaseSize(fileName: String): Long {
+    fun getFileDatabaseSize(fileName:String):Long {
         return File(FilePathTools.getDataBaseDir(fileName)).length()
     }
 
@@ -221,7 +222,7 @@ object FileUtils {
      * @return
      */
     @kotlin.jvm.JvmStatic
-    fun getAppCacheSize(context: Context): Int {
+    fun getAppCacheSize(context:Context):Int {
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         return activityManager.memoryClass
     }
@@ -235,7 +236,7 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getFile2Uri(filePath: String?): Uri? {
+    fun getFile2Uri(filePath:String?):Uri? {
         return getFile2Uri(File(filePath))
     }
 
@@ -245,13 +246,13 @@ object FileUtils {
      * @return Uri?
      */
     @JvmStatic
-    fun getFile2Uri(file: File): Uri? {
+    fun getFile2Uri(file:File):Uri? {
         val context = CoreConfig.applicationContext
         //如果在Android7.0以上,使用FileProvider获取Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             try {
                 return FileProvider.getUriForFile(context, context.packageName + ".FileProvider", file)
-            } catch (e: java.lang.Exception) {
+            } catch (e:java.lang.Exception) {
                 e.printStackTrace()
             }
         } else {
@@ -278,9 +279,16 @@ object FileUtils {
      * @return ContentValues
      */
     @JvmStatic
-    private fun createBitmapValues(data: String, _display_name: String, mime_type: String, relative_path: String,
-                                   date_added: String, date_modified: String, date_taken: String, size: Int, width: Int,
-                                   height: Int): ContentValues {
+    private fun createBitmapValues(data:String,
+                                   _display_name:String,
+                                   mime_type:String,
+                                   relative_path:String,
+                                   date_added:String,
+                                   date_modified:String,
+                                   date_taken:String,
+                                   size:Int,
+                                   width:Int,
+                                   height:Int):ContentValues {
         var values = ContentValues().apply {
             if (!isQ()) {
                 put(MediaStore.Images.ImageColumns.DATA, data)
@@ -303,10 +311,9 @@ object FileUtils {
 
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun saveFile2Download(context: Context, fileName: String, data: String) {
+    fun saveFile2Download(context:Context, fileName:String, data:String) {
         //使用ContentResolver创建需要操作的文件
-        val outputStream =
-            getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
+        val outputStream = getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
         outputStream?.write(data.toByteArray())
         outputStream?.close()
     }
@@ -319,7 +326,7 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun getDownloadInstallUri(fileName: String, context: Context): Uri? {
+    fun getDownloadInstallUri(fileName:String, context:Context):Uri? {
         val values = ContentValues()
         values.put(MediaStore.Files.FileColumns.DISPLAY_NAME, fileName)
         //MediaStore对应类型名
@@ -340,10 +347,10 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun deleteFile(context: Context, fileUri: Uri) {
+    fun deleteFile(context:Context, fileUri:Uri) {
         try {
             context.contentResolver?.delete(fileUri, null, null)
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
     }
@@ -354,7 +361,7 @@ object FileUtils {
      * @param uri Uri?
      * @return Boolean
      */
-    fun deleteImageByUri(contentResolver: ContentResolver, uri: Uri?): Boolean {
+    fun deleteImageByUri(contentResolver:ContentResolver, uri:Uri?):Boolean {
         try {
             // 检查 URI 是否是有效的
             if (uri != null && "content" == uri.scheme) {
@@ -366,7 +373,7 @@ object FileUtils {
                 val rowsDeleted = contentResolver.delete(imageUri, null, null)
                 return rowsDeleted > 0
             }
-        } catch (e: java.lang.Exception) {
+        } catch (e:java.lang.Exception) {
             e("ImageUtils Error deleting image", e)
         }
         return false
@@ -379,13 +386,13 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun listFiles(context: Context, dirName: String?): List<Uri> {
+    fun listFiles(context:Context, dirName:String?):List<Uri> {
         val resultList = ArrayList<Uri>()
         try {
             val resolver = context.contentResolver
             val downloadUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
-            var selection: String? = null
-            var selectionArgs: Array<String>? = null
+            var selection:String? = null
+            var selectionArgs:Array<String>? = null
             if (dirName != null && dirName.isNotEmpty()) {
                 selection = MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME + "=?"
                 selectionArgs = arrayOf(dirName)
@@ -395,14 +402,12 @@ object FileUtils {
                 val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
                 while (resultCursor.moveToNext()) {
                     val fileId = resultCursor.getLong(fileIdIndex)
-                    val pathUri = downloadUri.buildUpon()
-                        .appendPath("$fileId")
-                        .build()
+                    val pathUri = downloadUri.buildUpon().appendPath("$fileId").build()
                     resultList.add(pathUri)
                 }
                 resultCursor.close()
             }
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         return resultList
@@ -417,7 +422,7 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun copyFileToDownloadDir(context: Context, oldPath: String, targetDirName: String?, description: String?): Uri? {
+    fun copyFileToDownloadDir(context:Context, oldPath:String, targetDirName:String?, description:String?):Uri? {
         try {
             val oldFile = File(oldPath)
             //设置目标文件的信息
@@ -445,7 +450,7 @@ object FileUtils {
                     return insertUri
                 }
             }
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         return null
@@ -459,23 +464,29 @@ object FileUtils {
      * @param filePath String
      */
     @JvmStatic
-    fun saveBitmap2Public(context: Context = CoreConfig.applicationContext, bitmap: Bitmap, filePath: String) {
+    fun saveBitmap2Public(context:Context = CoreConfig.applicationContext, bitmap:Bitmap, filePath:String) {
         if (!File(filePath).parentFile.exists()) {
             File(filePath).parentFile?.mkdirs()
         }
         val file = File(filePath)
         val current = System.currentTimeMillis()
 
-        val values =
-            createBitmapValues(file.absolutePath, file.name, "image/jpg", file.parent, current.toString(), current.toString(), current.toString(), BitmapUtils.getBitmapSize(bitmap), bitmap.width, bitmap.height)
+        val values = createBitmapValues(file.absolutePath,
+            file.name,
+            "image/jpg",
+            file.parent,
+            current.toString(),
+            current.toString(),
+            current.toString(),
+            BitmapUtils.getBitmapSize(bitmap),
+            bitmap.width,
+            bitmap.height)
 
-        context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-            ?.let { it ->
-                context.contentResolver.openOutputStream(it)
-                    ?.let { it1 ->
-                        saveBitmap(it1, bitmap)
-                    }
+        context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)?.let { it ->
+            context.contentResolver.openOutputStream(it)?.let { it1 ->
+                saveBitmap(it1, bitmap)
             }
+        }
 
 
     }
@@ -487,27 +498,26 @@ object FileUtils {
      * @param bitmap Bitmap
      */
     @JvmStatic
-    fun saveBitmap2Pictures(relativePath: String, fileName: String, bitmap: Bitmap): Uri? {
+    fun saveBitmap2Pictures(relativePath:String, fileName:String, bitmap:Bitmap):Uri? {
         getContentResolverUri(relativePath, fileName)?.let { uri ->
-            CoreConfig.applicationContext.contentResolver.openOutputStream(uri)
-                ?.let { outputStream ->
-                    saveBitmap(outputStream, bitmap)
-                    // 更新图片大小
-                    if (!isQ()) {
-                        val imageValues = ContentValues()
-                        imageValues.put(MediaStore.Images.Media.SIZE, bitmap.byteCount)
-                        CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
-                        // 通知媒体库更新
-                        val intent = Intent(@Suppress("DEPRECATION") Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri)
-                        CoreConfig.applicationContext.sendBroadcast(intent)
-                    } else {
-                        val imageValues = ContentValues()
-                        // Android Q添加了IS_PENDING状态，为0时其他应用才可见
-                        imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
-                        CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
-                    }
-                    return uri
+            CoreConfig.applicationContext.contentResolver.openOutputStream(uri)?.let { outputStream ->
+                saveBitmap(outputStream, bitmap)
+                // 更新图片大小
+                if (!isQ()) {
+                    val imageValues = ContentValues()
+                    imageValues.put(MediaStore.Images.Media.SIZE, bitmap.byteCount)
+                    CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
+                    // 通知媒体库更新
+                    val intent = Intent(@Suppress("DEPRECATION") Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri)
+                    CoreConfig.applicationContext.sendBroadcast(intent)
+                } else {
+                    val imageValues = ContentValues()
+                    // Android Q添加了IS_PENDING状态，为0时其他应用才可见
+                    imageValues.put(MediaStore.Images.Media.IS_PENDING, 0)
+                    CoreConfig.applicationContext.contentResolver.update(uri, imageValues, null, null)
                 }
+                return uri
+            }
         }
         return null
     }
@@ -519,7 +529,7 @@ object FileUtils {
      * @return Uri?
      */
     @JvmStatic
-    fun getContentResolverUri(relativePath: String, fileName: String): Uri? {
+    fun getContentResolverUri(relativePath:String, fileName:String):Uri? {
         val ALBUM_DIR = Environment.DIRECTORY_PICTURES // 系统相册文件夹
         // 图片信息
         val imageValues = ContentValues().apply {
@@ -533,7 +543,7 @@ object FileUtils {
         }
 
         // 保存的位置
-        val collection: Uri
+        val collection:Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val path = "${ALBUM_DIR}/${relativePath}"
             imageValues.apply {
@@ -583,7 +593,7 @@ object FileUtils {
      * @return Uri 返回null时说明不存在，可以进行图片插入逻辑
      */
     @JvmStatic
-    private fun queryMediaImage28(imagePath: String): Uri? {
+    private fun queryMediaImage28(imagePath:String):Uri? {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) return null
 
         val imageFile = File(imagePath)
@@ -595,8 +605,11 @@ object FileUtils {
         val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 
         // 查询是否已经存在相同图片
-        val query =
-            CoreConfig.applicationContext.contentResolver.query(collection, arrayOf(MediaStore.Images.Media._ID, @Suppress("DEPRECATION") MediaStore.Images.Media.DATA), "${@Suppress("DEPRECATION") MediaStore.Images.Media.DATA} == ?", arrayOf(imagePath), null)
+        val query = CoreConfig.applicationContext.contentResolver.query(collection,
+            arrayOf(MediaStore.Images.Media._ID, @Suppress("DEPRECATION") MediaStore.Images.Media.DATA),
+            "${@Suppress("DEPRECATION") MediaStore.Images.Media.DATA} == ?",
+            arrayOf(imagePath),
+            null)
         query?.use {
             while (it.moveToNext()) {
                 val idColumn = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
@@ -617,27 +630,32 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun copyBitmap2CustomPath(context: Context, oldPath: String, newPath: String): Uri? {
+    fun copyBitmap2CustomPath(context:Context, oldPath:String, newPath:String):Uri? {
 
         val oldFile = File(oldPath)
         //设置目标文件的信息
         val options = BitmapUtils.getImageOptions(oldPath)
 
-        val values =
-            createBitmapValues(newPath, oldFile.name, "image/png", File(newPath).parentFile.path, oldFile.name, oldFile.name, oldFile.name, oldFile.length()
-                .toInt(), options.outHeight, options.outHeight)
+        val values = createBitmapValues(newPath,
+            oldFile.name,
+            "image/png",
+            File(newPath).parentFile.path,
+            oldFile.name,
+            oldFile.name,
+            oldFile.name,
+            oldFile.length().toInt(),
+            options.outHeight,
+            options.outHeight)
         val collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
-        context.contentResolver.insert(collection, values)
-            ?.let { insertUri ->
-                context.contentResolver.openOutputStream(insertUri)
-                    ?.let { fos ->
-                        val fis = FileInputStream(oldFile)
-                        fis.copyTo(fos)
-                        fis.close()
-                        fos.close()
-                        return insertUri
-                    }
+        context.contentResolver.insert(collection, values)?.let { insertUri ->
+            context.contentResolver.openOutputStream(insertUri)?.let { fos ->
+                val fis = FileInputStream(oldFile)
+                fis.copyTo(fos)
+                fis.close()
+                fos.close()
+                return insertUri
             }
+        }
         return null
     }
 
@@ -649,7 +667,7 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun saveBitmap2Download(context: Context, fileName: String, bitmap: Bitmap) {
+    fun saveBitmap2Download(context:Context, fileName:String, bitmap:Bitmap) {
         //使用ContentResolver创建需要操作的文件
         val os = getDownloadInstallUri(fileName, context)?.let { context.contentResolver.openOutputStream(it) }
         os?.let { saveBitmap(it, bitmap) }
@@ -664,8 +682,7 @@ object FileUtils {
      * @throws IOException
      */
     @Throws(IOException::class)
-    fun saveBitmap(bm: Bitmap?,
-                   filePath: String = FilePathTools.getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
+    fun saveBitmap(bm:Bitmap?, filePath:String = FilePathTools.getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
         if (bm == null) {
             LogUtils.d(" saveBitmap   is  null  ")
             return
@@ -688,10 +705,10 @@ object FileUtils {
      * @param bitmap Bitmap
      */
     @JvmStatic
-    fun saveBitmap(os: OutputStream, bitmap: Bitmap) {
+    fun saveBitmap(os:OutputStream, bitmap:Bitmap) {
         try {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, os)
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         } finally {
             os.close()
@@ -707,7 +724,7 @@ object FileUtils {
      * @param s String
      */
     @JvmStatic
-    fun createNewFile(fileName: String): File {
+    fun createNewFile(fileName:String):File {
         val path = FilePathTools.getCacheDir(CoreConfig.applicationContext) + "/" + fileName
         val file = File(path)
         file.createNewFile()
@@ -721,7 +738,7 @@ object FileUtils {
      * @param str String
      */
     @JvmStatic
-    fun writerFile(file: File, str: String) {
+    fun writerFile(file:File, str:String) {
         if (!file.exists()) {
             file.createNewFile()
         }
@@ -737,12 +754,12 @@ object FileUtils {
      * @return String
      */
     @JvmStatic
-    fun readFile(filePathName: String): String {
+    fun readFile(filePathName:String):String {
         val stringBuffer = StringBuffer()
         // 打开文件输入流
         val fileInputStream = FileInputStream(filePathName)
         val buffer = ByteArray(1024)
-        var len: Int = fileInputStream.read(buffer)
+        var len:Int = fileInputStream.read(buffer)
         // 读取文件内容
         while (len > 0) {
             stringBuffer.append(String(buffer, 0, len))
@@ -761,12 +778,12 @@ object FileUtils {
      * @param privatePath 私有目录的路径
      */
     @JvmStatic
-    fun copyToPrivateDir(context: Context, fileUri: Uri, privatePath: String) {
+    fun copyToPrivateDir(context:Context, fileUri:Uri, privatePath:String) {
         try {
             val fis = FileInputStream(context.contentResolver.openFileDescriptor(fileUri, "r")?.fileDescriptor)
             fis.copyTo(FileOutputStream(privatePath))
             fis.close()
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
     }
@@ -780,16 +797,15 @@ object FileUtils {
      * @return List<Uri>
      */
     @RequiresApi(Build.VERSION_CODES.Q)
-    fun findDownloadFile(context: Context, dirName: String?, fileName: String): List<Uri> {
+    fun findDownloadFile(context:Context, dirName:String?, fileName:String):List<Uri> {
         val resultList = ArrayList<Uri>()
         try {
             val resolver = context.contentResolver
             val downloadUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
-            var selection: String? = null
-            var selectionArgs: Array<String>? = null
+            var selection:String? = null
+            var selectionArgs:Array<String>? = null
             if (dirName != null && dirName.isNotEmpty()) {
-                selection =
-                    MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME + " = ? AND " + MediaStore.Downloads.DISPLAY_NAME + " = ? "
+                selection = MediaStore.Files.FileColumns.BUCKET_DISPLAY_NAME + " = ? AND " + MediaStore.Downloads.DISPLAY_NAME + " = ? "
                 selectionArgs = arrayOf(dirName, fileName)
             }
             val resultCursor = resolver?.query(downloadUri, null, selection, selectionArgs, null)
@@ -797,14 +813,12 @@ object FileUtils {
                 val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
                 while (resultCursor.moveToNext()) {
                     val fileId = resultCursor.getLong(fileIdIndex)
-                    val pathUri = downloadUri.buildUpon()
-                        .appendPath("$fileId")
-                        .build()
+                    val pathUri = downloadUri.buildUpon().appendPath("$fileId").build()
                     resultList.add(pathUri)
                 }
                 resultCursor.close()
             }
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         return resultList
@@ -817,12 +831,12 @@ object FileUtils {
      * @param description String  描述字段
      * @return ArrayList<Uri>
      */
-    fun findDownloadsUri4Description(context: Context, dirName: String?, description: String): ArrayList<Uri> {
+    fun findDownloadsUri4Description(context:Context, dirName:String?, description:String):ArrayList<Uri> {
         val resultList = ArrayList<Uri>()
         try {
             val resolver = context.contentResolver
             val downloadUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
-            var selection: String? = null
+            var selection:String? = null
 
             var selectionArgs = mutableListOf<String>()
             if (dirName != null && dirName.isNotEmpty()) {
@@ -838,14 +852,12 @@ object FileUtils {
                 val fileIdIndex = resultCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)
                 while (resultCursor.moveToNext()) {
                     val fileId = resultCursor.getLong(fileIdIndex)
-                    val pathUri = downloadUri.buildUpon()
-                        .appendPath("$fileId")
-                        .build()
+                    val pathUri = downloadUri.buildUpon().appendPath("$fileId").build()
                     resultList.add(pathUri)
                 }
                 resultCursor.close()
             }
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         return resultList
@@ -856,7 +868,7 @@ object FileUtils {
      * @return Boolean
      */
     @JvmStatic
-    fun isQ(): Boolean {
+    fun isQ():Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
 
@@ -866,9 +878,9 @@ object FileUtils {
      * @param destFile File  全地址
      */
     @JvmStatic
-    fun videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(context: Context, destFile: File) {
+    fun videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(context:Context, destFile:File) {
         val values = ContentValues()
-        val uriSavedVideo: Uri?
+        val uriSavedVideo:Uri?
         uriSavedVideo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             values.put(MediaStore.Video.Media.RELATIVE_PATH, "Movies")
             values.put(MediaStore.Video.Media.TITLE, destFile.name)
@@ -889,22 +901,20 @@ object FileUtils {
             values.put(MediaStore.Video.Media.DATE_TAKEN, System.currentTimeMillis())
             values.put(MediaStore.Video.Media.IS_PENDING, 1)
         }
-        val pfd: ParcelFileDescriptor?
+        val pfd:ParcelFileDescriptor?
         try {
             pfd = context.contentResolver.openFileDescriptor(uriSavedVideo!!, "w")
             val out = FileOutputStream(pfd!!.fileDescriptor)
             val inputStream = FileInputStream(destFile)
             val buf = ByteArray(8192)
-            var len: Int
-            while (inputStream.read(buf)
-                    .also { len = it } > 0
-            ) {
+            var len:Int
+            while (inputStream.read(buf).also { len = it } > 0) {
                 out.write(buf, 0, len)
             }
             out.close()
             inputStream.close()
             pfd.close()
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -923,8 +933,8 @@ object FileUtils {
      * @param strBuffer
      */
     @JvmStatic
-    fun Text2File(strFilePath: String, strBuffer: String) {
-        var fileWriter: FileWriter? = null
+    fun Text2File(strFilePath:String, strBuffer:String) {
+        var fileWriter:FileWriter? = null
         try {
             // 创建文件对象
             val fileText = File(strFilePath)
@@ -933,13 +943,13 @@ object FileUtils {
             // 写文件
             fileWriter.write(strBuffer)
             // 关闭
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         } finally {
             try {
                 fileWriter!!.flush()
                 fileWriter.close()
-            } catch (ex: IOException) {
+            } catch (ex:IOException) {
                 ex.printStackTrace()
             }
         }
@@ -949,31 +959,29 @@ object FileUtils {
      * 以行为单位读取文件，常用于读面向行的格式化文件
      */
     @JvmStatic
-    fun readFileByLines(fileName: String) {
+    fun readFileByLines(fileName:String) {
         val file = File(fileName)
-        var reader: BufferedReader? = null
+        var reader:BufferedReader? = null
         try {
             println("以行为单位读取文件内容，一次读一整行：")
             reader = BufferedReader(FileReader(file))
-            var tempString: String? = null
+            var tempString:String? = null
             var line = 1
             // 一次读入一行，直到读入null为文件结束
-            while (reader.readLine()
-                    .also { tempString = it } != null
-            ) {
+            while (reader.readLine().also { tempString = it } != null) {
                 // 显示行号
                 println("line?????????????????????????????????? $line: $tempString")
                 val content = tempString
                 line++
             }
             reader.close()
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         } finally {
             if (reader != null) {
                 try {
                     reader.close()
-                } catch (e1: IOException) {
+                } catch (e1:IOException) {
                 }
             }
         }
@@ -983,9 +991,9 @@ object FileUtils {
      * 得到SD卡根目录.
      */
     @JvmStatic
-    val rootPath: File?
+    val rootPath:File?
         get() {
-            var path: File? = null
+            var path:File? = null
             path = if (sdCardIsAvailable()) {
                 Environment.getExternalStorageDirectory() // 取得sdcard文件路径
             } else {
@@ -1001,7 +1009,7 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getCacheFolder(context: Context): File {
+    fun getCacheFolder(context:Context):File {
         val folder = File(context.cacheDir, "IMAGECACHE")
         if (!folder.exists()) {
             folder.mkdir()
@@ -1015,7 +1023,7 @@ object FileUtils {
      * @return true : 可用<br></br>false : 不可用
      */
     @JvmStatic
-    val isSDCardEnable: Boolean
+    val isSDCardEnable:Boolean
         get() = Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()
 
     /**
@@ -1026,7 +1034,7 @@ object FileUtils {
      * @return SD卡路径
      */
     @JvmStatic
-    val sDCardPath: String
+    val sDCardPath:String
         get() = if (!isSDCardEnable) {
             "sdcard unable!"
         } else Environment.getExternalStorageDirectory().path + File.separator
@@ -1037,7 +1045,7 @@ object FileUtils {
      * @return SD卡Data路径
      */
     @JvmStatic
-    val dataPath: String
+    val dataPath:String
         get() = if (!isSDCardEnable) {
             "sdcard unable!"
         } else Environment.getDataDirectory().path
@@ -1048,14 +1056,14 @@ object FileUtils {
      * @return SD卡剩余空间
      */
     @get:TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    val freeSpace: String
+    val freeSpace:String
         get() {
             if (!isSDCardEnable) {
                 return "sdcard unable!"
             }
             val stat = StatFs(sDCardPath)
-            val blockSize: Long
-            val availableBlocks: Long
+            val blockSize:Long
+            val availableBlocks:Long
             availableBlocks = stat.availableBlocksLong
             blockSize = stat.blockSizeLong
             return DataUtils.byte2FitSize(availableBlocks * blockSize)
@@ -1065,7 +1073,7 @@ object FileUtils {
      * SD卡是否可用.
      */
     @JvmStatic
-    fun sdCardIsAvailable(): Boolean {
+    fun sdCardIsAvailable():Boolean {
         return if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             val sd = File(Environment.getExternalStorageDirectory().path)
             sd.canWrite()
@@ -1078,7 +1086,7 @@ object FileUtils {
      * 文件或者文件夹是否存在.
      */
     @JvmStatic
-    fun fileExists(filePath: String?): Boolean {
+    fun fileExists(filePath:String?):Boolean {
         val file = File(filePath)
         return file.exists()
     }
@@ -1087,7 +1095,7 @@ object FileUtils {
      * 删除指定文件夹下所有文件, 不保留文件夹.
      */
     @JvmStatic
-    fun delAllFile(path: String?): Boolean {
+    fun delAllFile(path:String?):Boolean {
         val flag = false
         val file = File(path)
         if (!file.exists()) {
@@ -1117,7 +1125,7 @@ object FileUtils {
      * @return `true`: 删除成功<br></br>`false`: 删除失败
      */
     @JvmStatic
-    fun deleteFilesInDir(dirPath: String?): Boolean {
+    fun deleteFilesInDir(dirPath:String?):Boolean {
         return deleteFilesInDir(getFileByPath(dirPath))
     }
 
@@ -1128,7 +1136,7 @@ object FileUtils {
      * @return `true`: 删除成功<br></br>`false`: 删除失败
      */
     @JvmStatic
-    fun deleteFilesInDir(dir: File?): Boolean {
+    fun deleteFilesInDir(dir:File?):Boolean {
         if (dir == null) {
             return false
         }
@@ -1166,7 +1174,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanInternalCache(context: Context): Boolean {
+    fun cleanInternalCache(context:Context):Boolean {
         return deleteFilesInDir(context.cacheDir)
     }
 
@@ -1178,7 +1186,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanInternalFiles(context: Context): Boolean {
+    fun cleanInternalFiles(context:Context):Boolean {
         return deleteFilesInDir(context.filesDir)
     }
 
@@ -1190,7 +1198,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanInternalDbs(context: Context): Boolean {
+    fun cleanInternalDbs(context:Context):Boolean {
         return deleteFilesInDir(context.filesDir.parent + File.separator + "databases")
     }
 
@@ -1203,7 +1211,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanInternalDbByName(context: Context, dbName: String?): Boolean {
+    fun cleanInternalDbByName(context:Context, dbName:String?):Boolean {
         return context.deleteDatabase(dbName)
     }
 
@@ -1215,7 +1223,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanInternalSP(context: Context): Boolean {
+    fun cleanInternalSP(context:Context):Boolean {
         return deleteFilesInDir(context.filesDir.parent + File.separator + "shared_prefs")
     }
 
@@ -1227,7 +1235,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanExternalCache(context: Context): Boolean {
+    fun cleanExternalCache(context:Context):Boolean {
         return isSDCardEnable && deleteFilesInDir(context.externalCacheDir)
     }
 
@@ -1238,7 +1246,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanCustomCache(dirPath: String?): Boolean {
+    fun cleanCustomCache(dirPath:String?):Boolean {
         return deleteFilesInDir(dirPath)
     }
 
@@ -1249,7 +1257,7 @@ object FileUtils {
      * @return `true`: 清除成功<br></br>`false`: 清除失败
      */
     @JvmStatic
-    fun cleanCustomCache(dir: File?): Boolean {
+    fun cleanCustomCache(dir:File?):Boolean {
         return deleteFilesInDir(dir)
     }
 
@@ -1257,21 +1265,19 @@ object FileUtils {
      * 文件复制.
      */
     @JvmStatic
-    fun copy(srcFile: String?, destFile: String?): Boolean {
+    fun copy(srcFile:String?, destFile:String?):Boolean {
         try {
             val `in` = FileInputStream(srcFile)
             val out = FileOutputStream(destFile)
             val bytes = ByteArray(1024)
-            var c: Int
-            while (`in`.read(bytes)
-                    .also { c = it } != -1
-            ) {
+            var c:Int
+            while (`in`.read(bytes).also { c = it } != -1) {
                 out.write(bytes, 0, c)
             }
             `in`.close()
             out.flush()
             out.close()
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             return false
         }
         return true
@@ -1284,12 +1290,12 @@ object FileUtils {
      * @param newPath string 复制后路径如：f:/fqf/ff.
      */
     @JvmStatic
-    fun copyFolder(oldPath: String, newPath: String) {
+    fun copyFolder(oldPath:String, newPath:String) {
         try {
             File(newPath).mkdirs() // 如果文件夹不存在 则建立新文件夹
             val a = File(oldPath)
             val file = a.list()
-            var temp: File? = null
+            var temp:File? = null
             for (i in file.indices) {
                 temp = if (oldPath.endsWith(File.separator)) {
                     File(oldPath + file[i])
@@ -1300,10 +1306,8 @@ object FileUtils {
                     val input = FileInputStream(temp)
                     val output = FileOutputStream(newPath + "/" + temp.name)
                     val b = ByteArray(1024 * 5)
-                    var len: Int
-                    while (input.read(b)
-                            .also { len = it } != -1
-                    ) {
+                    var len:Int
+                    while (input.read(b).also { len = it } != -1) {
                         output.write(b, 0, len)
                     }
                     output.flush()
@@ -1314,8 +1318,8 @@ object FileUtils {
                     copyFolder(oldPath + "/" + file[i], newPath + "/" + file[i])
                 }
             }
-        } catch (e: NullPointerException) {
-        } catch (e: Exception) {
+        } catch (e:NullPointerException) {
+        } catch (e:Exception) {
         }
     }
 
@@ -1323,7 +1327,7 @@ object FileUtils {
      * 重命名文件.
      */
     @JvmStatic
-    fun renameFile(resFilePath: String?, newFilePath: String?): Boolean {
+    fun renameFile(resFilePath:String?, newFilePath:String?):Boolean {
         val resFile = File(resFilePath)
         val newFile = File(newFilePath)
         return resFile.renameTo(newFile)
@@ -1333,12 +1337,12 @@ object FileUtils {
      * 获取磁盘可用空间.
      */
     @get:SuppressLint("NewApi")
-    val sDCardAvailaleSize: Long
+    val sDCardAvailaleSize:Long
         get() {
             val path = rootPath
             val stat = StatFs(path!!.path)
-            val blockSize: Long
-            val availableBlocks: Long
+            val blockSize:Long
+            val availableBlocks:Long
             if (Build.VERSION.SDK_INT >= 18) {
                 blockSize = stat.blockSizeLong
                 availableBlocks = stat.availableBlocksLong
@@ -1354,10 +1358,10 @@ object FileUtils {
      */
     @SuppressLint("NewApi")
     @JvmStatic
-    fun getDirSize(path: String?): Long {
+    fun getDirSize(path:String?):Long {
         val stat = StatFs(path)
-        val blockSize: Long
-        val availableBlocks: Long
+        val blockSize:Long
+        val availableBlocks:Long
         if (Build.VERSION.SDK_INT >= 18) {
             blockSize = stat.blockSizeLong
             availableBlocks = stat.availableBlocksLong
@@ -1372,12 +1376,12 @@ object FileUtils {
      * 获取文件或者文件夹大小.
      */
     @JvmStatic
-    fun getFileAllSize(path: String?): Long {
+    fun getFileAllSize(path:String?):Long {
         val file = File(path)
         return if (file.exists()) {
             if (file.isDirectory) {
                 val childrens = file.listFiles()
-                var size: Long = 0
+                var size:Long = 0
                 for (f in childrens) {
                     size += getFileAllSize(f.path)
                 }
@@ -1394,7 +1398,7 @@ object FileUtils {
      * 创建一个文件.
      */
     @JvmStatic
-    fun initFile(path: String?): Boolean {
+    fun initFile(path:String?):Boolean {
         var result = false
         try {
             val file = File(path)
@@ -1406,7 +1410,7 @@ object FileUtils {
             } else if (file.exists()) {
                 result = true
             }
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         }
         return result
@@ -1416,7 +1420,7 @@ object FileUtils {
      * 创建一个文件夹.
      */
     @JvmStatic
-    fun initDirectory(path: String?): Boolean {
+    fun initDirectory(path:String?):Boolean {
         var result = false
         val file = File(path)
         if (!file.exists()) {
@@ -1435,7 +1439,7 @@ object FileUtils {
      */
     @Throws(IOException::class)
     @JvmStatic
-    fun copyFile(from: File, to: File?) {
+    fun copyFile(from:File, to:File?) {
         if (!from.exists()) {
             throw IOException("The source file not exist: " + from.absolutePath)
         }
@@ -1452,15 +1456,13 @@ object FileUtils {
      */
     @Throws(IOException::class)
     @JvmStatic
-    fun copyFile(from: InputStream, to: File?): Long {
-        var totalBytes: Long = 0
+    fun copyFile(from:InputStream, to:File?):Long {
+        var totalBytes:Long = 0
         val fos = FileOutputStream(to, false)
         try {
             val data = ByteArray(1024)
-            var len: Int
-            while (from.read(data)
-                    .also { len = it } > -1
-            ) {
+            var len:Int
+            while (from.read(data).also { len = it } > -1) {
                 fos.write(data, 0, len)
                 totalBytes += len.toLong()
             }
@@ -1475,19 +1477,17 @@ object FileUtils {
      * 保存InputStream流到文件.
      */
     @JvmStatic
-    fun saveFile(inputStream: InputStream, filePath: String?) {
+    fun saveFile(inputStream:InputStream, filePath:String?) {
         try {
-            val outputStream: OutputStream = FileOutputStream(File(filePath), false)
-            var len: Int
+            val outputStream:OutputStream = FileOutputStream(File(filePath), false)
+            var len:Int
             val buffer = ByteArray(1024)
-            while (inputStream.read(buffer)
-                    .also { len = it } != -1
-            ) {
+            while (inputStream.read(buffer).also { len = it } != -1) {
                 outputStream.write(buffer, 0, len)
             }
             outputStream.flush()
             outputStream.close()
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         }
     }
@@ -1497,9 +1497,9 @@ object FileUtils {
      */
     @Throws(IOException::class)
     @JvmStatic
-    fun saveFileUTF8(path: String?, content: String?, append: Boolean?) {
+    fun saveFileUTF8(path:String?, content:String?, append:Boolean?) {
         val fos = FileOutputStream(path, append!!)
-        val out: Writer = OutputStreamWriter(fos, StandardCharsets.UTF_8)
+        val out:Writer = OutputStreamWriter(fos, StandardCharsets.UTF_8)
         out.write(content)
         out.flush()
         out.close()
@@ -1511,9 +1511,9 @@ object FileUtils {
      * 用UTF8读取一个文件.
      */
     @JvmStatic
-    fun getFileUTF8(path: String?): String {
+    fun getFileUTF8(path:String?):String {
         var result = ""
-        var fin: InputStream? = null
+        var fin:InputStream? = null
         try {
             fin = FileInputStream(path)
             val length = fin.available()
@@ -1521,7 +1521,7 @@ object FileUtils {
             fin.read(buffer)
             fin.close()
             result = String(buffer, StandardCharsets.UTF_8)
-        } catch (e: Exception) {
+        } catch (e:Exception) {
         }
         return result
     }
@@ -1530,7 +1530,7 @@ object FileUtils {
      * 得到一个文件Intent.
      */
     @JvmStatic
-    fun getFileIntent(path: String?, mimeType: String?): Intent {
+    fun getFileIntent(path:String?, mimeType:String?):Intent {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setDataAndType(Uri.fromFile(File(path)), mimeType)
         return intent
@@ -1543,14 +1543,13 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getDiskCacheDir(context: Context): String? {
-        var cachePath: String? = null
-        cachePath =
-            if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {
-                context.externalCacheDir!!.path
-            } else {
-                context.cacheDir.path
-            }
+    fun getDiskCacheDir(context:Context):String? {
+        var cachePath:String? = null
+        cachePath = if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {
+            context.externalCacheDir!!.path
+        } else {
+            context.cacheDir.path
+        }
         return cachePath
     }
 
@@ -1561,14 +1560,13 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getDiskFileDir(context: Context): String? {
-        var cachePath: String? = null
-        cachePath =
-            if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {
-                context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)!!.path
-            } else {
-                context.filesDir.path
-            }
+    fun getDiskFileDir(context:Context):String? {
+        var cachePath:String? = null
+        cachePath = if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState() || !Environment.isExternalStorageRemovable()) {
+            context.getExternalFilesDir(Environment.DIRECTORY_MOVIES)!!.path
+        } else {
+            context.filesDir.path
+        }
         return cachePath
     }
 
@@ -1579,8 +1577,8 @@ object FileUtils {
      * @param files
      */
     @JvmStatic
-    fun mergeFiles(context: Context?, outFile: File?, files: List<File?>) {
-        var outChannel: FileChannel? = null
+    fun mergeFiles(context:Context?, outFile:File?, files:List<File?>) {
+        var outChannel:FileChannel? = null
         try {
             outChannel = FileOutputStream(outFile).channel
             for (f in files) {
@@ -1594,12 +1592,12 @@ object FileUtils {
                 fc.close()
             }
             LogUtils.d("拼接完成")
-        } catch (ioe: IOException) {
+        } catch (ioe:IOException) {
             ioe.printStackTrace()
         } finally {
             try {
                 outChannel?.close()
-            } catch (ignore: IOException) {
+            } catch (ignore:IOException) {
             }
         }
     }
@@ -1613,8 +1611,8 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getNativeM3u(context: Context?, file: File?, pathList: List<File>): String {
-        var `in`: InputStream? = null
+    fun getNativeM3u(context:Context?, file:File?, pathList:List<File>):String {
+        var `in`:InputStream? = null
         var num = 0
         //需要生成的目标buff
         val buf = StringBuffer()
@@ -1624,9 +1622,7 @@ object FileUtils {
             }
             val reader = BufferedReader(InputStreamReader(`in`))
             var line = ""
-            while (reader.readLine()
-                    .also { line = it } != null
-            ) {
+            while (reader.readLine().also { line = it } != null) {
                 if (line.length > 0 && line.startsWith("http://")) {
                     //replce 这行的内容
 //                    RxLogTool.d("ts替换", line + "  replce  " + pathList.get(num).getAbsolutePath());
@@ -1645,9 +1641,9 @@ object FileUtils {
             `in`!!.close()
             write(file!!.absolutePath, buf.toString())
             LogUtils.d("ts替换", "ts替换完成")
-        } catch (e1: FileNotFoundException) {
+        } catch (e1:FileNotFoundException) {
             e1.printStackTrace()
-        } catch (e1: IOException) {
+        } catch (e1:IOException) {
             e1.printStackTrace()
         }
         return buf.toString()
@@ -1660,22 +1656,22 @@ object FileUtils {
      * @param content
      */
     @JvmStatic
-    fun write(filePath: String?, content: String?) {
-        var bw: BufferedWriter? = null
+    fun write(filePath:String?, content:String?) {
+        var bw:BufferedWriter? = null
         try {
             //根据文件路径创建缓冲输出流
             bw = BufferedWriter(FileWriter(filePath))
             // 将内容写入文件中
             bw.write(content)
             //            RxLogTool.d("M3U8替换", "替换完成");
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         } finally {
             // 关闭流
             if (bw != null) {
                 try {
                     bw.close()
-                } catch (e: IOException) {
+                } catch (e:IOException) {
                     bw = null
                 }
             }
@@ -1690,7 +1686,7 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun GetAllFileName(fileAbsolutePath: String?, suffix: String?): Vector<String> {
+    fun GetAllFileName(fileAbsolutePath:String?, suffix:String?):Vector<String> {
         val vecFile = Vector<String>()
         val file = File(fileAbsolutePath)
         val subFile = file.listFiles()
@@ -1699,9 +1695,7 @@ object FileUtils {
             if (!subFile[iFileLength].isDirectory) {
                 val filename = subFile[iFileLength].name
                 // 判断是否为suffix结尾
-                if (filename.trim { it <= ' ' }
-                        .toLowerCase()
-                        .endsWith(suffix!!)) {
+                if (filename.trim { it <= ' ' }.toLowerCase().endsWith(suffix!!)) {
                     vecFile.add(filename)
                 }
             }
@@ -1716,7 +1710,7 @@ object FileUtils {
      * @return 文件
      */
     @JvmStatic
-    fun getFileByPath(filePath: String?): File? {
+    fun getFileByPath(filePath:String?):File? {
         return if (DataUtils.isNullString(filePath)) null else File(filePath)
     }
 
@@ -1727,7 +1721,7 @@ object FileUtils {
      * @return `true`: 存在<br></br>`false`: 不存在
      */
     @JvmStatic
-    fun isFileExists(filePath: String?): Boolean {
+    fun isFileExists(filePath:String?):Boolean {
         return isFileExists(getFileByPath(filePath))
     }
 
@@ -1738,7 +1732,7 @@ object FileUtils {
      * @return `true`: 存在<br></br>`false`: 不存在
      */
     @JvmStatic
-    fun isFileExists(file: File?): Boolean {
+    fun isFileExists(file:File?):Boolean {
         return file != null && file.exists()
     }
 
@@ -1749,7 +1743,7 @@ object FileUtils {
      * @return `true`: 是<br></br>`false`: 否
      */
     @JvmStatic
-    fun isDir(dirPath: String?): Boolean {
+    fun isDir(dirPath:String?):Boolean {
         return isDir(getFileByPath(dirPath))
     }
 
@@ -1760,7 +1754,7 @@ object FileUtils {
      * @return `true`: 是<br></br>`false`: 否
      */
     @JvmStatic
-    fun isDir(file: File?): Boolean {
+    fun isDir(file:File?):Boolean {
         return isFileExists(file) && file!!.isDirectory
     }
 
@@ -1771,7 +1765,7 @@ object FileUtils {
      * @return `true`: 是<br></br>`false`: 否
      */
     @JvmStatic
-    fun isFile(filePath: String?): Boolean {
+    fun isFile(filePath:String?):Boolean {
         return isFile(getFileByPath(filePath))
     }
 
@@ -1782,7 +1776,7 @@ object FileUtils {
      * @return `true`: 是<br></br>`false`: 否
      */
     @JvmStatic
-    fun isFile(file: File?): Boolean {
+    fun isFile(file:File?):Boolean {
         return isFileExists(file) && file!!.isFile
     }
 
@@ -1793,7 +1787,7 @@ object FileUtils {
      * @return `true`: 存在或创建成功<br></br>`false`: 不存在或创建失败
      */
     @JvmStatic
-    fun createOrExistsDir(dirPath: String?): Boolean {
+    fun createOrExistsDir(dirPath:String?):Boolean {
         return createOrExistsDir(getFileByPath(dirPath))
     }
 
@@ -1804,7 +1798,7 @@ object FileUtils {
      * @return `true`: 存在或创建成功<br></br>`false`: 不存在或创建失败
      */
     @JvmStatic
-    fun createOrExistsDir(file: File?): Boolean {
+    fun createOrExistsDir(file:File?):Boolean {
         // 如果存在，是目录则返回true，是文件则返回false，不存在则返回是否创建成功
         return file != null && if (file.exists()) file.isDirectory else file.mkdirs()
     }
@@ -1816,7 +1810,7 @@ object FileUtils {
      * @return `true`: 存在或创建成功<br></br>`false`: 不存在或创建失败
      */
     @JvmStatic
-    fun createOrExistsFile(filePath: String?): Boolean {
+    fun createOrExistsFile(filePath:String?):Boolean {
         return createOrExistsFile(getFileByPath(filePath))
     }
 
@@ -1827,7 +1821,7 @@ object FileUtils {
      * @return `true`: 存在或创建成功<br></br>`false`: 不存在或创建失败
      */
     @JvmStatic
-    fun createOrExistsFile(file: File?): Boolean {
+    fun createOrExistsFile(file:File?):Boolean {
         if (file == null) {
             return false
         }
@@ -1839,7 +1833,7 @@ object FileUtils {
             false
         } else try {
             file.createNewFile()
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             false
         }
@@ -1852,7 +1846,7 @@ object FileUtils {
      * @return `true`: 创建成功<br></br>`false`: 创建失败
      */
     @JvmStatic
-    fun createFileByDeleteOldFile(filePath: String?): Boolean {
+    fun createFileByDeleteOldFile(filePath:String?):Boolean {
         return createFileByDeleteOldFile(getFileByPath(filePath))
     }
 
@@ -1863,7 +1857,7 @@ object FileUtils {
      * @return `true`: 创建成功<br></br>`false`: 创建失败
      */
     @JvmStatic
-    fun createFileByDeleteOldFile(file: File?): Boolean {
+    fun createFileByDeleteOldFile(file:File?):Boolean {
         if (file == null) {
             return false
         }
@@ -1876,7 +1870,7 @@ object FileUtils {
             false
         } else try {
             file.createNewFile()
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             false
         }
@@ -1891,7 +1885,7 @@ object FileUtils {
      * @return `true`: 复制或移动成功<br></br>`false`: 复制或移动失败
      */
     @JvmStatic
-    fun copyOrMoveDir(srcDirPath: String?, destDirPath: String?, isMove: Boolean): Boolean {
+    fun copyOrMoveDir(srcDirPath:String?, destDirPath:String?, isMove:Boolean):Boolean {
         return copyOrMoveDir(getFileByPath(srcDirPath), getFileByPath(destDirPath), isMove)
     }
 
@@ -1904,7 +1898,7 @@ object FileUtils {
      * @return `true`: 复制或移动成功<br></br>`false`: 复制或移动失败
      */
     @JvmStatic
-    fun copyOrMoveDir(srcDir: File?, destDir: File?, isMove: Boolean): Boolean {
+    fun copyOrMoveDir(srcDir:File?, destDir:File?, isMove:Boolean):Boolean {
         if (srcDir == null || destDir == null) {
             return false
         }
@@ -1952,7 +1946,7 @@ object FileUtils {
      * @return `true`: 复制或移动成功<br></br>`false`: 复制或移动失败
      */
     @JvmStatic
-    fun copyOrMoveFile(srcFilePath: String?, destFilePath: String?, isMove: Boolean): Boolean {
+    fun copyOrMoveFile(srcFilePath:String?, destFilePath:String?, isMove:Boolean):Boolean {
         return copyOrMoveFile(getFileByPath(srcFilePath), getFileByPath(destFilePath), isMove)
     }
 
@@ -1965,7 +1959,7 @@ object FileUtils {
      * @return `true`: 复制或移动成功<br></br>`false`: 复制或移动失败
      */
     @JvmStatic
-    fun copyOrMoveFile(srcFile: File?, destFile: File?, isMove: Boolean): Boolean {
+    fun copyOrMoveFile(srcFile:File?, destFile:File?, isMove:Boolean):Boolean {
         if (srcFile == null || destFile == null) {
             return false
         }
@@ -1982,7 +1976,7 @@ object FileUtils {
             false
         } else try {
             (writeFileFromIS(destFile, FileInputStream(srcFile), false) && !(isMove && !deleteFile(srcFile)))
-        } catch (e: FileNotFoundException) {
+        } catch (e:FileNotFoundException) {
             e.printStackTrace()
             LogUtils.e4Mark(e)
             false
@@ -1997,7 +1991,7 @@ object FileUtils {
      * @return `true`: 复制成功<br></br>`false`: 复制失败
      */
     @JvmStatic
-    fun copyDir(srcDirPath: String?, destDirPath: String?): Boolean {
+    fun copyDir(srcDirPath:String?, destDirPath:String?):Boolean {
         return copyDir(getFileByPath(srcDirPath), getFileByPath(destDirPath))
     }
 
@@ -2009,7 +2003,7 @@ object FileUtils {
      * @return `true`: 复制成功<br></br>`false`: 复制失败
      */
     @JvmStatic
-    fun copyDir(srcDir: File?, destDir: File?): Boolean {
+    fun copyDir(srcDir:File?, destDir:File?):Boolean {
         return copyOrMoveDir(srcDir, destDir, false)
     }
 
@@ -2021,7 +2015,7 @@ object FileUtils {
      * @return `true`: 复制成功<br></br>`false`: 复制失败
      */
     @JvmStatic
-    fun copyFile(srcFilePath: String?, destFilePath: String?): Boolean {
+    fun copyFile(srcFilePath:String?, destFilePath:String?):Boolean {
         return copyFile(getFileByPath(srcFilePath), getFileByPath(destFilePath), false)
     }
 
@@ -2033,7 +2027,7 @@ object FileUtils {
      * @return `true`: 复制成功<br></br>`false`: 复制失败
      */
     @JvmStatic
-    fun copyFile(srcFile: File?, destFile: File?, isCopy: Boolean): Boolean {
+    fun copyFile(srcFile:File?, destFile:File?, isCopy:Boolean):Boolean {
         return copyOrMoveFile(srcFile, destFile, false)
     }
 
@@ -2045,7 +2039,7 @@ object FileUtils {
      * @return `true`: 移动成功<br></br>`false`: 移动失败
      */
     @JvmStatic
-    fun moveDir(srcDirPath: String?, destDirPath: String?): Boolean {
+    fun moveDir(srcDirPath:String?, destDirPath:String?):Boolean {
         return moveDir(getFileByPath(srcDirPath), getFileByPath(destDirPath))
     }
 
@@ -2057,7 +2051,7 @@ object FileUtils {
      * @return `true`: 移动成功<br></br>`false`: 移动失败
      */
     @JvmStatic
-    fun moveDir(srcDir: File?, destDir: File?): Boolean {
+    fun moveDir(srcDir:File?, destDir:File?):Boolean {
         return copyOrMoveDir(srcDir, destDir, true)
     }
 
@@ -2069,7 +2063,7 @@ object FileUtils {
      * @return `true`: 移动成功<br></br>`false`: 移动失败
      */
     @JvmStatic
-    fun moveFile(srcFilePath: String?, destFilePath: String?): Boolean {
+    fun moveFile(srcFilePath:String?, destFilePath:String?):Boolean {
         return moveFile(getFileByPath(srcFilePath), getFileByPath(destFilePath))
     }
 
@@ -2081,7 +2075,7 @@ object FileUtils {
      * @return `true`: 移动成功<br></br>`false`: 移动失败
      */
     @JvmStatic
-    fun moveFile(srcFile: File?, destFile: File?): Boolean {
+    fun moveFile(srcFile:File?, destFile:File?):Boolean {
         return copyOrMoveFile(srcFile, destFile, true)
     }
 
@@ -2092,7 +2086,7 @@ object FileUtils {
      * @return `true`: 删除成功<br></br>`false`: 删除失败
      */
     @JvmStatic
-    fun deleteDir(dirPath: String): Boolean? {
+    fun deleteDir(dirPath:String):Boolean? {
         return getFileByPath(dirPath)?.let { deleteDir(it) }
     }
 
@@ -2103,7 +2097,7 @@ object FileUtils {
      * @return `true`: 删除成功<br></br>`false`: 删除失败
      */
     @JvmStatic
-    fun deleteDir(dir: File): Boolean {
+    fun deleteDir(dir:File):Boolean {
         if (dir == null) {
             return false
         }
@@ -2138,7 +2132,7 @@ object FileUtils {
      * @return `true`: 删除成功<br></br>`false`: 删除失败
      */
     @JvmStatic
-    fun deleteFile(srcFilePath: String?): Boolean {
+    fun deleteFile(srcFilePath:String?):Boolean {
         return deleteFile(getFileByPath(srcFilePath))
     }
 
@@ -2149,7 +2143,7 @@ object FileUtils {
      * @return `true`: 删除成功<br></br>`false`: 删除失败
      */
     @JvmStatic
-    fun deleteFile(file: File?): Boolean {
+    fun deleteFile(file:File?):Boolean {
         return file != null && (!file.exists() || file.isFile && file.delete())
     }
 
@@ -2161,7 +2155,7 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDir(dirPath: String?, isRecursive: Boolean): List<File>? {
+    fun listFilesInDir(dirPath:String?, isRecursive:Boolean):List<File>? {
         return listFilesInDir(getFileByPath(dirPath), isRecursive)
     }
 
@@ -2173,14 +2167,14 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDir(dir: File?, isRecursive: Boolean): List<File>? {
+    fun listFilesInDir(dir:File?, isRecursive:Boolean):List<File>? {
         if (isRecursive) {
             return listFilesInDir(dir)
         }
         if (dir == null || !isDir(dir)) {
             return null
         }
-        val list: MutableList<File> = java.util.ArrayList()
+        val list:MutableList<File> = java.util.ArrayList()
         Collections.addAll(list, *dir.listFiles())
         return list
     }
@@ -2192,7 +2186,7 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDir(dirPath: String?): List<File>? {
+    fun listFilesInDir(dirPath:String?):List<File>? {
         return listFilesInDir(getFileByPath(dirPath))
     }
 
@@ -2203,11 +2197,11 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDir(dir: File?): List<File>? {
+    fun listFilesInDir(dir:File?):List<File>? {
         if (dir == null || !isDir(dir)) {
             return null
         }
-        val list: MutableList<File> = java.util.ArrayList()
+        val list:MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
             list.add(file)
@@ -2229,7 +2223,7 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dirPath: String?, suffix: String, isRecursive: Boolean): List<File>? {
+    fun listFilesInDirWithFilter(dirPath:String?, suffix:String, isRecursive:Boolean):List<File>? {
         return listFilesInDirWithFilter(getFileByPath(dirPath), suffix, isRecursive)
     }
 
@@ -2244,19 +2238,17 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dir: File?, suffix: String, isRecursive: Boolean): List<File>? {
+    fun listFilesInDirWithFilter(dir:File?, suffix:String, isRecursive:Boolean):List<File>? {
         if (isRecursive) {
             return listFilesInDirWithFilter(dir, suffix)
         }
         if (dir == null || !isDir(dir)) {
             return null
         }
-        val list: MutableList<File> = java.util.ArrayList()
+        val list:MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
-            if (file.name.toUpperCase()
-                    .endsWith(suffix.toUpperCase())
-            ) {
+            if (file.name.toUpperCase().endsWith(suffix.toUpperCase())) {
                 list.add(file)
             }
         }
@@ -2273,7 +2265,7 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dirPath: String?, suffix: String): List<File>? {
+    fun listFilesInDirWithFilter(dirPath:String?, suffix:String):List<File>? {
         return listFilesInDirWithFilter(getFileByPath(dirPath), suffix)
     }
 
@@ -2287,16 +2279,14 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dir: File?, suffix: String): List<File>? {
+    fun listFilesInDirWithFilter(dir:File?, suffix:String):List<File>? {
         if (dir == null || !isDir(dir)) {
             return null
         }
-        val list: MutableList<File> = java.util.ArrayList()
+        val list:MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
-            if (file.name.toUpperCase()
-                    .endsWith(suffix.toUpperCase())
-            ) {
+            if (file.name.toUpperCase().endsWith(suffix.toUpperCase())) {
                 list.add(file)
             }
             if (file.isDirectory) {
@@ -2315,7 +2305,7 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dirPath: String?, filter: FilenameFilter, isRecursive: Boolean): List<File>? {
+    fun listFilesInDirWithFilter(dirPath:String?, filter:FilenameFilter, isRecursive:Boolean):List<File>? {
         return listFilesInDirWithFilter(getFileByPath(dirPath), filter, isRecursive)
     }
 
@@ -2328,14 +2318,14 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dir: File?, filter: FilenameFilter, isRecursive: Boolean): List<File>? {
+    fun listFilesInDirWithFilter(dir:File?, filter:FilenameFilter, isRecursive:Boolean):List<File>? {
         if (isRecursive) {
             return listFilesInDirWithFilter(dir, filter)
         }
         if (dir == null || !isDir(dir)) {
             return null
         }
-        val list: MutableList<File> = java.util.ArrayList()
+        val list:MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
             if (filter.accept(file.parentFile, file.name)) {
@@ -2353,7 +2343,7 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dirPath: String?, filter: FilenameFilter): List<File>? {
+    fun listFilesInDirWithFilter(dirPath:String?, filter:FilenameFilter):List<File>? {
         return listFilesInDirWithFilter(getFileByPath(dirPath), filter)
     }
 
@@ -2365,11 +2355,11 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun listFilesInDirWithFilter(dir: File?, filter: FilenameFilter): List<File>? {
+    fun listFilesInDirWithFilter(dir:File?, filter:FilenameFilter):List<File>? {
         if (dir == null || !isDir(dir)) {
             return null
         }
-        val list: MutableList<File> = java.util.ArrayList()
+        val list:MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
             if (filter.accept(file.parentFile, file.name)) {
@@ -2392,7 +2382,7 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun searchFileInDir(dirPath: String?, fileName: String): List<File>? {
+    fun searchFileInDir(dirPath:String?, fileName:String):List<File>? {
         return searchFileInDir(getFileByPath(dirPath), fileName)
     }
 
@@ -2406,11 +2396,11 @@ object FileUtils {
      * @return 文件链表
      */
     @JvmStatic
-    fun searchFileInDir(dir: File?, fileName: String): List<File>? {
+    fun searchFileInDir(dir:File?, fileName:String):List<File>? {
         if (dir == null || !isDir(dir)) {
             return null
         }
-        val list: MutableList<File> = java.util.ArrayList()
+        val list:MutableList<File> = java.util.ArrayList()
         val files = dir.listFiles()
         for (file in files) {
             if (file.name.toUpperCase() == fileName.toUpperCase()) {
@@ -2432,7 +2422,7 @@ object FileUtils {
      * @return `true`: 写入成功<br></br>`false`: 写入失败
      */
     @JvmStatic
-    fun writeFileFromIS(filePath: String?, `is`: InputStream?, append: Boolean): Boolean {
+    fun writeFileFromIS(filePath:String?, `is`:InputStream?, append:Boolean):Boolean {
         return writeFileFromIS(getFileByPath(filePath), `is`, append)
     }
 
@@ -2445,21 +2435,19 @@ object FileUtils {
      * @return `true`: 写入成功<br></br>`false`: 写入失败
      */
     @JvmStatic
-    fun writeFileFromIS(file: File?, `is`: InputStream?, append: Boolean): Boolean {
+    fun writeFileFromIS(file:File?, `is`:InputStream?, append:Boolean):Boolean {
         if (file == null || `is` == null) return false
         if (!createOrExistsFile(file)) return false
-        var os: OutputStream? = null
+        var os:OutputStream? = null
         return try {
             os = BufferedOutputStream(FileOutputStream(file, append))
             val data = ByteArray(KB)
-            var len: Int
-            while (`is`.read(data, 0, KB)
-                    .also { len = it } != -1
-            ) {
+            var len:Int
+            while (`is`.read(data, 0, KB).also { len = it } != -1) {
                 os.write(data, 0, len)
             }
             true
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             false
         } finally {
@@ -2476,7 +2464,7 @@ object FileUtils {
      * @return `true`: 写入成功<br></br>`false`: 写入失败
      */
     @JvmStatic
-    fun writeFileFromString(filePath: String?, content: String?, append: Boolean): Boolean {
+    fun writeFileFromString(filePath:String?, content:String?, append:Boolean):Boolean {
         return writeFileFromString(getFileByPath(filePath), content, append)
     }
 
@@ -2489,15 +2477,15 @@ object FileUtils {
      * @return `true`: 写入成功<br></br>`false`: 写入失败
      */
     @JvmStatic
-    fun writeFileFromString(file: File?, content: String?, append: Boolean): Boolean {
+    fun writeFileFromString(file:File?, content:String?, append:Boolean):Boolean {
         if (file == null || content == null) return false
         if (!createOrExistsFile(file)) return false
-        var fileWriter: FileWriter? = null
+        var fileWriter:FileWriter? = null
         return try {
             fileWriter = FileWriter(file, append)
             fileWriter.write(content)
             true
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             false
         } finally {
@@ -2513,7 +2501,7 @@ object FileUtils {
      * @return 文件行链表
      */
     @JvmStatic
-    fun readFile2List(filePath: String?, charsetName: String?): List<String>? {
+    fun readFile2List(filePath:String?, charsetName:String?):List<String>? {
         return readFile2List(getFileByPath(filePath), charsetName)
     }
 
@@ -2525,7 +2513,7 @@ object FileUtils {
      * @return 文件行链表
      */
     @JvmStatic
-    fun readFile2List(file: File?, charsetName: String?): List<String>? {
+    fun readFile2List(file:File?, charsetName:String?):List<String>? {
         return readFile2List(file, 0, 0x7FFFFFFF, charsetName)
     }
 
@@ -2539,7 +2527,7 @@ object FileUtils {
      * @return 包含制定行的list
      */
     @JvmStatic
-    fun readFile2List(filePath: String?, st: Int, end: Int, charsetName: String?): List<String>? {
+    fun readFile2List(filePath:String?, st:Int, end:Int, charsetName:String?):List<String>? {
         return readFile2List(getFileByPath(filePath), st, end, charsetName)
     }
 
@@ -2553,26 +2541,24 @@ object FileUtils {
      * @return 包含从start行到end行的list
      */
     @JvmStatic
-    fun readFile2List(file: File?, st: Int, end: Int, charsetName: String?): List<String>? {
+    fun readFile2List(file:File?, st:Int, end:Int, charsetName:String?):List<String>? {
         if (file == null) {
             return null
         }
         if (st > end) {
             return null
         }
-        var reader: BufferedReader? = null
+        var reader:BufferedReader? = null
         return try {
-            var line: String?
+            var line:String?
             var curLine = 1
-            val list: MutableList<String> = java.util.ArrayList()
+            val list:MutableList<String> = java.util.ArrayList()
             reader = if (DataUtils.isNullString(charsetName)) {
                 BufferedReader(FileReader(file))
             } else {
                 BufferedReader(InputStreamReader(FileInputStream(file), charsetName))
             }
-            while (reader.readLine()
-                    .also { line = it } != null
-            ) {
+            while (reader.readLine().also { line = it } != null) {
                 if (curLine > end) {
                     break
                 }
@@ -2582,7 +2568,7 @@ object FileUtils {
                 ++curLine
             }
             list
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             null
         } finally {
@@ -2598,7 +2584,7 @@ object FileUtils {
      * @return 字符串
      */
     @JvmStatic
-    fun readFile2String(filePath: String?, charsetName: String?): String? {
+    fun readFile2String(filePath:String?, charsetName:String?):String? {
         return readFile2String(getFileByPath(filePath), charsetName)
     }
 
@@ -2610,11 +2596,11 @@ object FileUtils {
      * @return 字符串
      */
     @JvmStatic
-    fun readFile2String(file: File?, charsetName: String?): String? {
+    fun readFile2String(file:File?, charsetName:String?):String? {
         if (file == null) {
             return null
         }
-        var reader: BufferedReader? = null
+        var reader:BufferedReader? = null
         return try {
             val sb = StringBuilder()
             reader = if (DataUtils.isNullString(charsetName)) {
@@ -2622,17 +2608,13 @@ object FileUtils {
             } else {
                 BufferedReader(InputStreamReader(FileInputStream(file), charsetName))
             }
-            var line: String?
-            while (reader.readLine()
-                    .also { line = it } != null
-            ) {
-                sb.append(line)
-                    .append("\r\n") // windows系统换行为\r\n，Linux为\n
+            var line:String?
+            while (reader.readLine().also { line = it } != null) {
+                sb.append(line).append("\r\n") // windows系统换行为\r\n，Linux为\n
             }
             // 要去除最后的换行符
-            sb.delete(sb.length - 2, sb.length)
-                .toString()
-        } catch (e: IOException) {
+            sb.delete(sb.length - 2, sb.length).toString()
+        } catch (e:IOException) {
             e.printStackTrace()
             null
         } finally {
@@ -2647,7 +2629,7 @@ object FileUtils {
      * @return StringBuilder对象
      */
     @JvmStatic
-    fun readFile2Bytes(filePath: String?): ByteArray? {
+    fun readFile2Bytes(filePath:String?):ByteArray? {
         return readFile2Bytes(getFileByPath(filePath))
     }
 
@@ -2658,12 +2640,12 @@ object FileUtils {
      * @return StringBuilder对象
      */
     @JvmStatic
-    fun readFile2Bytes(file: File?): ByteArray? {
+    fun readFile2Bytes(file:File?):ByteArray? {
         return if (file == null) {
             null
         } else try {
             DataUtils.inputStream2Bytes(FileInputStream(file))
-        } catch (e: FileNotFoundException) {
+        } catch (e:FileNotFoundException) {
             e.printStackTrace()
             null
         }
@@ -2676,7 +2658,7 @@ object FileUtils {
      * @return 文件编码
      */
     @JvmStatic
-    fun getFileCharsetSimple(filePath: String?): String {
+    fun getFileCharsetSimple(filePath:String?):String {
         return getFileCharsetSimple(getFileByPath(filePath))
     }
 
@@ -2687,13 +2669,13 @@ object FileUtils {
      * @return 文件编码
      */
     @JvmStatic
-    fun getFileCharsetSimple(file: File?): String {
+    fun getFileCharsetSimple(file:File?):String {
         var p = 0
-        var `is`: InputStream? = null
+        var `is`:InputStream? = null
         try {
             `is` = BufferedInputStream(FileInputStream(file))
             p = (`is`.read() shl 8) + `is`.read()
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         } finally {
             closeIO(`is`)
@@ -2713,7 +2695,7 @@ object FileUtils {
      * @return 文件行数
      */
     @JvmStatic
-    fun getFileLines(filePath: String?): Int {
+    fun getFileLines(filePath:String?):Int {
         return getFileLines(getFileByPath(filePath))
     }
 
@@ -2724,23 +2706,21 @@ object FileUtils {
      * @return 文件行数
      */
     @JvmStatic
-    fun getFileLines(file: File?): Int {
+    fun getFileLines(file:File?):Int {
         var count = 1
-        var `is`: InputStream? = null
+        var `is`:InputStream? = null
         try {
             `is` = BufferedInputStream(FileInputStream(file))
             val buffer = ByteArray(KB)
-            var readChars: Int
-            while (`is`.read(buffer, 0, KB)
-                    .also { readChars = it } != -1
-            ) {
+            var readChars:Int
+            while (`is`.read(buffer, 0, KB).also { readChars = it } != -1) {
                 for (i in 0 until readChars) {
                     if (buffer[i].equals('\n')) {
                         ++count
                     }
                 }
             }
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         } finally {
             closeIO(`is`)
@@ -2755,7 +2735,7 @@ object FileUtils {
      * @return 文件大小
      */
     @JvmStatic
-    fun getFileSize(filePath: String?): String {
+    fun getFileSize(filePath:String?):String {
         return getFileSize(getFileByPath(filePath))
     }
 
@@ -2768,7 +2748,7 @@ object FileUtils {
      * @return 文件大小
      */
     @JvmStatic
-    fun getFileSize(file: File?): String {
+    fun getFileSize(file:File?):String {
         return if (!isFileExists(file)) {
             ""
         } else DataUtils.byte2FitSize(file!!.length())
@@ -2781,7 +2761,7 @@ object FileUtils {
      * @return 文件的MD5校验码
      */
     @JvmStatic
-    fun getFileMD5(filePath: String?): String {
+    fun getFileMD5(filePath:String?):String {
         return getFileMD5(getFileByPath(filePath))
     }
 
@@ -2792,7 +2772,7 @@ object FileUtils {
      * @return 文件的MD5校验码
      */
     @JvmStatic
-    fun getFileMD5(file: File?): String {
+    fun getFileMD5(file:File?):String {
         return EncryptTool.encryptMD5File2String(file!!)
     }
 
@@ -2802,7 +2782,7 @@ object FileUtils {
      * @param closeables closeable
      */
     @JvmStatic
-    fun closeIO(vararg closeables: Closeable?) {
+    fun closeIO(vararg closeables:Closeable?) {
         if (closeables == null) {
             return
         }
@@ -2810,7 +2790,7 @@ object FileUtils {
             for (closeable in closeables) {
                 closeable?.close()
             }
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         }
     }
@@ -2822,7 +2802,7 @@ object FileUtils {
      * @return filePath最长目录
      */
     @JvmStatic
-    fun getDirName(file: File?): String? {
+    fun getDirName(file:File?):String? {
         return if (file == null) {
             null
         } else getDirName(file.path)
@@ -2835,7 +2815,7 @@ object FileUtils {
      * @return filePath最长目录
      */
     @JvmStatic
-    fun getDirName(filePath: String): String {
+    fun getDirName(filePath:String):String {
         if (DataUtils.isNullString(filePath)) {
             return filePath
         }
@@ -2850,7 +2830,7 @@ object FileUtils {
      * @return 文件名
      */
     @JvmStatic
-    fun getFileName(file: File?): String? {
+    fun getFileName(file:File?):String? {
         return if (file == null) {
             null
         } else getFileName(file.path)
@@ -2863,7 +2843,7 @@ object FileUtils {
      * @return 文件名
      */
     @JvmStatic
-    fun getFileName(filePath: String): String {
+    fun getFileName(filePath:String):String {
         if (DataUtils.isNullString(filePath)) {
             return filePath
         }
@@ -2878,7 +2858,7 @@ object FileUtils {
      * @return 不带拓展名的文件名
      */
     @JvmStatic
-    fun getFileNameNoExtension(file: File?): String? {
+    fun getFileNameNoExtension(file:File?):String? {
         return if (file == null) {
             null
         } else getFileNameNoExtension(file.path)
@@ -2891,7 +2871,7 @@ object FileUtils {
      * @return 不带拓展名的文件名
      */
     @JvmStatic
-    fun getFileNameNoExtension(filePath: String): String {
+    fun getFileNameNoExtension(filePath:String):String {
         if (DataUtils.isNullString(filePath)) {
             return filePath
         }
@@ -2912,7 +2892,7 @@ object FileUtils {
      * @return 文件拓展名
      */
     @JvmStatic
-    fun getFileExtension(file: File?): String? {
+    fun getFileExtension(file:File?):String? {
         return if (file == null) {
             null
         } else getFileExtension(file.path)
@@ -2925,7 +2905,7 @@ object FileUtils {
      * @return 文件拓展名
      */
     @JvmStatic
-    fun getFileExtension(filePath: String): String {
+    fun getFileExtension(filePath:String):String {
         if (DataUtils.isNullString(filePath)) {
             return filePath
         }
@@ -2944,8 +2924,8 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getUriForFile(mContext: Context, file: File?): Uri? {
-        var fileUri: Uri? = null
+    fun getUriForFile(mContext:Context, file:File?):Uri? {
+        var fileUri:Uri? = null
         fileUri = if (Build.VERSION.SDK_INT >= 24) {
             FileProvider.getUriForFile(mContext, mContext.packageName + ".FileProvider", file!!)
         } else {
@@ -2963,10 +2943,9 @@ object FileUtils {
      */
     @SuppressLint("Range")
     @JvmStatic
-    fun getImageContentUri(context: Context?, imageFile: File?): Uri? {
+    fun getImageContentUri(context:Context?, imageFile:File?):Uri? {
         val filePath = imageFile?.absolutePath
-        val cursor =
-            context?.contentResolver?.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, arrayOf(MediaStore.Images.Media._ID), MediaStore.Images.Media.DATA + "=? ", arrayOf(filePath), null)
+        val cursor = context?.contentResolver?.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, arrayOf(MediaStore.Images.Media._ID), MediaStore.Images.Media.DATA + "=? ", arrayOf(filePath), null)
         return if (cursor != null && cursor.moveToFirst()) {
             val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
             val baseUri = Uri.parse("content://media/external/images/media")
@@ -2990,13 +2969,13 @@ object FileUtils {
      * @return
      */
     @JvmStatic
-    fun getFilePhotoFromUri(context: Activity?, uri: Uri?): File {
+    fun getFilePhotoFromUri(context:Activity?, uri:Uri?):File {
         return File(PhotoUtils.getImageAbsolutePath(context, uri))
     }
 
     @TargetApi(19)
     @JvmStatic
-    fun getPathFromUri(context: Context, uri: Uri): String? {
+    fun getPathFromUri(context:Context, uri:Uri):String? {
         val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
 
         // DocumentProvider
@@ -3004,24 +2983,20 @@ object FileUtils {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 val docId = DocumentsContract.getDocumentId(uri)
-                val split = docId.split(":")
-                    .toTypedArray()
+                val split = docId.split(":").toTypedArray()
                 val type = split[0]
                 if ("primary".equals(type, ignoreCase = true)) {
-                    return Environment.getExternalStorageDirectory()
-                        .toString() + "/" + split[1]
+                    return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
                 }
             } else if (isDownloadsDocument(uri)) {
                 val id = DocumentsContract.getDocumentId(uri)
-                val contentUri =
-                    ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
+                val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
                 return getDataColumn(context, contentUri, null, null)
             } else if (isMediaDocument(uri)) {
                 val docId = DocumentsContract.getDocumentId(uri)
-                val split = docId.split(":")
-                    .toTypedArray()
+                val split = docId.split(":").toTypedArray()
                 val type = split[0]
-                var contentUri: Uri? = null
+                var contentUri:Uri? = null
                 if ("image" == type) {
                     contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                 } else if ("video" == type) {
@@ -3049,7 +3024,7 @@ object FileUtils {
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
     @JvmStatic
-    fun isExternalStorageDocument(uri: Uri): Boolean {
+    fun isExternalStorageDocument(uri:Uri):Boolean {
         return "com.android.externalstorage.documents" == uri.authority
     }
 
@@ -3058,7 +3033,7 @@ object FileUtils {
      * @return Whether the Uri authority is DownloadsProvider.
      */
     @JvmStatic
-    fun isDownloadsDocument(uri: Uri): Boolean {
+    fun isDownloadsDocument(uri:Uri):Boolean {
         return "com.android.providers.downloads.documents" == uri.authority
     }
 
@@ -3067,7 +3042,7 @@ object FileUtils {
      * @return Whether the Uri authority is MediaProvider.
      */
     @JvmStatic
-    fun isMediaDocument(uri: Uri): Boolean {
+    fun isMediaDocument(uri:Uri):Boolean {
         return "com.android.providers.media.documents" == uri.authority
     }
 
@@ -3076,13 +3051,13 @@ object FileUtils {
      * @return Whether the Uri authority is Google Photos.
      */
     @JvmStatic
-    fun isGooglePhotosUri(uri: Uri): Boolean {
+    fun isGooglePhotosUri(uri:Uri):Boolean {
         return "com.google.android.apps.photos.content" == uri.authority
     }
 
     @JvmStatic
-    fun getDataColumn(context: Context, uri: Uri?, selection: String?, selectionArgs: Array<String>?): String? {
-        var cursor: Cursor? = null
+    fun getDataColumn(context:Context, uri:Uri?, selection:String?, selectionArgs:Array<String>?):String? {
+        var cursor:Cursor? = null
         val column = MediaStore.Images.Media.DATA
         val projection = arrayOf(column)
         try {
@@ -3103,7 +3078,7 @@ object FileUtils {
      * @param closeables closeable
      */
     @JvmStatic
-    fun closeIOQuietly(vararg closeables: Closeable?) {
+    fun closeIOQuietly(vararg closeables:Closeable?) {
         if (closeables == null) {
             return
         }
@@ -3111,52 +3086,56 @@ object FileUtils {
             if (closeable != null) {
                 try {
                     closeable.close()
-                } catch (ignored: IOException) {
+                } catch (ignored:IOException) {
                 }
             }
         }
     }
 
     @JvmStatic
-    fun file2Base64(filePath: String?): String {
-        var fis: FileInputStream? = null
+    fun file2Base64(filePath:String?):String {
+        var fis:FileInputStream? = null
         var base64String = ""
         val bos = ByteArrayOutputStream()
         try {
             fis = FileInputStream(filePath)
             val buffer = ByteArray(1024 * 100)
             var count = 0
-            while (fis.read(buffer)
-                    .also { count = it } != -1
-            ) {
+            while (fis.read(buffer).also { count = it } != -1) {
                 bos.write(buffer, 0, count)
             }
             fis.close()
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
         }
         base64String = Base64.encodeToString(bos.toByteArray(), Base64.DEFAULT)
         return base64String
     }
 
+    /**
+     *   是否是图片结尾
+     * @param name String
+     * @return Boolean
+     */
+    fun hasImageSuffix(name:String):Boolean {
+        return name.lowercase().endsWith(".png") || name.lowercase().endsWith(".jpg") || name.lowercase().endsWith(".jpeg") || name.lowercase().endsWith(".webp")
+    }
     @JvmStatic
-    fun exportDb2Sdcard(context: Context, path: String, realDBName: String?, exportDBName: String) {
+    fun exportDb2Sdcard(context:Context, path:String, realDBName:String?, exportDBName:String) {
         val filePath = context.getDatabasePath(realDBName).absolutePath
         val buffer = ByteArray(1024)
         try {
             val input = FileInputStream(File(filePath))
             val output = FileOutputStream(path + File.separator + exportDBName)
-            var length: Int
-            while (input.read(buffer)
-                    .also { length = it } > 0
-            ) {
+            var length:Int
+            while (input.read(buffer).also { length = it } > 0) {
                 output.write(buffer, 0, length)
             }
             output.flush()
             output.close()
             input.close()
             LogUtils.i("mv success!")
-        } catch (var8: IOException) {
+        } catch (var8:IOException) {
             LogUtils.e("TAG", var8.toString())
         }
     }

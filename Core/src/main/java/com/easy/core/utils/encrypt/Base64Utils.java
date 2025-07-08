@@ -44,6 +44,11 @@ public class Base64Utils {
         return new String(Base64.decode(data, Base64.DEFAULT));
     }
 
+    public static byte[] decodedStr(String data, int flags) {
+
+        return (Base64.decode(data, flags));
+    }
+
     /**
      * 文件编码
      *

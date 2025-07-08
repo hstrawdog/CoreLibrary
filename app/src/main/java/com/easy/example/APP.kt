@@ -12,7 +12,13 @@ import skin.support.app.SkinAppCompatViewInflater
 import skin.support.app.SkinCardViewInflater
 import skin.support.constraint.app.SkinConstraintViewInflater
 import skin.support.design.app.SkinMaterialViewInflater
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 /**
  * @Author : huangqiqiang
@@ -49,7 +55,30 @@ class APP : Application() {
         //  取消任务
         WorkManager.getInstance()
             .cancelAllWork()
+     handleSSLHandshake()
 
+    }
+    fun handleSSLHandshake() {
+        try {
+            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+                override fun getAcceptedIssuers():Array<X509Certificate> {
+                    return arrayOf();
+                }
+
+                override fun checkClientTrusted(certs:Array<X509Certificate>, authType:String) {
+                }
+
+                override fun checkServerTrusted(certs:Array<X509Certificate>, authType:String) {
+                }
+            })
+
+            val sc = SSLContext.getInstance("TLS")
+            // trustAllCerts信任所有的证书
+            sc.init(null, trustAllCerts, SecureRandom())
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.socketFactory)
+            HttpsURLConnection.setDefaultHostnameVerifier { hostname, session -> true }
+        } catch (ignored:java.lang.Exception) {
+        }
     }
 
     //debug 返回true  release 返回false

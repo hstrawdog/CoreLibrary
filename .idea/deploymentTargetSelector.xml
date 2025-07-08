@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="StudioProjects.CoreLibrary.app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-01-23T01:31:46.681928Z">
+        <DropdownSelection timestamp="2025-06-24T01:33:23.530761Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="PhysicalDevice" identifier="serial=T9Y0221714002719" />

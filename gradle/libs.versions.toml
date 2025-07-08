@@ -73,6 +73,10 @@ jsoup_jsoup_version = "1.14.1"
 jleakcanary_version = "2.14"
 idimenscompat_version = "1.0.3"
 unpeek_livedata_version = "7.8.0"
+junitJunit = "4.13.2"
+androidxJunit = "1.1.5"
+espressoCoreVersion = "3.5.1"
+activityVersion = "1.8.0"
 
 [libraries]
 
@@ -382,6 +386,10 @@ datastore_datastore_rxjava3 = { group = "androidx.datastore", name = "datastore-
 
 
 i_dimens_compat = { group = "com.github.hstrawdog", name = "IDimensCompat", version.ref = "idimenscompat_version" }
+junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+extJunit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCoreVersion" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activityVersion" }
 
 [plugins]
 

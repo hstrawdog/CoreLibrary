@@ -21,6 +21,7 @@ import com.easy.core.utils.AppTool
 import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.log.LogUtils
 
+
 /**
  * @Author : huangqiqiang
  * @Package : com.qi.core.ui
@@ -33,42 +34,42 @@ open class BaseWebFragment : BaseFragment() {
     /**
      *  进度条
      */
-    var progressBar: ProgressBar? = null
+    var progressBar:ProgressBar? = null
 
     /**
      *  进度条颜色
      */
-    var progressBarColor: ColorStateList? = null
+    var progressBarColor:ColorStateList? = null
 
     /**
      * WebView
      */
-    var webView: WebView? = null
+    var webView:WebView? = null
 
     /**
      *  URL
      */
-    var url: String? = null
+    var url:String? = null
 
     /**
      *  标题哦
      */
-    private var title: CharSequence? = ""
+    private var title:CharSequence? = ""
 
     /**
      *  加载监听
      */
-    var webLoadListener: WebLoadListener? = null
+    var webLoadListener:WebLoadListener? = null
 
     /**
      * 交互脚本
      */
-    var scriptInterface: ScriptInterface? = null
+    var scriptInterface:ScriptInterface? = null
 
     /**
      *  布局Id
      */
-    override fun getLayoutViewId(): Int {
+    override fun getLayoutViewId():Int {
         return R.layout.fragment_web
     }
 
@@ -87,8 +88,8 @@ open class BaseWebFragment : BaseFragment() {
      */
     var isGoBackWebView = true
 
-    var webChromeClient: WebChromeClient = object : WebChromeClient() {
-        override fun onReceivedTitle(view: WebView, title: String?) {
+    var webChromeClient:WebChromeClient = object : WebChromeClient() {
+        override fun onReceivedTitle(view:WebView, title:String?) {
             super.onReceivedTitle(view, title)
 
             title?.let {
@@ -98,18 +99,18 @@ open class BaseWebFragment : BaseFragment() {
             }
         }
 
-        override fun onConsoleMessage(cm: ConsoleMessage?): Boolean {
+        override fun onConsoleMessage(cm:ConsoleMessage?):Boolean {
             LogUtils.d("WebViewConsole", cm?.message() + " -- From line " + cm?.lineNumber() + " of " + cm?.sourceId());
             return super.onConsoleMessage(cm)
 
         }
 
-        override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+        override fun onShowCustomView(view:View?, callback:CustomViewCallback?) {
             super.onShowCustomView(view, callback)
 
         }
 
-        override fun onProgressChanged(view: WebView, newProgress: Int) {
+        override fun onProgressChanged(view:WebView, newProgress:Int) {
             if (newProgress >= 5) {
                 progressBar?.progress = newProgress
             }
@@ -130,11 +131,9 @@ open class BaseWebFragment : BaseFragment() {
 
     override fun initConfig() {
         super.initConfig()
-        rootViewImpl.iToolBarBuilder.showToolBar =
-            arguments?.getBoolean(getString(R.string.key_showToolBar), true) == true
+        rootViewImpl.iToolBarBuilder.showToolBar = arguments?.getBoolean(getString(R.string.key_showToolBar), true) == true
         rootViewImpl.iToolBarBuilder.showLine = arguments?.getBoolean(getString(R.string.key_showToolBar), true) == true
-        rootViewImpl.iToolBarBuilder.showStatusBar =
-            arguments?.getBoolean(getString(R.string.key_showstatusBar), true) == true
+        rootViewImpl.iToolBarBuilder.showStatusBar = arguments?.getBoolean(getString(R.string.key_showstatusBar), true) == true
     }
 
     @SuppressLint("JavascriptInterface")
@@ -157,9 +156,17 @@ open class BaseWebFragment : BaseFragment() {
         webView?.webChromeClient = webChromeClient
 
         webView?.let {
-            it.setWebChromeClient(InsideWebChromeClient(it, it.parent as ViewGroup))
-
+           it.setWebChromeClient(InsideWebChromeClient(it, it.parent as ViewGroup))
         }
+        if (Build.VERSION.SDK_INT >= 21) {
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
+        }
+        if (Build.VERSION.SDK_INT >= 19) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
+
+
         scriptInterface?.let {
             webView?.addJavascriptInterface(it, "android")
         }
@@ -176,14 +183,14 @@ open class BaseWebFragment : BaseFragment() {
     private fun initWebViewSettings() {
         val settings = webView?.settings
         settings?.run {
-
+            val originalUA = userAgentString
+            //Mozilla/5.0 (Linux; Android 12; JAD-AL50 Build/HUAWEIJAD-AL50; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/114.0.5735.196 Mobile Safari/537.36/emmcloud/ccwork/1.0.
+            userAgentString = "$originalUA/emmcloud/ccwork/3.8.1"
             // 白色背景
             webView?.setBackgroundColor(Color.TRANSPARENT)
             webView?.setBackgroundResource(R.color.white)
-
             webView?.overScrollMode = View.OVER_SCROLL_NEVER
             webView?.isNestedScrollingEnabled = false // 默认支持嵌套滑动
-
             // 设置自适应屏幕，两者合用
             useWideViewPort = true
             loadWithOverviewMode = true
@@ -205,9 +212,11 @@ open class BaseWebFragment : BaseFragment() {
             javaScriptEnabled = true
             // 是否支持自动加载图片
             loadsImagesAutomatically = true
+
             blockNetworkImage = false
             // 设置编码格式
             defaultTextEncodingName = "utf-8"
+
             layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
             // 是否启用 DOM storage API
             domStorageEnabled = true
@@ -215,23 +224,21 @@ open class BaseWebFragment : BaseFragment() {
             databaseEnabled = true
             // 配置当安全源试图从不安全源加载资源时WebView的行为
             mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-
             // 设置缓存模式
             cacheMode = WebSettings.LOAD_NO_CACHE
-            setUserAgentString(userAgentString + "" + requireActivity().packageName)
 
         }
     }
 
-    private class InsideWebChromeClient(var webView: WebView, var mFrameLayout: ViewGroup) : WebChromeClient() {
-        var mCustomView: View? = null
-        var mCustomViewCallback: CustomViewCallback? = null
+    private class InsideWebChromeClient(var webView:WebView, var mFrameLayout:ViewGroup) : WebChromeClient() {
+        var mCustomView:View? = null
+        var mCustomViewCallback:CustomViewCallback? = null
 
-        override fun getVideoLoadingProgressView(): View? {
+        override fun getVideoLoadingProgressView():View? {
             return super.getVideoLoadingProgressView()
         }
 
-        override fun onShowCustomView(view: View, callback: CustomViewCallback) {
+        override fun onShowCustomView(view:View, callback:CustomViewCallback) {
             super.onShowCustomView(view, callback)
             if (mCustomView != null) {
                 callback.onCustomViewHidden()
@@ -261,9 +268,15 @@ open class BaseWebFragment : BaseFragment() {
     }
 
     //处理 android err_unknown_url_scheme异常
-    val webViewClient: WebViewClient = object : WebViewClient() {
-        override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+    val webViewClient:WebViewClient = object : WebViewClient() {
+
+
+        override fun shouldOverrideUrlLoading(view:WebView?, url:String?):Boolean {
             LogUtils.e(" shouldOverrideUrlLoading :    ${url.toString()}")
+            return super.shouldOverrideUrlLoading(view, url)
+        }
+        override fun shouldOverrideUrlLoading(view:WebView, request:WebResourceRequest):Boolean {
+            LogUtils.e(" shouldOverrideUrlLoading2 :    ${url.toString()}")
             if (URLUtil.isNetworkUrl(request.url.toString())) {
                 return false
             }
@@ -275,11 +288,20 @@ open class BaseWebFragment : BaseFragment() {
             return super.shouldOverrideUrlLoading(view, request)
         }
 
-        override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
+        override fun shouldInterceptRequest(view:WebView, request:WebResourceRequest):WebResourceResponse? {
+            LogUtils.e(" shouldInterceptRequest :    ${request.url.toString()}")
+//            if (request.url.toString().toLowerCase().contains("/favicon.ico")) {
+//                try {
+//                    return WebResourceResponse("image/png", null, null)
+//                } catch (e:Exception) {
+//                    e.printStackTrace()
+//                }
+//            }
             return super.shouldInterceptRequest(view, request) //request.getUrl()
         }
 
-        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+        override fun onPageStarted(view:WebView?, url:String?, favicon:Bitmap?) {
+            LogUtils.e(" onPageStarted :    ${url.toString()}")
             super.onPageStarted(view, url, favicon)
             progressBar?.visibility = View.VISIBLE
             if (null != webLoadListener) {
@@ -287,7 +309,8 @@ open class BaseWebFragment : BaseFragment() {
             }
         }
 
-        override fun onPageFinished(view: WebView, url: String) {
+        override fun onPageFinished(view:WebView, url:String) {
+            LogUtils.e(" onPageFinished :    ${url.toString()}")
             super.onPageFinished(view, url)
             progressBar?.visibility = View.GONE
             if (null != webLoadListener) {
@@ -295,23 +318,25 @@ open class BaseWebFragment : BaseFragment() {
             }
         }
 
-        override fun onReceivedError(view: WebView, errorCode: Int, description: String?, failingUrl: String?) {
+        override fun onReceivedError(view:WebView, errorCode:Int, description:String?, failingUrl:String?) {
             super.onReceivedError(view, errorCode, description, failingUrl) // 断网或者网络连接超时
+            LogUtils.e(" onReceivedError :    ${url.toString()}  errorCode: $errorCode  description: $description  failingUrl: $failingUrl")
             if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_CONNECT || errorCode == ERROR_TIMEOUT) {
                 view.loadUrl("about:blank");// 避免出现默认的错误界面
                 webLoadListener?.onError(failingUrl)
             }
         }
 
-        override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+        override fun onReceivedError(view:WebView, request:WebResourceRequest, error:WebResourceError) {
             super.onReceivedError(view, request, error)
+            LogUtils.e(" onReceivedError :    ${request.url.toString()}  errorCode: ${error.errorCode }                 ${error.description }")
             progressBar?.visibility = View.GONE
 
         }
     }
 
 
-    fun onBackPressed(): Boolean {
+    fun onBackPressed():Boolean {
         if (isGoBackWebView) {
             webView?.run {
                 return if (canGoBack() && visibility == View.VISIBLE) {
@@ -325,8 +350,18 @@ open class BaseWebFragment : BaseFragment() {
         return false
     }
 
+    override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode:Int, permissions:Array<out String>, grantResults:IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+    }
+
     @JvmOverloads
-    fun loadUrl(url: String, clear: Boolean = true) {
+    fun loadUrl(url:String, clear:Boolean = true) {
         webView?.run {
             if (clear) {
                 clearHistory()
@@ -336,8 +371,7 @@ open class BaseWebFragment : BaseFragment() {
     }
 
     companion object {
-        fun instantiate(context: Context, title: String?, url: String?, scriptInterface: ScriptInterface? = null,
-                        showToolBar: Boolean = true, showstatusBar: Boolean = true): BaseWebFragment {
+        fun instantiate(context:Context, title:String?, url:String?, scriptInterface:ScriptInterface? = null, showToolBar:Boolean = true, showstatusBar:Boolean = true):BaseWebFragment {
             val baseWebFragment = BaseWebFragment()
             val bundle = Bundle()
             bundle.putString(context.getString(R.string.key_url), url)

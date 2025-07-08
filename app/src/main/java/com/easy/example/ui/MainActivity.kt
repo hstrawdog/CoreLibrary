@@ -1,24 +1,22 @@
 package com.easy.example.ui
 
-import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
+import android.text.format.Time
+import android.util.Base64
+import android.util.Log
 import android.view.KeyEvent
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
-import com.easy.core.utils.file.FileUtils
+import com.easy.core.utils.encrypt.AESUtils
+import com.easy.core.utils.encrypt.Base64Utils
 import com.easy.core.utils.log.LogUtils
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
@@ -38,7 +36,27 @@ import com.easy.example.ui.parcelable.ParcelableActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity2
+import io.socket.client.IO
+import io.socket.client.Socket
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
+import okio.ByteString
+import org.json.JSONObject
+import java.io.UnsupportedEncodingException
+import java.security.InvalidKeyException
+import java.security.NoSuchAlgorithmException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import javax.crypto.BadPaddingException
+import javax.crypto.Cipher
+import javax.crypto.IllegalBlockSizeException
+import javax.crypto.NoSuchPaddingException
+import javax.crypto.spec.SecretKeySpec
+
 
 /**
  * @Author : huangqiqiang
@@ -67,228 +85,98 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     @SuppressLint("Range")
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
-//        SysPermissionsUtils.requestBluetooth(supportFragmentManager) { status ->
-//            if (status) {
+
+        EncryptUtil.aesDecrypt("666")
+        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
+
+
+    }
+
+
+
+
+
+
+
+//    private fun getPdfFilesFromDownloadDirectory3() {
+//        val downloadsUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
+//
+//        val projection = arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DATA, MediaStore.Files.FileColumns.MIME_TYPE)
+//
+//        val selection = null
+//        val selectionArgs = null
+//        val sortOrder = "${MediaStore.Files.FileColumns.DATE_ADDED} DESC"
+//
+//        val cursor = contentResolver.query(downloadsUri, projection, selection, selectionArgs, sortOrder)
+//
+//        cursor?.use {
+//            val idColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns._ID)
+//            val dataColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.DATA)
+//            val mimeTypeColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.MIME_TYPE)
+//
+//            while (it.moveToNext()) {
+//                val fileId = it.getLong(idColumnIndex)
+//                val filePath = it.getString(dataColumnIndex)
+//                val mimeType = it.getString(mimeTypeColumnIndex)
+//                LogUtils.e("MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType")
 //            }
 //        }
-//        open(ResultActivity::class.java)
-//        open(ListV2ActivityView::class.java)
-//        open(NewBannerActivity::class.java)
-
-//        open(BackgroundActivity::class.java)
-//        open(TestDialogActivity::class.java)
-//        open(BannerActivity::class.java)
-        LogUtils.de("111111111111111111111111")
-
-
-//        open(DefImgActivity::class.java)
-//        open(MarqueeActivity::class.java)
-//        open(MainMarqueeActivity::class.java)
-
-//        FullDialog.showDialog(supportFragmentManager)
-        //data/data/com.easy.core/cache/256965670.pdf
-
-//        SysPermissionsUtils.requestStorage(object : PermissionsResult {
-//            override fun onPermissionsResult(status: Boolean) {
-//
-//                if (status) {
-//
-//                    var oldFilePath = "data/data/com.easy.core/cache/256965670.pdf"
-//
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//                        FileUtils.copyFileToDownloadDir(activity, oldFilePath, "core", "256965670.pdf")
-//                    }
-//
-////                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-////                    }
-//                    var downLoadPath =
-//                        FilePathTools.getExternalDownloadsPath() + File.separator + "core" + File.separator + "256965670.pdf"
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-////            var fileUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI.buildUpon()
-////                .appendPath(downLoadPath)
-////                .build()
-//                        ///sdcard/Download/ncpss/甘肃清水方言歇后语中的比喻探析.pdf
-////                        var f = FileUtils.findUri4FileName(activity, "ncpss", "甘肃清水方言歇后语中的比喻探析.pdf")
-//
-//                        var ff = FileUtils.findDownloadsUri4Description(activity, "core", "256965670.pdf")
-//
-////                        var fileUri = FileUtils.findDownloadFile(activity, "core", "256965670.pdf")
-////
-////
-////                        fileUri?.let { FileUtils.copyToPrivateDir(activity, it[0], FilePathTools.getCacheDir() + File.separator + "111.pdf") }
 //
 //
-//                        if (ff.size > 0) {
-//                            LogUtils.e("${ff[0]}")
-//                        }
-//                    FileUtils.listFiles(activity,"core")
+//    }
 //
-//                    } else {
-//                    }
+//    private fun getPdfFilesFromDownloadDirectory2() {
+//
+//        val projection = arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DATA, MediaStore.Files.FileColumns.MIME_TYPE)
+//
+//        val selection = null // 不指定筛选条件，获取所有文件
+//        val selectionArgs = null
+//
+//        val sortOrder = "${MediaStore.Files.FileColumns.DATE_ADDED} DESC"
+//
+//        val cursor = contentResolver.query(MediaStore.Files.getContentUri("external"), projection, selection, selectionArgs, sortOrder)
+//
+//        cursor?.use {
+//            val idColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns._ID)
+//            val dataColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.DATA)
+//            val mimeTypeColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.MIME_TYPE)
+//
+//            while (it.moveToNext()) {
+//                val fileId = it.getLong(idColumnIndex)
+//                val filePath = it.getString(dataColumnIndex)
+//                val mimeType = it.getString(mimeTypeColumnIndex)
+//
+//                LogUtils.e("MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType")
+//            }
+//        }
 //
 //
+//    }
+//
+//
+//    fun getPdfFilesFromDownloadDirectory() {
+//        val projection = arrayOf(MediaStore.Files.FileColumns.DISPLAY_NAME, MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.MIME_TYPE)
+//        val selection = "${MediaStore.Files.FileColumns.RELATIVE_PATH} = ?"
+//        val selectionArgs = arrayOf("Download/") // 下载目录的相对路径
+//
+//        val uri = MediaStore.Files.getContentUri("external")
+//        val cursor = contentResolver.query(uri, projection, selection, selectionArgs, null)
+//
+//        cursor?.use {
+//            val displayNameColumn = it.getColumnIndex(MediaStore.Files.FileColumns.DISPLAY_NAME)
+//            val mimeTypeColumn = it.getColumnIndex(MediaStore.Files.FileColumns.MIME_TYPE)
+//
+//            while (it.moveToNext()) {
+//                val displayName = it.getString(displayNameColumn)
+//                val mimeType = it.getString(mimeTypeColumn)
+//
+//                // 过滤出 PDF 文件
+//                if (mimeType == "application/pdf") {
+//                    LogUtils.e("PDFFile", "Found PDF: $displayName")
 //                }
-//
-//            }
-//
-//        })
-
-//        open(AlbumIndexActivity::class.java)
-//        open(FilePathActivity::class.java)
-//        open(DefToolBarActivity::class.java)
-//        loadingView.show()
-
-//        open(DownLoadActivity::class.java)
-//        open(RecProgressActivity::class.java)
-//        open(ComposeIndexActivity::class.java)
-
-//        startService(Intent(this, KillAppServers::class.java))
-
-//        open(DownLoadActivity::class.java)
-//        CropImageDialog().show(supportFragmentManager)
-
-//        PhotoDialog.getSelectPhotoDialog(1) {
-////            binding.cropImageView.imageBitmap = BitmapFactory.decodeFile(it[0].path)
-//        }.apply {
-//            isSendAlbum=false
-//        }.show(supportFragmentManager)
-
-//        open(FlowActivity::class.java)
-//        open(WeatherActivity::class.java)
-
-//        open(ComparedActivity::class.java)
-
-//        VideoDialog().show(supportFragmentManager)
-
-//        open(LoadMoreActivity::class.java)
-
-//        open(AlbumIndexActivity::class.java)
-//        open(ShareIndexActivity::class.java)
-//        open(LogUtilsActivity::class.java)
-//        open(TextViewActivity::class.java)
-//open(BindingRecycleActivity::class.java)
-//        PermissionsUtils.requestPermissions(IPermissionsHas.camera,IPermissionsHas.microphone){
-//            if (it){
-//                open(Camera2Activity::class.java)
 //            }
 //        }
-//        SysPermissionsUtils.requestStorage(supportFragmentManager,{
-//            if (it) {
-//                open(ProgressBarViewBuilderActivity::class.java)
-//                open(VideoViewActivity::class.java)
-//                open(SeparationVideoActivity::class.java)
-//            }
-//        })
-
-//        open(DefImgActivity::class.java)
-//        open(BannerActivity::class.java)
-//        open(TabLayoutActivity::class.java)
-
-
-//        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-//            addCategory(Intent.CATEGORY_OPENABLE) // 让文件可被选择
-//            type = "*/*" // 选择所有类型的文件，也可以指定某些类型，如 "image/*"
-//        }
-//        startActivityForResult(intent, 12)
-
-
-
-        getPdfFilesFromDownloadDirectory4()
-//        getPdfFilesFromDownloadDirectory3()
-//        getPdfFilesFromDownloadDirectory2()
-//        getPdfFilesFromDownloadDirectory()
-    }
-
-    private fun getPdfFilesFromDownloadDirectory4() {
-
-        val downloadDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val files = downloadDirectory.listFiles()
-
-        files?.forEach { file ->
-        LogUtils.e("DownloadFile", "File: ${file.name}, Path: ${file.absolutePath}")
-        }
-
-    }
-
-    private fun getPdfFilesFromDownloadDirectory3() {
-        val downloadsUri = MediaStore.Downloads.EXTERNAL_CONTENT_URI
-
-        val projection = arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DATA, MediaStore.Files.FileColumns.MIME_TYPE)
-
-        val selection = null
-        val selectionArgs = null
-        val sortOrder = "${MediaStore.Files.FileColumns.DATE_ADDED} DESC"
-
-        val cursor = contentResolver.query(downloadsUri, projection, selection, selectionArgs, sortOrder)
-
-        cursor?.use {
-            val idColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns._ID)
-            val dataColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.DATA)
-            val mimeTypeColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.MIME_TYPE)
-
-            while (it.moveToNext()) {
-                val fileId = it.getLong(idColumnIndex)
-                val filePath = it.getString(dataColumnIndex)
-                val mimeType = it.getString(mimeTypeColumnIndex)
-                LogUtils.e("MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType")
-            }
-        }
-
-
-    }
-
-    private fun getPdfFilesFromDownloadDirectory2() {
-
-        val projection = arrayOf(MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.DATA, MediaStore.Files.FileColumns.MIME_TYPE)
-
-        val selection = null // 不指定筛选条件，获取所有文件
-        val selectionArgs = null
-
-        val sortOrder = "${MediaStore.Files.FileColumns.DATE_ADDED} DESC"
-
-        val cursor = contentResolver.query(MediaStore.Files.getContentUri("external"), projection, selection, selectionArgs, sortOrder)
-
-        cursor?.use {
-            val idColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns._ID)
-            val dataColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.DATA)
-            val mimeTypeColumnIndex = it.getColumnIndex(MediaStore.Files.FileColumns.MIME_TYPE)
-
-            while (it.moveToNext()) {
-                val fileId = it.getLong(idColumnIndex)
-                val filePath = it.getString(dataColumnIndex)
-                val mimeType = it.getString(mimeTypeColumnIndex)
-
-                LogUtils.e("MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType")
-            }
-        }
-
-
-    }
-
-
-    fun getPdfFilesFromDownloadDirectory() {
-        val projection = arrayOf(MediaStore.Files.FileColumns.DISPLAY_NAME, MediaStore.Files.FileColumns._ID, MediaStore.Files.FileColumns.MIME_TYPE)
-        val selection = "${MediaStore.Files.FileColumns.RELATIVE_PATH} = ?"
-        val selectionArgs = arrayOf("Download/") // 下载目录的相对路径
-
-        val uri = MediaStore.Files.getContentUri("external")
-        val cursor = contentResolver.query(uri, projection, selection, selectionArgs, null)
-
-        cursor?.use {
-            val displayNameColumn = it.getColumnIndex(MediaStore.Files.FileColumns.DISPLAY_NAME)
-            val mimeTypeColumn = it.getColumnIndex(MediaStore.Files.FileColumns.MIME_TYPE)
-
-            while (it.moveToNext()) {
-                val displayName = it.getString(displayNameColumn)
-                val mimeType = it.getString(mimeTypeColumn)
-
-                // 过滤出 PDF 文件
-                if (mimeType == "application/pdf") {
-                    LogUtils.e("PDFFile", "Found PDF: $displayName")
-                }
-            }
-        }
-    }
+//    }
 
 
     private var mExitTime:Long = 0

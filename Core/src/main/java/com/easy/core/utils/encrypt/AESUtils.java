@@ -84,7 +84,7 @@ public class AESUtils {
         byte[] plainBytes = null;
 
         try {
-            cipher = Cipher.getInstance("AES"); // 对Cipher初始化,加密模式
+            cipher = Cipher.getInstance("AES/ECB/PKCS5Padding"); // 对Cipher初始化,加密模式
             cipher.init(Cipher.DECRYPT_MODE, secretKey); // 对Cipher初始化,加密模式
             plainBytes = cipher.doFinal(data); // 解密数据
         } catch (NoSuchAlgorithmException e) {

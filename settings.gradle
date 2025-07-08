@@ -48,3 +48,4 @@ rootProject.name = "CoreLibrary"
 include ':app'
 include ':Core'
 //include ':Album'
+include ':myapplication'
