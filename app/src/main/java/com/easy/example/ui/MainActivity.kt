@@ -12,6 +12,7 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.easy.core.kt.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
@@ -21,6 +22,7 @@ import com.easy.core.utils.log.LogUtils
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity2
+import com.easy.example.jsbridge.MainWebView2Activity
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity2
 import com.easy.example.ui.adaptation.permission.PermissionActivity
@@ -30,6 +32,7 @@ import com.easy.example.ui.customize.CustomizeIndexActivity2
 import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.FileIndexActivity2
 import com.easy.example.ui.fragment.FragmentIndexActivity
+import com.easy.example.ui.fragment.FragmentUtilsActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
@@ -76,18 +79,15 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     override var isLoadMore:Boolean = false
 
-    override fun onCreate(savedInstanceState:Bundle?) {
-        LogUtils.dInfo("MainActivity    onCreate1")
-        super.onCreate(savedInstanceState)
-        LogUtils.dInfo("MainActivity    onCreate2")
-    }
-
     @SuppressLint("Range")
     override fun initData() {
         LogUtils.dInfo("MainActivity    initData")
+//        EncryptUtil.aesDecrypt("666")
+//        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
 
-        EncryptUtil.aesDecrypt("666")
-        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
+
+//            open(MainWebView2Activity::class.java)
+            open(FragmentUtilsActivity::class.java)
 
 
     }

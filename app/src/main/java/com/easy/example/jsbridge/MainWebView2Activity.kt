@@ -148,7 +148,8 @@ class MainWebView2Activity : Activity(), View.OnClickListener {
 //        webView!!.loadUrl("http://117.73.18.229:9527/cc-app/#/pages/attendence/sign?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
 //        webView!!.loadUrl("http://117.73.18.229:9527/DreamMobile/dist/index.html#!/autoLoginUID/user/L3RlbXBsYXRlbGlzdC9Ub0RvTGlzdA==/111?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
 //        webView!!.loadUrl("http://117.73.18.229:9527/DreamMobile/dist/index.html#!/autoLoginUID/user/L3RlbXBsYXRlbGlzdC9zb2NpZXR5VmFjYXRpb24=/111?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
-        webView!!.loadUrl("117.73.18.229:9527/cc-app/#/pages/attendence/sign?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
+//        webView!!.loadUrl("117.73.18.229:9527/cc-app/#/pages/attendence/sign?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
+        webView!!.loadUrl("https://skycas.shangwenwan.com/cc-app/#/pages/password/modify")
 
     }
 
