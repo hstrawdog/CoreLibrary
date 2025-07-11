@@ -86,8 +86,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
 
 
-//            open(MainWebView2Activity::class.java)
-            open(FragmentUtilsActivity::class.java)
+            open(MainWebView2Activity::class.java)
+//            open(FragmentUtilsActivity::class.java)
 
 
     }

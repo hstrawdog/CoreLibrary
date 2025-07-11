@@ -68,6 +68,7 @@ dependencies {
     api libs.lifecycleViewModelKtx
     api libs.lifecycleLivedataKtx
     api libs.lifecycleRunTimeKtx
+    api libs.mmkv
 
     // gson解析
     api libs.gson

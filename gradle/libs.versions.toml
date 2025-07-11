@@ -77,6 +77,7 @@ junitJunit = "4.13.2"
 androidxJunit = "1.1.5"
 espressoCoreVersion = "3.5.1"
 activityVersion = "1.8.0"
+mmkvVersion = "2.2.2"
 
 [libraries]
 
@@ -96,6 +97,8 @@ lifecycleLivedataKtx = { group = "androidx.lifecycle", name = "lifecycle-livedat
 
 # 仅生命周期（没有 ViewModel 或 LiveData）
 lifecycleRunTimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle_version" }
+
+mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkvVersion" }
 
 # ViewModel 的已保存状态模块
 lifecycle_viewmodel_savedstate = { group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "lifecycle_version" }

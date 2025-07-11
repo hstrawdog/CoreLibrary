@@ -82,46 +82,49 @@ class MainWebView2Activity : Activity(), View.OnClickListener {
 
             val jSONObject2 = JSONObject()
             var type = GsonUtil.getValue(str, "type")?.asString
-            if (type == "WebHTTPRequest") {
-                // jSONObject 中解析出接口数据  执行请求
-                // 传递以下数据格式给页面
+            if (type == "scheme") {
+
+                startActivity(Intent("android.intent.action.VIEW", Uri.parse(jSONObject.optJSONObject("data").optString("scheme"))))
+            } else if (type == "WebHTTPRequest") {
+                    // jSONObject 中解析出接口数据  执行请求
+                    // 传递以下数据格式给页面
 //                gotoRequest(jSONObject, callBackFunction, false);
-                var result = JSONObject().apply {
-                    put("code", "0000")
-                    put("message", "获取免登录码成功")
-                    put("data", JSONObject().apply {
-                        put("code", "50f0e4ad-56d3-4975-b6bb-11e1dd8d6715")
-                    })
-                }
-                jSONObject2.put("state", "1")
-                jSONObject2.put("source", "network")
-                jSONObject2.put("errormessage", "")
+                    var result = JSONObject().apply {
+                        put("code", "0000")
+                        put("message", "获取免登录码成功")
+                        put("data", JSONObject().apply {
+                            put("code", "50f0e4ad-56d3-4975-b6bb-11e1dd8d6715")
+                        })
+                    }
+                    jSONObject2.put("state", "1")
+                    jSONObject2.put("source", "network")
+                    jSONObject2.put("errormessage", "")
 //                jSONObject2.put("result", result)
-                jSONObject2.put("body", result)
-                callBackFunction.onCallBack(jSONObject2.toString())
-            } else if (type == "ccworkGetOrganizeRouter") {
-                jSONObject2.put("status", 1)
-                jSONObject2.put("errormessage", "getRouterResult")
-                // ccwork 接口下发的登录地址 字段 loginServer
-                jSONObject2.put("result", "http://117.73.18.229:81")
-                callBackFunction.onCallBack(jSONObject2.toString())
-            } else if (type == "ccworkGetUserInfo") {
-                var result = JSONObject().apply {
-                    put("userId", "4bd0eaad5f434b199a9f618231401838")
-                    put("name", "测试人员22")
-                }
-                jSONObject2.put("status", 1)
-                jSONObject2.put("errormessage", "")
-                jSONObject2.put("result", result)
-                callBackFunction.onCallBack(jSONObject2.toString())
+                    jSONObject2.put("body", result)
+                    callBackFunction.onCallBack(jSONObject2.toString())
+                } else if (type == "ccworkGetOrganizeRouter") {
+                    jSONObject2.put("status", 1)
+                    jSONObject2.put("errormessage", "getRouterResult")
+                    // ccwork 接口下发的登录地址 字段 loginServer
+                    jSONObject2.put("result", "http://117.73.18.229:81")
+                    callBackFunction.onCallBack(jSONObject2.toString())
+                } else if (type == "ccworkGetUserInfo") {
+                    var result = JSONObject().apply {
+                        put("userId", "4bd0eaad5f434b199a9f618231401838")
+                        put("name", "测试人员22")
+                    }
+                    jSONObject2.put("status", 1)
+                    jSONObject2.put("errormessage", "")
+                    jSONObject2.put("result", result)
+                    callBackFunction.onCallBack(jSONObject2.toString())
 
-            } else if (type == "ccworkGetGpsLocation") {
+                } else if (type == "ccworkGetGpsLocation") {
 
-                var result = JSONObject().apply {
+                    var result = JSONObject().apply {
 //                    put("lat", "39.908482") // 纬度：上海
 //                    put("lng", "116.426593") // 经度：上海
-                    put("lat", "26.019024") // 纬度：上海
-                    put("lng", "119.223107") // 经度：上海
+                        put("lat", "26.019024") // 纬度：上海
+                        put("lng", "119.223107") // 经度：上海
 //                    put("addr", "中国上海市黄浦区人民广场")
 //                    put("country", "中国")
 //                    put("province", "上海市")
@@ -132,15 +135,15 @@ class MainWebView2Activity : Activity(), View.OnClickListener {
 //                    put("accuracy", 15.0f)
 //                    put("course", 90.0f)
 //                    put("speed", 0.0f)
-                }
-                jSONObject2.put("status", 1)
-                jSONObject2.put("errormessage", str)
-                jSONObject2.put("result", result)
+                    }
+                    jSONObject2.put("status", 1)
+                    jSONObject2.put("errormessage", str)
+                    jSONObject2.put("result", result)
 
-                callBackFunction.onCallBack(jSONObject2.toString())
-            } else if (type == "close") {
-                ToastUtils.showToast("关闭界面")
-            }
+                    callBackFunction.onCallBack(jSONObject2.toString())
+                } else if (type == "close") {
+                    ToastUtils.showToast("关闭界面")
+                }
 
         })
 //        webView!!.addJavascriptInterface(MainJavascriptInterface(webView!!.callbacks, webView), "WebViewJavascriptBridge")
@@ -149,7 +152,8 @@ class MainWebView2Activity : Activity(), View.OnClickListener {
 //        webView!!.loadUrl("http://117.73.18.229:9527/DreamMobile/dist/index.html#!/autoLoginUID/user/L3RlbXBsYXRlbGlzdC9Ub0RvTGlzdA==/111?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
 //        webView!!.loadUrl("http://117.73.18.229:9527/DreamMobile/dist/index.html#!/autoLoginUID/user/L3RlbXBsYXRlbGlzdC9zb2NpZXR5VmFjYXRpb24=/111?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
 //        webView!!.loadUrl("117.73.18.229:9527/cc-app/#/pages/attendence/sign?authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
-        webView!!.loadUrl("https://skycas.shangwenwan.com/cc-app/#/pages/password/modify")
+//        webView!!.loadUrl("https://skycas.shangwenwan.com/cc-app/#/pages/password/modify")
+        webView!!.loadUrl("https://sfh5.gwhome.com.cn/h5/gx/szsk?friendName=szsk&authCorpId=05f55be45ce541f4850ee2f4b36c7d60")
 
     }
 
