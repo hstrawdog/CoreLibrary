@@ -7,17 +7,23 @@
     android:orientation="vertical"
     tools:context=".ui.recycle.BannerActivity">
 
-    <com.easy.core.recycle.RecycleViewBanner
+    <com.easy.core.recycle.NewRecycleViewBanner
         android:id="@+id/rc_banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x330" />
 
-    <com.easy.core.recycle.RecycleViewBanner
+    <com.easy.core.recycle.NewRecycleViewBanner
         android:id="@+id/rc_banner2"
         app:rvb_indicatorGravity="left"
         app:rvb_tip_type="rectangle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x330" />
+
+    <Button
+        android:id="@+id/button100"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 
 </LinearLayout>

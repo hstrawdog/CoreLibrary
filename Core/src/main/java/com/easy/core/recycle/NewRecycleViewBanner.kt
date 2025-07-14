@@ -37,8 +37,7 @@ import  com.easy.core.utils.ScreenUtils
  * 3. 不能与BRVAH 搭配使用
  */
 class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
-                                                     defStyleAttr: Int = 0) :
-    FrameLayout(context, attrs, defStyleAttr) {
+                                                     defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
     /**
      * 轮播间隔时间
      */
@@ -78,6 +77,7 @@ class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: At
      * 倍数
      */
     private var selectSpeed = 0f
+
     var recycleViewBannerCurrentListener: RecycleViewBannerCurrentListener? = null
 
     /**
@@ -87,7 +87,6 @@ class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: At
     private var mAdapter: NewRecycleBannerAdapter<*, *>? = null
     private val playTask: Runnable = object : Runnable {
         override fun run() {
-
             recyclerView!!.smoothScrollToPosition(++currentIndex)
             switchIndicator(currentIndex % (mAdapter?.items?.size ?: 0))
             mHandlers.postDelayed(this, mInterval.toLong())
@@ -209,15 +208,13 @@ class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: At
         setPlaying(false)
     }
 
-    override fun onWindowVisibilityChanged(visibility: Int) {
-        if (visibility == View.GONE || visibility == View.INVISIBLE) {
-            // 停止轮播
+    override fun onVisibilityChanged(changedView: View, visibility: Int) {
+        super.onVisibilityChanged(changedView, visibility)
+        if (visibility != VISIBLE) {
             setPlaying(false)
-        } else if (visibility == View.VISIBLE) {
-            // 开始轮播
+        } else {
             setPlaying(true)
         }
-        super.onWindowVisibilityChanged(visibility)
     }
 
     /**
@@ -272,20 +269,16 @@ class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: At
         mLinearLayout?.invalidate()
         var size = adapter.items.size
         if (size > 1) {
-            currentIndex = if (mIsUnlimited) {
-                size * 100
-            } else {
-                0
-            }
-            mAdapter?.notifyDataSetChanged()
-            recyclerView!!.scrollToPosition(currentIndex)
+            // 定位到中间位置实现无限滚动效果
+            val mid = Int.MAX_VALUE / 2
+            val offset = mid - mid % adapter.items.size
+            recyclerView?.scrollToPosition(offset)
+
             if (isShowIndicator) {
                 mLinearLayout?.visibility = View.VISIBLE
             } else {
                 mLinearLayout?.visibility = View.GONE
-
             }
-
             setPlaying(true)
         } else {
             currentIndex = 0

@@ -36,6 +36,7 @@ import com.easy.example.ui.fragment.FragmentUtilsActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
+import com.easy.example.ui.recycle.BannerActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity2
@@ -86,7 +87,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
 
 
-            open(MainWebView2Activity::class.java)
+            open(BannerActivity::class.java)
+//            open(MainWebView2Activity::class.java)
 //            open(FragmentUtilsActivity::class.java)
 
 

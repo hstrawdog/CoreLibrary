@@ -2,7 +2,9 @@ package com.easy.example.ui.recycle
 
 import com.easy.core.recycle.RecycleViewBanner
 import com.easy.core.ui.base.BaseActivity
+import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.example.R
+import com.easy.example.databinding.ActivityBannerBinding
 
 /**
  * @Author : huangqiqiang
@@ -12,14 +14,10 @@ import com.easy.example.R
  * @Email :  qiqiang213@gmail.com
  * @Describe : TODO
  */
-class BannerActivity : BaseActivity() {
+class BannerActivity : BaseViewBindingActivity<ActivityBannerBinding>() {
     var mRcBanner: RecycleViewBanner? = null
     var mRcBanner2: RecycleViewBanner? = null
 
-
-    override fun getLayoutViewId(): Int {
-        return R.layout.activity_banner
-    }
 
     override fun initView() {
         mRcBanner = findViewById(R.id.rc_banner)
@@ -41,5 +39,13 @@ class BannerActivity : BaseActivity() {
         list2.add(R.mipmap.ic_banner2)
         list2.add(R.mipmap.ic_banner2)
         mRcBanner2?.setRvBannerData(list2)
+
+
+
+        binding.button100.setOnClickListener {
+            mRcBanner2?.smoothScrollToPosition(100)
+            mRcBanner?.scrollToPosition(100)
+        }
+
     }
 }
