@@ -23,6 +23,7 @@ import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity2
 import com.easy.example.jsbridge.MainWebView2Activity
+import com.easy.example.soctetio.SocketIo
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity2
 import com.easy.example.ui.adaptation.permission.PermissionActivity
@@ -86,8 +87,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        EncryptUtil.aesDecrypt("666")
 //        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
 
-
-            open(BannerActivity::class.java)
+        SocketIo().initIO()
+//            open(BannerActivity::class.java)
 //            open(MainWebView2Activity::class.java)
 //            open(FragmentUtilsActivity::class.java)
 

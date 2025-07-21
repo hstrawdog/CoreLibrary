@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.easy.core.R
+import com.easy.core.common.TAG
 import com.easy.core.toolbar.IToolBar
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
@@ -95,14 +96,14 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
      *  初始化
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        LogUtils.e4Mark(" ${this}     onCreate  start")
+        LogUtils.dMark( TAG.LIVE_TAG," ${this}     onCreate  start")
         initAnimEnter()
         super.onCreate(savedInstanceState)
         activity = this
         initConfig()
         setContentView(iCreateRootView.buildContentView(this))
         initView()
-        LogUtils.e4Mark(" ${this}     onCreate end")
+        LogUtils.dMark( TAG.LIVE_TAG," ${this}     onCreate end")
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.easy.example.soctetio
 
+import com.easy.core.utils.gson.GsonUtil
 import com.easy.core.utils.log.LogUtils
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -19,7 +20,7 @@ import org.json.JSONObject
  * @Describe :
  */
 class SocketIo{
-
+var  a =0
     fun initIO() {
 
         val serverUrl = "http://117.73.18.229:5850"
@@ -40,7 +41,7 @@ class SocketIo{
 //                put("userId", "4bd0eaad5f434b199a9f618231401838")
 //                // 其他字段略...
 //            }
-            val loginJson =  JSONObject("{\"name\":\"测试人员22\",\"userId\":\"4bd0eaad5f434b199a9f618231401838\",\"avatar\":\"http:\\/\\/117.73.18.229:81\\/file\\/download\\/AppIcon\\/2025\\/June\\/30\\/receitDpZRWMHAaAKNvcyI5r9SlzB9K0fRO.jpg\",\"password\":\"\",\"keepServerMail\":\"@inspur.com\",\"inUse\":1,\"type\":1,\"macAddress\":\"98d15c85-3beb-4f40-a5f3-2495df8dafb9\",\"loginTime\":1751621282274,\"version\":\"4.1.5\",\"organId\":\"05f55be45ce541f4850ee2f4b36c7d60\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjZXNoaXJlbnl1YW4yMiIsImN0diI6IiIsImRpZCI6ImZmZmZmZmZmLWIwYzEtYjIwMS1mZmZmLWZmZmZlZjA1YWM0YSIsImR0eSI6Im1vYmlsZSIsImV4cCI6MTc1MTc3MzA0MSwiaWF0IjoxNzUxNTkzMDQxLCJpc3MiOiJodGltZWFwcCIsImp0aSI6IjU4ODZlZjZjNWM3MTRiNjNiZjJjYzJmNTA4YWNhMTU2IiwibmJmIjoxNzUxNTkzMDQxLCJvcmciOiIwNWY1NWJlNDVjZTU0MWY0ODUwZWUyZjRiMzZjN2Q2MCIsInVpZCI6IjRiZDBlYWFkNWY0MzRiMTk5YTlmNjE4MjMxNDAxODM4IiwidW5hIjoi5rWL6K-V5Lq65ZGYMjIifQ.AAmuqyjPQEEgtp33NcMs2t0vMwVa1hzSnJCSnDWBCG8\"}")
+            val loginJson =  JSONObject("{\"name\":\"测试人员22\",\"userId\":\"4bd0eaad5f434b199a9f618231401838\",\"avatar\":\"http:\\/\\/117.73.18.229:81\\/file\\/download\\/AppIcon\\/2025\\/June\\/30\\/receitDpZRWMHAaAKNvcyI5r9SlzB9K0fRO.jpg\",\"password\":\"\",\"keepServerMail\":\"@inspur.com\",\"inUse\":1,\"type\":1,\"macAddress\":\"1ed6a329-1fa2-4ca4-bad9-cfb2bbaf4e66\",\"loginTime\":1752723394709,\"version\":\"4.1.5\",\"organId\":\"05f55be45ce541f4850ee2f4b36c7d60\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjZXNoaXJlbnl1YW4yMiIsImN0diI6IiIsImRpZCI6ImZmZmZmZmZmLWIwYzEtYjIwMS1mZmZmLWZmZmZlZjA1YWM0YSIsImR0eSI6Im1vYmlsZSIsImV4cCI6MTc1MjgyODA3MywiaWF0IjoxNzUyNjQ4MDczLCJpc3MiOiJodGltZWFwcCIsImp0aSI6ImJiYmNiMTFlOGNkODRhN2U4OTlhMDk3YTA4MGJmMTY1IiwibmJmIjoxNzUyNjQ4MDczLCJvcmciOiIwNWY1NWJlNDVjZTU0MWY0ODUwZWUyZjRiMzZjN2Q2MCIsInVpZCI6IjRiZDBlYWFkNWY0MzRiMTk5YTlmNjE4MjMxNDAxODM4IiwidW5hIjoi5rWL6K-V5Lq65ZGYMjIifQ.5Kn5HuBK0rWxxe3pya9DISpPco7P6t3VsrGXkU7BcIg\"}")
             socket.emit("login", loginJson)
 
         }
@@ -68,6 +69,21 @@ class SocketIo{
 // 自定义服务端事件监听
         socket.on("message") {
             LogUtils.e("📩 message 收到消息: ${it.getOrNull(0)}")
+
+            if (a==0){
+                a=1
+
+                var  request = JSONObject(it.getOrNull(0).toString())
+
+//               var  jsonObject = JSONObject("{\"ConnectionId\":\"${request.getString("ConnectionId")}\",\"Body\":{\"mailId\":\"686224b0dbe5d57602345d69\",\"uuid\":\"bc614b12-87b6-4148-8bbe-42b9b22b4655\",\"msg\":{\"from\":{\"id\":\"4bd0eaad5f434b199a9f618231401838\",\"name\":\"测试人员22\"},\"to\":[],\"at\":[],\"content\":\"YxKKK8MeezaWhTYBQomA9Q==\",\"isEncrypt\":true,\"type\":2,\"notShowMe\":false,\"isPhone\":true}},\"ClientId\":\"bc614b12-87b6-4148-8bbe-42b9b22b4655\",\"isPhone\":true}")
+//               var  jsonObject = JSONObject("{\"ConnectionId\":\"${request.getString("ConnectionId")}\",\"Body\":{\"mailId\":\"686224b0dbe5d57602345d69\",\"uuid\":\"03dd1e19-0c8a-4ad2-9975-8c58ac1f0779\",\"msg\":{\"from\":{\"id\":\"4bd0eaad5f434b199a9f618231401838\",\"name\":\"测试人员22\"},\"to\":[],\"at\":[],\"content\":\"Fqqfl51Atgy+etZLxAyr7g==\",\"isEncrypt\":true,\"type\":2,\"notShowMe\":false,\"isPhone\":true}},\"ClientId\":\"03dd1e19-0c8a-4ad2-9975-8c58ac1f0779\",\"isPhone\":true}")
+//               var  jsonObject = JSONObject("{\"ConnectionId\":\"${request.getString("ConnectionId")}\",\"Body\":{\"mailId\":\"6858b9b6dbe5d57602345372\",\"uuid\":\"9145cf69-de29-4205-be2a-cd37aafa544d\",\"msg\":{\"from\":{\"id\":\"4bd0eaad5f434b199a9f618231401838\",\"name\":\"测试人员22\",\"role\":\"\"},\"to\":[],\"at\":[],\"content\":\"\\/\\/0r8DMvoM4LEW03iYqzUg==\",\"isEncrypt\":true,\"type\":2,\"notShowMe\":false,\"isPhone\":true}},\"ClientId\":\"9145cf69-de29-4205-be2a-cd37aafa544d\",\"isPhone\":true}")
+               var  jsonObject = JSONObject("{\"ConnectionId\":\"${request.getString("ConnectionId")}\",\"Body\":{\"mailId\":\"68786b0a92802d75fb77ed9b\",\"uuid\":\"ab23f979-6811-4555-a58c-14c1ac77f0c5\",\"msg\":{\"from\":{\"id\":\"4bd0eaad5f434b199a9f618231401838\",\"name\":\"测试人员22\",\"role\":\"\"},\"to\":[],\"at\":[],\"content\":\"Qz4lGbRIA\\/jzyk1k2vog\\/A==\",\"isEncrypt\":true,\"type\":2,\"notShowMe\":false,\"isPhone\":true}},\"ClientId\":\"ab23f979-6811-4555-a58c-14c1ac77f0c5\",\"isPhone\":true}")
+                socket.emit("sendChatMsg",jsonObject)
+            }
+
+
+
         }
 
         socket.on("login") {

@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.lifecycle.*
+import com.easy.core.common.TAG
 import com.easy.core.utils.log.LogUtils
 
 /**
@@ -50,7 +51,7 @@ abstract class BaseViewModel : ViewModel(), IBaseViewModel {
     var goBack = MutableLiveData<GoBackComponent>()
 
     init {
-        LogUtils.e4Mark(" BaseViewModel  init " + javaClass.name)
+        LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} BaseViewModel  init " )
     }
 
     /**
@@ -61,12 +62,12 @@ abstract class BaseViewModel : ViewModel(), IBaseViewModel {
      */
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        LogUtils.e4Mark(" BaseViewModel           onCrete ")
+       LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} BaseViewModel           onCrete ")
     }
 
     override fun initData(extras: Bundle?) {
         bundle = extras
-        LogUtils.e4Mark(" BaseViewModel           initData ")
+       LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} BaseViewModel           initData ")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

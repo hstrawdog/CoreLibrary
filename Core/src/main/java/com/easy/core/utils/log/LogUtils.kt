@@ -100,6 +100,22 @@ object LogUtils {
         }
     }
 
+
+    /**
+     *   标记一个 d
+     * @param tag String
+     * @param any Any?
+     */
+    fun dMark(tag:String="Mark", any:Any?){
+        if (CoreConfig.get().isDebug) {
+            if (any == null){
+                dInfo(tag)
+            }else{
+                d(tag, any)
+            }
+        }
+    }
+
     /**
      *   打一个日志标记
      * @param any Any?
