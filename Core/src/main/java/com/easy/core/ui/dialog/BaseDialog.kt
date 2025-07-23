@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.easy.core.CoreConfig
 import com.easy.core.R
 import com.easy.core.annotation.ToolBarMode
+import com.easy.core.common.TAG
 import com.easy.core.listenner.DialogClickListener
 import com.easy.core.ui.base.IDialogFragment
 import com.easy.core.ui.base.IRootViewBuildBuild
@@ -154,7 +155,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
-            LogUtils.e4Mark("onCreateView     ${this} ")
+            LogUtils.dMark( TAG.LIVE_TAG,"${this}   onCreateView ")
         }
         return rootView
     }
@@ -171,7 +172,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
                 StatusBarManager.transparencyBar(dialog?.window)
             }
             loaded = true
-            LogUtils.e4Mark(rootView!!.width)
+            LogUtils.dMark( TAG.LIVE_TAG,"${this} onViewCreated   ${rootView!!.width}")
         }
     }
 
@@ -213,6 +214,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     }
 
     override fun show(manager:FragmentManager) {
+        LogUtils.dMark( TAG.LIVE_TAG,"${this}  show ")
         val ft = manager.beginTransaction()
         val prev = manager.findFragmentByTag(javaClass.simpleName)
         if (prev != null) {
@@ -233,6 +235,8 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     }
 
     override fun dismiss() {
+        LogUtils.dMark( TAG.LIVE_TAG,"${this}  dismiss ")
+
         if (isDismiss || !isAdded) {
 
             LogUtils.e("${this}   is ${isDismiss}    or  ${!isAdded}")

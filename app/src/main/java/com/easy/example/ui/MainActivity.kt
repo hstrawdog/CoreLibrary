@@ -1,28 +1,19 @@
 package com.easy.example.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
-import android.text.format.Time
-import android.util.Base64
-import android.util.Log
 import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
-import com.easy.core.kt.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
-import com.easy.core.utils.encrypt.AESUtils
-import com.easy.core.utils.encrypt.Base64Utils
 import com.easy.core.utils.log.LogUtils
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity2
-import com.easy.example.jsbridge.MainWebView2Activity
 import com.easy.example.soctetio.SocketIo
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity2
@@ -33,34 +24,13 @@ import com.easy.example.ui.customize.CustomizeIndexActivity2
 import com.easy.example.ui.dialog.TestDialogActivity
 import com.easy.example.ui.file.FileIndexActivity2
 import com.easy.example.ui.fragment.FragmentIndexActivity
-import com.easy.example.ui.fragment.FragmentUtilsActivity
 import com.easy.example.ui.jetpack.databinding.BindingIndexActivity2
 import com.easy.example.ui.launch.mode.SingleInstanceActivity
 import com.easy.example.ui.parcelable.ParcelableActivity
-import com.easy.example.ui.recycle.BannerActivity
 import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity2
-import io.socket.client.IO
-import io.socket.client.Socket
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.WebSocket
-import okhttp3.WebSocketListener
-import okio.ByteString
-import org.json.JSONObject
-import java.io.UnsupportedEncodingException
-import java.security.InvalidKeyException
-import java.security.NoSuchAlgorithmException
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import javax.crypto.BadPaddingException
-import javax.crypto.Cipher
-import javax.crypto.IllegalBlockSizeException
-import javax.crypto.NoSuchPaddingException
-import javax.crypto.spec.SecretKeySpec
 
 
 /**
@@ -87,7 +57,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        EncryptUtil.aesDecrypt("666")
 //        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
 
-        SocketIo().initIO()
+//        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("ieDs4rDUAXVy21hoKB9t9tyBjY0BoVOmNlf2+w8gO68="))
+        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("Su3CGflkcDnASJ+s9bpHPRHH5Pf0tlQBuWNx8tjf6N8zxFjGFURT8sjv7HCiQXUqXVtWOsKYpcuNhU5lOvnKn9AU45iFOA0yQTE2q1Lbryk="))
+
+
+//        SocketIo().initIO()
 //            open(BannerActivity::class.java)
 //            open(MainWebView2Activity::class.java)
 //            open(FragmentUtilsActivity::class.java)
