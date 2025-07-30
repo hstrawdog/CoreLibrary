@@ -15,22 +15,15 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.View
-import android.view.View.DRAWING_CACHE_QUALITY_HIGH
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.exifinterface.media.ExifInterface
 import com.easy.core.CoreConfig
 import com.easy.core.utils.ToastUtils
-import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.file.FileUtils
-import com.easy.core.utils.image.BitmapOperateUtils.scalePicture
-import com.easy.core.utils.log.LogUtils
 import java.io.*
-import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Locale
-import kotlin.jvm.Throws
 
 
 /**
@@ -44,26 +37,25 @@ import kotlin.jvm.Throws
 object BitmapUtils {
 
     @JvmStatic
-    fun saveImageToGallery(context: Context, bitmaps: Bitmap) {
+    fun saveImageToGallery(context:Context, bitmaps:Bitmap) {
         // 首先保存图片
         val appDir = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "dearxy")
         if (!appDir.exists()) {
             appDir.mkdir()
         }
-        val fileName = System.currentTimeMillis()
-            .toString() + ".jpg"
+        val fileName = System.currentTimeMillis().toString() + ".jpg"
         val file = File(appDir, fileName)
         Log.e("test_sign", "图片全路径localFile = " + appDir.absolutePath + fileName)
-        var fos: FileOutputStream? = null
+        var fos:FileOutputStream? = null
         try {
             fos = FileOutputStream(file)
             bitmaps.compress(Bitmap.CompressFormat.JPEG, 100, fos)
             fos.flush()
             fos.close()
-        } catch (e: FileNotFoundException) {
+        } catch (e:FileNotFoundException) {
             ToastUtils.showToast(context, "保存到相册失败！")
             e.printStackTrace()
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             ToastUtils.showToast(context, "保存到相册失败！")
             e.printStackTrace()
         } finally {
@@ -72,7 +64,7 @@ object BitmapUtils {
                     fos.close()
                     //回收
                     bitmaps.recycle()
-                } catch (e: IOException) {
+                } catch (e:IOException) {
                     e.printStackTrace()
                 }
             }
@@ -80,7 +72,7 @@ object BitmapUtils {
         // 其次把文件插入到系统图库
         try {
             MediaStore.Images.Media.insertImage(context.contentResolver, file.absolutePath, fileName, null)
-        } catch (e: FileNotFoundException) {
+        } catch (e:FileNotFoundException) {
             ToastUtils.showToast(context, "保存到相册失败！")
             e.printStackTrace()
         }
@@ -99,7 +91,7 @@ object BitmapUtils {
      * @return Bitmap 添加边框了的Bitmap
      */
     @JvmStatic
-    fun bitmapCombine(bm: Bitmap?, smallW: Int, smallH: Int, color: Int): Bitmap? {
+    fun bitmapCombine(bm:Bitmap?, smallW:Int, smallH:Int, color:Int):Bitmap? {
         //防止空指针异常
         if (bm == null) {
             return null
@@ -119,8 +111,7 @@ object BitmapUtils {
         canvas.drawRect(Rect(0, 0, newW, newH), p)
 
         // 绘边框
-        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(),
-            (newH - bigH - 2 * smallH) / 2 + smallH.toFloat(), null)
+        canvas.drawBitmap(bm, (newW - bigW - 2 * smallW) / 2 + smallW.toFloat(), (newH - bigH - 2 * smallH) / 2 + smallH.toFloat(), null)
 
 //        canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.save()
@@ -130,7 +121,7 @@ object BitmapUtils {
     }
 
     @JvmStatic
-    fun drawableToBitmap(drawable: Drawable): Bitmap {
+    fun drawableToBitmap(drawable:Drawable):Bitmap {
         val width = drawable.intrinsicWidth
         val height = drawable.intrinsicHeight
         val config = if (drawable.opacity != PixelFormat.OPAQUE) Bitmap.Config.ARGB_8888 else Bitmap.Config.RGB_565
@@ -142,24 +133,26 @@ object BitmapUtils {
     }
 
     @Synchronized
-    fun getBase64(path: String?): String {
-        var bitmap: Bitmap? = null
+    fun getBase64(path:String?):String {
+        var bitmap:Bitmap? = null
         //字节数组输出流
-        val baos: ByteArrayOutputStream? = null
-        val fs: FileInputStream? = null
+        val baos:ByteArrayOutputStream? = null
+        val fs:FileInputStream? = null
         var base64 = ""
         try {
-            val byteArray = scalePicture(path, 30).toByteArray()
+            bitmap = BitmapFactory.decodeFile(path, BitmapFactory.Options())
+            var newBitmap = BitmapOperateUtils.compressByQuality(bitmap, 800)
+            val byteArray = bitmap2Bytes(newBitmap!!, Bitmap.CompressFormat.JPEG)
             // , UTF8
             base64 = String(Base64.encode(byteArray, Base64.DEFAULT))
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         } finally {
             try {
                 baos?.close()
                 fs?.close()
                 bitmap = null
-            } catch (e: IOException) {
+            } catch (e:IOException) {
                 e.printStackTrace()
             }
         }
@@ -167,8 +160,8 @@ object BitmapUtils {
     }
 
     @JvmStatic
-    fun getImageHead(key: String?): String? {
-        val stringMap: MutableMap<String, String> = HashMap()
+    fun getImageHead(key:String?):String? {
+        val stringMap:MutableMap<String, String> = HashMap()
         stringMap["JPEG"] = "data:image/jpeg;base64,"
         stringMap["JPG"] = "data:image/jpg;base64,"
         stringMap["GIF"] = "data:image/gif;base64,"
@@ -182,8 +175,8 @@ object BitmapUtils {
      * @return BitmapFactory.Options
      */
     @JvmStatic
-    fun getImageOptions(path: String): BitmapFactory.Options {
-        val options: BitmapFactory.Options = BitmapFactory.Options()
+    fun getImageOptions(path:String):BitmapFactory.Options {
+        val options:BitmapFactory.Options = BitmapFactory.Options()
         //设置为true,表示解析Bitmap对象，该对象不占内存
         options.inJustDecodeBounds = true
         BitmapFactory.decodeFile(path, options)
@@ -196,7 +189,7 @@ object BitmapUtils {
      * @return Bitmap
      */
     @JvmStatic
-    fun drawableBitmapOnWhiteBg(bitmap: Bitmap): Bitmap {
+    fun drawableBitmapOnWhiteBg(bitmap:Bitmap):Bitmap {
         val newBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(newBitmap)
         canvas.drawColor(CoreConfig.applicationContext.resources.getColor(R.color.white))
@@ -211,8 +204,7 @@ object BitmapUtils {
      * @return ByteArray
      */
     @JvmStatic
-    fun bitmap2ByteArray(bitmap: Bitmap, format: Bitmap.CompressFormat = Bitmap.CompressFormat.WEBP,
-                         quality: Int = 80): ByteArray {
+    fun bitmap2ByteArray(bitmap:Bitmap, format:Bitmap.CompressFormat = Bitmap.CompressFormat.WEBP, quality:Int = 80):ByteArray {
         val baos = ByteArrayOutputStream()
         bitmap.compress(format, quality, baos)
         return baos.toByteArray()
@@ -222,7 +214,7 @@ object BitmapUtils {
      * 得到bitmap的大小
      */
     @JvmStatic
-    fun getBitmapSize(bitmap: Bitmap): Int {
+    fun getBitmapSize(bitmap:Bitmap):Int {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {    //API 19
             return bitmap.allocationByteCount
         }
@@ -239,7 +231,7 @@ object BitmapUtils {
      * @return ByteArray
      */
     @JvmStatic
-    fun bitmap2ByteArray4WeB(bitmap: Bitmap): ByteArray {
+    fun bitmap2ByteArray4WeB(bitmap:Bitmap):ByteArray {
         return bitmap2ByteArray(bitmap, Bitmap.CompressFormat.WEBP)
     }
 
@@ -250,7 +242,7 @@ object BitmapUtils {
      * @return Bitmap
      */
     @JvmStatic
-    fun drawBg4Bitmap(color: Int, orginBitmap: Bitmap): Bitmap {
+    fun drawBg4Bitmap(color:Int, orginBitmap:Bitmap):Bitmap {
         val paint = Paint()
         paint.color = color
         val bitmap = Bitmap.createBitmap(orginBitmap.width, orginBitmap.height, orginBitmap.config)
@@ -266,7 +258,7 @@ object BitmapUtils {
      * @return
      */
     @JvmStatic
-    fun convertBitmap(srcBitmap: Bitmap): Bitmap {
+    fun convertBitmap(srcBitmap:Bitmap):Bitmap {
         val width = srcBitmap.width
         val height = srcBitmap.height
         val newb = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888) // 创建一个新的和SRC长度宽度一样的位图
@@ -287,7 +279,7 @@ object BitmapUtils {
      * @return
      */
     @JvmStatic
-    fun convertBitmap(srcBitmap: Bitmap, offsetX: Int, offsetY: Int): Bitmap {
+    fun convertBitmap(srcBitmap:Bitmap, offsetX:Int, offsetY:Int):Bitmap {
         val width = srcBitmap.width
         val height = srcBitmap.height
         val newb = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888) // 创建一个新的和SRC长度宽度一样的位图
@@ -302,11 +294,9 @@ object BitmapUtils {
 //        LogUtils.e(" OffsetX :     $OffsetX       xSize:   $xSize  ")
 //        LogUtils.e(" OffsetY :     $OffsetY       offsetY:   $offsetY  ")
         // 左边图片
-        cv.drawBitmap(srcBitmap, Rect(xSize + OffsetX, 0, xSize + width / 2 + OffsetX, height),
-            Rect(0, 0, width / 2, height), null)
+        cv.drawBitmap(srcBitmap, Rect(xSize + OffsetX, 0, xSize + width / 2 + OffsetX, height), Rect(0, 0, width / 2, height), null)
         // 右边图片
-        cv.drawBitmap(new2, Rect(xSize - OffsetX, 0, xSize + width / 2 - OffsetX, height),
-            Rect(width / 2, OffsetY, width, height + OffsetY), null)
+        cv.drawBitmap(new2, Rect(xSize - OffsetX, 0, xSize + width / 2 - OffsetX, height), Rect(width / 2, OffsetY, width, height + OffsetY), null)
         return newb
     }
 
@@ -326,10 +316,10 @@ object BitmapUtils {
      * @return
      */
     @JvmStatic
-    fun getLocalOrNetBitmap(url: String?): Bitmap? {
-        var bitmap: Bitmap? = null
-        var `in`: InputStream? = null
-        var out: BufferedOutputStream? = null
+    fun getLocalOrNetBitmap(url:String?):Bitmap? {
+        var bitmap:Bitmap? = null
+        var `in`:InputStream? = null
+        var out:BufferedOutputStream? = null
         return try {
             `in` = BufferedInputStream(URL(url).openStream(), 1024)
             val dataStream = ByteArrayOutputStream()
@@ -340,25 +330,23 @@ object BitmapUtils {
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
             data = null
             bitmap
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             null
         }
     }
 
     @Throws(IOException::class)
-    private fun copy(`in`: InputStream, out: OutputStream) {
+    private fun copy(`in`:InputStream, out:OutputStream) {
         val b = ByteArray(1024)
-        var read: Int
-        while (`in`.read(b)
-                .also { read = it } != -1
-        ) {
+        var read:Int
+        while (`in`.read(b).also { read = it } != -1) {
             out.write(b, 0, read)
         }
     }
 
     @JvmStatic
-    fun getColorByInt(colorInt: Int): Int {
+    fun getColorByInt(colorInt:Int):Int {
         return colorInt or -16777216
     }
 
@@ -370,7 +358,7 @@ object BitmapUtils {
      * @return
      */
     @JvmStatic
-    fun changeColorAlpha(color: Int, alpha: Int): Int {
+    fun changeColorAlpha(color:Int, alpha:Int):Int {
         val red = Color.red(color)
         val green = Color.green(color)
         val blue = Color.blue(color)
@@ -378,22 +366,22 @@ object BitmapUtils {
     }
 
     @JvmStatic
-    fun getAlphaPercent(argb: Int): Float {
+    fun getAlphaPercent(argb:Int):Float {
         return Color.alpha(argb) / 255f
     }
 
     @JvmStatic
-    fun alphaValueAsInt(alpha: Float): Int {
+    fun alphaValueAsInt(alpha:Float):Int {
         return Math.round(alpha * 255)
     }
 
     @JvmStatic
-    fun adjustAlpha(alpha: Float, color: Int): Int {
+    fun adjustAlpha(alpha:Float, color:Int):Int {
         return alphaValueAsInt(alpha) shl 24 or (0x00ffffff and color)
     }
 
     @JvmStatic
-    fun colorAtLightness(color: Int, lightness: Float): Int {
+    fun colorAtLightness(color:Int, lightness:Float):Int {
         val hsv = FloatArray(3)
         Color.colorToHSV(color, hsv)
         hsv[2] = lightness
@@ -401,18 +389,17 @@ object BitmapUtils {
     }
 
     @JvmStatic
-    fun lightnessOfColor(color: Int): Float {
+    fun lightnessOfColor(color:Int):Float {
         val hsv = FloatArray(3)
         Color.colorToHSV(color, hsv)
         return hsv[2]
     }
 
     @JvmStatic
-    fun getHexString(color: Int, showAlpha: Boolean): String {
+    fun getHexString(color:Int, showAlpha:Boolean):String {
         val base = if (showAlpha) -0x1 else 0xFFFFFF
         val format = if (showAlpha) "#%08X" else "#%06X"
-        return String.format(format, base and color)
-            .toUpperCase(Locale.ROOT)
+        return String.format(format, base and color).toUpperCase(Locale.ROOT)
     }
 
     /**
@@ -423,7 +410,7 @@ object BitmapUtils {
      * @return 字节数组
      */
     @JvmStatic
-    fun bitmap2Bytes(bitmap: Bitmap, format: Bitmap.CompressFormat?): ByteArray {
+    fun bitmap2Bytes(bitmap:Bitmap, format:Bitmap.CompressFormat?):ByteArray {
         val baos = ByteArrayOutputStream()
         bitmap.compress(format, 100, baos)
         return baos.toByteArray()
@@ -436,7 +423,7 @@ object BitmapUtils {
      * @return bitmap对象
      */
     @JvmStatic
-    fun bytes2Bitmap(bytes: ByteArray): Bitmap? {
+    fun bytes2Bitmap(bytes:ByteArray):Bitmap? {
         return if (bytes.size != 0) {
             BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
         } else {
@@ -451,7 +438,7 @@ object BitmapUtils {
      * @return bitmap对象
      */
     @JvmStatic
-    fun drawable2Bitmap(drawable: Drawable): Bitmap {
+    fun drawable2Bitmap(drawable:Drawable):Bitmap {
         // 取 drawable 的长宽
         val w = drawable.intrinsicWidth
         val h = drawable.intrinsicHeight
@@ -476,12 +463,12 @@ object BitmapUtils {
      * @return drawable对象
      */
     @JvmStatic
-    fun bitmap2Drawable(res: Resources?, bitmap: Bitmap?): Drawable {
+    fun bitmap2Drawable(res:Resources?, bitmap:Bitmap?):Drawable {
         return BitmapDrawable(res, bitmap)
     }
 
     @JvmStatic
-    fun bitmap2Drawable(bitmap: Bitmap?): Drawable {
+    fun bitmap2Drawable(bitmap:Bitmap?):Drawable {
         return BitmapDrawable(bitmap)
     }
 
@@ -493,7 +480,7 @@ object BitmapUtils {
      * @return 字节数组
      */
     @JvmStatic
-    fun drawable2Bytes(drawable: Drawable, format: Bitmap.CompressFormat?): ByteArray {
+    fun drawable2Bytes(drawable:Drawable, format:Bitmap.CompressFormat?):ByteArray {
         val bitmap = drawable2Bitmap(drawable)
         return bitmap2Bytes(bitmap, format)
     }
@@ -506,13 +493,13 @@ object BitmapUtils {
      * @return drawable对象
      */
     @JvmStatic
-    fun bytes2Drawable(res: Resources?, bytes: ByteArray): Drawable {
+    fun bytes2Drawable(res:Resources?, bytes:ByteArray):Drawable {
         val bitmap = bytes2Bitmap(bytes)
         return bitmap2Drawable(res, bitmap)
     }
 
     @JvmStatic
-    fun bytes2Drawable(bytes: ByteArray): Drawable {
+    fun bytes2Drawable(bytes:ByteArray):Drawable {
         val bitmap = bytes2Bitmap(bytes)
         return bitmap2Drawable(bitmap)
     }
@@ -525,7 +512,7 @@ object BitmapUtils {
      * @param maxHeight 最大高度
      * @return 采样大小
      */
-    fun calculateInSampleSize(options: BitmapFactory.Options, maxWidth: Int, maxHeight: Int): Int {
+    fun calculateInSampleSize(options:BitmapFactory.Options, maxWidth:Int, maxHeight:Int):Int {
         if (maxWidth == 0 || maxHeight == 0) {
             return 1
         }
@@ -548,7 +535,7 @@ object BitmapUtils {
      * @param reqHeight
      * @return
      */
-    fun calculateInSampleSize2(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
+    fun calculateInSampleSize2(options:BitmapFactory.Options, reqWidth:Int, reqHeight:Int):Int {
         var reqWidth = reqWidth
         var reqHeight = reqHeight
         val height = options.outHeight
@@ -558,7 +545,7 @@ object BitmapUtils {
         return if (width < MIN_WIDTH) {
             inSampleSize
         } else {
-            var heightRatio: Int
+            var heightRatio:Int
             if (width > height && reqWidth < reqHeight || width < height && reqWidth > reqHeight) {
                 heightRatio = reqWidth
                 reqWidth = reqHeight
@@ -580,19 +567,18 @@ object BitmapUtils {
      * @return 旋转角度
      */
     @JvmStatic
-    fun getRotateDegree(filePath: String): Int {
+    fun getRotateDegree(filePath:String):Int {
         var degree = 0
         try {
             val exifInterface = ExifInterface(filePath)
-            val orientation =
-                exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+            val orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
             degree = when (orientation) {
                 ExifInterface.ORIENTATION_ROTATE_90 -> 90
                 ExifInterface.ORIENTATION_ROTATE_180 -> 180
                 ExifInterface.ORIENTATION_ROTATE_270 -> 270
                 else -> 90
             }
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         }
         return degree
@@ -606,7 +592,7 @@ object BitmapUtils {
      */
     @JvmOverloads
     @JvmStatic
-    fun toRound(src: Bitmap, recycle: Boolean = false): Bitmap? {
+    fun toRound(src:Bitmap, recycle:Boolean = false):Bitmap? {
         if (isEmptyBitmap(src)) {
             return null
         }
@@ -621,9 +607,7 @@ object BitmapUtils {
         paint.color = Color.TRANSPARENT
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
         canvas.drawARGB(0, 0, 0, 0)
-        canvas.drawCircle((width shr 1.toFloat()
-            .toInt()).toFloat(), (height shr 1.toFloat()
-            .toInt()).toFloat(), radius.toFloat(), paint)
+        canvas.drawCircle((width shr 1.toFloat().toInt()).toFloat(), (height shr 1.toFloat().toInt()).toFloat(), radius.toFloat(), paint)
         canvas.drawBitmap(src, rect, rect, paint)
         if (recycle && !src.isRecycled) {
             src.recycle()
@@ -640,7 +624,7 @@ object BitmapUtils {
      */
     @JvmOverloads
     @JvmStatic
-    fun toRoundCorner(src: Bitmap?, radius: Float, recycle: Boolean = false): Bitmap? {
+    fun toRoundCorner(src:Bitmap?, radius:Float, recycle:Boolean = false):Bitmap? {
         if (null == src) {
             return null
         }
@@ -669,7 +653,7 @@ object BitmapUtils {
      * @return 带颜色边框图
      */
     @JvmStatic
-    fun addFrame(src: Bitmap?, borderWidth: Int, color: Int): Bitmap {
+    fun addFrame(src:Bitmap?, borderWidth:Int, color:Int):Bitmap {
         return addFrame(src, borderWidth, color)
     }
 
@@ -683,7 +667,7 @@ object BitmapUtils {
      * @return 带颜色边框图
      */
     @JvmStatic
-    fun addFrame(src: Bitmap, borderWidth: Int, color: Int, recycle: Boolean): Bitmap? {
+    fun addFrame(src:Bitmap, borderWidth:Int, color:Int, recycle:Boolean):Bitmap? {
         if (isEmptyBitmap(src)) {
             return null
         }
@@ -713,7 +697,7 @@ object BitmapUtils {
      */
     @JvmOverloads
     @JvmStatic
-    fun addReflection(src: Bitmap, reflectionHeight: Int, recycle: Boolean = false): Bitmap? {
+    fun addReflection(src:Bitmap, reflectionHeight:Int, recycle:Boolean = false):Bitmap? {
         if (isEmptyBitmap(src)) {
             return null
         }
@@ -725,17 +709,14 @@ object BitmapUtils {
         }
         val matrix = Matrix()
         matrix.preScale(1f, -1f)
-        val reflectionBitmap =
-            Bitmap.createBitmap(src, 0, srcHeight - reflectionHeight, srcWidth, reflectionHeight, matrix, false)
-                ?: return null
+        val reflectionBitmap = Bitmap.createBitmap(src, 0, srcHeight - reflectionHeight, srcWidth, reflectionHeight, matrix, false) ?: return null
         val ret = Bitmap.createBitmap(srcWidth, srcHeight + reflectionHeight, src.config)
         val canvas = Canvas(ret)
         canvas.drawBitmap(src, 0f, 0f, null)
         canvas.drawBitmap(reflectionBitmap, 0f, srcHeight + REFLECTION_GAP.toFloat(), null)
         val paint = Paint()
         paint.isAntiAlias = true
-        val shader = LinearGradient(0f, srcHeight * 1f, 0f, ret.height + REFLECTION_GAP * 1f, 0x70FFFFFF, 0x00FFFFFF,
-            Shader.TileMode.MIRROR)
+        val shader = LinearGradient(0f, srcHeight * 1f, 0f, ret.height + REFLECTION_GAP * 1f, 0x70FFFFFF, 0x00FFFFFF, Shader.TileMode.MIRROR)
         paint.shader = shader
         paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
         canvas.save()
@@ -764,8 +745,7 @@ object BitmapUtils {
      */
     @JvmOverloads
     @JvmStatic
-    fun addTextWatermark(src: Bitmap, content: String?, textSize: Int, color: Int, alpha: Int, x: Float, y: Float,
-                         recycle: Boolean = false): Bitmap? {
+    fun addTextWatermark(src:Bitmap, content:String?, textSize:Int, color:Int, alpha:Int, x:Float, y:Float, recycle:Boolean = false):Bitmap? {
         if (isEmptyBitmap(src) || content == null) {
             return null
         }
@@ -796,8 +776,7 @@ object BitmapUtils {
      */
     @JvmOverloads
     @JvmStatic
-    fun addImageWatermark(src: Bitmap, watermark: Bitmap?, x: Int, y: Int, alpha: Int,
-                          recycle: Boolean = false): Bitmap? {
+    fun addImageWatermark(src:Bitmap, watermark:Bitmap?, x:Int, y:Int, alpha:Int, recycle:Boolean = false):Bitmap? {
         if (isEmptyBitmap(src)) {
             return null
         }
@@ -821,7 +800,7 @@ object BitmapUtils {
      * @return alpha位图
      */
     @JvmStatic
-    fun toAlpha(src: Bitmap?): Bitmap {
+    fun toAlpha(src:Bitmap?):Bitmap {
         return toAlpha(src)
     }
 
@@ -833,7 +812,7 @@ object BitmapUtils {
      * @return alpha位图
      */
     @JvmStatic
-    fun toAlpha(src: Bitmap, recycle: Boolean): Bitmap? {
+    fun toAlpha(src:Bitmap, recycle:Boolean):Bitmap? {
         if (isEmptyBitmap(src)) {
             return null
         }
@@ -856,7 +835,7 @@ object BitmapUtils {
      * @param color
      * @return
      */
-    private fun getDropShadow(iv: ImageView, src: Bitmap, radius: Float, color: Int): Bitmap {
+    private fun getDropShadow(iv:ImageView, src:Bitmap, radius:Float, color:Int):Bitmap {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         paint.color = color
         val width = src.width
@@ -880,7 +859,7 @@ object BitmapUtils {
      */
     @JvmOverloads
     @JvmStatic
-    fun toGray(src: Bitmap, recycle: Boolean = false): Bitmap? {
+    fun toGray(src:Bitmap, recycle:Boolean = false):Bitmap? {
         if (isEmptyBitmap(src)) {
             return null
         }
@@ -907,7 +886,7 @@ object BitmapUtils {
      * @return `true`: 成功<br></br>`false`: 失败
      */
     @JvmStatic
-    fun save(src: Bitmap, filePath: String?, format: Bitmap.CompressFormat?): Boolean {
+    fun save(src:Bitmap, filePath:String?, format:Bitmap.CompressFormat?):Boolean {
         return save(src, FileUtils.getFileByPath(filePath), format, false)
     }
 
@@ -921,7 +900,7 @@ object BitmapUtils {
      * @return `true`: 成功<br></br>`false`: 失败
      */
     @JvmStatic
-    fun save(src: Bitmap, filePath: String?, format: Bitmap.CompressFormat?, recycle: Boolean): Boolean {
+    fun save(src:Bitmap, filePath:String?, format:Bitmap.CompressFormat?, recycle:Boolean):Boolean {
         return save(src, FileUtils.getFileByPath(filePath), format, recycle)
     }
 
@@ -935,12 +914,12 @@ object BitmapUtils {
      */
     @JvmOverloads
     @JvmStatic
-    fun save(src: Bitmap, file: File?, format: Bitmap.CompressFormat?, recycle: Boolean = false): Boolean {
+    fun save(src:Bitmap, file:File?, format:Bitmap.CompressFormat?, recycle:Boolean = false):Boolean {
         if (isEmptyBitmap(src) || !FileUtils.createOrExistsFile(file)) {
             return false
         }
         println(src.width.toString() + ", " + src.height)
-        var os: OutputStream? = null
+        var os:OutputStream? = null
         var ret = false
         try {
             os = BufferedOutputStream(FileOutputStream(file))
@@ -948,7 +927,7 @@ object BitmapUtils {
             if (recycle && !src.isRecycled) {
                 src.recycle()
             }
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         } finally {
             FileUtils.closeIO(os)
@@ -963,7 +942,7 @@ object BitmapUtils {
      * @return `true`: 是<br></br>`false`: 否
      */
     @JvmStatic
-    fun isImage(file: File?): Boolean {
+    fun isImage(file:File?):Boolean {
         return file != null && isImage(file.path)
     }
 
@@ -974,10 +953,9 @@ object BitmapUtils {
      * @return `true`: 是<br></br>`false`: 否
      */
     @JvmStatic
-    fun isImage(filePath: String): Boolean {
+    fun isImage(filePath:String):Boolean {
         val path = filePath.toUpperCase()
-        return (path.endsWith(".PNG") || path.endsWith(".JPG") || path.endsWith(".JPEG") || path.endsWith(
-            ".BMP") || path.endsWith(".GIF"))
+        return (path.endsWith(".PNG") || path.endsWith(".JPG") || path.endsWith(".JPEG") || path.endsWith(".BMP") || path.endsWith(".GIF"))
     }
 
     /**
@@ -987,7 +965,7 @@ object BitmapUtils {
      * @return 图片类型
      */
     @JvmStatic
-    fun getImageType(filePath: String?): String? {
+    fun getImageType(filePath:String?):String? {
         return getImageType(FileUtils.getFileByPath(filePath))
     }
 
@@ -998,13 +976,13 @@ object BitmapUtils {
      * @return 图片类型
      */
     @JvmStatic
-    fun getImageType(file: File?): String? {
+    fun getImageType(file:File?):String? {
         if (file == null) return null
-        var `is`: InputStream? = null
+        var `is`:InputStream? = null
         return try {
             `is` = FileInputStream(file)
             getImageType(`is`)
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             null
         } finally {
@@ -1019,11 +997,11 @@ object BitmapUtils {
      * @return 图片类型
      */
     @JvmStatic
-    fun getImageType(`is`: InputStream?): String? {
+    fun getImageType(`is`:InputStream?):String? {
         return if (`is` == null) null else try {
             val bytes = ByteArray(8)
             if (`is`.read(bytes, 0, 8) != -1) getImageType(bytes) else null
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
             null
         }
@@ -1036,7 +1014,7 @@ object BitmapUtils {
      * @return 图片类型
      */
     @JvmStatic
-    fun getImageType(bytes: ByteArray): String? {
+    fun getImageType(bytes:ByteArray):String? {
         if (isJPEG(bytes)) {
             return "JPEG"
         }
@@ -1052,22 +1030,22 @@ object BitmapUtils {
     }
 
     @JvmStatic
-    fun isJPEG(b: ByteArray): Boolean {
+    fun isJPEG(b:ByteArray):Boolean {
         return b.size >= 2 && b[0] == 0xFF.toByte() && b[1] == 0xD8.toByte()
     }
 
     @JvmStatic
-    fun isGIF(b: ByteArray): Boolean {
+    fun isGIF(b:ByteArray):Boolean {
         return b.size >= 6 && b[0] == 'G'.toByte() && b[1] == 'I'.toByte() && b[2] == 'F'.toByte() && b[3] == '8'.toByte() && (b[4] == '7'.toByte() || b[4] == '9'.toByte()) && b[5] == 'a'.toByte()
     }
 
     @JvmStatic
-    fun isPNG(b: ByteArray): Boolean {
+    fun isPNG(b:ByteArray):Boolean {
         return (b.size >= 8 && b[0] == 137.toByte() && b[1] == 80.toByte() && b[2] == 78.toByte() && b[3] == 71.toByte() && b[4] == 13.toByte() && b[5] == 10.toByte() && b[6] == 26.toByte() && b[7] == 10.toByte())
     }
 
     @JvmStatic
-    fun isBMP(b: ByteArray): Boolean {
+    fun isBMP(b:ByteArray):Boolean {
         return b.size >= 2 && b[0].toInt() == 0x42 && b[1].toInt() == 0x4d
     }
 
@@ -1078,7 +1056,7 @@ object BitmapUtils {
      * @return `true`: 是<br></br>`false`: 否
      */
     @JvmStatic
-    fun isEmptyBitmap(src: Bitmap?): Boolean {
+    fun isEmptyBitmap(src:Bitmap?):Boolean {
         return src == null || src.width == 0 || src.height == 0
     }
 
@@ -1092,12 +1070,12 @@ object BitmapUtils {
      * @return
      */
     @JvmStatic
-    fun getThumb(filePath: String, kind: Int): Bitmap? {
+    fun getThumb(filePath:String, kind:Int):Bitmap? {
         return ThumbnailUtils.createVideoThumbnail(filePath, kind)
     }
 
     @JvmStatic
-    fun getThumb(source: Bitmap?, width: Int, height: Int): Bitmap {
+    fun getThumb(source:Bitmap?, width:Int, height:Int):Bitmap {
         return ThumbnailUtils.extractThumbnail(source, width, height)
     }
 
@@ -1109,7 +1087,7 @@ object BitmapUtils {
      * @param rect
      */
     @JvmStatic
-    fun drawNinePath(c: Canvas?, bmp: Bitmap, rect: Rect?) {
+    fun drawNinePath(c:Canvas?, bmp:Bitmap, rect:Rect?) {
         val patch = NinePatch(bmp, bmp.ninePatchChunk, null)
         patch.draw(c, rect)
     }
@@ -1125,13 +1103,12 @@ object BitmapUtils {
      * @return
      */
     @JvmStatic
-    fun createTextImage(source: Bitmap, txtSize: Int, innerTxt: String, textColor: Int,
-                        textBackgroundColor: Int): Bitmap {
+    fun createTextImage(source:Bitmap, txtSize:Int, innerTxt:String, textColor:Int, textBackgroundColor:Int):Bitmap {
         val bitmapWidth = source.width
         val bitmapHeight = source.height
         val textWidth = txtSize * innerTxt.length
         val textHeight = txtSize
-        val width: Int
+        val width:Int
         width = if (bitmapWidth > textWidth) {
             bitmapWidth + txtSize * innerTxt.length
         } else {
@@ -1169,7 +1146,7 @@ object BitmapUtils {
     }
 
     @JvmStatic
-    fun getDensity(context: Context): Float {
+    fun getDensity(context:Context):Float {
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val dm = DisplayMetrics()
         val display = wm.defaultDisplay

@@ -124,11 +124,11 @@ class ComparedView : View, View.OnTouchListener {
 
     init {
         status = 1
-        originalBitmap = BitmapOperateUtils.zoomImg(
-            BitmapFactory.decodeResource(resources, R.mipmap.a1), ScreenUtils.getScreenWidth()
+        originalBitmap = BitmapOperateUtils.scaleImage(
+            BitmapFactory.decodeResource(resources, R.mipmap.a1), ScreenUtils.getScreenWidth().toFloat(),ScreenUtils.getScreenWidth().toFloat()
         )
-        beautifyBitmap = BitmapOperateUtils.zoomImg(
-            BitmapFactory.decodeResource(resources, R.mipmap.a2), ScreenUtils.getScreenWidth()
+        beautifyBitmap = BitmapOperateUtils.scaleImage(
+            BitmapFactory.decodeResource(resources, R.mipmap.a2), ScreenUtils.getScreenWidth().toFloat(), ScreenUtils.getScreenWidth().toFloat()
         )
     }
 
