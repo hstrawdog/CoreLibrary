@@ -1,5 +1,6 @@
 package com.easy.core.utils.gson
 
+import android.net.Uri
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
@@ -20,7 +21,9 @@ object GsonUtil {
     /**
      * 如果不设置serializeNulls,序列化时默认忽略NULL
      * */
-    private val GSON = GsonBuilder().serializeNulls().create()
+    private val GSON = GsonBuilder().serializeNulls()
+        .registerTypeAdapter(Uri::class.java, UriAdapter())
+        .create()
 
     /**
      *

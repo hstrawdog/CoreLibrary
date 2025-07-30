@@ -143,10 +143,13 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 //        }
         //  设置主题
         setStyle(STYLE_NORMAL, R.style.DefDialogStyle)
+        LogUtils.dMark( TAG.LIVE_TAG,"${this}   onCreate ")
+
     }
 
     override fun onCreateView(inflater:LayoutInflater, container:ViewGroup?, savedInstanceState:Bundle?):View? {
         dialog?.window?.setWindowAnimations(getAnimation())
+        LogUtils.dMark( TAG.LIVE_TAG,"${this}   onCreateView ")
         if (rootView == null) {
             activity?.let {
                 loadingView = LoadingView(it)
@@ -155,13 +158,15 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
-            LogUtils.dMark( TAG.LIVE_TAG,"${this}   onCreateView ")
+            LogUtils.dMark( TAG.LIVE_TAG,"${this}   onCreateView   rootView is  null  ")
+
         }
         return rootView
     }
 
     override fun onViewCreated(view:View, savedInstanceState:Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        LogUtils.dMark( TAG.LIVE_TAG,"${this} onViewCreated  }")
         if (!loaded && rootView != null) {
             if (statusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
                 StatusBarManager.setStatusBarModel(dialog?.window, true)
@@ -192,7 +197,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onActivityCreated(savedInstanceState:Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtils.e4Mark(rootView?.measuredWidth)
+        LogUtils.dMark( TAG.LIVE_TAG, rootView?.measuredWidth)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(getBackground()))
         dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         dialog?.window?.setGravity(getGravity())
@@ -224,7 +229,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
                         prev.dismiss()
                     }
                 } catch (e:Exception) {
-                    LogUtils.e(e.toString())
+                    LogUtils.dMark( TAG.LIVE_TAG,e.toString())
                 }
             }
             ft.remove(prev)
@@ -239,7 +244,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
         if (isDismiss || !isAdded) {
 
-            LogUtils.e("${this}   is ${isDismiss}    or  ${!isAdded}")
+            LogUtils.dMark( TAG.LIVE_TAG,"${this}   is ${isDismiss}    or  ${!isAdded}")
             // 避免重复 执行
             return
         }
