@@ -2,6 +2,7 @@ package com.easy.example.ui.system.info
 
 import android.content.res.Configuration
 import android.hardware.SensorManager
+import android.os.Build
 import android.view.OrientationEventListener
 import android.widget.TextView
 import com.easy.core.ui.base.BaseActivity
@@ -16,6 +17,7 @@ import com.easy.core.utils.ScreenUtils.getScreenWidth
 import com.easy.core.utils.ScreenUtils.getScreenXDPI
 import com.easy.core.utils.ScreenUtils.getScreenYDPI
 import com.easy.core.utils.ScreenUtils.getStatusBarHeight
+import com.easy.core.utils.ScreenUtils.getStatusBarHeight4Resources
 import com.easy.core.utils.ScreenUtils.isAllScreenDevice
 import com.easy.core.utils.file.CacheUtil.getAppCacheSize
 import com.easy.core.utils.file.CacheUtil.getCacheSize
@@ -102,9 +104,14 @@ class BaseInfoActivity : BaseViewBindingActivity<ActivityBaseInfoBinding>() {
         mTvInfo = findViewById(R.id.tv_info)
         mTvInfo.setText(TextSpannableBuilder().addTextPart("包名    ")
             .addTextPart(AppTool.getPackageName(this))
-            .addTextPart("\n版本    ")
+            .addTextPart("\n系统版本    ")
+            .addTextPart(" ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})")
+            .addTextPart("\n设备厂商    ")
+            .addTextPart(DeviceUtils.buildMANUFACTURER)
+            .addTextPart("\n型号: ${Build.MODEL} ")
+            .addTextPart("\nAPK版本    ")
             .addTextPart(AppTool.getVerName(activity))
-            .addTextPart("\n版本号    ")
+            .addTextPart("\nApk版本号    ")
             .addTextPart(AppTool.getVersionCode(this)
                 .toString() + "")
             .addTextPart("\n系统分配大小    ")
@@ -116,12 +123,10 @@ class BaseInfoActivity : BaseViewBindingActivity<ActivityBaseInfoBinding>() {
             .addTextPart("\n手机类型    ")
             .addTextPart(DeviceUtils.getPhoneType(this)
                 .toString())
-            .addTextPart("\n设备厂商    ")
-            .addTextPart(DeviceUtils.buildMANUFACTURER)
 
-            .addTextPart("\n状态栏高度    ")
-            .addTextPart(getStatusBarHeight(this).toString() + "px")
-            .addTextPart("\n导航栏高度    ")
+            .addTextPart("\n顶部状态栏高度    ")
+            .addTextPart(getStatusBarHeight4Resources(this).toString() + "px")
+            .addTextPart("\n底部导航栏高度    ")
             .addTextPart(getNavigationBarHeight(this).toString() + "px")
             .addTextPart("\n是否全面屏    ")
             .addTextPart(isAllScreenDevice(this).toString())

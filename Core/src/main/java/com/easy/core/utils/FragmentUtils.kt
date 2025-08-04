@@ -2,6 +2,7 @@ package com.easy.core.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.easy.core.common.TAG
 import com.easy.core.ui.base.BaseActivity
 import com.easy.core.ui.base.BaseFragment
 import com.easy.core.utils.log.LogUtils
@@ -33,7 +34,14 @@ class FragmentUtils {
                 supportFragmentManager = any.childFragmentManager
             }
         }
+        // 监听 Fragment 回退栈变化
+        supportFragmentManager?.addOnBackStackChangedListener {
+            LogUtils.dMark(TAG.LIVE_TAG, "supportFragmentManager  addOnBackStackChangedListener  start  ${currentFragment}")
 
+            updateCurrentFragment()
+            LogUtils.dMark(TAG.LIVE_TAG, "supportFragmentManager  addOnBackStackChangedListener  end   ${currentFragment}")
+
+        }
     }
 
     /**
@@ -100,6 +108,28 @@ class FragmentUtils {
     }
 
     /**
+     * 以覆盖方式添加 Fragment（add + addToBackStack）
+     * 会叠加当前 Fragment，并支持按返回键返回
+     */
+    fun coverFragment(fragment:Fragment, id:Int) {
+        if (supportFragmentManager == null) return
+        if (fragment.isAdded && fragment.isRemoving) {
+            throw IllegalStateException("Fragment is already removing. Create a new instance instead.")
+        }
+
+        val tag = fragment::class.java.simpleName
+        // 避免重复添加同一类型 Fragment
+        if (supportFragmentManager!!.findFragmentByTag(tag) != null) {
+            LogUtils.e("coverFragment: Fragment $tag 已存在，避免重复添加")
+            return
+        }
+
+        supportFragmentManager!!.beginTransaction().add(id, fragment, tag).addToBackStack(tag).commit()
+
+        currentFragment = fragment
+    }
+
+    /**
      * 添加 fragment 到 FrameLayout
      *
      * @param fragment fragment
@@ -123,4 +153,25 @@ class FragmentUtils {
             currentFragment = null;
         }
     }
+
+    private fun updateCurrentFragment() {
+        val fragmentList = supportFragmentManager?.fragments
+        if (fragmentList.isNullOrEmpty()) {
+            currentFragment = null
+            return
+        }
+
+        // 找出最后一个“正在显示”的 Fragment 作为 currentFragment
+        for (i in fragmentList.indices.reversed()) {
+            val f = fragmentList[i]
+            if (f != null && f.isVisible) {
+                currentFragment = f
+                return
+            }
+        }
+
+        // 如果都不可见
+        currentFragment = null
+    }
+
 }
