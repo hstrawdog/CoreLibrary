@@ -17,7 +17,7 @@ import kotlin.jvm.Throws
  */
 class FragmentUtils {
     var supportFragmentManager:FragmentManager? = null
-
+    private val fragmentBackStack = ArrayDeque<Fragment>() // 手动管理栈
     var currentFragment:Fragment? = null
 
     constructor(any:Any) {
@@ -25,7 +25,6 @@ class FragmentUtils {
             is FragmentManager -> {
                 supportFragmentManager = any
             }
-
             is BaseActivity -> {
                 supportFragmentManager = any.supportFragmentManager
             }
@@ -34,10 +33,10 @@ class FragmentUtils {
                 supportFragmentManager = any.childFragmentManager
             }
         }
+        fragmentBackStack.clear()
         // 监听 Fragment 回退栈变化
         supportFragmentManager?.addOnBackStackChangedListener {
             LogUtils.dMark(TAG.LIVE_TAG, "supportFragmentManager  addOnBackStackChangedListener  start  ${currentFragment}")
-
             updateCurrentFragment()
             LogUtils.dMark(TAG.LIVE_TAG, "supportFragmentManager  addOnBackStackChangedListener  end   ${currentFragment}")
 
@@ -73,6 +72,7 @@ class FragmentUtils {
                 supportFragmentManager!!.beginTransaction().hide(currentFragment!!).show(fragment).commit()
             }
         }
+        fragmentBackStack?.plus(fragment)
         currentFragment = fragment
     }
 
@@ -104,6 +104,8 @@ class FragmentUtils {
                 supportFragmentManager!!.beginTransaction().replace(id, fragment).commit()
             }
         }
+        fragmentBackStack?.remove(currentFragment)
+        fragmentBackStack?.plus(fragment)
         currentFragment = fragment
     }
 
@@ -116,16 +118,8 @@ class FragmentUtils {
         if (fragment.isAdded && fragment.isRemoving) {
             throw IllegalStateException("Fragment is already removing. Create a new instance instead.")
         }
-
-        val tag = fragment::class.java.simpleName
-        // 避免重复添加同一类型 Fragment
-        if (supportFragmentManager!!.findFragmentByTag(tag) != null) {
-            LogUtils.e("coverFragment: Fragment $tag 已存在，避免重复添加")
-            return
-        }
-
-        supportFragmentManager!!.beginTransaction().add(id, fragment, tag).addToBackStack(tag).commit()
-
+        fragmentBackStack?.plus(fragment)
+        supportFragmentManager?.beginTransaction()?.add(id, fragment)?.commit()
         currentFragment = fragment
     }
 
@@ -140,6 +134,8 @@ class FragmentUtils {
         if (!fragment.isAdded && supportFragmentManager != null) {
             supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
             currentFragment = fragment
+            fragmentBackStack?.plus(fragment)
+
         }
     }
 
@@ -149,12 +145,14 @@ class FragmentUtils {
      */
     fun removeFragment(fragment:Fragment) {
         supportFragmentManager?.beginTransaction()?.remove(fragment)?.commit()
+        fragmentBackStack?.remove(fragment)
+
         if (fragment == currentFragment) {
-            currentFragment = null;
+            currentFragment = fragmentBackStack.lastOrNull()
         }
     }
 
-    private fun updateCurrentFragment() {
+    fun updateCurrentFragment() {
         val fragmentList = supportFragmentManager?.fragments
         if (fragmentList.isNullOrEmpty()) {
             currentFragment = null
