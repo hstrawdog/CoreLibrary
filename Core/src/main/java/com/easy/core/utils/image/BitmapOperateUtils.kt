@@ -10,6 +10,29 @@ import java.io.ByteArrayOutputStream
  * 图片处理工具类，包括缩放、裁剪、旋转和压缩等操作
  */
 object BitmapOperateUtils {
+    /**
+     * 等比缩放 Bitmap，最大边长限制为 maxLength
+     *
+     * @param bitmap 原始 Bitmap
+     * @param maxLength 最大边长（宽或高）
+     * @return 缩放后的 Bitmap，如果原图已小于等于 maxLength，则返回原图
+     */
+    fun  scaleBitmapProportionalMax(bitmap: Bitmap, maxLength: Int): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+
+        val scale = if (width >= height) {
+            maxLength.toFloat() / width
+        } else {
+            maxLength.toFloat() / height
+        }
+
+
+        val newWidth = (width * scale).toInt()
+        val newHeight = (height * scale).toInt()
+
+        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+    }
 
     /**
      * 按比例缩放图片（指定缩放倍数）
@@ -45,7 +68,7 @@ object BitmapOperateUtils {
 
         val scaleWidth = newWidth / src.width.toFloat()
         val scaleHeight = newHeight / src.height.toFloat()
-        return scaleImage(src, scaleWidth, scaleHeight, recycle)
+        return zoomImage(src, scaleWidth, scaleHeight, recycle)
     }
 
     /**
@@ -117,21 +140,32 @@ object BitmapOperateUtils {
         return result
     }
 
+
+
     /**
-     * 镜像 Bitmap（水平方向）
+     * 镜像 Bitmap（水平或垂直方向）
      * @param src 原始 Bitmap
      * @param recycle 是否回收原图
+     * @param isHorizontal 是否水平镜像，false 表示垂直镜像
      * @return 镜像后的 Bitmap
      */
     @JvmStatic
-    fun mirrorBitmap(src: Bitmap?, recycle: Boolean = false): Bitmap? {
+    fun mirrorBitmap(src: Bitmap?, recycle: Boolean = false, isHorizontal: Boolean = true): Bitmap? {
         if (src == null || isEmptyBitmap(src)) return null
 
-        val matrix = Matrix().apply { postScale(-1f, 1f) }
+        val matrix = Matrix().apply {
+            if (isHorizontal) {
+                postScale(-1f, 1f)  // 水平翻转
+            } else {
+                postScale(1f, -1f)  // 垂直翻转
+            }
+        }
+
         val result = Bitmap.createBitmap(src, 0, 0, src.width, src.height, matrix, true)
         if (recycle && !src.isRecycled && result != src) src.recycle()
         return result
     }
+
 
     /**
      * 倾斜 Bitmap
