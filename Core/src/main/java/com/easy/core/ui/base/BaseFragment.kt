@@ -34,7 +34,7 @@ interface OnFragmentVisibilityChangedListener {
  */
 abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener, View.OnAttachStateChangeListener, OnFragmentVisibilityChangedListener {
 
-   
+
     /**
      *   MutableLiveData 去传递结果
      */
@@ -122,7 +122,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
             initConfig()
             rootView = rootViewBuild.buildContentView(this)
         }
-        LogUtils.dMark( TAG.LIVE_TAG,  "${this.toString()}   onCreateView   " )
+        LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()}   onCreateView   ")
         return rootView
     }
 
@@ -133,7 +133,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      * @param isVisibleToUser
      */
     override fun setUserVisibleHint(isVisibleToUser:Boolean) {
-        LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} setUserVisibleHint =   $isVisibleToUser")
+        LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()} setUserVisibleHint =   $isVisibleToUser")
         super.setUserVisibleHint(isVisibleToUser)
         checkVisibility(isVisibleToUser)
 
@@ -152,11 +152,11 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
         if (!isCreate && rootView != null) {
             isCreate = true
             if (!isLazyLoad()) {
-                LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()}  onViewCreated initBasic   false  " )
+                LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()}  onViewCreated initBasic   false  ")
                 initView()
             } else if (isLazyLoad() && visible) {
                 lazyInitEnd = true
-                LogUtils.dMark( TAG.LIVE_TAG,  " ${this.toString()} onViewCreated initBasic   True " )
+                LogUtils.dMark(TAG.LIVE_TAG, " ${this.toString()} onViewCreated initBasic   True ")
                 initView()
             }
         }
@@ -168,7 +168,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      */
     override fun onDestroy() {
         super.onDestroy()
-        LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()}    onDestroy " )
+        LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()}    onDestroy ")
         if (rootView != null) {
             if (rootView is ViewGroup) {
                 (rootView as ViewGroup).removeAllViews()
@@ -250,7 +250,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     }
 
     override fun onAttach(context:Context) {
-           LogUtils.dMark( TAG.LIVE_TAG, "onAttach")
+        LogUtils.dMark(TAG.LIVE_TAG, "${this} onAttach")
         super.onAttach(context)
         val parentFragment = parentFragment
         if (parentFragment != null && parentFragment is BaseFragment) {
@@ -261,7 +261,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     }
 
     override fun onDetach() {
-           LogUtils.dMark( TAG.LIVE_TAG, "onDetach")
+        LogUtils.dMark(TAG.LIVE_TAG, "onDetach")
         localParentFragment?.removeOnVisibilityChangedListener(this)
         super.onDetach()
         checkVisibility(false)
@@ -269,14 +269,14 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     }
 
     override fun onResume() {
-           LogUtils.dMark( TAG.LIVE_TAG, "onResume")
+        LogUtils.dMark(TAG.LIVE_TAG, "onResume")
         super.onResume()
         onActivityVisibilityChanged(true)
     }
 
 
     override fun onPause() {
-           LogUtils.dMark( TAG.LIVE_TAG, "onPause")
+        LogUtils.dMark(TAG.LIVE_TAG, "onPause")
         super.onPause()
         onActivityVisibilityChanged(false)
     }
@@ -288,7 +288,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
         parentActivityVisible = visible
         checkVisibility(visible)
         if (isLazyLoad() && isCreate && !lazyInitEnd && visible) {
-            LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()}  setUserVisibleHint  initBasic " )
+            LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()}  setUserVisibleHint  initBasic ")
             initView()
             lazyInitEnd = true
         } else if (isLazyLoad() && isCreate && lazyInitEnd && !visible) {
@@ -304,7 +304,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     }
 
     override fun onCreate(savedInstanceState:Bundle?) {
-           LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} onCreate")
+        LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()} onCreate")
         super.onCreate(savedInstanceState)
     }
 
@@ -317,12 +317,12 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     }
 
     override fun onViewAttachedToWindow(v:View) {
-           LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} onViewAttachedToWindow")
+        LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()} onViewAttachedToWindow")
         checkVisibility(true)
     }
 
     override fun onViewDetachedFromWindow(v:View) {
-           LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} onViewDetachedFromWindow")
+        LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()} onViewDetachedFromWindow")
         v.removeOnAttachStateChangeListener(this)
         checkVisibility(false)
     }
@@ -339,7 +339,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
         val superVisible = super.isVisible()
         val hintVisible = userVisibleHint
         val visible = parentVisible && superVisible && hintVisible
-           LogUtils.dMark( TAG.LIVE_TAG, String.format("==> checkVisibility = %s  ( parent = %s, super = %s, hint = %s )", visible, parentVisible, superVisible, hintVisible))
+        LogUtils.dMark(TAG.LIVE_TAG, String.format("==> checkVisibility = %s  ( parent = %s, super = %s, hint = %s )", visible, parentVisible, superVisible, hintVisible))
         if (visible != this.visible) {
             this.visible = visible
             onVisibilityChanged(this.visible)
@@ -350,7 +350,7 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
      * 可见性改变
      */
     private fun onVisibilityChanged(visible:Boolean) {
-           LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()}   ==> onVisibilityChanged = $visible")
+        LogUtils.dMark(TAG.LIVE_TAG, "${this.toString()}   ==> onVisibilityChanged = $visible")
         listeners.forEach {
             it.onFragmentVisibilityChanged(visible)
         }
@@ -362,7 +362,6 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     fun isFragmentVisible():Boolean {
         return visible
     }
-
 
 
 }

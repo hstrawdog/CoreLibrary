@@ -58,7 +58,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
 
 //        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("ieDs4rDUAXVy21hoKB9t9tyBjY0BoVOmNlf2+w8gO68="))
-        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("Y3mx5lq7Y/UsZlCTBOJ+Ltujry8ZQipe3e/WeRxbLwM61h9WQh9Te2ShtsagN9T3CQADTyNK3fv7Bvrsc3dOBw=="))
+//        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("Y3mx5lq7Y/UsZlCTBOJ+Ltujry8ZQipe3e/WeRxbLwM61h9WQh9Te2ShtsagN9T3CQADTyNK3fv7Bvrsc3dOBw=="))
+        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("raNShXxfb59Mk7jw50v0XN2Ejf5128HJDawpr0sqv0o="))
 
 
 //        SocketIo().initIO()
