@@ -25,6 +25,7 @@ class FragmentUtils {
             is FragmentManager -> {
                 supportFragmentManager = any
             }
+
             is BaseActivity -> {
                 supportFragmentManager = any.supportFragmentManager
             }
@@ -145,11 +146,14 @@ class FragmentUtils {
      */
     fun removeFragment(fragment:Fragment) {
         supportFragmentManager?.beginTransaction()?.remove(fragment)?.commit()
-        fragmentBackStack?.remove(fragment)
-
+        supportFragmentManager?.executePendingTransactions()
+        fragmentBackStack.remove(fragment)
+            LogUtils.d(TAG.LIVE_TAG, "removeFragment  ${fragment}")
         if (fragment == currentFragment) {
             currentFragment = fragmentBackStack.lastOrNull()
         }
+        LogUtils.d(TAG.LIVE_TAG, "removeFragment  currentFragment  ${currentFragment}")
+
     }
 
     fun updateCurrentFragment() {
