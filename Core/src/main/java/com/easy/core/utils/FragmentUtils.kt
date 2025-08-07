@@ -106,7 +106,7 @@ class FragmentUtils {
             }
         }
         fragmentBackStack?.remove(currentFragment)
-        fragmentBackStack?.plus(fragment)
+        fragmentBackStack?.add(fragment)
         currentFragment = fragment
     }
 
@@ -119,7 +119,7 @@ class FragmentUtils {
         if (fragment.isAdded && fragment.isRemoving) {
             throw IllegalStateException("Fragment is already removing. Create a new instance instead.")
         }
-        fragmentBackStack?.plus(fragment)
+        fragmentBackStack?.add(fragment)
         supportFragmentManager?.beginTransaction()?.add(id, fragment)?.commit()
         currentFragment = fragment
     }
@@ -135,7 +135,7 @@ class FragmentUtils {
         if (!fragment.isAdded && supportFragmentManager != null) {
             supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
             currentFragment = fragment
-            fragmentBackStack?.plus(fragment)
+            fragmentBackStack?.add(fragment)
 
         }
     }
