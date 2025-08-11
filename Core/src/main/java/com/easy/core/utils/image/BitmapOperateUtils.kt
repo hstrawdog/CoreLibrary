@@ -84,7 +84,7 @@ object BitmapOperateUtils {
         val max = src.width.coerceAtLeast(src.height)
         if (max <= maxSize) return src
         val scale = maxSize.toFloat() / max
-        return scaleImage(src, scale, scale, recycle)
+        return zoomImage(src, scale, scale, recycle)
     }
 
     /**
@@ -100,7 +100,7 @@ object BitmapOperateUtils {
         val min = src.width.coerceAtMost(src.height)
         if (min <= minSize) return src
         val scale = minSize.toFloat() / min
-        return scaleImage(src, scale, scale, recycle)
+        return zoomImage(src, scale, scale, recycle)
     }
 
     /**
