@@ -73,7 +73,7 @@ class FragmentUtils {
                 supportFragmentManager!!.beginTransaction().hide(currentFragment!!).show(fragment).commit()
             }
         }
-        fragmentBackStack?.plus(fragment)
+        fragmentBackStack.add(fragment)
         currentFragment = fragment
     }
 
@@ -105,9 +105,15 @@ class FragmentUtils {
                 supportFragmentManager!!.beginTransaction().replace(id, fragment).commit()
             }
         }
-        fragmentBackStack?.remove(currentFragment)
-        fragmentBackStack?.add(fragment)
+        removeFragmentBackStack4Fragment(currentFragment)
+        fragmentBackStack.add(fragment)
         currentFragment = fragment
+    }
+
+    private fun removeFragmentBackStack4Fragment(currentFragment:Fragment?) {
+        if (currentFragment != null && fragmentBackStack.contains(currentFragment)) {
+            fragmentBackStack.remove(currentFragment)
+        }
     }
 
     /**
@@ -119,7 +125,7 @@ class FragmentUtils {
         if (fragment.isAdded && fragment.isRemoving) {
             throw IllegalStateException("Fragment is already removing. Create a new instance instead.")
         }
-        fragmentBackStack?.add(fragment)
+        fragmentBackStack.add(fragment)
         supportFragmentManager?.beginTransaction()?.add(id, fragment)?.commit()
         currentFragment = fragment
     }
@@ -135,8 +141,7 @@ class FragmentUtils {
         if (!fragment.isAdded && supportFragmentManager != null) {
             supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
             currentFragment = fragment
-            fragmentBackStack?.add(fragment)
-
+            fragmentBackStack.add(fragment)
         }
     }
 
@@ -147,8 +152,8 @@ class FragmentUtils {
     fun removeFragment(fragment:Fragment) {
         supportFragmentManager?.beginTransaction()?.remove(fragment)?.commit()
         supportFragmentManager?.executePendingTransactions()
-        fragmentBackStack.remove(fragment)
-            LogUtils.d(TAG.LIVE_TAG, "removeFragment  ${fragment}")
+        removeFragmentBackStack4Fragment(fragment)
+        LogUtils.d(TAG.LIVE_TAG, "removeFragment  ${fragment}")
         if (fragment == currentFragment) {
             currentFragment = fragmentBackStack.lastOrNull()
         }
