@@ -28,8 +28,7 @@ object SysPermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                       isNeedShowTip: Boolean = false, tipText: String = "文件读写权限说明：保存照片使用") {
+    fun requestStorage(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?, isNeedShowTip:Boolean = false, tipText:String = "文件读写权限说明：保存照片使用") {
         requestPermissions(fragmentManager, IPermissionsHas.storage, tipText, permissionsResult)
 
     }
@@ -40,8 +39,7 @@ object SysPermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestCamera(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                      isNeedShowTip: Boolean = false, tipText: String = "相机权限说明：拍照时使用") {
+    fun requestCamera(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?, isNeedShowTip:Boolean = false, tipText:String = "相机权限说明：拍照时使用") {
         requestPermissions(fragmentManager, IPermissionsHas.camera, tipText, permissionsResult)
 
 
@@ -53,8 +51,7 @@ object SysPermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestLocal(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                     isNeedShowTip: Boolean = false, tipText: String = "定位权限说明：当前位置信息使用") {
+    fun requestLocal(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?, isNeedShowTip:Boolean = false, tipText:String = "定位权限说明：当前位置信息使用") {
         requestPermissions(fragmentManager, IPermissionsHas.location, tipText, permissionsResult)
 
 
@@ -66,9 +63,10 @@ object SysPermissionsUtils {
      * @param permissionsResult PermissionsResult?
      */
     @JvmStatic
-    fun requestCameraAndStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                                isNeedShowTip: Boolean = false,
-                                tipText: String = "相机权限说明：拍照时使用\n" + "文件读写权限说明：保存照片使用") {
+    fun requestCameraAndStorage(fragmentManager:FragmentManager,
+                                permissionsResult:PermissionsResult?,
+                                isNeedShowTip:Boolean = false,
+                                tipText:String = "相机权限说明：拍照时使用\n" + "文件读写权限说明：保存照片使用") {
         requestPermissions(fragmentManager, IPermissionsHas.camera.plus(IPermissionsHas.storage), tipText, permissionsResult)
 
     }
@@ -79,9 +77,13 @@ object SysPermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?,
-                       tipText: String = "文件读写权限说明：保存照片使用") {
-        requestPermissions(fragmentManager, IPermissionsHas.storage, tipText, permissionsResult)
+    fun requestStorage(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?, tipText:String = "文件读写权限说明：保存照片使用") {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(fragmentManager, IPermissionsHas.readMediaImages, tipText, permissionsResult)
+        } else {
+            requestPermissions(fragmentManager, IPermissionsHas.storage, tipText, permissionsResult)
+        }
 
     }
 
@@ -91,7 +93,7 @@ object SysPermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestCamera(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?) {
+    fun requestCamera(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?) {
 
         requestPermissions(fragmentManager, IPermissionsHas.camera, "相机权限说明：拍照时使用", permissionsResult)
 
@@ -103,7 +105,7 @@ object SysPermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestLocal(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?) {
+    fun requestLocal(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?) {
 
         requestPermissions(fragmentManager, IPermissionsHas.localAround, "定位权限说明：当前位置信息使用", permissionsResult)
 
@@ -115,7 +117,7 @@ object SysPermissionsUtils {
      * @param permissionsResult
      */
     @JvmStatic
-    fun requestLocation(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?) {
+    fun requestLocation(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?) {
         FragmentProxy().requestPermissions(fragmentManager, IPermissionsHas.location, permissionsResult)
     }
 
@@ -124,10 +126,9 @@ object SysPermissionsUtils {
      * @param permissionsResult PermissionsResult
      */
     @JvmStatic
-    fun requestBluetooth(fragmentManager: FragmentManager, permissionsResult: PermissionsResult) {
+    fun requestBluetooth(fragmentManager:FragmentManager, permissionsResult:PermissionsResult) {
         // 蓝牙权限 需要定位权限  定位权限需要 读写权限
-        FragmentProxy().requestPermissions(fragmentManager, IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
-            .plus(IPermissionsHas.storage), permissionsResult)
+        FragmentProxy().requestPermissions(fragmentManager, IPermissionsHas.bluetooth.plus(IPermissionsHas.location).plus(IPermissionsHas.storage), permissionsResult)
     }
 
     /**
@@ -138,16 +139,15 @@ object SysPermissionsUtils {
      * @param permissionsResult PermissionsResult?
      */
     @JvmStatic
-    fun requestBluetooth(fragmentManager: FragmentManager, permissionsResult: PermissionsResult, tipText: String = "") {
+    fun requestBluetooth(fragmentManager:FragmentManager, permissionsResult:PermissionsResult, tipText:String = "") {
         // 蓝牙权限 需要定位权限  定位权限需要 读写权限
-        var permissions = IPermissionsHas.bluetooth.plus(IPermissionsHas.location)
-            .plus(IPermissionsHas.storage)
+        var permissions = IPermissionsHas.bluetooth.plus(IPermissionsHas.location).plus(IPermissionsHas.storage)
         requestPermissions(fragmentManager, permissions, tipText, permissionsResult)
 
     }
 
     @JvmStatic
-    fun requestCameraAndStorage(fragmentManager: FragmentManager, permissionsResult: PermissionsResult?) {
+    fun requestCameraAndStorage(fragmentManager:FragmentManager, permissionsResult:PermissionsResult?) {
         requestPermissions(fragmentManager, IPermissionsHas.cameraAndStorage, "相机权限说明：拍照时使用\n" + "文件读写权限说明：保存照片使用", permissionsResult)
 
     }
@@ -157,8 +157,7 @@ object SysPermissionsUtils {
      * @param permissions Array<out Array<String>>
      * @param permissionsResult PermissionsResult
      */
-    fun requestPermissions(fragmentManager: FragmentManager, vararg permissions: Array<String>,
-                           permissionsResult: PermissionsResult) {
+    fun requestPermissions(fragmentManager:FragmentManager, vararg permissions:Array<String>, permissionsResult:PermissionsResult) {
         var permissionArray = emptyArray<String>()
         for (permission in permissions) {
             permissionArray = permissionArray.plus(permission)
@@ -166,8 +165,7 @@ object SysPermissionsUtils {
         requestPermissions(fragmentManager, permissionArray, "", false, permissionsResult)
     }
 
-    fun requestPermissions(fragmentManager: FragmentManager, vararg permissions: Array<String>, tipText: String,
-                           permissionsResult: PermissionsResult) {
+    fun requestPermissions(fragmentManager:FragmentManager, vararg permissions:Array<String>, tipText:String, permissionsResult:PermissionsResult) {
         var permissionArray = emptyArray<String>()
         for (permission in permissions) {
             permissionArray = permissionArray.plus(permission)
@@ -175,8 +173,7 @@ object SysPermissionsUtils {
         requestPermissions(fragmentManager, permissionArray, tipText, tipText.isNotNull(), permissionsResult)
     }
 
-    fun requestPermissions(fragmentManager: FragmentManager, permissions: Array<String>, tipText: String,
-                           permissionsResult: PermissionsResult?) {
+    fun requestPermissions(fragmentManager:FragmentManager, permissions:Array<String>, tipText:String, permissionsResult:PermissionsResult?) {
         requestPermissions(fragmentManager, permissions, tipText, tipText.isNotNull(), permissionsResult)
     }
 
@@ -185,8 +182,7 @@ object SysPermissionsUtils {
      * @param tipText String  华为  荣耀提示
      * @param permissionsResult PermissionsResult?
      */
-    fun requestPermissions(fragmentManager: FragmentManager, plus: Array<String>, tipText: String,
-                           isNeedShowTip: Boolean = false, permissionsResult: PermissionsResult?) {
+    fun requestPermissions(fragmentManager:FragmentManager, plus:Array<String>, tipText:String, isNeedShowTip:Boolean = false, permissionsResult:PermissionsResult?) {
         if (BaseSystemUtil.isPermissionPromptDevice() && isNeedShowTip) {
             if (!IPermissionActions.hasPermission(CoreConfig.applicationContext, *plus)) {
                 CoreConfig.get().currActivity?.let {
@@ -196,8 +192,7 @@ object SysPermissionsUtils {
                         call = {
                             FragmentProxy().requestPermissions(fragmentManager, plus, permissionsResult)
                         }
-                    }
-                        .show(supportFragmentManager)
+                    }.show(supportFragmentManager)
                 }
             } else {
                 permissionsResult?.onPermissionsResult(true)

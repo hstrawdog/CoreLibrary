@@ -73,7 +73,7 @@ interface IPermissionsHas {
      *
      * 链接：https://juejin.im/post/5beaf27fe51d45332a4568e9
      */
-    fun hasPermission(context: Context?, vararg permissions: String): Boolean
+    fun hasPermission(context:Context?, vararg permissions:String):Boolean
 
     /**
      * 用户日志权限
@@ -81,7 +81,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasCalendar(context: Context?): Boolean
+    fun hasCalendar(context:Context?):Boolean
 
     /**
      * 摄像头权限
@@ -89,7 +89,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasCamera(context: Context?): Boolean
+    fun hasCamera(context:Context?):Boolean
 
     /**
      * 联系人
@@ -98,7 +98,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasContacts(context: Context?): Boolean
+    fun hasContacts(context:Context?):Boolean
 
     /**
      * 位置权限
@@ -107,7 +107,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasLocation(context: Context?): Boolean
+    fun hasLocation(context:Context?):Boolean
 
     /**
      * 手机麦克风
@@ -115,7 +115,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasMicrophone(context: Context?): Boolean
+    fun hasMicrophone(context:Context?):Boolean
 
     /**
      * 手机信息 拨打电话
@@ -123,7 +123,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasPhone(context: Context?): Boolean
+    fun hasPhone(context:Context?):Boolean
 
     /**
      * 传感器
@@ -131,7 +131,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasSensors(context: Context?): Boolean
+    fun hasSensors(context:Context?):Boolean
 
     /**
      * 短信 彩信
@@ -139,7 +139,7 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasSMS(context: Context?): Boolean
+    fun hasSMS(context:Context?):Boolean
 
     /**
      * 读写权限
@@ -147,22 +147,22 @@ interface IPermissionsHas {
      * @param context
      * @return
      */
-    fun hasStorage(context: Context?): Boolean
+    fun hasStorage(context:Context?):Boolean
 
     companion object {
-        val calendar: Array<String>
+        val calendar:Array<String>
             get() = arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
 
         /**
          * @return
          */
-        val camera: Array<String>
+        val camera:Array<String>
             get() = arrayOf(Manifest.permission.CAMERA)
 
         //(允许应用访问联系人通讯录信息)
         //(写入联系人，但不可读取)
         //(访问GMail账户列表)
-        val contacts: Array<String>
+        val contacts:Array<String>
             get() = arrayOf( //(允许应用访问联系人通讯录信息)
                 Manifest.permission.READ_CONTACTS,  //(写入联系人，但不可读取)
                 Manifest.permission.WRITE_CONTACTS,  //(访问GMail账户列表)
@@ -178,17 +178,17 @@ interface IPermissionsHas {
          *    参考 https://lbs.amap.com/api/android-location-sdk/guide/utilities/permision_10
          * @return
          */
-        val location: Array<String>
+        val location:Array<String>
             get() = arrayOf(
                 //(通过WiFi或移动基站的方式获取用户错略的经纬度信息，定位精度大概误差在30~1500米)
                 Manifest.permission.ACCESS_COARSE_LOCATION,  //(通过GPS芯片接收卫星的定位信息，定位精度达10米以内)
                 Manifest.permission.ACCESS_FINE_LOCATION,  // 允许程序访问额外的定位提供者指令
                 Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
 //                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            )
+                           )
 
         //(录制声音通过手机或耳机的麦克)
-        val microphone: Array<String>
+        val microphone:Array<String>
             get() = arrayOf( //(录制声音通过手机或耳机的麦克)
                 Manifest.permission.RECORD_AUDIO)
 
@@ -199,7 +199,7 @@ interface IPermissionsHas {
         //(允许应用程序添加语音邮件进入系统)
         //(允许程序使用SIP视频服务)
         //(允许程序监视，修改或放弃播出电话)
-        val phone: Array<String>
+        val phone:Array<String>
             get() = arrayOf( //(访问电话状态)
                 Manifest.permission.READ_PHONE_STATE,  //(允许程序从非系统拨号器里输入电话号码)
                 Manifest.permission.CALL_PHONE,  //(允许应用程序读取用户的通话记录)
@@ -210,7 +210,7 @@ interface IPermissionsHas {
                 Manifest.permission.PROCESS_OUTGOING_CALLS)
 
         //(允许从传感器，用户使用来衡量什么是他/她的身体内发生的事情，如心脏速率访问数据的应用程序)
-        val sensors: Array<String>
+        val sensors:Array<String>
             get() = arrayOf( //(允许从传感器，用户使用来衡量什么是他/她的身体内发生的事情，如心脏速率访问数据的应用程序)
                 Manifest.permission.BODY_SENSORS)
 
@@ -219,7 +219,7 @@ interface IPermissionsHas {
         //(读取短信内容)
         //(接收WAP PUSH信息)
         //(接收彩信)
-        val sMS: Array<String>
+        val sMS:Array<String>
             get() = arrayOf( //(发送短信)
                 Manifest.permission.SEND_SMS,  //(接收短信)
                 Manifest.permission.RECEIVE_SMS,  //(读取短信内容)
@@ -231,20 +231,24 @@ interface IPermissionsHas {
         /**
          * @return
          */
-        val storage: Array<String>
+        val storage:Array<String>
             get() = arrayOf( //(允许程序读取外部存储，如SD卡读文件)
                 Manifest.permission.READ_EXTERNAL_STORAGE,  //(允许程序写入外部存储，如SD卡上写文件)
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
+        val readMediaImages:Array<String> = arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
+        val readMediaVideo:Array<String> = arrayOf(Manifest.permission.READ_MEDIA_VIDEO)
+        val readMediaAudio:Array<String> = arrayOf(Manifest.permission.READ_MEDIA_AUDIO)
+
+
         /**
          *  蓝牙
          */
-        val bluetooth: Array<String>
+        val bluetooth:Array<String>
             get() =
 //
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    arrayOf( Manifest.permission.BLUETOOTH_CONNECT,
-                        Manifest.permission.BLUETOOTH_SCAN)
+                    arrayOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN)
                 } else {
                     arrayOf(Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH)
                 }
@@ -252,14 +256,18 @@ interface IPermissionsHas {
         /**
          * 高德定位权限
          */
-        val localAround: Array<String>
-            get() = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
+        val localAround:Array<String>
+            get() = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE)
 
 
         /**
          * 摄像头和读写存储权限
          */
-        val cameraAndStorage: Array<String>
+        val cameraAndStorage:Array<String>
             get() = arrayOf(Manifest.permission.CAMERA,
                 //(允许程序读取外部存储，如SD卡读文件)
                 Manifest.permission.READ_EXTERNAL_STORAGE,  //(允许程序写入外部存储，如SD卡上写文件)

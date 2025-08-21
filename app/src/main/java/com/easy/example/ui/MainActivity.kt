@@ -14,7 +14,6 @@ import com.easy.core.utils.log.LogUtils
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity2
-import com.easy.example.soctetio.SocketIo
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity2
 import com.easy.example.ui.adaptation.permission.PermissionActivity
@@ -31,6 +30,8 @@ import com.easy.example.ui.system.info.BaseInfoActivity
 import com.easy.example.ui.system.info.NetInfoActivity
 import com.easy.example.ui.transitions.animation.TransitionsAnimationActivity2
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.util.UUID
 
 
 /**
@@ -50,6 +51,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //    }
 
     override var isLoadMore:Boolean = false
+    fun getParamSignature(str:String):String {
+
+        return EncryptUtil.md5(str + UUID.randomUUID().toString()+"_!@#$%^_"+ "4bd0eaad5f434b199a9f618231401838")
+    }
+
 
     @SuppressLint("Range")
     override fun initData() {
@@ -61,6 +67,8 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("Y3mx5lq7Y/UsZlCTBOJ+Ltujry8ZQipe3e/WeRxbLwM61h9WQh9Te2ShtsagN9T3CQADTyNK3fv7Bvrsc3dOBw=="))
         LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("raNShXxfb59Mk7jw50v0XN2Ejf5128HJDawpr0sqv0o="))
 
+        val string:String ="{\"userId\":\"4bd0eaad5f434b199a9f618231401838\",\"ids\":{\"groupId\":\"68786b0a92802d75fb77ed9a\"},\"isPhone\":true,\"ClientId\":\"{\\\"type\\\":5,\\\"ClientId\\\":\\\"68786b0a92802d75fb77ed9a\\\"}\"}"
+        val paramSignature:String = getParamSignature(string)
 
 //        SocketIo().initIO()
 //            open(BannerActivity::class.java)

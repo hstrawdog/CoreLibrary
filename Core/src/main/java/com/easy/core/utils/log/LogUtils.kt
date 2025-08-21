@@ -231,7 +231,7 @@ object LogUtils {
         val strLength: Int = log.length
         var start = 0
         var end: Int = LOG_MAX_LENGTH
-        for (i in 0..99) {
+        for (i in 0..1999) {
             //剩下的文本还是大于规定长度则继续重复截取并输出
             if (strLength > end) {
                 printLog(level, str + i, log.substring(start, end))

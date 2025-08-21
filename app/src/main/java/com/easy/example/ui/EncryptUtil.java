@@ -1,8 +1,12 @@
 package com.easy.example.ui;
+import android.text.TextUtils;
 import android.util.Base64;
 import com.easy.core.utils.log.LogUtils;
+import com.google.common.primitives.UnsignedBytes;
+
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -80,6 +84,25 @@ public class EncryptUtil {
     }
 
 
-
+    public static String md5(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return "";
+        }
+        LogUtils.i(TAG, "md5: " + str);
+        try {
+            String str2 = "";
+            for (byte b : MessageDigest.getInstance("MD5").digest(str.getBytes())) {
+                String hexString = Integer.toHexString(b & UnsignedBytes.MAX_VALUE);
+                if (hexString.length() == 1) {
+                    hexString = "0" + hexString;
+                }
+                str2 = str2 + hexString;
+            }
+            return str2;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 
 }

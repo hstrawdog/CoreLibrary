@@ -347,12 +347,14 @@ object FileUtils {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
-    fun deleteFile(context:Context, fileUri:Uri) {
+    fun deleteFile(context:Context, fileUri:Uri):Int {
+        var  count =0
         try {
-            context.contentResolver?.delete(fileUri, null, null)
+            count=context.contentResolver?.delete(fileUri, null, null)?:0
         } catch (e:Exception) {
             e.printStackTrace()
         }
+        return count
     }
 
     /**
