@@ -133,20 +133,6 @@ class TextSpannableBuilder {
      * 添加文本
      *
      * @param text
-     * @param context
-     * @param colorId
-     * @param listener
-     * @return
-     */
-    fun addTextPart(text: CharSequence, context: Context?, colorId: Int,
-                    listener: OnClickListener?): TextSpannableBuilder {
-        return addTextPart(text, ContextCompat.getColor(context!!, colorId), listener)
-    }
-
-    /**
-     * 添加文本
-     *
-     * @param text
      * @param color
      * @param listener
      * @return

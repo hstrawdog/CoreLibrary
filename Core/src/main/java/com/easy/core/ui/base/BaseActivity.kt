@@ -16,6 +16,7 @@ import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
 import com.kunminx.architecture.domain.message.MutableResult
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @Author : huangqiqiang
@@ -33,14 +34,18 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     /**
      *  回调
      */
-    var activityResult:ActivityResultCallback<ActivityResult>? = null
-
+    internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
+    internal var requestCodeGenerator = AtomicInteger(2000) // 避免和 Activity 重复
     /**
      *  页面跳转
      */
-    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        activityResult?.onActivityResult( result)
-    }
+    internal val registerForActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val requestCode = result.data?.getIntExtra("__request_code__", -1) ?: -1
+            if (requestCode != -1) {
+                activityResultMap.remove(requestCode)?.invoke(result)
+            }
+        }
 
     /**
      * 当前对象

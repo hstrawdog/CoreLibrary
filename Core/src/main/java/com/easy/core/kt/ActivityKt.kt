@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.easy.core.ui.base.BaseActivity
 
 /**
@@ -12,12 +13,13 @@ import com.easy.core.ui.base.BaseActivity
  * @param cls Class<*>
  * @param result ActivityResultCallback<ActivityResult>
  */
-fun BaseActivity.open(cls:Class<*>, bundle:Bundle = Bundle(), result:ActivityResultCallback<ActivityResult> = ActivityResultCallback<ActivityResult> { }) {
+fun BaseActivity.open(cls:Class<*>, bundle:Bundle = Bundle(), callback:(ActivityResult) -> Unit = {}) {
+    val requestCode = requestCodeGenerator.incrementAndGet()
+    activityResultMap[requestCode] = callback
     registerForActivity.launch(Intent(this, cls).apply {
         putExtras(bundle)
+        putExtra("__request_code__", requestCode)
     })
-    activityResult =result
-
 }
 
 ///**
