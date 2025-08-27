@@ -1,5 +1,6 @@
 package com.easy.core.kt
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
@@ -21,6 +22,16 @@ fun BaseActivity.open(cls:Class<*>, bundle:Bundle = Bundle(), callback:(Activity
         putExtra("__request_code__", requestCode)
     })
 }
+
+fun BaseActivity.setResultOk(data: Bundle = Bundle()) {
+    val intent = Intent().apply {
+        putExtras(data)
+        putExtra("__request_code__", intent?.getIntExtra("__request_code__", -1) ?: -1)
+    }
+    setResult(Activity.RESULT_OK, intent)
+    finish()
+}
+
 
 ///**
 // *  拍照并预览

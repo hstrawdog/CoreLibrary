@@ -19,6 +19,7 @@ import com.easy.core.utils.ResourcesUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
 import com.kunminx.architecture.domain.message.MutableResult
+import java.util.concurrent.atomic.AtomicInteger
 
 interface OnFragmentVisibilityChangedListener {
     fun onFragmentVisibilityChanged(visible:Boolean)
@@ -38,15 +39,22 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      *   MutableLiveData 去传递结果
      */
-    var activityResult:ActivityResultCallback<ActivityResult>? = null
-
+    internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
+    internal var requestCodeGenerator = AtomicInteger(2000)
 
     /**
      * 预先 注册
      */
-    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        activityResult?.onActivityResult(result)
-    }
+
+
+    internal val registerForActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val requestCode = result.data?.getIntExtra("__request_code__", -1) ?: -1
+            if (requestCode != -1) {
+                activityResultMap.remove(requestCode)?.invoke(result)
+            }
+        }
+
 
 
     /**
