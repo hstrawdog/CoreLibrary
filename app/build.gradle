@@ -55,7 +55,7 @@ android {
         jvmTarget = '1.8'
     }
     namespace 'com.easy.example'
-    compileSdk 31
+    compileSdk 33
     defaultConfig {
         applicationId "com.easy.example"
         minSdkVersion 23
