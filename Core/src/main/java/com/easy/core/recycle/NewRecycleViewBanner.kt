@@ -88,7 +88,10 @@ class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: At
     private val playTask: Runnable = object : Runnable {
         override fun run() {
             recyclerView!!.smoothScrollToPosition(++currentIndex)
-            switchIndicator(currentIndex % (mAdapter?.items?.size ?: 0))
+            val itemCount = mAdapter?.items?.size ?: 0
+            if (itemCount > 0) {
+                switchIndicator(currentIndex % itemCount)
+            }
             mHandlers.postDelayed(this, mInterval.toLong())
         }
     }
@@ -119,7 +122,10 @@ class NewRecycleViewBanner @JvmOverloads constructor(context: Context, attrs: At
                         currentIndex = last
                         if (isTouched) {
                             isTouched = false
-                            switchIndicator(currentIndex % (mAdapter?.items?.size ?: 0))
+                            val itemCount = mAdapter?.items?.size ?: 0
+                            if (itemCount > 0) {
+                                switchIndicator(currentIndex % itemCount)
+                            }
                         }
                     }
                 }
