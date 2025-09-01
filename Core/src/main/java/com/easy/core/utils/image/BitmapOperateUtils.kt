@@ -224,7 +224,6 @@ object BitmapOperateUtils {
     }
 
 
-
     /**
      * 镜像 Bitmap（水平或垂直方向）
      * @param src 原始 Bitmap
@@ -248,7 +247,6 @@ object BitmapOperateUtils {
         if (recycle && !src.isRecycled && result != src) src.recycle()
         return result
     }
-
 
     /**
      * 倾斜 Bitmap
