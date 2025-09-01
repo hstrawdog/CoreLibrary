@@ -1,6 +1,7 @@
 package com.easy.core.utils.image
 
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Matrix
 import android.util.Log
 import com.easy.core.utils.image.BitmapUtils.isEmptyBitmap
@@ -70,6 +71,88 @@ object BitmapOperateUtils {
         val scaleHeight = newHeight / src.height.toFloat()
         return zoomImage(src, scaleWidth, scaleHeight, recycle)
     }
+
+    /**
+     * 居中裁剪到指定宽高（类似 ImageView.ScaleType.CENTER_CROP）
+     * @param src 原始 Bitmap
+     * @param newWidth 目标宽度
+     * @param newHeight 目标高度
+     * @param recycle 是否回收原图
+     * @return 裁剪后的 Bitmap
+     */
+    @JvmStatic
+    fun centerCrop(src: Bitmap?, newWidth: Int, newHeight: Int, recycle: Boolean = false): Bitmap? {
+        if (src == null || isEmptyBitmap(src)) return null
+        if (newWidth == src.width && newHeight == src.height) return src
+
+        val srcWidth = src.width
+        val srcHeight = src.height
+
+        // 按比例缩放，取较大值保证能覆盖目标区域
+        val scale = maxOf(
+            newWidth.toFloat() / srcWidth,
+            newHeight.toFloat() / srcHeight
+                         )
+
+        val scaledWidth = (srcWidth * scale).toInt()
+        val scaledHeight = (srcHeight * scale).toInt()
+
+        val scaledBitmap = Bitmap.createScaledBitmap(src, scaledWidth, scaledHeight, true)
+
+        val x = (scaledWidth - newWidth) / 2
+        val y = (scaledHeight - newHeight) / 2
+
+        val result = Bitmap.createBitmap(scaledBitmap, x, y, newWidth, newHeight)
+
+        if (recycle && !src.isRecycled) src.recycle()
+        if (recycle && scaledBitmap != src && !scaledBitmap.isRecycled) scaledBitmap.recycle()
+
+        return result
+    }
+
+    /**
+     * 居中缩放到指定宽高（类似 ImageView.ScaleType.FIT_CENTER）
+     * @param src 原始 Bitmap
+     * @param newWidth 目标宽度
+     * @param newHeight 目标高度
+     * @param recycle 是否回收原图
+     * @return 缩放后的 Bitmap（可能有留白）
+     */
+    @JvmStatic
+    fun fitCenter(src: Bitmap?, newWidth: Int, newHeight: Int, recycle: Boolean = false): Bitmap? {
+        if (src == null || isEmptyBitmap(src)) return null
+        if (newWidth == src.width && newHeight == src.height) return src
+
+        val srcWidth = src.width
+        val srcHeight = src.height
+
+        // 按比例缩放，取较小值保证能完整显示在目标区域
+        val scale = minOf(
+            newWidth.toFloat() / srcWidth,
+            newHeight.toFloat() / srcHeight
+                         )
+
+        val scaledWidth = (srcWidth * scale).toInt()
+        val scaledHeight = (srcHeight * scale).toInt()
+
+        val scaledBitmap = Bitmap.createScaledBitmap(src, scaledWidth, scaledHeight, true)
+
+        // 创建一个目标大小的空白图（透明背景）
+        val result = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(result)
+
+        // 将缩放后的图居中绘制
+        val left = (newWidth - scaledWidth) / 2f
+        val top = (newHeight - scaledHeight) / 2f
+        canvas.drawBitmap(scaledBitmap, left, top, null)
+
+        if (recycle && !src.isRecycled) src.recycle()
+        if (recycle && scaledBitmap != src && !scaledBitmap.isRecycled) scaledBitmap.recycle()
+
+        return result
+    }
+
+
 
     /**
      * 缩放 Bitmap（以最大边为基准等比缩放）
