@@ -1,5 +1,6 @@
 jdk:
   - openjdk17
 
-install:
-  - ./gradlew :Core:assembleRelease
+build:
+  commands:
+    - ./gradlew :Core:assembleRelease
