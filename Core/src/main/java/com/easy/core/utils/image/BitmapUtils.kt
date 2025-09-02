@@ -133,7 +133,7 @@ object BitmapUtils {
     }
 
     @Synchronized
-    fun getBase64(path:String?):String {
+    fun getBase64(path:String?,format:Bitmap.CompressFormat = Bitmap.CompressFormat.PNG):String {
         var bitmap:Bitmap? = null
         //字节数组输出流
         val baos:ByteArrayOutputStream? = null
@@ -142,7 +142,7 @@ object BitmapUtils {
         try {
             bitmap = BitmapFactory.decodeFile(path, BitmapFactory.Options())
             var newBitmap = BitmapOperateUtils.compressByQuality(bitmap, 800)
-            val byteArray = bitmap2Bytes(newBitmap!!, Bitmap.CompressFormat.JPEG)
+            val byteArray = bitmap2Bytes(newBitmap!!, format)
             // , UTF8
             base64 = String(Base64.encode(byteArray, Base64.DEFAULT))
         } catch (e:IOException) {
