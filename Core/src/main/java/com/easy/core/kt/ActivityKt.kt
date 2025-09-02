@@ -29,7 +29,6 @@ fun BaseActivity.setResultOk(data: Bundle = Bundle()) {
         putExtra("__request_code__", intent?.getIntExtra("__request_code__", -1) ?: -1)
     }
     setResult(Activity.RESULT_OK, intent)
-    finish()
 }
 
 

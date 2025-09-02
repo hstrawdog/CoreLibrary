@@ -33,5 +33,4 @@ fun BaseFragment.setResultOk(data:Bundle = Bundle()) {
         putExtra("__request_code__", code)
     }
     activity?.setResult(AppCompatActivity.RESULT_OK, intent)
-    activity?.finish()
 }
