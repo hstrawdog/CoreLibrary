@@ -4,15 +4,15 @@ pluginManagement 脚本块中的 repositories 配置 , 对应之前的 buildscri
 */
 pluginManagement {
     repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo1.maven.org/maven2/' }
+        gradlePluginPortal()
         // 添加阿里云 maven 地址
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
         // 阿里云的 Gradle 插件镜像（Kotlin 插件等）
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        google()
-        mavenCentral()
-        maven { url 'https://repo1.maven.org/maven2/' }
-        gradlePluginPortal()
 
     }
 
@@ -31,15 +31,19 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
 //    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        // 添加阿里云 maven 地址
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        // 阿里云的 Gradle 插件镜像（Kotlin 插件等）
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         google()
         mavenCentral() // Warning: this repository is going to shut down soon
         maven { url "https://jitpack.io" }
         gradlePluginPortal()
+        // 添加阿里云 maven 地址
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        // 阿里云的 Gradle 插件镜像（Kotlin 插件等）
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }   // 添加阿里云 maven 地址
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        // 阿里云的 Gradle 插件镜像（Kotlin 插件等）
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
 
     }
 }
