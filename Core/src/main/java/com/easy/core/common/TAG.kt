@@ -9,5 +9,6 @@ package com.easy.core.common
  */
 object TAG {
     const val  LIVE_TAG = "liveTag"
+    const val  TAG_REQUEST = "requestTag"
 
 }

@@ -7,11 +7,14 @@ import android.content.pm.ApplicationInfo
 import com.google.gson.InstanceCreator
 import com.easy.core.R
 import com.easy.core.annotation.ToolBarMode
+import com.easy.core.common.TAG
 import com.easy.core.toolbar.DefToolBar
 import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.ScreenUtils
 import com.easy.core.utils.log.LogUtils
+import com.google.gson.JsonObject
 import okhttp3.Interceptor
+import okhttp3.ResponseBody.Companion.toResponseBody
 import java.lang.reflect.Type
 
 /**
@@ -192,25 +195,77 @@ class CoreConfig private constructor() {
 
 
         // 创建一个 拦截器 打印请求日志
-        interceptorList.add(Interceptor { chain ->
+        CoreConfig.get().interceptorList.add(Interceptor { chain ->
             val request = chain.request()
-            LogUtils.e("-------------自定义拦截请求 start ----------------")
-            // 打印请求信息
-            LogUtils.e("Request URL: ${request.url}")
-            LogUtils.e("Request Headers: ${request.headers}")
-            LogUtils.e("Request Method: ${request.method}")
+            LogUtils.dMark(TAG.TAG_REQUEST, "-------------自定义拦截请求 start ----------------")
 
-            // 打印请求体参数
-            request.body?.let {
-                val buffer = okio.Buffer()
-                it.writeTo(buffer)
-                LogUtils.e("Request Body: ${buffer.readUtf8()}")
+            // 打印 URL 和方法
+            val url = request.url
+            LogUtils.dMark(TAG.TAG_REQUEST, "Request URL: $url")
+            LogUtils.dMark(TAG.TAG_REQUEST, "Request Method: ${request.method.uppercase()}")
+
+            // 打印查询参数
+            if (url.querySize > 0) {
+                val json = JsonObject()
+                for (i in 0 until url.querySize) {
+                    val name = url.queryParameterName(i)
+                    val value = url.queryParameterValue(i)
+                    json.addProperty(name, value)
+                }
+                LogUtils.dMark(TAG.TAG_REQUEST, "Query Params: ${json.toString()}")
             }
-            LogUtils.e("-------------自定义拦截请求 end----------------")
 
-            // 继续发送请求
-            chain.proceed(request)
+            // 打印请求体
+            request.body?.let { body ->
+                val buffer = okio.Buffer()
+                body.writeTo(buffer)
+                val charset = body.contentType()?.charset(Charsets.UTF_8) ?: Charsets.UTF_8
+                LogUtils.dMark(TAG.TAG_REQUEST, "Request Body: ${buffer.readString(charset)}")
+            }
+
+            // 打印请求头
+            LogUtils.dMark(TAG.TAG_REQUEST, "Request Headers: ${request.headers}")
+
+            // 记录开始时间
+            val startNs = System.nanoTime()
+
+            // 发送请求
+            val response = chain.proceed(request)
+
+            // 计算耗时
+            val tookMs = (System.nanoTime() - startNs) / 1_000_000
+            LogUtils.dMark(TAG.TAG_REQUEST, "Request took: ${tookMs}ms")
+
+            // 响应体处理
+            val responseBody = response.body
+            val contentType = responseBody?.contentType()
+            val mediaType = contentType?.type ?: ""
+            val subtype = contentType?.subtype ?: ""
+
+            val isTextResponse = mediaType == "text" || subtype.contains("json") || subtype.contains("xml") || subtype.contains("html")
+            LogUtils.dMark(TAG.TAG_REQUEST, "------------- 响应内容  ----------------")
+
+            val content = if (responseBody != null && isTextResponse) {
+                responseBody.string()
+            } else {
+                "非文本响应，内容忽略"
+            }
+
+            LogUtils.d("tagRequest", "Response Code: ${response.code}")
+            LogUtils.dMark(TAG.TAG_REQUEST, "Response Body: $content")
+
+            LogUtils.dMark(TAG.TAG_REQUEST, "-------------自定义拦截请求 end ----------------")
+
+            // 重新构建响应体返回上层
+            val newResponseBody = if (isTextResponse) {
+                content.toByteArray().toResponseBody(contentType)
+            } else {
+                responseBody
+            }
+
+            response.newBuilder().body(newResponseBody).build()
         })
+
     }
 
     fun isInitialized():Boolean {
