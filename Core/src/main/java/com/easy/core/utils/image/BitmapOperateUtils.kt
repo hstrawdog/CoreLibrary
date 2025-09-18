@@ -111,6 +111,50 @@ object BitmapOperateUtils {
     }
 
     /**
+     * 生成等比例缩放并居中图片
+     * 小图会放大，大图会缩小，不裁剪
+     * @param src 原始 Bitmap
+     * @param targetWidth 目标宽度
+     * @param targetHeight 目标高度
+     * @param backgroundColor 背景颜色，默认透明
+     * @return 缩放并居中后的 Bitmap
+     */
+    fun createFitCenterBitmap(
+        src: Bitmap,
+        targetWidth: Int,
+        targetHeight: Int,
+        backgroundColor: Int = android.graphics.Color.TRANSPARENT
+                             ): Bitmap {
+        // 计算缩放比例，保持宽高比
+        val scale = minOf(
+            targetWidth.toFloat() / src.width,
+            targetHeight.toFloat() / src.height
+                         )
+
+        val newWidth = (src.width * scale).toInt()
+        val newHeight = (src.height * scale).toInt()
+
+        // 缩放原图
+        val scaledBitmap = Bitmap.createScaledBitmap(src, newWidth, newHeight, true)
+
+        // 创建目标画布
+        val result = Bitmap.createBitmap(targetWidth, targetHeight, Bitmap.Config.ARGB_8888)
+        val canvas = android.graphics.Canvas(result)
+
+        // 填充背景
+        canvas.drawColor(backgroundColor)
+
+        // 计算居中位置
+        val left = (targetWidth - newWidth) / 2f
+        val top = (targetHeight - newHeight) / 2f
+
+        // 绘制缩放后的图片
+        canvas.drawBitmap(scaledBitmap, left, top, null)
+        return result
+    }
+
+
+    /**
      * 居中缩放到指定宽高（类似 ImageView.ScaleType.FIT_CENTER）
      * @param src 原始 Bitmap
      * @param newWidth 目标宽度

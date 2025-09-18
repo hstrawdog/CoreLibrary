@@ -25,16 +25,19 @@ import java.util.Date
  */
 object LogUtils {
 
-    //规定每段显示的长度
-    private const val LOG_MAX_LENGTH = 2000
+
+    /**
+     * Android Logcat 限制大约 4076 bytes，不是字符数。
+     */
+    private const val LOG_MAX_LENGTH = 4000
 
     /**
      * Log 输出标签
      */
-    var TAG ="com.easy.core"
+    var TAG = "com.easy.core"
 
     @JvmStatic
-    fun v(any: Any?) {
+    fun v(any:Any?) {
         if (CoreConfig.get().isDebug) {
             if (any == null) {
                 v("标签" + TAG + "的打印内容为空！")
@@ -50,7 +53,7 @@ object LogUtils {
      * @param object
      */
     @JvmStatic
-    fun d(any: Any?) {
+    fun d(any:Any?) {
         d(TAG, any)
     }
 
@@ -61,7 +64,7 @@ object LogUtils {
      * @param object
      */
     @JvmStatic
-    fun d(tag: String, any: Any?) {
+    fun d(tag:String, any:Any?) {
         if (CoreConfig.get().isDebug) {
             if (any == null) {
                 d("标签" + tag + "的打印内容为空！")
@@ -75,7 +78,7 @@ object LogUtils {
      * E 类型日志
      */
     @JvmStatic
-    fun dInfo(any: Any?) {
+    fun dInfo(any:Any?) {
         var tag = "Info"
         if (CoreConfig.get().isDebug) {
             doLog(tag, "w", "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
@@ -89,10 +92,9 @@ object LogUtils {
             if (stackTrace.size > 1) {
                 for (index in 1 until Math.min(10, stackTrace.size)) {
                     val targetElement = stackTrace[index]
-                    val head =
-                        "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
-                            getFileName(targetElement)
-                        }:${targetElement.getLineNumber()})            "
+                    val head = "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
+                        getFileName(targetElement)
+                    }:${targetElement.getLineNumber()})            "
                     doLog("w", tag, "|      $head     ")
                 }
             }
@@ -106,11 +108,11 @@ object LogUtils {
      * @param tag String
      * @param any Any?
      */
-    fun dMark(tag:String="Mark", any:Any?){
+    fun dMark(tag:String = "Mark", any:Any?) {
         if (CoreConfig.get().isDebug) {
-            if (any == null){
+            if (any == null) {
                 dInfo(tag)
-            }else{
+            } else {
                 d(tag, any)
             }
         }
@@ -121,14 +123,14 @@ object LogUtils {
      * @param any Any?
      */
     @JvmStatic
-    fun e4Mark(any: Any?) {
+    fun e4Mark(any:Any?) {
         if (CoreConfig.get().isDebug) {
             e("$TAG", any)
         }
     }
 
     @JvmStatic
-    fun i(any: Any?) {
+    fun i(any:Any?) {
         if (CoreConfig.get().isDebug) {
             if (any == null) {
                 i("标签" + TAG + "的打印内容为空！")
@@ -139,7 +141,7 @@ object LogUtils {
     }
 
     @JvmStatic
-    fun i(tag: String = TAG, any: Any?) {
+    fun i(tag:String = TAG, any:Any?) {
         if (CoreConfig.get().isDebug) {
             if (any == null) {
                 i("标签" + TAG + "的打印内容为空！")
@@ -150,7 +152,7 @@ object LogUtils {
     }
 
     @JvmStatic
-    fun w(any: Any?) {
+    fun w(any:Any?) {
         if (CoreConfig.get().isDebug) {
             if (any == null) {
                 doLog("w", TAG, "标签" + TAG + "的打印内容为空！")
@@ -166,7 +168,7 @@ object LogUtils {
      * @param object
      */
     @JvmStatic
-    fun e(any: Any?) {
+    fun e(any:Any?) {
         e(TAG, any)
     }
 
@@ -174,7 +176,7 @@ object LogUtils {
      * E 类型错误日志
      */
     @JvmStatic
-    fun e(exception: Exception?) {
+    fun e(exception:Exception?) {
         if (CoreConfig.get().isDebug) {
             Log.e(TAG, TAG, exception)
         }
@@ -184,7 +186,7 @@ object LogUtils {
      * E 类型日志
      */
     @JvmStatic
-    fun e(tag: String, any: Any?) {
+    fun e(tag:String, any:Any?) {
         if (CoreConfig.get().isDebug) {
             if (any == null) {
                 e("标签 : $tag 的打印内容为空！")
@@ -199,7 +201,7 @@ object LogUtils {
      * 以 类名 为 tag
      * @param any Any?
      */
-    fun de(any: Any?) {
+    fun de(any:Any?) {
         val stackTrace = Throwable().stackTrace
         if (stackTrace.size > 1) {
             val targetElement = stackTrace[0]
@@ -213,10 +215,9 @@ object LogUtils {
      *  判断日志是否超过长度
      */
     @JvmStatic
-    private fun doLog(level: String, tag: String, any: Any) {
-        val log = any.toString()
-            .trim()
-        if (log.length > LOG_MAX_LENGTH) {
+    private fun doLog(level:String, tag:String, any:Any) {
+        val log = any.toString().trim()
+        if (log.toByteArray(Charsets.UTF_8).size > LOG_MAX_LENGTH) {
             doLog4Length(level, tag, log)
         } else {
             printLog(level, tag, log)
@@ -227,20 +228,22 @@ object LogUtils {
      *  处理超过限制长度的日志
      */
     @JvmStatic
-    private fun doLog4Length(level: String, str: String, log: String) {
-        val strLength: Int = log.length
+    private fun doLog4Length(level: String, tag: String, log: String) {
+        val bytes = log.toByteArray(Charsets.UTF_8)
+        val maxBytes = LOG_MAX_LENGTH // Android Logcat 限制，取安全值
         var start = 0
-        var end: Int = LOG_MAX_LENGTH
-        for (i in 0..1999) {
-            //剩下的文本还是大于规定长度则继续重复截取并输出
-            if (strLength > end) {
-                printLog(level, str + i, log.substring(start, end))
-                start = end
-                end += LOG_MAX_LENGTH
-            } else {
-                printLog(level, str + i, log.substring(start, strLength))
-                break
+        while (start < bytes.size) {
+            var end = (start + maxBytes).coerceAtMost(bytes.size)
+
+            // 确保不截断 UTF-8 多字节字符
+            while (end > start && (bytes[end - 1].toInt() and 0xC0) == 0x80) {
+                end--
             }
+
+            val chunk = bytes.copyOfRange(start, end).toString(Charsets.UTF_8)
+            printLog(level, tag, chunk)
+
+            start = end
         }
     }
 
@@ -248,7 +251,7 @@ object LogUtils {
      *  打印日志
      */
     @JvmStatic
-    private fun printLog(level: String, tag: String, msg: String) {
+    private fun printLog(level:String, tag:String, msg:String) {
         when (level) {
             "e" -> {
                 Log.e(tag, msg)
@@ -281,14 +284,13 @@ object LogUtils {
      * @return String
      */
     @JvmStatic
-    private fun getFileName(targetElement: StackTraceElement): String {
+    private fun getFileName(targetElement:StackTraceElement):String {
         val fileName = targetElement.fileName
         if (fileName != null) return fileName
         // If name of file is null, should add
         // "-keepattributes SourceFile,LineNumberTable" in proguard file.
         var className = targetElement.className
-        val classNameInfo = className.split("\\.".toRegex())
-            .toTypedArray()
+        val classNameInfo = className.split("\\.".toRegex()).toTypedArray()
         if (classNameInfo.size > 0) {
             className = classNameInfo[classNameInfo.size - 1]
         }
@@ -311,16 +313,16 @@ object LogUtils {
 
     @JvmStatic
     private var LOG_FILE_PATH // 日志文件保存路径
-            : String? = null
+            :String? = null
 
     @JvmStatic
     private var LOG_FILE_NAME // 日志文件保存名称
-            : String? = null
+            :String? = null
 
     private const val LOG_SAVE_DAYS = 7 // sd卡中日志文件的最多保存天数
 
     @JvmStatic
-    fun init(context: Context) { // 在Application中初始化
+    fun init(context:Context) { // 在Application中初始化
         LOG_FILE_PATH = FileUtils.rootPath!!.path + File.separator + context.packageName + File.separator + "Log"
         LOG_FILE_NAME = "TLog_"
     }
@@ -331,7 +333,7 @@ object LogUtils {
      * @return
      */
     @Synchronized
-    private fun log2File(mylogtype: String, tag: String, text: String): File {
+    private fun log2File(mylogtype:String, tag:String, text:String):File {
         val nowtime = Date()
         val date = FILE_SUFFIX.format(nowtime)
         val dateLogContent = """
@@ -357,7 +359,7 @@ object LogUtils {
             bufWriter.newLine()
             bufWriter.close()
             filerWriter.close()
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         }
         return file
@@ -378,7 +380,7 @@ object LogUtils {
      * @return
      */
     @JvmStatic
-    private val dateBefore: Date
+    private val dateBefore:Date
         private get() {
             val nowtime = Date()
             val now = Calendar.getInstance()
@@ -388,7 +390,7 @@ object LogUtils {
         }
 
     @JvmStatic
-    fun saveLogFile(message: String) {
+    fun saveLogFile(message:String) {
         val fileDir = File(FileUtils.rootPath.toString() + File.separator + CoreConfig.applicationContext.packageName)
         if (!fileDir.exists()) {
             fileDir.mkdirs()
@@ -409,7 +411,7 @@ object LogUtils {
     $message
     """.trimIndent()) // 往文件里写入字符串
             }
-        } catch (e: IOException) {
+        } catch (e:IOException) {
             e.printStackTrace()
         }
     }
