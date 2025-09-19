@@ -27,26 +27,14 @@ interface IPermissionActions {
          * @return
          */
         fun hasPermission(context: Context?, vararg permissions: String?): Boolean {
-            var has = permissions.isNotEmpty()
-            if (has) {
-                for (permission in permissions) {
-                    var pre = context?.checkSelfPermission(permission!!) == PackageManager.PERMISSION_GRANTED
-                    if (context != null) {
-                        if (permission != null) {
-                            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                                pre = false
-                            } else {
-                                pre = true
-                            }
-//                            PermissionChecker.checkSelfPermission(context, permission)
-//                            ContextCompat.checkSelfPermission(context, permission)
-//                            context.checkSelfPermission(permission)
-                        }
-                    }
-                    has = has && pre
+            if (context == null || permissions.isEmpty()) return false
+            for (permission in permissions) {
+                if (permission.isNullOrEmpty()) return false
+                if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false
                 }
             }
-            return has
+            return true
         }
     }
 
