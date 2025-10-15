@@ -76,6 +76,11 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //            open(FragmentUtilsActivity::class.java)
 
 
+
+
+        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("7yp2G9cE4IBLlNQvDkURvJhOwQyhQld7pYu4yTH5SZRDVfKxwO3LQzAtUEI/w2gX0/FY98TKsnBlGcgd9Jq6+4nGudx2cqPe+uSqjXV7pLjXanLK7/skTsXm6bmoNscPEgQFcMj5FPqjqC7OFgkzxgj9aiIOG4B+edpdk/WLlYvWXvD3Nw4rVGrFym/ufO9P5FysFQecgcmRUh9CASK7cONqajWU3RP0PR5KYBWW48fBkiZLb8aifh7DaBgT5XdotZoXHonXFBjt2MLxRS2PFYbBYCbxRSGH4SDqziRFf4WWVBliMUcZ3PdY8zLE2in2qO5awV7R4/K1Wy9hL1C5nw=="))
+
+
     }
 
 

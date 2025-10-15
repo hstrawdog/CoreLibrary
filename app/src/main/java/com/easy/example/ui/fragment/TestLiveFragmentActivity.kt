@@ -17,7 +17,7 @@ class TestLiveFragmentActivity : BaseViewBindingActivity<ActivityTestLiveFragmen
     override fun initView() {
 
         var fragmentUtils = FragmentUtils(this)
-        fragmentUtils.addOrShowFragment(TestLiveFragment(), R.id.fl_layout)
+        fragmentUtils.showOrAddFragment(TestLiveFragment(), R.id.fl_layout)
 
         binding.button63.setOnClickListener {
             fragmentUtils.replaceOrShowFragment(TestLiveFragment(), R.id.fl_layout)

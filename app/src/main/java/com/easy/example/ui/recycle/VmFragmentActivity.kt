@@ -24,7 +24,7 @@ VmFragmentActivity : BaseViewBindingActivity<ActivityVmFragmentBinding>() {
 
 
     override fun initView() {
-        FragmentUtils(supportFragmentManager).addOrShowFragment(FragmentA.newInstance(), binding.flLayout.id)
+        FragmentUtils(supportFragmentManager).showOrAddFragment(FragmentA.newInstance(), binding.flLayout.id)
     }
 
     class FragmentA : BaseVmListFragment<ListModel, ActivityRecycleViewBinding>() {

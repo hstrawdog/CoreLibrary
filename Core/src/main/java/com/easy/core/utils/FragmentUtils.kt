@@ -6,179 +6,201 @@ import com.easy.core.common.TAG
 import com.easy.core.ui.base.BaseActivity
 import com.easy.core.ui.base.BaseFragment
 import com.easy.core.utils.log.LogUtils
-import kotlin.jvm.Throws
 
 /**
  * @Author : huangqiqiang
- * @Package : com.easy.core.utils
  * @Date : 下午 2:11
  * @Email : qiqiang213@gmail.com
- * @Describe :
+ * @Describe : Fragment 管理工具类（支持 add / show / detach / attach / pop）
  */
-class FragmentUtils {
-    var supportFragmentManager:FragmentManager? = null
-    private val fragmentBackStack = ArrayDeque<Fragment>() // 手动管理栈
-    var currentFragment:Fragment? = null
+class FragmentUtils(any: Any) {
 
-    constructor(any:Any) {
+    private var supportFragmentManager: FragmentManager? = null
+    private val fragmentBackStack = ArrayDeque<Fragment>() // 自定义 Fragment 栈
+    var currentFragment: Fragment? = null
+        private set
+
+    init {
         when (any) {
-            is FragmentManager -> {
-                supportFragmentManager = any
-            }
-
-            is BaseActivity -> {
-                supportFragmentManager = any.supportFragmentManager
-            }
-
-            is BaseFragment -> {
-                supportFragmentManager = any.childFragmentManager
-            }
+            is FragmentManager -> supportFragmentManager = any
+            is BaseActivity -> supportFragmentManager = any.supportFragmentManager
+            is BaseFragment -> supportFragmentManager = any.childFragmentManager
         }
+
         fragmentBackStack.clear()
-        // 监听 Fragment 回退栈变化
         supportFragmentManager?.addOnBackStackChangedListener {
-            LogUtils.dMark(TAG.LIVE_TAG, "supportFragmentManager  addOnBackStackChangedListener  start  ${currentFragment}")
             updateCurrentFragment()
-            LogUtils.dMark(TAG.LIVE_TAG, "supportFragmentManager  addOnBackStackChangedListener  end   ${currentFragment}")
-
+            LogUtils.dMark(TAG.LIVE_TAG, "Fragment 栈变化 -> 当前: $currentFragment")
         }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    //  智能添加 / 显示 / 复用
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * 智能添加或显示 Fragment（支持 attach / add / show）
+     */
+    fun showOrAddFragment(fragment: Fragment, containerId: Int) {
+        val fm = supportFragmentManager ?: return
+        val transaction = fm.beginTransaction().setReorderingAllowed(true)
+
+        val inManager = fm.fragments.contains(fragment)
+
+        when {
+            fragment.isAdded && fragment.isHidden -> transaction.show(fragment)
+            fragment.isDetached -> transaction.attach(fragment)
+            !inManager -> transaction.add(containerId, fragment)
+            else -> transaction.show(fragment)
+        }
+
+        if (currentFragment != null && currentFragment != fragment) {
+            transaction.hide(currentFragment!!)
+        }
+
+        transaction.commitAllowingStateLoss()
+
+        if (!fragmentBackStack.contains(fragment)) {
+            fragmentBackStack.add(fragment)
+        }
+        currentFragment = fragment
+
+        LogUtils.dMark(TAG.LIVE_TAG, "showOrAddFragment -> ${fragment.javaClass.simpleName}")
     }
 
     /**
-     * 添加或者显示 fragment
-     *
-     * @param fragment fragment
-     * @param id       FrameLayout
+     * 替换当前 Fragment（旧的将销毁）
      */
-    fun addOrShowFragment(fragment:Fragment, id:Int) {
-        if (currentFragment === fragment || supportFragmentManager == null) {
-            return
-        } else if (fragment.isAdded && fragment.isRemoving) {
-            // fragment 已移除，不能再 add，应该 return 或 new 一个新实例
-            LogUtils.e("fragment 已移除，不能再 add，应该 return 或 new 一个新实例 ")
-            // 抛出一个自定义的异常
-            throw IllegalStateException("Fragment is already removing. Create a new instance instead.")
-        }
-        // 如果当前fragment未被添加，则添加到Fragment管理器中
-        if (!fragment.isAdded) {
-            if (currentFragment == null) {
-                supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
-            } else {
-                supportFragmentManager!!.beginTransaction().hide(currentFragment!!).add(id, fragment).commit()
-            }
-        } else {
-            if (currentFragment == null) {
-                supportFragmentManager!!.beginTransaction().show(fragment).commit()
-            } else {
-                supportFragmentManager!!.beginTransaction().hide(currentFragment!!).show(fragment).commit()
-            }
-        }
-        fragmentBackStack.add(fragment)
-        currentFragment = fragment
-    }
+    fun replaceOrShowFragment(fragment: Fragment, containerId: Int) {
+        val fm = supportFragmentManager ?: return
+        if (currentFragment === fragment) return
 
-    /**
-     * replace  会将旧的Fragment  进入销毁流程
-     * @param fragment Fragment
-     * @param id Int
-     */
-    fun replaceOrShowFragment(fragment:Fragment, id:Int) {
-        if (currentFragment === fragment || supportFragmentManager == null) {
-            return
-        } else if (fragment.isAdded && fragment.isRemoving) {
-            // fragment 已移除，不能再 add，应该 return 或 new 一个新实例
-            LogUtils.e("fragment 已移除，不能再 add，应该 return 或 new 一个新实例 ")
-            // 抛出一个自定义的异常
-            throw IllegalStateException("Fragment is already removing. Create a new instance instead.")
-        }
-        // 如果当前fragment未被添加，则添加到Fragment管理器中
-        if (!fragment.isAdded) {
-            if (currentFragment == null) {
-                supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
-            } else {
-                supportFragmentManager!!.beginTransaction().replace(id, fragment).commit()
-            }
-        } else {
-            if (currentFragment == null) {
-                supportFragmentManager!!.beginTransaction().show(fragment).commit()
-            } else {
-                supportFragmentManager!!.beginTransaction().replace(id, fragment).commit()
-            }
-        }
-        removeFragmentBackStack4Fragment(currentFragment)
-        fragmentBackStack.add(fragment)
-        currentFragment = fragment
-    }
+        val transaction = fm.beginTransaction().setReorderingAllowed(true)
+        transaction.replace(containerId, fragment).commitAllowingStateLoss()
 
-    private fun removeFragmentBackStack4Fragment(currentFragment:Fragment?) {
-        if (currentFragment != null && fragmentBackStack.contains(currentFragment)) {
-            fragmentBackStack.remove(currentFragment)
-        }
+        removeFromStack(currentFragment)
+        addToStack(fragment)
+        currentFragment = fragment
     }
 
     /**
      * 以覆盖方式添加 Fragment（add + addToBackStack）
-     * 会叠加当前 Fragment，并支持按返回键返回
      */
-    fun coverFragment(fragment:Fragment, id:Int) {
-        if (supportFragmentManager == null) return
-        if (fragment.isAdded && fragment.isRemoving) {
-            throw IllegalStateException("Fragment is already removing. Create a new instance instead.")
-        }
-        fragmentBackStack.add(fragment)
-        supportFragmentManager?.beginTransaction()?.add(id, fragment)?.commit()
+    fun coverFragment(fragment: Fragment, containerId: Int) {
+        val fm = supportFragmentManager ?: return
+        val transaction = fm.beginTransaction().setReorderingAllowed(true)
+        transaction.add(containerId, fragment)
+            .addToBackStack(fragment.javaClass.name)
+            .commitAllowingStateLoss()
+
+        addToStack(fragment)
         currentFragment = fragment
     }
 
+    // ---------------------------------------------------------------------------------------------
+    //  detach / attach / remove 操作
+    // ---------------------------------------------------------------------------------------------
+
     /**
-     * 添加 fragment 到 FrameLayout
-     *
-     * @param fragment fragment
-     * @param id       FrameLayout
+     * 临时移除 Fragment（可下次重新 attach）
      */
-    @Deprecated("")
-    fun addFragment(fragment:Fragment, id:Int) {
-        if (!fragment.isAdded && supportFragmentManager != null) {
-            supportFragmentManager!!.beginTransaction().add(id, fragment).commit()
-            currentFragment = fragment
+    fun detachFragment(fragment: Fragment) {
+        val fm = supportFragmentManager ?: return
+        if (!fragment.isAdded || fragment.isDetached) return
+        fm.beginTransaction().setReorderingAllowed(true)
+            .detach(fragment)
+            .commitAllowingStateLoss()
+        LogUtils.dMark(TAG.LIVE_TAG, "detachFragment -> ${fragment.javaClass.simpleName}")
+
+        if (fragment == currentFragment) {
+            currentFragment = fragmentBackStack.lastOrNull { it != fragment }
+        }
+    }
+
+    /**
+     * 重新显示上次 detach 的 Fragment
+     */
+    fun attachFragment(fragment: Fragment, containerId: Int) {
+        val fm = supportFragmentManager ?: return
+        val transaction = fm.beginTransaction().setReorderingAllowed(true)
+
+        if (fragment.isDetached) {
+            transaction.attach(fragment)
+        } else if (!fm.fragments.contains(fragment)) {
+            transaction.add(containerId, fragment)
+        } else {
+            transaction.show(fragment)
+        }
+
+        transaction.commitAllowingStateLoss()
+        addToStack(fragment)
+        currentFragment = fragment
+        LogUtils.dMark(TAG.LIVE_TAG, "attachFragment -> ${fragment.javaClass.simpleName}")
+    }
+
+    /**
+     * 完全移除 Fragment（不可重用）
+     */
+    fun removeFragment(fragment: Fragment) {
+        val fm = supportFragmentManager ?: return
+        fm.beginTransaction()
+            .setReorderingAllowed(true)
+            .remove(fragment)
+            .commitAllowingStateLoss()
+        fm.executePendingTransactions()
+
+        removeFromStack(fragment)
+        if (fragment == currentFragment) {
+            currentFragment = fragmentBackStack.lastOrNull()
+        }
+
+        LogUtils.dMark(TAG.LIVE_TAG, "removeFragment -> ${fragment.javaClass.simpleName}")
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    //  栈与回退
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * 手动回退上一个 Fragment
+     */
+    fun popFragment(): Boolean {
+        if (fragmentBackStack.size > 1) {
+            val current = fragmentBackStack.removeLast()
+            val previous = fragmentBackStack.last()
+
+            supportFragmentManager?.beginTransaction()
+                ?.setReorderingAllowed(true)
+                ?.hide(current)
+                ?.show(previous)
+                ?.commitAllowingStateLoss()
+
+            currentFragment = previous
+            LogUtils.dMark(TAG.LIVE_TAG, "popFragment -> 切换至 ${previous.javaClass.simpleName}")
+            return true
+        }
+        return false
+    }
+
+    /**
+     * 更新当前 Fragment 引用（系统回退栈变化时调用）
+     */
+    fun updateCurrentFragment() {
+        val list = supportFragmentManager?.fragments ?: return
+        currentFragment = list.lastOrNull { it.isVisible }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    //  辅助方法
+    // ---------------------------------------------------------------------------------------------
+
+    private fun addToStack(fragment: Fragment?) {
+        if (fragment != null && !fragmentBackStack.contains(fragment)) {
             fragmentBackStack.add(fragment)
         }
     }
 
-    /**
-     *  移除 fragment
-     * @param fragment Fragment
-     */
-    fun removeFragment(fragment:Fragment) {
-        supportFragmentManager?.beginTransaction()?.remove(fragment)?.commit()
-        supportFragmentManager?.executePendingTransactions()
-        removeFragmentBackStack4Fragment(fragment)
-        LogUtils.d(TAG.LIVE_TAG, "removeFragment  ${fragment}")
-        if (fragment == currentFragment) {
-            currentFragment = fragmentBackStack.lastOrNull()
-        }
-        LogUtils.d(TAG.LIVE_TAG, "removeFragment  currentFragment  ${currentFragment}")
-
+    private fun removeFromStack(fragment: Fragment?) {
+        fragment?.let { fragmentBackStack.remove(it) }
     }
-
-    fun updateCurrentFragment() {
-        val fragmentList = supportFragmentManager?.fragments
-        if (fragmentList.isNullOrEmpty()) {
-            currentFragment = null
-            return
-        }
-
-        // 找出最后一个“正在显示”的 Fragment 作为 currentFragment
-        for (i in fragmentList.indices.reversed()) {
-            val f = fragmentList[i]
-            if (f != null && f.isVisible) {
-                currentFragment = f
-                return
-            }
-        }
-
-        // 如果都不可见
-        currentFragment = null
-    }
-
 }

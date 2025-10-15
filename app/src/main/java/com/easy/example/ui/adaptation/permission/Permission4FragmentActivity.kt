@@ -15,7 +15,7 @@ import com.easy.example.databinding.ActivityFragmentTestBinding
 class Permission4FragmentActivity : BaseViewBindingActivity<ActivityFragmentTestBinding>() {
 
     override fun initView() {
-        FragmentUtils(this).addOrShowFragment(Permission4Fragment(),R.id.fl_layout)
+        FragmentUtils(this).showOrAddFragment(Permission4Fragment(),R.id.fl_layout)
     }
 
 

@@ -28,7 +28,7 @@ class FragmentTestActivity : BaseVmActivity<FragmentTestViewModel, ActivityFragm
 
     override fun initViews() {
         val fragment: Fragment = com.easy.example.demo.TestFragment.newInstance()
-        FragmentUtils(supportFragmentManager).addOrShowFragment(fragment, R.id.fl_layout)
+        FragmentUtils(supportFragmentManager).showOrAddFragment(fragment, R.id.fl_layout)
     }
 
 

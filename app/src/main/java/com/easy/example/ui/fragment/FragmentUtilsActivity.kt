@@ -21,10 +21,10 @@ class FragmentUtilsActivity : BaseViewBindingActivity<ActivityFragmentUtilsBindi
         var  fragmentb =FragmentB()
 
         binding.button96.setOnClickListener {
-            fragmentUtils.addOrShowFragment(fragmentA, R.id.fl_layout)
+            fragmentUtils.showOrAddFragment(fragmentA, R.id.fl_layout)
         }
         binding.button97.setOnClickListener {
-            fragmentUtils.addOrShowFragment(fragmentb, R.id.fl_layout)
+            fragmentUtils.showOrAddFragment(fragmentb, R.id.fl_layout)
         }
 
         binding.button98.setOnClickListener {
