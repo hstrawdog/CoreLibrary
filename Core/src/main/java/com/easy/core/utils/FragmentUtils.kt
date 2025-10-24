@@ -13,6 +13,20 @@ import com.easy.core.utils.log.LogUtils
  * @Email : qiqiang213@gmail.com
  * @Describe : Fragment 管理工具类（支持 add / show / detach / attach / pop）
  */
+
+//
+//| 功能               | 方法名                       | 说明                                 |
+//| ---------------- | ------------------------- | ---------------------------------- |
+//| 智能显示或添加          | `showOrAddFragment()`     | 自动判断是否需要 `add` / `show` / `attach` |
+//| 替换当前 Fragment    | `replaceOrShowFragment()` | 销毁旧的 Fragment，添加新的                 |
+//| 覆盖叠加（可返回）        | `coverFragment()`         | 使用系统 BackStack                     |
+//| 暂时移除但可重用         | `detachFragment()`        | 从 UI 移除但保留实例                       |
+//| 重新显示已 detach     | `attachFragment()`        | 恢复 UI 显示                           |
+//| 完全移除 Fragment    | `removeFragment()`        | 销毁 Fragment                        |
+//| 返回上一个 Fragment   | `popFragment()`           | 使用自定义栈回退                           |
+//| 更新当前 Fragment 引用 | `updateCurrentFragment()` | 自动同步当前可见 Fragment                  |
+//
+
 class FragmentUtils(any: Any) {
 
     private var supportFragmentManager: FragmentManager? = null

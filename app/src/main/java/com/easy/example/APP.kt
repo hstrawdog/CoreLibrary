@@ -7,11 +7,7 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.easy.example.ui.crash.CrashHandler
 import dagger.hilt.android.HiltAndroidApp
-import skin.support.SkinCompatManager
-import skin.support.app.SkinAppCompatViewInflater
-import skin.support.app.SkinCardViewInflater
-import skin.support.constraint.app.SkinConstraintViewInflater
-import skin.support.design.app.SkinMaterialViewInflater
+
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
@@ -35,14 +31,7 @@ class APP : Application() {
         //配置 默认加载的 toolBar    CoreInitProvider   会比 Application  更加优先
         //  CoreBuildConfig.getInstance().init(this, true);
         //.setDefItoobar(BaseDefToolBarImpl.class);
-        SkinCompatManager.withoutActivity(this) // 基础控件换肤初始化
-            .addInflater(SkinAppCompatViewInflater()) // material design 控件换肤初始化[可选]
-            .addInflater(SkinMaterialViewInflater()) // ConstraintLayout 控件换肤初始化[可选]
-            .addInflater(SkinConstraintViewInflater()) // CardView v7 控件换肤初始化[可选]
-            .addInflater(SkinCardViewInflater()) // 关闭状态栏换肤，默认打开[可选]
-            .setSkinStatusBarColorEnable(false) // 关闭windowBackground换肤，默认打开[可选]
-            .setSkinWindowBackgroundEnable(false)
-            .loadSkin()
+
 
         // 本地异常捕捉
         CrashHandler.register(this)

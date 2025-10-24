@@ -20,10 +20,7 @@
 
 
 
-    <declare-styleable name="SkinSwitch">
-        <attr name="android:thumb"/>
-        <attr name="android:track"/>
-    </declare-styleable>
+
 
     <style name="editText">
         <item name="android:colorControlNormal">@color/color_main</item>
