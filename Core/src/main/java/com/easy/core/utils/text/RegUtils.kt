@@ -120,10 +120,11 @@ object RegUtils {
      */
     @JvmStatic
     fun isMobile(mobiles: String?): Boolean {
-        val p = Pattern.compile("^(13[0-9]|15[012356789]|17[03678]|18[0-9]|14[57])[0-9]{8}$")
-        val m = p.matcher(mobiles)
-        return m.matches()
+        if (mobiles.isNullOrBlank()) return false
+        val pattern = Pattern.compile("^1(3\\d|4[5-9]|5[0-35-9]|6[6]|7[0-8]|8\\d|9[0-9])\\d{8}$")
+        return pattern.matcher(mobiles).matches()
     }
+
 
     /**
      * 验证银卡卡号
