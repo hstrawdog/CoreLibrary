@@ -218,7 +218,8 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         return null
     }
 
-    override fun show(manager: FragmentManager, tag: String?) {
+
+    override fun show(manager:FragmentManager) {
         LogUtils.dMark(TAG.LIVE_TAG, "$this show")
 
         // 如果 Activity 已保存状态，不再 show，防止崩溃
@@ -242,7 +243,9 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         // 调用父类 show()，让系统处理 add + commit
         super.show(manager, tag ?: javaClass.simpleName)
         isDismiss = false
+
     }
+
 
 
     override fun dismiss() {
