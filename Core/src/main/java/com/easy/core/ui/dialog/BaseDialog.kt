@@ -218,26 +218,32 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
         return null
     }
 
-    override fun show(manager:FragmentManager) {
-        LogUtils.dMark( TAG.LIVE_TAG,"${this}  show ")
-        val ft = manager.beginTransaction()
-        val prev = manager.findFragmentByTag(javaClass.simpleName)
-        if (prev != null) {
-            if (prev is BaseDialog) {
-                try {
-                    if (prev.dialog?.isShowing == true) {
-                        prev.dismiss()
-                    }
-                } catch (e:Exception) {
-                    LogUtils.dMark( TAG.LIVE_TAG,e.toString())
-                }
-            }
-            ft.remove(prev)
+    override fun show(manager: FragmentManager, tag: String?) {
+        LogUtils.dMark(TAG.LIVE_TAG, "$this show")
+
+        // 如果 Activity 已保存状态，不再 show，防止崩溃
+        if (manager.isStateSaved) {
+            LogUtils.dMark(TAG.LIVE_TAG, "Skip show() — state already saved")
+            return
         }
-        ft.add(this, javaClass.simpleName)
-        ft.commitAllowingStateLoss()
+
+        // 如果已经添加过，直接返回
+        if (isAdded) {
+            LogUtils.dMark(TAG.LIVE_TAG, "Skip show() — already added")
+            return
+        }
+
+        // 如果存在旧的同类 Dialog，移除掉
+        manager.findFragmentByTag(tag ?: javaClass.simpleName)?.let {
+            (it as? DialogFragment)?.dismissAllowingStateLoss()
+            manager.beginTransaction().remove(it).commitNowAllowingStateLoss()
+        }
+
+        // 调用父类 show()，让系统处理 add + commit
+        super.show(manager, tag ?: javaClass.simpleName)
         isDismiss = false
     }
+
 
     override fun dismiss() {
         LogUtils.dMark( TAG.LIVE_TAG,"${this}  dismiss ")
