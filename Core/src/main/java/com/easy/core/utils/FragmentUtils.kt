@@ -136,6 +136,50 @@ class FragmentUtils(any: Any) {
         LogUtils.dMark(TAG.LIVE_TAG, "coverFragment -> ${fragment.javaClass.simpleName}")
     }
 
+
+    /**
+     * 回退上一个覆盖的 Fragment（与 coverFragment 搭配使用）
+     * @return 是否成功回退
+     */
+    fun popCoverFragment(): Boolean {
+        val fm = supportFragmentManager ?: return false
+
+        if (fragmentBackStack.size <= 1) {
+            LogUtils.dMark(TAG.LIVE_TAG, "popCoverFragment -> 栈中仅剩一个 Fragment，无法回退")
+            return false
+        }
+
+        val current = fragmentBackStack.removeLast()
+        val previous = fragmentBackStack.lastOrNull()
+
+        val transaction = fm.beginTransaction().setReorderingAllowed(true)
+
+        // 👇 如果需要自定义动画，可以在这里加上
+        // transaction.setCustomAnimations(
+        //     R.anim.slide_in_left,  // 上一个进入动画
+        //     R.anim.slide_out_right // 当前退出动画
+        // )
+
+        // 隐藏当前的、显示上一个
+        previous?.let { transaction.show(it) }
+        transaction.remove(current)
+        transaction.commitAllowingStateLoss()
+
+        currentFragment = previous
+
+        // 同步系统的 back stack
+        try {
+            fm.popBackStack()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        LogUtils.dMark(TAG.LIVE_TAG, "popCoverFragment -> 回到 ${previous?.javaClass?.simpleName}")
+
+        return true
+    }
+
+
     // ---------------------------------------------------------------------------------------------
     //  detach / attach / remove 操作
     // ---------------------------------------------------------------------------------------------
