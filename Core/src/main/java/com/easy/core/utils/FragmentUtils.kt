@@ -111,6 +111,31 @@ class FragmentUtils(any: Any) {
         currentFragment = fragment
     }
 
+    fun coverFragmentNew(fragment: Fragment, containerId: Int) {
+        val fm = supportFragmentManager ?: return
+        val transaction = fm.beginTransaction().setReorderingAllowed(true)
+
+        // 👇 隐藏当前 Fragment，避免叠加显示
+        currentFragment?.let { transaction.hide(it) }
+
+        val tag = fragment.javaClass.name
+        val existingFragment = fm.findFragmentByTag(tag)
+
+        if (existingFragment == null) {
+            transaction.add(containerId, fragment, tag)
+        } else {
+            transaction.show(existingFragment)
+        }
+
+        transaction.addToBackStack(tag)
+            .commitAllowingStateLoss()
+
+        addToStack(fragment)
+        currentFragment = fragment
+
+        LogUtils.dMark(TAG.LIVE_TAG, "coverFragment -> ${fragment.javaClass.simpleName}")
+    }
+
     // ---------------------------------------------------------------------------------------------
     //  detach / attach / remove 操作
     // ---------------------------------------------------------------------------------------------
