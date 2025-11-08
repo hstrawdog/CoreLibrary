@@ -51,7 +51,7 @@ object SaveBitmapUtils {
         }
         try {
             FileUtils.saveBitmap(bitmap, path)
-        } catch (e: Exception) {
+        } catch (e:Exception) {
             e.printStackTrace()
             return ""
         }
@@ -102,11 +102,35 @@ object SaveBitmapUtils {
      *  Q 一下key直接使用文件读写进行保存
      */
     @JvmStatic
+    @Deprecated(message = "请改用 saveBitmap2Pictures()")
     fun saveBitmap2Pictures(bitmap:Bitmap?, relativePath:String = "", fileName:String = getDefFileName(".png")):Uri? {
         if (bitmap == null) {
             return null
         }
         return FileUtils.saveBitmap2Pictures(relativePath, fileName, bitmap)
+    }
+
+    /**
+     *  同上
+     * @param bitmap Bitmap?
+     * @param relativePath String
+     * @param fileName String
+     * @param compressFormat CompressFormat
+     * @return Uri?
+     */
+
+    fun saveBitmap2Pictures(bitmap:Bitmap?, relativePath:String = "", fileName:String = "", compressFormat:CompressFormat = CompressFormat.PNG):Uri? {
+        if (bitmap == null) {
+            return null
+        }
+        var fullName = fileName
+        // fileName 如果不是图片后缀结尾补充 图片后缀
+        if (fileName.isNullOrEmpty()) {
+            fullName = getDefFileName(defFileName, compressFormat)
+        } else if (!FileUtils.hasImageSuffix(fileName)) {
+            fullName = getDefFileName(fileName, compressFormat)
+        }
+        return FileUtils.saveBitmap2Pictures(relativePath, fullName, bitmap, compressFormat)
     }
 
     /**
@@ -132,6 +156,11 @@ object SaveBitmapUtils {
         if (bitmap == null) {
             return ""
         }
+
+
+
+
+
         if (isQ()) {
             val path = if (relativePath.isNotNull()) {
                 FilePathTools.getExternalFilesDir() + File.separator + relativePath + File.separator + fileName
@@ -152,6 +181,36 @@ object SaveBitmapUtils {
             CoreConfig.applicationContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(path).parentFile)))
             return path
         }
+    }
+
+
+
+    fun saveBitmap2ExternalPrivate(bitmap:Bitmap?, relativePath:String = "", fileName:String = "", compressFormat:CompressFormat = CompressFormat.PNG):String {
+        if (bitmap == null) {
+            return ""
+        }
+
+        var fullName = fileName
+        // fileName 如果不是图片后缀结尾补充 图片后缀
+        if (fileName.isNullOrEmpty()) {
+            fullName = getDefFileName(defFileName, compressFormat)
+        } else if (!FileUtils.hasImageSuffix(fileName)) {
+            fullName = getDefFileName(fileName, compressFormat)
+        }
+
+
+
+        if (isQ()) {
+
+            FileUtils.saveBitmap(bitmap, fullName)
+        } else {
+            FileUtils.saveBitmap(bitmap, fullName)
+            // 发送至相册
+            MediaStore.Images.Media.insertImage(CoreConfig.applicationContext.contentResolver, fullName, File(fullName).name, null)
+            CoreConfig.applicationContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(fullName).parentFile)))
+        }
+        return fullName
+
     }
 
 }

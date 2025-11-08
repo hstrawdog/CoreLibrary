@@ -500,10 +500,10 @@ object FileUtils {
      * @param bitmap Bitmap
      */
     @JvmStatic
-    fun saveBitmap2Pictures(relativePath:String, fileName:String, bitmap:Bitmap):Uri? {
+    fun saveBitmap2Pictures(relativePath:String, fileName:String, bitmap:Bitmap, format:CompressFormat = Bitmap.CompressFormat.PNG):Uri? {
         getContentResolverUri(relativePath, fileName)?.let { uri ->
             CoreConfig.applicationContext.contentResolver.openOutputStream(uri)?.let { outputStream ->
-                saveBitmap(outputStream, bitmap)
+                saveBitmap(outputStream, bitmap,format)
                 // 更新图片大小
                 if (!isQ()) {
                     val imageValues = ContentValues()
@@ -707,9 +707,9 @@ object FileUtils {
      * @param bitmap Bitmap
      */
     @JvmStatic
-    fun saveBitmap(os:OutputStream, bitmap:Bitmap) {
+    fun saveBitmap(os:OutputStream, bitmap:Bitmap, format:CompressFormat = Bitmap.CompressFormat.PNG) {
         try {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os)
+            bitmap.compress(format, 100, os)
         } catch (e:IOException) {
             e.printStackTrace()
         } finally {

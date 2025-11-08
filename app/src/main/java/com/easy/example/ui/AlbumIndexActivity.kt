@@ -151,7 +151,7 @@ class AlbumIndexActivity : BaseActivity() {
     private fun httpsTest(view: View) {
 //        handleSSLHandshake()
         val gif =
-            "https://images.shangwenwan.com/mall/6d392bfd-6273-4992-a24d-74f4b39b19d3?imageMogr2/size-limit/54.7k!/crop/!485x485a6a8"
+            "https://imagestest.shangwenwan.com/birefnet/asp/removebg/2025-09-28/7a62ef74b86e4925ad7a881ab6611b00_1759047983.9272742.webp"
         val list = ArrayList<String>()
         list.add(gif)
         if(activity is BaseActivity){
@@ -167,10 +167,10 @@ class AlbumIndexActivity : BaseActivity() {
      */
     private fun previewUrl(view: View) {
         val list = ArrayList<String>()
-        list.add("http://img.pptjia.com/image/20180117/f4b76385a3ccdbac48893cc6418806d5.jpg")
-        list.add("http://img.pptjia.com/image/20180117/f4b76385a3ccdbac48893cc6418806d5.jpg")
-        list.add("http://img.pptjia.com/image/20180117/f4b76385a3ccdbac48893cc6418806d5.jpg")
-        list.add("http://img.pptjia.com/image/20180117/f4b76385a3ccdbac48893cc6418806d5.jpg")
+        list.add("https://imagestest.shangwenwan.com/birefnet/asp/removebg/2025-09-28/7a62ef74b86e4925ad7a881ab6611b00_1759047983.9272742.webp")
+        list.add("https://imagestest.shangwenwan.com/birefnet/asp/removebg/2025-09-28/7a62ef74b86e4925ad7a881ab6611b00_1759047983.9272742.webp")
+        list.add("https://imagestest.shangwenwan.com/birefnet/asp/removebg/2025-09-28/7a62ef74b86e4925ad7a881ab6611b00_1759047983.9272742.webp")
+        list.add("https://imagestest.shangwenwan.com/birefnet/asp/removebg/2025-09-28/7a62ef74b86e4925ad7a881ab6611b00_1759047983.9272742.webp")
 //        openPreviewActivity(activity, list, 0)
 
         AlbumPreviewActivity.openPreview(activity as BaseActivity, list)
