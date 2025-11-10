@@ -1,6 +1,7 @@
 package com.easy.example.ui.file
 
 import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
 import android.net.Uri
 import android.os.Build
 import com.easy.core.glide.ImageLoadUtils
@@ -28,7 +29,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         binding.textView28.setOnClickListener {
             SysPermissionsUtils.requestStorage(supportFragmentManager, {
                 if (it) {
-                    path = SaveBitmapUtils.saveBitmap2AppCache(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), "", FileUtils.getDefFileName(".png"))
+                    path = SaveBitmapUtils.saveBitmap2AppCache(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), compressFormat =  CompressFormat.JPEG)
                     binding.textView40.setText("$path")
                     ImageLoadUtils.with(path, binding.imageView15)
 

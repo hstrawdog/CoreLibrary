@@ -18,30 +18,36 @@ import java.io.File
  * @Date : 17:14
  * @Email : qiqiang213@gmail.com
  * @Describe :
+ * 通用位图（Bitmap）保存工具类。
+ *
+ * ✅ 功能概览：
+ * 1️⃣ 内部存储（App 私有目录，卸载后自动清除）
+ * 2️⃣ 外部存储（App 外部私有目录，不出现在相册）
+ * 3️⃣ 外部公共存储（用户可见，可出现在系统相册）
+ *
+ * 支持：
+ * - 自动补全图片后缀名
+ * - 指定压缩格式（PNG / JPEG / WEBP）
+ * - Android Q 及以上版本的兼容适配
+ * - 可选是否自动通知相册刷新
  */
 object SaveBitmapUtils {
 
 
+    // ---------------------------------------------------------
+    // ✅ 一、内部存储（App 私有目录）
+    // ---------------------------------------------------------
     /**
-     * ✅ 一、内部存储（私有）
-     * 应用卸载后，文件会被删除，用户不可直接访问
+     * 将 Bitmap 保存到应用内部缓存目录（不推荐，已废弃）
      *
-     * context.filesDir
-     * 路径示例：/data/user/0/com.example.app/files/
-     * 适用于：私有数据保存，例如缓存的小图片等。
+     * 目录示例：
+     * - filesDir: /data/user/0/com.example.app/files/
+     * - cacheDir: /data/user/0/com.example.app/cache/
      *
-     * context.cacheDir
-     * 路径示例：/data/user/0/com.example.app/cache/
-     * 适用于：临时图片缓存，系统可能自动清理。
-     *
-     * context.getDir("images", MODE_PRIVATE)
-     * 路径示例：/data/user/0/com.example.app/app_images/
-     * 你可以创建自己的命名子目录。
-     * @param bitmap Bitmap
-     * @param path String  FileUtils.getCacheDir()
-     * 如果需要通知相册  请直接保存至相册目录下
+     * 应用卸载后文件会被删除，用户无法直接访问。
+     * 若希望图片出现在相册，请使用外部存储相关方法。
      */
-    @Deprecated(" 请改用 {@link #saveBitmap2AppCache(Bitmap?, String, String, CompressFormat)}")
+    @Deprecated("请改用 saveBitmap2AppCache(Bitmap?, String, String, CompressFormat)")
     @JvmStatic
     fun saveBitmap2AppCache(bitmap:Bitmap?, relativePath:String = "", fileName:String = getDefFileName(".png")):String {
         val path = if (relativePath.isNotNull()) {
@@ -59,17 +65,19 @@ object SaveBitmapUtils {
     }
 
     /**
+     * 保存图片至内部缓存目录
      *
-     * @param bitmap Bitmap?
-     * @param relativePath String
-     * @param fileName String
-     * @param compressFormat CompressFormat
-     * @return String
+     * @param bitmap 要保存的 Bitmap 对象
+     * @param relativePath 相对路径，如 "images/temp"
+     * @param fileName 文件名（若无则自动生成）
+     * @param compressFormat 图片压缩格式（默认 PNG）
+     * @return 返回完整保存路径
      */
+
     @JvmStatic
     fun saveBitmap2AppCache(bitmap:Bitmap?, relativePath:String = "", fileName:String = "", compressFormat:CompressFormat = CompressFormat.PNG):String {
         var fullName = fileName
-        // fileName 如果不是图片后缀结尾补充 图片后缀
+        // 自动补后缀
         if (fileName.isNullOrEmpty()) {
             fullName = getDefFileName(defFileName, compressFormat)
         } else if (!FileUtils.hasImageSuffix(fileName)) {
@@ -81,50 +89,45 @@ object SaveBitmapUtils {
         } else {
             FilePathTools.getCacheDir() + File.separator + fullName
         }
+
         FileUtils.saveBitmap(bitmap, path)
         return path
     }
 
+
+    // ---------------------------------------------------------
+    // ✅ 二、外部存储（App 外部私有目录）
+    // ---------------------------------------------------------
     /**
-     *✅ 二、外部存储（私有）
-     * 应用卸载后被删除，用户不可见，适用于大型图片或缓存等
+     * 将 Bitmap 保存至外部私有目录（已废弃版本）
      *
-     * context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-     * 路径示例：/storage/emulated/0/Android/data/com.example.app/files/Pictures/
-     * 适用于：保存不需要用户直接查看的图片，如上传前的临时文件。
+     * 示例路径：
+     * /storage/emulated/0/Android/data/<package>/files/Pictures/
      *
-     * context.externalCacheDir
-     * 路径示例：/storage/emulated/0/Android/data/com.example.app/cache/
-     * 适用于：图片缓存，空间不足时可能被清理。
-     * @param relativePath String
-     * @param fileName String
-     *  保存至公有目录上  Q 以上有指定目录 需要 通过  MediaStore 进行保存
-     *  Q 一下key直接使用文件读写进行保存
+     * 注意：
+     * - 应用卸载后文件会被删除；
+     * - 用户不可直接在相册中查看；
+     * - Android Q 以下版本仍使用传统文件路径。
      */
-    @JvmStatic
     @Deprecated(message = "请改用 saveBitmap2Pictures()")
     fun saveBitmap2Pictures(bitmap:Bitmap?, relativePath:String = "", fileName:String = getDefFileName(".png")):Uri? {
-        if (bitmap == null) {
-            return null
-        }
+        if (bitmap == null) return null
         return FileUtils.saveBitmap2Pictures(relativePath, fileName, bitmap)
     }
 
     /**
-     *  同上
-     * @param bitmap Bitmap?
-     * @param relativePath String
-     * @param fileName String
-     * @param compressFormat CompressFormat
-     * @return Uri?
+     * 将 Bitmap 保存至外部私有目录（推荐写法）
+     *
+     * @param bitmap 要保存的位图
+     * @param relativePath 相对路径（如 "temp/img"）
+     * @param fileName 文件名（可选，自动补后缀）
+     * @param compressFormat 图片压缩格式
+     * @return 保存成功返回 Uri，否则 null
      */
-
     fun saveBitmap2Pictures(bitmap:Bitmap?, relativePath:String = "", fileName:String = "", compressFormat:CompressFormat = CompressFormat.PNG):Uri? {
-        if (bitmap == null) {
-            return null
-        }
+        if (bitmap == null) return null
+
         var fullName = fileName
-        // fileName 如果不是图片后缀结尾补充 图片后缀
         if (fileName.isNullOrEmpty()) {
             fullName = getDefFileName(defFileName, compressFormat)
         } else if (!FileUtils.hasImageSuffix(fileName)) {
@@ -133,35 +136,28 @@ object SaveBitmapUtils {
         return FileUtils.saveBitmap2Pictures(relativePath, fullName, bitmap, compressFormat)
     }
 
+
+    // ---------------------------------------------------------
+    // ✅ 三、外部公共存储（用户可见，会出现在相册）
+    // ---------------------------------------------------------
     /**
-     *✅ 三、外部存储（公共，可见）
-     * Android 10（API 29）之后需要使用 MediaStore 和 ContentResolver 保存，应用卸载后不会删除
+     * 保存 Bitmap 到外部公共目录。
      *
-     * 传统路径（Android 10 以下）：
+     * Android 10（Q）以上使用 MediaStore；
+     * Android 9 及以下直接使用传统文件路径。
      *
-     * kotlin
-     * 复制
-     * 编辑
-     * Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-     * 路径示例：/storage/emulated/0/Pictures/
-     * 注意：Android 10+ 后此方法被弃用，需使用 MediaStore。
-     *
-     * 使用 MediaStore 保存到系统图库
-     * Android 10+ 推荐方式，图片将出现在系统“相册/图库”中。
-     * @param bitmap Bitmap
-     * @param path String
+     * @param bitmap 要保存的位图
+     * @param relativePath 图片子目录（可选）
+     * @param fileName 文件名
+     * @return 返回最终路径字符串
      */
+
     @JvmStatic
     fun saveBitmap2ExternalPrivate(bitmap:Bitmap?, relativePath:String = "", fileName:String = getDefFileName(".png")):String {
-        if (bitmap == null) {
-            return ""
-        }
-
-
-
-
+        if (bitmap == null) return ""
 
         if (isQ()) {
+            // Android Q 及以上：保存到应用外部私有目录
             val path = if (relativePath.isNotNull()) {
                 FilePathTools.getExternalFilesDir() + File.separator + relativePath + File.separator + fileName
             } else {
@@ -170,47 +166,59 @@ object SaveBitmapUtils {
             FileUtils.saveBitmap(bitmap, path)
             return path
         } else {
+            // Android 9 及以下：保存并手动通知系统相册刷新
             val path = if (relativePath.isNotNull()) {
                 FilePathTools.getStorageDirectory() + File.separator + relativePath + File.separator + fileName
             } else {
                 FilePathTools.getStorageDirectory() + File.separator + fileName
             }
             FileUtils.saveBitmap(bitmap, path)
-            // 发送至相册
             MediaStore.Images.Media.insertImage(CoreConfig.applicationContext.contentResolver, path, File(path).name, null)
             CoreConfig.applicationContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(path).parentFile)))
             return path
         }
     }
 
-
-
+    /**
+     * 保存 Bitmap 到外部公共目录（完整参数版本）
+     *
+     * @param bitmap 要保存的 Bitmap
+     * @param relativePath 图片相对路径（例如 "Camera" 或 "MyApp"）
+     * @param fileName 文件名（自动补后缀）
+     * @param compressFormat 图片格式（默认 PNG）
+     * @return 返回最终保存路径字符串；失败返回 ""
+     *
+     * 逻辑说明：
+     * - Android Q 及以上版本：使用私有外部目录（不会出现在相册）
+     * - Android Q 以下版本：保存后会通过广播通知系统刷新媒体库，使图片出现在系统相册中
+     */
     fun saveBitmap2ExternalPrivate(bitmap:Bitmap?, relativePath:String = "", fileName:String = "", compressFormat:CompressFormat = CompressFormat.PNG):String {
-        if (bitmap == null) {
-            return ""
-        }
+        if (bitmap == null) return ""
 
+        // 处理文件名（补后缀）
         var fullName = fileName
-        // fileName 如果不是图片后缀结尾补充 图片后缀
         if (fileName.isNullOrEmpty()) {
             fullName = getDefFileName(defFileName, compressFormat)
         } else if (!FileUtils.hasImageSuffix(fileName)) {
             fullName = getDefFileName(fileName, compressFormat)
         }
 
-
-
-        if (isQ()) {
-
-            FileUtils.saveBitmap(bitmap, fullName)
+        // 拼接完整路径
+        val allPath = if (relativePath.isNullOrEmpty()) {
+            fullName
         } else {
-            FileUtils.saveBitmap(bitmap, fullName)
-            // 发送至相册
-            MediaStore.Images.Media.insertImage(CoreConfig.applicationContext.contentResolver, fullName, File(fullName).name, null)
-            CoreConfig.applicationContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(fullName).parentFile)))
+            relativePath + File.separator + fullName
         }
-        return fullName
 
+        // Android Q 及以上：仅保存文件
+        if (isQ()) {
+            FileUtils.saveBitmap(bitmap, allPath)
+        } else {
+            // Android Q 以下：保存并更新相册
+            FileUtils.saveBitmap(bitmap, allPath)
+            MediaStore.Images.Media.insertImage(CoreConfig.applicationContext.contentResolver, allPath, File(allPath).name, null)
+            CoreConfig.applicationContext.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(File(allPath).parentFile)))
+        }
+        return allPath
     }
-
 }

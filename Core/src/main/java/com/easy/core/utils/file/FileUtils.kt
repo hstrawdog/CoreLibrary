@@ -80,7 +80,7 @@ object FileUtils {
     }
 
     @JvmStatic
-    fun getDefFileName(fileName:String=defFileName ,  compressFormat:CompressFormat = CompressFormat.PNG):String {
+    fun getDefFileName(fileName:String = defFileName, compressFormat:CompressFormat = CompressFormat.PNG):String {
         return "$fileName.${compressFormat.name.lowercase()}"
     }
 
@@ -348,9 +348,9 @@ object FileUtils {
     @RequiresApi(Build.VERSION_CODES.Q)
     @JvmStatic
     fun deleteFile(context:Context, fileUri:Uri):Int {
-        var  count =0
+        var count = 0
         try {
-            count=context.contentResolver?.delete(fileUri, null, null)?:0
+            count = context.contentResolver?.delete(fileUri, null, null) ?: 0
         } catch (e:Exception) {
             e.printStackTrace()
         }
@@ -503,7 +503,7 @@ object FileUtils {
     fun saveBitmap2Pictures(relativePath:String, fileName:String, bitmap:Bitmap, format:CompressFormat = Bitmap.CompressFormat.PNG):Uri? {
         getContentResolverUri(relativePath, fileName)?.let { uri ->
             CoreConfig.applicationContext.contentResolver.openOutputStream(uri)?.let { outputStream ->
-                saveBitmap(outputStream, bitmap,format)
+                saveBitmap(outputStream, bitmap, format)
                 // 更新图片大小
                 if (!isQ()) {
                     val imageValues = ContentValues()
@@ -547,7 +547,11 @@ object FileUtils {
         // 保存的位置
         val collection:Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val path = "${ALBUM_DIR}/${relativePath}"
+            val path = if (relativePath.isNullOrEmpty()) {
+                "${ALBUM_DIR}"
+            } else {
+                "${ALBUM_DIR}/${relativePath}"
+            }
             imageValues.apply {
                 put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
                 put(MediaStore.Images.Media.RELATIVE_PATH, path)
@@ -559,8 +563,11 @@ object FileUtils {
             return uri
         } else {
             // 老版本
-            val pictures = @Suppress("DEPRECATION") Environment.getExternalStoragePublicDirectory(ALBUM_DIR)
-            val saveDir = File(pictures, relativePath)
+            val saveDir = if (relativePath.isNullOrEmpty()) {
+                Environment.getExternalStoragePublicDirectory(ALBUM_DIR)
+            } else {
+                File(Environment.getExternalStoragePublicDirectory(ALBUM_DIR), relativePath)
+            }
             if (!saveDir.exists() && !saveDir.mkdirs()) {
                 return null
             }
@@ -3122,6 +3129,7 @@ object FileUtils {
     fun hasImageSuffix(name:String):Boolean {
         return name.lowercase().endsWith(".png") || name.lowercase().endsWith(".jpg") || name.lowercase().endsWith(".jpeg") || name.lowercase().endsWith(".webp")
     }
+
     @JvmStatic
     fun exportDb2Sdcard(context:Context, path:String, realDBName:String?, exportDBName:String) {
         val filePath = context.getDatabasePath(realDBName).absolutePath
