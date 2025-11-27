@@ -52,7 +52,6 @@ class PermissionsFragment : Fragment() {
             if (success) {
                 mPermissionsResult?.onPermissionsResult(true)
             } else {
-                mPermissionsResult?.onPermissionsResult(false)
                 if (CoreConfig.get().goSettingPermission) {
                     SelectDialog.Builder()
                         .setTitle("提示")
@@ -62,19 +61,22 @@ class PermissionsFragment : Fragment() {
                             intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                             val uri = Uri.fromParts("package", AppTool.getPackageName(context), null)
                             intent.data = uri
+                            // 重新在检查一遍权限
                             startActivityForResult(intent, 0x55)
                             dialog.dismiss()
+
                         }
                         .setOnCancelListener("取消") { dialog, which ->
                             dialog.dismiss()
+                            mPermissionsResult?.onPermissionsResult(false)
                         }
                         .create()
                         .show(childFragmentManager)
                 } else {
                     ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
+                    mPermissionsResult?.onPermissionsResult(false)
+
                 }
-
-
             }
         }
     }
