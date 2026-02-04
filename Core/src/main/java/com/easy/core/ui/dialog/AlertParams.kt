@@ -2,6 +2,7 @@ package com.easy.core.ui.dialog
 
 import android.content.DialogInterface
 import com.easy.core.R
+import com.easy.core.utils.ResourcesUtils
 
 /**
  * @Author : huangqiqiang
@@ -19,22 +20,18 @@ class AlertParams {
     /**
      * 顶部标题
      */
-    var title: CharSequence = "提示"
-
-    /**
-     *  标题字体大小
-     */
-    var titleFontSize: Float = 50f
+    var titleData:StringData? = StringData("提示")
 
     /**
      *  中间内容或者提示
      */
-    var content: CharSequence = ""
+    var contentData:StringData = StringData("")
+
 
     /**
      * 中间布局
      */
-    var dialogViewBuilder: DialogViewBuilder? = null
+    var dialogViewBuilder:DialogViewBuilder? = null
 
     /**
      * 取消按钮上的文字
@@ -44,41 +41,43 @@ class AlertParams {
     /**
      * 取消按钮监听
      */
-    var negativeButtonListener: DialogInterface.OnClickListener? = null
+    var negativeButtonListener:DialogInterface.OnClickListener? = null
 
     /**
      * 确定按钮
      */
-    var positiveButtonText: CharSequence = "确定"
+    var positiveButtonText:CharSequence = "确定"
+
     /**
      *  确定按钮颜色
      */
-    var positiveButtonColor: Int = R.color.color_000
+    var positiveButtonColor:Int = R.color.color_000
+
     /**
      * 确定按钮监听
      */
-    var positiveButtonListener: DialogInterface.OnClickListener? = null
+    var positiveButtonListener:DialogInterface.OnClickListener? = null
 
     /**
      * 中立按钮
      */
-    var neutralButtonText: CharSequence = ""
+    var neutralButtonText:CharSequence = ""
 
     /**
      *  中立按钮监听
      */
-    var neutralButtonListener: DialogInterface.OnClickListener? = null
+    var neutralButtonListener:DialogInterface.OnClickListener? = null
 
 
     /**
      * 是否显示 按钮与内容的 横向 分割线
      */
-    var showDividingLine: Boolean = true
+    var showDividingLine:Boolean = true
 
     /**
      *  分割线颜色
      */
-    var dividingLineColor: Int = R.color.color_line_gray
+    var dividingLineColor:Int = R.color.color_line_gray
 
     /**
      *  点击空白位置 关闭dialog
@@ -89,4 +88,8 @@ class AlertParams {
      *  屏蔽返回键
      */
     var shieldReturn = false
+
+
+    data class StringData(var str:CharSequence, var fontSize:Float = ResourcesUtils.getDimen(R.dimen.x36), var fontColor:Int? = null)
+
 }

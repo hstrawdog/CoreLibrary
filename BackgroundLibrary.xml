@@ -17,7 +17,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="bl_corners_radius" value="app:bl_corners_radius=&quot;$value$&quot;" description="圆角宽度" toReformat="false" toShortenFQNames="true">
+  <template name="bl_corners_radius" value="app:bl_corners_radius=&quot;$value$&quot;" description="圆角大小" toReformat="false" toShortenFQNames="true">
     <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />

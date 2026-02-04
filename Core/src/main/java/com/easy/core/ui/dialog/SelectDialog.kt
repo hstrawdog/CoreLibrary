@@ -34,12 +34,12 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
     /**
      *  属性对象
      */
-    var alertParams: AlertParams? = null
+    var alertParams:AlertParams? = null
 
     /**
      *  viewHolder
      */
-    private val _viewHolder: T?
+    private val _viewHolder:T?
         get() {
             return alertParams?.dialogViewBuilder as? T
         }
@@ -47,7 +47,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
     /**
      *  布局ID
      */
-    override fun getDialogLayoutId(): Int {
+    override fun getDialogLayoutId():Int {
         return R.layout.dialog_base_select_dialog
 
     }
@@ -55,7 +55,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
     /**
      *  动画
      */
-    override fun getAnimation(): Int {
+    override fun getAnimation():Int {
         return R.style.dialogAnimation_fade_in2fade_out
 
     }
@@ -63,11 +63,11 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
     /**
      *  宽度
      */
-    override fun getDialogWeight(): Int {
+    override fun getDialogWeight():Int {
         return WindowManager.LayoutParams.MATCH_PARENT
     }
 
-    override val isDismissBackground: Boolean
+    override val isDismissBackground:Boolean
         get() {
             alertParams?.let {
                 return it.isDismissBackground
@@ -96,39 +96,39 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
         rootView?.let { it ->
 
             // 标题  提示
-            it.findViewById<TextView>(R.id.tv_title)
-                ?.apply {
-                    alertParams?.let {
-                        if (it.title.isNullOrEmpty()) {
-                            visibility = View.GONE
-                        } else {
-                            visibility = View.VISIBLE
-                        }
-                        this.text = it.title
-                        // 标题大小
-                        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.titleFontSize)
+            it.findViewById<TextView>(R.id.tv_title)?.apply {
+                alertParams?.titleData?.let {
+                    if (it.str.isNullOrEmpty()) {
+                        visibility = View.GONE
+                    } else {
+                        visibility = View.VISIBLE
+
                     }
+                    this.text = it.str
+                    // 标题大小
+                    this.setTextSize(TypedValue.COMPLEX_UNIT_PX, it.fontSize)
+                } ?: run {
+                    this.visibility = View.GONE
                 }
 
+            }
             // 内容
-            alertParams?.content?.let {
-                if (alertParams?.dialogViewBuilder == null && it.isNotEmpty()) {
+            alertParams?.contentData?.let {
+                if (alertParams?.dialogViewBuilder == null && it.str.isNotEmpty()){
                     var tv = TextView(activity)
                     tv.gravity = Gravity.CENTER
-                    tv.text = it
-                    var paddingSize = ResourcesUtils.getDimen(R.dimen.x10)
-                        .toInt()
+                    tv.text = it.str
+                    var paddingSize = ResourcesUtils.getDimen(R.dimen.x10).toInt()
                     tv.setPadding(paddingSize, 0, paddingSize, 0)
-                    tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT)
-                    rootView?.findViewById<LinearLayout>(R.id.ll_content)
-                        ?.apply {
-                            addView(tv)
-                            setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20)
-                                .toInt())
-                        }
+                    tv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                    rootView?.findViewById<LinearLayout>(R.id.ll_content)?.apply {
+                        addView(tv)
+                        setPadding(0, 0, 0, ResourcesUtils.getDimen(R.dimen.x20).toInt())
+                    }
                 }
             }
+
+
 
             //  处理 内容与按钮的分割线
             if (alertParams?.showDividingLine == false) {
@@ -138,60 +138,54 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
             }
 
             // 左边按钮 取消
-            it.findViewById<TextView>(R.id.tv_cancel)
-                ?.let {
-                    if (alertParams?.negativeButtonText.isNullOrEmpty()) {
-                        it.visibility = View.GONE
-                    } else {
-                        it.visibility = View.VISIBLE
-                    }
+            it.findViewById<TextView>(R.id.tv_cancel)?.let {
+                if (alertParams?.negativeButtonText.isNullOrEmpty()) {
+                    it.visibility = View.GONE
+                } else {
+                    it.visibility = View.VISIBLE
+                }
 
-                    it.text = alertParams?.negativeButtonText
-                    it.setOnClickListener {
-                        if (alertParams?.negativeButtonListener != null) {
-                            alertParams?.negativeButtonListener?.onClick(this@SelectDialog,
-                                DialogInterface.BUTTON_NEGATIVE)
-                        } else {
-                            // 没有实现事件回调
-                            dismiss()
-                        }
+                it.text = alertParams?.negativeButtonText
+                it.setOnClickListener {
+                    if (alertParams?.negativeButtonListener != null) {
+                        alertParams?.negativeButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_NEGATIVE)
+                    } else {
+                        // 没有实现事件回调
+                        dismiss()
                     }
                 }
+            }
             // 中间 中立按钮
-            it.findViewById<TextView>(R.id.tv_negative)
-                ?.apply {
-                    if (!alertParams?.neutralButtonText.isNullOrEmpty()) {
+            it.findViewById<TextView>(R.id.tv_negative)?.apply {
+                if (!alertParams?.neutralButtonText.isNullOrEmpty()) {
 
-                        text = alertParams?.neutralButtonText
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            if (alertParams?.neutralButtonListener != null) {
-                                alertParams?.neutralButtonListener?.onClick(this@SelectDialog,
-                                    DialogInterface.BUTTON_POSITIVE)
-                            }
+                    text = alertParams?.neutralButtonText
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        if (alertParams?.neutralButtonListener != null) {
+                            alertParams?.neutralButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
                         }
-                        it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
                     }
+                    it.findViewById<View>(R.id.v_negative).visibility = View.VISIBLE
                 }
+            }
             // 右边按钮 确认
-            it.findViewById<TextView>(R.id.tv_determine)
-                ?.let {
-                    if (alertParams?.positiveButtonText.isNullOrEmpty()) {
-                        it.visibility = View.GONE
-                    } else {
-                        it.visibility = View.VISIBLE
-                    }
-                    it.text = alertParams?.positiveButtonText
-                    alertParams?.positiveButtonColor.apply {
-                        it.setTextColor(ResourcesUtils.getColor(this!!))
-                    }
-                    it.setOnClickListener {
-                        if (alertParams?.positiveButtonListener != null) {
-                            alertParams?.positiveButtonListener?.onClick(this@SelectDialog,
-                                DialogInterface.BUTTON_POSITIVE)
-                        }
+            it.findViewById<TextView>(R.id.tv_determine)?.let {
+                if (alertParams?.positiveButtonText.isNullOrEmpty()) {
+                    it.visibility = View.GONE
+                } else {
+                    it.visibility = View.VISIBLE
+                }
+                it.text = alertParams?.positiveButtonText
+                alertParams?.positiveButtonColor.apply {
+                    it.setTextColor(ResourcesUtils.getColor(this!!))
+                }
+                it.setOnClickListener {
+                    if (alertParams?.positiveButtonListener != null) {
+                        alertParams?.positiveButtonListener?.onClick(this@SelectDialog, DialogInterface.BUTTON_POSITIVE)
                     }
                 }
+            }
 
             // 如果  三个菜单都没文字  隐藏 分割线
             if (alertParams?.positiveButtonText.isNullOrEmpty() && alertParams?.neutralButtonText.isNullOrEmpty() && alertParams?.negativeButtonText.isNullOrEmpty()) {
@@ -229,7 +223,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
      * @param event KeyEvent
      * @return Boolean
      */
-    override fun onKey(dialog: DialogInterface?, keyCode: Int, event: KeyEvent?): Boolean {
+    override fun onKey(dialog:DialogInterface?, keyCode:Int, event:KeyEvent?):Boolean {
         return keyCode == KeyEvent.KEYCODE_BACK && alertParams?.shieldReturn == true
     }
 
@@ -241,15 +235,15 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
         /**
          *  属性池
          */
-        private var alertParams: AlertParams = AlertParams()
+        private var alertParams:AlertParams = AlertParams()
 
         /**
          * 构建
          *
          * @return
          */
-        fun create(): SelectDialog<*> {
-            val baseSelectDialog: SelectDialog<*> = SelectDialog<DialogViewBuilder>()
+        fun create():SelectDialog<*> {
+            val baseSelectDialog:SelectDialog<*> = SelectDialog<DialogViewBuilder>()
             baseSelectDialog.alertParams = alertParams
             return baseSelectDialog
         }
@@ -259,8 +253,8 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param fragmentManager FragmentManager
          * @return SelectDialog<*>
          */
-        fun create(fragmentManager: FragmentManager): SelectDialog<*> {
-            val baseSelectDialog: SelectDialog<*> = SelectDialog<DialogViewBuilder>()
+        fun create(fragmentManager:FragmentManager):SelectDialog<*> {
+            val baseSelectDialog:SelectDialog<*> = SelectDialog<DialogViewBuilder>()
             baseSelectDialog.alertParams = alertParams
             baseSelectDialog.show(fragmentManager)
             return baseSelectDialog
@@ -271,8 +265,8 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param fragmentManager FragmentManager
          * @return SelectDialog<*>
          */
-        fun show(fragmentManager: FragmentManager): SelectDialog<*> {
-            val baseSelectDialog: SelectDialog<*> = SelectDialog<DialogViewBuilder>()
+        fun show(fragmentManager:FragmentManager):SelectDialog<*> {
+            val baseSelectDialog:SelectDialog<*> = SelectDialog<DialogViewBuilder>()
             baseSelectDialog.alertParams = alertParams
             baseSelectDialog.show(fragmentManager)
             return baseSelectDialog
@@ -284,7 +278,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param dialogViewBuilder
          * @return
          */
-        fun setBaseViewBuilderHolder(dialogViewBuilder: DialogViewBuilder?): Builder {
+        fun setBaseViewBuilderHolder(dialogViewBuilder:DialogViewBuilder?):Builder {
             alertParams.dialogViewBuilder = dialogViewBuilder
             return this
         }
@@ -297,7 +291,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param onCancelListener
          * @return
          */
-        fun setOnCancelListener(text: String?, onCancelListener: DialogInterface.OnClickListener? = null): Builder {
+        fun setOnCancelListener(text:String?, onCancelListener:DialogInterface.OnClickListener? = null):Builder {
             alertParams.negativeButtonListener = onCancelListener
             text?.let {
                 alertParams.negativeButtonText = it
@@ -312,7 +306,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param listener
          * @return
          */
-        fun setPositiveButton(text: CharSequence = "确定", listener: DialogInterface.OnClickListener? = null): Builder {
+        fun setPositiveButton(text:CharSequence = "确定", listener:DialogInterface.OnClickListener? = null):Builder {
             text?.let {
                 alertParams.positiveButtonText = it
             }
@@ -328,10 +322,10 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @return
          */
         fun setPositiveButton(
-                text: CharSequence = "确定",
-                color: Int = R.color.color_000,
-                listener: DialogInterface.OnClickListener? = null,
-        ): Builder {
+            text:CharSequence = "确定",
+            color:Int = R.color.color_000,
+            listener:DialogInterface.OnClickListener? = null,
+                             ):Builder {
             alertParams.positiveButtonText = text
             alertParams.positiveButtonColor = color
             alertParams.positiveButtonListener = listener
@@ -344,7 +338,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param listener OnClickListener
          * @return Builder?
          */
-        fun setNeutralButton(text: CharSequence, listener: DialogInterface.OnClickListener): Builder {
+        fun setNeutralButton(text:CharSequence, listener:DialogInterface.OnClickListener):Builder {
             alertParams.neutralButtonText = text
             alertParams.neutralButtonListener = listener
             return this
@@ -357,35 +351,34 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param text
          * @return
          */
-        fun setTitle(text: CharSequence?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)): Builder {
+        fun setTitle(text:CharSequence?, fontSize:Float = ResourcesUtils.getDimen(R.dimen.x36)):Builder {
             text?.let {
-                alertParams.title = it
+                alertParams.titleData?.str = it
             }
-            alertParams.titleFontSize = fontSize
+            alertParams.titleData?.fontSize = fontSize
             return this
         }
 
-        fun setTitle(@StringRes text: Int?, fontSize: Float = ResourcesUtils.getDimen(R.dimen.x36)): Builder {
+        fun setTitle(@StringRes text:Int?, fontSize:Float = ResourcesUtils.getDimen(R.dimen.x36)):Builder {
             text?.let {
-                alertParams.title = ResourcesUtils.getString(it)
+                setTitle(ResourcesUtils.getString(text), fontSize)
             }
-            alertParams.titleFontSize = fontSize
             return this
         }
 
         /**
          *  中间的提示
          */
-        fun setContent(text: CharSequence?): Builder {
+        fun setContent(text:CharSequence?):Builder {
             text?.let {
-                alertParams.content = it
+                alertParams.contentData.str = it
             }
             return this
         }
 
-        fun setContent(@StringRes text: Int?): Builder {
+        fun setContent(@StringRes text:Int?):Builder {
             text?.let {
-                alertParams.content = ResourcesUtils.getString(it)
+                setContent(ResourcesUtils.getString(it))
             }
             return this
         }
@@ -393,7 +386,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
         /**
          *  分割线
          */
-        fun setDividingLine(showDividingLine: Boolean): Builder {
+        fun setDividingLine(showDividingLine:Boolean):Builder {
             alertParams.showDividingLine = showDividingLine
             return this
         }
@@ -402,7 +395,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * 设置分割线颜色
          * @param dividingLineColor Int
          */
-        fun setDividingLineColor(@ColorRes dividingLineColor: Int) {
+        fun setDividingLineColor(@ColorRes dividingLineColor:Int) {
             alertParams.dividingLineColor = dividingLineColor
         }
         //endregion
@@ -412,7 +405,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param dismiss Boolean
          * @return Builder
          */
-        fun setDismissBackground(dismiss: Boolean): Builder {
+        fun setDismissBackground(dismiss:Boolean):Builder {
             alertParams.isDismissBackground = dismiss
             return this
 
@@ -423,7 +416,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
          * @param shieldReturn Boolean
          * @return Builder
          */
-        fun setShieldReturn(shieldReturn: Boolean): Builder {
+        fun setShieldReturn(shieldReturn:Boolean):Builder {
             alertParams.shieldReturn = shieldReturn
             return this
         }
