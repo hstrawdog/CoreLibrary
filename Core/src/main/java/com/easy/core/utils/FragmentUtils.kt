@@ -115,27 +115,32 @@ class FragmentUtils(any: Any) {
         val fm = supportFragmentManager ?: return
         val transaction = fm.beginTransaction().setReorderingAllowed(true)
 
-        // 👇 隐藏当前 Fragment，避免叠加显示
+        val tag = fragment.javaClass.name
+
+        // 1️⃣ 隐藏当前可见 Fragment
         currentFragment?.let { transaction.hide(it) }
 
-        val tag = fragment.javaClass.name
+        // 2️⃣ 查找是否已经 add
         val existingFragment = fm.findFragmentByTag(tag)
 
         if (existingFragment == null) {
+            // 新 Fragment，添加到 container
             transaction.add(containerId, fragment, tag)
+            addToStack(fragment)
+            currentFragment = fragment
         } else {
+            // 已存在，确保在 container 内并显示
+            if (existingFragment.isDetached) transaction.attach(existingFragment)
             transaction.show(existingFragment)
+            currentFragment = existingFragment
         }
 
+        // 3️⃣ 回退栈
         transaction.addToBackStack(tag)
             .commitAllowingStateLoss()
 
-        addToStack(fragment)
-        currentFragment = fragment
-
-        LogUtils.dMark(TAG.LIVE_TAG, "coverFragment -> ${fragment.javaClass.simpleName}")
+        LogUtils.dMark(TAG.LIVE_TAG, "coverFragmentNew -> ${currentFragment?.javaClass?.simpleName}")
     }
-
 
     /**
      * 回退上一个覆盖的 Fragment（与 coverFragment 搭配使用）
