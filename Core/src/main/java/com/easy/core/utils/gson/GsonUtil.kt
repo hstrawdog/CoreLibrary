@@ -21,9 +21,7 @@ object GsonUtil {
     /**
      * 如果不设置serializeNulls,序列化时默认忽略NULL
      * */
-    private val GSON = GsonBuilder().serializeNulls()
-        .registerTypeAdapter(Uri::class.java, UriAdapter())
-        .create()
+    private val GSON = GsonBuilder().serializeNulls().registerTypeAdapter(Uri::class.java, UriAdapter()).create()
 
     /**
      *
@@ -68,7 +66,7 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, clazz)
         } catch (e:JsonSyntaxException) {
-            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
+            LogUtils.e { "-- fromJson --:  ${e.toString()}" }
             null
         }
     }
@@ -84,7 +82,8 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, type)
         } catch (e:JsonSyntaxException) {
-            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
+            LogUtils.e { "-- fromJson --:  ${e.toString()}" }
+
             null
         }
     }
@@ -100,7 +99,8 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, clazz)
         } catch (e:JsonSyntaxException) {
-            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
+            LogUtils.e { "-- fromJson --:  ${e.toString()}" }
+
             null
         }
     }
@@ -116,7 +116,8 @@ object GsonUtil {
         return try {
             GSON.fromJson(json, type)
         } catch (e:JsonSyntaxException) {
-            LogUtils.dInfo("-- fromJson --:  ${e.toString()}")
+            LogUtils.e { "-- fromJson --:  ${e.toString()}" }
+
             null
         }
     }
@@ -152,12 +153,12 @@ object GsonUtil {
     @JvmStatic
     fun getValue(json:String?, key:String?):JsonElement? {
         if (json.isNullOrEmpty() || key.isNullOrEmpty()) {
-            LogUtils.e("$json   与  $key  ")
-            return  null
+            LogUtils.e { "$json   与  $key  " }
+            return null
         } else if (json.contains(key)) {
             return JsonParser.parseString(json).asJsonObject[key]
         } else {
-            LogUtils.e("$json    不存在 $key")
+            LogUtils.e { "$json    不存在 $key" }
             return null
         }
 

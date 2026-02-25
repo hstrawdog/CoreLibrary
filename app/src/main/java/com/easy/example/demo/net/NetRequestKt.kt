@@ -22,7 +22,7 @@ fun <T> BaseViewModel.launch(block: suspend () -> NetResponseBody<T>, error: sus
         try {
             responseData(block())
         } catch (e: Exception) {
-            LogUtils.dInfo("launch: error ${e.printStackTrace()}")
+            LogUtils.dInfo{"launch: error ${e.printStackTrace()}"}
             error(e)
         }
     }
@@ -50,7 +50,7 @@ suspend fun launchRequest(block: suspend () -> Unit, error: suspend (Throwable) 
     runCatching {
         block()
     }.onSuccess {
-        LogUtils.e("")
+        LogUtils.e { "" }
     }
         .onFailure {
             //// 处理异常

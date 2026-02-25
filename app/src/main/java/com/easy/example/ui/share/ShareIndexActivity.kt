@@ -38,7 +38,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                         "",
                         FileUtils.getDefFileName(".png")
                     )
-                    LogUtils.e("$path")
+                    LogUtils.e { "$path" }
                     shareImg(File(path))
                 }
             })
@@ -51,7 +51,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                         "",
                         FileUtils.getDefFileName(".png")
                     )
-                    LogUtils.e("$path")
+                    LogUtils.e { "$path" }
                     shareImg(File(path))
                 }
             })
@@ -64,7 +64,7 @@ class ShareIndexActivity : BaseViewBindingActivity<ActivityShareIndexBinding>() 
                         "",
                         FileUtils.getDefFileName(".png")
                     )
-                    LogUtils.e("$path")
+                    LogUtils.e { "$path" }
                     shareImg(File(queryFilePathByUri(activity,path)))
                 }
             })

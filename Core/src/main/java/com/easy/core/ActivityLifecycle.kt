@@ -24,7 +24,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     val activity: Activity?
         get() {
             check(activities.size != 0) {
-                LogUtils.e("activities 0 或者 Core 未初始化")
+                LogUtils.e{"activities 0 或者 Core 未初始化"}
             }
             // 获取最上面的 Activity
             for (i in activities.indices.reversed()) {
@@ -37,7 +37,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
         }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        LogUtils.i("ActivityLifecycle -> onActivityCreated  " + activity.localClassName)
+        LogUtils.i{"ActivityLifecycle -> onActivityCreated  " + activity.localClassName}
         activities.add(activity)
     }
 
@@ -47,7 +47,7 @@ class ActivityLifecycle : ActivityLifecycleCallbacks {
     override fun onActivityStopped(activity: Activity) {}
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
     override fun onActivityDestroyed(activity: Activity) {
-        LogUtils.i("ActivityLifecycle -> onActivityDestroyed    " + activity.localClassName)
+        LogUtils.i{"ActivityLifecycle -> onActivityDestroyed    " + activity.localClassName}
         activities.remove(activity)
     }
 

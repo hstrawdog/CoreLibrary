@@ -22,7 +22,7 @@ class LoadMoreActivity(override val adapter: MainAdapter = MainAdapter()) : Base
 
 
     override fun onLoadMore() {
-        LogUtils.e("----onLoadMore -----------------$pageCount")
+        LogUtils.e { "----onLoadMore -----------------$pageCount" }
         Handler().postDelayed({
             if (pageCount == 3) {
                 pageCount=1

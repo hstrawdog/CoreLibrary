@@ -20,7 +20,7 @@ class ParcelableActivity : BaseActivity() {
 
     override fun initView() {
         val bean = intent.getParcelableExtra<ParcelableBean>("A")
-        LogUtils.e("${bean?.a}")
+        LogUtils.e { "${bean?.a}" }
 
     }
 }

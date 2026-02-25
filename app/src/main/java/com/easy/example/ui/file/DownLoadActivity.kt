@@ -35,23 +35,23 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
             OkHttp.newHttpCompat()
                 .downloadFile(url, 0, "trailer.mp4", path, object : DownloadListener {
                     override fun start(max: Long) {
-                        LogUtils.e("onDownloaded")
+                        LogUtils.e { "onDownloaded" }
                     }
 
                     override fun loading(progress: Float) {
-                        LogUtils.e("onProgress " + progress)
+                        LogUtils.e { "onProgress " + progress }
                         findViewById<TextView>(R.id.textView30).setText("当前进度:         " + (progress * 100).toString())
                     }
 
                     override fun complete(filePath: String?) {
-                        LogUtils.e("complete")
+                        LogUtils.e { "complete" }
                         findViewById<TextView>(R.id.textView30).setText("下载完成 :  ${filePath}")
                         videoSaveToNotifyGalleryToRefreshWhenVersionGreaterQ(activity, File(path + "/trailer.mp4"))
 
                     }
 
                     override fun fail(code: Int, e: java.lang.Exception?) {
-                        LogUtils.e("onFailure")
+                        LogUtils.e { "onFailure" }
                         findViewById<TextView>(R.id.textView30).setText("失败 : " + code)
                     }
 
@@ -65,16 +65,16 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
             OkHttp.newHttpCompat()
                 .downloadFile(pdfPath, 0, "trailer.pdf", path, object : DownloadListener {
                     override fun start(max: Long) {
-                        LogUtils.e("onDownloaded")
+                        LogUtils.e { "onDownloaded" }
                     }
 
                     override fun loading(progress: Float) {
-                        LogUtils.e("onProgress " + progress)
+                        LogUtils.e { "onProgress " + progress }
                         findViewById<TextView>(R.id.textView36).setText("当前进度:         " + (progress * 100).toString())
                     }
 
                     override fun complete(filePath: String?) {
-                        LogUtils.e("complete")
+                        LogUtils.e { "complete" }
                         findViewById<TextView>(R.id.textView36).setText("下载完成 :  ${filePath}")
                         filePath?.let { it1 ->
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -86,7 +86,7 @@ class DownLoadActivity : BaseViewBindingActivity<ActivityDownloadBinding>() {
                     }
 
                     override fun fail(code: Int, e: java.lang.Exception?) {
-                        LogUtils.e("onFailure")
+                        LogUtils.e { "onFailure" }
                         findViewById<TextView>(R.id.textView36).setText("失败 : " + code)
                     }
 

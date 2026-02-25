@@ -77,7 +77,7 @@ class MainWebView2Activity : Activity(), View.OnClickListener {
             }
         }
         webView!!.registerHandler("bridgeToNative", BridgeHandler { str, callBackFunction ->
-            LogUtils.e(" bridgeToNative :    ${str.toString()}")
+            LogUtils.e { " bridgeToNative :    ${str.toString()}" }
             var jSONObject = JSONObject(str);
 
             val jSONObject2 = JSONObject()
@@ -203,7 +203,7 @@ class MainWebView2Activity : Activity(), View.OnClickListener {
                 "{\"data\":{\"build\":\"10299\",\"confidence\":0,\"contentCode\":\"sky-ysbg-qxjsq\",\"contentId\":\"25\",\"contentName\":\"请销假申请\",\"contentType\":\"app\",\"img\":[],\"latitude\":0,\"level\":0,\"longitude\":0,\"moduleCode\":\"other\",\"organCode\":\"cass\",\"organId\":\"05f55be45ce541f4850ee2f4b36c7d60\",\"platformCode\":\"\",\"state\":2,\"status\":0,\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjZXNoaXJlbnl1YW4yMiIsImN0diI6IiIsImRpZCI6ImZmZmZmZmZmLWIwYzEtYjIwMS1mZmZmLWZmZmZlZjA1YWM0YSIsImR0eSI6Im1vYmlsZSIsImV4cCI6MTc1MTIwMzg3NCwiaWF0IjoxNzUxMDIzODc0LCJpc3MiOiJodGltZWFwcCIsImp0aSI6IjcyNzk2YTE2OWY4OTQ2ZGJhMzQ4MzZlN2U2Y2ZhODM4IiwibmJmIjoxNzUxMDIzODc0LCJvcmciOiIwNWY1NWJlNDVjZTU0MWY0ODUwZWUyZjRiMzZjN2Q2MCIsInVpZCI6IjRiZDBlYWFkNWY0MzRiMTk5YTlmNjE4MjMxNDAxODM4IiwidW5hIjoi5rWL6K-V5Lq65ZGYMjIifQ.Oa9iB5n2nHFWpVUMp7GHDFeni26MxQS39s0KuVgLytk\",\"userCorpOrganId\":\"\",\"version\":\"3.8.11\"},\"reqid\":\"\",\"type\":\"common\"}"
             webView!!.callHandler("bridgeToWeb", json, object : OnBridgeCallback {
                 override fun onCallBack(p0:String?) {
-                    LogUtils.e(" onCallBack :    ${p0.toString()}")
+                    LogUtils.e { " onCallBack :    ${p0.toString()}" }
                 }
             })
         }

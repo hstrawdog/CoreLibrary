@@ -84,7 +84,7 @@ class OkHttpImpl : HttpCompat {
             postHandler(Dispatchers.Default, callback, response, params)
         } catch (e: IOException) {
             e.printStackTrace()
-            LogUtils.e(e.toString())
+            LogUtils.e{e.toString()}
 
             postHandler(Dispatchers.Default, callback, null, null)
         }
@@ -120,7 +120,7 @@ class OkHttpImpl : HttpCompat {
             postHandler(Dispatchers.Default, callback, response, params)
         } catch (e: IOException) {
             e.printStackTrace()
-            LogUtils.e(e.toString())
+            LogUtils.e { e.toString() }
 
             postHandler(Dispatchers.Default, callback, null, null)
         }
@@ -196,7 +196,7 @@ class OkHttpImpl : HttpCompat {
                                 //所有异常都处理
                                 if (CoreConfig.get().isDebug) {
                                     e.printStackTrace()
-                                    LogUtils.e(e.toString())
+                                    LogUtils.e { e.toString() }
 
                                 }
                                 downloadListener.fail(-1, e)
@@ -209,7 +209,7 @@ class OkHttpImpl : HttpCompat {
                                     //所有异常都处理
                                     if (CoreConfig.get().isDebug) {
                                         e.printStackTrace()
-                                        LogUtils.e(e.toString())
+                                        LogUtils.e { e.toString() }
 
                                     }
                                 }
@@ -221,7 +221,7 @@ class OkHttpImpl : HttpCompat {
                         //所有异常都处理
                         if (CoreConfig.get().isDebug) {
                             e.printStackTrace()
-                            LogUtils.e(e.toString())
+                            LogUtils.e { e.toString() }
                         }
                         downloadListener.fail(-1, e)
                     }
@@ -231,7 +231,7 @@ class OkHttpImpl : HttpCompat {
             //所有异常都处理
             if (CoreConfig.get().isDebug) {
                 e.printStackTrace()
-                LogUtils.e(e.toString())
+                LogUtils.e { e.toString() }
 
             }
             downloadListener.fail(-1, e)
@@ -420,7 +420,7 @@ class OkHttpImpl : HttpCompat {
                 callback.onSuccess(code.toString() + "", string)
             } catch (e: IOException) {
                 e.printStackTrace()
-                LogUtils.e(e.toString())
+                LogUtils.e { e.toString() }
 
             }
         } else {

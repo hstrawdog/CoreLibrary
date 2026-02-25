@@ -29,7 +29,6 @@ class CurtainActivity : BaseActivity() {
             findViewById<View>(R.id.imageView8).getDrawingRect(rect)
             val viewLocation = IntArray(2)
             findViewById<View>(R.id.imageView8).getLocationOnScreen(viewLocation)
-            dInfo("")
             guideView.setTargetView(findViewById(R.id.imageView8))
             guideView.visibility = View.VISIBLE
         }

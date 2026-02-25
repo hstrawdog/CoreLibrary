@@ -71,7 +71,6 @@ class RatingBarView @JvmOverloads constructor(context: Context, attrs: Attribute
         }
         if (mIsSlide) {
             current = (5 * index / length).toInt()
-            dInfo(" index " + current + "------" + index)
             redraw()
         }
         return ev.action != MotionEvent.ACTION_UP || super.dispatchTouchEvent(ev)

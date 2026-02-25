@@ -67,12 +67,12 @@ suspend inline fun <reified T> launchRequestBase(crossinline block: suspend () -
     }.onSuccess {
 
 
-        LogUtils.e("111")
+        LogUtils.e { "111" }
 //        val str = AESUtils.decrypt(it.getData())
 //        if (BuildConfig.DEBUG) {
 //            withContext(Dispatchers.Main) {
-//                LogUtils.e("解密结果 ------------")
-//                LogUtils.e(str)
+//                LogUtils.e { "解密结果 ------------" }
+//                LogUtils.e { str }
 //            }
 //        }
 //        // 将str  解析成T  对象
@@ -90,7 +90,7 @@ suspend inline fun <reified T> launchRequestBase(crossinline block: suspend () -
 //        }
     }
         .onFailure {
-            LogUtils.e("${it}")
+            LogUtils.e { "${it}" }
             //// 处理异常
             withContext(Dispatchers.Main) {
                 error(it)
@@ -129,8 +129,8 @@ inline fun <reified T> launchRequestWithScope(scope: CoroutineScope,
         runCatching { block() }.onSuccess { response ->
 //                val decrypted = AESUtils.decrypt(response.getData())
 //                if (BuildConfig.DEBUG) {
-//                    LogUtils.e("解密结果 ------------")
-//                    LogUtils.e(decrypted)
+//                    LogUtils.e { "解密结果 ------------" }
+//                    LogUtils.e { decrypted }
 //                }
 //
 //                val type = object : TypeToken<NetResponseBody<T>>() {}.type
@@ -145,7 +145,7 @@ inline fun <reified T> launchRequestWithScope(scope: CoroutineScope,
 //                }
             }
             .onFailure {
-                LogUtils.e("请求异常: $it")
+                LogUtils.e { "请求异常: $it" }
                 withContext(Dispatchers.Main) {
                     onError(it)
                 }
@@ -160,8 +160,8 @@ suspend inline fun <reified T> requestEncryptedSync(crossinline block: suspend (
 //        val decrypted = AESUtils.decrypt(response.getData())
 //
 //        if (BuildConfig.DEBUG) {
-//            LogUtils.e("解密结果 ------------")
-//            LogUtils.e(decrypted)
+//            LogUtils.e { "解密结果 ------------" }
+//            LogUtils.e { decrypted }
 //        }
 //
 //        val type = object : TypeToken<NetResponseBody<T>>() {}.type

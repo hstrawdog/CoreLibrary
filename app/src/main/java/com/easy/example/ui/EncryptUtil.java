@@ -77,7 +77,6 @@ public class EncryptUtil {
             }
             return new String(bArrAesDecrypt, "UTF-8");
         } catch (Exception e) {
-            LogUtils.e(TAG, "aesDecrypt: bad Base64" + str);
             e.printStackTrace();
             return str;
         }
@@ -88,7 +87,6 @@ public class EncryptUtil {
         if (TextUtils.isEmpty(str)) {
             return "";
         }
-        LogUtils.i(TAG, "md5: " + str);
         try {
             String str2 = "";
             for (byte b : MessageDigest.getInstance("MD5").digest(str.getBytes())) {

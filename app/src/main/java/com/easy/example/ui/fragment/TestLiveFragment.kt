@@ -31,23 +31,23 @@ class TestLiveFragment : BaseFragment() {
 
     override fun initView() {
         textView.setText("$text")
-        LogUtils.d(" TestLiveFragment   onResume         $text ")
+        LogUtils.e { " TestLiveFragment   onResume         $text " }
     }
 
     override fun onResume() {
         super.onResume()
-        LogUtils.d(" TestLiveFragment   onResume         $text ")
+        LogUtils.e { " TestLiveFragment   onResume         $text " }
     }
 
     override fun onPause() {
         super.onPause()
-        LogUtils.d(" TestLiveFragment   onPause         $text ")
+        LogUtils.e { " TestLiveFragment   onPause         $text " }
     }
 
 
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        LogUtils.d(" TestLiveFragment   setUserVisibleHint      $isVisibleToUser     $text ")
+        LogUtils.e { " TestLiveFragment   setUserVisibleHint      $isVisibleToUser     $text " }
     }
 }

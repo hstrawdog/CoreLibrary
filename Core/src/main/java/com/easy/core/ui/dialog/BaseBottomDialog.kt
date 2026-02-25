@@ -72,7 +72,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBaseDialogFragme
             initConfig()
             rootView = rootViewBuild.buildContentView(this)
         }
-        LogUtils.e4Mark("onCreateView " + javaClass.simpleName + this.toString())
+        LogUtils.dMark {"onCreateView " + javaClass.simpleName + this.toString()}
         return rootView
     }
 

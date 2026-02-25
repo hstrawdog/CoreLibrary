@@ -45,13 +45,12 @@ class ViewScrollView : View {
         canvas.drawLine(0f, 0f, width.toFloat(), height.toFloat(), paint)
 
 
-//        LogUtils.dInfo("800",""+getWidth());
-//        LogUtils.dInfo("getMeasuredWidth()",""+getMeasuredWidth());
-//        LogUtils.dInfo("getMeasuredWidth()",""+getMeasuredWidth());
-//        LogUtils.dInfo("getMeasuredWidth()",""+getMinimumWidth());
-//        LogUtils.dInfo("onDraw",""+ScreenUtils.dip2px(getContext(),800));
-        dInfo("onDraw"+ scrollX)
-        // LogUtils.dInfo("getScreenWidth", "" + ScreenUtils.getScreenWidth(getContext()));
+//        LogUtils.dInfo{ "800",""+getWidth() };
+//        LogUtils.dInfo{ "getMeasuredWidth()",""+getMeasuredWidth() };
+//        LogUtils.dInfo{ "getMeasuredWidth()",""+getMeasuredWidth() };
+//        LogUtils.dInfo{ "getMeasuredWidth()",""+getMinimumWidth() };
+//        LogUtils.dInfo{ "onDraw",""+ScreenUtils.dip2px(getContext(),800) };
+        // LogUtils.dInfo{ "getScreenWidth", "" + ScreenUtils.getScreenWidth(getContext()) };
     }
 
     var distanceX = 0f
@@ -62,13 +61,10 @@ class ViewScrollView : View {
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                e("getRight"+ right)
-                e("ACTION_DOWN -----------" + event.rawX)
                 mKeyX = event.x
                 mKeyX1 = event.x
             }
             MotionEvent.ACTION_MOVE -> {
-                e("ACTION_MOVE -----------" + event.rawX)
                 distanceX = mKeyX - event.rawX
                 scrollBy(distanceX.toInt(), 0)
                 if (scrollX < 0) {
@@ -81,24 +77,11 @@ class ViewScrollView : View {
                 mKeyX = event.rawX
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                e("---------------------------------------------------------------------------------------------------------------------")
-                e("ACTION_CANCEL"+ mKeyX1 + event.x)
-                e("distanceX"+ distanceX)
-                e("getRawX -----------" + event.rawX)
-                e("getX"+ x)
-                e("getLeft"+ left)
-                e("getRight"+ right)
-                e("getTranslationX"+ translationX)
-                e("getScrollX"+ scrollX)
                 postDelayed({
-                    e("---------------------------------------------------------------------------------------------------------------------")
-                    e("getScrollX"+ scrollX)
                     val getScrollX = scrollX
                     val animator = ValueAnimator.ofInt(0, scrollX)
                     animator.addUpdateListener { animation ->
                         val scrollX = animation.animatedValue as Int
-                        e("scrollX   $scrollX")
-                        e("getScrollX()-scrollX   "+ getScrollX + scrollX)
                         scrollTo(getScrollX - scrollX, 0)
                     }
                     animator.duration = 5000

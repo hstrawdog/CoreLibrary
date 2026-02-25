@@ -20,19 +20,19 @@ class LogUtilsActivity : BaseViewBindingActivity<ActivityLogUtilsBinding>() {
             }
         }
         binding.button84.setOnClickListener {
-            LogUtils.d(this.toString())
+            LogUtils.d{this.toString()}
         }
         binding.button85.setOnClickListener {
-            LogUtils.i(this.toString())
+            LogUtils.i{this.toString()}
         }
         binding.button86.setOnClickListener {
-            LogUtils.w(this.toString())
+            LogUtils.w{this.toString()}
         }
         binding.button87.setOnClickListener {
-            LogUtils.e(this.toString())
+            LogUtils.e{this.toString()}
         }
         binding.button88.setOnClickListener {
-            LogUtils.dInfo(this.toString())
+            LogUtils.dInfo{this.toString()}
 
         }
     }

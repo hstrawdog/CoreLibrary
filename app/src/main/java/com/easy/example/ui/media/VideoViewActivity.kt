@@ -40,7 +40,7 @@ class VideoViewActivity : BaseViewBindingActivity<ActivityVideoViewBinding>() {
             val inputStream = assetManager.open(fileName)
             // 创建目标文件路径
             val outFile = File(filesDir, fileName)
-            LogUtils.e("copyCacheFile           ${outFile.path}")
+            LogUtils.e { "copyCacheFile           ${outFile.path}" }
             outFile.delete()
             // 创建输出流并复制文件
             val outputStream: OutputStream = FileOutputStream(outFile)

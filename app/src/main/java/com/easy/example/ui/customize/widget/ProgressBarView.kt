@@ -51,7 +51,6 @@ class ProgressBarView : View {
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        e(event.action)
         when (event.action) {
             MotionEvent.ACTION_MOVE -> if (mSlide) {
                 mProgress = event.x / width * 100

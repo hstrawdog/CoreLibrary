@@ -151,12 +151,12 @@ class WebActivity : BaseFrameLayoutActivity() {
     class GetContent {
         @JavascriptInterface
         fun onHashChangeEvent() {
-            LogUtils.e("GetContent", "onHashChangeEvent")
+            LogUtils.e { "GetContent"+ "onHashChangeEvent" }
         }
 
         @JavascriptInterface
         fun onGetHtmlContent(str:String?) {
-            LogUtils.e("GetContent", str)
+            LogUtils.e { "GetContent"+ str }
         }
     }
 
@@ -164,17 +164,17 @@ class WebActivity : BaseFrameLayoutActivity() {
 
         @JavascriptInterface
         fun invoke(str:String?, str2:String?, str3:String?) {
-            LogUtils.e("GetContent", "invoke")
+            LogUtils.e { "GetContent "+ "invoke" }
         }
 
         @JavascriptInterface
         fun invoke(str:String?, str2:String?) {
-            LogUtils.e("GetContent", "invoke")
+            LogUtils.e { "GetContent "+"invoke" }
         }
 
         @JavascriptInterface
         fun invokeAndReturn(str:String, str2:String, str3:String?):String {
-            LogUtils.e("GetContent", "invokeAndReturn")
+            LogUtils.e { "GetContent "+ "invokeAndReturn" }
             var str = str
             var str2 = str2
             if (str == "com.inspur.gsp.imp.framework.plugin.GloSessionService" && str2 == "getClose") {
@@ -189,7 +189,7 @@ class WebActivity : BaseFrameLayoutActivity() {
 
         @JavascriptInterface
         fun invokeAndReturn(str:String?, str2:String?):String {
-            LogUtils.e("GetContent", "invokeAndReturn")
+            LogUtils.e { "GetContent"+ "invokeAndReturn" }
             return ""
         }
     }

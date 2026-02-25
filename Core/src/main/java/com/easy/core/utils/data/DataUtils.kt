@@ -1457,7 +1457,7 @@ object DataUtils {
             try {
                 return formatDecimals(java.lang.Double.valueOf(o.toString()), RoundingMode.FLOOR)
             } catch (e: Exception) {
-                LogUtils.e4Mark(" formatDecimals $e")
+                LogUtils.dMark {" formatDecimals $e"}
             }
         }
         return o.toString()

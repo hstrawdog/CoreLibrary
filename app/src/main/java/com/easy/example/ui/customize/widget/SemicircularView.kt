@@ -32,10 +32,6 @@ class SemicircularView : View {
         var widthSpecSize = MeasureSpec.getSize(widthMeasureSpec)
         val heightSpecMode = MeasureSpec.getMode(heightMeasureSpec)
         var heightSpecSize = MeasureSpec.getSize(heightMeasureSpec)
-        dInfo("widthSpecMode      $widthSpecMode")
-        dInfo("widthSpecSize      $widthSpecSize")
-        dInfo("heightSpecMode     $heightSpecMode")
-        dInfo("heightSpecSize     $heightSpecSize")
         if (widthSpecMode == MeasureSpec.EXACTLY || heightSpecMode == MeasureSpec.EXACTLY) {
             if (widthSpecSize < heightSpecSize) {
                 heightSpecSize = widthSpecSize

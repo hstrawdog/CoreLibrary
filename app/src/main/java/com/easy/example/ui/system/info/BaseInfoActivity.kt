@@ -44,14 +44,14 @@ class BaseInfoActivity : BaseViewBindingActivity<ActivityBaseInfoBinding>() {
 
     //   项目设定死了 竖屏  不会再触发
     override fun onConfigurationChanged(newConfig: Configuration) {
-        LogUtils.e("newConfig.orientation=" + newConfig.orientation);
+        LogUtils.e { "newConfig.orientation=" + newConfig.orientation };
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            LogUtils.e("触发竖屏");
+            LogUtils.e { "触发竖屏" };
             binding.textView9.text = "触发竖屏"
 
         }
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            LogUtils.e("触发横屏");
+            LogUtils.e { "触发横屏" };
             binding.textView9.text = "触发横屏"
 
         }
@@ -63,7 +63,7 @@ class BaseInfoActivity : BaseViewBindingActivity<ActivityBaseInfoBinding>() {
 
         mOrientationEventListener = object : OrientationEventListener(this) {
             override fun onOrientationChanged(orientation: Int) {
-                LogUtils.e("onOrientationChanged: $orientation")
+                LogUtils.e { "onOrientationChanged: $orientation" }
                 var direction = ""
                 if (orientation > 350 || orientation < 20) { //0度  90 正竖屏
                     direction = " 正竖屏"
@@ -84,15 +84,15 @@ class BaseInfoActivity : BaseViewBindingActivity<ActivityBaseInfoBinding>() {
         var mOrientationEventListener2 = object : OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
             //
             override fun onOrientationChanged(orientation: Int) {
-                LogUtils.e("onOrientationChanged2: $orientation")
+                LogUtils.e { "onOrientationChanged2: $orientation" }
             }
         }
         if (mOrientationEventListener?.canDetectOrientation() == true) {
-            LogUtils.e("可以检测方向")
+            LogUtils.e { "可以检测方向" }
             mOrientationEventListener2?.enable()
             mOrientationEventListener?.enable() //开启
         } else {
-            LogUtils.e("无法检测方向")
+            LogUtils.e { "无法检测方向" }
             mOrientationEventListener?.disable()
             mOrientationEventListener2?.disable()
 

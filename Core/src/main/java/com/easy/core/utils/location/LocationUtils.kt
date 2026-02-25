@@ -506,9 +506,9 @@ object LocationUtils {
                 mListener!!.onStatusChanged(provider, status, extras)
             }
             when (status) {
-                LocationProvider.AVAILABLE -> LogUtils.d("onStatusChanged", "当前GPS状态为可见状态")
-                LocationProvider.OUT_OF_SERVICE -> LogUtils.d("onStatusChanged", "当前GPS状态为服务区外状态")
-                LocationProvider.TEMPORARILY_UNAVAILABLE -> LogUtils.d("onStatusChanged", "当前GPS状态为暂停服务状态")
+                LocationProvider.AVAILABLE -> LogUtils.e { "onStatusChanged"+ "当前GPS状态为可见状态" }
+                LocationProvider.OUT_OF_SERVICE -> LogUtils.e { "onStatusChanged"+ "当前GPS状态为服务区外状态" }
+                LocationProvider.TEMPORARILY_UNAVAILABLE -> LogUtils.e { "onStatusChanged"+ "当前GPS状态为暂停服务状态" }
                 else -> {
                 }
             }

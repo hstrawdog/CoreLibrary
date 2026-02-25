@@ -46,7 +46,6 @@ class ClockView : View {
 
     private fun drawHour(canvas: Canvas, paint: Paint) {
         val hour = Calendar.getInstance()[Calendar.HOUR]
-        dInfo("--------------------   $hour")
         canvas.save()
         canvas.rotate(30 * hour.toFloat(), 0f, width / 2.toFloat())
         canvas.drawLine(0f, height / 2 + 30.toFloat(), 0f, height / 2 - 60.toFloat(), paint)
@@ -55,7 +54,6 @@ class ClockView : View {
 
     private fun drawSecond(canvas: Canvas, paint: Paint) {
         val second = Calendar.getInstance()[Calendar.SECOND]
-        dInfo("--------------------   $second")
         canvas.save()
         canvas.rotate(6 * second.toFloat(), 0f, width / 2.toFloat())
         canvas.drawLine(0f, height / 2 + 30.toFloat(), 0f, height / 2 - 180.toFloat(), paint)

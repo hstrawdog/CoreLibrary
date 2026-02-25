@@ -53,7 +53,7 @@ abstract class ListModel<T : Any> : BaseLifecycleObserver {
     private constructor()
 
     constructor(activity: BaseActivity) : this() {
-        LogUtils.e("listModel   constructor    BaseActivity11111")
+        LogUtils.e { "listModel   constructor    BaseActivity11111" }
 
         context = activity
         recycleView = initRecycleView(activity.rootViewImpl.rootView)
@@ -62,13 +62,13 @@ abstract class ListModel<T : Any> : BaseLifecycleObserver {
                 activity.lifecycle.addObserver(this@ListModel)
             }
         }
-        LogUtils.e("listModel   constructor    BaseActivity2222")
+        LogUtils.e { "listModel   constructor    BaseActivity2222" }
 
     }
 
     constructor(fragment: BaseFragment) : this() {
 
-        LogUtils.e("listModel   constructor    BaseFragment")
+        LogUtils.e { "listModel   constructor    BaseFragment" }
         context = fragment.context
         recycleView = initRecycleView(fragment.rootViewImpl.rootView)
         fragment.lifecycle.coroutineScope.launch {
@@ -336,7 +336,7 @@ abstract class ListModel<T : Any> : BaseLifecycleObserver {
 
 
     override fun onCrete() {
-        LogUtils.e(" ListModel  onCrete")
+        LogUtils.e { " ListModel  onCrete" }
         // 日志 上看去是是在 Activity 之后执行的
 
     }

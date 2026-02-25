@@ -26,14 +26,12 @@ public class KillAppServers extends Service {
     public void onCreate() {
         super.onCreate();
 
-        LogUtils.e("KillAppServers       onCreate   ");
 
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         //  并没执行到
-        LogUtils.e("    KillAppServers              onTaskRemoved ");
         super.onTaskRemoved(rootIntent);
     }
 }

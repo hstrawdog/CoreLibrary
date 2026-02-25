@@ -101,14 +101,14 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
      *  初始化
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-        LogUtils.dMark( TAG.LIVE_TAG," ${this}     onCreate  start")
+        LogUtils.dMark( TAG.LIVE_TAG, block = { " ${this}     onCreate  start" })
         initAnimEnter()
         super.onCreate(savedInstanceState)
         activity = this
         initConfig()
         setContentView(iCreateRootView.buildContentView(this))
         initView()
-        LogUtils.dMark( TAG.LIVE_TAG," ${this}     onCreate end")
+        LogUtils.dMark( TAG.LIVE_TAG, block = { " ${this}     onCreate end" })
     }
 
     /**

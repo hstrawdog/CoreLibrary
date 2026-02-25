@@ -35,7 +35,7 @@ class TestAccessibilityService : AccessibilityService() {
 
     var mainSearchId = "com.box.art:id/tv_search_tips"
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        LogUtils.e("onAccessibilityEvent")
+        LogUtils.e { "onAccessibilityEvent" }
 
         when (event.eventType) {
             AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED -> {
@@ -53,7 +53,7 @@ class TestAccessibilityService : AccessibilityService() {
                 if (source != null) {
                     var js = JSONObject()
                     recursionTravelView(source, js)
-                    LogUtils.e(" ${js.toString()}")
+                    LogUtils.e { " ${js.toString()}" }
                 }
 
 
@@ -79,10 +79,10 @@ class TestAccessibilityService : AccessibilityService() {
                                 var nodeInfo = window.root
                                 if (nodeInfo != null) {
                                     // 迭代View
-                                    LogUtils.e("--RecyclerVie-----------  ${nodeInfo.childCount}")
+                                    LogUtils.e { "--RecyclerVie-----------  ${nodeInfo.childCount}" }
                                     var js = JSONObject()
                                     recursionTravelView(nodeInfo, js)
-                                    LogUtils.e(js.toString())
+                                    LogUtils.e { js.toString() }
                                 }
                             }
 
@@ -93,11 +93,11 @@ class TestAccessibilityService : AccessibilityService() {
             }
 
         }
-        LogUtils.e("打开新窗口 ------   $set1  ")
-        LogUtils.e("当View被点击时发送此事件------   $set2  ")
-        LogUtils.e("当View被长按时发送此事件------   $set3  ")
-        LogUtils.e("View获取到焦点时发送此事件------   $set4  ")
-        LogUtils.e("当View滑动时发送此事件------   $set5  ")
+        LogUtils.e { "打开新窗口 ------   $set1  " }
+        LogUtils.e { "当View被点击时发送此事件------   $set2  " }
+        LogUtils.e { "当View被长按时发送此事件------   $set3  " }
+        LogUtils.e { "View获取到焦点时发送此事件------   $set4  " }
+        LogUtils.e { "当View滑动时发送此事件------   $set5  " }
 
     }
 
@@ -114,10 +114,10 @@ class TestAccessibilityService : AccessibilityService() {
                         var nodeInfo = window.root
                         if (nodeInfo != null) {
                             // 迭代View
-//                            LogUtils.e("--IBoxMainActivity-----------  ${nodeInfo.childCount}")
+//                            LogUtils.e { "--IBoxMainActivity-----------  ${nodeInfo.childCount}" }
 //                            var js = JSONObject()
 //                            recursionTravelView(nodeInfo, js)
-//                            LogUtils.e(js.toString())
+//                            LogUtils.e { js.toString() }
                             nodeInfo.findAccessibilityNodeInfosByViewId(mainSearchId)[0]?.parent?.parent?.performAction(AccessibilityNodeInfo.ACTION_CLICK)
                             isFirst = true
                         }
@@ -157,14 +157,14 @@ class TestAccessibilityService : AccessibilityService() {
                         }
 
                     } else {
-                        LogUtils.e(" " + window.type)
+                        LogUtils.e { " " + window.type }
                         var nodeInfo = window.root
                         if (nodeInfo != null) {
                             // 迭代View
-                            LogUtils.e("--RecyclerVie-----------  ${nodeInfo.childCount}")
+                            LogUtils.e { "--RecyclerVie-----------  ${nodeInfo.childCount}" }
                             var js = JSONObject()
                             recursionTravelView(nodeInfo, js)
-                            LogUtils.e(js.toString())
+                            LogUtils.e { js.toString() }
                         }
                     }
 
@@ -198,7 +198,7 @@ class TestAccessibilityService : AccessibilityService() {
     }
 
     override fun onInterrupt() {
-        LogUtils.e("onInterrupt")
+        LogUtils.e { "onInterrupt" }
 
     }
 

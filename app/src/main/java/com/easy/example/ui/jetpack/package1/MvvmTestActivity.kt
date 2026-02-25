@@ -21,7 +21,6 @@ import com.easy.example.databinding.ActivityMvvmBinding
  */
 class MvvmTestActivity : BaseVmActivity<UserViewModel, ActivityMvvmBinding, >() {
     override fun addViewModel() {
-        e(" MvvmTestActivity   addViewModel 1 ")
         //       mBinding.setVariable(BR.vm, new ViewModelProvider(this).get(UserViewModel.class));
         binding.vm = ViewModelProvider(this).get(UserViewModel::class.java)
         binding.title = "这是一个变量String"
@@ -35,7 +34,6 @@ class MvvmTestActivity : BaseVmActivity<UserViewModel, ActivityMvvmBinding, >() 
         observableArrayList.add("key1")
         observableArrayList.add("key2")
         binding.setList(observableArrayList)
-        e(" MvvmTestActivity   addViewModel 2 ")
     }
 
     override fun getLayoutId(): Int {

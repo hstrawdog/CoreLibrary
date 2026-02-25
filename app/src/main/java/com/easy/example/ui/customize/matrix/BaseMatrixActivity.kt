@@ -83,7 +83,6 @@ class BaseMatrixActivity : BaseActivity() {
             val matrix = Matrix()
             val rect = Rect()
             mButton47.getGlobalVisibleRect(rect)
-            dInfo(rect.toString())
             val dst = FloatArray(8)
             val src = FloatArray(8)
             val bw = mButton47!!.getWidth()
@@ -124,7 +123,6 @@ class BaseMatrixActivity : BaseActivity() {
             mButton47.animationMatrix = matrix
             val pts = FloatArray(8)
             mButton47.matrix.mapPoints(pts)
-            dInfo(pts.toString())
         })
     }
 }

@@ -68,7 +68,7 @@ VmFragmentActivity : BaseViewBindingActivity<ActivityVmFragmentBinding>() {
         }
 
         private fun addData(): List<*> {
-            LogUtils.e("----------------loadingMore")
+            LogUtils.e { "----------------loadingMore" }
             var map = ArrayList<com.easy.example.bean.MainBean<*>>()
             for (i in 0..9) {
                 map.add(com.easy.example.bean.MainBean("i " + i, VmFragmentActivity::class.java))

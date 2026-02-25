@@ -171,7 +171,7 @@ object PhotoUtils {
                 imageFilePath[0] = context.contentResolver.insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, values)
             }
         }
-        LogUtils.i("", "生成的照片输出路径：" + imageFilePath[0].toString())
+        LogUtils.e { ""+ "生成的照片输出路径：" + imageFilePath[0].toString() }
         return imageFilePath[0]
     }
 
@@ -286,15 +286,6 @@ object PhotoUtils {
                     exif.saveAttributes()
                 }
                 exif.saveAttributes()
-                LogUtils.d(
-                    """
-    ${exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE)}
-    ${exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)}
-    ${exif.getAttribute(ExifInterface.TAG_GPS_PROCESSING_METHOD)}
-    ${exif.getAttribute(ExifInterface.TAG_IMAGE_LENGTH)}
-    ${exif.getAttribute(ExifInterface.TAG_IMAGE_WIDTH)}
-    """.trimIndent()
-                )
             } catch (e: Exception) {
             }
         }

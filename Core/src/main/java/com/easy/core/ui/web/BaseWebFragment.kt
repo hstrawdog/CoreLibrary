@@ -100,7 +100,7 @@ open class BaseWebFragment : BaseFragment() {
         }
 
         override fun onConsoleMessage(cm:ConsoleMessage?):Boolean {
-            LogUtils.d("WebViewConsole", cm?.message() + " -- From line " + cm?.lineNumber() + " of " + cm?.sourceId());
+            LogUtils.e { "WebViewConsole"+ cm?.message() + " -- From line " + cm?.lineNumber() + " of " + cm?.sourceId() };
             return super.onConsoleMessage(cm)
 
         }
@@ -272,11 +272,11 @@ open class BaseWebFragment : BaseFragment() {
 
 
         override fun shouldOverrideUrlLoading(view:WebView?, url:String?):Boolean {
-            LogUtils.e(" shouldOverrideUrlLoading :    ${url.toString()}")
+            LogUtils.e { " shouldOverrideUrlLoading :    ${url.toString()}" }
             return super.shouldOverrideUrlLoading(view, url)
         }
         override fun shouldOverrideUrlLoading(view:WebView, request:WebResourceRequest):Boolean {
-            LogUtils.e(" shouldOverrideUrlLoading2 :    ${url.toString()}")
+            LogUtils.e { " shouldOverrideUrlLoading2 :    ${url.toString()}" }
             if (URLUtil.isNetworkUrl(request.url.toString())) {
                 return false
             }
@@ -289,7 +289,7 @@ open class BaseWebFragment : BaseFragment() {
         }
 
         override fun shouldInterceptRequest(view:WebView, request:WebResourceRequest):WebResourceResponse? {
-            LogUtils.e(" shouldInterceptRequest :    ${request.url.toString()}")
+            LogUtils.e { " shouldInterceptRequest :    ${request.url.toString()}" }
 //            if (request.url.toString().toLowerCase().contains("/favicon.ico")) {
 //                try {
 //                    return WebResourceResponse("image/png", null, null)
@@ -301,7 +301,7 @@ open class BaseWebFragment : BaseFragment() {
         }
 
         override fun onPageStarted(view:WebView?, url:String?, favicon:Bitmap?) {
-            LogUtils.e(" onPageStarted :    ${url.toString()}")
+            LogUtils.e { " onPageStarted :    ${url.toString()}" }
             super.onPageStarted(view, url, favicon)
             progressBar?.visibility = View.VISIBLE
             if (null != webLoadListener) {
@@ -310,7 +310,7 @@ open class BaseWebFragment : BaseFragment() {
         }
 
         override fun onPageFinished(view:WebView, url:String) {
-            LogUtils.e(" onPageFinished :    ${url.toString()}")
+            LogUtils.e { " onPageFinished :    ${url.toString()}" }
             super.onPageFinished(view, url)
             progressBar?.visibility = View.GONE
             if (null != webLoadListener) {
@@ -320,7 +320,7 @@ open class BaseWebFragment : BaseFragment() {
 
         override fun onReceivedError(view:WebView, errorCode:Int, description:String?, failingUrl:String?) {
             super.onReceivedError(view, errorCode, description, failingUrl) // 断网或者网络连接超时
-            LogUtils.e(" onReceivedError :    ${url.toString()}  errorCode: $errorCode  description: $description  failingUrl: $failingUrl")
+            LogUtils.e { " onReceivedError :    ${url.toString()}  errorCode: $errorCode  description: $description  failingUrl: $failingUrl" }
             if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_CONNECT || errorCode == ERROR_TIMEOUT) {
                 view.loadUrl("about:blank");// 避免出现默认的错误界面
                 webLoadListener?.onError(failingUrl)
@@ -329,7 +329,7 @@ open class BaseWebFragment : BaseFragment() {
 
         override fun onReceivedError(view:WebView, request:WebResourceRequest, error:WebResourceError) {
             super.onReceivedError(view, request, error)
-            LogUtils.e(" onReceivedError :    ${request.url.toString()}  errorCode: ${error.errorCode }                 ${error.description }")
+            LogUtils.e { " onReceivedError :    ${request.url.toString()}  errorCode: ${error.errorCode }                 ${error.description }" }
             progressBar?.visibility = View.GONE
 
         }

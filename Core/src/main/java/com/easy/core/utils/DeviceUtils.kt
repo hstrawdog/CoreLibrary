@@ -47,7 +47,7 @@ object DeviceUtils {
             val phoneName = Build.MODEL
             //品牌 例如：samsung
             val manuFacturer = Build.MANUFACTURER
-            LogUtils.d("详细序列号", "$manuFacturer-$phoneName-$serialNumber")
+            LogUtils.e { "详细序列号"+ "$manuFacturer-$phoneName-$serialNumber" }
             return "$manuFacturer-$phoneName-$serialNumber"
         }
 
@@ -514,7 +514,7 @@ object DeviceUtils {
             val entry = ite.next() as Map.Entry<*, *>
             val key = entry.key!!
             val value = entry.value!!
-            LogUtils.d("MSG_AUTH_COMPLETE", "$key： $value")
+            LogUtils.e { "MSG_AUTH_COMPLETE"+ "$key： $value" }
         }
     }
 
@@ -574,7 +574,7 @@ object DeviceUtils {
                 buf.append(String.format("%02X", b))
             }
             macAddress = buf.toString()
-            LogUtils.d("mac", "interfaceName=" + networkInterface.name + ", mac=" + macAddress)
+            LogUtils.e { "mac"+ "interfaceName=" + networkInterface.name + ", mac=" + macAddress }
             macAddress = macAddress.replace(":", "")
             return macAddress
         }
@@ -816,7 +816,7 @@ object DeviceUtils {
      */
     @JvmStatic
     fun getContantNum(context: Activity) {
-        LogUtils.i("tips", "U should copy the following code.")
+        LogUtils.e { "tips"+ "U should copy the following code." }
         val intent = Intent()
         intent.action = "android.intent.action.PICK"
         intent.type = "vnd.android.cursor.dir/phone_v2"

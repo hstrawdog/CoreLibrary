@@ -35,26 +35,18 @@ public class GyroActivity extends BaseViewBindingActivity<ActivityGyroBinding> i
     public void onSensorChanged(SensorEvent event) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {  //
-            LogUtils.e("onSensorChanged");
             float X_lateral = event.values[0];
             float Y_longitudinal = event.values[1];
             float Z_vertical = event.values[2];
-            LogUtils.e("\n X " + X_lateral);
-            LogUtils.e("\n Y " + Y_longitudinal);
-            LogUtils.e("\n Z " + Z_vertical);
         } else if (event.sensor.getType() == Sensor.TYPE_ORIENTATION) { // compass
             float X_lateral = event.values[0];
             float Y_longitudinal = event.values[1];
             float Z_vertical = event.values[2];
-            LogUtils.e("\n send heading " + X_lateral);
-            LogUtils.e("\n send pitch " + Y_longitudinal);
-            LogUtils.e("\n send roll " + Z_vertical);
         } else if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
             double X_lateral = Double.parseDouble(decimalFormat.format(event.values[0]));
             double Y_longitudinal = Double.parseDouble(decimalFormat.format(event.values[1]));
             double Z_vertical = Double.parseDouble(decimalFormat.format(event.values[2]));
             if (Math.abs(X_lateral) > 0.2 || Math.abs(Y_longitudinal) > 0.2 || Math.abs(Z_vertical) > 0.2) {
-                LogUtils.e("scop X " + X_lateral + "            scop Y " + Y_longitudinal + "                       scop Z " + Z_vertical);
                 binding.textView35.setText("scop X " + X_lateral + "            scop Y " + Y_longitudinal + "                       scop Z " + Z_vertical);
             }
         }

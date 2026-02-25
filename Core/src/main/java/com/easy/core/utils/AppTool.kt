@@ -246,7 +246,7 @@ object AppTool {
                 return true
             }
             if (result.errorMsg != null) {
-                LogUtils.d("isAppRoot", result.errorMsg)
+                LogUtils.e { "isAppRoot"+ result.errorMsg }
             }
             return false
         }

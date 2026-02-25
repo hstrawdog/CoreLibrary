@@ -51,7 +51,7 @@ abstract class BaseViewModel : ViewModel(), IBaseViewModel {
     var goBack = MutableLiveData<GoBackComponent>()
 
     init {
-        LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} BaseViewModel  init " )
+        LogUtils.dMark( TAG.LIVE_TAG, block = { "${this.toString()} BaseViewModel  init "  })
     }
 
     /**
@@ -62,12 +62,12 @@ abstract class BaseViewModel : ViewModel(), IBaseViewModel {
      */
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-       LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} BaseViewModel           onCrete ")
+       LogUtils.dMark( TAG.LIVE_TAG, block = { "${this.toString()} BaseViewModel           onCrete " })
     }
 
     override fun initData(extras: Bundle?) {
         bundle = extras
-       LogUtils.dMark( TAG.LIVE_TAG, "${this.toString()} BaseViewModel           initData ")
+       LogUtils.dMark( TAG.LIVE_TAG, block = { "${this.toString()} BaseViewModel           initData " })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

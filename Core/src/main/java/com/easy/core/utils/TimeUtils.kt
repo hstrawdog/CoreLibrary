@@ -582,7 +582,7 @@ object TimeUtils {
             date = sdf.parse(time)
             val l = date.time
             times = l
-            LogUtils.d("时间戳", times.toString() + "")
+            LogUtils.e { "时间戳"+ times.toString() + "" }
         } catch (e: ParseException) {
             e.printStackTrace()
         }

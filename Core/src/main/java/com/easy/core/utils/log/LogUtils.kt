@@ -119,10 +119,11 @@ object LogUtils {
     /**
      * 标记一个 d - lambda 版本
      */
+    @JvmStatic
     fun dMark(lever:String = "d", tag:String = "Mark", block:() -> Any?) {
         logInternal(lever, tag, block)
     }
-
+    @JvmStatic
     fun dInfo(lever:String = "d", block:() -> Any?) {
         var tag = "Info"
         if (CoreConfig.get().isDebug) {
@@ -146,9 +147,8 @@ object LogUtils {
                 for (index in 1 until Math.min(10, stackTrace.size)) {
                     val targetElement = stackTrace[index]
                     val head = "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
-                        getFileName(targetElement)
+                        getClassFileName(targetElement)
                     }:${targetElement.getLineNumber()})            "
-
 
                     logInternal(lever, tag) {
                         "|      $head     "
@@ -162,6 +162,171 @@ object LogUtils {
         }
     }
 
+
+
+
+    /**
+     * DEBUG 类型日志
+     *œ
+     * @param object
+     */
+    @JvmStatic
+    fun d(any:Any?) {
+        d(TAG, any)
+    }
+
+    /**
+     * DEBUG 类型日志
+     *
+     * @param tag    日志标识
+     * @param object
+     */
+    @JvmStatic
+    fun d(tag:String, any:Any?) {
+        if (CoreConfig.get().isDebug) {
+            if (any == null) {
+                d("标签" + tag + "的打印内容为空！")
+            } else {
+                doLog("d", tag, any)
+            }
+        }
+    }
+
+    @JvmStatic
+    fun i(any:Any?) {
+        if (CoreConfig.get().isDebug) {
+            if (any == null) {
+                i("标签" + TAG + "的打印内容为空！")
+            } else {
+                doLog("i", TAG, any)
+            }
+        }
+    }
+
+    @JvmStatic
+    fun i(tag:String = TAG, any:Any?) {
+        if (CoreConfig.get().isDebug) {
+            if (any == null) {
+                i("标签" + TAG + "的打印内容为空！")
+            } else {
+                doLog("i", TAG, any)
+            }
+        }
+    }
+
+    @JvmStatic
+    fun w(any:Any?) {
+        if (CoreConfig.get().isDebug) {
+            if (any == null) {
+                doLog("w", TAG, "标签" + TAG + "的打印内容为空！")
+            } else {
+                doLog("w", TAG, any)
+            }
+        }
+    }
+
+    /**
+     * ERROR 类型日志
+     *
+     * @param object
+     */
+    @JvmStatic
+    fun e(any:Any?) {
+        e(TAG, any)
+    }
+
+    /**
+     * E 类型错误日志
+     */
+    @JvmStatic
+    fun e(exception:Exception?) {
+        if (CoreConfig.get().isDebug) {
+            Log.e(TAG, TAG, exception)
+        }
+    }
+
+    /**
+     * E 类型日志
+     */
+    @JvmStatic
+    fun e(tag:String, any:Any?) {
+        if (CoreConfig.get().isDebug) {
+            if (any == null) {
+                e("标签 : $tag 的打印内容为空！")
+            } else {
+                doLog("e", tag, any)
+            }
+
+        }
+    }
+
+    /**
+     *   标记一个 d
+     * @param tag String
+     * @param any Any?
+     */
+    fun dMark(tag:String = "Mark", any:Any?) {
+        if (CoreConfig.get().isDebug) {
+            if (any == null) {
+                dInfo(tag)
+            } else {
+                d(tag, any)
+            }
+        }
+    }
+
+    /**
+     *   打一个日志标记
+     * @param any Any?
+     */
+    @JvmStatic
+    fun e4Mark(any:Any?) {
+        if (CoreConfig.get().isDebug) {
+            e("$TAG", any)
+        }
+    }
+
+    /**
+     * E 类型日志
+     */
+    @JvmStatic
+    fun dInfo(any:Any?) {
+        var tag = "Info"
+        if (CoreConfig.get().isDebug) {
+            doLog("w", tag, "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
+            if (any == null) {
+                e(tag, "标签 : 内容为空！")
+            } else {
+                doLog("w", tag, any)
+            }
+            doLog("w", tag, "├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+            val stackTrace = Throwable().stackTrace
+            if (stackTrace.size > 1) {
+                for (index in 1 until Math.min(10, stackTrace.size)) {
+                    val targetElement = stackTrace[index]
+                    val head = "${Thread.currentThread().name}  |      ${targetElement.getClassName()}.${targetElement.getMethodName()}(${
+                        getClassFileName(targetElement)
+                    }:${targetElement.getLineNumber()})            "
+                    doLog("w", tag, "|      $head     ")
+                }
+            }
+            doLog("w", tag, "└────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
+        }
+    }
+
+    /**
+     * 以 类名 为 tag
+     * @param any Any?
+     */
+    fun de(any:Any?) {
+        val stackTrace = Throwable().stackTrace
+        if (stackTrace.size > 1) {
+            val targetElement = stackTrace[0]
+            e(targetElement.fileName, any)
+        } else {
+            e(any)
+        }
+    }
 
     /**
      * 核心统一日志方法，供 lambda 版本调用
@@ -195,12 +360,10 @@ object LogUtils {
         var start = 0
         while (start < bytes.size) {
             var end = (start + maxBytes).coerceAtMost(bytes.size)
-
             // 确保不截断 UTF-8 多字节字符
             while (end > start && (bytes[end - 1].toInt() and 0xC0) == 0x80) {
                 end--
             }
-
             val chunk = bytes.copyOfRange(start, end).toString(Charsets.UTF_8)
             printLog(level, tag, chunk)
 
@@ -245,11 +408,9 @@ object LogUtils {
      * @return String
      */
     @JvmStatic
-    private fun getFileName(targetElement:StackTraceElement):String {
+    private fun getClassFileName(targetElement:StackTraceElement):String {
         val fileName = targetElement.fileName
         if (fileName != null) return fileName
-        // If name of file is null, should add
-        // "-keepattributes SourceFile,LineNumberTable" in proguard file.
         var className = targetElement.className
         val classNameInfo = className.split("\\.".toRegex()).toTypedArray()
         if (classNameInfo.size > 0) {

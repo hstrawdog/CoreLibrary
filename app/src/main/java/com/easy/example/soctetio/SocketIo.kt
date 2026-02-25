@@ -35,7 +35,7 @@ var  a =0
 
 // 标准 Socket.IO 事件监听
         socket.on(Socket.EVENT_CONNECT) {
-            LogUtils.e("✅ EVENT_CONNECT 已连接")
+            LogUtils.e { "✅ EVENT_CONNECT 已连接" }
 //            val loginJson = JSONObject().apply {
 //                put("name", "测试人员22")
 //                put("userId", "4bd0eaad5f434b199a9f618231401838")
@@ -47,28 +47,28 @@ var  a =0
         }
 
         socket.on(Socket.EVENT_DISCONNECT) {
-            LogUtils.e("❌ EVENT_DISCONNECT 连接断开")
+            LogUtils.e { "❌ EVENT_DISCONNECT 连接断开" }
         }
 
         socket.on(Socket.EVENT_CONNECT_ERROR) {
-            LogUtils.e("❗ EVENT_CONNECT_ERROR 连接错误: ${it.getOrNull(0)}")
+            LogUtils.e { "❗ EVENT_CONNECT_ERROR 连接错误: ${it.getOrNull(0)}" }
         }
 
         socket.on(Socket.EVENT_CONNECT_TIMEOUT) {
-            LogUtils.e("⏱ EVENT_CONNECT_TIMEOUT 超时")
+            LogUtils.e { "⏱ EVENT_CONNECT_TIMEOUT 超时" }
         }
 
         socket.on(Socket.EVENT_ERROR) {
-            LogUtils.e("💥 EVENT_ERROR 异常错误")
+            LogUtils.e { "💥 EVENT_ERROR 异常错误" }
         }
 
         socket.on(Socket.EVENT_CONNECTING) {
-            LogUtils.e("🔄 EVENT_CONNECTING 正在连接")
+            LogUtils.e { "🔄 EVENT_CONNECTING 正在连接" }
         }
 
 // 自定义服务端事件监听
         socket.on("message") {
-            LogUtils.e("📩 message 收到消息: ${it.getOrNull(0)}")
+            LogUtils.e { "📩 message 收到消息: ${it.getOrNull(0)}" }
 
             if (a==0){
                 a=1
@@ -87,31 +87,31 @@ var  a =0
         }
 
         socket.on("login") {
-            LogUtils.e("🔐 login 收到登录响应: ${it.getOrNull(0)}")
+            LogUtils.e { "🔐 login 收到登录响应: ${it.getOrNull(0)}" }
         }
 
         socket.on("newGroupMsg") {
-            LogUtils.e("👥 newGroupMsg 收到群组消息: ${it.getOrNull(0)}")
+            LogUtils.e { "👥 newGroupMsg 收到群组消息: ${it.getOrNull(0)}" }
         }
 
         socket.on("newTask") {
-            LogUtils.e("📝 newTask 收到新任务: ${it.getOrNull(0)}")
+            LogUtils.e { "📝 newTask 收到新任务: ${it.getOrNull(0)}" }
         }
 
         socket.on("logout") {
-            LogUtils.e("🚪 logout 被登出: ${it.getOrNull(0)}")
+            LogUtils.e { "🚪 logout 被登出: ${it.getOrNull(0)}" }
         }
 
         socket.on("exit_organ") {
-            LogUtils.e("🏢 exit_organ 组织退出通知")
+            LogUtils.e { "🏢 exit_organ 组织退出通知" }
         }
 
         socket.on("ping") {
-            LogUtils.e("📡 ping")
+            LogUtils.e { "📡 ping" }
         }
 
         socket.on("pong") {
-            LogUtils.e("📶 pong")
+            LogUtils.e { "📶 pong" }
         }
 
 // 开始连接
@@ -130,30 +130,30 @@ var  a =0
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
 
             override fun onOpen(webSocket:WebSocket, response:Response) {
-                LogUtils.e( "✅ 连接成功")
+                LogUtils.e { "✅ 连接成功" }
                 // 示例：发送一条消息
                 webSocket.send("hello server")
             }
 
             override fun onMessage(webSocket:WebSocket, text: String) {
-                LogUtils.e( "📨 接收到消息: $text")
+                LogUtils.e { "📨 接收到消息: $text" }
             }
 
             override fun onMessage(webSocket:WebSocket, bytes:ByteString) {
-                LogUtils.e("📨 接收到 ByteString: $bytes")
+                LogUtils.e { "📨 接收到 ByteString: $bytes" }
             }
 
             override fun onClosing(webSocket:WebSocket, code: Int, reason: String) {
-                LogUtils.e( "⚠️ 正在关闭: $code / $reason")
+                LogUtils.e { "⚠️ 正在关闭: $code / $reason" }
                 webSocket.close(code, reason)
             }
 
             override fun onClosed(webSocket:WebSocket, code: Int, reason: String) {
-                LogUtils.e("❎ 已关闭: $code / $reason")
+                LogUtils.e { "❎ 已关闭: $code / $reason" }
             }
 
             override fun onFailure(webSocket:WebSocket, t: Throwable, response: Response?) {
-                LogUtils.e( "❌ 连接失败", t)
+                LogUtils.e { "❌ 连接失败"+ t }
             }
         })
 

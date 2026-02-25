@@ -15,11 +15,9 @@ import com.easy.core.utils.log.LogUtils.e
 class DataBanding {
     fun onClickButton(v: View?) {
         showToast("onClickButton")
-        e("-----------onClickButton")
     }
 
     fun onClickButton4Text(name: String) {
         showToast("onClickButton   $name")
-        e("-----------onClickButton4Text")
     }
 }

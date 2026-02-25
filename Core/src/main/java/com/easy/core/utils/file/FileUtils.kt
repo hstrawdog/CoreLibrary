@@ -375,8 +375,7 @@ object FileUtils {
                 val rowsDeleted = contentResolver.delete(imageUri, null, null)
                 return rowsDeleted > 0
             }
-        } catch (e:java.lang.Exception) {
-            e("ImageUtils Error deleting image", e)
+        } catch (e:java.lang.Exception) {LogUtils.e{"ImageUtils Error deleting image"+ e.toString()}
         }
         return false
     }
@@ -693,7 +692,7 @@ object FileUtils {
     @Throws(IOException::class)
     fun saveBitmap(bm:Bitmap?, filePath:String = FilePathTools.getExternalPicturesPath() + File.separator + getDefFileName(".png")) {
         if (bm == null) {
-            LogUtils.d(" saveBitmap   is  null  ")
+            LogUtils.e { " saveBitmap   is  null  " }
             return
         }
         val myCaptureFile = File(filePath).parentFile
@@ -1600,7 +1599,7 @@ object FileUtils {
                 }
                 fc.close()
             }
-            LogUtils.d("拼接完成")
+            LogUtils.e { "拼接完成" }
         } catch (ioe:IOException) {
             ioe.printStackTrace()
         } finally {
@@ -1635,21 +1634,15 @@ object FileUtils {
                 if (line.length > 0 && line.startsWith("http://")) {
                     //replce 这行的内容
 //                    RxLogTool.d("ts替换", line + "  replce  " + pathList.get(num).getAbsolutePath());
-                    buf.append("""
-    file:${pathList[num].absolutePath}
-
-    """.trimIndent())
+                    buf.append("""file:${pathList[num].absolutePath}""".trimIndent())
                     num++
                 } else {
-                    buf.append("""
-    $line
-
-    """.trimIndent())
+                    buf.append("""$line""".trimIndent())
                 }
             }
             `in`!!.close()
             write(file!!.absolutePath, buf.toString())
-            LogUtils.d("ts替换", "ts替换完成")
+            LogUtils.e { "ts替换" + "ts替换完成" }
         } catch (e1:FileNotFoundException) {
             e1.printStackTrace()
         } catch (e1:IOException) {
@@ -1987,7 +1980,7 @@ object FileUtils {
             (writeFileFromIS(destFile, FileInputStream(srcFile), false) && !(isMove && !deleteFile(srcFile)))
         } catch (e:FileNotFoundException) {
             e.printStackTrace()
-            LogUtils.e4Mark(e)
+            LogUtils.dMark { e }
             false
         }
     }
@@ -3144,9 +3137,9 @@ object FileUtils {
             output.flush()
             output.close()
             input.close()
-            LogUtils.i("mv success!")
+            LogUtils.e { "mv success!" }
         } catch (var8:IOException) {
-            LogUtils.e("TAG", var8.toString())
+            LogUtils.e { var8.toString() }
         }
     }
 

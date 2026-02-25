@@ -29,13 +29,13 @@ abstract class BaseViewBindingActivity<T : ViewBinding> : BaseActivity() {
             binding = method.invoke(null, layoutInflater, parent, false) as T
         } catch (e: NoSuchMethodException) {
             e.printStackTrace()
-            LogUtils.dInfo(e)
+            LogUtils.dInfo{e}
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
-            LogUtils.dInfo(e)
+            LogUtils.dInfo{e}
         } catch (e: InvocationTargetException) {
             e.printStackTrace()
-            LogUtils.dInfo(e)
+            LogUtils.dInfo{e}
         }
         return binding?.root
     }

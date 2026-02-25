@@ -73,7 +73,6 @@ class RoundCountdownView : View {
         mAnimatorSet.addUpdateListener { animation ->
             mSweepAngle = animation.animatedValue as Float
             mNowCountdown = ((360 - mSweepAngle) / (360 / mCountdown)).toInt()
-            dInfo("onAnimationUpdate"+ mNowCountdown)
             invalidate()
         }
         mAnimatorSet.duration = mCountdown * 1000.toLong()
@@ -96,7 +95,6 @@ class RoundCountdownView : View {
         var wSpecSize = MeasureSpec.getSize(widthMeasureSpec)
         val hSpecMode = MeasureSpec.getMode(heightMeasureSpec)
         var hSpecSize = MeasureSpec.getSize(heightMeasureSpec)
-        dInfo("wSpecSize"+ wSpecSize)
         //        if (wSpecMode == MeasureSpec.AT_MOST && hSpecMode == MeasureSpec.AT_MOST) {
 //            setMeasuredDimension(300, 300);
 //        } else if (wSpecMode == MeasureSpec.AT_MOST) {
@@ -107,13 +105,10 @@ class RoundCountdownView : View {
         wSpecSize = 600
         hSpecSize = 600
         setMeasuredDimension(wSpecSize, hSpecSize)
-        dInfo("onMeasure getMeasuredWidth"+ measuredWidth)
-        dInfo("onMeasure getMeasuredHeight"+ measuredHeight)
     }
 
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
-        dInfo("getWidth"+ width)
         canvasText(canvas)
         canvasBg(canvas)
         cancasArc(canvas)

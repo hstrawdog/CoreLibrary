@@ -197,12 +197,11 @@ class CoreConfig private constructor() {
         // 创建一个 拦截器 打印请求日志
         CoreConfig.get().interceptorList.add(Interceptor { chain ->
             val request = chain.request()
-            LogUtils.dMark(TAG.TAG_REQUEST, "-------------自定义拦截请求 start ----------------")
-
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "-------------自定义拦截请求 start ----------------" })
             // 打印 URL 和方法
             val url = request.url
-            LogUtils.dMark(TAG.TAG_REQUEST, "Request URL: $url")
-            LogUtils.dMark(TAG.TAG_REQUEST, "Request Method: ${request.method.uppercase()}")
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "Request URL: $url" })
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "Request Method: ${request.method.uppercase()}" })
 
             // 打印查询参数
             if (url.querySize > 0) {
@@ -212,7 +211,7 @@ class CoreConfig private constructor() {
                     val value = url.queryParameterValue(i)
                     json.addProperty(name, value)
                 }
-                LogUtils.dMark(TAG.TAG_REQUEST, "Query Params: ${json.toString()}")
+                LogUtils.dMark(TAG.TAG_REQUEST, block = { "Query Params: ${json.toString()}" })
             }
 
             // 打印请求体
@@ -220,11 +219,11 @@ class CoreConfig private constructor() {
                 val buffer = okio.Buffer()
                 body.writeTo(buffer)
                 val charset = body.contentType()?.charset(Charsets.UTF_8) ?: Charsets.UTF_8
-                LogUtils.dMark(TAG.TAG_REQUEST, "Request Body: ${buffer.readString(charset)}")
+                LogUtils.dMark(TAG.TAG_REQUEST, block = { "Request Body: ${buffer.readString(charset)}" })
             }
 
             // 打印请求头
-            LogUtils.dMark(TAG.TAG_REQUEST, "Request Headers: ${request.headers}")
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "Request Headers: ${request.headers}" })
 
             // 记录开始时间
             val startNs = System.nanoTime()
@@ -234,7 +233,7 @@ class CoreConfig private constructor() {
 
             // 计算耗时
             val tookMs = (System.nanoTime() - startNs) / 1_000_000
-            LogUtils.dMark(TAG.TAG_REQUEST, "Request took: ${tookMs}ms")
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "Request took: ${tookMs}ms" })
 
             // 响应体处理
             val responseBody = response.body
@@ -243,7 +242,7 @@ class CoreConfig private constructor() {
             val subtype = contentType?.subtype ?: ""
 
             val isTextResponse = mediaType == "text" || subtype.contains("json") || subtype.contains("xml") || subtype.contains("html")
-            LogUtils.dMark(TAG.TAG_REQUEST, "------------- 响应内容  ----------------")
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "------------- 响应内容  ----------------" })
 
             val content = if (responseBody != null && isTextResponse) {
                 responseBody.string()
@@ -251,10 +250,10 @@ class CoreConfig private constructor() {
                 "非文本响应，内容忽略"
             }
 
-            LogUtils.d("tagRequest", "Response Code: ${response.code}")
-            LogUtils.dMark(TAG.TAG_REQUEST, "Response Body: $content")
+            LogUtils.dMark("tagRequest", block = {"Response Code: ${response.code}"})
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "Response Body: $content" })
 
-            LogUtils.dMark(TAG.TAG_REQUEST, "-------------自定义拦截请求 end ----------------")
+            LogUtils.dMark(TAG.TAG_REQUEST, block = { "-------------自定义拦截请求 end ----------------" })
 
             // 重新构建响应体返回上层
             val newResponseBody = if (isTextResponse) {

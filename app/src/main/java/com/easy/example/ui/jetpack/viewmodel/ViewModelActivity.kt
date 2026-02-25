@@ -30,7 +30,6 @@ class ViewModelActivity : BaseActivity() {
     override fun initView() {
         val userViewModel = ViewModelProvider(this).get(com.easy.example.ui.jetpack.viewmodel.UserViewModel::class.java)
         userViewModel.user.observe(this, Observer { user ->
-            e(user.toString())
             (findViewById<View>(R.id.textView15) as TextView).text = user.name + user.level
         })
         userViewModel.setUser(com.easy.example.ui.jetpack.livedata.User.newInstance())

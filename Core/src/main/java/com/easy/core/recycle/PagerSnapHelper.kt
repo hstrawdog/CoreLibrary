@@ -81,7 +81,7 @@ class PagerSnapHelper(
             out[0] = 0
             out[1] = 0
         }
-        LogUtils.e4Mark("calculateDistanceToFinalSnap              " + out[0])
+        LogUtils.dMark { "calculateDistanceToFinalSnap              " + out[0] }
         return out
     }
 
@@ -101,7 +101,7 @@ class PagerSnapHelper(
      * @return
      */
     override fun findSnapView(layoutManager: RecyclerView.LayoutManager): View? {
-        LogUtils.e4Mark("findSnapView    mFlung    $mFlung")
+        LogUtils.dMark { "findSnapView    mFlung    $mFlung" }
         if (mFlung) {
             resetCurrentScrolled()
             mFlung = false
@@ -111,7 +111,7 @@ class PagerSnapHelper(
         if (targetPosition == RecyclerView.NO_POSITION) {
             return null
         }
-        LogUtils.e4Mark("findSnapView   $targetPosition")
+        LogUtils.dMark {"findSnapView   $targetPosition"}
         val smoothScroller: SmoothScroller? = createScroller(layoutManager)
         //通过setTargetPosition()方法设置滚动器的滚动目标位置
         smoothScroller!!.targetPosition = targetPosition
@@ -133,7 +133,7 @@ class PagerSnapHelper(
     ): Int {
         val targetPosition = targetPosition
         mFlung = targetPosition != RecyclerView.NO_POSITION
-        LogUtils.e4Mark("findTargetSnapPosition     $targetPosition           mFlung $mFlung")
+        LogUtils.dMark {"findTargetSnapPosition     $targetPosition           mFlung $mFlung"}
         return targetPosition
     }
 
@@ -184,7 +184,7 @@ class PagerSnapHelper(
      */
     private val targetPosition: Int
         private get() {
-            LogUtils.e4Mark(" getTargetPosition, mScrolledX: $mScrolledX, mCurrentScrolledX: $mCurrentScrolledX    ,mRecyclerViewWidth   $mRecyclerViewWidth")
+            LogUtils.dMark {" getTargetPosition, mScrolledX: $mScrolledX, mCurrentScrolledX: $mCurrentScrolledX    ,mRecyclerViewWidth   $mRecyclerViewWidth"}
             val page: Int
             page = if (mCurrentScrolledX > 0) {
                 mScrolledX / mRecyclerViewWidth + 1

@@ -63,7 +63,6 @@ public class CustomWebView extends WebView implements WebViewJavascriptBridge, I
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView webView, String s) {
-                LogUtils.e("shouldOverrideUrlLoading  ");
                 return bridgeHelper.shouldOverrideUrlLoading(s);
             }
         });

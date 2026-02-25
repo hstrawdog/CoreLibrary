@@ -199,7 +199,7 @@ object SoftKeyboardUtils {
      */
     @JvmStatic
     fun clickBlankArea2HideSoftInput0() {
-        LogUtils.i("tips", "U should copy the following code.")/*
+        LogUtils.e { "tips"+ "U should copy the following code." }/*
         @Override
         public boolean onTouchEvent (MotionEvent event){
             if (null != this.getCurrentFocus()) {
@@ -222,7 +222,7 @@ object SoftKeyboardUtils {
      */
     @JvmStatic
     fun clickBlankArea2HideSoftInput1() {
-        LogUtils.i("tips", "U should copy the following code.")/*
+        LogUtils.e { "tips"+ "U should copy the following code." }/*
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {
             if (ev.getAction() == MotionEvent.ACTION_DOWN) {

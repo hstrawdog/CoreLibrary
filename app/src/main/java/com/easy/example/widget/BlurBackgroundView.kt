@@ -122,7 +122,7 @@ class BlurBackgroundView : View {
             override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
 
                 removeOnLayoutChangeListener(this)
-                LogUtils.e("addOnLayoutChangeListener    centerY        ${height}        centerX ${width}")
+                LogUtils.e { "addOnLayoutChangeListener    centerY        ${height}        centerX ${width}" }
                 centerY = height / 2f
                 centerX = width / 2f
                 invalidate()
@@ -295,7 +295,7 @@ class BlurBackgroundView : View {
                     moveDist = spacing(event)
                     val space: Float = moveDist - oldDist
 
-                    LogUtils.e("       scale  ${space / 50f}               ${moveDist - oldDist}      ")
+                    LogUtils.e { "       scale  ${space / 50f}               ${moveDist - oldDist}      " }
                     val scale = (space / 50f).toFloat() + _scale
 
                     if (scale > SCALE_MIN && scale < SCALE_MAX) {
@@ -365,7 +365,7 @@ class BlurBackgroundView : View {
             }
         }
 //        setPivot(setPivotX, setPivotY)
-        LogUtils.e(" centerX $centerX            centerY $centerY   setPivotX $setPivotX      setPivotY $setPivotY      lessX $lessX   lessY $lessY             ")
+        LogUtils.e { " centerX $centerX            centerY $centerY   setPivotX $setPivotX      setPivotY $setPivotY      lessX $lessX   lessY $lessY             " }
 
         centerX = setPivotX
         centerY = setPivotY

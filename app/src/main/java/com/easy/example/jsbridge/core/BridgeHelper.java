@@ -68,9 +68,7 @@ public class BridgeHelper implements WebViewJavascriptBridge {
     private void handlerReturnData(String url) {
         String functionName = BridgeUtil.getFunctionFromReturnUrl(url);
         OnBridgeCallback f = responseCallbacks.get(functionName);
-        LogUtils.e("handlerReturnData", "functionName: " + functionName);
         String data = BridgeUtil.getDataFromReturnUrl(url);
-        LogUtils.e("handlerReturnData", "data: " + data);
         if (f != null) {
             f.onCallBack(data);
             responseCallbacks.remove(functionName);
@@ -275,7 +273,6 @@ public class BridgeHelper implements WebViewJavascriptBridge {
     }
 
     public boolean shouldOverrideUrlLoading(String url) {
-        LogUtils.e("shouldOverrideUrlLoading333 " + url);
         try {
             // decode 之前，处理 % 和 +
             String replacedUrl = url.replaceAll("%(?![0-9a-fA-F]{2})", "%25").replaceAll("\\+", "%2B");

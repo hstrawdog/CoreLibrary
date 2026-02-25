@@ -38,7 +38,7 @@ class FlowActivity : BaseViewBindingActivity<ActivityFlowBinding>() {
                         " $i $s"
                     }
                     .collect() {
-                        LogUtils.e("     FlowActivity   collect        ${it}        ")
+                        LogUtils.e { "     FlowActivity   collect        ${it}        " }
                     }
             }
         }

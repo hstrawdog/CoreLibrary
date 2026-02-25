@@ -22,10 +22,10 @@ class CoreProvider : ContentProvider() {
      * 默认初始化 CoreConfig
      */
     override fun onCreate(): Boolean {
-        LogUtils.e4Mark(" CoreProvider  onCreate")
+        LogUtils.dMark { " CoreProvider  onCreate" }
         if (!CoreConfig.get().isInitialized() || DataUtils.checkIsNull(CoreConfig.get().application)) {
             CoreConfig.get().init(context as Application)
-            LogUtils.e4Mark(" CoreProvider  setApplication")
+            LogUtils.dMark {" CoreProvider  setApplication"}
         }
 
         return false

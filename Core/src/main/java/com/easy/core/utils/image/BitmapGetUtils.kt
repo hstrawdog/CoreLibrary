@@ -314,7 +314,7 @@ object BitmapGetUtils {
                 val bu = outputStream.toByteArray()
                 return BitmapFactory.decodeByteArray(bu, 0, bu.size)
             } else {
-                LogUtils.d("网络连接失败----" + httpURLConnection.responseCode)
+                LogUtils.e { "网络连接失败----" + httpURLConnection.responseCode }
             }
         } catch (e: Exception) {
 

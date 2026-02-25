@@ -216,22 +216,16 @@ class ComparedView : View, View.OnTouchListener {
         )
         //            canvas.translate(l.toFloat(), 0f)
 
-        LogUtils.e("-----------------")
-        LogUtils.e(" src ${src}")
-        LogUtils.e(" dst ${dst}")
+        LogUtils.e { "-----------------" }
+        LogUtils.e { " src ${src}" }
+        LogUtils.e { " dst ${dst}" }
         //            matrixNow.mapRect(src)
         matrixNow.mapRect(dst)
         dst.left = centerX.toFloat()
 
-        LogUtils.e(
-            "matrixNow  :       ${
-                matrixNow.values()
-                    .toList()
-                    .toString()
-            }"
-        )
-        LogUtils.e(" src ${src}")
-        LogUtils.e(" dst ${dst}")
+
+        LogUtils.e { " src ${src}" }
+        LogUtils.e { " dst ${dst}" }
         canvas.drawBitmap(originalBitmap!!, src.toRect(), dst, Paint())
     }
 
@@ -528,7 +522,7 @@ class ComparedView : View, View.OnTouchListener {
                 y = 0f
             }
         }
-        LogUtils.e("mCurrentScalePoint.x:" + mCurrentScalePoint.x + "   x:" + x)
+        LogUtils.e { "mCurrentScalePoint.x:" + mCurrentScalePoint.x + "   x:" + x }
         matrixNow!!.postTranslate(x, y)
         invalidate()
     }

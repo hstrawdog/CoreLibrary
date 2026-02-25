@@ -291,8 +291,8 @@ object BitmapUtils {
         val ySize = height / 4
         val OffsetY = (ySize * ((offsetY - 50.0) / 50.0)).toInt()
         val OffsetX = (xSize * ((offsetX - 50.0) / 50.0)).toInt()
-//        LogUtils.e(" OffsetX :     $OffsetX       xSize:   $xSize  ")
-//        LogUtils.e(" OffsetY :     $OffsetY       offsetY:   $offsetY  ")
+//        LogUtils.e { " OffsetX :     $OffsetX       xSize:   $xSize  " }
+//        LogUtils.e { " OffsetY :     $OffsetY       offsetY:   $offsetY  " }
         // 左边图片
         cv.drawBitmap(srcBitmap, Rect(xSize + OffsetX, 0, xSize + width / 2 + OffsetX, height), Rect(0, 0, width / 2, height), null)
         // 右边图片

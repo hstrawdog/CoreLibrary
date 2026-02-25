@@ -50,7 +50,7 @@ object ProcessUtils {
                     context.startActivity(intent)
                 }
                 if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
-                    LogUtils.d("getForegroundApp", "没有打开\"有权查看使用权限的应用\"选项")
+                    LogUtils.e { "getForegroundApp"+ "没有打开\"有权查看使用权限的应用\"选项" }
                     return null
                 }
                 val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
@@ -69,7 +69,7 @@ object ProcessUtils {
                 e.printStackTrace()
             }
         } else {
-            LogUtils.d("getForegroundApp", "无\"有权查看使用权限的应用\"选项")
+            LogUtils.e { "getForegroundApp"+ "无\"有权查看使用权限的应用\"选项" }
         }
         return null
     }
@@ -92,59 +92,59 @@ object ProcessUtils {
         return set
     }
 
-    /**
-     * 杀死后台服务进程
-     *
-     * 需添加权限 `<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>`
-     *
-     * @return 被暂时杀死的服务集合
-     */
-    @JvmStatic
-    fun killAllBackgroundProcesses(context: Context): Set<String> {
-        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        var infos = am.runningAppProcesses
-        val set: MutableSet<String> = HashSet()
-        for (info in infos) {
-            for (pkg in info.pkgList) {
-                am.killBackgroundProcesses(pkg)
-                set.add(pkg)
-            }
-        }
-        infos = am.runningAppProcesses
-        for (info in infos) {
-            for (pkg in info.pkgList) {
-                set.remove(pkg)
-            }
-        }
-        return set
-    }
-
-    /**
-     * 杀死后台服务进程
-     *
-     * 需添加权限 `<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>`
-     *
-     * @param packageName 包名
-     * @return `true`: 杀死成功<br></br>`false`: 杀死失败
-     */
-    @JvmStatic
-    fun killBackgroundProcesses(context: Context, packageName: String?): Boolean {
-        if (isNullString(packageName)) return false
-        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        var infos = am.runningAppProcesses
-        if (infos == null || infos.size == 0) return true
-        for (info in infos) {
-            if (Arrays.asList(*info.pkgList).contains(packageName)) {
-                am.killBackgroundProcesses(packageName)
-            }
-        }
-        infos = am.runningAppProcesses
-        if (infos == null || infos.size == 0) return true
-        for (info in infos) {
-            if (Arrays.asList(*info.pkgList).contains(packageName)) {
-                return false
-            }
-        }
-        return true
-    }
+//    /**
+//     * 杀死后台服务进程
+//     *
+//     * 需添加权限 `<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>`
+//     *
+//     * @return 被暂时杀死的服务集合
+//     */
+//    @JvmStatic
+//    fun killAllBackgroundProcesses(context: Context): Set<String> {
+//        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+//        var infos = am.runningAppProcesses
+//        val set: MutableSet<String> = HashSet()
+//        for (info in infos) {
+//            for (pkg in info.pkgList) {
+//                am.killBackgroundProcesses(pkg)
+//                set.add(pkg)
+//            }
+//        }
+//        infos = am.runningAppProcesses
+//        for (info in infos) {
+//            for (pkg in info.pkgList) {
+//                set.remove(pkg)
+//            }
+//        }
+//        return set
+//    }
+//
+//    /**
+//     * 杀死后台服务进程
+//     *
+//     * 需添加权限 `<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>`
+//     *
+//     * @param packageName 包名
+//     * @return `true`: 杀死成功<br></br>`false`: 杀死失败
+//     */
+//    @JvmStatic
+//    fun killBackgroundProcesses(context: Context, packageName: String?): Boolean {
+//        if (isNullString(packageName)) return false
+//        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+//        var infos = am.runningAppProcesses
+//        if (infos == null || infos.size == 0) return true
+//        for (info in infos) {
+//            if (Arrays.asList(*info.pkgList).contains(packageName)) {
+//                am.killBackgroundProcesses(packageName)
+//            }
+//        }
+//        infos = am.runningAppProcesses
+//        if (infos == null || infos.size == 0) return true
+//        for (info in infos) {
+//            if (Arrays.asList(*info.pkgList).contains(packageName)) {
+//                return false
+//            }
+//        }
+//        return true
+//    }
 }

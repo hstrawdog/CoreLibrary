@@ -44,7 +44,7 @@ class FragmentUtils(any: Any) {
         fragmentBackStack.clear()
         supportFragmentManager?.addOnBackStackChangedListener {
             updateCurrentFragment()
-            LogUtils.dMark(TAG.LIVE_TAG, "Fragment 栈变化 -> 当前: $currentFragment")
+            LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"Fragment 栈变化 -> 当前: $currentFragment"})
         }
     }
 
@@ -79,7 +79,7 @@ class FragmentUtils(any: Any) {
         }
         currentFragment = fragment
 
-        LogUtils.dMark(TAG.LIVE_TAG, "showOrAddFragment -> ${fragment.javaClass.simpleName}")
+        LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"showOrAddFragment -> ${fragment.javaClass.simpleName}"})
     }
 
     /**
@@ -139,7 +139,7 @@ class FragmentUtils(any: Any) {
         transaction.addToBackStack(tag)
             .commitAllowingStateLoss()
 
-        LogUtils.dMark(TAG.LIVE_TAG, "coverFragmentNew -> ${currentFragment?.javaClass?.simpleName}")
+        LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"coverFragmentNew -> ${currentFragment?.javaClass?.simpleName}"})
     }
 
     /**
@@ -150,7 +150,7 @@ class FragmentUtils(any: Any) {
         val fm = supportFragmentManager ?: return false
 
         if (fragmentBackStack.size <= 1) {
-            LogUtils.dMark(TAG.LIVE_TAG, "popCoverFragment -> 栈中仅剩一个 Fragment，无法回退")
+            LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"popCoverFragment -> 栈中仅剩一个 Fragment，无法回退"})
             return false
         }
 
@@ -179,7 +179,7 @@ class FragmentUtils(any: Any) {
             e.printStackTrace()
         }
 
-        LogUtils.dMark(TAG.LIVE_TAG, "popCoverFragment -> 回到 ${previous?.javaClass?.simpleName}")
+        LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"popCoverFragment -> 回到 ${previous?.javaClass?.simpleName}"})
 
         return true
     }
@@ -198,7 +198,7 @@ class FragmentUtils(any: Any) {
         fm.beginTransaction().setReorderingAllowed(true)
             .detach(fragment)
             .commitAllowingStateLoss()
-        LogUtils.dMark(TAG.LIVE_TAG, "detachFragment -> ${fragment.javaClass.simpleName}")
+        LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"detachFragment -> ${fragment.javaClass.simpleName}"})
 
         if (fragment == currentFragment) {
             currentFragment = fragmentBackStack.lastOrNull { it != fragment }
@@ -223,7 +223,7 @@ class FragmentUtils(any: Any) {
         transaction.commitAllowingStateLoss()
         addToStack(fragment)
         currentFragment = fragment
-        LogUtils.dMark(TAG.LIVE_TAG, "attachFragment -> ${fragment.javaClass.simpleName}")
+        LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"attachFragment -> ${fragment.javaClass.simpleName}"})
     }
 
     /**
@@ -242,7 +242,7 @@ class FragmentUtils(any: Any) {
             currentFragment = fragmentBackStack.lastOrNull()
         }
 
-        LogUtils.dMark(TAG.LIVE_TAG, "removeFragment -> ${fragment.javaClass.simpleName}")
+        LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"removeFragment -> ${fragment.javaClass.simpleName}"})
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -264,7 +264,7 @@ class FragmentUtils(any: Any) {
                 ?.commitAllowingStateLoss()
 
             currentFragment = previous
-            LogUtils.dMark(TAG.LIVE_TAG, "popFragment -> 切换至 ${previous.javaClass.simpleName}")
+            LogUtils.dMark(tag =  TAG.LIVE_TAG, block =  {"popFragment -> 切换至 ${previous.javaClass.simpleName}"})
             return true
         }
         return false

@@ -38,7 +38,6 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
 
         LiveUser.getInstance(this)
             .observe(this, Observer { user ->
-                e("onChanged button19        $user")
                 mTextView2.setText(user.name + user.level)
             })
 
@@ -49,7 +48,6 @@ class LiveDateActivity : BaseViewBindingActivity<ActivityDataBindingBinding>() {
         binding.button191.setOnClickListener {
             com.easy.example.ui.jetpack.livedata.LiveUser.getInstance(this)
                 .observe(this, Observer { user ->
-                    e("onChanged  button191       $user")
                     binding.textView21.setText(user.name + user.level)
                 })
         }

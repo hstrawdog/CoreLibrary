@@ -47,7 +47,7 @@ class SpinnerActivity : BaseViewBindingActivity<ActivitySpinnerBinding>() {
 
     open class MySelectedListener( var starArray: Array<String>) : OnItemSelectedListener {
         override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, i: Int, l: Long) {
-           LogUtils.e("\"您选择的是：\" + ${starArray.get(i)}")
+           LogUtils.e { "\"您选择的是：\" + ${starArray.get(i)}" }
         }
 
         override fun onNothingSelected(adapterView: AdapterView<*>?) {}

@@ -27,8 +27,8 @@ class ThrowActivity : BaseActivity() {
 
     fun onViewClicked(view: View) {
         when (view.id) {
-            R.id.button11 -> dInfo(Exception("一个异常 "))
-            R.id.button12 -> dInfo(RuntimeException("一个运行异常 "))
+            R.id.button11 -> dInfo{Exception("一个异常 ")}
+            R.id.button12 -> dInfo{RuntimeException("一个运行异常 ")}
             else -> {
             }
         }

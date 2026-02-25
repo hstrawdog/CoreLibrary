@@ -37,7 +37,6 @@ class WeatherViewModel : BaseViewModel() {
 
     //声明定位回调监听器
     var mLocationListener = AMapLocationListener { aMapLocation ->
-        e(aMapLocation.address)
         getWeather(aMapLocation.city)
     }
 
@@ -47,7 +46,6 @@ class WeatherViewModel : BaseViewModel() {
 
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        e(" -------WeatherViewModel--------- onCrete ------")
         AMapLocationClient.updatePrivacyShow(CoreConfig.applicationContext, true, true)
         AMapLocationClient.updatePrivacyAgree(CoreConfig.applicationContext, true)
         //初始化定位
@@ -113,11 +111,11 @@ class WeatherViewModel : BaseViewModel() {
                 ArrayList<NetResponseBody<com.easy.example.demo.weather.Weather>>().apply {
                     add(s)
                     add(i)
-                    LogUtils.e("")
+                    LogUtils.e { "" }
                 }
             }
                 .collect() {
-                    LogUtils.e("")
+                    LogUtils.e { "" }
                 }
         }
 

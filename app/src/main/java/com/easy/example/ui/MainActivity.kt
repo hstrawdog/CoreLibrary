@@ -59,13 +59,13 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     @SuppressLint("Range")
     override fun initData() {
-        LogUtils.dInfo("MainActivity    initData")
+//        LogUtils.dInfo{ "MainActivity    initData" }
 //        EncryptUtil.aesDecrypt("666")
 //        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
 
-//        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("ieDs4rDUAXVy21hoKB9t9tyBjY0BoVOmNlf2+w8gO68="))
-//        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("Y3mx5lq7Y/UsZlCTBOJ+Ltujry8ZQipe3e/WeRxbLwM61h9WQh9Te2ShtsagN9T3CQADTyNK3fv7Bvrsc3dOBw=="))
-        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("raNShXxfb59Mk7jw50v0XN2Ejf5128HJDawpr0sqv0o="))
+//        LogUtils.e { EncryptUtil.aesDecryptForMessageForDebug("ieDs4rDUAXVy21hoKB9t9tyBjY0BoVOmNlf2+w8gO68=") }
+//        LogUtils.e { EncryptUtil.aesDecryptForMessageForDebug("Y3mx5lq7Y/UsZlCTBOJ+Ltujry8ZQipe3e/WeRxbLwM61h9WQh9Te2ShtsagN9T3CQADTyNK3fv7Bvrsc3dOBw==") }
+//        LogUtils.e { EncryptUtil.aesDecryptForMessageForDebug("raNShXxfb59Mk7jw50v0XN2Ejf5128HJDawpr0sqv0o=") }
 
         val string:String ="{\"userId\":\"4bd0eaad5f434b199a9f618231401838\",\"ids\":{\"groupId\":\"68786b0a92802d75fb77ed9a\"},\"isPhone\":true,\"ClientId\":\"{\\\"type\\\":5,\\\"ClientId\\\":\\\"68786b0a92802d75fb77ed9a\\\"}\"}"
         val paramSignature:String = getParamSignature(string)
@@ -78,7 +78,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
 
 
-        LogUtils.e(EncryptUtil.aesDecryptForMessageForDebug("7yp2G9cE4IBLlNQvDkURvJhOwQyhQld7pYu4yTH5SZRDVfKxwO3LQzAtUEI/w2gX0/FY98TKsnBlGcgd9Jq6+4nGudx2cqPe+uSqjXV7pLjXanLK7/skTsXm6bmoNscPEgQFcMj5FPqjqC7OFgkzxgj9aiIOG4B+edpdk/WLlYvWXvD3Nw4rVGrFym/ufO9P5FysFQecgcmRUh9CASK7cONqajWU3RP0PR5KYBWW48fBkiZLb8aifh7DaBgT5XdotZoXHonXFBjt2MLxRS2PFYbBYCbxRSGH4SDqziRFf4WWVBliMUcZ3PdY8zLE2in2qO5awV7R4/K1Wy9hL1C5nw=="))
+//        LogUtils.e { EncryptUtil.aesDecryptForMessageForDebug("7yp2G9cE4IBLlNQvDkURvJhOwQyhQld7pYu4yTH5SZRDVfKxwO3LQzAtUEI/w2gX0/FY98TKsnBlGcgd9Jq6+4nGudx2cqPe+uSqjXV7pLjXanLK7/skTsXm6bmoNscPEgQFcMj5FPqjqC7OFgkzxgj9aiIOG4B+edpdk/WLlYvWXvD3Nw4rVGrFym/ufO9P5FysFQecgcmRUh9CASK7cONqajWU3RP0PR5KYBWW48fBkiZLb8aifh7DaBgT5XdotZoXHonXFBjt2MLxRS2PFYbBYCbxRSGH4SDqziRFf4WWVBliMUcZ3PdY8zLE2in2qO5awV7R4/K1Wy9hL1C5nw==") }
 
 
     }
@@ -109,7 +109,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //                val fileId = it.getLong(idColumnIndex)
 //                val filePath = it.getString(dataColumnIndex)
 //                val mimeType = it.getString(mimeTypeColumnIndex)
-//                LogUtils.e("MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType")
+//                LogUtils.e { "MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType" }
 //            }
 //        }
 //
@@ -137,7 +137,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //                val filePath = it.getString(dataColumnIndex)
 //                val mimeType = it.getString(mimeTypeColumnIndex)
 //
-//                LogUtils.e("MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType")
+//                LogUtils.e { "MediaStore", "ID: $fileId, Path: $filePath, MIME Type: $mimeType" }
 //            }
 //        }
 //
@@ -163,7 +163,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //
 //                // 过滤出 PDF 文件
 //                if (mimeType == "application/pdf") {
-//                    LogUtils.e("PDFFile", "Found PDF: $displayName")
+//                    LogUtils.e { "PDFFile", "Found PDF: $displayName" }
 //                }
 //            }
 //        }
@@ -192,22 +192,22 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     class MainViewModel : BaseListViewModel() {
         init {
-            LogUtils.dInfo("MainModel init 1  ")
-            viewModelScope.launch {
-                LogUtils.dInfo("MainModel init viewModelScope")
-            }
-            LogUtils.dInfo("MainModel init 2")
+//            LogUtils.dInfo{ "MainModel init 1  " }
+//            viewModelScope.launch {
+//                LogUtils.dInfo{ "MainModel init viewModelScope" }
+//            }
+//            LogUtils.dInfo{ "MainModel init 2" }
         }
 
         override fun initData(extras:Bundle?) {
             super.initData(extras)
-            LogUtils.dInfo("MainModel initData 1")
+//            LogUtils.dInfo{ "MainModel initData 1" }
         }
 
         override fun onCreate(owner:LifecycleOwner) {
-            LogUtils.dInfo("MainModel onCrete 1")
+//            LogUtils.dInfo{ "MainModel onCrete 1" }
             super.onCreate(owner)
-            LogUtils.dInfo("MainModel onCrete 2")
+//            LogUtils.dInfo{ "MainModel onCrete 2" }
             val arrayList = mutableListOf<MainBean<*>>()
             arrayList.add(MainBean("文件相关", FileIndexActivity2::class.java))
             arrayList.add(MainBean("Ui相关", ViewIndexActivity2::class.java))

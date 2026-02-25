@@ -1,5 +1,5 @@
 package com.easy.example.ui.customize.widget.imageedit;
-
+import kotlin.jvm.functions.Function0;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,7 +24,7 @@ class StickerUtils {
 
   public static String saveImageToGallery(File file, Bitmap bmp) {
     if (bmp == null) {
-      LogUtils.dInfo( "saveImageToGallery: the bitmap is null");
+
       return "";
     }
     try {
@@ -36,14 +36,13 @@ class StickerUtils {
       e.printStackTrace();
     }
 
-    LogUtils.dInfo("saveImageToGallery: the path of bmp is " + file.getAbsolutePath());
     return file.getAbsolutePath();
   }
 
   // 把文件插入到系统图库
   public static void notifySystemGallery(Context context, File file) {
     if (file == null || !file.exists()) {
-      LogUtils.dInfo( "notifySystemGallery: the file do not exist.");
+//      LogUtils.dInfo{ "notifySystemGallery: the file do not exist." };
       return;
     }
 
