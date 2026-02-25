@@ -15,7 +15,9 @@ class LogUtilsActivity : BaseViewBindingActivity<ActivityLogUtilsBinding>() {
 
     override fun initView() {
         binding.button83.setOnClickListener {
-            LogUtils.v(this.toString())
+            LogUtils.v{
+                this.toString()
+            }
         }
         binding.button84.setOnClickListener {
             LogUtils.d(this.toString())
