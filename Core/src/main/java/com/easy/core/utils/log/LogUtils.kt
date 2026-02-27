@@ -238,17 +238,6 @@ object LogUtils {
 
 
     /**
-     *   打一个日志标记
-     * @param any Any?
-     */
-    @JvmStatic
-    fun e4Mark(any:Any?) {
-        if (CoreConfig.get().isDebug) {
-            e("$TAG", any)
-        }
-    }
-
-    /**
      * E 类型日志
      */
     @JvmStatic
