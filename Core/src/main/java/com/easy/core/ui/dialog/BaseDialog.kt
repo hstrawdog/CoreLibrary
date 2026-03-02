@@ -143,13 +143,13 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 //        }
         //  设置主题
         setStyle(STYLE_NORMAL, R.style.DefDialogStyle)
-        LogUtils.dMark( TAG.LIVE_TAG,block = {"${this}   onCreate "})
+        LogUtils.dMark( tag = TAG.LIVE_TAG,block = {"${this}   onCreate "})
 
     }
 
     override fun onCreateView(inflater:LayoutInflater, container:ViewGroup?, savedInstanceState:Bundle?):View? {
         dialog?.window?.setWindowAnimations(getAnimation())
-        LogUtils.dMark( TAG.LIVE_TAG,block = {"${this}   onCreateView "})
+        LogUtils.dMark( tag = TAG.LIVE_TAG,block = {"${this}   onCreateView "})
         if (rootView == null) {
             activity?.let {
                 loadingView = LoadingView(it)
@@ -158,7 +158,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
             rootView = rootViewBuild.buildContentView(this)
             initContentView()
             initView()
-            LogUtils.dMark( TAG.LIVE_TAG,block = {"${this}   onCreateView   rootView is  null  "})
+            LogUtils.dMark( tag = TAG.LIVE_TAG,block = {"${this}   onCreateView   rootView is  null  "})
 
         }
         return rootView
@@ -166,7 +166,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onViewCreated(view:View, savedInstanceState:Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        LogUtils.dMark( TAG.LIVE_TAG,block = {"${this} onViewCreated  }"})
+        LogUtils.dMark( tag = TAG.LIVE_TAG,block = {"${this} onViewCreated  }"})
         if (!loaded && rootView != null) {
             if (statusBarMode == ToolBarMode.Companion.LIGHT_MODE) {
                 StatusBarManager.setStatusBarModel(dialog?.window, true)
@@ -177,7 +177,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
                 StatusBarManager.transparencyBar(dialog?.window)
             }
             loaded = true
-            LogUtils.dMark( TAG.LIVE_TAG,block = {"${this} onViewCreated   ${rootView!!.width}"})
+            LogUtils.dMark( tag = TAG.LIVE_TAG,block = {"${this} onViewCreated   ${rootView!!.width}"})
         }
     }
 
@@ -197,7 +197,7 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
     override fun onActivityCreated(savedInstanceState:Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtils.dMark( TAG.LIVE_TAG, block = {rootView?.measuredWidth})
+        LogUtils.dMark( tag = TAG.LIVE_TAG, block = {rootView?.measuredWidth})
         dialog?.window?.setBackgroundDrawable(ColorDrawable(getBackground()))
         dialog?.window?.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
         dialog?.window?.setGravity(getGravity())
@@ -249,11 +249,11 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
 
 
     override fun dismiss() {
-        LogUtils.dMark( TAG.LIVE_TAG, block = {"${this}  dismiss "})
+        LogUtils.dMark( tag = TAG.LIVE_TAG, block = {"${this}  dismiss "})
 
         if (isDismiss || !isAdded) {
 
-            LogUtils.dMark( TAG.LIVE_TAG, block = {"${this}   is ${isDismiss}    or  ${!isAdded}"})
+            LogUtils.dMark( tag = TAG.LIVE_TAG, block = {"${this}   is ${isDismiss}    or  ${!isAdded}"})
             // 避免重复 执行
             return
         }
