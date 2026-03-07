@@ -18,6 +18,7 @@ class HuaWeiTipDialog : BaseBindingDialog<DialogHuaweiTipBinding>() {
 
     var tipText = ""
 
+    override val isDismissBackground: Boolean=false
     override fun getDialogWeight(): Int {
         return WindowManager.LayoutParams.MATCH_PARENT
     }
