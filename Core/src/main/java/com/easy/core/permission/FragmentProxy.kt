@@ -94,7 +94,6 @@ class FragmentProxy : IPermissionActions {
                 this.tipText = tipText
                 this.call = {
                     call.invoke(it)
-
                 }
             }
                 .show(supportFragmentManager)

@@ -190,7 +190,11 @@ object SysPermissionsUtils {
                     HuaWeiTipDialog().apply {
                         this.tipText = tipText
                         call = {
-                            FragmentProxy().requestPermissions(fragmentManager, plus, permissionsResult)
+                            if (it){
+                                FragmentProxy().requestPermissions(fragmentManager, plus, permissionsResult)
+                            }else{
+                                permissionsResult?.onPermissionsResult(false)
+                            }
                         }
                     }.show(supportFragmentManager)
                 }
