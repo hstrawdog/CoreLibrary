@@ -1,6 +1,8 @@
 package com.easy.core.permission.dialog
 
+import android.content.DialogInterface
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.WindowManager
 import com.easy.core.databinding.DialogHuaweiTipBinding
 import com.easy.core.ui.dialog.BaseBindingDialog
@@ -12,7 +14,7 @@ import com.easy.core.ui.dialog.BaseBindingDialog
  * @Email : qiqiang213@gmail.com
  * @Describe :
  */
-class HuaWeiTipDialog : BaseBindingDialog<DialogHuaweiTipBinding>() {
+class HuaWeiTipDialog : BaseBindingDialog<DialogHuaweiTipBinding>() , DialogInterface.OnKeyListener{
 
     var call: ((isDefine: Boolean) -> Unit)? = null
 
@@ -37,6 +39,17 @@ class HuaWeiTipDialog : BaseBindingDialog<DialogHuaweiTipBinding>() {
             call?.invoke(true)
             dismiss()
         }
-    }
+        dialog?.setOnKeyListener(this)
 
+    }
+    /**
+     * 禁用返回键
+     * @param dialog DialogInterface
+     * @param keyCode Int
+     * @param event KeyEvent
+     * @return Boolean
+     */
+    override fun onKey(dialog:DialogInterface?, keyCode:Int, event:KeyEvent?):Boolean {
+        return keyCode == KeyEvent.KEYCODE_BACK
+    }
 }

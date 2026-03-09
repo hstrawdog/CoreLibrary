@@ -217,7 +217,7 @@ class SelectDialog<T : DialogViewBuilder?> : BaseDialog(), DialogInterface, Dial
     }
 
     /**
-     *
+     * 禁用返回键
      * @param dialog DialogInterface
      * @param keyCode Int
      * @param event KeyEvent
