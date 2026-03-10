@@ -7,6 +7,7 @@ import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.easy.core.CoreConfig
+import com.easy.core.permission.IPermissionsHas
 import com.easy.example.demo.net.launch
 import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseViewModel
@@ -75,7 +76,7 @@ class WeatherViewModel : BaseViewModel() {
         mLocationOption!!.isNeedAddress = true
         //给定位客户端对象设置定位参数
         mLocationClient!!.setLocationOption(mLocationOption)
-        SysPermissionsUtils.requestLocal((CoreConfig.get().currActivity as AppCompatActivity) .supportFragmentManager,{ status ->
+        SysPermissionsUtils.requestPermissions((CoreConfig.get().currActivity as AppCompatActivity) .supportFragmentManager,IPermissionsHas.location , { status ->
             if (status) {
                 startLocation()
             }

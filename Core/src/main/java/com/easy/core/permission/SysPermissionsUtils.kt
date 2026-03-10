@@ -28,7 +28,7 @@ object SysPermissionsUtils {
      * @param permissions Array<out Array<String>>
      * @param permissionsResult PermissionsResult
      */
-    fun requestPermissions(fragmentManager:FragmentManager, vararg permissions:Array<String>, permissionsResult:PermissionsResult) {
+    fun requestPermissions(fragmentManager:FragmentManager,  permissions:Array<String>, permissionsResult:PermissionsResult) {
         var permissionArray = emptyArray<String>()
         for (permission in permissions) {
             permissionArray = permissionArray.plus(permission)
@@ -36,16 +36,12 @@ object SysPermissionsUtils {
         requestPermissions(fragmentManager, permissionArray, "", false, permissionsResult)
     }
 
-    fun requestPermissions(fragmentManager:FragmentManager, vararg permissions:Array<String>, tipText:String, permissionsResult:PermissionsResult) {
+    fun requestPermissions(fragmentManager:FragmentManager,  permissions:Array<String>, tipText:String, permissionsResult:PermissionsResult) {
         var permissionArray = emptyArray<String>()
         for (permission in permissions) {
             permissionArray = permissionArray.plus(permission)
         }
         requestPermissions(fragmentManager, permissionArray, tipText, isNeedShowTip= tipText.isNotNull(), permissionsResult)
-    }
-
-    fun requestPermissions(fragmentManager:FragmentManager, permissions:Array<String>, tipText:String, permissionsResult:PermissionsResult?) {
-        requestPermissions(fragmentManager, permissions, tipText,isNeedShowTip= tipText.isNotNull(), permissionsResult)
     }
 
     /**

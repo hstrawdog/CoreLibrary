@@ -5,6 +5,7 @@ import android.graphics.Bitmap.CompressFormat
 import android.net.Uri
 import android.os.Build
 import com.easy.core.glide.ImageLoadUtils
+import com.easy.core.permission.IPermissionsHas
 import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.ui.base.BaseViewBindingActivity
 import com.easy.core.utils.image.BitmapUtils
@@ -27,7 +28,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
 
     override fun initView() {
         binding.textView28.setOnClickListener {
-            SysPermissionsUtils.requestStorage(supportFragmentManager, {
+            SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.storage,{
                 if (it) {
                     path = SaveBitmapUtils.saveBitmap2AppCache(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), compressFormat =  CompressFormat.JPEG)
                     binding.textView40.setText("$path")
@@ -38,7 +39,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
         //保存在相册
         binding.textView29.setOnClickListener {
-            SysPermissionsUtils.requestStorage(supportFragmentManager, {
+            SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.storage,{
                 if (it) {
                     binding.tvTitle.text = binding.textView29.text
                     SaveBitmapUtils.saveBitmap2Pictures(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), fileName = FileUtils.getDefFileName(".png"))?.let {
@@ -51,7 +52,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
         // 保存在相册 指定目录中
         binding.textView32.setOnClickListener {
-            SysPermissionsUtils.requestStorage(supportFragmentManager, {
+            SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.storage,{
                 if (it) {
                     binding.tvTitle.text = binding.textView32.text
                     SaveBitmapUtils.saveBitmap2Pictures(BitmapCreateUtils.createBitmapFromView2(binding.tvTitle), "subdirectory", fileName = FileUtils.getDefFileName(".png"))?.let {
@@ -65,7 +66,7 @@ class SaveBitmapActivity : BaseViewBindingActivity<ActivitySaveBitmapBinding>() 
         }
 
         binding.textView34.setOnClickListener {
-            SysPermissionsUtils.requestStorage(supportFragmentManager, {
+            SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.storage,{
                 if (it) {
                     binding.tvTitle.text = binding.textView34.text
                     // 保存到默认的文件夹

@@ -23,6 +23,7 @@ import com.easy.core.R
 import com.easy.core.album.entity.LocalMedia
 import com.easy.core.album.entity.LocalMediaFolder
 import com.easy.core.album.utils.AlbumUtils
+import com.easy.core.permission.IPermissionsHas
 import com.easy.core.permission.SysPermissionsUtils
 import com.easy.core.utils.ToastUtils
 
@@ -111,12 +112,8 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
     private fun initViews() {
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
-        SysPermissionsUtils.requestStorage(supportFragmentManager,{ status ->
-            if (status) {
-                initData()
-            } else {
-                ToastUtils.showToast("读取内存卡权限已被拒绝,请在系统设置中开启权限")
-            }
+        SysPermissionsUtils.requestPermissions(supportFragmentManager,IPermissionsHas.storage, { status ->
+
         })
     }
 

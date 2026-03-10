@@ -128,7 +128,7 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
 
     private fun startUpCamera() {
         // 启动相机拍照,先判断手机是否有拍照权限
-        SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.camera, IPermissionsHas.storage) {
+        SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.camera.plus( IPermissionsHas.storage)) {
             if (it) {
                 startOpenCamera()
             } else {
@@ -167,7 +167,7 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
 
-        SysPermissionsUtils.requestStorage(supportFragmentManager,object : PermissionsResult {
+        SysPermissionsUtils.requestPermissions(supportFragmentManager,IPermissionsHas.storage, object : PermissionsResult {
             override fun onPermissionsResult(status: Boolean) {
                 if (status) {
                     initData()
