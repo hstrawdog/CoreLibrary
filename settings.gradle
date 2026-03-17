@@ -1,55 +1,50 @@
 /*
-pluginManagement 脚本块,用于配置Gradle插件的Maven仓库,配置的是构建过程中,使用的仓库 ;
-pluginManagement 脚本块中的 repositories 配置 , 对应之前的 buildscript 中的 repositories 配置 ;
-*/
+ * pluginManagement:
+ * 配置 Gradle 插件解析时使用的仓库。
+ * 这里只影响构建脚本和插件本身，不影响业务依赖解析。
+ */
 pluginManagement {
     repositories {
         google()
         mavenCentral()
         maven { url 'https://repo1.maven.org/maven2/' }
         gradlePluginPortal()
-        // 添加阿里云 maven 地址
+        // 阿里云公共仓库
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
-        // 阿里云的 Gradle 插件镜像（Kotlin 插件等）
+        // 阿里云 Gradle 插件镜像（如 Kotlin 插件）
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-
     }
-
 }
 
 /*
-dependencyResolutionManagement 脚本块,用于配置依赖的Maven仓库 ,配置的是工程或模块下的依赖使用的仓库 ;
-在 dependencyResolutionManagement 脚本块中定义
-repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS) 代码的含义是 解析依赖时 , 只能使用本脚本块中的 Maven 仓库 , 不能使用 Module 子项目中的依赖 ;
-repositoriesMode 模式有两种 :
-RepositoriesMode.PREFER_PROJECT : 解析依赖库时 , 优先使用本地仓库 , 本地仓库没有该依赖 , 则使用远程仓库 ;
-RepositoriesMode.FAIL_ON_PROJECT_REPOS : 解析依赖库时 , 强行使用远程仓库 , 不管本地仓库有没有该依赖库 ;
-dependencyResolutionManagement 脚本块中的 repositories 配置 , 对应之前的 allprojects 中的 repositories 配置 ;
-*/
+ * dependencyResolutionManagement:
+ * 配置工程依赖解析时使用的仓库。
+ * 当前使用 PREFER_PROJECT，表示优先使用模块或工程中声明的仓库配置。
+ *
+ * repositoriesMode 常见取值：
+ * 1. PREFER_PROJECT
+ *    优先使用项目中声明的仓库，兼容旧工程迁移场景。
+ * 2. FAIL_ON_PROJECT_REPOS
+ *    强制所有模块只使用这里声明的仓库，适合统一治理仓库来源。
+ */
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
-//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        mavenCentral() // Warning: this repository is going to shut down soon
+        mavenCentral()
         maven { url "https://jitpack.io" }
         gradlePluginPortal()
-        // 添加阿里云 maven 地址
+        // 阿里云公共仓库
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
-        // 阿里云的 Gradle 插件镜像（Kotlin 插件等）
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }   // 添加阿里云 maven 地址
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        // 阿里云的 Gradle 插件镜像（Kotlin 插件等）
+        // 阿里云 Gradle 插件镜像（通常用于插件解析，保留以兼容现有环境）
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-
     }
 }
 
 rootProject.name = "CoreLibrary"
 include ':app'
 include ':Core'
-//include ':Album'
-include ':myapplication'
+// include ':Album'

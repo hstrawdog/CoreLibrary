@@ -2,6 +2,9 @@ package com.easy.core.album.annotation;
 
 import androidx.annotation.IntDef;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * @Author : huangqiqiang
  * @Package : com.easy.core.album.annotation
@@ -11,6 +14,7 @@ import androidx.annotation.IntDef;
  * @Describe :
  */
 @IntDef({LocalMediaType.VALUE_TYPE_IMAGE, LocalMediaType.VALUE_TYPE_VIDEO, LocalMediaType.VALUE_URL_IMAGE})
+@Retention(RetentionPolicy.SOURCE)
 public @interface LocalMediaType {
     /**
      *  本地图片类型
