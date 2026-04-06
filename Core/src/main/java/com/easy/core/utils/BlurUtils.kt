@@ -110,7 +110,7 @@ object BlurUtils {
         paint.colorFilter = filter
         canvas.scale(scale, scale)
         canvas.drawBitmap(scaleBitmap!!, 0f, 0f, paint)
-        scaleBitmap = renderScriptBlur(scaleBitmap, radius)
+        scaleBitmap = renderScriptBlur(scaleBitmap, radius) ?: return null
         if (scale == 1f) {
             return scaleBitmap
         }

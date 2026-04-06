@@ -86,8 +86,8 @@ abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.
     /**
      * 布局创建 容器
      */
-    private val rootViewBuild:IRootViewBuildBuild by lazy {
-        IRootViewBuildBuild(this)
+    private val rootViewBuild:RootViewBuilder by lazy {
+        RootViewBuilder.forFragment(this)
     }
 
     /**

@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
+import com.easy.core.kt.open
 import com.easy.core.ui.list.BaseListViewModel
 import com.easy.core.ui.list.BaseVmListActivity
 import com.easy.core.utils.ToastUtils
@@ -16,6 +17,7 @@ import com.easy.example.bean.MainBean
 import com.easy.example.demo.DemoIndexActivity2
 import com.easy.example.ui.MainActivity.MainViewModel
 import com.easy.example.ui.adaptation.AdaptationIndexActivity2
+import com.easy.example.ui.adaptation.ComposeToolbarControlActivity
 import com.easy.example.ui.adaptation.permission.PermissionActivity
 import com.easy.example.ui.bar.ToolBarActivity
 import com.easy.example.ui.crash.ThrowIndexActivity2
@@ -46,6 +48,7 @@ import java.util.UUID
 class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
     //  这边是kotlin
     override val adapter:MainAdapter = MainAdapter()
+
 //    override fun bindingViewModelId(): Int {
 //        return 0
 //    }
@@ -59,6 +62,7 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 
     @SuppressLint("Range")
     override fun initData() {
+
 //        LogUtils.dInfo{ "MainActivity    initData" }
 //        EncryptUtil.aesDecrypt("666")
 //        EncryptUtil.aesDecryptForMessageForDebug("ekhDPpQtWDWwXVldrTJ4xA==")
@@ -67,14 +71,15 @@ class MainActivity : BaseVmListActivity<MainViewModel, ViewDataBinding>() {
 //        LogUtils.e { EncryptUtil.aesDecryptForMessageForDebug("Y3mx5lq7Y/UsZlCTBOJ+Ltujry8ZQipe3e/WeRxbLwM61h9WQh9Te2ShtsagN9T3CQADTyNK3fv7Bvrsc3dOBw==") }
 //        LogUtils.e { EncryptUtil.aesDecryptForMessageForDebug("raNShXxfb59Mk7jw50v0XN2Ejf5128HJDawpr0sqv0o=") }
 
-        val string:String ="{\"userId\":\"4bd0eaad5f434b199a9f618231401838\",\"ids\":{\"groupId\":\"68786b0a92802d75fb77ed9a\"},\"isPhone\":true,\"ClientId\":\"{\\\"type\\\":5,\\\"ClientId\\\":\\\"68786b0a92802d75fb77ed9a\\\"}\"}"
-        val paramSignature:String = getParamSignature(string)
+//        val string:String ="{\"userId\":\"4bd0eaad5f434b199a9f618231401838\",\"ids\":{\"groupId\":\"68786b0a92802d75fb77ed9a\"},\"isPhone\":true,\"ClientId\":\"{\\\"type\\\":5,\\\"ClientId\\\":\\\"68786b0a92802d75fb77ed9a\\\"}\"}"
+//        val paramSignature:String = getParamSignature(string)
 
 //        SocketIo().initIO()
 //            open(BannerActivity::class.java)
 //            open(MainWebView2Activity::class.java)
 //            open(FragmentUtilsActivity::class.java)
 
+        open(AdaptationIndexActivity2::class.java)
 
 
 

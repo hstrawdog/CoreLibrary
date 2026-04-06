@@ -80,7 +80,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-    <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -166,6 +165,21 @@
         <activity
             android:name=".ui.compose.ComposeIndexActivity"
             android:label="ComposeIndex" />
+        <activity
+            android:name=".ui.adaptation.ComposeDimensActivity"
+            android:label="Compose 屏宽适配" />
+        <activity
+            android:name=".ui.adaptation.ComposeToolbarScrollActivity"
+            android:label="Compose Toolbar 滚动" />
+        <activity
+            android:name=".ui.adaptation.ComposeToolbarControlActivity"
+            android:label="Compose Toolbar 控制" />
+        <activity
+            android:name=".ui.adaptation.ComposeFragmentDemoActivity"
+            android:label="Compose Fragment 验证" />
+        <activity
+            android:name=".ui.adaptation.ComposeDialogDemoActivity"
+            android:label="Compose Dialog 验证" />
         <activity
             android:name="com.easy.example.ui.customize.ZoomViewActivity"
             android:exported="true"
@@ -372,15 +386,6 @@
             android:name=".ui.view.SvgActivity"
             android:label="svg 测试" />
         <activity
-            android:name=".ui.skin.SkinCActivity"
-            android:label="换肤界面C" />
-        <activity
-            android:name=".ui.skin.SkinBActivity"
-            android:label="换肤界面B" />
-        <activity
-            android:name=".ui.skin.SkinAActivity"
-            android:label="换肤界面A" />
-        <activity
             android:name=".ui.system.AppIconActivity"
             android:label="设置App图标" />
         <activity
@@ -549,7 +554,6 @@
             android:name=".ui.soft.hide.keyboard.DefSofKeyBoardAndShowActivity"
             android:label="默认键盘的展示" />
 
-        <service android:name="com.amap.api.location.APSService" />
 
         <service
             android:name=".receiver.KillAppServers"

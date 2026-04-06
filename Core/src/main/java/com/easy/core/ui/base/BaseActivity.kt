@@ -32,12 +32,24 @@ import java.util.concurrent.atomic.AtomicInteger
 
 abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener {
     /**
-     *  回调
+     * 新版页面结果回调表。
+     *
+     * 目的：
+     * 1. 让“在哪里发起页面跳转，就在哪里接收结果”。
+     * 2. 避免所有结果都集中到 onActivityResult 中再由外层手动分发。
+     *
+     * 注意：
+     * 这里服务的是库内主动封装的新跳转链路，不替代系统或三方 SDK
+     * 仍依赖的 onActivityResult 兼容逻辑。
      */
     internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
     internal var requestCodeGenerator = AtomicInteger(2000) // 避免和 Activity 重复
+
     /**
-     *  页面跳转
+     * Activity Result API 的统一入口。
+     *
+     * 通过在 intent 中写入内部 requestCode，将系统回调重新分发到
+     * 发起方注册的 lambda 中，实现“就近接收结果”。
      */
     internal val registerForActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -70,8 +82,13 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     /**
      * 根布局创建
      */
-    private val iCreateRootView: IRootViewBuildBuild by lazy {
-        IRootViewBuildBuild(this, showStatus = true, showToolBar = true, isAlwaysPortrait = isAlwaysPortrait)
+    private val iCreateRootView: RootViewBuilder by lazy {
+        RootViewBuilder.forActivity(
+            activity = this,
+            showStatus = true,
+            showToolBar = true,
+            isAlwaysPortrait = isAlwaysPortrait
+        )
     }
 
     /**
@@ -112,7 +129,15 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     }
 
     /**
-     *  统一的判断
+     * 兼容旧版结果回调链路。
+     *
+     * 保留原因：
+     * 1. 部分历史页面仍通过 startActivityForResult/onActivityResult 传递结果。
+     * 2. 一些第三方 SDK 或外部页面仍要求宿主继续接收 onActivityResult。
+     *
+     * 当前策略：
+     * - 旧链路继续通过 onResult 暴露给子类处理。
+     * - 新链路优先使用 registerForActivityResult，就近分发结果。
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -144,7 +169,12 @@ abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleActi
     }
 
     /**
-     *  统一判断  onActivityResult 方法
+     * 旧版 Activity 结果回调扩展点。
+     *
+     * 仅处理仍依赖 onActivityResult 的场景，例如：
+     * - 第三方 SDK 页面
+     * - 历史业务页面
+     * - 无法迁移到 registerForActivityResult 的旧链路
      */
     override fun onResult(requestCode: Int, resultCode: Int, data: Intent?) {}
 

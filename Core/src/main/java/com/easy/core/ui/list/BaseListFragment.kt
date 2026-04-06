@@ -2,10 +2,12 @@ package com.easy.core.ui.list
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.loadState.LoadState
 import com.easy.core.BaseCommonsKey
+import com.easy.core.R
 import com.easy.core.ui.base.BaseFragment
 import com.easy.core.ui.list.BaseListModel.IBaseListModelView
 
@@ -40,11 +42,19 @@ abstract class BaseListFragment : BaseFragment(), IBaseListModelView {
 
     override fun getLayoutView(group: ViewGroup): View? {
         return if (getLayoutViewId() <= 0) {
-            context?.let {
-                BaseListModel.createRecycleView(it)
-            }
+            context?.let { createDefaultRecyclerView(it) }
         } else {
             null
+        }
+    }
+
+    protected open fun createDefaultRecyclerView(context: android.content.Context): RecyclerView {
+        return RecyclerView(context).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            id = R.id.rc_list
         }
     }
 

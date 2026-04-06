@@ -9,6 +9,7 @@ import com.easy.core.R
 import com.easy.core.annotation.ToolBarMode
 import com.easy.core.common.TAG
 import com.easy.core.toolbar.DefToolBar
+import com.easy.core.ui.compose.ComposeDimensSpec
 import com.easy.core.utils.data.DataUtils
 import com.easy.core.utils.ScreenUtils
 import com.easy.core.utils.log.LogUtils
@@ -105,6 +106,12 @@ class CoreConfig private constructor() {
      * 默认标题字体颜色
      */
     var defTitleColor = R.color.toolbar_text_color
+
+    /**
+     * Compose 屏幕适配默认配置。
+     * 默认沿用现有 dimen 体系的 750 设计稿基准，页面可按需重写。
+     */
+    var composeDimensSpec: ComposeDimensSpec = ComposeDimensSpec()
     //endregion
 
     /**

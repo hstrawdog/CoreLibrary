@@ -15,7 +15,7 @@ import com.easy.core.annotation.ToolBarMode
 import com.easy.core.common.TAG
 import com.easy.core.listenner.DialogClickListener
 import com.easy.core.ui.base.IDialogFragment
-import com.easy.core.ui.base.IRootViewBuildBuild
+import com.easy.core.ui.base.RootViewBuilder
 import com.easy.core.ui.base.RootViewImpl
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.utils.statusbar.StatusBarManager
@@ -73,8 +73,8 @@ abstract class BaseDialog : DialogFragment(), IDialogFragment {
     /**
      * 布局创建
      */
-    protected val rootViewBuild:IRootViewBuildBuild by lazy {
-        IRootViewBuildBuild(this)
+    protected val rootViewBuild:RootViewBuilder by lazy {
+        RootViewBuilder.forDialogFragment(this)
     }
 
     /**

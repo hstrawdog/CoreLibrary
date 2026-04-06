@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.easy.core.R
 import com.easy.core.ui.base.IBaseDialogFragment
-import com.easy.core.ui.base.IRootViewBuildBuild
+import com.easy.core.ui.base.RootViewBuilder
 import com.easy.core.utils.log.LogUtils
 
 /**
@@ -36,7 +36,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBaseDialogFragme
     /**
      * 布局创建 容器
      */
-    lateinit var rootViewBuild: IRootViewBuildBuild
+    lateinit var rootViewBuild: RootViewBuilder
 
     override fun getDialogHeight(): Int {
         return CoordinatorLayout.LayoutParams.MATCH_PARENT
@@ -68,7 +68,7 @@ abstract class BaseBottomDialog : BottomSheetDialogFragment(), IBaseDialogFragme
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         if (rootView == null) {
-            rootViewBuild = IRootViewBuildBuild(this)
+            rootViewBuild = RootViewBuilder.forDialogFragment(this)
             initConfig()
             rootView = rootViewBuild.buildContentView(this)
         }

@@ -52,7 +52,7 @@ class ManageStartActivity : IManageStartActivity {
      * current activity result callback
      */
     private val activityResultCallback = object : ActivityResultCallback<ActivityResult> {
-        override fun onActivityResult(result: ActivityResult?) {
+        override fun onActivityResult(result: ActivityResult) {
             result ?: return
             checkInit()
             startActivityResultDeque.pollFirst()?.invoke(result.resultCode, result.data)

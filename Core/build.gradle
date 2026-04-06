@@ -14,9 +14,9 @@ android {
         //开启 dataBinding 支持
         dataBinding true
         //开启 Compose 支持
-//        compose true
+        compose true
     }
-    compileSdk 33
+    compileSdk 34
     defaultConfig {
         minSdkVersion 23
     }
@@ -32,6 +32,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.5.1'
     }
     lint {
         baseline = file("lint-baseline.xml")
@@ -65,9 +68,12 @@ dependencies {
     api libs.meteria
 
     // 生命周期
+    api 'androidx.lifecycle:lifecycle-runtime:2.7.0'
     api libs.lifecycleViewModelKtx
     api libs.lifecycleLivedataKtx
     api libs.lifecycleRunTimeKtx
+    api 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0'
+    api 'androidx.savedstate:savedstate-ktx:1.2.1'
     api libs.mmkv
 
     // gson解析
@@ -97,6 +103,13 @@ dependencies {
     api libs.converterGson
     api libs.loggingInterceptor
 
+    // Compose 新页面路径
+    api 'androidx.activity:activity-compose:1.8.2'
+    api 'androidx.compose.ui:ui:1.5.1'
+    api 'androidx.compose.foundation:foundation:1.5.1'
+    api 'androidx.compose.material:material:1.5.1'
+    api 'androidx.compose.ui:ui-tooling-preview:1.5.1'
+
     api libs.photoview.library
     api libs.subsamplingscaleimageview.core
 
@@ -124,7 +137,7 @@ afterEvaluate {
 //                artifact androidSourcesJar
 //                artifact(androidSourcesJar)
                 //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
-                version = '1.4.0'
+                version = '1.4.1'
 //                afterEvaluate {
 //                    from components.release
 //                }

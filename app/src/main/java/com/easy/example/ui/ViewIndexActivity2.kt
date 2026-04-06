@@ -1,6 +1,6 @@
 package com.easy.example.ui
 
-import com.easy.core.ui.list.BaseListActivity
+import com.easy.core.ui.compose.BaseComposeListActivity
 import com.easy.example.adapter.MainAdapter
 import com.easy.example.bean.MainBean
 import com.easy.example.ui.adaptation.DefImgActivity
@@ -9,7 +9,7 @@ import com.easy.example.ui.recycle.RecycleIndexActivity
 import com.easy.example.ui.tab.layout.TabLayoutActivity
 import com.easy.example.ui.web.WebActivity
 
-class ViewIndexActivity2 : BaseListActivity() {
+class ViewIndexActivity2 : BaseComposeListActivity() {
     override val adapter: MainAdapter = MainAdapter()
 
     override fun initData() {

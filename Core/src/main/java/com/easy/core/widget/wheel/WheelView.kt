@@ -365,7 +365,7 @@ class WheelView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private fun initView(context: Context) {
         handler = MessageHandler(this)
         gestureDetector = GestureDetector(context, object : SimpleOnGestureListener() {
-            override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+            override fun onFling(e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
                 scrollBy(velocityY)
                 return true
             }

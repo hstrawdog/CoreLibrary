@@ -36,13 +36,10 @@ class VolDiskView : View {
 
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         setLayerType(LAYER_TYPE_SOFTWARE, null)
-
-        canvas?.let {
-            drawScale(it)
-        }
+        drawScale(canvas)
     }
 
     /**

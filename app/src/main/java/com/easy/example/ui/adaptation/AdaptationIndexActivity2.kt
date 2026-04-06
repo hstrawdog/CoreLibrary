@@ -16,6 +16,11 @@ class AdaptationIndexActivity2(override val adapter: MainAdapter = MainAdapter()
     BaseListActivity() {
     override fun initData() {
         adapter.add(com.easy.example.bean.MainBean("键盘适配r", SoftHidKeyboardIndexActivity2::class.java))
+        adapter.add(com.easy.example.bean.MainBean("Compose 屏宽适配", ComposeDimensActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("Compose Toolbar 滚动", ComposeToolbarScrollActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("Compose Toolbar 控制", ComposeToolbarControlActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("Compose Fragment 验证", ComposeFragmentDemoActivity::class.java))
+        adapter.add(com.easy.example.bean.MainBean("Compose Dialog 验证", ComposeDialogDemoActivity::class.java))
         adapter.add(com.easy.example.bean.MainBean("文字适配测试", com.easy.example.ui.screen.TextViewBuilderSizeActivity::class.java))
         adapter.add(com.easy.example.bean.MainBean("1像素大小测试", com.easy.example.ui.screen.DimenActivity::class.java))
         adapter.add(com.easy.example.bean.MainBean("SVG测试", com.easy.example.ui.view.SvgActivity::class.java))

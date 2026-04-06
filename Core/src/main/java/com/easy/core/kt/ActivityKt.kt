@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.easy.core.ui.compose.BaseComposeActivity
 import com.easy.core.ui.base.BaseActivity
 
 /**
@@ -31,6 +32,23 @@ fun BaseActivity.setResultOk(data: Bundle = Bundle()) {
     setResult(Activity.RESULT_OK, intent)
 }
 
+fun BaseComposeActivity.open(cls:Class<*>, bundle:Bundle = Bundle(), callback:(ActivityResult) -> Unit = {}) {
+    val requestCode = requestCodeGenerator.incrementAndGet()
+    activityResultMap[requestCode] = callback
+    registerForActivity.launch(Intent(this, cls).apply {
+        putExtras(bundle)
+        putExtra("__request_code__", requestCode)
+    })
+}
+
+fun BaseComposeActivity.setResultOk(data: Bundle = Bundle()) {
+    val intent = Intent().apply {
+        putExtras(data)
+        putExtra("__request_code__", intent?.getIntExtra("__request_code__", -1) ?: -1)
+    }
+    setResult(Activity.RESULT_OK, intent)
+}
+
 
 ///**
 // *  拍照并预览
@@ -45,4 +63,3 @@ fun BaseActivity.setResultOk(data: Bundle = Bundle()) {
 //    })
 //
 //}
-

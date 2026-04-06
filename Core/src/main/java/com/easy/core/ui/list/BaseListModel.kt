@@ -3,12 +3,9 @@ package com.easy.core.ui.list
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
 import `in`.srain.cube.views.ptr.PtrHandler
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
@@ -64,6 +61,10 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
      * adapter
      */
     private val _adapter get() = mBaseListModelView.adapter
+
+    constructor(mBaseListModelView: IBaseListModelView, rootView: View?) : this(mBaseListModelView) {
+        mBaseListModelView.listView = initRecycleView(rootView)
+    }
 
     constructor(mBaseListModelView: IBaseListModelView, iRootView: RootViewImpl) : this(mBaseListModelView) {
         mBaseListModelView.listView = initRecycleView(iRootView.rootView)
@@ -301,24 +302,6 @@ class BaseListModel(var mBaseListModelView: IBaseListModelView) {
          */
         fun initData()
 
-
-    }
-
-    companion object {
-        /**
-         * 创建一个 rootView = recycleView
-         *
-         * @param context
-         * @return
-         */
-        @JvmOverloads
-        fun createRecycleView(context: Context): View {
-            val view = RecyclerView(context)
-            view.layoutParams =
-                LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            view.id = R.id.rc_list
-            return view
-        }
 
     }
 }

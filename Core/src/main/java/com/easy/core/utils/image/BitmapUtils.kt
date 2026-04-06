@@ -412,7 +412,7 @@ object BitmapUtils {
     @JvmStatic
     fun bitmap2Bytes(bitmap:Bitmap, format:Bitmap.CompressFormat?):ByteArray {
         val baos = ByteArrayOutputStream()
-        bitmap.compress(format, 100, baos)
+        bitmap.compress(format ?: Bitmap.CompressFormat.PNG, 100, baos)
         return baos.toByteArray()
     }
 
@@ -923,7 +923,7 @@ object BitmapUtils {
         var ret = false
         try {
             os = BufferedOutputStream(FileOutputStream(file))
-            ret = src.compress(format, 100, os)
+            ret = src.compress(format ?: Bitmap.CompressFormat.PNG, 100, os)
             if (recycle && !src.isRecycled) {
                 src.recycle()
             }

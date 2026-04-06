@@ -114,7 +114,7 @@ class RecProgressLayout @JvmOverloads constructor(context: Context, attrs: Attri
         setWillNotDraw(false)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 //        drawProgressBg(canvas)
         drawProgress(canvas)

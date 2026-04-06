@@ -73,7 +73,7 @@ class CusPtrClassicFrameLayout : PtrClassicFrameLayout {
             return false
         }
 
-        override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+        override fun onScroll(e1: MotionEvent?, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
             val disX: Float
             val disY: Float
             disX = if (distanceX < 0) {
@@ -104,7 +104,7 @@ class CusPtrClassicFrameLayout : PtrClassicFrameLayout {
         }
 
         override fun onLongPress(e: MotionEvent) {}
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+        override fun onFling(e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
             return false
         }
     }
