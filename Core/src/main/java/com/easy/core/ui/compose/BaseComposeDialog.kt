@@ -13,6 +13,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.easy.core.common.TAG
 import com.easy.core.R
+import com.easy.core.annotation.ToolBarMode
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.utils.statusbar.StatusBarManager
@@ -173,11 +174,16 @@ abstract class BaseComposeDialog : DialogFragment(), ComposeRootViewHost, Bundle
      * 根据当前根布局配置同步 Dialog window 的状态栏表现。
      */
     protected open fun applyDialogWindowConfig() {
-        if (rootViewConfig?.showStatusBar != true) {
+        val window = dialog?.window ?: return
+        val config = rootViewConfig ?: return
+        if (!config.showStatusBar) {
             return
         }
-        val window = dialog?.window ?: return
-        StatusBarManager.transparencyBar(window)
+        when (config.statusBarMode) {
+            ToolBarMode.LIGHT_MODE -> StatusBarManager.setStatusBarModel(window, true)
+            ToolBarMode.DARK_MODE -> StatusBarManager.setStatusBarModel(window, false)
+            else -> StatusBarManager.transparencyBar(window)
+        }
     }
 
     /**

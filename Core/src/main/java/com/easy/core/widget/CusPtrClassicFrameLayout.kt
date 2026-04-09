@@ -64,6 +64,7 @@ class CusPtrClassicFrameLayout : PtrClassicFrameLayout {
     }
 
     private val gestureListener: GestureDetector.OnGestureListener = object : GestureDetector.OnGestureListener {
+
         override fun onDown(e: MotionEvent): Boolean {
             return true
         }

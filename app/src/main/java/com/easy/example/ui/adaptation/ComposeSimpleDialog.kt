@@ -50,7 +50,7 @@ class ComposeSimpleDialog : BaseComposeDialog() {
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "这个 full-screen dialog 现在按 Activity 一样走内容头部：状态栏背景占位 + toolbar 都由页面根布局负责，window 本身不再单独改状态栏。",
+                    text = "这个 full-screen dialog 现在按 Activity 一样走内容头部：状态栏背景占位 + toolbar 由页面根布局负责，window 只同步状态栏图标深浅，避免系统默认样式把图标切浅。",
                     color = Color(0xFF5C6878),
                     fontSize = dimens.text(28)
                 )
