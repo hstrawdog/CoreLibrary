@@ -41,19 +41,19 @@ class ComposeDimensActivity : BaseComposeActivity() {
                 .fillMaxSize()
                 .background(Color(0xFFF4F6FB))
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 48.xdp, vertical = 40.xdp),
-            verticalArrangement = Arrangement.spacedBy(32.xdp)
+                .padding(horizontal = 24.xdp, vertical = 20.xdp),
+            verticalArrangement = Arrangement.spacedBy(16.xdp)
         ) {
             Text(
                 text = "Compose runtime xdp",
-                fontSize = dimens.text(64),
+                fontSize = dimens.text(32),
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF18212F)
             )
 
             Text(
                 text = "designWidth=${dimens.designWidth.toInt()}, screenWidthDp=${dimens.screenWidthDp.toInt()}, scale=$scaleText",
-                fontSize = dimens.text(30),
+                fontSize = dimens.text(15),
                 color = Color(0xFF5E6B7A)
             )
 
@@ -68,45 +68,45 @@ class ComposeDimensActivity : BaseComposeActivity() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(36.xdp))
+                .clip(RoundedCornerShape(18.xdp))
                 .background(Color.White)
-                .padding(48.xdp),
-            verticalArrangement = Arrangement.spacedBy(28.xdp)
+                .padding(24.xdp),
+            verticalArrangement = Arrangement.spacedBy(14.xdp)
         ) {
             Text(
-                text = "20.xdp / dimens.text(32)",
-                fontSize = currentComposeDimens().text(40),
+                text = "20.xdp / dimens.text(16)",
+                fontSize = currentComposeDimens().text(20),
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF18212F)
             )
 
             Text(
-                text = "这套写法保留了旧工具最核心的换算方式: 当前屏宽dp / 设计稿宽度。布局统一用 xdp，文字也走同一套比例。",
-                fontSize = currentComposeDimens().text(30),
+                text = "当前基线改为 375dp。布局里的 20.xdp、文字里的 dimens.text(16) 都直接对应设计稿里的 dp 标注。",
+                fontSize = currentComposeDimens().text(15),
                 color = Color(0xFF5E6B7A)
             )
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(320.xdp)
-                    .clip(RoundedCornerShape(32.xdp))
+                    .height(160.xdp)
+                    .clip(RoundedCornerShape(16.xdp))
                     .background(Color(0xFF1E88E5))
-                    .padding(40.xdp)
+                    .padding(20.xdp)
             ) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(24.xdp)
+                    verticalArrangement = Arrangement.spacedBy(12.xdp)
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(96.xdp)
-                            .clip(RoundedCornerShape(28.xdp))
+                            .size(48.xdp)
+                            .clip(RoundedCornerShape(14.xdp))
                             .background(Color(0xFFFFFFFF))
                     )
 
                     Text(
-                        text = "旧 XML 里的 @dimen/x40、@dimen/s32，迁到 Compose 后可以直接写成 40.xdp、dimens.text(32)。",
-                        fontSize = currentComposeDimens().text(32),
+                        text = "现在推荐直接按设计稿 dp 标注写：20.xdp、dimens.text(16)。如果设计图给的是 375dp 基线，数值可以直接照抄。",
+                        fontSize = currentComposeDimens().text(16),
                         color = Color.White,
                         fontWeight = FontWeight.Medium
                     )
@@ -120,22 +120,22 @@ class ComposeDimensActivity : BaseComposeActivity() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(36.xdp))
+                .clip(RoundedCornerShape(18.xdp))
                 .background(Color.White)
-                .padding(48.xdp),
-            verticalArrangement = Arrangement.spacedBy(24.xdp)
+                .padding(24.xdp),
+            verticalArrangement = Arrangement.spacedBy(12.xdp)
         ) {
             Text(
-                text = "Legacy mapping",
-                fontSize = currentComposeDimens().text(40),
+                text = "375dp mapping",
+                fontSize = currentComposeDimens().text(20),
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xFF18212F)
             )
 
             MetricRow(label = "x20", value = "20.xdp")
-            MetricRow(label = "x48", value = "48.xdp")
-            MetricRow(label = "s28", value = "dimens.text(28)")
-            MetricRow(label = "s36", value = "dimens.text(36)")
+            MetricRow(label = "x24", value = "24.xdp")
+            MetricRow(label = "s14", value = "dimens.text(14)")
+            MetricRow(label = "s18", value = "dimens.text(18)")
         }
     }
 
@@ -148,19 +148,19 @@ class ComposeDimensActivity : BaseComposeActivity() {
         ) {
             Text(
                 text = label,
-                fontSize = dimens.text(30),
+                fontSize = dimens.text(15),
                 color = Color(0xFF5E6B7A)
             )
-            Spacer(modifier = Modifier.width(20.xdp))
+            Spacer(modifier = Modifier.width(10.xdp))
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(999.xdp))
+                    .clip(RoundedCornerShape(500.xdp))
                     .background(Color(0xFFE9F2FF))
-                    .padding(horizontal = 24.xdp, vertical = 12.xdp)
+                    .padding(horizontal = 12.xdp, vertical = 6.xdp)
             ) {
                 Text(
                     text = value,
-                    fontSize = dimens.text(28),
+                    fontSize = dimens.text(14),
                     color = Color(0xFF1E88E5),
                     fontWeight = FontWeight.Medium
                 )
@@ -173,34 +173,34 @@ class ComposeDimensActivity : BaseComposeActivity() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(36.xdp))
+                .clip(RoundedCornerShape(18.xdp))
                 .background(Color(0xFF18212F))
-                .padding(48.xdp),
-            verticalArrangement = Arrangement.spacedBy(20.xdp)
+                .padding(24.xdp),
+            verticalArrangement = Arrangement.spacedBy(10.xdp)
         ) {
             val dimens = currentComposeDimens()
             Text(
                 text = "Usage",
-                fontSize = dimens.text(40),
+                fontSize = dimens.text(20),
                 fontWeight = FontWeight.SemiBold,
                 color = Color.White
             )
 
             Text(
                 text = "CoreConfig.composeDimensSpec / page override",
-                fontSize = dimens.text(28),
+                fontSize = dimens.text(14),
                 color = Color(0xFFDCE6F5)
             )
 
             Text(
-                text = "Modifier.padding(32.xdp)",
-                fontSize = dimens.text(28),
+                text = "Modifier.padding(16.xdp)",
+                fontSize = dimens.text(14),
                 color = Color(0xFFDCE6F5)
             )
 
             Text(
-                text = "Text(fontSize = dimens.text(30))",
-                fontSize = dimens.text(28),
+                text = "Text(fontSize = dimens.text(15))",
+                fontSize = dimens.text(14),
                 color = Color(0xFFDCE6F5)
             )
         }

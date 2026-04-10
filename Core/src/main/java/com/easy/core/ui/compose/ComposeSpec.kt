@@ -108,8 +108,8 @@ sealed interface ComposeToolbarActionSpec {
     class Text(
         val text: CharSequence,
         @ColorRes val color: Int = R.color.color_333,
-        val textSize: Int = 28,
-        val endPadding: Int = 20,
+        val textSize: Int = 14,
+        val endPadding: Int = 10,
         val onClick: (() -> Unit)? = null
     ) : ComposeToolbarActionSpec
 
@@ -117,7 +117,7 @@ sealed interface ComposeToolbarActionSpec {
         @DrawableRes val iconRes: Int,
         val startPadding: Int = 0,
         val topPadding: Int = 0,
-        val endPadding: Int = 20,
+        val endPadding: Int = 10,
         val bottomPadding: Int = 0,
         val onClick: (() -> Unit)? = null
     ) : ComposeToolbarActionSpec
@@ -138,13 +138,13 @@ class ComposeToolbarSpec(
     @ColorRes val toolbarBackgroundColor: Int? = null,
     @ColorRes val statusBarBackgroundColor: Int? = null,
     @ColorRes val contentColor: Int = CoreConfig.get().defTitleColor,
-    val toolbarHeight: Int = 88,
-    val navigationStartPadding: Int = 15,
-    val navigationEndPadding: Int = 26,
-    val titleTextSize: Int = 36,
-    val titleHorizontalPadding: Int = 88,
-    val titleMaxWidth: Int = 240,
-    val actionsEndPadding: Int = 8,
+    val toolbarHeight: Int = 44,
+    val navigationStartPadding: Int = 8,
+    val navigationEndPadding: Int = 13,
+    val titleTextSize: Int = 18,
+    val titleHorizontalPadding: Int = 44,
+    val titleMaxWidth: Int = 120,
+    val actionsEndPadding: Int = 4,
     val showBottomLine: Boolean = true,
     val scrollProgress: Float? = null,
     val scrollProgressState: State<Float>? = null,

@@ -109,7 +109,7 @@ class CoreConfig private constructor() {
 
     /**
      * Compose 屏幕适配默认配置。
-     * 默认沿用现有 dimen 体系的 750 设计稿基准，页面可按需重写。
+     * 默认按 375dp 设计基线，页面可按需重写。
      */
     var composeDimensSpec: ComposeDimensSpec = ComposeDimensSpec()
     //endregion

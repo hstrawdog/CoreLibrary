@@ -46,8 +46,8 @@ private fun ComposeToolbarControlScreen(toolbarController: ComposeToolbarControl
             .fillMaxSize()
             .background(Color(0xFFF5F7FB))
             .verticalScroll(rememberScrollState())
-            .padding(24.xdp),
-        verticalArrangement = Arrangement.spacedBy(16.xdp)
+            .padding(12.xdp),
+        verticalArrangement = Arrangement.spacedBy(8.xdp)
     ) {
         TitleBlock(
             title = "Toolbar Runtime Control",
@@ -173,8 +173,8 @@ private fun ComposeToolbarControlScreen(toolbarController: ComposeToolbarControl
         Text(
             text = "这套控制方式不是直接操作 View，而是通过 ComposeToolbarController 改状态，toolbar 自己重组。",
             color = Color(0xFF5C6878),
-            fontSize = dimens.text(28),
-            modifier = Modifier.padding(top = 8.xdp)
+            fontSize = dimens.text(14),
+            modifier = Modifier.padding(top = 4.xdp)
         )
     }
 }
@@ -185,20 +185,20 @@ private fun TitleBlock(title: String, desc: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(24.xdp))
-            .padding(24.xdp),
-        verticalArrangement = Arrangement.spacedBy(10.xdp)
+            .background(Color.White, RoundedCornerShape(12.xdp))
+            .padding(12.xdp),
+        verticalArrangement = Arrangement.spacedBy(5.xdp)
     ) {
         Text(
             text = title,
             color = Color(0xFF18212F),
-            fontSize = dimens.text(34),
+            fontSize = dimens.text(17),
             fontWeight = FontWeight.Bold
         )
         Text(
             text = desc,
             color = Color(0xFF5C6878),
-            fontSize = dimens.text(28)
+            fontSize = dimens.text(14)
         )
     }
 }
@@ -212,32 +212,32 @@ private fun ActionRow(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White, RoundedCornerShape(24.xdp))
-            .padding(24.xdp),
-        verticalArrangement = Arrangement.spacedBy(12.xdp)
+            .background(Color.White, RoundedCornerShape(12.xdp))
+            .padding(12.xdp),
+        verticalArrangement = Arrangement.spacedBy(6.xdp)
     ) {
         Text(
             text = title,
             color = Color(0xFF18212F),
-            fontSize = dimens.text(30),
+            fontSize = dimens.text(15),
             fontWeight = FontWeight.SemiBold
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(12.xdp)
+            horizontalArrangement = Arrangement.spacedBy(6.xdp)
         ) {
             actions.forEach { (label, action) ->
                 Button(
                     onClick = action,
-                    shape = RoundedCornerShape(18.xdp),
+                    shape = RoundedCornerShape(9.xdp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF1E88E5))
                 ) {
                     Text(
                         text = label,
                         color = Color.White,
-                        fontSize = dimens.text(24)
+                        fontSize = dimens.text(12)
                     )
                 }
             }
@@ -257,7 +257,7 @@ private fun ComposeToolbarControlScreenPreview() {
             )
         )
     }
-    ProvideComposeDimens(designWidth = 750) {
+    ProvideComposeDimens(designWidth = 375) {
         MaterialTheme {
             ComposeToolbarControlScreen(toolbarController = toolbarController)
         }

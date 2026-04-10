@@ -64,19 +64,19 @@ class ComposeToolbarScrollActivity : BaseComposeActivity() {
                 .fillMaxSize()
                 .background(Color(0xFFF5F7FB))
                 .verticalScroll(scrollState)
-                .padding(bottom = 40.xdp)
+                .padding(bottom = 20.xdp)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(280.xdp)
+                    .height(140.xdp)
                     .background(Color(0xFF202F46))
-                    .padding(horizontal = 40.xdp, vertical = 36.xdp)
+                    .padding(horizontal = 20.xdp, vertical = 18.xdp)
             ) {
                 Text(
                     text = "向上滚动，观察标题栏背景、标题和返回图标的变化。",
                     color = Color.White,
-                    fontSize = dimens.text(36),
+                    fontSize = dimens.text(18),
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -95,23 +95,23 @@ class ComposeToolbarScrollActivity : BaseComposeActivity() {
         val dimens = currentComposeDimens()
         Column(
             modifier = Modifier
-                .padding(horizontal = 24.xdp, vertical = 12.xdp)
+                .padding(horizontal = 12.xdp, vertical = 6.xdp)
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(28.xdp))
+                .clip(RoundedCornerShape(14.xdp))
                 .background(Color.White)
-                .padding(28.xdp),
-            verticalArrangement = Arrangement.spacedBy(12.xdp)
+                .padding(14.xdp),
+            verticalArrangement = Arrangement.spacedBy(6.xdp)
         ) {
             Text(
                 text = title,
                 color = Color(0xFF18212F),
-                fontSize = dimens.text(32),
+                fontSize = dimens.text(16),
                 fontWeight = FontWeight.SemiBold
             )
             Text(
                 text = body,
                 color = Color(0xFF586578),
-                fontSize = dimens.text(28)
+                fontSize = dimens.text(14)
             )
         }
     }

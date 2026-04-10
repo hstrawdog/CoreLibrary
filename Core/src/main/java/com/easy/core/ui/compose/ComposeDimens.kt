@@ -16,20 +16,18 @@ import kotlin.math.max
 /**
  * Runtime dimens adapter for Compose.
  *
- * The designWidth keeps the same meaning as the old generator's "base width":
- * if your design draft is 1080 wide, pass 1080 here.
+ * designWidth 表示设计稿逻辑宽度，默认按 375dp 基线处理。
  */
 data class ComposeDimensSpec(
     val enabled: Boolean = true,
-    val designWidth: Int = 750,
+    val designWidth: Int = 375,
     val minValue: Float = 0.5f
 )
 
 /**
  * Runtime dimens adapter for Compose.
  *
- * The designWidth keeps the same meaning as the old generator's "base width":
- * if your design draft is 1080 wide, pass 1080 here.
+ * designWidth 表示设计稿逻辑宽度，默认按 375dp 基线处理。
  */
 @Immutable
 data class ComposeDimens(

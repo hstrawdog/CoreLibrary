@@ -249,7 +249,7 @@ private fun ComposeToolbarPreview() {
             contentSpec = ContentSpec.Compose {}
         )
     }
-    ProvideComposeDimens(designWidth = 750) {
+    ProvideComposeDimens(designWidth = 375) {
         MaterialTheme {
             ComposeToolbar(
                 config = config,
@@ -287,7 +287,7 @@ private fun ComposeToolbarScrolledPreview() {
             contentSpec = ContentSpec.Compose {}
         )
     }
-    ProvideComposeDimens(designWidth = 750) {
+    ProvideComposeDimens(designWidth = 375) {
         MaterialTheme {
             ComposeToolbar(
                 config = config,
