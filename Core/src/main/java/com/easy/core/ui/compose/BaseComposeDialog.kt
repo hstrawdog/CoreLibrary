@@ -176,9 +176,6 @@ abstract class BaseComposeDialog : DialogFragment(), ComposeRootViewHost, Bundle
     protected open fun applyDialogWindowConfig() {
         val window = dialog?.window ?: return
         val config = rootViewConfig ?: return
-        if (!config.showStatusBar) {
-            return
-        }
         when (config.statusBarMode) {
             ToolBarMode.LIGHT_MODE -> StatusBarManager.setStatusBarModel(window, true)
             ToolBarMode.DARK_MODE -> StatusBarManager.setStatusBarModel(window, false)
