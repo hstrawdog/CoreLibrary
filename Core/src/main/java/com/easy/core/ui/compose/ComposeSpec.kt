@@ -28,9 +28,11 @@ class ComposeToolbarController(
     val backgroundColorState: MutableState<Int?> = mutableStateOf(null)
     val toolbarBackgroundColorState: MutableState<Int?> = mutableStateOf(null)
     val statusBarBackgroundColorState: MutableState<Int?> = mutableStateOf(null)
-    val contentColorState: MutableState<Int?> = mutableStateOf(null)
+    val titleColorState: MutableState<Int?> = mutableStateOf(null)
     val navigationIconResState: MutableState<Int?> = mutableStateOf(null)
     val navigationExpandedIconResState: MutableState<Int?> = mutableStateOf(null)
+    val showToolbarState: MutableState<Boolean?> = mutableStateOf(null)
+    val showStatusBarState: MutableState<Boolean?> = mutableStateOf(null)
     val showBottomLineState: MutableState<Boolean?> = mutableStateOf(null)
 
     /**
@@ -76,10 +78,24 @@ class ComposeToolbarController(
     }
 
     /**
-     * 设置标题栏前景色，包括标题和默认返回图标着色语义。
+     * 控制 toolbar 主体区域显隐。
      */
-    fun setContentColor(@ColorRes colorRes: Int?) {
-        contentColorState.value = colorRes
+    fun setShowToolbar(show: Boolean?) {
+        showToolbarState.value = show
+    }
+
+    /**
+     * 控制状态栏占位区域显隐。
+     */
+    fun setShowStatusBar(show: Boolean?) {
+        showStatusBarState.value = show
+    }
+
+    /**
+     * 设置标题颜色。
+     */
+    fun setTitleColor(@ColorRes colorRes: Int?) {
+        titleColorState.value = colorRes
     }
 
     /**
@@ -137,7 +153,7 @@ class ComposeToolbarSpec(
     @ColorRes val backgroundColor: Int = CoreConfig.get().defToolBarColor,
     @ColorRes val toolbarBackgroundColor: Int? = null,
     @ColorRes val statusBarBackgroundColor: Int? = null,
-    @ColorRes val contentColor: Int = CoreConfig.get().defTitleColor,
+    @ColorRes val titleColor: Int = CoreConfig.get().defTitleColor,
     val toolbarHeight: Int = 44,
     val navigationStartPadding: Int = 8,
     val navigationEndPadding: Int = 13,
@@ -153,7 +169,19 @@ class ComposeToolbarSpec(
     val onNavigationClick: (() -> Unit)? = null,
     val actionItems: List<ComposeToolbarActionSpec> = emptyList(),
     val actions: ComposeToolbarActions = {}
-)
+) {
+    /**
+     * 是否绘制状态栏占位区域。
+     */
+    var showStatusBar: Boolean = true
+
+    /**
+     * 是否绘制 toolbar 主体区域。
+     * 适合保留状态栏占位，但临时隐藏标题栏内容。
+     */
+    var showToolbar: Boolean = true
+
+}
 
 /**
  * 页面头部区域描述。

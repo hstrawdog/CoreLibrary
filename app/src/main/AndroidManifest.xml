@@ -166,6 +166,9 @@
             android:name=".ui.compose.ComposeIndexActivity"
             android:label="ComposeIndex" />
         <activity
+            android:name=".ui.adaptation.ComposeListDemoActivity"
+            android:label="Compose List 验证" />
+        <activity
             android:name=".ui.adaptation.ComposeDimensActivity"
             android:label="Compose 屏宽适配" />
         <activity
@@ -175,11 +178,11 @@
             android:name=".ui.adaptation.ComposeToolbarControlActivity"
             android:label="Compose Toolbar 控制" />
         <activity
-            android:name=".ui.adaptation.ComposeFragmentDemoActivity"
-            android:label="Compose Fragment 验证" />
+            android:name=".ui.adaptation.ComposeToolbarHostCatalogActivity"
+            android:label="Compose Toolbar 宿主验证" />
         <activity
-            android:name=".ui.adaptation.ComposeDialogDemoActivity"
-            android:label="Compose Dialog 验证" />
+            android:name=".ui.adaptation.ComposeToolbarHostCaseActivity"
+            android:label="Compose Toolbar 宿主 Case" />
         <activity
             android:name="com.easy.example.ui.customize.ZoomViewActivity"
             android:exported="true"

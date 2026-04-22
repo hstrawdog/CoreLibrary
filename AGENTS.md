@@ -275,3 +275,50 @@ Compose 约束：
 - 先归类问题：`API 设计 / 复用性 / Compose 适配 / 依赖构建 / 兼容性`
 - 改动 `Core` 公共 API 时明确兼容性风险
 - 新增能力时给出 `app` 中最小可运行验证示例
+
+---
+
+## Core 库画像
+
+`Core` 当前不是单一工具包，而是一个面向 Android 多项目复用的基础设施库，主要由以下几类能力组成：
+
+- `ui`：Activity / Fragment / Dialog / List 基座，承载 ViewBinding、DataBinding、ViewModel、页面装配
+- `ui/compose`：Compose 页面基座、RootView 装配、Compose Toolbar、`375dp` 基线适配、`xdp` 能力
+- `utils`：文件、图片、文本、加密、日志、线程、状态栏、键盘、设备、Intent、时间、SP 等通用工具
+- `recycle` / `widget`：Banner、Gallery、Indicator、Divider、PTR、WheelView、自定义通用控件
+- `album`：相册选择、目录、预览、媒体实体与装饰器
+- `permission`：系统权限请求与权限结果封装
+- `net`：OkHttp / Retrofit 基础封装、下载回调、参数兼容层
+- `glide`：图片加载与圆角等能力封装
+- `msa`：启动 Activity for result 管理封装
+- `background`：Shape / Selector / Drawable 构建与背景能力
+
+### 项目现状判断
+
+- `Core` 是唯一发布产物
+- `app` 是验证模块，不承担发布职责
+- 当前是 `View 基座 + Compose 新路径` 并存
+- Compose 演进已开始落地，不是纯规划状态
+- `Core` 依赖暴露较多，定位偏开箱即用基础库，而非极简内核
+
+### 适合放进 Core 的内容
+
+- 对多个项目都成立的工具类、扩展函数、封装层
+- 通用页面基座、通用状态管理容器、通用 UI 组件
+- 与业务无关的文件、网络、权限、图片、列表、适配能力
+- Compose 通用能力：`Modifier` 扩展、`@Composable` 工具函数、state holder、适配体系
+
+### 不适合放进 Core 的内容
+
+- 登录、用户、订单、支付、风控、Feed、消息等业务语义
+- 某单一项目的页面流程、接口契约、埋点模型、业务状态机
+- 强依赖特定 Application / Activity / 生命周期的定制逻辑
+- 只能服务 demo 展示的临时实现
+
+### 推荐工作流
+
+1. 先判断问题类别：`API 设计 / 复用性 / Compose 适配 / 依赖构建 / 兼容性`
+2. 再判断能力归属：是否应该进入 `Core`
+3. 如进入 `Core`，优先抽象为稳定 API 或扩展能力
+4. 如涉及 UI，新能力优先补 Compose 版本
+5. 最后在 `app` 提供最小验证示例

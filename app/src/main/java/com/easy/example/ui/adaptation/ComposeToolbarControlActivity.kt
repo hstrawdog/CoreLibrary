@@ -31,9 +31,22 @@ import com.easy.core.ui.compose.xdp
 
 class ComposeToolbarControlActivity : BaseComposeActivity() {
 
+    override fun initView() {
+        composeToolbarController.setShowStatusBar(true)
+    }
+
     @Composable
     override fun InitComposeView() {
         ComposeToolbarControlScreen(toolbarController = composeToolbarController)
+    }
+
+    override fun provideComposeToolbarController(): ComposeToolbarController {
+        return super.provideComposeToolbarController().apply {
+            setShowStatusBar(false)
+            setShowToolbar(false)
+            setShowBottomLine(false)
+        }
+
     }
 }
 
@@ -71,19 +84,19 @@ private fun ComposeToolbarControlScreen(toolbarController: ComposeToolbarControl
             listOf(
                 "默认" to {
                     toolbarController.setBackgroundColor(com.easy.core.R.color.toolbar_bg_color)
-                    toolbarController.setContentColor(com.easy.core.R.color.toolbar_text_color)
+                    toolbarController.setTitleColor(com.easy.core.R.color.toolbar_text_color)
                 },
                 "主色" to {
                     toolbarController.setBackgroundColor(R.color.color_main)
-                    toolbarController.setContentColor(R.color.white)
+                    toolbarController.setTitleColor(R.color.white)
                 },
                 "白色" to {
                     toolbarController.setBackgroundColor(R.color.white)
-                    toolbarController.setContentColor(R.color.color_333)
+                    toolbarController.setTitleColor(R.color.color_333)
                 },
                 "透明" to {
                     toolbarController.setBackgroundColor(R.color.transparent)
-                    toolbarController.setContentColor(R.color.color_333)
+                    toolbarController.setTitleColor(R.color.color_333)
                 }
             )
         )
@@ -96,36 +109,65 @@ private fun ComposeToolbarControlScreen(toolbarController: ComposeToolbarControl
                 },
                 "Bar主色" to {
                     toolbarController.setToolbarBackgroundColor(R.color.color_main)
-                    toolbarController.setContentColor(R.color.white)
+                    toolbarController.setTitleColor(R.color.white)
                 },
                 "Bar黑色" to {
                     toolbarController.setToolbarBackgroundColor(R.color.black)
-                    toolbarController.setContentColor(R.color.white)
+                    toolbarController.setTitleColor(R.color.white)
                 },
                 "Bar白色" to {
                     toolbarController.setToolbarBackgroundColor(R.color.white)
-                    toolbarController.setContentColor(R.color.color_333)
+                    toolbarController.setTitleColor(R.color.color_333)
                 }
             )
         )
 
         ActionRow(
-            "仅状态栏背景",
+            "状态栏",
             listOf(
+                "显示状态栏" to {
+                    toolbarController.setShowStatusBar(true)
+                },
+                "隐藏状态栏" to {
+                    toolbarController.setShowStatusBar(false)
+                },
                 "恢复跟随" to {
+                    toolbarController.setShowStatusBar(true)
                     toolbarController.setStatusBarBackgroundColor(null)
                 },
                 "状态栏主色" to {
+                    toolbarController.setShowStatusBar(true)
                     toolbarController.setStatusBarBackgroundColor(R.color.color_main)
-                    toolbarController.setContentColor(R.color.white)
+                    toolbarController.setTitleColor(R.color.white)
                 },
                 "状态栏黑色" to {
+                    toolbarController.setShowStatusBar(true)
                     toolbarController.setStatusBarBackgroundColor(R.color.black)
-                    toolbarController.setContentColor(R.color.white)
+                    toolbarController.setTitleColor(R.color.white)
                 },
                 "状态栏白色" to {
+                    toolbarController.setShowStatusBar(true)
                     toolbarController.setStatusBarBackgroundColor(R.color.white)
-                    toolbarController.setContentColor(R.color.color_333)
+                    toolbarController.setTitleColor(R.color.color_333)
+                },
+                "状态栏透明" to {
+                    toolbarController.setShowStatusBar(true)
+                    toolbarController.setStatusBarBackgroundColor(com.easy.core.R.color.transparent)
+                }
+            )
+        )
+
+        ActionRow(
+            "标题栏显隐",
+            listOf(
+                "显示标题栏" to {
+                    toolbarController.setShowToolbar(true)
+                },
+                "隐藏标题栏" to {
+                    toolbarController.setShowToolbar(false)
+                },
+                "恢复默认" to {
+                    toolbarController.setShowToolbar(null)
                 }
             )
         )

@@ -52,10 +52,12 @@ fun ComposeToolbar(
     val resolvedStatusBarBackgroundColorRes = spec.controller?.statusBarBackgroundColorState?.value
         ?: spec.statusBarBackgroundColor
         ?: resolvedBackgroundColorRes
-    val resolvedContentColorRes = spec.controller?.contentColorState?.value ?: spec.contentColor
+    val resolvedTitleColorRes = spec.controller?.titleColorState?.value ?: spec.titleColor
     val resolvedNavigationIconRes = spec.controller?.navigationIconResState?.value ?: spec.navigationIconRes
     val resolvedExpandedNavigationIconRes = spec.controller?.navigationExpandedIconResState?.value
         ?: spec.navigationExpandedIconRes
+    val resolvedShowStatusBar = spec.controller?.showStatusBarState?.value ?: spec.showStatusBar
+    val resolvedShowToolbar = spec.controller?.showToolbarState?.value ?: spec.showToolbar
     val resolvedShowBottomLine = spec.controller?.showBottomLineState?.value ?: spec.showBottomLine
     val resolvedTitle = spec.controller?.titleState?.value ?: spec.title
     val resolvedActionItems = spec.controller?.actionItemsState?.value ?: spec.actionItems
@@ -71,7 +73,7 @@ fun ComposeToolbar(
     val titleHorizontalPadding = spec.titleHorizontalPadding.xdp
     val toolbarBackgroundColor = colorResource(resolvedToolbarBackgroundColorRes)
     val statusBarBackgroundColor = colorResource(resolvedStatusBarBackgroundColorRes)
-    val contentColor = colorResource(resolvedContentColorRes)
+    val titleColor = colorResource(resolvedTitleColorRes)
     val appCompatActivity = activity as? AppCompatActivity
     val backgroundAlpha = progress ?: 1f
     val titleAlpha = progress ?: 1f
@@ -90,7 +92,7 @@ fun ComposeToolbar(
     }.coerceIn(0f, 1f)
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        if (config.showStatusBar) {
+        if (config.showStatusBar && resolvedShowStatusBar) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -104,64 +106,66 @@ fun ComposeToolbar(
                 )
             }
         }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(toolbarHeight)
-        ) {
+        if (resolvedShowToolbar) {
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .alpha(backgroundAlpha)
-                    .background(toolbarBackgroundColor)
-            )
-            if (spec.showNavigationIcon) {
-                BackHandler(enabled = false) {}
+                    .fillMaxWidth()
+                    .height(toolbarHeight)
+            ) {
                 Box(
                     modifier = Modifier
-                        .align(Alignment.CenterStart)
+                        .fillMaxSize()
+                        .alpha(backgroundAlpha)
+                        .background(toolbarBackgroundColor)
+                )
+                if (spec.showNavigationIcon) {
+                    BackHandler(enabled = false) {}
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.CenterStart)
+                            .fillMaxHeight()
+                            .clickable {
+                                spec.onNavigationClick?.invoke()
+                                    ?: appCompatActivity?.onBackPressedDispatcher?.onBackPressed()
+                            }
+                            .padding(start = iconStartPadding, end = iconEndPadding),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Image(
+                            painter = navigationPainter,
+                            contentDescription = "Back",
+                            modifier = Modifier.alpha(navigationAlpha)
+                        )
+                    }
+                }
+
+                Text(
+                    text = resolvedTitle?.toString().orEmpty(),
+                    color = titleColor,
+                    fontSize = dimens.text(spec.titleTextSize),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .alpha(titleAlpha)
+                        .padding(horizontal = titleHorizontalPadding)
+                        .widthIn(max = spec.titleMaxWidth.xdp)
+                )
+
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
                         .fillMaxHeight()
-                        .clickable {
-                            spec.onNavigationClick?.invoke()
-                                ?: appCompatActivity?.onBackPressedDispatcher?.onBackPressed()
-                        }
-                        .padding(start = iconStartPadding, end = iconEndPadding),
-                    contentAlignment = Alignment.Center
+                        .padding(end = spec.actionsEndPadding.xdp),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Image(
-                        painter = navigationPainter,
-                        contentDescription = "Back",
-                        modifier = Modifier.alpha(navigationAlpha)
-                    )
+                    RenderToolbarActionItems(resolvedActionItems)
+                    spec.actions(this)
                 }
             }
-
-            Text(
-                text = resolvedTitle?.toString().orEmpty(),
-                color = contentColor,
-                fontSize = dimens.text(spec.titleTextSize),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .alpha(titleAlpha)
-                    .padding(horizontal = titleHorizontalPadding)
-                    .widthIn(max = spec.titleMaxWidth.xdp)
-            )
-
-            Row(
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .fillMaxHeight()
-                    .padding(end = spec.actionsEndPadding.xdp),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                RenderToolbarActionItems(resolvedActionItems)
-                spec.actions(this)
-            }
         }
-        if (resolvedShowBottomLine) {
+        if (resolvedShowToolbar && resolvedShowBottomLine) {
             Divider(
                 modifier = Modifier.alpha(bottomLineAlpha),
                 color = colorResource(R.color.toolbar_line_bg),
@@ -271,7 +275,7 @@ private fun ComposeToolbarScrolledPreview() {
             backgroundColor = R.color.transparent,
             toolbarBackgroundColor = R.color.white,
             statusBarBackgroundColor = R.color.white,
-            contentColor = R.color.color_333,
+            titleColor = R.color.color_333,
             scrollProgress = 0.72f,
             swapNavigationIconOnScroll = true,
             actionItems = listOf(
