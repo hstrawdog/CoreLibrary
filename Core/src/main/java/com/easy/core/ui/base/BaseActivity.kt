@@ -5,18 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.easy.core.R
 import com.easy.core.common.TAG
+import com.easy.core.ui.open.OpenDelegate
+import com.easy.core.ui.open.OpenHost
 import com.easy.core.toolbar.IToolBar
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
 import com.kunminx.architecture.domain.message.MutableResult
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @Author : huangqiqiang
@@ -30,34 +29,15 @@ import java.util.concurrent.atomic.AtomicInteger
  * 3. 初始化 LoadingView
  */
 
-abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener {
-    /**
-     * 新版页面结果回调表。
-     *
-     * 目的：
-     * 1. 让“在哪里发起页面跳转，就在哪里接收结果”。
-     * 2. 避免所有结果都集中到 onActivityResult 中再由外层手动分发。
-     *
-     * 注意：
-     * 这里服务的是库内主动封装的新跳转链路，不替代系统或三方 SDK
-     * 仍依赖的 onActivityResult 兼容逻辑。
-     */
-    internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
-    internal var requestCodeGenerator = AtomicInteger(2000) // 避免和 Activity 重复
+abstract class BaseActivity : AppCompatActivity(), IActivityRootView, BundleAction, View.OnClickListener, OpenHost {
+    private val openResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        openDelegate.dispatch(result)
+    }
 
-    /**
-     * Activity Result API 的统一入口。
-     *
-     * 通过在 intent 中写入内部 requestCode，将系统回调重新分发到
-     * 发起方注册的 lambda 中，实现“就近接收结果”。
-     */
-    internal val registerForActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val requestCode = result.data?.getIntExtra("__request_code__", -1) ?: -1
-            if (requestCode != -1) {
-                activityResultMap.remove(requestCode)?.invoke(result)
-            }
-        }
+    override val openDelegate: OpenDelegate = OpenDelegate(openResultLauncher)
+
+    override val openContext
+        get() = this
 
     /**
      * 当前对象

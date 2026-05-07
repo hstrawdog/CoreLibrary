@@ -1,44 +1,27 @@
 package com.easy.core.kt
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.ActivityResult
 import com.easy.core.ui.compose.BaseComposeDialog
 import com.easy.core.ui.dialog.BaseDialog
+import com.easy.core.ui.open.INTERNAL_REQUEST_CODE
+import com.easy.core.ui.open.openRequestCode
 
-/**
- * @Author : huangqiqiang
- * @Package : com.easy.core.kt
- * @Date  : 19:03
- * @Email : qiqiang213@gmail.com
- * @Describe :
- */
-fun BaseDialog.open(
-    cls:Class<*>,
-    bundle:Bundle = Bundle(),
-    result:(ActivityResult) -> Unit = {},
-) {
-    activityResult.observe(this) {
-        result(it)
-        activityResult.removeObservers(this)
+fun BaseDialog.setResultOk(data: Bundle = Bundle()) {
+    val sourceIntent = activity?.intent ?: Intent().apply {
+        arguments.openRequestCode()?.let {
+            putExtra(INTERNAL_REQUEST_CODE, it)
+        }
     }
-    registerForActivity.launch(Intent(activity, cls).apply {
-        putExtras(bundle)
-    })
+    activity?.setResult(Activity.RESULT_OK, openDelegate.createResultIntent(sourceIntent, data))
 }
 
-/**
- * 在 Compose Dialog 中打开新的 Activity，并通过 callback 接收返回结果。
- */
-fun BaseComposeDialog.open(
-    cls:Class<*>,
-    bundle:Bundle = Bundle(),
-    callback:(ActivityResult) -> Unit = {},
-) {
-    val requestCode = requestCodeGenerator.incrementAndGet()
-    activityResultMap[requestCode] = callback
-    registerForActivity.launch(Intent(requireContext(), cls).apply {
-        putExtras(bundle)
-        putExtra("__request_code__", requestCode)
-    })
+fun BaseComposeDialog.setResultOk(data: Bundle = Bundle()) {
+    val sourceIntent = activity?.intent ?: Intent().apply {
+        arguments.openRequestCode()?.let {
+            putExtra(INTERNAL_REQUEST_CODE, it)
+        }
+    }
+    activity?.setResult(Activity.RESULT_OK, openDelegate.createResultIntent(sourceIntent, data))
 }

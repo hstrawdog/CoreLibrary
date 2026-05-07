@@ -1,9 +1,10 @@
 package com.easy.core.ui.base
 
 import android.content.Intent
-import androidx.activity.result.contract.ActivityResultContracts
+import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.easy.core.BR
+import com.easy.core.kt.open
 import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
 
 /**
@@ -64,11 +65,9 @@ abstract class BaseVmFragment<K : BaseViewModel, T : ViewDataBinding> : BaseData
      * 打开新的界面
      */
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult(), openActivityComponent.result)
-                .launch(Intent(context, openActivityComponent.activityClass).apply {
-                    openActivityComponent.bundle?.let {
-                        this.putExtras(it)
-                    }
-                })
+        val activityClass = openActivityComponent.activityClass ?: return
+        open(activityClass, openActivityComponent.bundle ?: Bundle()) {
+            openActivityComponent.result.onActivityResult(it)
+        }
     }
 }

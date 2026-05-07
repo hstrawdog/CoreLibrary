@@ -6,20 +6,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.easy.core.R
 import com.easy.core.common.TAG
 import com.easy.core.kt.open
+import com.easy.core.ui.open.OpenDelegate
+import com.easy.core.ui.open.OpenHost
 import com.easy.core.toolbar.IToolBar
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.ResourcesUtils
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
 import com.kunminx.architecture.domain.message.MutableResult
-import java.util.concurrent.atomic.AtomicInteger
 
 interface OnFragmentVisibilityChangedListener {
     fun onFragmentVisibilityChanged(visible:Boolean)
@@ -33,27 +32,15 @@ interface OnFragmentVisibilityChangedListener {
  * @Email :  qiqiang213@gmail.com
  * @Describe :
  */
-abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener, View.OnAttachStateChangeListener, OnFragmentVisibilityChangedListener {
+abstract class BaseFragment : Fragment(), IFragmentRootView, BundleAction, View.OnClickListener, View.OnAttachStateChangeListener, OnFragmentVisibilityChangedListener, OpenHost {
+    private val openResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        openDelegate.dispatch(result)
+    }
 
+    override val openDelegate: OpenDelegate = OpenDelegate(openResultLauncher)
 
-    /**
-     *   MutableLiveData 去传递结果
-     */
-    internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
-    internal var requestCodeGenerator = AtomicInteger(2000)
-
-    /**
-     * 预先 注册
-     */
-
-
-    internal val registerForActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val requestCode = result.data?.getIntExtra("__request_code__", -1) ?: -1
-            if (requestCode != -1) {
-                activityResultMap.remove(requestCode)?.invoke(result)
-            }
-        }
+    override val openContext: Context
+        get() = requireContext()
 
 
 

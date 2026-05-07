@@ -4,30 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.Fragment
 import com.easy.core.common.TAG
+import com.easy.core.ui.open.OpenDelegate
+import com.easy.core.ui.open.OpenHost
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Compose 页面 Fragment 基类。
  * 结构与 BaseComposeActivity 保持一致，但宿主生命周期改为 Fragment。
  */
-abstract class BaseComposeFragment : Fragment(), ComposeRootViewHost, BundleAction, View.OnClickListener {
-    internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
-    internal var requestCodeGenerator = AtomicInteger(2000)
-    internal val registerForActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val requestCode = result.data?.getIntExtra("__request_code__", -1) ?: -1
-            if (requestCode != -1) {
-                activityResultMap.remove(requestCode)?.invoke(result)
-            }
-        }
+abstract class BaseComposeFragment : Fragment(), ComposeRootViewHost, BundleAction, View.OnClickListener, OpenHost {
+    private val openResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        openDelegate.dispatch(result)
+    }
+
+    override val openDelegate: OpenDelegate = OpenDelegate(openResultLauncher)
+
+    override val openContext
+        get() = requireContext()
 
     protected var rootView:View? = null
 

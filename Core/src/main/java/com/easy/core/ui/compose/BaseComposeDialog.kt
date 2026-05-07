@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.DialogFragment
@@ -14,26 +13,26 @@ import androidx.fragment.app.FragmentManager
 import com.easy.core.common.TAG
 import com.easy.core.R
 import com.easy.core.annotation.ToolBarMode
+import com.easy.core.ui.open.OpenDelegate
+import com.easy.core.ui.open.OpenHost
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.utils.statusbar.StatusBarManager
 import com.easy.core.widget.LoadingView
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Compose 弹窗基类。
  * 默认使用透明背景，并关闭沉浸式状态栏控制，便于弹窗自己决定视觉表现。
  */
-abstract class BaseComposeDialog : DialogFragment(), ComposeRootViewHost, BundleAction, View.OnClickListener {
-    internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
-    internal var requestCodeGenerator = AtomicInteger(2000)
-    internal val registerForActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val requestCode = result.data?.getIntExtra("__request_code__", -1) ?: -1
-            if (requestCode != -1) {
-                activityResultMap.remove(requestCode)?.invoke(result)
-            }
-        }
+abstract class BaseComposeDialog : DialogFragment(), ComposeRootViewHost, BundleAction, View.OnClickListener, OpenHost {
+    private val openResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        openDelegate.dispatch(result)
+    }
+
+    override val openDelegate: OpenDelegate = OpenDelegate(openResultLauncher)
+
+    override val openContext
+        get() = requireContext()
 
     protected var rootView: View? = null
     private var rootViewConfig: RootViewConfig? = null

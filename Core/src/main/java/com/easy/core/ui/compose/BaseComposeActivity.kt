@@ -3,15 +3,15 @@ package com.easy.core.ui.compose
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import com.easy.core.common.TAG
+import com.easy.core.ui.open.OpenDelegate
+import com.easy.core.ui.open.OpenHost
 import com.easy.core.utils.BundleAction
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.widget.LoadingView
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Compose 页面 Activity 基类。
@@ -20,16 +20,15 @@ import java.util.concurrent.atomic.AtomicInteger
  * 1. 重写 initComposeView() 提供 Compose 页面内容。
  * 2. 按需重写 ComposeRootViewHost 中的 provideXxx 方法调整页面装配。
  */
-abstract class BaseComposeActivity : AppCompatActivity(), ComposeRootViewHost, BundleAction, View.OnClickListener {
-    internal val activityResultMap = mutableMapOf<Int, (ActivityResult) -> Unit>()
-    internal var requestCodeGenerator = AtomicInteger(2000)
-    internal val registerForActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val requestCode = result.data?.getIntExtra("__request_code__", -1) ?: -1
-            if (requestCode != -1) {
-                activityResultMap.remove(requestCode)?.invoke(result)
-            }
-        }
+abstract class BaseComposeActivity : AppCompatActivity(), ComposeRootViewHost, BundleAction, View.OnClickListener, OpenHost {
+    private val openResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        openDelegate.dispatch(result)
+    }
+
+    override val openDelegate: OpenDelegate = OpenDelegate(openResultLauncher)
+
+    override val openContext
+        get() = this
 
     lateinit var activity: Activity
 

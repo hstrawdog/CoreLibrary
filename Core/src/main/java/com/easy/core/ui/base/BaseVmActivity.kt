@@ -2,9 +2,11 @@ package com.easy.core.ui.base
 
 import android.app.Activity
 import android.content.Intent
-import androidx.activity.result.contract.ActivityResultContracts
+import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.easy.core.BR
+import com.easy.core.kt.open
+import com.easy.core.kt.setResultOk
 import com.easy.core.ui.base.BaseViewModel.OpenActivityComponent
 
 /**
@@ -89,9 +91,7 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
     override fun finishActivity(goBackComponent: BaseViewModel.GoBackComponent) {
         if (goBackComponent.goBack) {
             goBackComponent.bundle?.let {
-                setResult(Activity.RESULT_OK, Intent().apply {
-                    putExtras(it)
-                })
+                setResultOk(it)
             }
             finish()
         }
@@ -102,11 +102,9 @@ abstract class BaseVmActivity<K : BaseViewModel, T : ViewDataBinding>
      * @param openActivityComponent OpenActivityComponent
      */
     override fun openActivity(openActivityComponent: OpenActivityComponent) {
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult(), openActivityComponent.result)
-                .launch(Intent(this, openActivityComponent.activityClass).apply {
-                    openActivityComponent.bundle?.let {
-                        this.putExtras(it)
-                    }
-                })
+        val activityClass = openActivityComponent.activityClass ?: return
+        open(activityClass, openActivityComponent.bundle ?: Bundle()) {
+            openActivityComponent.result.onActivityResult(it)
+        }
     }
 }

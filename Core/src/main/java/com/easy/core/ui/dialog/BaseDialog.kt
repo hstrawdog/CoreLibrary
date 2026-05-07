@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
@@ -17,10 +16,11 @@ import com.easy.core.listenner.DialogClickListener
 import com.easy.core.ui.base.IDialogFragment
 import com.easy.core.ui.base.RootViewBuilder
 import com.easy.core.ui.base.RootViewImpl
+import com.easy.core.ui.open.OpenDelegate
+import com.easy.core.ui.open.OpenHost
 import com.easy.core.utils.log.LogUtils
 import com.easy.core.utils.statusbar.StatusBarManager
 import com.easy.core.widget.LoadingView
-import com.kunminx.architecture.domain.message.MutableResult
 
 /**
  * @Author : huangqiqiang
@@ -36,18 +36,15 @@ import com.kunminx.architecture.domain.message.MutableResult
  *
  * --  考虑是否重构 引入Binding框架
  */
-abstract class BaseDialog : DialogFragment(), IDialogFragment {
-    /**
-     *  回调
-     */
-    var activityResult = MutableResult<ActivityResult>()
-
-    /**
-     *  页面跳转
-     */
-    var registerForActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        activityResult.value = result
+abstract class BaseDialog : DialogFragment(), IDialogFragment, OpenHost {
+    private val openResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        openDelegate.dispatch(result)
     }
+
+    override val openDelegate: OpenDelegate = OpenDelegate(openResultLauncher)
+
+    override val openContext
+        get() = requireContext()
 
     var loadingView:LoadingView? = null
 

@@ -74,8 +74,6 @@ dependencies {
     api libs.lifecycleRunTimeKtx
     api 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0'
     api 'androidx.savedstate:savedstate-ktx:1.2.1'
-    api libs.mmkv
-
     // gson解析
     api libs.gson
     // 压缩
