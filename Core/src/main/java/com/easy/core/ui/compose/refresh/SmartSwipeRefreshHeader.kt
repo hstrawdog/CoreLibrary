@@ -67,6 +67,7 @@ fun SmartSwipeRefreshDefaultHeader(
         SmartSwipeStateFlag.SUCCESS -> "数据已完成刷新"
         SmartSwipeStateFlag.ERROR -> "请稍后重试"
         SmartSwipeStateFlag.TIPS_RELEASE -> "松手后立即开始刷新"
+        //todo  是否 使用距离上次刷新的时间
         else -> {
             val percent = (progress * 100).roundToInt().coerceIn(0, 100)
             if (percent > 0) "继续下拉 $percent%" else "继续下拉即可触发"
