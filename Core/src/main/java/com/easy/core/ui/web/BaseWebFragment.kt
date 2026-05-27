@@ -184,8 +184,9 @@ open class BaseWebFragment : BaseFragment() {
         val settings = webView?.settings
         settings?.run {
             val originalUA = userAgentString
-            //Mozilla/5.0 (Linux; Android 12; JAD-AL50 Build/HUAWEIJAD-AL50; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/114.0.5735.196 Mobile Safari/537.36/emmcloud/ccwork/1.0.
-            userAgentString = "$originalUA/emmcloud/ccwork/3.8.1"
+            arguments?.getString(KEY_USER_AGENT_APPEND)?.takeIf { it.isNotBlank() }?.let {
+                userAgentString = "$originalUA/$it"
+            }
             // 白色背景
             webView?.setBackgroundColor(Color.TRANSPARENT)
             webView?.setBackgroundResource(R.color.white)
@@ -267,7 +268,6 @@ open class BaseWebFragment : BaseFragment() {
         }
     }
 
-    //处理 android err_unknown_url_scheme异常
     val webViewClient:WebViewClient = object : WebViewClient() {
 
 
@@ -290,13 +290,6 @@ open class BaseWebFragment : BaseFragment() {
 
         override fun shouldInterceptRequest(view:WebView, request:WebResourceRequest):WebResourceResponse? {
             LogUtils.e { " shouldInterceptRequest :    ${request.url.toString()}" }
-//            if (request.url.toString().toLowerCase().contains("/favicon.ico")) {
-//                try {
-//                    return WebResourceResponse("image/png", null, null)
-//                } catch (e:Exception) {
-//                    e.printStackTrace()
-//                }
-//            }
             return super.shouldInterceptRequest(view, request) //request.getUrl()
         }
 
@@ -349,17 +342,6 @@ open class BaseWebFragment : BaseFragment() {
         }
         return false
     }
-
-    override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-
-    override fun onRequestPermissionsResult(requestCode:Int, permissions:Array<out String>, grantResults:IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-    }
-
     @JvmOverloads
     fun loadUrl(url:String, clear:Boolean = true) {
         webView?.run {
@@ -371,13 +353,16 @@ open class BaseWebFragment : BaseFragment() {
     }
 
     companion object {
-        fun instantiate(context:Context, title:String?, url:String?, scriptInterface:ScriptInterface? = null, showToolBar:Boolean = true, showstatusBar:Boolean = true):BaseWebFragment {
+        const val KEY_USER_AGENT_APPEND = "key_user_agent_append"
+
+        fun instantiate(context:Context, title:String?, url:String?, scriptInterface:ScriptInterface? = null, showToolBar:Boolean = true, showstatusBar:Boolean = true, userAgentAppend:String? = null):BaseWebFragment {
             val baseWebFragment = BaseWebFragment()
             val bundle = Bundle()
             bundle.putString(context.getString(R.string.key_url), url)
             bundle.putString(context.getString(R.string.key_title), title)
             bundle.putBoolean(context.getString(R.string.key_showToolBar), showToolBar)
             bundle.putBoolean(context.getString(R.string.key_showstatusBar), showstatusBar)
+            bundle.putString(KEY_USER_AGENT_APPEND, userAgentAppend)
             baseWebFragment.arguments = bundle
             baseWebFragment.scriptInterface = (scriptInterface)
             return baseWebFragment
