@@ -29,7 +29,7 @@ class GlideModuleUtils : AppGlideModule() {
         val calculator = MemorySizeCalculator.Builder(context).setMemoryCacheScreens(2f).build()
         // 小米4c 4+32  16588800
         builder.setMemoryCache(LruResourceCache(calculator.memoryCacheSize.toLong()))
-        val diskCacheSizeBytes = 1024 * 1024 * 100 // 100 MB
+        val diskCacheSizeBytes = 1024 * 1024 * 300 // 300 MB
         builder.setDiskCache(InternalCacheDiskCacheFactory(context, diskCacheSizeBytes.toLong()))
         //自定义图片质量
         //builder.setDefaultRequestOptions(DecodeFormat.PREFER_ARGB_8888);
