@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.setViewTreeLifecycleOwner
+import androidx.lifecycle.setViewTreeViewModelStoreOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.easy.core.common.TAG
 import com.easy.core.ui.open.OpenDelegate
 import com.easy.core.ui.open.OpenHost
@@ -88,7 +92,7 @@ abstract class BaseComposeFragment : Fragment(), ComposeRootViewHost, BundleActi
             }
             val config = rootViewBuilder.buildConfig()
             rootView = rootViewBuilder.rootViewImpl.render(config)
-            rootView?.let { installViewTreeOwners(it) }
+            rootView?.let { installFragmentViewTreeOwners(it) }
             initView()
         }
         LogUtils.dMark(TAG.LIVE_TAG, block = { "${this}   onCreateView" })
@@ -100,6 +104,7 @@ abstract class BaseComposeFragment : Fragment(), ComposeRootViewHost, BundleActi
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        installViewTreeOwners(view, viewLifecycleOwner)
         LogUtils.dMark(TAG.LIVE_TAG, block = { "${this}   onViewCreated" })
     }
 
@@ -113,41 +118,13 @@ abstract class BaseComposeFragment : Fragment(), ComposeRootViewHost, BundleActi
     /**
      * 给根视图补齐 Compose 运行所需的 ViewTree owner。
      */
-    protected open fun installViewTreeOwners(rootView: View) {
-        setViewTreeOwner(
-            className = "androidx.lifecycle.ViewTreeLifecycleOwner",
-            ownerTypeName = "androidx.lifecycle.LifecycleOwner",
-            rootView = rootView,
-            owner = this
-        )
-        setViewTreeOwner(
-            className = "androidx.lifecycle.ViewTreeViewModelStoreOwner",
-            ownerTypeName = "androidx.lifecycle.ViewModelStoreOwner",
-            rootView = rootView,
-            owner = this
-        )
-        setViewTreeOwner(
-            className = "androidx.savedstate.ViewTreeSavedStateRegistryOwner",
-            ownerTypeName = "androidx.savedstate.SavedStateRegistryOwner",
-            rootView = rootView,
-            owner = this
-        )
+    protected open fun installFragmentViewTreeOwners(rootView: View) {
+        installViewTreeOwners(rootView, this)
     }
 
-    /**
-     * 通过反射兼容设置不同 AndroidX 版本下的 ViewTree owner。
-     */
-    protected fun setViewTreeOwner(
-        className: String,
-        ownerTypeName: String,
-        rootView: View,
-        owner: Any
-    ) {
-        runCatching {
-            val ownerClass = Class.forName(ownerTypeName)
-            val treeOwnerClass = Class.forName(className)
-            val setMethod = treeOwnerClass.getMethod("set", View::class.java, ownerClass)
-            setMethod.invoke(null, rootView, owner)
-        }
+    protected fun installViewTreeOwners(rootView: View, owner: LifecycleOwner) {
+        rootView.setViewTreeLifecycleOwner(owner)
+        rootView.setViewTreeViewModelStoreOwner(owner as androidx.lifecycle.ViewModelStoreOwner)
+        rootView.setViewTreeSavedStateRegistryOwner(owner as androidx.savedstate.SavedStateRegistryOwner)
     }
 }
