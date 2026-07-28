@@ -4,12 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableArrayMap
+import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.easy.core.ui.base.BaseVmActivity
 import com.easy.core.utils.log.LogUtils.e
 import com.easy.example.R
 import com.easy.example.databinding.ActivityMvvmBinding
+import kotlinx.coroutines.launch
 
 /**
  * @Author : huangqiqiang
@@ -20,6 +25,8 @@ import com.easy.example.databinding.ActivityMvvmBinding
  * @Describe : ViewBinding + ViewModel + liveData
  */
 class MvvmTestActivity : BaseVmActivity<UserViewModel, ActivityMvvmBinding, >() {
+    private val stateViewModel: StateViewModelDemoViewModel by viewModels()
+
     override fun addViewModel() {
         //       mBinding.setVariable(BR.vm, new ViewModelProvider(this).get(UserViewModel.class));
         binding.vm = ViewModelProvider(this).get(UserViewModel::class.java)
@@ -48,6 +55,26 @@ class MvvmTestActivity : BaseVmActivity<UserViewModel, ActivityMvvmBinding, >() 
 
     override fun initViews() {
         binding?.vm?.liveData?.observeForever { }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    stateViewModel.uiState.collect {
+                        binding.title = "StateFlow loadCount=${it.loadCount}"
+                    }
+                }
+                launch {
+                    stateViewModel.isLoading.collect {
+                        if (it) loadingView.show() else loadingView.dismiss()
+                    }
+                }
+                launch {
+                    stateViewModel.uiEffect.collect {
+                        binding.title = "StateFlow loaded"
+                    }
+                }
+            }
+        }
+        stateViewModel.load()
     }
 
     object Fields {

@@ -44,6 +44,10 @@ class RecycleViewBanner @JvmOverloads constructor(context:Context, attrs:Attribu
 
     private val playTask = object : Runnable {
         override fun run() {
+            if (!canAutoPlay()) {
+                isPlaying = false
+                return
+            }
             recyclerView.smoothScrollToPosition(++currentIndex)
             switchIndicator()
             mHandlers.postDelayed(this, mInterval.toLong())
@@ -152,28 +156,47 @@ class RecycleViewBanner @JvmOverloads constructor(context:Context, attrs:Attribu
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        setPlaying(false)
+        stopPlayingForVisibilityChange()
+    }
+
+    override fun onVisibilityChanged(changedView:View, visibility:Int) {
+        super.onVisibilityChanged(changedView, visibility)
+        if (visibility == View.VISIBLE && isShown) {
+            setPlaying(true)
+        } else {
+            stopPlayingForVisibilityChange()
+        }
     }
 
     override fun onWindowVisibilityChanged(visibility:Int) {
+        super.onWindowVisibilityChanged(visibility)
         if (visibility != View.VISIBLE) {
-            setPlaying(false)
+            stopPlayingForVisibilityChange()
         } else {
             setPlaying(true)
         }
-        super.onWindowVisibilityChanged(visibility)
     }
 
     private fun setPlaying(playing:Boolean) {
-        if (isAutoPlaying) {
-            if (!isPlaying && playing && mAdapter?.itemCount ?: 0 > 1) {
-                mHandlers.postDelayed(playTask, mInterval.toLong())
-                isPlaying = true
-            } else if (isPlaying && !playing) {
-                mHandlers.removeCallbacksAndMessages(null)
-                isPlaying = false
-            }
+        if (!playing) {
+            mHandlers.removeCallbacks(playTask)
+            isPlaying = false
+            return
         }
+        if (!isPlaying && canAutoPlay()) {
+            mHandlers.postDelayed(playTask, mInterval.toLong())
+            isPlaying = true
+        }
+    }
+
+    private fun canAutoPlay():Boolean {
+        return isAutoPlaying && isAttachedToWindow && windowVisibility == View.VISIBLE && isShown &&
+            (mAdapter?.itemCount ?: 0) > 1
+    }
+
+    private fun stopPlayingForVisibilityChange() {
+        setPlaying(false)
+        recyclerView.stopScroll()
     }
 
     fun setRvBannerData(data:MutableList<Any>) {
@@ -212,6 +235,7 @@ class RecycleViewBanner @JvmOverloads constructor(context:Context, attrs:Attribu
 
     fun setRvAutoPlaying(autoPlay:Boolean) {
         isAutoPlaying = autoPlay
+        setPlaying(autoPlay)
     }
 
     fun isShowIndicator(show:Boolean) {
