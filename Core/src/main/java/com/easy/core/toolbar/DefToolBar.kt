@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat
 import com.easy.core.CoreConfig
 import  com.easy.core.R
 import  com.easy.core.utils.ResourcesUtils
-import com.easy.core.widget.FilterImageView
 
 /**
  * @Author : huangqiqiang
@@ -307,7 +306,7 @@ class DefToolBar : BaseToolBar() {
         bottom: Int,
         listener: View.OnClickListener?
     ): View {
-        val imageView = FilterImageView(rootView?.context)
+        val imageView = ImageView(rootView?.context)
         imageView.adjustViewBounds = true
         imageView.setImageResource(icImage)
         imageView.scaleType = ImageView.ScaleType.CENTER
