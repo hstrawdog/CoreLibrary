@@ -50,7 +50,7 @@ class PermissionsFragment : Fragment() {
         }
         if (mPermissionsResult != null) {
             if (success) {
-                mPermissionsResult?.onPermissionsResult(true)
+                dispatchPermissionResult(true)
             } else {
                 if (CoreConfig.get().goSettingPermission) {
                     SelectDialog.Builder()
@@ -61,20 +61,20 @@ class PermissionsFragment : Fragment() {
                             intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                             val uri = Uri.fromParts("package", AppTool.getPackageName(context), null)
                             intent.data = uri
-                            // 重新在检查一遍权限
+                            // 设置页返回后只检查结果，不再自动弹出权限申请。
                             startActivityForResult(intent, 0x55)
                             dialog.dismiss()
 
                         }
                         .setOnCancelListener("取消") { dialog, which ->
                             dialog.dismiss()
-                            mPermissionsResult?.onPermissionsResult(false)
+                            dispatchPermissionResult(false)
                         }
                         .create()
                         .show(childFragmentManager)
                 } else {
                     ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
-                    mPermissionsResult?.onPermissionsResult(false)
+                    dispatchPermissionResult(false)
 
                 }
             }
@@ -99,11 +99,18 @@ class PermissionsFragment : Fragment() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0x55) {
-            // 从设置界面过来 重新再去检测权限
-            requestPermissions(mPermissions, mPermissionsResult)
+            val granted = ::mPermissions.isInitialized &&
+                IPermissionActions.hasPermission(context, *mPermissions)
+            dispatchPermissionResult(granted)
         }
     }
 
+    private fun dispatchPermissionResult(granted: Boolean) {
+        val result = mPermissionsResult
+        mPermissionsResult = null
+        result?.onPermissionsResult(granted)
+    }
 
 }
