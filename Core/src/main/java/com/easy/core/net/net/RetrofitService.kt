@@ -29,10 +29,12 @@ object RetrofitService {
             //读取超时
             readTimeout(CoreConfig.get().readTimeout, TimeUnit.SECONDS)
             if (CoreConfig.get().isDebug) {
-                //打印拦截器
-                addInterceptor(HttpLoggingInterceptor().apply {
-                    setLevel(HttpLoggingInterceptor.Level.BODY)
-                })
+                // 打印拦截器，业务项目可按需关闭并使用自定义日志。
+                if (CoreConfig.get().isHttpLoggingEnabled) {
+                    addInterceptor(HttpLoggingInterceptor().apply {
+                        setLevel(HttpLoggingInterceptor.Level.BODY)
+                    })
+                }
 
                 // 添加配置的拦截器
                 CoreConfig.get().interceptorList.forEach {

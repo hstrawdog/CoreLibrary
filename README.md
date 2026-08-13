@@ -54,6 +54,17 @@
 # 请求 Net
  - OkHttpImpl 依赖OkHttp的网络请求与文件上传 
 
+## Retrofit 请求日志
+
+- Debug 构建默认启用 Core 的 `HttpLoggingInterceptor`，按 `BODY` 级别输出请求和响应日志。
+- 如果接入项目已通过 `CoreConfig.get().interceptorList` 注册自定义日志拦截器，可关闭 Core 默认日志，避免同一请求重复打印。
+- 必须在首次调用 `RetrofitService.createService` 前完成配置；未设置时保持默认开启，不影响现有项目。
+
+```kotlin
+CoreConfig.get().isHttpLoggingEnabled = false
+CoreConfig.get().interceptorList.add(customLoggingInterceptor)
+```
+
 
 # 权限适配
  - SysPermissionsUtils 
@@ -90,7 +101,6 @@
 [权限适配](https://github.com/soulqw/SoulPermission)
 
 [状态栏适配]( https://github.com/gyf-dev/ImmersionBar)
-
 
 
 

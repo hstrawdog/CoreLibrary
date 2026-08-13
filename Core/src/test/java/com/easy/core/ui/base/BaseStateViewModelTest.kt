@@ -32,6 +32,15 @@ class BaseStateViewModelTest {
     }
 
     @Test
+    fun finishCanBeSentByConcreteViewModel() = runBlocking {
+        val viewModel = TestViewModel()
+
+        viewModel.closePage()
+
+        assertEquals(null, viewModel.finishEvents.first().result)
+    }
+
+    @Test
     fun loadingRemainsVisibleUntilAllRequestsFinish() {
         val viewModel = TestViewModel()
 
@@ -79,6 +88,8 @@ class BaseStateViewModelTest {
         }
 
         fun toast(message: String) = showToast(message)
+
+        fun closePage() = finish()
 
         fun acquireLoading(): AutoCloseable = beginLoading()
 

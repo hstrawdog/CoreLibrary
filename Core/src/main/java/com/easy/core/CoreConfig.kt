@@ -149,6 +149,12 @@ class CoreConfig private constructor() {
     var isDebug = true
 
     /**
+     * 是否启用 Core 默认的 OkHttp BODY 日志。
+     * 业务侧注册自定义网络日志时可关闭，默认不影响现有项目。
+     */
+    var isHttpLoggingEnabled = true
+
+    /**
      * 默认图  加载中的图片
      */
     var defImg = R.drawable.ic_def_img

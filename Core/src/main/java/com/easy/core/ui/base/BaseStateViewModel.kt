@@ -18,11 +18,13 @@ import java.util.concurrent.atomic.AtomicInteger
 abstract class BaseStateViewModel : ViewModel() {
     private val openChannel = Channel<OpenRequest>(Channel.BUFFERED)
     private val toastChannel = Channel<String>(Channel.BUFFERED)
+    private val finishChannel = Channel<FinishRequest>(Channel.BUFFERED)
     private val loadingRequestCount = AtomicInteger(0)
     private val mutableIsLoading = MutableStateFlow(false)
 
     internal val openEvents = openChannel.receiveAsFlow()
     internal val toastEvents = toastChannel.receiveAsFlow()
+    internal val finishEvents = finishChannel.receiveAsFlow()
     val isLoading: StateFlow<Boolean> = mutableIsLoading.asStateFlow()
 
     /** 由页面基类负责展示 Toast。 */
@@ -38,6 +40,12 @@ abstract class BaseStateViewModel : ViewModel() {
         callback: (ActivityResult) -> Unit = {}
     ): BaseStateViewModel {
         openChannel.trySend(OpenRequest(activityClass, bundle, callback))
+        return this
+    }
+
+    /** 由页面基类关闭当前页面；传入结果时同时回传 RESULT_OK。 */
+    protected fun finish(result: Bundle? = null): BaseStateViewModel {
+        finishChannel.trySend(FinishRequest(result))
         return this
     }
 
@@ -87,6 +95,7 @@ abstract class BaseStateViewModel : ViewModel() {
     override fun onCleared() {
         openChannel.close()
         toastChannel.close()
+        finishChannel.close()
         super.onCleared()
     }
 
@@ -95,4 +104,6 @@ abstract class BaseStateViewModel : ViewModel() {
         val bundle: Bundle?,
         val callback: (ActivityResult) -> Unit
     )
+
+    internal data class FinishRequest(val result: Bundle?)
 }

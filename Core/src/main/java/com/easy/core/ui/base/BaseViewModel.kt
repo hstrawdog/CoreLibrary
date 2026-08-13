@@ -3,6 +3,7 @@ package com.easy.core.ui.base
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Looper
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.lifecycle.*
@@ -80,7 +81,11 @@ abstract class BaseViewModel : ViewModel(), IBaseViewModel {
      * @param resultCode 回调code
      */
     fun showLoading(showLoading: Boolean): BaseViewModel {
-        this.loadingView.postValue(showLoading)
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            this.loadingView.value = showLoading
+        } else {
+            this.loadingView.postValue(showLoading)
+        }
         return this
     }
 

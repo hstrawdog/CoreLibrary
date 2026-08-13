@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import com.easy.core.kt.open
+import com.easy.core.kt.setResultOk
 import com.easy.core.utils.ToastUtils
 import kotlinx.coroutines.launch
 
@@ -34,6 +35,12 @@ abstract class BaseStateViewModelFragment<Binding : ViewBinding, VM : BaseStateV
                 }
                 launch {
                     viewModel.toastEvents.collect { ToastUtils.showToast(it) }
+                }
+                launch {
+                    viewModel.finishEvents.collect { request ->
+                        request.result?.let(::setResultOk)
+                        activity?.finish()
+                    }
                 }
                 launch {
                     viewModel.isLoading.collect { isLoading ->
