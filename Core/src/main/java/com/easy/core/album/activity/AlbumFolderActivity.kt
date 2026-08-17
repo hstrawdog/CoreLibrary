@@ -2,6 +2,7 @@ package com.easy.core.album.activity
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -22,6 +23,7 @@ import com.easy.core.album.decoration.RecycleViewDivider
 import com.easy.core.R
 import com.easy.core.album.entity.LocalMedia
 import com.easy.core.album.entity.LocalMediaFolder
+import com.easy.core.album.annotation.LocalMediaType
 import com.easy.core.album.utils.AlbumUtils
 import com.easy.core.permission.IPermissionsHas
 import com.easy.core.permission.SysPermissionsUtils
@@ -112,9 +114,26 @@ class AlbumFolderActivity : BaseAlbumActivity<ActivityAlbumFolderBinding>(), OnP
     private fun initViews() {
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
-        SysPermissionsUtils.requestPermissions(supportFragmentManager,IPermissionsHas.storage, { status ->
-
+        SysPermissionsUtils.requestPermissions(supportFragmentManager, mediaReadPermissions(), { status ->
+            if (status) {
+                initData()
+            } else {
+                AppManager.appManager?.finishAllActivity()
+            }
         })
+    }
+
+    private fun mediaReadPermissions(): Array<String> {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            applicationInfo.targetSdkVersion < Build.VERSION_CODES.TIRAMISU
+        ) {
+            return arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        return if (Album.functionOptions.albumType == LocalMediaType.VALUE_TYPE_VIDEO) {
+            IPermissionsHas.readMediaVideo
+        } else {
+            IPermissionsHas.readMediaImages
+        }
     }
 
     private fun initData() {

@@ -20,33 +20,7 @@ class PermissionsHasImpl : IPermissionsHas {
      * @return
      */
     override fun hasPermission(context: Context?, vararg permissions: String): Boolean {
-        var result = true
-        if (permissions.isNotEmpty()) {
-            for (permission in permissions) {
-                if (IPermissionsHas.calendar.contains(permission)) {
-                    result = result && hasCalendar(context)
-                } else if (IPermissionsHas.camera.contains(permission)) {
-                    result = result && hasCamera(context)
-                } else if (IPermissionsHas.contacts.contains(permission)) {
-                    result = result && hasContacts(context)
-                } else if (IPermissionsHas.location.contains(permission)) {
-                    result = result && hasLocation(context)
-                } else if (IPermissionsHas.microphone.contains(permission)) {
-                    result = result && hasMicrophone(context)
-                } else if (IPermissionsHas.phone.contains(permission)) {
-                    result = result && hasPhone(context)
-                } else if (IPermissionsHas.sensors.contains(permission)) {
-                    result = result && hasSensors(context)
-                } else if (IPermissionsHas.sMS.contains(permission)) {
-                    result = result && hasSMS(context)
-                } else if (IPermissionsHas.storage.contains(permission)) {
-                    result = result && hasStorage(context)
-                } else if (IPermissionsHas.bluetooth.contains(permission)) {
-                    result = result && hasBluetooth(context)
-                }
-            }
-        }
-        return result
+        return IPermissionActions.hasPermission(context, *permissions)
     }
 
     private fun hasBluetooth(context: Context?): Boolean {

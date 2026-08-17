@@ -150,9 +150,14 @@ object PhotoUtils {
      */
     @JvmStatic
     fun createImagePathUri(context: Context?): Uri? {
+        if (context == null) return null
         val imageFilePath = arrayOf<Uri?>(null)
-        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((context as Activity?)!!, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (context is Activity) {
+                ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            }
             imageFilePath[0] = Uri.parse("")
             ToastUtils.showToast("请先获取写入SDCard权限")
         } else {

@@ -10,6 +10,7 @@ package com.easy.core.album.activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -128,12 +129,11 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
 
     private fun startUpCamera() {
         // 启动相机拍照,先判断手机是否有拍照权限
-        SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.camera.plus( IPermissionsHas.storage)) {
+        SysPermissionsUtils.requestPermissions(supportFragmentManager, IPermissionsHas.camera) {
             if (it) {
                 startOpenCamera()
-            } else {
-                mTvProgress!!.text = "哎呀!没有获取到权限,\n请在系统设置中开启权限"
-
+            } else if (Album.functionOptions.isStartUpCamera) {
+                AppManager.appManager?.finishAllActivity()
             }
         }
 
@@ -167,13 +167,17 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         // 第一次启动ImageActivity，没有获取过相册列表
         // 先判断手机是否有读取权限，主要是针对6.0已上系统
 
-        SysPermissionsUtils.requestPermissions(supportFragmentManager,IPermissionsHas.storage, object : PermissionsResult {
+        if (Album.functionOptions.isStartUpCamera) {
+            startUpCamera()
+            return
+        }
+
+        SysPermissionsUtils.requestPermissions(supportFragmentManager, mediaReadPermissions(), object : PermissionsResult {
             override fun onPermissionsResult(status: Boolean) {
                 if (status) {
                     initData()
                 } else {
-                    mTvProgress!!.text = "哎呀!没有获取到权限,\n请在系统设置中开启权限"
-
+                    AppManager.appManager?.finishAllActivity()
                 }
             }
 
@@ -181,12 +185,6 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
     }
 
     private fun initData() {
-        // 判断是否直接打开相机
-        if (Album.functionOptions.isStartUpCamera) {
-            startUpCamera()
-            return
-        }
-        // 否则再去 读取内存中的数据
         val localMediaLoader =
             LocalMediaLoader(this, Album.functionOptions.albumType, Album.functionOptions.isSupportGif)
         localMediaLoader.loadAllImage(object : LocalMediaLoader.LocalMediaLoadListener {
@@ -201,6 +199,19 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
             }
 
         })
+    }
+
+    private fun mediaReadPermissions(): Array<String> {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            applicationInfo.targetSdkVersion < Build.VERSION_CODES.TIRAMISU
+        ) {
+            return arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        return if (Album.functionOptions.albumType == LocalMediaType.VALUE_TYPE_VIDEO) {
+            IPermissionsHas.readMediaVideo
+        } else {
+            IPermissionsHas.readMediaImages
+        }
     }
 
     /**
@@ -226,5 +237,3 @@ class AlbumDirectoryActivity : BaseAlbumActivity<ActivityAlbumBinding>(), AlbumD
         startActivity(Intent(this, AlbumDetailActivity::class.java).putExtra(FunctionKey.KEY_FOLDER_NAME, folderName))
     }
 }
-
-

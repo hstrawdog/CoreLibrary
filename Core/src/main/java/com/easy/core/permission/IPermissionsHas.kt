@@ -182,8 +182,7 @@ interface IPermissionsHas {
             get() = arrayOf(
                 //(通过WiFi或移动基站的方式获取用户错略的经纬度信息，定位精度大概误差在30~1500米)
                 Manifest.permission.ACCESS_COARSE_LOCATION,  //(通过GPS芯片接收卫星的定位信息，定位精度达10米以内)
-                Manifest.permission.ACCESS_FINE_LOCATION,  // 允许程序访问额外的定位提供者指令
-                Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
+                Manifest.permission.ACCESS_FINE_LOCATION,
 //                Manifest.permission.ACCESS_BACKGROUND_LOCATION
                            )
 

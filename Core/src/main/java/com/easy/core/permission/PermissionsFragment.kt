@@ -1,10 +1,12 @@
 package com.easy.core.permission
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.easy.core.CoreConfig
 import com.easy.core.ui.dialog.SelectDialog
@@ -22,6 +24,9 @@ import com.easy.core.utils.ToastUtils
 class PermissionsFragment : Fragment() {
 
     companion object {
+        private const val REQUEST_APPLICATION_SETTINGS = 0x55
+        private const val PERMISSION_HISTORY = "core_permission_request_history"
+
         fun newInstance(): PermissionsFragment {
             val args = Bundle()
             val fragment = PermissionsFragment()
@@ -62,7 +67,7 @@ class PermissionsFragment : Fragment() {
                             val uri = Uri.fromParts("package", AppTool.getPackageName(context), null)
                             intent.data = uri
                             // 设置页返回后只检查结果，不再自动弹出权限申请。
-                            startActivityForResult(intent, 0x55)
+                            startActivityForResult(intent, REQUEST_APPLICATION_SETTINGS)
                             dialog.dismiss()
 
                         }
@@ -73,7 +78,9 @@ class PermissionsFragment : Fragment() {
                         .create()
                         .show(childFragmentManager)
                 } else {
-                    ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
+                    if (CoreConfig.get().showPermissionDeniedToast) {
+                        ToastUtils.showToast(context, "拒绝权限,会导致功能无法继续执行")
+                    }
                     dispatchPermissionResult(false)
 
                 }
@@ -90,6 +97,13 @@ class PermissionsFragment : Fragment() {
     fun requestPermissions(permissions: Array<String>, listener: PermissionsResult?) {
         mPermissions = permissions
         mPermissionsResult = listener
+        if (CoreConfig.get().openSettingsWhenPermissionPermanentlyDenied &&
+            permissions.any(::isPermanentlyDenied)
+        ) {
+            openApplicationSettings()
+            return
+        }
+        permissions.forEach(::markPermissionRequested)
 //        if (IPermissionActions.hasPermission(context, *permissions)) {
 //            mPermissionsResult!!.onPermissionsResult(true)
 //        } else {
@@ -97,10 +111,35 @@ class PermissionsFragment : Fragment() {
 //        }
     }
 
+    private fun isPermanentlyDenied(permission: String): Boolean {
+        val hostActivity = activity ?: return false
+        return !IPermissionActions.hasPermission(hostActivity, permission) &&
+            wasPermissionRequested(permission) &&
+            !ActivityCompat.shouldShowRequestPermissionRationale(hostActivity, permission)
+    }
+
+    private fun wasPermissionRequested(permission: String): Boolean =
+        requireContext().getSharedPreferences(PERMISSION_HISTORY, Context.MODE_PRIVATE)
+            .getBoolean(permission, false)
+
+    private fun markPermissionRequested(permission: String) {
+        requireContext().getSharedPreferences(PERMISSION_HISTORY, Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean(permission, true)
+            .apply()
+    }
+
+    private fun openApplicationSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.fromParts("package", AppTool.getPackageName(context), null)
+        }
+        startActivityForResult(intent, REQUEST_APPLICATION_SETTINGS)
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0x55) {
+        if (requestCode == REQUEST_APPLICATION_SETTINGS) {
             val granted = ::mPermissions.isInitialized &&
                 IPermissionActions.hasPermission(context, *mPermissions)
             dispatchPermissionResult(granted)

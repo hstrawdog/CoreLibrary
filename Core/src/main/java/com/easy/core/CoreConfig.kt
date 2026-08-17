@@ -184,6 +184,12 @@ class CoreConfig private constructor() {
      */
     var goSettingPermission = true
 
+    /** 是否在权限拒绝后显示 Core 的通用提示。 */
+    var showPermissionDeniedToast = true
+
+    /** 永久拒绝后再次触发功能时，是否直接打开应用权限设置。 */
+    var openSettingsWhenPermissionPermanentlyDenied = false
+
     /**
      *  是否显示华为权限提示
      */
